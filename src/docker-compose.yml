@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  uds.net.web.mvc:
+    image: ${DOCKER_REGISTRY-}udsnetweb
+    build:
+      context: .
+      dockerfile: UDS.Net.Web.MVC/Dockerfile

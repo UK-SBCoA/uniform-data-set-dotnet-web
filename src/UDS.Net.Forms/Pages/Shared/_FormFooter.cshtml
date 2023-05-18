@@ -1,0 +1,41 @@
+﻿@model FormModel
+@{
+}
+
+<div class="shadow sm:rounded-lg bg-indigo-100">
+    <div class="px-4 py-5 sm:p-6">
+
+        <div asp-validation-summary="All" class="mt-1 text-sm text-red-700">
+            <p></p>
+        </div>
+
+
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="VisitId" type="hidden" />
+        <input asp-for="Kind" type="hidden" />
+        <input asp-for="IsRequiredForVisitKind" type="hidden" />
+        <input asp-for="Version" type="hidden" />
+        <input asp-for="Title" type="hidden" />
+        <input asp-for="Description" type="hidden" />
+        <input asp-for="Status" type="hidden" />
+        <input asp-for="IsRequiredForVisitKind" type="hidden" />
+        <input asp-for="Language" type="hidden" />
+        <input asp-for="IncludeInPacketSubmission" type="hidden" />
+        <input asp-for="ReasonCodeNotIncluded" type="hidden" />
+        <input asp-for="ReasonNotIncluded" type="hidden" />
+        <input asp-for="CreatedAt" type="hidden" />
+        <input asp-for="CreatedBy" type="hidden" />
+        <input asp-for="ModifiedBy" type="hidden" />
+        <input asp-for="DeletedBy" type="hidden" />
+        <input asp-for="IsDeleted" type="hidden" />
+
+        <div class="w-full sm:max-w-xs">
+            <label class="block text-sm font-medium leading-6 text-gray-900">Status</label>
+            <select asp-for="@Model.Status" asp-items="Html.GetEnumSelectList<FormStatus>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></select>
+
+        </div>
+        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+
+    </div>
+</div>
+

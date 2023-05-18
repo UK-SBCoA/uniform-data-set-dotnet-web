@@ -1,0 +1,18 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Participations.CreateModel
+
+@{
+    ViewData["Title"] = "Create participation";
+}
+
+<form method="post">
+    Legacy Id
+    <input asp-for="Participation!.LegacyId" />
+    <span asp-validation-for="Participation.LegacyId" />
+
+    <input type="submit" />
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

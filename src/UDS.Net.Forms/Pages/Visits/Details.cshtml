@@ -1,0 +1,26 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.Visits.DetailsModel
+@{
+    ViewData["Title"] = @Model.Visit.Kind + " Visit";
+}
+
+@if (Model.Visit != null)
+{
+    <h2>Visit details for @Model.Visit.ParticipationId</h2>
+
+    <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+        <div class="py-6 lg:col-span-3">
+
+            <partial name="_NavSidebarForms" model="@Model.Visit" />
+
+
+
+
+        </div>
+        <div class="py-6 lg:col-span-3">
+
+
+        </div>
+    </div>
+
+}

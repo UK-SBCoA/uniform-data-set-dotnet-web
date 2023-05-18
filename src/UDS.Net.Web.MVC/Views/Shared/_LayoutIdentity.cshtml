@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UDS.Net.Forms</title>
+
+    <partial name="_LayoutHtmlHeadPartial"></partial>
+    <link rel="stylesheet" href="~/UDS.Net.Web.MVC.styles.css" asp-append-version="true" />
+</head>
+<body class="h-full">
+
+    <div>
+        <div class="bg-indigo-600 pb-32">
+            <partial name="_NavigationMenu" />
+            <header class="py-10">
+                <div class="mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-white">@ViewData["Title"]</h1>
+                </div>
+            </header>
+        </div>
+
+        <main class="-mt-32">
+            <div class="mx-auto px-4 pb-12 sm:px-6 lg:px-8">
+                <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+                    <div class="rounded-md bg-red-50 p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">Only use this type of authentication during development</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    <ul role="list" class="list-disc space-y-1 pl-5">
+                                        <li>On production you must configure an external authentication service.</li>
+                                        <li>See <a href="https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/microsoft-logins?view=aspnetcore-7.0" target="_blank">this article</a> about setting up authentication with an external provider.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <partial name="_Footer"></partial>
+    <partial name="_LayoutScriptsPartial"></partial>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  uds.mssql:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    user: root
+    ports:
+      - "1187:1433"
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQLSAPASSWORD:?api needs database password}
+      ACCEPT_EULA: "Y"
+  uds.net.api:
+    image: "ghcr.io/uk-sbcoa/uniform-data-set-dotnet-api:release"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__DefaultConnection=server=uds.mssql,1433;user id=sa;password=${MSSQLSAPASSWORD:?api needs database password};database=UDSAPI;TrustServerCertificate=True
+    ports:
+      - "4800:80"
+      - "4801:443"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      - uds.mssql
+  uds.net.web.mvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:445;http://+:82
+      - DownstreamApis__UDSNetApi__BaseUrl=http://uds.net.api/api/
+      - ConnectionStrings__AuthServiceConnection=server=uds.mssql,1433;user id=sa;password=${MSSQLSAPASSWORD:?api needs database password};database=UDSAUTH;TrustServerCertificate=True
+    ports:
+      - "4810:82"
+      - "4811:445"
+    volumes:
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
+    depends_on:
+      - uds.mssql
+      - uds.net.api

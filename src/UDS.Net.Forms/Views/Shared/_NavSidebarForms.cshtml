@@ -1,0 +1,26 @@
+﻿@model VisitModel
+@{
+    var currentPath = ViewContext.RouteData.Values["page"];
+
+    string currentlySelectedAnchorCss = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium";
+    string notSelectedAnchorCss = "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900 group border-l-4 px-3 py-2 flex items-center text-sm font-medium";
+}
+
+@if (Model != null && Model.Forms != null)
+{
+    <nav class="space-y-1">
+        @foreach (var form in Model.Forms)
+        {
+            var anchorPath = $"/{Model.Version}/{form.Kind}";
+            var cssClass = notSelectedAnchorCss;
+            if (anchorPath.Trim() == currentPath.ToString().Trim())
+            {
+                cssClass = currentlySelectedAnchorCss;
+            }
+            <a asp-page="/@Model.Version/@form.Kind" asp-route-id="@Model.Id" asp-route-visitKind="@Model.Kind" class="@cssClass">
+                <span class="text-teal-500 group-hover:text-teal-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">@form.Kind</span>
+                <span class="truncate">@form.Title</span>
+            </a>
+        }
+    </nav>
+}

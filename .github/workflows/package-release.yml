@@ -1,0 +1,41 @@
+name: Package release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  pack:
+    name: Package and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        source-url: https://nuget.pkg.github.com/UK-SBCoA/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Set VERSION variable from tag
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
+    - name: Build the projects in solution by building the project that uses them all
+      run: dotnet build src/UDS.Net.Web.MVC -c Release
+      
+    - name: Pack UDS.Net.Forms
+      run: dotnet pack src/UDS.Net.Forms -c Release -o .
+    
+    - name: Pack UDS.Net.Services
+      run: dotnet pack src/UDS.Net.Services -c Release -o .
+
+    - name: Push packages
+      run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols

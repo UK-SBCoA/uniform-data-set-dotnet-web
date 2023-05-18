@@ -1,0 +1,22 @@
+﻿@model MenuItemViewModel
+@{
+    string activeStyle = "bg-indigo-700 text-white rounded-md py-2 px-3 text-sm font-medium";
+    string inactiveStyle = "text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md py-2 px-3 text-sm font-medium";
+
+    if (Model.IsMobile)
+    {
+        activeStyle = "bg-indigo-700 text-white block rounded-md py-2 px-3 text-base font-medium";
+        inactiveStyle = "text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md py-2 px-3 text-base font-medium";
+    }
+}
+
+<!-- Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" -->
+<a href="/Home" class="@activeStyle" aria-current="page">Home</a>
+
+<a asp-page="/Participations/Index" class="@inactiveStyle">Participation</a>
+
+<a asp-page="/Visits/Index" class="@inactiveStyle">Visits</a>
+
+<a href="#" class="@inactiveStyle">Notes</a>
+
+<a href="#" class="@inactiveStyle">Reports</a>

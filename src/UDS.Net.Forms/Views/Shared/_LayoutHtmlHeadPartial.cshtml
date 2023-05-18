@@ -1,0 +1,18 @@
+﻿<environment include="Development">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> <!--// Development use of CDN. Do not deploy. //-->
+</environment>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css"> <!--// Font family called Inter //-->
+<link rel="stylesheet" href="~/_content/UDS.Net.Forms/css/uds.net.forms.css" asp-append-version="true" />
+
+<environment include="Development">
+    <script async src=https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "@@hotwired/stimulus": "https://unpkg.com/@@hotwired/stimulus@3.2.1/dist/stimulus.js"
+            }
+        }
+    </script>
+</environment>
+
+<script src="~/_content/UDS.Net.Forms/js/stimulus_controllers.js" type="module" asp-append-version="true"></script>

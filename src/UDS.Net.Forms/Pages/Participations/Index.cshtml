@@ -1,0 +1,32 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Participations.IndexModel
+
+@{
+    ViewData["Title"] = "Participation";
+}
+
+<h2>Participation</h2>
+@if (Model.Participations != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Participation Id</th>
+                <th>Legacy Id</th>
+                <th>Visit count</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var participation in Model.Participations)
+            {
+                <tr>
+                    <td>@participation.Id</td>
+                    <td>@participation.LegacyId</td>
+                    <td>@participation.VisitCount</td>
+                    <td><a asp-page="Details" asp-route-id="@participation.Id">View</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

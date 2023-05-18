@@ -1,0 +1,25 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.Participations.EditModel
+
+@{
+}
+
+<h2>@Model.Title</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Participation!.Id" />
+
+
+    Legacy Id
+    <input asp-for="Participation!.LegacyId" />
+    <span asp-validation-for="Participation!.LegacyId" />
+
+    <input type="submit"/>
+</form>
+
+<a asp-page="Index">All participation</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,36 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Visits.IndexModel
+@{
+    ViewData["Title"] = "Visits";
+}
+
+<div class="sm:flex-auto">
+    <h1 class="text-xl font-semibold text-gray-900">Active visits</h1>
+    <p class="mt-2 text-sm text-gray-700">A list of in-progress, tabled, and unsubmitted visits.</p>
+</div>
+@if (Model.Visits != null)
+{
+        <table class="min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Participation Id</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit Id</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit kind</th>
+                    <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Date</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-6 sm:pr-0"><span class="sr-only">Edit</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var visit in Model.Visits)
+                {
+                    <tr>
+                        <td><a asp-area="Participations" asp-page="Details" asp-route-id="@visit.ParticipationId">@visit.ParticipationId</a></td>
+                        <td>@visit.Id</td>
+                        <td>@visit.Kind</td>
+                        <td>@visit.StartDateTime.ToShortDateString()</td>
+                        <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-indigo-600 hover:text-indigo-900">View</a></th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+}

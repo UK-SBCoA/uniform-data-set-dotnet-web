@@ -1,0 +1,39 @@
+﻿@page "{id:int}"
+@model UDS.Net.Forms.Pages.Participations.DetailsModel
+
+@{
+    ViewData["Title"] = "Participation details";
+}
+
+@if (Model.Participation != null)
+{
+    <h2>Details for @Model.Participation.LegacyId</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Visit number</th>
+                <th>Visit kind</th>
+                <th>Visit version</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var visit in Model.Participation.Visits)
+            {
+                <tr data-visit-id="@visit.Id">
+                    <td>@visit.Number</td>
+                    <td>@visit.Kind</td>
+                    <td>@visit.Version</td>
+                    <td>@visit.StartDateTime</td>
+                    <td><a asp-page="/Visits/Details" asp-route-id="@visit.Id">View</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

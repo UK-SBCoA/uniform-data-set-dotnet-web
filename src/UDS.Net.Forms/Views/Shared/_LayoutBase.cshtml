@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UDS.Net.Forms</title>
+
+    <partial name="_LayoutHtmlHeadPartial"></partial>
+</head>
+<body class="h-full">
+
+    <div>
+        <div class="bg-indigo-600 pb-32">
+            <partial name="_NavigationMenu" />
+            <header class="py-10">
+                <div class="mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl font-bold tracking-tight text-white">@ViewData["Title"]</h1>
+                </div>
+            </header>
+        </div>
+
+        <main class="-mt-32">
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_Footer"></partial>
+    <partial name="_LayoutScriptsPartial"></partial>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

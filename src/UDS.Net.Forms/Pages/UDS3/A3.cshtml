@@ -1,0 +1,29 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS3.A3Model
+@{
+    Layout = "_LayoutForm";
+}
+
+<form method="post" class="space-y-8 divide-y divide-gray-200">
+    <div>
+        <h2 class="text-lg font-medium leading-6 text-gray-900">A3: Family History</h2>
+
+        <div class="grid gap-x-6 gap-y-8 sm:grid sm:grid-cols-3 sm:items-start sm:pt-5">
+
+            <div class="sm:col-span-1">
+                <label asp-for="A3.MOMYOB">@Html.DisplayNameFor(m => m.A3.MOMYOB)</label>
+                <div class="mt-2">
+                    <input asp-for="A3.MOMYOB" />
+                </div>
+                <p class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></p>
+            </div>
+        </div>
+    </div>
+    <div class="divide-y divide-gray-200 pt-6">
+        <div>
+            <p asp-validation-summary="ModelOnly" class="mt-1 text-sm text-red-700"></p>
+        </div>
+
+        <partial name="_FormFooter" for="@Model.A3" />
+    </div>
+</form>
