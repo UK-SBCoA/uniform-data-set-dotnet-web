@@ -11,7 +11,6 @@ COPY ["UDS.Net.Web.MVC/UDS.Net.Web.MVC.csproj", "UDS.Net.Web.MVC/"]
 COPY ["UDS.Net.Forms/UDS.Net.Forms.csproj", "UDS.Net.Forms/"]
 COPY ["UDS.Net.Services/UDS.Net.Services.csproj", "UDS.Net.Services/"]
 COPY ["UDS.Net.Web.MVC.Services/UDS.Net.Web.MVC.Services.csproj", "UDS.Net.Web.MVC.Services/"]
-COPY ["UDS.Net.Web.MVC.Services/nuget.config", "nuget.config"]
 RUN dotnet restore "UDS.Net.Web.MVC/UDS.Net.Web.MVC.csproj"
 COPY . .
 WORKDIR "/src/UDS.Net.Web.MVC"
