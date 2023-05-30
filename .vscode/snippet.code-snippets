@@ -1,0 +1,69 @@
+{
+	// Place your uniform-data-set-dotnet-web workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"console.log": {
+		"scope": "javascript,typescript",
+		"prefix": "cl",
+		"body": [
+			"console.${2|log,table,output,dir,error,info|}('${1:Output}');"
+		],
+		"description": "Log output to console"
+	},
+	"forms.input": {
+		"scope": "html",
+		"prefix": "udsi",
+		"body": [
+			"<div class=\"sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6\">",
+			"\t<label asp-for=\"${1:Property}\"><span class=\"counter\"></span> @Html.DisplayNameFor(m => m.${1})</label>",
+			"\t<div class=\"mt-4 sm:col-span-2 sm:mt-0\">",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"@Model.${1}\"></p>",
+			"\t\t<input asp-for=\"@Model.${1}\" />",
+			"\t\t<span class=\"mt-2 text-sm text-red-600\" asp-validation-for=\"${1}\"></span>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Render field"
+	},
+	"forms.radio": {
+		"scope": "html",
+		"prefix": "udsr",
+		"body": [
+			"<div class=\"sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6\">",
+			"\t<label asp-for=\"${1:Property}\"><span class=\"counter\"></span> @Html.DisplayNameFor(m => m.${1})</label>",
+			"\t<div class=\"mt-4 sm:col-span-2 sm:mt-0\">",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"@Model.${1}\"></p>",
+			"\t\t<radio-button-group id=\"@Html.IdFor(m => m.${1})\" for=\"@Model.${1}\" items=\"Model.${2:OptionsList}\"></radio-button-group>",
+			"\t\t<span class=\"mt-2 text-sm text-red-600\" asp-validation-for=\"${1}\"></span>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Render field"
+	},
+	"forms.radiowithother": {
+		"scope": "html",
+		"prefix": "udsro",
+		"body": [
+			"<div class=\"sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6\">",
+			"\t<label asp-for=\"${1:Property}\"><span class=\"counter\"></span> @Html.DisplayNameFor(m => m.${1})</label>",
+			"\t<div>",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"${1}\"></p>",
+			"\t\t<radio-button-group id=\"@Html.IdFor(m => m.${1})\" for=\"@Model.${1}\" items=\"${2:OptionsList}\"></radio-button-group>",
+			"\t\t<span class=\"mt-2 text-sm text-red-600\" asp-validation-for=\"${1}\"></span>",
+			"\t</div>",
+			"\t<div>",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"${3:OtherProperty}\"></p>",
+			"\t\t<label asp-for=\"${3}\">@Html.DisplayNameFor(m => m.${3})</label>",
+			"\t\t<div class=\"mt-2\">",
+			"\t\t\t<input asp-for=\"${3}\" />",
+			"\t\t</div>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Render field"
+	}
+}
