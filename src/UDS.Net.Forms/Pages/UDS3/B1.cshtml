@@ -1,0 +1,20 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS3.B1Model
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <h2 class="text-lg font-medium leading-6 text-gray-900">B1: Evaluation Form &mdash; Physical</h2>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B1. Check only <span class="underline">one</span> box per question.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+    </div>
+</div>
+<partial name="_FormFooter" for="@Model.B1" />
+

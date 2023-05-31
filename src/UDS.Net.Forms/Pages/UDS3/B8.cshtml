@@ -1,0 +1,19 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS3.B8Model
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <h2 class="text-lg font-medium leading-6 text-gray-900">B8: Neurological Examination Findings</h2>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form must be completed by a clinician with experience in assessing the neurological signs listed below and in attributing the observed findings to a particular syndrome. Please use your best clinical judgment in assigning the syndrome. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B8.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+    </div>
+</div>
+<partial name="_FormFooter" for="@Model.B8" />

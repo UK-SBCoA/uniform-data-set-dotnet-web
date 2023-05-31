@@ -9,6 +9,7 @@ using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS3;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.UDS3
@@ -17,6 +18,13 @@ namespace UDS.Net.Forms.Pages.UDS3
     {
         [BindProperty]
         public A3 A3 { get; set; } = default!;
+
+        public List<RadioListItem> AffectedRelativesListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Yes", "0"),
+            new RadioListItem("No", "1"),
+            new RadioListItem("Unknown", "9")
+        };
 
         public A3Model(IVisitService visitService) : base(visitService, "A3")
         {

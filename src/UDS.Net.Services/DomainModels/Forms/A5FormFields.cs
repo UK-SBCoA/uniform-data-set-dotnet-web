@@ -84,6 +84,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "3.0";
         }
 
+        public A5FormFields() { }
         public A5FormFields(FormDto dto)
         {
             if (dto is A5Dto)

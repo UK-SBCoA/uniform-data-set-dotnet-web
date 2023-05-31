@@ -74,6 +74,54 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new A5FormFields(dto);
             }
+            else if (dto is B1Dto)
+            {
+                formFields = new B1FormFields(dto);
+            }
+            else if (dto is B4Dto)
+            {
+                formFields = new B4FormFields(dto);
+            }
+            else if (dto is B5Dto)
+            {
+                formFields = new B5FormFields(dto);
+            }
+            else if (dto is B6Dto)
+            {
+                formFields = new B6FormFields(dto);
+            }
+            else if (dto is B7Dto)
+            {
+                formFields = new B7FormFields(dto);
+            }
+            else if (dto is B8Dto)
+            {
+                formFields = new B8FormFields(dto);
+            }
+            else if (dto is B9Dto)
+            {
+                formFields = new B9FormFields(dto);
+            }
+            else if (dto is C1Dto)
+            {
+                formFields = new C1FormFields(dto);
+            }
+            else if (dto is C2Dto)
+            {
+                formFields = new C2FormFields(dto);
+            }
+            else if (dto is D1Dto)
+            {
+                formFields = new D1FormFields(dto);
+            }
+            else if (dto is D2Dto)
+            {
+                formFields = new D2FormFields(dto);
+            }
+            else if (dto is T1Dto)
+            {
+                formFields = new T1FormFields(dto);
+            }
 
             return new Form(visitId, dto.Id, dto.Kind, dto.Kind, dto.Status, dto.Language, dto.IsIncluded, dto.ReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }

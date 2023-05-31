@@ -2,28 +2,18 @@
 @model UDS.Net.Forms.Pages.UDS3.A3Model
 @{
     Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
-<form method="post" class="space-y-8 divide-y divide-gray-200">
-    <div>
-        <h2 class="text-lg font-medium leading-6 text-gray-900">A3: Family History</h2>
+<div>
+    <h2 class="text-lg font-medium leading-6 text-gray-900">A2: Co-participant Demographics</h2>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating patients with neurological problems and psychiatric conditions. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A3.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        <div class="grid gap-x-6 gap-y-8 sm:grid sm:grid-cols-3 sm:items-start sm:pt-5">
-
-            <div class="sm:col-span-1">
-                <label asp-for="A3.MOMYOB">@Html.DisplayNameFor(m => m.A3.MOMYOB)</label>
-                <div class="mt-2">
-                    <input asp-for="A3.MOMYOB" />
-                </div>
-                <p class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></p>
-            </div>
-        </div>
     </div>
-    <div class="divide-y divide-gray-200 pt-6">
-        <div>
-            <p asp-validation-summary="ModelOnly" class="mt-1 text-sm text-red-700"></p>
-        </div>
-
-        <partial name="_FormFooter" for="@Model.A3" />
-    </div>
-</form>
+</div>
+<partial name="_FormFooter" for="@Model.A3" />

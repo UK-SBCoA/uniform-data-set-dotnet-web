@@ -80,6 +80,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return familyMember;
         }
 
+        public A3FormFields() { }
         public A3FormFields(FormDto dto)
         {
             if (dto is A3Dto)

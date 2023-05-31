@@ -7,7 +7,9 @@
 
 <div>
     <h2 class="text-lg font-medium leading-6 text-gray-900">A2: Co-participant Demographics</h2>
-    <p class="mt-1 text-sm text-gray-500">INSTRUCTIONS: This form is to be completed by intake interviewer based on co-participant's report. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A2. Check only <span class="underline">one</span> box per question.</p>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by intake interviewer based on co-participant's report. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A2. Check only <span class="underline">one</span> box per question.
+    </p>
 </div>
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
@@ -48,13 +50,13 @@
 
         <div class="@rowCSS">
             <label class="text-base font-semibold text-gray-900" asp-for="A2.INHISP"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A2.INHISP)</label>
-
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="A2.INHISP"></p>
                 <radio-button-group id="A2_INHISP" for="@Model.A2.INHISP" items="Model.HispanicLatinoListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INHISP"></span>
             </div>
         </div>
+
         <div class="@rowCSS">
             <label class="text-base font-semibold text-gray-900" asp-for="A2.INHISPOR"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A2.INHISPOR)</label>
             <div>
@@ -71,6 +73,7 @@
                 <p class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INHISPOX"></p>
             </div>
         </div>
+
         <div class="@rowCSS">
             <label asp-for="A2.INRACE" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A2.INRACE)</label>
             <div>

@@ -1,0 +1,19 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS3.B5Model
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <h2 class="text-lg font-medium leading-6 text-gray-900">B5: NPI-Q</h2>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional based on co-participant interview, as described by the training video. (This is not to be completed by the participant as a paper-and-pencil self-report.) For information on NPI-Q Interviewer Certification, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B5. Check only <span class="underline">one</span> box for each category of response.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+    </div>
+</div>
+<partial name="_FormFooter" for="@Model.B5" />

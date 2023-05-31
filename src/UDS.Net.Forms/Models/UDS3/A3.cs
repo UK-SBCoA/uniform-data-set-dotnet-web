@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
-        public string FADMUTX { get; set; }
+        public string? FADMUTX { get; set; }
 
         [Display(Name = "Source of evidence for AD mutation")]
         [RegularExpression("^(1-3|8|9)$")]
@@ -26,7 +26,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
-        public string FADMUSOX { get; set; }
+        public string? FADMUSOX { get; set; }
 
         [Display(Name = "In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation")]
         [RegularExpression("^(0-4|8|9)$")]
@@ -34,7 +34,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
-        public string FFTDMUTX { get; set; }
+        public string? FFTDMUTX { get; set; }
 
         [Display(Name = "Source of evidence for FTLD mutation")]
         [RegularExpression("^(1-3|8|9)$")]
@@ -42,7 +42,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
-        public string FFTDMUSX { get; set; }
+        public string? FFTDMUSX { get; set; }
 
         [Display(Name = "In this family, is there evidence for a mutation other than an AD or FTLD mutation?")]
         [RegularExpression("^(0|1|9)$")]
@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If Yes, specify")]
         [MaxLength(60)]
-        public string FOTHMUTX { get; set; }
+        public string? FOTHMUTX { get; set; }
 
         [Display(Name = "Source of evidence for other mutation")]
         [RegularExpression("^(1-3|8|9)$")]
@@ -58,7 +58,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If other, specify")]
         [MaxLength(60)]
-        public string FOTHMUSX { get; set; }
+        public string? FOTHMUSX { get; set; }
 
         [Display(Name = "Mother — birth month")]
         [RegularExpression("^(1-12|99)$")]
@@ -88,15 +88,44 @@ namespace UDS.Net.Forms.Models.UDS3
         [RegularExpression("^(0-110|999)$")]
         public int? MOMAGEO { get; set; }
 
+        [Display(Name = "Father — birth month")]
+        [RegularExpression("^(1-12|99)$")]
         public int? DADMOB { get; set; }
+
+        [Display(Name = "Father — birth year")]
+        [Remote("ValidateYear", "A3", "UDS3")]
         public int? DADYOB { get; set; }
+
+        [Display(Name = "Father — age at death")]
+        [RegularExpression("^(0-110|888|999)$")]
         public int? DADDAGE { get; set; }
+
+        [Display(Name = "Father — neurological problem")]
+        [RegularExpression("^(1-5|8|9)$")]
         public int? DADNEUR { get; set; }
+
+        [Display(Name = "Father — primary diagnosis")]
+        [RegularExpression("^(40-490|999)$")]
         public int? DADPRDX { get; set; }
+
+        [Display(Name = "Father — method of evaluation")]
+        [RegularExpression("^(1-7)$")]
         public int? DADMOE { get; set; }
+
+        [Display(Name = "Father — age of onset")]
+        [RegularExpression("^(0-110|999)$")]
         public int? DADAGEO { get; set; }
+
         public int? SIBS { get; set; }
+
         public int? KIDS { get; set; }
+
+        /// TODO SIBS and KIDS collections
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            yield break;
+        }
     }
 }
 

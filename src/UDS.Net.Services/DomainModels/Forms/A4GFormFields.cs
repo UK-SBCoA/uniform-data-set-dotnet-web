@@ -20,6 +20,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "3.0";
         }
 
+        public A4GFormFields() { }
         public A4GFormFields(FormDto dto)
         {
             if (dto is A4GDto)
