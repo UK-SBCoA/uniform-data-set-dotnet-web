@@ -25,6 +25,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
         public int? MOMNEUR { get; set; }
+        public int? MOMPRDX { get; set; }
         public int? MOMMOE { get; set; }
         public int? MOMAGEO { get; set; }
         public int? DADMOB { get; set; }
@@ -123,7 +124,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 this.KIDS = a3Dto.KIDS; // the count of kids
                 // always 15 spots for kids
-                for (int i = 1; 1 <= 15; i++)
+                for (int i = 1; i <= 15; i++)
                 {
                     var kid = GetFamilyMemberFormFields(i, "KID", a3Dto);
 
