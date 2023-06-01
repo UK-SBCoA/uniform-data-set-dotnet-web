@@ -7,6 +7,9 @@ using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class A1 : FormModel
     {
         [Display(Name = "Primary reason for coming to ADC")]

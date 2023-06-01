@@ -282,24 +282,107 @@ namespace UDS.Net.Forms.Extensions
                 DADMOE = fields.DADMOE,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
-                KIDS = fields.KIDS
+                KIDS = fields.KIDS,
+                Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
+                Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
-            /// TODO SIBS and KIDS collections
+        }
+
+        public static A3FamilyMember ToVM(this A3FamilyMemberFormFields fields, int formId)
+        {
+            return new A3FamilyMember()
+            {
+                FamilyMemberIndex = fields.FamilyMemberIndex,
+                MOB = fields.MOB,
+                YOB = fields.YOB,
+                AGD = fields.AGD,
+                NEU = fields.NEU,
+                PDX = fields.PDX,
+                MOE = fields.MOE,
+                AGO = fields.AGO
+            };
         }
 
         public static A4 ToVM(this A4GFormFields fields, int formId)
         {
             return new A4()
             {
-                Id = formId
-            }; // TODO medications details collection
+                Id = formId,
+                DrugIds = fields.A4Ds.Select(d => d.DRUGID).ToList()
+            };
         }
 
         public static A5 ToVM(this A5FormFields fields, int formId)
         {
             return new A5()
             {
-                Id = formId
+                Id = formId,
+                TOBAC30 = fields.TOBAC30,
+                TOBAC100 = fields.TOBAC100,
+                SMOKYRS = fields.SMOKYRS,
+                PACKSPER = fields.PACKSPER,
+                QUITSMOK = fields.QUITSMOK,
+                ALCOCCAS = fields.ALCOCCAS,
+                ALCFREQ = fields.ALCFREQ,
+                CVHATT = fields.CVHATT,
+                HATTMULT = fields.HATTMULT,
+                CVAFIB = fields.CVAFIB,
+                CVANGIO = fields.CVANGIO,
+                CVBYPASS = fields.CVBYPASS,
+                CVPACDEF = fields.CVPACDEF,
+                CVCHF = fields.CVCHF,
+                CVANGINA = fields.CVANGINA,
+                CVHVALVE = fields.CVHVALVE,
+                CVOTHR = fields.CVOTHR,
+                CVOTHRX = fields.CVOTHRX,
+                CBSTROKE = fields.CBSTROKE,
+                STROKMUL = fields.STROKMUL,
+                STROKYR = fields.STROKYR,
+                CBTIA = fields.CBTIA,
+                TIAMULT = fields.TIAMULT,
+                TIAYEAR = fields.TIAYEAR,
+                PD = fields.PD,
+                PDYR = fields.PDYR,
+                PDOTHR = fields.PDOTHR,
+                SEIZURES = fields.SEIZURES,
+                TBI = fields.TBI,
+                TBIBRIEF = fields.TBIBRIEF,
+                TBIEXTEN = fields.TBIEXTEN,
+                TBIWOLOS = fields.TBIWOLOS,
+                TBIYEAR = fields.TBIYEAR,
+                DIABETES = fields.DIABETES,
+                DIABTYPE = fields.DIABTYPE,
+                HYPERTEN = fields.HYPERTEN,
+                HYPERCHO = fields.HYPERCHO,
+                B12DEF = fields.B12DEF,
+                THYROID = fields.THYROID,
+                ARTHRIT = fields.ARTHRIT,
+                ARTHTYPE = fields.ARTHTYPE,
+                ARTHTYPX = fields.ARTHTYPX,
+                ARTHUPEX = fields.ARTHUPEX,
+                ARTHLOEX = fields.ARTHLOEX,
+                ARTHSPIN = fields.ARTHSPIN,
+                ARTHUNK = fields.ARTHUNK,
+                INCONTU = fields.INCONTU,
+                INCONTF = fields.INCONTF,
+                APNEA = fields.APNEA,
+                RBD = fields.RBD,
+                INSOMN = fields.INSOMN,
+                OTHSLEEP = fields.OTHSLEEP,
+                OTHSLEEX = fields.OTHSLEEX,
+                ALCOHOL = fields.ALCOHOL,
+                ABUSOTHR = fields.ABUSOTHR,
+                ABUSX = fields.ABUSX,
+                PTSD = fields.PTSD,
+                BIPOLAR = fields.BIPOLAR,
+                SCHIZ = fields.SCHIZ,
+                DEP2YRS = fields.DEP2YRS,
+                DEPOTHR = fields.DEPOTHR,
+                ANXIETY = fields.ANXIETY,
+                OCD = fields.OCD,
+                NPSYDEV = fields.NPSYDEV,
+                PSYCDIS = fields.PSYCDIS,
+                PSYCDISX = fields.PSYCDISX
             };
         }
 
@@ -307,7 +390,18 @@ namespace UDS.Net.Forms.Extensions
         {
             return new B1()
             {
-                Id = formId
+                Id = formId,
+                HEIGHT = fields.HEIGHT,
+                WEIGHT = fields.WEIGHT,
+                BPSYS = fields.BPSYS,
+                BPDIAS = fields.BPDIAS,
+                HRATE = fields.HRATE,
+                VISION = fields.VISION,
+                VISCORR = fields.VISCORR,
+                VISWCORR = fields.VISWCORR,
+                HEARING = fields.HEARING,
+                HEARAID = fields.HEARAID,
+                HEARWAID = fields.HEARWAID
             };
         }
 
@@ -315,7 +409,17 @@ namespace UDS.Net.Forms.Extensions
         {
             return new B4()
             {
-                Id = formId
+                Id = formId,
+                MEMORY = fields.MEMORY,
+                ORIENT = fields.ORIENT,
+                JUDGMENT = fields.JUDGMENT,
+                COMMUN = fields.COMMUN,
+                HOMEHOBB = fields.HOMEHOBB,
+                PERSCARE = fields.PERSCARE,
+                CDRSUM = fields.CDRSUM,
+                CDRGLOB = fields.CDRGLOB,
+                COMPORT = fields.COMPORT,
+                CDRLANG = fields.CDRLANG
             };
         }
 
@@ -323,7 +427,33 @@ namespace UDS.Net.Forms.Extensions
         {
             return new B5()
             {
-                Id = formId
+                Id = formId,
+                NPIQINF = fields.NPIQINF,
+                NPIQINFX = fields.NPIQINFX,
+                DEL = fields.DEL,
+                DELSEV = fields.DELSEV,
+                HALL = fields.HALL,
+                HALLSEV = fields.HALLSEV,
+                AGIT = fields.AGIT,
+                AGITSEV = fields.AGITSEV,
+                DEPD = fields.DEPD,
+                DEPDSEV = fields.DEPDSEV,
+                ANX = fields.ANX,
+                ANXSEV = fields.ANXSEV,
+                ELAT = fields.ELAT,
+                ELATSEV = fields.ELATSEV,
+                APA = fields.APA,
+                APASEV = fields.APASEV,
+                DISN = fields.DISN,
+                DISNSEV = fields.DISNSEV,
+                IRR = fields.IRR,
+                IRRSEV = fields.IRRSEV,
+                MOT = fields.MOT,
+                MOTSEV = fields.MOTSEV,
+                NITE = fields.NITE,
+                NITESEV = fields.NITESEV,
+                APP = fields.APP,
+                APPSEV = fields.APPSEV
             };
         }
 

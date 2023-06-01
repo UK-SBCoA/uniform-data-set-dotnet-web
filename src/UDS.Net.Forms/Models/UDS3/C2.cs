@@ -4,6 +4,9 @@ using System.Xml.Linq;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class C2 : FormModel
     {
         [Display(Name = "")]
@@ -19,7 +22,8 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MOCALAN { get; set; }
 
         [Display(Name = "")]
-        public string MOCALANX { get; set; }
+        [MaxLength(60)]
+        public string? MOCALANX { get; set; }
 
         [Display(Name = "")]
         public int? MOCAVIS { get; set; }
@@ -103,7 +107,8 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "")]
-        public string NPSYLANX { get; set; }
+        [MaxLength(60)]
+        public string? NPSYLANX { get; set; }
 
         [Display(Name = "")]
         public int? CRAFTVRS { get; set; }

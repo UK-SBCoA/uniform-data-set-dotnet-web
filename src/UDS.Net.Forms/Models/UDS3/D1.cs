@@ -4,6 +4,9 @@ using System.Xml.Linq;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class D1 : FormModel
     {
         [Display(Name = "")]
@@ -121,7 +124,8 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? OTHBIOM { get; set; }
 
         [Display(Name = "")]
-        public string OTHBIOMX { get; set; }
+        [MaxLength(60)]
+        public string? OTHBIOMX { get; set; }
 
         [Display(Name = "")]
         public int? IMAGLINF { get; set; }
@@ -151,7 +155,8 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? OTHMUT { get; set; }
 
         [Display(Name = "")]
-        public string OTHMUTX { get; set; }
+        [MaxLength(60)]
+        public string? OTHMUTX { get; set; }
 
         [Display(Name = "")]
         public int? ALZDIS { get; set; }

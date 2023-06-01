@@ -134,28 +134,118 @@ namespace UDS.Net.Forms.Extensions
                 DADMOE = vm.DADMOE,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
-                KIDS = vm.KIDS
+                KIDS = vm.KIDS,
+                SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
+                KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
+        public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)
+        {
+            return new A3FamilyMemberFormFields()
+            {
+                FamilyMemberIndex = vm.FamilyMemberIndex,
+                MOB = vm.MOB,
+                YOB = vm.YOB,
+                AGD = vm.AGD,
+                NEU = vm.NEU,
+                PDX = vm.PDX,
+                MOE = vm.MOE,
+                AGO = vm.AGO
+            };
+        }
+
         public static Form ToEntity(this A4 vm)
         {
-            /// TODO medications and details
             var fields = new A4GFormFields
             {
-                ANYMEDS = vm.ANYMEDS
+                ANYMEDS = vm.ANYMEDS,
+                A4Ds = vm.DrugIds.Select(d => d.ToEntity()).ToList()
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static A4DFormFields ToEntity(this string drugId)
+        {
+            return new A4DFormFields
+            {
+                DRUGID = drugId
+            };
         }
 
         public static Form ToEntity(this A5 vm)
         {
             var fields = new A5FormFields
             {
-
+                TOBAC30 = vm.TOBAC30,
+                TOBAC100 = vm.TOBAC100,
+                SMOKYRS = vm.SMOKYRS,
+                PACKSPER = vm.PACKSPER,
+                QUITSMOK = vm.QUITSMOK,
+                ALCOCCAS = vm.ALCOCCAS,
+                ALCFREQ = vm.ALCFREQ,
+                CVHATT = vm.CVHATT,
+                HATTMULT = vm.HATTMULT,
+                CVAFIB = vm.CVAFIB,
+                CVANGIO = vm.CVANGIO,
+                CVBYPASS = vm.CVBYPASS,
+                CVPACDEF = vm.CVPACDEF,
+                CVCHF = vm.CVCHF,
+                CVANGINA = vm.CVANGINA,
+                CVHVALVE = vm.CVHVALVE,
+                CVOTHR = vm.CVOTHR,
+                CVOTHRX = vm.CVOTHRX,
+                CBSTROKE = vm.CBSTROKE,
+                STROKMUL = vm.STROKMUL,
+                STROKYR = vm.STROKYR,
+                CBTIA = vm.CBTIA,
+                TIAMULT = vm.TIAMULT,
+                TIAYEAR = vm.TIAYEAR,
+                PD = vm.PD,
+                PDYR = vm.PDYR,
+                PDOTHR = vm.PDOTHR,
+                SEIZURES = vm.SEIZURES,
+                TBI = vm.TBI,
+                TBIBRIEF = vm.TBIBRIEF,
+                TBIEXTEN = vm.TBIEXTEN,
+                TBIWOLOS = vm.TBIWOLOS,
+                TBIYEAR = vm.TBIYEAR,
+                DIABETES = vm.DIABETES,
+                DIABTYPE = vm.DIABTYPE,
+                HYPERTEN = vm.HYPERTEN,
+                HYPERCHO = vm.HYPERCHO,
+                B12DEF = vm.B12DEF,
+                THYROID = vm.THYROID,
+                ARTHRIT = vm.ARTHRIT,
+                ARTHTYPE = vm.ARTHTYPE,
+                ARTHTYPX = vm.ARTHTYPX,
+                ARTHUPEX = vm.ARTHUPEX,
+                ARTHLOEX = vm.ARTHLOEX,
+                ARTHSPIN = vm.ARTHSPIN,
+                ARTHUNK = vm.ARTHUNK,
+                INCONTU = vm.INCONTU,
+                INCONTF = vm.INCONTF,
+                APNEA = vm.APNEA,
+                RBD = vm.RBD,
+                INSOMN = vm.INSOMN,
+                OTHSLEEP = vm.OTHSLEEP,
+                OTHSLEEX = vm.OTHSLEEX,
+                ALCOHOL = vm.ALCOHOL,
+                ABUSOTHR = vm.ABUSOTHR,
+                ABUSX = vm.ABUSX,
+                PTSD = vm.PTSD,
+                BIPOLAR = vm.BIPOLAR,
+                SCHIZ = vm.SCHIZ,
+                DEP2YRS = vm.DEP2YRS,
+                DEPOTHR = vm.DEPOTHR,
+                ANXIETY = vm.ANXIETY,
+                OCD = vm.OCD,
+                NPSYDEV = vm.NPSYDEV,
+                PSYCDIS = vm.PSYCDIS,
+                PSYCDISX = vm.PSYCDISX
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
@@ -165,7 +255,17 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B1FormFields
             {
-
+                HEIGHT = vm.HEIGHT,
+                WEIGHT = vm.WEIGHT,
+                BPSYS = vm.BPSYS,
+                BPDIAS = vm.BPDIAS,
+                HRATE = vm.HRATE,
+                VISION = vm.VISION,
+                VISCORR = vm.VISCORR,
+                VISWCORR = vm.VISWCORR,
+                HEARING = vm.HEARING,
+                HEARAID = vm.HEARAID,
+                HEARWAID = vm.HEARWAID
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
@@ -175,7 +275,16 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B4FormFields
             {
-
+                MEMORY = vm.MEMORY,
+                ORIENT = vm.ORIENT,
+                JUDGMENT = vm.JUDGMENT,
+                COMMUN = vm.COMMUN,
+                HOMEHOBB = vm.HOMEHOBB,
+                PERSCARE = vm.PERSCARE,
+                CDRSUM = vm.CDRSUM,
+                CDRGLOB = vm.CDRGLOB,
+                COMPORT = vm.COMPORT,
+                CDRLANG = vm.CDRLANG,
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
@@ -185,7 +294,32 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B5FormFields
             {
-
+                NPIQINF = vm.NPIQINF,
+                NPIQINFX = vm.NPIQINFX,
+                DEL = vm.DEL,
+                DELSEV = vm.DELSEV,
+                HALL = vm.HALL,
+                HALLSEV = vm.HALLSEV,
+                AGIT = vm.AGIT,
+                AGITSEV = vm.AGITSEV,
+                DEPD = vm.DEPD,
+                DEPDSEV = vm.DEPDSEV,
+                ANX = vm.ANX,
+                ANXSEV = vm.ANXSEV,
+                ELAT = vm.ELAT,
+                ELATSEV = vm.ELATSEV,
+                APA = vm.APA,
+                APASEV = vm.APASEV,
+                DISN = vm.DISN,
+                DISNSEV = vm.DISNSEV,
+                IRR = vm.IRR,
+                IRRSEV = vm.IRRSEV,
+                MOT = vm.MOT,
+                MOTSEV = vm.MOTSEV,
+                NITE = vm.NITE,
+                NITESEV = vm.NITESEV,
+                APP = vm.APP,
+                APPSEV = vm.APPSEV
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

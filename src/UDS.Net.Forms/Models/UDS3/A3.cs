@@ -4,12 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class A3 : FormModel
     {
         [Display(Name = "Are there affected first-degree relatives (biological parents, full siblings, or biological children)?")]
         [RegularExpression("^(0|1|9)$")]
         public int? AFFFAMM { get; set; } // initial visits
 
+        [Display(Name = "")]
         public int? NWINFMUT { get; set; } // follow-up visits
 
         [Display(Name = "In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.")]
@@ -120,7 +124,9 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public int? KIDS { get; set; }
 
-        /// TODO SIBS and KIDS collections
+        public List<A3FamilyMember> Siblings { get; set; } = new List<A3FamilyMember>();
+
+        public List<A3FamilyMember> Children { get; set; } = new List<A3FamilyMember>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

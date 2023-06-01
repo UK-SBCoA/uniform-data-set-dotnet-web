@@ -4,6 +4,9 @@ using System.Xml.Linq;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class T1 : FormModel
     {
         [Display(Name = "")]

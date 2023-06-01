@@ -53,10 +53,90 @@ namespace UDS.Net.Services.DomainModels
             {
                 Dictionary<string, FormContract[]> UDS3 = new Dictionary<string, FormContract[]>
                 {
-                    { "IVP", new FormContract[] { new FormContract("A1", true), new FormContract("A2", false), new FormContract("A3", false), new FormContract("A4", false), new FormContract("A5", false) } },
-                    { "FVP", new FormContract[] { new FormContract("A1", true), new FormContract("A2", false), new FormContract("A3", false), new FormContract("A4", false), new FormContract("A5", false) } },
-                    { "TIP", new FormContract[] { new FormContract("A1", true), new FormContract("A2", true), new FormContract("A3", false), new FormContract("A4", false), new FormContract("A5", false) } },
-                    { "TVP", new FormContract[] { new FormContract("A1", true), new FormContract("A2", true), new FormContract("A3", false), new FormContract("A4", false), new FormContract("A5", false) } }
+                    {
+                        "IVP",
+                        new FormContract[]
+                        {
+                            new FormContract("A1", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", false),
+                            new FormContract("A4", false),
+                            new FormContract("A5", true),
+                            new FormContract("B1", false),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B8", true),
+                            new FormContract("B9", true),
+                            new FormContract("C2", true),
+                            new FormContract("D1", true),
+                            new FormContract("D2", true)
+                        }
+                    },
+                    {
+                        "FVP",
+                        new FormContract[]
+                        {
+                            new FormContract("A1", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", false),
+                            new FormContract("A4", false),
+                            new FormContract("B1", false),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B8", true),
+                            new FormContract("B9", true),
+                            new FormContract("C1", false),
+                            new FormContract("C2", false),
+                            new FormContract("D1", true),
+                            new FormContract("D2", true)
+                        }
+                    },
+                    {
+                        "TIP",
+                        new FormContract[]
+                        {
+                            new FormContract("T1", true),
+                            new FormContract("A1", true),
+                            new FormContract("A2", true),
+                            new FormContract("A3", false),
+                            new FormContract("A4", false),
+                            new FormContract("A5", true),
+                            new FormContract("B1", true),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B8", false),
+                            new FormContract("B9", true),
+                            new FormContract("C2", true),
+                            new FormContract("D1", true),
+                            new FormContract("D2", true)
+                        }
+                    },
+                    {
+                        "TVP",
+                        new FormContract[]
+                        {
+                            new FormContract("T1", true),
+                            new FormContract("A1", true),
+                            new FormContract("A2", true),
+                            new FormContract("A3", false),
+                            new FormContract("A4", false),
+                            new FormContract("A5", false),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B9", true),
+                            new FormContract("C2", false),
+                            new FormContract("D1", true),
+                            new FormContract("D2", true)
+                        }
+                    }
                 };
 
                 var formDefinitions = UDS3.Where(u => u.Key == kind).FirstOrDefault();
@@ -133,6 +213,7 @@ namespace UDS.Net.Services.DomainModels
 
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
+            /// TODO For UDS3 FVP, either C1 or C2 is required
             yield break;
         }
     }

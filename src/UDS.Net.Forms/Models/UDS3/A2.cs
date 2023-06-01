@@ -8,6 +8,9 @@ using UDS.Net.Forms.TagHelpers;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
+    /// <summary>
+    /// ViewModel for form with front-end validation
+    /// </summary>
     public class A2 : FormModel
     {
         [Display(Name = "Co-participant's birth month")]
