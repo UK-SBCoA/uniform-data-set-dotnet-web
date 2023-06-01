@@ -18,8 +18,11 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet(int? id)
         {
+            await base.OnGet(id);
+
+            return Page();
         }
     }
 }

@@ -17,8 +17,12 @@ namespace UDS.Net.Forms.Pages.UDS3
         public A4Model(IVisitService visitService) : base(visitService, "A4")
         {
         }
-        public void OnGet()
+
+        public async Task<IActionResult> OnGet(int? id)
         {
+            await base.OnGet(id);
+
+            return Page();
         }
     }
 }
