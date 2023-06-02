@@ -308,6 +308,7 @@ namespace UDS.Net.Forms.Extensions
             return new A4()
             {
                 Id = formId,
+                ANYMEDS = fields.ANYMEDS,
                 DrugIds = fields.A4Ds.Select(d => d.DRUGID).ToList()
             };
         }
