@@ -44,7 +44,7 @@ namespace UDS.Net.Forms.TagHelpers
             else if (Kind == "TFP")
                 packetKindDisplay = "UDS Coding Guidebook for Telephone Follow-up Visit Packet";
 
-            output.Content.Append($"UDS Coding Guidebook for {packetKindDisplay}");
+            output.Content.Append($"{packetKindDisplay}");
         }
     }
 }
