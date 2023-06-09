@@ -17,10 +17,10 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Shopping alone for clothes, household necessities, or groceries")]
         public int? SHOPPING { get; set; }
 
-        [Display(Name = "In the past four weeks, did the subject have any difficulty or need help with: Playing a game of skill such as bridge or chess, working on a hobby")]
+        [Display(Name = "Playing a game of skill such as bridge or chess, working on a hobby")]
         public int? GAMES { get; set; }
 
-        [Display(Name = "In the past four weeks, did the subject have any difficulty or need help with: Heating water, making a cup of coffee, turning off the stove")]
+        [Display(Name = "Heating water, making a cup of coffee, turning off the stove")]
         public int? STOVE { get; set; }
 
         [Display(Name = "Preparing a balanced meal")]
