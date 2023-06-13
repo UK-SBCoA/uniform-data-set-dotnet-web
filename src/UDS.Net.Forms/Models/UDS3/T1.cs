@@ -27,7 +27,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other")]
         public int? TELOTHR { get; set; }
 
-        [Display(Name = "Other (SPECIFY)")]
+        [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         public string? TELOTHRX { get; set; }
 
@@ -37,7 +37,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Is the subject likely to resume in-person UDS follow-up evaluation?")]
         public int? TELINPER { get; set; }
 
-        [Display(Name = "Has a Milestones Form documenting the change to telephone follow-up been completed?\n(If no, complete a Milestones Form now.)")]
+        [Display(Name = "Has a Milestones Form documenting the change to telephone follow-up been completed? (If no, complete a Milestones Form now.)")]
         public int? TELMILE { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
