@@ -14,12 +14,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${DEVCERTPASSWORD:?api needs dev cert password}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - ConnectionStrings__DefaultConnection=server=uds.mssql,1433;user id=sa;password=${MSSQLSAPASSWORD:?api needs database password};database=UDSAPI;TrustServerCertificate=True
     ports:
       - "4800:80"
       - "4801:443"
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.aspnet/https:/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     depends_on:
       - uds.mssql
@@ -27,13 +30,16 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:445;http://+:82
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${DEVCERTPASSWORD:?app needs dev cert password}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       - DownstreamApis__UDSNetApi__BaseUrl=http://uds.net.api/api/
-      - ConnectionStrings__AuthServiceConnection=server=uds.mssql,1433;user id=sa;password=${MSSQLSAPASSWORD:?api needs database password};database=UDSAUTH;TrustServerCertificate=True
+      - ConnectionStrings__AuthServiceConnection=server=uds.mssql,1433;user id=sa;password=${MSSQLSAPASSWORD:?app needs database password};database=UDSAUTH;TrustServerCertificate=True
     ports:
       - "4810:82"
       - "4811:445"
     volumes:
       - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.aspnet/https:/https:ro
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     depends_on:
       - uds.mssql

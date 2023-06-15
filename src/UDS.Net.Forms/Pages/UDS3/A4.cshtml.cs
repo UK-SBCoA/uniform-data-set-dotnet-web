@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS3;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.UDS3
@@ -14,6 +15,13 @@ namespace UDS.Net.Forms.Pages.UDS3
     {
         [BindProperty]
         public A4 A4 { get; set; } = default!;
+
+        public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (end form here)", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
         public A4Model(IVisitService visitService) : base(visitService, "A4")
         {
         }
