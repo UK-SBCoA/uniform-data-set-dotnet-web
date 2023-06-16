@@ -6,6 +6,7 @@ using UDS.Net.Forms.Models;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class BirthYearAttribute : ValidationAttribute, IClientModelValidator
     {
         public int Minimum { get; set; } = 1875; // A1 minimum is default
