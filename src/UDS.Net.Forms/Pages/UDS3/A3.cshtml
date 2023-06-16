@@ -6,13 +6,317 @@
 }
 
 <div>
-    <h2 class="text-lg font-medium leading-6 text-gray-900">A2: Co-participant Demographics</h2>
+    <h2 class="text-lg font-medium leading-6 text-gray-900">A3: Family History</h2>
     <p class="mt-1 text-sm text-gray-500">
         INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating patients with neurological problems and psychiatric conditions. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A3.
     </p>
 </div>
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="A3.AFFFAMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.AFFFAMM)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.AFFFAMM"></p>
+                <radio-button-group id="@Html.IdFor(m => m.A3.AFFFAMM)" for="@Model.A3.AFFFAMM" items="Model.AffectedRelativesListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.AFFFAMM"></span>
+            </div>
+        </div>
+
+        <!--// AD Mutation //-->
+        <div class="px-4 sm:px-2">
+            <h3 class="text-base font-semibold leading-7 text-gray-900">
+                <span class="counter"></span> AD Mutation</h2>
+                <div class="subcounterreset m-2">
+                    <div class="px-4 py-4 sm:p-2">
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="A3.FADMUT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FADMUT)</label>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="A3.FADMUT"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A3.FADMUT)" for="@Model.A3.FADMUT" items="Model.EvidenceOfADMutationListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FADMUT"></span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="A3.FADMUTX"></p>
+                                <label asp-for="A3.FADMUTX">@Html.DisplayNameFor(m => m.A3.FADMUTX)</label>
+                                <div class="mt-2">
+                                    <input asp-for="A3.FADMUTX" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="A3.FADMUSO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FADMUSO)</label>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="A3.FADMUSO"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A3.FADMUSO)" for="@Model.A3.FADMUSO" items="Model.SourceOfMutationListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FADMUSO"></span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="A3.FADMUSOX"></p>
+                                <label asp-for="A3.FADMUSOX">@Html.DisplayNameFor(m => m.A3.FADMUSOX)</label>
+                                <div class="mt-2">
+                                    <input asp-for="A3.FADMUSOX" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+
+        <!--// FTLD Mutation //-->
+        <div class="px-4 sm:px-2">
+            <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> FTLD Mutation</h3>
+            <div class="subcounterreset m-2">
+                <div class="px-4 py-4 sm:p-2">
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.FFTDMUT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FFTDMUT)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FFTDMUT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.FFTDMUT)" for="@Model.A3.FFTDMUT" items="Model.EvidenceOfFTLDMutationListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FFTDMUT"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FFTDMUTX"></p>
+                            <label asp-for="A3.FFTDMUTX">@Html.DisplayNameFor(m => m.A3.FFTDMUTX)</label>
+                            <div class="mt-2">
+                                <input asp-for="A3.FFTDMUTX" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.FFTDMUSO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FFTDMUSO)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FFTDMUSO"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.FFTDMUSO)" for="@Model.A3.FFTDMUSO" items="Model.SourceOfMutationListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FFTDMUSO"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FFTDMUSX"></p>
+                            <label asp-for="A3.FFTDMUSX">@Html.DisplayNameFor(m => m.A3.FFTDMUSX)</label>
+                            <div class="mt-2">
+                                <input asp-for="A3.FFTDMUSX" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--// Other Mutation //-->
+        <div class="px-4 sm:px-2">
+            <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Other Mutation</h3>
+            <div class="subcounterreset m-2">
+                <div class="px-4 py-4 sm:p-2">
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.FOTHMUT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FOTHMUT)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FOTHMUT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.FOTHMUT)" for="@Model.A3.FOTHMUT" items="Model.EvidenceOfOtherMutationListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FOTHMUT"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FOTHMUTX"></p>
+                            <label asp-for="A3.FOTHMUTX">@Html.DisplayNameFor(m => m.A3.FOTHMUTX)</label>
+                            <div class="mt-2">
+                                <input asp-for="A3.FOTHMUTX" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.FOTHMUSO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A3.FOTHMUSO)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FOTHMUSO"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.FOTHMUSO)" for="@Model.A3.FOTHMUSO" items="Model.SourceOfMutationListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.FOTHMUSO"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="A3.FOTHMUSX"></p>
+                            <label asp-for="A3.FOTHMUSX">@Html.DisplayNameFor(m => m.A3.FOTHMUSX)</label>
+                            <div class="mt-2">
+                                <input asp-for="A3.FOTHMUSX" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--// Biological parents //-->
+        <div class="px-4 sm:px-2">
+            <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                Provide information on biological parents below. If birth year is unknown, please provide an approximate year on the Initial Visit Form A3 and ensure that it is consistently reported on any Follow-up Visit Form A3, as applicable. If it is impossible for the participant and co-participant to estimate the birth year, enter <i>9999=Unknown</i>.
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+                For any biological parent with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/ psychiatric condition column, and then skip the subsequent questions in the row. For a biological parent with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
+            </p>
+
+            <div class="subcounterreset m-2">
+                <table class="mt-16 w-full text-left text-sm leading-6">
+                    <thead class="border-b border-gray-200 text-gray-900">
+                        <tr>
+                            <th></th>
+                            <th>Birth month/year</th>
+                            <th>Age at death</th>
+                            <th>Primary neurological problem/psychiatric condition*</th>
+                            <th>Primary Dx**</th>
+                            <th>Method of evaluation**</th>
+                            <th>Age of onset (999=unknown)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100">
+                            <td><span class="subcounter"></span> Mother</td>
+                            <td>
+                                <fieldset>
+                                    <div class="grid grid-cols-2 sm:grid-cols-2">
+                                        <div class="sm:col-span-1">
+                                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMMOB</p>
+                                            <input asp-for="@Model.A3.MOMMOB" placeholder="MM" />
+                                        </div>
+                                        <div class="sm:col-span-1">
+                                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMYOB</p>
+                                            <input asp-for="@Model.A3.MOMYOB" placeholder="YYYY" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMDAGE</p>
+                                    <input asp-for="@Model.A3.MOMDAGE" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMNEUR</p>
+                                    <input asp-for="@Model.A3.MOMNEUR" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMPRDX</p>
+                                    <input asp-for="@Model.A3.MOMPRDX" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMMOE</p>
+                                    <input asp-for="@Model.A3.MOMMOE" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMAGEO</p>
+                                    <input asp-for="@Model.A3.MOMAGEO" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMOB"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
+                            </td>
+                            <td colspan="4">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMNEUR"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMPRDX"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMOE"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td><span class="subcounter"></span> Father</td>
+                            <td>
+                                <fieldset>
+                                    <div class="flex -space-x-px">
+                                        <div class="w-24 min-w-0 flex-1">
+                                            <input asp-for="@Model.A3.DADMOB" placeholder="MM" class="relative block w-full rounded-none rounded-bl-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        </div>
+                                        <div class="w-36 min-w-0 flex-1">
+                                            <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" class="relative block w-full rounded-none rounded-br-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                        </div>
+                                    </div>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMOB"></span>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB"></span>
+                                </fieldset>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <input asp-for="@Model.A3.DADDAGE" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADDAGE"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <input asp-for="@Model.A3.DADNEUR" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADNEUR"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <input asp-for="@Model.A3.DADPRDX" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADPRDX"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <input asp-for="@Model.A3.DADMOE" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMOE"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="w-20">
+                                    <input asp-for="@Model.A3.DADAGEO" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+        <!--// Siblings //-->
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
+                <input asp-for="@Model.A3.SIBS" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
+            </div>
+        </div>
+
+        <div>
+            Grid for siblings here
+        </div>
+
+        <!--// Children //-->
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
+                <input asp-for="@Model.A3.KIDS" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
+            </div>
+        </div>
+
+        <div>
+            Grid for children here
+        </div>
 
     </div>
 </div>
