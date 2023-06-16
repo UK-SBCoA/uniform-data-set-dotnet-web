@@ -52,13 +52,12 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
     {
         var libraryPath = "";
 
-        if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+        if (System.Environment.OSVersion.Platform != PlatformID.Win32NT)
         {
-            libraryPath = Path.GetFullPath(
-                Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
+            libraryPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
         }
 
-        if (String.IsNullOrWhiteSpace(libraryPath))
+        if (!String.IsNullOrWhiteSpace(libraryPath))
         {
             options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
         }
