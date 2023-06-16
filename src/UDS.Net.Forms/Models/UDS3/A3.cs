@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -17,35 +18,44 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? NWINFMUT { get; set; } // follow-up visits
 
         [Display(Name = "In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.")]
-        [RegularExpression("^(0-3|8|9)$")]
+        [RegularExpression("^([0-3]|8|9)$")]
         public int? FADMUT { get; set; }
 
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FADMUT), "8", ErrorMessage = "Other predominant AD mutation must be specified.")]
         public string? FADMUTX { get; set; }
 
         [Display(Name = "Source of evidence for AD mutation")]
-        [RegularExpression("^(1-3|8|9)$")]
+        [RegularExpression("^([1-3]|8|9)$")]
+        [RequiredIf(nameof(FADMUT), "1", ErrorMessage = "Define source of evidence for APP mutation.")]
+        [RequiredIf(nameof(FADMUT), "2", ErrorMessage = "Define source of evidence for PS-1 mutation.")]
+        [RequiredIf(nameof(FADMUT), "3", ErrorMessage = "Define source of evidence for PS-2 mutation.")]
+        [RequiredIf(nameof(FADMUT), "8", ErrorMessage = "Define source of evidence for other mutation.")]
         public int? FADMUSO { get; set; }
 
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FADMUSO), "8", ErrorMessage = "Other source of evidence for AD mutation must be specified.")]
         public string? FADMUSOX { get; set; }
 
         [Display(Name = "In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation")]
-        [RegularExpression("^(0-4|8|9)$")]
+        [RegularExpression("^([0-4]|8|9)$")]
         public int? FFTDMUT { get; set; }
 
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FFTDMUT), "8", ErrorMessage = "Other predominant FTLD mutation must be specified.")]
         public string? FFTDMUTX { get; set; }
 
         [Display(Name = "Source of evidence for FTLD mutation")]
-        [RegularExpression("^(1-3|8|9)$")]
+        [RegularExpression("^([1-3]|8|9)$")]
+        [RequiredIf(nameof(FFTDMUT), "8", ErrorMessage = "Other predominant FTLD mutation must be specified.")]
         public int? FFTDMUSO { get; set; }
 
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FFTDMUSO), "8", ErrorMessage = "Other source of evidence for FTLD mutation must be specified.")]
         public string? FFTDMUSX { get; set; }
 
         [Display(Name = "In this family, is there evidence for a mutation other than an AD or FTLD mutation?")]
@@ -54,74 +64,80 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If Yes, specify")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FFTDMUSO), "1", ErrorMessage = "Specify other evidence for a mutation other than an AD or FTLD mutation.")]
         public string? FOTHMUTX { get; set; }
 
         [Display(Name = "Source of evidence for other mutation")]
-        [RegularExpression("^(1-3|8|9)$")]
+        [RegularExpression("^([1-3]|8|9)$")]
         public int? FOTHMUSO { get; set; }
 
         [Display(Name = "If other, specify")]
         [MaxLength(60)]
+        [RequiredIf(nameof(FOTHMUSO), "8", ErrorMessage = "Other source of evidence required.")]
         public string? FOTHMUSX { get; set; }
 
         [Display(Name = "Mother — birth month")]
-        [RegularExpression("^(1-12|99)$")]
+        [BirthMonth(AllowUnknown = true)]
         public int? MOMMOB { get; set; }
 
         [Display(Name = "Mother — birth year")]
-        [Remote("ValidateYear", "A3", "UDS3")]
+        [BirthYear(AllowUnknown = true)]
         public int? MOMYOB { get; set; }
 
         [Display(Name = "Mother — age at death")]
-        [RegularExpression("^(0-110|888|999)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Mother age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
         public int? MOMDAGE { get; set; }
 
         [Display(Name = "Mother — neurological problem")]
-        [RegularExpression("^(1-5|8|9)$")]
+        [RegularExpression("^([1-5]|8|9)$", ErrorMessage = "Mother neurological problem/psychiatric condition invalid. Please see reference.")]
         public int? MOMNEUR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
-        [RegularExpression("^(40-490|999)$")]
+        [Diagnosis]
         public int? MOMPRDX { get; set; }
 
         [Display(Name = "Mother — method of evaluation")]
-        [RegularExpression("^(1-7)$")]
+        [Range(1, 7)]
         public int? MOMMOE { get; set; }
 
         [Display(Name = "Mother — age of onset")]
-        [RegularExpression("^(0-110|999)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Mother age of onset must be 0-110, or 999 (unknown)")]
         public int? MOMAGEO { get; set; }
 
         [Display(Name = "Father — birth month")]
-        [RegularExpression("^(1-12|99)$")]
+        [BirthMonth(AllowUnknown = true)]
         public int? DADMOB { get; set; }
 
         [Display(Name = "Father — birth year")]
-        [Remote("ValidateYear", "A3", "UDS3")]
+        [BirthYear(AllowUnknown = true)]
         public int? DADYOB { get; set; }
 
         [Display(Name = "Father — age at death")]
-        [RegularExpression("^(0-110|888|999)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Father age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
         public int? DADDAGE { get; set; }
 
         [Display(Name = "Father — neurological problem")]
-        [RegularExpression("^(1-5|8|9)$")]
+        [RegularExpression("^([1-5]|8|9)$", ErrorMessage = "Father neurological problem/psychiatric condition invalid. Please see reference.")]
         public int? DADNEUR { get; set; }
 
         [Display(Name = "Father — primary diagnosis")]
-        [RegularExpression("^(40-490|999)$")]
+        [Diagnosis]
         public int? DADPRDX { get; set; }
 
         [Display(Name = "Father — method of evaluation")]
-        [RegularExpression("^(1-7)$")]
+        [Range(1, 7)]
         public int? DADMOE { get; set; }
 
         [Display(Name = "Father — age of onset")]
-        [RegularExpression("^(0-110|999)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Father age of onset must be 0-110, or 999 (unknown)")]
         public int? DADAGEO { get; set; }
 
+        [Display(Name = "How many full siblings does the participant have? (77 = adopted, unknown)")]
+        [RegularExpression("^(\\d|[1]\\d|20|77)$", ErrorMessage = "Number of siblings must be 0-20, or 77 = adopted, unknown")]
         public int? SIBS { get; set; }
 
+        [Display(Name = "How many known biological children does the participant have?")]
+        [Range(0, 15)]
         public int? KIDS { get; set; }
 
         public List<A3FamilyMember> Siblings { get; set; } = new List<A3FamilyMember>();
@@ -130,6 +146,8 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            var type = validationContext.ObjectType;
+
             yield break;
         }
     }
