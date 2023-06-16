@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Yes, APP","1"),
             new RadioListItem("Yes, PS-1 (PSEN-1)","2"),
             new RadioListItem("Yes, PS-2 (PSEN-2)","3"),
-            new RadioListItem("Yes, Other specify","8"),
+            new RadioListItem("Yes, other (specify)","8"),
             new RadioListItem("Unknown whether mutation exists","9"),
         };
 
@@ -168,6 +168,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             foreach (var result in A3.Validate(new ValidationContext(A3, null, null)))
             {
+                // Validation in these scenarios
+                // - cross-form validation
+                // - differences in validation across visit types for instance, IVP vs FVP
                 var memberName = result.MemberNames.FirstOrDefault();
                 ModelState.AddModelError($"A3.{memberName}", result.ErrorMessage);
             }
