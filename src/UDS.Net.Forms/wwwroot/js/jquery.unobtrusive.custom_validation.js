@@ -2,6 +2,8 @@
 /* eslint semi: ["error", "always", { "omitLastInOneLineBlock": false}] */
 /* eslint brace-style: ["error", "stroustrup", { "allowSingleLine": true }] */
 /* eslint prefer-const: "off" */
+/* eslint space-before-function-paren: "off" */
+/* eslint unicode-bom: "off" */
 /*
 * Custom client-side validation for custom data annotations using jQuery unobtrusive
 * Read more here https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0#custom-client-side-validation
