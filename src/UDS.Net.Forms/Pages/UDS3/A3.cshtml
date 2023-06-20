@@ -13,15 +13,33 @@
 </div>
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        @if (Model.Visit != null)
+        {
+            if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "TIP")
+            {
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="A3.AFFFAMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.AFFFAMM)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.AFFFAMM"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A3.AFFFAMM)" for="@Model.A3.AFFFAMM" items="Model.AffectedRelativesListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.AFFFAMM"></span>
+                    </div>
+                </div>
+            }
+            else if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+            {
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="A3.NWINFMUT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFMUT)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFMUT"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFMUT)" for="@Model.A3.NWINFMUT" items="Model.SinceLastVisitAffectedRelativesListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFMUT"></span>
+                    </div>
+                </div>
+            }
+        }
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A3.AFFFAMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.AFFFAMM)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.AFFFAMM"></p>
-                <radio-button-group id="@Html.IdFor(m => m.A3.AFFFAMM)" for="@Model.A3.AFFFAMM" items="Model.AffectedRelativesListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.AFFFAMM"></span>
-            </div>
-        </div>
+
 
         <!--// AD Mutation //-->
         <div class="">

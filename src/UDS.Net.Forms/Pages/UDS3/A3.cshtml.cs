@@ -26,6 +26,13 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> SinceLastVisitAffectedRelativesListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (skip to question 5)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown (skip to question 5)", "9")
+        };
+
         public List<RadioListItem> EvidenceOfADMutationListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No","0"),
