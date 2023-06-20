@@ -1,6 +1,6 @@
 ﻿/* eslint-env jquery */
 /* eslint semi: ["error", "always", { "omitLastInOneLineBlock": false}] */
-/* eslint brace-style: "stroustrup" */
+/* eslint brace-style: ["error", "stroustrup", { "allowSingleLine": true }] */
 /* eslint prefer-const: "off" */
 /*
 * Custom client-side validation for custom data annotations using jQuery unobtrusive
