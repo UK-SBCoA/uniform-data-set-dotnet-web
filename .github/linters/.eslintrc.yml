@@ -43,7 +43,8 @@ plugins:
 # Rules #
 #########
 rules: { 
-  "space-before-function-paren" : ["error", "never"]
+  "space-before-function-paren" : "off",
+  "prefer-const" : "off"
 }
 
 ##############################
