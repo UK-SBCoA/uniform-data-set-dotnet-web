@@ -291,12 +291,7 @@
         <!--// Siblings //-->
         <div>
             <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">FULL SIBLINGS</h3>
-            <p class="mt-1 text-sm text-gray-500">
-                If participant has no full siblings, SKIP TO QUESTION 7; otherwise, provide information on all full siblings below.
-            </p>
-            <p class="mt-1 text-sm text-gray-500">
-                For any full sibling with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column , and then skip the subsequent questions in the row. For a sibling with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
-            </p>
+
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                 <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -305,6 +300,13 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
                 </div>
             </div>
+
+            <p class="mt-1 text-sm text-gray-500">
+                If participant has no full siblings, SKIP TO QUESTION 7; otherwise, provide information on all full siblings below.
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+                For any full sibling with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column , and then skip the subsequent questions in the row. For a sibling with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
+            </p>
 
             <div class="subcounterreset m-2">
                 <table class="mt-8 w-full text-left text-sm leading-6">
@@ -333,12 +335,6 @@
         <!--// Children //-->
         <div>
             <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL CHILDREN</h3>
-            <p class="mt-1 text-sm text-gray-500">
-                If particpant has no biological children, END FORM HERE; otherwise, provide information on all biological children below.
-            </p>
-            <p class="mt-1 text-sm text-gray-500">
-                For any biological child with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row. For a biological child with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/ psychiatric condition column, and then skip the subsequent questions in the row.
-            </p>
 
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                 <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
@@ -348,6 +344,13 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
                 </div>
             </div>
+
+            <p class="mt-1 text-sm text-gray-500">
+                If particpant has no biological children, END FORM HERE; otherwise, provide information on all biological children below.
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+                For any biological child with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row. For a biological child with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/ psychiatric condition column, and then skip the subsequent questions in the row.
+            </p>
 
             <div class="subcounterreset m-2">
                 <table class="mt-8 w-full text-left text-sm leading-6">
