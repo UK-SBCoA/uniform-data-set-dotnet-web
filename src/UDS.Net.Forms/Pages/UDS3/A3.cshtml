@@ -24,7 +24,7 @@
         </div>
 
         <!--// AD Mutation //-->
-        <div class="px-4 sm:px-2">
+        <div class="">
             <h3 class="text-base font-semibold leading-7 text-gray-900">
                 <span class="counter"></span> AD Mutation</h2>
                 <div class="subcounterreset m-2">
@@ -67,7 +67,7 @@
         </div>
 
         <!--// FTLD Mutation //-->
-        <div class="px-4 sm:px-2">
+        <div class="">
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> FTLD Mutation</h3>
             <div class="subcounterreset m-2">
                 <div class="px-4 py-4 sm:p-2">
@@ -109,7 +109,7 @@
         </div>
 
         <!--// Other Mutation //-->
-        <div class="px-4 sm:px-2">
+        <div class="">
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Other Mutation</h3>
             <div class="subcounterreset m-2">
                 <div class="px-4 py-4 sm:p-2">
@@ -151,7 +151,7 @@
         </div>
 
         <!--// Biological parents //-->
-        <div class="px-4 sm:px-2">
+        <div class="">
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
             <p class="mt-1 text-sm text-gray-500">
                 Provide information on biological parents below. If birth year is unknown, please provide an approximate year on the Initial Visit Form A3 and ensure that it is consistently reported on any Follow-up Visit Form A3, as applicable. If it is impossible for the participant and co-participant to estimate the birth year, enter <i>9999=Unknown</i>.
@@ -285,37 +285,91 @@
                     </tbody>
                 </table>
 
-
-
             </div>
         </div>
 
         <!--// Siblings //-->
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
-                <input asp-for="@Model.A3.SIBS" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
+        <div>
+            <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">FULL SIBLINGS</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                If participant has no full siblings, SKIP TO QUESTION 7; otherwise, provide information on all full siblings below.
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+                For any full sibling with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column , and then skip the subsequent questions in the row. For a sibling with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
+            </p>
+            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
+                    <input asp-for="@Model.A3.SIBS" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
+                </div>
+            </div>
+
+            <div class="subcounterreset m-2">
+                <table class="mt-8 w-full text-left text-sm leading-6">
+                    <thead class="border-b border-gray-200 text-gray-900">
+                        <tr>
+                            <th></th>
+                            <th>Birth month/year</th>
+                            <th>Age at death</th>
+                            <th>Primary neurological problem/psychiatric condition*</th>
+                            <th>Primary Dx**</th>
+                            <th>Method of evaluation**</th>
+                            <th>Age of onset (999=unknown)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
+                        {
+                            @Html.EditorFor(m => m.A3.Siblings[i])
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div>
-            Grid for siblings here
-        </div>
 
         <!--// Children //-->
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
-                <input asp-for="@Model.A3.KIDS" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
-            </div>
-        </div>
-
         <div>
-            Grid for children here
+            <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL CHILDREN</h3>
+            <p class="mt-1 text-sm text-gray-500">
+                If particpant has no biological children, END FORM HERE; otherwise, provide information on all biological children below.
+            </p>
+            <p class="mt-1 text-sm text-gray-500">
+                For any biological child with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row. For a biological child with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/ psychiatric condition column, and then skip the subsequent questions in the row.
+            </p>
+
+            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
+                    <input asp-for="@Model.A3.KIDS" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
+                </div>
+            </div>
+
+            <div class="subcounterreset m-2">
+                <table class="mt-8 w-full text-left text-sm leading-6">
+                    <thead class="border-b border-gray-200 text-gray-900">
+                        <tr>
+                            <th></th>
+                            <th>Birth month/year</th>
+                            <th>Age at death</th>
+                            <th>Primary neurological problem/psychiatric condition*</th>
+                            <th>Primary Dx**</th>
+                            <th>Method of evaluation**</th>
+                            <th>Age of onset (999=unknown)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.A3.Children.Count(); i++)
+                        {
+                            @Html.EditorFor(m => m.A3.Children[i])
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
