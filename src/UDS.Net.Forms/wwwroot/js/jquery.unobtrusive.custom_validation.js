@@ -20,7 +20,7 @@ function setValidationStatus(statusValue, statusText) {
 
   if (statusValue === '2') { // TODO don't hardcode status value
     // figure out which fields needs to be required
-    // enable client-side validation 
+    // enable client-side validation
     settings.ignore = '';
   }
   else {
@@ -92,7 +92,7 @@ $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allow
 
     console.log(allowUnknown);
 
-    options.rules.birthmonth = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }];
+    options.rules.birthmonth = [element, { allowUnknown, maximum, minimum }];
 
     options.messages.birthmonth = options.message;
   });
@@ -125,7 +125,7 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
     let maximum = parseInt(options.params.maximum);
     let allowUnknown = options.params.allowunknown; // TODO parse bool
 
-    options.rules.birthyear = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }]; // rules are required for the onChange event to trigger validation
+    options.rules.birthyear = [element, { allowUnknown, maximum, minimum }]; // rules are required for the onChange event to trigger validation
     options.messages.birthyear = options.message;
   });
 
