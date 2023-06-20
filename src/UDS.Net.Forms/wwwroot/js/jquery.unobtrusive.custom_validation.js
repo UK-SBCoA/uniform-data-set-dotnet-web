@@ -86,9 +86,9 @@ $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allow
   function (options) {
     let element = $(options.form).find('input[data-val-birthmonth]')[0];
 
-    let minimum = parseInt(options.params['minimum']);
-    let maximum = parseInt(options.params['maximum']);
-    let allowUnknown = options.params['allowunknown']; // TODO parse bool
+    let minimum = parseInt(options.params.minimum);
+    let maximum = parseInt(options.params.maximum);
+    let allowUnknown = options.params.allowunknown; // TODO parse bool
 
     console.log(allowUnknown);
 
@@ -121,9 +121,9 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
   function (options) {
     let element = $(options.form).find('input[data-val-birthyear]')[0];
 
-    let minimum = parseInt(options.params['minimum']);
-    let maximum = parseInt(options.params['maximum']);
-    let allowUnknown = options.params['allowunknown']; // TODO parse bool
+    let minimum = parseInt(options.params.minimum);
+    let maximum = parseInt(options.params.maximum);
+    let allowUnknown = options.params.allowunknown; // TODO parse bool
 
     options.rules['birthyear'] = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }]; // rules are required for the onChange event to trigger validation
     options.messages['birthyear'] = options.message;
