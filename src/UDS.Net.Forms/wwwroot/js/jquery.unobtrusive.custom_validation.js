@@ -8,47 +8,47 @@
 /* Status */
 function setValidationStatus(statusValue, statusText) {
   // get the current form
-  var form = $("form");
+  let form = $('form');
 
   // get validator object
-  var validator = form.validate(); //$.data($('form')[0], 'validator');
-  var settings = validator.settings;
+  let validator = form.validate();
+  let settings = validator.settings;
 
   if (statusValue == 2) { // TODO don't hardcode status value
     // figure out which fields needs to be required
     // enable client-side validation 
-    settings.ignore = "";
+    settings.ignore = '';
   }
   else {
     // get errors that were created using jQuery.validate.unobtrusive
     // and remove messages
-    var errors = form.find(".field-validation-error span");
+    let errors = form.find('.field-validation-error span');
     errors.each(function () { validator.settings.success($(this)); })
 
     // clear summary
-    var summary = form.find(".validation-summary-errors ul");
+    let summary = form.find('.validation-summary-errors ul');
     summary.empty();
 
     // clear errors from validation
     validator.resetForm();
 
     // disable client-side validation
-    settings.ignore = "*";
+    settings.ignore = '*';
   }
 }
 
 $(function () {
-  var select = $("select[data-val-status]");
+  let select = $('select[data-val-status]');
   if (select.length) {
-    var optionSelected = select.find(":selected");
+    let optionSelected = select.find(':selected');
     if (optionSelected.length) {
       setValidationStatus(optionSelected.val(), optionSelected.text())
     }
   }
 });
 
-$("select[data-val-status]").on("change", function () {
-  var optionSelected = $("select[data-val-status]").find(":selected");
+$('select[data-val-status]').on('change', function () {
+  let optionSelected = $('select[data-val-status]').find(':selected');
   if (optionSelected.length) {
     setValidationStatus(optionSelected.val(), optionSelected.text())
   }
@@ -57,9 +57,9 @@ $("select[data-val-status]").on("change", function () {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Birth Month */
 $.validator.addMethod('birthmonth', function (value, element, params) {
-  var parameters = params[1];
+  let parameters = params[1];
 
-  var allowUnknown = parameters.allowUnknown;
+  let allowUnknown = parameters.allowUnknown;
 
   if (allowUnknown == 'true' && value == 99) { // TODO after parsing as bool, update conditional
     return true;
@@ -80,11 +80,11 @@ $.validator.addMethod('birthmonth', function (value, element, params) {
 */
 $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allowunknown'],
   function (options) {
-    var element = $(options.form).find('input[data-val-birthmonth]')[0];
+    let element = $(options.form).find('input[data-val-birthmonth]')[0];
 
-    var minimum = parseInt(options.params['minimum']);
-    var maximum = parseInt(options.params['maximum']);
-    var allowUnknown = options.params['allowunknown']; // TODO parse bool
+    let minimum = parseInt(options.params['minimum']);
+    let maximum = parseInt(options.params['maximum']);
+    let allowUnknown = options.params['allowunknown']; // TODO parse bool
 
     console.log(allowUnknown);
 
@@ -97,11 +97,11 @@ $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allow
 /* Birth Year */
 $.validator.addMethod('birthyear',
   function (value, element, params) {
-    var parameters = params[1];
+    let parameters = params[1];
 
-    var minimum = parameters.minimum;
-    var maximum = parameters.maximum;
-    var allowUnknown = parameters.allowUnknown;
+    let minimum = parameters.minimum;
+    let maximum = parameters.maximum;
+    let allowUnknown = parameters.allowUnknown;
 
     if (allowUnknown == 'true' && value == 9999) { // TODO after parsing as bool, update conditional
       return true;
@@ -115,11 +115,11 @@ $.validator.addMethod('birthyear',
 
 $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'minimum'],
   function (options) {
-    var element = $(options.form).find('input[data-val-birthyear]')[0];
+    let element = $(options.form).find('input[data-val-birthyear]')[0];
 
-    var minimum = parseInt(options.params['minimum']);
-    var maximum = parseInt(options.params['maximum']);
-    var allowUnknown = options.params['allowunknown']; // TODO parse bool
+    let minimum = parseInt(options.params['minimum']);
+    let maximum = parseInt(options.params['maximum']);
+    let allowUnknown = options.params['allowunknown']; // TODO parse bool
 
     options.rules['birthyear'] = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }]; // rules are required for the onChange event to trigger validation
     options.messages['birthyear'] = options.message;
@@ -130,7 +130,7 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
 /* Diagnosis */
 $.validator.addMethod('diagnosis', function (value, element, params) {
   console.log(element);
-  var codes = [40, 41, 42, 43, 44, 45, 50, 70, 80, 100, 110, 120, 130, 131, 132, 133, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 310, 320, 400, 410, 420, 421, 430, 431, 432, 433, 434, 435, 436, 439, 440, 450, 490, 999];
+  let codes = [40, 41, 42, 43, 44, 45, 50, 70, 80, 100, 110, 120, 130, 131, 132, 133, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 310, 320, 400, 410, 420, 421, 430, 431, 432, 433, 434, 435, 436, 439, 440, 450, 490, 999];
   if (codes.includes(value)) {
     return true;
   }
