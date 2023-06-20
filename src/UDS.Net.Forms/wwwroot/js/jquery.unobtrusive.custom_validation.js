@@ -18,7 +18,7 @@ function setValidationStatus(statusValue, statusText) {
   let validator = form.validate();
   let settings = validator.settings;
 
-  if (statusValue == 2) { // TODO don't hardcode status value
+  if (statusValue === '2') { // TODO don't hardcode status value
     // figure out which fields needs to be required
     // enable client-side validation 
     settings.ignore = '';
@@ -65,7 +65,7 @@ $.validator.addMethod('birthmonth', function (value, element, params) {
 
   let allowUnknown = parameters.allowUnknown;
 
-  if (allowUnknown == 'true' && value == 99) { // TODO after parsing as bool, update conditional
+  if (allowUnknown === 'true' && value === '99') { // TODO after parsing as bool, update conditional
     return true;
   }
 
@@ -107,7 +107,7 @@ $.validator.addMethod('birthyear',
     let maximum = parameters.maximum;
     let allowUnknown = parameters.allowUnknown;
 
-    if (allowUnknown == 'true' && value == 9999) { // TODO after parsing as bool, update conditional
+    if (allowUnknown === 'true' && value === '9999') { // TODO after parsing as bool, update conditional
       return true;
     }
 
