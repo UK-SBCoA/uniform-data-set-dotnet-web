@@ -14,7 +14,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [RegularExpression("^(0|1|9)$")]
         public int? AFFFAMM { get; set; } // initial visits
 
-        [Display(Name = "")]
+        [Display(Name = "Since the last visit, is new information available concerning genetic mutations addressed by Questions 2a through 4b, below?\n“Affected” = having dementia or one of the non-normal diagnoses listed in Appendix 1")]
         public int? NWINFMUT { get; set; } // follow-up visits
 
         [Display(Name = "In this family, is there evidence for an AD mutation? If Yes, select predominant mutation.")]
@@ -76,6 +76,12 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredIf(nameof(FOTHMUSO), "8", ErrorMessage = "Other source of evidence required.")]
         public string? FOTHMUSX { get; set; }
 
+        /// <summary>
+        /// Only required on follow-up visits
+        /// </summary>
+        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
+        public int? NWINFPAR { get; set; }
+
         [Display(Name = "Mother — birth month")]
         [BirthMonth(AllowUnknown = true)]
         public int? MOMMOB { get; set; }
@@ -136,9 +142,15 @@ namespace UDS.Net.Forms.Models.UDS3
         [RegularExpression("^(\\d|[1]\\d|20|77)$", ErrorMessage = "Number of siblings must be 0-20, or 77 = adopted, unknown")]
         public int? SIBS { get; set; }
 
+        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant’s siblings?")]
+        public int? NWINFSIB { get; set; }
+
         [Display(Name = "How many known biological children does the participant have?")]
         [Range(0, 15)]
         public int? KIDS { get; set; }
+
+        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant’s siblings?")]
+        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMember> Siblings { get; set; } = new List<A3FamilyMember>();
 

@@ -74,6 +74,12 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9"),
         };
 
+        public List<RadioListItem> NewInformationSinceLastVisit { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
         public List<RadioListItem> NeurologicalProblemsListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Cognitive impairment/behavior change", "1"),

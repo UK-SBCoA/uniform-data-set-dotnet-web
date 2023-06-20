@@ -10,6 +10,40 @@
     <p class="mt-1 text-sm text-gray-500">
         INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating patients with neurological problems and psychiatric conditions. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A3.
     </p>
+    @if (Model.Visit != null)
+    {
+        if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+        {
+            <div class="divide-y divide-sky-300 overflow-hidden rounded-lg bg-sky-200 shadow m-6">
+                <div class="px-4 py-5 sm:p-6">
+                    <p class="mt-1 text-sm text-gray-900 font-medium">
+                        SPECIAL INSTRUCTIONS for participants who are receiving UDS Version 3 of Form A3 <span class="underline">for the first time</span>:
+                    </p>
+                    <p class="mt-1 text-sm text-gray-500 italic">
+                        NOTE: A participant is receiving UDS v3 Form A3 for the first time if:
+                    </p>
+                    <ul class="list-disc px-4 py-2 sm:px-6 italic">
+                        <li class="mt-1 text-sm text-gray-500">No A3 data has been submitted yet for this participant –OR–</li>
+                        <li class="mt-1 text-sm text-gray-500">A3 data has been submitted for this participant, but it was collected using UDS v2</li>
+                    </ul>
+                    <p class="mt-1 text-sm text-gray-500 font-medium">
+                        For such participants, you must fill out this form <span class="underline">in its entirety</span>, meaning:
+                    </p>
+                    <ol class="list-decimal px-4 py-2 sm:px-6">
+                        <li class="mt-1 text-sm text-gray-500">You must answer <span class="text-gray-900 font-medium">1=Yes</span> to Question 1 on genetic mutations and complete 2a — 4b.</li>
+                        <li class="mt-1 text-sm text-gray-500">You must answer <span class="text-gray-900 font-medium">1=Yes</span> to Question 5 on parents and complete 5a — 5b.</li>
+                        <li class="mt-1 text-sm text-gray-500">You must answer <span class="text-gray-900 font-medium">1=Yes</span> to Question 6a on siblings and complete 6a — 6t, as appropriate.</li>
+                        <li class="mt-1 text-sm text-gray-500">You must answer <span class="text-gray-900 font-medium">1=Yes</span> to Question 7a on children and complete 7a — 7o, as appropriate.</li>
+                    </ol>
+                </div>
+                <div class="px-4 py-5 sm:p-6">
+                    <p class="mt-1 text-sm text-gray-500">
+                        <span class="text-gray-900 font-medium">Corrections or new information on previously submitted family members</span> — For family members who were denoted as being "affected" with a neurological or psychiatric condition or who were not affected at a previous UDS visit, any corrections to their data should be made to that previous A3 Form. Any newly obtained information (e.g., new mutation information, new diagnoses, new method of evaluation), including for family members previously reported as being affected at a past UDS visit, should be indicated on this form and should not be submitted as a correction to a previously submitted Form A3.
+                    </p>
+                </div>
+            </div>
+        }
+    }
 </div>
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
@@ -26,7 +60,7 @@
                     </div>
                 </div>
             }
-            else if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+            else
             {
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A3.NWINFMUT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFMUT)</label>
@@ -170,7 +204,28 @@
 
         <!--// Biological parents //-->
         <div class="">
-            <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+            @if (Model.Visit != null)
+            {
+                if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "TIP")
+                {
+                    <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+
+                }
+                else
+                {
+                    <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL PARENTS</h3>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.NWINFPAR"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFPAR)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFPAR"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.NWINFPAR)" for="@Model.A3.NWINFPAR" items="Model.NewInformationSinceLastVisit"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFPAR"></span>
+                        </div>
+                    </div>
+                }
+            }
+
             <p class="mt-1 text-sm text-gray-500">
                 Provide information on biological parents below. If birth year is unknown, please provide an approximate year on the Initial Visit Form A3 and ensure that it is consistently reported on any Follow-up Visit Form A3, as applicable. If it is impossible for the participant and co-participant to estimate the birth year, enter <i>9999=Unknown</i>.
             </p>
@@ -322,6 +377,22 @@
             <p class="mt-1 text-sm text-gray-500">
                 If participant has no full siblings, SKIP TO QUESTION 7; otherwise, provide information on all full siblings below.
             </p>
+
+            @if (Model.Visit != null)
+            {
+                if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+                {
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.NWINFSIB"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFSIB"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.NWINFSIB)" for="@Model.A3.NWINFSIB" items="Model.NewInformationSinceLastVisit"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFSIB"></span>
+                        </div>
+                    </div>
+                }
+            }
+
             <p class="mt-1 text-sm text-gray-500">
                 For any full sibling with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column , and then skip the subsequent questions in the row. For a sibling with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row.
             </p>
@@ -366,6 +437,22 @@
             <p class="mt-1 text-sm text-gray-500">
                 If particpant has no biological children, END FORM HERE; otherwise, provide information on all biological children below.
             </p>
+
+            @if (Model.Visit != null)
+            {
+                if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+                {
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="A3.NWINFKID"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFKID)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFKID"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.A3.NWINFKID)" for="@Model.A3.NWINFKID" items="Model.NewInformationSinceLastVisit"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFKID"></span>
+                        </div>
+                    </div>
+                }
+            }
+
             <p class="mt-1 text-sm text-gray-500">
                 For any biological child with a neurological or psychiatric condition, the entire row must be filled out. If the clinician cannot determine the primary neurological problem/psychiatric condition after reviewing all available evidence, enter 9=Unknown in the Primary neurological problem/psychiatric condition column, and then skip the subsequent questions in the row. For a biological child with no neurological or psychiatric problem, enter 8=N/A — no neurological problem or psychiatric condition in the Primary neurological problem/ psychiatric condition column, and then skip the subsequent questions in the row.
             </p>
