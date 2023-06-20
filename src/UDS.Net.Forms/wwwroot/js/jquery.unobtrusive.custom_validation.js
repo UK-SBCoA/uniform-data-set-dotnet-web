@@ -27,7 +27,7 @@ function setValidationStatus(statusValue, statusText) {
     // get errors that were created using jQuery.validate.unobtrusive
     // and remove messages
     let errors = form.find('.field-validation-error span');
-    errors.each(function () { validator.settings.success($(this)); })
+    errors.each(function () { validator.settings.success($(this)); });
 
     // clear summary
     let summary = form.find('.validation-summary-errors ul');
@@ -46,7 +46,7 @@ $(function () {
   if (select.length) {
     let optionSelected = select.find(':selected');
     if (optionSelected.length) {
-      setValidationStatus(optionSelected.val(), optionSelected.text())
+      setValidationStatus(optionSelected.val(), optionSelected.text());
     }
   }
 });
@@ -54,7 +54,7 @@ $(function () {
 $('select[data-val-status]').on('change', function () {
   let optionSelected = $('select[data-val-status]').find(':selected');
   if (optionSelected.length) {
-    setValidationStatus(optionSelected.val(), optionSelected.text())
+    setValidationStatus(optionSelected.val(), optionSelected.text());
   }
 });
 
@@ -92,9 +92,9 @@ $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allow
 
     console.log(allowUnknown);
 
-    options.rules['birthmonth'] = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }];
+    options.rules.birthmonth = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }];
 
-    options.messages['birthmonth'] = options.message;
+    options.messages.birthmonth = options.message;
   });
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -125,8 +125,8 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
     let maximum = parseInt(options.params.maximum);
     let allowUnknown = options.params.allowunknown; // TODO parse bool
 
-    options.rules['birthyear'] = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }]; // rules are required for the onChange event to trigger validation
-    options.messages['birthyear'] = options.message;
+    options.rules.birthyear = [element, { allowUnknown: allowUnknown, maximum: maximum, minimum: minimum }]; // rules are required for the onChange event to trigger validation
+    options.messages.birthyear = options.message;
   });
 
 
@@ -142,5 +142,5 @@ $.validator.addMethod('diagnosis', function (value, element, params) {
 });
 
 $.validator.unobtrusive.adapters.add('diagnosis', [], function (options) {
-  options.messages['diagnosis'] = options.message;
+  options.messages.diagnosis = options.message;
 });
