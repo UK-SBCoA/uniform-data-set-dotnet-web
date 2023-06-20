@@ -129,7 +129,6 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
     options.messages.birthyear = options.message;
   });
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Diagnosis */
 $.validator.addMethod('diagnosis', function (value, element, params) {
