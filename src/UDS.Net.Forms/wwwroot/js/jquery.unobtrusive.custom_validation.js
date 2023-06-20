@@ -1,4 +1,6 @@
-﻿/*
+﻿/*eslint-env jquery */
+/*eslint semi: ["error", "always", { "omitLastInOneLineBlock": false}] */
+/*
 * Custom client-side validation for custom data annotations using jQuery unobtrusive
 * Read more here https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0#custom-client-side-validation
 * Another good blog post here https://bradwilson.typepad.com/blog/2010/10/mvc3-unobtrusive-validation.html
