@@ -65,5 +65,20 @@
 			"</div>"
 		],
 		"description": "Render field"
+	},
+	"forms.tablerow": {
+		"scope": "html",
+		"prefix": "udstr",
+		"body": [
+			"<tr>",
+			"\t<td>",
+			"\t\t<label asp-for=\"${1:Property}\"><span class=\"counter\"></span> @Html.DisplayNameFor(m => m.${1})</label>",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"${1}\"></p>",
+			"\t\t<span class=\"mt-2 text-sm text-red-600\" asp-validation-for=\"${1}\"></span>",
+			"\t</td>",
+			"\t<table-cell-radio-buttons id=\"@Html.IdFor(m => m.${1})\" for=\"@Model.${1}\" items=\"${2:OptionsList}\"></table-cell-radio-buttons>",
+			"</tr>"
+		],
+		"description": "Render field"
 	}
 }
