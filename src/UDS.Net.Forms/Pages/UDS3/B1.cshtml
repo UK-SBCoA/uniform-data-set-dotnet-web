@@ -14,6 +14,120 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
+        @if (Model.Visit != null)
+        {
+            @if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "FVP")
+            {
+                <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3">Physical measurements</h3>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="B1.HEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEIGHT)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HEIGHT"></p>
+                        <input asp-for="@Model.B1.HEIGHT" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEIGHT"></span>
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="B1.WEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.WEIGHT)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WEIGHT"></p>
+                        <input asp-for="@Model.B1.WEIGHT" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <h3><span class="counter"></span> Participant blood pressure at initial reading (sitting)</h3>
+                    <div>
+                        <label asp-for="B1.BPSYS"></label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.BPSYS"></p>
+                        <input asp-for="B1.BPSYS" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYS"></span>
+                    </div>
+                    <div>
+                        <label asp-for="B1.BPDIAS"></label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.BPDIAS"></p>
+                        <input asp-for="B1.BPDIAS" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIAS"></span>
+                    </div>
+                </div>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="B1.HRATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HRATE)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HRATE"></p>
+                        <input asp-for="@Model.B1.HRATE" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HRATE"></span>
+                    </div>
+                </div>
+            }
+        }
+
+
+        <table class="table-auto min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 italic">Physical observations</th>
+                    @foreach (var item in Model.BasicYesNoListItems)
+                    {
+                        <th class="w-20 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr>
+                    <td>
+                        <label asp-for="B1.VISION"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.VISION)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.VISION"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.VISION"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISION)" for="@Model.B1.VISION" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B1.VISCORR"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.VISCORR)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.VISCORR"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.VISCORR"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISCORR)" for="@Model.B1.VISCORR" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td>
+                        <label asp-for="B1.VISWCORR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B1.VISWCORR)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.VISWCORR"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.VISWCORR"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISWCORR)" for="@Model.B1.VISWCORR" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B1.HEARAID"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEARAID)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.HEARAID"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARAID"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARAID" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B1.HEARAID"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEARAID)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.HEARAID"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARAID"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARAID" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+            <tbody class="subcounterreset">
+                <tr>
+                    <td>
+                        <label asp-for="B1.HEARWAID"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B1.HEARWAID)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.HEARWAID"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARWAID"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARWAID)" for="@Model.B1.HEARWAID" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
 <partial name="_FormFooter" for="@Model.B1" />
