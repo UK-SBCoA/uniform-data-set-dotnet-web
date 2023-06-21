@@ -30,21 +30,8 @@
                     <label asp-for="T1.TELCOG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELCOG)</label>
                     <p class="text-sm text-gray-500" asp-description-for="T1.TELCOG"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELCOG"></span>
-
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELCOG[@i]" name="T1.TELCOG" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="T1_TELCOG[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELCOG)" for="@Model.T1.TELCOG" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -52,19 +39,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="T1.TELILL"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELILL"></span>
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELILL[@i]" name="T1.TELILL" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELILL[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELILL)" for="@Model.T1.TELILL" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -72,19 +47,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="T1.TELHOME"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELHOME"></span>
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELHOME[@i]" name="T1.TELHOME" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELHOME[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELHOME)" for="@Model.T1.TELHOME" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -92,19 +55,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="T1.TELREFU"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELREFU"></span>
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELREFU[@i]" name="T1.TELREFU" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELREFU[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELREFU)" for="@Model.T1.TELREFU" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -112,19 +63,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="T1.TELCOV"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELCOV"></span>
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELCOV[@i]" name="T1.TELCOV" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELCOV[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELCOV)" for="@Model.T1.TELCOV" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -134,19 +73,8 @@
                     <p class="mt-2 text-sm text-gray-500" id="email-description">(ADC staff convenience is not an acceptable reason.)</p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELOTHRX"></span>
                 </td>
-                @for (int i = 0; i < Model.SimpleYesNoListItems.Count(); i++)
-                {
-                    <td>
-                        <div class="relative flex items-start">
-                            <div class="flex items-center">
-                                <input type="radio" id="T1_TELOTHR[@i]" name="T1.TELOTHR" value="@Model.SimpleYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELOTHR[@i]">
-                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.SimpleYesNoListItems[i].Value</span>
-                                </label>
-                            </div>
-                        </div>
-                    </td>
-                }
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELOTHR)" for="@Model.T1.TELOTHR" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+
             </tr>
         </tbody>
     </table>
