@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Was any part of the MMSE completed?")]
         public int? MMSECOMP { get; set; }
 
-        [Display(Name = "N0 (Enter reason code, 95-98 and SKIP TO QUESTION 2a)")]
+        [Display(Name = "No (Enter reason code, 95-98 and SKIP TO QUESTION 2a)")]
         [Range(95, 98)]
         public int? MMSEREAS { get; set; }
 
@@ -168,7 +168,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(0, 15)]
         public int? UDSVERLR { get; set; }
 
-        [Display(Name = "Number of non-Lwords and rule violation errors in 1 minute")]
+        [Display(Name = "Number of non-L-words and rule violation errors in 1 minute")]
         [Range(0, 15)]
         public int? UDSVERLN { get; set; }
 
@@ -184,7 +184,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(0, 80)]
         public int? UDSVERTI { get; set; }
 
-        [Display(Name = "Per Clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participant’s cognitive status is deemed")]
+        [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participant’s cognitive status is deemed")]
         public int? COGSTAT { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
