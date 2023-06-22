@@ -8,12 +8,137 @@
 <div>
     <h2 class="text-lg font-medium leading-6 text-gray-900">T1: Inclusion Form</h2>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS:  This form is to be completed by the clinician or clinical interviewer who will participate in the telephone initial visit. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form T1.
+        INSTRUCTIONS:  This form is to be completed by the clinician or clinical interviewer who will participate in the @Model.Visit.Kind. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form T1.
     </p>
 </div>
 <div>
-    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <caption class="caption-top">
+            <p>Please complete the following before continuing with the @Model.Visit.Kind.</p>
+            <p>When feasible, the optimal modality of assessment would be video-assisted rather than by telephone.</p>
+        </caption>
+        <thead>
+            <tr>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"><span class="counter"></span> Why is the UDS @Model.Visit.Kind protocol being used to obtain data about the participant?</th>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">No</th>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Yes</th>
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="T1.TELCOG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELCOG)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELCOG"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELCOG"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELCOG)" for="@Model.T1.TELCOG" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELILL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELILL)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELILL"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELILL"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELILL)" for="@Model.T1.TELILL" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELHOME"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELHOME)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELHOME"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELHOME"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELHOME)" for="@Model.T1.TELHOME" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELREFU"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELREFU)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELREFU"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELREFU"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELREFU)" for="@Model.T1.TELREFU" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELCOV"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELCOV)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELCOV"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELCOV"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELCOV)" for="@Model.T1.TELCOV" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELOTHRX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.T1.TELOTHRX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELOTHRX"></p>
+                    <input asp-for="T1.TELOTHRX" />
+                    <p class="mt-2 text-sm text-gray-500" id="email-description">(ADC staff convenience is not an acceptable reason.)</p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELOTHRX"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.T1.TELOTHR)" for="@Model.T1.TELOTHR" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
 
+            </tr>
+        </tbody>
+    </table>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="T1.TELMOD"><span class="counter"></span> @Html.DisplayNameFor(m => m.T1.TELMOD)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.T1.TELMOD"></p>
+                <radio-button-group id="@Html.IdFor(m => m.T1.TELMOD)" for="@Model.T1.TELMOD" items="Model.ModalityListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELMOD"></span>
+            </div>
+        </div>
     </div>
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">No</th>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Yes</th>
+                <th class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Unknown</th>
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="T1.TELINPER"><span class="counter"></span> @Html.DisplayNameFor(m => m.T1.TELINPER)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELINPER"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELINPER"></span>
+                </td>
+                @for (int i = 0; i < Model.BasicYesNoListItems.Count(); i++)
+                {
+                    <td>
+                        <div class="relative flex items-start">
+                            <div class="flex items-center">
+                                <input type="radio" id="T1_TELINPER[@i]" name="T1.TELINPER" value="@Model.BasicYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELINPER[@i]">
+                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.BasicYesNoListItems[i].Value</span>
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="T1.TELMILE"><span class="counter"></span> @Html.DisplayNameFor(m => m.T1.TELMILE)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="T1.TELMILE"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="T1.TELMILE"></span>
+                </td>
+                @for (int i = 0; i < Model.BasicYesNoListItems.Count(); i++)
+                {
+                    <td>
+                        <div class="relative flex items-start">
+                            <div class="flex items-center">
+                                <input type="radio" id="T1_TELMILE[@i]" name="T1.TELMILE" value="@Model.BasicYesNoListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="TELMILE[@i]">
+                                    <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.BasicYesNoListItems[i].Value</span>
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
 </div>
 <partial name="_FormFooter" for="@Model.T1" />

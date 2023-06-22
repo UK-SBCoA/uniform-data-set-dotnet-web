@@ -1,0 +1,56 @@
+﻿@model UDS.Net.Forms.Models.UDS3.A3FamilyMember
+
+<tr class="border-b border-gray-100">
+    <td class="w-20"><span class="subcounter"></span> @Model.FamilyMemberIndex</td>
+    <td>
+        <fieldset>
+            <div class="grid grid-cols-2 sm:grid-cols-2">
+                <div class="sm:col-span-1">
+                    <input asp-for="@Model.MOB" placeholder="MM" />
+                </div>
+                <div class="sm:col-span-1">
+                    <input asp-for="@Model.YOB" placeholder="YYYY" />
+                </div>
+            </div>
+        </fieldset>
+    </td>
+    <td>
+        <div class="w-20">
+            <input asp-for="@Model.AGD" />
+        </div>
+    </td>
+    <td>
+        <div class="w-20">
+            <input asp-for="@Model.NEU" />
+        </div>
+    </td>
+    <td>
+        <div class="w-20">
+            <input asp-for="@Model.PDX" />
+        </div>
+    </td>
+    <td>
+        <div class="w-20">
+            <input asp-for="@Model.MOE" />
+        </div>
+    </td>
+    <td>
+        <div class="w-20">
+            <input asp-for="@Model.AGO" />
+        </div>
+    </td>
+</tr>
+<tr>
+    <td></td>
+    <td colspan="2">
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="MOB"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="YOB"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="AGD"></span>
+    </td>
+    <td colspan="4">
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="NEU"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="PDX"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="MOE"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="AGO"></span>
+    </td>
+</tr>
