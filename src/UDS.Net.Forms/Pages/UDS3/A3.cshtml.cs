@@ -177,7 +177,7 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPost(int id)
+        public new async Task<IActionResult> OnPost(int id)
         {
             foreach (var result in A3.Validate(new ValidationContext(A3, null, null)))
             {
@@ -190,6 +190,8 @@ namespace UDS.Net.Forms.Pages.UDS3
 
             if (ModelState.IsValid)
             {
+                Visit.Forms.Add(A3);
+
                 await base.OnPost(id); // checks for domain-level business rules validation
             }
 

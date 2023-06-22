@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -8,83 +9,73 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class B5 : FormModel
     {
-        [Display(Name = "")]
+        [Display(Name = "NPI co-participant")]
+        [Range(1, 3)]
         public int? NPIQINF { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(NPIQINF), "3", ErrorMessage = "Specify other co-participant")]
         public string? NPIQINFX { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Delusions - Does the participant have false beliefs, such as thinking that others are stealing from him/her or planning to harm him/her in some way?")]
         public int? DEL { get; set; }
 
-        [Display(Name = "")]
         public int? DELSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Hallucinations - Does the participant have hallucinations such as false visions or voices? Does he or she seem to hear or see things that are not present?")]
         public int? HALL { get; set; }
 
-        [Display(Name = "")]
         public int? HALLSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Agitation/aggression")]
         public int? AGIT { get; set; }
 
-        [Display(Name = "")]
         public int? AGITSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Depression/dysphoria")]
         public int? DEPD { get; set; }
 
-        [Display(Name = "")]
         public int? DEPDSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Anxiety")]
         public int? ANX { get; set; }
 
-        [Display(Name = "")]
         public int? ANXSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Elation/euphoria")]
         public int? ELAT { get; set; }
 
-        [Display(Name = "")]
         public int? ELATSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Apathy/indifference")]
         public int? APA { get; set; }
 
-        [Display(Name = "")]
         public int? APASEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Disinhibition")]
         public int? DISN { get; set; }
 
-        [Display(Name = "")]
         public int? DISNSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Irritability/Iability")]
         public int? IRR { get; set; }
 
-        [Display(Name = "")]
         public int? IRRSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Motor disturbance")]
         public int? MOT { get; set; }
 
-        [Display(Name = "")]
         public int? MOTSEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Nighttime behaviors")]
         public int? NITE { get; set; }
 
-        [Display(Name = "")]
         public int? NITESEV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Appetite/eating")]
         public int? APP { get; set; }
 
-        [Display(Name = "")]
         public int? APPSEV { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

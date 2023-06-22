@@ -31,9 +31,39 @@ namespace UDS.Net.Forms.Extensions
         public static Form ToEntity(this FormModel vm)
         {
             if (vm is A1)
-            {
                 return ((A1)vm).ToEntity();
-            }
+            else if (vm is A2)
+                return ((A2)vm).ToEntity();
+            else if (vm is A3)
+                return ((A3)vm).ToEntity();
+            else if (vm is A4)
+                return ((A4)vm).ToEntity();
+            else if (vm is A5)
+                return ((A5)vm).ToEntity();
+            else if (vm is B1)
+                return ((B1)vm).ToEntity();
+            else if (vm is B4)
+                return ((B4)vm).ToEntity();
+            else if (vm is B5)
+                return ((B5)vm).ToEntity();
+            else if (vm is B6)
+                return ((B6)vm).ToEntity();
+            else if (vm is B7)
+                return ((B7)vm).ToEntity();
+            else if (vm is B8)
+                return ((B8)vm).ToEntity();
+            else if (vm is B9)
+                return ((B9)vm).ToEntity();
+            else if (vm is C1)
+                return ((C1)vm).ToEntity();
+            else if (vm is C2)
+                return ((C2)vm).ToEntity();
+            else if (vm is D1)
+                return ((D1)vm).ToEntity();
+            else if (vm is D2)
+                return ((D2)vm).ToEntity();
+            else if (vm is T1)
+                return ((T1)vm).ToEntity();
             else
                 return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
         }
