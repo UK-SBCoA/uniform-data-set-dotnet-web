@@ -72,12 +72,16 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPost(int id)
         {
+            Dictionary<object, object?> contextDicitonary = new Dictionary<object, object?>
+            {
+                { "VisitDate", this.Visit.StartDateTime }
+            };
             /*
              * ValidationContext describes any member on which validation is performed. It also enables
              * custom validation to be added through any service that implements the IServiceProvider
              * interface.
              */
-            foreach (var result in C1.Validate(new ValidationContext(C1, null, null)))
+            foreach (var result in C1.Validate(new ValidationContext(C1, null, contextDicitonary)))
             {
                 var memberName = result.MemberNames.FirstOrDefault();
                 ModelState.AddModelError($"C1.{memberName}", result.ErrorMessage);

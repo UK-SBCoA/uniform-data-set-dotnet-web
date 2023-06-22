@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Dto;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -153,6 +154,47 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Status == "Complete")
+            {
+                bool isValid = false;
+                string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";
+                var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
+                if (LOGIPREV.HasValue && LOGIPREV != 88)
+                {
+                    if (LOGIYR.HasValue && LOGIMO.HasValue && LOGIDAY.HasValue)
+                    {
+                        // we need the visit date
+                        var visitDate = visitDateEntry.Value;
+                        if (visitDate != null)
+                        {
+                            var max = (DateTime)visitDate;
+                            var min = ((DateTime)visitDate).AddMonths(-3);
+
+                            try
+                            {
+                                var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
+
+                                // TODO this is where we do the comparison
+                                // logiDate < max
+                                // logiDate > min
+                                // look up C# datetime comparators
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                // not a valid date
+                                isValid = false;
+                                errorMessage = "Logical Memory IA -Immediate previous test date invalid";
+                            }
+                        }
+                    }
+                }
+                if (!isValid)
+                {
+                    yield return new ValidationResult(
+                        errorMessage,
+                        new[] { nameof(LOGIMO) });
+                }
+            }
             yield break;
         }
     }
