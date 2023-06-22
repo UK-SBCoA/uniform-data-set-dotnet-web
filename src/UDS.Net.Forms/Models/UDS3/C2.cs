@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -14,6 +15,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "No (If No, enter reason code, 95–98)")]
         [Range(95, 98)]
+        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Provide reason code")]
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
@@ -24,6 +26,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "0ther (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(MOCALAN), "3", ErrorMessage = "Specify other language used")]
         public string? MOCALANX { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to visual impairment")]
@@ -132,6 +135,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(NPSYLAN), "3", ErrorMessage = "Specify other language used")]
         public string? NPSYLANX { get; set; }
 
         [Display(Name = "Total story units recalled, verbatim scoring")]
