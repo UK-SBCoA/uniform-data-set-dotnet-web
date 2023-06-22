@@ -117,6 +117,8 @@ namespace UDS.Net.Forms.Pages.UDS3
             // annotations as well in view model
             if (ModelState.IsValid)
             {
+                Visit.Forms.Add(A2);
+
                 await base.OnPost(id);
             }
 

@@ -6,26 +6,10 @@ using UDS.Net.Forms.Models;
 namespace UDS.Net.Forms.DataAnnotations
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class BirthMonthAttribute : ValidationAttribute, IClientModelValidator
+    public class DiagnosisAttribute : ValidationAttribute, IClientModelValidator
     {
-        public bool AllowUnknown { get; set; } = false;
-
-        public void AddValidation(ClientModelValidationContext context)
-        {
-            MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-birthmonth", GetErrorMessage());
-            MergeAttribute(context.Attributes, "data-val-birthmonth-minimum", "1");
-            MergeAttribute(context.Attributes, "data-val-birthmonth-maximum", "12");
-            MergeAttribute(context.Attributes, "data-val-birthmonth-allowunknown", AllowUnknown.ToString().ToLower());
-        }
-
-        public string GetErrorMessage()
-        {
-            if (AllowUnknown)
-                return "Birth month must be within 1 and 12, or 99 (unknown).";
-            else
-                return "Birth month must be within 1 and 12.";
-        }
+        private static string ERRORMESSAGE = "Diagnosis code invalid. Please see reference.";
+        private static int[] CODES = new int[] { 40, 41, 42, 43, 44, 45, 50, 70, 80, 100, 110, 120, 130, 131, 132, 133, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 310, 320, 400, 410, 420, 421, 430, 431, 432, 433, 434, 435, 436, 439, 440, 450, 490, 999 };
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
@@ -33,25 +17,32 @@ namespace UDS.Net.Forms.DataAnnotations
             {
                 var form = (FormModel)validationContext.ObjectInstance;
 
+
                 // only validate if the form is attempting to be completed
                 if (form.Status == "2") // TODO change statuses to enum
                 {
-                    // Only validate on the server if form is attempting to be completed
-                    var month = (int)value;
-
-                    if (AllowUnknown && month == 99)
+                    if (value is int)
                     {
-                        return ValidationResult.Success;
+                        int code = (int)value;
+
+                        if (CODES.Contains(code))
+                        {
+                            return ValidationResult.Success;
+                        }
+
                     }
 
-                    if (month < 1 || month > 12)
-                    {
-                        return new ValidationResult(GetErrorMessage());
-                    }
+                    return new ValidationResult(ERRORMESSAGE);
                 }
             }
 
             return ValidationResult.Success;
+        }
+
+        public void AddValidation(ClientModelValidationContext context)
+        {
+            MergeAttribute(context.Attributes, "data-val", "true");
+            MergeAttribute(context.Attributes, "data-val-diagnosis", ERRORMESSAGE);
         }
 
         /// <summary>

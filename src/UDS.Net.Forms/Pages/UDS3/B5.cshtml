@@ -13,7 +13,173 @@
 </div>
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B5.NPIQINF"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.NPIQINF)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINF"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B5.NPIQINF)" for="@Model.B5.NPIQINF" items="Model.CoparticipantListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINF"></span>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINFX"></p>
+                <label asp-for="B5.NPIQINFX">@Html.DisplayNameFor(m => m.B5.NPIQINFX)</label>
+                <div class="mt-2">
+                    <input asp-for="B5.NPIQINFX" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINFX"></span>
+            </div>
+        </div>
+        <table class="table-auto min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="w-20"></th>
+                    @foreach (var symptom in Model.SymptomPresentListItems)
+                    {
+                        <th>@symptom.Text</th>
+                    }
+                    <th class="w-20"></th>
+                    @foreach (var severity in Model.SeverityListItems)
+                    {
+                        <th>@severity.Text</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr class="subcounterreset">
+                    <td>
+                        <label asp-for="B5.DEL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DEL)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.DEL"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DEL"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DEL)" for="@Model.B5.DEL" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DELSEV)" for="@Model.B5.DELSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.HALL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.HALL)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.HALL"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.HALL"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.HALL)" for="@Model.B5.HALL" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.HALLSEV)" for="@Model.B5.HALLSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.AGIT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.AGIT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.AGIT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.AGIT"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.AGIT)" for="@Model.B5.AGIT" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.AGITSEV)" for="@Model.B5.AGITSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.DEPD"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DEPD)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.DEPD"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DEPD"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DEPD)" for="@Model.B5.DEPD" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DEPDSEV)" for="@Model.B5.DEPDSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.ANX"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.ANX)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.ANX"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANX"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ANX)" for="@Model.B5.ANX" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ANXSEV)" for="@Model.B5.ANXSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.ELAT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.ELAT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.ELAT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ELAT"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ELAT)" for="@Model.B5.ELAT" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ELATSEV)" for="@Model.B5.ELATSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.APA"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.APA)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.APA"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APA"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APA)" for="@Model.B5.APA" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APASEV)" for="@Model.B5.APASEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.DISN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DISN)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.DISN"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DISN"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DISN)" for="@Model.B5.DISN" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DISNSEV)" for="@Model.B5.DISNSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.IRR"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.IRR)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.IRR"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.IRR"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.IRR)" for="@Model.B5.IRR" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.IRRSEV)" for="@Model.B5.IRRSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.MOT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.MOT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.MOT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.MOT"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.MOT)" for="@Model.B5.MOT" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.MOTSEV)" for="@Model.B5.MOTSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.NITE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.NITE)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.NITE"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NITE"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.NITE)" for="@Model.B5.NITE" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.NITESEV)" for="@Model.B5.NITESEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B5.APP"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.APP)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B5.APP"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APP"></span>
+                    </td>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APP)" for="@Model.B5.APP" items="Model.SymptomPresentListItems"></table-cell-radio-buttons>
+                    <td class="text-right"><span class="subcounter"></span></td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APPSEV)" for="@Model.B5.APPSEV" items="Model.SeverityListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <partial name="_FormFooter" for="@Model.B5" />
