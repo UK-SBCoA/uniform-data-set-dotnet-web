@@ -50,10 +50,17 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
     // Is also required for runtime compilation of Razor Class Library UDS.Net.Forms
     builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
     {
-        var libraryPath = Path.GetFullPath(
-            Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
+        var libraryPath = "";
 
-        options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+        if (System.Environment.OSVersion.Platform != PlatformID.Win32NT)
+        {
+            libraryPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
+        }
+
+        if (!String.IsNullOrWhiteSpace(libraryPath))
+        {
+            options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+        }
     });
 
 }
