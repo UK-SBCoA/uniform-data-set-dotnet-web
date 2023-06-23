@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -23,6 +24,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(MMSELAN), "3", ErrorMessage = "Specify other language used")]
         public string? MMSELANX { get; set; }
 
         [Display(Name = "Participant was unable to complete one or more sections due to visual impairment")]
@@ -32,19 +34,19 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MMSEHEAR { get; set; }
 
         [Display(Name = "Time")]
-        [RegularExpression("^(0-5|95-98)$")]
+        [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "(0-5, 95-98)")]
         public int? MMSEORDA { get; set; }
 
         [Display(Name = "Place")]
-        [RegularExpression("^(0-5|95-98)$")]
+        [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "(0-5, 95-98)")]
         public int? MMSEORLO { get; set; }
 
         [Display(Name = "Intersecting pentagon subscale score")]
-        [RegularExpression("^(0-1|95-98)$")]
+        [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "(0-1, 95-98)")]
         public int? PENTAGON { get; set; }
 
         [Display(Name = "Total MMSE score (using D-L-R-O-W)")]
-        [RegularExpression("^(0-30|88)$")]
+        [RegularExpression("^(\\d|[12]\\d|30)|88)$", ErrorMessage = "(0-30, 88 = Missing)")]
         public int? MMSE { get; set; }
 
         [Display(Name = "The remainder of the battery (i.e., the tests summarized below) was administered")]
@@ -55,34 +57,32 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
+        [RequiredIf(nameof(NPSYLAN), "3", ErrorMessage = "Specify other language used")]
         public string? NPSYLANX { get; set; }
 
         [Display(Name = "month")]
-        [RegularExpression("^(0-12|88)$")]
         public int? LOGIMO { get; set; }
 
         [Display(Name = "day")]
-        [RegularExpression("^(0-31|88)$")]
         public int? LOGIDAY { get; set; }
 
-        //year validation
         [Display(Name = "year")]
         public int? LOGIYR { get; set; }
 
         [Display(Name = "Total score from the previous test administration")]
-        [RegularExpression("^(0-25|88)$")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])|88)$", ErrorMessage = "(0-25, 88 = not applicable)")]
         public int? LOGIPREV { get; set; }
 
         [Display(Name = "Total number of story units recalled from this current test administration")]
-        [RegularExpression("^(0-25|95-98)$")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])|(9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
         public int? LOGIMEM { get; set; }
 
         [Display(Name = "Total score for copy of Bension figure")]
-        [RegularExpression("^(0-17|95-98)$")]
+        [RegularExpression("^(\\d|1[0-7])|(9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
         public int? UDSBENTC { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length")]
-        [RegularExpression("^(0-12|95-98)$")]
+        [RegularExpression("^(\\d|1[0-2])|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
         public int? DIGIF { get; set; }
 
         [Display(Name = "Digit span forward length ")]
@@ -90,7 +90,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DIGIFLEN { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length ")]
-        [RegularExpression("^(0-12|95-98)$")]
+        [RegularExpression("^(\\d|1[0-2])|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
         public int? DIGIB { get; set; }
 
         [Display(Name = "Digit span backward length")]
@@ -98,15 +98,15 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DIGIBLEN { get; set; }
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds")]
-        [RegularExpression("^(0-77|95-98)$")]
+        [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "(0-77, 95-98)")]
         public int? ANIMALS { get; set; }
 
         [Display(Name = "Vegetables: Total number of vegetables named in 60 seconds")]
-        [RegularExpression("^(0-77|95-98)$")]
+        [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "(0-77, 95-98)")]
         public int? VEG { get; set; }
 
         [Display(Name = "PART A: Total number of seconds to complete")]
-        [RegularExpression("^(0-150|995-998)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "(0-150, 995-998)")]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors")]
@@ -118,7 +118,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TRAILALI { get; set; }
 
         [Display(Name = "PART B: Total number of seconds to complete")]
-        [RegularExpression("^(0-300|995-998)$")]
+        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors")]
@@ -130,26 +130,26 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TRAILBLI { get; set; }
 
         [Display(Name = "Total number of story units recalled")]
-        [RegularExpression("^(0-25|95-98)$")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
         public int? MEMUNITS { get; set; }
 
         [Display(Name = "Time elapsed since Logical Memory IA–Immediate")]
-        [RegularExpression("^(0-85|99)$")]
+        [RegularExpression("^(\\d|[1-7]\\d|8[0-5])|9[5-8])$", ErrorMessage = "(0-85 minutes, 99 = unknown")]
         public int? MEMTIME { get; set; }
 
         [Display(Name = "Total score for 10- to 15-minute delayed drawing of Bension figure")]
-        [RegularExpression("^(0-17|95-98)$")]
+        [RegularExpression("^(\\d|1[0-7])|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus from among four options?")]
         public int? UDSBENRS { get; set; }
 
         [Display(Name = "Total score")]
-        [RegularExpression("^(0-30|95-98)$")]
+        [RegularExpression("^(\\d|[12]\\d|30)|9[5-8])$", ErrorMessage = "(0-30, 95-98)")]
         public int? BOSTON { get; set; }
 
         [Display(Name = "Number of correct F-words generated in 1 minute")]
-        [RegularExpression("^(0-40|95-98)$")]
+        [RegularExpression("^(\\d|[1-3]\\d|40)]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
@@ -161,7 +161,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSVERNF { get; set; }
 
         [Display(Name = "Number of correct L-words generated in 1 minute")]
-        [RegularExpression("^(0-40|95-98)$")]
+        [RegularExpression("^(\\d|[1-3]\\d|40)]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in one minute")]
