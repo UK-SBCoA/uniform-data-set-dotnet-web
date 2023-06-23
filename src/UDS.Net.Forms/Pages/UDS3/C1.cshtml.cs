@@ -57,9 +57,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
         }
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            await base.OnGet(id);
+            await base.OnGetAsync(id);
 
             if (_formModel != null)
             {
@@ -70,7 +70,7 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             /*
              * ValidationContext describes any member on which validation is performed. It also enables
@@ -90,7 +90,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(C1);
 
-                await base.OnPost(id); // checks for domain-level business rules validation
+                await base.OnPostAsync(id); // checks for domain-level business rules validation
             }
 
             var visit = await _visitService.GetByIdWithForm("", id, _formKind);
