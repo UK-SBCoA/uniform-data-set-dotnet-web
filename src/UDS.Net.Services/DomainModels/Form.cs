@@ -77,6 +77,7 @@ namespace UDS.Net.Services.DomainModels
                 Fields = fields;
                 Version = fields.GetVersion();
                 Description = fields.GetDescription();
+                Title = fields.GetDescription();
             }
         }
 
@@ -104,6 +105,7 @@ namespace UDS.Net.Services.DomainModels
                 Fields = fields;
                 Version = fields.GetVersion();
                 Description = fields.GetDescription();
+                Title = fields.GetDescription();
             }
         }
 
