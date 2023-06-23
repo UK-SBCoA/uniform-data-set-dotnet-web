@@ -24,5 +24,5 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/uniformdatasetdotnetweb:dev -f UDS.Net.Web.MVC/Dockerfile
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/uniformdatasetdotnetweb:dev -f src/UDS.Net.Web.MVC/Dockerfile
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/uniformdatasetdotnetweb:dev
