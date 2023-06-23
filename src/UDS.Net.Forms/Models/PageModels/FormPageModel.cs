@@ -68,15 +68,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             if (visit.IsValid)
             {
-                if (id == 0)
-                {
-                    // TODO Add
-                }
-                else
-                {
-                    // TODO Update
-                    await _visitService.Update("", visit);
-                }
+                await _visitService.UpdateForm("", visit, _formKind);
             }
             else
             {

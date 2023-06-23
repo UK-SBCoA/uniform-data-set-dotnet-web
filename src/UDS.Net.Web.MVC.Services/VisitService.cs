@@ -82,15 +82,26 @@ namespace UDS.Net.Web.MVC.Services
         {
         }
 
+        private async Task<Visit> UpdateVisit(string username, VisitDto dto)
+        {
+
+            await _apiClient.VisitClient.Put(dto.Id, dto);
+
+            var updatedDto = await _apiClient.VisitClient.Get(dto.Id);
+
+            return updatedDto.ToDomain(username);
+        }
+
         public async Task<Visit> Update(string username, Visit entity)
         {
             var dto = entity.ToDto();
+            return await UpdateVisit(username, dto);
+        }
 
-            await _apiClient.VisitClient.Put(entity.Id, dto);
-
-            var updatedDto = await _apiClient.VisitClient.Get(entity.Id);
-
-            return updatedDto.ToDomain(username);
+        public async Task<Visit> UpdateForm(string username, Visit entity, string formId)
+        {
+            var dto = entity.ToDto(formId);
+            return await UpdateVisit(username, dto);
         }
     }
 }

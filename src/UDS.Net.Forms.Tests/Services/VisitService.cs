@@ -66,6 +66,10 @@ namespace UDS.Net.Forms.Tests.Services
             };
         }
 
+        public Task<Visit> UpdateForm(string username, Visit entity, string formId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

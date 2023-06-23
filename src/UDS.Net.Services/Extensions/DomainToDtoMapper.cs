@@ -62,12 +62,39 @@ namespace UDS.Net.Services.Extensions
             return dto;
         }
 
+        public static VisitDto ToDto(this Visit visit, string formKind)
+        {
+            var dto = new VisitDto()
+            {
+                Id = visit.Id,
+                ParticipationId = visit.ParticipationId,
+                Number = visit.Number,
+                Version = visit.Version,
+                Kind = visit.Kind.ToString(),
+                StartDateTime = visit.StartDateTime,
+                CreatedAt = visit.CreatedAt,
+                CreatedBy = visit.CreatedBy,
+                ModifiedBy = visit.ModifiedBy,
+                DeletedBy = visit.DeletedBy,
+                IsDeleted = visit.IsDeleted
+            };
+            if (visit.Forms != null)
+                dto.Forms = visit.Forms.ToDto(formKind);
+
+            return dto;
+        }
+
         public static List<FormDto> ToDto(this IList<Form> forms)
         {
             return forms.Select(f => f.ToDto()).ToList();
         }
 
-        public static FormDto ToDto(this Form form)
+        public static List<FormDto> ToDto(this IList<Form> forms, string formKind)
+        {
+            return forms.Select(f => f.ToDto(formKind)).ToList();
+        }
+
+        private static FormDto GetDto(Form form)
         {
             // set default formDto and then override with more details if it is a strongly typed object
             FormDto dto = new FormDto()
@@ -86,6 +113,14 @@ namespace UDS.Net.Services.Extensions
                 IsDeleted = form.IsDeleted
             };
 
+            return dto;
+        }
+
+        public static FormDto ToDto(this Form form)
+        {
+            FormDto dto = GetDto(form); // get baseline dto
+
+            // if the form is a special type then get that type of dto
             if (form.Fields is A1FormFields)
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
@@ -159,6 +194,86 @@ namespace UDS.Net.Services.Extensions
 
             return dto;
 
+        }
+
+        public static FormDto ToDto(this Form form, string formKind)
+        {
+            FormDto dto = GetDto(form); // get baseline form dto
+
+            // if the type of form we want to retun matches the specialized type
+            // then return the special dto, otherwise just return the baseline
+            if (form.Fields is A1FormFields && formKind == "A1")
+            {
+                dto = ((A1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is A2FormFields && formKind == "A2")
+            {
+                dto = ((A2FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is A3FormFields && formKind == "A3")
+            {
+                dto = ((A3FormFields)form.Fields).ToDto(form.Id);
+            }
+            else if (form.Fields is A4GFormFields && formKind == "A4")
+            {
+                dto = ((A4GFormFields)form.Fields).ToDto(form);
+            }
+            else if (form.Fields is A5FormFields && formKind == "A5")
+            {
+                dto = ((A5FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B1FormFields && formKind == "B1")
+            {
+                dto = ((B1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B4FormFields && formKind == "B4")
+            {
+                dto = ((B4FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B5FormFields && formKind == "B5")
+            {
+                dto = ((B5FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B6FormFields && formKind == "B6")
+            {
+                dto = ((B6FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B7FormFields && formKind == "B7")
+            {
+                dto = ((B7FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B8FormFields && formKind == "B8")
+            {
+                dto = ((B8FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B9FormFields && formKind == "B9")
+            {
+                dto = ((B9FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is C1FormFields && formKind == "C1")
+            {
+                dto = ((C1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is C2FormFields && formKind == "C2")
+            {
+                dto = ((C2FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is D1FormFields && formKind == "D1")
+            {
+                dto = ((D1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is D2FormFields && formKind == "D2")
+            {
+                dto = ((D2FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is T1FormFields && formKind == "T1")
+            {
+                dto = ((T1FormFields)form.Fields).ToDto();
+            }
+
+            SetBaseProperties(dto, form);
+
+            return dto;
         }
 
         public static A1Dto ToDto(this A1FormFields fields)
