@@ -4,6 +4,7 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -39,7 +40,11 @@ namespace UDS.Net.Services.Extensions
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
             }
 
-            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, dto.Kind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            VisitKind visitKind;
+            if (!Enum.TryParse(dto.Kind, true, out visitKind))
+                visitKind = VisitKind.IVP;
+
+            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, visitKind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
         }
 
         public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username)

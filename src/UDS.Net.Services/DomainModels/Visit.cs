@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels
 {
@@ -19,7 +20,7 @@ namespace UDS.Net.Services.DomainModels
 
         public string Version { get; set; } = "";
 
-        public string Kind { get; set; } = "";
+        public VisitKind Kind { get; set; }
 
         public DateTime StartDateTime { get; set; }
 
@@ -47,14 +48,14 @@ namespace UDS.Net.Services.DomainModels
 
         public IList<Form> Forms { get; set; } = new List<Form>();
 
-        private void BuildFormsContract(string version, string kind, IList<Form> existingForms)
+        private void BuildFormsContract(string version, VisitKind kind, IList<Form> existingForms)
         {
             if (version == "UDS3")
             {
                 Dictionary<string, FormContract[]> UDS3 = new Dictionary<string, FormContract[]>
                 {
                     {
-                        "IVP",
+                        VisitKind.IVP.ToString(),
                         new FormContract[]
                         {
                             new FormContract("A1", true),
@@ -75,7 +76,7 @@ namespace UDS.Net.Services.DomainModels
                         }
                     },
                     {
-                        "FVP",
+                        VisitKind.FVP.ToString(),
                         new FormContract[]
                         {
                             new FormContract("A1", true),
@@ -96,7 +97,7 @@ namespace UDS.Net.Services.DomainModels
                         }
                     },
                     {
-                        "TIP",
+                        VisitKind.TIP.ToString(),
                         new FormContract[]
                         {
                             new FormContract("T1", true),
@@ -118,7 +119,7 @@ namespace UDS.Net.Services.DomainModels
                         }
                     },
                     {
-                        "TVP",
+                        VisitKind.TFP.ToString(),
                         new FormContract[]
                         {
                             new FormContract("T1", true),
@@ -139,11 +140,16 @@ namespace UDS.Net.Services.DomainModels
                     }
                 };
 
-                var formDefinitions = UDS3.Where(u => u.Key == kind).FirstOrDefault();
+                var formDefinitions = UDS3.Where(u => u.Key == kind.ToString()).FirstOrDefault();
 
                 foreach (var formContract in formDefinitions.Value)
                 {
-                    bool hasExisting = existingForms.Where(f => f.Kind == formContract.Abbreviation).Any();
+                    bool hasExisting = false;
+
+                    if (existingForms != null && existingForms.Count() > 0)
+                    {
+                        hasExisting = existingForms.Where(f => f.Kind == formContract.Abbreviation).Any();
+                    }
 
                     if (hasExisting)
                     {
@@ -157,15 +163,16 @@ namespace UDS.Net.Services.DomainModels
                     }
                 }
 
+
             }
             else if (version == "UDS4")
             {
                 Dictionary<string, string[]> UDS4 = new Dictionary<string, string[]> // TODO use form contract
                 {
-                    { "IVP", new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
-                    { "FVP", new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
-                    { "TIP", new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } },
-                    { "TVP" , new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } }
+                    { VisitKind.IVP.ToString(), new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
+                    { VisitKind.FVP.ToString(), new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
+                    { VisitKind.TIP.ToString(), new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } },
+                    { VisitKind.TFP.ToString() , new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } }
                 };
             }
         }
@@ -181,7 +188,7 @@ namespace UDS.Net.Services.DomainModels
 
         public int Count { get; private set; }
 
-        public Visit(int id, int number, int participationId, string version, string kind, DateTime startDateTime, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
+        public Visit(int id, int number, int participationId, string version, VisitKind kind, DateTime startDateTime, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
             Id = id;
             Number = number;
@@ -194,6 +201,9 @@ namespace UDS.Net.Services.DomainModels
             ModifiedBy = modifiedBy;
             DeletedBy = deletedBy;
             IsDeleted = IsDeleted;
+
+            if (existingForms == null)
+                existingForms = new List<Form>();
 
             BuildFormsContract(Version, Kind, existingForms);
 

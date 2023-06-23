@@ -20,24 +20,20 @@ namespace UDS.Net.Forms.Pages.Participations
         private readonly IParticipationService _participationService;
 
         [BindProperty]
-        public ParticipationModel? Participation { get; set; }
+        public ParticipationModel Participation { get; set; }
 
         public CreateModel(IParticipationService participationService)
         {
             _participationService = participationService;
         }
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGet()
         {
-            if (id == null)
-                return NotFound();
-
-            var participation = await _participationService.GetById("", id.Value);
-
-            if (participation == null)
-                return NotFound();
-
-            Participation = participation.ToVM();
+            Participation = new ParticipationModel
+            {
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
+            };
 
             return Page();
         }
@@ -47,7 +43,9 @@ namespace UDS.Net.Forms.Pages.Participations
             if (!ModelState.IsValid)
                 return Page();
 
-            return RedirectToPage("./Details");
+            await _participationService.Add("", Participation.ToEntity());
+
+            return RedirectToPage("./Index");
         }
     }
 }

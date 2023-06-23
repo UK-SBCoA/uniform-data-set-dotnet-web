@@ -16,7 +16,7 @@
 
         @if (Model.Visit != null)
         {
-            @if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "FVP")
+            @if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.FVP)
             {
                 <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3">Physical measurements</h3>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">

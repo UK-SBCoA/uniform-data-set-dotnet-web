@@ -27,23 +27,39 @@ namespace UDS.Net.Services.Extensions
             dto.IsDeleted = form.IsDeleted;
         }
 
+        public static ParticipationDto ToDto(this Participation participation)
+        {
+            return new ParticipationDto
+            {
+                Id = participation.Id,
+                LegacyId = participation.LegacyId,
+                CreatedAt = participation.CreatedAt,
+                CreatedBy = participation.CreatedBy,
+                ModifiedBy = participation.ModifiedBy,
+                DeletedBy = participation.DeletedBy,
+                IsDeleted = participation.IsDeleted
+            };
+        }
         public static VisitDto ToDto(this Visit visit)
         {
-            return new VisitDto()
+            var dto = new VisitDto()
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
                 Number = visit.Number,
                 Version = visit.Version,
-                Kind = visit.Kind,
+                Kind = visit.Kind.ToString(),
                 StartDateTime = visit.StartDateTime,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
-                IsDeleted = visit.IsDeleted,
-                Forms = visit.Forms.ToDto()
+                IsDeleted = visit.IsDeleted
             };
+            if (visit.Forms != null)
+                dto.Forms = visit.Forms.ToDto();
+
+            return dto;
         }
 
         public static List<FormDto> ToDto(this IList<Form> forms)

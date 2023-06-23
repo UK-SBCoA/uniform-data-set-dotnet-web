@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Models.PageModels
             _formKind = formKind;
         }
 
-        protected async Task<IActionResult> OnGet(int? id)
+        protected async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _formKind == null)
                 return NotFound();
@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Models.PageModels
         }
 
         [ValidateAntiForgeryToken]
-        protected async Task<IActionResult> OnPost(int id)
+        protected async Task<IActionResult> OnPostAsync(int id)
         {
             var visit = Visit.ToEntity();
 

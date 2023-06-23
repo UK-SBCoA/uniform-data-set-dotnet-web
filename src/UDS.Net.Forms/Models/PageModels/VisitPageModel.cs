@@ -17,12 +17,12 @@ namespace UDS.Net.Forms.Models
         [BindProperty]
         public VisitModel? Visit { get; set; }
 
-        public VisitPageModel(IVisitService visitService) : base ()
+        public VisitPageModel(IVisitService visitService) : base()
         {
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGet(int? id)
+        public virtual async Task<IActionResult> OnGet(int? id)
         {
             if (id == null || id == 0)
                 return NotFound();
