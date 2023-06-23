@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Pages.Visits
 {
     public class EditModel : VisitPageModel
     {
-        public EditModel(IVisitService visitService) : base(visitService)
+        public EditModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService)
         {
         }
 

@@ -13,13 +13,27 @@ namespace UDS.Net.Forms.Models
     public class VisitPageModel : PageModel
     {
         protected readonly IVisitService _visitService;
+        protected readonly IParticipationService _participationService;
 
         [BindProperty]
         public VisitModel? Visit { get; set; }
 
-        public VisitPageModel(IVisitService visitService) : base()
+        public string PageTitle
+        {
+            get
+            {
+                if (Visit != null)
+                {
+                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.Number}";
+                }
+                return "";
+            }
+        }
+
+        public VisitPageModel(IVisitService visitService, IParticipationService participationService) : base()
         {
             _visitService = visitService;
+            _participationService = participationService;
         }
 
         public virtual async Task<IActionResult> OnGet(int? id)
@@ -32,7 +46,13 @@ namespace UDS.Net.Forms.Models
             if (visit == null)
                 return NotFound();
 
+            var participation = await _participationService.GetById("", visit.ParticipationId);
+
+            if (participation == null)
+                return NotFound();
+
             Visit = visit.ToVM();
+            Visit.Participation = participation.ToVM();
 
             return Page();
         }
