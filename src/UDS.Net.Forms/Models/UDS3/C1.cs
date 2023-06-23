@@ -59,11 +59,9 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? NPSYLANX { get; set; }
 
         [Display(Name = "month")]
-        [RegularExpression("^(0-12|88)$")]
         public int? LOGIMO { get; set; }
 
         [Display(Name = "day")]
-        [RegularExpression("^(0-31|88)$")]
         public int? LOGIDAY { get; set; }
 
         //year validation
@@ -71,7 +69,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? LOGIYR { get; set; }
 
         [Display(Name = "Total score from the previous test administration")]
-        [RegularExpression("^(0-25|88)$")]
         public int? LOGIPREV { get; set; }
 
         [Display(Name = "Total number of story units recalled from this current test administration")]
@@ -190,7 +187,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == "Complete")
+            if (Status == "2")
             {
                 bool isValid = false;
                 string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";
