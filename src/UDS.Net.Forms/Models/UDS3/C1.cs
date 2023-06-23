@@ -210,6 +210,19 @@ namespace UDS.Net.Forms.Models.UDS3
                             {
                                 var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
 
+                                var resultHigh = DateTime.Compare(logiDate, max);
+                                var resultLow = DateTime.Compare(logiDate, min);
+
+                                if (resultHigh < 0 && resultLow > 0)
+                                {
+                                    isValid = true;
+                                }
+
+                                else
+                                {
+                                    isValid = false;
+                                }
+
                                 // TODO this is where we do the comparison
                                 // logiDate < max
                                 // logiDate > min
