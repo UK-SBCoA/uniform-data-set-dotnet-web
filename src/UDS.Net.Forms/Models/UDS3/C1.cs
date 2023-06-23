@@ -86,7 +86,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DIGIF { get; set; }
 
         [Display(Name = "Digit span forward length ")]
-        [Range(0, 8)]
+        [Range(0, 8, ErrorMessage = "(0-8)")]
         public int? DIGIFLEN { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length ")]
@@ -94,7 +94,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DIGIB { get; set; }
 
         [Display(Name = "Digit span backward length")]
-        [Range(0, 7)]
+        [Range(0, 7, ErrorMessage = "(0-7)")]
         public int? DIGIBLEN { get; set; }
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds")]
@@ -110,11 +110,11 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors")]
-        [Range(0, 40)]
+        [Range(0, 40, ErrorMessage = "(0-40)")]
         public int? TRAILARR { get; set; }
 
         [Display(Name = "Number of correct lines")]
-        [Range(0, 24)]
+        [Range(0, 24, ErrorMessage = "(0-24)")]
         public int? TRAILALI { get; set; }
 
         [Display(Name = "PART B: Total number of seconds to complete")]
@@ -122,11 +122,11 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors")]
-        [Range(0, 40)]
+        [Range(0, 40, ErrorMessage = "(0-40)")]
         public int? TRAILBRR { get; set; }
 
         [Display(Name = "Number of correct lines")]
-        [Range(0, 24)]
+        [Range(0, 24, ErrorMessage = "(0-24)")]
         public int? TRAILBLI { get; set; }
 
         [Display(Name = "Total number of story units recalled")]
@@ -153,11 +153,11 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
-        [Range(0, 15)]
+        [Range(0, 15, ErrorMessage = "(0-15)")]
         public int? UDSVERFN { get; set; }
 
         [Display(Name = "Number of non-F-words and rule violation errors in 1 minute")]
-        [Range(0, 15)]
+        [Range(0, 15, ErrorMessage = "(0-15)")]
         public int? UDSVERNF { get; set; }
 
         [Display(Name = "Number of correct L-words generated in 1 minute")]
@@ -165,23 +165,23 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in one minute")]
-        [Range(0, 15)]
+        [Range(0, 15, ErrorMessage = "(0-15)")]
         public int? UDSVERLR { get; set; }
 
         [Display(Name = "Number of non-L-words and rule violation errors in 1 minute")]
-        [Range(0, 15)]
+        [Range(0, 15, ErrorMessage = "(0-15)")]
         public int? UDSVERLN { get; set; }
 
         [Display(Name = "TOTAL number of correct F-words and L-words")]
-        [Range(0, 80)]
+        [Range(0, 80, ErrorMessage = "(0-80)")]
         public int? UDSVERTN { get; set; }
 
         [Display(Name = "TOTAL number of F-word and L-word repetition errors")]
-        [Range(0, 80)]
+        [Range(0, 80, ErrorMessage = "(0-80)")]
         public int? UDSVERTE { get; set; }
 
         [Display(Name = "TOTAL number of non-F/L words and rule violation errors")]
-        [Range(0, 80)]
+        [Range(0, 80, ErrorMessage = "(0-80)")]
         public int? UDSVERTI { get; set; }
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participant’s cognitive status is deemed")]
