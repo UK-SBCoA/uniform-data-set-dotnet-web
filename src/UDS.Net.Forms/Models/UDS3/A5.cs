@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? HATTMULT { get; set; }
 
         [Display(Name = "Year of most recent heart attack")]
-        //custom validation
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? HATTYEAR { get; set; }
 
         [Display(Name = "Atrial fibrillation")]
@@ -79,7 +79,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? STROKMUL { get; set; }
 
         [Display(Name = "Year of most recent stroke")]
-        //custom validation
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? STROKYR { get; set; }
 
         [Display(Name = "Transient ischemic attack (TIA)")]
@@ -89,21 +89,21 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TIAMULT { get; set; }
 
         [Display(Name = "Year of most recent TIA")]
-        //custom valiation
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? TIAYEAR { get; set; }
 
         [Display(Name = "Parkinson’s disease (PD)")]
         public int? PD { get; set; }
 
         [Display(Name = "Year of PD diagnosis")]
-        //custom validation 
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? PDYR { get; set; }
 
         [Display(Name = "Other parkinsonian disorder (e.g, PSP, CBD")]
         public int? PDOTHR { get; set; }
 
         [Display(Name = "Year of parkinsonian disorder diagnosis")]
-        //custom validation
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? PDOTHRYR { get; set; }
 
         [Display(Name = "Seizures")]
@@ -122,7 +122,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TBIWOLOS { get; set; }
 
         [Display(Name = "Year of most recent TBI")]
-        //custom validation
+        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? TBIYEAR { get; set; }
 
         [Display(Name = "Diabetes")]
