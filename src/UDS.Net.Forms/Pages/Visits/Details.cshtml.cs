@@ -12,6 +12,6 @@ namespace UDS.Net.Forms.Pages.Visits
 {
     public class DetailsModel : VisitPageModel
     {
-        public DetailsModel(IVisitService visitService) : base(visitService) { }
+        public DetailsModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService) { }
     }
 }

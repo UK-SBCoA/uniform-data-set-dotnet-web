@@ -14,7 +14,7 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && Model.Visit.Kind == "IVP")
+        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
         {
             <div class="@rowCSS">
                 <label asp-for="A1.REASON"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A1.REASON)</label>
@@ -105,7 +105,7 @@
 
 
 
-        @if (Model.Visit != null && Model.Visit.Kind == "IVP")
+        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
         {
             <div class="@rowCSS">
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
@@ -240,7 +240,7 @@
             </div>
         </div>
 
-        @if (Model.Visit != null && Model.Visit.Kind == "IVP")
+        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
         {
             <div class="@rowCSS">
                 <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP)</label>

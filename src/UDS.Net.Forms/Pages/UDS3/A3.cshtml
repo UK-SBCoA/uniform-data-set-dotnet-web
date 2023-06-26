@@ -12,7 +12,7 @@
     </p>
     @if (Model.Visit != null)
     {
-        if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+        if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
         {
             <div class="divide-y divide-sky-300 overflow-hidden rounded-lg bg-sky-200 shadow m-6">
                 <div class="px-4 py-5 sm:p-6">
@@ -49,7 +49,7 @@
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         @if (Model.Visit != null)
         {
-            if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "TIP")
+            if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP)
             {
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A3.AFFFAMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.AFFFAMM)</label>
@@ -206,7 +206,7 @@
         <div class="">
             @if (Model.Visit != null)
             {
-                if (Model.Visit.Kind == "IVP" || Model.Visit.Kind == "TIP")
+                if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP)
                 {
                     <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
 
@@ -380,7 +380,7 @@
 
             @if (Model.Visit != null)
             {
-                if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+                if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
                 {
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="A3.NWINFSIB"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
@@ -440,7 +440,7 @@
 
             @if (Model.Visit != null)
             {
-                if (Model.Visit.Kind == "FVP" || Model.Visit.Kind == "TFP")
+                if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
                 {
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="A3.NWINFKID"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFKID)</label>

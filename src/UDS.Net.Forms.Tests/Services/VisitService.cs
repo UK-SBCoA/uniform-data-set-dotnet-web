@@ -58,14 +58,18 @@ namespace UDS.Net.Forms.Tests.Services
         {
             return new List<Visit>()
             {
-                new Visit(1, 1, 1,"UDS3", "IVP", DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS3", "IVP", DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS3", "IVP", DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS3", "IVP", DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS3", "IVP", DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null)
+                new Visit(1, 1, 1,"UDS3", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"UDS3", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"UDS3", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"UDS3", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"UDS3", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null)
             };
         }
 
+        public Task<Visit> UpdateForm(string username, Visit entity, string formId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
