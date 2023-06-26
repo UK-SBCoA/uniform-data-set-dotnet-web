@@ -92,9 +92,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            await base.OnGet(id);
+            await base.OnGetAsync(id);
 
             if (_formModel != null)
             {
@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             // server validation for form fields
             foreach (var result in A2.Validate(new ValidationContext(A2, null, null)))
@@ -119,7 +119,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(A2);
 
-                await base.OnPost(id);
+                await base.OnPostAsync(id);
             }
 
             var visit = await _visitService.GetByIdWithForm("", id, _formKind);

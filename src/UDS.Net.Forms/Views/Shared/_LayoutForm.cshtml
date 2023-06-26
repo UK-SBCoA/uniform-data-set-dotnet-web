@@ -18,27 +18,46 @@
             </nav>
         </aside>
 
+        <main class="lg:col-span-9 px-5 py-6">
 
-        <main class="divide-y divide-gray-200 lg:col-span-9 px-5 py-6">
+            <nav class="hidden sm:flex" aria-label="Breadcrumb">
+                <ol role="list" class="flex items-center space-x-4">
+                    <li>
+                        <div class="flex">
+                            <a asp-page="/Participations/Details" asp-route-id="@Model.Visit.ParticipationId" class="text-sm font-medium text-gray-500 hover:text-gray-700">Participation @(Model.Visit.Participation != null ? Model.Visit.Participation.LegacyId : "")</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a asp-page="/Visits/Details" asp-route-id="@Model.Visit.Id" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Visit @Model.Visit.Number</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
 
-            <form method="post">
-                <input asp-for="Visit.Id" type="hidden" />
-                <input asp-for="Visit.ParticipationId" type="hidden" />
-                <input asp-for="Visit.Number" type="hidden" />
-                <input asp-for="Visit.Kind" type="hidden" />
-                <input asp-for="Visit.Version" type="hidden" />
-                <input asp-for="Visit.StartDateTime" type="hidden" />
-                <input asp-for="Visit.CreatedAt" type="hidden" />
-                <input asp-for="Visit.CreatedBy" type="hidden" />
-                <input asp-for="Visit.ModifiedBy" type="hidden" />
-                <input asp-for="Visit.DeletedBy" type="hidden" />
-                <input asp-for="Visit.IsDeleted" type="hidden" />
+            <div class="divide-y divide-gray-200">
+                <form method="post">
+                    <input asp-for="Visit.Id" type="hidden" />
+                    <input asp-for="Visit.ParticipationId" type="hidden" />
+                    <input asp-for="Visit.Number" type="hidden" />
+                    <input asp-for="Visit.Kind" type="hidden" />
+                    <input asp-for="Visit.Version" type="hidden" />
+                    <input asp-for="Visit.StartDateTime" type="hidden" />
+                    <input asp-for="Visit.CreatedAt" type="hidden" />
+                    <input asp-for="Visit.CreatedBy" type="hidden" />
+                    <input asp-for="Visit.ModifiedBy" type="hidden" />
+                    <input asp-for="Visit.DeletedBy" type="hidden" />
+                    <input asp-for="Visit.IsDeleted" type="hidden" />
 
-                <div class="counterreset space-y-12 sm:space-y-16">
+                    <div class="counterreset space-y-12 sm:space-y-16 mt-2">
 
-                    @RenderBody()
-                </div>
-            </form>
+                        @RenderBody()
+                    </div>
+                </form>
+            </div>
         </main>
 
     </div>

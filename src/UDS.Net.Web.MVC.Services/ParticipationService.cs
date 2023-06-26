@@ -21,8 +21,9 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Participation> Add(string username, Participation entity)
         {
-            return entity;
-            // TODO Add participation
+            await _apiClient.ParticipationClient.Post(entity.ToDto());
+
+            return entity; // TODO update client to return new object or id
         }
 
         public async Task<int> Count(string username)
