@@ -4,6 +4,7 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -39,7 +40,11 @@ namespace UDS.Net.Services.Extensions
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
             }
 
-            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, dto.Kind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            VisitKind visitKind;
+            if (!Enum.TryParse(dto.Kind, true, out visitKind))
+                visitKind = VisitKind.IVP;
+
+            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, visitKind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
         }
 
         public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username)
@@ -52,7 +57,8 @@ namespace UDS.Net.Services.Extensions
 
         public static Form ToDomain(this FormDto dto, int visitId, string username)
         {
-            IFormFields formFields = null; // if the form is NOT of a specific type then there are no fields to include
+            IFormFields formFields = null;
+            string title = "";
 
             if (dto is A1Dto)
             {
@@ -122,8 +128,44 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new T1FormFields(dto);
             }
-
-            return new Form(visitId, dto.Id, dto.Kind, dto.Kind, dto.Status, dto.Language, dto.IsIncluded, dto.ReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+            else
+            {
+                if (dto.Kind == "A1")
+                    title = new A1FormFields().GetDescription();
+                else if (dto.Kind == "A2")
+                    title = new A2FormFields().GetDescription();
+                else if (dto.Kind == "A3")
+                    title = new A3FormFields().GetDescription();
+                else if (dto.Kind == "A4G")
+                    title = new A4GFormFields().GetDescription();
+                else if (dto.Kind == "A5")
+                    title = new A5FormFields().GetDescription();
+                else if (dto.Kind == "B1")
+                    title = new B1FormFields().GetDescription();
+                else if (dto.Kind == "B4")
+                    title = new B4FormFields().GetDescription();
+                else if (dto.Kind == "B5")
+                    title = new B5FormFields().GetDescription();
+                else if (dto.Kind == "B6")
+                    title = new B6FormFields().GetDescription();
+                else if (dto.Kind == "B7")
+                    title = new B7FormFields().GetDescription();
+                else if (dto.Kind == "B8")
+                    title = new B8FormFields().GetDescription();
+                else if (dto.Kind == "B9")
+                    title = new B9FormFields().GetDescription();
+                else if (dto.Kind == "C1")
+                    title = new C1FormFields().GetDescription();
+                else if (dto.Kind == "C2")
+                    title = new C2FormFields().GetDescription();
+                else if (dto.Kind == "D1")
+                    title = new D1FormFields().GetDescription();
+                else if (dto.Kind == "D2")
+                    title = new D2FormFields().GetDescription();
+                else if (dto.Kind == "T1")
+                    title = new T1FormFields().GetDescription();
+            }
+            return new Form(visitId, dto.Id, title, dto.Kind, dto.Status, dto.Language, dto.IsIncluded, dto.ReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
 
     }

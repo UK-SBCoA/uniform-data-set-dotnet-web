@@ -6,13 +6,23 @@
 }
 
 <form method="post">
-    Legacy Id
-    <input asp-for="Participation!.LegacyId" />
-    <span asp-validation-for="Participation.LegacyId" />
 
-    <input type="submit" />
+    <div class="space-y-16 p-16 xl:space-y-20">
+        <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+
+            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                <label asp-for="Participation.LegacyId"></label>
+                <input asp-for="Participation.LegacyId" />
+                <span asp-validation-for="Participation.LegacyId" />
+            </div>
+
+            <input asp-for="Participation.CreatedBy" type="hidden" />
+            <input asp-for="Participation.CreatedAt" type="hidden" />
+
+            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+
+
+        </div>
+    </div>
 </form>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -43,11 +43,14 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
-        public List<RadioListItem> LifetimeSmokingListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> SmokingFrequencyListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0", new Dictionary<string, string> { { "SMOKYRS", "disabled=true" }, { "PACKSPER", "disabled=true" }, { "QUITSMOK", "disabled=true" } }),
-            new RadioListItem("Yes", "1", new Dictionary<string, string> { { "SMOKYRS", "disabled=false" }, { "PACKSPER", "disabled=false" }, { "QUITSMOK", "disabled=false" }  }),
-            new RadioListItem("Unknown", "9", new Dictionary<string, string> { { "SMOKYRS", "disabled=true" }, { "PACKSPER", "disabled=true" }, { "QUITSMOK", "disabled=true" } })
+            new RadioListItem("1 cigarette to less than 1/2 pack", "1"),
+            new RadioListItem("1/2 pack to less than 1 pack", "2"),
+            new RadioListItem("1 pack to less than 1 1/2 packs", "3"),
+            new RadioListItem("1 1/2 packs to less than 2 packs", "4"),
+            new RadioListItem("2 packs or more", "5"),
+            new RadioListItem("Unknown", "9")
         };
 
         public List<RadioListItem> RecentAlcoholUseListItems { get; set; } = new List<RadioListItem>
@@ -95,9 +98,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
         }
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            await base.OnGet(id);
+            await base.OnGetAsync(id);
 
             if (_formModel != null)
             {
@@ -108,7 +111,7 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPost(int id)
+        public new async Task<IActionResult> OnPostAsync(int id)
         {
             foreach (var result in A5.Validate(new ValidationContext(A5, null, null)))
             {
@@ -123,7 +126,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(A5);
 
-                await base.OnPost(id); // checks for domain-level business rules validation
+                await base.OnPostAsync(id); // checks for domain-level business rules validation
             }
 
             var visit = await _visitService.GetByIdWithForm("", id, _formKind);

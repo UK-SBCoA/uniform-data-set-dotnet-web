@@ -102,13 +102,22 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> PredominantDomainListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Cognition", "1"),
+            new RadioListItem("Behavior", "2"),
+            new RadioListItem("Motor function", "3"),
+            new RadioListItem("N/A", "8"),
+            new RadioListItem("Unknown", "9")
+        };
+
         public B9Model(IVisitService visitService) : base(visitService, "B9")
         {
         }
 
-        public async Task<IActionResult> OnGet(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
-            await base.OnGet(id);
+            await base.OnGetAsync(id);
 
             if (_formModel != null)
             {
@@ -119,7 +128,7 @@ namespace UDS.Net.Forms.Pages.UDS3
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPost(int id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
             /*
              * ValidationContext describes any member on which validation is performed. It also enables
@@ -139,7 +148,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(B9);
 
-                await base.OnPost(id); // checks for domain-level business rules validation
+                await base.OnPostAsync(id); // checks for domain-level business rules validation
             }
 
             var visit = await _visitService.GetByIdWithForm("", id, _formKind);

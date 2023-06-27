@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        @if (Model.Visit != null && Model.Visit.Kind == "FVP")
+        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.FVP)
         {
             <div class="@rowCSS">
                 <label asp-for="A2.NEWINF"><span class="counter"></span> @Html.DisplayNameFor(m => m.A2.NEWINF)</label>

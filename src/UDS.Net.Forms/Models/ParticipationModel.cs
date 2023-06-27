@@ -13,6 +13,16 @@ namespace UDS.Net.Forms.Models
 
         public int VisitCount { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
+        public string CreatedBy { get; set; } = "";
+
+        public string? ModifiedBy { get; set; }
+
+        public string? DeletedBy { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public IList<VisitModel> Visits { get; set; } = new List<VisitModel>();
     }
 }

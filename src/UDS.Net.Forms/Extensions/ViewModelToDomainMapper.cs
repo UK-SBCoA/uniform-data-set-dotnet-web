@@ -14,7 +14,12 @@ namespace UDS.Net.Forms.Extensions
             return new Participation
             {
                 Id = vm.Id,
-                LegacyId = vm.LegacyId
+                LegacyId = vm.LegacyId,
+                CreatedAt = vm.CreatedAt,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                DeletedBy = vm.DeletedBy,
+                IsDeleted = vm.IsDeleted
             };
         }
 

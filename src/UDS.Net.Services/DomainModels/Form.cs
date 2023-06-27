@@ -1,17 +1,48 @@
 ﻿using System;
+using UDS.Net.Services.DomainModels.Forms;
+
 namespace UDS.Net.Services.DomainModels
 {
     public class Form
     {
+        private string _title = "";
         public int VisitId { get; set; }
 
         public int Id { get; set; }
 
-        public string Version { get; set; }
+        public string Version
+        {
+            get
+            {
+                if (Fields != null)
+                    return Fields.GetVersion();
+                else
+                    return "";
+            }
+        }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get
+            {
 
-        public string Description { get; set; }
+                if (Fields != null)
+                    return Fields.GetDescription();
+                else
+                    return _title;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                if (Fields != null)
+                    return Fields.GetDescription();
+                else
+                    return "";
+            }
+        }
 
         public bool IsRequiredForVisitKind { get; set; }
 
@@ -37,29 +68,69 @@ namespace UDS.Net.Services.DomainModels
 
         public IFormFields Fields { get; set; }
 
+        private void SetFieldsBasedOnKind()
+        {
+            if (Kind == "A1")
+                Fields = new A1FormFields();
+            else if (Kind == "A2")
+                Fields = new A2FormFields();
+            else if (Kind == "A3")
+                Fields = new A3FormFields();
+            else if (Kind == "A4")
+                Fields = new A4GFormFields();
+            else if (Kind == "A5")
+                Fields = new A5FormFields();
+            else if (Kind == "B1")
+                Fields = new B1FormFields();
+            else if (Kind == "B4")
+                Fields = new B4FormFields();
+            else if (Kind == "B5")
+                Fields = new B5FormFields();
+            else if (Kind == "B6")
+                Fields = new B6FormFields();
+            else if (Kind == "B7")
+                Fields = new B7FormFields();
+            else if (Kind == "B8")
+                Fields = new B8FormFields();
+            else if (Kind == "B9")
+                Fields = new B9FormFields();
+            else if (Kind == "C1")
+                Fields = new C1FormFields();
+            else if (Kind == "C2")
+                Fields = new C2FormFields();
+            else if (Kind == "D1")
+                Fields = new D1FormFields();
+            else if (Kind == "D2")
+                Fields = new D2FormFields();
+            else if (Kind == "T1")
+                Fields = new T1FormFields();
+        }
+
         // TODO field versions so comparison can be made between existing data version and version that should be used
         public Form(int visitId, string kind, bool isRequired, string createdBy)
         {
-            // TODO This is used in VisitService to initialize a new form when one doesn't exist, but should
             VisitId = visitId;
 
             Kind = kind;
 
             IsRequiredForVisitKind = isRequired;
 
-            Status = "NotStarted";
+            Status = "NotStarted"; // TODO change to enum
 
             CreatedBy = createdBy;
 
             CreatedAt = DateTime.Now;
+
+            // there is no existing form, but we need to fields initialized for brand new forms
+            SetFieldsBasedOnKind();
         }
 
         public Form(int visitId, int id, string title, string kind, string status, string language, bool? isIncluded, string reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
-            Title = title;
             VisitId = visitId;
 
+            _title = title;
             Kind = kind;
             Status = status;
             Language = language;
@@ -75,17 +146,15 @@ namespace UDS.Net.Services.DomainModels
             if (fields != null)
             {
                 Fields = fields;
-                Version = fields.GetVersion();
-                Description = fields.GetDescription();
             }
         }
 
         public Form(int visitId, int id, string title, string kind, bool isRequired, string status, string language, bool? isIncluded, string reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
-            Title = title;
             VisitId = visitId;
 
+            _title = title;
             Kind = kind;
             IsRequiredForVisitKind = isRequired;
             Status = status;
@@ -102,8 +171,6 @@ namespace UDS.Net.Services.DomainModels
             if (fields != null)
             {
                 Fields = fields;
-                Version = fields.GetVersion();
-                Description = fields.GetDescription();
             }
         }
 

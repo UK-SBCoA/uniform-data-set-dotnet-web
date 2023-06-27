@@ -30,14 +30,13 @@ namespace UDS.Net.Forms.TagHelpers
                 Id = $"RadioButtonGroup{random.Next(1, 100)}";
             }
 
-            output.TagName = "fieldset"; // overwrites custom tag
-            output.Attributes.SetAttribute("class", "mt-4 space-y-2");
+            output.TagName = "";
 
             if (For == null)
             {
                 // nothing bound
                 var cells = GenerateTableCellRadioInputs(items, "");
-                output.PostContent.AppendHtml(cells);
+                output.PostContent.SetHtmlContent(cells);// = cells;
                 return;
             }
 
@@ -48,7 +47,7 @@ namespace UDS.Net.Forms.TagHelpers
                 prefix = prefix + ".";
 
             var cellsWithName = GenerateTableCellRadioInputs(items, expression);
-            output.PostContent.AppendHtml(cellsWithName);
+            output.PostContent.SetHtmlContent(cellsWithName);
         }
 
         private IHtmlContent GenerateTableCellRadioInputs(IEnumerable<RadioListItem> items, string name)
@@ -70,7 +69,6 @@ namespace UDS.Net.Forms.TagHelpers
                 var item = itemsList[i];
                 var radio = GenerateRadioInput(item, i, name);
                 var label = GenerateLabel(item, i);
-
 
                 var cell = new TagBuilder("td");
 
