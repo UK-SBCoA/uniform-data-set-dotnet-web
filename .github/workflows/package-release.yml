@@ -39,3 +39,25 @@ jobs:
 
     - name: Push packages
       run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols
+      
+    #the next 3 steps update the acr image to trigger update in azure container
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+      with:
+        context: src/
+        file: src/UDS.Net.Web.MVC/Dockerfile
+        push: true
+        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/uniformdatasetdotnetweb:dev
