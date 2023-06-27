@@ -102,6 +102,15 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> PredominantDomainListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Cognition", "1"),
+            new RadioListItem("Behavior", "2"),
+            new RadioListItem("Motor function", "3"),
+            new RadioListItem("N/A", "8"),
+            new RadioListItem("Unknown", "9")
+        };
+
         public B9Model(IVisitService visitService) : base(visitService, "B9")
         {
         }
