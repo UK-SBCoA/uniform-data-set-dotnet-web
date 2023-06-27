@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B6 : FormModel
     {
         [Display(Name = "Check this box if the subject is not able to complete the GDS, based on the clinician's best judgment")]
-        [Range(0,1, ErrorMessage ="0,1)")]
+        [Range(0, 1, ErrorMessage = "0,1)")]
         public int? NOGDS { get; set; }
 
         [Display(Name = "Are you basically satisifed with your life?")]
