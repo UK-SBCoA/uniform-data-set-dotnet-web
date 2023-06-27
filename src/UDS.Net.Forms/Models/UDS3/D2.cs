@@ -108,7 +108,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Antibody-mediated encephalopathy")]
         public int? ANTIENC { get; set; }
 
-        [Display(Name = "Antibody-mediated encephalopathy")]
+        [Display(Name = "Specify antibody")]
         [RequiredIf(nameof(ANTIENC), "1", ErrorMessage = "Specify antibody")]
         [MaxLength(60)]
         public string? ANTIENCX { get; set; }
