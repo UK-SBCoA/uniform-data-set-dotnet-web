@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B1 : FormModel
     {
         [Display(Name = "Participant height (inches)")]
-        [RegularExpression("^(3[6-9]\\.\\d| [4-7]\\d\\.\\d|8[0-7]\\.\\d|87\\.[0-9]|88\\.8)$", ErrorMessage = "(36.0-87.9, 88.8 = not assessed)")]
+        //[RegularExpression("^(3[6-9]\\.\\d| [4-7]\\d\\.\\d|8[0-7]\\.\\d|87\\.[0-9]|88\\.8)$", ErrorMessage = "(36.0-87.9, 88.8 = not assessed)")]
         public int? HEIGHT { get; set; }
 
         [Display(Name = "Participant weight (lbs)")]
