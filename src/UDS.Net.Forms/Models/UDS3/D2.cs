@@ -89,6 +89,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? SLEEPOTH { get; set; }
 
         [Display(Name = "Other sleep disorder (specify)")]
+        [RequiredIf(nameof(SLEEPOTH), "1", ErrorMessage = "Specify antibody")]
         [MaxLength(60)]
         public string? SLEEPOTX { get; set; }
 
@@ -108,6 +109,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ANTIENC { get; set; }
 
         [Display(Name = "Antibody-mediated encephalopathy")]
+        [RequiredIf(nameof(ANTIENC), "1", ErrorMessage = "Specify antibody")]
         [MaxLength(60)]
         public string? ANTIENCX { get; set; }
 
@@ -115,6 +117,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? OTHCOND { get; set; }
 
         [Display(Name = "If yes, specify")]
+        [RequiredIf(nameof(OTHCOND), "1", ErrorMessage = "Specify other medical conditions or procedures")]
         [MaxLength(60)]
         public string? OTHCONDX { get; set; }
 
