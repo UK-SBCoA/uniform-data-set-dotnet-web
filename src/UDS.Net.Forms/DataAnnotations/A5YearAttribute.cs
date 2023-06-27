@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.DataAnnotations
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class A5YearAttribute : ValidationAttribute, IClientModelValidator
     {
-        public int Minimum { get; set; } = 1900; 
+        public int Minimum { get; set; } = 1900;
         public int Maximum { get; } = DateTime.Now.Year;
         public bool AllowUnknown { get; set; } = false;
 
@@ -71,4 +71,3 @@ namespace UDS.Net.Forms.DataAnnotations
         }
     }
 }
-
