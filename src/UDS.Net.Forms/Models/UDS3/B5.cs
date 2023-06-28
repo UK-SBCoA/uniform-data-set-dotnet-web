@@ -16,6 +16,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(NPIQINF), "3", ErrorMessage = "Specify other co-participant")]
+        [RegularExpression(@"^[^'&%""]*$", ErrorMessage = "Single qoutes ('), double quotes (\"), ampersands (&) and percentage signs (%) are not allowed")]
         public string? NPIQINFX { get; set; }
 
         [Display(Name = "Delusions - Does the participant have false beliefs, such as thinking that others are stealing from him/her or planning to harm him/her in some way?")]
