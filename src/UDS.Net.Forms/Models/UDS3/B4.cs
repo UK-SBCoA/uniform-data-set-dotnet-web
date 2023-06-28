@@ -9,34 +9,34 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B4 : FormModel
     {
         [Display(Name = "")]
-        public int? MEMORY { get; set; }
+        public double? MEMORY { get; set; }
 
         [Display(Name = "")]
-        public int? ORIENT { get; set; }
+        public double? ORIENT { get; set; }
 
         [Display(Name = "")]
-        public int? JUDGMENT { get; set; }
+        public double? JUDGMENT { get; set; }
 
         [Display(Name = "")]
-        public int? COMMUN { get; set; }
+        public double? COMMUN { get; set; }
 
         [Display(Name = "")]
-        public int? HOMEHOBB { get; set; }
+        public double? HOMEHOBB { get; set; }
 
         [Display(Name = "")]
-        public int? PERSCARE { get; set; }
+        public double? PERSCARE { get; set; }
 
         [Display(Name = "")]
-        public int? CDRSUM { get; set; }
+        public double? CDRSUM { get; set; }
 
         [Display(Name = "")]
-        public int? CDRGLOB { get; set; }
+        public double? CDRGLOB { get; set; }
 
         [Display(Name = "")]
-        public int? COMPORT { get; set; }
+        public double? COMPORT { get; set; }
 
         [Display(Name = "")]
-        public int? CDRLANG { get; set; }
+        public double? CDRLANG { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

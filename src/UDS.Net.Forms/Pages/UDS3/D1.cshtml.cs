@@ -25,17 +25,18 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other (e.g., two or more clinicians or other informal group", "3")
         };
 
-        public List<RadioListItem> NormalCognitionListItems { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (continue to question 3)", "0"),
-            new RadioListItem("Yes (skip to question 6)", "1")
-        };
+        // TODO UI behavior list items
+        // public List<RadioListItem> NormalCognitionListItems { get; set; } = new List<RadioListItem>
+        // {
+        //     new RadioListItem("No (continue to question 3)", "0"),
+        //     new RadioListItem("Yes (skip to question 6)", "1")
+        // };
 
-        public List<RadioListItem> DementiaListItems { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (skip to question 5)", "0"),
-            new RadioListItem("Yes (continue to question 4)", "1")
-        };
+        // public List<RadioListItem> DementiaListItems { get; set; } = new List<RadioListItem>
+        // {
+        //     new RadioListItem("No (skip to question 5)", "0"),
+        //     new RadioListItem("Yes (continue to question 4)", "1")
+        // };
 
         public List<RadioListItem> PPASyndromeListItems { get; set; } = new List<RadioListItem>
         {

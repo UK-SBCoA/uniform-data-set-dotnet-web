@@ -5,7 +5,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class B1FormFields : IFormFields
     {
-        public int? HEIGHT { get; set; }
+        public double? HEIGHT { get; set; }
         public int? WEIGHT { get; set; }
         public int? BPSYS { get; set; }
         public int? BPDIAS { get; set; }
