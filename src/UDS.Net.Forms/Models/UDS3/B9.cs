@@ -200,7 +200,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOTREM { get; set; }
 
-        [Display(Name = "Has the participant noticeably slowed down in walking, moving, or writing by hand, other than due to an injury or illness? Has his/her facial expression changed or become more \"wooden, \" or masked and unexpressive?")]
+        [Display(Name = "Has the participant noticeably slowed down in walking, moving, or writing by hand, other than due to an injury or illness? Has his/her facial expression changed or become more \"wooden,\" or masked and unexpressive?")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOSLOW { get; set; }
 
