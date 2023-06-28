@@ -11,10 +11,10 @@ namespace UDS.Net.Forms.Models.UDS3
     {
         [Display(Name = "Participant height (inches)")]
         [RegularExpression("^(3[6-9]\\.\\d| [4-7]\\d\\.\\d|8[0-7]\\.\\d|87\\.[0-9]|88\\.8)$", ErrorMessage = "(36.0-87.9, 88.8 = not assessed)")]
-        public int? HEIGHT { get; set; }
+        public double? HEIGHT { get; set; }
 
         [Display(Name = "Participant weight (lbs)")]
-        [RegularExpression("^(5\\d|[6-9]\\d|[1-3]\\d{2}|400)|888)$", ErrorMessage = "(50-400, 888 = Not assessed)")]
+        [RegularExpression("^(5\\d|[6-9]\\d|[1-3]\\d{2}|400|888)$", ErrorMessage = "(50-400, 888 = Not assessed)")]
         public int? WEIGHT { get; set; }
 
         [Display(Name = "Participantblood pressure at initial reading (sitting)")]
