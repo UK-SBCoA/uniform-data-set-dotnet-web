@@ -27,7 +27,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public double? PERSCARE { get; set; }
 
         [Display(Name = "CDR sum of boxes")]
-        [RegularExpression("^(0(\\.5)?|[1-9](\\.5)?|1[0-5](\\.5)?|1[6-8])$", ErrorMessage = "0,18 (except scores of 16.5 and 17.5 not possible)")]
+        [RegularExpression("^(0(.5)?|[1-9](.5)?|1[0-5](.5)?|1[6-8])$", ErrorMessage = "0,18 (except scores of 16.5 and 17.5 not possible)")]
         public double? CDRSUM { get; set; }
 
         [Display(Name = "Global CDR")]
