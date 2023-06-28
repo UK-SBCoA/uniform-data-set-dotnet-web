@@ -80,5 +80,37 @@
 			"</tr>"
 		],
 		"description": "Render field"
+	},
+	"forms.tablerowwithcheckbox": {
+		"scope": "html",
+		"prefix": "udstrc",
+		"body": [
+			"<tr>",
+			"\t<td>",
+			"\t\t<label asp-for=\"${1:PropertyCheckbox}\"><span class=\"counter\"></span> @Html.DisplayNameFor(m => m.${1})</label>",
+			"\t\t<p class=\"text-sm text-gray-500\" asp-description-for=\"${1}\"></p>",
+			"\t\t<span class=\"mt-2 text-sm text-red-600\" asp-validation-for=\"${1}\"></span>",
+			"\t</td>",
+			"\t<td>",
+			"\t\t<fieldset>",
+			"\t\t\t<div class=\"space-y-5\">",
+			"\t\t\t\t<div class=\"relative flex items-start\">",
+			"\t\t\t\t\t<div class=\"flex h-6 items-center\">",
+			"\t\t\t\t\t\t@Html.CheckBox(\"${1}\", Model.${1}.HasValue && Model.${1}.Value != 0, new { @class = \"h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600\" })",
+			"\t\t\t\t\t</div>",
+			"\t\t\t\t\t<div class=\"ml-3 text-sm leading-6\">",
+			"\t\t\t\t\t\t<label for=\"@Html.IdFor(m => m.${1})\" class=\"font-medium text-gray-900\"><span class=\"inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800\">1</span></label>",
+			"\t\t\t\t\t</div>",
+			"\t\t\t\t</div>",
+			"\t\t\t</div>",
+			"\t\t</fieldset>",
+			"\t</td>",
+			"\t<td>",
+			"\t\t<span class=\"subcounter\"></span>",
+			"\t</td>",
+			"\t<table-cell-radio-buttons id=\"@Html.IdFor(m => m.${2})\" for=\"@Model.${2:PropertyRadio}\" items=\"${3:OptionsList}\"></table-cell-radio-buttons>",
+			"</tr>"
+		],
+		"description": "Render field"
 	}
 }

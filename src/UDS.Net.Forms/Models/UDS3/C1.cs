@@ -46,7 +46,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? PENTAGON { get; set; }
 
         [Display(Name = "Total MMSE score (using D-L-R-O-W)")]
-        [RegularExpression("^(\\d|[12]\\d|30)|88)$", ErrorMessage = "(0-30, 88 = Missing)")]
+        [RegularExpression("^(\\d|[12]\\d|30|88)$", ErrorMessage = "(0-30, 88 = Missing)")]
         public int? MMSE { get; set; }
 
         [Display(Name = "The remainder of the battery (i.e., the tests summarized below) was administered")]
@@ -70,7 +70,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? LOGIYR { get; set; }
 
         [Display(Name = "Total score from the previous test administration")]
-        [RegularExpression("^(\\d|1\\d|2[0-5])|88)$", ErrorMessage = "(0-25, 88 = not applicable)")]
         public int? LOGIPREV { get; set; }
 
         [Display(Name = "Total number of story units recalled from this current test administration")]
@@ -82,7 +81,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSBENTC { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length")]
-        [RegularExpression("^(\\d|1[0-2])|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
+        [RegularExpression("^(\\d|1[0-2]|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
         public int? DIGIF { get; set; }
 
         [Display(Name = "Digit span forward length ")]
@@ -90,7 +89,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DIGIFLEN { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length ")]
-        [RegularExpression("^(\\d|1[0-2])|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
+        [RegularExpression("^(\\d|1[0-2]|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
         public int? DIGIB { get; set; }
 
         [Display(Name = "Digit span backward length")]
@@ -130,26 +129,26 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TRAILBLI { get; set; }
 
         [Display(Name = "Total number of story units recalled")]
-        [RegularExpression("^(\\d|1\\d|2[0-5])|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5]|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
         public int? MEMUNITS { get; set; }
 
         [Display(Name = "Time elapsed since Logical Memory IA–Immediate")]
-        [RegularExpression("^(\\d|[1-7]\\d|8[0-5])|9[5-8])$", ErrorMessage = "(0-85 minutes, 99 = unknown")]
+        [RegularExpression("^(\\d|[1-7]\\d|8[0-5]|9[5-8])$", ErrorMessage = "(0-85 minutes, 99 = unknown")]
         public int? MEMTIME { get; set; }
 
         [Display(Name = "Total score for 10- to 15-minute delayed drawing of Bension figure")]
-        [RegularExpression("^(\\d|1[0-7])|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
+        [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus from among four options?")]
         public int? UDSBENRS { get; set; }
 
         [Display(Name = "Total score")]
-        [RegularExpression("^(\\d|[12]\\d|30)|9[5-8])$", ErrorMessage = "(0-30, 95-98)")]
+        [RegularExpression("^(\\d|[12]\\d|30|9[5-8])$", ErrorMessage = "(0-30, 95-98)")]
         public int? BOSTON { get; set; }
 
         [Display(Name = "Number of correct F-words generated in 1 minute")]
-        [RegularExpression("^(\\d|[1-3]\\d|40)]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
+        [RegularExpression("^(\\d|[1-3]\\d|40]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
@@ -161,7 +160,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSVERNF { get; set; }
 
         [Display(Name = "Number of correct L-words generated in 1 minute")]
-        [RegularExpression("^(\\d|[1-3]\\d|40)]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
+        [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in one minute")]
@@ -189,6 +188,55 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Status == "2")
+            {
+                bool isValid = false;
+                string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";
+                var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
+                if (LOGIPREV.HasValue && LOGIPREV != 88)
+                {
+                    if (LOGIYR.HasValue && LOGIMO.HasValue && LOGIDAY.HasValue)
+                    {
+                        // we need the visit date
+                        var visitDate = visitDateEntry.Value;
+                        if (visitDate != null)
+                        {
+                            var max = (DateTime)visitDate;
+                            var min = ((DateTime)visitDate).AddMonths(-3);
+
+                            try
+                            {
+                                var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
+
+                                var resultHigh = DateTime.Compare(logiDate, max);
+                                var resultLow = DateTime.Compare(logiDate, min);
+
+                                if (resultHigh < 0 && resultLow > 0)
+                                {
+                                    isValid = true;
+                                }
+
+                                else
+                                {
+                                    isValid = false;
+                                }
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                // not a valid date
+                                isValid = false;
+                                errorMessage = "Logical Memory IA -Immediate previous test date invalid";
+                            }
+                        }
+                    }
+                }
+                if (!isValid)
+                {
+                    yield return new ValidationResult(
+                        errorMessage,
+                        new[] { nameof(LOGIMO) });
+                }
+            }
             yield break;
         }
     }

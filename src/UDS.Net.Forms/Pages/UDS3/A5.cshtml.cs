@@ -43,11 +43,14 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
-        public List<RadioListItem> LifetimeSmokingListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> SmokingFrequencyListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0", new Dictionary<string, string> { { "SMOKYRS", "disabled=true" }, { "PACKSPER", "disabled=true" }, { "QUITSMOK", "disabled=true" } }),
-            new RadioListItem("Yes", "1", new Dictionary<string, string> { { "SMOKYRS", "disabled=false" }, { "PACKSPER", "disabled=false" }, { "QUITSMOK", "disabled=false" }  }),
-            new RadioListItem("Unknown", "9", new Dictionary<string, string> { { "SMOKYRS", "disabled=true" }, { "PACKSPER", "disabled=true" }, { "QUITSMOK", "disabled=true" } })
+            new RadioListItem("1 cigarette to less than 1/2 pack", "1"),
+            new RadioListItem("1/2 pack to less than 1 pack", "2"),
+            new RadioListItem("1 pack to less than 1 1/2 packs", "3"),
+            new RadioListItem("1 1/2 packs to less than 2 packs", "4"),
+            new RadioListItem("2 packs or more", "5"),
+            new RadioListItem("Unknown", "9")
         };
 
         public List<RadioListItem> RecentAlcoholUseListItems { get; set; } = new List<RadioListItem>
