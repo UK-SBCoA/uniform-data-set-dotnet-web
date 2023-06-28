@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -9,11 +10,10 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B6 : FormModel
     {
         [Display(Name = "Check this box if the subject is not able to complete the GDS, based on the clinician's best judgment")]
-        [Range(0, 1, ErrorMessage = "0,1)")]
-        public int? NOGDS { get; set; }
+        public bool NOGDS { get; set; }
 
         [Display(Name = "Are you basically satisifed with your life?")]
-        [RegularExpression("(0|1|9)", ErrorMessage = "(0-1, 9)")]
+        [RequiredIf(nameof(NOGDS), "False", ErrorMessage = "Answer required for SATIS")]
         public int? SATIS { get; set; }
 
         [Display(Name = "Have you dropped many of your activities and interests?")]
