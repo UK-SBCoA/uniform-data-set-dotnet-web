@@ -23,7 +23,7 @@
                     <label asp-for="B1.HEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEIGHT)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HEIGHT"></p>
-                        <input asp-for="@Model.B1.HEIGHT" />
+                        <input asp-for="@Model.B1.HEIGHT" type="number" step=".1" placeholder="0.0" min="36.0" max="88.8" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEIGHT"></span>
                     </div>
                 </div>
