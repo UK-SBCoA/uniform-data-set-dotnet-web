@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public int? DEPDSEV { get; set; }
 
-        [Display(Name = "Anxiety - Does the patient become upset when separated from you? Does he/she have any otehr signs of nervousness such as shortness of breath, sighing, being unable to relax or feeling excessively tense?")]
+        [Display(Name = "Anxiety - Does the patient become upset when separated from you? Does he/she have any other signs of nervousness such as shortness of breath, sighing, being unable to relax or feeling excessively tense?")]
         public int? ANX { get; set; }
 
         public int? ANXSEV { get; set; }
