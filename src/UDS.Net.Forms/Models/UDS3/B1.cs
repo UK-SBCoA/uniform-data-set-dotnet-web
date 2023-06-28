@@ -18,15 +18,15 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? WEIGHT { get; set; }
 
         [Display(Name = "Participantblood pressure at initial reading (sitting)")]
-        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230)|777|888)$", ErrorMessage = "(70-230, 777 = BP Addendum submitted, 888 = Not assessed)")]
+        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|777|888)$", ErrorMessage = "(70-230, 777 = BP Addendum submitted, 888 = Not assessed)")]
         public int? BPSYS { get; set; }
 
         [Display(Name = "Participant blood pressure (sitting), diastolic")]
-        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140)|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
+        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
         public int? BPDIAS { get; set; }
 
         [Display(Name = "Participantresting heart rate (pulse)")]
-        [RegularExpression("^(3[3-9]|[4-9]\\d|1[0-5]\\d|160)|888)$", ErrorMessage = "(33-160, 888 = Not assessed)")]
+        [RegularExpression("^(3[3-9]|[4-9]\\d|1[0-5]\\d|160|888)$", ErrorMessage = "(33-160, 888 = Not assessed)")]
         public int? HRATE { get; set; }
 
         [Display(Name = "Without corrective lenses, is the participant’s vision functionally normal?")]
