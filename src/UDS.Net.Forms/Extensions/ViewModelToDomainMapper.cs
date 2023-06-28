@@ -364,7 +364,7 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B6FormFields
             {
-                NOGDS = vm.NOGDS,
+                NOGDS = vm.NOGDS ? 1 : 0,
                 SATIS = vm.SATIS,
                 DROPACT = vm.DROPACT,
                 EMPTY = vm.EMPTY,
