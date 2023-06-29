@@ -13,6 +13,12 @@
 		<ReleaseVersion>1.0.2</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="UDS.Net.Dto" Version="1.1.0" />
+		<PackageReference Include="UDS.Net.Dto" Version="1.3.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="LookupModels\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="LookupModels\" />
 	</ItemGroup>
 </Project>

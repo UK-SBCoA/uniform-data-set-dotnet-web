@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B1 : FormModel
     {
         [Display(Name = "")]
-        public int? HEIGHT { get; set; }
+        public double? HEIGHT { get; set; }
 
         [Display(Name = "")]
         public int? WEIGHT { get; set; }

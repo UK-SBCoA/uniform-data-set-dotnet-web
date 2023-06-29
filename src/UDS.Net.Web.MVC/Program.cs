@@ -30,6 +30,7 @@ builder.Services.AddUDSApiClient(configuration.GetValue<string>("DownstreamApis:
 
 builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
+builder.Services.AddSingleton<ILookupService, LookupService>();
 
 ////*************************************************************************************************
 
