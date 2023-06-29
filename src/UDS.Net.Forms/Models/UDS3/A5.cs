@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
@@ -16,14 +17,14 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TOBAC100 { get; set; }
 
         [Display(Name = "Total years smoked")]
-        [RegularExpression("^(\\d|[1-7]\\d|8[0-7])|99)$", ErrorMessage = "(0-87, 99 = Unknown)")]
+        [RegularExpression("^(\\d|[1-7]\\d|8[0-7]|99)$", ErrorMessage = "(0-87, 99 = Unknown)")]
         public int? SMOKYRS { get; set; }
 
         [Display(Name = "Average number of packs smoked per day")]
         public int? PACKSPER { get; set; }
 
         [Display(Name = "If the subject quit smoking, specify age at which he/she last smoked (i.e., quit)")]
-        [RegularExpression("^([89]|[1-9]\\d|10\\d|110)|888|999)$", ErrorMessage = "(8-110, 888 = N/A, 999 = Unknown)")]
+        [RegularExpression("^([89]|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "(8-110, 888 = N/A, 999 = Unknown)")]
         public int? QUITSMOK { get; set; }
 
         [Display(Name = "In the past three months,has the subject consumed any alcohol?")]
@@ -39,7 +40,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? HATTMULT { get; set; }
 
         [Display(Name = "Year of most recent heart attack")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? HATTYEAR { get; set; }
 
         [Display(Name = "Atrial fibrillation")]
@@ -79,7 +79,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? STROKMUL { get; set; }
 
         [Display(Name = "Year of most recent stroke")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? STROKYR { get; set; }
 
         [Display(Name = "Transient ischemic attack (TIA)")]
@@ -89,21 +88,18 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TIAMULT { get; set; }
 
         [Display(Name = "Year of most recent TIA")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? TIAYEAR { get; set; }
 
         [Display(Name = "Parkinson’s disease (PD)")]
         public int? PD { get; set; }
 
         [Display(Name = "Year of PD diagnosis")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? PDYR { get; set; }
 
         [Display(Name = "Other parkinsonian disorder (e.g, PSP, CBD")]
         public int? PDOTHR { get; set; }
 
         [Display(Name = "Year of parkinsonian disorder diagnosis")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? PDOTHRYR { get; set; }
 
         [Display(Name = "Seizures")]
@@ -122,7 +118,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? TBIWOLOS { get; set; }
 
         [Display(Name = "Year of most recent TBI")]
-        [A5Year(Minimum = 1900, AllowUnknown = true)]
         public int? TBIYEAR { get; set; }
 
         [Display(Name = "Diabetes")]
@@ -237,8 +232,92 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            yield break;
+            if (Status == "2")
+            {
+                bool isValid = false;
+                string errorMessage = "Value must be between 1900 and the current year of the visit date";
+                var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
+
+                if (STROKYR.HasValue && STROKYR.Value != 9999 ||
+                    HATTYEAR.HasValue && HATTYEAR.Value != 9999 ||
+                    TIAYEAR.HasValue && TIAYEAR.Value != 9999 ||
+                    PDYR.HasValue && PDYR.Value != 9999 ||
+                    PDOTHRYR.HasValue && PDOTHRYR.Value != 9999 ||
+                     TBIYEAR.HasValue && TBIYEAR.Value != 9999)
+                {
+                    var visitDate = visitDateEntry.Value;
+
+                    if (visitDate != null)
+                    {
+                        var min = new DateTime(1900, 1, 1);
+                        var max = (DateTime)visitDate;
+
+                        if (STROKYR.HasValue && STROKYR.Value != 9999)
+                        {
+                            var strokeYear = new DateTime(STROKYR.Value, 1, 1);
+                            if (strokeYear >= min && strokeYear <= max)
+                            {
+                                isValid = true;
+                            }
+
+
+                            if (HATTYEAR.HasValue && HATTYEAR.Value != 9999)
+                            {
+                                var hatYear = new DateTime(HATTYEAR.Value, 1, 1);
+                                if (hatYear >= min && hatYear <= max)
+                                {
+                                    isValid = true;
+                                }
+                            }
+
+                            if (TIAYEAR.HasValue && TIAYEAR.Value != 9999)
+                            {
+                                var tiaYear = new DateTime(TIAYEAR.Value, 1, 1);
+                                if (tiaYear >= min && tiaYear <= max)
+                                {
+                                    isValid = true;
+                                }
+                            }
+
+                            if (PDYR.HasValue && PDYR.Value != 9999)
+                            {
+                                var pdYear = new DateTime(PDYR.Value, 1, 1);
+                                if (pdYear >= min && pdYear <= max)
+                                {
+                                    isValid = true;
+                                }
+                            }
+
+                            if (PDOTHRYR.HasValue && PDOTHRYR.Value != 9999)
+                            {
+                                var pdOtherYear = new DateTime(PDOTHRYR.Value, 1, 1);
+                                if (pdOtherYear >= min && pdOtherYear <= max)
+                                {
+                                    isValid = true;
+                                }
+                            }
+
+                            if (TBIYEAR.HasValue && TBIYEAR.Value != 9999)
+                            {
+                                var tbiYear = new DateTime(TBIYEAR.Value, 1, 1);
+                                if (tbiYear >= min && tbiYear <= max)
+                                {
+                                    isValid = true;
+                                }
+                            }
+                        }
+                    }
+
+                    if (!isValid)
+                    {
+                        yield return new ValidationResult(
+                            errorMessage,
+                            new[] { nameof(STROKYR), nameof(HATTYEAR), nameof(TIAYEAR), nameof(PDYR), nameof(PDOTHRYR), nameof(TBIYEAR) });
+                    }
+                }
+
+                yield break;
+            }
         }
     }
 }
-
