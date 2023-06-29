@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "")]
         public int? ANYMEDS { get; set; }
 
-        public List<string> DrugIds { get; set; } = new List<string>();
+        public List<DrugCodeModel> DrugIds { get; set; } = new List<DrugCodeModel>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

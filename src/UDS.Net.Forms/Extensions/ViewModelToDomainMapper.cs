@@ -203,12 +203,19 @@ namespace UDS.Net.Forms.Extensions
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static A4DFormFields ToEntity(this string drugId)
+        public static A4DFormFields ToEntity(this DrugCodeModel vm)
         {
             return new A4DFormFields
             {
-                DRUGID = drugId
+                Id = vm.Id,
+                DRUGID = vm.DrugId,
+                CreatedAt = vm.CreatedAt,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                DeletedBy = vm.DeletedBy,
+                IsDeleted = vm.IsDeleted
             };
+
         }
 
         public static Form ToEntity(this A5 vm)
