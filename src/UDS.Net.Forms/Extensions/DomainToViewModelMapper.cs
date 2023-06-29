@@ -346,7 +346,7 @@ namespace UDS.Net.Forms.Extensions
                 BrandName = drugCode.BrandName,
                 IsPopular = drugCode.IsPopular,
                 IsOverTheCounter = drugCode.IsOverTheCounter,
-                IsSelected = a4.IsSelected,
+                IsSelected = a4.IsDeleted.HasValue ? !a4.IsDeleted.Value : false, // there is no concept of isSelected persisted in the database (if the row is there and it's not deleted then it is selected)
                 CreatedAt = a4.CreatedAt,
                 CreatedBy = a4.CreatedBy,
                 ModifiedBy = a4.ModifiedBy,

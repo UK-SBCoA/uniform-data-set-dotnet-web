@@ -37,6 +37,12 @@ namespace UDS.Net.Services.DomainModels.Forms
                 var a4DDto = (A4DDto)dto;
 
                 this.DRUGID = a4DDto.DRUGID;
+                this.Id = a4DDto.Id;
+                this.CreatedAt = a4DDto.CreatedAt;
+                this.CreatedBy = a4DDto.CreatedBy;
+                this.ModifiedBy = a4DDto.ModifiedBy;
+                this.DeletedBy = a4DDto.DeletedBy;
+                this.IsDeleted = a4DDto.IsDeleted;
             }
         }
     }

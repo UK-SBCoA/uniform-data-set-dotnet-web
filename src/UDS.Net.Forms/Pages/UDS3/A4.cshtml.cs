@@ -108,9 +108,40 @@ namespace UDS.Net.Forms.Pages.UDS3
                 A4 = (A4)_formModel; // class library should always handle new instances
             }
 
-            await PopulateDrugCodeLists(A4.DrugIds);
+            await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
             return Page();
+        }
+
+        private void AssessDrugId(DrugCodeModel? vm)
+        {
+            if (vm != null)
+            {
+                if (vm.Id > 0 || vm.IsSelected) // if it is persisted from a previous interaction or new
+                {
+                    if (vm.Id == null) // it's new
+                    {
+                        vm.CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
+                        vm.CreatedAt = DateTime.Now;
+                    }
+                    else if (vm.Id > 0)
+                    {
+                        if (vm.IsSelected)
+                        {
+                            vm.IsDeleted = false; // checked = new or re-checked (update)
+                            vm.DeletedBy = null;
+                            vm.ModifiedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
+
+                        }
+                        else
+                        {
+                            vm.DeletedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
+                            vm.IsDeleted = true; // unchecked (soft delete)
+                        }
+                    }
+                    A4.DrugIds.Add(vm);
+                }
+            }
         }
 
         [ValidateAntiForgeryToken]
@@ -125,8 +156,19 @@ namespace UDS.Net.Forms.Pages.UDS3
                 ModelState.AddModelError($"A4.{memberName}", result.ErrorMessage);
             }
 
-            // TODO Update drug ids
-
+            // Reassemble the model's A4D state based on the bound properties
+            foreach (var p in PopularDrugCodes)
+            {
+                AssessDrugId(p);
+            }
+            foreach (var o in OTCDrugCodes)
+            {
+                AssessDrugId(o);
+            }
+            foreach (var c in CustomDrugCodes)
+            {
+                AssessDrugId(c);
+            }
 
             if (ModelState.IsValid)
             {
