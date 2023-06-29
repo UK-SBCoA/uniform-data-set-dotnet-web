@@ -1,0 +1,28 @@
+name: Build and push to ACR
+
+on:
+  push:
+    branches: ['release']
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+        steps:
+        - name: 'Checkout GitHub Action'
+          uses: actions/checkout@v3
+          
+        - name: 'Login via Azure CLI'
+          uses: azure/login@v1
+          with:
+           client-id: ${{ secrets.AZURE_CLIENT_ID }}
+           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            
+        - name: Build and push image
+          id: build-image
+          run: |
+           az acr build --image ${{ secrets.REGISTRY_LOGIN_SERVER }}/uniformdatasetdotnetweb:release --registry ${{ secrets.REGISTRY_LOGIN_SERVER }} --file src/UDS.Net.Web.MVC/Dockerfile src/
