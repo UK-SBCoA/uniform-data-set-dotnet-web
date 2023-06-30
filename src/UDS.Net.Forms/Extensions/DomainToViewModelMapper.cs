@@ -506,7 +506,7 @@ namespace UDS.Net.Forms.Extensions
             return new B6()
             {
                 Id = formId,
-                NOGDS = fields.NOGDS,
+                NOGDS = fields.NOGDS.HasValue ? fields.NOGDS.Value != 0 : false, // (1 != 0) = true, (0 != 0) = false
                 SATIS = fields.SATIS,
                 DROPACT = fields.DROPACT,
                 EMPTY = fields.EMPTY,
