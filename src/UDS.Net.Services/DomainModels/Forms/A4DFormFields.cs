@@ -1,5 +1,6 @@
 ﻿using System;
 using UDS.Net.Dto;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -8,6 +9,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int Id { get; set; }
 
         public string DRUGID { get; set; }
+
+        public DrugCode? DrugCode { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -43,6 +46,18 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ModifiedBy = a4DDto.ModifiedBy;
                 this.DeletedBy = a4DDto.DeletedBy;
                 this.IsDeleted = a4DDto.IsDeleted;
+
+                if (a4DDto.DrugCodeLookup != null)
+                {
+                    this.DrugCode = new DrugCode
+                    {
+                        DrugId = a4DDto.DrugCodeLookup.DrugId,
+                        DrugName = a4DDto.DrugCodeLookup.DrugName,
+                        BrandName = a4DDto.DrugCodeLookup.BrandName,
+                        IsOverTheCounter = a4DDto.DrugCodeLookup.IsOverTheCounter,
+                        IsPopular = a4DDto.DrugCodeLookup.IsPopular
+                    };
+                }
             }
         }
     }

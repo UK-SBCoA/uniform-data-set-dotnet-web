@@ -100,7 +100,7 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", entity, _formKind);
 
-            return Page();
+            return Redirect($"/{entity.Version}/{form.Kind}?Id={entity.Id}&VisitKind={entity.Kind}");
         }
     }
 }

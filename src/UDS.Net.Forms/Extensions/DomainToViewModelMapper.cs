@@ -319,7 +319,11 @@ namespace UDS.Net.Forms.Extensions
                     ModifiedBy = d.ModifiedBy,
                     DeletedBy = d.DeletedBy,
                     IsDeleted = d.IsDeleted,
-                    IsSelected = !d.IsDeleted
+                    IsSelected = !d.IsDeleted,
+                    DrugName = d.DrugCode != null ? d.DrugCode.DrugName : "",
+                    BrandName = d.DrugCode != null ? d.DrugCode.BrandName : "",
+                    IsOverTheCounter = d.DrugCode != null ? d.DrugCode.IsOverTheCounter : false,
+                    IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false
                 }).ToList()
             };
         }
