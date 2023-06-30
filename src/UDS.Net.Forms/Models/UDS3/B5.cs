@@ -16,15 +16,15 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(NPIQINF), "3", ErrorMessage = "Specify other co-participant")]
-        [RegularExpression(@"^[^'&%""]*$", ErrorMessage = "Single qoutes ('), double quotes (\"), ampersands (&) and percentage signs (%) are not allowed")]
+        [RegularExpression(@"^[^'&%""]*$", ErrorMessage = "Single quotes ('), double quotes (\"), ampersands (&) and percentage signs (%) are not allowed")]
         public string? NPIQINFX { get; set; }
 
-        [Display(Name = "Delusions - Does the participant have false beliefs, such as thinking that others are stealing from him/her or planning to harm him/her in some way?")]
+        [Display(Name = "Delusions - Does the patient have false beliefs, such as thinking that others are stealing from him/her or planning to harm him/her in some way?")]
         public int? DEL { get; set; }
 
         public int? DELSEV { get; set; }
 
-        [Display(Name = "Hallucinations - Does the participant have hallucinations such as false visions or voices? Does he or she seem to hear or see things that are not present?")]
+        [Display(Name = "Hallucinations - Does the patient have hallucinations such as false visions or voices? Does he or she seem to hear or see things that are not present?")]
         public int? HALL { get; set; }
 
         public int? HALLSEV { get; set; }
@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public int? DISNSEV { get; set; }
 
-        [Display(Name = "Irritability/Lability - Is the paitent impatient and cranky? Does he/she have difficulty coping with delays or waiting for planned activities?")]
+        [Display(Name = "Irritability/Lability - Is the patient impatient and cranky? Does he/she have difficulty coping with delays or waiting for planned activities?")]
         public int? IRR { get; set; }
 
         public int? IRRSEV { get; set; }
