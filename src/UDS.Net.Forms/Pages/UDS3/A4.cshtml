@@ -14,6 +14,30 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
+        @if (Model.DrugCodeLookup != null)
+        {
+            foreach (var code in Model.DrugCodeLookup.DrugCodes)
+            {
+                var displayName = code.DrugName;
+                if (!string.IsNullOrWhiteSpace(code.BrandName))
+                {
+                    displayName += " (" + code.BrandName + ")";
+                }
+                <fieldset>
+                    <div class="space-y-5">
+                        <div class="relative flex items-start">
+                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                <input name="checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label for="checkbox" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@code.DrugId</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        }
     </div>
 </div>
 <partial name="_FormFooter" for="@Model.A4" />
