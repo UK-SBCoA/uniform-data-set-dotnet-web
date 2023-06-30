@@ -1,3 +1,4 @@
+[![GitHub Super-Linter](https://github.com/UK-SBCoA/uniform-data-set-dotnet-web/actions/workflows/super-linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 # UDS for .NET
 
 This repository includes all necessary tools to electronically collect data for UDS including
