@@ -117,7 +117,7 @@
             <div>
                 @if (Model.CustomDrugCodes != null || Model.CustomDrugCodes.Count() == 0)
                 {
-                    <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                         @for (int i = 0; i < Model.CustomDrugCodes.Count(); i++)
                         {
                             var displayName = Model.CustomDrugCodes[i].DrugName;
@@ -154,7 +154,8 @@
                 }
             </div>
             <div>
-                <p>If a medication is not listed above, find by using the form below.</p>
+                <p>If a medication is not listed above, find by using the search here.</p>
+                <a href="/Lookup/DrugCode?visitId=@Model.A4.VisitId" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Search</a>
             </div>
         </div>
     </div>

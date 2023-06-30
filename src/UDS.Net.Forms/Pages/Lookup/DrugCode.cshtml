@@ -15,9 +15,13 @@
 
 
         <div class="@rowCSS">
-            <form method="get">
-                <label for="Lookup_SearchTerm">Search</label>
-                <input asp-for="Lookup.SearchTerm" />
+            <form method="get" class="w-full max-w-md lg:col-span-5 lg:pt-2">
+
+                <div class="flex gap-x-4">
+                    <label for="SearchTerm" class="sr-only">Search by drug or brand name</label>
+                    <input asp-for="Lookup.SearchTerm" class="min-w-0 flex-auto rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Drug or brand name" />
+                    <button type="submit" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Search</button>
+                </div>
             </form>
         </div>
 
@@ -31,11 +35,24 @@
                         <input asp-for="Lookup.DrugCodes[i].DrugName" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].BrandName" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].DrugId" type="hidden" />
-                        <input asp-for="Lookup.DrugCodes[i].IsSelected" type="checkbox" />
-                        @Model.Lookup.DrugCodes[i].DrugName
+                        <fieldset>
+                            <div class="space-y-5">
+                                <div class="relative flex items-start">
+                                    <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                    <div class="flex h-6 items-center">
+                                        <input asp-for="Lookup.DrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                    </div>
+                                    <div class="ml-3 text-sm leading-6">
+                                        <label for="Lookup_DrugCodes_@(i)__IsSelected" class="font-medium text-gray-900">@Model.Lookup.DrugCodes[i].DrugName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.Lookup.DrugCodes[i].DrugId</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
                     </div>
                 }
-                <input type="submit" value="Add" />
+                <input type="submit" value="Add selected" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
             </form>
         }
 
