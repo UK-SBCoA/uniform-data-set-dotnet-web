@@ -13,82 +13,82 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DXMETHOD { get; set; }
 
         [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose MCI or dementia due to FTLD or LBD)?")]
-        public int? NORMCOG { get; set; }
+        public bool? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
-        public int? DEMENTED { get; set; }
+        public bool? DEMENTED { get; set; }
 
         [Display(Name = "Amnestic multidomain dementia syndrome")]
-        public int? AMNDEM { get; set; }
+        public bool? AMNDEM { get; set; }
 
         [Display(Name = "Posterior cortical atrophy syndrome (or primary visual presentation)")]
-        public int? PCA { get; set; }
+        public bool? PCA { get; set; }
 
         [Display(Name = "Primary progressive aphasia (PPA) syndrome")]
-        public int? PPASYN { get; set; }
+        public bool? PPASYN { get; set; }
 
         [Display(Name = "Please indicate PPA type")]
         public int? PPASYNT { get; set; }
 
         [Display(Name = "Behavioral variant FTD (bvFTD) syndrome")]
-        public int? FTDSYN { get; set; }
+        public bool? FTDSYN { get; set; }
 
         [Display(Name = "Lewy body dementia syndrome")]
-        public int? LBDSYN { get; set; }
+        public bool? LBDSYN { get; set; }
 
         [Display(Name = "Non-amnestic multidomain dementia, not PCA, PPA, bvFTD, or DLB syndrome")]
-        public int? NAMNDEM { get; set; }
+        public bool? NAMNDEM { get; set; }
 
         [Display(Name = "Amnestic MCI, single domain (aMCI SD)")]
-        public int? MCIAMEM { get; set; }
+        public bool? MCIAMEM { get; set; }
 
         [Display(Name = "Amnestic MCI, multiple domains (aMCI MD)")]
-        public int? MCIAPLUS { get; set; }
+        public bool? MCIAPLUS { get; set; }
 
         [Display(Name = "Language")]
-        public int? MCIAPLAN { get; set; }
+        public bool? MCIAPLAN { get; set; }
 
         [Display(Name = "Attention")]
-        public int? MCIAPATT { get; set; }
+        public bool? MCIAPATT { get; set; }
 
         [Display(Name = "Executive")]
-        public int? MCIAPEX { get; set; }
+        public bool? MCIAPEX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public int? MCIAPVIS { get; set; }
+        public bool? MCIAPVIS { get; set; }
 
         [Display(Name = "Non-amnestic MCI, single domain (naMCI SD)")]
-        public int? MCINON1 { get; set; }
+        public bool? MCINON1 { get; set; }
 
         [Display(Name = "Language")]
-        public int? MCIN1LAN { get; set; }
+        public bool? MCIN1LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public int? MCIN1ATT { get; set; }
+        public bool? MCIN1ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public int? MCIN1EX { get; set; }
+        public bool? MCIN1EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public int? MCIN1VIS { get; set; }
+        public bool? MCIN1VIS { get; set; }
 
         [Display(Name = "Non-amnestic MCI, multiple domains (naMCI MD)")]
-        public int? MCINON2 { get; set; }
+        public bool? MCINON2 { get; set; }
 
         [Display(Name = "Language")]
-        public int? MCIN2LAN { get; set; }
+        public bool? MCIN2LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public int? MCIN2ATT { get; set; }
+        public bool? MCIN2ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public int? MCIN2EX { get; set; }
+        public bool? MCIN2EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public int? MCIN2VIS { get; set; }
+        public bool? MCIN2VIS { get; set; }
 
         [Display(Name = "IMPNOMCI")]
-        public int? IMPNOMCI { get; set; }
+        public bool? IMPNOMCI { get; set; }
 
         [Display(Name = "AMYLPET")]
         public int? AMYLPET { get; set; }
@@ -121,7 +121,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DATSCAN { get; set; }
 
         [Display(Name = "Other (specify)")]
-        public int? OTHBIOM { get; set; }
+        public bool? OTHBIOM { get; set; }
 
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
@@ -159,46 +159,46 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? OTHMUTX { get; set; }
 
         [Display(Name = "Alzheimer's disease")]
-        public int? ALZDIS { get; set; }
+        public bool? ALZDIS { get; set; }
 
         [Display(Name = "")]
         public int? ALZDISIF { get; set; }
 
         [Display(Name = "Lewy body disease")]
-        public int? LBDIS { get; set; }
+        public bool? LBDIS { get; set; }
 
         [Display(Name = "")]
         public int? LBDIF { get; set; }
 
         [Display(Name = "Parkinson's disease")]
-        public int? PARK { get; set; }
+        public bool? PARK { get; set; }
 
         [Display(Name = "Multiple system atrophy")]
-        public int? MSA { get; set; }
+        public bool? MSA { get; set; }
 
         [Display(Name = "")]
         public int? MSAIF { get; set; }
 
         [Display(Name = "Progressive supranuclear palsy (PSP)")]
-        public int? PSP { get; set; }
+        public bool? PSP { get; set; }
 
         [Display(Name = "")]
         public int? PSPIF { get; set; }
 
         [Display(Name = "Corticobasal degeneration (CBD)")]
-        public int? CORT { get; set; }
+        public bool? CORT { get; set; }
 
         [Display(Name = "")]
         public int? CORTIF { get; set; }
 
         [Display(Name = "FTLD with motor neuron disease")]
-        public int? FTLDMO { get; set; }
+        public bool? FTLDMO { get; set; }
 
         [Display(Name = "")]
         public int? FTLDMOIF { get; set; }
 
         [Display(Name = "FTLD NOS")]
-        public int? FTLDNOS { get; set; }
+        public bool? FTLDNOS { get; set; }
 
         [Display(Name = "")]
         public int? FTLDNOIF { get; set; }
@@ -211,16 +211,16 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? FTLDSUBX { get; set; }
 
         [Display(Name = "Vascular brain injury (based on clinical or imaging evidence)")]
-        public int? CVD { get; set; }
+        public bool? CVD { get; set; }
 
         [Display(Name = "")]
         public int? CVDIF { get; set; }
 
         [Display(Name = "Previous symptomatic stroke?")]
-        public int? PREVSTK { get; set; }
+        public bool? PREVSTK { get; set; }
 
         [Display(Name = "Temporal relationship between stroke and cognitive decline?")]
-        public int? STROKDEC { get; set; }
+        public bool? STROKDEC { get; set; }
 
         [Display(Name = "Confirmation of stroke by neuroimaging?")]
         public int? STKIMAG { get; set; }
@@ -232,31 +232,31 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? INFWMH { get; set; }
 
         [Display(Name = "Essential tremor")]
-        public int? ESSTREM { get; set; }
+        public bool? ESSTREM { get; set; }
 
         [Display(Name = "")]
         public int? ESSTREIF { get; set; }
 
         [Display(Name = "Down syndrome")]
-        public int? DOWNS { get; set; }
+        public bool? DOWNS { get; set; }
 
         [Display(Name = "")]
         public int? DOWNSIF { get; set; }
 
         [Display(Name = "Huntington's disease")]
-        public int? HUNT { get; set; }
+        public bool? HUNT { get; set; }
 
         [Display(Name = "")]
         public int? HUNTIF { get; set; }
 
         [Display(Name = "Prion disease (CJD, other)")]
-        public int? PRION { get; set; }
+        public bool? PRION { get; set; }
 
         [Display(Name = "")]
         public int? PRIONIF { get; set; }
 
         [Display(Name = "Traumatic brain injury")]
-        public int? BRNINJ { get; set; }
+        public bool? BRNINJ { get; set; }
 
         [Display(Name = "")]
         public int? BRNINJIF { get; set; }
@@ -265,19 +265,19 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? BRNINCTE { get; set; }
 
         [Display(Name = "Normal-pressure hydrocephalus")]
-        public int? HYCEPH { get; set; }
+        public bool? HYCEPH { get; set; }
 
         [Display(Name = "")]
         public int? HYCEPHIF { get; set; }
 
         [Display(Name = "Epilepsy")]
-        public int? EPILEP { get; set; }
+        public bool? EPILEP { get; set; }
 
         [Display(Name = "")]
         public int? EPILEPIF { get; set; }
 
         [Display(Name = "CNS neoplasm")]
-        public int? NEOP { get; set; }
+        public bool? NEOP { get; set; }
 
         [Display(Name = "")]
         public int? NEOPIF { get; set; }
@@ -286,7 +286,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? NEOPSTAT { get; set; }
 
         [Display(Name = "Human immunodeficiency virus (HIV)")]
-        public int? HIV { get; set; }
+        public bool? HIV { get; set; }
 
         [Display(Name = "")]
         public int? HIVIF { get; set; }
@@ -302,46 +302,46 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? OTHCOGX { get; set; }
 
         [Display(Name = "Active depression")]
-        public int? DEP { get; set; }
+        public bool? DEP { get; set; }
 
         [Display(Name = "")]
         public int? DEPIF { get; set; }
 
         [Display(Name = "If Present, select one")]
-        public int? DEPTREAT { get; set; }
+        public bool? DEPTREAT { get; set; }
 
         [Display(Name = "Bipolar disorder")]
-        public int? BIPOLDX { get; set; }
+        public bool? BIPOLDX { get; set; }
 
         [Display(Name = "")]
         public int? BIPOLDIF { get; set; }
 
         [Display(Name = "Schizophrenia or other psychosis")]
-        public int? SCHIZOP { get; set; }
+        public bool? SCHIZOP { get; set; }
 
         [Display(Name = "")]
         public int? SCHIZOIF { get; set; }
 
         [Display(Name = "Anxiety disorder")]
-        public int? ANXIET { get; set; }
+        public bool? ANXIET { get; set; }
 
         [Display(Name = "")]
         public int? ANXIETIF { get; set; }
 
         [Display(Name = "Delirium")]
-        public int? DELIR { get; set; }
+        public bool? DELIR { get; set; }
 
         [Display(Name = "")]
         public int? DELIRIF { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
-        public int? PTSDDX { get; set; }
+        public bool? PTSDDX { get; set; }
 
         [Display(Name = "")]
         public int? PTSDDXIF { get; set; }
 
         [Display(Name = "Other psychiatric disease")]
-        public int? OTHPSY { get; set; }
+        public bool? OTHPSY { get; set; }
 
         [Display(Name = "")]
         public int? OTHPSYIF { get; set; }
@@ -351,7 +351,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? OTHPSYX { get; set; }
 
         [Display(Name = "Cognitive impairment due to alcohol abuse")]
-        public int? ALCDEM { get; set; }
+        public bool? ALCDEM { get; set; }
 
         [Display(Name = "")]
         public int? ALCDEMIF { get; set; }
@@ -360,25 +360,25 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ALCABUSE { get; set; }
 
         [Display(Name = "Cognitive impairment due to other substance abuse")]
-        public int? IMPSUB { get; set; }
+        public bool? IMPSUB { get; set; }
 
         [Display(Name = "")]
         public int? IMPSUBIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to systemic disease/medical illness (as indicated on Form D2)")]
-        public int? DYSILL { get; set; }
+        public bool? DYSILL { get; set; }
 
         [Display(Name = "")]
         public int? DYSILLIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications")]
-        public int? MEDS { get; set; }
+        public bool? MEDS { get; set; }
 
         [Display(Name = "")]
         public int? MEDSIF { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
-        public int? COGOTH { get; set; }
+        public bool? COGOTH { get; set; }
 
         [Display(Name = "")]
         public int? COGOTHIF { get; set; }
@@ -388,7 +388,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? COGOTHX { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
-        public int? COGOTH2 { get; set; }
+        public bool? COGOTH2 { get; set; }
 
         [Display(Name = "")]
         public int? COGOTH2F { get; set; }
@@ -398,7 +398,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? COGOTH2X { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
-        public int? COGOTH3 { get; set; }
+        public bool? COGOTH3 { get; set; }
 
         [Display(Name = "")]
         public int? COGOTH3F { get; set; }
