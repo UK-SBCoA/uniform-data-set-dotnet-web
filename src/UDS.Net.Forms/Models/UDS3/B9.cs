@@ -20,35 +20,35 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
         public int? DECCLCOG { get; set; }
 
-        [Display(Name = "For example, does s/he forget conversations and/or dates, repeat questions and/or statements, misplace things more than usual, forget names of people s/he knows well?")]
+        [Display(Name = "MEMORY For example, does s/he forget conversations and/or dates, repeat questions and/or statements, misplace things more than usual, forget names of people s/he knows well?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGMEM { get; set; }
 
-        [Display(Name = "For example, does s/he have trouble knowing the day, month, and year, or not recognize familiar locations, or get lost in familiar locations?")]
+        [Display(Name = "ORIENTATION For example, does s/he have trouble knowing the day, month, and year, or not recognize familiar locations, or get lost in familiar locations?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGORI { get; set; }
 
-        [Display(Name = "Does s/he have trouble handling money (e.g., tips), paying bills, preparing meals, shopping, using appliances, handling medications, driving?")]
+        [Display(Name = "EXECUTIVE FUNCTION - JUDGMENT, PLANNING, PROBLEM-SOLVING Does s/he have trouble handling money (e.g., tips), paying bills, preparing meals, shopping, using appliances, handling medications, driving?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGJUDG { get; set; }
 
-        [Display(Name = "Does s/he have hesitant speech, have trouble finding words, use inappropriate words without self-correction?")]
+        [Display(Name = "LANGUAGE Does s/he have hesitant speech, have trouble finding words, use inappropriate words without self-correction?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGLANG { get; set; }
 
-        [Display(Name = "Does s/he have difficulty interpreting visual stimuli and finding his/her way around?")]
+        [Display(Name = "VISUOSPATIAL FUNCTION Does s/he have difficulty interpreting visual stimuli and finding his/her way around?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGVIS { get; set; }
 
-        [Display(Name = "Does the participant have a short attention span or limited ability to concentrate? Is s/he easily distracted?")]
+        [Display(Name = "ATTENTION, CONCENTRATION Does the participant have a short attention span or limited ability to concentrate? Is s/he easily distracted?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGATTN { get; set; }
 
-        [Display(Name = "Does the participant exhibit pronounced variation in attention and alertness, noticeably over hours or days — for example, long lapses or periods of staring into space, or times when his/her ideas have a disorganized flow?")]
+        [Display(Name = "FLUCTUATING COGNITION Does the participant exhibit pronounced variation in attention and alertness, noticeably over hours or days — for example, long lapses or periods of staring into space, or times when his/her ideas have a disorganized flow?")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGFLUC { get; set; }
 
-        [Display(Name = "If yes, at what age did the fluctuating cognition begin?")]
+        [Display(Name = "If yes, at what age did the fluctuating cognition begin? (The clinician must use his/her best judgment to estimate an age of onset.)")]
         [RequiredIf(nameof(COGFLUC), "1", ErrorMessage = "Specify age")]
         [Range(15, 110)]
         public int? COGFLAGO { get; set; }
@@ -92,11 +92,11 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Based on clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
         public int? DECCLBE { get; set; }
 
-        [Display(Name = "Has the participant lost interest in or displayed a reduced ability to initiate usual activities and social interaction, such as conversing with family and/or friends?")]
+        [Display(Name = "APATHY, WITHDRAWAL Has the participant lost interest in or displayed a reduced ability to initiate usual activities and social interaction, such as conversing with family and/or friends?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEAPATHY { get; set; }
 
-        [Display(Name = "Has the participant seemed depressed for more than two weeks at a time, e.g., shown loss of interest or pleasure in nearly all activities, sadness, hopelessness, loss of appetite, fatigue?")]
+        [Display(Name = "DEPRESSED MOOD Has the participant seemed depressed for more than two weeks at a time, e.g., shown loss of interest or pleasure in nearly all activities, sadness, hopelessness, loss of appetite, fatigue?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEDEP { get; set; }
 
@@ -121,23 +121,23 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEDEL { get; set; }
 
-        [Display(Name = "Does the participant use inappropriate coarse language or exhibit inappropriate speech or behaviors in public or in the home? Does s/he talk personally to strangers or have disregard for personal hygiene?")]
+        [Display(Name = "DISINHIBITION Does the participant use inappropriate coarse language or exhibit inappropriate speech or behaviors in public or in the home? Does s/he talk personally to strangers or have disregard for personal hygiene?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEDISIN { get; set; }
 
-        [Display(Name = "Does the participant overreact, e.g., by shouting at family members or others?")]
+        [Display(Name = "IRRITABILITY Does the participant overreact, e.g., by shouting at family members or others?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEIRRIT { get; set; }
 
-        [Display(Name = "Does the participant have trouble sitting still? Does s/he shout, hit, and/or kick?")]
+        [Display(Name = "AGITATION Does the participant have trouble sitting still? Does s/he shout, hit, and/or kick?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEAGIT { get; set; }
 
-        [Display(Name = "Does the participant exhibit bizarre behavior 3 or behavior uncharacteristic of the participant, such as unusual collecting, suspiciousness (without delusions), unusual dress, or dietary changes? Does the participant fail to take others’ feelings into account?")]
+        [Display(Name = "PERSONALITY CHANGE Does the participant exhibit bizarre behavior 3 or behavior uncharacteristic of the participant, such as unusual collecting, suspiciousness (without delusions), unusual dress, or dietary changes? Does the participant fail to take others’ feelings into account?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEPERCH { get; set; }
 
-        [Display(Name = "While sleeping, does the participant appear to act out his/her dreams (e.g., punch or flail their arms, shout, or scream)?")]
+        [Display(Name = "REM SLEEP BEHAVIOR DISORDER While sleeping, does the participant appear to act out his/her dreams (e.g., punch or flail their arms, shout, or scream)?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEREM { get; set; }
 
@@ -146,7 +146,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(15, 110)]
         public int? BEREMAGO { get; set; }
 
-        [Display(Name = "For example, does s/he show signs of nervousness (e.g., frequent sighing, anxious facial expressions, or hand-wringing) and/or excessive worrying?")]
+        [Display(Name = "ANXIETY For example, does s/he show signs of nervousness (e.g., frequent sighing, anxious facial expressions, or hand-wringing) and/or excessive worrying?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
         public int? BEANX { get; set; }
 
@@ -188,19 +188,19 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Based on the clinician's judgment, is the participant currently experiencing any motor symptoms?")]
         public int? DECCLMOT { get; set; }
 
-        [Display(Name = "Has the participant's walking changed, not specifically due to arthritis or an injury? Is s/he unsteady, or does s/he shuffle when walking, have little or no arm-swing, or drag a foot?")]
+        [Display(Name = "GAIT DISORDER Has the participant's walking changed, not specifically due to arthritis or an injury? Is s/he unsteady, or does s/he shuffle when walking, have little or no arm-swing, or drag a foot?")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOGAIT { get; set; }
 
-        [Display(Name = "Does the participant fall more than usual?")]
+        [Display(Name = "FALLS Does the participant fall more than usual?")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOFALLS { get; set; }
 
-        [Display(Name = "Has the participant had rhythmic shaking, especially in the hands, arms, legs, head, mouth, or tongue?")]
+        [Display(Name = "TREMOR Has the participant had rhythmic shaking, especially in the hands, arms, legs, head, mouth, or tongue?")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOTREM { get; set; }
 
-        [Display(Name = "Has the participant noticeably slowed down in walking, moving, or writing by hand, other than due to an injury or illness? Has his/her facial expression changed or become more \"wooden,\" or masked and unexpressive?")]
+        [Display(Name = "SLOWNESS Has the participant noticeably slowed down in walking, moving, or writing by hand, other than due to an injury or illness? Has his/her facial expression changed or become more \"wooden,\" or masked and unexpressive?")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOSLOW { get; set; }
 
