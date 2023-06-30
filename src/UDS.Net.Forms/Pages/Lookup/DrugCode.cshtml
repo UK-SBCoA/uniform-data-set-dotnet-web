@@ -1,0 +1,43 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Lookup.DrugCodeModel
+@{
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<main class="lg:col-span-9 px-5 py-6">
+    <div>
+        <h2 class="text-lg font-medium leading-6 text-gray-900">Drug Code Lookup</h2>
+        <p class="mt-1 text-sm text-gray-500">
+            INSTRUCTIONS: Search for drug by name or brand name.
+        </p>
+    </div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+
+        <div class="@rowCSS">
+            <form method="get">
+                <label for="Lookup_SearchTerm">Search</label>
+                <input asp-for="Lookup.SearchTerm" />
+            </form>
+        </div>
+
+        @if (Model.Lookup.DrugCodes != null)
+        {
+            <form method="post">
+                @for (int i = 0; i < Model.Lookup.DrugCodes.Count(); i++)
+                {
+                    <div class="@rowCSS">
+                        <input asp-for="Lookup.DrugCodes[i].Id" type="hidden" />
+                        <input asp-for="Lookup.DrugCodes[i].DrugName" type="hidden" />
+                        <input asp-for="Lookup.DrugCodes[i].BrandName" type="hidden" />
+                        <input asp-for="Lookup.DrugCodes[i].DrugId" type="hidden" />
+                        <input asp-for="Lookup.DrugCodes[i].IsSelected" type="checkbox" />
+                        @Model.Lookup.DrugCodes[i].DrugName
+                    </div>
+                }
+                <input type="submit" value="Add" />
+            </form>
+        }
+
+    </div>
+</main>

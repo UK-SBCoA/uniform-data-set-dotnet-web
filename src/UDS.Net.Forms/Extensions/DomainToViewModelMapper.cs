@@ -318,7 +318,8 @@ namespace UDS.Net.Forms.Extensions
                     CreatedBy = d.CreatedBy,
                     ModifiedBy = d.ModifiedBy,
                     DeletedBy = d.DeletedBy,
-                    IsDeleted = d.IsDeleted
+                    IsDeleted = d.IsDeleted,
+                    IsSelected = !d.IsDeleted
                 }).ToList()
             };
         }
