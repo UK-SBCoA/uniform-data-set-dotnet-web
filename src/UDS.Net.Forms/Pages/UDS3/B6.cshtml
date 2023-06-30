@@ -14,13 +14,19 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B6.NOGDS"> @Html.DisplayNameFor(m => m.B6.NOGDS)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B6.NOGDS"></p>
-                <input asp-for="@Model.B6.NOGDS" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDS"></span>
-            </div>
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+            <fieldset class="subsubcounterreset">
+                <div class="space-y-5">
+                    <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("B6.NOGDS", Model.B6.NOGDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="B6.NOGDS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B6.NOGDS)</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
 
         <table class="table-auto min-w-full divide-y divide-gray-300">

@@ -463,7 +463,7 @@ namespace UDS.Net.Forms.Extensions
             return new B6()
             {
                 Id = formId,
-                NOGDS = fields.NOGDS,
+                NOGDS = fields.NOGDS.HasValue ? fields.NOGDS.Value != 0 : false, // (1 != 0) = true, (0 != 0) = false
                 SATIS = fields.SATIS,
                 DROPACT = fields.DROPACT,
                 EMPTY = fields.EMPTY,
@@ -906,10 +906,10 @@ namespace UDS.Net.Forms.Extensions
                 ARTH = fields.ARTH,
                 ARTYPE = fields.ARTYPE,
                 ARTYPEX = fields.ARTYPEX,
-                ARTUPEX = fields.ARTUPEX,
-                ARTLOEX = fields.ARTLOEX,
-                ARTSPIN = fields.ARTSPIN,
-                ARTUNKN = fields.ARTUNKN,
+                ARTUPEX = fields.ARTUPEX.HasValue ? fields.ARTUPEX.Value != 0 : false,
+                ARTLOEX = fields.ARTLOEX.HasValue ? fields.ARTLOEX.Value != 0 : false,
+                ARTSPIN = fields.ARTSPIN.HasValue ? fields.ARTSPIN.Value != 0 : false,
+                ARTUNKN = fields.ARTUNKN.HasValue ? fields.ARTUNKN.Value != 0 : false,
                 URINEINC = fields.URINEINC,
                 BOWLINC = fields.BOWLINC,
                 SLEEPAP = fields.SLEEPAP,
