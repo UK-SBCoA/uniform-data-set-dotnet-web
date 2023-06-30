@@ -1,7 +1,11 @@
 {
   "iisSettings": {
     "windowsAuthentication": false,
-    "anonymousAuthentication": true
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:52800/",
+      "sslPort": 44335
+    }
   },
   "profiles": {
     "UDS.Net.Web.MVC": {

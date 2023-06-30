@@ -59,16 +59,16 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? ARTYPEX { get; set; }
 
         [Display(Name = "Upper extremity")]
-        public int? ARTUPEX { get; set; }
+        public bool ARTUPEX { get; set; }
 
         [Display(Name = "Lower extremity")]
-        public int? ARTLOEX { get; set; }
+        public bool ARTLOEX { get; set; }
 
         [Display(Name = "Spine")]
-        public int? ARTSPIN { get; set; }
+        public bool ARTSPIN { get; set; }
 
         [Display(Name = "Unknown")]
-        public int? ARTUNKN { get; set; }
+        public bool ARTUNKN { get; set; }
 
         [Display(Name = "Incontinence — urinary")]
         public int? URINEINC { get; set; }
