@@ -364,7 +364,7 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B6FormFields
             {
-                NOGDS = vm.NOGDS,
+                NOGDS = vm.NOGDS ? 1 : 0,
                 SATIS = vm.SATIS,
                 DROPACT = vm.DROPACT,
                 EMPTY = vm.EMPTY,
@@ -815,10 +815,10 @@ namespace UDS.Net.Forms.Extensions
                 ARTH = vm.ARTH,
                 ARTYPE = vm.ARTYPE,
                 ARTYPEX = vm.ARTYPEX,
-                ARTUPEX = vm.ARTUPEX,
-                ARTLOEX = vm.ARTLOEX,
-                ARTSPIN = vm.ARTSPIN,
-                ARTUNKN = vm.ARTUNKN,
+                ARTUPEX = vm.ARTUPEX ? 1 : 0,
+                ARTLOEX = vm.ARTLOEX ? 1 : 0,
+                ARTSPIN = vm.ARTSPIN ? 1 : 0,
+                ARTUNKN = vm.ARTUNKN ? 1 : 0,
                 URINEINC = vm.URINEINC,
                 BOWLINC = vm.BOWLINC,
                 SLEEPAP = vm.SLEEPAP,
