@@ -16,27 +16,35 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
+        [RequiredIf(nameof(NORMCOG), false, ErrorMessage = "Please indicate dementia status.")]
         public bool? DEMENTED { get; set; }
 
         [Display(Name = "Amnestic multidomain dementia syndrome")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? AMNDEM { get; set; }
 
         [Display(Name = "Posterior cortical atrophy syndrome (or primary visual presentation)")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? PCA { get; set; }
 
-        [Display(Name = "Primary progressive aphasia (PPA) syndrome")]
+        [Display(Name = "If PPA present")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? PPASYN { get; set; }
 
         [Display(Name = "Please indicate PPA type")]
+        [RequiredIf(nameof(PPASYN), true, ErrorMessage = "Please indicate PPA type.")]
         public int? PPASYNT { get; set; }
 
         [Display(Name = "Behavioral variant FTD (bvFTD) syndrome")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? FTDSYN { get; set; }
 
         [Display(Name = "Lewy body dementia syndrome")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? LBDSYN { get; set; }
 
         [Display(Name = "Non-amnestic multidomain dementia, not PCA, PPA, bvFTD, or DLB syndrome")]
+        [RequiredIf(nameof(DEMENTED), true, ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         public bool? NAMNDEM { get; set; }
 
         [Display(Name = "Amnestic MCI, single domain (aMCI SD)")]
@@ -87,10 +95,10 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Visuospatial")]
         public bool? MCIN2VIS { get; set; }
 
-        [Display(Name = "IMPNOMCI")]
+        [Display(Name = "Cognitively impaired, not MCI")]
         public bool? IMPNOMCI { get; set; }
 
-        [Display(Name = "AMYLPET")]
+        [Display(Name = "Abnormally elevated amyloid on PET")]
         public int? AMYLPET { get; set; }
 
         [Display(Name = "Abnormally low amyloid in CSF")]
@@ -161,13 +169,13 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Alzheimer's disease")]
         public bool? ALZDIS { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Alzheimer’s disease, primary or contributing")]
         public int? ALZDISIF { get; set; }
 
         [Display(Name = "Lewy body disease")]
         public bool? LBDIS { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Lewy body disease, primary or contributing")]
         public int? LBDIF { get; set; }
 
         [Display(Name = "Parkinson's disease")]
@@ -176,31 +184,31 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Multiple system atrophy")]
         public bool? MSA { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Multiple system atrophy nprimary or contributing")]
         public int? MSAIF { get; set; }
 
         [Display(Name = "Progressive supranuclear palsy (PSP)")]
         public bool? PSP { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Progressive supranuclear palsy (PSP), primary or contributing")]
         public int? PSPIF { get; set; }
 
         [Display(Name = "Corticobasal degeneration (CBD)")]
         public bool? CORT { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Corticobasal degeneration (CBD), primary or contributing")]
         public int? CORTIF { get; set; }
 
         [Display(Name = "FTLD with motor neuron disease")]
         public bool? FTLDMO { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "FTLD with motor neuron disease, primary or contributing")]
         public int? FTLDMOIF { get; set; }
 
         [Display(Name = "FTLD NOS")]
         public bool? FTLDNOS { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "FTLD NOS, primary or contributing")]
         public int? FTLDNOIF { get; set; }
 
         [Display(Name = "If FTLD (Questions 14a – 14d) is Present, specify FTLD subtype")]
@@ -213,7 +221,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Vascular brain injury (based on clinical or imaging evidence)")]
         public bool? CVD { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Vascular brain injury, primary or contributing")]
         public int? CVDIF { get; set; }
 
         [Display(Name = "Previous symptomatic stroke?")]
@@ -234,13 +242,13 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Essential tremor")]
         public bool? ESSTREM { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Essential tremor, primary or contributing")]
         public int? ESSTREIF { get; set; }
 
         [Display(Name = "Down syndrome")]
         public bool? DOWNS { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Down syndrome, primary or contributing")]
         public int? DOWNSIF { get; set; }
 
         [Display(Name = "Huntington's disease")]
@@ -252,13 +260,13 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Prion disease (CJD, other)")]
         public bool? PRION { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Huntington’s disease, primary or contributing")]
         public int? PRIONIF { get; set; }
 
         [Display(Name = "Traumatic brain injury")]
         public bool? BRNINJ { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Traumatic brain injury, primary or contributing")]
         public int? BRNINJIF { get; set; }
 
         [Display(Name = "If Present, does the subject have symptoms consistent with chronic traumatic encephalopathy?")]
@@ -267,34 +275,34 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Normal-pressure hydrocephalus")]
         public bool? HYCEPH { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Normal-pressure hydrocephalus, primary or contributing")]
         public int? HYCEPHIF { get; set; }
 
         [Display(Name = "Epilepsy")]
         public bool? EPILEP { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Epilepsy, primary or contributing")]
         public int? EPILEPIF { get; set; }
 
         [Display(Name = "CNS neoplasm")]
         public bool? NEOP { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "CNS neoplasm, primary or contributing")]
         public int? NEOPIF { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "CNS neoplasm, benign or malignant?")]
         public int? NEOPSTAT { get; set; }
 
         [Display(Name = "Human immunodeficiency virus (HIV)")]
         public bool? HIV { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Human immunodeficiency virus (HIV), primary or contributing")]
         public int? HIVIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above")]
         public int? OTHCOG { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above, primary or contributing")]
         public int? OTHCOGIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -304,7 +312,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Active depression")]
         public bool? DEP { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Active depression, primary or contributing")]
         public int? DEPIF { get; set; }
 
         [Display(Name = "If Present, select one")]
@@ -313,37 +321,37 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Bipolar disorder")]
         public bool? BIPOLDX { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Bipolar disorder, primary or contributing")]
         public int? BIPOLDIF { get; set; }
 
         [Display(Name = "Schizophrenia or other psychosis")]
         public bool? SCHIZOP { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Schizophrenia or other psychosis, primary or contributing")]
         public int? SCHIZOIF { get; set; }
 
         [Display(Name = "Anxiety disorder")]
         public bool? ANXIET { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Anxiety disorder, primary or contributing")]
         public int? ANXIETIF { get; set; }
 
         [Display(Name = "Delirium")]
         public bool? DELIR { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Delirium, primary or contributing")]
         public int? DELIRIF { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
         public bool? PTSDDX { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Post-traumatic stress disorder (PTSD), primary or contributing")]
         public int? PTSDDXIF { get; set; }
 
         [Display(Name = "Other psychiatric disease")]
         public bool? OTHPSY { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Other psychiatric disease, primary or contributing")]
         public int? OTHPSYIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -353,7 +361,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitive impairment due to alcohol abuse")]
         public bool? ALCDEM { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment due to alcohol abuse, primary or contributing")]
         public int? ALCDEMIF { get; set; }
 
         [Display(Name = "Current alcohol abuse")]
@@ -362,25 +370,25 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitive impairment due to other substance abuse")]
         public bool? IMPSUB { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment due to other substance abuse, primary or contributing")]
         public int? IMPSUBIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to systemic disease/medical illness (as indicated on Form D2)")]
         public bool? DYSILL { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment due to systemic disease/nmedical illness, primary or contributing")]
         public int? DYSILLIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications")]
         public bool? MEDS { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment due to medications, primary or contributing")]
         public int? MEDSIF { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
         public bool? COGOTH { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment NOS, primary or contributing")]
         public int? COGOTHIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -390,7 +398,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitive impairment NOS")]
         public bool? COGOTH2 { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment NOS, primary or contributing")]
         public int? COGOTH2F { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -400,7 +408,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitive impairment NOS")]
         public bool? COGOTH3 { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Cognitive impairment NOS, primary or contributing")]
         public int? COGOTH3F { get; set; }
 
         [Display(Name = "If Present, specify")]
