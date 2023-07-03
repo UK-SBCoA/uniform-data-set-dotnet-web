@@ -238,13 +238,7 @@ namespace UDS.Net.Forms.Models.UDS3
                 string errorMessage = "Value must be between 1900 and the current year of the visit date";
                 var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
 
-                if (STROKYR.HasValue && STROKYR.Value != 9999 ||
-                    HATTYEAR.HasValue && HATTYEAR.Value != 9999 ||
-                    TIAYEAR.HasValue && TIAYEAR.Value != 9999 ||
-                    PDYR.HasValue && PDYR.Value != 9999 ||
-                    PDOTHRYR.HasValue && PDOTHRYR.Value != 9999 ||
-                     TBIYEAR.HasValue && TBIYEAR.Value != 9999)
-                {
+      
                     var visitDate = visitDateEntry.Value;
 
                     if (visitDate != null)
@@ -259,6 +253,12 @@ namespace UDS.Net.Forms.Models.UDS3
                             {
                                 isValid = true;
                             }
+                            else
+                            {
+                                yield return new ValidationResult(
+                                    errorMessage,
+                                    new[] { nameof(STROKYR) });
+                            }
 
 
                             if (HATTYEAR.HasValue && HATTYEAR.Value != 9999)
@@ -268,7 +268,12 @@ namespace UDS.Net.Forms.Models.UDS3
                                 {
                                     isValid = true;
                                 }
+                                else { 
+                                yield return new ValidationResult(
+                                errorMessage,
+                                new[] { nameof(HATTYEAR) });
                             }
+                        }
 
                             if (TIAYEAR.HasValue && TIAYEAR.Value != 9999)
                             {
@@ -276,6 +281,12 @@ namespace UDS.Net.Forms.Models.UDS3
                                 if (tiaYear >= min && tiaYear <= max)
                                 {
                                     isValid = true;
+                                }
+                                else
+                                {
+                                    yield return new ValidationResult(
+                                    errorMessage,
+                                    new[] { nameof(TIAYEAR) });
                                 }
                             }
 
@@ -286,6 +297,12 @@ namespace UDS.Net.Forms.Models.UDS3
                                 {
                                     isValid = true;
                                 }
+                                else
+                                {
+                                    yield return new ValidationResult(
+                                    errorMessage,
+                                    new[] { nameof(PDYR) });
+                                }
                             }
 
                             if (PDOTHRYR.HasValue && PDOTHRYR.Value != 9999)
@@ -294,6 +311,12 @@ namespace UDS.Net.Forms.Models.UDS3
                                 if (pdOtherYear >= min && pdOtherYear <= max)
                                 {
                                     isValid = true;
+                                }
+                                else
+                                {
+                                    yield return new ValidationResult(
+                                    errorMessage,
+                                    new[] { nameof(PDOTHRYR) });
                                 }
                             }
 
@@ -304,17 +327,15 @@ namespace UDS.Net.Forms.Models.UDS3
                                 {
                                     isValid = true;
                                 }
+                                else
+                                {
+                                    yield return new ValidationResult(
+                                    errorMessage,
+                                    new[] { nameof(TBIYEAR) });
+                                }
                             }
                         }
                     }
-
-                    if (!isValid)
-                    {
-                        yield return new ValidationResult(
-                            errorMessage,
-                            new[] { nameof(STROKYR), nameof(HATTYEAR), nameof(TIAYEAR), nameof(PDYR), nameof(PDOTHRYR), nameof(TBIYEAR) });
-                    }
-                }
 
                 yield break;
             }
