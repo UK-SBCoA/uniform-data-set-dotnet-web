@@ -118,7 +118,7 @@ namespace UDS.Net.Forms.Pages.UDS3
                 { "VisitDate", this.Visit.StartDateTime }
             };
 
-            foreach (var result in A5.Validate(new ValidationContext(A5, null, null)))
+            foreach (var result in A5.Validate(new ValidationContext(A5, null, contextDicitonary)))
             {
                 // Validation in these scenarios
                 // - cross-form validation
