@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Logging;
 using UDS.Net.Forms.DataAnnotations;
@@ -237,106 +238,84 @@ namespace UDS.Net.Forms.Models.UDS3
                 bool isValid = false;
                 string errorMessage = "Value must be between 1900 and the current year of the visit date";
                 var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
-
-      
-                    var visitDate = visitDateEntry.Value;
-
-                    if (visitDate != null)
+                var visitDate = visitDateEntry.Value;
+                if (visitDate != null)
+                {
+                    var min = new DateTime(1900, 1, 1);
+                    var max = (DateTime)visitDate;
+                    if (STROKYR.HasValue && STROKYR.Value != 9999)
                     {
-                        var min = new DateTime(1900, 1, 1);
-                        var max = (DateTime)visitDate;
-
-                        if (STROKYR.HasValue && STROKYR.Value != 9999)
+                        var strokeYear = new DateTime(STROKYR.Value, 1, 1);
+                        if (strokeYear >= min && strokeYear <= max)
                         {
-                            var strokeYear = new DateTime(STROKYR.Value, 1, 1);
-                            if (strokeYear >= min && strokeYear <= max)
+                            isValid = true;
+                        }
+                        else
+                        {
+                            yield return new ValidationResult(errorMessage, new[] { nameof(STROKYR) });
+                        }
+                        if (HATTYEAR.HasValue && HATTYEAR.Value != 9999)
+                        {
+                            var hatYear = new DateTime(HATTYEAR.Value, 1, 1);
+                            if (hatYear >= min && hatYear <= max)
                             {
                                 isValid = true;
                             }
                             else
                             {
-                                yield return new ValidationResult(
-                                    errorMessage,
-                                    new[] { nameof(STROKYR) });
-                            }
-
-
-                            if (HATTYEAR.HasValue && HATTYEAR.Value != 9999)
-                            {
-                                var hatYear = new DateTime(HATTYEAR.Value, 1, 1);
-                                if (hatYear >= min && hatYear <= max)
-                                {
-                                    isValid = true;
-                                }
-                                else { 
-                                yield return new ValidationResult(
-                                errorMessage,
-                                new[] { nameof(HATTYEAR) });
+                                yield return new ValidationResult(errorMessage, new[] { nameof(HATTYEAR) });
                             }
                         }
-
-                            if (TIAYEAR.HasValue && TIAYEAR.Value != 9999)
+                        if (TIAYEAR.HasValue && TIAYEAR.Value != 9999)
+                        {
+                            var tiaYear = new DateTime(TIAYEAR.Value, 1, 1);
+                            if (tiaYear >= min && tiaYear <= max)
                             {
-                                var tiaYear = new DateTime(TIAYEAR.Value, 1, 1);
-                                if (tiaYear >= min && tiaYear <= max)
-                                {
-                                    isValid = true;
-                                }
-                                else
-                                {
-                                    yield return new ValidationResult(
-                                    errorMessage,
-                                    new[] { nameof(TIAYEAR) });
-                                }
+                                isValid = true;
                             }
-
-                            if (PDYR.HasValue && PDYR.Value != 9999)
+                            else
                             {
-                                var pdYear = new DateTime(PDYR.Value, 1, 1);
-                                if (pdYear >= min && pdYear <= max)
-                                {
-                                    isValid = true;
-                                }
-                                else
-                                {
-                                    yield return new ValidationResult(
-                                    errorMessage,
-                                    new[] { nameof(PDYR) });
-                                }
+                                yield return new ValidationResult(errorMessage, new[] { nameof(TIAYEAR) });
                             }
-
-                            if (PDOTHRYR.HasValue && PDOTHRYR.Value != 9999)
+                        }
+                        if (PDYR.HasValue && PDYR.Value != 9999)
+                        {
+                            var pdYear = new DateTime(PDYR.Value, 1, 1);
+                            if (pdYear >= min && pdYear <= max)
                             {
-                                var pdOtherYear = new DateTime(PDOTHRYR.Value, 1, 1);
-                                if (pdOtherYear >= min && pdOtherYear <= max)
-                                {
-                                    isValid = true;
-                                }
-                                else
-                                {
-                                    yield return new ValidationResult(
-                                    errorMessage,
-                                    new[] { nameof(PDOTHRYR) });
-                                }
+                                isValid = true;
                             }
-
-                            if (TBIYEAR.HasValue && TBIYEAR.Value != 9999)
+                            else
                             {
-                                var tbiYear = new DateTime(TBIYEAR.Value, 1, 1);
-                                if (tbiYear >= min && tbiYear <= max)
-                                {
-                                    isValid = true;
-                                }
-                                else
-                                {
-                                    yield return new ValidationResult(
-                                    errorMessage,
-                                    new[] { nameof(TBIYEAR) });
-                                }
+                                yield return new ValidationResult(errorMessage, new[] { nameof(PDYR) });
+                            }
+                        }
+                        if (PDOTHRYR.HasValue && PDOTHRYR.Value != 9999)
+                        {
+                            var pdOtherYear = new DateTime(PDOTHRYR.Value, 1, 1);
+                            if (pdOtherYear >= min && pdOtherYear <= max)
+                            {
+                                isValid = true;
+                            }
+                            else
+                            {
+                                yield return new ValidationResult(errorMessage, new[] { nameof(PDOTHRYR) });
+                            }
+                        }
+                        if (TBIYEAR.HasValue && TBIYEAR.Value != 9999)
+                        {
+                            var tbiYear = new DateTime(TBIYEAR.Value, 1, 1);
+                            if (tbiYear >= min && tbiYear <= max)
+                            {
+                                isValid = true;
+                            }
+                            else
+                            {
+                                yield return new ValidationResult(errorMessage, new[] { nameof(TBIYEAR) });
                             }
                         }
                     }
-
+                }
                 yield break;
             }
         }
