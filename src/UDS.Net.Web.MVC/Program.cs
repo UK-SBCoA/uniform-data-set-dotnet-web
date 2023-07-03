@@ -68,13 +68,13 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
 
 ////*************************************************************************************************
 
-// Uncomment to enforce authentication
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-//        .RequireAuthenticatedUser()
-//        .Build();
-//});
+// Uncomment to remove enforced authentication
+builder.Services.AddAuthorization(options =>
+{
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
 
 var app = builder.Build();
 
