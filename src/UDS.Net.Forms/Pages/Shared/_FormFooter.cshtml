@@ -2,42 +2,74 @@
 @{
 }
 
-<div class="shadow sm:rounded-lg bg-indigo-100">
-    <div class="px-4 py-5 sm:p-6">
-
-        <div asp-validation-summary="All" class="mt-1 text-sm text-red-700">
-            <p></p>
+@if (Model != null)
+{
+    <div class="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
+        <div class="relative px-6 pb-20 pt-12 sm:pt-12 lg:static lg:px-8 lg:py-12">
+            <div class="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900">Complete this form</h2>
+                <p class="mt-6 text-lg leading-8 text-gray-600">You can partially save the form <i>in-progress</i> if you're in a hurry and wish to return and finish it later, otherwise, choose <i>Complete</i> and resolve any validation errors.</p>
+            </div>
+            <div asp-validation-summary="All" class="mt-1 text-sm text-red-700">
+                <p></p>
+            </div>
         </div>
+        <div class="px-6 pb-20 pt-12 sm:pb-32 lg:px-8 lg:py-12 bg-indigo-100 shadow sm:rounded-lg">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="VisitId" type="hidden" />
+                <input asp-for="Kind" type="hidden" />
+                <input asp-for="IsRequiredForVisitKind" type="hidden" />
+                <input asp-for="Version" type="hidden" />
+                <input asp-for="Title" type="hidden" />
+                <input asp-for="Description" type="hidden" />
+                <input asp-for="IsRequiredForVisitKind" type="hidden" />
+                <input asp-for="IncludeInPacketSubmission" type="hidden" />
+                <input asp-for="ReasonNotIncluded" type="hidden" />
+                <input asp-for="CreatedAt" type="hidden" />
+                <input asp-for="CreatedBy" type="hidden" />
+                <input asp-for="ModifiedBy" type="hidden" />
+                <input asp-for="DeletedBy" type="hidden" />
+                <input asp-for="IsDeleted" type="hidden" />
 
-        <input asp-for="Id" type="hidden" />
-        <input asp-for="VisitId" type="hidden" />
-        <input asp-for="Kind" type="hidden" />
-        <input asp-for="IsRequiredForVisitKind" type="hidden" />
-        <input asp-for="Version" type="hidden" />
-        <input asp-for="Title" type="hidden" />
-        <input asp-for="Description" type="hidden" />
-        <input asp-for="IsRequiredForVisitKind" type="hidden" />
-        <input asp-for="Language" type="hidden" />
-        <input asp-for="IncludeInPacketSubmission" type="hidden" />
-        <input asp-for="ReasonCodeNotIncluded" type="hidden" />
-        <input asp-for="ReasonNotIncluded" type="hidden" />
-        <input asp-for="CreatedAt" type="hidden" />
-        <input asp-for="CreatedBy" type="hidden" />
-        <input asp-for="ModifiedBy" type="hidden" />
-        <input asp-for="DeletedBy" type="hidden" />
-        <input asp-for="IsDeleted" type="hidden" />
+                <div>
+                    <label for="@Html.IdFor(m => m.Status)" class="block text-sm font-semibold leading-6 text-gray-900">Status</label>
+                    <enum-select for="Status" data-val-status="@(Model.GetType().Name + "." + nameof(Model.Status))"></enum-select>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="Status"></span>
 
-        <div class="w-full sm:max-w-xs">
-            <label class="block text-sm font-medium leading-6 text-gray-900">Status</label>
-            @if (Model != null)
-            {
-                <select data-val-status="@(Model.GetType().Name + "." + nameof(Model.Status))" asp-for="Status" asp-items="Html.GetEnumSelectList<FormStatus>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></select>
-            }
+                </div>
+                <div>
+                    <label for="@Html.IdFor(m => m.ReasonCodeNotIncluded)" class="block text-sm font-semibold leading-6 text-gray-800">If not submitted, specify reason</label>
 
+                    @if (Model.IsRequiredForVisitKind)
+                    {
+                        <select asp-for="ReasonCodeNotIncluded" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option disabled selected class="disabled:opacity-75">Form is required, MUST submit</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select asp-for="ReasonCodeNotIncluded" asp-items="Html.GetEnumSelectList<ReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option disabled selected class="disabled:opacity-75">--</option>
+                        </select>
+                    }
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="ReasonCodeNotIncluded"></span>
+
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="@Html.IdFor(m => m.Language)" class="block text-sm font-semibold leading-6 text-gray-900">Language</label>
+                    <select asp-for="Language" asp-items="Html.GetEnumSelectList<FormLanguage>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></select>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="Language"></span>
+
+                </div>
+
+            </div>
+            <div class="mt-8">
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+            </div>
         </div>
-        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
-
     </div>
-</div>
 
+
+}
