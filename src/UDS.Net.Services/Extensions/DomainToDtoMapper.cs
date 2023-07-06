@@ -851,8 +851,16 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
+        private static int? ToInt(bool? fields)
+        {
+            if (fields.HasValue)
+                return fields.Value ? 1 : 0;
+            return null;
+        }
+
         public static D1Dto ToDto(this D1FormFields fields)
         {
+
             return new D1Dto
             {
                 DXMETHOD = fields.DXMETHOD,
@@ -867,20 +875,20 @@ namespace UDS.Net.Services.Extensions
                 NAMNDEM = fields.NAMNDEM,
                 MCIAMEM = fields.MCIAMEM,
                 MCIAPLUS = fields.MCIAPLUS,
-                MCIAPLAN = fields.MCIAPLAN.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIAPATT = fields.MCIAPATT.HasValue ? Convert.ToInt32(fields.MCIAPATT.Value) : null,
-                MCIAPEX = fields.MCIAPEX.HasValue ? Convert.ToInt32(fields.MCIAPEX.Value) : null,
-                MCIAPVIS = fields.MCIAPVIS.HasValue ? Convert.ToInt32(fields.MCIAPVIS.Value) : null,
+                MCIAPLAN = ToInt(fields.MCIAPLAN),
+                MCIAPATT = ToInt(fields.MCIAPATT),
+                MCIAPEX = ToInt(fields.MCIAPEX),
+                MCIAPVIS = ToInt(fields.MCIAPVIS),
                 MCINON1 = fields.MCINON1,
-                MCIN1LAN = fields.MCIN1LAN.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN1ATT = fields.MCIN1ATT.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN1EX = fields.MCIN1EX.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN1VIS = fields.MCIN1VIS.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
+                MCIN1LAN = ToInt(fields.MCIN1LAN),
+                MCIN1ATT = ToInt(fields.MCIN1ATT),
+                MCIN1EX = ToInt(fields.MCIN1EX),
+                MCIN1VIS = ToInt(fields.MCIN1VIS),
                 MCINON2 = fields.MCINON2,
-                MCIN2LAN = fields.MCIN2LAN.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN2ATT = fields.MCIN2ATT.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN2EX = fields.MCIN2EX.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
-                MCIN2VIS = fields.MCIN2VIS.HasValue ? Convert.ToInt32(fields.MCIAPLAN.Value) : null,
+                MCIN2LAN = ToInt(fields.MCIN2LAN),
+                MCIN2ATT = ToInt(fields.MCIN2ATT),
+                MCIN2EX = ToInt(fields.MCIN2EX),
+                MCIN2VIS = ToInt(fields.MCIN2VIS),
                 IMPNOMCI = fields.IMPNOMCI,
                 AMYLPET = fields.AMYLPET,
                 AMYLCSF = fields.AMYLCSF,

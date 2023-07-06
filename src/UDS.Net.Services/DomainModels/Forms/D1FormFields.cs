@@ -135,6 +135,13 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COGOTH3F { get; set; }
         public string COGOTH3X { get; set; }
 
+        private bool? ToBool(int? dtoValue)
+        {
+            if (dtoValue.HasValue)
+                return dtoValue.Value != 0;
+            return null;
+        }
+
         public D1FormFields() { }
         public D1FormFields(FormDto dto)
         {
@@ -153,20 +160,20 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NAMNDEM = d1Dto.NAMNDEM;
                 MCIAMEM = d1Dto.MCIAMEM;
                 MCIAPLUS = d1Dto.MCIAPLUS;
-                MCIAPLAN = d1Dto.MCIAPLAN.HasValue ? Convert.ToBoolean(d1Dto.MCIAPLAN.Value) : null;
-                MCIAPATT = d1Dto.MCIAPATT.HasValue ? Convert.ToBoolean(d1Dto.MCIAPATT.Value) : null;
-                MCIAPEX = d1Dto.MCIAPEX.HasValue ? Convert.ToBoolean(d1Dto.MCIAPEX.Value) : null;
-                MCIAPVIS = d1Dto.MCIAPVIS.HasValue ? Convert.ToBoolean(d1Dto.MCIAPVIS.Value) : null;
+                MCIAPLAN = ToBool(d1Dto.MCIN2LAN);
+                MCIAPATT = ToBool(d1Dto.MCIAPATT);
+                MCIAPEX = ToBool(d1Dto.MCIAPEX);
+                MCIAPVIS = ToBool(d1Dto.MCIAPVIS);
                 MCINON1 = d1Dto.MCINON1;
-                MCIN1LAN = d1Dto.MCIN1LAN.HasValue ? Convert.ToBoolean(d1Dto.MCIN1LAN.Value) : null;
-                MCIN1ATT = d1Dto.MCIN1ATT.HasValue ? Convert.ToBoolean(d1Dto.MCIN1ATT.Value) : null;
-                MCIN1EX = d1Dto.MCIN1EX.HasValue ? Convert.ToBoolean(d1Dto.MCIN1EX.Value) : null;
-                MCIN1VIS = d1Dto.MCIN1VIS.HasValue ? Convert.ToBoolean(d1Dto.MCIN1VIS.Value) : null;
+                MCIN1LAN = ToBool(d1Dto.MCIN1LAN);
+                MCIN1ATT = ToBool(d1Dto.MCIN1ATT);
+                MCIN1EX = ToBool(d1Dto.MCIN1EX);
+                MCIN1VIS = ToBool(d1Dto.MCIN1VIS);
                 MCINON2 = d1Dto.MCINON2;
-                MCIN2LAN = d1Dto.MCIN2LAN.HasValue ? Convert.ToBoolean(d1Dto.MCIN2LAN.Value) : null;
-                MCIN2ATT = d1Dto.MCIN2ATT.HasValue ? Convert.ToBoolean(d1Dto.MCIN2ATT.Value) : null;
-                MCIN2EX = d1Dto.MCIN2EX.HasValue ? Convert.ToBoolean(d1Dto.MCIN2EX.Value) : null;
-                MCIN2VIS = d1Dto.MCIN2VIS.HasValue ? Convert.ToBoolean(d1Dto.MCIN2VIS.Value) : null;
+                MCIN2LAN = ToBool(d1Dto.MCIN2LAN);
+                MCIN2ATT = ToBool(d1Dto.MCIN2ATT);
+                MCIN2EX = ToBool(d1Dto.MCIN2EX);
+                MCIN2VIS = ToBool(d1Dto.MCIN2VIS);
                 IMPNOMCI = d1Dto.IMPNOMCI;
                 AMYLPET = d1Dto.AMYLPET;
                 AMYLCSF = d1Dto.AMYLCSF;

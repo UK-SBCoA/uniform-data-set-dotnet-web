@@ -1383,7 +1383,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG.HasValue && Model.D1.OTHCOG.Value != 0, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.OTHCOG)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
