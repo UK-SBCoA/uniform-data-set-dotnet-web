@@ -17,20 +17,20 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? NAMNDEM { get; set; }
         public int? MCIAMEM { get; set; }
         public int? MCIAPLUS { get; set; }
-        public int? MCIAPLAN { get; set; }
-        public int? MCIAPATT { get; set; }
-        public int? MCIAPEX { get; set; }
-        public int? MCIAPVIS { get; set; }
+        public bool? MCIAPLAN { get; set; }
+        public bool? MCIAPATT { get; set; }
+        public bool? MCIAPEX { get; set; }
+        public bool? MCIAPVIS { get; set; }
         public int? MCINON1 { get; set; }
-        public int? MCIN1LAN { get; set; }
-        public int? MCIN1ATT { get; set; }
-        public int? MCIN1EX { get; set; }
-        public int? MCIN1VIS { get; set; }
+        public bool? MCIN1LAN { get; set; }
+        public bool? MCIN1ATT { get; set; }
+        public bool? MCIN1EX { get; set; }
+        public bool? MCIN1VIS { get; set; }
         public int? MCINON2 { get; set; }
-        public int? MCIN2LAN { get; set; }
-        public int? MCIN2ATT { get; set; }
-        public int? MCIN2EX { get; set; }
-        public int? MCIN2VIS { get; set; }
+        public bool? MCIN2LAN { get; set; }
+        public bool? MCIN2ATT { get; set; }
+        public bool? MCIN2EX { get; set; }
+        public bool? MCIN2VIS { get; set; }
         public int? IMPNOMCI { get; set; }
         public int? AMYLPET { get; set; }
         public int? AMYLCSF { get; set; }
@@ -153,20 +153,20 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NAMNDEM = d1Dto.NAMNDEM;
                 MCIAMEM = d1Dto.MCIAMEM;
                 MCIAPLUS = d1Dto.MCIAPLUS;
-                MCIAPLAN = d1Dto.MCIAPLAN;
-                MCIAPATT = d1Dto.MCIAPATT;
-                MCIAPEX = d1Dto.MCIAPEX;
-                MCIAPVIS = d1Dto.MCIAPVIS;
+                MCIAPLAN = d1Dto.MCIAPLAN.HasValue ? Convert.ToBoolean(d1Dto.MCIAPLAN.Value) : null;
+                MCIAPATT = d1Dto.MCIAPATT.HasValue ? Convert.ToBoolean(d1Dto.MCIAPATT.Value) : null;
+                MCIAPEX = d1Dto.MCIAPEX.HasValue ? Convert.ToBoolean(d1Dto.MCIAPEX.Value) : null;
+                MCIAPVIS = d1Dto.MCIAPVIS.HasValue ? Convert.ToBoolean(d1Dto.MCIAPVIS.Value) : null;
                 MCINON1 = d1Dto.MCINON1;
-                MCIN1LAN = d1Dto.MCIN1LAN;
-                MCIN1ATT = d1Dto.MCIN1ATT;
-                MCIN1EX = d1Dto.MCIN1EX;
-                MCIN1VIS = d1Dto.MCIN1VIS;
+                MCIN1LAN = d1Dto.MCIN1LAN.HasValue ? Convert.ToBoolean(d1Dto.MCIN1LAN.Value) : null;
+                MCIN1ATT = d1Dto.MCIN1ATT.HasValue ? Convert.ToBoolean(d1Dto.MCIN1ATT.Value) : null;
+                MCIN1EX = d1Dto.MCIN1EX.HasValue ? Convert.ToBoolean(d1Dto.MCIN1EX.Value) : null;
+                MCIN1VIS = d1Dto.MCIN1VIS.HasValue ? Convert.ToBoolean(d1Dto.MCIN1VIS.Value) : null;
                 MCINON2 = d1Dto.MCINON2;
-                MCIN2LAN = d1Dto.MCIN2LAN;
-                MCIN2ATT = d1Dto.MCIN2ATT;
-                MCIN2EX = d1Dto.MCIN2EX;
-                MCIN2VIS = d1Dto.MCIN2VIS;
+                MCIN2LAN = d1Dto.MCIN2LAN.HasValue ? Convert.ToBoolean(d1Dto.MCIN2LAN.Value) : null;
+                MCIN2ATT = d1Dto.MCIN2ATT.HasValue ? Convert.ToBoolean(d1Dto.MCIN2ATT.Value) : null;
+                MCIN2EX = d1Dto.MCIN2EX.HasValue ? Convert.ToBoolean(d1Dto.MCIN2EX.Value) : null;
+                MCIN2VIS = d1Dto.MCIN2VIS.HasValue ? Convert.ToBoolean(d1Dto.MCIN2VIS.Value) : null;
                 IMPNOMCI = d1Dto.IMPNOMCI;
                 AMYLPET = d1Dto.AMYLPET;
                 AMYLCSF = d1Dto.AMYLCSF;

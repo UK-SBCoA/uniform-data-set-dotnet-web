@@ -42,19 +42,19 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Non-amnestic multidomain dementia, not PCA, PPA, bvFTD, or DLB syndrome")]
         public bool NAMNDEM { get; set; }
 
-        //[RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
-        //[NotMapped]
-        //public bool? DementiaSyndromeIndicated
-        //{
-        //    get
-        //    {
-        //        if (AMNDEM || PCA || PPASYN || FTDSYN || LBDSYN || NAMNDEM)
-        //        {
-        //            return true;
-        //        }
-        //        else return null;
-        //    }
-        //}
+        [RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
+        [NotMapped]
+        public bool? DementiaSyndromeIndicated
+        {
+            get
+            {
+                if (AMNDEM || PCA || PPASYN || FTDSYN || LBDSYN || NAMNDEM)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         [Display(Name = "Amnestic MCI, single domain (aMCI SD)")]
         public bool MCIAMEM { get; set; }
@@ -63,97 +63,132 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool MCIAPLUS { get; set; }
 
         [Display(Name = "Language")]
-        public bool MCIAPLAN { get; set; }
+        public bool? MCIAPLAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool MCIAPATT { get; set; }
+        public bool? MCIAPATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool MCIAPEX { get; set; }
+        public bool? MCIAPEX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool MCIAPVIS { get; set; }
+        public bool? MCIAPVIS { get; set; }
 
-        //[RequiredIf(nameof(MCIAPLUS), "1", ErrorMessage = "Please at least one additional affected domain.")]
-        //[NotMapped]
-        //public bool? AmnesticMCIMultipleDomainsIndicated
-        //{
-        //    get
-        //    {
-        //        if (MCIAPLAN.HasValue && MCIAPATT.HasValue && MCIAPEX.HasValue && MCIAPVIS.HasValue)
-        //        {
-        //            if (MCIAPLAN.Value || MCIAPATT.Value || MCIAPEX.Value || MCIAPVIS.Value)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //        return null;
-        //    }
-        //}
+        [RequiredIf(nameof(MCIAPLUS), "1", ErrorMessage = "Please at least one additional affected domain.")]
+        [NotMapped]
+        public bool? AmnesticMCIMultipleDomainsIndicated
+        {
+            get
+            {
+                if (MCIAPLAN.HasValue && MCIAPATT.HasValue && MCIAPEX.HasValue && MCIAPVIS.HasValue)
+                {
+                    if (MCIAPLAN.Value || MCIAPATT.Value || MCIAPEX.Value || MCIAPVIS.Value)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
 
         [Display(Name = "Non-amnestic MCI, single domain (naMCI SD)")]
         public bool MCINON1 { get; set; }
 
         [Display(Name = "Language")]
-        public bool MCIN1LAN { get; set; }
+        public bool? MCIN1LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool MCIN1ATT { get; set; }
+        public bool? MCIN1ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool MCIN1EX { get; set; }
+        public bool? MCIN1EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool MCIN1VIS { get; set; }
+        public bool? MCIN1VIS { get; set; }
 
-        //[RequiredIf(nameof(MCINON1), "1", ErrorMessage = "Please select ONE affected domain.")]
-        //[NotMapped]
-        //public bool? NonAmnesticMCISingleDomainIndicated
-        //{
-        //    get
-        //    {
-        //        if (MCIN1LAN.HasValue && MCIN1ATT.HasValue && MCIN1EX.HasValue && MCIN1VIS.HasValue)
-        //        {
-        //            int counter = 0;
-        //            if (MCIN1LAN.Value)
-        //            {
-        //                counter++;
-        //            }
-        //            if (MCIN1ATT.Value)
-        //            {
-        //                counter++;
-        //            }
-        //            if (MCIN1EX.Value)
-        //            {
-        //                counter++;
-        //            }
-        //            if (MCIN1VIS.Value)
-        //            {
-        //                counter++;
-        //            }
-        //            if (counter == 1)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //        return null;
-        //    }
-        //}
+        [RequiredIf(nameof(MCINON1), "1", ErrorMessage = "Please select ONE affected domain.")]
+        [NotMapped]
+        public bool? NonAmnesticMCISingleDomainIndicated
+        {
+            get
+            {
+                if (MCIN1LAN.HasValue && MCIN1ATT.HasValue && MCIN1EX.HasValue && MCIN1VIS.HasValue)
+                {
+                    int counter = 0;
+                    if (MCIN1LAN.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN1ATT.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN1EX.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN1VIS.Value)
+                    {
+                        counter++;
+                    }
+                    if (counter == 1)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
 
         [Display(Name = "Non-amnestic MCI, multiple domains (naMCI MD)")]
         public bool MCINON2 { get; set; }
 
         [Display(Name = "Language")]
-        public bool MCIN2LAN { get; set; }
+        public bool? MCIN2LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool MCIN2ATT { get; set; }
+        public bool? MCIN2ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool MCIN2EX { get; set; }
+        public bool? MCIN2EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool MCIN2VIS { get; set; }
+        public bool? MCIN2VIS { get; set; }
+
+        [RequiredIf(nameof(MCINON2), "1", ErrorMessage = "Please select at least two affected domains.")]
+        [NotMapped]
+        public bool? NonAmnesticMCIMultipleDomainsIndicated
+        {
+            get
+            {
+                if (MCIN2LAN.HasValue && MCIN2ATT.HasValue && MCIN2EX.HasValue && MCIN2VIS.HasValue)
+                {
+                    int counter = 0;
+                    if (MCIN2LAN.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN2ATT.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN2EX.Value)
+                    {
+                        counter++;
+                    }
+                    if (MCIN2VIS.Value)
+                    {
+                        counter++;
+                    }
+                    if (counter >= 2)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
+
 
         [Display(Name = "Cognitively impaired, not MCI")]
         public bool IMPNOMCI { get; set; }
