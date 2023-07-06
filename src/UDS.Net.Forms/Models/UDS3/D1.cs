@@ -14,7 +14,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
         public int? DXMETHOD { get; set; }
 
-        [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose MCI or dementia due to FTLD or LBD)?")]
+        [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose I or dementia due to FTLD or LBD)?")]
         public bool NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
@@ -66,7 +66,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool MCIAPLAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool?MCIAPATT { get; set; }
+        public bool MCIAPATT { get; set; }
 
         [Display(Name = "Executive")]
         public bool MCIAPEX { get; set; }

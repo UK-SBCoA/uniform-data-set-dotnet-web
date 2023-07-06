@@ -848,7 +848,7 @@ namespace UDS.Net.Forms.Extensions
                 NEOPSTAT = fields.NEOPSTAT,
                 HIV = fields.HIV.HasValue ? fields.HIV.Value != 0 : false,
                 HIVIF = fields.HIVIF,
-                OTHCOG = fields.OTHCOG,
+                OTHCOG = fields.OTHCOG.HasValue ? fields.OTHCOG.Value != 0 : false,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX,
                 DEP = fields.DEP.HasValue ? fields.DEP.Value != 0 : false,

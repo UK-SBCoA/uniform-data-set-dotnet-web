@@ -756,7 +756,7 @@ namespace UDS.Net.Forms.Extensions
                 NEOPSTAT = vm.NEOPSTAT,
                 HIV = vm.HIV ? 1 : 0,
                 HIVIF = vm.HIVIF,
-                OTHCOG = vm.OTHCOG,
+                OTHCOG = vm.OTHCOG ? 1 : 0,
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX,
                 DEP = vm.DEP ? 1 : 0,
