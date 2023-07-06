@@ -188,6 +188,11 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
             if (Status == FormStatus.Complete)
             {
                 bool isValid = false;

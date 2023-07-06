@@ -181,9 +181,6 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             foreach (var result in A3.Validate(new ValidationContext(A3, null, null)))
             {
-                // Validation in these scenarios
-                // - cross-form validation
-                // - differences in validation across visit types for instance, IVP vs FVP
                 var memberName = result.MemberNames.FirstOrDefault();
                 ModelState.AddModelError($"A3.{memberName}", result.ErrorMessage);
             }
@@ -192,15 +189,10 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(A3);
 
-                await base.OnPostAsync(id); // checks for domain-level business rules validation
+                _formModel = A3;
+
+                return await base.OnPostAsync(id);
             }
-
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
 
             return Page();
         }

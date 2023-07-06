@@ -69,15 +69,10 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(B6);
 
-                await base.OnPostAsync(id); // checks for domain-level business rules validation
+                _formModel = B6;
+
+                return await base.OnPostAsync(id); // checks for domain-level business rules validation
             }
-
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
 
             return Page();
         }

@@ -213,7 +213,7 @@ namespace UDS.Net.Services.DomainModels
         // https://stackoverflow.com/questions/30895888/setting-common-base-class-properties-when-creating-objects
         // TODO Use notifications pattern to return errors and not throwing exceptions
 
-        public bool TryValidate(string formKind)
+        public bool TryValidate()
         {
             // TODO validate the visit against any rules that might have changed due to form fields changing
             GetModelErrors();

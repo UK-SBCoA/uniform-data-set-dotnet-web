@@ -119,15 +119,10 @@ namespace UDS.Net.Forms.Pages.UDS3
             {
                 Visit.Forms.Add(A2);
 
-                await base.OnPostAsync(id);
+                _formModel = A2;
+
+                return await base.OnPostAsync(id);
             }
-
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
 
             return Page();
         }
