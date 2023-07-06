@@ -20,7 +20,7 @@ namespace UDS.Net.Services.Extensions
             dto.Status = ((int)form.Status).ToString();
             dto.Language = ((int)form.Language).ToString();
             dto.IsIncluded = form.IsIncluded;
-            dto.ReasonCode = ((int)form.ReasonCode).ToString();
+            dto.ReasonCode = form.ReasonCode.HasValue ? ((int)form.ReasonCode.Value).ToString() : "";
             dto.CreatedAt = form.CreatedAt;
             dto.CreatedBy = form.CreatedBy;
             dto.ModifiedBy = form.ModifiedBy;
