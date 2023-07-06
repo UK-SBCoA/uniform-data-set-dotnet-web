@@ -1,6 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -188,7 +188,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == "2")
+            if (Status == FormStatus.Complete)
             {
                 bool isValid = false;
                 string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";

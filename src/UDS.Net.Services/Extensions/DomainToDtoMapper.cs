@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -16,10 +17,10 @@ namespace UDS.Net.Services.Extensions
             dto.Id = form.Id;
             dto.VisitId = form.VisitId;
             dto.Kind = form.Kind;
-            dto.Status = form.Status;
-            dto.Language = form.Language;
+            dto.Status = ((int)form.Status).ToString();
+            dto.Language = ((int)form.Language).ToString();
             dto.IsIncluded = form.IsIncluded;
-            dto.ReasonCode = form.ReasonCode;
+            dto.ReasonCode = ((int)form.ReasonCode).ToString();
             dto.CreatedAt = form.CreatedAt;
             dto.CreatedBy = form.CreatedBy;
             dto.ModifiedBy = form.ModifiedBy;
@@ -96,16 +97,20 @@ namespace UDS.Net.Services.Extensions
 
         private static FormDto GetDto(Form form)
         {
+            string reasonCode = "";
+            if (form.Status == FormStatus.NotIncluded && form.ReasonCode.HasValue)
+                reasonCode = ((int)form.ReasonCode).ToString();
+
             // set default formDto and then override with more details if it is a strongly typed object
             FormDto dto = new FormDto()
             {
                 Id = form.Id,
                 VisitId = form.VisitId,
                 Kind = form.Kind,
-                Status = form.Status,
-                Language = form.Language,
+                Status = ((int)form.Status).ToString(),
+                Language = ((int)form.Language).ToString(),
                 IsIncluded = form.IsIncluded,
-                ReasonCode = form.ReasonCode,
+                ReasonCode = reasonCode,
                 CreatedAt = form.CreatedAt,
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,

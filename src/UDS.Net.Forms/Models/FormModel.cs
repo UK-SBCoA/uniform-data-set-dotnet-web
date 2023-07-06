@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models
 {
@@ -18,17 +19,13 @@ namespace UDS.Net.Forms.Models
 
         public string Description { get; set; } = "";
 
-        public string Status { get; set; } = "";
+        public FormStatus Status { get; set; }
 
         public bool IsRequiredForVisitKind { get; set; }
 
-        public string? Language { get; set; }
+        public FormLanguage Language { get; set; }
 
-        public bool IncludeInPacketSubmission { get; set; }
-
-        public int? ReasonCodeNotIncluded { get; set; }
-
-        public string? ReasonNotIncluded { get; set; }
+        public ReasonCode? ReasonCodeNotIncluded { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

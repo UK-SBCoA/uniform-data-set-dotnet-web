@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.Models;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
@@ -34,7 +35,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 var form = (FormModel)validationContext.ObjectInstance;
 
                 // only validate if the form is attempting to be completed
-                if (form.Status == "2") // TODO change statuses to enum
+                if (form.Status == FormStatus.Complete)
                 {
                     // Only validate on the server if form is attempting to be completed
                     var month = (int)value;

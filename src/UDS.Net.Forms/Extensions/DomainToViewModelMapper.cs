@@ -21,13 +21,12 @@ namespace UDS.Net.Forms.Extensions
         {
             vm.VisitId = form.VisitId;
             vm.Version = form.Version;
-            vm.Status = form.Status; // TODO
+            vm.Status = form.Status;
             vm.Kind = form.Kind;
             vm.Title = form.Title;
             vm.Description = form.Description;
             vm.IsRequiredForVisitKind = form.IsRequiredForVisitKind;
-            vm.IncludeInPacketSubmission = form.IsIncluded.HasValue ? form.IsIncluded.Value : false;
-            vm.ReasonNotIncluded = form.ReasonCode;
+            vm.ReasonCodeNotIncluded = form.ReasonCode;
             vm.CreatedAt = form.CreatedAt;
             vm.CreatedBy = form.CreatedBy;
             vm.ModifiedBy = form.ModifiedBy;
@@ -101,7 +100,6 @@ namespace UDS.Net.Forms.Extensions
                 Title = form.Title,
                 Description = form.Description,
                 IsRequiredForVisitKind = form.IsRequiredForVisitKind,
-                IncludeInPacketSubmission = form.IsIncluded.HasValue ? form.IsIncluded.Value : false,
                 CreatedAt = form.CreatedAt,
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,

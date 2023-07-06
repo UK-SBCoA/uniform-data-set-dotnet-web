@@ -165,7 +165,24 @@ namespace UDS.Net.Services.Extensions
                 else if (dto.Kind == "T1")
                     title = new T1FormFields().GetDescription();
             }
-            return new Form(visitId, dto.Id, title, dto.Kind, dto.Status, dto.Language, dto.IsIncluded, dto.ReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+
+            FormStatus formStatus = FormStatus.NotStarted;
+            if (!string.IsNullOrWhiteSpace(dto.Status) && Int32.TryParse(dto.Status, out int statusValue))
+            {
+                formStatus = (FormStatus)statusValue;
+            }
+            FormLanguage formLanguage = FormLanguage.English;
+            if (!string.IsNullOrWhiteSpace(dto.Language) && Int32.TryParse(dto.Language, out int languageValue))
+            {
+                formLanguage = (FormLanguage)languageValue;
+            }
+            ReasonCode? reasonCode = null;
+            if (formStatus == FormStatus.NotIncluded && string.IsNullOrWhiteSpace(dto.ReasonCode) && Int32.TryParse(dto.ReasonCode, out int reasonCodeValue))
+            {
+                reasonCode = (ReasonCode)reasonCodeValue;
+            }
+
+            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, formLanguage, reasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
 
     }

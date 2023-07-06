@@ -4,6 +4,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using UDS.Net.Forms.Models;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
@@ -27,7 +28,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 var form = (FormModel)validationContext.ObjectInstance;
 
                 // only validate if the form is attempting to be completed
-                if (form.Status == "2") // TODO change statuses to enum
+                if (form.Status == FormStatus.Complete)
                 {
                     // get the watched property and compare
                     var type = validationContext.ObjectType;

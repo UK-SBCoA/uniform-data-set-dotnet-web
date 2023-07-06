@@ -55,12 +55,10 @@ namespace UDS.Net.Forms.TagHelpers
 
         private IHtmlContent GenerateOptions()
         {
-            var count = 4;
-            // TODO if form is required, then count = 3
+            var enumValues = Enum.GetValues(typeof(FormStatus));
+            var optionsBuilder = new HtmlContentBuilder(enumValues.Length);
 
-            var optionsBuilder = new HtmlContentBuilder(3);
-
-            foreach (int i in Enum.GetValues(typeof(FormStatus)))
+            foreach (int i in enumValues)
             {
                 var option = new TagBuilder("option");
 
@@ -75,27 +73,38 @@ namespace UDS.Net.Forms.TagHelpers
                 option.InnerHtml.AppendLine(formattedName);
 
                 var form = (FormModel)ViewContext.ViewData.Model;
-                if (i == (int)FormStatus.NotStarted)
+
+                if (form != null)
                 {
-                    option.Attributes["disabled"] = "disabled";
-                    if (ViewContext.ViewData.Model != null && ViewContext.ViewData.Model is FormModel)
+                    if ((int)form.Status == i)
                     {
-                        if (form.Id <= 0 && (form.Status == FormStatus.NotStarted.ToString() || string.IsNullOrWhiteSpace(form.Status)))
+                        option.Attributes["selected"] = "true"; // select the current status
+                    }
+
+                    // additionally, if the select option is for not started
+                    if (i == (int)FormStatus.NotStarted)
+                    {
+                        option.Attributes["disabled"] = "disabled";
+                        if (ViewContext.ViewData.Model != null && ViewContext.ViewData.Model is FormModel)
                         {
-                            option.Attributes["selected"] = "true";
+                            if (form.Id <= 0 && (form.Status == FormStatus.NotStarted))
+                            {
+                                option.Attributes["selected"] = "true";
+                            }
                         }
                     }
-                }
-                else if (i == (int)FormStatus.NotIncluded)
-                {
-                    // Only allow "Not included" on optional forms
-                    if (form.IsRequiredForVisitKind)
-                        option.Attributes["disabled"] = "disabled";
-                }
-                else
-                {
-                    // "Not started" should not be selectable, so don't have a value and therefore would be null
-                    option.Attributes["value"] = i.ToString();
+                    else
+                    {
+                        // Only set value for statuses that should be allowed to be selected
+                        // "NotStarted" should never have a value
+                        // "NotIncluded" should only have a value on optional forms
+                        if (i == (int)FormStatus.NotIncluded && form.IsRequiredForVisitKind)
+                        {
+                            option.Attributes["disabled"] = "disabled";
+                        }
+                        else
+                            option.Attributes["value"] = i.ToString();
+                    }
                 }
 
                 optionsBuilder.AppendLine(option);
