@@ -336,11 +336,11 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Previous symptomatic stroke?")]
         [RequiredIf(nameof(CVD), "1", ErrorMessage = "Please indicate")]
-        public bool PREVSTK { get; set; }
+        public int? PREVSTK { get; set; }
 
         [Display(Name = "Temporal relationship between stroke and cognitive decline?")]
         [RequiredIf(nameof(PREVSTK), "1", ErrorMessage = "Please indicate")]
-        public bool STROKDEC { get; set; }
+        public int? STROKDEC { get; set; }
 
         [Display(Name = "Confirmation of stroke by neuroimaging?")]
         [RequiredIf(nameof(PREVSTK), "1", ErrorMessage = "Please indicate")]
@@ -555,7 +555,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool COGOTH3 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS, primary or contributing")]
-        [RequiredIf(nameof(COGOTH3), "1", ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
+        [RequiredIf(nameof(COGOTH3), "true", ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         public int? COGOTH3F { get; set; }
 
         [Display(Name = "If Present, specify")]
