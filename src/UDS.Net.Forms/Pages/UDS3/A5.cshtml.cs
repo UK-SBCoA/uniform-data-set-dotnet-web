@@ -113,7 +113,12 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id)
         {
-            foreach (var result in A5.Validate(new ValidationContext(A5, null, null)))
+            Dictionary<object, object?> contextDictionary = new Dictionary<object, object?>
+            {
+                { "VisitDate", this.Visit.StartDateTime }
+            };
+
+            foreach (var result in A5.Validate(new ValidationContext(A5, null, contextDictionary)))
             {
                 // Validation in these scenarios
                 // - cross-form validation
