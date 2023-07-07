@@ -75,6 +75,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other origin")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? HISPORX { get; set; }
 
         /* Racial group */
