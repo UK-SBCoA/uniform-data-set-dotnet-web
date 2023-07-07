@@ -21,7 +21,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         }
 
         public A4GFormFields() { }
-        public A4GFormFields(FormDto dto)
+        public A4GFormFields(FormDto dto) : this()
         {
             if (dto is A4GDto)
             {
