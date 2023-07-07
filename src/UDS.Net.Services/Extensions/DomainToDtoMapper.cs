@@ -416,10 +416,16 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A4DDto
             {
-                DRUGID = fields.DRUGID
+                Id = fields.Id,
+                DRUGID = fields.DRUGID,
+                CreatedAt = fields.CreatedAt,
+                CreatedBy = fields.CreatedBy,
+                DeletedBy = fields.DeletedBy,
+                IsDeleted = fields.IsDeleted,
+                Kind = "A4D",
+                VisitId = form.VisitId,
+                Status = "2" // TODO Status
             };
-
-            SetBaseProperties(dto, form);
 
             return dto;
         }
