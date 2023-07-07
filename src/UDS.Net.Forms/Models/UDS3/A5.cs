@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -63,6 +64,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? CVOTHR { get; set; }
 
         [Display(Name = "")]
+        [SpecialCharacter]
         public string? CVOTHRX { get; set; }
 
         [Display(Name = "")]
@@ -138,6 +140,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ARTHTYPE { get; set; }
 
         [Display(Name = "")]
+        [SpecialCharacter]
         public string? ARTHTYPX { get; set; }
 
         [Display(Name = "")]
@@ -171,6 +174,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? OTHSLEEP { get; set; }
 
         [Display(Name = "")]
+        [SpecialCharacter]
         public string? OTHSLEEX { get; set; }
 
         [Display(Name = "")]
@@ -180,6 +184,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ABUSOTHR { get; set; }
 
         [Display(Name = "")]
+        [SpecialCharacter]
         public string? ABUSX { get; set; }
 
         [Display(Name = "")]
@@ -210,6 +215,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? PSYCDIS { get; set; }
 
         [Display(Name = "")]
+        [SpecialCharacter]
         public string? PSYCDISX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
