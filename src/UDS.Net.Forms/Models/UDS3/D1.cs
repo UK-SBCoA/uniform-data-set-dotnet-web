@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -125,6 +126,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHBIOMX { get; set; }
 
         [Display(Name = "")]
@@ -156,6 +158,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHMUTX { get; set; }
 
         [Display(Name = "")]
@@ -208,6 +211,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? FTLDSUBX { get; set; }
 
         [Display(Name = "")]
@@ -299,6 +303,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHCOGX { get; set; }
 
         [Display(Name = "")]
@@ -348,6 +353,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHPSYX { get; set; }
 
         [Display(Name = "")]
@@ -385,6 +391,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTHX { get; set; }
 
         [Display(Name = "")]
@@ -395,6 +402,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTH2X { get; set; }
 
         [Display(Name = "")]
@@ -405,6 +413,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTH3X { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

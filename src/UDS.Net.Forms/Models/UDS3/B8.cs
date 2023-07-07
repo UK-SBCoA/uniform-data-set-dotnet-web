@@ -138,6 +138,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Yes (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(OTHNEUR), "1", ErrorMessage = "Specify other findings")]
+        [SpecialCharacter]
         public string? OTHNEURX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
