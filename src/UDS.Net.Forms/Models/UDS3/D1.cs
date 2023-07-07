@@ -15,10 +15,10 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DXMETHOD { get; set; }
 
         [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose I or dementia due to FTLD or LBD)?")]
-        public bool NORMCOG { get; set; }
+        public int? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
-        public bool DEMENTED { get; set; }
+        public int? DEMENTED { get; set; }
 
         [Display(Name = "Amnestic multidomain dementia syndrome")]
         public bool AMNDEM { get; set; }
@@ -224,7 +224,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DATSCAN { get; set; }
 
         [Display(Name = "Other (specify)")]
-        public bool OTHBIOM { get; set; }
+        public int? OTHBIOM { get; set; }
 
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(OTHBIOM), "1", ErrorMessage = "Please specify other biomarker findings.")]
@@ -446,7 +446,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If Present, select one")]
         [RequiredIf(nameof(DEP), "1", ErrorMessage = "Please indicate")]
-        public bool DEPTREAT { get; set; }
+        public int? DEPTREAT { get; set; }
 
         [Display(Name = "Bipolar disorder")]
         public bool BIPOLDX { get; set; }
