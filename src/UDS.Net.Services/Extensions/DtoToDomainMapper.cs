@@ -136,7 +136,7 @@ namespace UDS.Net.Services.Extensions
                     title = new A2FormFields().GetDescription();
                 else if (dto.Kind == "A3")
                     title = new A3FormFields().GetDescription();
-                else if (dto.Kind == "A4G")
+                else if (dto.Kind == "A4")
                     title = new A4GFormFields().GetDescription();
                 else if (dto.Kind == "A5")
                     title = new A5FormFields().GetDescription();
