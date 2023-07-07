@@ -13,8 +13,8 @@ namespace UDS.Net.Forms.DataAnnotations
     {
         public void AddValidation(ClientModelValidationContext context)
         {
-            MergeAttribute(context.Attributes,"data-val", "true");
-            MergeAttribute(context.Attributes,"data-val-specialcharacter", GetErrorMessage());
+            MergeAttribute(context.Attributes, "data-val", "true");
+            MergeAttribute(context.Attributes, "data-val-specialcharacter", GetErrorMessage());
         }
         public static string GetErrorMessage()
         {

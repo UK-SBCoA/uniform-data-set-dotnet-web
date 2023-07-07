@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (SPECIFY)")]
         [MaxLength(60)]
-        [SpecialCharacter]  
+        [SpecialCharacter]
         public string? INRATERX { get; set; }
 
         [Display(Name = "Co-participant's years of education — use the codes below to report the level achieved; if an attempted level is not completed, enter the number of years completed")]
