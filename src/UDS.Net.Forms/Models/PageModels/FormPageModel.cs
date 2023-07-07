@@ -19,11 +19,13 @@ namespace UDS.Net.Forms.Models.PageModels
         [BindProperty]
         public VisitModel Visit { get; set; } = default!;
 
+        public FormModel BaseForm { get; set; }
+
         public string PageTitle
         {
             get
             {
-                if (_formModel != null)
+                if (BaseForm != null)
                 {
                     return $"Participant {Visit.ParticipationId} Visit {Visit.Number} {Visit.Kind}";
                 }
@@ -31,9 +33,9 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
+
         protected readonly IVisitService _visitService;
         protected string _formKind { get; set; }
-        public FormModel _formModel;
 
         public FormPageModel(IVisitService visitService, string formKind) : base()
         {
@@ -55,7 +57,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             var form = visit.Forms.Where(f => f.Kind.Contains(_formKind)).FirstOrDefault();
 
-            _formModel = form.ToVM(); // this will have the subclass
+            BaseForm = form.ToVM(); // this will have the subclass
 
             return Page();
         }
@@ -63,12 +65,25 @@ namespace UDS.Net.Forms.Models.PageModels
         [ValidateAntiForgeryToken]
         protected async Task<IActionResult> OnPostAsync(int id)
         {
-            var visit = Visit.ToEntity(); // TODO check for domain-level business rules validation
+            var visit = Visit.ToEntity();
 
-            foreach (var result in _formModel.Validate(new ValidationContext(_formModel, null, null)))
+            if (BaseForm.Status == Services.Enums.FormStatus.Complete)
             {
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"{memberName}", result.ErrorMessage);
+                /*
+                 * ValidationContext describes any member on which validation is performed. It also enables
+                 * custom validation to be added through any service that implements the IServiceProvider
+                 * interface.
+                 */
+                Dictionary<object, object?> visitContext = new Dictionary<object, object?>
+                {
+                    { "Visit", this.Visit }
+                };
+
+                foreach (var result in BaseForm.Validate(new ValidationContext(BaseForm, null, visitContext)))
+                {
+                    var memberName = result.MemberNames.FirstOrDefault();
+                    ModelState.AddModelError($"{BaseForm.GetType().Name}.{memberName}", result.ErrorMessage);
+                }
             }
 
             if (ModelState.IsValid)
@@ -89,7 +104,7 @@ namespace UDS.Net.Forms.Models.PageModels
             visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id, _formKind);
 
             if (visit == null)
-                return NotFound();
+                return NotFound(); // this should never be possible, but just in case
 
             Visit = visit.ToVM();
 

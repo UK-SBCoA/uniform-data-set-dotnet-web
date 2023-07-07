@@ -61,9 +61,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             await base.OnGetAsync(id);
 
-            if (_formModel != null)
+            if (BaseForm != null)
             {
-                C2 = (C2)_formModel; // class library should always handle new instances
+                C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
             return Page();
@@ -72,30 +72,11 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            /*
-             * ValidationContext describes any member on which validation is performed. It also enables
-             * custom validation to be added through any service that implements the IServiceProvider
-             * interface.
-             */
-            foreach (var result in C2.Validate(new ValidationContext(C2, null, null)))
-            {
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"C2.{memberName}", result.ErrorMessage);
-            }
+            BaseForm = C2; // reassign bounded and derived form to base form for base method
 
-            // if model is attempting to be completed, validation against domain form rules and visit rules
-            // if not validates, return with errors
+            Visit.Forms.Add(C2); // visit needs updated form as well
 
-            if (ModelState.IsValid)
-            {
-                Visit.Forms.Add(C2);
-
-                _formModel = C2;
-
-                return await base.OnPostAsync(id); // checks for domain-level business rules validation
-            }
-
-            return Page();
+            return await base.OnPostAsync(id); // checks for validation, etc.
         }
     }
 }

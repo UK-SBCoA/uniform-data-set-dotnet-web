@@ -33,9 +33,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             await base.OnGetAsync(id);
 
-            if (_formModel != null)
+            if (BaseForm != null)
             {
-                B1 = (B1)_formModel; // class library should always handle new instances
+                B1 = (B1)BaseForm; // class library should always handle new instances
             }
 
             return Page();
@@ -44,25 +44,11 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id)
         {
-            foreach (var result in B1.Validate(new ValidationContext(B1, null, null)))
-            {
-                // Validation in these scenarios
-                // - cross-form validation
-                // - differences in validation across visit types for instance, IVP vs FVP
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"B1.{memberName}", result.ErrorMessage);
-            }
+            BaseForm = B1;
 
-            if (ModelState.IsValid)
-            {
-                Visit.Forms.Add(B1);
+            Visit.Forms.Add(B1);
 
-                _formModel = B1;
-
-                return await base.OnPostAsync(id); // checks for domain-level business rules validation
-            }
-
-            return Page();
+            return await base.OnPostAsync(id); // checks for domain-level business rules validation
         }
     }
 }
