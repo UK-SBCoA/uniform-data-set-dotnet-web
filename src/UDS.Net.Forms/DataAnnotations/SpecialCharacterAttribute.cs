@@ -10,18 +10,22 @@ namespace UDS.Net.Forms.DataAnnotations
 {
     public class SpecialCharacterAttribute : ValidationAttribute
     {
+        public static string GetErrorMessage()
+        {
+          return "Single quotes ('), double quotes (\"), ampersands (&) and percentage signs (%) are not allowed";
+        }
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value is string allowableCode)
             {
-                if (allowableCode.Contains("$") || allowableCode.Contains("'") || allowableCode.Contains("\"") || allowableCode.Contains("&"))
+                if (allowableCode.Contains("'") || allowableCode.Contains("\"") || allowableCode.Contains("&") || allowableCode.Contains("%"))
                 {
-                    return new ValidationResult("The field cannot contain the characters $, ', \", or &");
+                    return new ValidationResult (GetErrorMessage());
                 }
             }
 
             return ValidationResult.Success;
         }
-    }
-
+    } 
 }
