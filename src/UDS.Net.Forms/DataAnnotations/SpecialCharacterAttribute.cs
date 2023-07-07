@@ -33,6 +33,10 @@ namespace UDS.Net.Forms.DataAnnotations
 
             return ValidationResult.Success;
         }
+
+        /// <summary>
+        /// See https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0#iclientmodelvalidator-for-client-side-validation
+        /// </summary>
         private static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
         {
             if (attributes.ContainsKey(key))
