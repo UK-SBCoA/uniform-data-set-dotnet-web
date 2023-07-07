@@ -33,7 +33,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
         protected readonly IVisitService _visitService;
         protected string _formKind { get; set; }
-        protected FormModel _formModel;
+        public FormModel _formModel;
 
         public FormPageModel(IVisitService visitService, string formKind) : base()
         {
