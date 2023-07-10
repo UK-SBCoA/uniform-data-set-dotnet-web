@@ -154,7 +154,7 @@ namespace UDS.Net.Services.DomainModels
                     {
                         var existing = existingForms.Where(f => f.Kind == formContract.Abbreviation).FirstOrDefault();
 
-                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequredForVisitKind, existing.Status, existing.Language, existing.IsIncluded, existing.ReasonCode, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields));
+                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequredForVisitKind, existing.Status, existing.Language, existing.ReasonCode, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields));
                     }
                     else
                     {
@@ -213,7 +213,7 @@ namespace UDS.Net.Services.DomainModels
         // https://stackoverflow.com/questions/30895888/setting-common-base-class-properties-when-creating-objects
         // TODO Use notifications pattern to return errors and not throwing exceptions
 
-        public bool TryValidate(string formKind)
+        public bool TryValidate()
         {
             // TODO validate the visit against any rules that might have changed due to form fields changing
             GetModelErrors();

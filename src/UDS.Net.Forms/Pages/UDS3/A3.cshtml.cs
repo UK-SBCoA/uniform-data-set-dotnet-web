@@ -168,9 +168,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             await base.OnGetAsync(id);
 
-            if (_formModel != null)
+            if (BaseForm != null)
             {
-                A3 = (A3)_formModel; // class library should always handle new instances
+                A3 = (A3)BaseForm; // class library should always handle new instances
             }
 
             return Page();
@@ -179,35 +179,12 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id)
         {
-            foreach (var result in A3.Validate(new ValidationContext(A3, null, null)))
-            {
-                // Validation in these scenarios
-                // - cross-form validation
-                // - differences in validation across visit types for instance, IVP vs FVP
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"A3.{memberName}", result.ErrorMessage);
-            }
+            BaseForm = A3; // reassign bounded and derived form to base form for base method
 
-            if (ModelState.IsValid)
-            {
-                Visit.Forms.Add(A3);
+            Visit.Forms.Add(A3); // visit needs updated form as well
 
-                await base.OnPostAsync(id); // checks for domain-level business rules validation
-            }
-
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
-
-            return Page();
+            return await base.OnPostAsync(id); // checks for validation, etc.
         }
 
-        public JsonResult ValidateYear(int year)
-        {
-            return new JsonResult(true);
-        }
     }
 }

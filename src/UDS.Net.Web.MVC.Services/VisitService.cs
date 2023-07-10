@@ -84,6 +84,12 @@ namespace UDS.Net.Web.MVC.Services
 
         private async Task<Visit> UpdateVisit(string username, VisitDto dto)
         {
+            if (dto.IsDeleted)
+            {
+                dto.DeletedBy = username;
+            }
+            else
+                dto.ModifiedBy = username;
 
             await _apiClient.VisitClient.Put(dto.Id, dto);
 
