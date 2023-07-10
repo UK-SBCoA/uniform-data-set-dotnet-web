@@ -96,9 +96,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             await base.OnGetAsync(id);
 
-            if (_formModel != null)
+            if (BaseForm != null)
             {
-                A2 = (A2)_formModel; // class library should always handle new instances
+                A2 = (A2)BaseForm; // class library should always handle new instances
             }
 
             return Page();
@@ -107,29 +107,11 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            // server validation for form fields
-            foreach (var result in A2.Validate(new ValidationContext(A2, null, null)))
-            {
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"A2.{memberName}", result.ErrorMessage);
-            }
+            BaseForm = A2; // reassign bounded and derived form to base form for base method
 
-            // annotations as well in view model
-            if (ModelState.IsValid)
-            {
-                Visit.Forms.Add(A2);
+            Visit.Forms.Add(A2); // visit needs updated form as well
 
-                await base.OnPostAsync(id);
-            }
-
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
-
-            return Page();
+            return await base.OnPostAsync(id); // checks for validation, etc.
         }
     }
 }

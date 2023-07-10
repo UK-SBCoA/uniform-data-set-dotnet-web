@@ -103,9 +103,9 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             await base.OnGetAsync(id);
 
-            if (_formModel != null)
+            if (BaseForm != null)
             {
-                A4 = (A4)_formModel; // class library should always handle new instances
+                A4 = (A4)BaseForm; // class library should always handle new instances
             }
 
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
@@ -147,15 +147,6 @@ namespace UDS.Net.Forms.Pages.UDS3
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id)
         {
-            foreach (var result in A4.Validate(new ValidationContext(A4, null, null)))
-            {
-                // Validation in these scenarios
-                // - cross-form validation
-                // - differences in validation across visit types for instance, IVP vs FVP
-                var memberName = result.MemberNames.FirstOrDefault();
-                ModelState.AddModelError($"A4.{memberName}", result.ErrorMessage);
-            }
-
             // Reassemble the model's A4D state based on the bound properties
             foreach (var p in PopularDrugCodes)
             {
@@ -170,21 +161,11 @@ namespace UDS.Net.Forms.Pages.UDS3
                 AssessDrugId(c);
             }
 
-            if (ModelState.IsValid)
-            {
-                Visit.Forms.Add(A4);
+            BaseForm = A4; // reassign bounded and derived form to base form for base method
 
-                await base.OnPostAsync(id); // checks for domain-level business rules validation
-            }
+            Visit.Forms.Add(A4); // visit needs updated form as well
 
-            var visit = await _visitService.GetByIdWithForm("", id, _formKind);
-
-            if (visit == null)
-                return NotFound();
-
-            Visit = visit.ToVM();
-
-            return Page();
+            return await base.OnPostAsync(id); // checks for validation, etc.
         }
     }
 }

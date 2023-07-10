@@ -83,12 +83,12 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == "Complete" && IsRequiredForVisitKind && IncludeInPacketSubmission == false)
+            foreach (var result in base.Validate(validationContext))
             {
-                yield return new ValidationResult(
-                    $"Form is required for visit and is not optional",
-                    new[] { nameof(IncludeInPacketSubmission) });
+                yield return result;
             }
+
+            yield break;
         }
     }
 }

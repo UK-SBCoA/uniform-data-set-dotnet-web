@@ -1,6 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -188,48 +188,77 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == "2")
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
+            if (Status == FormStatus.Complete)
             {
                 bool isValid = false;
                 string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";
-                var visitDateEntry = validationContext.Items.Where(i => i.Key.ToString() == "VisitDate").FirstOrDefault();
+
                 if (LOGIPREV.HasValue && LOGIPREV != 88)
                 {
+                    // If the test was performed in the last 3 months then confirm the date falls within the range
+
                     if (LOGIYR.HasValue && LOGIMO.HasValue && LOGIDAY.HasValue)
                     {
-                        // we need the visit date
-                        var visitDate = visitDateEntry.Value;
-                        if (visitDate != null)
+                        if (validationContext.Items.Where(v => v.Key.ToString() == "Visit").Any())
                         {
-                            var max = (DateTime)visitDate;
-                            var min = ((DateTime)visitDate).AddMonths(-3);
-
-                            try
+                            var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
+                            if (visitValue is VisitModel)
                             {
-                                var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
+                                VisitModel visit = (VisitModel)visitValue;
+                                var visitDateEntry = visit.StartDateTime;
 
-                                var resultHigh = DateTime.Compare(logiDate, max);
-                                var resultLow = DateTime.Compare(logiDate, min);
-
-                                if (resultHigh < 0 && resultLow > 0)
+                                // we need the visit date
+                                var visitDate = visitDateEntry;
+                                if (visitDate != null)
                                 {
-                                    isValid = true;
+                                    var max = (DateTime)visitDate;
+                                    var min = ((DateTime)visitDate).AddMonths(-3);
+
+                                    try
+                                    {
+                                        var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
+
+                                        var resultHigh = DateTime.Compare(logiDate, max);
+                                        var resultLow = DateTime.Compare(logiDate, min);
+
+                                        if (resultHigh < 0 && resultLow > 0)
+                                        {
+                                            isValid = true;
+                                        }
+
+                                        else
+                                        {
+                                            isValid = false;
+                                        }
+                                    }
+                                    catch (ArgumentOutOfRangeException ex)
+                                    {
+                                        // not a valid date
+                                        isValid = false;
+                                        errorMessage = "Logical Memory IA - Immediate previous test date invalid";
+                                    }
                                 }
 
-                                else
-                                {
-                                    isValid = false;
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException ex)
-                            {
-                                // not a valid date
-                                isValid = false;
-                                errorMessage = "Logical Memory IA -Immediate previous test date invalid";
                             }
                         }
+                        else
+                        {
+                            isValid = false;
+                            errorMessage = "Unable to compare against Visit date.";
+                        }
+                    }
+                    else
+                    {
+                        isValid = false;
+                        errorMessage = "Logical Memory IA - Immediate Must provide the full date of the previous test";
                     }
                 }
+
                 if (!isValid)
                 {
                     yield return new ValidationResult(
