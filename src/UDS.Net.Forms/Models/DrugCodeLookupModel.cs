@@ -4,6 +4,8 @@ namespace UDS.Net.Forms.Models
     public class DrugCodeLookupModel
     {
         public List<DrugCodeModel> DrugCodes { get; set; }
+
+        public string SearchTerm { get; set; }
     }
 }
 

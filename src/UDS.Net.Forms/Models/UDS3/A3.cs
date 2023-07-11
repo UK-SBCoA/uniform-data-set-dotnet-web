@@ -156,9 +156,15 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public List<A3FamilyMember> Children { get; set; } = new List<A3FamilyMember>();
 
+        // Validation in these scenarios
+        // - cross-form validation
+        // - differences in validation across visit types for instance, IVP vs FVP
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var type = validationContext.ObjectType;
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
 
             yield break;
         }

@@ -14,7 +14,7 @@
 /* Status */
 function setValidationStatus(statusValue, statusText) {
   // get the current form
-  let form = $('form');
+  let form = $('#UDSForm');
 
   // get validator object
   let validator = form.validate();

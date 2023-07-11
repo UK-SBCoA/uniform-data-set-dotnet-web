@@ -70,7 +70,7 @@ namespace UDS.Net.Forms.Extensions
             else if (vm is T1)
                 return ((T1)vm).ToEntity();
             else
-                return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
+                return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
         }
 
         public static Form ToEntity(this A1 vm)
@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Extensions
                 HANDED = vm.HANDED
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this A2 vm)
@@ -133,7 +133,7 @@ namespace UDS.Net.Forms.Extensions
                 INRELY = vm.INRELY
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this A3 vm)
@@ -174,7 +174,7 @@ namespace UDS.Net.Forms.Extensions
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)
@@ -200,15 +200,23 @@ namespace UDS.Net.Forms.Extensions
                 A4Ds = vm.DrugIds.Select(d => d.ToEntity()).ToList()
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static A4DFormFields ToEntity(this string drugId)
+        public static A4DFormFields ToEntity(this DrugCodeModel vm)
         {
+
             return new A4DFormFields
             {
-                DRUGID = drugId
+                Id = vm.Id.HasValue ? vm.Id.Value : 0,
+                DRUGID = vm.DrugId,
+                CreatedAt = vm.CreatedAt,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                DeletedBy = vm.DeletedBy,
+                IsDeleted = vm.IsDeleted.HasValue ? vm.IsDeleted.Value : false
             };
+
         }
 
         public static Form ToEntity(this A5 vm)
@@ -283,7 +291,7 @@ namespace UDS.Net.Forms.Extensions
                 PSYCDISX = vm.PSYCDISX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B1 vm)
@@ -303,7 +311,7 @@ namespace UDS.Net.Forms.Extensions
                 HEARWAID = vm.HEARWAID
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B4 vm)
@@ -322,7 +330,7 @@ namespace UDS.Net.Forms.Extensions
                 CDRLANG = vm.CDRLANG,
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B5 vm)
@@ -357,7 +365,7 @@ namespace UDS.Net.Forms.Extensions
                 APPSEV = vm.APPSEV
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B6 vm)
@@ -383,7 +391,7 @@ namespace UDS.Net.Forms.Extensions
                 GDS = vm.GDS
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B7 vm)
@@ -402,7 +410,7 @@ namespace UDS.Net.Forms.Extensions
                 TRAVEL = vm.TRAVEL
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B8 vm)
@@ -455,7 +463,7 @@ namespace UDS.Net.Forms.Extensions
                 OTHNEURX = vm.OTHNEURX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B9 vm)
@@ -521,7 +529,7 @@ namespace UDS.Net.Forms.Extensions
                 FTLDEVAL = vm.FTLDEVAL
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this C1 vm)
@@ -577,7 +585,7 @@ namespace UDS.Net.Forms.Extensions
                 COGSTAT = vm.COGSTAT
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this C2 vm)
@@ -656,7 +664,7 @@ namespace UDS.Net.Forms.Extensions
                 COGSTAT = vm.COGSTAT
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this D1 vm)
@@ -794,7 +802,7 @@ namespace UDS.Net.Forms.Extensions
                 COGOTH3X = vm.COGOTH3X
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this D2 vm)
@@ -836,7 +844,7 @@ namespace UDS.Net.Forms.Extensions
                 OTHCONDX = vm.OTHCONDX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this T1 vm)
@@ -855,7 +863,7 @@ namespace UDS.Net.Forms.Extensions
                 TELMILE = vm.TELMILE
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
     }
 }
