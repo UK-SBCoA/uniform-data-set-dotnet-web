@@ -42,7 +42,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Non-amnestic multidomain dementia, not PCA, PPA, bvFTD, or DLB syndrome")]
         public bool NAMNDEM { get; set; }
 
-        [RequiredIf(nameof(DEMENTED), "True", ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
+        [RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please select one or more cognitive/behavioral syndromes.")]
         [NotMapped]
         public bool? DementiaSyndromeIndicated
         {
