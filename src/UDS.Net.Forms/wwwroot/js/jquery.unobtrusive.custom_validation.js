@@ -157,7 +157,6 @@ $.validator.addMethod('specialcharacter', function (value, element, params) {
 });
 
 $.validator.unobtrusive.adapters.add('specialcharacter', [], function (options) {
-    options.rules.specialcharacter = true;
-    options.messages.specialcharacter = options.message;
-
+  options.rules.specialcharacter = true;
+  options.messages.specialcharacter = options.message;
 });
