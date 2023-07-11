@@ -150,14 +150,14 @@ $.validator.unobtrusive.adapters.add('diagnosis', [], function (options) {
 /* Special Characters */
 
 $.validator.addMethod('specialcharacter', function (value, element, params) {
-    if (value.includes("'") || value.includes('"') || value.includes('&') || value.includes('%')) {
-        return false;
-    }
-    return true;
+  if (value.includes("'") || value.includes('"') || value.includes('&') || value.includes('%')) {
+    return false;
+  }
+  return true;
 });
 
 $.validator.unobtrusive.adapters.add('specialcharacter', [], function (options) {
-    options.rules['specialcharacter'] = true;
-    options.messages['specialcharacter'] = options.message;
+    options.rules.specialcharacter = true;
+    options.messages.specialcharacter = options.message;
 
 });
