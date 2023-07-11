@@ -60,6 +60,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Specification of other cognitive impairment")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTHRX { get; set; }
 
         [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the participant’s cognition")]
@@ -69,6 +70,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(COGFPRED), "8", ErrorMessage = "Specification for other predominant symptom first recognized as a decline in the participant’s cognition")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGFPREX { get; set; }
 
         [Display(Name = "Mode of onset of cognitive symptoms")]
@@ -78,6 +80,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(COGMODE), "4", ErrorMessage = "Specification for mode of onset of other cognitive symptoms")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGMODEX { get; set; }
 
         [Display(Name = "Based on clinician’s assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.)")]
@@ -157,6 +160,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(BEOTHR), "1", ErrorMessage = "Please provide other value")]
+        [SpecialCharacter]
         public string? BEOTHRX { get; set; }
 
         [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the participant’s behavior")]
@@ -166,6 +170,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(BEFPRED), "10", ErrorMessage = "Please provide other value")]
+        [SpecialCharacter]
         public string? BEFPREDX { get; set; }
 
         [Display(Name = "Mode of onset of behavioral symptoms")]
@@ -175,6 +180,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(BEMODE), "4", ErrorMessage = "Please provide other value")]
+        [SpecialCharacter]
         public string? BEMODEX { get; set; }
 
         [Display(Name = "Based on the clinician's assessment, at what age did the behavioral symptoms begin?")]
@@ -215,6 +221,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(MOMODE), "4", ErrorMessage = "Please provide pther value")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? MOMODEX { get; set; }
 
         [Display(Name = "Were changes in motor function suggestive of parkinsonism?")]
