@@ -63,31 +63,31 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool MCIAPLUS { get; set; }
 
         [Display(Name = "Language")]
-        public bool? MCIAPLAN { get; set; }
+        public int? MCIAPLAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool? MCIAPATT { get; set; }
+        public int? MCIAPATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool? MCIAPEX { get; set; }
+        public int? MCIAPEX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool? MCIAPVIS { get; set; }
+        public int? MCIAPVIS { get; set; }
 
-        [RequiredIf(nameof(MCIAPLUS), "True", ErrorMessage = "Please at least ONE additional affected domain.")]
+        [RequiredIf(nameof(MCIAPLUS), "True", ErrorMessage = "Please select at least ONE additional affected domain.")]
         [NotMapped]
         public bool? AmnesticMCIMultipleDomainsIndicated
         {
             get
             {
-                if (MCIAPLAN.HasValue && MCIAPATT.HasValue && MCIAPEX.HasValue && MCIAPVIS.HasValue)
+                if (MCIAPLAN == 1 || MCIAPATT == 1 || MCIAPEX == 1 || MCIAPVIS == 1)
                 {
-                    if (MCIAPLAN.Value || MCIAPATT.Value || MCIAPEX.Value || MCIAPVIS.Value)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -95,16 +95,16 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool MCINON1 { get; set; }
 
         [Display(Name = "Language")]
-        public bool? MCIN1LAN { get; set; }
+        public int? MCIN1LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool? MCIN1ATT { get; set; }
+        public int? MCIN1ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool? MCIN1EX { get; set; }
+        public int? MCIN1EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool? MCIN1VIS { get; set; }
+        public int? MCIN1VIS { get; set; }
 
         [RequiredIf(nameof(MCINON1), "True", ErrorMessage = "Please select ONE affected domain.")]
         [NotMapped]
@@ -112,48 +112,32 @@ namespace UDS.Net.Forms.Models.UDS3
         {
             get
             {
-                if (MCIN1LAN.HasValue && MCIN1ATT.HasValue && MCIN1EX.HasValue && MCIN1VIS.HasValue)
+                if (MCIN1LAN == 1 || MCIN1ATT == 1 || MCIN1EX == 1 || MCIN1VIS == 1)
                 {
-                    int counter = 0;
-                    if (MCIN1LAN.Value)
-                    {
-                        counter++;
-                    }
-                    if (MCIN1ATT.Value)
-                    {
-                        counter++;
-                    }
-                    if (MCIN1EX.Value)
-                    {
-                        counter++;
-                    }
-                    if (MCIN1VIS.Value)
-                    {
-                        counter++;
-                    }
-                    if (counter == 1)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
-                return null;
+                else
+                {
+                    return null;
+                }
             }
+
         }
 
         [Display(Name = "Non-amnestic MCI, multiple domains (naMCI MD)")]
         public bool MCINON2 { get; set; }
 
         [Display(Name = "Language")]
-        public bool? MCIN2LAN { get; set; }
+        public int? MCIN2LAN { get; set; }
 
         [Display(Name = "Attention")]
-        public bool? MCIN2ATT { get; set; }
+        public int? MCIN2ATT { get; set; }
 
         [Display(Name = "Executive")]
-        public bool? MCIN2EX { get; set; }
+        public int? MCIN2EX { get; set; }
 
         [Display(Name = "Visuospatial")]
-        public bool? MCIN2VIS { get; set; }
+        public int? MCIN2VIS { get; set; }
 
         [RequiredIf(nameof(MCINON2), "True", ErrorMessage = "Please select at least TWO affected domains.")]
         [NotMapped]
@@ -161,22 +145,20 @@ namespace UDS.Net.Forms.Models.UDS3
         {
             get
             {
-                if (MCIN2LAN.HasValue && MCIN2ATT.HasValue && MCIN2EX.HasValue && MCIN2VIS.HasValue)
-                {
-                    int counter = 0;
-                    if (MCIN2LAN.Value)
+              int counter = 0;
+                    if (MCIN2LAN == 1)
                     {
                         counter++;
                     }
-                    if (MCIN2ATT.Value)
+                    if (MCIN2ATT == 1)
                     {
                         counter++;
                     }
-                    if (MCIN2EX.Value)
+                    if (MCIN2EX == 1)
                     {
                         counter++;
                     }
-                    if (MCIN2VIS.Value)
+                    if (MCIN2VIS == 1)
                     {
                         counter++;
                     }
@@ -184,7 +166,6 @@ namespace UDS.Net.Forms.Models.UDS3
                     {
                         return true;
                     }
-                }
                 return null;
             }
         }

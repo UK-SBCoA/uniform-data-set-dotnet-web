@@ -862,13 +862,6 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
-        private static int? ToInt(bool? fields)
-        {
-            if (fields.HasValue)
-                return fields.Value ? 1 : 0;
-            return null;
-        }
-
         public static D1Dto ToDto(this D1FormFields fields)
         {
 
@@ -886,20 +879,20 @@ namespace UDS.Net.Services.Extensions
                 NAMNDEM = fields.NAMNDEM,
                 MCIAMEM = fields.MCIAMEM,
                 MCIAPLUS = fields.MCIAPLUS,
-                MCIAPLAN = ToInt(fields.MCIAPLAN),
-                MCIAPATT = ToInt(fields.MCIAPATT),
-                MCIAPEX = ToInt(fields.MCIAPEX),
-                MCIAPVIS = ToInt(fields.MCIAPVIS),
+                MCIAPLAN = fields.MCIAPLAN,
+                MCIAPATT = fields.MCIAPATT,
+                MCIAPEX = fields.MCIAPEX,
+                MCIAPVIS = fields.MCIAPVIS,
                 MCINON1 = fields.MCINON1,
-                MCIN1LAN = ToInt(fields.MCIN1LAN),
-                MCIN1ATT = ToInt(fields.MCIN1ATT),
-                MCIN1EX = ToInt(fields.MCIN1EX),
-                MCIN1VIS = ToInt(fields.MCIN1VIS),
+                MCIN1LAN = fields.MCIN1LAN,
+                MCIN1ATT = fields.MCIN1ATT,
+                MCIN1EX = fields.MCIN1EX,
+                MCIN1VIS = fields.MCIN1VIS,
                 MCINON2 = fields.MCINON2,
-                MCIN2LAN = ToInt(fields.MCIN2LAN),
-                MCIN2ATT = ToInt(fields.MCIN2ATT),
-                MCIN2EX = ToInt(fields.MCIN2EX),
-                MCIN2VIS = ToInt(fields.MCIN2VIS),
+                MCIN2LAN = fields.MCIN2LAN,
+                MCIN2ATT = fields.MCIN2ATT,
+                MCIN2EX = fields.MCIN2EX,
+                MCIN2VIS = fields.MCIN2VIS,
                 IMPNOMCI = fields.IMPNOMCI,
                 AMYLPET = fields.AMYLPET,
                 AMYLCSF = fields.AMYLCSF,

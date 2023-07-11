@@ -17,20 +17,20 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? NAMNDEM { get; set; }
         public int? MCIAMEM { get; set; }
         public int? MCIAPLUS { get; set; }
-        public bool? MCIAPLAN { get; set; }
-        public bool? MCIAPATT { get; set; }
-        public bool? MCIAPEX { get; set; }
-        public bool? MCIAPVIS { get; set; }
+        public int? MCIAPLAN { get; set; }
+        public int? MCIAPATT { get; set; }
+        public int? MCIAPEX { get; set; }
+        public int? MCIAPVIS { get; set; }
         public int? MCINON1 { get; set; }
-        public bool? MCIN1LAN { get; set; }
-        public bool? MCIN1ATT { get; set; }
-        public bool? MCIN1EX { get; set; }
-        public bool? MCIN1VIS { get; set; }
+        public int? MCIN1LAN { get; set; }
+        public int? MCIN1ATT { get; set; }
+        public int? MCIN1EX { get; set; }
+        public int? MCIN1VIS { get; set; }
         public int? MCINON2 { get; set; }
-        public bool? MCIN2LAN { get; set; }
-        public bool? MCIN2ATT { get; set; }
-        public bool? MCIN2EX { get; set; }
-        public bool? MCIN2VIS { get; set; }
+        public int? MCIN2LAN { get; set; }
+        public int? MCIN2ATT { get; set; }
+        public int? MCIN2EX { get; set; }
+        public int? MCIN2VIS { get; set; }
         public int? IMPNOMCI { get; set; }
         public int? AMYLPET { get; set; }
         public int? AMYLCSF { get; set; }
@@ -135,13 +135,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COGOTH3F { get; set; }
         public string COGOTH3X { get; set; }
 
-        private bool? ToBool(int? dtoValue)
-        {
-            if (dtoValue.HasValue)
-                return dtoValue.Value != 0;
-            return null;
-        }
-
         public D1FormFields() { }
         public D1FormFields(FormDto dto)
         {
@@ -160,20 +153,20 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NAMNDEM = d1Dto.NAMNDEM;
                 MCIAMEM = d1Dto.MCIAMEM;
                 MCIAPLUS = d1Dto.MCIAPLUS;
-                MCIAPLAN = ToBool(d1Dto.MCIN2LAN);
-                MCIAPATT = ToBool(d1Dto.MCIAPATT);
-                MCIAPEX = ToBool(d1Dto.MCIAPEX);
-                MCIAPVIS = ToBool(d1Dto.MCIAPVIS);
+                MCIAPLAN = d1Dto.MCIN2LAN;
+                MCIAPATT = d1Dto.MCIAPATT;
+                MCIAPEX = d1Dto.MCIAPEX;
+                MCIAPVIS = d1Dto.MCIAPVIS;
                 MCINON1 = d1Dto.MCINON1;
-                MCIN1LAN = ToBool(d1Dto.MCIN1LAN);
-                MCIN1ATT = ToBool(d1Dto.MCIN1ATT);
-                MCIN1EX = ToBool(d1Dto.MCIN1EX);
-                MCIN1VIS = ToBool(d1Dto.MCIN1VIS);
+                MCIN1LAN = d1Dto.MCIN1LAN;
+                MCIN1ATT = d1Dto.MCIN1ATT;
+                MCIN1EX = d1Dto.MCIN1EX;
+                MCIN1VIS = d1Dto.MCIN1VIS;
                 MCINON2 = d1Dto.MCINON2;
-                MCIN2LAN = ToBool(d1Dto.MCIN2LAN);
-                MCIN2ATT = ToBool(d1Dto.MCIN2ATT);
-                MCIN2EX = ToBool(d1Dto.MCIN2EX);
-                MCIN2VIS = ToBool(d1Dto.MCIN2VIS);
+                MCIN2LAN = d1Dto.MCIN2LAN;
+                MCIN2ATT = d1Dto.MCIN2ATT;
+                MCIN2EX = d1Dto.MCIN2EX;
+                MCIN2VIS = d1Dto.MCIN2VIS;
                 IMPNOMCI = d1Dto.IMPNOMCI;
                 AMYLPET = d1Dto.AMYLPET;
                 AMYLCSF = d1Dto.AMYLCSF;
