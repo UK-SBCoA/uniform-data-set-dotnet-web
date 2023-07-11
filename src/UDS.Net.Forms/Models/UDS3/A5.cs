@@ -67,10 +67,12 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other cardiovascular disease")]
         public int? CVOTHR { get; set; }
 
+
         [Display(Name = "Other cardiovascular disease (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(CVOTHR), "1", ErrorMessage = "Specify cardiovascular disease")]
         [RequiredIf(nameof(CVOTHR), "2", ErrorMessage = "Specify cardiovascular disease")]
+        [SpecialCharacter]
         public string? CVOTHRX { get; set; }
 
         [Display(Name = "Stroke – by history, not exam (imaging is not required)")]
@@ -145,9 +147,11 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Type of arthritis")]
         public int? ARTHTYPE { get; set; }
 
+
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(ARTHTYPE), "1", ErrorMessage = "Specify sleep disorder")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? ARTHTYPX { get; set; }
 
         [Display(Name = "Upper extremity")]
@@ -180,10 +184,12 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other sleep disorder")]
         public int? OTHSLEEP { get; set; }
 
+
         [Display(Name = "Other sleep disorder (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(OTHSLEEP), "1", ErrorMessage = "Specify sleep disorder")]
         [RequiredIf(nameof(OTHSLEEP), "2", ErrorMessage = "Specify sleep disorder")]
+        [SpecialCharacter]
         public string? OTHSLEEX { get; set; }
 
         [Display(Name = "Alcohol abuse: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social")]
@@ -192,10 +198,12 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other abused substances: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social")]
         public int? ABUSOTHR { get; set; }
 
+
         [Display(Name = "If recent/active or remote/inactive, specify abused substance")]
         [MaxLength(60)]
         [RequiredIf(nameof(ABUSOTHR), "1", ErrorMessage = "Specify abused substance")]
         [RequiredIf(nameof(ABUSOTHR), "2", ErrorMessage = "Specify abused substance")]
+        [SpecialCharacter]
         public string? ABUSX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
@@ -225,10 +233,12 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other psychiatric disorders")]
         public int? PSYCDIS { get; set; }
 
+
         [Display(Name = "If recent/active or remote/inactive, specify disorder")]
         [MaxLength(60)]
         [RequiredIf(nameof(PSYCDIS), "1", ErrorMessage = "Specify disorder")]
         [RequiredIf(nameof(PSYCDIS), "2", ErrorMessage = "Specify disorder")]
+        [SpecialCharacter]
         public string? PSYCDISX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

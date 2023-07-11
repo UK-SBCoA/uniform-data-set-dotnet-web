@@ -210,6 +210,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(OTHBIOM), "1", ErrorMessage = "Please specify other biomarker findings.")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHBIOMX { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
@@ -242,6 +243,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(OTHMUT), "1", ErrorMessage = "Please specify other imaging findings.")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHMUTX { get; set; }
 
         [Display(Name = "Alzheimer's disease")]
@@ -306,6 +308,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(FTLDSUBT), "3", ErrorMessage = "Please specify FTLD subtype")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? FTLDSUBX { get; set; }
 
         [Display(Name = "Vascular brain injury (based on clinical or imaging evidence)")]
@@ -416,6 +419,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Present, specify")]
         [RequiredIf(nameof(OTHCOG), "True", ErrorMessage = "Please indicate")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHCOGX { get; set; }
 
         [Display(Name = "Active depression")]
@@ -474,6 +478,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Present, specify")]
         [RequiredIf(nameof(OTHPSY), "True", ErrorMessage = "Please indicate")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHPSYX { get; set; }
 
         [Display(Name = "Cognitive impairment due to alcohol abuse")]
@@ -518,6 +523,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Present, specify")]
         [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Please indicate")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTHX { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
@@ -530,6 +536,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Present, specify")]
         [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Please indicate")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? COGOTH2X { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
@@ -542,6 +549,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Present, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
+        [SpecialCharacter]
         public string? COGOTH3X { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
