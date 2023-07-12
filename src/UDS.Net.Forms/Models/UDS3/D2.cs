@@ -17,6 +17,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredIf(nameof(CANCER), "1", ErrorMessage = "Specify primary site")]
         [RequiredIf(nameof(CANCER), "2", ErrorMessage = "Specify primary site")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? CANCSITE { get; set; }
 
         [Display(Name = "Diabetes")]
@@ -56,6 +57,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(ARTYPE), "3", ErrorMessage = "Specify arthritis")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? ARTYPEX { get; set; }
 
         [Display(Name = "Upper extremity")]
@@ -91,6 +93,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other sleep disorder (specify)")]
         [RequiredIf(nameof(SLEEPOTH), "1", ErrorMessage = "Specify antibody")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? SLEEPOTX { get; set; }
 
         [Display(Name = "Carotid procedure: angioplasty, endarterectomy, or stent")]
@@ -111,6 +114,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Specify antibody")]
         [RequiredIf(nameof(ANTIENC), "1", ErrorMessage = "Specify antibody")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? ANTIENCX { get; set; }
 
         [Display(Name = "Other medical conditions or procedures not listed above")]
@@ -119,10 +123,16 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If yes, specify")]
         [RequiredIf(nameof(OTHCOND), "1", ErrorMessage = "Specify other medical conditions or procedures")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? OTHCONDX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
             yield break;
         }
     }

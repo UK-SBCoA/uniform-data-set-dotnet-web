@@ -41,9 +41,24 @@ namespace UDS.Net.Web.MVC.Services
             };
         }
 
-        public Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, bool onlyPopular = true, string searchTerm = "")
+        public async Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, bool onlyPopular = true, string searchTerm = "")
         {
-            throw new NotImplementedException();
+            var dto = await _apiClient.LookupClient.SearchDrugCodes(pageSize, pageSize, onlyPopular, searchTerm);
+
+            return new DrugCodeLookup
+            {
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                TotalResultsCount = dto.TotalResultsCount,
+                DrugCodes = dto.Results.Select(r => new DrugCode
+                {
+                    DrugId = r.DrugId,
+                    DrugName = r.DrugName,
+                    BrandName = r.BrandName,
+                    IsPopular = r.IsPopular,
+                    IsOverTheCounter = r.IsOverTheCounter
+                }).ToList()
+            };
         }
 
         [Obsolete]

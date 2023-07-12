@@ -75,6 +75,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other origin")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? HISPORX { get; set; }
 
         /* Racial group */
@@ -84,6 +85,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other race")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? RACEX { get; set; }
 
         [Display(Name = "What additional race does participant report?")]
@@ -92,6 +94,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other additional race")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? RACESECX { get; set; }
 
         [Display(Name = "What additional race, beyond those reported in Questions 9 and 10, does participant report?")]
@@ -100,6 +103,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other additional race")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? RACETERX { get; set; }
 
         /* Language and Education */
@@ -110,6 +114,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (specify)", Prompt = "Other primary language")]
         [MaxLength(60)]
+        [SpecialCharacter]
         public string? PRIMLANX { get; set; }
 
         [Display(Name = "Participant’s years of education - use the codes to report the level achieved; if an attempted level is not completed, enter the number of years completed", Description = "12 = high school or GED, 16 = bachelor’s degree, 18 = master’s degree, 20 = doctorate, 99 = unknown")]
@@ -126,6 +131,11 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
             yield break;
         }
     }

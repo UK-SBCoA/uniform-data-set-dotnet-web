@@ -2,8 +2,7 @@
 @{
     var currentPath = ViewContext.RouteData.Values["page"];
 
-    string currentlySelectedAnchorCss = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium";
-    string notSelectedAnchorCss = "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900 group border-l-4 px-3 py-2 flex items-center text-sm font-medium";
+    string notSelectedAnchorCss = "border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900";
 }
 
 @if (Model != null && Model.Forms != null)
@@ -15,10 +14,27 @@
             var cssClass = notSelectedAnchorCss;
             if (anchorPath.Trim() == currentPath.ToString().Trim())
             {
-                cssClass = currentlySelectedAnchorCss;
+                if (form.Status == FormStatus.NotStarted)
+                    cssClass = "bg-red-50 border-red-500 text-red-700 hover:bg-red-50 hover:text-red-700";
+                else if (form.Status == FormStatus.InProgress)
+                    cssClass = "bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700";
+                else if (form.Status == FormStatus.Complete)
+                    cssClass = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"; // text-teal-500 group-hover:text-teal-500
+                else if (form.Status == FormStatus.NotIncluded)
+                    cssClass = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700";
             }
-            <a asp-page="/@Model.Version/@form.Kind" asp-route-id="@Model.Id" asp-route-visitKind="@Model.Kind" class="@cssClass">
-                <span class="text-teal-500 group-hover:text-teal-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">@form.Kind</span>
+            var cssClassFormState = "text-gray-500 group-hover:text-gray-500";
+            if (form.Status == FormStatus.NotStarted)
+                cssClassFormState = "text-red-500 group-hover:text-red-500";
+            else if (form.Status == FormStatus.InProgress)
+                cssClassFormState = "text-indigo-500 group-hover:text-indigo-500";
+            else if (form.Status == FormStatus.Complete)
+                cssClassFormState = "text-teal-500 group-hover:text-teal-500"; // text-teal-500 group-hover:text-teal-500
+            else if (form.Status == FormStatus.NotIncluded)
+                cssClassFormState = "text-teal-500 group-hover:text-teal-500";
+
+            <a asp-page="/@Model.Version/@form.Kind" asp-route-id="@Model.Id" asp-route-visitKind="@Model.Kind" class="@cssClass group border-l-4 px-3 py-2 flex items-center text-sm font-medium">
+                <span class="@cssClassFormState flex-shrink-0 -ml-1 mr-3 h-6 w-6">@form.Kind</span>
                 <span class="truncate">@form.Title</span>
             </a>
         }
