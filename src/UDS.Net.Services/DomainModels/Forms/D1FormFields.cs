@@ -153,7 +153,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NAMNDEM = d1Dto.NAMNDEM;
                 MCIAMEM = d1Dto.MCIAMEM;
                 MCIAPLUS = d1Dto.MCIAPLUS;
-                MCIAPLAN = d1Dto.MCIN2LAN;
+                MCIAPLAN = d1Dto.MCIAPLAN;
                 MCIAPATT = d1Dto.MCIAPATT;
                 MCIAPEX = d1Dto.MCIAPEX;
                 MCIAPVIS = d1Dto.MCIAPVIS;
