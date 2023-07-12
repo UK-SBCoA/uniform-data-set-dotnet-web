@@ -112,14 +112,28 @@ namespace UDS.Net.Forms.Models.UDS3
         {
             get
             {
-                if (MCIN1LAN == 1 || MCIN1ATT == 1 || MCIN1EX == 1 || MCIN1VIS == 1)
+                int counter = 0;
+                if (MCIN1LAN == 1)
+                {
+                    counter++;
+                }
+                if (MCIN1ATT == 1)
+                {
+                    counter++;
+                }
+                if (MCIN1EX == 1)
+                {
+                    counter++;
+                }
+                if (MCIN1VIS == 1)
+                {
+                    counter++;
+                }
+                if (counter == 1)
                 {
                     return true;
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
 
         }
