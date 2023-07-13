@@ -15,6 +15,8 @@ namespace UDS.Net.Forms.TagHelpers
     {
         public IEnumerable<RadioListItem> Items { get; set; }
 
+        public List<UIBehavior> UIBehaviors { get; set; }
+
         public ModelExpression For { get; set; }
 
         public string Id { get; set; }
@@ -120,6 +122,31 @@ namespace UDS.Net.Forms.TagHelpers
             if (item.Disabled)
             {
                 tagBuilder.Attributes["disabled"] = "disabled";
+            }
+            if (UIBehaviors != null)
+            {
+                foreach (var ui in UIBehaviors)
+                {
+                    if ((ui.Condition == UIBehaviorCondition.Equal && ui.Value == item.Value) ||
+                        (ui.Condition == UIBehaviorCondition.NotEqual && ui.Value != item.Value))
+                    {
+                        tagBuilder.Attributes["data-affects"] = ui.PropertyAttributes.ToJSON();
+                    }
+                }
+                //if (UIBehaviors.Where(u => u.Value == item.Value).Any())
+                //{
+                //    // if there are conditions for a matching value
+                //    var behaviors = UIBehaviors.Where(u => u.Condition == item.Value).ToList();
+
+                //    foreach (var behavior in behaviors)
+                //    {
+
+                //        var propertyToAffect = behavior.Property;
+                //        var condition = behavior.Condition;
+                //        var how = behavior.Attributes
+                //    }
+
+                //}
             }
 
             return tagBuilder;

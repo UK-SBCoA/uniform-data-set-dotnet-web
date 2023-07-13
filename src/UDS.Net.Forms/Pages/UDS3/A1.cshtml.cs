@@ -22,9 +22,9 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> HispanicLatinoListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No  (If No, SKIP TO QUESTION 9)", "1"),
+            new RadioListItem("No ", "1"),
             new RadioListItem("Yes", "2"),
-            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 9)", "9")
+            new RadioListItem("Unknown", "9")
         };
 
         public List<RadioListItem> OriginsListItems { get; } = new List<RadioListItem>
@@ -39,6 +39,45 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown","99")
         };
 
+        // (If No, SKIP TO QUESTION 9)
+        public List<UIBehavior> HispanicBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("1", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("A1.HISPOR", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("2", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("A1.HISPOR", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            ),
+            new UIBehavior("9", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("A1.HISPOR", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
+        };
+
+        public List<UIBehavior> OriginsBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("50", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("HISPORX", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("50", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("HISPORX", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
+        };
+
         public List<RadioListItem> RacialGroupsListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("White", "1"),
@@ -49,6 +88,56 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other (specify)", "50"),
             new RadioListItem("Unknown", "99")
         };
+
+        public List<UIBehavior> RacialGroupBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("50", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("RACEX", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("50", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("RACEX", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
+        };
+
+        public List<UIBehavior> SecondaryRacialGroupBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("50", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("RACESECX", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("50", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("RACESECX", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
+        };
+
+        public List<UIBehavior> TertiaryRacialGroupBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("50", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("RACETERX", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("50", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("RACETERX", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
+        };
+
+        // Property, condition, attribute and value
 
         public List<RadioListItem> ParticipationReasonsListItems { get; } = new List<RadioListItem>
         {
@@ -68,6 +157,34 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other research study clinician/staff/investigator (non-ADC; e.g., ADNI, Women's Health Initiative)", "6"),
             new RadioListItem("Other", "8"),
             new RadioListItem("Unknown", "9")
+        };
+
+        public List<UIBehavior> ReferralBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("1", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("LEARNED", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("2", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("LEARNED", new Dictionary<string, string>()
+                {
+                    { "disabled", "false" }
+                })
+            ),
+            new UIBehavior("1", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("LEARNED", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            ),
+            new UIBehavior("2", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("LEARNED", new Dictionary<string, string>()
+                {
+                    { "disabled", "true" }
+                })
+            )
         };
 
         public List<RadioListItem> SecondaryReferralSourcesListItems { get; } = new List<RadioListItem>
@@ -115,6 +232,20 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Japanese", "6"),
             new RadioListItem("Other (specify)", "8"),
             new RadioListItem("Unknown", "9"),
+        };
+
+        public List<UIBehavior> LanguageBehavior { get; } = new List<UIBehavior>
+        {
+            new UIBehavior("8", UIBehaviorCondition.Equal,
+                new UIPropertyAttributes("PRIMLANX", new Dictionary<string, string>()
+            {
+                { "disabled", "false" }
+            })),
+            new UIBehavior("8", UIBehaviorCondition.NotEqual,
+                new UIPropertyAttributes("PRIMLANX", new Dictionary<string, string>()
+            {
+                { "disabled", "true" }
+            }))
         };
 
         public List<RadioListItem> MaritalStatusListItems { get; } = new List<RadioListItem>

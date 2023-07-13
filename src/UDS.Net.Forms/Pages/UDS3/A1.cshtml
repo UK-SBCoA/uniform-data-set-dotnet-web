@@ -31,7 +31,7 @@
                     <label asp-for="A1.REFERSC"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.REFERSC)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A1.REFERSC"></p>
-                        <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems"></radio-button-group>
+                        <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.ReferralBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.REFERSC"></span>
 
                     </div>
@@ -110,7 +110,7 @@
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.HISPANIC"></p>
-                    <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems"></radio-button-group>
+                    <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems" ui-behaviors="Model.HispanicBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPANIC"></span>
                 </div>
             </div>
@@ -119,14 +119,14 @@
                 <label asp-for="A1.HISPOR" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPOR)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPOR"></p>
-                    <radio-button-group id="Origins" for="@Model.A1.HISPOR" items="Model.OriginsListItems"></radio-button-group>
+                    <radio-button-group id="A1.HISPOR" for="@Model.A1.HISPOR" items="Model.OriginsListItems" ui-behaviors="Model.OriginsBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPOR"></span>
                 </div>
                 <div class="mt-4 space-y-4">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPORX"></p>
                     <label asp-for="@Model.A1.HISPORX">@Html.DisplayNameFor(m => m.A1.HISPORX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.HISPORX" />
+                        <input asp-for="@Model.A1.HISPORX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPORX"></span>
                 </div>
@@ -136,7 +136,7 @@
                 <label asp-for="A1.RACE" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACE)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACE"></p>
-                    <radio-button-group id="RacialGroups" for="@Model.A1.RACE" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACE" for="@Model.A1.RACE" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACE"></span>
                 </div>
                 <div class="mt-4 space-y-4">
@@ -153,7 +153,7 @@
                 <label asp-for="A1.RACESEC" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACESEC)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESEC"></p>
-                    <radio-button-group id="RacialGroupsSecondary" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACESEC" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems" ui-behaviors="Model.SecondaryRacialGroupBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESEC"></span>
                 </div>
                 <div class="mt-4 space-y-4">
@@ -170,7 +170,7 @@
                 <label asp-for="A1.RACETER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACETER)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="A1.RACETER"></p>
-                    <radio-button-group id="RacialGroupsTertiary" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACETER" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems" ui-behaviors="Model.TertiaryRacialGroupBehavior "></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETER"></span>
                 </div>
                 <div class="mt-4 space-y-4">
@@ -187,7 +187,7 @@
                 <label asp-for="A1.PRIMLANG"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRIMLANG)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANG"></p>
-                    <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage"></radio-button-group>
+                    <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage" ui-behaviors="Model.LanguageBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANG"></span>
                 </div>
                 <div>
