@@ -35,7 +35,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Dominican", "4"),
             new RadioListItem("Central American", "5"),
             new RadioListItem("South American", "6"),
-            new RadioListItem("Other (specify)", "50", new Dictionary<string, string> { { "HISPORX", "disabled" } }),
+            new RadioListItem("Other (specify)", "50"),
             new RadioListItem("Unknown","99")
         };
 
@@ -60,8 +60,8 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> ReferralSourcesListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("Self-referral", "1", new Dictionary<string, string> { { "LEARNED", "disabled" } }),
-            new RadioListItem("Non-professional contact (spouse/partner, relative, friend, coworker, etc.)", "2", new Dictionary<string, string> { { "LEARNED", "disabled" } }),
+            new RadioListItem("Self-referral", "1"),
+            new RadioListItem("Non-professional contact (spouse/partner, relative, friend, coworker, etc.)", "2"),
             new RadioListItem("ADC participant referral", "3"),
             new RadioListItem("ADC clinician, staff, or investigator referral", "4"),
             new RadioListItem("Nurse, doctor, or other health care provider", "5"),

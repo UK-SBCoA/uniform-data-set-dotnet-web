@@ -121,10 +121,7 @@ namespace UDS.Net.Forms.TagHelpers
             {
                 tagBuilder.Attributes["disabled"] = "disabled";
             }
-            if (item.IfSelectedAffects != null && item.IfSelectedAffects.Count > 0)
-            {
-                // TODO render data attributes
-            }
+
             return tagBuilder;
         }
 
