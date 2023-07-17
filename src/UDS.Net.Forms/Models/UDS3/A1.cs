@@ -22,6 +22,8 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "If the referral source was self-referral or a non-professional contact, how did the referral source learn of the ADC?")]
         [Range(1, 9)]
+        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "How did the referral source learn of the ADC.")]
+        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "How did the referral source learn of the ADC.")]
         public int? LEARNED { get; set; }
 
         [Display(Name = "Presumed disease status at enrollment")]
