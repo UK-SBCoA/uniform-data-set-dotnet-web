@@ -10,7 +10,7 @@ permissions:
 
 jobs:
     build-and-push:
-        runs-on: ubuntu-latest-m
+        runs-on: ubuntu-latest
         steps:
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@v3
