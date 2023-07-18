@@ -29,19 +29,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.BILLS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.BILLS"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_BILLS[@i]" name="B7.BILLS" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_BILLS[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.BILLS)" for="@Model.B7.BILLS" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -49,19 +37,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.TAXES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TAXES"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_TAXES[@i]" name="B7.TAXES" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_TAXES[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TAXES)" for="@Model.B7.TAXES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -69,19 +45,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.SHOPPING"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.SHOPPING"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_SHOPPING[@i]" name="B7.SHOPPING" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_SHOPPING[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.SHOPPING)" for="@Model.B7.SHOPPING" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -89,19 +53,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.GAMES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.GAMES"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_GAMES[@i]" name="B7.GAMES" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_GAMES[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.GAMES)" for="@Model.B7.GAMES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -109,19 +61,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.STOVE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.STOVE"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_STOVE[@i]" name="B7.STOVE" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_STOVE[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.STOVE)" for="@Model.B7.STOVE" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -129,19 +69,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.MEALPREP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.MEALPREP"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_MEALPREP[@i]" name="B7.MEALPREP" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_MEALPREP[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.MEALPREP)" for="@Model.B7.MEALPREP" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -149,19 +77,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.EVENTS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.EVENTS"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_EVENTS[@i]" name="B7.EVENTS" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_EVENTS[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.EVENTS)" for="@Model.B7.EVENTS" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -169,19 +85,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.PAYATTN"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.PAYATTN"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_PAYATTN[@i]" name="B7.PAYATTN" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_PAYATTN[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.PAYATTN)" for="@Model.B7.PAYATTN" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -189,19 +93,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.REMDATES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.REMDATES"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_REMDATES[@i]" name="B7.REMDATES" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_REMDATES[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.REMDATES)" for="@Model.B7.REMDATES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -209,19 +101,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B7.TRAVEL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TRAVEL"></span>
                     </td>
-                    @for (int i = 0; i < Model.ListItems.Count(); i++)
-                    {
-                        <td>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input type="radio" id="B7_TRAVEL[@i]" name="B7.TRAVEL" value="@Model.ListItems[i].Value" class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B7_TRAVEL[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TRAVEL)" for="@Model.B7.TRAVEL" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
             </tbody>
         </table>
