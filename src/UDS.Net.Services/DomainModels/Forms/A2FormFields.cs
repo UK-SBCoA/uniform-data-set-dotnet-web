@@ -51,6 +51,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INRACE = a2Dto.INRACE;
                 this.INRACEX = a2Dto.INRACEX;
                 this.INRASEC = a2Dto.INRASEC;
+                this.INRASECX = a2Dto.INRASECX;
                 this.INRATER = a2Dto.INRATER;
                 this.INRATERX = a2Dto.INRATERX;
                 this.INEDUC = a2Dto.INEDUC;
