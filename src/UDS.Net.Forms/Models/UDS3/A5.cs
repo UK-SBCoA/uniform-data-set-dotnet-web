@@ -145,11 +145,12 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ARTHRIT { get; set; }
 
         [Display(Name = "Type of arthritis")]
+        [RequiredIf(nameof(ARTHRIT), "1", ErrorMessage = "Specify type of arthritis")]
+        [RequiredIf(nameof(ARTHRIT), "2", ErrorMessage = "Specify type of arthritis")]
         public int? ARTHTYPE { get; set; }
 
-
         [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(ARTHTYPE), "1", ErrorMessage = "Specify sleep disorder")]
+        [RequiredIf(nameof(ARTHTYPE), "3", ErrorMessage = "Specify sleep disorder")]
         [MaxLength(60)]
         [SpecialCharacter]
         public string? ARTHTYPX { get; set; }
