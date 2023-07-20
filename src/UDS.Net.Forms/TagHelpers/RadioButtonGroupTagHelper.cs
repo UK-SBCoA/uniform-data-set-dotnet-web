@@ -131,13 +131,21 @@ namespace UDS.Net.Forms.TagHelpers
                     {
                         tagBuilder.Attributes["data-affects"] = "true";
                         string json = "";
-                        foreach (var att in ui.Value.PropertyAttributes)
+                        if (ui.Value.PropertyAttributes.Count() == 1)
                         {
-                            json += att.ToJSON();
-                            if (ui.Value.PropertyAttributes.Count() > 1)
-                                json += ", ";
+                            json = ui.Value.PropertyAttributes[0].ToJSON();
                         }
-                        tagBuilder.Attributes["data-affects-targets"] = json;
+                        else if (ui.Value.PropertyAttributes.Count() > 1)
+                        {
+                            foreach (var att in ui.Value.PropertyAttributes)
+                            {
+                                json += att.ToJSON();
+                                if (ui.Value.PropertyAttributes.Count() > 1)
+                                    json += ", ";
+                            }
+                            json = json.Trim().TrimEnd(',');
+                        }
+                        tagBuilder.Attributes["data-affects-targets"] = "[ " + json + " ]"; // js expects an array
                     }
                 }
             }

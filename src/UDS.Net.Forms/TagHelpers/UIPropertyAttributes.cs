@@ -14,7 +14,7 @@ namespace UDS.Net.Forms.TagHelpers
 
             var dictionary = "{" + string.Join(",", entries) + "}";
 
-            return "{\"" + Property + "\": " + dictionary + "}";
+            return "{\"" + Property + "\": " + dictionary + " }";
         }
         public UIPropertyAttributes()
         {

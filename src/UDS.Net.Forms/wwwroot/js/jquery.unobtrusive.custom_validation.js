@@ -11,33 +11,31 @@
 */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* Enabling/disabling fields */
-
+/* UI behavior affects on input fields */
 function setAffects(targets) {
-  //let arr = $.parseJSON(targets);
-  //console.log(targets);
+  $.each(targets, function (index, behavior) {
+    $.each(behavior, function (target, affects) {
+      //console.log(target);
+      $.each(affects, function (attribute, value) {
+        //console.log(attribute + " to " + value);
+        var element = $('[name="' + target + '"]');
+        if (element != 'undefined') {
 
-  $.each(targets, function (target, affects) {
-    $.each(affects, function (attribute, value) {
-
-      var element = $('[name="' + target + '"]');
-      if (element != 'undefined') {
-
-        if (attribute === "disabled") {
-          if (value === "true") {
-            element.attr('disabled', 'disabled');
-            element.attr('value', '');
-            element.removeAttr('checked');
-          }
-          else {
-            element.removeAttr('disabled');
+          if (attribute === "disabled") {
+            if (value === "true") {
+              element.attr('disabled', 'disabled');
+              element.attr('value', '');
+              element.removeAttr('checked');
+            }
+            else {
+              element.removeAttr('disabled');
+            }
           }
         }
-      }
-
-
+      });
     });
   });
+
 }
 
 $(function () {
@@ -56,6 +54,11 @@ $(function () {
         // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
 
       }
+      else if ($(this).data('affects-toggle-targets')) {
+        var isSelected = $(this).is(':checked');
+
+        console.log(isSelected);
+      }
 
       // watch
       $(this).on('change', function () {
@@ -63,7 +66,6 @@ $(function () {
         if ($(this).data('affects-targets')) {
           var targets = $(this).data('affects-targets');
           setAffects(targets);
-
         }
       });
     });

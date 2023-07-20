@@ -48,7 +48,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.AMNDEM"),
+                    new UIDisableAttribute("D1.AMNDEM"),
                     new UIDisableAttribute("D1.PCA"),
                     new UIDisableAttribute("D1.PPASYN"),
                     new UIDisableAttribute("D1.FTDSYN"),
@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A1.AMNDEM"),
+                    new UIEnableAttribute("D1.AMNDEM"),
                     new UIEnableAttribute("D1.PCA"),
                     new UIEnableAttribute("D1.PPASYN"),
                     new UIEnableAttribute("D1.FTDSYN"),
@@ -71,7 +71,12 @@ namespace UDS.Net.Forms.Pages.UDS3
             } },
         };
 
-        // TODO PPASYN checkbox enabling / disabled ui behavior for radio button group
+        // Checkbox attributes are in view, is there a way to move them here?
+        //public Dictionary<string, UIBehavior> PPASYNBehavior = new Dictionary<string, UIBehavior>
+        //{
+        //    { "true", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.PPASYNT") } },
+        //    { "false", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.PPASYNT") } }
+        //};
 
 
         public List<RadioListItem> PPASyndromeListItems { get; set; } = new List<RadioListItem>
