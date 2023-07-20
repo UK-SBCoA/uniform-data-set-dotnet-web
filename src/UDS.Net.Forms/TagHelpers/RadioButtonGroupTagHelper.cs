@@ -109,7 +109,7 @@ namespace UDS.Net.Forms.TagHelpers
             tagBuilder.Attributes["type"] = "radio";
             tagBuilder.Attributes["id"] = $"{Id}[{index}]";
             tagBuilder.Attributes["value"] = item.Value;
-            tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600";
+            tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
             if (!String.IsNullOrWhiteSpace(name))
             {
