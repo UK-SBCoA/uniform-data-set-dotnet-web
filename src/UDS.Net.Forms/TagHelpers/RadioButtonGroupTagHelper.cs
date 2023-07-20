@@ -15,7 +15,7 @@ namespace UDS.Net.Forms.TagHelpers
     {
         public IEnumerable<RadioListItem> Items { get; set; }
 
-        public List<UIBehavior> UIBehaviors { get; set; }
+        public Dictionary<string, UIBehavior> UIBehaviors { get; set; } = new Dictionary<string, UIBehavior>();
 
         public ModelExpression For { get; set; }
 
@@ -123,30 +123,23 @@ namespace UDS.Net.Forms.TagHelpers
             {
                 tagBuilder.Attributes["disabled"] = "disabled";
             }
-            if (UIBehaviors != null)
+            if (UIBehaviors != null && UIBehaviors.Count() > 0)
             {
                 foreach (var ui in UIBehaviors)
                 {
-                    if ((ui.Condition == UIBehaviorCondition.Equal && ui.Value == item.Value) ||
-                        (ui.Condition == UIBehaviorCondition.NotEqual && ui.Value != item.Value))
+                    if (ui.Key == item.Value)
                     {
-                        tagBuilder.Attributes["data-affects"] = ui.PropertyAttributes.ToJSON();
+                        tagBuilder.Attributes["data-affects"] = "true";
+                        string json = "";
+                        foreach (var att in ui.Value.PropertyAttributes)
+                        {
+                            json += att.ToJSON();
+                            if (ui.Value.PropertyAttributes.Count() > 1)
+                                json += ", ";
+                        }
+                        tagBuilder.Attributes["data-affects-targets"] = json;
                     }
                 }
-                //if (UIBehaviors.Where(u => u.Value == item.Value).Any())
-                //{
-                //    // if there are conditions for a matching value
-                //    var behaviors = UIBehaviors.Where(u => u.Condition == item.Value).ToList();
-
-                //    foreach (var behavior in behaviors)
-                //    {
-
-                //        var propertyToAffect = behavior.Property;
-                //        var condition = behavior.Condition;
-                //        var how = behavior.Attributes
-                //    }
-
-                //}
             }
 
             return tagBuilder;

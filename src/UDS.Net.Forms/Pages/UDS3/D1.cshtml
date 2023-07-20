@@ -69,7 +69,7 @@
             <label asp-for="D1.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.NORMCOG)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.NORMCOG"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.SimpleNoYesListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.SimpleNoYesListItems" ui-behaviors="Model.NORMCOGBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.NORMCOG"></span>
             </div>
         </div>
@@ -110,7 +110,7 @@
             <label asp-for="D1.DEMENTED"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.DEMENTED)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.DEMENTED"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.DEMENTED)" for="@Model.D1.DEMENTED" items="Model.SimpleNoYesListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.DEMENTED)" for="@Model.D1.DEMENTED" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DEMENTEDBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.DEMENTED"></span>
             </div>
         </div>

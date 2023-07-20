@@ -6,18 +6,41 @@ namespace UDS.Net.Forms.TagHelpers
 {
     public class UIBehavior
     {
-        public string Value { get; set; }
-
-        public UIBehaviorCondition Condition { get; set; }
-
-        public UIPropertyAttributes PropertyAttributes { get; set; }
-
-        public UIBehavior(string value, UIBehaviorCondition condition, UIPropertyAttributes propertyAttributes)
+        public UIPropertyAttributes PropertyAttribute
         {
-            Value = value;
-            Condition = condition;
-            PropertyAttributes = propertyAttributes;
+            set
+            {
+                PropertyAttributes.Add(value);
+            }
         }
+
+        public List<UIPropertyAttributes> PropertyAttributes { get; set; } = new List<UIPropertyAttributes>();
+
+        public string InstructionalMessage { get; set; }
+
+        public UIBehavior()
+        {
+
+        }
+
+        public UIBehavior(UIPropertyAttributes propertyAttribute, string? instructionalMessage = "")
+        {
+            PropertyAttributes.Add(propertyAttribute);
+            if (!String.IsNullOrWhiteSpace(instructionalMessage))
+            {
+                InstructionalMessage = instructionalMessage;
+            }
+        }
+
+        public UIBehavior(List<UIPropertyAttributes> propertyAttributes, string? instructionalMessage = "")
+        {
+            PropertyAttributes = propertyAttributes;
+            if (!String.IsNullOrWhiteSpace(instructionalMessage))
+            {
+                InstructionalMessage = instructionalMessage;
+            }
+        }
+
     }
 }
 

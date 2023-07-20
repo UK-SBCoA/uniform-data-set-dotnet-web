@@ -16,12 +16,16 @@ namespace UDS.Net.Forms.TagHelpers
 
             return "{\"" + Property + "\": " + dictionary + "}";
         }
+        public UIPropertyAttributes()
+        {
 
+        }
         public UIPropertyAttributes(string property, Dictionary<string, string> attributes)
         {
-            Property = property; // property to affect
+            Property = property;
             Attributes = attributes;
         }
+
     }
 }
 
