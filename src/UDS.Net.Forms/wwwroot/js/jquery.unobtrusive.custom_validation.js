@@ -12,32 +12,42 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields */
+function setAffect(target, attribute, value) {
+  let element = $('[name="' + target + '"]');
+  if (element !== 'undefined') {
+    if (attribute === 'disabled') {
+      if (value === 'true' || value === true) {
+        element.attr('disabled', 'disabled');
+        element.attr('value', '');
+        // TODO check the element type to decide how to set value to null
+        element.removeAttr('checked');
+      }
+      else {
+        element.removeAttr('disabled');
+      }
+    }
+  }
+}
 function setAffects(targets) {
   $.each(targets, function (index, behavior) {
     $.each(behavior, function (target, affects) {
       // console.log(target);
       $.each(affects, function (attribute, value) {
         // console.log(attribute + " to " + value);
-        let element = $('[name="' + target + '"]');
-        if (element !== 'undefined') {
-          if (attribute === 'disabled') {
-            if (value === 'true') {
-              element.attr('disabled', 'disabled');
-              element.attr('value', '');
-              element.removeAttr('checked');
-            }
-            else {
-              element.removeAttr('disabled');
-            }
-          }
-        }
+        setAffect(target, attribute, value);
       });
     });
   });
-
+}
+function toggleAffects(targets, isSelected) {
+  $.each(targets, function (index, target) {
+    // console.log(target + " disabled to " + !isSelected);
+    setAffect(target, 'disabled', !isSelected);
+  });
 }
 
 $(function () {
+  // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
   let affects = $('[data-affects]');
   if (affects.length) {
     affects.each(function () {
@@ -48,17 +58,23 @@ $(function () {
           let targets = $(this).data('affects-targets');
           setAffects(targets);
         }
-        // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
       }
       else if ($(this).data('affects-toggle-targets')) {
         let isSelected = $(this).is(':checked');
+        let toggleTargets = $(this).data('affects-toggle-targets');
+        toggleAffects(toggleTargets, isSelected);
       }
 
-      // watch
+      // watch for changes
       $(this).on('change', function () {
         if ($(this).data('affects-targets')) {
           let targets = $(this).data('affects-targets');
           setAffects(targets);
+        }
+        else if ($(this).data('affects-toggle-targets')) {
+          let isSelected = $(this).is(':checked');
+          let toggleTargets = $(this).data('affects-toggle-targets');
+          toggleAffects(toggleTargets, isSelected);
         }
       });
     });
