@@ -11,6 +11,67 @@
 */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* Enabling/disabling fields */
+
+function setAffects(targets) {
+  //let arr = $.parseJSON(targets);
+  //console.log(targets);
+
+  $.each(targets, function (target, affects) {
+    $.each(affects, function (attribute, value) {
+
+      var element = $('[name="' + target + '"]');
+      if (element != 'undefined') {
+
+        if (attribute === "disabled") {
+          if (value === "true") {
+            element.attr('disabled', 'disabled');
+            element.attr('value', '');
+            element.removeAttr('checked');
+          }
+          else {
+            element.removeAttr('disabled');
+          }
+        }
+      }
+
+
+    });
+  });
+}
+
+$(function () {
+  let affects = $('[data-affects]');
+  if (affects.length) {
+    affects.each(function () {
+
+      // set initial status
+      if ($(this).data('affects-targets')) {
+        var isSelected = $(this).is(':checked');
+
+        if (isSelected) {
+          var targets = $(this).data('affects-targets');
+          setAffects(targets);
+        }
+        // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
+
+      }
+
+      // watch
+      $(this).on('change', function () {
+
+        if ($(this).data('affects-targets')) {
+          var targets = $(this).data('affects-targets');
+          setAffects(targets);
+
+        }
+      });
+    });
+
+  }
+});
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Status */
 function setValidationStatus(statusValue, statusText) {
   // get the current form
