@@ -15,14 +15,13 @@
 function setAffects(targets) {
   $.each(targets, function (index, behavior) {
     $.each(behavior, function (target, affects) {
-      //console.log(target);
+      // console.log(target);
       $.each(affects, function (attribute, value) {
-        //console.log(attribute + " to " + value);
-        var element = $('[name="' + target + '"]');
-        if (element != 'undefined') {
-
-          if (attribute === "disabled") {
-            if (value === "true") {
+        // console.log(attribute + " to " + value);
+        let element = $('[name="' + target + '"]');
+        if (element !== 'undefined') {
+          if (attribute === 'disabled') {
+            if (value === 'true') {
               element.attr('disabled', 'disabled');
               element.attr('value', '');
               element.removeAttr('checked');
@@ -42,34 +41,27 @@ $(function () {
   let affects = $('[data-affects]');
   if (affects.length) {
     affects.each(function () {
-
       // set initial status
       if ($(this).data('affects-targets')) {
-        var isSelected = $(this).is(':checked');
-
+        let isSelected = $(this).is(':checked');
         if (isSelected) {
-          var targets = $(this).data('affects-targets');
+          let targets = $(this).data('affects-targets');
           setAffects(targets);
         }
         // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
-
       }
       else if ($(this).data('affects-toggle-targets')) {
-        var isSelected = $(this).is(':checked');
-
-        console.log(isSelected);
+        let isSelected = $(this).is(':checked');
       }
 
       // watch
       $(this).on('change', function () {
-
         if ($(this).data('affects-targets')) {
-          var targets = $(this).data('affects-targets');
+          let targets = $(this).data('affects-targets');
           setAffects(targets);
         }
       });
     });
-
   }
 });
 
