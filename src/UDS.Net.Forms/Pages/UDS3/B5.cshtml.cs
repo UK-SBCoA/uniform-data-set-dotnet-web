@@ -40,6 +40,96 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9"),
         };
 
+        public Dictionary<string, UIBehavior> NPIQINFUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.NPIQINFX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.NPIQINFX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.NPIQINFX") } }
+        };
+
+        public Dictionary<string, UIBehavior> DELUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.DELSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DELSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DELSEV") } }
+        };
+        public Dictionary<string, UIBehavior> HALLUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.HALLSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.HALLSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.HALLSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> AGITUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.AGITSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.AGITSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.AGITSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> DEPDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.DEPDSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DEPDSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DEPDSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> ANXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.ANXSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.ANXSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.ANXSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> ELATUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.ELATSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.ELATSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.ELATSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> APAUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.APASEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APASEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APASEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> DISNUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.DISNSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DISNSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.DISNSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> IRRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.IRRSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.IRRSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.IRRSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> MOTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.MOTSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.MOTSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.MOTSEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> NITEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.NITESEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.NITESEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.NITESEV") } }
+        };
+
+        public Dictionary<string, UIBehavior> APPUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B5.APPSEV") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APPSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APPSEV") } }
+        };
+
         public B5Model(IVisitService visitService) : base(visitService, "B5")
         {
         }
