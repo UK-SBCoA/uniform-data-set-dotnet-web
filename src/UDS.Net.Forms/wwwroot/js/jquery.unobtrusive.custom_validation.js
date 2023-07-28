@@ -47,12 +47,13 @@ function toggleAffects(targets, isSelected) {
 }
 
 $(function () {
-  // TODO if nothing is selected (possibly because it is disabled) choose a default state for the targets
   let affects = $('[data-affects]');
   if (affects.length) {
+    // for each input with data-affects check to see if it is selected or is a checkbox that should toggle
     affects.each(function () {
       // set initial status
       if ($(this).data('affects-targets')) {
+        // radio button groups
         let isSelected = $(this).is(':checked');
         if (isSelected) {
           let targets = $(this).data('affects-targets');
@@ -60,6 +61,7 @@ $(function () {
         }
       }
       else if ($(this).data('affects-toggle-targets')) {
+        // checkboxes
         let isSelected = $(this).is(':checked');
         let toggleTargets = $(this).data('affects-toggle-targets');
         toggleAffects(toggleTargets, isSelected);
@@ -77,6 +79,28 @@ $(function () {
           toggleAffects(toggleTargets, isSelected);
         }
       });
+    });
+
+    // after checking each input, check to see if some should have a default state
+    let allNames = affects.map(function () {
+      let name = $(this).attr('name');
+      return name;
+    });
+
+    let uniqueNames = jQuery.unique(allNames);
+    uniqueNames.each(function () {
+      let element = $('input[name="' + this + '"]');
+      if (element.is(':checked')) {
+        // console.log(element.attr('name') + " checked");
+      }
+      else {
+        let toggleTargets = element.data('affects-targets');
+        $.each(toggleTargets, function (index, behavior) {
+          $.each(behavior, function (target, affects) {
+            setAffect(target, 'disabled', true);
+          });
+        });
+      }
     });
   }
 });
