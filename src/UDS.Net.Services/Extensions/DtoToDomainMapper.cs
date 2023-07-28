@@ -175,9 +175,9 @@ namespace UDS.Net.Services.Extensions
             if (!string.IsNullOrWhiteSpace(dto.Language) && Int32.TryParse(dto.Language, out int languageValue))
             {
                 formLanguage = (FormLanguage)languageValue;
-            }
+            } 
             ReasonCode? reasonCode = null;
-            if (formStatus == FormStatus.NotIncluded && string.IsNullOrWhiteSpace(dto.ReasonCode) && Int32.TryParse(dto.ReasonCode, out int reasonCodeValue))
+            if (formStatus == FormStatus.NotIncluded && !string.IsNullOrWhiteSpace(dto.ReasonCode) && Int32.TryParse(dto.ReasonCode, out int reasonCodeValue))
             {
                 reasonCode = (ReasonCode)reasonCodeValue;
             }

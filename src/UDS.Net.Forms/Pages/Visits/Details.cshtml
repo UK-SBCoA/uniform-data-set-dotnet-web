@@ -66,7 +66,7 @@
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 p-6 py-12">
 
                 @foreach (var form in Model.Visit.Forms)
-                    {
+                {
                     <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
                         <div class="flex w-full items-center justify-between space-x-6 p-6">
                             <div class="flex-1 truncate">
@@ -76,14 +76,16 @@
                                     {
                                         <span class="inline-flex flex-shrink-0 items-center rounded-full bg-indigo-50 px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">Required</span>
                                     }
-                                    @if (form.Language == FormLanguage.English)
-                                    {
-                                        <span class="inline-flex flex-shrink-0 items-center rounded-full bg-indigo-75 px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">English</span>
+                                    @{
+                                        var cssClassFormLanguage = "bg-green-50";
+                                        if (form.Language == FormLanguage.English)
+                                            cssClassFormLanguage = "bg-green-75";
+                                        else if (form.Language == FormLanguage.Spanish)
+                                            cssClassFormLanguage = "bg-green-100";
                                     }
-                                    else if (form.Language == FormLanguage.Spanish)
-                                    {
-                                        <span class="inline-flex flex-shrink-0 items-center rounded-full bg-indigo-75 px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">Spanish</span>
-                                    }
+                                    <span class="@cssClassFormLanguage inline-flex flex-shrink-0 items-center rounded-full  px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                        @form.Language
+                                    </span>
                                 </div>
                                 <p class="mt-1 truncate text-sm text-gray-500">@form.Title</p>
                             </div>
@@ -96,6 +98,7 @@
                                 <div class="-ml-px flex w-0 flex-1">
                                     @{
                                         var cssClassFormState = "text-gray-900";
+
                                         if (form.Status == FormStatus.NotStarted)
                                             cssClassFormState = "text-red-500 border-transparent";
                                         else if (form.Status == FormStatus.InProgress)
@@ -104,9 +107,29 @@
                                             cssClassFormState = "text-teal-500 bg-teal-50 border-teal";
                                         else if (form.Status == FormStatus.NotIncluded)
                                             cssClassFormState = "text-teal-500 border-transparent";
+
                                     }
                                     <span class="@cssClassFormState relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border py-4 text-sm font-semibold">
                                         @form.Status
+                                    </span>
+
+                                    @{
+                                        var cssClassReason = "text-gray-900";
+
+                                        if (form.ReasonCodeNotIncluded == ReasonCode.CognitiveOrBehavioralProblem)
+                                            cssClassReason = "text-red-500 border-transparent";
+                                        else if (form.ReasonCodeNotIncluded == ReasonCode.OtherProblem)
+                                            cssClassReason = "text-indigo-500 border-transparent";
+                                        else if (form.ReasonCodeNotIncluded == ReasonCode.PhysicalProblem)
+                                            cssClassReason = "text-teal-500 bg-teal-50 border-teal";
+                                        else if (form.ReasonCodeNotIncluded == ReasonCode.UnknownOrInadequateInformation)
+                                            cssClassReason = "text-teal-500 border-transparent";
+                                        else if (form.ReasonCodeNotIncluded == ReasonCode.VerbalRefusal)
+                                            cssClassReason = "text-teal-500 border-transparent";
+
+                                    }
+                                    <span class="@cssClassReason relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border py-4 text-sm font-semibold">
+                                        @form.ReasonCodeNotIncluded
                                     </span>
                                 </div>
                             </div>
