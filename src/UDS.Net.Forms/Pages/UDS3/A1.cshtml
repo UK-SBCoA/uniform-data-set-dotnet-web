@@ -13,7 +13,7 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label asp-for="A1.REASON"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A1.REASON)</label>
@@ -104,7 +104,7 @@
 
 
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
@@ -214,7 +214,7 @@
             <label asp-for="@Model.A1.MARISTAT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.MARISTAT)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="MaritalStatuses" for="@Model.A1.MARISTAT" items="Model.MaritalStatusListItems"></radio-button-group>
-
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.MARISTAT"></span>
             </div>
         </div>
 
@@ -222,6 +222,7 @@
             <label asp-for="@Model.A1.LIVSITUA"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.LIVSITUA)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="LivingSituations" for="@Model.A1.LIVSITUA" items="Model.LivingSituationListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.LIVSITUA"></span>
             </div>
         </div>
 
@@ -229,6 +230,7 @@
             <label asp-for="@Model.A1.INDEPEND"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.INDEPEND)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="IndependenceLevels" for="@Model.A1.INDEPEND" items="Model.IndependenceLevelListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.INDEPEND"></span>
             </div>
         </div>
 
@@ -236,10 +238,11 @@
             <label asp-for="@Model.A1.RESIDENC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.RESIDENC)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="ResidenceTypes" for="@Model.A1.RESIDENC" items="Model.ResidenceTypeListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RESIDENC"></span>
             </div>
         </div>
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP)</label>
@@ -254,6 +257,7 @@
                 <label asp-for="@Model.A1.HANDED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.HANDED)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <radio-button-group id="ResidenceTypes" for="@Model.A1.HANDED" items="Model.HandednessListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HANDED"></span>
                 </div>
             </div>
         }
