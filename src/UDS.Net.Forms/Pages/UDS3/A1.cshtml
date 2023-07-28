@@ -79,16 +79,19 @@
         <div class="@rowCSS">
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Participant's month and year of birth</label>
-
             </div>
-            <div>
+            <div class="mt-2">
                 <label asp-for="@Model.A1.BIRTHMO">Month</label>
-                <input asp-for="@Model.A1.BIRTHMO" />
+                <div class="w-20">
+                    <input asp-for="@Model.A1.BIRTHMO" />
+                </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHMO"></span>
             </div>
-            <div>
+            <div class="mt-2">
                 <label asp-for="@Model.A1.BIRTHYR">Year</label>
-                <input asp-for="@Model.A1.BIRTHYR" />
+                <div class="w-40">
+                    <input asp-for="@Model.A1.BIRTHYR" />
+                </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHYR"></span>
             </div>
         </div>
@@ -204,7 +207,9 @@
                 <label asp-for="@Model.A1.EDUC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EDUC)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.EDUC"></p>
-                    <input asp-for="@Model.A1.EDUC" />
+                    <div class="mt-2 w-20">
+                        <input asp-for="@Model.A1.EDUC" />
+                    </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
                 </div>
             </div>
@@ -248,7 +253,9 @@
                 <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP)</label>
                 <div class="mt-4 sm:col-span-1 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.ZIP"></p>
-                    <input asp-for="@Model.A1.ZIP" />
+                    <div class="w-21">
+                        <input asp-for="@Model.A1.ZIP" />
+                    </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ZIP"></span>
                 </div>
             </div>
