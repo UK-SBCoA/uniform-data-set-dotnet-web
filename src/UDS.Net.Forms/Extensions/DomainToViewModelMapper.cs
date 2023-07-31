@@ -105,7 +105,8 @@ namespace UDS.Net.Forms.Extensions
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,
                 DeletedBy = form.DeletedBy,
-                IsDeleted = form.IsDeleted
+                IsDeleted = form.IsDeleted,
+                Language = form.Language
             };
 
             if (form.Fields != null)
