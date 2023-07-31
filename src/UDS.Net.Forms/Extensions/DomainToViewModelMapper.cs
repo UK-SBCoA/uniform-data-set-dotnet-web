@@ -12,6 +12,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
@@ -106,7 +107,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = form.ModifiedBy,
                 DeletedBy = form.DeletedBy,
                 IsDeleted = form.IsDeleted,
-                Language = form.Language
+                Language = form.Language,
+                ReasonCodeNotIncluded = form.ReasonCode
             };
 
             if (form.Fields != null)
