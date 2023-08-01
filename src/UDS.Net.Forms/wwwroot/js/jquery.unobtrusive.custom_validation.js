@@ -240,8 +240,6 @@ $.validator.unobtrusive.adapters.add('birthmonth', ['maximum', 'minimum', 'allow
     let maximum = parseInt(options.params.maximum);
     let allowUnknown = options.params.allowunknown; // TODO parse bool
 
-    console.log(allowUnknown);
-
     options.rules.birthmonth = [element, { allowUnknown, maximum, minimum }];
 
     options.messages.birthmonth = options.message;
@@ -282,7 +280,6 @@ $.validator.unobtrusive.adapters.add('birthyear', ['allowunknown', 'maximum', 'm
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Diagnosis */
 $.validator.addMethod('diagnosis', function (value, element, params) {
-  console.log(element);
   let codes = [40, 41, 42, 43, 44, 45, 50, 70, 80, 100, 110, 120, 130, 131, 132, 133, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 310, 320, 400, 410, 420, 421, 430, 431, 432, 433, 434, 435, 436, 439, 440, 450, 490, 999];
   if (codes.includes(value)) {
     return true;
@@ -320,7 +317,9 @@ $.validator.addMethod('requiredif', function (value, element, params) {
     let selected = watched.val();
     let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
     if (selected == watchedFieldIsRequiredValue) {
-      return false;
+      if (value === '') {
+        return false;
+      }
     }
   }
 
@@ -349,3 +348,61 @@ $.validator.unobtrusive.adapters.add('requiredif', ['watchedfield', 'watchedfiel
     options.messages.requiredif = options.message;
   });
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* RequiredIfRange */
+$.validator.addMethod('requiredifrange', function (value, element, params) {
+  let parameters = params[1];
+  let watchedFieldName = parameters.watchedfield;
+
+  let watched = $('input[name="' + watchedFieldName + '"]');
+  if (watched.length) {
+    let watchedValue = watched.val();
+    if (watchedValue.length) {
+      let watchedInt = parseInt(watchedValue);
+      let lowInt = parseInt(parameters.lowvalue);
+      let highInt = parseInt(parameters.highvalue);
+
+      if (watchedInt >= lowInt && watchedInt <= highInt) {
+        // if within range field is required
+        if (value === '') {
+          return false;
+        }
+      }
+    }
+  }
+
+  return true;
+});
+
+$.validator.unobtrusive.adapters.add('requiredifrange', ['watchedfield', 'lowvalue', 'highvalue'],
+  function (options) {
+    let watchedFieldName = options.params.watchedfield;
+    let watched = $('input[name="' + watchedFieldName + '"]');
+    if (watched.length) {
+      watched.on('change', function () {
+        // clear the validation if the watched field is changed to outside the range
+        let watchedValue = watched.val();
+        if (watchedValue.length) {
+          let watchedInt = parseInt(watchedValue);
+          let lowInt = parseInt(options.params.lowvalue);
+          let highInt = parseInt(options.params.highvalue);
+          if (watchedInt <= lowInt || watchedInt >= highInt) {
+            // outside the range, reset everything
+
+            let element = $(options.element);
+            if (element.length) {
+              // reset css
+              element.removeClass('input-validation-error');
+              element.addClass('block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none');
+              // reset error messages
+              let validator = $('#UDSForm').validate();
+              validator.form();
+            }
+          }
+        }
+      });
+    }
+    options.rules.requiredifrange = [options.element, options.params]; // rules are required for the onChange event to trigger validation
+    options.messages.requiredifrange = options.message;
+  });
