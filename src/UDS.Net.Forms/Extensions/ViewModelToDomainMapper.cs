@@ -70,7 +70,7 @@ namespace UDS.Net.Forms.Extensions
             else if (vm is T1)
                 return ((T1)vm).ToEntity();
             else
-                return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
+                return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
         }
 
         public static Form ToEntity(this A1 vm)
@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Extensions
                 HANDED = vm.HANDED
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this A2 vm)
@@ -133,7 +133,7 @@ namespace UDS.Net.Forms.Extensions
                 INRELY = vm.INRELY
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this A3 vm)
@@ -174,7 +174,7 @@ namespace UDS.Net.Forms.Extensions
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)
@@ -200,15 +200,23 @@ namespace UDS.Net.Forms.Extensions
                 A4Ds = vm.DrugIds.Select(d => d.ToEntity()).ToList()
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static A4DFormFields ToEntity(this string drugId)
+        public static A4DFormFields ToEntity(this DrugCodeModel vm)
         {
+
             return new A4DFormFields
             {
-                DRUGID = drugId
+                Id = vm.Id.HasValue ? vm.Id.Value : 0,
+                DRUGID = vm.DrugId,
+                CreatedAt = vm.CreatedAt,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                DeletedBy = vm.DeletedBy,
+                IsDeleted = vm.IsDeleted.HasValue ? vm.IsDeleted.Value : false
             };
+
         }
 
         public static Form ToEntity(this A5 vm)
@@ -257,10 +265,10 @@ namespace UDS.Net.Forms.Extensions
                 ARTHRIT = vm.ARTHRIT,
                 ARTHTYPE = vm.ARTHTYPE,
                 ARTHTYPX = vm.ARTHTYPX,
-                ARTHUPEX = vm.ARTHUPEX,
-                ARTHLOEX = vm.ARTHLOEX,
-                ARTHSPIN = vm.ARTHSPIN,
-                ARTHUNK = vm.ARTHUNK,
+                ARTHUPEX = vm.ARTHUPEX ? 1 : 0,
+                ARTHLOEX = vm.ARTHLOEX ? 1 : 0,
+                ARTHSPIN = vm.ARTHSPIN ? 1 : 0,
+                ARTHUNK = vm.ARTHUNK ? 1 : 0,
                 INCONTU = vm.INCONTU,
                 INCONTF = vm.INCONTF,
                 APNEA = vm.APNEA,
@@ -283,7 +291,7 @@ namespace UDS.Net.Forms.Extensions
                 PSYCDISX = vm.PSYCDISX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B1 vm)
@@ -303,7 +311,7 @@ namespace UDS.Net.Forms.Extensions
                 HEARWAID = vm.HEARWAID
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B4 vm)
@@ -322,7 +330,7 @@ namespace UDS.Net.Forms.Extensions
                 CDRLANG = vm.CDRLANG,
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B5 vm)
@@ -357,7 +365,7 @@ namespace UDS.Net.Forms.Extensions
                 APPSEV = vm.APPSEV
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B6 vm)
@@ -383,7 +391,7 @@ namespace UDS.Net.Forms.Extensions
                 GDS = vm.GDS
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B7 vm)
@@ -402,7 +410,7 @@ namespace UDS.Net.Forms.Extensions
                 TRAVEL = vm.TRAVEL
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B8 vm)
@@ -455,7 +463,7 @@ namespace UDS.Net.Forms.Extensions
                 OTHNEURX = vm.OTHNEURX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this B9 vm)
@@ -521,7 +529,7 @@ namespace UDS.Net.Forms.Extensions
                 FTLDEVAL = vm.FTLDEVAL
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this C1 vm)
@@ -577,7 +585,7 @@ namespace UDS.Net.Forms.Extensions
                 COGSTAT = vm.COGSTAT
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this C2 vm)
@@ -656,7 +664,7 @@ namespace UDS.Net.Forms.Extensions
                 COGSTAT = vm.COGSTAT
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this D1 vm)
@@ -666,30 +674,30 @@ namespace UDS.Net.Forms.Extensions
                 DXMETHOD = vm.DXMETHOD,
                 NORMCOG = vm.NORMCOG,
                 DEMENTED = vm.DEMENTED,
-                AMNDEM = vm.AMNDEM,
-                PCA = vm.PCA,
-                PPASYN = vm.PPASYN,
+                AMNDEM = vm.AMNDEM ? 1 : 0,
+                PCA = vm.PCA ? 1 : 0,
+                PPASYN = vm.PPASYN ? 1 : 0,
                 PPASYNT = vm.PPASYNT,
-                FTDSYN = vm.FTDSYN,
-                LBDSYN = vm.LBDSYN,
-                NAMNDEM = vm.NAMNDEM,
-                MCIAMEM = vm.MCIAMEM,
-                MCIAPLUS = vm.MCIAPLUS,
+                FTDSYN = vm.FTDSYN ? 1 : 0,
+                LBDSYN = vm.LBDSYN ? 1 : 0,
+                NAMNDEM = vm.NAMNDEM ? 1 : 0,
+                MCIAMEM = vm.MCIAMEM ? 1 : 0,
+                MCIAPLUS = vm.MCIAPLUS ? 1 : 0,
                 MCIAPLAN = vm.MCIAPLAN,
                 MCIAPATT = vm.MCIAPATT,
                 MCIAPEX = vm.MCIAPEX,
                 MCIAPVIS = vm.MCIAPVIS,
-                MCINON1 = vm.MCINON1,
+                MCINON1 = vm.MCINON1 ? 1 : 0,
                 MCIN1LAN = vm.MCIN1LAN,
                 MCIN1ATT = vm.MCIN1ATT,
                 MCIN1EX = vm.MCIN1EX,
                 MCIN1VIS = vm.MCIN1VIS,
-                MCINON2 = vm.MCINON2,
+                MCINON2 = vm.MCINON2 ? 1 : 0,
                 MCIN2LAN = vm.MCIN2LAN,
                 MCIN2ATT = vm.MCIN2ATT,
                 MCIN2EX = vm.MCIN2EX,
                 MCIN2VIS = vm.MCIN2VIS,
-                IMPNOMCI = vm.IMPNOMCI,
+                IMPNOMCI = vm.IMPNOMCI ? 1 : 0,
                 AMYLPET = vm.AMYLPET,
                 AMYLCSF = vm.AMYLCSF,
                 FDGAD = vm.FDGAD,
@@ -712,89 +720,89 @@ namespace UDS.Net.Forms.Extensions
                 FTLDMUT = vm.FTLDMUT,
                 OTHMUT = vm.OTHMUT,
                 OTHMUTX = vm.OTHMUTX,
-                ALZDIS = vm.ALZDIS,
+                ALZDIS = vm.ALZDIS ? 1 : 0,
                 ALZDISIF = vm.ALZDISIF,
-                LBDIS = vm.LBDIS,
+                LBDIS = vm.LBDIS ? 1 : 0,
                 LBDIF = vm.LBDIF,
-                PARK = vm.PARK,
-                MSA = vm.MSA,
+                PARK = vm.PARK ? 1 : 0,
+                MSA = vm.MSA ? 1 : 0,
                 MSAIF = vm.MSAIF,
-                PSP = vm.PSP,
+                PSP = vm.PSP ? 1 : 0,
                 PSPIF = vm.PSPIF,
-                CORT = vm.CORT,
+                CORT = vm.CORT ? 1 : 0,
                 CORTIF = vm.CORTIF,
-                FTLDMO = vm.FTLDMO,
+                FTLDMO = vm.FTLDMO ? 1 : 0,
                 FTLDMOIF = vm.FTLDMOIF,
-                FTLDNOS = vm.FTLDNOS,
+                FTLDNOS = vm.FTLDNOS ? 1 : 0,
                 FTLDNOIF = vm.FTLDNOIF,
                 FTLDSUBT = vm.FTLDSUBT,
                 FTLDSUBX = vm.FTLDSUBX,
-                CVD = vm.CVD,
+                CVD = vm.CVD ? 1 : 0,
                 CVDIF = vm.CVDIF,
                 PREVSTK = vm.PREVSTK,
                 STROKDEC = vm.STROKDEC,
                 STKIMAG = vm.STKIMAG,
                 INFNETW = vm.INFNETW,
                 INFWMH = vm.INFWMH,
-                ESSTREM = vm.ESSTREM,
+                ESSTREM = vm.ESSTREM ? 1 : 0,
                 ESSTREIF = vm.ESSTREIF,
-                DOWNS = vm.DOWNS,
+                DOWNS = vm.DOWNS ? 1 : 0,
                 DOWNSIF = vm.DOWNSIF,
-                HUNT = vm.HUNT,
+                HUNT = vm.HUNT ? 1 : 0,
                 HUNTIF = vm.HUNTIF,
-                PRION = vm.PRION,
+                PRION = vm.PRION ? 1 : 0,
                 PRIONIF = vm.PRIONIF,
-                BRNINJ = vm.BRNINJ,
+                BRNINJ = vm.BRNINJ ? 1 : 0,
                 BRNINJIF = vm.BRNINJIF,
                 BRNINCTE = vm.BRNINCTE,
-                HYCEPH = vm.HYCEPH,
+                HYCEPH = vm.HYCEPH ? 1 : 0,
                 HYCEPHIF = vm.HYCEPHIF,
-                EPILEP = vm.EPILEP,
+                EPILEP = vm.EPILEP ? 1 : 0,
                 EPILEPIF = vm.EPILEPIF,
-                NEOP = vm.NEOP,
+                NEOP = vm.NEOP ? 1 : 0,
                 NEOPIF = vm.NEOPIF,
                 NEOPSTAT = vm.NEOPSTAT,
-                HIV = vm.HIV,
+                HIV = vm.HIV ? 1 : 0,
                 HIVIF = vm.HIVIF,
-                OTHCOG = vm.OTHCOG,
+                OTHCOG = vm.OTHCOG ? 1 : 0,
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX,
-                DEP = vm.DEP,
+                DEP = vm.DEP ? 1 : 0,
                 DEPIF = vm.DEPIF,
                 DEPTREAT = vm.DEPTREAT,
-                BIPOLDX = vm.BIPOLDX,
+                BIPOLDX = vm.BIPOLDX ? 1 : 0,
                 BIPOLDIF = vm.BIPOLDIF,
-                SCHIZOP = vm.SCHIZOP,
+                SCHIZOP = vm.SCHIZOP ? 1 : 0,
                 SCHIZOIF = vm.SCHIZOIF,
-                ANXIET = vm.ANXIET,
+                ANXIET = vm.ANXIET ? 1 : 0,
                 ANXIETIF = vm.ANXIETIF,
-                DELIR = vm.DELIR,
+                DELIR = vm.DELIR ? 1 : 0,
                 DELIRIF = vm.DELIRIF,
-                PTSDDX = vm.PTSDDX,
+                PTSDDX = vm.PTSDDX ? 1 : 0,
                 PTSDDXIF = vm.PTSDDXIF,
-                OTHPSY = vm.OTHPSY,
+                OTHPSY = vm.OTHPSY ? 1 : 0,
                 OTHPSYIF = vm.OTHPSYIF,
                 OTHPSYX = vm.OTHPSYX,
                 ALCDEMIF = vm.ALCDEMIF,
                 ALCABUSE = vm.ALCABUSE,
-                IMPSUB = vm.IMPSUB,
+                IMPSUB = vm.IMPSUB ? 1 : 0,
                 IMPSUBIF = vm.IMPSUBIF,
-                DYSILL = vm.DYSILL,
+                DYSILL = vm.DYSILL ? 1 : 0,
                 DYSILLIF = vm.DYSILLIF,
-                MEDS = vm.MEDS,
+                MEDS = vm.MEDS ? 1 : 0,
                 MEDSIF = vm.MEDSIF,
-                COGOTH = vm.COGOTH,
+                COGOTH = vm.COGOTH ? 1 : 0,
                 COGOTHIF = vm.COGOTHIF,
                 COGOTHX = vm.COGOTHX,
-                COGOTH2 = vm.COGOTH2,
+                COGOTH2 = vm.COGOTH2 ? 1 : 0,
                 COGOTH2F = vm.COGOTH2F,
                 COGOTH2X = vm.COGOTH2X,
-                COGOTH3 = vm.COGOTH3,
+                COGOTH3 = vm.COGOTH3 ? 1 : 0,
                 COGOTH3F = vm.COGOTH3F,
                 COGOTH3X = vm.COGOTH3X
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this D2 vm)
@@ -836,7 +844,7 @@ namespace UDS.Net.Forms.Extensions
                 OTHCONDX = vm.OTHCONDX
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static Form ToEntity(this T1 vm)
@@ -855,7 +863,7 @@ namespace UDS.Net.Forms.Extensions
                 TELMILE = vm.TELMILE
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.IncludeInPacketSubmission, vm.ReasonCodeNotIncluded.ToString(), vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
     }
 }

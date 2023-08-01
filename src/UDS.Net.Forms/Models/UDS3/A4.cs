@@ -8,13 +8,18 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class A4 : FormModel
     {
-        [Display(Name = "")]
+        [Display(Name = "Is the participant currently taking any medications?")]
         public int? ANYMEDS { get; set; }
 
-        public List<string> DrugIds { get; set; } = new List<string>();
+        public List<DrugCodeModel> DrugIds { get; set; } = new List<DrugCodeModel>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
             yield break;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Forms.Pages.UDS3;
 using UDS.Net.Services;
 
@@ -17,11 +19,13 @@ namespace UDS.Net.Forms.Models.PageModels
         [BindProperty]
         public VisitModel Visit { get; set; } = default!;
 
+        public FormModel BaseForm { get; set; }
+
         public string PageTitle
         {
             get
             {
-                if (_formModel != null)
+                if (BaseForm != null)
                 {
                     return $"Participant {Visit.ParticipationId} Visit {Visit.Number} {Visit.Kind}";
                 }
@@ -29,9 +33,9 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
+
         protected readonly IVisitService _visitService;
         protected string _formKind { get; set; }
-        protected FormModel _formModel;
 
         public FormPageModel(IVisitService visitService, string formKind) : base()
         {
@@ -44,7 +48,7 @@ namespace UDS.Net.Forms.Models.PageModels
             if (id == null || _formKind == null)
                 return NotFound();
 
-            var visit = await _visitService.GetByIdWithForm("", id.Value, _formKind);
+            var visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id.Value, _formKind);
 
             if (visit == null)
                 return NotFound();
@@ -53,7 +57,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             var form = visit.Forms.Where(f => f.Kind.Contains(_formKind)).FirstOrDefault();
 
-            _formModel = form.ToVM(); // this will have the subclass
+            BaseForm = form.ToVM(); // this will have the subclass
 
             return Page();
         }
@@ -63,22 +67,46 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             var visit = Visit.ToEntity();
 
-            // check rules for the visit
-            visit.TryValidate(_formKind);
-
-            if (visit.IsValid)
+            if (BaseForm.Status == Services.Enums.FormStatus.Complete)
             {
-                await _visitService.UpdateForm("", visit, _formKind);
-            }
-            else
-            {
-                // update model state with errors
-                var errors = visit.GetModelErrors();
-                foreach (var error in errors)
+                /*
+                 * ValidationContext describes any member on which validation is performed. It also enables
+                 * custom validation to be added through any service that implements the IServiceProvider
+                 * interface.
+                 */
+                Dictionary<object, object?> visitContext = new Dictionary<object, object?>
                 {
-                    ModelState.AddModelError(error.MemberName, error.ErrorMessage); // TODO how can the full name be resolved?
+                    { "Visit", this.Visit }
+                };
+
+                foreach (var result in BaseForm.Validate(new ValidationContext(BaseForm, null, visitContext)))
+                {
+                    var memberName = result.MemberNames.FirstOrDefault();
+                    ModelState.AddModelError($"{BaseForm.GetType().Name}.{memberName}", result.ErrorMessage);
                 }
             }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, _formKind);
+
+                    return RedirectToAction("Details", "Visits", new { Id = Visit.Id });
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Status", ex.Message);
+                }
+            }
+
+            // repopulate the visit for navigation menus
+            visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id, _formKind);
+
+            if (visit == null)
+                return NotFound(); // this should never be possible, but just in case
+
+            Visit = visit.ToVM();
 
             return Page();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels
 {
@@ -48,13 +49,13 @@ namespace UDS.Net.Services.DomainModels
 
         public string Kind { get; set; }
 
-        public string Status { get; set; }
+        public FormStatus Status { get; set; }
 
-        public string Language { get; set; }
+        public FormLanguage Language { get; set; }
 
-        public bool? IsIncluded { get; set; }
+        public bool? IsIncluded { get; private set; } // Is Included is persisted as Status (Not Included)
 
-        public string ReasonCode { get; set; }
+        public ReasonCode? ReasonCode { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -115,7 +116,7 @@ namespace UDS.Net.Services.DomainModels
 
             IsRequiredForVisitKind = isRequired;
 
-            Status = "NotStarted"; // TODO change to enum
+            Status = FormStatus.NotStarted;
 
             CreatedBy = createdBy;
 
@@ -125,7 +126,7 @@ namespace UDS.Net.Services.DomainModels
             SetFieldsBasedOnKind();
         }
 
-        public Form(int visitId, int id, string title, string kind, string status, string language, bool? isIncluded, string reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
             VisitId = visitId;
@@ -134,7 +135,7 @@ namespace UDS.Net.Services.DomainModels
             Kind = kind;
             Status = status;
             Language = language;
-            IsIncluded = isIncluded;
+            IsIncluded = !(Status == FormStatus.NotIncluded);
             ReasonCode = reasonCode;
 
             CreatedAt = createdAt;
@@ -149,7 +150,7 @@ namespace UDS.Net.Services.DomainModels
             }
         }
 
-        public Form(int visitId, int id, string title, string kind, bool isRequired, string status, string language, bool? isIncluded, string reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
             VisitId = visitId;
@@ -159,7 +160,7 @@ namespace UDS.Net.Services.DomainModels
             IsRequiredForVisitKind = isRequired;
             Status = status;
             Language = language;
-            IsIncluded = isIncluded;
+            IsIncluded = !(Status == FormStatus.NotIncluded);
             ReasonCode = reasonCode;
 
             CreatedAt = createdAt;

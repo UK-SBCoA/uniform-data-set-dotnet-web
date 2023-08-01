@@ -63,6 +63,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 SEX = a1Dto.SEX;
                 HISPANIC = a1Dto.HISPANIC;
                 HISPOR = a1Dto.HISPOR;
+                HISPORX = a1Dto.HISPORX;
                 RACE = a1Dto.RACE;
                 RACEX = a1Dto.RACEX;
                 RACESEC = a1Dto.RACESEC;

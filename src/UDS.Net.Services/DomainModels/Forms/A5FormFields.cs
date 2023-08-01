@@ -100,6 +100,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ALCFREQ = a5Dto.ALCFREQ;
                 this.CVHATT = a5Dto.CVHATT;
                 this.HATTMULT = a5Dto.HATTMULT;
+                this.HATTYEAR = a5Dto.HATTYEAR;
                 this.CVAFIB = a5Dto.CVAFIB;
                 this.CVANGIO = a5Dto.CVANGIO;
                 this.CVBYPASS = a5Dto.CVBYPASS;
@@ -118,6 +119,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.PD = a5Dto.PD;
                 this.PDYR = a5Dto.PDYR;
                 this.PDOTHR = a5Dto.PDOTHR;
+                this.PDOTHRYR = a5Dto.PDOTHRYR;
                 this.SEIZURES = a5Dto.SEIZURES;
                 this.TBI = a5Dto.TBI;
                 this.TBIBRIEF = a5Dto.TBIBRIEF;

@@ -27,6 +27,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "0ther (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(MOCALAN), "3", ErrorMessage = "Specify other language used")]
+        [SpecialCharacter]
         public string? MOCALANX { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to visual impairment")]
@@ -136,6 +137,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(NPSYLAN), "3", ErrorMessage = "Specify other language used")]
+        [SpecialCharacter]
         public string? NPSYLANX { get; set; }
 
         [Display(Name = "Total story units recalled, verbatim scoring")]
@@ -285,6 +287,11 @@ namespace UDS.Net.Forms.Models.UDS3
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
             yield break;
         }
     }

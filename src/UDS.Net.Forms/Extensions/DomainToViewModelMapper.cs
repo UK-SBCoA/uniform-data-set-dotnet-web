@@ -12,6 +12,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
 {
@@ -21,13 +22,12 @@ namespace UDS.Net.Forms.Extensions
         {
             vm.VisitId = form.VisitId;
             vm.Version = form.Version;
-            vm.Status = form.Status; // TODO
+            vm.Status = form.Status;
             vm.Kind = form.Kind;
             vm.Title = form.Title;
             vm.Description = form.Description;
             vm.IsRequiredForVisitKind = form.IsRequiredForVisitKind;
-            vm.IncludeInPacketSubmission = form.IsIncluded.HasValue ? form.IsIncluded.Value : false;
-            vm.ReasonNotIncluded = form.ReasonCode;
+            vm.ReasonCodeNotIncluded = form.ReasonCode;
             vm.CreatedAt = form.CreatedAt;
             vm.CreatedBy = form.CreatedBy;
             vm.ModifiedBy = form.ModifiedBy;
@@ -101,7 +101,6 @@ namespace UDS.Net.Forms.Extensions
                 Title = form.Title,
                 Description = form.Description,
                 IsRequiredForVisitKind = form.IsRequiredForVisitKind,
-                IncludeInPacketSubmission = form.IsIncluded.HasValue ? form.IsIncluded.Value : false,
                 CreatedAt = form.CreatedAt,
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,
@@ -309,7 +308,53 @@ namespace UDS.Net.Forms.Extensions
             {
                 Id = formId,
                 ANYMEDS = fields.ANYMEDS,
-                DrugIds = fields.A4Ds.Select(d => d.DRUGID).ToList()
+                DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
+                {
+                    Id = d.Id,
+                    DrugId = d.DRUGID,
+                    CreatedAt = d.CreatedAt,
+                    CreatedBy = d.CreatedBy,
+                    ModifiedBy = d.ModifiedBy,
+                    DeletedBy = d.DeletedBy,
+                    IsDeleted = d.IsDeleted,
+                    IsSelected = !d.IsDeleted,
+                    DrugName = d.DrugCode != null ? d.DrugCode.DrugName : "",
+                    BrandName = d.DrugCode != null ? d.DrugCode.BrandName : "",
+                    IsOverTheCounter = d.DrugCode != null ? d.DrugCode.IsOverTheCounter : false,
+                    IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false
+                }).ToList()
+            };
+        }
+
+        public static DrugCodeModel ToVM(this DrugCode drugCode, DrugCodeModel? a4 = null)
+        {
+            if (a4 == null)
+            {
+                return new DrugCodeModel
+                {
+                    DrugId = drugCode.DrugId,
+                    DrugName = drugCode.DrugName,
+                    BrandName = drugCode.BrandName,
+                    IsPopular = drugCode.IsPopular,
+                    IsOverTheCounter = drugCode.IsOverTheCounter,
+                    IsSelected = false
+                };
+            }
+            // combines drug code reference with data from A4D record
+            return new DrugCodeModel
+            {
+                Id = a4.Id,
+                DrugId = drugCode.DrugId,
+                DrugName = drugCode.DrugName,
+                BrandName = drugCode.BrandName,
+                IsPopular = drugCode.IsPopular,
+                IsOverTheCounter = drugCode.IsOverTheCounter,
+                IsSelected = a4.IsDeleted.HasValue ? !a4.IsDeleted.Value : false, // there is no concept of isSelected persisted in the database (if the row is there and it's not deleted then it is selected)
+                CreatedAt = a4.CreatedAt,
+                CreatedBy = a4.CreatedBy,
+                ModifiedBy = a4.ModifiedBy,
+                DeletedBy = a4.DeletedBy,
+                IsDeleted = a4.IsDeleted
             };
         }
 
@@ -327,6 +372,7 @@ namespace UDS.Net.Forms.Extensions
                 ALCFREQ = fields.ALCFREQ,
                 CVHATT = fields.CVHATT,
                 HATTMULT = fields.HATTMULT,
+                HATTYEAR = fields.HATTYEAR,
                 CVAFIB = fields.CVAFIB,
                 CVANGIO = fields.CVANGIO,
                 CVBYPASS = fields.CVBYPASS,
@@ -345,6 +391,7 @@ namespace UDS.Net.Forms.Extensions
                 PD = fields.PD,
                 PDYR = fields.PDYR,
                 PDOTHR = fields.PDOTHR,
+                PDOTHRYR = fields.PDOTHRYR,
                 SEIZURES = fields.SEIZURES,
                 TBI = fields.TBI,
                 TBIBRIEF = fields.TBIBRIEF,
@@ -360,10 +407,10 @@ namespace UDS.Net.Forms.Extensions
                 ARTHRIT = fields.ARTHRIT,
                 ARTHTYPE = fields.ARTHTYPE,
                 ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX,
-                ARTHLOEX = fields.ARTHLOEX,
-                ARTHSPIN = fields.ARTHSPIN,
-                ARTHUNK = fields.ARTHUNK,
+                ARTHUPEX = fields.ARTHUPEX.HasValue ? fields.ARTHUPEX.Value != 0 : false,
+                ARTHLOEX = fields.ARTHLOEX.HasValue ? fields.ARTHLOEX.Value != 0 : false,
+                ARTHSPIN = fields.ARTHSPIN.HasValue ? fields.ARTHSPIN.Value != 0 : false,
+                ARTHUNK = fields.ARTHUNK.HasValue ? fields.ARTHUNK.Value != 0 : false,
                 INCONTU = fields.INCONTU,
                 INCONTF = fields.INCONTF,
                 APNEA = fields.APNEA,
@@ -758,30 +805,30 @@ namespace UDS.Net.Forms.Extensions
                 DXMETHOD = fields.DXMETHOD,
                 NORMCOG = fields.NORMCOG,
                 DEMENTED = fields.DEMENTED,
-                AMNDEM = fields.AMNDEM,
-                PCA = fields.PCA,
-                PPASYN = fields.PPASYN,
+                AMNDEM = fields.AMNDEM.HasValue ? fields.AMNDEM.Value != 0 : false,
+                PCA = fields.PCA.HasValue ? fields.PCA.Value != 0 : false,
+                PPASYN = fields.PPASYN.HasValue ? fields.PPASYN.Value != 0 : false,
                 PPASYNT = fields.PPASYNT,
-                FTDSYN = fields.FTDSYN,
-                LBDSYN = fields.LBDSYN,
-                NAMNDEM = fields.NAMNDEM,
-                MCIAMEM = fields.MCIAMEM,
-                MCIAPLUS = fields.MCIAPLUS,
+                FTDSYN = fields.FTDSYN.HasValue ? fields.FTDSYN.Value != 0 : false,
+                LBDSYN = fields.LBDSYN.HasValue ? fields.LBDSYN.Value != 0 : false,
+                NAMNDEM = fields.NAMNDEM.HasValue ? fields.NAMNDEM.Value != 0 : false,
+                MCIAMEM = fields.MCIAMEM.HasValue ? fields.MCIAMEM.Value != 0 : false,
+                MCIAPLUS = fields.MCIAPLUS.HasValue ? fields.MCIAPLUS.Value != 0 : false,
                 MCIAPLAN = fields.MCIAPLAN,
                 MCIAPATT = fields.MCIAPATT,
                 MCIAPEX = fields.MCIAPEX,
                 MCIAPVIS = fields.MCIAPVIS,
-                MCINON1 = fields.MCINON1,
+                MCINON1 = fields.MCINON1.HasValue ? fields.MCINON1.Value != 0 : false,
                 MCIN1LAN = fields.MCIN1LAN,
                 MCIN1ATT = fields.MCIN1ATT,
                 MCIN1EX = fields.MCIN1EX,
                 MCIN1VIS = fields.MCIN1VIS,
-                MCINON2 = fields.MCINON2,
+                MCINON2 = fields.MCINON2.HasValue ? fields.MCINON2.Value != 0 : false,
                 MCIN2LAN = fields.MCIN2LAN,
                 MCIN2ATT = fields.MCIN2ATT,
                 MCIN2EX = fields.MCIN2EX,
                 MCIN2VIS = fields.MCIN2VIS,
-                IMPNOMCI = fields.IMPNOMCI,
+                IMPNOMCI = fields.IMPNOMCI.HasValue ? fields.IMPNOMCI.Value != 0 : false,
                 AMYLPET = fields.AMYLPET,
                 AMYLCSF = fields.AMYLCSF,
                 FDGAD = fields.FDGAD,
@@ -804,84 +851,84 @@ namespace UDS.Net.Forms.Extensions
                 FTLDMUT = fields.FTLDMUT,
                 OTHMUT = fields.OTHMUT,
                 OTHMUTX = fields.OTHMUTX,
-                ALZDIS = fields.ALZDIS,
+                ALZDIS = fields.ALZDIS.HasValue ? fields.ALZDIS.Value != 0 : false,
                 ALZDISIF = fields.ALZDISIF,
-                LBDIS = fields.LBDIS,
+                LBDIS = fields.LBDIS.HasValue ? fields.LBDIS.Value != 0 : false,
                 LBDIF = fields.LBDIF,
-                PARK = fields.PARK,
-                MSA = fields.MSA,
+                PARK = fields.PARK.HasValue ? fields.PARK.Value != 0 : false,
+                MSA = fields.MSA.HasValue ? fields.MSA.Value != 0 : false,
                 MSAIF = fields.MSAIF,
-                PSP = fields.PSP,
+                PSP = fields.PSP.HasValue ? fields.PSP.Value != 0 : false,
                 PSPIF = fields.PSPIF,
-                CORT = fields.CORT,
+                CORT = fields.CORT.HasValue ? fields.CORT.Value != 0 : false,
                 CORTIF = fields.CORTIF,
-                FTLDMO = fields.FTLDMO,
+                FTLDMO = fields.FTLDMO.HasValue ? fields.FTLDMO.Value != 0 : false,
                 FTLDMOIF = fields.FTLDMOIF,
-                FTLDNOS = fields.FTLDNOS,
+                FTLDNOS = fields.FTLDNOS.HasValue ? fields.FTLDNOS.Value != 0 : false,
                 FTLDNOIF = fields.FTLDNOIF,
                 FTLDSUBT = fields.FTLDSUBT,
                 FTLDSUBX = fields.FTLDSUBX,
-                CVD = fields.CVD,
+                CVD = fields.CVD.HasValue ? fields.CVD.Value != 0 : false,
                 CVDIF = fields.CVDIF,
                 PREVSTK = fields.PREVSTK,
                 STROKDEC = fields.STROKDEC,
                 STKIMAG = fields.STKIMAG,
                 INFNETW = fields.INFNETW,
                 INFWMH = fields.INFWMH,
-                ESSTREM = fields.ESSTREM,
+                ESSTREM = fields.ESSTREM.HasValue ? fields.ESSTREM.Value != 0 : false,
                 ESSTREIF = fields.ESSTREIF,
-                DOWNS = fields.DOWNS,
+                DOWNS = fields.DOWNS.HasValue ? fields.DOWNS.Value != 0 : false,
                 DOWNSIF = fields.DOWNSIF,
-                HUNT = fields.HUNT,
+                HUNT = fields.HUNT.HasValue ? fields.HUNT.Value != 0 : false,
                 HUNTIF = fields.HUNTIF,
-                PRION = fields.PRION,
+                PRION = fields.PRION.HasValue ? fields.PRION.Value != 0 : false,
                 PRIONIF = fields.PRIONIF,
-                BRNINJ = fields.BRNINJ,
+                BRNINJ = fields.BRNINJ.HasValue ? fields.BRNINJ.Value != 0 : false,
                 BRNINJIF = fields.BRNINJIF,
                 BRNINCTE = fields.BRNINCTE,
-                HYCEPH = fields.HYCEPH,
+                HYCEPH = fields.HYCEPH.HasValue ? fields.HYCEPH.Value != 0 : false,
                 HYCEPHIF = fields.HYCEPHIF,
-                EPILEP = fields.EPILEP,
+                EPILEP = fields.EPILEP.HasValue ? fields.EPILEP.Value != 0 : false,
                 EPILEPIF = fields.EPILEPIF,
-                NEOP = fields.NEOP,
+                NEOP = fields.NEOP.HasValue ? fields.NEOP.Value != 0 : false,
                 NEOPIF = fields.NEOPIF,
                 NEOPSTAT = fields.NEOPSTAT,
-                HIV = fields.HIV,
+                HIV = fields.HIV.HasValue ? fields.HIV.Value != 0 : false,
                 HIVIF = fields.HIVIF,
-                OTHCOG = fields.OTHCOG,
+                OTHCOG = fields.OTHCOG.HasValue ? fields.OTHCOG.Value != 0 : false,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX,
-                DEP = fields.DEP,
+                DEP = fields.DEP.HasValue ? fields.DEP.Value != 0 : false,
                 DEPIF = fields.DEPIF,
                 DEPTREAT = fields.DEPTREAT,
-                BIPOLDX = fields.BIPOLDX,
+                BIPOLDX = fields.BIPOLDX.HasValue ? fields.BIPOLDX.Value != 0 : false,
                 BIPOLDIF = fields.BIPOLDIF,
-                SCHIZOP = fields.SCHIZOP,
+                SCHIZOP = fields.SCHIZOP.HasValue ? fields.SCHIZOP.Value != 0 : false,
                 SCHIZOIF = fields.SCHIZOIF,
-                ANXIET = fields.ANXIET,
+                ANXIET = fields.ANXIET.HasValue ? fields.ANXIET.Value != 0 : false,
                 ANXIETIF = fields.ANXIETIF,
-                DELIR = fields.DELIR,
+                DELIR = fields.DELIR.HasValue ? fields.DELIR.Value != 0 : false,
                 DELIRIF = fields.DELIRIF,
-                PTSDDX = fields.PTSDDX,
+                PTSDDX = fields.PTSDDX.HasValue ? fields.PTSDDX.Value != 0 : false,
                 PTSDDXIF = fields.PTSDDXIF,
-                OTHPSY = fields.OTHPSY,
+                OTHPSY = fields.OTHPSY.HasValue ? fields.OTHPSY.Value != 0 : false,
                 OTHPSYIF = fields.OTHPSYIF,
                 OTHPSYX = fields.OTHPSYX,
                 ALCDEMIF = fields.ALCDEMIF,
                 ALCABUSE = fields.ALCABUSE,
-                IMPSUB = fields.IMPSUB,
+                IMPSUB = fields.IMPSUB.HasValue ? fields.IMPSUB.Value != 0 : false,
                 IMPSUBIF = fields.IMPSUBIF,
-                DYSILL = fields.DYSILL,
+                DYSILL = fields.DYSILL.HasValue ? fields.DYSILL.Value != 0 : false,
                 DYSILLIF = fields.DYSILLIF,
-                MEDS = fields.MEDS,
+                MEDS = fields.MEDS.HasValue ? fields.MEDS.Value != 0 : false,
                 MEDSIF = fields.MEDSIF,
-                COGOTH = fields.COGOTH,
+                COGOTH = fields.COGOTH.HasValue ? fields.COGOTH.Value != 0 : false,
                 COGOTHIF = fields.COGOTHIF,
                 COGOTHX = fields.COGOTHX,
-                COGOTH2 = fields.COGOTH2,
+                COGOTH2 = fields.COGOTH2.HasValue ? fields.COGOTH2.Value != 0 : false,
                 COGOTH2F = fields.COGOTH2F,
                 COGOTH2X = fields.COGOTH2X,
-                COGOTH3 = fields.COGOTH3,
+                COGOTH3 = fields.COGOTH3.HasValue ? fields.COGOTH3.Value != 0 : false,
                 COGOTH3F = fields.COGOTH3F,
                 COGOTH3X = fields.COGOTH3X
             };
