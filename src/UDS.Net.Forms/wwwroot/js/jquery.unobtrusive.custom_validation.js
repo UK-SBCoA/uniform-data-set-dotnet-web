@@ -11,16 +11,21 @@
 */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* UI behavior affects on input fields */
+/* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
   let element = $('[name="' + target + '"]');
-  if (element !== 'undefined') {
+  if (element.length) {
     if (attribute === 'disabled') {
       if (value === 'true' || value === true) {
         element.attr('disabled', 'disabled');
         element.attr('value', '');
         // TODO check the element type to decide how to set value to null
-        element.removeAttr('checked');
+        if (element.is(':radio') || element.is(':checked')) {
+          element.removeAttr('checked');
+        }
+        else {
+          element.val('');
+        }
       }
       else {
         element.removeAttr('disabled');
@@ -45,6 +50,31 @@ function toggleAffects(targets, isSelected) {
     setAffect(target, 'disabled', !isSelected);
   });
 }
+function compareRange(low, high, targets, value) {
+  if (value === '') {
+    $.each(targets, function (index, behavior) {
+      $.each(behavior, function (target, affects) {
+        setAffect(target, 'disabled', true);
+      });
+    });
+  }
+  else {
+    if (value >= low && value <= high) {
+      $.each(targets, function (index, behavior) {
+        $.each(behavior, function (target, affects) {
+          setAffect(target, 'disabled', false);
+        });
+      });
+    }
+    else {
+      $.each(targets, function (index, behavior) {
+        $.each(behavior, function (target, affects) {
+          setAffect(target, 'disabled', true);
+        });
+      });
+    }
+  }
+}
 
 $(function () {
   let affects = $('[data-affects]');
@@ -53,11 +83,13 @@ $(function () {
     affects.each(function () {
       // set initial status
       if ($(this).data('affects-targets')) {
-        // radio button groups
-        let isSelected = $(this).is(':checked');
-        if (isSelected) {
-          let targets = $(this).data('affects-targets');
-          setAffects(targets);
+        if ($(this).is(':radio')) {
+          // radio button groups
+          let isSelected = $(this).is(':checked');
+          if (isSelected) {
+            let targets = $(this).data('affects-targets');
+            setAffects(targets);
+          }
         }
       }
       else if ($(this).data('affects-toggle-targets')) {
@@ -65,6 +97,14 @@ $(function () {
         let isSelected = $(this).is(':checked');
         let toggleTargets = $(this).data('affects-toggle-targets');
         toggleAffects(toggleTargets, isSelected);
+      }
+      else if ($(this).data('affects-range-targets')) {
+        // text or number inputs
+        let low = $(this).data('affects-range-low');
+        let high = $(this).data('affects-range-high');
+        let targets = $(this).data('affects-range-targets');
+
+        compareRange(low, high, targets, $(this).val());
       }
 
       // watch for changes
@@ -78,6 +118,14 @@ $(function () {
           let toggleTargets = $(this).data('affects-toggle-targets');
           toggleAffects(toggleTargets, isSelected);
         }
+        else if ($(this).data('affects-range-targets')) {
+          // change event fires when input unfocused
+          let low = $(this).data('affects-range-low');
+          let high = $(this).data('affects-range-high');
+          let targets = $(this).data('affects-range-targets');
+
+          compareRange(low, high, targets, $(this).val());
+        }
       });
     });
 
@@ -90,17 +138,22 @@ $(function () {
     let uniqueNames = jQuery.unique(allNames);
     uniqueNames.each(function () {
       let element = $('input[name="' + this + '"]');
-      if (element.is(':checked')) {
-        // console.log(element.attr('name') + " checked");
-      }
-      else {
-        let toggleTargets = element.data('affects-targets');
-        $.each(toggleTargets, function (index, behavior) {
-          $.each(behavior, function (target, affects) {
-            setAffect(target, 'disabled', true);
+
+      if (element.is(':radio')) {
+        if (element.is(':checked')) {
+          // console.log(element.attr('name') + " checked");
+        }
+        else {
+          let toggleTargets = element.data('affects-targets');
+          $.each(toggleTargets, function (index, behavior) {
+            $.each(behavior, function (target, affects) {
+              setAffect(target, 'disabled', true);
+            });
           });
-        });
+        }
       }
+      // text inputs with ranges defaults are set with compareRange()
+
     });
   }
 });
@@ -255,3 +308,44 @@ $.validator.unobtrusive.adapters.add('specialcharacter', [], function (options) 
   options.rules.specialcharacter = true;
   options.messages.specialcharacter = options.message;
 });
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* RequiredIf */
+$.validator.addMethod('requiredif', function (value, element, params) {
+  let parameters = params[1];
+  let watchedFieldName = parameters.watchedfield;
+
+  let watched = $('input[name="' + watchedFieldName + '"]:checked');
+  if (watched.length) {
+    let selected = watched.val();
+    let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
+    if (selected == watchedFieldIsRequiredValue) {
+      return false;
+    }
+  }
+
+  return true;
+});
+
+$.validator.unobtrusive.adapters.add('requiredif', ['watchedfield', 'watchedfieldvalue'],
+  function (options) {
+    let watchedFieldName = options.params.watchedfield;
+    let watched = $('input[name="' + watchedFieldName + '"]');
+    if (watched.length) {
+      watched.on('change', function () {
+        // clear the validation if the watched field is changed
+        let element = $(options.element);
+        if (element.length) {
+          // reset css
+          element.removeClass('input-validation-error');
+          element.addClass('block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none');
+          // reset error messages
+          let validator = $('#UDSForm').validate();
+          validator.form();
+        }
+      });
+    }
+    options.rules.requiredif = [options.element, options.params]; // rules are required for the onChange event to trigger validation
+    options.messages.requiredif = options.message;
+  });
+

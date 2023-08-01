@@ -62,7 +62,13 @@ namespace UDS.Net.Forms.DataAnnotations
         {
             MergeAttribute(context.Attributes, "data-val", "true");
             MergeAttribute(context.Attributes, "data-val-requiredif", this.ErrorMessage);
-            MergeAttribute(context.Attributes, "data-val-requiredif-watchedfield", _watchedField);
+            string watched = _watchedField;
+            var containerName = context.ModelMetadata.ContainerType.Name;
+            if (!String.IsNullOrEmpty(containerName))
+            {
+                watched = containerName + "." + _watchedField;
+            }
+            MergeAttribute(context.Attributes, "data-val-requiredif-watchedfield", watched);
             MergeAttribute(context.Attributes, "data-val-requiredif-watchedfieldvalue", _watchedFieldValue);
         }
 
