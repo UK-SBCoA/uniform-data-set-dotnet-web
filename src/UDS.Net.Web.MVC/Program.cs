@@ -14,6 +14,7 @@ using Microsoft.Identity.Web.UI;
 using Microsoft.Identity.Client;
 using Microsoft.Extensions.Caching.Cosmos;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -46,6 +47,35 @@ builder.Services.AddControllersWithViews(options =>
 builder.Services.AddRazorPages()
     .AddMicrosoftIdentityUI();
 
+var mvcBuilder = builder.Services.AddControllersWithViews();
+
+
+////*************************************************************************************************
+// Only used during development
+// Runtime compilation of razor assets. Read more here: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-7.0&tabs=visual-studio#enable-runtime-compilation-conditionally
+
+if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
+{
+    mvcBuilder.AddRazorRuntimeCompilation(); // this can't be configured in startup assembly for RCL runtime compilation, it must be here. The fix is available soon in .NET 7 https://github.com/dotnet/aspnetcore/issues/38465
+
+    // Is also required for runtime compilation of Razor Class Library UDS.Net.Forms
+    builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
+    {
+        var libraryPath = "";
+        if (System.Environment.OSVersion.Platform != PlatformID.Win32NT)
+        {
+            libraryPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
+        }
+
+        if (!String.IsNullOrWhiteSpace(libraryPath))
+        {
+            options.FileProviders.Add(new PhysicalFileProvider(libraryPath));
+        }
+    });
+
+}
+
+////*************************************************************************************************
 
 ////*************************************************************************************************
 // Replace API and implemented services with your own if you don't want to use the included API here
