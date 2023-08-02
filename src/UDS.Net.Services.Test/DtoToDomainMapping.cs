@@ -237,7 +237,7 @@ public class DtoToDomainMapping
                     MOMYOB = TESTINT,
                     MOMDAGE = TESTINT,
                     MOMNEUR = TESTINT,
-                    // TODO MOMPRDX
+                    MOMPRDX = TESTINT,
                     MOMMOE = TESTINT,
                     MOMAGEO = TESTINT,
                     DADMOB = TESTINT,
