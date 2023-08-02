@@ -130,6 +130,7 @@ $(function () {
     });
 
     // after checking each input, check to see if some should have a default state
+    // text inputs with ranges defaults are set with compareRange()
     let allNames = affects.map(function () {
       let name = $(this).attr('name');
       return name;
@@ -152,8 +153,6 @@ $(function () {
           });
         }
       }
-      // text inputs with ranges defaults are set with compareRange()
-
     });
   }
 });
@@ -316,7 +315,7 @@ $.validator.addMethod('requiredif', function (value, element, params) {
   if (watched.length) {
     let selected = watched.val();
     let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
-    if (selected == watchedFieldIsRequiredValue) {
+    if (selected === watchedFieldIsRequiredValue) {
       if (value === '') {
         return false;
       }
@@ -347,7 +346,6 @@ $.validator.unobtrusive.adapters.add('requiredif', ['watchedfield', 'watchedfiel
     options.rules.requiredif = [options.element, options.params]; // rules are required for the onChange event to trigger validation
     options.messages.requiredif = options.message;
   });
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* RequiredIfRange */
