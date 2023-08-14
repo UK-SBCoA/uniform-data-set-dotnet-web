@@ -10,6 +10,7 @@ using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Forms.Pages.UDS3;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Models.PageModels
@@ -67,7 +68,7 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             var visit = Visit.ToEntity();
 
-            if (BaseForm.Status == Services.Enums.FormStatus.Complete)
+            if (BaseForm.Status == FormStatus.Complete || BaseForm.Status == FormStatus.NotIncluded)
             {
                 /*
                  * ValidationContext describes any member on which validation is performed. It also enables
