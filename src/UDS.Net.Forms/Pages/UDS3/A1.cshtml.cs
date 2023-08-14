@@ -22,9 +22,16 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> HispanicLatinoListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No  (If No, SKIP TO QUESTION 9)", "1"),
+            new RadioListItem("No ", "1"),
             new RadioListItem("Yes", "2"),
-            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 9)", "9")
+            new RadioListItem("Unknown", "9")
+        };
+
+        public Dictionary<string, UIBehavior> HispanicLatinoUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPOR"), InstructionalMessage = "If No, SKIP TO QUESTION 9" } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.HISPOR")} },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.HISPOR")} }
         };
 
         public List<RadioListItem> OriginsListItems { get; } = new List<RadioListItem>
@@ -35,8 +42,20 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Dominican", "4"),
             new RadioListItem("Central American", "5"),
             new RadioListItem("South American", "6"),
-            new RadioListItem("Other (specify)", "50", new Dictionary<string, string> { { "HISPORX", "disabled" } }),
+            new RadioListItem("Other (specify)", "50"),
             new RadioListItem("Unknown","99")
+        };
+
+        public Dictionary<string, UIBehavior> OriginsUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
+            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.HISPORX")  } },
+            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } }
         };
 
         public List<RadioListItem> RacialGroupsListItems { get; } = new List<RadioListItem>
@@ -50,6 +69,41 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "99")
         };
 
+        public Dictionary<string, UIBehavior> RacialGroupsUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACEX")  } },
+            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } }
+        };
+
+        public Dictionary<string, UIBehavior> RacialGroupsSecondaryUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACESECX")  } },
+            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } }
+        };
+
+        public Dictionary<string, UIBehavior> RacialGroupsTertiaryUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACETERX")  } },
+            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } }
+        };
+
+        // Property, condition, attribute and value
+
         public List<RadioListItem> ParticipationReasonsListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("To participate in a research study", "1"),
@@ -60,14 +114,26 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> ReferralSourcesListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("Self-referral", "1", new Dictionary<string, string> { { "LEARNED", "disabled" } }),
-            new RadioListItem("Non-professional contact (spouse/partner, relative, friend, coworker, etc.)", "2", new Dictionary<string, string> { { "LEARNED", "disabled" } }),
+            new RadioListItem("Self-referral", "1"),
+            new RadioListItem("Non-professional contact (spouse/partner, relative, friend, coworker, etc.)", "2"),
             new RadioListItem("ADC participant referral", "3"),
             new RadioListItem("ADC clinician, staff, or investigator referral", "4"),
             new RadioListItem("Nurse, doctor, or other health care provider", "5"),
             new RadioListItem("Other research study clinician/staff/investigator (non-ADC; e.g., ADNI, Women's Health Initiative)", "6"),
             new RadioListItem("Other", "8"),
             new RadioListItem("Unknown", "9")
+        };
+
+        public Dictionary<string, UIBehavior> ReferralSourcesUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED")  } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } }
         };
 
         public List<RadioListItem> SecondaryReferralSourcesListItems { get; } = new List<RadioListItem>
@@ -115,6 +181,18 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Japanese", "6"),
             new RadioListItem("Other (specify)", "8"),
             new RadioListItem("Unknown", "9"),
+        };
+
+        public Dictionary<string, UIBehavior> LanguageUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.PRIMLANX")  } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } }
         };
 
         public List<RadioListItem> MaritalStatusListItems { get; } = new List<RadioListItem>

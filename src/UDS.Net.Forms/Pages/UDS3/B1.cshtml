@@ -80,16 +80,16 @@
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISION)" for="@Model.B1.VISION" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
                 </tr>
+            </tbody>
+            <tbody class="divide-y divide-gray-200 subcounterreset">
                 <tr>
                     <td>
                         <label asp-for="B1.VISCORR"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.VISCORR)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B1.VISCORR"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.VISCORR"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISCORR)" for="@Model.B1.VISCORR" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.VISCORR)" for="@Model.B1.VISCORR" items="Model.BasicYesNoListItems" ui-behaviors="Model.VISCORRUIBehavior"></table-cell-radio-buttons>
                 </tr>
-            </tbody>
-            <tbody class="subcounterreset">
                 <tr>
                     <td>
                         <label asp-for="B1.VISWCORR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B1.VISWCORR)</label>
@@ -100,22 +100,22 @@
                 </tr>
                 <tr>
                     <td>
-                        <label asp-for="B1.HEARAID"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEARAID)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B1.HEARAID"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARAID"></span>
+                        <label asp-for="B1.HEARING"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEARING)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B1.HEARING"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARING"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARAID" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARING" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
                 </tr>
+            </tbody>
+            <tbody class="divide-y divide-gray-200 subcounterreset">
                 <tr>
                     <td>
                         <label asp-for="B1.HEARAID"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEARAID)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B1.HEARAID"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEARAID"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARAID" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B1.HEARAID)" for="@Model.B1.HEARAID" items="Model.BasicYesNoListItems" ui-behaviors="Model.HEARAIDUIBehavior"></table-cell-radio-buttons>
                 </tr>
-            </tbody>
-            <tbody class="subcounterreset">
                 <tr>
                     <td>
                         <label asp-for="B1.HEARWAID"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B1.HEARWAID)</label>

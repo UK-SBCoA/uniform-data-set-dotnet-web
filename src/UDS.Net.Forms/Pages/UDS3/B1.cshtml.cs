@@ -25,6 +25,20 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public Dictionary<string, UIBehavior> VISCORRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B1.VISWCORR") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B1.VISWCORR") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B1.VISWCORR") } }
+        };
+
+        public Dictionary<string, UIBehavior> HEARAIDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B1.HEARWAID") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B1.HEARWAID") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B1.HEARWAID") } }
+        };
+
         public B1Model(IVisitService visitService) : base(visitService, "B1")
         {
         }

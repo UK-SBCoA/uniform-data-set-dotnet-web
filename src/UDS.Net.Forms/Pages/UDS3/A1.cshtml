@@ -13,7 +13,7 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label asp-for="A1.REASON"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A1.REASON)</label>
@@ -31,7 +31,7 @@
                     <label asp-for="A1.REFERSC"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.REFERSC)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A1.REFERSC"></p>
-                        <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems"></radio-button-group>
+                        <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.ReferralSourcesUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.REFERSC"></span>
 
                     </div>
@@ -79,16 +79,19 @@
         <div class="@rowCSS">
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Participant's month and year of birth</label>
-
             </div>
-            <div>
+            <div class="mt-2">
                 <label asp-for="@Model.A1.BIRTHMO">Month</label>
-                <input asp-for="@Model.A1.BIRTHMO" />
+                <div class="w-20">
+                    <input asp-for="@Model.A1.BIRTHMO" />
+                </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHMO"></span>
             </div>
-            <div>
+            <div class="mt-2">
                 <label asp-for="@Model.A1.BIRTHYR">Year</label>
-                <input asp-for="@Model.A1.BIRTHYR" />
+                <div class="w-40">
+                    <input asp-for="@Model.A1.BIRTHYR" />
+                </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHYR"></span>
             </div>
         </div>
@@ -104,13 +107,13 @@
 
 
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.HISPANIC"></p>
-                    <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems"></radio-button-group>
+                    <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems" ui-behaviors="Model.HispanicLatinoUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPANIC"></span>
                 </div>
             </div>
@@ -119,14 +122,14 @@
                 <label asp-for="A1.HISPOR" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPOR)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPOR"></p>
-                    <radio-button-group id="Origins" for="@Model.A1.HISPOR" items="Model.OriginsListItems"></radio-button-group>
+                    <radio-button-group id="A1.HISPOR" for="@Model.A1.HISPOR" items="Model.OriginsListItems" ui-behaviors="Model.OriginsUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPOR"></span>
                 </div>
                 <div class="mt-4 space-y-4">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPORX"></p>
                     <label asp-for="@Model.A1.HISPORX">@Html.DisplayNameFor(m => m.A1.HISPORX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.HISPORX" />
+                        <input asp-for="@Model.A1.HISPORX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPORX"></span>
                 </div>
@@ -136,14 +139,14 @@
                 <label asp-for="A1.RACE" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACE)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACE"></p>
-                    <radio-button-group id="RacialGroups" for="@Model.A1.RACE" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACE" for="@Model.A1.RACE" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACE"></span>
                 </div>
                 <div class="mt-4 space-y-4">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACEX"></p>
                     <label asp-for="@Model.A1.RACEX">@Html.DisplayNameFor(m => m.A1.RACEX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.RACEX" />
+                        <input asp-for="@Model.A1.RACEX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACEX"></span>
                 </div>
@@ -153,14 +156,14 @@
                 <label asp-for="A1.RACESEC" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACESEC)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESEC"></p>
-                    <radio-button-group id="RacialGroupsSecondary" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACESEC" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsSecondaryUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESEC"></span>
                 </div>
                 <div class="mt-4 space-y-4">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESECX"></p>
                     <label asp-for="@Model.A1.RACESECX">@Html.DisplayNameFor(m => m.A1.RACESECX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.RACESECX" />
+                        <input asp-for="@Model.A1.RACESECX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESECX"></span>
                 </div>
@@ -170,14 +173,14 @@
                 <label asp-for="A1.RACETER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACETER)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="A1.RACETER"></p>
-                    <radio-button-group id="RacialGroupsTertiary" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems"></radio-button-group>
+                    <radio-button-group id="A1.RACETER" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsTertiaryUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETER"></span>
                 </div>
                 <div class="mt-4 space-y-4">
                     <p class="text-sm text-gray-500" asp-description-for="A1.RACETERX"></p>
                     <label asp-for="@Model.A1.RACETERX">@Html.DisplayNameFor(m => m.A1.RACETERX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.RACETERX" />
+                        <input asp-for="@Model.A1.RACETERX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETERX"></span>
                 </div>
@@ -187,14 +190,14 @@
                 <label asp-for="A1.PRIMLANG"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRIMLANG)</label>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANG"></p>
-                    <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage"></radio-button-group>
+                    <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANG"></span>
                 </div>
                 <div>
                     <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANX"></p>
                     <label asp-for="@Model.A1.PRIMLANX">@Html.DisplayNameFor(m => m.A1.PRIMLANX)</label>
                     <div class="mt-2">
-                        <input asp-for="@Model.A1.PRIMLANX" />
+                        <input asp-for="@Model.A1.PRIMLANX" disabled="disabled" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANX"></span>
                 </div>
@@ -204,7 +207,9 @@
                 <label asp-for="@Model.A1.EDUC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EDUC)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.EDUC"></p>
-                    <input asp-for="@Model.A1.EDUC" />
+                    <div class="mt-2 w-20">
+                        <input asp-for="@Model.A1.EDUC" />
+                    </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
                 </div>
             </div>
@@ -214,7 +219,7 @@
             <label asp-for="@Model.A1.MARISTAT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.MARISTAT)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="MaritalStatuses" for="@Model.A1.MARISTAT" items="Model.MaritalStatusListItems"></radio-button-group>
-
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.MARISTAT"></span>
             </div>
         </div>
 
@@ -222,6 +227,7 @@
             <label asp-for="@Model.A1.LIVSITUA"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.LIVSITUA)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="LivingSituations" for="@Model.A1.LIVSITUA" items="Model.LivingSituationListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.LIVSITUA"></span>
             </div>
         </div>
 
@@ -229,6 +235,7 @@
             <label asp-for="@Model.A1.INDEPEND"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.INDEPEND)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="IndependenceLevels" for="@Model.A1.INDEPEND" items="Model.IndependenceLevelListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.INDEPEND"></span>
             </div>
         </div>
 
@@ -236,16 +243,19 @@
             <label asp-for="@Model.A1.RESIDENC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.RESIDENC)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <radio-button-group id="ResidenceTypes" for="@Model.A1.RESIDENC" items="Model.ResidenceTypeListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RESIDENC"></span>
             </div>
         </div>
 
-        @if (Model.Visit != null && Model.Visit.Kind == VisitKind.IVP)
+        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
         {
             <div class="@rowCSS">
                 <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP)</label>
                 <div class="mt-4 sm:col-span-1 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="A1.ZIP"></p>
-                    <input asp-for="@Model.A1.ZIP" />
+                    <div class="w-21">
+                        <input asp-for="@Model.A1.ZIP" />
+                    </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ZIP"></span>
                 </div>
             </div>
@@ -254,6 +264,7 @@
                 <label asp-for="@Model.A1.HANDED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.HANDED)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <radio-button-group id="ResidenceTypes" for="@Model.A1.HANDED" items="Model.HandednessListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HANDED"></span>
                 </div>
             </div>
         }
