@@ -43,6 +43,7 @@ namespace UDS.Net.Forms.Models
 
         public string? ModifiedBy { get; set; }
 
+        [RequiredIf(nameof(IsDeleted), "true", ErrorMessage = "Include username of who deleted the form.")]
         public string? DeletedBy { get; set; }
 
         [Required]

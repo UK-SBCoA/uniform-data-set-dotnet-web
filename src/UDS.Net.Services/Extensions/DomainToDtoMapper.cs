@@ -363,7 +363,7 @@ namespace UDS.Net.Services.Extensions
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMNEUR = fields.MOMNEUR,
-                //MOMPRDX = fields.MOMPRDX, /// TODO Add property to A3 dto
+                MOMPRDX = fields.MOMPRDX,
                 MOMMOE = fields.MOMMOE,
                 MOMAGEO = fields.MOMAGEO,
                 DADMOB = fields.DADMOB,

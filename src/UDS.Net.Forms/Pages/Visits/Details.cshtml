@@ -76,6 +76,23 @@
                                     {
                                         <span class="inline-flex flex-shrink-0 items-center rounded-full bg-indigo-50 px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">Required</span>
                                     }
+                                    @{
+                                        var cssClassFormLanguage = "bg-green-50";
+                                        if (form.Language == FormLanguage.English)
+                                            cssClassFormLanguage = "bg-green-75";
+                                        else if (form.Language == FormLanguage.Spanish)
+                                            cssClassFormLanguage = "bg-green-100";
+                                    }
+                                    @if (form.Language != FormLanguage.English && form.Language != FormLanguage.Spanish)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <span class="@cssClassFormLanguage inline-flex flex-shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                            @form.Language
+                                        </span>
+                                    }
                                 </div>
                                 <p class="mt-1 truncate text-sm text-gray-500">@form.Title</p>
                             </div>
@@ -88,6 +105,7 @@
                                 <div class="-ml-px flex w-0 flex-1">
                                     @{
                                         var cssClassFormState = "text-gray-900";
+
                                         if (form.Status == FormStatus.NotStarted)
                                             cssClassFormState = "text-red-500 border-transparent";
                                         else if (form.Status == FormStatus.InProgress)
@@ -96,9 +114,17 @@
                                             cssClassFormState = "text-teal-500 bg-teal-50 border-teal";
                                         else if (form.Status == FormStatus.NotIncluded)
                                             cssClassFormState = "text-teal-500 border-transparent";
+
                                     }
                                     <span class="@cssClassFormState relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border py-4 text-sm font-semibold">
-                                        @form.Status
+                                        @if (form.Status == FormStatus.NotIncluded)
+                                        {
+                                            @form.ReasonCodeNotIncluded
+                                        }
+                                        else
+                                        {
+                                            @form.Status
+                                        }
                                     </span>
                                 </div>
                             </div>

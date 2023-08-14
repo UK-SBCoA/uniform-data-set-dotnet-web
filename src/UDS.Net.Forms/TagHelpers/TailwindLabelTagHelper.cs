@@ -13,6 +13,8 @@ namespace UDS.Net.Forms.TagHelpers
         [HtmlAttributeName(ForAttributeName)]
         public ModelExpression For { get; set; }
 
+        public bool ShowPropertyName { get; set; } = true;
+
         private const string css = "text-base font-semibold text-gray-900";
         // block text-sm font-medium leading-6 text-gray-900
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -21,18 +23,20 @@ namespace UDS.Net.Forms.TagHelpers
 
             output.Attributes.Add("class", css);
 
-            // TODO check for user preferences on whether they want to see UDS variables and wrap this in a conditional
-            string propertyName = "";
-
-            propertyName = this.For.Name; // TODO there is a way to get the property name without a prefix, do it
-
-            if (!String.IsNullOrEmpty(propertyName))
+            if (ShowPropertyName)
             {
-                TagBuilder tag = new TagBuilder("p");
-                tag.AddCssClass("mt-1 text-sm leading-6 text-gray-400");
+                string propertyName = "";
 
-                tag.InnerHtml.Append(propertyName);
-                output.Content.AppendHtml(tag);
+                propertyName = this.For.Name; // TODO there is a way to get the property name without a prefix, do it
+
+                if (!String.IsNullOrEmpty(propertyName))
+                {
+                    TagBuilder tag = new TagBuilder("p");
+                    tag.AddCssClass("mt-1 text-sm leading-6 text-gray-400");
+
+                    tag.InnerHtml.Append(propertyName);
+                    output.Content.AppendHtml(tag);
+                }
             }
         }
     }
