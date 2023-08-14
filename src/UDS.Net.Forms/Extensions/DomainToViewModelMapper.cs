@@ -12,6 +12,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
@@ -105,7 +106,9 @@ namespace UDS.Net.Forms.Extensions
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,
                 DeletedBy = form.DeletedBy,
-                IsDeleted = form.IsDeleted
+                IsDeleted = form.IsDeleted,
+                Language = form.Language,
+                ReasonCodeNotIncluded = form.ReasonCode
             };
 
             if (form.Fields != null)
@@ -372,6 +375,7 @@ namespace UDS.Net.Forms.Extensions
                 ALCFREQ = fields.ALCFREQ,
                 CVHATT = fields.CVHATT,
                 HATTMULT = fields.HATTMULT,
+                HATTYEAR = fields.HATTYEAR,
                 CVAFIB = fields.CVAFIB,
                 CVANGIO = fields.CVANGIO,
                 CVBYPASS = fields.CVBYPASS,
@@ -390,6 +394,7 @@ namespace UDS.Net.Forms.Extensions
                 PD = fields.PD,
                 PDYR = fields.PDYR,
                 PDOTHR = fields.PDOTHR,
+                PDOTHRYR = fields.PDOTHRYR,
                 SEIZURES = fields.SEIZURES,
                 TBI = fields.TBI,
                 TBIBRIEF = fields.TBIBRIEF,
@@ -405,10 +410,10 @@ namespace UDS.Net.Forms.Extensions
                 ARTHRIT = fields.ARTHRIT,
                 ARTHTYPE = fields.ARTHTYPE,
                 ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX,
-                ARTHLOEX = fields.ARTHLOEX,
-                ARTHSPIN = fields.ARTHSPIN,
-                ARTHUNK = fields.ARTHUNK,
+                ARTHUPEX = fields.ARTHUPEX.HasValue ? fields.ARTHUPEX.Value != 0 : false,
+                ARTHLOEX = fields.ARTHLOEX.HasValue ? fields.ARTHLOEX.Value != 0 : false,
+                ARTHSPIN = fields.ARTHSPIN.HasValue ? fields.ARTHSPIN.Value != 0 : false,
+                ARTHUNK = fields.ARTHUNK.HasValue ? fields.ARTHUNK.Value != 0 : false,
                 INCONTU = fields.INCONTU,
                 INCONTF = fields.INCONTF,
                 APNEA = fields.APNEA,

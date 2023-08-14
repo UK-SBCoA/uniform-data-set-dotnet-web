@@ -74,6 +74,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Sum of all circled answers for Total GDS Score")]
         [RegularExpression("^([1-9]|1[0-5]|88)$", ErrorMessage = "(0-15, 88)")]
+        [RequiredIf(nameof(NOGDS), "False", ErrorMessage = "Total GDS Score is required.")]
         public int? GDS { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -15,6 +15,8 @@ namespace UDS.Net.Forms.TagHelpers
     {
         public IEnumerable<RadioListItem> Items { get; set; }
 
+        public Dictionary<string, UIBehavior> UIBehaviors { get; set; } = new Dictionary<string, UIBehavior>();
+
         public ModelExpression For { get; set; }
 
         public string Id { get; set; }
@@ -107,7 +109,7 @@ namespace UDS.Net.Forms.TagHelpers
             tagBuilder.Attributes["type"] = "radio";
             tagBuilder.Attributes["id"] = $"{Id}[{index}]";
             tagBuilder.Attributes["value"] = item.Value;
-            tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600";
+            tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
             if (!String.IsNullOrWhiteSpace(name))
             {
@@ -121,10 +123,33 @@ namespace UDS.Net.Forms.TagHelpers
             {
                 tagBuilder.Attributes["disabled"] = "disabled";
             }
-            if (item.IfSelectedAffects != null && item.IfSelectedAffects.Count > 0)
+            if (UIBehaviors != null && UIBehaviors.Count() > 0)
             {
-                // TODO render data attributes
+                foreach (var ui in UIBehaviors)
+                {
+                    if (ui.Key == item.Value)
+                    {
+                        tagBuilder.Attributes["data-affects"] = "true";
+                        string json = "";
+                        if (ui.Value.PropertyAttributes.Count() == 1)
+                        {
+                            json = ui.Value.PropertyAttributes[0].ToJSON();
+                        }
+                        else if (ui.Value.PropertyAttributes.Count() > 1)
+                        {
+                            foreach (var att in ui.Value.PropertyAttributes)
+                            {
+                                json += att.ToJSON();
+                                if (ui.Value.PropertyAttributes.Count() > 1)
+                                    json += ", ";
+                            }
+                            json = json.Trim().TrimEnd(',');
+                        }
+                        tagBuilder.Attributes["data-affects-targets"] = "[ " + json + " ]"; // js expects an array
+                    }
+                }
             }
+
             return tagBuilder;
         }
 

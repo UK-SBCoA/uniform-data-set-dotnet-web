@@ -17,7 +17,7 @@
             <label asp-for="B8.NORMEXAM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.NORMEXAM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.NORMEXAM"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.NORMEXAM)" for="@Model.B8.NORMEXAM" items="Model.FindingsListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.NORMEXAM)" for="@Model.B8.NORMEXAM" items="Model.FindingsListItems" ui-behaviors="Model.NORMEXAMUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.NORMEXAM"></span>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <label asp-for="B8.PARKSIGN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.PARKSIGN)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.PARKSIGN"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.PARKSIGN)" for="@Model.B8.PARKSIGN" items="Model.SyndromePresentListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.PARKSIGN)" for="@Model.B8.PARKSIGN" items="Model.SyndromePresentListItems" ui-behaviors="Model.PARKSIGNUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.PARKSIGN"></span>
             </div>
         </div>
@@ -121,7 +121,7 @@
             <label asp-for="B8.CVDSIGNS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.CVDSIGNS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.CVDSIGNS"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.CVDSIGNS)" for="@Model.B8.CVDSIGNS" items="Model.SyndromePresentListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.CVDSIGNS)" for="@Model.B8.CVDSIGNS" items="Model.SyndromePresentListItems" ui-behaviors="Model.CVDSIGNSUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.CVDSIGNS"></span>
             </div>
         </div>
@@ -224,7 +224,7 @@
             <label asp-for="B8.PSPCBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.PSPCBS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.PSPCBS"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.PSPCBS)" for="@Model.B8.PSPCBS" items="Model.SyndromePresentListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.PSPCBS)" for="@Model.B8.PSPCBS" items="Model.SyndromePresentListItems" ui-behaviors="Model.PSPCBSUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.PSPCBS"></span>
             </div>
         </div>
@@ -398,7 +398,7 @@
             <label asp-for="B8.OTHNEUR"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.OTHNEUR)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B8.OTHNEUR"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.OTHNEUR)" for="@Model.B8.OTHNEUR" items="Model.SyndromePresentListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.OTHNEUR)" for="@Model.B8.OTHNEUR" items="Model.SyndromePresentListItems" ui-behaviors="Model.OTHNEURUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.OTHNEUR"></span>
             </div>
             <div>

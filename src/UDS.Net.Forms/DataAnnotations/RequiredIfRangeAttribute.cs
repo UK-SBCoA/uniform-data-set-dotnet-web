@@ -1,23 +1,27 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class RequiredIfAttribute : ValidationAttribute, IClientModelValidator
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class RequiredIfRangeAttribute : ValidationAttribute, IClientModelValidator
     {
         private string _watchedField = "";
-        private string _watchedFieldValue = "";
+        private int _watchedFieldLowValue = int.MinValue;
+        private int _watchedFieldHighValue = int.MaxValue;
 
-        public RequiredIfAttribute(string watchedField, string value) : base()
+        public RequiredIfRangeAttribute(string watchedField, int lowValue, int highValue) : base()
         {
             _watchedField = watchedField;
-            _watchedFieldValue = value;
+            if (lowValue > highValue)
+                throw new Exception("Range validation error");
+
+            _watchedFieldLowValue = lowValue;
+            _watchedFieldHighValue = highValue;
+
         }
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
@@ -40,11 +44,11 @@ namespace UDS.Net.Forms.DataAnnotations
                         if (watchedProperty != null)
                         {
                             var currentValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
-                            if (currentValue != null)
+                            if (currentValue != null && Int32.TryParse(currentValue.ToString(), out int integerValue))
                             {
-                                if (currentValue.ToString() == _watchedFieldValue)
+                                if (integerValue >= _watchedFieldLowValue && integerValue <= _watchedFieldHighValue)
                                 {
-                                    // if the watched field's value matches what we're looking for then this field requires a value
+                                    // if the watched field's value is within the range then this field requires a value
                                     if (value == null)
                                         return new ValidationResult(this.ErrorMessage);
                                 }
@@ -54,27 +58,25 @@ namespace UDS.Net.Forms.DataAnnotations
                 }
             }
 
-
             return ValidationResult.Success;
         }
+
 
         public void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-requiredif", this.ErrorMessage);
+            MergeAttribute(context.Attributes, "data-val-requiredifrange", this.ErrorMessage);
             string watched = _watchedField;
             var containerName = context.ModelMetadata.ContainerType.Name;
             if (!String.IsNullOrEmpty(containerName))
             {
                 watched = containerName + "." + _watchedField;
             }
-            MergeAttribute(context.Attributes, "data-val-requiredif-watchedfield", watched);
-            MergeAttribute(context.Attributes, "data-val-requiredif-watchedfieldvalue", _watchedFieldValue);
+            MergeAttribute(context.Attributes, "data-val-requiredifrange-watchedfield", watched);
+            MergeAttribute(context.Attributes, "data-val-requiredifrange-lowvalue", _watchedFieldLowValue.ToString());
+            MergeAttribute(context.Attributes, "data-val-requiredifrange-highvalue", _watchedFieldHighValue.ToString());
         }
 
-        /// <summary>
-        /// See https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0#iclientmodelvalidator-for-client-side-validation
-        /// </summary>
         private static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
         {
             if (attributes.ContainsKey(key))

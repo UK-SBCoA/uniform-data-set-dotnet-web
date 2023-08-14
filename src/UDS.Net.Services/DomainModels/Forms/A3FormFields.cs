@@ -104,6 +104,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
                 this.MOMNEUR = a3Dto.MOMNEUR;
+                this.MOMPRDX = a3Dto.MOMPRDX;
                 this.MOMMOE = a3Dto.MOMMOE;
                 this.MOMAGEO = a3Dto.MOMAGEO;
                 this.DADMOB = a3Dto.DADMOB;

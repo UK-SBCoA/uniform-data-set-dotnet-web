@@ -55,9 +55,9 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> RecentAlcoholUseListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (skip to question 2a)", "0", new Dictionary<string, string> { { "ALCFREQ", "disabled=true" } }),
-            new RadioListItem("Yes", "1", new Dictionary<string, string> { { "ALCFREQ", "disabled=false" } }),
-            new RadioListItem("Unknown", "9 (skip to question 2a)", new Dictionary<string, string> { { "ALCFREQ", "disabled=true" } })
+            new RadioListItem("No (skip to question 2a)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown", "9 (skip to question 2a)")
         };
 
         public List<RadioListItem> AlcoholUseFrequencyListItems { get; set; } = new List<RadioListItem>
