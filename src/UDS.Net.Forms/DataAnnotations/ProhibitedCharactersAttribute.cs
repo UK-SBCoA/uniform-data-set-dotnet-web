@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
-    public class SpecialCharacterAttribute : ValidationAttribute, IClientModelValidator
+    public class ProhibitedCharactersAttribute : ValidationAttribute, IClientModelValidator
     {
         public void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-specialcharacter", GetErrorMessage());
+            MergeAttribute(context.Attributes, "data-val-prohibitedcharacters", GetErrorMessage());
         }
         public static string GetErrorMessage()
         {
@@ -23,9 +23,9 @@ namespace UDS.Net.Forms.DataAnnotations
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value is string allowableCode)
+            if (value is string userInput)
             {
-                if (allowableCode.Contains("'") || allowableCode.Contains("\"") || allowableCode.Contains("&") || allowableCode.Contains("%"))
+                if (userInput.Contains("'") || userInput.Contains("\"") || userInput.Contains("&") || userInput.Contains("%"))
                 {
                     return new ValidationResult(GetErrorMessage());
                 }
