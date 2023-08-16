@@ -301,8 +301,8 @@ $.validator.addMethod('prohibitedcharacters', function (value, element, params) 
 });
 
 $.validator.unobtrusive.adapters.add('prohibitedcharacters', [], function (options) {
-    options.rules.prohibitedcharacters = true;
-    options.messages.prohibitedcharacters = options.message;
+  options.rules.prohibitedcharacters = true;
+  options.messages.prohibitedcharacters = options.message;
 });
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
