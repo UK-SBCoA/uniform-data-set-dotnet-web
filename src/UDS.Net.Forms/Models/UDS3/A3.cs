@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(FADMUT), "8", ErrorMessage = "Other predominant AD mutation must be specified.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FADMUTX { get; set; }
 
         [Display(Name = "Source of evidence for AD mutation")]
@@ -38,7 +38,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(FADMUSO), "8", ErrorMessage = "Other source of evidence for AD mutation must be specified.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FADMUSOX { get; set; }
 
         [Display(Name = "In this family, is there evidence for an FTLD mutation? If Yes, select predominant mutation")]
@@ -48,7 +48,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Yes, Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(FFTDMUT), "8", ErrorMessage = "Other predominant FTLD mutation must be specified.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FFTDMUTX { get; set; }
 
         [Display(Name = "Source of evidence for FTLD mutation")]
@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If other, (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(FFTDMUSO), "8", ErrorMessage = "Other source of evidence for FTLD mutation must be specified.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FFTDMUSX { get; set; }
 
         [Display(Name = "In this family, is there evidence for a mutation other than an AD or FTLD mutation?")]
@@ -69,7 +69,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If Yes, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(FFTDMUSO), "1", ErrorMessage = "Specify other evidence for a mutation other than an AD or FTLD mutation.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FOTHMUTX { get; set; }
 
         [Display(Name = "Source of evidence for other mutation")]
@@ -79,7 +79,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "If other, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(FOTHMUSO), "8", ErrorMessage = "Other source of evidence required.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? FOTHMUSX { get; set; }
 
         /// <summary>

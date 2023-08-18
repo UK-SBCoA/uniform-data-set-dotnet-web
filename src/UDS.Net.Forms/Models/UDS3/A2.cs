@@ -35,7 +35,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (SPECIFY)")]
         [MaxLength(60)]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? INHISPOX { get; set; }
 
         [Display(Name = "What does the co-participant report as his or her race?")]
@@ -43,7 +43,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (SPECIFY)")]
         [MaxLength(60)]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? INRACEX { get; set; }
 
         [Display(Name = "What additional race does the co-participant report?")]
@@ -51,7 +51,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (SPECIFY)")]
         [MaxLength(60)]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? INRASECX { get; set; }
 
         [Display(Name = "What additional race, beyond those reported in Questions 4 and 5, does the co-participant report?")]
@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Other (SPECIFY)")]
         [MaxLength(60)]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? INRATERX { get; set; }
 
         [Display(Name = "Co-participant's years of education — use the codes below to report the level achieved; if an attempted level is not completed, enter the number of years completed")]

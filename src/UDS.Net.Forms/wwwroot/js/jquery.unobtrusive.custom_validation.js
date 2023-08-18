@@ -291,18 +291,18 @@ $.validator.unobtrusive.adapters.add('diagnosis', [], function (options) {
 });
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* Special Characters */
+/* Prohibited Characters */
 
-$.validator.addMethod('specialcharacter', function (value, element, params) {
+$.validator.addMethod('prohibitedcharacters', function (value, element, params) {
   if (value.includes("'") || value.includes('"') || value.includes('&') || value.includes('%')) {
     return false;
   }
   return true;
 });
 
-$.validator.unobtrusive.adapters.add('specialcharacter', [], function (options) {
-  options.rules.specialcharacter = true;
-  options.messages.specialcharacter = options.message;
+$.validator.unobtrusive.adapters.add('prohibitedcharacters', [], function (options) {
+  options.rules.prohibitedcharacters = true;
+  options.messages.prohibitedcharacters = options.message;
 });
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
