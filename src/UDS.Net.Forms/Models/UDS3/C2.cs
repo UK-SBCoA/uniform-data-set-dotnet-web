@@ -10,6 +10,11 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class C2 : FormModel
     {
+        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
+        [RequiredOnComplete]
+        [Range(1, 3)]
+        public int? MODCOMM { get; set; }
+
         [Display(Name = "Was any part of MoCA administered?")]
         [RequiredOnComplete]
         public int? MOCACOMP { get; set; }
@@ -394,6 +399,74 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
         [RequiredOnComplete]
         public int? COGSTAT { get; set; }
+
+        public int? REY1REC { get; set; }
+
+        public int? REY1INT { get; set; }
+
+        public int? REY2REC { get; set; }
+
+        public int? REY2INT { get; set; }
+
+        public int? REY3REC { get; set; }
+
+        public int? REY3INT { get; set; }
+
+        public int? REY4REC { get; set; }
+
+        public int? REY4INT { get; set; }
+
+        public int? REY5REC { get; set; }
+
+        public int? REY5INT { get; set; }
+
+        public int? REY6REC { get; set; }
+
+        public int? REY6INT { get; set; }
+
+        public int? OTRAILA { get; set; }
+
+        public int? OTRLARR { get; set; }
+
+        public int? OTRLALI { get; set; }
+
+        public int? OTRAILB { get; set; }
+
+        public int? OTRLBRR { get; set; }
+
+        public int? OTRLBLI { get; set; }
+
+        public int? REYDREC { get; set; }
+
+        public int? REYDINT { get; set; }
+
+        public int? REYTCOR { get; set; }
+
+        public int? REYFPOS { get; set; }
+
+        public int? VNTTOTW { get; set; }
+
+        public int? VNTPCNC { get; set; }
+
+        public int? RESPVAL { get; set; }
+
+        public int? RESPHEAR { get; set; }
+
+        public int? RESPDIST { get; set; }
+
+        public int? RESPINTR { get; set; }
+
+        public int? RESPDISN { get; set; }
+
+        public int? RESPFATG { get; set; }
+
+        public int? RESPEMOT { get; set; }
+
+        public int? RESPASST { get; set; }
+
+        public int? RESPOTH { get; set; }
+
+        public int? RESPOTHX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
