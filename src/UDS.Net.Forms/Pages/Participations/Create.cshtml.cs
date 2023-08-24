@@ -40,6 +40,14 @@ namespace UDS.Net.Forms.Pages.Participations
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var existingParticipation = await _participationService.GetByLegacyId(Participation.LegacyId);
+
+            if (existingParticipation != null)
+            {
+                ModelState.AddModelError("LegacyId", "Participation with Legacy Id already exists.");
+                return Redirect($"/Participations/Details/{existingParticipation.Id}");
+            }
+
             if (!ModelState.IsValid)
                 return Page();
 
