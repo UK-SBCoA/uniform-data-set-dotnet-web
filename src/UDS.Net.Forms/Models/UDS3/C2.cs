@@ -527,35 +527,35 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "What makes this participant’s responses less valid? Hearing impairment")]
         [RequiredOnComplete]
-        public bool? RESPHEAR { get; set; }
+        public bool RESPHEAR { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Distractions")]
         [RequiredOnComplete]
-        public bool? RESPDIST { get; set; }
+        public bool RESPDIST { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Interruptions")]
         [RequiredOnComplete]
-        public bool? RESPINTR { get; set; }
+        public bool RESPINTR { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Lack of effort or disinterest")]
         [RequiredOnComplete]
-        public bool? RESPDISN { get; set; }
+        public bool RESPDISN { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Fatigue")]
         [RequiredOnComplete]
-        public bool? RESPFATG { get; set; }
+        public bool RESPFATG { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Emotional issues")]
         [RequiredOnComplete]
-        public bool? RESPEMOT { get; set; }
+        public bool RESPEMOT { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Unapproved assistance")]
         [RequiredOnComplete]
-        public bool? RESPASST { get; set; }
+        public bool RESPASST { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Other (specify)")]
         [RequiredOnComplete]
-        public bool? RESPOTH { get; set; }
+        public bool RESPOTH { get; set; }
 
         [Display(Name = "What makes this participant’s responses less valid? Other reason")]
         [RequiredOnComplete]
