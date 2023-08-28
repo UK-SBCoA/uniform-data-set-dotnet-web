@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Pages.Visits;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.Participations
@@ -40,12 +41,12 @@ namespace UDS.Net.Forms.Pages.Participations
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var existingParticipation = await _participationService.GetByLegacyId(Participation.LegacyId);
+            var participation = await _participationService.GetByLegacyId(Participation.LegacyId);
 
-            if (existingParticipation != null)
+            if (participation != null && participation.LegacyId == Participation.LegacyId)
             {
-                ModelState.AddModelError("LegacyId", "Participation with Legacy Id already exists.");
-                return Redirect($"/Participations/Details/{existingParticipation.Id}");
+                ModelState.AddModelError("Participation.LegacyId", "A Participation with this Legacy Id already exists.");
+                TempData["Participation"] = participation.Id;
             }
 
             if (!ModelState.IsValid)
