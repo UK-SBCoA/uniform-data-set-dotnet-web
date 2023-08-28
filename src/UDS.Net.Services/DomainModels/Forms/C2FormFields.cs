@@ -133,7 +133,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MOCACLOC = c2Dto.MOCACLOC;
                 MOCACLON = c2Dto.MOCACLON;
                 MOCACLOH = c2Dto.MOCACLOH;
-                MOCANAMI = c2Dto.MOCANAMI;d
+                MOCANAMI = c2Dto.MOCANAMI;
                 MOCAREGI = c2Dto.MOCAREGI;
                 MOCADIGI = c2Dto.MOCADIGI;
                 MOCALETT = c2Dto.MOCALETT;
