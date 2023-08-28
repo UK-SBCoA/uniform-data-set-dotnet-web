@@ -688,14 +688,14 @@ namespace UDS.Net.Forms.Extensions
                 VNTTOTW = vm.VNTTOTW,
                 VNTPCNC = vm.VNTPCNC,
                 RESPVAL = vm.RESPVAL,
-                RESPHEAR = vm.RESPHEAR,
-                RESPDIST = vm.RESPDIST,
-                RESPINTR = vm.RESPINTR,
-                RESPDISN = vm.RESPDISN,
-                RESPFATG = vm.RESPFATG,
-                RESPEMOT = vm.RESPEMOT,
-                RESPASST = vm.RESPASST,
-                RESPOTH = vm.RESPOTH,
+                RESPHEAR = vm.RESPHEAR ? 1 : 0,
+                RESPDIST = vm.RESPDIST ? 1 : 0,
+                RESPINTR = vm.RESPINTR ? 1 : 0,
+                RESPDISN = vm.RESPDISN ? 1 : 0,
+                RESPFATG = vm.RESPFATG ? 1 : 0,
+                RESPEMOT = vm.RESPEMOT ? 1 : 0,
+                RESPASST = vm.RESPASST ? 1 : 0,
+                RESPOTH = vm.RESPOTH ? 1 : 0,
                 RESPOTHX = vm.RESPOTHX
             };
 

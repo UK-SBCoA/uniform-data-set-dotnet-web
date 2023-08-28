@@ -823,14 +823,14 @@ namespace UDS.Net.Forms.Extensions
                 VNTTOTW = fields.VNTTOTW,
                 VNTPCNC = fields.VNTPCNC,
                 RESPVAL = fields.RESPVAL,
-                RESPHEAR = fields.RESPHEAR,
-                RESPDIST = fields.RESPDIST,
-                RESPINTR = fields.RESPINTR,
-                RESPDISN = fields.RESPDISN,
-                RESPFATG = fields.RESPFATG,
-                RESPEMOT = fields.RESPEMOT,
-                RESPASST = fields.RESPASST,
-                RESPOTH = fields.RESPOTH,
+                RESPHEAR = fields.RESPHEAR.HasValue ? fields.RESPHEAR.Value != 0 : false,
+                RESPDIST = fields.RESPDIST.HasValue ? fields.RESPDIST.Value != 0 : false,
+                RESPINTR = fields.RESPINTR.HasValue ? fields.RESPINTR.Value != 0 : false,
+                RESPDISN = fields.RESPDISN.HasValue ? fields.RESPDISN.Value != 0 : false,
+                RESPFATG = fields.RESPFATG.HasValue ? fields.RESPFATG.Value != 0 : false,
+                RESPEMOT = fields.RESPEMOT.HasValue ? fields.RESPEMOT.Value != 0 : false,
+                RESPASST = fields.RESPASST.HasValue ? fields.RESPASST.Value != 0 : false,
+                RESPOTH = fields.RESPOTH.HasValue ? fields.RESPOTH.Value != 0 : false,
                 RESPOTHX = fields.RESPOTHX
             };
         }
