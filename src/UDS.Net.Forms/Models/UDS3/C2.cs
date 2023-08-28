@@ -10,11 +10,6 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class C2 : FormModel
     {
-        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
-        [RequiredOnComplete]
-        [Range(1, 3)]
-        public int? MODCOMM { get; set; }
-
         [Display(Name = "Was any part of MoCA administered?")]
         [RequiredOnComplete]
         public int? MOCACOMP { get; set; }
@@ -400,72 +395,172 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredOnComplete]
         public int? COGSTAT { get; set; }
 
+        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
+        [RequiredOnComplete]
+        [Range(1, 3)]
+        public int? MODCOMM { get; set; }
+
+        [Display(Name = "Trial 1 total recall")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         public int? REY1REC { get; set; }
 
+        [Display(Name = "Trial 1 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY1INT { get; set; }
 
+        [Display(Name = "Trial 2 total recall")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REY2REC { get; set; }
 
+        [Display(Name = "Trial 2 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY2INT { get; set; }
 
+        [Display(Name = "Trial 3 total recall")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REY3REC { get; set; }
 
+        [Display(Name = "Trial 3 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY3INT { get; set; }
 
+        [Display(Name = "Trial 4 total recall")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REY4REC { get; set; }
 
+        [Display(Name = "Trial 4 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY4INT { get; set; }
 
+        [Display(Name = "Trial 5 total recall")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REY5REC { get; set; }
 
+        [Display(Name = "Trial 5 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY5INT { get; set; }
 
+        [Display(Name = "Trial 6 total recall")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REY6REC { get; set; }
 
+        [Display(Name = "Trial 6 intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REY6INT { get; set; }
 
+        [Display(Name = "Total number of seconds to complete")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "0-100, or 888 , or 995-998")]
         public int? OTRAILA { get; set; }
 
+        [Display(Name = " Number of commission errors")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? OTRLARR { get; set; }
 
+        [Display(Name = "Part A: Number of correct lines")]
+        [RequiredOnComplete]
+        [Range(0, 25)]
         public int? OTRLALI { get; set; }
 
+        [Display(Name = "Part B: Total number of seconds to complete")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "0-300, or 888 , or 995-998")]
         public int? OTRAILB { get; set; }
 
+        [Display(Name = "Part B: Number of commission errors")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? OTRLBRR { get; set; }
 
+        [Display(Name = "Part B: Number of correct lines")]
+        [RequiredOnComplete]
+        [Range(0, 25)]
         public int? OTRLBLI { get; set; }
 
+        [Display(Name = "total delayed recall")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         public int? REYDREC { get; set; }
 
+        [Display(Name = "delayed intrusions")]
+        [RequiredOnComplete]
+        [Range(0, 99)]
         public int? REYDINT { get; set; }
 
+        [Display(Name = "recognition total correct")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REYTCOR { get; set; }
 
+        [Display(Name = "recognition total false positives")]
+        [RequiredOnComplete]
+        [Range(0, 15)]
         public int? REYFPOS { get; set; }
 
+        [Display(Name = "total correct without a cue")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
         public int? VNTTOTW { get; set; }
 
+        [Display(Name = "total correct with a phonemic cue")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
         public int? VNTPCNC { get; set; }
 
+        [Display(Name = "How valid do you think the participant’s responses are?")]
+        [RequiredOnComplete]
+        [Range(1, 3)]
         public int? RESPVAL { get; set; }
 
-        public int? RESPHEAR { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Hearing impairment")]
+        [RequiredOnComplete]
+        public bool? RESPHEAR { get; set; }
 
-        public int? RESPDIST { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Distractions")]
+        [RequiredOnComplete]
+        public bool? RESPDIST { get; set; }
 
-        public int? RESPINTR { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Interruptions")]
+        [RequiredOnComplete]
+        public bool? RESPINTR { get; set; }
 
-        public int? RESPDISN { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Lack of effort or disinterest")]
+        [RequiredOnComplete]
+        public bool? RESPDISN { get; set; }
 
-        public int? RESPFATG { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Fatigue")]
+        [RequiredOnComplete]
+        public bool? RESPFATG { get; set; }
 
-        public int? RESPEMOT { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Emotional issues")]
+        [RequiredOnComplete]
+        public bool? RESPEMOT { get; set; }
 
-        public int? RESPASST { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Unapproved assistance")]
+        [RequiredOnComplete]
+        public bool? RESPASST { get; set; }
 
-        public int? RESPOTH { get; set; }
+        [Display(Name = "What makes this participant’s responses less valid? Other (specify)")]
+        [RequiredOnComplete]
+        public bool? RESPOTH { get; set; }
 
+        [Display(Name = "What makes this participant’s responses less valid? Other reason")]
+        [RequiredOnComplete]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
         public int? RESPOTHX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
