@@ -17,25 +17,29 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
 ConfigurationManager configuration = builder.Configuration;
 
-// Get the scopes from the configuration (appsettings.json)
-var initialScopes = configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
+var initialScopes = configuration.GetValue<string>("DownstreamApis:Scopes")?.Split(' ');
 
-
-// Add sign-in with Microsoft
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+    .AddMicrosoftGraph(configuration.GetSection("DownstreamApis:GraphApi"))
+    .AddInMemoryTokenCaches(); // In memory token caching recommended for development only
 
-        // Add the possibility of acquiring a token to call a protected web API
-        .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+////*************************************************************************************************
+// Replace API and implemented services with your own if you don't want to use the included API here
 
-            // Enables controllers and pages to get GraphServiceClient by dependency injection
-            // And use an in memory token cache
-            .AddMicrosoftGraph(configuration.GetSection("DownstreamApi"))
-            .AddInMemoryTokenCaches();
+builder.Services.AddUDSApiClient(configuration.GetValue<string>("DownstreamApis:UDSNetApi:BaseUrl"));
 
-builder.Services.AddControllersWithViews(options =>
+builder.Services.AddSingleton<IVisitService, VisitService>();
+builder.Services.AddSingleton<IParticipationService, ParticipationService>();
+builder.Services.AddSingleton<ILookupService, LookupService>();
+
+////*************************************************************************************************
+
+var mvcBuilder = builder.Services.AddControllersWithViews(options =>
 {
     var policy = new AuthorizationPolicyBuilder()
         .RequireAuthenticatedUser()
@@ -43,12 +47,8 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AuthorizeFilter(policy));
 });
 
-// Enables a UI and controller for sign in and sign out.
 builder.Services.AddRazorPages()
     .AddMicrosoftIdentityUI();
-
-var mvcBuilder = builder.Services.AddControllersWithViews();
-
 
 ////*************************************************************************************************
 // Only used during development
@@ -77,20 +77,15 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
 
 ////*************************************************************************************************
 
-////*************************************************************************************************
-// Replace API and implemented services with your own if you don't want to use the included API here
-
-builder.Services.AddUDSApiClient(configuration.GetValue<string>("DownstreamApis:UDSNetApi:BaseUrl"));
-
-builder.Services.AddSingleton<IVisitService, VisitService>();
-builder.Services.AddSingleton<IParticipationService, ParticipationService>();
-builder.Services.AddSingleton<ILookupService, LookupService>();
-
-////*************************************************************************************************
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // A must for using content from referenced UDS.Net.Forms RCL
