@@ -14,10 +14,10 @@
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                 <label asp-for="Participation.LegacyId"></label>
                 <input asp-for="Participation.LegacyId" />     
-                <span asp-validation-for="Participation.LegacyId" class="text-danger"></span>
+                <span asp-validation-for="Participation.LegacyId" class="text-red-500"></span>
                 @{
-                    var participationId = TempData["Participation"] as int ?;
-                    @if (participationId.HasValue)
+                    var participationId = ViewData["Participation"];
+                    @if (participationId != null)
                     {
                         <a asp-page="/Participations/Details" asp-route-id="@participationId" class="text-blue-500 hover:underline">Click here to view the details of this Participation </a>
                     }

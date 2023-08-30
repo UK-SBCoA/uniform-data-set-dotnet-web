@@ -43,10 +43,10 @@ namespace UDS.Net.Forms.Pages.Participations
         {
             var participation = await _participationService.GetByLegacyId(Participation.LegacyId);
 
-            if (participation != null && participation.LegacyId == Participation.LegacyId)
+            if (participation != null)
             {
                 ModelState.AddModelError("Participation.LegacyId", "A Participation with this Legacy Id already exists.");
-                TempData["Participation"] = participation.Id;
+                ViewData["Participation"] = participation.Id;
             }
 
             if (!ModelState.IsValid)
