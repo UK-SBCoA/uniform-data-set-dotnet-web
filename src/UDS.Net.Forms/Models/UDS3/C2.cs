@@ -490,33 +490,31 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(0, 25)]
         public int? OTRLBLI { get; set; }
 
-        [Display(Name = "total delayed recall")]
+        [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RequiredOnComplete]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         public int? REYDREC { get; set; }
 
-        [Display(Name = "delayed intrusions")]
+        [Display(Name = "Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REYDINT { get; set; }
 
-        [Display(Name = "recognition total correct")]
+        [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REYTCOR { get; set; }
 
-        [Display(Name = "recognition total false positives")]
+        [Display(Name = "Recognition - Total false positives", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REYFPOS { get; set; }
 
-        [Display(Name = "total correct without a cue")]
-        [RequiredOnComplete]
+        [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
         public int? VNTTOTW { get; set; }
 
-        [Display(Name = "total correct with a phonemic cue")]
-        [RequiredOnComplete]
+        [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
         public int? VNTPCNC { get; set; }
 
@@ -525,39 +523,39 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(1, 3)]
         public int? RESPVAL { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Hearing impairment")]
+        [Display(Name = "Hearing impairment")]
         [RequiredOnComplete]
         public bool RESPHEAR { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Distractions")]
+        [Display(Name = "Distractions")]
         [RequiredOnComplete]
         public bool RESPDIST { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Interruptions")]
+        [Display(Name = "Interruptions")]
         [RequiredOnComplete]
         public bool RESPINTR { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Lack of effort or disinterest")]
+        [Display(Name = "Lack of effort or disinterest")]
         [RequiredOnComplete]
         public bool RESPDISN { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Fatigue")]
+        [Display(Name = "Fatigue")]
         [RequiredOnComplete]
         public bool RESPFATG { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Emotional issues")]
+        [Display(Name = "Emotional issues")]
         [RequiredOnComplete]
         public bool RESPEMOT { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Unapproved assistance")]
+        [Display(Name = "Unapproved assistance")]
         [RequiredOnComplete]
         public bool RESPASST { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Other (specify)")]
+        [Display(Name = "Other (specify)")]
         [RequiredOnComplete]
         public bool RESPOTH { get; set; }
 
-        [Display(Name = "What makes this participant’s responses less valid? Other reason")]
+        [Display(Name = "")]
         [RequiredOnComplete]
         [MaxLength(60)]
         [ProhibitedCharacters]
