@@ -400,114 +400,111 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(1, 3)]
         public int? MODCOMM { get; set; }
 
-        [Display(Name = "Trial 1 total recall")]
+        [Display(Name = "Trial 1 - Total recall", Description = "(0-15, 88, 95-98)")]
         [RequiredOnComplete]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         public int? REY1REC { get; set; }
 
-        [Display(Name = "Trial 1 intrusions")]
+        [Display(Name = "Trial 1 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY1INT { get; set; }
 
-        [Display(Name = "Trial 2 total recall")]
+        [Display(Name = "Trial 2 - Total recall", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REY2REC { get; set; }
 
-        [Display(Name = "Trial 2 intrusions")]
+        [Display(Name = "Trial 2 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY2INT { get; set; }
 
-        [Display(Name = "Trial 3 total recall")]
+        [Display(Name = "Trial 3 - Total recall", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REY3REC { get; set; }
 
-        [Display(Name = "Trial 3 intrusions")]
+        [Display(Name = "Trial 3 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY3INT { get; set; }
 
-        [Display(Name = "Trial 4 total recall")]
+        [Display(Name = "Trial 4 - Total recall", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REY4REC { get; set; }
 
-        [Display(Name = "Trial 4 intrusions")]
+        [Display(Name = "Trial 4 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY4INT { get; set; }
 
-        [Display(Name = "Trial 5 total recall")]
+        [Display(Name = "Trial 5 - Total recall", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REY5REC { get; set; }
 
-        [Display(Name = "Trial 5 intrusions")]
+        [Display(Name = "Trial 5 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY5INT { get; set; }
 
-        [Display(Name = "Trial 6 total recall")]
+        [Display(Name = "Trial 6 - Total recall", Description = "(0-15)")]
         [RequiredOnComplete]
         [Range(0, 15)]
         public int? REY6REC { get; set; }
 
-        [Display(Name = "Trial 6 intrusions")]
+        [Display(Name = "Trial 6 - Intrusions", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? REY6INT { get; set; }
 
-        [Display(Name = "Total number of seconds to complete")]
-        [RequiredOnComplete]
-        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "0-100, or 888 , or 995-998")]
+        [Display(Name = "PART A: Total number of seconds to complete", Description = "(0–100, 888, 995 – 998)")]
+        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, or 888 , or 995-998")]
         public int? OTRAILA { get; set; }
 
-        [Display(Name = " Number of commission errors")]
-        [RequiredOnComplete]
+        [Display(Name = " Number of commission errors", Description = "(No limit)")]
         [Range(0, 99)]
         public int? OTRLARR { get; set; }
 
-        [Display(Name = "Part A: Number of correct lines")]
+        [Display(Name = "Total number correct", Description = "(0-25)")]
         [RequiredOnComplete]
         [Range(0, 25)]
         public int? OTRLALI { get; set; }
 
-        [Display(Name = "Part B: Total number of seconds to complete")]
+        [Display(Name = "PART B: Total number of seconds to complete", Description = "(0–300, 888, 995 – 998)")]
         [RequiredOnComplete]
-        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "0-300, or 888 , or 995-998")]
+        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, or 888 , or 995-998")]
         public int? OTRAILB { get; set; }
 
-        [Display(Name = "Part B: Number of commission errors")]
+        [Display(Name = "Number of commission errors", Description = "(No limit)")]
         [RequiredOnComplete]
         [Range(0, 99)]
         public int? OTRLBRR { get; set; }
 
-        [Display(Name = "Part B: Number of correct lines")]
+        [Display(Name = "Total number correct", Description = "(0–25)")]
         [RequiredOnComplete]
         [Range(0, 25)]
         public int? OTRLBLI { get; set; }
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
-        [RequiredOnComplete]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
         public int? REYDINT { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total correct recognitions.")]
         public int? REYTCOR { get; set; }
 
         [Display(Name = "Recognition - Total false positives", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
