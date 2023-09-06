@@ -400,64 +400,63 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(1, 3)]
         public int? MODCOMM { get; set; }
 
-        [Display(Name = "Trial 1 - Total recall", Description = "(0-15, 88, 95-98)")]
-        [RequiredOnComplete]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
+        [Display(Name = "Trial 1 - Total recall", Description = "(If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a.)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
         public int? REY1REC { get; set; }
 
         [Display(Name = "Trial 1 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 1 intrusions.")]
         public int? REY1INT { get; set; }
 
         [Display(Name = "Trial 2 - Total recall", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 total recall.")]
         public int? REY2REC { get; set; }
 
         [Display(Name = "Trial 2 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 intrusions.")]
         public int? REY2INT { get; set; }
 
         [Display(Name = "Trial 3 - Total recall", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 total recall.")]
         public int? REY3REC { get; set; }
 
         [Display(Name = "Trial 3 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
         public int? REY3INT { get; set; }
 
         [Display(Name = "Trial 4 - Total recall", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 total recall.")]
         public int? REY4REC { get; set; }
 
         [Display(Name = "Trial 4 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
         public int? REY4INT { get; set; }
 
         [Display(Name = "Trial 5 - Total recall", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 total recall.")]
         public int? REY5REC { get; set; }
 
         [Display(Name = "Trial 5 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
         [Display(Name = "Trial 6 - Total recall", Description = "(0-15)")]
-        [RequiredOnComplete]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 total recall.")]
         public int? REY6REC { get; set; }
 
         [Display(Name = "Trial 6 - Intrusions", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
         [Display(Name = "PART A: Total number of seconds to complete", Description = "(0–100, 888, 995 – 998)")]
@@ -466,30 +465,30 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = " Number of commission errors", Description = "(No limit)")]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide number of commission errors.")]
         public int? OTRLARR { get; set; }
 
         [Display(Name = "Total number correct", Description = "(0-25)")]
-        [RequiredOnComplete]
         [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide total number correct.")]
         public int? OTRLALI { get; set; }
 
         [Display(Name = "PART B: Total number of seconds to complete", Description = "(0–300, 888, 995 – 998)")]
-        [RequiredOnComplete]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, or 888 , or 995-998")]
         public int? OTRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(No limit)")]
-        [RequiredOnComplete]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide number of commission errors.")]
         public int? OTRLBRR { get; set; }
 
         [Display(Name = "Total number correct", Description = "(0–25)")]
-        [RequiredOnComplete]
         [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide total number correct.")]
         public int? OTRLBLI { get; set; }
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
+        [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
@@ -508,11 +507,11 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? REYFPOS { get; set; }
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
-        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
         public int? VNTTOTW { get; set; }
 
         [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
-        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50 0r 88 or 95-98.")]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
@@ -521,7 +520,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? RESPVAL { get; set; }
 
         [Display(Name = "Hearing impairment")]
-        [RequiredOnComplete]
         public bool RESPHEAR { get; set; }
 
         [Display(Name = "Distractions")]
@@ -553,8 +551,8 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool RESPOTH { get; set; }
 
         [Display(Name = "")]
-        [RequiredOnComplete]
         [MaxLength(60)]
+        [RequiredIf(nameof(RESPOTH), "1", ErrorMessage = "Please specify.")]
         [ProhibitedCharacters]
         public int? RESPOTHX { get; set; }
 
