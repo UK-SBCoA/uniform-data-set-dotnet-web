@@ -1,27 +1,26 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using UDS.Net.API.Client;
 using UDS.Net.Services;
-using UDS.Net.Web.MVC.Data;
 using UDS.Net.Web.MVC.Services;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.FileProviders;
 using System.Diagnostics;
+using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
-// Replace identity service with your preferred provider rather than using this one. Roles required:
-// Administrator
-// SuperUser
-// Examiner
-var connectionString = configuration.GetConnectionString("AuthServiceConnection");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+ConfigurationManager configuration = builder.Configuration;
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+var initialScopes = configuration.GetValue<string>("DownstreamApis:Scopes")?.Split(' ');
+
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(configuration.GetSection("AzureAd"))
+    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+    .AddMicrosoftGraph(configuration.GetSection("DownstreamApis:GraphApi"))
+    .AddInMemoryTokenCaches(); // In memory token caching recommended for development only
 
 ////*************************************************************************************************
 // Replace API and implemented services with your own if you don't want to use the included API here
@@ -34,11 +33,16 @@ builder.Services.AddSingleton<ILookupService, LookupService>();
 
 ////*************************************************************************************************
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+var mvcBuilder = builder.Services.AddControllersWithViews(options =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+});
 
-builder.Services.AddRazorPages(); // Enables UDS.Net.Forms razor class library. More here: https://learn.microsoft.com/en-us/aspnet/core/razor-pages/
-
-var mvcBuilder = builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages()
+    .AddMicrosoftIdentityUI();
 
 ////*************************************************************************************************
 // Only used during development
@@ -52,7 +56,6 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
     builder.Services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
     {
         var libraryPath = "";
-
         if (System.Environment.OSVersion.Platform != PlatformID.Win32NT)
         {
             libraryPath = Path.GetFullPath(Path.Combine(builder.Environment.ContentRootPath, "..", "UDS.Net.Forms"));
@@ -68,27 +71,10 @@ if (builder.Environment.IsDevelopment() && Debugger.IsAttached)
 
 ////*************************************************************************************************
 
-// Uncomment to remove enforced authentication
-builder.Services.AddAuthorization(options =>
-{
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-    using (var scope = app.Services.CreateScope())
-    {
-        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        db.Database.Migrate();
-    }
-}
-else
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -112,7 +98,4 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
-
-
 app.Run();
-
