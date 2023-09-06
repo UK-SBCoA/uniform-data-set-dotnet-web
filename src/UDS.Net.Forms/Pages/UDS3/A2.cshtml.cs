@@ -25,11 +25,53 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Female", "2")
         };
 
+        public List<RadioListItem> NewCoParticipantListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 9)", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
+        public Dictionary<string, UIBehavior> NewCoParticipantUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A2.INHISP"),
+                new UIDisableAttribute("A2.INHISPOR"),
+                new UIDisableAttribute("A2.INRACE"),
+                new UIDisableAttribute("A2.INRASEC"),
+                new UIDisableAttribute("A2.INRATER"),
+                new UIDisableAttribute("A2.INEDUC")
+            },
+            InstructionalMessage = "skip to question 9"
+
+            } },
+            { "1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A2.INHISP"),
+                new UIEnableAttribute("A2.INHISPOR"),
+                new UIEnableAttribute("A2.INRACE"),
+                new UIEnableAttribute("A2.INRASEC"),
+                new UIEnableAttribute("A2.INRATER"),
+                new UIEnableAttribute("A2.INEDUC")
+            },
+            } }
+        };
+    
+                                          
         public List<RadioListItem> HispanicLatinoListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No  (If No, SKIP TO QUESTION below)", "1"),
+            new RadioListItem("No  (If No, SKIP TO QUESTION 4)", "1"),
             new RadioListItem("Yes", "2"),
-            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION below)", "9")
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 4)", "9")
+        };
+
+        public List<RadioListItem> HispanicLatinoFVPListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No  (If No, SKIP TO QUESTION 5)", "1"),
+            new RadioListItem("Yes", "2"),
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 5)", "9")
         };
         public Dictionary<string, UIBehavior> HispanicLatinoUIBehavior = new Dictionary<string, UIBehavior>
         {
@@ -149,11 +191,27 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Yes (If Yes, SKIP TO QUESTION 10)", "1")
         };
 
+        public List<RadioListItem> LivingSituationFVPListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes (If Yes, SKIP TO QUESTION 11)", "1")
+        };
+
         public Dictionary<string, UIBehavior> LivingSituationUIBehavior = new Dictionary<string, UIBehavior>
         {
 
-        { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INVISITS") } },
-        { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INVISITS") } },
+            { "0", new UIBehavior { PropertyAttributes = new List<UIPropertyAttributes>
+            {
+            new UIEnableAttribute("A2.INVISITS"),
+            new UIEnableAttribute("A2.INCALLS")}
+            } },
+
+            {"1", new UIBehavior {PropertyAttributes = new List<UIPropertyAttributes>
+            {
+            new UIDisableAttribute("A2.INVISITS"),
+            new UIDisableAttribute("A2.INCALLS")
+            }
+            } }
 
         };
 
@@ -165,18 +223,6 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("At least three times per month", "4"),
             new RadioListItem("Monthly", "5"),
             new RadioListItem("Less than once a month", "6"),
-        };
-
-        public Dictionary<string, UIBehavior> VisitContactFrequencyUIBehavior = new Dictionary<string, UIBehavior>
-        {
-
-        { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-        { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-        { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-        { "4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-        { "5", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-        { "6", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCALLS") } },
-
         };
 
         public List<RadioListItem> TelephoneContactFrequencyListItems { get; } = new List<RadioListItem>
