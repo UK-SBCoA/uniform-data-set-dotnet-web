@@ -7,7 +7,7 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by ADC or clinic staff. For test administration and scoring, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).
+        INSTRUCTIONS: This form is to be completed by ADC or clinic staff. For test administration and scoring, see <g-bedebook kind="@Model.Visit.Kind"></g-bedebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).
     </p>
 </div>
 <div>
@@ -1172,7 +1172,7 @@
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY1REC"></p>
                             <div class="w-28">
-                                <input asp-for="@Model.C2.REY1REC" />
+                                <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY1REC"></span>
                         </div>
@@ -1363,7 +1363,7 @@
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILA"></p>
                             <div class="w-24">
-                                <input asp-for="@Model.C2.OTRAILA" />
+                                <input asp-for="@Model.C2.OTRAILA" ui-range-behavior="Model.OTRAILABehavior" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILA"></span>
                         </div>
@@ -1396,7 +1396,7 @@
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILB"></p>
                             <div class="w-24">
-                                <input asp-for="@Model.C2.OTRAILB" />
+                                <input asp-for="@Model.C2.OTRAILB" ui-range-behavior="Model.OTRAILBBehavior" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILB"></span>
                         </div>
@@ -1613,7 +1613,7 @@
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDREC"></p>
                             <div class="w-28">
-                                <input asp-for="@Model.C2.REYDREC" ui-range-behavior="Model.REYDRECBehavior"/>
+                                <input asp-for="@Model.C2.REYDREC" ui-range-behavior="Model.REYDRECBehavior" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
                         </div>
@@ -1703,7 +1703,7 @@
                         <label asp-for="C2.RESPVAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.RESPVAL)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.RESPVAL"></p>
-                            <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems"></radio-button-group>
+                            <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems" ui-behaviors="Model.RESPVALBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVAL"></span>
                         </div>
                     </div>
@@ -1794,7 +1794,7 @@
                                             <input asp-for="C2.RESPOTHX" />
                                         </div>
                                         <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
+                                        <span class="mt-2 text-sm text-red-600" ui-behaviors="Model.RESPVALBehavior" asp-validation-for="C2.RESPOTHX"></span>
                                     </div>
                                 </div>
                             </fieldset>
