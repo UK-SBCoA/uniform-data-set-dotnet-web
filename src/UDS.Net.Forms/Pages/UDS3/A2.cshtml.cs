@@ -58,8 +58,7 @@ namespace UDS.Net.Forms.Pages.UDS3
             },
             } }
         };
-    
-                                          
+
         public List<RadioListItem> HispanicLatinoListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No  (If No, SKIP TO QUESTION 4)", "1"),
