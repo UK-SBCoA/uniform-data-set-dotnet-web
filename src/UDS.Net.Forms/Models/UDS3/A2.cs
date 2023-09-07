@@ -64,7 +64,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Co-participant's years of education — use the codes below to report the level achieved; if an attempted level is not completed, enter the number of years completed" +
          "<br /><br /> 12 = high school or GED<br />  16 = bachelor's degree<br /> 18 = master's degree<br /> 20 = doctorate<br /> 99 = unknown")]
-        [Range(0, 99, ErrorMessage = "Co-participants years of education must be within 0 and 99")]
+        [RegularExpression(@"^(99|[0-9]|[1-2][0-9]|3[0-6])$", ErrorMessage = "Co-participants years of education must be within 0 and 36 or 99.")]
         public int? INEDUC { get; set; }
 
         [Display(Name = "What is the co-participant's relationship to the participant?")]
