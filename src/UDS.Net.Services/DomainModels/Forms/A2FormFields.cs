@@ -63,6 +63,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INVISITS = a2Dto.INVISITS;
                 this.INCALLS = a2Dto.INCALLS;
                 this.INRELY = a2Dto.INRELY;
+                this.NEWINF = a2Dto.NEWINF;
             }
         }
     }
