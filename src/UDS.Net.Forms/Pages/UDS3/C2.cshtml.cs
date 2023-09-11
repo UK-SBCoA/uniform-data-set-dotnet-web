@@ -169,12 +169,6 @@ namespace UDS.Net.Forms.Pages.UDS3
             } }
         };
 
-        public Dictionary<string, UIBehavior> RESPOTHBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("C2.RESPOTHX")} },
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("C2.RESPOTHX")} }
-        };
-
         public List<RadioListItem> ModeOfCommunication { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Telephone", "1"),
