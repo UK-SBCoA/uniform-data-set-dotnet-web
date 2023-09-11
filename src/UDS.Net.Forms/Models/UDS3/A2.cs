@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? NEWINF { get; set; }
 
         [Display(Name = "Does the co-participant report being of Hispanic/Latino ethnicity  (i.e., having origins from a mainly Spanish-speaking Latin American country), regardless of race?")]
-        [RequiredIf(nameof(NEWINF),"1", ErrorMessage = "Does the co-participant report being of Hispanic/Latino ethnicity?")]
+        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Does the co-participant report being of Hispanic/Latino ethnicity?")]
         public int? INHISP { get; set; }
 
         [Display(Name = "If yes, what are the co-participant's reported origins?")]
@@ -89,7 +89,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? INKNOWN { get; set; }
 
         [Display(Name = "Does the co-participant live with the subject?")]
-        [RequiredOnComplete (ErrorMessage = "Response required")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? INLIVWTH { get; set; }
 
         [Display(Name = "If no, approximate frequency of in-person visits?")]
