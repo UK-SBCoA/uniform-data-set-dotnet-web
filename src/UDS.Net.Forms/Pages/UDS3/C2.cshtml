@@ -862,20 +862,19 @@
                 </div>
             </div>
         }
-
         @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.TFP || Model.Visit.Kind == VisitKind.TIP))
         {
-         <div>
-            <h3 class="text-base font-semibold leading-7 text-gray-900">0. Mode of communication</h3>
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="C2.MODCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MODCOMM)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MODCOMM"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.C2.MODCOMM)" for="@Model.C2.MODCOMM" items="Model.ModeOfCommunication"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MODCOMM"></span>
+            <div>
+                <h3 class="text-base font-semibold leading-7 text-gray-900">0. Mode of communication</h3>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="C2.MODCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MODCOMM)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MODCOMM"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.C2.MODCOMM)" for="@Model.C2.MODCOMM" items="Model.ModeOfCommunication"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MODCOMM"></span>
+                    </div>
                 </div>
             </div>
-        </div>
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Montreal Cognitive Assessment (MoCA) Blind</h3>
                 <div class="subcounterreset m-2">
@@ -1779,10 +1778,13 @@
                                             <label asp-for="C2.RESPASST" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPASST)</label>
                                         </div>
                                     </div>
-                                    <div class="relative flex items-start">
+                                    @*<div class="relative flex items-start">
                                         <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                         <div class="flex h-6 items-center">
-                                            @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                            <input type="checkbox" asp-for="C2.RESPOTH"
+                                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                   data-affects="true"
+                                                   data-affects-toggle-targets="[ &quot;C2.RESPOTHX&quot; ]" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label asp-for="C2.RESPOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPOTH)</label>
@@ -1791,10 +1793,27 @@
                                     <div>
                                         <p class="text-sm text-gray-500" asp-description-for="C2.RESPOTHX"></p>
                                         <div class="mt-2">
+                                            <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
                                             <input asp-for="C2.RESPOTHX" />
                                         </div>
-                                        <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
-                                        <span class="mt-2 text-sm text-red-600" ui-behaviors="Model.RESPVALBehavior" asp-validation-for="C2.RESPOTHX"></span>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
+                                    </div>*@
+
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            <input type="checkbox" asp-for="C2.RESPOTH"
+                                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                                   data-affects="true"
+                                                   data-affects-toggle-targets="[ &quot;C2.RESPOTHX&quot; ]" />
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="C2.RESPOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPOTH)</label>
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <input asp-for="C2.RESPOTHX" />
+                                            @*<label asp-for="C2.RESPOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>*@
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>
