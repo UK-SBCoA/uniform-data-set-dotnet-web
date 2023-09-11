@@ -523,34 +523,27 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool RESPHEAR { get; set; }
 
         [Display(Name = "Distractions")]
-        [RequiredOnComplete]
         public bool RESPDIST { get; set; }
 
         [Display(Name = "Interruptions")]
-        [RequiredOnComplete]
         public bool RESPINTR { get; set; }
 
         [Display(Name = "Lack of effort or disinterest")]
-        [RequiredOnComplete]
         public bool RESPDISN { get; set; }
 
         [Display(Name = "Fatigue")]
-        [RequiredOnComplete]
         public bool RESPFATG { get; set; }
 
         [Display(Name = "Emotional issues")]
-        [RequiredOnComplete]
         public bool RESPEMOT { get; set; }
 
         [Display(Name = "Unapproved assistance")]
-        [RequiredOnComplete]
         public bool RESPASST { get; set; }
 
         [Display(Name = "Other (specify)")]
-        [RequiredOnComplete]
         public bool RESPOTH { get; set; }
 
-        [Display(Name = "")]
+        [Display(Name = "Specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(RESPOTH), "1", ErrorMessage = "Please specify.")]
         [ProhibitedCharacters]
