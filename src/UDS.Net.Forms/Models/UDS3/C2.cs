@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Xml.Linq;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -20,7 +23,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Which location was the MoCA administered?")]
         public int? MOCALOC { get; set; }
 
         [Display(Name = "Language of MoCA administration")]
@@ -34,7 +36,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? MOCALANX { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to visual impairment")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Was the MoCA affected by visual impairment?")]
         public int? MOCAVIS { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to hearing impairment")]
@@ -43,7 +44,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "TOTAL RAW SCORE - UNCORRECTED (Not corrected for education or visual/hearing impairment)", Description = "enter 88 if any of the following MoCA items were not administered: 1g-1l, 1n-1t, 1w-1bb")]
         [RegularExpression("^(\\d|[0-2]\\d|30|88)$", ErrorMessage = "Allowed values are 0-30 or 88 = not administered.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Sum all subscores. The maximum score is 30 points.")]
         public int? MOCATOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
@@ -53,27 +53,22 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = " Visuospatial/executive — Cube", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Assign a point if all cube criteria are met.")]
         public int? MOCACUBE { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock contour", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If clock contour acceptable, enter 1; otherwise, enter 0.")]
         public int? MOCACLOC { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock numbers", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If all clock number criteria are met, enter 1; otherwise, enter 0.")]
         public int? MOCACLON { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock hands", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If all clock hands criteria are met, enter 1; otherwise, enter 0.")]
         public int? MOCACLOH { get; set; }
 
         [Display(Name = "Language — Naming", Description = "(0-3, 95-98)")]
         [RegularExpression("^([0-3]|9[5-8])$", ErrorMessage = "Allowed values are 0-3 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.")]
         public int? MOCANAMI { get; set; }
 
         [Display(Name = "Memory — Registration (two trials)", Description = "(0-10, 95-98)")]
@@ -115,7 +110,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Delayed recall — No cue", Description = "(0-5, 95-98)")]
         [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-5 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Allocate 1 point for each word recalled freely without any cues.")]
         public int? MOCARECN { get; set; }
 
         [Display(Name = "Delayed recall — Category cue", Description = "(0-5, 88 = not applicable)")]
@@ -161,7 +155,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredOnComplete]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
@@ -190,7 +183,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -235,7 +227,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredOnComplete]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -295,7 +286,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -308,7 +298,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredOnComplete]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
@@ -590,6 +579,66 @@ namespace UDS.Net.Forms.Models.UDS3
                     if (count > 5)
                     {
                         yield return new ValidationResult("The total possible words recalled and entered in Questions 1t, 1u, and 1v should be 5 or less.", new[] { nameof(MOCARECN) });
+                    }
+                }
+
+                if (Status == FormStatus.Complete)
+                {
+                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
+                    if (visitValue is VisitModel)
+                    {
+                        VisitModel visit = (VisitModel)visitValue;
+
+                        if (visit != null)
+                        {
+                            if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.FVP)
+                            {
+                                if (!OTRAILA.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(OTRAILA) });
+
+                                if (!MOCALOC.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
+
+                                if (!MOCAVIS.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
+
+                                if (!MOCATOTS.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
+
+                                if (!MOCACLOC.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
+
+                                if (!MOCACLON.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
+
+                                if (!MOCACLOH.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
+
+                                if (!MOCACUBE.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
+
+                                if (!MOCANAMI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
+
+                                if (!MOCAREGI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
+
+                                if (!MOCARECN.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCARECN) });
+
+                                if (!NPSYCLOC.HasValue)
+                                    yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
+
+                                if (!UDSBENTC.HasValue)
+                                    yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
+
+                                if (!UDSBENTD.HasValue)
+                                    yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
+
+                                if (!MINTTOTS.HasValue)
+                                    yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
+                            }
+                        }
                     }
                 }
 
