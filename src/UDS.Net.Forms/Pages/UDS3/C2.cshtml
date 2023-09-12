@@ -1778,27 +1778,6 @@
                                             <label asp-for="C2.RESPASST" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPASST)</label>
                                         </div>
                                     </div>
-                                    @*<div class="relative flex items-start">
-                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                        <div class="flex h-6 items-center">
-                                            <input type="checkbox" asp-for="C2.RESPOTH"
-                                                   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                                                   data-affects="true"
-                                                   data-affects-toggle-targets="[ &quot;C2.RESPOTHX&quot; ]" />
-                                        </div>
-                                        <div class="ml-3 text-sm leading-6">
-                                            <label asp-for="C2.RESPOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPOTH)</label>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-500" asp-description-for="C2.RESPOTHX"></p>
-                                        <div class="mt-2">
-                                            <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
-                                            <input asp-for="C2.RESPOTHX" />
-                                        </div>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
-                                    </div>*@
-
                                     <div class="relative flex items-start">
                                         <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                         <div class="flex h-6 items-center">
@@ -1812,11 +1791,12 @@
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <input asp-for="C2.RESPOTHX" />
-                                            @*<label asp-for="C2.RESPOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>*@
                                         </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
                                     </div>
                                 </div>
                             </fieldset>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVALReasonIndicated"></span>
                         </div>
                     </div>
                 </div>
