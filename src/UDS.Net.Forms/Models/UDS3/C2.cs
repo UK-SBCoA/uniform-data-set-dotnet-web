@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
@@ -385,7 +386,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? COGSTAT { get; set; }
 
         [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
-        [RequiredOnComplete]
         [Range(1, 3)]
         public int? MODCOMM { get; set; }
 
@@ -504,7 +504,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
-        [RequiredOnComplete]
         [Range(1, 3)]
         public int? RESPVAL { get; set; }
 
@@ -534,9 +533,23 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Specify")]
         [MaxLength(60)]
-        [RequiredIf(nameof(RESPOTH), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(RESPOTH), "True", ErrorMessage = "Please specify.")]
         [ProhibitedCharacters]
         public int? RESPOTHX { get; set; }
+
+        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Please select atleast one reason for what makes this participant’s responses less valid?")]
+        [NotMapped]
+        public bool? RESPVALReasonIndicated
+        {
+            get
+            {
+                if (RESPHEAR || RESPDIST || RESPINTR || RESPDISN || RESPFATG || RESPEMOT || RESPASST || RESPOTH)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -593,8 +606,8 @@ namespace UDS.Net.Forms.Models.UDS3
                         {
                             if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.FVP)
                             {
-                                if (!OTRAILA.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(OTRAILA) });
+                                if (!TRAILA.HasValue)
+                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
 
                                 if (!MOCALOC.HasValue && MOCACOMP == 1)
                                     yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
@@ -637,6 +650,27 @@ namespace UDS.Net.Forms.Models.UDS3
 
                                 if (!MINTTOTS.HasValue)
                                     yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
+                            }
+                        }
+                    }
+                }
+
+                if (Status == FormStatus.Complete)
+                {
+                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
+                    if (visitValue is VisitModel)
+                    {
+                        VisitModel visit = (VisitModel)visitValue;
+
+                        if (visit != null)
+                        {
+                            if (visit.Kind == VisitKind.TIP || visit.Kind == VisitKind.TFP)
+                            {
+                                if (!MODCOMM.HasValue)
+                                    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
+
+                                if (!RESPVAL.HasValue)
+                                    yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
                             }
                         }
                     }
