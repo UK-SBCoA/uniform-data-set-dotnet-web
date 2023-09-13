@@ -109,7 +109,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? RESPEMOT { get; set; }
         public int? RESPASST { get; set; }
         public int? RESPOTH { get; set; }
-        public int? RESPOTHX { get; set; }
+        public string RESPOTHX { get; set; }
 
         public C2FormFields()
         {

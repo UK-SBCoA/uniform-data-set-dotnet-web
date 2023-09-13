@@ -535,7 +535,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [RequiredIf(nameof(RESPOTH), "True", ErrorMessage = "Please specify.")]
         [ProhibitedCharacters]
-        public int? RESPOTHX { get; set; }
+        public string? RESPOTHX { get; set; }
 
         [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Please select atleast one reason for what makes this participant’s responses less valid?")]
         [NotMapped]
