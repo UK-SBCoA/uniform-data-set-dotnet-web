@@ -84,7 +84,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? INRELTO { get; set; }
 
         [Display(Name = "How long has the co-participant known the participant?")]
-        [Range(0, 999, ErrorMessage = "Years known must be within 0 and 999")]
+        [RegularExpression(@"^(0|[1-9]\d?|120|999)$", ErrorMessage = "Years known must be within 0-120 or 999")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? INKNOWN { get; set; }
 
