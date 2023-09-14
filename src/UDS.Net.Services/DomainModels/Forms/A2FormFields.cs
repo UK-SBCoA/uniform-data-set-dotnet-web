@@ -8,6 +8,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? INBIRMO { get; set; }
         public int? INBIRYR { get; set; }
         public int? INSEX { get; set; }
+        public int? NEWINF { get; set; }
         public int? INHISP { get; set; }
         public int? INHISPOR { get; set; }
         public string INHISPOX { get; set; }
@@ -45,6 +46,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INBIRMO = a2Dto.INBIRMO;
                 this.INBIRYR = a2Dto.INBIRYR;
                 this.INSEX = a2Dto.INSEX;
+                this.NEWINF = a2Dto.NEWINF;
                 this.INHISP = a2Dto.INHISP;
                 this.INHISPOR = a2Dto.INHISPOR;
                 this.INHISPOX = a2Dto.INHISPOX;
@@ -61,6 +63,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INVISITS = a2Dto.INVISITS;
                 this.INCALLS = a2Dto.INCALLS;
                 this.INRELY = a2Dto.INRELY;
+                this.NEWINF = a2Dto.NEWINF;
             }
         }
     }
