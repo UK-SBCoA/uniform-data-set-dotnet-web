@@ -337,7 +337,8 @@ namespace UDS.Net.Services.Extensions
                 INLIVWTH = fields.INLIVWTH,
                 INVISITS = fields.INVISITS,
                 INCALLS = fields.INCALLS,
-                INRELY = fields.INRELY
+                INRELY = fields.INRELY,
+                NEWINF = fields.NEWINF
             };
         }
 
