@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "0ther (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(MOCALAN), "3", ErrorMessage = "Specify other language used.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? MOCALANX { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to visual impairment")]
@@ -171,7 +171,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(NPSYLAN), "3", ErrorMessage = "Specify other language used")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? NPSYLANX { get; set; }
 
         #region if not completed, skip to question  4a

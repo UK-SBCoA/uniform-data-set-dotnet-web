@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)", Prompt = "Other origin")]
         [MaxLength(60)]
         [RequiredIf(nameof(HISPOR), "50", ErrorMessage = "Indicate other origin.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? HISPORX { get; set; }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)", Prompt = "Other race")]
         [MaxLength(60)]
         [RequiredIf(nameof(RACE), "50", ErrorMessage = "Indicate other race.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? RACEX { get; set; }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)", Prompt = "Other additional race")]
         [MaxLength(60)]
         [RequiredIf(nameof(RACESEC), "50", ErrorMessage = "Indicate other additional race.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? RACESECX { get; set; }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)", Prompt = "Other additional race")]
         [MaxLength(60)]
         [RequiredIf(nameof(RACETER), "50", ErrorMessage = "Indicate other additional race.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? RACETERX { get; set; }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)", Prompt = "Other primary language")]
         [MaxLength(60)]
         [RequiredIf(nameof(PRIMLANG), "50", ErrorMessage = "Indicate other language.")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? PRIMLANX { get; set; }
 
         /// <summary>

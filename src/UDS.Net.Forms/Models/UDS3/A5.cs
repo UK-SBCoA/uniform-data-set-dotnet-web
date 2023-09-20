@@ -72,7 +72,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [RequiredIf(nameof(CVOTHR), "1", ErrorMessage = "Specify cardiovascular disease")]
         [RequiredIf(nameof(CVOTHR), "2", ErrorMessage = "Specify cardiovascular disease")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? CVOTHRX { get; set; }
 
         [Display(Name = "Stroke – by history, not exam (imaging is not required)")]
@@ -152,7 +152,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Other (specify)")]
         [RequiredIf(nameof(ARTHTYPE), "3", ErrorMessage = "Specify sleep disorder")]
         [MaxLength(60)]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? ARTHTYPX { get; set; }
 
         [Display(Name = "Upper extremity")]
@@ -190,7 +190,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [RequiredIf(nameof(OTHSLEEP), "1", ErrorMessage = "Specify sleep disorder")]
         [RequiredIf(nameof(OTHSLEEP), "2", ErrorMessage = "Specify sleep disorder")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? OTHSLEEX { get; set; }
 
         [Display(Name = "Alcohol abuse: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social")]
@@ -204,7 +204,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [RequiredIf(nameof(ABUSOTHR), "1", ErrorMessage = "Specify abused substance")]
         [RequiredIf(nameof(ABUSOTHR), "2", ErrorMessage = "Specify abused substance")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? ABUSX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
@@ -239,7 +239,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [RequiredIf(nameof(PSYCDIS), "1", ErrorMessage = "Specify disorder")]
         [RequiredIf(nameof(PSYCDIS), "2", ErrorMessage = "Specify disorder")]
-        [SpecialCharacter]
+        [ProhibitedCharacters]
         public string? PSYCDISX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

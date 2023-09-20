@@ -69,19 +69,19 @@ namespace UDS.Net.Forms.Models
                 {
                     yield return new ValidationResult(
                         $"Form kind is required",
-                        new[] { nameof(ReasonCodeNotIncluded) });
+                        new[] { nameof(Kind) });
                 }
                 if (string.IsNullOrWhiteSpace(Version.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Form version is required",
-                        new[] { nameof(ReasonCodeNotIncluded) });
+                        new[] { nameof(Version) });
                 }
                 if (string.IsNullOrWhiteSpace(CreatedBy.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Created by is required",
-                        new[] { nameof(ReasonCodeNotIncluded) });
+                        new[] { nameof(CreatedBy) });
                 }
             }
         }

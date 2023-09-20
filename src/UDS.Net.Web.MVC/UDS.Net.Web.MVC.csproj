@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>aspnet-UDS.Net.Web.MVC-F92C0881-61B6-4292-8635-0004DE84CFE6</UserSecretsId>
 		<DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
-		<ReleaseVersion>1.0.3</ReleaseVersion>
+		<ReleaseVersion>1.0.4</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -23,6 +23,8 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.18" />
+		<PackageReference Include="UDS.Net.API.Client" Version="1.5.0" />
+		<PackageReference Include="UDS.Net.Dto" Version="1.5.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Forms\UDS.Net.Forms.csproj">
