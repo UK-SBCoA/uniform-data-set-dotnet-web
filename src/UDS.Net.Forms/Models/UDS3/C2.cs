@@ -49,7 +49,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Allocate one point if the pattern was drawn successfully; otherwise, enter 0.")]
         public int? MOCATRAI { get; set; }
 
         [Display(Name = " Visuospatial/executive — Cube", Description = "(0-1, 95-98)")]
@@ -74,7 +73,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Memory — Registration (two trials)", Description = "(0-10, 95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Count the number correct for both trials.")]
         public int? MOCAREGI { get; set; }
 
         [Display(Name = "Attention — Digits", Description = "(0-2, 95-98)")]
@@ -637,7 +635,10 @@ namespace UDS.Net.Forms.Models.UDS3
                                     yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
 
                                 if (!MOCARECN.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCARECN) });
+                                    yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
+
+                                if (!MOCATRAI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
 
                                 if (!NPSYCLOC.HasValue)
                                     yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
