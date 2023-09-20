@@ -115,6 +115,7 @@ namespace UDS.Net.Forms.Extensions
                 INBIRMO = vm.INBIRMO,
                 INBIRYR = vm.INBIRYR,
                 INSEX = vm.INSEX,
+                NEWINF = vm.NEWINF,
                 INHISP = vm.INHISP,
                 INHISPOR = vm.INHISPOR,
                 INHISPOX = vm.INHISPOX,

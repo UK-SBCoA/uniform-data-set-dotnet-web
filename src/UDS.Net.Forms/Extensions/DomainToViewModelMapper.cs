@@ -231,6 +231,7 @@ namespace UDS.Net.Forms.Extensions
                 INBIRMO = fields.INBIRMO,
                 INBIRYR = fields.INBIRYR,
                 INSEX = fields.INSEX,
+                NEWINF = fields.NEWINF,
                 INHISP = fields.INHISP,
                 INHISPOR = fields.INHISPOR,
                 INHISPOX = fields.INHISPOX,
