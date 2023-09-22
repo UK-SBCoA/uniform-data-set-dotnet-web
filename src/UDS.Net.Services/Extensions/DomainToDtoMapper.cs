@@ -38,7 +38,9 @@ namespace UDS.Net.Services.Extensions
                 CreatedBy = participation.CreatedBy,
                 ModifiedBy = participation.ModifiedBy,
                 DeletedBy = participation.DeletedBy,
-                IsDeleted = participation.IsDeleted
+                IsDeleted = participation.IsDeleted,
+                VisitCount = participation.VisitCount,
+                LastVisitNumber = participation.LastVisitNumber
             };
         }
         public static VisitDto ToDto(this Visit visit)

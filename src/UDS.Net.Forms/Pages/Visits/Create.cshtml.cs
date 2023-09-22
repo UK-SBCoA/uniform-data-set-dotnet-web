@@ -9,6 +9,7 @@ using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -53,11 +54,14 @@ namespace UDS.Net.Forms.Pages.Visits
                 Version = "UDS3",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username",
-                StartDateTime = DateTime.Now
+                StartDateTime = DateTime.Now,
             };
 
-            if (participationId.HasValue)
-                Visit.ParticipationId = participationId.Value;
+            //Visit.Participation = new ParticipationModel{
+            //    LastVisitNumber = 0
+            //};
+
+
 
             return Page();
         }

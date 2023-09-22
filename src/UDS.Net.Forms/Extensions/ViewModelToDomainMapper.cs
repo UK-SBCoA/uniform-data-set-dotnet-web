@@ -19,7 +19,10 @@ namespace UDS.Net.Forms.Extensions
                 CreatedBy = vm.CreatedBy,
                 ModifiedBy = vm.ModifiedBy,
                 DeletedBy = vm.DeletedBy,
-                IsDeleted = vm.IsDeleted
+                IsDeleted = vm.IsDeleted,
+                VisitCount = vm.VisitCount,
+                LastVisitNumber = vm.LastVisitNumber
+
             };
         }
 

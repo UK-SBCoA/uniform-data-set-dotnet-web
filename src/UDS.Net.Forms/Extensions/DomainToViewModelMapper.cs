@@ -43,7 +43,8 @@ namespace UDS.Net.Forms.Extensions
                 Id = participation.Id,
                 LegacyId = participation.LegacyId,
                 VisitCount = participation.Visits.Count(),
-                Visits = participation.Visits.ToVM()
+                Visits = participation.Visits.ToVM(),
+                LastVisitNumber = participation.LastVisitNumber
             };
         }
 
