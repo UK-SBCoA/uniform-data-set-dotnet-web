@@ -21,6 +21,60 @@ namespace UDS.Net.Forms.Pages.UDS3
         [BindProperty]
         public A5 A5 { get; set; } = default!;
 
+        public List<RadioListItem> TOBAC100ListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 1F)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 1F)", "9")
+        };
+
+
+        public Dictionary<string, UIBehavior> TOBAC100UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.SMOKYRS"),
+                new UIDisableAttribute("A5.PACKSPER"),
+                new UIDisableAttribute("A5.QUITSMOK"),
+            },
+            InstructionalMessage = "skip to question 1F"
+
+            } },
+            { "1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.SMOKYRS"),
+                new UIEnableAttribute("A5.PACKSPER"),
+                new UIEnableAttribute("A5.QUITSMOK"),
+            },
+            } },
+
+            { "9", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                new UIDisableAttribute("A5.SMOKYRS"),
+                new UIDisableAttribute("A5.PACKSPER"),
+                new UIDisableAttribute("A5.QUITSMOK"),
+                },
+            InstructionalMessage = "skip to question 1F"
+            } }
+        };
+
+        public List<RadioListItem> ALCOCCASListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 2A)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 2A)", "9")
+        };
+
+        public Dictionary<string, UIBehavior> ALCOCCASUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ALCFREQ") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.ALCFREQ") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ALCFREQ") } }
+        };
+
         public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
@@ -36,6 +90,134 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public Dictionary<string, UIBehavior> CVHATTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.HATTMULT"),
+                new UIDisableAttribute("A5.HATTYEAR"),
+            },
+            InstructionalMessage = "skip to question 2B"
+
+            } },
+
+            { "1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.HATTMULT"),
+                new UIEnableAttribute("A5.HATTYEAR"),
+            },
+            } },
+
+            { "2", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.HATTMULT"),
+                new UIEnableAttribute("A5.HATTYEAR"),
+            },
+            } },
+
+            { "9", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.HATTMULT"),
+                new UIDisableAttribute("A5.HATTYEAR"),
+            },
+            InstructionalMessage = "skip to question 2B"
+
+            } }
+        };
+        public Dictionary<string, UIBehavior> CVOTHRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.CVOTHRX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.CVOTHRX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.CVOTHRX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.CVOTHRX") } }
+        };
+
+        public Dictionary<string, UIBehavior> CBSTROKEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.STROKMUL"),
+                new UIDisableAttribute("A5.STROKYR"),
+            },
+            InstructionalMessage = "skip to question 3B"
+
+            } },
+
+            { "1", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.STROKMUL"),
+                new UIEnableAttribute("A5.STROKYR"),
+            },
+
+            } },
+
+            { "2", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.STROKMUL"),
+                new UIEnableAttribute("A5.STROKYR"),
+            },
+
+            } },
+
+            { "9", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.STROKMUL"),
+                new UIDisableAttribute("A5.STROKYR"),
+            },
+            InstructionalMessage = "skip to question 3B"
+
+            } }
+            };
+
+
+        public Dictionary<string, UIBehavior> CBTIAUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.TIAMULT"),
+                new UIDisableAttribute("A5.TIAYEAR"),
+            },
+            InstructionalMessage = "skip to question 4A"
+
+            } },
+
+            { "1", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.TIAMULT"),
+                new UIEnableAttribute("A5.TIAYEAR"),
+            },
+
+            } },
+
+            { "2", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.TIAMULT"),
+                new UIEnableAttribute("A5.TIAYEAR"),
+            },
+
+            } },
+
+            { "9", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.TIAMULT"),
+                new UIDisableAttribute("A5.TIAYEAR"),
+            },
+            InstructionalMessage = "skip to question 4A"
+
+            } }
+            };
         public List<RadioListItem> ConditionsLimitedListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Absent", "0"),

@@ -33,7 +33,7 @@
                     <label asp-for="A5.TOBAC100"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.TOBAC100)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5.TOBAC100"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A5.TOBAC100)" for="@Model.A5.TOBAC100" items="Model.BasicYesNoListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A5.TOBAC100)" for="@Model.A5.TOBAC100" items="Model.TOBAC100ListItems" ui-behaviors="Model.TOBAC100UIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.TOBAC100"></span>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <label asp-for="A5.ALCOCCAS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.ALCOCCAS)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5.ALCOCCAS"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A5.ALCOCCAS)" for="@Model.A5.ALCOCCAS" items="Model.BasicYesNoListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A5.ALCOCCAS)" for="@Model.A5.ALCOCCAS" items="Model.ALCOCCASListItems" ui-behaviors="Model.ALCOCCASUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.ALCOCCAS"></span>
                     </div>
                 </div>
@@ -108,7 +108,8 @@
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.CVHATT"></span>
 
                             </td>
-                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CVHATT)" for="@Model.A5.CVHATT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CVHATT)" for="@Model.A5.CVHATT" items="Model.ConditionsListItems" ui-behaviors="Model.CVHATTUIBehavior"></table-cell-radio-buttons>
+
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -195,7 +196,7 @@
                                 <p class="text-sm text-gray-500" asp-description-for="A5.CVOTHR"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.CVOTHR"></span>
                             </td>
-                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CVOTHR)" for="@Model.A5.CVOTHR" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CVOTHR)" for="@Model.A5.CVOTHR" items="Model.ConditionsListItems" ui-behaviors="Model.CVOTHRUIBehavior"></table-cell-radio-buttons>
                         </tr>
                         <tr>
                             <td colspan="4">
@@ -237,7 +238,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.CBSTROKE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.CBSTROKE"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CBSTROKE)" for="@Model.A5.CBSTROKE" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CBSTROKE)" for="@Model.A5.CBSTROKE" items="Model.ConditionsListItems" ui-behaviors="Model.CBSTROKEUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4" class="subsubcounterreset">
@@ -267,7 +268,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.CBTIA"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.CBTIA"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CBTIA)" for="@Model.A5.CBTIA" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.CBTIA)" for="@Model.A5.CBTIA" items="Model.ConditionsListItems" ui-behaviors="Model.CBTIAUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4" class="subsubcounterreset">
@@ -314,14 +315,17 @@
                 <tbody class="subcounterreset">
                     <tr>
                         <td>
-                            <label asp-for="A5.PD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.PD)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="A5.PD"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.PD"></span>
+                           <label asp-for="A5.PD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.PD)</label>
+                           <p class="text-sm text-gray-500" asp-description-for="A5.PD"></p>
+                           <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.PD"></span>
                         </td>
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PD[0]" name="A5.PD" type="radio" value="@Model.ConditionsLimitedListItems[0].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
+                                            id="A5_PD[0]" name="A5.PD" type="radio" value="0">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[0]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[0].Value</span>
                                     </label>
@@ -331,7 +335,10 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PD[1]" name="A5.PD" type="radio" value="@Model.ConditionsLimitedListItems[1].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" 
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]"
+                                           id="A5_PD[1]" name="A5.PD" type="radio" value="1">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[1]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[1].Value</span>
                                     </label>
@@ -342,7 +349,10 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PD[2]" name="A5.PD" type="radio" value="@Model.ConditionsLimitedListItems[2].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
+                                           id="A5_PD[2]" name="A5.PD" type="radio" value="9">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[2]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[2].Value</span>
                                     </label>
@@ -373,7 +383,10 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PDOTHR[0]" name="A5.PDOTHR" type="radio" value="@Model.ConditionsLimitedListItems[0].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
+                                           id="A5_PDOTHR[0]" name="A5.PDOTHR" type="radio" value="0">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[0]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[0].Value</span>
                                     </label>
@@ -383,7 +396,10 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PDOTHR[1]" name="A5.PDOTHR" type="radio" value="@Model.ConditionsLimitedListItems[1].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]"
+                                           id="A5_PDOTHR[1]" name="A5.PDOTHR" type="radio" value="1">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[1]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[1].Value</span>
                                     </label>
@@ -394,7 +410,10 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="A5_PDOTHR[2]" name="A5.PDOTHR" type="radio" value="@Model.ConditionsLimitedListItems[2].Value">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                           data-affects="true"
+                                           data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
+                                           id="A5_PDOTHR[2]" name="A5.PDOTHR" type="radio" value="9">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[2]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[2].Value</span>
                                     </label>
