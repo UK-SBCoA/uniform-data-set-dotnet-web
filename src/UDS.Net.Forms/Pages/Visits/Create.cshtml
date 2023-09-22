@@ -1,7 +1,7 @@
 ﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.Visits.CreateModel
 @{
-    ViewData["Title"] = "Create visit";
+    ViewData["Title"] = "Create visit for ";
 }
 
 
@@ -10,28 +10,28 @@
     <div class="space-y-16 p-16 xl:space-y-20">
         <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-            <label for="Visit_ParticipationId">Participant</label>
-            <select asp-for="Visit.ParticipationId" asp-items="@Model.ParticipationsSelectList" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <option value=""></option>
-            </select>
+            @*<label for="Visit_ParticipationId">Participant</label>*@
+            @*<select asp-for="Visit.ParticipationId" asp-items="@Model.ParticipationsSelectList" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <option value=""></option>
+                </select>*@
 
             <label asp-for="Visit.Kind"></label>
-            <select asp-for="Visit.Kind" asp-items="Html.GetEnumSelectList<VisitKind>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <option value=""></option>
-                @if (Model.Visit.Participation.LastVisitNumber > 1)
-                {
-                    <option value="FVP">FVP</option>
-                    <option value="TFP">TFP</option>
-                }
-                else
-                {
-                    <option value="IVP">IVP</option>
-                    <option value="TIP">TIP</option>
-                }
-            </select>
+            @*<select asp-for="Visit.Kind" asp-items="Html.GetEnumSelectList<VisitKind>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <option value=""></option>
+                    @if (Model.Visit.Participation.LastVisitNumber > 1)
+                    {
+                        <option value="FVP">FVP</option>
+                        <option value="TFP">TFP</option>
+                    }
+                    else
+                    {
+                        <option value="IVP">IVP</option>
+                        <option value="TIP">TIP</option>
+                    }
+                </select>*@
 
             <label asp-for="Visit.Number"></label>
-            <input asp-for="Visit.Number" />
+            <input asp-for="Visit.Number" value="@Model.SelectedParticipationNextVisit" />
 
             <label asp-for="Visit.StartDateTime"></label>
             <input asp-for="Visit.StartDateTime" />
