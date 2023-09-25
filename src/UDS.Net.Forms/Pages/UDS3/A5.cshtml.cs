@@ -218,6 +218,152 @@ namespace UDS.Net.Forms.Pages.UDS3
 
             } }
             };
+
+        public Dictionary<string, UIBehavior> TBIUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.TBIBRIEF"),
+                new UIDisableAttribute("A5.TBIEXTEN"),
+                new UIDisableAttribute("A5.TBIWOLOS"),
+                new UIDisableAttribute("A5.TBIYEAR")
+            },
+            InstructionalMessage = "skip to question 5A"
+
+            } },
+
+            { "1", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.TBIBRIEF"),
+                new UIEnableAttribute("A5.TBIEXTEN"),
+                new UIEnableAttribute("A5.TBIWOLOS"),
+                new UIEnableAttribute("A5.TBIYEAR")
+            },
+
+            } },
+
+            { "2", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.TBIBRIEF"),
+                new UIEnableAttribute("A5.TBIEXTEN"),
+                new UIEnableAttribute("A5.TBIWOLOS"),
+                new UIEnableAttribute("A5.TBIYEAR")
+            },
+
+            } },
+
+            { "9", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.TBIBRIEF"),
+                new UIDisableAttribute("A5.TBIEXTEN"),
+                new UIDisableAttribute("A5.TBIWOLOS"),
+                new UIDisableAttribute("A5.TBIYEAR")
+            },
+            InstructionalMessage = "skip to question 5A"
+
+            } }
+            };
+
+        public Dictionary<string, UIBehavior> DIABETESUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.DIABTYPE") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.DIABTYPE") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.DIABTYPE") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.DIABTYPE") } }
+        };
+
+        public Dictionary<string, UIBehavior> ARTHRITUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.ARTHTYPE"),
+                new UIDisableAttribute("A5.ARTHTYPX"),
+                new UIDisableAttribute("A5.ARTHUPEX"),
+                new UIDisableAttribute("A5.ARTHLOEX"),
+                new UIDisableAttribute("A5.ARTHSPIN"),
+                new UIDisableAttribute("A5.ARTHUNK")
+            },
+            InstructionalMessage = "skip to question 5G"
+
+            } },
+
+            { "1", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.ARTHTYPE"),
+                new UIEnableAttribute("A5.ARTHTYPX"),
+                new UIEnableAttribute("A5.ARTHUPEX"),
+                new UIEnableAttribute("A5.ARTHLOEX"),
+                new UIEnableAttribute("A5.ARTHSPIN"),
+                new UIEnableAttribute("A5.ARTHUNK")
+            },
+
+            } },
+
+            { "2", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIEnableAttribute("A5.ARTHTYPE"),
+                new UIEnableAttribute("A5.ARTHTYPX"),
+                new UIEnableAttribute("A5.ARTHUPEX"),
+                new UIEnableAttribute("A5.ARTHLOEX"),
+                new UIEnableAttribute("A5.ARTHSPIN"),
+                new UIEnableAttribute("A5.ARTHUNK")
+            },
+
+            } },
+
+            { "9", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
+            {
+                new UIDisableAttribute("A5.ARTHTYPE"),
+                new UIDisableAttribute("A5.ARTHTYPX"),
+                new UIDisableAttribute("A5.ARTHUPEX"),
+                new UIDisableAttribute("A5.ARTHLOEX"),
+                new UIDisableAttribute("A5.ARTHSPIN"),
+                new UIDisableAttribute("A5.ARTHUNK")
+            },
+            InstructionalMessage = "skip to question 5A"
+
+            } }
+            };
+
+        public Dictionary<string, UIBehavior> ARTHTYPEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ARTHTYPX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ARTHTYPX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.ARTHTYPX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ARTHTYPX") } }
+        };
+
+        public Dictionary<string, UIBehavior> OTHSLEEPUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.OTHSLEEX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.OTHSLEEX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.OTHSLEEX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.OTHSLEEX") } }
+        };
+
+        public Dictionary<string, UIBehavior> ABUSOTHRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ABUSX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.ABUSX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.ABUSX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.ABUSX") } }
+        };
+
+        public Dictionary<string, UIBehavior> PSYCDISUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.PSYCDISX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.PSYCDISX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5.PSYCDISX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5.PSYCDISX") } }
+        };
         public List<RadioListItem> ConditionsLimitedListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Absent", "0"),

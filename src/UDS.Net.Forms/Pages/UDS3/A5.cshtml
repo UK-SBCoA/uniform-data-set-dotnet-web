@@ -315,9 +315,9 @@
                 <tbody class="subcounterreset">
                     <tr>
                         <td>
-                           <label asp-for="A5.PD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.PD)</label>
-                           <p class="text-sm text-gray-500" asp-description-for="A5.PD"></p>
-                           <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.PD"></span>
+                            <label asp-for="A5.PD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5.PD)</label>
+                            <p class="text-sm text-gray-500" asp-description-for="A5.PD"></p>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.PD"></span>
                         </td>
                         <td>
                             <div class="relative flex items-start">
@@ -325,7 +325,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
-                                            id="A5_PD[0]" name="A5.PD" type="radio" value="0">
+                                           id="A5_PD[0]" name="A5.PD" type="radio" value="0">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[0]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[0].Value</span>
                                     </label>
@@ -335,7 +335,7 @@
                         <td>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" 
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]"
                                            id="A5_PD[1]" name="A5.PD" type="radio" value="1">
@@ -449,7 +449,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.TBI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.TBI"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.TBI)" for="@Model.A5.TBI" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.TBI)" for="@Model.A5.TBI" items="Model.ConditionsListItems" ui-behaviors="Model.TBIUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -522,7 +522,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.DIABETES"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.DIABETES"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.DIABETES)" for="@Model.A5.DIABETES" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.DIABETES)" for="@Model.A5.DIABETES" items="Model.ConditionsListItems" ui-behaviors="Model.DIABETESUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -576,7 +576,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.ARTHRIT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.ARTHRIT"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.ARTHRIT)" for="@Model.A5.ARTHRIT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.ARTHRIT)" for="@Model.A5.ARTHRIT" items="Model.ConditionsListItems" ui-behaviors="Model.ARTHRITUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -585,7 +585,7 @@
                                     <label asp-for="A5.ARTHTYPE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5.ARTHTYPE)</label>
                                     <div>
                                         <p class="text-sm text-gray-500" asp-description-for="A5.ARTHTYPE"></p>
-                                        <radio-button-group id="@Html.IdFor(m => m.A5.ARTHTYPE)" for="@Model.A5.ARTHTYPE" items="Model.ArthritisListItems"></radio-button-group>
+                                        <radio-button-group id="@Html.IdFor(m => m.A5.ARTHTYPE)" for="@Model.A5.ARTHTYPE" items="Model.ArthritisListItems" ui-behaviors="Model.ARTHTYPEUIBehavior"></radio-button-group>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.ARTHTYPE"></span>
                                     </div>
                                     <div>
@@ -690,7 +690,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.OTHSLEEP"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.OTHSLEEP"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.OTHSLEEP)" for="@Model.A5.OTHSLEEP" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.OTHSLEEP)" for="@Model.A5.OTHSLEEP" items="Model.ConditionsListItems" ui-behaviors="Model.OTHSLEEPUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -739,7 +739,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.ABUSOTHR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.ABUSOTHR"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.ABUSOTHR)" for="@Model.A5.ABUSOTHR" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.ABUSOTHR)" for="@Model.A5.ABUSOTHR" items="Model.ConditionsListItems" ui-behaviors="Model.ABUSOTHRUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
@@ -852,7 +852,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A5.PSYCDIS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.PSYCDIS"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.PSYCDIS)" for="@Model.A5.PSYCDIS" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5.PSYCDIS)" for="@Model.A5.PSYCDIS" items="Model.ConditionsListItems" ui-behaviors="Model.PSYCDISUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4">
