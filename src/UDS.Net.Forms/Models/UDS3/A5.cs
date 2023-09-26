@@ -21,7 +21,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total years smoked")]
         [RegularExpression("^(\\d|[1-7]\\d|8[0-7]|99)$", ErrorMessage = "(0-87, 99 = Unknown)")]
-        [RequiredIf(nameof(TOBAC100),"1", ErrorMessage = "Specify total years smoked?")]
+        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Specify total years smoked?")]
         public int? SMOKYRS { get; set; }
 
         [Display(Name = "Average number of packs smoked per day")]
@@ -38,7 +38,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? ALCOCCAS { get; set; }
 
         [Display(Name = "During the past three months, how often did the subject have at least one drink of any alcoholic beverage such as wine, beer, malt liquor, or spirits?")]
-        [RequiredIf(nameof(ALCOCCAS),"1",ErrorMessage= "Specify how often the participant has at least one drink")]
+        [RequiredIf(nameof(ALCOCCAS), "1", ErrorMessage = "Specify how often the participant has at least one drink")]
         public int? ALCFREQ { get; set; }
 
         [Display(Name = "Heart attack/cardiac arrest")]
