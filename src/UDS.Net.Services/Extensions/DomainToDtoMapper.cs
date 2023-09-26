@@ -449,6 +449,7 @@ namespace UDS.Net.Services.Extensions
                 ALCFREQ = fields.ALCFREQ,
                 CVHATT = fields.CVHATT,
                 HATTMULT = fields.HATTMULT,
+                HATTYEAR = fields.HATTYEAR,
                 CVAFIB = fields.CVAFIB,
                 CVANGIO = fields.CVANGIO,
                 CVBYPASS = fields.CVBYPASS,

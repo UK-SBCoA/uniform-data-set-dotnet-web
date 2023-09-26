@@ -325,7 +325,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
-                                           id="A5_PD[0]" name="A5.PD" type="radio" value="0">
+                                           id="A5_PD[0]" name="A5.PD" type="radio" value="0" @(Model.A5.PD == 0 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[0]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[0].Value</span>
                                     </label>
@@ -338,7 +338,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]"
-                                           id="A5_PD[1]" name="A5.PD" type="radio" value="1">
+                                           id="A5_PD[1]" name="A5.PD" type="radio" value="1" @(Model.A5.PD == 1 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[1]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[1].Value</span>
                                     </label>
@@ -352,7 +352,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
-                                           id="A5_PD[2]" name="A5.PD" type="radio" value="9">
+                                           id="A5_PD[2]" name="A5.PD" type="radio" value="9" @(Model.A5.PD == 9 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PD[2]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[2].Value</span>
                                     </label>
@@ -386,7 +386,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
-                                           id="A5_PDOTHR[0]" name="A5.PDOTHR" type="radio" value="0">
+                                           id="A5_PDOTHR[0]" name="A5.PDOTHR" type="radio" value="0" @(Model.A5.PDOTHR == 0 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[0]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[0].Value</span>
                                     </label>
@@ -399,7 +399,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]"
-                                           id="A5_PDOTHR[1]" name="A5.PDOTHR" type="radio" value="1">
+                                           id="A5_PDOTHR[1]" name="A5.PDOTHR" type="radio" value="1" @(Model.A5.PDOTHR == 1 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[1]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[1].Value</span>
                                     </label>
@@ -413,7 +413,7 @@
                                     <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                                            data-affects="true"
                                            data-affects-targets="[ {&quot;A5.PDOTHRYR&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]"
-                                           id="A5_PDOTHR[2]" name="A5.PDOTHR" type="radio" value="9">
+                                           id="A5_PDOTHR[2]" name="A5.PDOTHR" type="radio" value="9" @(Model.A5.PDOTHR == 9 ? "checked" : "")>
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="A5_PDOTHR[2]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ConditionsLimitedListItems[2].Value</span>
                                     </label>
@@ -471,11 +471,11 @@
                                     </div>
                                 </div>
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="A5.TBIEXTEN"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5.TBIEXTEN)</label>
+                                    <label asp-for="A5.TBIWOLOS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5.TBIWOLOS)</label>
                                     <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                        <p class="text-sm text-gray-500" asp-description-for="@Model.A5.TBIEXTEN"></p>
-                                        <radio-button-group id="@Html.IdFor(m => m.A5.TBIEXTEN)" for="@Model.A5.TBIEXTEN" items="Model.TBIFrequencyListItems"></radio-button-group>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.TBIEXTEN"></span>
+                                        <p class="text-sm text-gray-500" asp-description-for="@Model.A5.TBIWOLOS"></p>
+                                        <radio-button-group id="@Html.IdFor(m => m.A5.TBIWOLOS)" for="@Model.A5.TBIWOLOS" items="Model.TBIFrequencyListItems"></radio-button-group>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5.TBIWOLOS"></span>
                                     </div>
                                 </div>
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
