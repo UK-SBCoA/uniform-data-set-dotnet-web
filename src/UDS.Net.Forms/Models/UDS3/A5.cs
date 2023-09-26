@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using UDS.Net.Forms.DataAnnotations;
 
@@ -12,20 +13,20 @@ namespace UDS.Net.Forms.Models.UDS3
     public class A5 : FormModel
     {
         [Display(Name = "Has subject smoked within the last 30 days?")]
-        [RequiredOnComplete(ErrorMessage = "Has the subject smoked?")]
+        [RequiredOnComplete(ErrorMessage = "Has the subject smoked within the last 30 days?")]
         public int? TOBAC30 { get; set; }
 
         [Display(Name = "Has participant smoked more than 100 cigarettes in his/her life?")]
-        [RequiredOnComplete(ErrorMessage = "Has the participant smoked more than 100 cigarettes?")]
+        [RequiredOnComplete(ErrorMessage = "Has the participant smoked more than 100 cigarettes in their life?")]
         public int? TOBAC100 { get; set; }
 
         [Display(Name = "Total years smoked")]
         [RegularExpression("^(\\d|[1-7]\\d|8[0-7]|99)$", ErrorMessage = "(0-87, 99 = Unknown)")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Specify total years smoked?")]
+        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Specify total years smoked")]
         public int? SMOKYRS { get; set; }
 
         [Display(Name = "Average number of packs smoked per day")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Specify average number of packs smoked per day?")]
+        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Specify average number of packs smoked per day")]
         public int? PACKSPER { get; set; }
 
         [Display(Name = "If the subject quit smoking, specify age at which he/she last smoked (i.e., quit)")]
