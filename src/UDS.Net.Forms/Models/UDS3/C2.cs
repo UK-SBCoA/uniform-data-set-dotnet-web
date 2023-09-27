@@ -1,7 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Xml.Linq;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS3
 {
@@ -20,7 +24,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Which location was the MoCA administered?")]
         public int? MOCALOC { get; set; }
 
         [Display(Name = "Language of MoCA administration")]
@@ -34,7 +37,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? MOCALANX { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to visual impairment")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Was the MoCA affected by visual impairment?")]
         public int? MOCAVIS { get; set; }
 
         [Display(Name = "Subject was unable to complete one or more sections due to hearing impairment")]
@@ -43,42 +45,34 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "TOTAL RAW SCORE - UNCORRECTED (Not corrected for education or visual/hearing impairment)", Description = "enter 88 if any of the following MoCA items were not administered: 1g-1l, 1n-1t, 1w-1bb")]
         [RegularExpression("^(\\d|[0-2]\\d|30|88)$", ErrorMessage = "Allowed values are 0-30 or 88 = not administered.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Sum all subscores. The maximum score is 30 points.")]
         public int? MOCATOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Allocate one point if the pattern was drawn successfully; otherwise, enter 0.")]
         public int? MOCATRAI { get; set; }
 
         [Display(Name = " Visuospatial/executive — Cube", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Assign a point if all cube criteria are met.")]
         public int? MOCACUBE { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock contour", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If clock contour acceptable, enter 1; otherwise, enter 0.")]
         public int? MOCACLOC { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock numbers", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If all clock number criteria are met, enter 1; otherwise, enter 0.")]
         public int? MOCACLON { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock hands", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "If all clock hands criteria are met, enter 1; otherwise, enter 0.")]
         public int? MOCACLOH { get; set; }
 
         [Display(Name = "Language — Naming", Description = "(0-3, 95-98)")]
         [RegularExpression("^([0-3]|9[5-8])$", ErrorMessage = "Allowed values are 0-3 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.")]
         public int? MOCANAMI { get; set; }
 
         [Display(Name = "Memory — Registration (two trials)", Description = "(0-10, 95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Count the number correct for both trials.")]
         public int? MOCAREGI { get; set; }
 
         [Display(Name = "Attention — Digits", Description = "(0-2, 95-98)")]
@@ -115,7 +109,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Delayed recall — No cue", Description = "(0-5, 95-98)")]
         [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-5 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Allocate 1 point for each word recalled freely without any cues.")]
         public int? MOCARECN { get; set; }
 
         [Display(Name = "Delayed recall — Category cue", Description = "(0-5, 88 = not applicable)")]
@@ -161,7 +154,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredOnComplete]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
@@ -190,7 +182,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -235,7 +226,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredOnComplete]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -295,7 +285,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -308,7 +297,6 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredOnComplete]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
@@ -395,6 +383,172 @@ namespace UDS.Net.Forms.Models.UDS3
         [RequiredOnComplete]
         public int? COGSTAT { get; set; }
 
+        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
+        [Range(1, 3)]
+        public int? MODCOMM { get; set; }
+
+        [Display(Name = "Trial 1 - Total recall", Description = "(If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a.)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
+        public int? REY1REC { get; set; }
+
+        [Display(Name = "Trial 1 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 1 intrusions.")]
+        public int? REY1INT { get; set; }
+
+        [Display(Name = "Trial 2 - Total recall", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 total recall.")]
+        public int? REY2REC { get; set; }
+
+        [Display(Name = "Trial 2 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 intrusions.")]
+        public int? REY2INT { get; set; }
+
+        [Display(Name = "Trial 3 - Total recall", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 total recall.")]
+        public int? REY3REC { get; set; }
+
+        [Display(Name = "Trial 3 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
+        public int? REY3INT { get; set; }
+
+        [Display(Name = "Trial 4 - Total recall", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 total recall.")]
+        public int? REY4REC { get; set; }
+
+        [Display(Name = "Trial 4 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
+        public int? REY4INT { get; set; }
+
+        [Display(Name = "Trial 5 - Total recall", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 total recall.")]
+        public int? REY5REC { get; set; }
+
+        [Display(Name = "Trial 5 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
+        public int? REY5INT { get; set; }
+
+        [Display(Name = "Trial 6 - Total recall", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 total recall.")]
+        public int? REY6REC { get; set; }
+
+        [Display(Name = "Trial 6 - Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
+        public int? REY6INT { get; set; }
+
+        [Display(Name = "PART A: Total number of seconds to complete", Description = "(0–100, 888, 995 – 998)")]
+        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, or 888 , or 995-998")]
+        public int? OTRAILA { get; set; }
+
+        [Display(Name = " Number of commission errors", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide number of commission errors.")]
+        public int? OTRLARR { get; set; }
+
+        [Display(Name = "Total number correct", Description = "(0-25)")]
+        [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide total number correct.")]
+        public int? OTRLALI { get; set; }
+
+        [Display(Name = "PART B: Total number of seconds to complete", Description = "(0–300, 888, 995 – 998)")]
+        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, or 888 , or 995-998")]
+        public int? OTRAILB { get; set; }
+
+        [Display(Name = "Number of commission errors", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide number of commission errors.")]
+        public int? OTRLBRR { get; set; }
+
+        [Display(Name = "Total number correct", Description = "(0–25)")]
+        [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide total number correct.")]
+        public int? OTRLBLI { get; set; }
+
+        [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
+        public int? REYDREC { get; set; }
+
+        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
+        public int? REYDINT { get; set; }
+
+        [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total correct recognitions.")]
+        public int? REYTCOR { get; set; }
+
+        [Display(Name = "Recognition - Total false positives", Description = "(0-15)")]
+        [Range(0, 15)]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
+        public int? REYFPOS { get; set; }
+
+        [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        public int? VNTTOTW { get; set; }
+
+        [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
+        [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        public int? VNTPCNC { get; set; }
+
+        [Display(Name = "How valid do you think the participant’s responses are?")]
+        [Range(1, 3)]
+        public int? RESPVAL { get; set; }
+
+        [Display(Name = "Hearing impairment")]
+        public bool RESPHEAR { get; set; }
+
+        [Display(Name = "Distractions")]
+        public bool RESPDIST { get; set; }
+
+        [Display(Name = "Interruptions")]
+        public bool RESPINTR { get; set; }
+
+        [Display(Name = "Lack of effort or disinterest")]
+        public bool RESPDISN { get; set; }
+
+        [Display(Name = "Fatigue")]
+        public bool RESPFATG { get; set; }
+
+        [Display(Name = "Emotional issues")]
+        public bool RESPEMOT { get; set; }
+
+        [Display(Name = "Unapproved assistance")]
+        public bool RESPASST { get; set; }
+
+        [Display(Name = "Other (specify)")]
+        public bool RESPOTH { get; set; }
+
+        [Display(Name = "Specify")]
+        [MaxLength(60)]
+        [RequiredIf(nameof(RESPOTH), "True", ErrorMessage = "Please specify.")]
+        [ProhibitedCharacters]
+        public string? RESPOTHX { get; set; }
+
+        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Please select atleast one reason for what makes this participant’s responses less valid?")]
+        [NotMapped]
+        public bool? RESPVALReasonIndicated
+        {
+            get
+            {
+                if (RESPHEAR || RESPDIST || RESPINTR || RESPDISN || RESPFATG || RESPEMOT || RESPASST || RESPOTH)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Complete)
@@ -436,6 +590,90 @@ namespace UDS.Net.Forms.Models.UDS3
                     if (count > 5)
                     {
                         yield return new ValidationResult("The total possible words recalled and entered in Questions 1t, 1u, and 1v should be 5 or less.", new[] { nameof(MOCARECN) });
+                    }
+                }
+
+                if (Status == FormStatus.Complete)
+                {
+                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
+                    if (visitValue is VisitModel)
+                    {
+                        VisitModel visit = (VisitModel)visitValue;
+
+                        if (visit != null)
+                        {
+                            if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.FVP)
+                            {
+                                if (!TRAILA.HasValue)
+                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
+
+                                if (!MOCALOC.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
+
+                                if (!MOCAVIS.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
+
+                                if (!MOCATOTS.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
+
+                                if (!MOCACLOC.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
+
+                                if (!MOCACLON.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
+
+                                if (!MOCACLOH.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
+
+                                if (!MOCACUBE.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
+
+                                if (!MOCANAMI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
+
+                                if (!MOCAREGI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
+
+                                if (!MOCARECN.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
+
+                                if (!MOCATRAI.HasValue && MOCACOMP == 1)
+                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
+
+                                if (!NPSYCLOC.HasValue)
+                                    yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
+
+                                if (!UDSBENTC.HasValue)
+                                    yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
+
+                                if (!UDSBENTD.HasValue)
+                                    yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
+
+                                if (!MINTTOTS.HasValue)
+                                    yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
+                            }
+                        }
+                    }
+                }
+
+                if (Status == FormStatus.Complete)
+                {
+                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
+                    if (visitValue is VisitModel)
+                    {
+                        VisitModel visit = (VisitModel)visitValue;
+
+                        if (visit != null)
+                        {
+                            if (visit.Kind == VisitKind.TIP || visit.Kind == VisitKind.TFP)
+                            {
+                                if (!MODCOMM.HasValue)
+                                    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
+
+                                if (!RESPVAL.HasValue)
+                                    yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
+                            }
+                        }
                     }
                 }
 
