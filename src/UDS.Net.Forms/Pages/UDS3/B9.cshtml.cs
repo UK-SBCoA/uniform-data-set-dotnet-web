@@ -39,12 +39,137 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> COGFLUCListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown", "9")
+        };
+
+        public Dictionary<string, UIBehavior> COGFLUCUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFLAGO") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.COGFLAGO") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFLAGO") } }
+        };
+
         public List<RadioListItem> SimpleYesNoListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1")
         };
+        public Dictionary<string, UIBehavior> COGOTHRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGOTHRX") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.COGOTHRX") } }
+        };
+        public Dictionary<string, UIBehavior> DECCLOGUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
 
+                    new UIDisableAttribute("B9.COGMEM"),
+                    new UIDisableAttribute("B9.COGORI"),
+                    new UIDisableAttribute("B9.COGJUDG"),
+                    new UIDisableAttribute("B9.COGLANG"),
+                    new UIDisableAttribute("B9.COGVIS"),
+                    new UIDisableAttribute("B9.COGATTN"),
+                    new UIDisableAttribute("B9.COGFLUC"),
+                    new UIDisableAttribute("B9.COGFLAGO"),
+                    new UIDisableAttribute("B9.COGOTHR"),
+                    new UIDisableAttribute("B9.COGOTHRX"),
+                    new UIDisableAttribute("B9.COGFPRED"),
+                    new UIDisableAttribute("B9.COGFPREX"),
+                    new UIDisableAttribute("B9.COGMODE"),
+                    new UIDisableAttribute("B9.COGMODEX"),
+                    new UIDisableAttribute("B9.DECAGE")
+                },
+                InstructionalMessage = "Skip to question 8"
+            } },
+
+            {"1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.COGMEM"),
+                    new UIEnableAttribute("B9.COGORI"),
+                    new UIEnableAttribute("B9.COGJUDG"),
+                    new UIEnableAttribute("B9.COGLANG"),
+                    new UIEnableAttribute("B9.COGVIS"),
+                    new UIEnableAttribute("B9.COGATTN"),
+                    new UIEnableAttribute("B9.COGFLUC"),
+                    new UIEnableAttribute("B9.COGFLAGO"),
+                    new UIEnableAttribute("B9.COGOTHR"),
+                    new UIEnableAttribute("B9.COGOTHRX"),
+                    new UIEnableAttribute("B9.COGFPRED"),
+                    new UIEnableAttribute("B9.COGFPREX"),
+                    new UIEnableAttribute("B9.COGMODE"),
+                    new UIEnableAttribute("B9.COGMODEX"),
+                    new UIEnableAttribute("B9.DECAGE")
+                },
+                InstructionalMessage = "Continue to question 4A"
+            } }
+            };
+
+        public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("B9.BEAPATHY"),
+                    new UIDisableAttribute("B9.BEDEP"),
+                    new UIDisableAttribute("B9.BEVHALL"),
+                    new UIDisableAttribute("B9.BEVWELL"),
+                    new UIDisableAttribute("B9.BEVHAGO"),
+                    new UIDisableAttribute("B9.BEAHALL"),
+                    new UIDisableAttribute("B9.BEDEL"),
+                    new UIDisableAttribute("B9.BEDISIN"),
+                    new UIDisableAttribute("B9.BEIRRIT"),
+                    new UIDisableAttribute("B9.BEAGIT"),
+                    new UIDisableAttribute("B9.BEPERCH"),
+                    new UIDisableAttribute("B9.BEREM"),
+                    new UIDisableAttribute("B9.BEREMAGO"),
+                    new UIDisableAttribute("B9.BEANX"),
+                    new UIDisableAttribute("B9.BEOTHR"),
+                    new UIDisableAttribute("B9.BEOTHRX"),
+                    new UIDisableAttribute("B9.BEFPRED"),
+                    new UIDisableAttribute("B9.BEFPREDX"),
+                    new UIDisableAttribute("B9.BEMODE"),
+                    new UIDisableAttribute("B9.BEMODEX"),
+                    new UIDisableAttribute("B9.BEAGE")
+                },
+                InstructionalMessage = "Skip to question 13"
+            } },
+
+            {"1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEAPATHY"),
+                    new UIEnableAttribute("B9.BEDEP"),
+                    new UIEnableAttribute("B9.BEVHALL"),
+                    new UIEnableAttribute("B9.BEVWELL"),
+                    new UIEnableAttribute("B9.BEVHAGO"),
+                    new UIEnableAttribute("B9.BEAHALL"),
+                    new UIEnableAttribute("B9.BEDEL"),
+                    new UIEnableAttribute("B9.BEDISIN"),
+                    new UIEnableAttribute("B9.BEIRRIT"),
+                    new UIEnableAttribute("B9.BEAGIT"),
+                    new UIEnableAttribute("B9.BEPERCH"),
+                    new UIEnableAttribute("B9.BEREM"),
+                    new UIEnableAttribute("B9.BEREMAGO"),
+                    new UIEnableAttribute("B9.BEANX"),
+                    new UIEnableAttribute("B9.BEOTHR"),
+                    new UIEnableAttribute("B9.BEOTHRX"),
+                    new UIEnableAttribute("B9.BEFPRED"),
+                    new UIEnableAttribute("B9.BEFPREDX"),
+                    new UIEnableAttribute("B9.BEMODE"),
+                    new UIEnableAttribute("B9.BEMODEX"),
+                    new UIEnableAttribute("B9.BEAGE")
+                },
+                InstructionalMessage = "Continue to question 9A"
+            } }
+            };
         public List<RadioListItem> CognitiveDomainsListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Memory", "1"),
@@ -57,6 +182,18 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other", "8"),
             new RadioListItem("Unknown", "99")
         };
+        public Dictionary<string, UIBehavior> COGFPREDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"7", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.COGFPREX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } }
+        };
 
         public List<RadioListItem> OnsetListItems { get; set; } = new List<RadioListItem>
         {
@@ -67,6 +204,14 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "99")
         };
 
+        public Dictionary<string, UIBehavior> COGMODEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGMODEX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGMODEX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGMODEX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.COGMODEX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGMODEX") } },
+        };
         public List<RadioListItem> PredominantSymptomListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Apathy/withdrawal", "1"),

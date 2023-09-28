@@ -53,7 +53,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(15, 110)]
         public int? COGFLAGO { get; set; }
 
-        [Display(Name = "Other")]
+        [Display(Name = "Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities, in other cognitive domains ")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGOTHR { get; set; }
 
