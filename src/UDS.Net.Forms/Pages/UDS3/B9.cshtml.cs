@@ -39,11 +39,64 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
-        public List<RadioListItem> COGFLUCListItems { get; set; } = new List<RadioListItem>
+        public Dictionary<string, UIBehavior> MOMOALSUIBehavior = new Dictionary<string, UIBehavior>
         {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown", "9")
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.ALSAGE") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE") } }
+
+        };
+        public Dictionary<string, UIBehavior> MOMOPARKUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.PARKAGE") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE") } }
+
+        };
+        public Dictionary<string, UIBehavior> BEHVHALLUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("B9.BEVWELL"),
+                    new UIDisableAttribute("B9.BEVHAGO"),
+                },
+                InstructionalMessage = "Skip to question 9C2"
+             } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("B9.BEVWELL"),
+                    new UIEnableAttribute("B9.BEVHAGO"),
+                },
+             } },
+
+                { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("B9.BEVWELL"),
+                    new UIDisableAttribute("B9.BEVHAGO"),
+                },
+                InstructionalMessage = "Skip to question 9C2"
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEREMUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEREMAGO") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEREMAGO") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEREMAGO") } }
+        };
+
+        public Dictionary<string, UIBehavior> BEOTHRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEOTHRX") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEOTHRX") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEOTHRX") } }
         };
 
         public Dictionary<string, UIBehavior> COGFLUCUIBehavior = new Dictionary<string, UIBehavior>
@@ -57,6 +110,48 @@ namespace UDS.Net.Forms.Pages.UDS3
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1")
+        };
+        public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("B9.MOGAIT"),
+                    new UIDisableAttribute("B9.MOFALLS"),
+                    new UIDisableAttribute("B9.MOTREM"),
+                    new UIDisableAttribute("B9.MOSLOW"),
+                    new UIDisableAttribute("B9.MOFRST"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMODEX"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.PARKAGE"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                    new UIDisableAttribute("B9.ALSAGE"),
+                    new UIDisableAttribute("B9.MOAGE"),
+                },
+                InstructionalMessage = "Skip to question 20"
+            } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("B9.MOGAIT"),
+                    new UIEnableAttribute("B9.MOFALLS"),
+                    new UIEnableAttribute("B9.MOTREM"),
+                    new UIEnableAttribute("B9.MOSLOW"),
+                    new UIEnableAttribute("B9.MOFRST"),
+                    new UIEnableAttribute("B9.MOMODE"),
+                    new UIEnableAttribute("B9.MOMODEX"),
+                    new UIEnableAttribute("B9.MOMOPARK"),
+                    new UIEnableAttribute("B9.PARKAGE"),
+                    new UIEnableAttribute("B9.MOMOALS"),
+                    new UIEnableAttribute("B9.ALSAGE"),
+                    new UIEnableAttribute("B9.MOAGE"),
+                },
+
+            } }
         };
         public Dictionary<string, UIBehavior> COGOTHRUIBehavior = new Dictionary<string, UIBehavior>
         {
@@ -204,6 +299,23 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "99")
         };
 
+        public Dictionary<string, UIBehavior> MOMODEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.MOMODEX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.MOMODEX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.MOMODEX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.MOMODEX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.MOMODEX") } },
+        };
+        public Dictionary<string, UIBehavior> BEMODEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEMODEX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEMODEX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEMODEX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEMODEX") } },
+        };
+
         public Dictionary<string, UIBehavior> COGMODEUIBehavior = new Dictionary<string, UIBehavior>
         {
             {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGMODEX") } },
@@ -225,6 +337,21 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Anxiety", "9"),
             new RadioListItem("Other", "10"),
             new RadioListItem("Unknown", "99")
+        };
+
+        public Dictionary<string, UIBehavior> BEFPREDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEFPREDX") } },
+            {"5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"7", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"10", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEFPREDX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
         };
 
         public List<RadioListItem> MotorFunctionListItems { get; set; } = new List<RadioListItem>

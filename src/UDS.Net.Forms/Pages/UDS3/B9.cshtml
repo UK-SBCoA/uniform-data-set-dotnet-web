@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS3.B9Model
 @{
     Layout = "_LayoutForm";
@@ -55,7 +55,7 @@
                     </th>
                     @foreach (var item in Model.BasicYesNoListItems)
                     {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                            <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
                     }
                 </tr>
             </thead>
@@ -242,7 +242,7 @@
                     </th>
                     @foreach (var item in Model.BasicYesNoListItems)
                     {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                            <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
                     }
                 </tr>
             </thead>
@@ -284,7 +284,7 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEVHALL"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVHALL)" for="@Model.B9.BEVHALL" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVHALL)" for="@Model.B9.BEVHALL" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEHVHALLUIBehavior"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -329,7 +329,7 @@
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEDEL)" for="@Model.B9.BEDEL" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
                 </tr>
             </tbody>
-            <tbody>
+            <tbody class=subsubcounterreset>
                 <tr>
                     <td>
                         <div class="ml-2">
@@ -379,10 +379,10 @@
 
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEREM)" for="@Model.B9.BEREM" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEREM)" for="@Model.B9.BEREM" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEREMUIBehavior"></table-cell-radio-buttons>
                 </tr>
                 <tr>
-                    <td colspan="4" class="subsubcounterreset">
+                    <td>
                         <div class="ml-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="B9.BEREMAGO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEREMAGO)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -403,19 +403,32 @@
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEANX)" for="@Model.B9.BEANX" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
                 </tr>
+                </tbody>
+                <tbody class=subsubcounterreset>
                 <tr>
                     <td>
                         <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="B9.BEOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEOTHR)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEOTHR"></p>
-                                <input asp-for="@Model.B9.BEOTHR" />
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHR"></span>
                             </div>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEOTHRX)" for="@Model.B9.BEOTHRX" items="Model.SimpleYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEOTHR)" for="@Model.B9.BEOTHR" items="Model.SimpleYesNoListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
                     <td></td>
+                </tr>
+                                <tr>
+                    <td>
+                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="B9.BEOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEOTHRX)</label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEOTHRX"></p>
+                                <input asp-for="@Model.B9.BEOTHRX" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHRX"></span>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -424,7 +437,7 @@
             <label asp-for="B9.BEFPRED"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEFPRED)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B9.BEFPRED"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.BEFPRED)" for="@Model.B9.BEFPRED" items="Model.PredominantSymptomListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.BEFPRED)" for="@Model.B9.BEFPRED" items="Model.PredominantSymptomListItems" ui-behaviors="Model.BEFPREDUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEFPRED"></span>
             </div>
             <div>
@@ -440,7 +453,7 @@
             <label asp-for="B9.BEMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEMODE)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B9.BEMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.BEMODE)" for="@Model.B9.BEMODE" items="Model.OnsetListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.BEMODE)" for="@Model.B9.BEMODE" items="Model.OnsetListItems" ui-behaviors="Model.BEMODEUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEMODE"></span>
             </div>
             <div>
@@ -469,7 +482,7 @@
             <label asp-for="B9.DECCLMOT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLMOT)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLMOT"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLMOT)" for="@Model.B9.DECCLMOT" items="Model.SimpleYesNoListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLMOT)" for="@Model.B9.DECCLMOT" items="Model.SimpleYesNoListItems" ui-behaviors="Model.DECCLMOTUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLMOT"></span>
             </div>
         </div>
@@ -482,7 +495,7 @@
                     </th>
                     @foreach (var item in Model.BasicYesNoListItems)
                     {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                            <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
                     }
                 </tr>
             </thead>
@@ -543,7 +556,7 @@
             <label asp-for="B9.MOMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMODE)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B9.MOMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMODE)" for="@Model.B9.MOMODE" items="Model.OnsetListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.MOMODE)" for="@Model.B9.MOMODE" items="Model.OnsetListItems" ui-behaviors="Model.MOMODEUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMODE"></span>
             </div>
             <div>
@@ -559,7 +572,7 @@
             <label asp-for="B9.MOMOPARK"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOPARK)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOMOPARK"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOPARK)" for="@Model.B9.MOMOPARK" items="Model.BasicYesNoListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOPARK)" for="@Model.B9.MOMOPARK" items="Model.BasicYesNoListItems" ui-behaviors="Model.MOMOPARKUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOPARK"></span>
             </div>
         </div>
@@ -577,7 +590,7 @@
             <label asp-for="B9.MOMOALS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOALS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOMOALS"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOALS)" for="@Model.B9.MOMOALS" items="Model.BasicYesNoListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOALS)" for="@Model.B9.MOMOALS" items="Model.BasicYesNoListItems" ui-behaviors="Model.MOMOALSUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOALS"></span>
             </div>
         </div>
