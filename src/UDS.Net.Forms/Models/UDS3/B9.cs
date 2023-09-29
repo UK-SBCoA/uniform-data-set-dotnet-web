@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B9 : FormModel
     {
         [Display(Name = "Does the participant report a decline in memory (relative to previously attained abilities)?")]
-        [RequiredOnComplete (ErrorMessage ="Response required for DECSUB")]
+        [RequiredOnComplete(ErrorMessage = "Response required for DECSUB")]
         public int? DECSUB { get; set; }
 
         [Display(Name = "Does the co-participant report a decline in participant’s memory (relative to previously attained abilities)?")]
