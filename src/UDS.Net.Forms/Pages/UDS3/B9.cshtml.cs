@@ -70,7 +70,6 @@ namespace UDS.Net.Forms.Pages.UDS3
                 {
 
                     new UIEnableAttribute("B9.BEVWELL"),
-                    new UIEnableAttribute("B9.BEVHAGO"),
                 },
              } },
 
@@ -84,7 +83,13 @@ namespace UDS.Net.Forms.Pages.UDS3
                 InstructionalMessage = "Skip to question 9C2"
              } },
         };
+        public Dictionary<string, UIBehavior> BEVWELLUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEVHAGO") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEVHAGO") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEVHAGO") } }
 
+        };
         public Dictionary<string, UIBehavior> BEREMUIBehavior = new Dictionary<string, UIBehavior>
         {
             {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEREMAGO") } },

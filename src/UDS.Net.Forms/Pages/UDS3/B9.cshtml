@@ -294,7 +294,7 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEVWELL"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVWELL)" for="@Model.B9.BEVWELL" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVWELL)" for="@Model.B9.BEVWELL" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEVWELLUIBehavior"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="4">
