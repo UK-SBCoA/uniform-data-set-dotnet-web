@@ -189,6 +189,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Based on the clinician's assessment, at what age did the behavioral symptoms begin?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Range(15, 110)]
         public int? BEAGE { get; set; }
 
         #endregion

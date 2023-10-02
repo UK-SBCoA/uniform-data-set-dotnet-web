@@ -41,16 +41,16 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public Dictionary<string, UIBehavior> MOMOALSUIBehavior = new Dictionary<string, UIBehavior>
         {
-            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE") } },
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE"), InstructionalMessage ="Skip to question 19" } },
             {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.ALSAGE") } },
-            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE") } }
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE"), InstructionalMessage ="Skip to question 19" } }
 
-        };
+    };
         public Dictionary<string, UIBehavior> MOMOPARKUIBehavior = new Dictionary<string, UIBehavior>
         {
-            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE") } },
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE"), InstructionalMessage = "Skip to question 18"} },
             {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.PARKAGE") } },
-            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE") } }
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE"), InstructionalMessage ="Skip to question 18" } }
 
         };
         public Dictionary<string, UIBehavior> BEHVHALLUIBehavior = new Dictionary<string, UIBehavior>
