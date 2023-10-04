@@ -236,6 +236,7 @@ namespace UDS.Net.Forms.Extensions
                 ALCFREQ = vm.ALCFREQ,
                 CVHATT = vm.CVHATT,
                 HATTMULT = vm.HATTMULT,
+                HATTYEAR = vm.HATTYEAR,
                 CVAFIB = vm.CVAFIB,
                 CVANGIO = vm.CVANGIO,
                 CVBYPASS = vm.CVBYPASS,
