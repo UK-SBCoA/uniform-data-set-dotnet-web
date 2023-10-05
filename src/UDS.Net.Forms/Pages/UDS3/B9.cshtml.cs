@@ -270,6 +270,20 @@ namespace UDS.Net.Forms.Pages.UDS3
                 InstructionalMessage = "Continue to question 9A"
             } }
             };
+
+        public List<RadioListItem> FollowUpCognitiveDomainsListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Assessed at a previous UDS visit", "0"),
+            new RadioListItem("Memory", "1"),
+            new RadioListItem("Orientation", "2"),
+            new RadioListItem("Executive function — judgment, planning, problem-solving", "3"),
+            new RadioListItem("Language", "4"),
+            new RadioListItem("Visuospatial function", "5"),
+            new RadioListItem("Attention / concentration", "6"),
+            new RadioListItem("Fluctuating cognition", "7"),
+            new RadioListItem("Other", "8"),
+            new RadioListItem("Unknown", "99")
+        };
         public List<RadioListItem> CognitiveDomainsListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Memory", "1"),
@@ -284,6 +298,20 @@ namespace UDS.Net.Forms.Pages.UDS3
         };
         public Dictionary<string, UIBehavior> COGFPREDUIBehavior = new Dictionary<string, UIBehavior>
         {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"7", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.COGFPREX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } }
+        };
+
+        public Dictionary<string, UIBehavior> COGFPREDFOLLOWUPUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
             {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
             {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
             {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFPREX") } },
@@ -343,9 +371,39 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other", "10"),
             new RadioListItem("Unknown", "99")
         };
+        public List<RadioListItem> PredominantSymptomFollowUpListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Assessed at a previous UDS visit", "0"),
+            new RadioListItem("Apathy/withdrawal", "1"),
+            new RadioListItem("Depressed mood", "2"),
+            new RadioListItem("Psychosis", "3"),
+            new RadioListItem("Disinhibition", "4"),
+            new RadioListItem("Irritability", "5"),
+            new RadioListItem("Agitation", "6"),
+            new RadioListItem("Personality change", "7"),
+            new RadioListItem("Personality change", "8"),
+            new RadioListItem("Anxiety", "9"),
+            new RadioListItem("Other", "10"),
+            new RadioListItem("Unknown", "99")
+        };
 
         public Dictionary<string, UIBehavior> BEFPREDUIBehavior = new Dictionary<string, UIBehavior>
         {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEFPREDX") } },
+            {"5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"7", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+            {"10", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.BEFPREDX") } },
+            {"99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
+        };
+        public Dictionary<string, UIBehavior> BEFPREDFOLLOWUPUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
             {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
             {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
             {"3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.BEFPREDX") } },
@@ -368,6 +426,17 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "99")
         };
 
+        public List<RadioListItem> MotorFunctionFollowUpListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Assessed at a previous UDS visit", "0"),
+            new RadioListItem("Gait disorder", "1"),
+            new RadioListItem("Falls", "2"),
+            new RadioListItem("Tremor", "3"),
+            new RadioListItem("Slowness", "4"),
+            new RadioListItem("Unknown", "99")
+        };
+
+
         public List<RadioListItem> CourseOfDeclineListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Gradually progressive", "1"),
@@ -381,6 +450,16 @@ namespace UDS.Net.Forms.Pages.UDS3
 
         public List<RadioListItem> PredominantDomainListItems { get; set; } = new List<RadioListItem>
         {
+            new RadioListItem("Cognition", "1"),
+            new RadioListItem("Behavior", "2"),
+            new RadioListItem("Motor function", "3"),
+            new RadioListItem("N/A", "8"),
+            new RadioListItem("Unknown", "9")
+        };
+
+        public List<RadioListItem> PredominantDomainFollowUpListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Assessed at a previous UDS visit", "0"),
             new RadioListItem("Cognition", "1"),
             new RadioListItem("Behavior", "2"),
             new RadioListItem("Motor function", "3"),
