@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IParticipationService _participationService;
         protected readonly IVisitService _visitService;
 
-        //public SelectList ParticipationsSelectList { get; private set; }
+        public SelectList ParticipationsSelectList { get; private set; }
         public int SelectedParticipationNextVisit { get; private set; } = 0;
 
         [BindProperty]
@@ -32,29 +32,32 @@ namespace UDS.Net.Forms.Pages.Visits
             _participationService = participationService;
         }
 
-        //public async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
-        //{
-        //    Participation selectedParticipation = null;
-        //    var participations = await _participationService.List("");
+        public async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
+        {
+            Participation selectedParticipation = null;
+            var participations = await _participationService.List("");
 
-        //    if (selectedParticipationId.HasValue)
-        //        selectedParticipation = participations.FirstOrDefault(p => p.Id == selectedParticipationId);
+            if (selectedParticipationId.HasValue)
+                selectedParticipation = participations.FirstOrDefault(p => p.Id == selectedParticipationId);
 
-        //    ParticipationsSelectList = new SelectList(participations,
-        //        nameof(Participation.Id),
-        //        nameof(Participation.LegacyId),
-        //        selectedParticipation.Id);
+            ParticipationsSelectList = new SelectList(participations,
+                nameof(Participation.Id),
+                nameof(Participation.LegacyId),
+                selectedParticipation.Id);
 
-        //}
+        }
+
+        public List<SelectListItem> VisitKindOptions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? participationId)
         {
-            //await PopulateParticipationsDropDownList(participationId);
+            await PopulateParticipationsDropDownList(participationId);
 
             Participation = await _participationService.GetById(User.Identity.Name, participationId.Value);
 
             if (Participation != null)
                 SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
+
 
             Visit = new VisitModel
             {
@@ -64,14 +67,28 @@ namespace UDS.Net.Forms.Pages.Visits
                 StartDateTime = DateTime.Now,
             };
 
-            //Visit.Participation = new ParticipationModel{
-            //    LastVisitNumber = 0
-            //};
+            if (participationId.HasValue)
+                Visit.ParticipationId = participationId.Value;
 
+            VisitKindOptions = new List<SelectListItem>();
 
+            if (Participation != null)
+            {
+                if (Participation.LastVisitNumber < 1)
+                {
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.IVP.ToString(), Text = "IVP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TIP.ToString(), Text = "TIP" });
+                }
+                else if (Participation.LastVisitNumber >= 1 )
+                {
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.FVP.ToString(), Text = "FVP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TFP.ToString(), Text = "TFP" });
+                }
+            }
 
             return Page();
         }
+     
 
         public async Task<IActionResult> OnPostAsync(int? participationId)
         {
