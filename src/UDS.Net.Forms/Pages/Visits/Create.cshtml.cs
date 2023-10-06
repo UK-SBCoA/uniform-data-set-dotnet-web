@@ -88,7 +88,6 @@ namespace UDS.Net.Forms.Pages.Visits
 
             return Page();
         }
-     
 
         public async Task<IActionResult> OnPostAsync(int? participationId)
         {
