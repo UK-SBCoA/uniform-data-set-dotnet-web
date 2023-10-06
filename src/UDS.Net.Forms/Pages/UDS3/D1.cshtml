@@ -69,7 +69,7 @@
             <label asp-for="D1.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.NORMCOG)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.NORMCOG"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.SimpleNoYesListItems" ui-behaviors="Model.NORMCOGBehavior"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.SimpleNoYesListItems" ui-behaviors="Model.NORMCOGUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.NORMCOG"></span>
             </div>
         </div>
@@ -320,7 +320,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",  })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAMEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -345,7 +345,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",  data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIAPLAN\" , \"D1.MCIAPATT\" , \"D1.MCIAPEX\" ,\"D1.MCIAPVIS\" ]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAPLUS" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -413,7 +413,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",  data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN1LAN\" , \"D1.MCIN1ATT\" , \"D1.MCIN1EX\" ,\"D1.MCIN1VIS\" ]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON1" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -481,7 +481,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",  data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN2LAN\" , \"D1.MCIN2ATT\" , \"D1.MCIN2EX\" ,\"D1.MCIN2VIS\" ]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON2" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -677,13 +677,12 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.OTHBIOM"></span>
 
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHBIOM)" for="@Model.D1.OTHBIOM" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHBIOM)" for="@Model.D1.OTHBIOM" items="Model.SimpleNoYesListItems" ui-behaviors="Model.OTHBIOMUIBehavior"></table-cell-radio-buttons>
                     <td></td>
-                </tr>
-                <tr>
+
                     <td colspan="4">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="D1.OTHBIOMX">@Html.DisplayNameFor(m => m.D1.OTHBIOMX)</label>
+                            <label asp-for="D1.OTHBIOMX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1.OTHBIOMX)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.OTHBIOMX"></p>
                                 <input asp-for="@Model.D1.OTHBIOMX" />
@@ -783,12 +782,12 @@
             <label asp-for="D1.OTHMUT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.OTHMUT)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="D1.OTHMUT"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.OTHMUT)" for="@Model.D1.OTHMUT" items="Model.FindingsListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.OTHMUT)" for="@Model.D1.OTHMUT" items="Model.MutationListItems" ui-behaviors="Model.OTHMUTUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.OTHMUT"></span>
             </div>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="D1.OTHMUTX"></p>
-                <label asp-for="D1.OTHMUTX">@Html.DisplayNameFor(m => m.D1.OTHMUTX)</label>
+                <label asp-for="D1.OTHMUTX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1.OTHMUTX)</label>
                 <div class="mt-2">
                     <input asp-for="D1.OTHMUTX" />
                 </div>

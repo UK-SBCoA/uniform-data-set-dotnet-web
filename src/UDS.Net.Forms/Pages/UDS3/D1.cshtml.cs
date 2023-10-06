@@ -25,19 +25,69 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other (e.g., two or more clinicians or other informal group", "3")
         };
 
-        public Dictionary<string, UIBehavior> NORMCOGBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> NORMCOGUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A1.DEMENTED")
+                    new UIEnableAttribute("D1.DEMENTED"),
+                    new UIEnableAttribute("D1.AMNDEM"),
+                    new UIEnableAttribute("D1.PCA"),
+                    new UIEnableAttribute("D1.PPASYN"),
+                    new UIEnableAttribute("D1.PPASYNT"),
+                    new UIEnableAttribute("D1.FTDSYN"),
+                    new UIEnableAttribute("D1.LBDSYN"),
+                    new UIEnableAttribute("D1.NAMNDEM"),
+                    new UIEnableAttribute("D1.MCIAMEM"),
+                    new UIEnableAttribute("D1.MCIAPLUS"),
+                    new UIEnableAttribute("D1.MCIAPLAN"),
+                    new UIEnableAttribute("D1.MCIAPATT"),
+                    new UIEnableAttribute("D1.MCIAPEX"),
+                    new UIEnableAttribute("D1.MCIAPVIS"),
+                    new UIEnableAttribute("D1.MCINON1"),
+                    new UIEnableAttribute("D1.MCIN1LAN"),
+                    new UIEnableAttribute("D1.MCIN1ATT"),
+                    new UIEnableAttribute("D1.MCIN1EX"),
+                    new UIEnableAttribute("D1.MCIN1VIS"),
+                    new UIEnableAttribute("D1.MCINON2"),
+                    new UIEnableAttribute("D1.MCIN2LAN"),
+                    new UIEnableAttribute("D1.MCIN2ATT"),
+                    new UIEnableAttribute("D1.MCIN2EX"),
+                    new UIEnableAttribute("D1.MCIN2VIS"),
+                    new UIEnableAttribute("D1.IMPNOMCI")
+
                 },
                 InstructionalMessage = "Continue to question 3"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.HISPORX")
+                    new UIDisableAttribute("D1.DEMENTED"),
+                    new UIDisableAttribute("D1.AMNDEM"),
+                    new UIDisableAttribute("D1.PCA"),
+                    new UIDisableAttribute("D1.PPASYN"),
+                    new UIDisableAttribute("D1.FTDSYN"),
+                    new UIDisableAttribute("D1.LBDSYN"),
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.LBDSYN"),
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.MCIAMEM"),
+                    new UIDisableAttribute("D1.MCIAPLUS"),
+                    new UIDisableAttribute("D1.MCIAPLAN"),
+                    new UIDisableAttribute("D1.MCIAPATT"),
+                    new UIDisableAttribute("D1.MCIAPEX"),
+                    new UIDisableAttribute("D1.MCIAPVIS"),
+                    new UIDisableAttribute("D1.MCINON1"),
+                    new UIDisableAttribute("D1.MCIN1LAN"),
+                    new UIDisableAttribute("D1.MCIN1ATT"),
+                    new UIDisableAttribute("D1.MCIN1EX"),
+                    new UIDisableAttribute("D1.MCIN1VIS"),
+                    new UIDisableAttribute("D1.MCINON2"),
+                    new UIDisableAttribute("D1.MCIN2LAN"),
+                    new UIDisableAttribute("D1.MCIN2ATT"),
+                    new UIDisableAttribute("D1.MCIN2EX"),
+                    new UIDisableAttribute("D1.MCIN2VIS"),
+                    new UIDisableAttribute("D1.IMPNOMCI")
                 },
                 InstructionalMessage = "Skip to question 6"
             } },
@@ -51,6 +101,7 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIDisableAttribute("D1.AMNDEM"),
                     new UIDisableAttribute("D1.PCA"),
                     new UIDisableAttribute("D1.PPASYN"),
+                    new UIDisableAttribute("D1.PPASYNT"),
                     new UIDisableAttribute("D1.FTDSYN"),
                     new UIDisableAttribute("D1.LBDSYN"),
                     new UIDisableAttribute("D1.NAMNDEM")
@@ -63,6 +114,7 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIEnableAttribute("D1.AMNDEM"),
                     new UIEnableAttribute("D1.PCA"),
                     new UIEnableAttribute("D1.PPASYN"),
+                    new UIEnableAttribute("D1.PPASYNT"),
                     new UIEnableAttribute("D1.FTDSYN"),
                     new UIEnableAttribute("D1.LBDSYN"),
                     new UIEnableAttribute("D1.NAMNDEM")
@@ -93,6 +145,19 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Yes", "1")
         };
 
+        public Dictionary<string, UIBehavior> OTHBIOMUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHBIOMX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.OTHBIOMX") } },
+
+        };
+        public Dictionary<string, UIBehavior> OTHMUTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHMUTX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.OTHMUTX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHMUTX") } },
+
+        };
         public List<RadioListItem> FindingsListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
