@@ -79,7 +79,7 @@ namespace UDS.Net.Forms.Pages.Visits
                     VisitKindOptions.Add(new SelectListItem { Value = VisitKind.IVP.ToString(), Text = "IVP" });
                     VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TIP.ToString(), Text = "TIP" });
                 }
-                else if (Participation.LastVisitNumber >= 1 )
+                else if (Participation.LastVisitNumber >= 1)
                 {
                     VisitKindOptions.Add(new SelectListItem { Value = VisitKind.FVP.ToString(), Text = "FVP" });
                     VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TFP.ToString(), Text = "TFP" });
