@@ -835,7 +835,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ALZDIS", Model.D1.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ALZDIS", Model.D1.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.ALZDISIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ALZDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -860,7 +860,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.LBDIS", Model.D1.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.LBDIS", Model.D1.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.LBDIF\", \"D1.PARK\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.LBDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -906,7 +906,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MSA", Model.D1.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MSA", Model.D1.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true", data_affects_toggle_targets = "[ \"D1.MSAIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.MSA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -940,7 +940,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PSP", Model.D1.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PSP", Model.D1.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true",data_affects_toggle_targets = "[ \"D1.PSPIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PSP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -967,7 +967,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.CORT", Model.D1.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.CORT", Model.D1.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true",data_affects_toggle_targets = "[ \"D1.CORTIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.CORT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -994,7 +994,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.FTLDMO", Model.D1.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.FTLDMO", Model.D1.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true",data_affects_toggle_targets = "[ \"D1.FTLDMOIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.FTLDMO)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1021,7 +1021,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.FTLDNOS", Model.D1.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.FTLDNOS", Model.D1.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true",data_affects_toggle_targets = "[ \"D1.FTLDNOIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.FTLDNOS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1041,7 +1041,7 @@
                             <label asp-for="D1.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1.FTLDSUBT)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="D1.FTLDSUBT"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.D1.FTLDSUBT)" for="@Model.D1.FTLDSUBT" items="Model.FTLDListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.D1.FTLDSUBT)" for="@Model.D1.FTLDSUBT" items="Model.FTLDListItems" ui-behaviors="Model.FTLDSUBTUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.FTLDSUBT"></span>
                             </div>
                             <div>
@@ -1067,7 +1067,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.CVD", Model.D1.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.CVD", Model.D1.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",data_affects = "true",data_affects_toggle_targets = "[ \"D1.CVDIF\",\"D1.PREVSTK\",\"D1.STROKDEC\",\"D1.STKIMAG\",\"D1.INFNETW\",\"D1.INFWMH\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.CVD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1087,7 +1087,7 @@
                             <label asp-for="D1.PREVSTK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1.PREVSTK)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.PREVSTK"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.D1.PREVSTK)" for="@Model.D1.PREVSTK" items="Model.SimpleNoYesListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.D1.PREVSTK)" for="@Model.D1.PREVSTK" items="Model.SimpleNoYesListItems" ui-behaviors="Model.PREVSTKUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.PREVSTK"></span>
                             </div>
                         </div>
@@ -1160,7 +1160,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ESSTREIF)" for="@Model.D1.ESSTREIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ESSTREIF)" for="@Model.D1.ESSTREIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1185,7 +1185,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DOWNSIF)" for="@Model.D1.DOWNSIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DOWNSIF)" for="@Model.D1.DOWNSIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1210,7 +1210,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HUNTIF)" for="@Model.D1.HUNTIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HUNTIF)" for="@Model.D1.HUNTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1235,7 +1235,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PRIONIF)" for="@Model.D1.PRIONIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PRIONIF)" for="@Model.D1.PRIONIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1260,7 +1260,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BRNINJIF)" for="@Model.D1.BRNINJIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BRNINJIF)" for="@Model.D1.BRNINJIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1297,7 +1297,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HYCEPHIF)" for="@Model.D1.HYCEPHIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HYCEPHIF)" for="@Model.D1.HYCEPHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1322,7 +1322,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.EPILEPIF)" for="@Model.D1.EPILEPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.EPILEPIF)" for="@Model.D1.EPILEPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1347,7 +1347,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.NEOPIF)" for="@Model.D1.NEOPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.NEOPIF)" for="@Model.D1.NEOPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1384,7 +1384,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HIVIF)" for="@Model.D1.HIVIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HIVIF)" for="@Model.D1.HIVIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1409,7 +1409,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHCOGIF)" for="@Model.D1.OTHCOGIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHCOGIF)" for="@Model.D1.OTHCOGIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1446,7 +1446,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DEPIF)" for="@Model.D1.DEPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DEPIF)" for="@Model.D1.DEPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1483,7 +1483,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BIPOLDIF)" for="@Model.D1.BIPOLDIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BIPOLDIF)" for="@Model.D1.BIPOLDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1558,7 +1558,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DELIRIF)" for="@Model.D1.DELIRIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DELIRIF)" for="@Model.D1.DELIRIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1583,7 +1583,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PTSDDXIF)" for="@Model.D1.PTSDDXIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PTSDDXIF)" for="@Model.D1.PTSDDXIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1608,7 +1608,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHPSYIF)" for="@Model.D1.OTHPSYIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHPSYIF)" for="@Model.D1.OTHPSYIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1645,7 +1645,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ALCDEMIF)" for="@Model.D1.ALCDEMIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ALCDEMIF)" for="@Model.D1.ALCDEMIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1682,7 +1682,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.IMPSUBIF)" for="@Model.D1.IMPSUBIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.IMPSUBIF)" for="@Model.D1.IMPSUBIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1707,7 +1707,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DYSILLIF)" for="@Model.D1.DYSILLIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DYSILLIF)" for="@Model.D1.DYSILLIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1732,7 +1732,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MEDSIF)" for="@Model.D1.MEDSIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MEDSIF)" for="@Model.D1.MEDSIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1757,7 +1757,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTHIF)" for="@Model.D1.COGOTHIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTHIF)" for="@Model.D1.COGOTHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1796,7 +1796,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH2F)" for="@Model.D1.COGOTH2F" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH2F)" for="@Model.D1.COGOTH2F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1835,7 +1835,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH3F)" for="@Model.D1.COGOTH3F" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH3F)" for="@Model.D1.COGOTH3F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
