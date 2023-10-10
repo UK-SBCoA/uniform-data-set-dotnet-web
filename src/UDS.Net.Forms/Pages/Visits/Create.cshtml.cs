@@ -99,7 +99,7 @@ namespace UDS.Net.Forms.Pages.Visits
             if (Visit != null)
             {
                 Visit.Forms = new List<FormModel>(); // initialize form set
-                await _visitService.Add("", Visit.ToEntity());
+                await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
             }
 
             return RedirectToPage("./Index");
