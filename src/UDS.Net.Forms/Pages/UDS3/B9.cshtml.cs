@@ -39,6 +39,20 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> MOMOPARKListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 18)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 18)", "9")
+        };
+
+        public List<RadioListItem> MOMOALSListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 19)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown (If Unknown, SKIP TO QUESTION 19)", "9")
+        };
+
         public Dictionary<string, UIBehavior> MOMOALSUIBehavior = new Dictionary<string, UIBehavior>
         {
             {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE"), InstructionalMessage ="Skip to question 19" } },
@@ -114,6 +128,24 @@ namespace UDS.Net.Forms.Pages.UDS3
         public List<RadioListItem> SimpleYesNoListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
+        public List<RadioListItem> DECCLCOGListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 8)", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
+        public List<RadioListItem> DECCLBEListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 13)", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
+        public List<RadioListItem> DECCLMOTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (If No, SKIP TO QUESTION 20)", "0"),
             new RadioListItem("Yes", "1")
         };
         public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
