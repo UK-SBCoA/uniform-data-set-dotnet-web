@@ -149,9 +149,26 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIEnableAttribute("D1.PPASYNT"),
                     new UIEnableAttribute("D1.FTDSYN"),
                     new UIEnableAttribute("D1.LBDSYN"),
-                    new UIEnableAttribute("D1.NAMNDEM")
+                    new UIEnableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.MCIAMEM"),
+                    new UIDisableAttribute("D1.MCIAPLUS"),
+                    new UIDisableAttribute("D1.MCIAPLAN"),
+                    new UIDisableAttribute("D1.MCIAPATT"),
+                    new UIDisableAttribute("D1.MCIAPEX"),
+                    new UIDisableAttribute("D1.MCIAPVIS"),
+                    new UIDisableAttribute("D1.MCINON1"),
+                    new UIDisableAttribute("D1.MCIN1LAN"),
+                    new UIDisableAttribute("D1.MCIN1ATT"),
+                    new UIDisableAttribute("D1.MCIN1EX"),
+                    new UIDisableAttribute("D1.MCIN1VIS"),
+                    new UIDisableAttribute("D1.MCINON2"),
+                    new UIDisableAttribute("D1.MCIN2LAN"),
+                    new UIDisableAttribute("D1.MCIN2ATT"),
+                    new UIDisableAttribute("D1.MCIN2EX"),
+                    new UIDisableAttribute("D1.MCIN2VIS"),
+                    new UIDisableAttribute("D1.IMPNOMCI"),
                 },
-                InstructionalMessage = "Continue to question 4"
+                InstructionalMessage = "Continue to question 4a-4f and then SKIP TO QUESTION 6"
             } },
         };
 
