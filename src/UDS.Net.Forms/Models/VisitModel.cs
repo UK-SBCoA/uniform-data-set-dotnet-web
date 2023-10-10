@@ -16,7 +16,7 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Number")]
         public int Number { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a visit type")]
         [Display(Name = "Type")]
         public VisitKind Kind { get; set; }
 
