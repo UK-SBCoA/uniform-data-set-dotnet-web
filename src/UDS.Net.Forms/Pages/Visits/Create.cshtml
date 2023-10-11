@@ -15,8 +15,8 @@
             </div>
             </br>
 
-            <select hidden asp-for="Visit.ParticipationId" asp-items="@Model.ParticipationsSelectList">
-            </select>
+            <input type="hidden" asp-for="Visit.ParticipationId" asp-items="@Model.ParticipationsSelectList">
+            </input>
 
             <div>
                 <label asp-for="Visit.Kind"></label>
