@@ -21,7 +21,7 @@
             <label asp-for="D2.CANCER"><span class="counter"></span> @Html.DisplayNameFor(m => m.D2.CANCER)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="D2.CANCER"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D2.CANCER)" for="@Model.D2.CANCER" items="Model.CancerListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D2.CANCER)" for="@Model.D2.CANCER" items="Model.CancerListItems" ui-behaviors="Model.CancerUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.CANCER"></span>
             </div>
             <div>
@@ -128,7 +128,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="D2.ARTH"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ARTH"></span>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.ARTH)" for="@Model.D2.ARTH" items="Model.SimpleListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.ARTH)" for="@Model.D2.ARTH" items="Model.SimpleListItems" ui-behaviors="Model.ARTHUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td colspan="4" class="subcounterreset">
@@ -136,14 +136,14 @@
                                 <label asp-for="D2.ARTYPE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D2.ARTYPE)</label>
                                 <div>
                                     <p class="text-sm text-gray-500" asp-description-for="D2.ARTYPE"></p>
-                                    <radio-button-group id="@Html.IdFor(m => m.D2.ARTYPE)" for="@Model.D2.ARTYPE" items="Model.ArthritisListItems"></radio-button-group>
+                                    <radio-button-group id="@Html.IdFor(m => m.D2.ARTYPE)" for="@Model.D2.ARTYPE" items="Model.ArthritisListItems"  ui-behaviors="Model.ARTYPEUIBehavior"></radio-button-group>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ARTYPE"></span>
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-500" asp-description-for="D2.ARTYPEX"></p>
                                     <label asp-for="D2.ARTYPEX">@Html.DisplayNameFor(m => m.D2.ARTYPEX)</label>
                                     <div class="mt-2">
-                                        <input asp-for="D2.ARTYPEX" />
+                                        <input asp-for="D2.ARTYPEX"/>
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                                 </div>
                             </div>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.SLEEPOTH)" for="@Model.D2.SLEEPOTH" items="Model.SimpleListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.SLEEPOTH)" for="@Model.D2.SLEEPOTH" items="Model.SimpleListItems"  ui-behaviors="Model.SLEEPOTHUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td>
@@ -297,7 +297,7 @@
                                 </div>
                             </div>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.ANTIENC)" for="@Model.D2.ANTIENC" items="Model.SimpleListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.ANTIENC)" for="@Model.D2.ANTIENC" items="Model.SimpleListItems" ui-behaviors="Model.ANTIENCUIBehavior"></table-cell-radio-buttons>
                     </tr>
                     <tr>
                         <td>
@@ -314,7 +314,7 @@
                                 </div>
                             </div>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.OTHCOND)" for="@Model.D2.OTHCOND" items="Model.SimpleListItems"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.OTHCOND)" for="@Model.D2.OTHCOND" items="Model.SimpleListItems" ui-behaviors="Model.OTHCONDUIBehavior"></table-cell-radio-buttons>
                     </tr>
                 </tbody>
             </table>
