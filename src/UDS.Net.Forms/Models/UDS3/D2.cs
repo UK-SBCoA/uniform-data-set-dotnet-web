@@ -91,7 +91,7 @@ namespace UDS.Net.Forms.Models.UDS3
         {
             get
             {
-                if (ARTUPEX || ARTLOEX  || ARTSPIN  || ARTUNKN )
+                if ( ARTUPEX || ARTLOEX || ARTSPIN || ARTUNKN )
                 {
                     return true;
                 }
