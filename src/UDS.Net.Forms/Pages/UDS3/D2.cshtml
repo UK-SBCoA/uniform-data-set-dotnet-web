@@ -29,6 +29,7 @@
                 <label asp-for="D2.CANCSITE">@Html.DisplayNameFor(m => m.D2.CANCSITE)</label>
                 <div class="mt-2">
                     <input asp-for="D2.CANCSITE" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.CANCSITE"></span>
                 </div>
             </div>
         </div>
@@ -143,7 +144,8 @@
                                     <p class="text-sm text-gray-500" asp-description-for="D2.ARTYPEX"></p>
                                     <label asp-for="D2.ARTYPEX">@Html.DisplayNameFor(m => m.D2.ARTYPEX)</label>
                                     <div class="mt-2">
-                                        <input asp-for="D2.ARTYPEX"/>
+                                        <input asp-for="D2.ARTYPEX" />
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ARTYPEX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +191,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ArthritisRegionIndicated"></span>
                                     </fieldset>
                                 </div>
                             </div>
@@ -314,7 +317,7 @@
                                 </div>
                             </div>
                         </td>
-                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.OTHCOND)" for="@Model.D2.OTHCOND" items="Model.SimpleListItems" ui-behaviors="Model.OTHCONDUIBehavior"></table-cell-radio-buttons>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.D2.OTHCOND)" for="@Model.D2.OTHCOND" items="Model.NoYesListItems" ui-behaviors="Model.OTHCONDUIBehavior"></table-cell-radio-buttons>
                     </tr>
                 </tbody>
             </table>
