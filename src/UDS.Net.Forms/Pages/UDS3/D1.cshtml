@@ -1148,7 +1148,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ESSTREM", Model.D1.ESSTREM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ESSTREM", Model.D1.ESSTREM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ESSTREIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ESSTREM)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1173,7 +1173,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DOWNS", Model.D1.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DOWNS", Model.D1.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.DOWNSIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DOWNS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1198,7 +1198,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HUNT", Model.D1.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HUNT", Model.D1.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.HUNTIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HUNT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1223,7 +1223,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PRION", Model.D1.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PRION", Model.D1.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.PRIONIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PRION)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1248,7 +1248,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.BRNINJ", Model.D1.BRNINJ, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.BRNINJ", Model.D1.BRNINJ, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.BRNINJIF\",\"D1.BRNINCTE\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.BRNINJ)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1285,7 +1285,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HYCEPH", Model.D1.HYCEPH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HYCEPH", Model.D1.HYCEPH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.HYCEPHIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HYCEPH)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1310,7 +1310,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.EPILEP", Model.D1.EPILEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.EPILEP", Model.D1.EPILEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.EPILEPIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.EPILEP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1335,7 +1335,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.NEOP", Model.D1.NEOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.NEOP", Model.D1.NEOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.NEOPIF\", \"D1.NEOPSTAT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.NEOP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1372,7 +1372,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HIV", Model.D1.HIV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HIV", Model.D1.HIV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.HIVIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HIV)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1397,7 +1397,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.OTHCOGIF\",\"D1.OTHCOGX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.OTHCOG)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1434,7 +1434,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DEP", Model.D1.DEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DEP", Model.D1.DEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DEPIF\" , \"D1.DEPTREAT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DEP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1471,7 +1471,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.BIPOLDX", Model.D1.BIPOLDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.BIPOLDX", Model.D1.BIPOLDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.BIPOLDIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.BIPOLDX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1496,7 +1496,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.SCHIZOP", Model.D1.SCHIZOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.SCHIZOP", Model.D1.SCHIZOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.SCHIZOIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.SCHIZOP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1521,7 +1521,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ANXIET", Model.D1.ANXIET, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ANXIET", Model.D1.ANXIET, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ANXIETIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ANXIET)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1546,7 +1546,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DELIR", Model.D1.DELIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DELIR", Model.D1.DELIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DELIRIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DELIR)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1571,7 +1571,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PTSDDX", Model.D1.PTSDDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PTSDDX", Model.D1.PTSDDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.PTSDDXIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PTSDDX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1596,7 +1596,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.OTHPSY", Model.D1.OTHPSY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.OTHPSY", Model.D1.OTHPSY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.OTHPSYIF\" , \"D1.OTHPSYX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.OTHPSY)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1633,7 +1633,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ALCDEM", Model.D1.ALCDEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ALCDEM", Model.D1.ALCDEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ALCDEMIF\" , \"D1.ALCABUSE\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ALCDEM)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1670,7 +1670,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.IMPSUB", Model.D1.IMPSUB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.IMPSUB", Model.D1.IMPSUB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.IMPSUBIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.IMPSUB)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1695,7 +1695,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DYSILL", Model.D1.DYSILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DYSILL", Model.D1.DYSILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DYSILLIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DYSILL)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1720,7 +1720,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MEDS", Model.D1.MEDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MEDS", Model.D1.MEDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MEDSIF\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.MEDS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1745,7 +1745,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH", Model.D1.COGOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH", Model.D1.COGOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTHIF\", \"D1.COGOTHX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1784,7 +1784,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH2", Model.D1.COGOTH2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH2", Model.D1.COGOTH2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTH2F\", \"D1.COGOTH2X\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH2)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1823,7 +1823,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH3", Model.D1.COGOTH3, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH3", Model.D1.COGOTH3, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" , data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTH3F\", \"D1.COGOTH3X\"]"})
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH3)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
