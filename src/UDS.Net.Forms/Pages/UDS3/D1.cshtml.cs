@@ -193,6 +193,24 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1")
         };
+
+        public List<RadioListItem> NORMCOGListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (CONTINUE TO QUESTION 3)", "0"),
+            new RadioListItem("Yes (SKIP TO QUESTION 6)", "1")
+        };
+
+        public List<RadioListItem> DEMENTEDListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 5)", "0"),
+            new RadioListItem("Yes (CONTINUE TO QUESTION 4)", "1")
+        };
+
+        public List<RadioListItem> PREVSTKListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 15c)", "0"),
+            new RadioListItem("Yes", "1")
+        };
         public Dictionary<string, UIBehavior> PREVSTKUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
