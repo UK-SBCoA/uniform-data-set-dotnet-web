@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6" data-controller="fancycheckboxes">
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
             <label class="text-base font-semibold text-gray-900"><span class="counter"></span> If the participant meets criteria for dementia, ANSWER QUESTIONS 4a–4f below and then SKIP TO QUESTION 6.</label>
             <p class="text-sm text-gray-500">
                 Based entirely on the history and examination (including neuropsychological testing), what is the cognitive/behavioral syndrome? <strong>Select one or more as Present; all others will default to Absent in the NACC database.</strong>
@@ -292,7 +292,7 @@
             </div>
         </div>
 
-        <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <table class="ml-2 table-auto min-w-full divide-y divide-gray-300" data-controller="fancycheckboxes">
             <caption class="caption-top text-sm text-gray-500">
                 Select one syndrome from 5a-5e as being Present (all others will default to Absent in the NACC database), and then <strong>CONTINUE TO QUESTION 6</strong>. If you select MCI below, it should meet the MCI core clinical criteria outlined above.
             </caption>
@@ -320,7 +320,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", })
+                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_target= "fancycheckboxes.checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAMEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -345,7 +345,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIAPLAN\" , \"D1.MCIAPATT\" , \"D1.MCIAPEX\" ,\"D1.MCIAPVIS\" ]" })
+                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIAPLAN\" , \"D1.MCIAPATT\" , \"D1.MCIAPEX\" ,\"D1.MCIAPVIS\" ]",data_target= "fancycheckboxes.checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAPLUS" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -413,7 +413,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN1LAN\" , \"D1.MCIN1ATT\" , \"D1.MCIN1EX\" ,\"D1.MCIN1VIS\" ]" })
+                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN1LAN\" , \"D1.MCIN1ATT\" , \"D1.MCIN1EX\" ,\"D1.MCIN1VIS\" ]",data_target= "fancycheckboxes.checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON1" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -481,7 +481,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN2LAN\" , \"D1.MCIN2ATT\" , \"D1.MCIN2EX\" ,\"D1.MCIN2VIS\" ]" })
+                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN2LAN\" , \"D1.MCIN2ATT\" , \"D1.MCIN2EX\" ,\"D1.MCIN2VIS\" ]", data_target= "fancycheckboxes.checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON2" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -549,7 +549,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.IMPNOMCI", Model.D1.IMPNOMCI, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.IMPNOMCI", Model.D1.IMPNOMCI, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_target= "fancycheckboxes.checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_IMPNOMCI" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
