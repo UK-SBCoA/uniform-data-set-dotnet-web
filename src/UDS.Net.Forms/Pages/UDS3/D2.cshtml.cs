@@ -18,6 +18,86 @@ namespace UDS.Net.Forms.Pages.UDS3
         [BindProperty]
         public D2 D2 { get; set; } = default!;
 
+        public Dictionary<string, UIBehavior> CancerUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.CANCSITE") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.CANCSITE") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.CANCSITE") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.CANCSITE") } }
+        };
+
+        public Dictionary<string, UIBehavior> ARTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("D2.ARTYPE"),
+                    new UIDisableAttribute("D2.ARTYPEX"),
+                    new UIDisableAttribute("D2.ARTUPEX"),
+                    new UIDisableAttribute("D2.ARTLOEX"),
+                    new UIDisableAttribute("D2.ARTSPIN"),
+                    new UIDisableAttribute("D2.ARTUNKN"),
+                },
+                InstructionalMessage = ""
+            } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("D2.ARTYPE"),
+                    new UIEnableAttribute("D2.ARTUPEX"),
+                    new UIEnableAttribute("D2.ARTLOEX"),
+                    new UIEnableAttribute("D2.ARTSPIN"),
+                    new UIEnableAttribute("D2.ARTUNKN"),
+                },
+
+            } },
+
+                { "8", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("D2.ARTYPE"),
+                    new UIDisableAttribute("D2.ARTUPEX"),
+                    new UIDisableAttribute("D2.ARTLOEX"),
+                    new UIDisableAttribute("D2.ARTSPIN"),
+                    new UIDisableAttribute("D2.ARTUNKN"),
+                },
+
+            } }
+        };
+
+        public Dictionary<string, UIBehavior> ARTYPEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.ARTYPEX") } },
+            {"2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.ARTYPEX") } },
+            {"3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.ARTYPEX") } },
+            {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.ARTYPEX") } }
+        };
+
+        public Dictionary<string, UIBehavior> SLEEPOTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.SLEEPOTX") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.SLEEPOTX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.SLEEPOTX") } }
+        };
+
+        public Dictionary<string, UIBehavior> ANTIENCUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.ANTIENCX") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.ANTIENCX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.ANTIENCX") } }
+        };
+
+        public Dictionary<string, UIBehavior> OTHCONDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.OTHCONDX") } },
+            {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D2.OTHCONDX") } },
+            {"8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D2.OTHCONDX") } }
+        };
+
         public List<RadioListItem> CancerListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (skip to question 2)", "0"),

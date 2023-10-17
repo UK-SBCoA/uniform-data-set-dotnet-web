@@ -20,6 +20,10 @@ namespace UDS.Net.Services.DomainModels
         public bool IsDeleted { get; set; }
 
         public IList<Visit> Visits { get; set; } = new List<Visit>();
+
+        public int VisitCount { get; set; }
+
+        public int LastVisitNumber { get; set; }
     }
 }
 
