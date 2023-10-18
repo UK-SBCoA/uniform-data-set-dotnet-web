@@ -44,8 +44,8 @@ plugins:
 # Rules #
 #########
 rules: { 
-  "space-before-function-paren" : "off",
-  "prefer-const" : "off",
+  "space-before-function-paren": "off",
+  "prefer-const": "off",
   "semi": "off",
   "quotes": "warn"
 }
