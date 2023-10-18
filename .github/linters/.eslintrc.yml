@@ -20,6 +20,7 @@ env:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+  Stimulus: readonly
 
 ignorePatterns:
   - "!.*"
@@ -44,7 +45,9 @@ plugins:
 #########
 rules: { 
   "space-before-function-paren" : "off",
-  "prefer-const" : "off"
+  "prefer-const" : "off",
+  "semi": "off",
+  "quotes": "warn"
 }
 
 ##############################
