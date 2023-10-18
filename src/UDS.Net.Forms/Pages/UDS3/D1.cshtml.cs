@@ -136,7 +136,13 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIDisableAttribute("D1.PPASYNT"),
                     new UIDisableAttribute("D1.FTDSYN"),
                     new UIDisableAttribute("D1.LBDSYN"),
-                    new UIDisableAttribute("D1.NAMNDEM")
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIEnableAttribute("D1.MCIAMEM"),
+                    new UIEnableAttribute("D1.MCIAPLUS"),
+                    new UIEnableAttribute("D1.MCINON1"),
+                    new UIEnableAttribute("D1.MCINON2"),
+                    new UIEnableAttribute("D1.IMPNOMCI"),
+
                 },
                 InstructionalMessage = "Skip to question 5"
             } },
