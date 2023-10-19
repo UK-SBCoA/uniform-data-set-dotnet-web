@@ -11,6 +11,7 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class D1 : FormModel
     {
+        #region Cognitive and behavioral status
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
         public int? DXMETHOD { get; set; }
 
@@ -188,6 +189,8 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitively impaired, not MCI")]
         public bool IMPNOMCI { get; set; }
 
+        #endregion
+        #region Biomarkers, imaging and genetics
         [Display(Name = "Abnormally elevated amyloid on PET")]
         public int? AMYLPET { get; set; }
 
@@ -259,6 +262,189 @@ namespace UDS.Net.Forms.Models.UDS3
         [MaxLength(60)]
         [ProhibitedCharacters]
         public string? OTHMUTX { get; set; }
+
+        #endregion
+
+        #region One Primary Diagnosis Allowed Questions 11a-39a
+        [RequiredOnComplete(ErrorMessage = "In Section 3, only ONE diagnosis should be indicated as primary.")]
+        [NotMapped]
+        public bool? OnePrimaryDiagnosisAllowed
+        {
+            get
+            {
+                int counter = 0;
+
+                if (ALZDISIF.HasValue && ALZDISIF == 1)
+                {
+                    counter++;
+                }
+                if (LBDIF.HasValue && LBDIF == 1)
+                {
+                    counter++;
+                }
+
+                if (MSAIF.HasValue && MSAIF == 1)
+                {
+                    counter++;
+                }
+                if (PSPIF.HasValue && PSPIF == 1)
+                {
+                    counter++;
+                }
+                if (CORTIF.HasValue && CORTIF == 1)
+                {
+                    counter++;
+                }
+
+                if (FTLDMOIF.HasValue && FTLDMOIF == 1)
+                {
+                    counter++;
+                }
+                if (FTLDNOIF.HasValue && FTLDNOIF == 1)
+                {
+                    counter++;
+                }
+                if (CVDIF.HasValue && CVDIF == 1)
+                {
+                    counter++;
+                }
+                if (ESSTREIF.HasValue && ESSTREIF == 1)
+                {
+                    counter++;
+                }
+                if (DOWNSIF.HasValue && DOWNSIF == 1)
+                {
+                    counter++;
+                }
+                if (HUNTIF.HasValue && HUNTIF == 1)
+                {
+                    counter++;
+                }
+
+                if (PRIONIF.HasValue && PRIONIF == 1)
+                {
+                    counter++;
+                }
+
+                {
+                    if (BRNINJIF.HasValue && BRNINJIF == 1)
+                        counter++;
+                }
+
+                if (HYCEPHIF.HasValue && HYCEPHIF == 1)
+                {
+                    counter++;
+                }
+
+                if (EPILEPIF.HasValue && EPILEPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (NEOPIF.HasValue && NEOPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (HIVIF.HasValue && HIVIF == 1)
+                {
+                    counter++;
+                }
+
+                if (OTHCOGIF.HasValue && OTHCOGIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DEPIF.HasValue && DEPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (BIPOLDIF.HasValue && BIPOLDIF == 1)
+                {
+                    counter++;
+                }
+
+                if (SCHIZOIF.HasValue && SCHIZOIF == 1)
+                {
+                    counter++;
+                }
+
+                if (ANXIETIF.HasValue && ANXIETIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DELIRIF.HasValue && DELIRIF == 1)
+                {
+                    counter++;
+                }
+
+                if (PTSDDXIF.HasValue && PTSDDXIF == 1)
+                {
+                    counter++;
+                }
+
+                if (OTHPSYIF.HasValue && OTHPSYIF == 1)
+                {
+                    counter++;
+                }
+
+                if (ALCDEMIF.HasValue && ALCDEMIF == 1)
+                {
+                    counter++;
+                }
+
+
+                if (IMPSUBIF.HasValue && IMPSUBIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DYSILLIF.HasValue && DYSILLIF == 1)
+                {
+                    counter++;
+                }
+
+                if (MEDSIF.HasValue && MEDSIF == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTHIF.HasValue && COGOTHIF == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTH2F.HasValue && COGOTH2F == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTH3F.HasValue && COGOTH3F == 1)
+                {
+                    counter++;
+                }
+
+
+                if (counter == 1)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    if (NORMCOG.HasValue && NORMCOG == 1 && counter == 0)
+                    {
+                        return true;
+                    }
+                    return null;
+                }
+            }
+        }
+
+        #endregion
 
         [Display(Name = "Alzheimer's disease")]
         public bool ALZDIS { get; set; }
