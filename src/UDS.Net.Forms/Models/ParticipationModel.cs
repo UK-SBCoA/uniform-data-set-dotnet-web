@@ -24,6 +24,8 @@ namespace UDS.Net.Forms.Models
         public bool IsDeleted { get; set; }
 
         public IList<VisitModel> Visits { get; set; } = new List<VisitModel>();
+
+        public int LastVisitNumber { get; set; }
     }
 }
 

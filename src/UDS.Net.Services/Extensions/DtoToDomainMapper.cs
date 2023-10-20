@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
@@ -20,7 +21,10 @@ namespace UDS.Net.Services.Extensions
                 CreatedBy = dto.CreatedBy,
                 ModifiedBy = dto.ModifiedBy,
                 DeletedBy = dto.DeletedBy,
-                IsDeleted = dto.IsDeleted
+                IsDeleted = dto.IsDeleted,
+                VisitCount = dto.VisitCount,
+                LastVisitNumber = dto.LastVisitNumber
+
             };
 
             if (dto.Visits != null)

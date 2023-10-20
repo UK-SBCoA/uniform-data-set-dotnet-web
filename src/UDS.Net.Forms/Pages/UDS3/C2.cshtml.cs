@@ -27,6 +27,155 @@ namespace UDS.Net.Forms.Pages.UDS3
         //    new SelectListItem("Verbal refusal", "98")
         //};
 
+        //public UIRangeToggle VNTTOTWDBehavior = new UIRangeToggle
+        //{
+        //    Low = 0,
+        //    High = 50,
+        //    UIBehavior = new UIBehavior
+        //    {
+        //        PropertyAttributes = new List<UIPropertyAttributes>
+        //        {
+        //            new UIEnableAttribute("C2.VNTPCNC")
+        //        },
+        //        InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped\nbecause optional, enter 88, and SKIP TO QUESTION 12b."
+        //    }
+        //};
+        public UIRangeToggle OTRAILABehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 100,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.OTRLARR"),
+                    new UIEnableAttribute("C2.OTRLALI")
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because optional, enter 888, and SKIP TO QUESTION 7b."
+            }
+        };
+
+        public UIRangeToggle OTRAILBBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 300,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.OTRLBRR"),
+                    new UIEnableAttribute("C2.OTRLBLI")
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because\noptional, enter 888, and SKIP TO QUESTION 8a."
+            }
+        };
+
+        public UIRangeToggle REY1RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY1INT"),
+                    new UIEnableAttribute("C2.REY2REC"),
+                    new UIEnableAttribute("C2.REY2INT"),
+                    new UIEnableAttribute("C2.REY3REC"),
+                    new UIEnableAttribute("C2.REY3INT"),
+                    new UIEnableAttribute("C2.REY4REC"),
+                    new UIEnableAttribute("C2.REY4INT"),
+                    new UIEnableAttribute("C2.REY5REC"),
+                    new UIEnableAttribute("C2.REY5INT"),
+                    new UIEnableAttribute("C2.REY6REC"),
+                    new UIEnableAttribute("C2.REY6INT")
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
+            }
+        };
+
+        public UIRangeToggle REYDRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
+                },
+                InstructionalMessage = "If test not completed, enter reason code, 95-98. If test was skipped because optional or\nnot available in Spanish translation, enter 88, and SKIP TO QUESTION 12a."
+            }
+        };
+
+        public List<RadioListItem> RESPVALListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Very valid, probably accurate indication of participant’s cognitive abilities (END FORM HERE)", "1"),
+            new RadioListItem("Questionably valid, possibly inaccurate indication of participant’s cognitive abilities (CONTINUE)", "2"),
+            new RadioListItem("Invalid, probably inaccurate indication of participant’s cognitive abilities (CONTINUE)", "3")
+        };
+
+        public Dictionary<string, UIBehavior> RESPVALBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIDisableAttribute("C2.RESPHEAR"),
+                    new UIDisableAttribute("C2.RESPDIST"),
+                    new UIDisableAttribute("C2.RESPINTR"),
+                    new UIDisableAttribute("C2.RESPDISN"),
+                    new UIDisableAttribute("C2.RESPFATG"),
+                    new UIDisableAttribute("C2.RESPEMOT"),
+                    new UIDisableAttribute("C2.RESPASST"),
+                    new UIDisableAttribute("C2.RESPOTH")
+                },
+                InstructionalMessage = "End form here."
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("C2.RESPHEAR"),
+                    new UIEnableAttribute("C2.RESPDIST"),
+                    new UIEnableAttribute("C2.RESPINTR"),
+                    new UIEnableAttribute("C2.RESPDISN"),
+                    new UIEnableAttribute("C2.RESPFATG"),
+                    new UIEnableAttribute("C2.RESPEMOT"),
+                    new UIEnableAttribute("C2.RESPASST"),
+                    new UIEnableAttribute("C2.RESPOTH")
+                },
+                InstructionalMessage = "continue to question 14b"
+            } },
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("C2.RESPHEAR"),
+                    new UIEnableAttribute("C2.RESPDIST"),
+                    new UIEnableAttribute("C2.RESPINTR"),
+                    new UIEnableAttribute("C2.RESPDISN"),
+                    new UIEnableAttribute("C2.RESPFATG"),
+                    new UIEnableAttribute("C2.RESPEMOT"),
+                    new UIEnableAttribute("C2.RESPASST"),
+                    new UIEnableAttribute("C2.RESPOTH")
+                },
+                InstructionalMessage = "continue to question 14b"
+            } }
+        };
+
+        public List<RadioListItem> ModeOfCommunication { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Telephone", "1"),
+            new RadioListItem("Video-assisted conference", "2"),
+            new RadioListItem("Some combination of the two", "3")
+        };
+
         public List<RadioListItem> SimpleNoYesListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),

@@ -9,6 +9,7 @@ using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -18,10 +19,12 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IVisitService _visitService;
 
         public SelectList ParticipationsSelectList { get; private set; }
-        public int SelectedParticipationNextVisit { get; private set; }
+        public int SelectedParticipationNextVisit { get; private set; } = 0;
 
         [BindProperty]
         public VisitModel? Visit { get; set; }
+
+        public Participation? Participation { get; set; }
 
         public CreateModel(IVisitService visitService, IParticipationService participationService)
         {
@@ -44,20 +47,44 @@ namespace UDS.Net.Forms.Pages.Visits
 
         }
 
+        public List<SelectListItem> VisitKindOptions { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? participationId)
         {
             await PopulateParticipationsDropDownList(participationId);
+
+            Participation = await _participationService.GetById(User.Identity.Name, participationId.Value);
+
+            if (Participation != null)
+                SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
+
 
             Visit = new VisitModel
             {
                 Version = "UDS3",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username",
-                StartDateTime = DateTime.Now
+                StartDateTime = DateTime.Now,
             };
 
             if (participationId.HasValue)
                 Visit.ParticipationId = participationId.Value;
+
+            VisitKindOptions = new List<SelectListItem>();
+
+            if (Participation != null)
+            {
+                if (Participation.LastVisitNumber < 1)
+                {
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.IVP.ToString(), Text = "IVP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TIP.ToString(), Text = "TIP" });
+                }
+                else if (Participation.LastVisitNumber >= 1)
+                {
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.FVP.ToString(), Text = "FVP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TFP.ToString(), Text = "TFP" });
+                }
+            }
 
             return Page();
         }
@@ -72,7 +99,7 @@ namespace UDS.Net.Forms.Pages.Visits
             if (Visit != null)
             {
                 Visit.Forms = new List<FormModel>(); // initialize form set
-                await _visitService.Add("", Visit.ToEntity());
+                await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
             }
 
             return RedirectToPage("./Index");

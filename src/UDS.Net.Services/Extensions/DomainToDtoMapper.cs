@@ -38,7 +38,9 @@ namespace UDS.Net.Services.Extensions
                 CreatedBy = participation.CreatedBy,
                 ModifiedBy = participation.ModifiedBy,
                 DeletedBy = participation.DeletedBy,
-                IsDeleted = participation.IsDeleted
+                IsDeleted = participation.IsDeleted,
+                VisitCount = participation.VisitCount,
+                LastVisitNumber = participation.LastVisitNumber
             };
         }
         public static VisitDto ToDto(this Visit visit)
@@ -449,6 +451,7 @@ namespace UDS.Net.Services.Extensions
                 ALCFREQ = fields.ALCFREQ,
                 CVHATT = fields.CVHATT,
                 HATTMULT = fields.HATTMULT,
+                HATTYEAR = fields.HATTYEAR,
                 CVAFIB = fields.CVAFIB,
                 CVANGIO = fields.CVANGIO,
                 CVBYPASS = fields.CVBYPASS,
@@ -790,6 +793,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new C2Dto
             {
+                MODCOMM = fields.MODCOMM,
                 MOCACOMP = fields.MOCACOMP,
                 MOCAREAS = fields.MOCAREAS,
                 MOCALOC = fields.MOCALOC,
@@ -859,7 +863,41 @@ namespace UDS.Net.Services.Extensions
                 UDSVERTN = fields.UDSVERTN,
                 UDSVERTE = fields.UDSVERTE,
                 UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
+                COGSTAT = fields.COGSTAT,
+                REY1REC = fields.REY1REC,
+                REY1INT = fields.REY1INT,
+                REY2REC = fields.REY2REC,
+                REY2INT = fields.REY2INT,
+                REY3REC = fields.REY3REC,
+                REY3INT = fields.REY3INT,
+                REY4REC = fields.REY4REC,
+                REY4INT = fields.REY4INT,
+                REY5REC = fields.REY5REC,
+                REY5INT = fields.REY5INT,
+                REY6REC = fields.REY6REC,
+                REY6INT = fields.REY6INT,
+                OTRAILA = fields.OTRAILA,
+                OTRLARR = fields.OTRLARR,
+                OTRLALI = fields.OTRLALI,
+                OTRAILB = fields.OTRAILB,
+                OTRLBRR = fields.OTRLBRR,
+                OTRLBLI = fields.OTRLBLI,
+                REYDREC = fields.REYDREC,
+                REYDINT = fields.REYDINT,
+                REYTCOR = fields.REYTCOR,
+                REYFPOS = fields.REYFPOS,
+                VNTTOTW = fields.VNTTOTW,
+                VNTPCNC = fields.VNTPCNC,
+                RESPVAL = fields.RESPVAL,
+                RESPHEAR = fields.RESPHEAR,
+                RESPDIST = fields.RESPDIST,
+                RESPINTR = fields.RESPINTR,
+                RESPDISN = fields.RESPDISN,
+                RESPFATG = fields.RESPFATG,
+                RESPEMOT = fields.RESPEMOT,
+                RESPASST = fields.RESPASST,
+                RESPOTH = fields.RESPOTH,
+                RESPOTHX = fields.RESPOTHX
             };
         }
 
