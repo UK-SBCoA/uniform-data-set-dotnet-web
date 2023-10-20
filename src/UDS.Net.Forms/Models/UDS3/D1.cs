@@ -465,6 +465,187 @@ namespace UDS.Net.Forms.Models.UDS3
 
         #endregion
 
+        #region At Least One Or More Diagnoses Present 
+
+        [RequiredOnComplete(ErrorMessage = "In Section 3, if the particpant does not have normal cognition, at least ONE diagnosis should be indicated as present.")]
+        [NotMapped]
+        public bool? OneDiagnosesPresent
+        {
+            get
+            {
+                int counter = 0;
+
+                if (ALZDIS == true)
+                {
+                    counter++;
+                }
+                if (LBDIS == true)
+                {
+                    counter++;
+                }
+
+                if (MSA == true)
+                {
+                    counter++;
+                }
+                if (PSP == true)
+                {
+                    counter++;
+                }
+                if (CORT == true)
+                {
+                    counter++;
+                }
+
+                if (FTLDMO == true)
+                {
+                    counter++;
+                }
+                if (FTLDNOS == true)
+                {
+                    counter++;
+                }
+                if (CVD == true)
+                {
+                    counter++;
+                }
+                if (ESSTREM == true)
+                {
+                    counter++;
+                }
+                if (DOWNS == true)
+                {
+                    counter++;
+                }
+                if (HUNT == true)
+                {
+                    counter++;
+                }
+
+                if (PRION == true)
+                {
+                    counter++;
+                }
+
+                if (BRNINJ == true)
+                {
+                    counter++;
+                }
+
+                if (HYCEPH == true)
+                {
+                    counter++;
+                }
+
+                if (EPILEP == true)
+                {
+                    counter++;
+                }
+
+                if (NEOP == true)
+                {
+                    counter++;
+                }
+
+                if (HIV == true)
+                {
+                    counter++;
+                }
+
+                if (OTHCOG == true)
+                {
+                    counter++;
+                }
+
+                if (DEP == true)
+                {
+                    counter++;
+                }
+
+                if (BIPOLDX == true)
+                {
+                    counter++;
+                }
+
+                if (SCHIZOP == true)
+                {
+                    counter++;
+                }
+
+                if (ANXIET == true)
+                {
+                    counter++;
+                }
+
+                if (DELIR == true)
+                {
+                    counter++;
+                }
+
+                if (PTSDDX == true)
+                {
+                    counter++;
+                }
+
+                if (OTHPSY == true)
+                {
+                    counter++;
+                }
+
+                if (ALCDEM == true)
+                {
+                    counter++;
+                }
+
+                if (IMPSUB == true)
+                {
+                    counter++;
+                }
+
+                if (DYSILL == true)
+                {
+                    counter++;
+                }
+
+                if (MEDS == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH2 == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH3 == true)
+                {
+                    counter++;
+                }
+
+                if (counter >= 1)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    if (NORMCOG.HasValue && NORMCOG == 1)
+                    {
+                        return true;
+                    }
+                    return null;
+                }
+
+            }
+        }
+
+        #endregion
+
         #region Etiologic Diagnoses
         [Display(Name = "Alzheimer's disease")]
         public bool ALZDIS { get; set; }
