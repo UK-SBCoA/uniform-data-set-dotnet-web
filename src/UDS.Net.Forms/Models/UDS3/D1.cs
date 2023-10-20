@@ -192,36 +192,47 @@ namespace UDS.Net.Forms.Models.UDS3
         #endregion
         #region Biomarkers, imaging and genetics
         [Display(Name = "Abnormally elevated amyloid on PET")]
+        [RequiredOnComplete]
         public int? AMYLPET { get; set; }
 
         [Display(Name = "Abnormally low amyloid in CSF")]
+        [RequiredOnComplete]
         public int? AMYLCSF { get; set; }
 
         [Display(Name = "FDG-PET pattern of AD")]
+        [RequiredOnComplete]
         public int? FDGAD { get; set; }
 
         [Display(Name = "Hippocampal atrophy")]
+        [RequiredOnComplete]
         public int? HIPPATR { get; set; }
 
         [Display(Name = "Tau PET evidence for AD")]
+        [RequiredOnComplete]
         public int? TAUPETAD { get; set; }
 
         [Display(Name = "Abnormally elevated CSF tau or ptau")]
+        [RequiredOnComplete]
         public int? CSFTAU { get; set; }
 
         [Display(Name = "FDG-PET evidence for frontal or anterior temporal hypometabolism for FTLD")]
+        [RequiredOnComplete]
         public int? FDGFTLD { get; set; }
 
         [Display(Name = "Tau PET evidence for FTLD")]
+        [RequiredOnComplete]
         public int? TPETFTLD { get; set; }
 
         [Display(Name = "Structural MR evidence for frontal or anterior temporal atrophy for FTLD")]
+        [RequiredOnComplete]
         public int? MRFTLD { get; set; }
 
         [Display(Name = "Dopamine transporter scan (DATscan) evidence for Lewy body disease")]
+        [RequiredOnComplete]
         public int? DATSCAN { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [RequiredOnComplete]
         public int? OTHBIOM { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -231,30 +242,39 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? OTHBIOMX { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
+        [RequiredOnComplete]
         public int? IMAGLINF { get; set; }
 
         [Display(Name = "Lacunar infarct(s)")]
+        [RequiredOnComplete]
         public int? IMAGLAC { get; set; }
 
         [Display(Name = "Macrohemorrhage(s)")]
+        [RequiredOnComplete]
         public int? IMAGMACH { get; set; }
 
         [Display(Name = "Microhemorrhage(s)")]
+        [RequiredOnComplete]
         public int? IMAGMICH { get; set; }
 
         [Display(Name = "Moderate white-matter hyperintensity (CHS score 5–6)")]
+        [RequiredOnComplete]
         public int? IMAGMWMH { get; set; }
 
         [Display(Name = "Extensive white-matter hyperintensity (CHS score 7–8+)")]
+        [RequiredOnComplete]
         public int? IMAGEWMH { get; set; }
 
         [Display(Name = "Does the subject have a dominantly inherited AD mutation (PSEN1, PSEN2, APP)")]
+        [RequiredOnComplete]
         public int? ADMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary FTLD mutation (e.g., GRN, VCP, TARBP, FUS, C9orf72, CHMP2B, MAPT)?")]
+        [RequiredOnComplete]
         public int? FTLDMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary mutation other than an AD or FTLD mutation?")]
+        [RequiredOnComplete]
         public int? OTHMUT { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -396,7 +416,6 @@ namespace UDS.Net.Forms.Models.UDS3
                     counter++;
                 }
 
-
                 if (IMPSUBIF.HasValue && IMPSUBIF == 1)
                 {
                     counter++;
@@ -446,6 +465,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         #endregion
 
+        #region Etiologic Diagnoses
         [Display(Name = "Alzheimer's disease")]
         public bool ALZDIS { get; set; }
 
@@ -752,6 +772,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [ProhibitedCharacters]
         public string? COGOTH3X { get; set; }
 
+        #endregion
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
