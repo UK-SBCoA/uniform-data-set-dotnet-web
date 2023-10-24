@@ -13,9 +13,11 @@ namespace UDS.Net.Forms.Models.UDS3
     {
         #region Section 1  Cognitive and behavioral status
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
+        [RequiredOnComplete]
         public int? DXMETHOD { get; set; }
 
         [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose I or dementia due to FTLD or LBD)?")]
+        [RequiredOnComplete]
         public int? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
