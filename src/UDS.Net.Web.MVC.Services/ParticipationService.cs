@@ -42,6 +42,20 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Participation not found.");
         }
 
+        public async Task<ParticipationDto> GetByLegacyId(string legacyId)
+        {
+            try
+            {
+                var participation = await _apiClient.ParticipationClient.GetByLegacyId(legacyId);
+
+                return participation;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
             var participationDtos = await _apiClient.ParticipationClient.Get();

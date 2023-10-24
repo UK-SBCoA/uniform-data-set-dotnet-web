@@ -10,14 +10,17 @@ namespace UDS.Net.Forms.Models.UDS3
     public class B9 : FormModel
     {
         [Display(Name = "Does the participant report a decline in memory (relative to previously attained abilities)?")]
+        [RequiredOnComplete(ErrorMessage = "Response required for DECSUB")]
         public int? DECSUB { get; set; }
 
         [Display(Name = "Does the co-participant report a decline in participant’s memory (relative to previously attained abilities)?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? DECIN { get; set; }
 
         #region Cognitive symptoms
 
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? DECCLCOG { get; set; }
 
         [Display(Name = "MEMORY For example, does s/he forget conversations and/or dates, repeat questions and/or statements, misplace things more than usual, forget names of people s/he knows well?")]
@@ -53,7 +56,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [Range(15, 110)]
         public int? COGFLAGO { get; set; }
 
-        [Display(Name = "Other")]
+        [Display(Name = "Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities, in other cognitive domains ")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
         public int? COGOTHR { get; set; }
 
@@ -93,6 +96,7 @@ namespace UDS.Net.Forms.Models.UDS3
         #region Behavioral symptoms
 
         [Display(Name = "Based on clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? DECCLBE { get; set; }
 
         [Display(Name = "APATHY, WITHDRAWAL Has the participant lost interest in or displayed a reduced ability to initiate usual activities and social interaction, such as conversing with family and/or friends?")]
@@ -185,6 +189,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Based on the clinician's assessment, at what age did the behavioral symptoms begin?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Range(15, 110)]
         public int? BEAGE { get; set; }
 
         #endregion
@@ -192,6 +197,7 @@ namespace UDS.Net.Forms.Models.UDS3
         #region Motor Symptoms
 
         [Display(Name = "Based on the clinician's judgment, is the participant currently experiencing any motor symptoms?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? DECCLMOT { get; set; }
 
         [Display(Name = "GAIT DISORDER Has the participant's walking changed, not specifically due to arthritis or an injury? Is s/he unsteady, or does s/he shuffle when walking, have little or no arm-swing, or drag a foot?")]
@@ -250,15 +256,19 @@ namespace UDS.Net.Forms.Models.UDS3
         #endregion
 
         [Display(Name = "Overall course of decline of cognitive / behavorial / motor syndrome")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? COURSE { get; set; }
 
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? FRSTCHG { get; set; }
 
         [Display(Name = "Is the participant a potential candidate for further evaluation for Lewy body disease?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? LBDEVAL { get; set; }
 
         [Display(Name = "Is the participant a potential candidate for further evaluation for frontotemporal lobar degeneration?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? FTLDEVAL { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

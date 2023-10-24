@@ -18,7 +18,6 @@ function setAffect(target, attribute, value) {
     if (attribute === 'disabled') {
       if (value === 'true' || value === true) {
         element.attr('disabled', 'disabled');
-        element.attr('value', '');
         // TODO check the element type to decide how to set value to null
         if (element.is(':radio') || element.is(':checked')) {
           element.removeAttr('checked');

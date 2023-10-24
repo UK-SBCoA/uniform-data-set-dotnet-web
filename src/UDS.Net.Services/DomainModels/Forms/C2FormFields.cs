@@ -5,6 +5,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class C2FormFields : IFormFields
     {
+        public int? MODCOMM { get; set; }
         public int? MOCACOMP { get; set; }
         public int? MOCAREAS { get; set; }
         public int? MOCALOC { get; set; }
@@ -40,11 +41,29 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string NPSYLANX { get; set; }
         public int? CRAFTVRS { get; set; }
         public int? CRAFTURS { get; set; }
+        public int? REY1REC { get; set; }
+        public int? REY1INT { get; set; }
+        public int? REY2REC { get; set; }
+        public int? REY2INT { get; set; }
+        public int? REY3REC { get; set; }
+        public int? REY3INT { get; set; }
+        public int? REY4REC { get; set; }
+        public int? REY4INT { get; set; }
+        public int? REY5REC { get; set; }
+        public int? REY5INT { get; set; }
+        public int? REY6REC { get; set; }
+        public int? REY6INT { get; set; }
         public int? UDSBENTC { get; set; }
         public int? DIGFORCT { get; set; }
         public int? DIGFORSL { get; set; }
         public int? DIGBACCT { get; set; }
         public int? DIGBACLS { get; set; }
+        public int? OTRAILA { get; set; }
+        public int? OTRLARR { get; set; }
+        public int? OTRLALI { get; set; }
+        public int? OTRAILB { get; set; }
+        public int? OTRLBRR { get; set; }
+        public int? OTRLBLI { get; set; }
         public int? ANIMALS { get; set; }
         public int? VEG { get; set; }
         public int? TRAILA { get; set; }
@@ -74,7 +93,23 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? UDSVERTN { get; set; }
         public int? UDSVERTE { get; set; }
         public int? UDSVERTI { get; set; }
+        public int? REYDREC { get; set; }
+        public int? REYDINT { get; set; }
+        public int? REYTCOR { get; set; }
+        public int? REYFPOS { get; set; }
+        public int? VNTTOTW { get; set; }
+        public int? VNTPCNC { get; set; }
         public int? COGSTAT { get; set; }
+        public int? RESPVAL { get; set; }
+        public int? RESPHEAR { get; set; }
+        public int? RESPDIST { get; set; }
+        public int? RESPINTR { get; set; }
+        public int? RESPDISN { get; set; }
+        public int? RESPFATG { get; set; }
+        public int? RESPEMOT { get; set; }
+        public int? RESPASST { get; set; }
+        public int? RESPOTH { get; set; }
+        public string RESPOTHX { get; set; }
 
         public C2FormFields()
         {
@@ -84,6 +119,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is C2Dto)
             {
                 var c2Dto = ((C2Dto)dto);
+                MODCOMM = c2Dto.MODCOMM;
                 MOCACOMP = c2Dto.MOCACOMP;
                 MOCAREAS = c2Dto.MOCAREAS;
                 MOCALOC = c2Dto.MOCALOC;
@@ -154,6 +190,41 @@ namespace UDS.Net.Services.DomainModels.Forms
                 UDSVERTE = c2Dto.UDSVERTE;
                 UDSVERTI = c2Dto.UDSVERTI;
                 COGSTAT = c2Dto.COGSTAT;
+                REY1REC = c2Dto.REY1REC;
+                REY1INT = c2Dto.REY1INT;
+                REY2REC = c2Dto.REY2REC;
+                REY2INT = c2Dto.REY2INT;
+                REY3REC = c2Dto.REY3REC;
+                REY3INT = c2Dto.REY3INT;
+                REY4REC = c2Dto.REY4REC;
+                REY4INT = c2Dto.REY4INT;
+                REY5REC = c2Dto.REY5REC;
+                REY5INT = c2Dto.REY5INT;
+                REY6REC = c2Dto.REY6REC;
+                REY6INT = c2Dto.REY6INT;
+                OTRAILA = c2Dto.OTRAILA;
+                OTRLARR = c2Dto.OTRLARR;
+                OTRLALI = c2Dto.OTRLALI;
+                OTRAILB = c2Dto.OTRAILB;
+                OTRLBRR = c2Dto.OTRLBRR;
+                OTRLBLI = c2Dto.OTRLBLI;
+                REYDREC = c2Dto.REYDREC;
+                REYDINT = c2Dto.REYDINT;
+                REYTCOR = c2Dto.REYTCOR;
+                REYFPOS = c2Dto.REYFPOS;
+                VNTTOTW = c2Dto.VNTTOTW;
+                VNTPCNC = c2Dto.VNTPCNC;
+                RESPVAL = c2Dto.RESPVAL;
+                RESPHEAR = c2Dto.RESPHEAR;
+                RESPDIST = c2Dto.RESPDIST;
+                RESPINTR = c2Dto.RESPINTR;
+                RESPDISN = c2Dto.RESPDISN;
+                RESPFATG = c2Dto.RESPFATG;
+                RESPEMOT = c2Dto.RESPEMOT;
+                RESPASST = c2Dto.RESPASST;
+                RESPOTH = c2Dto.RESPOTH;
+                RESPOTHX = c2Dto.RESPOTHX;
+
             }
         }
         public string GetDescription()

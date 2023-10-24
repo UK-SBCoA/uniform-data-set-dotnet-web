@@ -19,7 +19,10 @@ namespace UDS.Net.Forms.Extensions
                 CreatedBy = vm.CreatedBy,
                 ModifiedBy = vm.ModifiedBy,
                 DeletedBy = vm.DeletedBy,
-                IsDeleted = vm.IsDeleted
+                IsDeleted = vm.IsDeleted,
+                VisitCount = vm.VisitCount,
+                LastVisitNumber = vm.LastVisitNumber
+
             };
         }
 
@@ -115,6 +118,7 @@ namespace UDS.Net.Forms.Extensions
                 INBIRMO = vm.INBIRMO,
                 INBIRYR = vm.INBIRYR,
                 INSEX = vm.INSEX,
+                NEWINF = vm.NEWINF,
                 INHISP = vm.INHISP,
                 INHISPOR = vm.INHISPOR,
                 INHISPOX = vm.INHISPOX,
@@ -232,6 +236,7 @@ namespace UDS.Net.Forms.Extensions
                 ALCFREQ = vm.ALCFREQ,
                 CVHATT = vm.CVHATT,
                 HATTMULT = vm.HATTMULT,
+                HATTYEAR = vm.HATTYEAR,
                 CVAFIB = vm.CVAFIB,
                 CVANGIO = vm.CVANGIO,
                 CVBYPASS = vm.CVBYPASS,
@@ -592,6 +597,7 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new C2FormFields
             {
+                MODCOMM = vm.MODCOMM,
                 MOCACOMP = vm.MOCACOMP,
                 MOCAREAS = vm.MOCAREAS,
                 MOCALOC = vm.MOCALOC,
@@ -661,7 +667,41 @@ namespace UDS.Net.Forms.Extensions
                 UDSVERTN = vm.UDSVERTN,
                 UDSVERTE = vm.UDSVERTE,
                 UDSVERTI = vm.UDSVERTI,
-                COGSTAT = vm.COGSTAT
+                COGSTAT = vm.COGSTAT,
+                REY1REC = vm.REY1REC,
+                REY1INT = vm.REY1INT,
+                REY2REC = vm.REY2REC,
+                REY2INT = vm.REY2INT,
+                REY3REC = vm.REY3REC,
+                REY3INT = vm.REY3INT,
+                REY4REC = vm.REY4REC,
+                REY4INT = vm.REY4INT,
+                REY5REC = vm.REY5REC,
+                REY5INT = vm.REY5INT,
+                REY6REC = vm.REY6REC,
+                REY6INT = vm.REY6INT,
+                OTRAILA = vm.OTRAILA,
+                OTRLARR = vm.OTRLARR,
+                OTRLALI = vm.OTRLALI,
+                OTRAILB = vm.OTRAILB,
+                OTRLBRR = vm.OTRLBRR,
+                OTRLBLI = vm.OTRLBLI,
+                REYDREC = vm.REYDREC,
+                REYDINT = vm.REYDINT,
+                REYTCOR = vm.REYTCOR,
+                REYFPOS = vm.REYFPOS,
+                VNTTOTW = vm.VNTTOTW,
+                VNTPCNC = vm.VNTPCNC,
+                RESPVAL = vm.RESPVAL,
+                RESPHEAR = vm.RESPHEAR ? 1 : 0,
+                RESPDIST = vm.RESPDIST ? 1 : 0,
+                RESPINTR = vm.RESPINTR ? 1 : 0,
+                RESPDISN = vm.RESPDISN ? 1 : 0,
+                RESPFATG = vm.RESPFATG ? 1 : 0,
+                RESPEMOT = vm.RESPEMOT ? 1 : 0,
+                RESPASST = vm.RESPASST ? 1 : 0,
+                RESPOTH = vm.RESPOTH ? 1 : 0,
+                RESPOTHX = vm.RESPOTHX
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
