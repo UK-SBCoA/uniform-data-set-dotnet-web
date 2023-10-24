@@ -57,6 +57,20 @@ namespace UDS.Net.Forms.Models.UDS3
             }
         }
 
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? DementiaSyndromeNotIndicated
+        {
+            get
+            {
+                if (MCIAMEM || MCIAPLUS || MCINON1 || MCINON2 || IMPNOMCI)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [Display(Name = "Amnestic MCI, single domain (aMCI SD)")]
         public bool MCIAMEM { get; set; }
 
