@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class D1 : FormModel
     {
-        #region Cognitive and behavioral status
+        #region Section 1  Cognitive and behavioral status
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
         public int? DXMETHOD { get; set; }
 
@@ -190,7 +190,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool IMPNOMCI { get; set; }
 
         #endregion
-        #region Biomarkers, imaging and genetics
+        #region Section 2   Biomarkers, imaging and genetics
         [Display(Name = "Abnormally elevated amyloid on PET")]
         [RequiredOnComplete]
         public int? AMYLPET { get; set; }
@@ -465,7 +465,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         #endregion
 
-        #region At Least One Or More Diagnoses Present 
+        #region At Least One Or More Diagnoses Present Questions 11-39
 
         [RequiredOnComplete(ErrorMessage = "In Section 3, if the particpant does not have normal cognition, at least ONE diagnosis should be indicated as present.")]
         [NotMapped]
@@ -646,7 +646,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         #endregion
 
-        #region Etiologic Diagnoses
+        #region  Section 3 Etiologic Diagnoses
         [Display(Name = "Alzheimer's disease")]
         public bool ALZDIS { get; set; }
 
