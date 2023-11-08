@@ -20,7 +20,7 @@
                     <label asp-for="C1.MMSECOMP"><span class="counter"></span> @Html.DisplayNameFor(m => m.C1.MMSECOMP)</label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="C1.MMSECOMP"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C1.MMSECOMP)" for="@Model.C1.MMSECOMP" items="Model.MMSECompletedListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.C1.MMSECOMP)" for="@Model.C1.MMSECOMP" items="Model.MMSECompletedListItems" ui-behaviors="Model.MMSECOMPBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.MMSECOMP"></span>
                     </div>
                     <div>
@@ -46,7 +46,7 @@
                             <label asp-for="C1.MMSELAN"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C1.MMSELAN)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="C1.MMSELAN"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.C1.MMSELAN)" for="@Model.C1.MMSELAN" items="Model.LanguageListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.C1.MMSELAN)" for="@Model.C1.MMSELAN" items="Model.LanguageListItems" ui-behaviors="Model.MMSELANBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.MMSELAN"></span>
                             </div>
                             <div>
@@ -140,7 +140,7 @@
                     <label asp-for="C1.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.NPSYLAN)</label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="C1.NPSYLAN"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C1.NPSYLAN)" for="@Model.C1.NPSYLAN" items="Model.LanguageListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.C1.NPSYLAN)" for="@Model.C1.NPSYLAN" items="Model.LanguageListItems" ui-behaviors="Model.NPSYLANBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.NPSYLAN"></span>
                     </div>
                     <div>
@@ -219,7 +219,7 @@
                     <label asp-for="C1.DIGIF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.DIGIF)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.DIGIF"></p>
-                        <input asp-for="@Model.C1.DIGIF" />
+                        <input asp-for="@Model.C1.DIGIF" ui-range-behavior="Model.DIGIFBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.DIGIF"></span>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                     <label asp-for="C1.DIGIB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.DIGIB)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.DIGIB"></p>
-                        <input asp-for="@Model.C1.DIGIB" />
+                        <input asp-for="@Model.C1.DIGIB" ui-range-behavior="Model.DIGIBBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.DIGIB"></span>
                     </div>
                 </div>
@@ -288,7 +288,7 @@
                     <label asp-for="C1.TRAILA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.TRAILA)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.TRAILA"></p>
-                        <input asp-for="@Model.C1.TRAILA" />
+                        <input asp-for="@Model.C1.TRAILA" ui-range-behavior="Model.TRAILABehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.TRAILA"></span>
                     </div>
                 </div>
@@ -316,7 +316,7 @@
                     <label asp-for="C1.TRAILB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.TRAILB)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.TRAILB"></p>
-                        <input asp-for="@Model.C1.TRAILB" />
+                        <input asp-for="@Model.C1.TRAILB" ui-range-behavior="Model.TRAILBBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.TRAILB"></span>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                     <label asp-for="C1.MEMUNITS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.MEMUNITS)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.MEMUNITS"></p>
-                        <input asp-for="@Model.C1.MEMUNITS" />
+                        <input asp-for="@Model.C1.MEMUNITS" ui-range-behavior="Model.MEMUNITSBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.MEMUNITS"></span>
                     </div>
                 </div>
@@ -372,7 +372,7 @@
                     <label asp-for="C1.UDSBENTD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.UDSBENTD)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.UDSBENTD"></p>
-                        <input asp-for="@Model.C1.UDSBENTD" />
+                        <input asp-for="@Model.C1.UDSBENTD" ui-range-behavior="Model.UDSBENTDBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.UDSBENTD"></span>
                     </div>
                 </div>
@@ -410,7 +410,7 @@
                     <label asp-for="C1.UDSVERFC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.UDSVERFC)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.UDSVERFC"></p>
-                        <input asp-for="@Model.C1.UDSVERFC" />
+                        <input asp-for="@Model.C1.UDSVERFC" ui-range-behavior="Model.UDSVERFCBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.UDSVERFC"></span>
                     </div>
                 </div>
@@ -437,7 +437,7 @@
                     <label asp-for="C1.UDSVERLC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C1.UDSVERLC)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C1.UDSVERLC"></p>
-                        <input asp-for="@Model.C1.UDSVERLC" />
+                        <input asp-for="@Model.C1.UDSVERLC" ui-range-behavior="Model.UDSVERLCBehavior"/>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C1.UDSVERLC"></span>
                     </div>
                 </div>
