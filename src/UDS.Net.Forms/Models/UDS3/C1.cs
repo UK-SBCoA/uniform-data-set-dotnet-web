@@ -73,11 +73,11 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? LOGIPREV { get; set; }
 
         [Display(Name = "Total number of story units recalled from this current test administration")]
-        [RegularExpression("^(\\d|1\\d|2[0-5])|(9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5]|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
         public int? LOGIMEM { get; set; }
 
         [Display(Name = "Total score for copy of Bension figure")]
-        [RegularExpression("^(\\d|1[0-7])|(9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
+        [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
         public int? UDSBENTC { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length")]
@@ -148,7 +148,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? BOSTON { get; set; }
 
         [Display(Name = "Number of correct F-words generated in 1 minute")]
-        [RegularExpression("^(\\d|[1-3]\\d|40]|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
+        [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
