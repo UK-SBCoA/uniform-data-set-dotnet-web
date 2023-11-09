@@ -232,7 +232,7 @@ namespace UDS.Net.Forms.Models.UDS3
                                 var visitDate = visitDateEntry;
                                 if (visitDate != null)
                                 {
-                                    if(IsNonApplicableDate(LOGIDAY.Value, LOGIMO.Value, LOGIYR.Value))
+                                    if (IsNonApplicableDate(LOGIDAY.Value, LOGIMO.Value, LOGIYR.Value))
                                     {
                                         isValid = true;
                                     }
@@ -298,7 +298,7 @@ namespace UDS.Net.Forms.Models.UDS3
             int nonApplicableMonth = 88;
             int nonApplicableYear = 8888;
 
-            if(day == nonApplicableDay && month == nonApplicableMonth && year == nonApplicableYear)
+            if (day == nonApplicableDay && month == nonApplicableMonth && year == nonApplicableYear)
             {
                 return true;
             }
