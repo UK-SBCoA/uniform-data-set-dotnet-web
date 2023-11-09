@@ -15,12 +15,15 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "No (Enter reason code, 95-98 and SKIP TO QUESTION 2a)")]
         [Range(95, 98)]
+        [RequiredIf(nameof(MMSECOMP), "0", ErrorMessage = "Enter reason code")]
         public int? MMSEREAS { get; set; }
 
         [Display(Name = "Administration of the MMSE was")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify administration of the MMSE")]
         public int? MMSELOC { get; set; }
 
         [Display(Name = "Language of MMSE administration")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify language of MMSE administration")]
         public int? MMSELAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -29,31 +32,39 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? MMSELANX { get; set; }
 
         [Display(Name = "Participant was unable to complete one or more sections due to visual impairment")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify a value")]
         public int? MMSEVIS { get; set; }
 
         [Display(Name = "Participant was unable to complete one or more sections due to hearing impairment")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify a value")]
         public int? MMSEHEAR { get; set; }
 
         [Display(Name = "Time")]
         [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "(0-5, 95-98)")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify Time")]
         public int? MMSEORDA { get; set; }
 
         [Display(Name = "Place")]
         [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "(0-5, 95-98)")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify Place")]
         public int? MMSEORLO { get; set; }
 
         [Display(Name = "Intersecting pentagon subscale score")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "(0-1, 95-98)")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify score")]
         public int? PENTAGON { get; set; }
 
         [Display(Name = "Total MMSE score (using D-L-R-O-W)")]
         [RegularExpression("^(\\d|[12]\\d|30|88)$", ErrorMessage = "(0-30, 88 = Missing)")]
+        [RequiredIf(nameof(MMSECOMP), "1", ErrorMessage = "Specify score")]
         public int? MMSE { get; set; }
 
         [Display(Name = "The remainder of the battery (i.e., the tests summarized below) was administered")]
+        [RequiredOnComplete]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
+        [RequiredOnComplete]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -91,6 +102,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Digit span forward length ")]
         [Range(0, 8, ErrorMessage = "(0-8)")]
+        [RequiredIfRange(nameof(DIGIF), 0, 12, ErrorMessage = "Specify digit span forward length")]
         public int? DIGIFLEN { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length ")]
@@ -100,6 +112,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Digit span backward length")]
         [Range(0, 7, ErrorMessage = "(0-7)")]
+        [RequiredIfRange(nameof(DIGIB), 0, 12, ErrorMessage = "Specify digit span backward length")]
         public int? DIGIBLEN { get; set; }
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds")]
@@ -119,10 +132,12 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Number of commission errors")]
         [Range(0, 40, ErrorMessage = "(0-40)")]
+        [RequiredIfRange(nameof(TRAILA), 0, 150, ErrorMessage = "Specify number of commission errors")]
         public int? TRAILARR { get; set; }
 
         [Display(Name = "Number of correct lines")]
         [Range(0, 24, ErrorMessage = "(0-24)")]
+        [RequiredIfRange(nameof(TRAILA), 0, 150, ErrorMessage = "Specify number of correct lines")]
         public int? TRAILALI { get; set; }
 
         [Display(Name = "PART B: Total number of seconds to complete")]
@@ -132,10 +147,12 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Number of commission errors")]
         [Range(0, 40, ErrorMessage = "(0-40)")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Specify number of commission errors")]
         public int? TRAILBRR { get; set; }
 
         [Display(Name = "Number of correct lines")]
         [Range(0, 24, ErrorMessage = "(0-24)")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Specify number of correct lines")]
         public int? TRAILBLI { get; set; }
 
         [Display(Name = "Total number of story units recalled")]
@@ -145,6 +162,7 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Time elapsed since Logical Memory IA–Immediate")]
         [RegularExpression("^(\\d|[1-7]\\d|8[0-5]|9[5-8])$", ErrorMessage = "(0-85 minutes, 99 = unknown")]
+        [RequiredIfRange(nameof(MEMUNITS), 0, 25, ErrorMessage = "Specify time elapsed since Logical Memory IA–Immediate")]
         public int? MEMTIME { get; set; }
 
         [Display(Name = "Total score for 10- to 15-minute delayed drawing of Bension figure")]
@@ -153,6 +171,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus from among four options?")]
+        [RequiredIfRange(nameof(UDSBENTD), 0, 17, ErrorMessage = "Specify recognized original stimulus from among four options?\n")]
         public int? UDSBENRS { get; set; }
 
         [Display(Name = "Total score")]
@@ -167,10 +186,12 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
         [Range(0, 15, ErrorMessage = "(0-15)")]
+        [RequiredIfRange(nameof(UDSVERFC), 0, 40, ErrorMessage = "Specify number of F-words repeated in 1 minute")]
         public int? UDSVERFN { get; set; }
 
         [Display(Name = "Number of non-F-words and rule violation errors in 1 minute")]
         [Range(0, 15, ErrorMessage = "(0-15)")]
+        [RequiredIfRange(nameof(UDSVERFC), 0, 40, ErrorMessage = "number of non-F-words and rule violation errors in 1 minute")]
         public int? UDSVERNF { get; set; }
 
         [Display(Name = "Number of correct L-words generated in 1 minute")]
@@ -180,22 +201,27 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Number of L-words repeated in one minute")]
         [Range(0, 15, ErrorMessage = "(0-15)")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Specify number of L-words repeated in one minute")]
         public int? UDSVERLR { get; set; }
 
         [Display(Name = "Number of non-L-words and rule violation errors in 1 minute")]
         [Range(0, 15, ErrorMessage = "(0-15)")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Specify number of non-L-words and rule violation errors in 1 minute")]
         public int? UDSVERLN { get; set; }
 
         [Display(Name = "TOTAL number of correct F-words and L-words")]
         [Range(0, 80, ErrorMessage = "(0-80)")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Specify total number of correct F-words and L-words")]
         public int? UDSVERTN { get; set; }
 
         [Display(Name = "TOTAL number of F-word and L-word repetition errors")]
         [Range(0, 80, ErrorMessage = "(0-80)")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Specify total number of F-word and L-word repetition errors")]
         public int? UDSVERTE { get; set; }
 
         [Display(Name = "TOTAL number of non-F/L words and rule violation errors")]
         [Range(0, 80, ErrorMessage = "(0-80)")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Specify total number of non-F/L words and rule violation errors")]
         public int? UDSVERTI { get; set; }
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participant’s cognitive status is deemed")]
