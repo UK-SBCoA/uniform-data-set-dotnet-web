@@ -232,31 +232,38 @@ namespace UDS.Net.Forms.Models.UDS3
                                 var visitDate = visitDateEntry;
                                 if (visitDate != null)
                                 {
-                                    var max = (DateTime)visitDate;
-                                    var min = ((DateTime)visitDate).AddMonths(-3);
-
-                                    try
+                                    if(IsNonApplicableDate(LOGIDAY.Value, LOGIMO.Value, LOGIYR.Value))
                                     {
-                                        var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
-
-                                        var resultHigh = DateTime.Compare(logiDate, max);
-                                        var resultLow = DateTime.Compare(logiDate, min);
-
-                                        if (resultHigh < 0 && resultLow > 0)
-                                        {
-                                            isValid = true;
-                                        }
-
-                                        else
-                                        {
-                                            isValid = false;
-                                        }
+                                        isValid = true;
                                     }
-                                    catch (ArgumentOutOfRangeException ex)
+                                    else
                                     {
-                                        // not a valid date
-                                        isValid = false;
-                                        errorMessage = "Logical Memory IA - Immediate previous test date invalid";
+                                        var max = (DateTime)visitDate;
+                                        var min = ((DateTime)visitDate).AddMonths(-3);
+
+                                        try
+                                        {
+                                            var logiDate = new DateTime(LOGIYR.Value, LOGIMO.Value, LOGIDAY.Value);
+
+                                            var resultHigh = DateTime.Compare(logiDate, max);
+                                            var resultLow = DateTime.Compare(logiDate, min);
+
+                                            if (resultHigh < 0 && resultLow > 0)
+                                            {
+                                                isValid = true;
+                                            }
+
+                                            else
+                                            {
+                                                isValid = false;
+                                            }
+                                        }
+                                        catch (ArgumentOutOfRangeException ex)
+                                        {
+                                            // not a valid date
+                                            isValid = false;
+                                            errorMessage = "Logical Memory IA - Immediate previous test date invalid";
+                                        }
                                     }
                                 }
 
@@ -283,6 +290,20 @@ namespace UDS.Net.Forms.Models.UDS3
                 }
             }
             yield break;
+        }
+
+        private static bool IsNonApplicableDate(int day, int month, int year)
+        {
+            int nonApplicableDay = 88;
+            int nonApplicableMonth = 88;
+            int nonApplicableYear = 8888;
+
+            if(day == nonApplicableDay && month == nonApplicableMonth && year == nonApplicableYear)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
