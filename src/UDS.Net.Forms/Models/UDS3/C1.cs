@@ -82,6 +82,7 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? LOGIYR { get; set; }
 
         [Display(Name = "Total score from the previous test administration")]
+        [RegularExpression("^(\\d|1\\d|2[0-5]|88)$", ErrorMessage = "(0-25, 88)")]
         [RequiredOnComplete]
         public int? LOGIPREV { get; set; }
 
