@@ -83,6 +83,15 @@ namespace UDS.Net.Web.MVC.Services
             // TODO update participation
             return entity;
         }
+
+        //make another getbyid method for getting milestones
+        //need to make a milestone class
+        public async Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId)
+        {
+            IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);
+
+            return milestones.ToDomain();
+        }
     }
 }
 

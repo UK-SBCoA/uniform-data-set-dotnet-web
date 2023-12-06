@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -24,7 +26,6 @@ namespace UDS.Net.Services.Extensions
                 IsDeleted = dto.IsDeleted,
                 VisitCount = dto.VisitCount,
                 LastVisitNumber = dto.LastVisitNumber
-
             };
 
             if (dto.Visits != null)
@@ -49,6 +50,54 @@ namespace UDS.Net.Services.Extensions
                 visitKind = VisitKind.IVP;
 
             return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, visitKind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+        }
+
+        public static Milestone ToDomain(this M1Dto dto)
+        {
+            return new Milestone()
+            {
+                Id = dto.Id,
+                FormId = dto.FormId,
+                ParticipationId = dto.ParticipationId,
+                Status = dto.Status,
+                CHANGEMO = dto.CHANGEMO,
+                CHANGEDY = dto.CHANGEDY,
+                CHANGEYR = dto.CHANGEYR,
+                PROTOCOL = dto.PROTOCOL,
+                ACONSENT = dto.ACONSENT,
+                RECOGIM = dto.RECOGIM,
+                REPHYILL = dto.REPHYILL,
+                REREFUSE = dto.REREFUSE,
+                RENAVAIL = dto.RENAVAIL,
+                RENURSE = dto.RENURSE,
+                NURSEMO = dto.NURSEMO,
+                NURSEDY = dto.NURSEDY,
+                NURSEYR = dto.NURSEYR,
+                REJOIN = dto.REJOIN,
+                FTLDDISC = dto.FTLDDISC,
+                FTLDREAS = dto.FTLDREAS,
+                FTLDREAX = dto.FTLDREAX,
+                DECEASED = dto.DECEASED,
+                DISCONT = dto.DISCONT,
+                DEATHMO = dto.DEATHMO,
+                DEATHDY = dto.DEATHDY,
+                DEATHYR = dto.DEATHYR,
+                AUTOPSY = dto.AUTOPSY,
+                DISCMO = dto.DISCMO,
+                DISCDAY = dto.DISCDAY,
+                DISCYR = dto.DISCYR,
+                DROPREAS = dto.DROPREAS,
+                CreatedAt = dto.CreatedAt,
+                CreatedBy = dto.CreatedBy,
+                ModifiedBy = dto.ModifiedBy,
+                DeletedBy = dto.DeletedBy,
+                IsDeleted = dto.IsDeleted
+            };
+        }
+
+        public static IEnumerable<Milestone> ToDomain(this IEnumerable<M1Dto> m1Dtos)
+        {
+            return m1Dtos.Select(m => m.ToDomain()).ToList();
         }
 
         public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username)
@@ -188,7 +237,6 @@ namespace UDS.Net.Services.Extensions
 
             return new Form(visitId, dto.Id, title, dto.Kind, formStatus, formLanguage, reasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
-
     }
 }
 

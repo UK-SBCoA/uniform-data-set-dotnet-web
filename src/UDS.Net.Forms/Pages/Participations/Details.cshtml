@@ -75,13 +75,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Date</td>
-                                <td>type</td>
-                                <td>details</td>
-                                <td>progress</td>
-                                <td>Edit</td>
-                            </tr>
+                            <!-- for each milstone in the page model-->
+                            @foreach (var milestone in Model.Milestones)
+                            {
+                                <tr>
+                                    <td>@milestone.CreatedAt</td>
+                                    <td>type</td>
+                                    <td>details</td>
+                                    <td>@milestone.Status</td>
+                                    <td>Edit</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
