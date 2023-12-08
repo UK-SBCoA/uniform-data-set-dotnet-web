@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace UDS.Net.Forms.Models
 {
 	public class MilestoneModel
@@ -12,7 +14,7 @@ namespace UDS.Net.Forms.Models
         public int? CHANGEYR { get; set; }
         public int? PROTOCOL { get; set; }
         public int? ACONSENT { get; set; }
-        public int? RECOGIM { get; set; }
+        public bool RECOGIM { get; set; }
         public int? REPHYILL { get; set; }
         public int? REREFUSE { get; set; }
         public int? RENAVAIL { get; set; }
@@ -39,6 +41,9 @@ namespace UDS.Net.Forms.Models
         public string ModifiedBy { get; set; }
         public string DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
+        [Display(Name = "Which milesone type are you reporting?")]
+        [Range(0, 1)]
+        public int? MilestoneType { get; set; }
     }
 }
 

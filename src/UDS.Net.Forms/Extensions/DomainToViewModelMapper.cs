@@ -94,7 +94,7 @@ namespace UDS.Net.Forms.Extensions
                 CHANGEYR = milestone.CHANGEYR,
                 PROTOCOL = milestone.PROTOCOL,
                 ACONSENT = milestone.ACONSENT,
-                RECOGIM = milestone.RECOGIM,
+                RECOGIM = milestone.RECOGIM.HasValue ? true : false,
                 REPHYILL = milestone.REPHYILL,
                 REREFUSE = milestone.REREFUSE,
                 RENAVAIL = milestone.RENAVAIL,
@@ -120,7 +120,8 @@ namespace UDS.Net.Forms.Extensions
                 CreatedBy = milestone.CreatedBy,
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
-                IsDeleted = milestone.IsDeleted
+                IsDeleted = milestone.IsDeleted,
+                MilestoneType = milestone.MilestoneType
             };
         }
 

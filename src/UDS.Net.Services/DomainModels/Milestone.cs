@@ -1,8 +1,9 @@
 ﻿using System;
+
 namespace UDS.Net.Services.DomainModels
 {
-	public class Milestone
-	{
+    public class Milestone
+    {
         public int Id { get; set; }
         public int FormId { get; set; }
         public int ParticipationId { get; set; }
@@ -39,6 +40,24 @@ namespace UDS.Net.Services.DomainModels
         public string ModifiedBy { get; set; }
         public string DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
+
+        public int? MilestoneType
+        {
+            get
+            {
+                return GetMilestoneType(DECEASED, DISCONT);
+            }
+        }
+
+        private int? GetMilestoneType(int? DECEASED, int? DISCONT)
+        {
+            if(DECEASED == 1 || DISCONT == 1)
+            {
+                return 0;
+            }
+
+            return null;
+        }
     }
 }
 

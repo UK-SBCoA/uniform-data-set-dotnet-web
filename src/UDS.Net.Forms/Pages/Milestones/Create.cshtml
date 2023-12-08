@@ -1,0 +1,75 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Milestones.CreateModel
+
+
+@{
+    ViewData["Title"] = "Create milestone";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<form method="post">
+
+    <div class="space-y-16 p-16 xl:space-y-20">
+        <div>
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Milstone</h2>
+            <p class="mt-1 text-sm text-gray-500">
+                INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples.
+            </p>
+        </div>
+        <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+            <div class="@rowCSS">
+                <label asp-for="Milestone.MilestoneType">Which milesone type are you reporting?</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <div class="max-w-lg">
+                        <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems"></radio-button-group>
+                    </div>
+                </div>
+            </div>
+            <div class="@rowCSS subcounterreset">
+                <div>
+                    <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Participant's month and year of birth</label>
+                </div>
+                <div class="sm:col-span-2">
+                    <div class="mt-2 inline-block">
+                        <label asp-for="@Model.Milestone.CHANGEMO">Month</label>
+                        <div class="w-20">
+                            <input asp-for="@Model.Milestone.CHANGEMO" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEMO"></span>
+                    </div>
+                    <div class="mt-2 inline-block">
+                        <label asp-for="@Model.Milestone.CHANGEDY">Day</label>
+                        <div class="w-20">
+                            <input asp-for="@Model.Milestone.CHANGEDY" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEDY"></span>
+                    </div>
+                    <div class="mt-2 inline-block">
+                        <label asp-for="@Model.Milestone.CHANGEYR">Year</label>
+                        <div class="w-40">
+                            <input asp-for="@Model.Milestone.CHANGEYR" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEYR"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="Milestone.PROTOCOL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.PROTOCOL)</label>
+                <div class="mt-4 sm:col-span-1 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.Milestone.PROTOCOL"></p>
+                    <radio-button-group id="Milestone.PROTOCOL" for="Milestone.PROTOCOL" items="Model.ProtocolItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.PROTOCOL"></span>
+                </div>
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="Milestone.ACONSENT"><span class="subcounter"></span> @Html.DisplayFor(model => model.Milestone.ACONSENT)</label>
+                <radio-button-group id="Milestone.ACONSENT" for="Milestone.ACONSENT" items="Model.AconsentItems"></radio-button-group>
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="Milestone.RECOGIM"><span class="subcounter"></span> Subject is too cognitively impaired</label>
+                @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+            </div>
+        </div>
+        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+    </div>
+</form>
