@@ -26,6 +26,14 @@ namespace UDS.Net.Web.MVC.Services
             return entity; // TODO update client to return new object or id
         }
 
+        public async Task<Milestone> AddMilestone(string username, int participationId, Milestone milestone)
+        {
+            // TODO will need to get the participationId from the milestone create.cshtml.cs. For now plug in here
+            await _apiClient.ParticipationClient.PostMilestone(milestone.ParticipationId, milestone.ToDto());
+
+            return milestone;
+        }
+
         public async Task<int> Count(string username)
         {
             return await _apiClient.ParticipationClient.Count();

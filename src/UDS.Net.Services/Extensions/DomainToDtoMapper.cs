@@ -65,6 +65,48 @@ namespace UDS.Net.Services.Extensions
             return dto;
         }
 
+        public static M1Dto ToDto(this Milestone milestone)
+        {
+            return new M1Dto
+            {
+                FormId = milestone.FormId,
+                ParticipationId = milestone.ParticipationId,
+                Status = milestone.Status,
+                CHANGEMO = milestone.CHANGEMO,
+                CHANGEDY = milestone.CHANGEDY,
+                CHANGEYR = milestone.CHANGEYR,
+                PROTOCOL = milestone.PROTOCOL,
+                ACONSENT = milestone.ACONSENT,
+                RECOGIM = milestone.RECOGIM,
+                REPHYILL = milestone.REPHYILL,
+                REREFUSE = milestone.REREFUSE,
+                RENAVAIL = milestone.RENAVAIL,
+                RENURSE = milestone.RENURSE,
+                NURSEMO = milestone.NURSEMO,
+                NURSEDY = milestone.NURSEDY,
+                NURSEYR = milestone.NURSEYR,
+                REJOIN = milestone.REJOIN,
+                FTLDDISC = milestone.FTLDDISC,
+                FTLDREAS = milestone.FTLDREAS,
+                FTLDREAX = milestone.FTLDREAX,
+                DECEASED = milestone.DECEASED,
+                DISCONT = milestone.DISCONT,
+                DEATHMO = milestone.DEATHMO,
+                DEATHDY = milestone.DEATHDY,
+                DEATHYR = milestone.DEATHYR,
+                AUTOPSY = milestone.AUTOPSY,
+                DISCMO = milestone.DISCMO,
+                DISCDAY = milestone.DISCDAY,
+                DISCYR = milestone.DISCYR,
+                DROPREAS = milestone.DROPREAS,
+                CreatedAt = milestone.CreatedAt,
+                CreatedBy = milestone.CreatedBy,
+                ModifiedBy = milestone.ModifiedBy,
+                DeletedBy = milestone.DeletedBy,
+                IsDeleted = milestone.IsDeleted,
+            };
+        }
+
         public static VisitDto ToDto(this Visit visit, string formKind)
         {
             var dto = new VisitDto()

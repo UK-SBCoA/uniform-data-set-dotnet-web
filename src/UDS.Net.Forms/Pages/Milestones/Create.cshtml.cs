@@ -4,18 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Forms.TagHelpers;
+using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
     public class CreateModel : PageModel
     {
+        protected readonly IParticipationService _participationService;
+
         [BindProperty]
         public MilestoneModel? Milestone { get; set; }
 
         public int participationId { get; set; }
+
+        public CreateModel(IParticipationService participationService)
+        {
+            _participationService = participationService;
+        }
 
         public async Task<IActionResult> OnGet(int participationId)
         {
@@ -24,11 +34,26 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ParticipationId = participationId,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
+                IsDeleted = false,
+                // TODO setting status to complete for temp work
+                Status = "Complete",
             };
 
             Milestone = newMilstone;
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if(Milestone == null)
+            {
+                return Page();
+            }
+
+            await _participationService.AddMilestone(User.Identity?.Name, participationId, Milestone.ToEntity());
+
+            return RedirectToPage($"../Participations/Details/{Milestone.ParticipationId}");
         }
 
         public List<RadioListItem> MilestoneTypeItems { get; } = new List<RadioListItem>
