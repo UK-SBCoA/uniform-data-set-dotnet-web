@@ -83,7 +83,7 @@
                                     <td>type</td>
                                     <td>details</td>
                                     <td>@milestone.Status</td>
-                                    <td>Edit</td>
+                                    <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" asp-route-participationId="@milestone.ParticipationId">Edit</a></td>
                                 </tr>
                             }
                         </tbody>

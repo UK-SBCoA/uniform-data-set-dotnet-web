@@ -76,20 +76,17 @@ namespace UDS.Net.Web.MVC.Services
             return new List<Participation>();
         }
 
-        public async Task<Participation> Patch(string username, Participation entity)
+        public async Task<Milestone> UpdateMilestone(int id, int milestoneId, Milestone milestone)
         {
-            // TODO update participation
-            return entity;
-        }
+            //ToDo come back to make some error catches
+            if(milestone == null)
+            {
+                return null;
+            }
 
-        public async Task Remove(string username, Participation entity)
-        {
-        }
+            await _apiClient.ParticipationClient.PutMilestone(id, milestoneId, milestone.ToDto());
 
-        public async Task<Participation> Update(string username, Participation entity)
-        {
-            // TODO update participation
-            return entity;
+            return milestone;
         }
 
         //make another getbyid method for getting milestones
@@ -99,6 +96,20 @@ namespace UDS.Net.Web.MVC.Services
             IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);
 
             return milestones.ToDomain();
+        }
+
+        public async Task<Participation> Patch(string username, Participation entity)
+        {
+            // TODO update participation
+            return entity;
+        }
+        public async Task Remove(string username, Participation entity)
+        {
+        }
+        public async Task<Participation> Update(string username, Participation entity)
+        {
+            // TODO update participation
+            return entity;
         }
     }
 }
