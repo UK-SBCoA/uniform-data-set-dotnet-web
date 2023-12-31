@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models
 {
@@ -8,8 +9,10 @@ namespace UDS.Net.Forms.Models
         public int Id { get; set; }
         public int FormId { get; set; }
         public int ParticipationId { get; set; }
+        [Display(Name = "Status")]
         public string Status { get; set; }
         [Display(Name = "Month")]
+        [RequiredIf(nameof(MilestoneType), "1")]
         public int? CHANGEMO { get; set; }
         [Display(Name = "Day")]
         public int? CHANGEDY { get; set; }
@@ -59,7 +62,27 @@ namespace UDS.Net.Forms.Models
         public bool IsDeleted { get; set; }
         [Display(Name = "Which milesone type are you reporting?")]
         [Range(0, 1)]
-        public int? MilestoneType { get; set; }
+        public int MilestoneType
+        {
+            get
+            {
+                return GetMilestoneType(DECEASED, DISCONT);
+            }
+        }
+
+        private int GetMilestoneType(bool? DECEASED, bool? DISCONT)
+        {
+            if (DECEASED == true || DISCONT == true)
+            {
+                //no further contact
+                return 0;
+            }
+            else
+            {
+                //continued contact
+                return 1;
+            }
+        }
     }
 }
 

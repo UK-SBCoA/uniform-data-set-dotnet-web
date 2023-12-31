@@ -26,9 +26,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ParticipationId = participationId,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
-                IsDeleted = false,
-                // TODO setting status to complete for temp work
-                Status = "Complete",
+                IsDeleted = false
             };
 
             Milestone = newMilstone;

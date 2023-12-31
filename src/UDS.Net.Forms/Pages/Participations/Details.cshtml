@@ -69,8 +69,8 @@
                             <tr>
                                 <th>Date</th>
                                 <th>type</th>
-                                <th>details</th>
                                 <th>progress</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -80,8 +80,7 @@
                             {
                                 <tr>
                                     <td>@milestone.CreatedAt</td>
-                                    <td>type</td>
-                                    <td>details</td>
+                                    <td>@milestone.MilestoneType</td>
                                     <td>@milestone.Status</td>
                                     <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" asp-route-participationId="@milestone.ParticipationId">Edit</a></td>
                                 </tr>
