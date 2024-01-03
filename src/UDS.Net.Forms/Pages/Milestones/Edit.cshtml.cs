@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
             await _participationService.UpdateMilestone(Milestone.FormId, Milestone.FormId, Milestone.ToEntity());
 
-            return RedirectToPage($"/Participations/Details/{Milestone.ParticipationId}");
+            return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
         }
     }
 }

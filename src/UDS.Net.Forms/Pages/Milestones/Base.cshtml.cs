@@ -91,7 +91,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 }
             },
             {
-            "1", new UIBehavior{
+                "1", new UIBehavior{
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
                         new UIEnableAttribute("Milestone.CHANGEMO"),

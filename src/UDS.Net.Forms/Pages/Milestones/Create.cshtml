@@ -259,12 +259,20 @@
                 </div>
             </div>
         </div>
+        <div>
+            <label asp-for="Milestone.Status">@Html.DisplayNameFor(model => model.Milestone.Status)</label>
+            <select asp-for="Milestone.Status">
+                <option value="Complete">Complete</option>
+                <option value="In-progress">In Progress</option>
+            </select>
+        </div>
         <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
     </div>
 
-    <input hidden asp-for="@Model.Milestone.ParticipationId" />
-    <input hidden asp-for="@Model.Milestone.CreatedAt" />
-    <input hidden asp-for="@Model.Milestone.CreatedBy" />
-    <input hidden asp-for="@Model.Milestone.Status" />
-    <input hidden asp-for="@Model.Milestone.IsDeleted" />
+    <input class="invisible" asp-for="@Model.Milestone.ParticipationId" />
+    <input class="invisible" asp-for="@Model.Milestone.CreatedAt" />
+    <input class="invisible" asp-for="@Model.Milestone.CreatedBy" />
+    <input class="invisible" asp-for="@Model.Milestone.Status" />
+    <input class="invisible" asp-for="@Model.Milestone.IsDeleted" />
+    <input class="invisible" asp-for="@Model.Milestone.FormId" />
 </form>

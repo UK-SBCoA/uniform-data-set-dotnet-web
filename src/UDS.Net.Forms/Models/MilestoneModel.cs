@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models
 {
@@ -23,7 +25,7 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Autopsy consent on file?")]
         public int? ACONSENT { get; set; }
         [Display(Name = "Subject is too cognitively impaired")]
-        public bool RECOGIM { get; set; }
+        public bool? RECOGIM { get; set; }
         [Display(Name = "Subject is too ill or\nphysically impaired")]
         public bool? REPHYILL { get; set; }
         [Display(Name = "Subject refuses neuropsychological testing or clinical exam")]
@@ -84,5 +86,7 @@ namespace UDS.Net.Forms.Models
             }
         }
     }
+
+    
 }
 
