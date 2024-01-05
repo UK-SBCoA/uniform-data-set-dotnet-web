@@ -63,65 +63,22 @@ namespace UDS.Net.Forms.Pages.Milestones
 
         public Dictionary<string, UIBehavior> MilestoneTypeBehavior = new Dictionary<string, UIBehavior>
         {
+            { "0", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
             {
-                "0", new UIBehavior{
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.CHANGEMO"),
-                        new UIDisableAttribute("Milestone.CHANGEDY"),
-                        new UIDisableAttribute("Milestone.CHANGEYR"),
-                        new UIDisableAttribute("Milestone.PROTOCOL"),
-                        new UIDisableAttribute("Milestone.ACONSENT"),
-                        new UIDisableAttribute("Milestone.RECOGIM"),
-                        new UIDisableAttribute("Milestone.REPHYILL"),
-                        new UIDisableAttribute("Milestone.REREFUSE"),
-                        new UIDisableAttribute("Milestone.RENAVAIL"),
-                        new UIDisableAttribute("Milestone.RENURSE"),
-                        new UIDisableAttribute("Milestone.REJOIN"),
-                        new UIDisableAttribute("Milestone.NURSEMO"),
-                        new UIDisableAttribute("Milestone.NURSEDY"),
-                        new UIDisableAttribute("Milestone.NURSEYR"),
-                        new UIDisableAttribute("Milestone.FTLDDISC"),
-                        new UIDisableAttribute("Milestone.FTLDREAS"),
-                        new UIDisableAttribute("Milestone.FTLDREAX"),
-                        new UIEnableAttribute("Milestone.DECEASED"),
-                        new UIEnableAttribute("Milestone.DISCONT"),
-                    },
-                    InstructionalMessage = "skip to question 1F"
-                }
+                new UIEnableAttribute("Milestone.DECEASED"),
+                new UIEnableAttribute("Milestone.DISCONT"),
             },
+            InstructionalMessage = "skip to question 1F"
+
+            } },
+            { "1", new UIBehavior{
+            PropertyAttributes = new List<UIPropertyAttributes>
             {
-                "1", new UIBehavior{
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.CHANGEMO"),
-                        new UIEnableAttribute("Milestone.CHANGEDY"),
-                        new UIEnableAttribute("Milestone.CHANGEYR"),
-                        new UIEnableAttribute("Milestone.PROTOCOL"),
-                        new UIEnableAttribute("Milestone.ACONSENT"),
-                        new UIEnableAttribute("Milestone.RECOGIM"),
-                        new UIEnableAttribute("Milestone.REPHYILL"),
-                        new UIEnableAttribute("Milestone.REREFUSE"),
-                        new UIEnableAttribute("Milestone.RENAVAIL"),
-                        new UIEnableAttribute("Milestone.RENURSE"),
-                        new UIEnableAttribute("Milestone.REJOIN"),
-                        new UIEnableAttribute("Milestone.FTLDDISC"),
-                        new UIEnableAttribute("Milestone.FTLDREAS"),
-                        new UIEnableAttribute("Milestone.FTLDREAX"),
-                        new UIDisableAttribute("Milestone.DECEASED"),
-                        new UIDisableAttribute("Milestone.DISCONT"),
-                        new UIDisableAttribute("Milestone.DEATHMO"),
-                        new UIDisableAttribute("Milestone.DEATHDY"),
-                        new UIDisableAttribute("Milestone.DEATHYR"),
-                        new UIDisableAttribute("Milestone.AUTOPSY"),
-                        new UIDisableAttribute("Milestone.DISCMO"),
-                        new UIDisableAttribute("Milestone.DISCDAY"),
-                        new UIDisableAttribute("Milestone.DISCYR"),
-                        new UIDisableAttribute("Milestone.DROPREAS"),
-                    },
-                    InstructionalMessage = "skip to question 1F"
-                }
-            }
+                new UIDisableAttribute("Milestone.DECEASED"),
+                new UIDisableAttribute("Milestone.DISCONT"),
+            },
+            } }
         };
 
 

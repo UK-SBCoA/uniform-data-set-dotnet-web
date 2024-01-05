@@ -27,6 +27,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return NotFound($"No milestones found within participationId of: {participationId}");
             }
 
+            //TODO will update this functionality with a singular GET for milestone
             var milestoneFound = milestonesByParticipationId.Where(m => m.Id == id).FirstOrDefault().ToVM();
 
             if(milestoneFound == null)

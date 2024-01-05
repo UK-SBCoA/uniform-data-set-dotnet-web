@@ -22,7 +22,7 @@
                     <label asp-for="Milestone.MilestoneType">@Html.DisplayNameFor(model => model.Milestone.MilestoneType)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div class="max-w-lg">
-                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems"></radio-button-group>
+                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems" ui-behaviors="Model.MilestoneTypeBehavior"></radio-button-group>
                         </div>
                     </div>
                 </div>
