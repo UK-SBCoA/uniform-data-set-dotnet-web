@@ -224,6 +224,12 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             if(milestone.MilestoneType == 0)
             {
+                if(milestone.DECEASED == false && milestone.DISCONT == false)
+                {
+                    ModelState.AddModelError("Milestone.DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
+                    ModelState.AddModelError("Milestone.DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
+                }
+
                 if(milestone.DECEASED == true)
                 {
                     if(milestone.DEATHMO == null)

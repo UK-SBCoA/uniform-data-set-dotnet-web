@@ -172,18 +172,20 @@
                     </div>
                 </div>
             </div>
-            <div class="boxB">
+            <div class="boxB" data-controller="fancycheckboxes">
                 <h3 class="@headerCSS">Box B - No Further Contact</h3>
                 <div class="@rowCSS">
                     <label asp-for="@Model.Milestone.DECEASED">@Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
                     <div class="sm:col-span-2">
-                        @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]"})
+                        @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DECEASED"></span>
                     </div>
                 </div>
                 <div class="@rowCSS">
                     <label asp-for="@Model.Milestone.DISCONT">@Html.DisplayNameFor(model => model.Milestone.DISCONT)</label>
                     <div class="sm:col-span-2">
-                        @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]" })
+                        @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCONT"></span>
                     </div>
                 </div>
                 <div class="@rowCSS subcounterreset">
