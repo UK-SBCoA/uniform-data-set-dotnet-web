@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="boxA">
                 <h3 class="@headerCSS">Box A - Change with continued contact</h3>
                 <div class="@rowCSS">
                     <div>
@@ -84,7 +84,10 @@
                 </div>
                 <div class="@rowCSS">
                     <div>
-                        <label class="subcounter">Reasons(s) for chnage inidcated in Question 2a (CHECK AT LEAST ONE):</label>
+                        <label class="subcounter">Reasons(s) for change inidcated in Question 2a (CHECK AT LEAST ONE):</label>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.ProtocolReasonValidation"></span>
+                        </div>
                     </div>
                     <div class="sm:col-span-2">
                         <div>
@@ -166,11 +169,11 @@
                     <label asp-for="@Model.Milestone.FTLDREAX">@Html.DisplayNameFor(model => model.Milestone.FTLDREAX)</label>
                     <div class="w-40">
                         <input asp-for="@Model.Milestone.FTLDREAX" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
                 </div>
             </div>
-            <div>
+            <div class="boxB">
                 <h3 class="@headerCSS">Box B - No Further Contact</h3>
                 <div class="@rowCSS">
                     <label asp-for="@Model.Milestone.DECEASED">@Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
@@ -220,7 +223,10 @@
                     </div>
                 </div>
                 <div class="@rowCSS">
-                    <label asp-for="Milestone.AUTOPSY"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.AUTOPSY)</label>
+                    <div>
+                        <label asp-for="Milestone.AUTOPSY"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.AUTOPSY)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.AUTOPSY"></span>
+                    </div>
                     <radio-button-group id="Milestone.AUTOPSY" for="Milestone.AUTOPSY" items="Model.AutopsyItems"></radio-button-group>
                 </div>
                 <div class="@rowCSS">
@@ -254,17 +260,13 @@
                     </div>
                 </div>
                 <div class="@rowCSS">
-                    <label asp-for="Milestone.DROPREAS"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.DROPREAS)</label>
+                    <div>
+                        <label asp-for="Milestone.DROPREAS"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.DROPREAS)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DROPREAS"></span>
+                    </div>
                     <radio-button-group id="Milestone.DROPREAS" for="Milestone.DROPREAS" items="Model.DropReasonItems"></radio-button-group>
                 </div>
             </div>
-        </div>
-        <div>
-            <label asp-for="Milestone.Status">@Html.DisplayNameFor(model => model.Milestone.Status)</label>
-            <select asp-for="Milestone.Status">
-                <option value="Complete">Complete</option>
-                <option value="In-progress">In Progress</option>
-            </select>
         </div>
         <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
     </div>
@@ -275,4 +277,10 @@
     <input class="invisible" asp-for="@Model.Milestone.Status" />
     <input class="invisible" asp-for="@Model.Milestone.IsDeleted" />
     <input class="invisible" asp-for="@Model.Milestone.FormId" />
+    <input class="invisible" asp-for="@Model.Milestone.Id" />
+    <input class="invisible" asp-for="@Model.Milestone.ModifiedBy" />
 </form>
+
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/js_controllers/MilestoneTypeBehavior.js"></script>
+}

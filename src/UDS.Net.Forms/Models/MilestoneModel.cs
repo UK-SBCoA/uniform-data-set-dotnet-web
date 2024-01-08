@@ -12,10 +12,11 @@ namespace UDS.Net.Forms.Models
         public int FormId { get; set; }
         public int ParticipationId { get; set; }
         [Display(Name = "Status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = "Complete";
         [Display(Name = "Month")]
-        [RequiredIf(nameof(MilestoneType), "1")]
+        [Range(0, 12)]
         public int? CHANGEMO { get; set; }
+        [Range(0, 30)]
         [Display(Name = "Day")]
         public int? CHANGEDY { get; set; }
         [Display(Name = "Year")]
@@ -42,7 +43,7 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Subject will no longer receive FTLD Module follow-up, but annual in-person UDS visits will continue")]
         public bool? FTLDDISC { get; set; }
         public int? FTLDREAS { get; set; }
-        public string FTLDREAX { get; set; }
+        public string? FTLDREAX { get; set; }
         [Display(Name = "Subject has DIED (COMPLETE DEATH SECTION, BELOW)")]
         public bool? DECEASED { get; set; }
         [Display(Name = "Subject has been DROPPED from ADC. (COMPLETE DROPPED SECTION, BELOW)")]
@@ -59,11 +60,12 @@ namespace UDS.Net.Forms.Models
         public int? DROPREAS { get; set; }
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-        public string DeletedBy { get; set; }
+        public string? ModifiedBy { get; set; }
+        public string? DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
         [Display(Name = "Which milesone type are you reporting?")]
         [Range(0, 1)]
         public int? MilestoneType { get; set; } = null;
+        public int ProtocolReasonValidation { get; set; }
     }
 }

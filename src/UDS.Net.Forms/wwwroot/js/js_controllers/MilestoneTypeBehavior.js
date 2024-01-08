@@ -1,44 +1,4 @@
-﻿//$(() => {
-//    let milestoneTypes = $("input[name='Milestone.MilestoneType']")
-//    let deceasedInput = $("#Milestone_DECEASED")
-//    let discontInput = $("#Milestone_DISCONT")
-
-//    //on load, set the milestoneType radio select
-//    function OnLoad() {
-//        if ($(deceasedInput).is(':checked') || $(discontInput).is(':checked')) {
-//            $(milestoneTypes[0]).prop("checked", true)
-//            DisableBoxA()
-//        } else {
-//            $(milestoneTypes[1]).prop("checked", true)
-//            DisableBoxB()
-//        }
-//    }
-
-//    //on change, disable corrisponding questions
-//    $(milestoneTypes).on("change", () => {
-        //let milestoneTypeValue = $('input[name="Milestone.MilestoneType"]:checked').val()
-        //if (milestoneTypeValue == 0) {
-        //    DisableBoxA()
-        //}
-        //if (milestoneTypeValue == 1) {
-        //    DisableBoxB()
-        //}
-//    })
-
-//    //disable all inputs in boxA section
-//    function DisableBoxA() {
-//        $(".boxA input").prop("disabled", true)
-//        $(".boxB input").prop("disabled", false)
-//    }
-
-//    //disable all inputs in boxB section
-//    function DisableBoxB() {
-//        $(".boxA input").prop("disabled", false)
-//        $(".boxB input").prop("disabled", true)
-//    }
-//})
-
-class MilestoneTypeBehavior {
+﻿class MilestoneTypeBehavior {
     SetMilestoneType() {
         let milestoneTypes = $("input[name='Milestone.MilestoneType']")
         let deceasedInput = $("#Milestone_DECEASED")

@@ -47,11 +47,20 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return Page();
             }
 
-            //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
-            //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
-            await _participationService.UpdateMilestone(Milestone.FormId, Milestone.FormId, Milestone.ToEntity());
+            Milestone.ModifiedBy = User.Identity.Name;
 
-            return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            Isvalid(Milestone);
+
+            if(ModelState.IsValid)
+            {
+                //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
+                //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
+                await _participationService.UpdateMilestone(Milestone.FormId, Milestone.FormId, Milestone.ToEntity());
+
+                return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            }
+
+            return Page();
         }
     }
 }

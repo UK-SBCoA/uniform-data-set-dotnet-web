@@ -163,5 +163,113 @@ namespace UDS.Net.Forms.Pages.Milestones
                 }
             }
         };
+
+        public void Isvalid(MilestoneModel milestone)
+        {
+            if(milestone.MilestoneType == 1)
+            {
+                if(milestone.CHANGEMO == null)
+                {
+                    ModelState.AddModelError("Milestone.CHANGEMO", "Must have a value when indicating continued contact");
+                }
+
+                if (milestone.CHANGEDY == null)
+                {
+                    ModelState.AddModelError("Milestone.CHANGEDY", "Must have a value when indicating continued contact");
+                }
+
+                if (milestone.CHANGEYR == null)
+                {
+                    ModelState.AddModelError("Milestone.CHANGEYR", "Must have a value when indicating continued contact");
+                }
+
+                if (milestone.PROTOCOL == null)
+                {
+                    ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
+                }
+
+                if(milestone.PROTOCOL == 3 && milestone.ACONSENT == null)
+                {
+                    ModelState.AddModelError("Milestone.ACONSENT", "Must have a value when indicating continued contact");
+                }
+
+                if(milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
+                {
+                    ModelState.AddModelError("Milestone.ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
+                }
+
+                if(milestone.RENURSE == true)
+                {
+                    if(milestone.NURSEMO == null)
+                    {
+                        ModelState.AddModelError("Milestone.NURSEMO", "Must have a value if subject has entered a nursing home");
+                    }
+
+                    if(milestone.NURSEDY == null)
+                    {
+                        ModelState.AddModelError("Milestone.NURSEDY", "Must have a value if subject has entered a nursing home");
+                    }
+
+                    if(milestone.NURSEYR == null)
+                    {
+                        ModelState.AddModelError("Milestone.NURSEYR", "Must have a value if subject has entered a nursing home");
+                    }
+                }
+
+                if(milestone.FTLDREAS == 4 &&  String.IsNullOrEmpty(milestone.FTLDREAX))
+                {
+                    ModelState.AddModelError("Milestone.FTLDREAX", "Must have a value when indicating reason of other");
+                }
+            }
+
+            if(milestone.MilestoneType == 0)
+            {
+                if(milestone.DECEASED == true)
+                {
+                    if(milestone.DEATHMO == null)
+                    {
+                        ModelState.AddModelError("Milestone.DEATHMO", "Must have a value");
+                    }
+
+                    if (milestone.DEATHDY == null)
+                    {
+                        ModelState.AddModelError("Milestone.DEATHDY", "Must have a value");
+                    }
+
+                    if (milestone.DEATHYR == null)
+                    {
+                        ModelState.AddModelError("Milestone.DEATHYR", "Must have a value");
+                    }
+
+                    if (milestone.AUTOPSY == null)
+                    {
+                        ModelState.AddModelError("Milestone.AUTOPSY", "Must have a value");
+                    }
+                }
+
+                if(milestone.DISCONT == true)
+                {
+                    if (milestone.DISCMO == null)
+                    {
+                        ModelState.AddModelError("Milestone.DISCMO", "Must have a value");
+                    }
+
+                    if (milestone.DISCDAY == null)
+                    {
+                        ModelState.AddModelError("Milestone.DISCDAY", "Must have a value");
+                    }
+
+                    if (milestone.DISCYR == null)
+                    {
+                        ModelState.AddModelError("Milestone.DISCYR", "Must have a value");
+                    }
+
+                    if (milestone.DROPREAS == null)
+                    {
+                        ModelState.AddModelError("Milestone.DROPREAS", "Must have a value");
+                    }
+                }
+            }
+        }
     }
 }

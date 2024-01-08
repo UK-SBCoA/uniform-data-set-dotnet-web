@@ -26,7 +26,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ParticipationId = participationId,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
-                IsDeleted = false
+                IsDeleted = false,
             };
 
             Milestone = newMilstone;
@@ -41,11 +41,18 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return Page();
             }
 
-            //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
-            //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
-            await _participationService.AddMilestone(User.Identity?.Name, Milestone.ParticipationId, Milestone.ToEntity());
+            Isvalid(Milestone);
 
-            return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            if (ModelState.IsValid)
+            {
+                //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
+                //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
+                await _participationService.AddMilestone(User.Identity?.Name, Milestone.ParticipationId, Milestone.ToEntity());
+
+                return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            }
+
+            return Page();
         }
     }
 }
