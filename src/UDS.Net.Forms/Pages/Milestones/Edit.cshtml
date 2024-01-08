@@ -22,12 +22,12 @@
                     <label asp-for="Milestone.MilestoneType">@Html.DisplayNameFor(model => model.Milestone.MilestoneType)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div class="max-w-lg">
-                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems" ui-behaviors="Model.MilestoneTypeBehavior"></radio-button-group>
+                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems"></radio-button-group>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="boxA">
                 <h3 class="@headerCSS">Box A - Change with continued contact</h3>
                 <div class="@rowCSS">
                     <div>
@@ -169,7 +169,7 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
                 </div>
             </div>
-            <div>
+            <div class="boxB">
                 <h3 class="@headerCSS">Box B - No Further Contact</h3>
                 <div class="@rowCSS">
                     <label asp-for="@Model.Milestone.DECEASED">@Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
@@ -276,3 +276,7 @@
     <input class="invisible" asp-for="@Model.Milestone.FormId" />
     <input class="invisible" asp-for="@Model.Milestone.Id" />
 </form>
+
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/js_controllers/MilestoneTypeBehavior.js"></script>
+}

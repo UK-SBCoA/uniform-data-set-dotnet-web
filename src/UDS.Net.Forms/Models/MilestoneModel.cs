@@ -6,8 +6,8 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models
 {
-	public class MilestoneModel
-	{
+    public class MilestoneModel
+    {
         public int Id { get; set; }
         public int FormId { get; set; }
         public int ParticipationId { get; set; }
@@ -43,9 +43,9 @@ namespace UDS.Net.Forms.Models
         public bool? FTLDDISC { get; set; }
         public int? FTLDREAS { get; set; }
         public string FTLDREAX { get; set; }
-        [Display (Name = "Subject has DIED (COMPLETE DEATH SECTION, BELOW)")]
+        [Display(Name = "Subject has DIED (COMPLETE DEATH SECTION, BELOW)")]
         public bool? DECEASED { get; set; }
-        [Display (Name = "Subject has been DROPPED from ADC. (COMPLETE DROPPED SECTION, BELOW)")]
+        [Display(Name = "Subject has been DROPPED from ADC. (COMPLETE DROPPED SECTION, BELOW)")]
         public bool? DISCONT { get; set; }
         public int? DEATHMO { get; set; }
         public int? DEATHDY { get; set; }
@@ -64,29 +64,6 @@ namespace UDS.Net.Forms.Models
         public bool IsDeleted { get; set; }
         [Display(Name = "Which milesone type are you reporting?")]
         [Range(0, 1)]
-        public int MilestoneType
-        {
-            get
-            {
-                return GetMilestoneType(DECEASED, DISCONT);
-            }
-        }
-
-        private int GetMilestoneType(bool? DECEASED, bool? DISCONT)
-        {
-            if (DECEASED == true || DISCONT == true)
-            {
-                //no further contact
-                return 0;
-            }
-            else
-            {
-                //continued contact
-                return 1;
-            }
-        }
+        public int? MilestoneType { get; set; } = null;
     }
-
-    
 }
-

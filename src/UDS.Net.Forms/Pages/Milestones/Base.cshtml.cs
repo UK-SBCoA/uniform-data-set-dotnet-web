@@ -24,8 +24,8 @@ namespace UDS.Net.Forms.Pages.Milestones
 
         public List<RadioListItem> MilestoneTypeItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("CONTINUED CONTACT", "1"),
             new RadioListItem("NO FURTHER CONTACT", "0"),
+            new RadioListItem("CONTINUED CONTACT", "1"),
         };
 
         public List<RadioListItem> ProtocolItems { get; } = new List<RadioListItem>
@@ -60,27 +60,6 @@ namespace UDS.Net.Forms.Pages.Milestones
             new RadioListItem("Informant not available", "3"),
             new RadioListItem("Other, specify below", "4")
         };
-
-        public Dictionary<string, UIBehavior> MilestoneTypeBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior{
-            PropertyAttributes = new List<UIPropertyAttributes>
-            {
-                new UIEnableAttribute("Milestone.DECEASED"),
-                new UIEnableAttribute("Milestone.DISCONT"),
-            },
-            InstructionalMessage = "skip to question 1F"
-
-            } },
-            { "1", new UIBehavior{
-            PropertyAttributes = new List<UIPropertyAttributes>
-            {
-                new UIDisableAttribute("Milestone.DECEASED"),
-                new UIDisableAttribute("Milestone.DISCONT"),
-            },
-            } }
-        };
-
 
         public Dictionary<string, UIBehavior> ProtocolBehavior = new Dictionary<string, UIBehavior>
         {
