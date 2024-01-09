@@ -82,11 +82,11 @@
                                 <tr class="align-top">
                                     <td>@milestone.CreatedAt.ToShortDateString()</td>
                                     @{
-                                        if (milestone.MilestoneType == 0)
+                                        if (milestone.DECEASED == true || milestone.DISCONT == true)
                                         {
-                                            <td>Change followed by no further contact</td>
+                                            <td>Change followed by NO FURTHER CONTACT</td>
                                         }
-                                        if (milestone.MilestoneType == 1)
+                                        else
                                         {
                                             <td>Change followed by continued contact</td>
                                         }
