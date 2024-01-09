@@ -36,7 +36,7 @@
         <tbody>
 
             @foreach (var visit in Model.Participation.Visits)
-             {
+            {
                 <tr data-visit-id="@visit.Id">
                     <td>@visit.Number</td>
                     <td>@visit.Kind</td>
@@ -44,7 +44,7 @@
                     <td>@visit.StartDateTime</td>
                     <td><a asp-page="/Visits/Details" asp-route-id="@visit.Id">View</a></td>
                 </tr>
-             }
+            }
         </tbody>
     </table>
     <div class="space-y-16 py-16 xl:space-y-10">

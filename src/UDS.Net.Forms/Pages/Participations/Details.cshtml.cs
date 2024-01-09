@@ -31,10 +31,8 @@ namespace UDS.Net.Forms.Pages.Participations
 
             Participation = participation.ToVM();
 
-            //create method to get all milestone data in a list from participation service
             var milestones = await _participationService.GetMilestonesByParticipationId(id.Value);
 
-            //keeping error to keep track of progress. Need to add a ToVM method for M1
             Milestones = milestones.ToVM();
 
             return Page();
