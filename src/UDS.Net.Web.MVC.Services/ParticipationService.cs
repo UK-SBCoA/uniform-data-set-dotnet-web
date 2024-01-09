@@ -28,8 +28,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Milestone> AddMilestone(string username, int participationId, Milestone milestone)
         {
-            // TODO will need to get the participationId from the milestone create.cshtml.cs. For now plug in here
-            await _apiClient.ParticipationClient.PostMilestone(milestone.ParticipationId, milestone.ToDto());
+            await _apiClient.ParticipationClient.PostMilestone(participationId, milestone.ToDto());
 
             return milestone;
         }
@@ -78,19 +77,11 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Milestone> UpdateMilestone(int id, int milestoneId, Milestone milestone)
         {
-            //ToDo come back to make some error catches
-            if(milestone == null)
-            {
-                return null;
-            }
-
             await _apiClient.ParticipationClient.PutMilestone(id, milestoneId, milestone.ToDto());
 
             return milestone;
         }
 
-        //make another getbyid method for getting milestones
-        //need to make a milestone class
         public async Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId)
         {
             IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);

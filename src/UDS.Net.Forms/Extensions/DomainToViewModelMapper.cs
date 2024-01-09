@@ -45,8 +45,6 @@ namespace UDS.Net.Forms.Extensions
                 VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
                 Visits = participation.Visits.ToVM(),
                 LastVisitNumber = participation.LastVisitNumber
-
-                //
             };
         }
 
