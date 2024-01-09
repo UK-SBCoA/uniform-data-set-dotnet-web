@@ -63,6 +63,7 @@ namespace UDS.Net.Forms.Models
         public string? ModifiedBy { get; set; }
         public string? DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
+        [Required]
         [Display(Name = "Which milesone type are you reporting?")]
         [Range(0, 1)]
         public int? MilestoneType { get; set; } = null;
