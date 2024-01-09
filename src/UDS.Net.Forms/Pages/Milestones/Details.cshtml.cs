@@ -13,5 +13,6 @@ namespace UDS.Net.Forms.Pages.Milestones
         public DetailsModel(IParticipationService participationService) : base(participationService)
         {
         }
+
     }
 }
