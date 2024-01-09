@@ -8,11 +8,10 @@ using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
-	public class DetailsModel : EditModel
+    public class DetailsModel : EditModel
     {
         public DetailsModel(IParticipationService participationService) : base(participationService)
         {
         }
-
     }
 }

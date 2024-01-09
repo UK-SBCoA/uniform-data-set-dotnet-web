@@ -10,7 +10,7 @@ using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
-	public class BaseModel : PageModel
+    public class BaseModel : PageModel
     {
         protected readonly IParticipationService _participationService;
 
@@ -166,9 +166,9 @@ namespace UDS.Net.Forms.Pages.Milestones
 
         public void Isvalid(MilestoneModel milestone)
         {
-            if(milestone.MilestoneType == 1)
+            if (milestone.MilestoneType == 1)
             {
-                if(milestone.CHANGEMO == null)
+                if (milestone.CHANGEMO == null)
                 {
                     ModelState.AddModelError("Milestone.CHANGEMO", "Must have a value when indicating continued contact");
                 }
@@ -188,51 +188,51 @@ namespace UDS.Net.Forms.Pages.Milestones
                     ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
-                if(milestone.PROTOCOL == 3 && milestone.ACONSENT == null)
+                if (milestone.PROTOCOL == 3 && milestone.ACONSENT == null)
                 {
                     ModelState.AddModelError("Milestone.ACONSENT", "Must have a value when indicating continued contact");
                 }
 
-                if(milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
+                if (milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
                 {
                     ModelState.AddModelError("Milestone.ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
                 }
 
-                if(milestone.RENURSE == true)
+                if (milestone.RENURSE == true)
                 {
-                    if(milestone.NURSEMO == null)
+                    if (milestone.NURSEMO == null)
                     {
                         ModelState.AddModelError("Milestone.NURSEMO", "Must have a value if subject has entered a nursing home");
                     }
 
-                    if(milestone.NURSEDY == null)
+                    if (milestone.NURSEDY == null)
                     {
                         ModelState.AddModelError("Milestone.NURSEDY", "Must have a value if subject has entered a nursing home");
                     }
 
-                    if(milestone.NURSEYR == null)
+                    if (milestone.NURSEYR == null)
                     {
                         ModelState.AddModelError("Milestone.NURSEYR", "Must have a value if subject has entered a nursing home");
                     }
                 }
 
-                if(milestone.FTLDREAS == 4 &&  String.IsNullOrEmpty(milestone.FTLDREAX))
+                if (milestone.FTLDREAS == 4 && String.IsNullOrEmpty(milestone.FTLDREAX))
                 {
                     ModelState.AddModelError("Milestone.FTLDREAX", "Must have a value when indicating reason of other");
                 }
             }
 
-            if(milestone.MilestoneType == 0)
+            if (milestone.MilestoneType == 0)
             {
-                if(milestone.DECEASED == false && milestone.DISCONT == false)
+                if (milestone.DECEASED == false && milestone.DISCONT == false)
                 {
                     ModelState.AddModelError("Milestone.DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
                     ModelState.AddModelError("Milestone.DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
                 }
 
-                if(milestone.DECEASED == true)
+                if (milestone.DECEASED == true)
                 {
-                    if(milestone.DEATHMO == null)
+                    if (milestone.DEATHMO == null)
                     {
                         ModelState.AddModelError("Milestone.DEATHMO", "Must have a value");
                     }
@@ -253,7 +253,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                     }
                 }
 
-                if(milestone.DISCONT == true)
+                if (milestone.DISCONT == true)
                 {
                     if (milestone.DISCMO == null)
                     {

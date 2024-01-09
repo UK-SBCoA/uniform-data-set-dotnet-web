@@ -11,7 +11,7 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
-	public class EditModel : BaseModel
+    public class EditModel : BaseModel
     {
         public EditModel(IParticipationService participationService) : base(participationService)
         {
@@ -22,7 +22,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             //TODO temporary method for getting the selected milestone for edit. Will need to create "getById" in the API
             var milestonesByParticipationId = await _participationService.GetMilestonesByParticipationId(participationId);
 
-            if(milestonesByParticipationId.Count() < 1)
+            if (milestonesByParticipationId.Count() < 1)
             {
                 return NotFound($"No milestones found within participationId of: {participationId}");
             }
@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             //TODO will update this functionality with a singular GET for milestone
             var milestoneFound = milestonesByParticipationId.Where(m => m.Id == id).FirstOrDefault().ToVM();
 
-            if(milestoneFound == null)
+            if (milestoneFound == null)
             {
                 return NotFound($"Milestone with participation Id of: {participationId} was not found");
             }
@@ -51,7 +51,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             Isvalid(Milestone);
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
                 //the api checks to make sure participationId and milestone.ToEntity() participationId are the same

@@ -36,7 +36,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if(Milestone == null)
+            if (Milestone == null)
             {
                 return Page();
             }

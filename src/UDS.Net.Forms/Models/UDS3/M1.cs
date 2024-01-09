@@ -1,8 +1,8 @@
 ﻿using System;
 namespace UDS.Net.Forms.Models.UDS3
 {
-	public class M1 : FormModel
-	{
+    public class M1 : FormModel
+    {
         public int FormId { get; set; }
         public int ParticipationId { get; set; }
         public string Status { get; set; } = default!;
@@ -35,4 +35,3 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? DROPREAS { get; set; }
     }
 }
-

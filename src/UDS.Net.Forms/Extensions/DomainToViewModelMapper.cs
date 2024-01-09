@@ -101,7 +101,7 @@ namespace UDS.Net.Forms.Extensions
                 NURSEDY = milestone.NURSEDY,
                 NURSEYR = milestone.NURSEYR,
                 REJOIN = milestone.REJOIN.HasValue ? true : false,
-                FTLDDISC = milestone.FTLDDISC.HasValue ? true: false,
+                FTLDDISC = milestone.FTLDDISC.HasValue ? true : false,
                 FTLDREAS = milestone.FTLDREAS,
                 FTLDREAX = milestone.FTLDREAX,
                 DECEASED = milestone.DECEASED.HasValue ? true : false,
