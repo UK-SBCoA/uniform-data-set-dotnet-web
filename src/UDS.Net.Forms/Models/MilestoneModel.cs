@@ -35,7 +35,9 @@ namespace UDS.Net.Forms.Models
         public bool? RENAVAIL { get; set; }
         [Display(Name = "Subject has permanently entered nursing home")]
         public bool? RENURSE { get; set; }
+        [Range(0, 12)]
         public int? NURSEMO { get; set; }
+        [Range(0, 30)]
         public int? NURSEDY { get; set; }
         public int? NURSEYR { get; set; }
         [Display(Name = "Subject is rejoining ADC")]
@@ -48,12 +50,16 @@ namespace UDS.Net.Forms.Models
         public bool? DECEASED { get; set; }
         [Display(Name = "Subject has been DROPPED from ADC. (COMPLETE DROPPED SECTION, BELOW)")]
         public bool? DISCONT { get; set; }
+        [Range(0, 12)]
         public int? DEATHMO { get; set; }
+        [Range(0, 30)]
         public int? DEATHDY { get; set; }
         public int? DEATHYR { get; set; }
         [Display(Name = "ADC autopsy")]
         public int? AUTOPSY { get; set; }
+        [Range(0, 12)]
         public int? DISCMO { get; set; }
+        [Range(0, 30)]
         public int? DISCDAY { get; set; }
         public int? DISCYR { get; set; }
         [Display(Name = "Main reason for being dropped from ADC (CHECK ONE):")]
