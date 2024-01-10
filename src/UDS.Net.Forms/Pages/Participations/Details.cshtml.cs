@@ -12,7 +12,7 @@ namespace UDS.Net.Forms.Pages.Participations
 
         public ParticipationModel? Participation { get; set; }
 
-        public IEnumerable<MilestoneModel> Milestones {get; set; }
+        public IEnumerable<MilestoneModel> Milestones { get; set; }
 
         public DetailsModel(IParticipationService participationService)
         {
