@@ -18,11 +18,14 @@
             if (i < rowCount) {
                 $(`#${this.tableId}_${i}__MOB`).prop('disabled', false);
                 $(`#${this.tableId}_${i}__YOB`).prop('disabled', false);
-                console.log(`Enabling row ${i} for ${this.tableId}`);
+                $(`#${this.tableId}_${i}__AGD`).prop('disabled', false);
+                $(`#${this.tableId}_${i}__NEU`).prop('disabled', false);
+
             } else {
                 $(`#${this.tableId}_${i}__MOB`).prop('disabled', true);
                 $(`#${this.tableId}_${i}__YOB`).prop('disabled', true);
-                console.log(`Disabling row ${i} for ${this.tableId}`);
+                $(`#${this.tableId}_${i}__AGD`).prop('disabled', true);
+                $(`#${this.tableId}_${i}__NEU`).prop('disabled', true);
             }
         }
     }
