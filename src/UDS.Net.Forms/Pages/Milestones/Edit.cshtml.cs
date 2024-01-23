@@ -21,7 +21,7 @@ namespace UDS.Net.Forms.Pages.Milestones
         {
             var milestoneFound = await _participationService.GetMilestoneById(id, formId);
 
-            if(milestoneFound == null)
+            if (milestoneFound == null)
             {
                 return NotFound($"No milestones found within formId of: {formId}");
             }

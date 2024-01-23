@@ -242,7 +242,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ModelState.AddModelError(property, "Must have a value for month");
             }
 
-            if(monthValue < 1 || monthValue > 12 && monthValue != 99)
+            if (monthValue < 1 || monthValue > 12 && monthValue != 99)
             {
                 ModelState.AddModelError(property, "Must have a value of 1 - 12 or 99 for month");
             }
