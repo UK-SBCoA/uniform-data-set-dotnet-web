@@ -12,6 +12,7 @@ namespace UDS.Net.Services
         Task<Milestone> UpdateMilestone(int id, int milestoneId, Milestone milestone);
         Task<ParticipationDto> GetByLegacyId(string legacyId);
         Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId);
+        Task<Milestone> GetMilestoneById(int id, int formId);
     }
 }
 

@@ -17,25 +17,16 @@ namespace UDS.Net.Forms.Pages.Milestones
         {
         }
 
-        public async Task<IActionResult> OnGet(int id, int participationId)
+        public async Task<IActionResult> OnGet(int id, int formId)
         {
-            //TODO temporary method for getting the selected milestone for edit. Will need to create "getById" in the API
-            var milestonesByParticipationId = await _participationService.GetMilestonesByParticipationId(participationId);
+            var milestoneFound = await _participationService.GetMilestoneById(id, formId);
 
-            if (milestonesByParticipationId.Count() < 1)
+            if(milestoneFound == null)
             {
-                return NotFound($"No milestones found within participationId of: {participationId}");
+                return NotFound($"No milestones found within formId of: {formId}");
             }
 
-            //TODO will update this functionality with a singular GET for milestone
-            var milestoneFound = milestonesByParticipationId.Where(m => m.Id == id).FirstOrDefault().ToVM();
-
-            if (milestoneFound == null)
-            {
-                return NotFound($"Milestone with participation Id of: {participationId} was not found");
-            }
-
-            Milestone = milestoneFound;
+            Milestone = milestoneFound.ToVM();
 
             return Page();
         }

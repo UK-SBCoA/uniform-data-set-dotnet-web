@@ -89,6 +89,13 @@ namespace UDS.Net.Web.MVC.Services
             return milestones.ToDomain();
         }
 
+        public async Task<Milestone> GetMilestoneById(int id, int formId)
+        {
+            M1Dto milestone = await _apiClient.ParticipationClient.GetMilestone(id, formId);
+
+            return milestone.ToDomain();
+        }
+
         public async Task<Participation> Patch(string username, Participation entity)
         {
             // TODO update participation

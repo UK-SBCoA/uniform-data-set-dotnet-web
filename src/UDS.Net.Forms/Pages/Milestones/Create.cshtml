@@ -6,14 +6,15 @@
     ViewData["Title"] = "Create milestone";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
     string headerCSS = "text-base font-semibold leading-7 text-gray-900";
+    string pillNumberCSS = "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800";
 }
 
 <form method="post">
     <div class="space-y-16 p-16 xl:space-y-20">
         <div>
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Milstone</h2>
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">M1 Milstones (February 18 Final, rev. 2/20)</h2>
             <p class="mt-1 text-sm text-gray-500">
-                INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples.
+                INSTRUCTIONS: Review the types of milestone at right and complete the appropriate box below. Use only one box (A or B) per form submitted. For more information, see flow chart on reverse.
             </p>
         </div>
         <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
@@ -32,51 +33,54 @@
             </div>
 
             <div class="boxA counterreset">
-                <h3 class="@headerCSS">Box A - Change with continued contact</h3>
+                <h3 class="my-16 text-base font-semibold leading-7 text-gray-900 text-xl">BOX A - Change with continued contact</h3>
                 <div class="@rowCSS">
                     <div>
-                        <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Date of status change (Uknown = 99/99/YEAR REQUIRED)</label>
+                        <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Date of status change</label>
                     </div>
                     <div class="sm:col-span-2">
-                        <div class="mt-2 inline-block">
-                            <label asp-for="@Model.Milestone.CHANGEMO">@Html.DisplayNameFor(model => model.Milestone.CHANGEMO)</label>
-                            <div class="w-20">
-                                <input asp-for="@Model.Milestone.CHANGEMO" />
+                        <div>
+                            <p class="text-sm text-gray-500">Unknown = 99/99/YEAR REQUIRED</p>
+                            <div class="mt-2 inline-block">
+                                <div class="w-20">
+                                    <input placeholder="mm" asp-for="@Model.Milestone.CHANGEMO" />
+                                </div>
                             </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEMO"></span>
+                            <div class="mt-2 inline-block">
+                                <div class="w-20">
+                                    <input placeholder="dd" asp-for="@Model.Milestone.CHANGEDY" />
+                                </div>
+                            </div>
+                            <div class="mt-2 inline-block">
+                                <div class="w-40">
+                                    <input placeholder="yyyy" asp-for="@Model.Milestone.CHANGEYR" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-2 inline-block">
-                            <label asp-for="@Model.Milestone.CHANGEDY">@Html.DisplayNameFor(model => model.Milestone.CHANGEDY)</label>
-                            <div class="w-20">
-                                <input asp-for="@Model.Milestone.CHANGEDY" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEDY"></span>
-                        </div>
-                        <div class="mt-2 inline-block">
-                            <label asp-for="@Model.Milestone.CHANGEYR">@Html.DisplayNameFor(model => model.Milestone.CHANGEYR)</label>
-                            <div class="w-40">
-                                <input asp-for="@Model.Milestone.CHANGEYR" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.CHANGEYR"></span>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.CHANGEMO"></span>
+                            <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.CHANGEDY"></span>
+                            <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.CHANGEYR"></span>
                         </div>
                     </div>
                 </div>
                 <div class="@rowCSS">
                     <div>
-                        <span class="text-base font-semibold text-gray-900">
+                        <span class="text-base font-semibold text-indigo-300 italic">
                             Complete the UDS and FTLD sections below, as appropriate.
                         </span>
                     </div>
                 </div>
                 <div class="@rowCSS">
-                    <label class="text-base font-semibold leading-7 text-gray-900"><span class="counter invisible"></span>UDS Status</label>
+                    <label class="text-base font-semibold leading-7 text-gray-900 uppercase text-lg"><span class="counter invisible"></span>UDS Status</label>
                 </div>
                 <div class="@rowCSS subcounterreset">
-                    <label asp-for="Milestone.PROTOCOL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.PROTOCOL)</label>
-                    <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.Milestone.PROTOCOL"></p>
-                        <radio-button-group id="Milestone.PROTOCOL" for="Milestone.PROTOCOL" items="Model.ProtocolItems" ui-behaviors="@Model.ProtocolBehavior"></radio-button-group>
+                    <div>
+                        <label asp-for="Milestone.PROTOCOL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.PROTOCOL)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.PROTOCOL"></span>
+                    </div>
+                    <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        <radio-button-group id="Milestone.PROTOCOL" for="Milestone.PROTOCOL" items="Model.ProtocolItems" ui-behaviors="@Model.ProtocolBehavior"></radio-button-group>
                     </div>
                 </div>
                 <div class="@rowCSS subcounterreset">
@@ -94,140 +98,193 @@
                         </div>
                     </div>
                     <div class="sm:col-span-2">
-                        <div class="counterreset">
-                            <label asp-for="Milestone.RECOGIM"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.RECOGIM)</label>
-                            @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                        </div>
-                        <div>
-                            <label asp-for="Milestone.REPHYILL"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.REPHYILL)</label>
-                            @Html.CheckBox("Milestone.REPHYILL", Model.Milestone.REPHYILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                        </div>
-                        <div>
-                            <label asp-for="Milestone.REREFUSE"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.REREFUSE)</label>
-                            @Html.CheckBox("Milestone.REREFUSE", Model.Milestone.REREFUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                        </div>
-                        <div>
-                            <label asp-for="Milestone.RENAVAIL"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.RENAVAIL)</label>
-                            @Html.CheckBox("Milestone.RENAVAIL", Model.Milestone.RENAVAIL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                        </div>
-                        <div>
+                        <div class="counterreset flex items-top">
                             <div>
-                                <label asp-for="Milestone.RENURSE"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.RENURSE)</label>
+                                @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="Milestone.RECOGIM"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.RECOGIM)</label>
+                            </div>
+                        </div>
+                        <div class="flex items-top">
+                            <div>
+                                @Html.CheckBox("Milestone.REPHYILL", Model.Milestone.REPHYILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="Milestone.REPHYILL"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.REPHYILL)</label>
+                            </div>
+                        </div>
+                        <div class="flex items-top">
+                            <div>
+                                @Html.CheckBox("Milestone.REREFUSE", Model.Milestone.REREFUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="Milestone.REREFUSE"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.REREFUSE)</label>
+                            </div>
+                        </div>
+                        <div class="flex items-top">
+                            <div>
+                                @Html.CheckBox("Milestone.RENAVAIL", Model.Milestone.RENAVAIL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="Milestone.RENAVAIL"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.RENAVAIL)</label>
+                            </div>
+                        </div>
+                        <div class="flex items-top">
+                            <div>
                                 @Html.CheckBox("Milestone.RENURSE", Model.Milestone.RENURSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.NURSEMO\", \"Milestone.NURSEDY\", \"Milestone.NURSEYR\" ]" })
                             </div>
-                            <div class="m-10">
-                                <div class="subcounterreset">
-                                    <label class="text-base font-semibold text-gray-900">2b5a. Date permanently moved to nursing home:</label>
-                                </div>
-                                <div>
-                                    <div class="sm:col-span-2">
+                            <div class="ml-3">
+                                <label asp-for="Milestone.RENURSE"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.RENURSE)</label>
+                            </div>
+                        </div>
+                        <div class="my-10 ml-20">
+                            <div class="subcounterreset">
+                                <label class="text-base font-semibold text-gray-900">2b5a. Date permanently moved to nursing home:</label>
+                            </div>
+                            <div>
+                                <div class="sm:col-span-2">
+                                    <div>
+                                        <p class="text-sm text-gray-500 mt-3">(unknown = 99/99/YEAR REQUIRED)</p>
                                         <div class="mt-2 inline-block">
-                                            <label asp-for="@Model.Milestone.NURSEMO">@Html.DisplayNameFor(model => model.Milestone.NURSEMO)</label>
                                             <div class="w-20">
-                                                <input asp-for="@Model.Milestone.NURSEMO" />
+                                                <input placeholder="mm" asp-for="@Model.Milestone.NURSEMO" />
                                             </div>
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.NURSEMO"></span>
                                         </div>
                                         <div class="mt-2 inline-block">
-                                            <label asp-for="@Model.Milestone.NURSEDY">@Html.DisplayNameFor(model => model.Milestone.NURSEDY)</label>
                                             <div class="w-20">
-                                                <input asp-for="@Model.Milestone.NURSEDY" />
+                                                <input placeholder="dd" asp-for="@Model.Milestone.NURSEDY" />
                                             </div>
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.NURSEDY"></span>
                                         </div>
                                         <div class="mt-2 inline-block">
-                                            <label asp-for="@Model.Milestone.NURSEYR">@Html.DisplayNameFor(model => model.Milestone.NURSEYR)</label>
                                             <div class="w-40">
-                                                <input asp-for="@Model.Milestone.NURSEYR" />
+                                                <input placeholder="yyyy" asp-for="@Model.Milestone.NURSEYR" />
                                             </div>
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.NURSEYR"></span>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.NURSEMO"></span>
+                                        <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.NURSEDY"></span>
+                                        <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.NURSEYR"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label asp-for="Milestone.REJOIN"><span class="counter"></span> @Html.DisplayNameFor(Model => Model.Milestone.REJOIN)</label>
-                            @Html.CheckBox("Milestone.REJOIN", Model.Milestone.REJOIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        <div class="flex items-top">
+                            <div>
+                                @Html.CheckBox("Milestone.REJOIN", Model.Milestone.REJOIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3">
+                                <label asp-for="Milestone.REJOIN"><span class="counter @pillNumberCSS"></span> @Html.DisplayNameFor(Model => Model.Milestone.REJOIN)</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="@rowCSS subcounterreset">
                     <div>
-                        <label class="text-base font-semibold leading-7 text-gray-900">FTLD MODULE STATUS</label>
+                        <label class="text-base font-semibold leading-7 text-gray-900 text-lg">FTLD MODULE STATUS</label>
                     </div>
                 </div>
-                <div class="@rowCSS">
-                    <label asp-for="@Model.Milestone.FTLDDISC"><span class="counter"></span>@Html.DisplayNameFor(model => model.Milestone.FTLDDISC)</label>
-                    <div class="sm:col-span-2">
-                        @Html.CheckBox("Milestone.FTLDDISC", Model.Milestone.FTLDDISC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                <div class="flex">
+                    <div class="flex">
+                        <div>
+                            <span class="counter"></span>
+                        </div>
+                        <div class="pl-3">
+                            @Html.CheckBox("Milestone.FTLDDISC", Model.Milestone.FTLDDISC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                    </div>
+                    <div class="ml-3">
+                        <label asp-for="@Model.Milestone.FTLDDISC">@Html.DisplayNameFor(model => model.Milestone.FTLDDISC)</label>
                     </div>
                 </div>
-                <div class="@rowCSS">
-                    <label asp-for="Milestone.FTLDREAS"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.FTLDREAS)</label>
-                    <div class="mt-4 sm:col-span-1 sm:mt-0">
+                <div class="flex my-6">
+                    <div class="mt-4">
+                        <label class="font-semibold"><span class="subcounter"></span></label>
+                    </div>
+                    <div class="ml-3">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.Milestone.FTLDREAS"></p>
                         <radio-button-group id="Milestone.FTLDREAS" for="Milestone.FTLDREAS" items="Model.FTLDREASItems" ui-behaviors="@Model.FTLDREASBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAS"></span>
-                    </div>
-                </div>
-                <div class="@rowCSS">
-                    <div>
-                        <label asp-for="@Model.Milestone.FTLDREAX"><span class=""></span>@Html.DisplayNameFor(model => model.Milestone.FTLDREAX)</label>
-                    </div>
-                    <div class="w-40">
-                        <input asp-for="@Model.Milestone.FTLDREAX" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
+                        <div class="w-40 flex mt-3">
+                            <div class="font-semibold">
+                                <label>3a1.</label>
+                            </div>
+                            <div class="ml-3">
+                                <input asp-for="@Model.Milestone.FTLDREAX" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="boxB subcounterreset" data-controller="fancycheckboxes">
-                <h3 class="@headerCSS">Box B - No Further Contact</h3>
-                <div class="@rowCSS">
-                    <label asp-for="@Model.Milestone.DECEASED"><span class="counter invisible"></span><span class="subcounter"></span>@Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
-                    <div class="sm:col-span-2">
-                        @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DECEASED"></span>
+                <h3 class="my-16 text-base font-semibold leading-7 text-gray-900 text-xl">BOX B - No Further Contact</h3>
+                <div class="my-3">
+                    <div class="flex">
+                        <div>
+                            <span class="counter invisible"></span><span class="subcounter"></span>
+                        </div>
+                        <div class="mx-3">
+                            @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Milestone.DECEASED"><span class="@pillNumberCSS">Deceased</span> @Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
+                            <div class="sm:col-span-2">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DECEASED"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="@rowCSS">
-                    <label asp-for="@Model.Milestone.DISCONT"><span class="subcounter"></span>@Html.DisplayNameFor(model => model.Milestone.DISCONT)</label>
-                    <div class="sm:col-span-2">
-                        @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCONT"></span>
+                <div class="my-3">
+                    <div class="flex">
+                        <div>
+                            <span class="subcounter"></span>
+                        </div>
+                        <div class="mx-3">
+                            @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Milestone.DISCONT"><span class="@pillNumberCSS">Withdrawn</span> @Html.DisplayNameFor(model => model.Milestone.DISCONT)</label>
+                            <div class="sm:col-span-2">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCONT"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="@rowCSS subcounterreset">
                     <div>
-                        <label class="text-base font-semibold leading-7 text-gray-900"><span class="counter invisible"></span> DEATH</label>
+                        <label class="text-base font-semibold leading-7 text-gray-900 text-xl"><span class="counter"></span> DEATH</label>
                     </div>
                 </div>
                 <div class="@rowCSS">
                     <div>
-                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Date of death (unknown=99/99/YEAR REQUIRED):</label>
+                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Date of death:</label>
                     </div>
                     <div>
                         <div class="sm:col-span-2">
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DEATHMO">@Html.DisplayNameFor(model => model.Milestone.DEATHMO)</label>
-                                <div class="w-20">
-                                    <input asp-for="@Model.Milestone.DEATHMO" />
+                            <div>
+                                <p class="text-sm text-gray-500">Unknown = 99/99/YEAR REQUIRED</p>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-20">
+                                        <input placeholder="mm" asp-for="@Model.Milestone.DEATHMO" />
+                                    </div>
                                 </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DEATHMO"></span>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-20">
+                                        <input placeholder="dd" asp-for="@Model.Milestone.DEATHDY" />
+                                    </div>
+                                </div>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-40">
+                                        <input placeholder="yyyy" asp-for="@Model.Milestone.DEATHYR" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DEATHDY">@Html.DisplayNameFor(model => model.Milestone.DEATHDY)</label>
-                                <div class="w-20">
-                                    <input asp-for="@Model.Milestone.DEATHDY" />
-                                </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DEATHDY"></span>
-                            </div>
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DEATHYR">@Html.DisplayNameFor(model => model.Milestone.DEATHYR)</label>
-                                <div class="w-40">
-                                    <input asp-for="@Model.Milestone.DEATHYR" />
-                                </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DEATHYR"></span>
+                            <div>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DEATHMO"></span>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DEATHDY"></span>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DEATHYR"></span>
                             </div>
                         </div>
                     </div>
@@ -239,32 +296,42 @@
                     </div>
                     <radio-button-group id="Milestone.AUTOPSY" for="Milestone.AUTOPSY" items="Model.AutopsyItems"></radio-button-group>
                 </div>
+                <div class="@rowCSS subcounterreset">
+                    <label class="text-base font-semibold leading-7 text-gray-900 text-xl"><span class="counter"></span> DROPPED</label>
+                </div>
+                <div>
+                    <span class="text-base font-semibold text-indigo-300 italic">
+                        DO NOT fill out this section if the participant has consented to autopsy or if you will maintain minimal contact. Instead, fill out BOX A QUESTION 2 UDS STATUS section.
+                    </span>
+                </div>
                 <div class="@rowCSS">
                     <div>
-                        <label class="text-base font-semibold text-gray-900"><span class="counter invisible"></span><span class="subcounter"></span>Date dropped from ADC (unknown = 99/99/YEAR REQUIRED):</label>
+                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Date dropped from ADC:</label>
                     </div>
                     <div>
                         <div class="sm:col-span-2">
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DISCMO">@Html.DisplayNameFor(model => model.Milestone.DISCMO)</label>
-                                <div class="w-20">
-                                    <input asp-for="@Model.Milestone.DISCMO" />
+                            <div>
+                                <p class="text-sm text-gray-500">Unknown = 99/99/YEAR REQUIRED</p>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-20">
+                                        <input placeholder="mm" asp-for="@Model.Milestone.DISCMO" />
+                                    </div>
                                 </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCMO"></span>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-20">
+                                        <input placeholder="dd" asp-for="@Model.Milestone.DISCDAY" />
+                                    </div>
+                                </div>
+                                <div class="mt-2 inline-block">
+                                    <div class="w-40">
+                                        <input placeholder="yyyy" asp-for="@Model.Milestone.DISCYR" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DISCDAY">@Html.DisplayNameFor(model => model.Milestone.DISCDAY)</label>
-                                <div class="w-20">
-                                    <input asp-for="@Model.Milestone.DISCDAY" />
-                                </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCDAY"></span>
-                            </div>
-                            <div class="mt-2 inline-block">
-                                <label asp-for="@Model.Milestone.DISCYR">@Html.DisplayNameFor(model => model.Milestone.DISCYR)</label>
-                                <div class="w-40">
-                                    <input asp-for="@Model.Milestone.DISCYR" />
-                                </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCYR"></span>
+                            <div>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DISCMO"></span>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DISCDAY"></span>
+                                <span class="mt-2 text-sm text-red-600 block" asp-validation-for="@Model.Milestone.DISCYR"></span>
                             </div>
                         </div>
                     </div>

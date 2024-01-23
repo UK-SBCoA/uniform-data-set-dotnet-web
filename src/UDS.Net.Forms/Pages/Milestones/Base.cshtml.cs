@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
@@ -24,8 +25,8 @@ namespace UDS.Net.Forms.Pages.Milestones
 
         public List<RadioListItem> MilestoneTypeItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("NO FURTHER CONTACT", "0"),
-            new RadioListItem("CONTINUED CONTACT", "1"),
+            new RadioListItem("Data-collection status CHANGE followed by CONTINUED CONTACT with participant (Box A)", "1"),
+            new RadioListItem("Change followed by NO FURTHER CONTACT with participant (Box B)", "0")
         };
 
         public List<RadioListItem> ProtocolItems { get; } = new List<RadioListItem>
@@ -50,13 +51,13 @@ namespace UDS.Net.Forms.Pages.Milestones
         public List<RadioListItem> DropReasonItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("ADC decision or protocol", "1"),
-            new RadioListItem("Subject or co-paprticipant asked to be dropped", "2")
+            new RadioListItem("Participant or co-paprticipant asked to be dropped", "2")
         };
 
         public List<RadioListItem> FTLDREASItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("ADC decision", "1"),
-            new RadioListItem("Subject/informant refused", "2"),
+            new RadioListItem("Participant/informant refused", "2"),
             new RadioListItem("Informant not available", "3"),
             new RadioListItem("Other, specify below", "4")
         };
@@ -168,20 +169,9 @@ namespace UDS.Net.Forms.Pages.Milestones
         {
             if (milestone.MilestoneType == 1)
             {
-                if (milestone.CHANGEMO == null)
-                {
-                    ModelState.AddModelError("Milestone.CHANGEMO", "Must have a value when indicating continued contact");
-                }
-
-                if (milestone.CHANGEDY == null)
-                {
-                    ModelState.AddModelError("Milestone.CHANGEDY", "Must have a value when indicating continued contact");
-                }
-
-                if (milestone.CHANGEYR == null)
-                {
-                    ModelState.AddModelError("Milestone.CHANGEYR", "Must have a value when indicating continued contact");
-                }
+                ValidateMonth(milestone.CHANGEMO, "Milestone.CHANGEMO");
+                ValidateDay(milestone.CHANGEDY, "Milestone.CHANGEDY");
+                ValidateYear(milestone.CHANGEYR, "Milestone.CHANGEYR");
 
                 if (milestone.PROTOCOL == null)
                 {
@@ -200,20 +190,9 @@ namespace UDS.Net.Forms.Pages.Milestones
 
                 if (milestone.RENURSE == true)
                 {
-                    if (milestone.NURSEMO == null)
-                    {
-                        ModelState.AddModelError("Milestone.NURSEMO", "Must have a value if subject has entered a nursing home");
-                    }
-
-                    if (milestone.NURSEDY == null)
-                    {
-                        ModelState.AddModelError("Milestone.NURSEDY", "Must have a value if subject has entered a nursing home");
-                    }
-
-                    if (milestone.NURSEYR == null)
-                    {
-                        ModelState.AddModelError("Milestone.NURSEYR", "Must have a value if subject has entered a nursing home");
-                    }
+                    ValidateMonth(milestone.NURSEMO, "Milestone.NURSEMO");
+                    ValidateDay(milestone.NURSEDY, "Milestone.NURSEDY");
+                    ValidateYear(milestone.NURSEYR, "Milestone.NURSEYR");
                 }
 
                 if (milestone.FTLDREAS == 4 && String.IsNullOrEmpty(milestone.FTLDREAX))
@@ -232,20 +211,9 @@ namespace UDS.Net.Forms.Pages.Milestones
 
                 if (milestone.DECEASED == true)
                 {
-                    if (milestone.DEATHMO == null)
-                    {
-                        ModelState.AddModelError("Milestone.DEATHMO", "Must have a value");
-                    }
-
-                    if (milestone.DEATHDY == null)
-                    {
-                        ModelState.AddModelError("Milestone.DEATHDY", "Must have a value");
-                    }
-
-                    if (milestone.DEATHYR == null)
-                    {
-                        ModelState.AddModelError("Milestone.DEATHYR", "Must have a value");
-                    }
+                    ValidateMonth(milestone.DEATHMO, "Milestone.DEATHMO");
+                    ValidateDay(milestone.DEATHDY, "Milestone.DEATHDY");
+                    ValidateYear(milestone.DEATHYR, "Milestone.DEATHYR");
 
                     if (milestone.AUTOPSY == null)
                     {
@@ -255,26 +223,54 @@ namespace UDS.Net.Forms.Pages.Milestones
 
                 if (milestone.DISCONT == true)
                 {
-                    if (milestone.DISCMO == null)
-                    {
-                        ModelState.AddModelError("Milestone.DISCMO", "Must have a value");
-                    }
-
-                    if (milestone.DISCDAY == null)
-                    {
-                        ModelState.AddModelError("Milestone.DISCDAY", "Must have a value");
-                    }
-
-                    if (milestone.DISCYR == null)
-                    {
-                        ModelState.AddModelError("Milestone.DISCYR", "Must have a value");
-                    }
+                    ValidateMonth(milestone.DISCMO, "Milestone.DISCMO");
+                    ValidateDay(milestone.DISCDAY, "Milestone.DISCDAY");
+                    ValidateYear(milestone.DISCYR, "Milestone.DISCYR");
 
                     if (milestone.DROPREAS == null)
                     {
                         ModelState.AddModelError("Milestone.DROPREAS", "Must have a value");
                     }
                 }
+            }
+        }
+
+        private void ValidateMonth(int? monthValue, string property)
+        {
+            if (monthValue == null)
+            {
+                ModelState.AddModelError(property, "Must have a value for month");
+            }
+
+            if(monthValue < 1 || monthValue > 12 && monthValue != 99)
+            {
+                ModelState.AddModelError(property, "Must have a value of 1 - 12 or 99 for month");
+            }
+        }
+
+        private void ValidateDay(int? dayValue, string property)
+        {
+            if (dayValue == null)
+            {
+                ModelState.AddModelError(property, "Must have a value for day");
+            }
+
+            if (dayValue < 1 || dayValue > 12 && dayValue != 99)
+            {
+                ModelState.AddModelError(property, "Must have a value of 1 - 31 or 99 for day");
+            }
+        }
+
+        private void ValidateYear(int? yearValue, string property)
+        {
+            if (yearValue == null)
+            {
+                ModelState.AddModelError(property, "Must have a value for year");
+            }
+
+            if (yearValue < 1000 || yearValue > 9999 && yearValue != 9999)
+            {
+                ModelState.AddModelError(property, "Must have a valid value or 9999 for year");
             }
         }
     }

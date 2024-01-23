@@ -8,12 +8,13 @@ class MilestoneTypeBehavior {
         let milestoneTypes = $("input[name='Milestone.MilestoneType']")
         let deceasedInput = $("#Milestone_DECEASED")
         let discontInput = $("#Milestone_DISCONT")
-    
+
         if ($(deceasedInput).is(':checked') || $(discontInput).is(':checked')) {
-            $(milestoneTypes[0]).prop("checked", true)
+            console.log('test')
+            $('#Milestone\\.MilestoneType\\[1\\]').prop("checked", true)
             this.DisableBoxA()
         } else {
-            $(milestoneTypes[1]).prop("checked", true)
+            $('#Milestone\\.MilestoneType\\[0\\]').prop("checked", true)
             this.DisableBoxB()
         }
     }
