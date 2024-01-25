@@ -69,7 +69,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIEnableAttribute("Milestone.ACONSENT")
+                        new UIDisableAttribute("Milestone.ACONSENT")
                     }
                 }
             },
@@ -87,7 +87,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIDisableAttribute("Milestone.ACONSENT")
+                        new UIEnableAttribute("Milestone.ACONSENT")
                     }
                 }
             }
