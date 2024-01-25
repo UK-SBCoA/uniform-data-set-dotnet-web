@@ -244,7 +244,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             if (monthValue < 1 || monthValue > 12 && monthValue != 99)
             {
-                ModelState.AddModelError(property, "Must have a value of 1 - 12 or 99 for month");
+                ModelState.AddModelError(property, "Provide a valid month between 1 - 12 or 99");
             }
         }
 
@@ -257,7 +257,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             if (dayValue < 1 || dayValue > 12 && dayValue != 99)
             {
-                ModelState.AddModelError(property, "Must have a value of 1 - 31 or 99 for day");
+                ModelState.AddModelError(property, "Provide a valid day between 1 - 31 or 99");
             }
         }
 
@@ -268,9 +268,9 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ModelState.AddModelError(property, "Must have a value for year");
             }
 
-            if (yearValue < 1000 || yearValue > 9999 && yearValue != 9999)
+            if (yearValue < 2015 || yearValue > 2999)
             {
-                ModelState.AddModelError(property, "Must have a valid value or 9999 for year");
+                ModelState.AddModelError(property, "Provide a valid year between 2015 - 2999");
             }
         }
     }
