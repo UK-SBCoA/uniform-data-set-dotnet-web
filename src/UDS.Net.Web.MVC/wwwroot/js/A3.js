@@ -9,59 +9,36 @@
     initialize() {
         this.updateRows();
         $(`#${this.inputId}`).on('change', () => this.updateRows());
-
-        for (let i = 1; i <= this.maxRows; i++) {
-            const neruoHasValue = this.GetRow(i).find('input[name$=PrimaryNeurologicalProblemPsychiatricCondition]').first().val();
-            if (neruoHasValue && neruoHasValue != 8 && neruoHasValue != 9) {
-                this.EnableNeuroControls(i);
-            } else {
-                this.DisableNeuroControls(i);
-            }
-            this.AddNeruoPsychInputWatch(i);
+        for (let i = 0; i < this.maxRows; i++) {
+            this.updateNeuroControls(i);
+            this.addNeuroChangeWatch(i);
         }
     }
 
     updateRows() {
         const rowCount = parseInt($(`#${this.inputId}`).val(), 10) || 0;
         for (let i = 0; i < this.maxRows; i++) {
-            if (i < rowCount) {
-                $(`#${this.tableId}_${i}__MOB`).prop('disabled', false);
-                $(`#${this.tableId}_${i}__YOB`).prop('disabled', false);
-                $(`#${this.tableId}_${i}__AGD`).prop('disabled', false);
-                $(`#${this.tableId}_${i}__NEU`).prop('disabled', false);
-            } else {
-                $(`#${this.tableId}_${i}__MOB`).prop('disabled', true);
-                $(`#${this.tableId}_${i}__YOB`).prop('disabled', true);
-                $(`#${this.tableId}_${i}__AGD`).prop('disabled', true);
-                $(`#${this.tableId}_${i}__NEU`).prop('disabled', true);
-            }
+            const enabled = i < rowCount;
+            $(`#${this.tableId}_${i}__MOB`).prop('disabled', !enabled);
+            $(`#${this.tableId}_${i}__YOB`).prop('disabled', !enabled);
+            $(`#${this.tableId}_${i}__AGD`).prop('disabled', !enabled);
+            $(`#${this.tableId}_${i}__NEU`).prop('disabled', !enabled);
+            this.updateNeuroControls(i);
         }
     }
 
-    EnableNeuroControls(relationshipIndex) {
-        const jRow = this.GetRow(relationshipIndex);
-        jRow.find('input[data-neurocon]').prop('readonly', false);
+    updateNeuroControls(index) {
+        const neuValue = parseInt($(`#${this.tableId}_${index}__NEU`).val(), 10);
+        const isEnabled = neuValue >= 1 && neuValue <= 7;
+        $(`#${this.tableId}_${index}__PDX`).prop('disabled', !isEnabled);
+        $(`#${this.tableId}_${index}__MOE`).prop('disabled', !isEnabled);
+        $(`#${this.tableId}_${index}__AGO`).prop('disabled', !isEnabled);
     }
 
-    DisableNeuroControls(relationshipIndex) {
-        const jRow = this.GetRow(relationshipIndex);
-        jRow.find('input[data-neurocon]').prop('readonly', true);
-    }
-
-    AddNeruoPsychInputWatch(relationshipIndex) {
-        const jRow = this.GetRow(relationshipIndex);
-        const neuroWatch = jRow.find('input[name$="PrimaryNeurologicalProblemPsychiatricCondition"]').first();
-        neuroWatch.on('keydown keyup', (events) => {
-            if ($(events.target).val() == '' || $(events.target).val() == 8 || $(events.target).val() == 9) {
-                this.DisableNeuroControls(relationshipIndex);
-            } else {
-                this.EnableNeuroControls(relationshipIndex);
-            }
+    addNeuroChangeWatch(index) {
+        $(`#${this.tableId}_${index}__NEU`).change(() => {
+            this.updateNeuroControls(index);
         });
-    }
-
-    GetRow(index) {
-        return $(`#${this.tableId}_Row${index}`);
     }
 }
 
