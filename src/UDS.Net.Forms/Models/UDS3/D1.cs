@@ -11,10 +11,13 @@ namespace UDS.Net.Forms.Models.UDS3
     /// </summary>
     public class D1 : FormModel
     {
+        #region Section 1  Cognitive and behavioral status
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
+        [RequiredOnComplete]
         public int? DXMETHOD { get; set; }
 
         [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose I or dementia due to FTLD or LBD)?")]
+        [RequiredOnComplete]
         public int? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
@@ -49,6 +52,20 @@ namespace UDS.Net.Forms.Models.UDS3
             get
             {
                 if (AMNDEM || PCA || PPASYN || FTDSYN || LBDSYN || NAMNDEM)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? DementiaSyndromeNotIndicated
+        {
+            get
+            {
+                if (MCIAMEM || MCIAPLUS || MCINON1 || MCINON2 || IMPNOMCI)
                 {
                     return true;
                 }
@@ -188,37 +205,50 @@ namespace UDS.Net.Forms.Models.UDS3
         [Display(Name = "Cognitively impaired, not MCI")]
         public bool IMPNOMCI { get; set; }
 
+        #endregion
+        #region Section 2   Biomarkers, imaging and genetics
         [Display(Name = "Abnormally elevated amyloid on PET")]
+        [RequiredOnComplete]
         public int? AMYLPET { get; set; }
 
         [Display(Name = "Abnormally low amyloid in CSF")]
+        [RequiredOnComplete]
         public int? AMYLCSF { get; set; }
 
         [Display(Name = "FDG-PET pattern of AD")]
+        [RequiredOnComplete]
         public int? FDGAD { get; set; }
 
         [Display(Name = "Hippocampal atrophy")]
+        [RequiredOnComplete]
         public int? HIPPATR { get; set; }
 
         [Display(Name = "Tau PET evidence for AD")]
+        [RequiredOnComplete]
         public int? TAUPETAD { get; set; }
 
         [Display(Name = "Abnormally elevated CSF tau or ptau")]
+        [RequiredOnComplete]
         public int? CSFTAU { get; set; }
 
         [Display(Name = "FDG-PET evidence for frontal or anterior temporal hypometabolism for FTLD")]
+        [RequiredOnComplete]
         public int? FDGFTLD { get; set; }
 
         [Display(Name = "Tau PET evidence for FTLD")]
+        [RequiredOnComplete]
         public int? TPETFTLD { get; set; }
 
         [Display(Name = "Structural MR evidence for frontal or anterior temporal atrophy for FTLD")]
+        [RequiredOnComplete]
         public int? MRFTLD { get; set; }
 
         [Display(Name = "Dopamine transporter scan (DATscan) evidence for Lewy body disease")]
+        [RequiredOnComplete]
         public int? DATSCAN { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [RequiredOnComplete]
         public int? OTHBIOM { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -228,30 +258,39 @@ namespace UDS.Net.Forms.Models.UDS3
         public string? OTHBIOMX { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
+        [RequiredOnComplete]
         public int? IMAGLINF { get; set; }
 
         [Display(Name = "Lacunar infarct(s)")]
+        [RequiredOnComplete]
         public int? IMAGLAC { get; set; }
 
         [Display(Name = "Macrohemorrhage(s)")]
+        [RequiredOnComplete]
         public int? IMAGMACH { get; set; }
 
         [Display(Name = "Microhemorrhage(s)")]
+        [RequiredOnComplete]
         public int? IMAGMICH { get; set; }
 
         [Display(Name = "Moderate white-matter hyperintensity (CHS score 5–6)")]
+        [RequiredOnComplete]
         public int? IMAGMWMH { get; set; }
 
         [Display(Name = "Extensive white-matter hyperintensity (CHS score 7–8+)")]
+        [RequiredOnComplete]
         public int? IMAGEWMH { get; set; }
 
         [Display(Name = "Does the subject have a dominantly inherited AD mutation (PSEN1, PSEN2, APP)")]
+        [RequiredOnComplete]
         public int? ADMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary FTLD mutation (e.g., GRN, VCP, TARBP, FUS, C9orf72, CHMP2B, MAPT)?")]
+        [RequiredOnComplete]
         public int? FTLDMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary mutation other than an AD or FTLD mutation?")]
+        [RequiredOnComplete]
         public int? OTHMUT { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -260,18 +299,380 @@ namespace UDS.Net.Forms.Models.UDS3
         [ProhibitedCharacters]
         public string? OTHMUTX { get; set; }
 
+        #endregion
+
+        #region One Primary Diagnosis Allowed Questions 11a-39a
+        [RequiredOnComplete(ErrorMessage = "In Section 3, only ONE diagnosis should be indicated as primary.")]
+        [NotMapped]
+        public bool? OnePrimaryDiagnosisAllowed
+        {
+            get
+            {
+                int counter = 0;
+
+                if (ALZDISIF.HasValue && ALZDISIF == 1)
+                {
+                    counter++;
+                }
+                if (LBDIF.HasValue && LBDIF == 1)
+                {
+                    counter++;
+                }
+
+                if (MSAIF.HasValue && MSAIF == 1)
+                {
+                    counter++;
+                }
+                if (PSPIF.HasValue && PSPIF == 1)
+                {
+                    counter++;
+                }
+                if (CORTIF.HasValue && CORTIF == 1)
+                {
+                    counter++;
+                }
+
+                if (FTLDMOIF.HasValue && FTLDMOIF == 1)
+                {
+                    counter++;
+                }
+                if (FTLDNOIF.HasValue && FTLDNOIF == 1)
+                {
+                    counter++;
+                }
+                if (CVDIF.HasValue && CVDIF == 1)
+                {
+                    counter++;
+                }
+                if (ESSTREIF.HasValue && ESSTREIF == 1)
+                {
+                    counter++;
+                }
+                if (DOWNSIF.HasValue && DOWNSIF == 1)
+                {
+                    counter++;
+                }
+                if (HUNTIF.HasValue && HUNTIF == 1)
+                {
+                    counter++;
+                }
+
+                if (PRIONIF.HasValue && PRIONIF == 1)
+                {
+                    counter++;
+                }
+
+                {
+                    if (BRNINJIF.HasValue && BRNINJIF == 1)
+                        counter++;
+                }
+
+                if (HYCEPHIF.HasValue && HYCEPHIF == 1)
+                {
+                    counter++;
+                }
+
+                if (EPILEPIF.HasValue && EPILEPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (NEOPIF.HasValue && NEOPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (HIVIF.HasValue && HIVIF == 1)
+                {
+                    counter++;
+                }
+
+                if (OTHCOGIF.HasValue && OTHCOGIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DEPIF.HasValue && DEPIF == 1)
+                {
+                    counter++;
+                }
+
+                if (BIPOLDIF.HasValue && BIPOLDIF == 1)
+                {
+                    counter++;
+                }
+
+                if (SCHIZOIF.HasValue && SCHIZOIF == 1)
+                {
+                    counter++;
+                }
+
+                if (ANXIETIF.HasValue && ANXIETIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DELIRIF.HasValue && DELIRIF == 1)
+                {
+                    counter++;
+                }
+
+                if (PTSDDXIF.HasValue && PTSDDXIF == 1)
+                {
+                    counter++;
+                }
+
+                if (OTHPSYIF.HasValue && OTHPSYIF == 1)
+                {
+                    counter++;
+                }
+
+                if (ALCDEMIF.HasValue && ALCDEMIF == 1)
+                {
+                    counter++;
+                }
+
+                if (IMPSUBIF.HasValue && IMPSUBIF == 1)
+                {
+                    counter++;
+                }
+
+                if (DYSILLIF.HasValue && DYSILLIF == 1)
+                {
+                    counter++;
+                }
+
+                if (MEDSIF.HasValue && MEDSIF == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTHIF.HasValue && COGOTHIF == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTH2F.HasValue && COGOTH2F == 1)
+                {
+                    counter++;
+                }
+
+                if (COGOTH3F.HasValue && COGOTH3F == 1)
+                {
+                    counter++;
+                }
+
+
+                if (counter == 1)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    if (NORMCOG.HasValue && NORMCOG == 1 && counter == 0)
+                    {
+                        return true;
+                    }
+                    return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region At Least One Or More Diagnoses Present Questions 11-39
+
+        [RequiredOnComplete(ErrorMessage = "In Section 3, if the particpant does not have normal cognition, at least ONE diagnosis should be indicated as present.")]
+        [NotMapped]
+        public bool? OneDiagnosesPresent
+        {
+            get
+            {
+                int counter = 0;
+
+                if (ALZDIS == true)
+                {
+                    counter++;
+                }
+                if (LBDIS == true)
+                {
+                    counter++;
+                }
+
+                if (MSA == true)
+                {
+                    counter++;
+                }
+                if (PSP == true)
+                {
+                    counter++;
+                }
+                if (CORT == true)
+                {
+                    counter++;
+                }
+
+                if (FTLDMO == true)
+                {
+                    counter++;
+                }
+                if (FTLDNOS == true)
+                {
+                    counter++;
+                }
+                if (CVD == true)
+                {
+                    counter++;
+                }
+                if (ESSTREM == true)
+                {
+                    counter++;
+                }
+                if (DOWNS == true)
+                {
+                    counter++;
+                }
+                if (HUNT == true)
+                {
+                    counter++;
+                }
+
+                if (PRION == true)
+                {
+                    counter++;
+                }
+
+                if (BRNINJ == true)
+                {
+                    counter++;
+                }
+
+                if (HYCEPH == true)
+                {
+                    counter++;
+                }
+
+                if (EPILEP == true)
+                {
+                    counter++;
+                }
+
+                if (NEOP == true)
+                {
+                    counter++;
+                }
+
+                if (HIV == true)
+                {
+                    counter++;
+                }
+
+                if (OTHCOG == true)
+                {
+                    counter++;
+                }
+
+                if (DEP == true)
+                {
+                    counter++;
+                }
+
+                if (BIPOLDX == true)
+                {
+                    counter++;
+                }
+
+                if (SCHIZOP == true)
+                {
+                    counter++;
+                }
+
+                if (ANXIET == true)
+                {
+                    counter++;
+                }
+
+                if (DELIR == true)
+                {
+                    counter++;
+                }
+
+                if (PTSDDX == true)
+                {
+                    counter++;
+                }
+
+                if (OTHPSY == true)
+                {
+                    counter++;
+                }
+
+                if (ALCDEM == true)
+                {
+                    counter++;
+                }
+
+                if (IMPSUB == true)
+                {
+                    counter++;
+                }
+
+                if (DYSILL == true)
+                {
+                    counter++;
+                }
+
+                if (MEDS == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH2 == true)
+                {
+                    counter++;
+                }
+
+                if (COGOTH3 == true)
+                {
+                    counter++;
+                }
+
+                if (counter >= 1)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    if (NORMCOG.HasValue && NORMCOG == 1)
+                    {
+                        return true;
+                    }
+                    return null;
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region  Section 3 Etiologic Diagnoses
         [Display(Name = "Alzheimer's disease")]
         public bool ALZDIS { get; set; }
 
         [Display(Name = "Alzheimer’s disease, primary or contributing")]
-        [RequiredIf(nameof(ALZDIS), "True", ErrorMessage = "Indicate diagnosis for Alzheimer's disease.")]
         public int? ALZDISIF { get; set; }
 
         [Display(Name = "Lewy body disease")]
         public bool LBDIS { get; set; }
 
         [Display(Name = "Lewy body disease, primary or contributing")]
-        [RequiredIf(nameof(LBDIS), "True", ErrorMessage = "Indicate diagnosis for Lewy body disease.")]
         public int? LBDIF { get; set; }
 
         [Display(Name = "Parkinson's disease")]
@@ -281,35 +682,30 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool MSA { get; set; }
 
         [Display(Name = "Multiple system atrophy nprimary or contributing")]
-        [RequiredIf(nameof(MSA), "True", ErrorMessage = "Indicate diagnosis for Multiple system atrophy.")]
         public int? MSAIF { get; set; }
 
         [Display(Name = "Progressive supranuclear palsy (PSP)")]
         public bool PSP { get; set; }
 
         [Display(Name = "Progressive supranuclear palsy (PSP), primary or contributing")]
-        [RequiredIf(nameof(PSP), "True", ErrorMessage = "Indicate diagnosis for Progressive supranuclear palsy (PSP).")]
         public int? PSPIF { get; set; }
 
         [Display(Name = "Corticobasal degeneration (CBD)")]
         public bool CORT { get; set; }
 
         [Display(Name = "Corticobasal degeneration (CBD), primary or contributing")]
-        [RequiredIf(nameof(CORT), "True", ErrorMessage = "Indicate diagnosis for Corticobasal degeneration (CBD).")]
         public int? CORTIF { get; set; }
 
         [Display(Name = "FTLD with motor neuron disease")]
         public bool FTLDMO { get; set; }
 
         [Display(Name = "FTLD with motor neuron disease, primary or contributing")]
-        [RequiredIf(nameof(FTLDMO), "True", ErrorMessage = "Indicate diagnosis for FTLD with motor neuron disease.")]
         public int? FTLDMOIF { get; set; }
 
         [Display(Name = "FTLD NOS")]
         public bool FTLDNOS { get; set; }
 
         [Display(Name = "FTLD NOS, primary or contributing")]
-        [RequiredIf(nameof(FTLDNOS), "True", ErrorMessage = "Indicate diagnosis for FTLD NOS.")]
         public int? FTLDNOIF { get; set; }
 
         [Display(Name = "If FTLD (Questions 14a – 14d) is Present, specify FTLD subtype")]
@@ -329,7 +725,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool CVD { get; set; }
 
         [Display(Name = "Vascular brain injury, primary or contributing")]
-        [RequiredIf(nameof(CVD), "True", ErrorMessage = "Indicate diagnosis for Vascular brain injury.")]
         public int? CVDIF { get; set; }
 
         [Display(Name = "Previous symptomatic stroke?")]
@@ -356,35 +751,30 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool ESSTREM { get; set; }
 
         [Display(Name = "Essential tremor, primary or contributing")]
-        [RequiredIf(nameof(ESSTREM), "True", ErrorMessage = "Indicate diagnosis for Essential tremor.")]
         public int? ESSTREIF { get; set; }
 
         [Display(Name = "Down syndrome")]
         public bool DOWNS { get; set; }
 
         [Display(Name = "Down syndrome, primary or contributing")]
-        [RequiredIf(nameof(DOWNS), "True", ErrorMessage = "Indicate diagnosis for Down syndrome.")]
         public int? DOWNSIF { get; set; }
 
         [Display(Name = "Huntington's disease")]
         public bool HUNT { get; set; }
 
         [Display(Name = "Huntington’s disease, primary or contributing")]
-        [RequiredIf(nameof(HUNT), "True", ErrorMessage = "Indicate diagnosis for Huntington's disease.")]
         public int? HUNTIF { get; set; }
 
         [Display(Name = "Prion disease (CJD, other)")]
         public bool PRION { get; set; }
 
         [Display(Name = "Prion disease, primary or contributing")]
-        [RequiredIf(nameof(PRION), "True", ErrorMessage = "Indicate diagnosis for Prion disease (CJD, other).")]
         public int? PRIONIF { get; set; }
 
         [Display(Name = "Traumatic brain injury")]
         public bool BRNINJ { get; set; }
 
         [Display(Name = "Traumatic brain injury, primary or contributing")]
-        [RequiredIf(nameof(BRNINJ), "True", ErrorMessage = "Indicate diagnosis for Traumatic brain injury.")]
         public int? BRNINJIF { get; set; }
 
         [Display(Name = "If Present, does the subject have symptoms consistent with chronic traumatic encephalopathy?")]
@@ -395,21 +785,18 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool HYCEPH { get; set; }
 
         [Display(Name = "Normal-pressure hydrocephalus, primary or contributing")]
-        [RequiredIf(nameof(HYCEPH), "True", ErrorMessage = "Indicate diagnosis for Normal-pressure hydrocephalus.")]
         public int? HYCEPHIF { get; set; }
 
         [Display(Name = "Epilepsy")]
         public bool EPILEP { get; set; }
 
         [Display(Name = "Epilepsy, primary or contributing")]
-        [RequiredIf(nameof(EPILEP), "True", ErrorMessage = "Indicate diagnosis for Epilepsy.")]
         public int? EPILEPIF { get; set; }
 
         [Display(Name = "CNS neoplasm")]
         public bool NEOP { get; set; }
 
         [Display(Name = "CNS neoplasm, primary or contributing")]
-        [RequiredIf(nameof(NEOP), "True", ErrorMessage = "Indicate diagnosis for CNS neoplasm.")]
         public int? NEOPIF { get; set; }
 
         [Display(Name = "CNS neoplasm, benign or malignant?")]
@@ -420,14 +807,12 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool HIV { get; set; }
 
         [Display(Name = "Human immunodeficiency virus (HIV), primary or contributing")]
-        [RequiredIf(nameof(HIV), "True", ErrorMessage = "Indicate diagnosis for Human immunodeficiency virus (HIV).")]
         public int? HIVIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above")]
         public bool OTHCOG { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, or infectious conditions not listed above, primary or contributing")]
-        [RequiredIf(nameof(OTHCOG), "True", ErrorMessage = "Indicate diagnosis for Other cognitive impairment.")]
         public int? OTHCOGIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -440,7 +825,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool DEP { get; set; }
 
         [Display(Name = "Active depression, primary or contributing")]
-        [RequiredIf(nameof(DEP), "True", ErrorMessage = "Indicate diagnosis for Active depression.")]
         public int? DEPIF { get; set; }
 
         [Display(Name = "If Present, select one")]
@@ -451,42 +835,36 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool BIPOLDX { get; set; }
 
         [Display(Name = "Bipolar disorder, primary or contributing")]
-        [RequiredIf(nameof(BIPOLDX), "True", ErrorMessage = "Indicate diagnosis for Bipolar disorder.")]
         public int? BIPOLDIF { get; set; }
 
         [Display(Name = "Schizophrenia or other psychosis")]
         public bool SCHIZOP { get; set; }
 
         [Display(Name = "Schizophrenia or other psychosis, primary or contributing")]
-        [RequiredIf(nameof(SCHIZOP), "True", ErrorMessage = "Indicate diagnosis for Schizophrenia or other psychosis.")]
         public int? SCHIZOIF { get; set; }
 
         [Display(Name = "Anxiety disorder")]
         public bool ANXIET { get; set; }
 
         [Display(Name = "Anxiety disorder, primary or contributing")]
-        [RequiredIf(nameof(ANXIET), "True", ErrorMessage = "Indicate diagnosis for Anxiety disorder.")]
         public int? ANXIETIF { get; set; }
 
         [Display(Name = "Delirium")]
         public bool DELIR { get; set; }
 
         [Display(Name = "Delirium, primary or contributing")]
-        [RequiredIf(nameof(DELIR), "True", ErrorMessage = "Indicate diagnosis for Delirium.")]
         public int? DELIRIF { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
         public bool PTSDDX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD), primary or contributing")]
-        [RequiredIf(nameof(PTSDDX), "True", ErrorMessage = "Indicate diagnosis for Post-traumatic stress disorder (PTSD).")]
         public int? PTSDDXIF { get; set; }
 
         [Display(Name = "Other psychiatric disease")]
         public bool OTHPSY { get; set; }
 
         [Display(Name = "Other psychiatric disease, primary or contributing")]
-        [RequiredIf(nameof(OTHPSY), "True", ErrorMessage = "Indicate diagnosis for Other psychiatric disease.")]
         public int? OTHPSYIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -499,7 +877,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool ALCDEM { get; set; }
 
         [Display(Name = "Cognitive impairment due to alcohol abuse, primary or contributing")]
-        [RequiredIf(nameof(ALCDEM), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment due to alcohol abuse.")]
         public int? ALCDEMIF { get; set; }
 
         [Display(Name = "Current alcohol abuse")]
@@ -510,28 +887,24 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool IMPSUB { get; set; }
 
         [Display(Name = "Cognitive impairment due to other substance abuse, primary or contributing")]
-        [RequiredIf(nameof(IMPSUB), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment due to other substance abuse.")]
         public int? IMPSUBIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to systemic disease/medical illness (as indicated on Form D2)")]
         public bool DYSILL { get; set; }
 
         [Display(Name = "Cognitive impairment due to systemic disease/nmedical illness, primary or contributing")]
-        [RequiredIf(nameof(DYSILL), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment due to systemic disease/medical illness (as indicated on Form D2).")]
         public int? DYSILLIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications")]
         public bool MEDS { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications, primary or contributing")]
-        [RequiredIf(nameof(MEDS), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment due to medications.")]
         public int? MEDSIF { get; set; }
 
         [Display(Name = "Cognitive impairment NOS")]
         public bool COGOTH { get; set; }
 
         [Display(Name = "Cognitive impairment NOS, primary or contributing")]
-        [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         public int? COGOTHIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -544,7 +917,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool COGOTH2 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS, primary or contributing")]
-        [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         public int? COGOTH2F { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -557,7 +929,6 @@ namespace UDS.Net.Forms.Models.UDS3
         public bool COGOTH3 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS, primary or contributing")]
-        [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Indicate diagnosis for Cognitive impairment NOS.")]
         public int? COGOTH3F { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -566,6 +937,7 @@ namespace UDS.Net.Forms.Models.UDS3
         [ProhibitedCharacters]
         public string? COGOTH3X { get; set; }
 
+        #endregion
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))

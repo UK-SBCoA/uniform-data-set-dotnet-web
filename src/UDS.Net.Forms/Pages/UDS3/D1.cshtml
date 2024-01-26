@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS3.D1Model
 @{
     Layout = "_LayoutForm";
@@ -46,7 +46,7 @@
         </dl>
     </div>
 </div>
-<div>
+<div data-controller="fancycheckboxes">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="D1.DXMETHOD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.DXMETHOD)</label>
@@ -69,7 +69,7 @@
             <label asp-for="D1.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.NORMCOG)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.NORMCOG"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.SimpleNoYesListItems" ui-behaviors="Model.NORMCOGBehavior"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.NORMCOG)" for="@Model.D1.NORMCOG" items="Model.NORMCOGListItems" ui-behaviors="Model.NORMCOGUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.NORMCOG"></span>
             </div>
         </div>
@@ -110,7 +110,7 @@
             <label asp-for="D1.DEMENTED"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.DEMENTED)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.DEMENTED"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.DEMENTED)" for="@Model.D1.DEMENTED" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DEMENTEDBehavior"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.DEMENTED)" for="@Model.D1.DEMENTED" items="Model.DEMENTEDListItems" ui-behaviors="Model.DEMENTEDBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.DEMENTED"></span>
             </div>
         </div>
@@ -320,7 +320,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCIAMEM", Model.D1.MCIAMEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_fancycheckboxes_target= "checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAMEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -345,7 +345,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCIAPLUS", Model.D1.MCIAPLUS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIAPLAN\", \"D1.MCIAPATT\",\"D1.MCIAPEX\",\"D1.MCIAPVIS\"]", data_fancycheckboxes_target= "checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCIAPLUS" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -413,7 +413,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCINON1", Model.D1.MCINON1, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN1LAN\" , \"D1.MCIN1ATT\" , \"D1.MCIN1EX\" ,\"D1.MCIN1VIS\" ]", data_fancycheckboxes_target= "checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON1" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -481,7 +481,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MCINON2", Model.D1.MCINON2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MCIN2LAN\" , \"D1.MCIN2ATT\" , \"D1.MCIN2EX\" ,\"D1.MCIN2VIS\" ]", data_fancycheckboxes_target= "checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_MCINON2" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -549,7 +549,7 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.IMPNOMCI", Model.D1.IMPNOMCI, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.IMPNOMCI", Model.D1.IMPNOMCI, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_fancycheckboxes_target= "checkbox" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="D1_IMPNOMCI" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -677,13 +677,12 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.OTHBIOM"></span>
 
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHBIOM)" for="@Model.D1.OTHBIOM" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHBIOM)" for="@Model.D1.OTHBIOM" items="Model.SimpleNoYesListItems" ui-behaviors="Model.OTHBIOMUIBehavior"></table-cell-radio-buttons>
                     <td></td>
-                </tr>
-                <tr>
+
                     <td colspan="4">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="D1.OTHBIOMX">@Html.DisplayNameFor(m => m.D1.OTHBIOMX)</label>
+                            <label asp-for="D1.OTHBIOMX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1.OTHBIOMX)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.OTHBIOMX"></p>
                                 <input asp-for="@Model.D1.OTHBIOMX" />
@@ -783,12 +782,12 @@
             <label asp-for="D1.OTHMUT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.OTHMUT)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="D1.OTHMUT"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1.OTHMUT)" for="@Model.D1.OTHMUT" items="Model.FindingsListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1.OTHMUT)" for="@Model.D1.OTHMUT" items="Model.MutationListItems" ui-behaviors="Model.OTHMUTUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.OTHMUT"></span>
             </div>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="D1.OTHMUTX"></p>
-                <label asp-for="D1.OTHMUTX">@Html.DisplayNameFor(m => m.D1.OTHMUTX)</label>
+                <label asp-for="D1.OTHMUTX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1.OTHMUTX)</label>
                 <div class="mt-2">
                     <input asp-for="D1.OTHMUTX" />
                 </div>
@@ -836,7 +835,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ALZDIS", Model.D1.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ALZDIS", Model.D1.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ALZDISIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ALZDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -861,7 +860,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.LBDIS", Model.D1.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.LBDIS", Model.D1.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.LBDIF\", \"D1.PARK\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.LBDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -907,7 +906,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MSA", Model.D1.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MSA", Model.D1.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MSAIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.MSA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -919,7 +918,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MSAIF)" for="@Model.D1.MSAIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MSAIF)" for="@Model.D1.MSAIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
             </tbody>
             <tbody class="subcounterreset divide-y divide-gray-200">
@@ -941,7 +940,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PSP", Model.D1.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PSP", Model.D1.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.PSPIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PSP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -953,7 +952,7 @@
                     <td>
                         <span class="subsubcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PSPIF)" for="@Model.D1.PSPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PSPIF)" for="@Model.D1.PSPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subsubcounterreset">
                     <td>
@@ -968,7 +967,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.CORT", Model.D1.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.CORT", Model.D1.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.CORTIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.CORT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -980,7 +979,7 @@
                     <td>
                         <span class="subsubcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.CORTIF)" for="@Model.D1.CORTIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.CORTIF)" for="@Model.D1.CORTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subsubcounterreset">
                     <td>
@@ -995,7 +994,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.FTLDMO", Model.D1.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.FTLDMO", Model.D1.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.FTLDMOIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.FTLDMO)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1007,7 +1006,7 @@
                     <td>
                         <span class="subsubcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.FTLDMOIF)" for="@Model.D1.FTLDMOIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.FTLDMOIF)" for="@Model.D1.FTLDMOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subsubcounterreset">
                     <td>
@@ -1022,7 +1021,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.FTLDNOS", Model.D1.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.FTLDNOS", Model.D1.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.FTLDNOIF\",\"D1.FTLDSUBT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.FTLDNOS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1034,7 +1033,7 @@
                     <td>
                         <span class="subsubcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.FTLDNOIF)" for="@Model.D1.FTLDNOIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.FTLDNOIF)" for="@Model.D1.FTLDNOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subsubcounterreset">
                     <td colspan="6">
@@ -1042,7 +1041,7 @@
                             <label asp-for="D1.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1.FTLDSUBT)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="D1.FTLDSUBT"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.D1.FTLDSUBT)" for="@Model.D1.FTLDSUBT" items="Model.FTLDListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.D1.FTLDSUBT)" for="@Model.D1.FTLDSUBT" items="Model.FTLDListItems" ui-behaviors="Model.FTLDSUBTUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.FTLDSUBT"></span>
                             </div>
                             <div>
@@ -1059,7 +1058,7 @@
             <tbody class="subcounterreset">
                 <tr>
                     <td>
-                        <label asp-for="D1.CVD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.CVD)</label>
+                        <label asp-for="D1.CVD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1.CVD) <br /><br /> If significant vasular brain injury is asbsent, SKIP TO QUESTION 16 </label>
                         <p class="text-sm text-gray-500" asp-description-for="D1.CVD"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.CVDIF"></span>
                     </td>
@@ -1068,7 +1067,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.CVD", Model.D1.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.CVD", Model.D1.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.CVDIF\",\"D1.PREVSTK\",\"D1.STROKDEC\",\"D1.STKIMAG\",\"D1.INFNETW\",\"D1.INFWMH\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.CVD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1080,7 +1079,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.CVDIF)" for="@Model.D1.CVDIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.CVDIF)" for="@Model.D1.CVDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1088,7 +1087,7 @@
                             <label asp-for="D1.PREVSTK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1.PREVSTK)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1.PREVSTK"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.D1.PREVSTK)" for="@Model.D1.PREVSTK" items="Model.SimpleNoYesListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.D1.PREVSTK)" for="@Model.D1.PREVSTK" items="Model.PREVSTKListItems" ui-behaviors="Model.PREVSTKUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1.PREVSTK"></span>
                             </div>
                         </div>
@@ -1149,7 +1148,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ESSTREM", Model.D1.ESSTREM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ESSTREM", Model.D1.ESSTREM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ESSTREIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ESSTREM)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1161,7 +1160,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ESSTREIF)" for="@Model.D1.ESSTREIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ESSTREIF)" for="@Model.D1.ESSTREIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1174,7 +1173,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DOWNS", Model.D1.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DOWNS", Model.D1.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DOWNSIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DOWNS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1186,7 +1185,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DOWNSIF)" for="@Model.D1.DOWNSIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DOWNSIF)" for="@Model.D1.DOWNSIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1199,7 +1198,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HUNT", Model.D1.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HUNT", Model.D1.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.HUNTIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HUNT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1211,7 +1210,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HUNTIF)" for="@Model.D1.HUNTIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HUNTIF)" for="@Model.D1.HUNTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1224,7 +1223,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PRION", Model.D1.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PRION", Model.D1.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.PRIONIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PRION)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1236,7 +1235,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PRIONIF)" for="@Model.D1.PRIONIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PRIONIF)" for="@Model.D1.PRIONIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1249,7 +1248,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.BRNINJ", Model.D1.BRNINJ, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.BRNINJ", Model.D1.BRNINJ, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.BRNINJIF\",\"D1.BRNINCTE\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.BRNINJ)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1261,7 +1260,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BRNINJIF)" for="@Model.D1.BRNINJIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BRNINJIF)" for="@Model.D1.BRNINJIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1286,7 +1285,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HYCEPH", Model.D1.HYCEPH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HYCEPH", Model.D1.HYCEPH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.HYCEPHIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HYCEPH)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1298,7 +1297,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HYCEPHIF)" for="@Model.D1.HYCEPHIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HYCEPHIF)" for="@Model.D1.HYCEPHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1311,7 +1310,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.EPILEP", Model.D1.EPILEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.EPILEP", Model.D1.EPILEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.EPILEPIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.EPILEP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1323,7 +1322,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.EPILEPIF)" for="@Model.D1.EPILEPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.EPILEPIF)" for="@Model.D1.EPILEPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1336,7 +1335,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.NEOP", Model.D1.NEOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.NEOP", Model.D1.NEOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.NEOPIF\", \"D1.NEOPSTAT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.NEOP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1348,7 +1347,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.NEOPIF)" for="@Model.D1.NEOPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.NEOPIF)" for="@Model.D1.NEOPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1373,7 +1372,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.HIV", Model.D1.HIV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.HIV", Model.D1.HIV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.HIVIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.HIV)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1385,7 +1384,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HIVIF)" for="@Model.D1.HIVIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.HIVIF)" for="@Model.D1.HIVIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1398,7 +1397,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.OTHCOG", Model.D1.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.OTHCOGIF\",\"D1.OTHCOGX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.OTHCOG)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1410,7 +1409,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHCOGIF)" for="@Model.D1.OTHCOGIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHCOGIF)" for="@Model.D1.OTHCOGIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1435,7 +1434,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DEP", Model.D1.DEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DEP", Model.D1.DEP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DEPIF\" , \"D1.DEPTREAT\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DEP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1447,7 +1446,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DEPIF)" for="@Model.D1.DEPIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DEPIF)" for="@Model.D1.DEPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td colspan="6">
@@ -1472,7 +1471,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.BIPOLDX", Model.D1.BIPOLDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.BIPOLDX", Model.D1.BIPOLDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.BIPOLDIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.BIPOLDX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1484,7 +1483,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BIPOLDIF)" for="@Model.D1.BIPOLDIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.BIPOLDIF)" for="@Model.D1.BIPOLDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1497,7 +1496,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.SCHIZOP", Model.D1.SCHIZOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.SCHIZOP", Model.D1.SCHIZOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.SCHIZOIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.SCHIZOP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1522,7 +1521,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ANXIET", Model.D1.ANXIET, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ANXIET", Model.D1.ANXIET, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ANXIETIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ANXIET)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1547,7 +1546,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DELIR", Model.D1.DELIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DELIR", Model.D1.DELIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DELIRIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DELIR)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1559,7 +1558,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DELIRIF)" for="@Model.D1.DELIRIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DELIRIF)" for="@Model.D1.DELIRIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1572,7 +1571,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.PTSDDX", Model.D1.PTSDDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.PTSDDX", Model.D1.PTSDDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.PTSDDXIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.PTSDDX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1584,7 +1583,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PTSDDXIF)" for="@Model.D1.PTSDDXIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.PTSDDXIF)" for="@Model.D1.PTSDDXIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1597,7 +1596,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.OTHPSY", Model.D1.OTHPSY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.OTHPSY", Model.D1.OTHPSY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.OTHPSYIF\" , \"D1.OTHPSYX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.OTHPSY)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1609,7 +1608,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHPSYIF)" for="@Model.D1.OTHPSYIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.OTHPSYIF)" for="@Model.D1.OTHPSYIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1634,7 +1633,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.ALCDEM", Model.D1.ALCDEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.ALCDEM", Model.D1.ALCDEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.ALCDEMIF\" , \"D1.ALCABUSE\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.ALCDEM)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1646,7 +1645,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ALCDEMIF)" for="@Model.D1.ALCDEMIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.ALCDEMIF)" for="@Model.D1.ALCDEMIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1671,7 +1670,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.IMPSUB", Model.D1.IMPSUB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.IMPSUB", Model.D1.IMPSUB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.IMPSUBIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.IMPSUB)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1683,7 +1682,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.IMPSUBIF)" for="@Model.D1.IMPSUBIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.IMPSUBIF)" for="@Model.D1.IMPSUBIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1696,7 +1695,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.DYSILL", Model.D1.DYSILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.DYSILL", Model.D1.DYSILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.DYSILLIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.DYSILL)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1708,7 +1707,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DYSILLIF)" for="@Model.D1.DYSILLIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.DYSILLIF)" for="@Model.D1.DYSILLIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1721,7 +1720,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.MEDS", Model.D1.MEDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.MEDS", Model.D1.MEDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.MEDSIF\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.MEDS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1733,7 +1732,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MEDSIF)" for="@Model.D1.MEDSIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.MEDSIF)" for="@Model.D1.MEDSIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="subcounterreset">
                     <td>
@@ -1746,7 +1745,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH", Model.D1.COGOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH", Model.D1.COGOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTHIF\", \"D1.COGOTHX\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1758,7 +1757,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTHIF)" for="@Model.D1.COGOTHIF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTHIF)" for="@Model.D1.COGOTHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1785,7 +1784,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH2", Model.D1.COGOTH2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH2", Model.D1.COGOTH2, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTH2F\", \"D1.COGOTH2X\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH2)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1797,7 +1796,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH2F)" for="@Model.D1.COGOTH2F" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH2F)" for="@Model.D1.COGOTH2F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -1824,7 +1823,7 @@
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
                                     <div class="flex h-6 items-center">
-                                        @Html.CheckBox("D1.COGOTH3", Model.D1.COGOTH3, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("D1.COGOTH3", Model.D1.COGOTH3, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"D1.COGOTH3F\", \"D1.COGOTH3X\"]" })
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
                                         <label for="@Html.IdFor(m => m.D1.COGOTH3)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1836,7 +1835,7 @@
                     <td>
                         <span class="subcounter"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH3F)" for="@Model.D1.COGOTH3F" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.D1.COGOTH3F)" for="@Model.D1.COGOTH3F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="6">

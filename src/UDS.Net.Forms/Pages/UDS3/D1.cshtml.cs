@@ -25,19 +25,100 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Other (e.g., two or more clinicians or other informal group", "3")
         };
 
-        public Dictionary<string, UIBehavior> NORMCOGBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> NORMCOGUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A1.DEMENTED")
+                    new UIEnableAttribute("D1.DEMENTED"),
+                    new UIEnableAttribute("D1.AMNDEM"),
+                    new UIEnableAttribute("D1.PCA"),
+                    new UIEnableAttribute("D1.PPASYN"),
+                    new UIEnableAttribute("D1.FTDSYN"),
+                    new UIEnableAttribute("D1.LBDSYN"),
+                    new UIEnableAttribute("D1.NAMNDEM"),
+                    new UIEnableAttribute("D1.MCIAMEM"),
+                    new UIEnableAttribute("D1.MCIAPLUS"),
+                    new UIEnableAttribute("D1.MCIAPLAN"),
+                    new UIEnableAttribute("D1.MCIAPATT"),
+                    new UIEnableAttribute("D1.MCIAPEX"),
+                    new UIEnableAttribute("D1.MCIAPVIS"),
+                    new UIEnableAttribute("D1.MCINON1"),
+                    new UIEnableAttribute("D1.MCIN1LAN"),
+                    new UIEnableAttribute("D1.MCIN1ATT"),
+                    new UIEnableAttribute("D1.MCIN1EX"),
+                    new UIEnableAttribute("D1.MCIN1VIS"),
+                    new UIEnableAttribute("D1.MCINON2"),
+                    new UIEnableAttribute("D1.MCIN2LAN"),
+                    new UIEnableAttribute("D1.MCIN2ATT"),
+                    new UIEnableAttribute("D1.MCIN2EX"),
+                    new UIEnableAttribute("D1.MCIN2VIS"),
+                    new UIEnableAttribute("D1.IMPNOMCI")
+
                 },
                 InstructionalMessage = "Continue to question 3"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.HISPORX")
+                    new UIDisableAttribute("D1.DEMENTED"),
+                    new UIDisableAttribute("D1.AMNDEM"),
+                    new UIDisableAttribute("D1.PCA"),
+                    new UIDisableAttribute("D1.PPASYN"),
+                    new UIDisableAttribute("D1.FTDSYN"),
+                    new UIDisableAttribute("D1.LBDSYN"),
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.LBDSYN"),
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.MCIAMEM"),
+                    new UIDisableAttribute("D1.MCIAPLUS"),
+                    new UIDisableAttribute("D1.MCIAPLAN"),
+                    new UIDisableAttribute("D1.MCIAPATT"),
+                    new UIDisableAttribute("D1.MCIAPEX"),
+                    new UIDisableAttribute("D1.MCIAPVIS"),
+                    new UIDisableAttribute("D1.MCINON1"),
+                    new UIDisableAttribute("D1.MCIN1LAN"),
+                    new UIDisableAttribute("D1.MCIN1ATT"),
+                    new UIDisableAttribute("D1.MCIN1EX"),
+                    new UIDisableAttribute("D1.MCIN1VIS"),
+                    new UIDisableAttribute("D1.MCINON2"),
+                    new UIDisableAttribute("D1.MCIN2LAN"),
+                    new UIDisableAttribute("D1.MCIN2ATT"),
+                    new UIDisableAttribute("D1.MCIN2EX"),
+                    new UIDisableAttribute("D1.MCIN2VIS"),
+                    new UIDisableAttribute("D1.IMPNOMCI"),
+                    new UIDisableAttribute("D1.ALZDISIF"),
+                    new UIDisableAttribute("D1.LBDIF"),
+                    new UIDisableAttribute("D1.MSAIF"),
+                    new UIDisableAttribute("D1.PSPIF"),
+                    new UIDisableAttribute("D1.CORTIF"),
+                    new UIDisableAttribute("D1.FTLDMOIF"),
+                    new UIDisableAttribute("D1.FTLDNOIF"),
+                    new UIDisableAttribute("D1.CVDIF"),
+                    new UIDisableAttribute("D1.ESSTREIF"),
+                    new UIDisableAttribute("D1.DOWNSIF"),
+                    new UIDisableAttribute("D1.HUNTIF"),
+                    new UIDisableAttribute("D1.PRIONIF"),
+                    new UIDisableAttribute("D1.BRNINJIF"),
+                    new UIDisableAttribute("D1.HYCEPHIF"),
+                    new UIDisableAttribute("D1.EPILEPIF"),
+                    new UIDisableAttribute("D1.NEOPIF"),
+                    new UIDisableAttribute("D1.HIVIF"),
+                    new UIDisableAttribute("D1.OTHCOGIF"),
+                    new UIDisableAttribute("D1.DEPIF"),
+                    new UIDisableAttribute("D1.BIPOLDIF"),
+                    new UIDisableAttribute("D1.SCHIZOIF"),
+                    new UIDisableAttribute("D1.ANXIETIF"),
+                    new UIDisableAttribute("D1.DELIRIF"),
+                    new UIDisableAttribute("D1.PTSDDXIF"),
+                    new UIDisableAttribute("D1.OTHPSYIF"),
+                    new UIDisableAttribute("D1.ALCDEMIF"),
+                    new UIDisableAttribute("D1.IMPSUBIF"),
+                    new UIDisableAttribute("D1.DYSILLIF"),
+                    new UIDisableAttribute("D1.MEDSIF"),
+                    new UIDisableAttribute("D1.COGOTHIF"),
+                    new UIDisableAttribute("D1.COGOTH2F"),
+                    new UIDisableAttribute("D1.COGOTH3F")
                 },
                 InstructionalMessage = "Skip to question 6"
             } },
@@ -51,9 +132,16 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIDisableAttribute("D1.AMNDEM"),
                     new UIDisableAttribute("D1.PCA"),
                     new UIDisableAttribute("D1.PPASYN"),
+                    new UIDisableAttribute("D1.PPASYNT"),
                     new UIDisableAttribute("D1.FTDSYN"),
                     new UIDisableAttribute("D1.LBDSYN"),
-                    new UIDisableAttribute("D1.NAMNDEM")
+                    new UIDisableAttribute("D1.NAMNDEM"),
+                    new UIEnableAttribute("D1.MCIAMEM"),
+                    new UIEnableAttribute("D1.MCIAPLUS"),
+                    new UIEnableAttribute("D1.MCINON1"),
+                    new UIEnableAttribute("D1.MCINON2"),
+                    new UIEnableAttribute("D1.IMPNOMCI"),
+
                 },
                 InstructionalMessage = "Skip to question 5"
             } },
@@ -65,9 +153,26 @@ namespace UDS.Net.Forms.Pages.UDS3
                     new UIEnableAttribute("D1.PPASYN"),
                     new UIEnableAttribute("D1.FTDSYN"),
                     new UIEnableAttribute("D1.LBDSYN"),
-                    new UIEnableAttribute("D1.NAMNDEM")
+                    new UIEnableAttribute("D1.NAMNDEM"),
+                    new UIDisableAttribute("D1.MCIAMEM"),
+                    new UIDisableAttribute("D1.MCIAPLUS"),
+                    new UIDisableAttribute("D1.MCIAPLAN"),
+                    new UIDisableAttribute("D1.MCIAPATT"),
+                    new UIDisableAttribute("D1.MCIAPEX"),
+                    new UIDisableAttribute("D1.MCIAPVIS"),
+                    new UIDisableAttribute("D1.MCINON1"),
+                    new UIDisableAttribute("D1.MCIN1LAN"),
+                    new UIDisableAttribute("D1.MCIN1ATT"),
+                    new UIDisableAttribute("D1.MCIN1EX"),
+                    new UIDisableAttribute("D1.MCIN1VIS"),
+                    new UIDisableAttribute("D1.MCINON2"),
+                    new UIDisableAttribute("D1.MCIN2LAN"),
+                    new UIDisableAttribute("D1.MCIN2ATT"),
+                    new UIDisableAttribute("D1.MCIN2EX"),
+                    new UIDisableAttribute("D1.MCIN2VIS"),
+                    new UIDisableAttribute("D1.IMPNOMCI"),
                 },
-                InstructionalMessage = "Continue to question 4"
+                InstructionalMessage = "Continue to question 4a-4f and then SKIP TO QUESTION 6"
             } },
         };
 
@@ -93,6 +198,56 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("Yes", "1")
         };
 
+        public List<RadioListItem> NORMCOGListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (CONTINUE TO QUESTION 3)", "0"),
+            new RadioListItem("Yes (SKIP TO QUESTION 6)", "1")
+        };
+
+        public List<RadioListItem> DEMENTEDListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 5)", "0"),
+            new RadioListItem("Yes (CONTINUE TO QUESTION 4)", "1")
+        };
+
+        public List<RadioListItem> PREVSTKListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 15c)", "0"),
+            new RadioListItem("Yes", "1")
+        };
+        public Dictionary<string, UIBehavior> PREVSTKUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1.STROKDEC"),
+                    new UIDisableAttribute("D1.STKIMAG"),
+                },
+                InstructionalMessage ="If Question 15b PREVSTK = 0 (N0), then skip to question 15c"
+            } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1.STROKDEC"),
+                    new UIEnableAttribute("D1.STKIMAG"),
+                }
+             } }
+        };
+
+        public Dictionary<string, UIBehavior> OTHBIOMUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHBIOMX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.OTHBIOMX") } },
+
+        };
+        public Dictionary<string, UIBehavior> OTHMUTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHMUTX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.OTHMUTX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.OTHMUTX") } },
+
+        };
         public List<RadioListItem> FindingsListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
@@ -127,6 +282,15 @@ namespace UDS.Net.Forms.Pages.UDS3
             new RadioListItem("TDP-43 proteinopathy", "2"),
             new RadioListItem("Other (specify)", "3"),
             new RadioListItem("Unknown", "9")
+        };
+
+        public Dictionary<string, UIBehavior> FTLDSUBTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.FTLDSUBX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.FTLDSUBX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1.FTLDSUBX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1.FTLDSUBX") } },
+
         };
 
         public List<RadioListItem> ImagingListItems { get; set; } = new List<RadioListItem>
