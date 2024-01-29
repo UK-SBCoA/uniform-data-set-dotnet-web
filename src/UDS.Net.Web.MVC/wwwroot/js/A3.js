@@ -16,13 +16,16 @@
     }
 
     updateRows() {
-        const rowCount = parseInt($(`#${this.inputId}`).val(), 10) || 0;
+        let rowCount = parseInt($(`#${this.inputId}`).val(), 10) || 0;
+        rowCount = this.adjustRowCountForSpecialCases(rowCount);
+
         for (let i = 0; i < this.maxRows; i++) {
             const enabled = i < rowCount;
-            $(`#${this.tableId}_${i}__MOB`).prop('disabled', !enabled);
-            $(`#${this.tableId}_${i}__YOB`).prop('disabled', !enabled);
-            $(`#${this.tableId}_${i}__AGD`).prop('disabled', !enabled);
-            $(`#${this.tableId}_${i}__NEU`).prop('disabled', !enabled);
+            const rowInputs = $(`#${this.tableId}_${i}__MOB, #${this.tableId}_${i}__YOB, #${this.tableId}_${i}__AGD, #${this.tableId}_${i}__NEU`);
+            rowInputs.prop('disabled', !enabled);
+            if (!enabled) {
+                rowInputs.val(''); 
+            }
             this.updateNeuroControls(i);
         }
     }
@@ -30,9 +33,7 @@
     updateNeuroControls(index) {
         const neuValue = parseInt($(`#${this.tableId}_${index}__NEU`).val(), 10);
         const isEnabled = neuValue >= 1 && neuValue <= 7;
-        $(`#${this.tableId}_${index}__PDX`).prop('disabled', !isEnabled);
-        $(`#${this.tableId}_${index}__MOE`).prop('disabled', !isEnabled);
-        $(`#${this.tableId}_${index}__AGO`).prop('disabled', !isEnabled);
+        $(`#${this.tableId}_${index}__PDX, #${this.tableId}_${index}__MOE, #${this.tableId}_${index}__AGO`).prop('disabled', !isEnabled);
     }
 
     addNeuroChangeWatch(index) {
