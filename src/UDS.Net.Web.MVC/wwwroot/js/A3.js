@@ -30,6 +30,13 @@
         }
     }
 
+    adjustRowCountForSpecialCases(rowCount) {
+        if (this.tableId === 'A3_Siblings' && rowCount === 77) {
+            return 0; 
+        }
+        return rowCount; 
+    }
+
     updateNeuroControls(index) {
         const neuValue = parseInt($(`#${this.tableId}_${index}__NEU`).val(), 10);
         const isEnabled = neuValue >= 1 && neuValue <= 7;
