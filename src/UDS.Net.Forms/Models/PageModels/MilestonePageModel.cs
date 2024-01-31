@@ -5,8 +5,8 @@ using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Models.PageModels
 {
-	public class MilestonePageModel : PageModel
-	{
+    public class MilestonePageModel : PageModel
+    {
         protected readonly IParticipationService _participationService;
 
         [BindProperty]
