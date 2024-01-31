@@ -13,6 +13,7 @@
             this.updateNeuroControls(i);
             this.addNeuroChangeWatch(i);
         }
+        this.addParentNeuroChangeWatch(); 
     }
 
     updateRows() {
@@ -28,6 +29,7 @@
             }
             this.updateNeuroControls(i);
         }
+        this.updateParentControls(); 
     }
 
     adjustRowCountForSpecialCases(rowCount) {
@@ -47,6 +49,22 @@
         $(`#${this.tableId}_${index}__NEU`).change(() => {
             this.updateNeuroControls(index);
         });
+    }
+
+    addParentNeuroChangeWatch() {
+        $(`#A3_MOMNEUR, #A3_DADNEUR`).change(() => {
+            this.updateParentControls();
+        });
+    }
+
+    updateParentControls() {
+        const momNeurValue = parseInt($(`#A3_MOMNEUR`).val(), 10);
+        const isMomEnabled = momNeurValue >= 1 && momNeurValue <= 7;
+        $(`#A3_MOMPRDX, #A3_MOMMOE, #A3_MOMAGEO`).prop('disabled', !isMomEnabled);
+
+        const dadNeurValue = parseInt($(`#A3_DADNEUR`).val(), 10);
+        const isDadEnabled = dadNeurValue >= 1 && dadNeurValue <= 7;
+        $(`#A3_DADPRDX, #A3_DADMOE, #A3_DADAGEO`).prop('disabled', !isDadEnabled);
     }
 }
 
