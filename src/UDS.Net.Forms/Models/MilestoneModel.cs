@@ -65,7 +65,7 @@ namespace UDS.Net.Forms.Models
         [Required]
         [Display(Name = "Which milestone type are you reporting?")]
         [Range(0, 1)]
-        //MilestoneType plays a role in client-side validation for disabling sections
+        //MilestoneType plays a role in client-side validation, must be answered but not stored
         public int MilestoneType { get; set; }
         //validation properties used as targets for validation messages in the manual validation
         public int ProtocolReasonValidation { get; set; }
