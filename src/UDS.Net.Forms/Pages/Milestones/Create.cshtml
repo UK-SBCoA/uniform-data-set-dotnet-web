@@ -6,15 +6,16 @@
     ViewData["Title"] = "Create milestone";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
     string pillNumberCSS = "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800";
+    string labelInstructionCSS = "text-base uppercase text-indigo-600 italic";
 }
 
 <form method="post">
     <div>
         <div>
             <div class="p-16">
-                <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">M1 Milstones (February 18 Final, rev. 2/20)</h2>
+                <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">M1 Milestones (February 18 Final, rev. 2/20)</h2>
                 <p class="mt-1 text-sm text-gray-500">
-                    INSTRUCTIONS: Review the types of milestone at right and complete the appropriate box below. Use only one box (A or B) per form submitted.
+                    INSTRUCTIONS: Please submit a new Milestones Form as soon as possible after each milestone event has occurred.
                 </p>
             </div>
         </div>
@@ -74,7 +75,7 @@
                 </div>
                 <div>
                     <div>
-                        <span class="text-base font-semibold text-indigo-300 italic">
+                        <span class="text-base font-semibold text-indigo-600 italic">
                             Complete the UDS and FTLD sections below, as appropriate.
                         </span>
                     </div>
@@ -89,7 +90,7 @@
                 </div>
                 <div class="@rowCSS subcounterreset">
                     <div>
-                        <label asp-for="Milestone.PROTOCOL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.PROTOCOL)</label>
+                        <label asp-for="Milestone.PROTOCOL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.PROTOCOL) <small class="@labelInstructionCSS">(check one)</small></label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.PROTOCOL"></span>
                     </div>
                     <div class="mt-4 sm:col-span-1 sm:mt-0">
@@ -111,13 +112,19 @@
                             </div>
                         </div>
 
+                        <div>
+                            <small class="text-sm text-indigo-900 italic">
+                                NOTE: Minimal contact status is reserved for participants who can no longer participate for one of the reasons listed in Question 2b, below.
+                            </small>
+                        </div>
+
                         <div class="my-10 ml-20">
                             <div class="subcounterreset">
                                 <div>
-                                    <label asp-for="Milestone.ACONSENT"><span class="subcounter"></span><span class="counterreset counter"></span> @Html.DisplayNameFor(model => model.Milestone.ACONSENT)</label>
+                                    <label asp-for="Milestone.ACONSENT">2a1. @Html.DisplayNameFor(model => model.Milestone.ACONSENT)</label>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.ACONSENT"></span>
                                 </div>
-                                <radio-button-group id="Milestone.ACONSENT" for="Milestone.ACONSENT" items="Model.SimpleYesNoRadio"></radio-button-group>
+                                <radio-button-group id="Milestone.ACONSENT" for="Milestone.ACONSENT" items="Model.AconsentItems"></radio-button-group>
                             </div>
                         </div>
 
@@ -134,7 +141,7 @@
                 </div>
                 <div class="@rowCSS border-b">
                     <div>
-                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Reasons(s) for change inidcated in Question 2a (CHECK AT LEAST ONE):</label>
+                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Reasons(s) for change indicated in Question 2a <small class="@labelInstructionCSS">(CHECK AT LEAST ONE)</small></label>
                         <div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.ProtocolReasonValidation"></span>
                         </div>
@@ -144,45 +151,45 @@
                             <div>
                                 @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.RECOGIM"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.Milestone.RECOGIM)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RECOGIM"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.Milestone.RECOGIM)</label>
                             </div>
                         </div>
                         <div class="flex items-top">
                             <div>
                                 @Html.CheckBox("Milestone.REPHYILL", Model.Milestone.REPHYILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.REPHYILL"><span class="@pillNumberCSS">2</span> @Html.DisplayNameFor(Model => Model.Milestone.REPHYILL)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REPHYILL"><span class="@pillNumberCSS">2</span> @Html.DisplayNameFor(Model => Model.Milestone.REPHYILL)</label>
                             </div>
                         </div>
                         <div class="flex items-top">
                             <div>
                                 @Html.CheckBox("Milestone.REREFUSE", Model.Milestone.REREFUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.REREFUSE"><span class="@pillNumberCSS">3</span> @Html.DisplayNameFor(Model => Model.Milestone.REREFUSE)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REREFUSE"><span class="@pillNumberCSS">3</span> @Html.DisplayNameFor(Model => Model.Milestone.REREFUSE)</label>
                             </div>
                         </div>
                         <div class="flex items-top">
                             <div>
                                 @Html.CheckBox("Milestone.RENAVAIL", Model.Milestone.RENAVAIL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.RENAVAIL"><span class="@pillNumberCSS">4</span> @Html.DisplayNameFor(Model => Model.Milestone.RENAVAIL)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RENAVAIL"><span class="@pillNumberCSS">4</span> @Html.DisplayNameFor(Model => Model.Milestone.RENAVAIL)</label>
                             </div>
                         </div>
                         <div class="flex items-top">
                             <div>
                                 @Html.CheckBox("Milestone.RENURSE", Model.Milestone.RENURSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.NURSEMO\", \"Milestone.NURSEDY\", \"Milestone.NURSEYR\" ]" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.RENURSE"><span class="@pillNumberCSS">5</span> @Html.DisplayNameFor(Model => Model.Milestone.RENURSE)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RENURSE"><span class="@pillNumberCSS">5</span> @Html.DisplayNameFor(Model => Model.Milestone.RENURSE)</label>
                             </div>
                         </div>
                         <div class="my-10 ml-20">
                             <div class="subcounterreset">
-                                <label class="text-base font-semibold text-gray-900">2b5a. Date permanently moved to nursing home:</label>
+                                <label class="text-base font-semibold text-gray-900">2b5a. Date permanently moved to nursing home</label>
                             </div>
                             <div>
                                 <div class="sm:col-span-2">
@@ -216,8 +223,8 @@
                             <div>
                                 @Html.CheckBox("Milestone.REJOIN", Model.Milestone.REJOIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                             </div>
-                            <div class="ml-3">
-                                <label asp-for="Milestone.REJOIN"><span class="@pillNumberCSS">6</span> @Html.DisplayNameFor(Model => Model.Milestone.REJOIN)</label>
+                            <div>
+                                <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REJOIN"><span class="@pillNumberCSS">6</span> @Html.DisplayNameFor(Model => Model.Milestone.REJOIN)</label>
                             </div>
                         </div>
                     </div>
@@ -239,25 +246,29 @@
                             @Html.CheckBox("Milestone.FTLDDISC", Model.Milestone.FTLDDISC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                         </div>
                     </div>
-                    <div class="ml-3">
-                        <label asp-for="@Model.Milestone.FTLDDISC">@Html.DisplayNameFor(model => model.Milestone.FTLDDISC)</label>
+                    <div class="ml-3 counterreset">
+                        <span class="@pillNumberCSS">1</span><label asp-for="@Model.Milestone.FTLDDISC">@Html.DisplayNameFor(model => model.Milestone.FTLDDISC)</label>
                     </div>
                 </div>
                 <div class="flex my-6">
                     <div class="mt-4">
                         <label class="font-semibold"><span class="subcounter"></span></label>
                     </div>
-                    <div class="ml-3">
+                    <div class="ml-3 grow">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.Milestone.FTLDREAS"></p>
                         <radio-button-group id="Milestone.FTLDREAS" for="Milestone.FTLDREAS" items="Model.FTLDREASItems" ui-behaviors="@Model.FTLDREASBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAS"></span>
-                        <div class="w-40 flex mt-3">
+                        <div class="flex mt-3">
                             <div class="font-semibold">
                                 <label>3a1.</label>
                             </div>
-                            <div class="ml-3">
-                                <input asp-for="@Model.Milestone.FTLDREAX" />
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
+                            <div class="ml-3 grow flex flex-col">
+                                <div class="w-full">
+                                    <input class="block w-full max-w-4xl rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" asp-for="@Model.Milestone.FTLDREAX" />
+                                </div>
+                                <div>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.FTLDREAX"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -277,7 +288,7 @@
                             @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
                         </div>
                         <div>
-                            <label asp-for="@Model.Milestone.DECEASED"><span class="@pillNumberCSS">Deceased</span> @Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
+                            <label asp-for="@Model.Milestone.DECEASED"><span class="@pillNumberCSS">Deceased</span> @Html.DisplayNameFor(model => model.Milestone.DECEASED) <small class="@labelInstructionCSS normal-case">(Complete DEATH section)</small></label>
                             <div class="sm:col-span-2">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DECEASED"></span>
                             </div>
@@ -293,7 +304,7 @@
                             @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
                         </div>
                         <div>
-                            <label asp-for="@Model.Milestone.DISCONT"><span class="@pillNumberCSS">Withdrawn</span> @Html.DisplayNameFor(model => model.Milestone.DISCONT)</label>
+                            <label asp-for="@Model.Milestone.DISCONT"><span class="@pillNumberCSS">Withdrawn</span> @Html.DisplayNameFor(model => model.Milestone.DISCONT) <small class="@labelInstructionCSS normal-case">(Complete DROPPED section)</small></label>
                             <div class="sm:col-span-2">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DISCONT"></span>
                             </div>
@@ -304,7 +315,7 @@
                     <div class="max-w-7xl px-6 lg:px-8">
                         <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none bg-slate-50">
                             <div class="p-8 sm:p-10 lg:flex-auto subcounterreset">
-                                <h3 class="text-2xl font-bold tracking-tight text-gray-900"><span class="counter"></span>Death</h3>
+                                <h3 class="text-2xl font-bold tracking-tight text-gray-900"><span class="counter"> </span>Death</h3>
                                 <div>
                                     <div>
                                         <div class="w-14 border-t-2 border-indigo-600"></div>
@@ -312,7 +323,7 @@
                                 </div>
                                 <div class="@rowCSS">
                                     <div>
-                                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Date of death:</label>
+                                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"> </span>Date of death</label>
                                     </div>
                                     <div class="sm:col-span-2">
                                         <div>
@@ -351,7 +362,7 @@
                                 </div>
                                 <div class="@rowCSS mt-5">
                                     <div class="col-span-3 text-center">
-                                        <span class="text-base font-semibold text-indigo-300 italic">END FORM HERE</span>
+                                        <span class="text-base font-semibold text-indigo-600 italic">END FORM HERE</span>
                                     </div>
                                 </div>
                             </div>
@@ -368,11 +379,11 @@
                                         <div class="w-14 border-t-2 border-indigo-600"></div>
                                     </div>
                                 </div>
-                                <p class="mt-6 text-base leading-7 font-semibold text-indigo-300 italic">DO NOT fill out this section if the participant has consented to autopsy or if you will maintain minimal contact. Instead, fill out BOX A QUESTION 2 UDS STATUS section.</p>
+                                <p class="mt-6 text-base leading-7 font-semibold text-indigo-600 italic"><u>DO NOT</u> fill out this section if the participant has consented to autopsy or if you will maintain minimal contact. Instead, fill out <u>BOX A QUESTION 2 UDS STATUS</u> section.</p>
                                 <div>
-                                    <div class="@rowCSS">
+                                    <div class="@rowCSS subcounterreset">
                                         <div>
-                                            <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Date dropped from ADC:</label>
+                                            <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> Date dropped from ADC</label>
                                         </div>
                                         <div>
                                             <div class="sm:col-span-2">
@@ -404,10 +415,12 @@
                                     </div>
                                     <div class="@rowCSS">
                                         <div>
-                                            <label asp-for="Milestone.DROPREAS"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.DROPREAS)</label>
+                                            <label asp-for="Milestone.DROPREAS"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.Milestone.DROPREAS)<small class="@labelInstructionCSS">(CHECK ONE)</small></label>
                                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.DROPREAS"></span>
                                         </div>
-                                        <radio-button-group id="Milestone.DROPREAS" for="Milestone.DROPREAS" items="Model.DropReasonItems"></radio-button-group>
+                                        <div class="col-span-2">
+                                            <radio-button-group id="Milestone.DROPREAS" for="Milestone.DROPREAS" items="Model.DropReasonItems"></radio-button-group>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

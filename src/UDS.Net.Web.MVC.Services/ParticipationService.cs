@@ -26,7 +26,7 @@ namespace UDS.Net.Web.MVC.Services
             return entity; // TODO update client to return new object or id
         }
 
-        public async Task<Milestone> AddMilestone(string username, int participationId, Milestone milestone)
+        public async Task<Milestone> AddMilestone(int participationId, Milestone milestone)
         {
             await _apiClient.ParticipationClient.PostMilestone(participationId, milestone.ToDto());
 
@@ -75,9 +75,9 @@ namespace UDS.Net.Web.MVC.Services
             return new List<Participation>();
         }
 
-        public async Task<Milestone> UpdateMilestone(int id, int milestoneId, Milestone milestone)
+        public async Task<Milestone> UpdateMilestone(int id, int formId, Milestone milestone)
         {
-            await _apiClient.ParticipationClient.PutMilestone(id, milestoneId, milestone.ToDto());
+            await _apiClient.ParticipationClient.PutMilestone(id, formId, milestone.ToDto());
 
             return milestone;
         }

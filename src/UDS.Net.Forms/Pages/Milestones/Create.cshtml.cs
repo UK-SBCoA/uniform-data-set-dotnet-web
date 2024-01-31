@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
-using UDS.Net.Forms.TagHelpers;
+using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
+
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
-    public class CreateModel : BaseModel
+    public class CreateModel : MilestonePageModel
     {
         public CreateModel(IParticipationService participationService) : base(participationService)
         {
@@ -41,13 +35,11 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return Page();
             }
 
-            Isvalid(Milestone);
+            IsValid(Milestone);
 
             if (ModelState.IsValid)
             {
-                //TODO sending participationId from page model for now, I think we want to send the Id from visit/participation data?
-                //the api checks to make sure participationId and milestone.ToEntity() participationId are the same
-                await _participationService.AddMilestone(User.Identity?.Name, Milestone.ParticipationId, Milestone.ToEntity());
+                await _participationService.AddMilestone(Milestone.ParticipationId, Milestone.ToEntity());
 
                 return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
             }

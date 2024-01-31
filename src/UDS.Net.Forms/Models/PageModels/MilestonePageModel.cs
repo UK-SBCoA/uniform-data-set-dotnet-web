@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Models;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
 
-namespace UDS.Net.Forms.Pages.Milestones
+namespace UDS.Net.Forms.Models.PageModels
 {
-    public class BaseModel : PageModel
-    {
+	public class MilestonePageModel : PageModel
+	{
         protected readonly IParticipationService _participationService;
 
         [BindProperty]
         public MilestoneModel? Milestone { get; set; }
 
-        public BaseModel(IParticipationService participationService)
+        public MilestonePageModel(IParticipationService participationService)
         {
             _participationService = participationService;
         }
@@ -36,10 +30,10 @@ namespace UDS.Net.Forms.Pages.Milestones
             new RadioListItem("Annual in-person UDS follow-up", "3")
         };
 
-        public List<RadioListItem> SimpleYesNoRadio { get; } = new List<RadioListItem>
+        public List<RadioListItem> AconsentItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1")
+            new RadioListItem("No (CONTINUE TO QUESTION 2B)", "0"),
+            new RadioListItem("Yes (CONTINUE TO QUESTION 2B)", "1")
         };
 
         public List<RadioListItem> AutopsyItems { get; } = new List<RadioListItem>
@@ -51,14 +45,14 @@ namespace UDS.Net.Forms.Pages.Milestones
         public List<RadioListItem> DropReasonItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("ADC decision or protocol", "1"),
-            new RadioListItem("Participant or co-paprticipant asked to be dropped", "2")
+            new RadioListItem("Participant or co-participant asked to be dropped (ie. withdrawn)", "2")
         };
 
         public List<RadioListItem> FTLDREASItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("ADC decision", "1"),
-            new RadioListItem("Participant/informant refused", "2"),
-            new RadioListItem("Informant not available", "3"),
+            new RadioListItem("Participant/co-participant refused", "2"),
+            new RadioListItem("Co-participant not available", "3"),
             new RadioListItem("Other, specify below", "4")
         };
 
@@ -165,7 +159,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             }
         };
 
-        public void Isvalid(MilestoneModel milestone)
+        protected private void IsValid(MilestoneModel milestone)
         {
             if (milestone.MilestoneType == 1)
             {
@@ -178,9 +172,9 @@ namespace UDS.Net.Forms.Pages.Milestones
                     ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
-                if (milestone.PROTOCOL == 3 && milestone.ACONSENT == null)
+                if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1 && milestone.ACONSENT == null)
                 {
-                    ModelState.AddModelError("Milestone.ACONSENT", "Must have a value when indicating continued contact");
+                    ModelState.AddModelError("Milestone.ACONSENT", "Autopsy status required");
                 }
 
                 if (milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
@@ -275,3 +269,4 @@ namespace UDS.Net.Forms.Pages.Milestones
         }
     }
 }
+
