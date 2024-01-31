@@ -10,8 +10,8 @@
 name: Push image to DockerHub
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: ['release']
 
 jobs:
   push_to_registry:
