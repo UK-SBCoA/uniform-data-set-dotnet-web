@@ -11,7 +11,7 @@ name: Push image to DockerHub
 
 on:
   push:
-    branches: ['dockerhub-workflow-test']
+    branches: ['release']
 
 jobs:
   push_to_registry:
