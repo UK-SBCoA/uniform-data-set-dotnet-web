@@ -41,7 +41,7 @@
 
     updateNeuroControls(index) {
         const neuValue = parseInt($(`#${this.tableId}_${index}__NEU`).val(), 10);
-        const isEnabled = neuValue >= 1 && neuValue <= 7;
+        const isEnabled = neuValue >= 1 && neuValue <= 5;
         $(`#${this.tableId}_${index}__PDX, #${this.tableId}_${index}__MOE, #${this.tableId}_${index}__AGO`).prop('disabled', !isEnabled);
     }
 
@@ -59,11 +59,11 @@
 
     updateParentControls() {
         const momNeurValue = parseInt($(`#A3_MOMNEUR`).val(), 10);
-        const isMomEnabled = momNeurValue >= 1 && momNeurValue <= 7;
+        const isMomEnabled = momNeurValue >= 1 && momNeurValue <= 5;
         $(`#A3_MOMPRDX, #A3_MOMMOE, #A3_MOMAGEO`).prop('disabled', !isMomEnabled);
 
         const dadNeurValue = parseInt($(`#A3_DADNEUR`).val(), 10);
-        const isDadEnabled = dadNeurValue >= 1 && dadNeurValue <= 7;
+        const isDadEnabled = dadNeurValue >= 1 && dadNeurValue <= 5;
         $(`#A3_DADPRDX, #A3_DADMOE, #A3_DADAGEO`).prop('disabled', !isDadEnabled);
     }
 }
