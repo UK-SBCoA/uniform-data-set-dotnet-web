@@ -64,23 +64,42 @@ namespace UDS.Net.Services.DomainModels.Forms
             PropertyInfo prop = typeof(A3Dto).GetProperty($"{propertyPrefix}{index}");
             if (prop != null)
             {
-                A3FamilyMemberDto value = (A3FamilyMemberDto)prop.GetValue(dto);
-                if (value != null)
+                if (dto != null)
                 {
-                    familyMember.MOB = value.MOB;
-                    familyMember.YOB = value.YOB;
-                    familyMember.AGD = value.AGD;
-                    familyMember.NEU = value.NEU;
-                    familyMember.PDX = value.PDX;
-                    familyMember.MOE = value.MOE;
-                    familyMember.AGO = value.AGO;
+                    A3FamilyMemberDto value = (A3FamilyMemberDto)prop.GetValue(dto);
+                    if (value != null)
+                    {
+                        familyMember.MOB = value.MOB;
+                        familyMember.YOB = value.YOB;
+                        familyMember.AGD = value.AGD;
+                        familyMember.NEU = value.NEU;
+                        familyMember.PDX = value.PDX;
+                        familyMember.MOE = value.MOE;
+                        familyMember.AGO = value.AGO;
+                    }
                 }
             }
 
             return familyMember;
         }
 
-        public A3FormFields() { }
+        public A3FormFields()
+        {
+            // always 20 spots for siblings
+            for (int i = 1; i <= 20; i++)
+            {
+                var sibling = GetFamilyMemberFormFields(i, "SIB", null);
+
+                this.SiblingFormFields.Add(sibling);
+            }
+            // always 15 spots for kids
+            for (int i = 1; i <= 15; i++)
+            {
+                var kid = GetFamilyMemberFormFields(i, "KID", null);
+
+                this.KidsFormFields.Add(kid);
+            }
+        }
         public A3FormFields(FormDto dto)
         {
             if (dto is A3Dto)
