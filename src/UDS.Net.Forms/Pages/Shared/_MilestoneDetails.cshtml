@@ -1,0 +1,76 @@
+﻿@model MilestoneModel
+
+@{
+    string statusChangeMessage = null;
+    var statusChangeReasons = new List<String>();
+
+    switch (@Model.PROTOCOL)
+    {
+        case 1:
+            statusChangeMessage = "Status changed to annual UDS follow-up by telephone";
+            break;
+
+        case 2:
+            statusChangeMessage = "Status changed to minimal contact";
+            break;
+
+        case 3:
+            statusChangeMessage = "Status changed to annual in-person UDS follow-up";
+            break;
+
+        default:
+            statusChangeMessage = null;
+            break;
+    }
+
+    if (!String.IsNullOrEmpty(statusChangeMessage))
+    {
+        if (@Model.RECOGIM == true)
+        {
+            statusChangeReasons.Add("Subject is too cognitively impaired");
+        };
+
+        if (@Model.REPHYILL == true)
+        {
+            statusChangeReasons.Add("Subject is too ill or\nphysically impaired");
+        };
+
+        if (@Model.REREFUSE == true)
+        {
+            statusChangeReasons.Add("Subject refuses neuropsychological testing or clinical exam");
+        };
+
+        if (@Model.RENAVAIL == true)
+        {
+            statusChangeReasons.Add("Subject or coparticipant unreachable, not available, or moved away");
+        };
+
+        if (@Model.RENURSE == true)
+        {
+            statusChangeReasons.Add("Subject has permanently entered nursing home");
+        };
+
+        if (@Model.REJOIN == true)
+        {
+            statusChangeReasons.Add("Subject is rejoining ADC");
+        };
+    }
+}
+
+@if (!String.IsNullOrEmpty(statusChangeMessage))
+{
+    <td>
+        <p class="mb-3">@statusChangeMessage</p>
+        <p class="mb-3">Reson(s)</p>
+        <ul class="list-disc list-inside">
+            @foreach (var reason in statusChangeReasons)
+                {
+                <li>@reason</li>
+                }
+        </ul>
+    </td>
+}
+else
+{
+    <td>N/A</td>
+}

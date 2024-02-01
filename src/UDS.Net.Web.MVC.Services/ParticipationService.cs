@@ -26,6 +26,13 @@ namespace UDS.Net.Web.MVC.Services
             return entity; // TODO update client to return new object or id
         }
 
+        public async Task<Milestone> AddMilestone(int participationId, Milestone milestone)
+        {
+            await _apiClient.ParticipationClient.PostMilestone(participationId, milestone.ToDto());
+
+            return milestone;
+        }
+
         public async Task<int> Count(string username)
         {
             return await _apiClient.ParticipationClient.Count();
@@ -68,16 +75,35 @@ namespace UDS.Net.Web.MVC.Services
             return new List<Participation>();
         }
 
+        public async Task<Milestone> UpdateMilestone(int id, int formId, Milestone milestone)
+        {
+            await _apiClient.ParticipationClient.PutMilestone(id, formId, milestone.ToDto());
+
+            return milestone;
+        }
+
+        public async Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId)
+        {
+            IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);
+
+            return milestones.ToDomain();
+        }
+
+        public async Task<Milestone> GetMilestoneById(int id, int formId)
+        {
+            M1Dto milestone = await _apiClient.ParticipationClient.GetMilestone(id, formId);
+
+            return milestone.ToDomain();
+        }
+
         public async Task<Participation> Patch(string username, Participation entity)
         {
             // TODO update participation
             return entity;
         }
-
         public async Task Remove(string username, Participation entity)
         {
         }
-
         public async Task<Participation> Update(string username, Participation entity)
         {
             // TODO update participation

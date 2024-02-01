@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
@@ -15,6 +11,8 @@ namespace UDS.Net.Forms.Pages.Participations
         private readonly IParticipationService _participationService;
 
         public ParticipationModel? Participation { get; set; }
+
+        public IEnumerable<MilestoneModel> Milestones { get; set; }
 
         public DetailsModel(IParticipationService participationService)
         {
@@ -32,6 +30,10 @@ namespace UDS.Net.Forms.Pages.Participations
                 return NotFound();
 
             Participation = participation.ToVM();
+
+            var milestones = await _participationService.GetMilestonesByParticipationId(id.Value);
+
+            Milestones = milestones.ToVM();
 
             return Page();
         }

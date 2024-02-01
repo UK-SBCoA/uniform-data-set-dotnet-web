@@ -26,6 +26,49 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static Milestone ToEntity(this MilestoneModel vm)
+        {
+            return new Milestone
+            {
+                Id = vm.Id,
+                FormId = vm.FormId,
+                ParticipationId = vm.ParticipationId,
+                Status = vm.Status,
+                CHANGEMO = vm.CHANGEMO,
+                CHANGEDY = vm.CHANGEDY,
+                CHANGEYR = vm.CHANGEYR,
+                PROTOCOL = vm.PROTOCOL,
+                ACONSENT = vm.ACONSENT,
+                RECOGIM = vm.RECOGIM == true ? 1 : null,
+                REPHYILL = vm.REPHYILL == true ? 1 : null,
+                REREFUSE = vm.REREFUSE == true ? 1 : null,
+                RENAVAIL = vm.RENAVAIL == true ? 1 : null,
+                RENURSE = vm.RENURSE == true ? 1 : null,
+                NURSEMO = vm.NURSEMO,
+                NURSEDY = vm.NURSEDY,
+                NURSEYR = vm.NURSEYR,
+                REJOIN = vm.REJOIN == true ? 1 : null,
+                FTLDDISC = vm.FTLDDISC == true ? 1 : null,
+                FTLDREAS = vm.FTLDREAS,
+                FTLDREAX = vm.FTLDREAX,
+                DECEASED = vm.DECEASED == true ? 1 : null,
+                DISCONT = vm.DISCONT == true ? 1 : null,
+                DEATHMO = vm.DEATHMO,
+                DEATHDY = vm.DEATHDY,
+                DEATHYR = vm.DEATHYR,
+                AUTOPSY = vm.AUTOPSY,
+                DISCMO = vm.DISCMO,
+                DISCDAY = vm.DISCDAY,
+                DISCYR = vm.DISCYR,
+                DROPREAS = vm.DROPREAS,
+                CreatedAt = vm.CreatedAt,
+                CreatedBy = vm.CreatedBy,
+                ModifiedBy = vm.ModifiedBy,
+                DeletedBy = vm.DeletedBy,
+                IsDeleted = vm.IsDeleted,
+            };
+        }
+
         public static Visit ToEntity(this VisitModel vm)
         {
             return new Visit(vm.Id, vm.Number, vm.ParticipationId, vm.Version, vm.Kind, vm.StartDateTime, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
