@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Emit;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.UDS3;
+using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
@@ -17,26 +20,33 @@ namespace UDS.Net.Forms.DataAnnotations
             if (validationContext.ObjectType.IsSubclassOf(typeof(FormModel)))
             {
                 var form = (FormModel)validationContext.ObjectInstance;
+                var a3 = (A3)validationContext.ObjectInstance;
 
-
-                // only validate if the form is attempting to be completed
                 if (form.Status == FormStatus.Complete)
                 {
-                    if (value is int)
+                    if (((a3.MOMNEUR >= 1 && a3.MOMNEUR <= 5) || a3.MOMNEUR == 8 || a3.MOMNEUR == 9) ||
+                        ((a3.DADNEUR >= 1 && a3.DADNEUR <= 5) || a3.DADNEUR == 8 || a3.DADNEUR == 9))
                     {
-                        int code = (int)value;
+                        if (value is int)
+                        {
+                            int code = (int)value;
 
-                        if (CODES.Contains(code))
+                            if (CODES.Contains(code))
+                            {
+                                return ValidationResult.Success;
+                            }
+                        }
+                        else if (value == null)
                         {
                             return ValidationResult.Success;
                         }
 
+                        return new ValidationResult(ERRORMESSAGE);
                     }
 
                     return new ValidationResult(ERRORMESSAGE);
                 }
             }
-
             return ValidationResult.Success;
         }
 
@@ -61,4 +71,3 @@ namespace UDS.Net.Forms.DataAnnotations
         }
     }
 }
-
