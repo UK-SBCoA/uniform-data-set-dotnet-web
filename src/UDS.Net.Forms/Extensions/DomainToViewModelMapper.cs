@@ -79,6 +79,54 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static MilestoneModel ToVM(this Milestone milestone)
+        {
+            return new MilestoneModel()
+            {
+                Id = milestone.Id,
+                FormId = milestone.FormId,
+                ParticipationId = milestone.ParticipationId,
+                Status = milestone.Status,
+                CHANGEMO = milestone.CHANGEMO,
+                CHANGEDY = milestone.CHANGEDY,
+                CHANGEYR = milestone.CHANGEYR,
+                PROTOCOL = milestone.PROTOCOL,
+                ACONSENT = milestone.ACONSENT,
+                RECOGIM = milestone.RECOGIM.HasValue ? true : false,
+                REPHYILL = milestone.REPHYILL.HasValue ? true : false,
+                REREFUSE = milestone.REREFUSE.HasValue ? true : false,
+                RENAVAIL = milestone.RENAVAIL.HasValue ? true : false,
+                RENURSE = milestone.RENURSE.HasValue ? true : false,
+                NURSEMO = milestone.NURSEMO,
+                NURSEDY = milestone.NURSEDY,
+                NURSEYR = milestone.NURSEYR,
+                REJOIN = milestone.REJOIN.HasValue ? true : false,
+                FTLDDISC = milestone.FTLDDISC.HasValue ? true : false,
+                FTLDREAS = milestone.FTLDREAS,
+                FTLDREAX = milestone.FTLDREAX,
+                DECEASED = milestone.DECEASED.HasValue ? true : false,
+                DISCONT = milestone.DISCONT.HasValue ? true : false,
+                DEATHMO = milestone.DEATHMO,
+                DEATHDY = milestone.DEATHDY,
+                DEATHYR = milestone.DEATHYR,
+                AUTOPSY = milestone.AUTOPSY,
+                DISCMO = milestone.DISCMO,
+                DISCDAY = milestone.DISCDAY,
+                DISCYR = milestone.DISCYR,
+                DROPREAS = milestone.DROPREAS,
+                CreatedAt = milestone.CreatedAt,
+                CreatedBy = milestone.CreatedBy,
+                ModifiedBy = milestone.ModifiedBy,
+                DeletedBy = milestone.DeletedBy,
+                IsDeleted = milestone.IsDeleted,
+            };
+        }
+
+        public static IEnumerable<MilestoneModel> ToVM(this IEnumerable<Milestone> milestones)
+        {
+            return milestones.Select(m => m.ToVM()).ToList();
+        }
+
         public static List<FormModel> ToVM(this IList<Form> forms)
         {
             List<FormModel> vm = new List<FormModel>();
