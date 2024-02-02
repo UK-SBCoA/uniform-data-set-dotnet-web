@@ -131,7 +131,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADNEUR = a3Dto.DADNEUR;
                 this.DADPRDX = a3Dto.DADPRDX;
-                this.DADMOE = a3Dto.DADMOB;
+                this.DADMOE = a3Dto.DADMOE;
                 this.DADAGEO = a3Dto.DADAGEO;
 
                 this.SIBS = a3Dto.SIBS; // the count of siblings
