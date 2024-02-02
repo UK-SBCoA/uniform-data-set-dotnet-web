@@ -24,26 +24,20 @@ namespace UDS.Net.Forms.DataAnnotations
 
                 if (form.Status == FormStatus.Complete)
                 {
-                    if (((a3.MOMNEUR >= 1 && a3.MOMNEUR <= 5) || a3.MOMNEUR == 8 || a3.MOMNEUR == 9) ||
-                        ((a3.DADNEUR >= 1 && a3.DADNEUR <= 5) || a3.DADNEUR == 8 || a3.DADNEUR == 9))
-                    {
-                        if (value is int)
-                        {
-                            int code = (int)value;
+                    bool validNeurStatus = (a3.MOMNEUR >= 1 && a3.MOMNEUR <= 5) || (a3.DADNEUR >= 1 && a3.DADNEUR <= 5);
 
-                            if (CODES.Contains(code))
-                            {
-                                return ValidationResult.Success;
-                            }
-                        }
-                        else if (value == null)
+                    if (validNeurStatus)
+                    {
+                        if (value is int code && CODES.Contains(code))
                         {
                             return ValidationResult.Success;
                         }
-
                         return new ValidationResult(ERRORMESSAGE);
                     }
-
+                    else if (value == null && (a3.MOMNEUR == 8 || a3.MOMNEUR == 9 || a3.DADNEUR == 8 || a3.DADNEUR == 9))
+                    {
+                        return ValidationResult.Success;
+                    }
                     return new ValidationResult(ERRORMESSAGE);
                 }
             }
