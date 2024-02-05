@@ -98,22 +98,39 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Mother — age at death")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Mother age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
+        [Required(ErrorMessage = "Please provide an age at death or indicate otherwise")]
         public int? MOMDAGE { get; set; }
 
         [Display(Name = "Mother — neurological problem")]
         [RegularExpression("^([1-5]|8|9)$", ErrorMessage = "Mother neurological problem/psychiatric condition invalid. Please see reference.")]
+        [Required(ErrorMessage = "Please provide a value for Primary neurological problem/psychiatric condition")]
         public int? MOMNEUR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
-        [Diagnosis]
+        [Diagnosis(AllowUnknown = true)]
+        [RequiredIf(nameof(MOMNEUR), "1", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(MOMNEUR), "2", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(MOMNEUR), "3", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(MOMNEUR), "4", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(MOMNEUR), "5", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
         public int? MOMPRDX { get; set; }
 
         [Display(Name = "Mother — method of evaluation")]
         [Range(1, 7)]
+        [RequiredIf(nameof(MOMNEUR), "1", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(MOMNEUR), "2", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(MOMNEUR), "3", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(MOMNEUR), "4", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(MOMNEUR), "5", ErrorMessage = "Please provide a method of evaluation")]
         public int? MOMMOE { get; set; }
 
         [Display(Name = "Mother — age of onset")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Mother age of onset must be 0-110, or 999 (unknown)")]
+        [RequiredIf(nameof(MOMNEUR), "1", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(MOMNEUR), "2", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(MOMNEUR), "3", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(MOMNEUR), "4", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(MOMNEUR), "5", ErrorMessage = "Please provide the age of onset")]
         public int? MOMAGEO { get; set; }
 
         [Display(Name = "Father — birth month")]
@@ -126,22 +143,39 @@ namespace UDS.Net.Forms.Models.UDS3
 
         [Display(Name = "Father — age at death")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Father age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
+        [Required(ErrorMessage = "Please provide an age at death or indicate otherwise")]
         public int? DADDAGE { get; set; }
 
         [Display(Name = "Father — neurological problem")]
         [RegularExpression("^([1-5]|8|9)$", ErrorMessage = "Father neurological problem/psychiatric condition invalid. Please see reference.")]
+        [Required(ErrorMessage = "Please provide a value for Primary neurological problem/psychiatric condition")]
         public int? DADNEUR { get; set; }
 
         [Display(Name = "Father — primary diagnosis")]
-        [Diagnosis]
+        [Diagnosis(AllowUnknown = true)]
+        [RequiredIf(nameof(DADNEUR), "1", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(DADNEUR), "2", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(DADNEUR), "3", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(DADNEUR), "4", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(DADNEUR), "5", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
         public int? DADPRDX { get; set; }
 
         [Display(Name = "Father — method of evaluation")]
         [Range(1, 7)]
+        [RequiredIf(nameof(DADNEUR), "1", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(DADNEUR), "2", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(DADNEUR), "3", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(DADNEUR), "4", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(DADNEUR), "5", ErrorMessage = "Please provide a method of evaluation")]
         public int? DADMOE { get; set; }
 
         [Display(Name = "Father — age of onset")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Father age of onset must be 0-110, or 999 (unknown)")]
+        [RequiredIf(nameof(DADNEUR), "1", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(DADNEUR), "2", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(DADNEUR), "3", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(DADNEUR), "4", ErrorMessage = "Please provide the age of onset")]
+        [RequiredIf(nameof(DADNEUR), "5", ErrorMessage = "Please provide the age of onset")]
         public int? DADAGEO { get; set; }
 
         [Display(Name = "How many full siblings does the participant have? (77 = adopted, unknown)")]
