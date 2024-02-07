@@ -384,6 +384,12 @@ namespace UDS.Net.Services.Extensions
             {
                 // TODO map a3 siblings
                 var sibDto = sib.ToDto(formId);
+                if (sib.FamilyMemberIndex == 1)
+                    dto.SIB1 = sibDto;
+                else if (sib.FamilyMemberIndex == 2)
+                    dto.SIB2 = sibDto;
+                else if (sib.FamilyMemberIndex == 3)
+                    dto.SIB3 = sibDto;
             }
 
             foreach (var kid in fields.KidsFormFields)
