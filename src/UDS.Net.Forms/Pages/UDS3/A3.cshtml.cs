@@ -183,7 +183,59 @@ namespace UDS.Net.Forms.Pages.UDS3
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            if (A3 != null)
+            {
+                if (A3.Siblings != null)
+                {
+                    foreach (var sibling in A3.Siblings)
+                    {
+                        if (sibling != null)
+                        {
+                            if (sibling.MOB.HasValue || sibling.YOB.HasValue)
+                            {
+                                if (!sibling.AGD.HasValue)
+                                {
+                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
+                                }
+                            }
+                            if (sibling.MOB.HasValue || sibling.YOB.HasValue || sibling.AGD.HasValue)
+                            {
+                                if (!sibling.NEU.HasValue)
+                                {
+                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this sibling.");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (A3.Children != null)
+                {
+                    foreach (var child in A3.Children)
+                    {
+                        if (child != null)
+                        {
+                            if (child.MOB.HasValue || child.YOB.HasValue)
+                            {
+                                if (!child.AGD.HasValue)
+                                {
+                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
+                                }
+                            }
+                            if (child.MOB.HasValue || child.YOB.HasValue || child.AGD.HasValue)
+                            {
+                                if (!child.NEU.HasValue)
+                                {
+                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this child.");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return await base.OnPostAsync(id); // checks for validation, etc.
+            }
+            return RedirectToPage(); 
         }
 
     }
