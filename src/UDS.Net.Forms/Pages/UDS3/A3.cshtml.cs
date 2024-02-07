@@ -232,11 +232,9 @@ namespace UDS.Net.Forms.Pages.UDS3
                         }
                     }
                 }
-
                 return await base.OnPostAsync(id); // checks for validation, etc.
             }
-            return RedirectToPage(); 
+            return RedirectToPage();
         }
-
     }
 }
