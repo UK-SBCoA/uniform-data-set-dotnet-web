@@ -173,25 +173,18 @@ public class DtoToDomainMapping
 
         var a2DtoFields = (A2Dto)dtoFields;
 
-        Assert.AreEqual(a2DtoFields.INBIRMO, fields.INBIRMO);
-        Assert.AreEqual(a2DtoFields.INBIRYR, fields.INBIRYR);
-        Assert.AreEqual(a2DtoFields.INSEX, fields.INSEX);
-        Assert.AreEqual(a2DtoFields.INHISP, fields.INHISP);
-        Assert.AreEqual(a2DtoFields.INHISPOR, fields.INHISPOR);
-        Assert.AreEqual(a2DtoFields.INHISPOX, fields.INHISPOX);
-        Assert.AreEqual(a2DtoFields.INRACE, fields.INRACE);
-        Assert.AreEqual(a2DtoFields.INRACEX, fields.INRACEX);
-        Assert.AreEqual(a2DtoFields.INRASEC, fields.INRASEC);
-        Assert.AreEqual(a2DtoFields.INRASECX, fields.INRASECX);
-        Assert.AreEqual(a2DtoFields.INRATER, fields.INRATER);
-        Assert.AreEqual(a2DtoFields.INRATERX, fields.INRATERX);
-        Assert.AreEqual(a2DtoFields.INEDUC, fields.INEDUC);
+        Assert.AreEqual(a2DtoFields.NEWINF, fields.NEWINF);
         Assert.AreEqual(a2DtoFields.INRELTO, fields.INRELTO);
         Assert.AreEqual(a2DtoFields.INKNOWN, fields.INKNOWN);
         Assert.AreEqual(a2DtoFields.INLIVWTH, fields.INLIVWTH);
-        Assert.AreEqual(a2DtoFields.INVISITS, fields.INVISITS);
-        Assert.AreEqual(a2DtoFields.INCALLS, fields.INCALLS);
+        Assert.AreEqual(a2DtoFields.INCNTMOD, fields.INCNTMOD);
+        Assert.AreEqual(a2DtoFields.INCNTMDX, fields.INCNTMDX);
+        Assert.AreEqual(a2DtoFields.INCNTFRQ, fields.INCNTFRQ);
+        Assert.AreEqual(a2DtoFields.INCNTTIM, fields.INCNTTIM);
         Assert.AreEqual(a2DtoFields.INRELY, fields.INRELY);
+        Assert.AreEqual(a2DtoFields.INMEMWORS, fields.INMEMWORS);
+        Assert.AreEqual(a2DtoFields.INMEMTROUB, fields.INMEMTROUB);
+        Assert.AreEqual(a2DtoFields.INMEMTEN, fields.INMEMTEN);
     }
 
     [TestMethod]
