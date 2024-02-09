@@ -7,7 +7,7 @@
 
 
 @if (Model.Participation != null)
-{
+ {
 
     <div class="pb-4 pt-6 sm:pb-6">
         <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
@@ -47,7 +47,65 @@
             }
         </tbody>
     </table>
-}
+    <div class="space-y-16 py-16 xl:space-y-10">
+        <div class="pb-4 pt-6 sm:pb-6">
+            <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
+                <h2 class="max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Milestones</h2>
+            </div>
+            <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
+                <a asp-page="/Milestones/Create" asp-route-participationId="@Model.Participation.Id" class="ml-auto flex items-center gap-x-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <svg class="-ml-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"></path>
+                    </svg>
+                    Create Milestone
+                </a>
+            </div>
+        </div>
+        <div class="mt-6 overflow-hidden border-t border-gray-100">
+            <div class="max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl lg:mx-0 lg:max-w-none">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>type</th>
+                                <th>details</th>
+                                <th>progress</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- for each milstone in the page model-->
+                            @foreach (var milestone in Model.Milestones)
+                             {
+                                <tr class="align-top">
+                                    <td>@milestone.CreatedAt.ToShortDateString()</td>
+                                    @{
+                                        if (milestone.DECEASED == true || milestone.DISCONT == true)
+                                        {
+                                            <td>Change followed by NO FURTHER CONTACT</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Change followed by continued contact</td>
+                                        }
+                                    }
+
+                                    @await Html.PartialAsync("_MilestoneDetails", milestone)
+
+                                    <td>@milestone.Status</td>
+                                    <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" asp-route-formId="@milestone.FormId">Edit</a></td>
+                                    <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id" asp-route-formId="@milestone.FormId">View</a></td>
+                                </tr>
+                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>

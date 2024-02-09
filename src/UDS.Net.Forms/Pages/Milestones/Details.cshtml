@@ -1,0 +1,301 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Milestones.DetailsModel
+
+@{
+    ViewData["Title"] = "Milestone details";
+}
+
+<div class="space-y-16 p-16 xl:space-y-20">
+    <table class="table-auto border-separate border-spacing-y-5">
+        <tbody>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.Id">@Html.DisplayNameFor(model => model.Milestone.Id)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.Id" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.FormId">@Html.DisplayNameFor(model => model.Milestone.FormId)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.FormId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.ParticipationId">@Html.DisplayNameFor(model => model.Milestone.ParticipationId)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.ParticipationId" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.Status">@Html.DisplayNameFor(model => model.Milestone.Status)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.Status" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.CHANGEMO">@Html.DisplayNameFor(model => model.Milestone.CHANGEMO)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.CHANGEMO" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.CHANGEDY">@Html.DisplayNameFor(model => model.Milestone.CHANGEDY)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.CHANGEDY" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.CHANGEYR">@Html.DisplayNameFor(model => model.Milestone.CHANGEYR)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.CHANGEYR" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.PROTOCOL">@Html.DisplayNameFor(model => model.Milestone.PROTOCOL)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.PROTOCOL" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.ACONSENT">@Html.DisplayNameFor(model => model.Milestone.ACONSENT)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.ACONSENT" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.RECOGIM">@Html.DisplayNameFor(model => model.Milestone.RECOGIM)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.RECOGIM" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.REPHYILL">@Html.DisplayNameFor(model => model.Milestone.REPHYILL)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.REPHYILL" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.REREFUSE">@Html.DisplayNameFor(model => model.Milestone.REREFUSE)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.REREFUSE" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.RENAVAIL">@Html.DisplayNameFor(model => model.Milestone.RENAVAIL)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.RENAVAIL" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.RENURSE">@Html.DisplayNameFor(model => model.Milestone.RENURSE)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.RENURSE" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.NURSEMO">@Html.DisplayNameFor(model => model.Milestone.NURSEMO)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.NURSEMO" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.NURSEDY">@Html.DisplayNameFor(model => model.Milestone.NURSEDY)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.NURSEDY" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.NURSEYR">@Html.DisplayNameFor(model => model.Milestone.NURSEYR)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.NURSEYR" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.REJOIN">@Html.DisplayNameFor(model => model.Milestone.REJOIN)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.REJOIN" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.FTLDDISC">@Html.DisplayNameFor(model => model.Milestone.FTLDDISC)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.FTLDDISC" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.FTLDREAS">@Html.DisplayNameFor(model => model.Milestone.FTLDREAS)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.FTLDREAS" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.FTLDREAX">@Html.DisplayNameFor(model => model.Milestone.FTLDREAX)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.FTLDREAX" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DECEASED">@Html.DisplayNameFor(model => model.Milestone.DECEASED)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DECEASED" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DISCONT">@Html.DisplayNameFor(model => model.Milestone.DISCONT)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DISCONT" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DEATHMO">@Html.DisplayNameFor(model => model.Milestone.DEATHMO)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DEATHMO" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DEATHDY">@Html.DisplayNameFor(model => model.Milestone.DEATHDY)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DEATHDY" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DEATHYR">@Html.DisplayNameFor(model => model.Milestone.DEATHYR)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DEATHYR" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.AUTOPSY">@Html.DisplayNameFor(model => model.Milestone.AUTOPSY)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.AUTOPSY" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DISCMO">@Html.DisplayNameFor(model => model.Milestone.DISCMO)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DISCMO" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DISCDAY">@Html.DisplayNameFor(model => model.Milestone.DISCDAY)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DISCDAY" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DISCYR">@Html.DisplayNameFor(model => model.Milestone.DISCYR)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DISCYR" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DROPREAS">@Html.DisplayNameFor(model => model.Milestone.DROPREAS)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DROPREAS" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.CreatedAt">@Html.DisplayNameFor(model => model.Milestone.CreatedAt)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.CreatedAt" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.CreatedBy">@Html.DisplayNameFor(model => model.Milestone.CreatedBy)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.CreatedBy" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.ModifiedBy">@Html.DisplayNameFor(model => model.Milestone.ModifiedBy)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.ModifiedBy" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.DeletedBy">@Html.DisplayNameFor(model => model.Milestone.DeletedBy)</label>
+                </td>
+                <td>
+                    <input readonly asp-for="Milestone.DeletedBy" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="Milestone.IsDeleted">@Html.DisplayNameFor(model => model.Milestone.IsDeleted)</label>
+                </td>
+                <td>
+                    <input type="text" readonly asp-for="Milestone.IsDeleted" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
