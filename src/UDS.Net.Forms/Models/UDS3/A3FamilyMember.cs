@@ -28,11 +28,21 @@ namespace UDS.Net.Forms.Models.UDS3
         public int? NEU { get; set; }
 
         [Display(Name = "Primary Dx")]
-        [Diagnosis]
+        [Diagnosis(AllowUnknown = true)]
+        [RequiredIf(nameof(NEU), "1", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(NEU), "2", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(NEU), "3", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(NEU), "4", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
+        [RequiredIf(nameof(NEU), "5", ErrorMessage = "Please provide a Primary Dx, refer to the codes in APPENDIX 1")]
         public int? PDX { get; set; }
 
         [Display(Name = "Method of evaluation")]
         [Range(1, 7)]
+        [RequiredIf(nameof(NEU), "1", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(NEU), "2", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(NEU), "3", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(NEU), "4", ErrorMessage = "Please provide a method of evaluation")]
+        [RequiredIf(nameof(NEU), "5", ErrorMessage = "Please provide a method of evaluation")]
         public int? MOE { get; set; }
 
         [Display(Name = "Age of onset")]
