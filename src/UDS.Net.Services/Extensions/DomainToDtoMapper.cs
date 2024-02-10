@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -63,6 +62,48 @@ namespace UDS.Net.Services.Extensions
                 dto.Forms = visit.Forms.ToDto();
 
             return dto;
+        }
+
+        public static M1Dto ToDto(this Milestone milestone)
+        {
+            return new M1Dto
+            {
+                FormId = milestone.FormId,
+                ParticipationId = milestone.ParticipationId,
+                Status = milestone.Status,
+                CHANGEMO = milestone.CHANGEMO,
+                CHANGEDY = milestone.CHANGEDY,
+                CHANGEYR = milestone.CHANGEYR,
+                PROTOCOL = milestone.PROTOCOL,
+                ACONSENT = milestone.ACONSENT,
+                RECOGIM = milestone.RECOGIM,
+                REPHYILL = milestone.REPHYILL,
+                REREFUSE = milestone.REREFUSE,
+                RENAVAIL = milestone.RENAVAIL,
+                RENURSE = milestone.RENURSE,
+                NURSEMO = milestone.NURSEMO,
+                NURSEDY = milestone.NURSEDY,
+                NURSEYR = milestone.NURSEYR,
+                REJOIN = milestone.REJOIN,
+                FTLDDISC = milestone.FTLDDISC,
+                FTLDREAS = milestone.FTLDREAS,
+                FTLDREAX = milestone.FTLDREAX,
+                DECEASED = milestone.DECEASED,
+                DISCONT = milestone.DISCONT,
+                DEATHMO = milestone.DEATHMO,
+                DEATHDY = milestone.DEATHDY,
+                DEATHYR = milestone.DEATHYR,
+                AUTOPSY = milestone.AUTOPSY,
+                DISCMO = milestone.DISCMO,
+                DISCDAY = milestone.DISCDAY,
+                DISCYR = milestone.DISCYR,
+                DROPREAS = milestone.DROPREAS,
+                CreatedAt = milestone.CreatedAt,
+                CreatedBy = milestone.CreatedBy,
+                ModifiedBy = milestone.ModifiedBy,
+                DeletedBy = milestone.DeletedBy,
+                IsDeleted = milestone.IsDeleted,
+            };
         }
 
         public static VisitDto ToDto(this Visit visit, string formKind)
@@ -382,15 +423,82 @@ namespace UDS.Net.Services.Extensions
 
             foreach (var sib in fields.SiblingFormFields)
             {
-                // TODO map a3 siblings
                 var sibDto = sib.ToDto(formId);
+                if (sib.FamilyMemberIndex == 1)
+                    dto.SIB1 = sibDto;
+                else if (sib.FamilyMemberIndex == 2)
+                    dto.SIB2 = sibDto;
+                else if (sib.FamilyMemberIndex == 3)
+                    dto.SIB3 = sibDto;
+                else if (sib.FamilyMemberIndex == 4)
+                    dto.SIB4 = sibDto;
+                else if (sib.FamilyMemberIndex == 5)
+                    dto.SIB5 = sibDto;
+                else if (sib.FamilyMemberIndex == 6)
+                    dto.SIB6 = sibDto;
+                else if (sib.FamilyMemberIndex == 7)
+                    dto.SIB7 = sibDto;
+                else if (sib.FamilyMemberIndex == 8)
+                    dto.SIB8 = sibDto;
+                else if (sib.FamilyMemberIndex == 9)
+                    dto.SIB9 = sibDto;
+                else if (sib.FamilyMemberIndex == 10)
+                    dto.SIB10 = sibDto;
+                else if (sib.FamilyMemberIndex == 11)
+                    dto.SIB11 = sibDto;
+                else if (sib.FamilyMemberIndex == 12)
+                    dto.SIB12 = sibDto;
+                else if (sib.FamilyMemberIndex == 13)
+                    dto.SIB13 = sibDto;
+                else if (sib.FamilyMemberIndex == 14)
+                    dto.SIB14 = sibDto;
+                else if (sib.FamilyMemberIndex == 15)
+                    dto.SIB15 = sibDto;
+                else if (sib.FamilyMemberIndex == 16)
+                    dto.SIB16 = sibDto;
+                else if (sib.FamilyMemberIndex == 17)
+                    dto.SIB17 = sibDto;
+                else if (sib.FamilyMemberIndex == 18)
+                    dto.SIB18 = sibDto;
+                else if (sib.FamilyMemberIndex == 19)
+                    dto.SIB19 = sibDto;
+                else if (sib.FamilyMemberIndex == 20)
+                    dto.SIB20 = sibDto;
             }
 
             foreach (var kid in fields.KidsFormFields)
             {
-                // TODO map a3 children
-                var kidSto = kid.ToDto(formId);
-
+                var kidDto = kid.ToDto(formId);
+                if (kid.FamilyMemberIndex == 1)
+                    dto.KID1 = kidDto;
+                else if (kid.FamilyMemberIndex == 2)
+                    dto.KID2 = kidDto;
+                else if (kid.FamilyMemberIndex == 3)
+                    dto.KID3 = kidDto;
+                else if (kid.FamilyMemberIndex == 4)
+                    dto.KID4 = kidDto;
+                else if (kid.FamilyMemberIndex == 5)
+                    dto.KID5 = kidDto;
+                else if (kid.FamilyMemberIndex == 6)
+                    dto.KID6 = kidDto;
+                else if (kid.FamilyMemberIndex == 7)
+                    dto.KID7 = kidDto;
+                else if (kid.FamilyMemberIndex == 8)
+                    dto.KID8 = kidDto;
+                else if (kid.FamilyMemberIndex == 9)
+                    dto.KID9 = kidDto;
+                else if (kid.FamilyMemberIndex == 10)
+                    dto.KID10 = kidDto;
+                else if (kid.FamilyMemberIndex == 11)
+                    dto.KID11 = kidDto;
+                else if (kid.FamilyMemberIndex == 12)
+                    dto.KID12 = kidDto;
+                else if (kid.FamilyMemberIndex == 13)
+                    dto.KID13 = kidDto;
+                else if (kid.FamilyMemberIndex == 14)
+                    dto.KID14 = kidDto;
+                else if (kid.FamilyMemberIndex == 15)
+                    dto.KID15 = kidDto;
             }
 
             return dto;
