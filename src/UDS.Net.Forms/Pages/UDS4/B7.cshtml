@@ -1,0 +1,110 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.B7Model
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on information provided by the co-participant. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B7. Indicate the level of performance for each activity by checking the <span class="underline">one</span> appropriate response.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <table class="table-auto min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 italic">In the past four weeks, did the subject have difficulty or need help with:</th>
+                    @foreach (var item in Model.ListItems)
+                    {
+                        <th class="w-20 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                <tr>
+                    <td>
+                        <label asp-for="B7.BILLS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.BILLS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.BILLS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.BILLS"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.BILLS)" for="@Model.B7.BILLS" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.TAXES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.TAXES)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.TAXES"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TAXES"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TAXES)" for="@Model.B7.TAXES" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.SHOPPING"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.SHOPPING)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.SHOPPING"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.SHOPPING"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.SHOPPING)" for="@Model.B7.SHOPPING" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.GAMES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.GAMES)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.GAMES"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.GAMES"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.GAMES)" for="@Model.B7.GAMES" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.STOVE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.STOVE)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.STOVE"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.STOVE"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.STOVE)" for="@Model.B7.STOVE" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.MEALPREP"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.MEALPREP)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.MEALPREP"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.MEALPREP"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.MEALPREP)" for="@Model.B7.MEALPREP" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.EVENTS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.EVENTS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.EVENTS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.EVENTS"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.EVENTS)" for="@Model.B7.EVENTS" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.PAYATTN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.PAYATTN)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.PAYATTN"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.PAYATTN"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.PAYATTN)" for="@Model.B7.PAYATTN" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.REMDATES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.REMDATES)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.REMDATES"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.REMDATES"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.REMDATES)" for="@Model.B7.REMDATES" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="B7.TRAVEL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.TRAVEL)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B7.TRAVEL"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TRAVEL"></span>
+                    </td>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TRAVEL)" for="@Model.B7.TRAVEL" items="Model.ListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<partial name="_FormFooter" for="@Model.B7" />

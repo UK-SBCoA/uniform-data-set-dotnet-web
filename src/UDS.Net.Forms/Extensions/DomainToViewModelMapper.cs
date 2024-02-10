@@ -1,18 +1,7 @@
-﻿using System;
-using System.Drawing;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.Arm;
-using Microsoft.Extensions.Logging;
-using UDS.Net.Dto;
-using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
+﻿using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions

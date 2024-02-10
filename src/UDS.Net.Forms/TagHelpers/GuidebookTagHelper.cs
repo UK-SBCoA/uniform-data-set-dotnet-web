@@ -8,10 +8,10 @@ namespace UDS.Net.Forms.TagHelpers
     /// </summary>
     public class GuidebookTagHelper : TagHelper
     {
-        private const string IVP = "https://files.alz.washington.edu/documentation/uds3-ivp-guidebook.pdf";
-        private const string FVP = "https://files.alz.washington.edu/documentation/uds3-fvp-guidebook.pdf";
-        private const string TIP = "https://files.alz.washington.edu/documentation/uds3-tip-guidebook.pdf";
-        private const string TFP = "https://files.alz.washington.edu/documentation/uds3-tfp-guidebook.pdf";
+        private const string IVP = "https://github.com/naccdata/uniform-data-set";
+        private const string FVP = "https://github.com/naccdata/uniform-data-set";
+        private const string TIP = "https://github.com/naccdata/uniform-data-set";
+        private const string TFP = "https://github.com/naccdata/uniform-data-set";
 
         public string Kind { get; set; }
 

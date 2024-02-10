@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 
 namespace UDS.Net.Forms.Pages.Lookup
