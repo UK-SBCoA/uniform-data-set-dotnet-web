@@ -20,17 +20,19 @@
         <div class="@rowCSS">
             <label asp-for="A2.INRELTO"><span class="counter"></span>@Html.DisplayNameFor(m=> m.A2.INRELTO)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
-
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INRELTO"></span>
                 <radio-button-group id="A2_INRELTO" for="@Model.A2.INRELTO" items="Model.INRELTO"></radio-button-group>
             </div>
 
         </div>
         <div class="@rowCSS">
-            <label asp-for="@Model.A2.INKNOWN"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INKNOWN)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div>
+                <label asp-for="@Model.A2.INKNOWN"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INKNOWN)<p class="text-sm font-semibold">(If the co-participant has known the participant for less than 1 year, use 0.)</p> </label>
+            </div>
+            <div class="mt-4 sm:col-span-2 sm:mt-0" style="display: flex; align-items: center;">
                 <p class="text-sm text-gray-500" asp-description-for="A2.INKNOWN"></p>
-                <input asp-for="@Model.A2.INKNOWN" />
+                <input asp-for="@Model.A2.INKNOWN" style="margin-right: 10px" />
+                <p class="text-base font-semibold">Years (999 = Unknown)</p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INKNOWN"></span>
             </div>
         </div>
@@ -43,6 +45,7 @@
                 <radio-button-group id="A2_INLIVWTH" for="@Model.A2.INLIVWTH" items="Model.INLIVWTH"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INLIVWTH"></span>
             </div>
+        </div>
 
         <div class="">
             <div class="px-4 py-4 sm:p-2">
@@ -124,5 +127,5 @@
         </div>
 
     </div>
-
-    <partial name="_FormFooter" for="@Model.A2" />
+</div>
+<partial name="_FormFooter" for="@Model.A2" />
