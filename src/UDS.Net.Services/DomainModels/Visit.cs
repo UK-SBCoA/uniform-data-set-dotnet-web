@@ -50,96 +50,53 @@ namespace UDS.Net.Services.DomainModels
 
         private void BuildFormsContract(string version, VisitKind kind, IList<Form> existingForms)
         {
-            if (version == "UDS3")
+            if (version == "UDS4")
             {
-                Dictionary<string, FormContract[]> UDS3 = new Dictionary<string, FormContract[]>
+                Dictionary<string, FormContract[]> UDS4 = new Dictionary<string, FormContract[]>
                 {
                     {
                         VisitKind.IVP.ToString(),
                         new FormContract[]
                         {
-                            new FormContract("A1", true),
-                            new FormContract("A2", false),
-                            new FormContract("A3", false),
-                            new FormContract("A4", false),
-                            new FormContract("A5", true),
-                            new FormContract("B1", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B8", true),
-                            new FormContract("B9", true),
-                            new FormContract("C2", true),
-                            new FormContract("D1", true),
-                            new FormContract("D2", true)
+                            new FormContract("B7", false)
                         }
                     },
                     {
                         VisitKind.FVP.ToString(),
                         new FormContract[]
                         {
-                            new FormContract("A1", true),
-                            new FormContract("A2", false),
-                            new FormContract("A3", false),
-                            new FormContract("A4", false),
-                            new FormContract("B1", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B8", true),
-                            new FormContract("B9", true),
-                            new FormContract("C1", false),
-                            new FormContract("C2", false),
-                            new FormContract("D1", true),
-                            new FormContract("D2", true)
+                            new FormContract("B7", false)
                         }
                     },
                     {
                         VisitKind.TIP.ToString(),
                         new FormContract[]
                         {
-                            new FormContract("T1", true),
-                            new FormContract("A1", true),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", false),
-                            new FormContract("A5", true),
-                            new FormContract("B1", true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B8", false),
-                            new FormContract("B9", true),
-                            new FormContract("C2", true),
-                            new FormContract("D1", true),
-                            new FormContract("D2", true)
+                            new FormContract("B7", false)
                         }
                     },
                     {
                         VisitKind.TFP.ToString(),
                         new FormContract[]
                         {
-                            new FormContract("T1", true),
-                            new FormContract("A1", true),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B9", true),
-                            new FormContract("C2", false),
-                            new FormContract("D1", true),
-                            new FormContract("D2", true)
+                            new FormContract("B7", false)
                         }
                     }
                 };
 
-                var formDefinitions = UDS3.Where(u => u.Key == kind.ToString()).FirstOrDefault();
+                var formDefinitions = UDS4.Where(u => u.Key == kind.ToString()).FirstOrDefault();
 
                 foreach (var formContract in formDefinitions.Value)
                 {
@@ -163,16 +120,6 @@ namespace UDS.Net.Services.DomainModels
                 }
 
 
-            }
-            else if (version == "UDS4")
-            {
-                Dictionary<string, string[]> UDS4 = new Dictionary<string, string[]> // TODO use form contract
-                {
-                    { VisitKind.IVP.ToString(), new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
-                    { VisitKind.FVP.ToString(), new string[] { "A1", "A2", "A3", "A4", "A5D2" } },
-                    { VisitKind.TIP.ToString(), new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } },
-                    { VisitKind.TFP.ToString() , new string[] { "T1", "A1", "A2", "A3", "A4", "A5" } }
-                };
             }
         }
 
@@ -222,7 +169,7 @@ namespace UDS.Net.Services.DomainModels
 
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
-            /// TODO For UDS3 FVP, either C1 or C2 is required
+            /// TODO For UDS3 FVP, either C1 or C2 is required, but not both
             yield break;
         }
     }

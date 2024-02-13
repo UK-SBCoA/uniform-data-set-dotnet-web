@@ -61,7 +61,7 @@ namespace UDS.Net.Forms.Pages.Visits
 
             Visit = new VisitModel
             {
-                Version = "UDS3",
+                Version = "UDS4",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username",
                 StartDateTime = DateTime.Now,

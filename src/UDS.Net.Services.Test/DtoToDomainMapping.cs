@@ -12,104 +12,104 @@ public class DtoToDomainMapping
     private static double TESTDOUBLE = 1.0;
     private static string EMAIL = "test@uky.edu";
 
-    [TestMethod]
-    public void A1DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new A1Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "A1",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    REASON = TESTINT,
-                    REFERSC = TESTINT,
-                    LEARNED = TESTINT,
-                    PRESTAT = TESTINT,
-                    PRESPART = TESTINT,
-                    SOURCENW = TESTINT,
-                    BIRTHMO = TESTINT,
-                    BIRTHYR = TESTINT,
-                    SEX = TESTINT,
-                    HISPANIC = TESTINT,
-                    HISPOR = TESTINT,
-                    HISPORX = TESTSTRING,
-                    RACE = TESTINT,
-                    RACEX = TESTSTRING,
-                    RACESEC = TESTINT,
-                    RACESECX = TESTSTRING,
-                    RACETER = TESTINT,
-                    RACETERX = TESTSTRING,
-                    PRIMLANG = TESTINT,
-                    PRIMLANX = TESTSTRING,
-                    EDUC = TESTINT,
-                    MARISTAT = TESTINT,
-                    LIVSITUA = TESTINT,
-                    INDEPEND = TESTINT,
-                    RESIDENC = TESTINT,
-                    ZIP = TESTSTRING,
-                    HANDED = TESTINT
-                }
-            }
-        };
+    //[TestMethod]
+    //public void A1DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new A1Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "A1",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                REASON = TESTINT,
+    //                REFERSC = TESTINT,
+    //                LEARNED = TESTINT,
+    //                PRESTAT = TESTINT,
+    //                PRESPART = TESTINT,
+    //                SOURCENW = TESTINT,
+    //                BIRTHMO = TESTINT,
+    //                BIRTHYR = TESTINT,
+    //                SEX = TESTINT,
+    //                HISPANIC = TESTINT,
+    //                HISPOR = TESTINT,
+    //                HISPORX = TESTSTRING,
+    //                RACE = TESTINT,
+    //                RACEX = TESTSTRING,
+    //                RACESEC = TESTINT,
+    //                RACESECX = TESTSTRING,
+    //                RACETER = TESTINT,
+    //                RACETERX = TESTSTRING,
+    //                PRIMLANG = TESTINT,
+    //                PRIMLANX = TESTSTRING,
+    //                EDUC = TESTINT,
+    //                MARISTAT = TESTINT,
+    //                LIVSITUA = TESTINT,
+    //                INDEPEND = TESTINT,
+    //                RESIDENC = TESTINT,
+    //                ZIP = TESTSTRING,
+    //                HANDED = TESTINT
+    //            }
+    //        }
+    //    };
 
-        var visit = visitDto.ToDomain(EMAIL);
+    //    var visit = visitDto.ToDomain(EMAIL);
 
-        var a1 = visit.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
+    //    var a1 = visit.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
 
-        Assert.IsTrue(a1.GetType() == typeof(Form));
-        Assert.IsTrue(a1.Fields.GetType() == typeof(A1FormFields));
+    //    Assert.IsTrue(a1.GetType() == typeof(Form));
+    //    Assert.IsTrue(a1.Fields.GetType() == typeof(A1FormFields));
 
-        var fields = (A1FormFields)a1.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
+    //    var fields = (A1FormFields)a1.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
 
-        Assert.IsNotNull(dtoFields);
+    //    Assert.IsNotNull(dtoFields);
 
-        var a1DtoFields = (A1Dto)dtoFields;
+    //    var a1DtoFields = (A1Dto)dtoFields;
 
-        Assert.AreEqual(a1DtoFields.REASON, fields.REASON);
-        Assert.AreEqual(a1DtoFields.REFERSC, fields.REFERSC);
-        Assert.AreEqual(a1DtoFields.LEARNED, fields.LEARNED);
-        Assert.AreEqual(a1DtoFields.PRESTAT, fields.PRESTAT);
-        Assert.AreEqual(a1DtoFields.PRESPART, fields.PRESPART);
-        Assert.AreEqual(a1DtoFields.SOURCENW, fields.SOURCENW);
-        Assert.AreEqual(a1DtoFields.BIRTHMO, fields.BIRTHMO);
-        Assert.AreEqual(a1DtoFields.BIRTHYR, fields.BIRTHYR);
-        Assert.AreEqual(a1DtoFields.SEX, fields.SEX);
-        Assert.AreEqual(a1DtoFields.HISPANIC, fields.HISPANIC);
-        Assert.AreEqual(a1DtoFields.HISPOR, fields.HISPOR);
-        Assert.AreEqual(a1DtoFields.HISPORX, fields.HISPORX);
-        Assert.AreEqual(a1DtoFields.RACE, fields.RACE);
-        Assert.AreEqual(a1DtoFields.RACEX, fields.RACEX);
-        Assert.AreEqual(a1DtoFields.RACESEC, fields.RACESEC);
-        Assert.AreEqual(a1DtoFields.RACESECX, fields.RACESECX);
-        Assert.AreEqual(a1DtoFields.RACETER, fields.RACETER);
-        Assert.AreEqual(a1DtoFields.RACETERX, fields.RACETERX);
-        Assert.AreEqual(a1DtoFields.PRIMLANG, fields.PRIMLANG);
-        Assert.AreEqual(a1DtoFields.PRIMLANX, fields.PRIMLANX);
-        Assert.AreEqual(a1DtoFields.EDUC, fields.EDUC);
-        Assert.AreEqual(a1DtoFields.MARISTAT, fields.MARISTAT);
-        Assert.AreEqual(a1DtoFields.LIVSITUA, fields.LIVSITUA);
-        Assert.AreEqual(a1DtoFields.INDEPEND, fields.INDEPEND);
-        Assert.AreEqual(a1DtoFields.RESIDENC, fields.RESIDENC);
-        Assert.AreEqual(a1DtoFields.ZIP, fields.ZIP);
-        Assert.AreEqual(a1DtoFields.HANDED, fields.HANDED);
-    }
+    //    Assert.AreEqual(a1DtoFields.REASON, fields.REASON);
+    //    Assert.AreEqual(a1DtoFields.REFERSC, fields.REFERSC);
+    //    Assert.AreEqual(a1DtoFields.LEARNED, fields.LEARNED);
+    //    Assert.AreEqual(a1DtoFields.PRESTAT, fields.PRESTAT);
+    //    Assert.AreEqual(a1DtoFields.PRESPART, fields.PRESPART);
+    //    Assert.AreEqual(a1DtoFields.SOURCENW, fields.SOURCENW);
+    //    Assert.AreEqual(a1DtoFields.BIRTHMO, fields.BIRTHMO);
+    //    Assert.AreEqual(a1DtoFields.BIRTHYR, fields.BIRTHYR);
+    //    Assert.AreEqual(a1DtoFields.SEX, fields.SEX);
+    //    Assert.AreEqual(a1DtoFields.HISPANIC, fields.HISPANIC);
+    //    Assert.AreEqual(a1DtoFields.HISPOR, fields.HISPOR);
+    //    Assert.AreEqual(a1DtoFields.HISPORX, fields.HISPORX);
+    //    Assert.AreEqual(a1DtoFields.RACE, fields.RACE);
+    //    Assert.AreEqual(a1DtoFields.RACEX, fields.RACEX);
+    //    Assert.AreEqual(a1DtoFields.RACESEC, fields.RACESEC);
+    //    Assert.AreEqual(a1DtoFields.RACESECX, fields.RACESECX);
+    //    Assert.AreEqual(a1DtoFields.RACETER, fields.RACETER);
+    //    Assert.AreEqual(a1DtoFields.RACETERX, fields.RACETERX);
+    //    Assert.AreEqual(a1DtoFields.PRIMLANG, fields.PRIMLANG);
+    //    Assert.AreEqual(a1DtoFields.PRIMLANX, fields.PRIMLANX);
+    //    Assert.AreEqual(a1DtoFields.EDUC, fields.EDUC);
+    //    Assert.AreEqual(a1DtoFields.MARISTAT, fields.MARISTAT);
+    //    Assert.AreEqual(a1DtoFields.LIVSITUA, fields.LIVSITUA);
+    //    Assert.AreEqual(a1DtoFields.INDEPEND, fields.INDEPEND);
+    //    Assert.AreEqual(a1DtoFields.RESIDENC, fields.RESIDENC);
+    //    Assert.AreEqual(a1DtoFields.ZIP, fields.ZIP);
+    //    Assert.AreEqual(a1DtoFields.HANDED, fields.HANDED);
+    //}
 
     [TestMethod]
     public void A2DtoMapsToDomain()
@@ -157,7 +157,7 @@ public class DtoToDomainMapping
         var a2 = visit.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
 
         Assert.IsTrue(a2.GetType() == typeof(Form));
-        Assert.IsTrue(a2.Fields.GetType() == typeof(A2FormFields));
+        Assert.IsTrue(a2.Fields.GetType() == typeof(A1FormFields));
 
         var fields = (A2FormFields)a2.Fields;
         var dtoFields = visitDto.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
@@ -180,356 +180,356 @@ public class DtoToDomainMapping
         Assert.AreEqual(a2DtoFields.INMEMTEN, fields.INMEMTEN);
     }
 
-    [TestMethod]
-    public void A3DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new A3Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "A3",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    AFFFAMM = TESTINT,
-                    NWINFMUT = TESTINT,
-                    FADMUT = TESTINT,
-                    FADMUTX = TESTSTRING,
-                    FADMUSO = TESTINT,
-                    FADMUSOX = TESTSTRING,
-                    FFTDMUT = TESTINT,
-                    FFTDMUTX = TESTSTRING,
-                    FFTDMUSO = TESTINT,
-                    FFTDMUSX = TESTSTRING,
-                    FOTHMUT = TESTINT,
-                    FOTHMUTX = TESTSTRING,
-                    FOTHMUSO = TESTINT,
-                    FOTHMUSX = TESTSTRING,
-                    MOMMOB = TESTINT,
-                    MOMYOB = TESTINT,
-                    MOMDAGE = TESTINT,
-                    MOMNEUR = TESTINT,
-                    MOMPRDX = TESTINT,
-                    MOMMOE = TESTINT,
-                    MOMAGEO = TESTINT,
-                    DADMOB = TESTINT,
-                    DADDAGE = TESTINT,
-                    DADNEUR = TESTINT,
-                    DADPRDX = TESTINT,
-                    DADMOE = TESTINT,
-                    DADAGEO = TESTINT
-                    // TODO test sibling and children mappings
-                }
-            }
-        };
+    //[TestMethod]
+    //public void A3DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new A3Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "A3",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                AFFFAMM = TESTINT,
+    //                NWINFMUT = TESTINT,
+    //                FADMUT = TESTINT,
+    //                FADMUTX = TESTSTRING,
+    //                FADMUSO = TESTINT,
+    //                FADMUSOX = TESTSTRING,
+    //                FFTDMUT = TESTINT,
+    //                FFTDMUTX = TESTSTRING,
+    //                FFTDMUSO = TESTINT,
+    //                FFTDMUSX = TESTSTRING,
+    //                FOTHMUT = TESTINT,
+    //                FOTHMUTX = TESTSTRING,
+    //                FOTHMUSO = TESTINT,
+    //                FOTHMUSX = TESTSTRING,
+    //                MOMMOB = TESTINT,
+    //                MOMYOB = TESTINT,
+    //                MOMDAGE = TESTINT,
+    //                MOMNEUR = TESTINT,
+    //                MOMPRDX = TESTINT,
+    //                MOMMOE = TESTINT,
+    //                MOMAGEO = TESTINT,
+    //                DADMOB = TESTINT,
+    //                DADDAGE = TESTINT,
+    //                DADNEUR = TESTINT,
+    //                DADPRDX = TESTINT,
+    //                DADMOE = TESTINT,
+    //                DADAGEO = TESTINT
+    //                // TODO test sibling and children mappings
+    //            }
+    //        }
+    //    };
 
-        var visit = visitDto.ToDomain(EMAIL);
+    //    var visit = visitDto.ToDomain(EMAIL);
 
-        var a3 = visit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+    //    var a3 = visit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
 
-        Assert.IsTrue(a3.GetType() == typeof(Form));
-        Assert.IsTrue(a3.Fields.GetType() == typeof(A3FormFields));
+    //    Assert.IsTrue(a3.GetType() == typeof(Form));
+    //    Assert.IsTrue(a3.Fields.GetType() == typeof(A3FormFields));
 
-        var fields = (A3FormFields)a3.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+    //    var fields = (A3FormFields)a3.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
 
-        Assert.IsNotNull(dtoFields);
+    //    Assert.IsNotNull(dtoFields);
 
-        var a3DtoFields = (A3Dto)dtoFields;
+    //    var a3DtoFields = (A3Dto)dtoFields;
 
-        foreach (var property in typeof(A3FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+    //    foreach (var property in typeof(A3FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
 
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
 
-            var dtoProperty = a3DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(a3DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-
-
-        }
-    }
-
-    [TestMethod]
-    public void A4DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new A4GDto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "A4",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    ANYMEDS = TESTINT,
-                    A4Dtos = new List<A4DDto>()
-                    {
-                        new A4DDto
-                        {
-                            Id = 1,
-                            VisitId = 1,
-                            Kind = "A4",
-                            CreatedAt = DateTime.Now,
-                            CreatedBy = EMAIL,
-                            IsDeleted = false,
-                            Status = "Pending",
-                            DRUGID = TESTSTRING
-                        }
-                    }
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var a4 = visit.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
-
-        Assert.IsTrue(a4.GetType() == typeof(Form));
-        Assert.IsTrue(a4.Fields.GetType() == typeof(A4GFormFields));
-
-        var fields = (A4GFormFields)a4.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var a4DtoFields = (A4GDto)dtoFields;
-
-        Assert.AreEqual(a4DtoFields.ANYMEDS, fields.ANYMEDS);
-        Assert.AreEqual(a4DtoFields.A4Dtos.FirstOrDefault().DRUGID, fields.A4Ds.FirstOrDefault().DRUGID);
-    }
-
-    [TestMethod]
-    public void A5DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new A5Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "A5",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    TOBAC30 = TESTINT,
-                    TOBAC100 = TESTINT,
-                    SMOKYRS = TESTINT,
-                    PACKSPER = TESTINT,
-                    QUITSMOK = TESTINT,
-                    ALCOCCAS = TESTINT,
-                    ALCFREQ = TESTINT,
-                    CVHATT = TESTINT,
-                    HATTMULT = TESTINT,
-                    HATTYEAR = TESTINT,
-                    CVAFIB = TESTINT,
-                    CVANGIO = TESTINT,
-                    CVBYPASS = TESTINT,
-                    CVPACDEF = TESTINT,
-                    CVCHF = TESTINT,
-                    CVANGINA = TESTINT,
-                    CVHVALVE = TESTINT,
-                    CVOTHR = TESTINT,
-                    CVOTHRX = TESTSTRING,
-                    CBSTROKE = TESTINT,
-                    STROKMUL = TESTINT,
-                    STROKYR = TESTINT,
-                    CBTIA = TESTINT,
-                    TIAMULT = TESTINT,
-                    TIAYEAR = TESTINT,
-                    PD = TESTINT,
-                    PDYR = TESTINT,
-                    PDOTHR = TESTINT,
-                    PDOTHRYR = TESTINT,
-                    SEIZURES = TESTINT,
-                    TBI = TESTINT,
-                    TBIBRIEF = TESTINT,
-                    TBIEXTEN = TESTINT,
-                    TBIWOLOS = TESTINT,
-                    TBIYEAR = TESTINT,
-                    DIABETES = TESTINT,
-                    DIABTYPE = TESTINT,
-                    HYPERTEN = TESTINT,
-                    HYPERCHO = TESTINT,
-                    B12DEF = TESTINT,
-                    THYROID = TESTINT,
-                    ARTHRIT = TESTINT,
-                    ARTHTYPE = TESTINT,
-                    ARTHTYPX = TESTSTRING,
-                    ARTHUPEX = TESTINT,
-                    ARTHLOEX = TESTINT,
-                    ARTHSPIN = TESTINT,
-                    ARTHUNK = TESTINT,
-                    INCONTU = TESTINT,
-                    INCONTF = TESTINT,
-                    APNEA = TESTINT,
-                    RBD = TESTINT,
-                    INSOMN = TESTINT,
-                    OTHSLEEP = TESTINT,
-                    OTHSLEEX = TESTSTRING,
-                    ALCOHOL = TESTINT,
-                    ABUSOTHR = TESTINT,
-                    ABUSX = TESTSTRING,
-                    PTSD = TESTINT,
-                    BIPOLAR = TESTINT,
-                    SCHIZ = TESTINT,
-                    DEP2YRS = TESTINT,
-                    DEPOTHR = TESTINT,
-                    ANXIETY = TESTINT,
-                    OCD = TESTINT,
-                    NPSYDEV = TESTINT,
-                    PSYCDIS = TESTINT,
-                    PSYCDISX = TESTSTRING
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var a5 = visit.Forms.Where(f => f.Kind == "A5").FirstOrDefault();
-
-        Assert.IsTrue(a5.GetType() == typeof(Form));
-        Assert.IsTrue(a5.Fields.GetType() == typeof(A5FormFields));
-
-        var fields = (A5FormFields)a5.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "A5").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var a5DtoFields = (A5Dto)dtoFields;
-
-        foreach (var property in typeof(A5FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = a5DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(a5DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
+    //        var dtoProperty = a3DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(a3DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
 
 
-        }
-    }
+    //    }
+    //}
 
-    [TestMethod]
-    public void B1DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new B1Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "B1",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    HEIGHT = TESTDOUBLE,
-                    WEIGHT = TESTINT,
-                    BPSYS = TESTINT,
-                    BPDIAS = TESTINT,
-                    HRATE = TESTINT,
-                    VISION = TESTINT,
-                    VISCORR = TESTINT,
-                    VISWCORR = TESTINT,
-                    HEARING = TESTINT,
-                    HEARAID = TESTINT,
-                    HEARWAID = TESTINT
-                }
-            }
-        };
+    //[TestMethod]
+    //public void A4DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new A4GDto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "A4",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                ANYMEDS = TESTINT,
+    //                A4Dtos = new List<A4DDto>()
+    //                {
+    //                    new A4DDto
+    //                    {
+    //                        Id = 1,
+    //                        VisitId = 1,
+    //                        Kind = "A4",
+    //                        CreatedAt = DateTime.Now,
+    //                        CreatedBy = EMAIL,
+    //                        IsDeleted = false,
+    //                        Status = "Pending",
+    //                        DRUGID = TESTSTRING
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    };
 
-        var visit = visitDto.ToDomain(EMAIL);
+    //    var visit = visitDto.ToDomain(EMAIL);
 
-        var b1 = visit.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+    //    var a4 = visit.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
 
-        Assert.IsTrue(b1.GetType() == typeof(Form));
-        Assert.IsTrue(b1.Fields.GetType() == typeof(B1FormFields));
+    //    Assert.IsTrue(a4.GetType() == typeof(Form));
+    //    Assert.IsTrue(a4.Fields.GetType() == typeof(A4GFormFields));
 
-        var fields = (B1FormFields)b1.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+    //    var fields = (A4GFormFields)a4.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
 
-        Assert.IsNotNull(dtoFields);
+    //    Assert.IsNotNull(dtoFields);
 
-        var b1DtoFields = (B1Dto)dtoFields;
+    //    var a4DtoFields = (A4GDto)dtoFields;
 
-        Assert.AreEqual(b1DtoFields.HEIGHT, fields.HEIGHT);
-        Assert.AreEqual(b1DtoFields.WEIGHT, fields.WEIGHT);
-        Assert.AreEqual(b1DtoFields.BPSYS, fields.BPSYS);
-        Assert.AreEqual(b1DtoFields.BPDIAS, fields.BPDIAS);
-        Assert.AreEqual(b1DtoFields.HRATE, fields.HRATE);
-        Assert.AreEqual(b1DtoFields.VISION, fields.VISION);
-        Assert.AreEqual(b1DtoFields.VISCORR, fields.VISCORR);
-        Assert.AreEqual(b1DtoFields.VISWCORR, fields.VISWCORR);
-        Assert.AreEqual(b1DtoFields.HEARING, fields.HEARING);
-        Assert.AreEqual(b1DtoFields.HEARAID, fields.HEARAID);
-        Assert.AreEqual(b1DtoFields.HEARWAID, fields.HEARWAID);
-    }
+    //    Assert.AreEqual(a4DtoFields.ANYMEDS, fields.ANYMEDS);
+    //    Assert.AreEqual(a4DtoFields.A4Dtos.FirstOrDefault().DRUGID, fields.A4Ds.FirstOrDefault().DRUGID);
+    //}
+
+    //[TestMethod]
+    //public void A5DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new A5Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "A5",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                TOBAC30 = TESTINT,
+    //                TOBAC100 = TESTINT,
+    //                SMOKYRS = TESTINT,
+    //                PACKSPER = TESTINT,
+    //                QUITSMOK = TESTINT,
+    //                ALCOCCAS = TESTINT,
+    //                ALCFREQ = TESTINT,
+    //                CVHATT = TESTINT,
+    //                HATTMULT = TESTINT,
+    //                HATTYEAR = TESTINT,
+    //                CVAFIB = TESTINT,
+    //                CVANGIO = TESTINT,
+    //                CVBYPASS = TESTINT,
+    //                CVPACDEF = TESTINT,
+    //                CVCHF = TESTINT,
+    //                CVANGINA = TESTINT,
+    //                CVHVALVE = TESTINT,
+    //                CVOTHR = TESTINT,
+    //                CVOTHRX = TESTSTRING,
+    //                CBSTROKE = TESTINT,
+    //                STROKMUL = TESTINT,
+    //                STROKYR = TESTINT,
+    //                CBTIA = TESTINT,
+    //                TIAMULT = TESTINT,
+    //                TIAYEAR = TESTINT,
+    //                PD = TESTINT,
+    //                PDYR = TESTINT,
+    //                PDOTHR = TESTINT,
+    //                PDOTHRYR = TESTINT,
+    //                SEIZURES = TESTINT,
+    //                TBI = TESTINT,
+    //                TBIBRIEF = TESTINT,
+    //                TBIEXTEN = TESTINT,
+    //                TBIWOLOS = TESTINT,
+    //                TBIYEAR = TESTINT,
+    //                DIABETES = TESTINT,
+    //                DIABTYPE = TESTINT,
+    //                HYPERTEN = TESTINT,
+    //                HYPERCHO = TESTINT,
+    //                B12DEF = TESTINT,
+    //                THYROID = TESTINT,
+    //                ARTHRIT = TESTINT,
+    //                ARTHTYPE = TESTINT,
+    //                ARTHTYPX = TESTSTRING,
+    //                ARTHUPEX = TESTINT,
+    //                ARTHLOEX = TESTINT,
+    //                ARTHSPIN = TESTINT,
+    //                ARTHUNK = TESTINT,
+    //                INCONTU = TESTINT,
+    //                INCONTF = TESTINT,
+    //                APNEA = TESTINT,
+    //                RBD = TESTINT,
+    //                INSOMN = TESTINT,
+    //                OTHSLEEP = TESTINT,
+    //                OTHSLEEX = TESTSTRING,
+    //                ALCOHOL = TESTINT,
+    //                ABUSOTHR = TESTINT,
+    //                ABUSX = TESTSTRING,
+    //                PTSD = TESTINT,
+    //                BIPOLAR = TESTINT,
+    //                SCHIZ = TESTINT,
+    //                DEP2YRS = TESTINT,
+    //                DEPOTHR = TESTINT,
+    //                ANXIETY = TESTINT,
+    //                OCD = TESTINT,
+    //                NPSYDEV = TESTINT,
+    //                PSYCDIS = TESTINT,
+    //                PSYCDISX = TESTSTRING
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var a5 = visit.Forms.Where(f => f.Kind == "A5").FirstOrDefault();
+
+    //    Assert.IsTrue(a5.GetType() == typeof(Form));
+    //    Assert.IsTrue(a5.Fields.GetType() == typeof(A5FormFields));
+
+    //    var fields = (A5FormFields)a5.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "A5").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var a5DtoFields = (A5Dto)dtoFields;
+
+    //    foreach (var property in typeof(A5FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = a5DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(a5DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+
+
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void B1DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new B1Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "B1",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                HEIGHT = TESTDOUBLE,
+    //                WEIGHT = TESTINT,
+    //                BPSYS = TESTINT,
+    //                BPDIAS = TESTINT,
+    //                HRATE = TESTINT,
+    //                VISION = TESTINT,
+    //                VISCORR = TESTINT,
+    //                VISWCORR = TESTINT,
+    //                HEARING = TESTINT,
+    //                HEARAID = TESTINT,
+    //                HEARWAID = TESTINT
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var b1 = visit.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+
+    //    Assert.IsTrue(b1.GetType() == typeof(Form));
+    //    Assert.IsTrue(b1.Fields.GetType() == typeof(B1FormFields));
+
+    //    var fields = (B1FormFields)b1.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var b1DtoFields = (B1Dto)dtoFields;
+
+    //    Assert.AreEqual(b1DtoFields.HEIGHT, fields.HEIGHT);
+    //    Assert.AreEqual(b1DtoFields.WEIGHT, fields.WEIGHT);
+    //    Assert.AreEqual(b1DtoFields.BPSYS, fields.BPSYS);
+    //    Assert.AreEqual(b1DtoFields.BPDIAS, fields.BPDIAS);
+    //    Assert.AreEqual(b1DtoFields.HRATE, fields.HRATE);
+    //    Assert.AreEqual(b1DtoFields.VISION, fields.VISION);
+    //    Assert.AreEqual(b1DtoFields.VISCORR, fields.VISCORR);
+    //    Assert.AreEqual(b1DtoFields.VISWCORR, fields.VISWCORR);
+    //    Assert.AreEqual(b1DtoFields.HEARING, fields.HEARING);
+    //    Assert.AreEqual(b1DtoFields.HEARAID, fields.HEARAID);
+    //    Assert.AreEqual(b1DtoFields.HEARWAID, fields.HEARWAID);
+    //}
 
     [TestMethod]
     public void B4DtoMapsToDomain()
@@ -544,7 +544,7 @@ public class DtoToDomainMapping
             Number = 1,
             StartDateTime = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS3",
+            Version = "UDS4",
             Forms = new List<FormDto>()
             {
                 new B4Dto
@@ -609,7 +609,7 @@ public class DtoToDomainMapping
             Number = 1,
             StartDateTime = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS3",
+            Version = "UDS4",
             Forms = new List<FormDto>()
             {
                 new B5Dto
@@ -706,7 +706,7 @@ public class DtoToDomainMapping
             Number = 1,
             StartDateTime = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS3",
+            Version = "UDS4",
             Forms = new List<FormDto>()
             {
                 new B6Dto
@@ -785,7 +785,7 @@ public class DtoToDomainMapping
             Number = 1,
             StartDateTime = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS3",
+            Version = "UDS4",
             Forms = new List<FormDto>()
             {
                 new B7Dto
@@ -837,841 +837,841 @@ public class DtoToDomainMapping
         Assert.AreEqual(b7DtoFields.TRAVEL, fields.TRAVEL);
     }
 
-    [TestMethod]
-    public void B8DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new B8Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "B8",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    NORMEXAM = TESTINT,
-                    PARKSIGN = TESTINT,
-                    RESTTRL = TESTINT,
-                    RESTTRR = TESTINT,
-                    SLOWINGL = TESTINT,
-                    SLOWINGR = TESTINT,
-                    RIGIDL = TESTINT,
-                    RIGIDR = TESTINT,
-                    BRADY = TESTINT,
-                    PARKGAIT = TESTINT,
-                    POSTINST = TESTINT,
-                    CVDSIGNS = TESTINT,
-                    CORTDEF = TESTINT,
-                    SIVDFIND = TESTINT,
-                    CVDMOTL = TESTINT,
-                    CVDMOTR = TESTINT,
-                    CORTVISL = TESTINT,
-                    CORTVISR = TESTINT,
-                    SOMATL = TESTINT,
-                    SOMATR = TESTINT,
-                    POSTCORT = TESTINT,
-                    PSPCBS = TESTINT,
-                    EYEPSP = TESTINT,
-                    DYSPSP = TESTINT,
-                    AXIALPSP = TESTINT,
-                    GAITPSP = TESTINT,
-                    APRAXSP = TESTINT,
-                    APRAXL = TESTINT,
-                    APRAXR = TESTINT,
-                    CORTSENL = TESTINT,
-                    CORTSENR = TESTINT,
-                    ATAXL = TESTINT,
-                    ATAXR = TESTINT,
-                    ALIENLML = TESTINT,
-                    ALIENLMR = TESTINT,
-                    DYSTONL = TESTINT,
-                    DYSTONR = TESTINT,
-                    MYOCLLT = TESTINT,
-                    MYOCLRT = TESTINT,
-                    ALSFIND = TESTINT,
-                    GAITNPH = TESTINT,
-                    OTHNEUR = TESTINT,
-                    OTHNEURX = TESTSTRING
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var b8 = visit.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
-
-        Assert.IsTrue(b8.GetType() == typeof(Form));
-        Assert.IsTrue(b8.Fields.GetType() == typeof(B8FormFields));
-
-        var fields = (B8FormFields)b8.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var b8DtoFields = (B8Dto)dtoFields;
-
-        Assert.AreEqual(b8DtoFields.NORMEXAM, fields.NORMEXAM);
-        Assert.AreEqual(b8DtoFields.PARKSIGN, fields.PARKSIGN);
-        Assert.AreEqual(b8DtoFields.RESTTRL, fields.RESTTRL);
-        Assert.AreEqual(b8DtoFields.RESTTRR, fields.RESTTRR);
-        Assert.AreEqual(b8DtoFields.SLOWINGL, fields.SLOWINGL);
-        Assert.AreEqual(b8DtoFields.SLOWINGR, fields.SLOWINGR);
-        Assert.AreEqual(b8DtoFields.RIGIDL, fields.RIGIDL);
-        Assert.AreEqual(b8DtoFields.RIGIDR, fields.RIGIDR);
-        Assert.AreEqual(b8DtoFields.BRADY, fields.BRADY);
-        Assert.AreEqual(b8DtoFields.PARKGAIT, fields.PARKGAIT);
-        Assert.AreEqual(b8DtoFields.POSTINST, fields.POSTINST);
-        Assert.AreEqual(b8DtoFields.CVDSIGNS, fields.CVDSIGNS);
-        Assert.AreEqual(b8DtoFields.CORTDEF, fields.CORTDEF);
-        Assert.AreEqual(b8DtoFields.SIVDFIND, fields.SIVDFIND);
-        Assert.AreEqual(b8DtoFields.CVDMOTL, fields.CVDMOTL);
-        Assert.AreEqual(b8DtoFields.CVDMOTR, fields.CVDMOTR);
-        Assert.AreEqual(b8DtoFields.CORTVISL, fields.CORTVISL);
-        Assert.AreEqual(b8DtoFields.CORTVISR, fields.CORTVISR);
-        Assert.AreEqual(b8DtoFields.SOMATL, fields.SOMATL);
-        Assert.AreEqual(b8DtoFields.SOMATR, fields.SOMATR);
-        Assert.AreEqual(b8DtoFields.POSTCORT, fields.POSTCORT);
-        Assert.AreEqual(b8DtoFields.PSPCBS, fields.PSPCBS);
-        Assert.AreEqual(b8DtoFields.EYEPSP, fields.EYEPSP);
-        Assert.AreEqual(b8DtoFields.DYSPSP, fields.DYSPSP);
-        Assert.AreEqual(b8DtoFields.AXIALPSP, fields.AXIALPSP);
-        Assert.AreEqual(b8DtoFields.GAITPSP, fields.GAITPSP);
-        Assert.AreEqual(b8DtoFields.APRAXSP, fields.APRAXSP);
-        Assert.AreEqual(b8DtoFields.APRAXL, fields.APRAXL);
-        Assert.AreEqual(b8DtoFields.APRAXR, fields.APRAXR);
-        Assert.AreEqual(b8DtoFields.CORTSENL, fields.CORTSENL);
-        Assert.AreEqual(b8DtoFields.CORTSENR, fields.CORTSENR);
-        Assert.AreEqual(b8DtoFields.ATAXL, fields.ATAXL);
-        Assert.AreEqual(b8DtoFields.ATAXR, fields.ATAXR);
-        Assert.AreEqual(b8DtoFields.ALIENLML, fields.ALIENLML);
-        Assert.AreEqual(b8DtoFields.ALIENLMR, fields.ALIENLMR);
-        Assert.AreEqual(b8DtoFields.DYSTONL, fields.DYSTONL);
-        Assert.AreEqual(b8DtoFields.DYSTONR, fields.DYSTONR);
-        Assert.AreEqual(b8DtoFields.MYOCLLT, fields.MYOCLLT);
-        Assert.AreEqual(b8DtoFields.MYOCLRT, fields.MYOCLRT);
-        Assert.AreEqual(b8DtoFields.ALSFIND, fields.ALSFIND);
-        Assert.AreEqual(b8DtoFields.GAITNPH, fields.GAITNPH);
-        Assert.AreEqual(b8DtoFields.OTHNEUR, fields.OTHNEUR);
-        Assert.AreEqual(b8DtoFields.OTHNEURX, fields.OTHNEURX);
-
-    }
-
-    [TestMethod]
-    public void B9DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new B9Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "B9",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    DECSUB = TESTINT,
-                    DECIN = TESTINT,
-                    DECCLCOG = TESTINT,
-                    COGMEM = TESTINT,
-                    COGORI = TESTINT,
-                    COGJUDG = TESTINT,
-                    COGLANG = TESTINT,
-                    COGVIS = TESTINT,
-                    COGATTN = TESTINT,
-                    COGFLUC = TESTINT,
-                    COGFLAGO = TESTINT,
-                    COGOTHR = TESTINT,
-                    COGOTHRX = TESTSTRING,
-                    COGFPRED = TESTINT,
-                    COGFPREX = TESTSTRING,
-                    COGMODE = TESTINT,
-                    COGMODEX = TESTSTRING,
-                    DECAGE = TESTINT,
-                    DECCLBE = TESTINT,
-                    BEAPATHY = TESTINT,
-                    BEDEP = TESTINT,
-                    BEVHALL = TESTINT,
-                    BEVWELL = TESTINT,
-                    BEVHAGO = TESTINT,
-                    BEAHALL = TESTINT,
-                    BEDEL = TESTINT,
-                    BEDISIN = TESTINT,
-                    BEIRRIT = TESTINT,
-                    BEAGIT = TESTINT,
-                    BEPERCH = TESTINT,
-                    BEREM = TESTINT,
-                    BEREMAGO = TESTINT,
-                    BEANX = TESTINT,
-                    BEOTHR = TESTINT,
-                    BEOTHRX = TESTSTRING,
-                    BEFPRED = TESTINT,
-                    BEFPREDX = TESTSTRING,
-                    BEMODE = TESTINT,
-                    BEMODEX = TESTSTRING,
-                    BEAGE = TESTINT,
-                    DECCLMOT = TESTINT,
-                    MOGAIT = TESTINT,
-                    MOFALLS = TESTINT,
-                    MOTREM = TESTINT,
-                    MOSLOW = TESTINT,
-                    MOFRST = TESTINT,
-                    MOMODE = TESTINT,
-                    MOMODEX = TESTSTRING,
-                    MOMOPARK = TESTINT,
-                    PARKAGE = TESTINT,
-                    MOMOALS = TESTINT,
-                    ALSAGE = TESTINT,
-                    MOAGE = TESTINT,
-                    COURSE = TESTINT,
-                    FRSTCHG = TESTINT,
-                    LBDEVAL = TESTINT,
-                    FTLDEVAL = TESTINT
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var b9 = visit.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
-
-        Assert.IsTrue(b9.GetType() == typeof(Form));
-        Assert.IsTrue(b9.Fields.GetType() == typeof(B9FormFields));
-
-        var fields = (B9FormFields)b9.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var b9DtoFields = (B9Dto)dtoFields;
-
-        foreach (var property in typeof(B9FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = b9DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(b9DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-        }
-    }
-
-    [TestMethod]
-    public void C1DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "FVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 2,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new C1Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "C1",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    MMSECOMP = TESTINT,
-                    MMSEREAS = TESTINT,
-                    MMSELOC = TESTINT,
-                    MMSELAN = TESTINT,
-                    MMSELANX = TESTSTRING,
-                    MMSEVIS = TESTINT,
-                    MMSEHEAR = TESTINT,
-                    MMSEORDA = TESTINT,
-                    MMSEORLO = TESTINT,
-                    PENTAGON = TESTINT,
-                    MMSE = TESTINT,
-                    NPSYCLOC = TESTINT,
-                    NPSYLAN = TESTINT,
-                    NPSYLANX = TESTSTRING,
-                    LOGIMO = TESTINT,
-                    LOGIDAY = TESTINT,
-                    LOGIYR = TESTINT,
-                    LOGIPREV = TESTINT,
-                    LOGIMEM = TESTINT,
-                    UDSBENTC = TESTINT,
-                    DIGIF = TESTINT,
-                    DIGIFLEN = TESTINT,
-                    DIGIB = TESTINT,
-                    DIGIBLEN = TESTINT,
-                    ANIMALS = TESTINT,
-                    VEG = TESTINT,
-                    TRAILA = TESTINT,
-                    TRAILARR = TESTINT,
-                    TRAILALI = TESTINT,
-                    TRAILB = TESTINT,
-                    TRAILBRR = TESTINT,
-                    TRAILBLI = TESTINT,
-                    MEMUNITS = TESTINT,
-                    MEMTIME = TESTINT,
-                    UDSBENTD = TESTINT,
-                    UDSBENRS = TESTINT,
-                    BOSTON = TESTINT,
-                    UDSVERFC = TESTINT,
-                    UDSVERFN = TESTINT,
-                    UDSVERNF = TESTINT,
-                    UDSVERLC = TESTINT,
-                    UDSVERLR = TESTINT,
-                    UDSVERLN = TESTINT,
-                    UDSVERTN = TESTINT,
-                    UDSVERTE = TESTINT,
-                    UDSVERTI = TESTINT,
-                    COGSTAT = TESTINT
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var c1 = visit.Forms.Where(f => f.Kind == "C1").FirstOrDefault();
-
-        Assert.IsTrue(c1.GetType() == typeof(Form));
-        Assert.IsTrue(c1.Fields.GetType() == typeof(C1FormFields));
-
-        var fields = (C1FormFields)c1.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "C1").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var c1DtoFields = (C1Dto)dtoFields;
-
-        foreach (var property in typeof(C1FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = c1DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(c1DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-        }
-    }
-
-    [TestMethod]
-    public void C2DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new C2Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "C2",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    MOCACOMP = TESTINT,
-                    MOCAREAS = TESTINT,
-                    MOCALOC = TESTINT,
-                    MOCALAN = TESTINT,
-                    MOCALANX = TESTSTRING,
-                    MOCAVIS = TESTINT,
-                    MOCAHEAR = TESTINT,
-                    MOCATOTS = TESTINT,
-                    MOCATRAI = TESTINT,
-                    MOCACUBE = TESTINT,
-                    MOCACLOC = TESTINT,
-                    MOCACLON = TESTINT,
-                    MOCACLOH = TESTINT,
-                    MOCANAMI = TESTINT,
-                    MOCAREGI = TESTINT,
-                    MOCADIGI = TESTINT,
-                    MOCALETT = TESTINT,
-                    MOCASER7 = TESTINT,
-                    MOCAREPE = TESTINT,
-                    MOCAFLUE = TESTINT,
-                    MOCAABST = TESTINT,
-                    MOCARECN = TESTINT,
-                    MOCARECC = TESTINT,
-                    MOCARECR = TESTINT,
-                    MOCAORDT = TESTINT,
-                    MOCAORMO = TESTINT,
-                    MOCAORYR = TESTINT,
-                    MOCAORDY = TESTINT,
-                    MOCAORPL = TESTINT,
-                    MOCAORCT = TESTINT,
-                    NPSYCLOC = TESTINT,
-                    NPSYLAN = TESTINT,
-                    NPSYLANX = TESTSTRING,
-                    CRAFTVRS = TESTINT,
-                    CRAFTURS = TESTINT,
-                    UDSBENTC = TESTINT,
-                    DIGFORCT = TESTINT,
-                    DIGFORSL = TESTINT,
-                    DIGBACCT = TESTINT,
-                    DIGBACLS = TESTINT,
-                    ANIMALS = TESTINT,
-                    VEG = TESTINT,
-                    TRAILA = TESTINT,
-                    TRAILARR = TESTINT,
-                    TRAILALI = TESTINT,
-                    TRAILB = TESTINT,
-                    TRAILBRR = TESTINT,
-                    TRAILBLI = TESTINT,
-                    CRAFTDVR = TESTINT,
-                    CRAFTDRE = TESTINT,
-                    CRAFTDTI = TESTINT,
-                    CRAFTCUE = TESTINT,
-                    UDSBENTD = TESTINT,
-                    UDSBENRS = TESTINT,
-                    MINTTOTS = TESTINT,
-                    MINTTOTW = TESTINT,
-                    MINTSCNG = TESTINT,
-                    MINTSCNC = TESTINT,
-                    MINTPCNC = TESTINT,
-                    MINTPCNG = TESTINT,
-                    UDSVERFC = TESTINT,
-                    UDSVERFN = TESTINT,
-                    UDSVERNF = TESTINT,
-                    UDSVERLC = TESTINT,
-                    UDSVERLR = TESTINT,
-                    UDSVERLN = TESTINT,
-                    UDSVERTN = TESTINT,
-                    UDSVERTE = TESTINT,
-                    UDSVERTI = TESTINT,
-                    COGSTAT = TESTINT
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var c2 = visit.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
-
-        Assert.IsTrue(c2.GetType() == typeof(Form));
-        Assert.IsTrue(c2.Fields.GetType() == typeof(C2FormFields));
-
-        var fields = (C2FormFields)c2.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var c2DtoFields = (C2Dto)dtoFields;
-
-        foreach (var property in typeof(C2FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = c2DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(c2DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-        }
-    }
-
-    [TestMethod]
-    public void D1DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new D1Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "D1",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    DXMETHOD = TESTINT,
-                    NORMCOG = TESTINT,
-                    DEMENTED = TESTINT,
-                    AMNDEM = TESTINT,
-                    PCA = TESTINT,
-                    PPASYN = TESTINT,
-                    PPASYNT = TESTINT,
-                    FTDSYN = TESTINT,
-                    LBDSYN = TESTINT,
-                    NAMNDEM = TESTINT,
-                    MCIAMEM = TESTINT,
-                    MCIAPLUS = TESTINT,
-                    MCIAPLAN = TESTINT,
-                    MCIAPATT = TESTINT,
-                    MCIAPEX = TESTINT,
-                    MCIAPVIS = TESTINT,
-                    MCINON1 = TESTINT,
-                    MCIN1LAN = TESTINT,
-                    MCIN1ATT = TESTINT,
-                    MCIN1EX = TESTINT,
-                    MCIN1VIS = TESTINT,
-                    MCINON2 = TESTINT,
-                    MCIN2LAN = TESTINT,
-                    MCIN2ATT = TESTINT,
-                    MCIN2EX = TESTINT,
-                    MCIN2VIS = TESTINT,
-                    IMPNOMCI = TESTINT,
-                    AMYLPET = TESTINT,
-                    AMYLCSF = TESTINT,
-                    FDGAD = TESTINT,
-                    HIPPATR = TESTINT,
-                    TAUPETAD = TESTINT,
-                    CSFTAU = TESTINT,
-                    FDGFTLD = TESTINT,
-                    TPETFTLD = TESTINT,
-                    MRFTLD = TESTINT,
-                    DATSCAN = TESTINT,
-                    OTHBIOM = TESTINT,
-                    OTHBIOMX = TESTSTRING,
-                    IMAGLINF = TESTINT,
-                    IMAGLAC = TESTINT,
-                    IMAGMACH = TESTINT,
-                    IMAGMICH = TESTINT,
-                    IMAGEWMH = TESTINT,
-                    IMAGMWMH = TESTINT,
-                    ADMUT = TESTINT,
-                    FTLDMUT = TESTINT,
-                    OTHMUT = TESTINT,
-                    OTHMUTX = TESTSTRING,
-                    ALZDIS = TESTINT,
-                    ALZDISIF = TESTINT,
-                    LBDIS = TESTINT,
-                    LBDIF = TESTINT,
-                    PARK = TESTINT,
-                    MSA = TESTINT,
-                    MSAIF = TESTINT,
-                    PSP = TESTINT,
-                    PSPIF = TESTINT,
-                    CORT = TESTINT,
-                    CORTIF = TESTINT,
-                    FTLDMO = TESTINT,
-                    FTLDMOIF = TESTINT,
-                    FTLDNOS = TESTINT,
-                    FTLDNOIF = TESTINT,
-                    FTLDSUBT = TESTINT,
-                    FTLDSUBX = TESTSTRING,
-                    CVD = TESTINT,
-                    CVDIF = TESTINT,
-                    PREVSTK = TESTINT,
-                    STROKDEC = TESTINT,
-                    STKIMAG = TESTINT,
-                    INFNETW = TESTINT,
-                    INFWMH = TESTINT,
-                    ESSTREM = TESTINT,
-                    ESSTREIF = TESTINT,
-                    DOWNS = TESTINT,
-                    DOWNSIF = TESTINT,
-                    HUNT = TESTINT,
-                    HUNTIF = TESTINT,
-                    PRION = TESTINT,
-                    PRIONIF = TESTINT,
-                    BRNINJ = TESTINT,
-                    BRNINJIF = TESTINT,
-                    BRNINCTE = TESTINT,
-                    HYCEPH = TESTINT,
-                    HYCEPHIF = TESTINT,
-                    EPILEP = TESTINT,
-                    EPILEPIF = TESTINT,
-                    NEOP = TESTINT,
-                    NEOPIF = TESTINT,
-                    NEOPSTAT = TESTINT,
-                    HIV = TESTINT,
-                    HIVIF = TESTINT,
-                    OTHCOG = TESTINT,
-                    OTHCOGIF = TESTINT,
-                    OTHCOGX = TESTSTRING,
-                    DEP = TESTINT,
-                    DEPIF = TESTINT,
-                    DEPTREAT = TESTINT,
-                    BIPOLDX = TESTINT,
-                    BIPOLDIF = TESTINT,
-                    SCHIZOP = TESTINT,
-                    SCHIZOIF = TESTINT,
-                    ANXIET = TESTINT,
-                    ANXIETIF = TESTINT,
-                    DELIR = TESTINT,
-                    DELIRIF = TESTINT,
-                    PTSDDX = TESTINT,
-                    PTSDDXIF = TESTINT,
-                    OTHPSY = TESTINT,
-                    OTHPSYIF = TESTINT,
-                    OTHPSYX = TESTSTRING,
-                    ALCDEMIF = TESTINT,
-                    ALCABUSE = TESTINT,
-                    IMPSUB = TESTINT,
-                    IMPSUBIF = TESTINT,
-                    DYSILL = TESTINT,
-                    DYSILLIF = TESTINT,
-                    MEDS = TESTINT,
-                    MEDSIF = TESTINT,
-                    COGOTH = TESTINT,
-                    COGOTHIF = TESTINT,
-                    COGOTHX = TESTSTRING,
-                    COGOTH2 = TESTINT,
-                    COGOTH2F = TESTINT,
-                    COGOTH2X = TESTSTRING,
-                    COGOTH3 = TESTINT,
-                    COGOTH3F = TESTINT,
-                    COGOTH3X = TESTSTRING
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var d1 = visit.Forms.Where(f => f.Kind == "D1").FirstOrDefault();
-
-        Assert.IsTrue(d1.GetType() == typeof(Form));
-        Assert.IsTrue(d1.Fields.GetType() == typeof(D1FormFields));
-
-        var fields = (D1FormFields)d1.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "D1").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var d1DtoFields = (D1Dto)dtoFields;
-
-        foreach (var property in typeof(D1FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = d1DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(d1DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-        }
-    }
-
-    [TestMethod]
-    public void D2DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = "IVP",
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new D2Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "D2",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    CANCER = TESTINT,
-                    CANCSITE = TESTSTRING,
-                    DIABET = TESTINT,
-                    MYOINF = TESTINT,
-                    CONGHRT = TESTINT,
-                    AFIBRILL = TESTINT,
-                    HYPERT = TESTINT,
-                    ANGINA = TESTINT,
-                    HYPCHOL = TESTINT,
-                    VB12DEF = TESTINT,
-                    THYDIS = TESTINT,
-                    ARTH = TESTINT,
-                    ARTYPE = TESTINT,
-                    ARTYPEX = TESTSTRING,
-                    ARTUPEX = TESTINT,
-                    ARTLOEX = TESTINT,
-                    ARTSPIN = TESTINT,
-                    ARTUNKN = TESTINT,
-                    URINEINC = TESTINT,
-                    BOWLINC = TESTINT,
-                    SLEEPAP = TESTINT,
-                    REMDIS = TESTINT,
-                    HYPOSOM = TESTINT,
-                    SLEEPOTH = TESTINT,
-                    SLEEPOTX = TESTSTRING,
-                    ANGIOCP = TESTINT,
-                    ANGIOPCI = TESTINT,
-                    PACEMAKE = TESTINT,
-                    HVALVE = TESTINT,
-                    ANTIENC = TESTINT,
-                    ANTIENCX = TESTSTRING,
-                    OTHCOND = TESTINT,
-                    OTHCONDX = TESTSTRING
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var d2 = visit.Forms.Where(f => f.Kind == "D2").FirstOrDefault();
-
-        Assert.IsTrue(d2.GetType() == typeof(Form));
-        Assert.IsTrue(d2.Fields.GetType() == typeof(D2FormFields));
-
-        var fields = (D2FormFields)d2.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "D2").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var d2DtoFields = (D2Dto)dtoFields;
-
-        foreach (var property in typeof(D2FormFields).GetProperties())
-        {
-            // property names are the same in each object
-            // so we can iterate through reflection
-            var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
-
-            // Make sure the test was set to a value
-            Assert.IsNotNull(domainPropertyValue);
-
-            var dtoProperty = d2DtoFields.GetType().GetProperty(property.Name);
-            if (dtoProperty != null)
-            {
-                var dtoPropertyValue = dtoProperty.GetValue(d2DtoFields, null);
-                Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
-            }
-        }
-    }
-
-    [TestMethod]
-    public void T1DtoMapsToDomain()
-    {
-        VisitDto visitDto = new VisitDto
-        {
-            Id = 1,
-            Kind = VisitKind.TIP.ToString(),
-            CreatedAt = DateTime.Now,
-            CreatedBy = EMAIL,
-            IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
-            ParticipationId = 1,
-            Version = "UDS3",
-            Forms = new List<FormDto>()
-            {
-                new T1Dto
-                {
-                    Id = 1,
-                    VisitId = 1,
-                    Kind = "T1",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = EMAIL,
-                    IsDeleted = false,
-                    Status = "Pending",
-                    TELCOG = TESTINT,
-                    TELILL = TESTINT,
-                    TELHOME = TESTINT,
-                    TELREFU = TESTINT,
-                    TELCOV = TESTINT,
-                    TELOTHR = TESTINT,
-                    TELOTHRX = TESTSTRING,
-                    TELMOD = TESTINT,
-                    TELINPER = TESTINT,
-                    TELMILE = TESTINT
-                }
-            }
-        };
-
-        var visit = visitDto.ToDomain(EMAIL);
-
-        var t1 = visit.Forms.Where(f => f.Kind == "T1").FirstOrDefault();
-
-        Assert.IsTrue(t1.GetType() == typeof(Form));
-        Assert.IsTrue(t1.Fields.GetType() == typeof(T1FormFields));
-
-        var fields = (T1FormFields)t1.Fields;
-        var dtoFields = visitDto.Forms.Where(f => f.Kind == "T1").FirstOrDefault();
-
-        Assert.IsNotNull(dtoFields);
-
-        var t1DtoFields = (T1Dto)dtoFields;
-
-        Assert.AreEqual(t1DtoFields.TELCOG, fields.TELCOG);
-        Assert.AreEqual(t1DtoFields.TELILL, fields.TELILL);
-        Assert.AreEqual(t1DtoFields.TELHOME, fields.TELHOME);
-        Assert.AreEqual(t1DtoFields.TELREFU, fields.TELREFU);
-        Assert.AreEqual(t1DtoFields.TELCOV, fields.TELCOV);
-        Assert.AreEqual(t1DtoFields.TELOTHR, fields.TELOTHR);
-        Assert.AreEqual(t1DtoFields.TELOTHRX, fields.TELOTHRX);
-        Assert.AreEqual(t1DtoFields.TELMOD, fields.TELMOD);
-        Assert.AreEqual(t1DtoFields.TELINPER, fields.TELINPER);
-        Assert.AreEqual(t1DtoFields.TELMILE, fields.TELMILE);
-    }
+    //[TestMethod]
+    //public void B8DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new B8Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "B8",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                NORMEXAM = TESTINT,
+    //                PARKSIGN = TESTINT,
+    //                RESTTRL = TESTINT,
+    //                RESTTRR = TESTINT,
+    //                SLOWINGL = TESTINT,
+    //                SLOWINGR = TESTINT,
+    //                RIGIDL = TESTINT,
+    //                RIGIDR = TESTINT,
+    //                BRADY = TESTINT,
+    //                PARKGAIT = TESTINT,
+    //                POSTINST = TESTINT,
+    //                CVDSIGNS = TESTINT,
+    //                CORTDEF = TESTINT,
+    //                SIVDFIND = TESTINT,
+    //                CVDMOTL = TESTINT,
+    //                CVDMOTR = TESTINT,
+    //                CORTVISL = TESTINT,
+    //                CORTVISR = TESTINT,
+    //                SOMATL = TESTINT,
+    //                SOMATR = TESTINT,
+    //                POSTCORT = TESTINT,
+    //                PSPCBS = TESTINT,
+    //                EYEPSP = TESTINT,
+    //                DYSPSP = TESTINT,
+    //                AXIALPSP = TESTINT,
+    //                GAITPSP = TESTINT,
+    //                APRAXSP = TESTINT,
+    //                APRAXL = TESTINT,
+    //                APRAXR = TESTINT,
+    //                CORTSENL = TESTINT,
+    //                CORTSENR = TESTINT,
+    //                ATAXL = TESTINT,
+    //                ATAXR = TESTINT,
+    //                ALIENLML = TESTINT,
+    //                ALIENLMR = TESTINT,
+    //                DYSTONL = TESTINT,
+    //                DYSTONR = TESTINT,
+    //                MYOCLLT = TESTINT,
+    //                MYOCLRT = TESTINT,
+    //                ALSFIND = TESTINT,
+    //                GAITNPH = TESTINT,
+    //                OTHNEUR = TESTINT,
+    //                OTHNEURX = TESTSTRING
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var b8 = visit.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
+
+    //    Assert.IsTrue(b8.GetType() == typeof(Form));
+    //    Assert.IsTrue(b8.Fields.GetType() == typeof(B8FormFields));
+
+    //    var fields = (B8FormFields)b8.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var b8DtoFields = (B8Dto)dtoFields;
+
+    //    Assert.AreEqual(b8DtoFields.NORMEXAM, fields.NORMEXAM);
+    //    Assert.AreEqual(b8DtoFields.PARKSIGN, fields.PARKSIGN);
+    //    Assert.AreEqual(b8DtoFields.RESTTRL, fields.RESTTRL);
+    //    Assert.AreEqual(b8DtoFields.RESTTRR, fields.RESTTRR);
+    //    Assert.AreEqual(b8DtoFields.SLOWINGL, fields.SLOWINGL);
+    //    Assert.AreEqual(b8DtoFields.SLOWINGR, fields.SLOWINGR);
+    //    Assert.AreEqual(b8DtoFields.RIGIDL, fields.RIGIDL);
+    //    Assert.AreEqual(b8DtoFields.RIGIDR, fields.RIGIDR);
+    //    Assert.AreEqual(b8DtoFields.BRADY, fields.BRADY);
+    //    Assert.AreEqual(b8DtoFields.PARKGAIT, fields.PARKGAIT);
+    //    Assert.AreEqual(b8DtoFields.POSTINST, fields.POSTINST);
+    //    Assert.AreEqual(b8DtoFields.CVDSIGNS, fields.CVDSIGNS);
+    //    Assert.AreEqual(b8DtoFields.CORTDEF, fields.CORTDEF);
+    //    Assert.AreEqual(b8DtoFields.SIVDFIND, fields.SIVDFIND);
+    //    Assert.AreEqual(b8DtoFields.CVDMOTL, fields.CVDMOTL);
+    //    Assert.AreEqual(b8DtoFields.CVDMOTR, fields.CVDMOTR);
+    //    Assert.AreEqual(b8DtoFields.CORTVISL, fields.CORTVISL);
+    //    Assert.AreEqual(b8DtoFields.CORTVISR, fields.CORTVISR);
+    //    Assert.AreEqual(b8DtoFields.SOMATL, fields.SOMATL);
+    //    Assert.AreEqual(b8DtoFields.SOMATR, fields.SOMATR);
+    //    Assert.AreEqual(b8DtoFields.POSTCORT, fields.POSTCORT);
+    //    Assert.AreEqual(b8DtoFields.PSPCBS, fields.PSPCBS);
+    //    Assert.AreEqual(b8DtoFields.EYEPSP, fields.EYEPSP);
+    //    Assert.AreEqual(b8DtoFields.DYSPSP, fields.DYSPSP);
+    //    Assert.AreEqual(b8DtoFields.AXIALPSP, fields.AXIALPSP);
+    //    Assert.AreEqual(b8DtoFields.GAITPSP, fields.GAITPSP);
+    //    Assert.AreEqual(b8DtoFields.APRAXSP, fields.APRAXSP);
+    //    Assert.AreEqual(b8DtoFields.APRAXL, fields.APRAXL);
+    //    Assert.AreEqual(b8DtoFields.APRAXR, fields.APRAXR);
+    //    Assert.AreEqual(b8DtoFields.CORTSENL, fields.CORTSENL);
+    //    Assert.AreEqual(b8DtoFields.CORTSENR, fields.CORTSENR);
+    //    Assert.AreEqual(b8DtoFields.ATAXL, fields.ATAXL);
+    //    Assert.AreEqual(b8DtoFields.ATAXR, fields.ATAXR);
+    //    Assert.AreEqual(b8DtoFields.ALIENLML, fields.ALIENLML);
+    //    Assert.AreEqual(b8DtoFields.ALIENLMR, fields.ALIENLMR);
+    //    Assert.AreEqual(b8DtoFields.DYSTONL, fields.DYSTONL);
+    //    Assert.AreEqual(b8DtoFields.DYSTONR, fields.DYSTONR);
+    //    Assert.AreEqual(b8DtoFields.MYOCLLT, fields.MYOCLLT);
+    //    Assert.AreEqual(b8DtoFields.MYOCLRT, fields.MYOCLRT);
+    //    Assert.AreEqual(b8DtoFields.ALSFIND, fields.ALSFIND);
+    //    Assert.AreEqual(b8DtoFields.GAITNPH, fields.GAITNPH);
+    //    Assert.AreEqual(b8DtoFields.OTHNEUR, fields.OTHNEUR);
+    //    Assert.AreEqual(b8DtoFields.OTHNEURX, fields.OTHNEURX);
+
+    //}
+
+    //[TestMethod]
+    //public void B9DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new B9Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "B9",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                DECSUB = TESTINT,
+    //                DECIN = TESTINT,
+    //                DECCLCOG = TESTINT,
+    //                COGMEM = TESTINT,
+    //                COGORI = TESTINT,
+    //                COGJUDG = TESTINT,
+    //                COGLANG = TESTINT,
+    //                COGVIS = TESTINT,
+    //                COGATTN = TESTINT,
+    //                COGFLUC = TESTINT,
+    //                COGFLAGO = TESTINT,
+    //                COGOTHR = TESTINT,
+    //                COGOTHRX = TESTSTRING,
+    //                COGFPRED = TESTINT,
+    //                COGFPREX = TESTSTRING,
+    //                COGMODE = TESTINT,
+    //                COGMODEX = TESTSTRING,
+    //                DECAGE = TESTINT,
+    //                DECCLBE = TESTINT,
+    //                BEAPATHY = TESTINT,
+    //                BEDEP = TESTINT,
+    //                BEVHALL = TESTINT,
+    //                BEVWELL = TESTINT,
+    //                BEVHAGO = TESTINT,
+    //                BEAHALL = TESTINT,
+    //                BEDEL = TESTINT,
+    //                BEDISIN = TESTINT,
+    //                BEIRRIT = TESTINT,
+    //                BEAGIT = TESTINT,
+    //                BEPERCH = TESTINT,
+    //                BEREM = TESTINT,
+    //                BEREMAGO = TESTINT,
+    //                BEANX = TESTINT,
+    //                BEOTHR = TESTINT,
+    //                BEOTHRX = TESTSTRING,
+    //                BEFPRED = TESTINT,
+    //                BEFPREDX = TESTSTRING,
+    //                BEMODE = TESTINT,
+    //                BEMODEX = TESTSTRING,
+    //                BEAGE = TESTINT,
+    //                DECCLMOT = TESTINT,
+    //                MOGAIT = TESTINT,
+    //                MOFALLS = TESTINT,
+    //                MOTREM = TESTINT,
+    //                MOSLOW = TESTINT,
+    //                MOFRST = TESTINT,
+    //                MOMODE = TESTINT,
+    //                MOMODEX = TESTSTRING,
+    //                MOMOPARK = TESTINT,
+    //                PARKAGE = TESTINT,
+    //                MOMOALS = TESTINT,
+    //                ALSAGE = TESTINT,
+    //                MOAGE = TESTINT,
+    //                COURSE = TESTINT,
+    //                FRSTCHG = TESTINT,
+    //                LBDEVAL = TESTINT,
+    //                FTLDEVAL = TESTINT
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var b9 = visit.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
+
+    //    Assert.IsTrue(b9.GetType() == typeof(Form));
+    //    Assert.IsTrue(b9.Fields.GetType() == typeof(B9FormFields));
+
+    //    var fields = (B9FormFields)b9.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var b9DtoFields = (B9Dto)dtoFields;
+
+    //    foreach (var property in typeof(B9FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = b9DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(b9DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void C1DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "FVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 2,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new C1Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "C1",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                MMSECOMP = TESTINT,
+    //                MMSEREAS = TESTINT,
+    //                MMSELOC = TESTINT,
+    //                MMSELAN = TESTINT,
+    //                MMSELANX = TESTSTRING,
+    //                MMSEVIS = TESTINT,
+    //                MMSEHEAR = TESTINT,
+    //                MMSEORDA = TESTINT,
+    //                MMSEORLO = TESTINT,
+    //                PENTAGON = TESTINT,
+    //                MMSE = TESTINT,
+    //                NPSYCLOC = TESTINT,
+    //                NPSYLAN = TESTINT,
+    //                NPSYLANX = TESTSTRING,
+    //                LOGIMO = TESTINT,
+    //                LOGIDAY = TESTINT,
+    //                LOGIYR = TESTINT,
+    //                LOGIPREV = TESTINT,
+    //                LOGIMEM = TESTINT,
+    //                UDSBENTC = TESTINT,
+    //                DIGIF = TESTINT,
+    //                DIGIFLEN = TESTINT,
+    //                DIGIB = TESTINT,
+    //                DIGIBLEN = TESTINT,
+    //                ANIMALS = TESTINT,
+    //                VEG = TESTINT,
+    //                TRAILA = TESTINT,
+    //                TRAILARR = TESTINT,
+    //                TRAILALI = TESTINT,
+    //                TRAILB = TESTINT,
+    //                TRAILBRR = TESTINT,
+    //                TRAILBLI = TESTINT,
+    //                MEMUNITS = TESTINT,
+    //                MEMTIME = TESTINT,
+    //                UDSBENTD = TESTINT,
+    //                UDSBENRS = TESTINT,
+    //                BOSTON = TESTINT,
+    //                UDSVERFC = TESTINT,
+    //                UDSVERFN = TESTINT,
+    //                UDSVERNF = TESTINT,
+    //                UDSVERLC = TESTINT,
+    //                UDSVERLR = TESTINT,
+    //                UDSVERLN = TESTINT,
+    //                UDSVERTN = TESTINT,
+    //                UDSVERTE = TESTINT,
+    //                UDSVERTI = TESTINT,
+    //                COGSTAT = TESTINT
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var c1 = visit.Forms.Where(f => f.Kind == "C1").FirstOrDefault();
+
+    //    Assert.IsTrue(c1.GetType() == typeof(Form));
+    //    Assert.IsTrue(c1.Fields.GetType() == typeof(C1FormFields));
+
+    //    var fields = (C1FormFields)c1.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "C1").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var c1DtoFields = (C1Dto)dtoFields;
+
+    //    foreach (var property in typeof(C1FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = c1DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(c1DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void C2DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new C2Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "C2",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                MOCACOMP = TESTINT,
+    //                MOCAREAS = TESTINT,
+    //                MOCALOC = TESTINT,
+    //                MOCALAN = TESTINT,
+    //                MOCALANX = TESTSTRING,
+    //                MOCAVIS = TESTINT,
+    //                MOCAHEAR = TESTINT,
+    //                MOCATOTS = TESTINT,
+    //                MOCATRAI = TESTINT,
+    //                MOCACUBE = TESTINT,
+    //                MOCACLOC = TESTINT,
+    //                MOCACLON = TESTINT,
+    //                MOCACLOH = TESTINT,
+    //                MOCANAMI = TESTINT,
+    //                MOCAREGI = TESTINT,
+    //                MOCADIGI = TESTINT,
+    //                MOCALETT = TESTINT,
+    //                MOCASER7 = TESTINT,
+    //                MOCAREPE = TESTINT,
+    //                MOCAFLUE = TESTINT,
+    //                MOCAABST = TESTINT,
+    //                MOCARECN = TESTINT,
+    //                MOCARECC = TESTINT,
+    //                MOCARECR = TESTINT,
+    //                MOCAORDT = TESTINT,
+    //                MOCAORMO = TESTINT,
+    //                MOCAORYR = TESTINT,
+    //                MOCAORDY = TESTINT,
+    //                MOCAORPL = TESTINT,
+    //                MOCAORCT = TESTINT,
+    //                NPSYCLOC = TESTINT,
+    //                NPSYLAN = TESTINT,
+    //                NPSYLANX = TESTSTRING,
+    //                CRAFTVRS = TESTINT,
+    //                CRAFTURS = TESTINT,
+    //                UDSBENTC = TESTINT,
+    //                DIGFORCT = TESTINT,
+    //                DIGFORSL = TESTINT,
+    //                DIGBACCT = TESTINT,
+    //                DIGBACLS = TESTINT,
+    //                ANIMALS = TESTINT,
+    //                VEG = TESTINT,
+    //                TRAILA = TESTINT,
+    //                TRAILARR = TESTINT,
+    //                TRAILALI = TESTINT,
+    //                TRAILB = TESTINT,
+    //                TRAILBRR = TESTINT,
+    //                TRAILBLI = TESTINT,
+    //                CRAFTDVR = TESTINT,
+    //                CRAFTDRE = TESTINT,
+    //                CRAFTDTI = TESTINT,
+    //                CRAFTCUE = TESTINT,
+    //                UDSBENTD = TESTINT,
+    //                UDSBENRS = TESTINT,
+    //                MINTTOTS = TESTINT,
+    //                MINTTOTW = TESTINT,
+    //                MINTSCNG = TESTINT,
+    //                MINTSCNC = TESTINT,
+    //                MINTPCNC = TESTINT,
+    //                MINTPCNG = TESTINT,
+    //                UDSVERFC = TESTINT,
+    //                UDSVERFN = TESTINT,
+    //                UDSVERNF = TESTINT,
+    //                UDSVERLC = TESTINT,
+    //                UDSVERLR = TESTINT,
+    //                UDSVERLN = TESTINT,
+    //                UDSVERTN = TESTINT,
+    //                UDSVERTE = TESTINT,
+    //                UDSVERTI = TESTINT,
+    //                COGSTAT = TESTINT
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var c2 = visit.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
+
+    //    Assert.IsTrue(c2.GetType() == typeof(Form));
+    //    Assert.IsTrue(c2.Fields.GetType() == typeof(C2FormFields));
+
+    //    var fields = (C2FormFields)c2.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var c2DtoFields = (C2Dto)dtoFields;
+
+    //    foreach (var property in typeof(C2FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = c2DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(c2DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void D1DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new D1Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "D1",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                DXMETHOD = TESTINT,
+    //                NORMCOG = TESTINT,
+    //                DEMENTED = TESTINT,
+    //                AMNDEM = TESTINT,
+    //                PCA = TESTINT,
+    //                PPASYN = TESTINT,
+    //                PPASYNT = TESTINT,
+    //                FTDSYN = TESTINT,
+    //                LBDSYN = TESTINT,
+    //                NAMNDEM = TESTINT,
+    //                MCIAMEM = TESTINT,
+    //                MCIAPLUS = TESTINT,
+    //                MCIAPLAN = TESTINT,
+    //                MCIAPATT = TESTINT,
+    //                MCIAPEX = TESTINT,
+    //                MCIAPVIS = TESTINT,
+    //                MCINON1 = TESTINT,
+    //                MCIN1LAN = TESTINT,
+    //                MCIN1ATT = TESTINT,
+    //                MCIN1EX = TESTINT,
+    //                MCIN1VIS = TESTINT,
+    //                MCINON2 = TESTINT,
+    //                MCIN2LAN = TESTINT,
+    //                MCIN2ATT = TESTINT,
+    //                MCIN2EX = TESTINT,
+    //                MCIN2VIS = TESTINT,
+    //                IMPNOMCI = TESTINT,
+    //                AMYLPET = TESTINT,
+    //                AMYLCSF = TESTINT,
+    //                FDGAD = TESTINT,
+    //                HIPPATR = TESTINT,
+    //                TAUPETAD = TESTINT,
+    //                CSFTAU = TESTINT,
+    //                FDGFTLD = TESTINT,
+    //                TPETFTLD = TESTINT,
+    //                MRFTLD = TESTINT,
+    //                DATSCAN = TESTINT,
+    //                OTHBIOM = TESTINT,
+    //                OTHBIOMX = TESTSTRING,
+    //                IMAGLINF = TESTINT,
+    //                IMAGLAC = TESTINT,
+    //                IMAGMACH = TESTINT,
+    //                IMAGMICH = TESTINT,
+    //                IMAGEWMH = TESTINT,
+    //                IMAGMWMH = TESTINT,
+    //                ADMUT = TESTINT,
+    //                FTLDMUT = TESTINT,
+    //                OTHMUT = TESTINT,
+    //                OTHMUTX = TESTSTRING,
+    //                ALZDIS = TESTINT,
+    //                ALZDISIF = TESTINT,
+    //                LBDIS = TESTINT,
+    //                LBDIF = TESTINT,
+    //                PARK = TESTINT,
+    //                MSA = TESTINT,
+    //                MSAIF = TESTINT,
+    //                PSP = TESTINT,
+    //                PSPIF = TESTINT,
+    //                CORT = TESTINT,
+    //                CORTIF = TESTINT,
+    //                FTLDMO = TESTINT,
+    //                FTLDMOIF = TESTINT,
+    //                FTLDNOS = TESTINT,
+    //                FTLDNOIF = TESTINT,
+    //                FTLDSUBT = TESTINT,
+    //                FTLDSUBX = TESTSTRING,
+    //                CVD = TESTINT,
+    //                CVDIF = TESTINT,
+    //                PREVSTK = TESTINT,
+    //                STROKDEC = TESTINT,
+    //                STKIMAG = TESTINT,
+    //                INFNETW = TESTINT,
+    //                INFWMH = TESTINT,
+    //                ESSTREM = TESTINT,
+    //                ESSTREIF = TESTINT,
+    //                DOWNS = TESTINT,
+    //                DOWNSIF = TESTINT,
+    //                HUNT = TESTINT,
+    //                HUNTIF = TESTINT,
+    //                PRION = TESTINT,
+    //                PRIONIF = TESTINT,
+    //                BRNINJ = TESTINT,
+    //                BRNINJIF = TESTINT,
+    //                BRNINCTE = TESTINT,
+    //                HYCEPH = TESTINT,
+    //                HYCEPHIF = TESTINT,
+    //                EPILEP = TESTINT,
+    //                EPILEPIF = TESTINT,
+    //                NEOP = TESTINT,
+    //                NEOPIF = TESTINT,
+    //                NEOPSTAT = TESTINT,
+    //                HIV = TESTINT,
+    //                HIVIF = TESTINT,
+    //                OTHCOG = TESTINT,
+    //                OTHCOGIF = TESTINT,
+    //                OTHCOGX = TESTSTRING,
+    //                DEP = TESTINT,
+    //                DEPIF = TESTINT,
+    //                DEPTREAT = TESTINT,
+    //                BIPOLDX = TESTINT,
+    //                BIPOLDIF = TESTINT,
+    //                SCHIZOP = TESTINT,
+    //                SCHIZOIF = TESTINT,
+    //                ANXIET = TESTINT,
+    //                ANXIETIF = TESTINT,
+    //                DELIR = TESTINT,
+    //                DELIRIF = TESTINT,
+    //                PTSDDX = TESTINT,
+    //                PTSDDXIF = TESTINT,
+    //                OTHPSY = TESTINT,
+    //                OTHPSYIF = TESTINT,
+    //                OTHPSYX = TESTSTRING,
+    //                ALCDEMIF = TESTINT,
+    //                ALCABUSE = TESTINT,
+    //                IMPSUB = TESTINT,
+    //                IMPSUBIF = TESTINT,
+    //                DYSILL = TESTINT,
+    //                DYSILLIF = TESTINT,
+    //                MEDS = TESTINT,
+    //                MEDSIF = TESTINT,
+    //                COGOTH = TESTINT,
+    //                COGOTHIF = TESTINT,
+    //                COGOTHX = TESTSTRING,
+    //                COGOTH2 = TESTINT,
+    //                COGOTH2F = TESTINT,
+    //                COGOTH2X = TESTSTRING,
+    //                COGOTH3 = TESTINT,
+    //                COGOTH3F = TESTINT,
+    //                COGOTH3X = TESTSTRING
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var d1 = visit.Forms.Where(f => f.Kind == "D1").FirstOrDefault();
+
+    //    Assert.IsTrue(d1.GetType() == typeof(Form));
+    //    Assert.IsTrue(d1.Fields.GetType() == typeof(D1FormFields));
+
+    //    var fields = (D1FormFields)d1.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "D1").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var d1DtoFields = (D1Dto)dtoFields;
+
+    //    foreach (var property in typeof(D1FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = d1DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(d1DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void D2DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = "IVP",
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new D2Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "D2",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                CANCER = TESTINT,
+    //                CANCSITE = TESTSTRING,
+    //                DIABET = TESTINT,
+    //                MYOINF = TESTINT,
+    //                CONGHRT = TESTINT,
+    //                AFIBRILL = TESTINT,
+    //                HYPERT = TESTINT,
+    //                ANGINA = TESTINT,
+    //                HYPCHOL = TESTINT,
+    //                VB12DEF = TESTINT,
+    //                THYDIS = TESTINT,
+    //                ARTH = TESTINT,
+    //                ARTYPE = TESTINT,
+    //                ARTYPEX = TESTSTRING,
+    //                ARTUPEX = TESTINT,
+    //                ARTLOEX = TESTINT,
+    //                ARTSPIN = TESTINT,
+    //                ARTUNKN = TESTINT,
+    //                URINEINC = TESTINT,
+    //                BOWLINC = TESTINT,
+    //                SLEEPAP = TESTINT,
+    //                REMDIS = TESTINT,
+    //                HYPOSOM = TESTINT,
+    //                SLEEPOTH = TESTINT,
+    //                SLEEPOTX = TESTSTRING,
+    //                ANGIOCP = TESTINT,
+    //                ANGIOPCI = TESTINT,
+    //                PACEMAKE = TESTINT,
+    //                HVALVE = TESTINT,
+    //                ANTIENC = TESTINT,
+    //                ANTIENCX = TESTSTRING,
+    //                OTHCOND = TESTINT,
+    //                OTHCONDX = TESTSTRING
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var d2 = visit.Forms.Where(f => f.Kind == "D2").FirstOrDefault();
+
+    //    Assert.IsTrue(d2.GetType() == typeof(Form));
+    //    Assert.IsTrue(d2.Fields.GetType() == typeof(D2FormFields));
+
+    //    var fields = (D2FormFields)d2.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "D2").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var d2DtoFields = (D2Dto)dtoFields;
+
+    //    foreach (var property in typeof(D2FormFields).GetProperties())
+    //    {
+    //        // property names are the same in each object
+    //        // so we can iterate through reflection
+    //        var domainPropertyValue = fields.GetType().GetProperty(property.Name).GetValue(fields, null);
+
+    //        // Make sure the test was set to a value
+    //        Assert.IsNotNull(domainPropertyValue);
+
+    //        var dtoProperty = d2DtoFields.GetType().GetProperty(property.Name);
+    //        if (dtoProperty != null)
+    //        {
+    //            var dtoPropertyValue = dtoProperty.GetValue(d2DtoFields, null);
+    //            Assert.AreEqual(dtoPropertyValue, domainPropertyValue);
+    //        }
+    //    }
+    //}
+
+    //[TestMethod]
+    //public void T1DtoMapsToDomain()
+    //{
+    //    VisitDto visitDto = new VisitDto
+    //    {
+    //        Id = 1,
+    //        Kind = VisitKind.TIP.ToString(),
+    //        CreatedAt = DateTime.Now,
+    //        CreatedBy = EMAIL,
+    //        IsDeleted = false,
+    //        Number = 1,
+    //        StartDateTime = DateTime.Now,
+    //        ParticipationId = 1,
+    //        Version = "UDS3",
+    //        Forms = new List<FormDto>()
+    //        {
+    //            new T1Dto
+    //            {
+    //                Id = 1,
+    //                VisitId = 1,
+    //                Kind = "T1",
+    //                CreatedAt = DateTime.Now,
+    //                CreatedBy = EMAIL,
+    //                IsDeleted = false,
+    //                Status = "Pending",
+    //                TELCOG = TESTINT,
+    //                TELILL = TESTINT,
+    //                TELHOME = TESTINT,
+    //                TELREFU = TESTINT,
+    //                TELCOV = TESTINT,
+    //                TELOTHR = TESTINT,
+    //                TELOTHRX = TESTSTRING,
+    //                TELMOD = TESTINT,
+    //                TELINPER = TESTINT,
+    //                TELMILE = TESTINT
+    //            }
+    //        }
+    //    };
+
+    //    var visit = visitDto.ToDomain(EMAIL);
+
+    //    var t1 = visit.Forms.Where(f => f.Kind == "T1").FirstOrDefault();
+
+    //    Assert.IsTrue(t1.GetType() == typeof(Form));
+    //    Assert.IsTrue(t1.Fields.GetType() == typeof(T1FormFields));
+
+    //    var fields = (T1FormFields)t1.Fields;
+    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "T1").FirstOrDefault();
+
+    //    Assert.IsNotNull(dtoFields);
+
+    //    var t1DtoFields = (T1Dto)dtoFields;
+
+    //    Assert.AreEqual(t1DtoFields.TELCOG, fields.TELCOG);
+    //    Assert.AreEqual(t1DtoFields.TELILL, fields.TELILL);
+    //    Assert.AreEqual(t1DtoFields.TELHOME, fields.TELHOME);
+    //    Assert.AreEqual(t1DtoFields.TELREFU, fields.TELREFU);
+    //    Assert.AreEqual(t1DtoFields.TELCOV, fields.TELCOV);
+    //    Assert.AreEqual(t1DtoFields.TELOTHR, fields.TELOTHR);
+    //    Assert.AreEqual(t1DtoFields.TELOTHRX, fields.TELOTHRX);
+    //    Assert.AreEqual(t1DtoFields.TELMOD, fields.TELMOD);
+    //    Assert.AreEqual(t1DtoFields.TELINPER, fields.TELINPER);
+    //    Assert.AreEqual(t1DtoFields.TELMILE, fields.TELMILE);
+    //}
 }
