@@ -437,7 +437,6 @@ namespace UDS.Net.Services.Extensions
                 REFOTHREGX = fields.REFOTHREGX,
                 REFOTHX = fields.REFOTHX
             };
-        
         }
 
         public static A2Dto ToDto(this A2FormFields fields)
