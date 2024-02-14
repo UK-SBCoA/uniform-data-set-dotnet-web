@@ -49,7 +49,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response to participants memory required")]
         public int? INMEMTROUB { get; set; }
         [Display(Name = "Compared to 10 years ago, would you say that the participant's memory is much worse, a little worse, the same, a little better, or much better?")]
-        [RequiredOnComplete (ErrorMessage = "Response to participants memory since 10 years ago required")]
+        [RequiredOnComplete(ErrorMessage = "Response to participants memory since 10 years ago required")]
         public int? INMEMTEN { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
