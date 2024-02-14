@@ -21,7 +21,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? INRELTO { get; set; }
         [Display(Name = "How long has the co-participant known the participant?")]
         [RequiredOnComplete]
-        [RegularExpression("^(0|[1-9]\\d?|120|999)$", ErrorMessage = "Valid range is 0-120 or 999")]
+        [RegularExpression("^(0|[1-9]\\d?|1[01]\\d|120|999)$", ErrorMessage = "Valid range is 0-120 or 999")]
         public int? INKNOWN { get; set; }
         [Display(Name = "Does the co-participant live with the participant?")]
         [RequiredOnComplete]
