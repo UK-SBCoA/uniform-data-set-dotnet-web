@@ -19,7 +19,11 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A2 A2 { get; set; } = default!;
 
-
+        public List<RadioListItem> NEWINF { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1")
+        };
 
         public List<RadioListItem> INRELTO { get; } = new List<RadioListItem>
         {
