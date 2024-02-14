@@ -1,0 +1,231 @@
+﻿@page  "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.B4Model
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: For information on the required online CDR training, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B4. This form is to be completed by the clinician or other trained health professional, based on co-participant report and behavioral and neurological exam of the participant. In the extremely rare instances when no co-participant is available, the clinician or other trained health professional must complete this form using all other available information and his/her best clinical judgment. Score only as decline from previous level due to <span class="underline">cognitive loss</span>, not impairment due to other factors, such as physical disability. For further information, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B4.
+    </p>
+</div>
+<div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <h2>SECTION 1: CDR DEMENTIA STAGING INSTRUMENT<sup>1</sup></h2>
+        </div>
+
+        <table class="table-auto min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="w-48 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 italic">
+                        Please enter score below
+                    </th>
+                    <th colspan="5" class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">IMPAIRMENT</th>
+                </tr>
+                <tr>
+                    @foreach (var item in Model.ImpairmentListItems)
+                    {
+                        <th>@item.Text &mdash; @item.Value</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="subcounterreset">
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.MEMORY"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.MEMORY)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.MEMORY"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.MEMORY"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">No memory loss, or slight inconsistent forgetfulness</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Consistent slight forgetfulness; partial recollection of events; "benign" forgetfulness</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate memory loss, more marked for recent events; defect interferes with everyday activities</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.ORIENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.ORIENT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.ORIENT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.ORIENT"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented except for slight difficulty with time relationships</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty with time relationships; oriented for place at examination; may have geographic disorientation elsewhere</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severe difficulty with time relationships; usually disoriented to time, often to place</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Oriented to person only</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.JUDGMENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.JUDGMENT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.JUDGMENT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.JUDGMENT"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Solves everyday problems, handles business and financial affairs well; judgment good in relation to past performance</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in solving problems, similarities, and differences</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty in handling problems, similarities, and differences; social judgment usually maintained</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severely impaired in handling problems, similarities, and differences; social judgment usually impaired</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to make judgments or solve problems</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.COMMUN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMMUN)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.COMMUN"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMMUN"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Independent function at usual level in job, shopping, volunteer and social groups</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in these activities</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to function independently at these activities, although may still be engaged in some; appears normal to casual inspection</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears well enough to be taken to functions outside the family home</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.HOMEHOBB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.HOMEHOBB)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.HOMEHOBB"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.HOMEHOBB"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests well maintained</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests slightly impaired</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Mild but definite impairment of function at home; more difficult chores abandoned; more complicated hobbies and interests abandoned</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Only simple chores preserved; very restricted interests, poorly maintained</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">No significant function in the home</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.PERSCARE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.PERSCARE)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.PERSCARE"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.PERSCARE"></span>
+                    </td>
+                    <td colspan="2" class="mt-1 p-2 text-sm text-gray-500">Fully capable of self-care</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Needs prompting</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Requires assistance in dressing, hygiene, keeping of personal effects</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
+                </tr>
+                <tr>
+                    <!--// Only 4 options for Personal Care (PERSCARE) so the first two cells need to be merged //-->
+                    @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
+                    {
+                        <td @(i == 0 ? "colspan=2" : "")>
+                            <div class="relative flex items-start">
+                                <div class="flex items-center">
+                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio" value="@Model.ImpairmentSimpleListItems[i].Value">
+                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B4_PERSCARE[@i]">
+                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ImpairmentSimpleListItems[i].Value</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B4.CDRSUM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRSUM)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRSUM"></p>
+                <input asp-for="@Model.B4.CDRSUM" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRSUM"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B4.CDRGLOB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRGLOB)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRGLOB"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRGLOB"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+            <p class="mt-1 p-2 text-sm text-gray-500 italic"><sup>1</sup>Morris, JC. The Clinical Dementia Rating (CDR): Current version and scoring rules. Neurology 43(11):2412–4, 1993. Copyright© Lippincott, Williams &amp; Wilkins. Reproduced by permission.</p>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <h2>SECTION 2: NACC FTLD BEHAVIOR & LANGUAGE DOMAINS</h2>
+        </div>
+
+        <table class="table-auto min-w-full divide-y divide-gray-300">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="w-48 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 italic">
+                        Please enter score below
+                    </th>
+                    <th colspan="5" class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">IMPAIRMENT</th>
+                </tr>
+                <tr>
+                    @foreach (var item in Model.ImpairmentListItems)
+                    {
+                        <th>@item.Text &mdash; @item.Value</th>
+                    }
+                </tr>
+            </thead>
+            <tbody class="subcounterreset">
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.COMPORT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMPORT)<sup>2</sup></label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.COMPORT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMPORT"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Socially appropriate behavior</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Questionable changes in comportment, empathy, appropriateness of actions</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Mild but definite changes in behavior</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate behavioral changes, affecting interpersonal relationships and interactions in a significant manner</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severe behavioral changes, making interpersonal interactions all unidirectional</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMPORT)" for="@Model.B4.COMPORT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="divide-y divide-gray-200">
+                    <td rowspan="2">
+                        <label asp-for="B4.CDRLANG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRLANG)<sup>3</sup></label>
+                        <p class="text-sm text-gray-500" asp-description-for="B4.CDRLANG"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRLANG"></span>
+                    </td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">No language difficulties, or occasional mild slip of the tongue</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Consistent mild word-finding difficulties; simplification of word choice; circumlocution; decreased phrase length; and/or mild comprehension difficulties</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate word-finding difficulty in speech; cannot name objects in environment; reduced phrase length and/or agrammatical speech and/or reduced comprehension in conversation and reading</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate to severe impairment in either speech or comprehension; has difficulty communicating thoughts; writing may be slightly more effective</td>
+                    <td class="mt-1 p-2 text-sm text-gray-500">Severe comprehension deficits; no intelligible speech</td>
+                </tr>
+                <tr>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.CDRLANG)" for="@Model.B4.CDRLANG" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+            <p class="mt-1 p-2 text-sm text-gray-500 italic">
+                <sup>2</sup>Excerpted from the Frontotemporal Dementia Multicenter Instrument &amp; MR Study (Mayo Clinic, UCSF, UCLA, UW).
+            </p>
+        </div>
+
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+            <p class="mt-1 p-2 text-sm text-gray-500 italic">
+                <sup>3</sup>Excerpted from the PPA-CRD: A modification of the CDR for assessing dementia severity in persons with primary progressive aphasia (Johnson N, Weintraub S, Mesulam MM), 2002.
+            </p>
+        </div>
+
+    </div>
+</div>
+<partial name="_FormFooter" for="@Model.B4" />

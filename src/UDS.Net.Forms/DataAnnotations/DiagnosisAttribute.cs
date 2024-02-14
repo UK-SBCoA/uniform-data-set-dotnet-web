@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services.Enums;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
