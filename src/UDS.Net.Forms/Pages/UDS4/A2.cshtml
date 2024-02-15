@@ -24,7 +24,7 @@
                 <div class="@rowCSS">
                     <label asp-for="A2.NEWINF"><span class="counter"></span>@Html.DisplayNameFor(m=> m.A2.NEWINF)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.NEWINF">Repsone to if this is a new co-participant required</span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.NEWINF"></span>
                         <radio-button-group id="A2_NEWINF" for="@Model.A2.NEWINF" items="Model.NEWINF"></radio-button-group>
                     </div>
 
