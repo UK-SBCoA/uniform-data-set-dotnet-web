@@ -92,16 +92,20 @@
                         <span class="subcounter invisible"></span>
                         <div class="@rowCSS">
                             <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTFRQ"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTFRQ)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="A2.INCNTFRQ"></p>
-                            <radio-button-group id="INCNTFRQ" for="@Model.A2.INCNTFRQ" items="Model.INCNTFRQ"></radio-button-group>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTFRQ"></span>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="A2.INCNTFRQ"></p>
+                                <radio-button-group id="INCNTFRQ" for="@Model.A2.INCNTFRQ" items="Model.INCNTFRQ"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTFRQ"></span>
+                            </div>
                         </div>
 
                         <div class="@rowCSS">
                             <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTTIM"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTTIM)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="A2.INCNTTIM"></p>
-                            <radio-button-group id="INCNTTIM" for="@Model.A2.INCNTTIM" items="Model.INCNTTIM"></radio-button-group>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTTIM"></span>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="A2.INCNTTIM"></p>
+                                <radio-button-group id="INCNTTIM" for="@Model.A2.INCNTTIM" items="Model.INCNTTIM"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTTIM"></span>
+                            </div>
                         </div>
 
                     </div>
