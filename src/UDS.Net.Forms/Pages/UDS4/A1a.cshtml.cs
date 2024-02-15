@@ -106,7 +106,18 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Other (SPECIFY)", "8")
         };
 
-        public List<RadioListItem> GUARD2EDUItems { get; } = new List<RadioListItem>
+        public Dictionary<string, UIBehavior> GUARDRELBehavior = new Dictionary<string, UIBehavior>
+        {
+			{ "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
+			{ "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARDRELX") } }
+		};
+
+		public List<RadioListItem> GUARD2EDUItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Never attended school or only attended kindergarten", "1"),
             new RadioListItem("Grades 1 through 8 (elementary)", "2"),
@@ -118,7 +129,23 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Do not know", "9")
         };
 
-        public List<RadioListItem> DisagreeToAgreeItems { get; } = new List<RadioListItem>
+		public Dictionary<string, UIBehavior> GUARD2EDUBehavior = new Dictionary<string, UIBehavior>
+		{
+			{ "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2REL") } }
+		};
+
+		public Dictionary<string, UIBehavior> GUARD2RELBehavior = new Dictionary<string, UIBehavior>
+		{
+			{ "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
+			{ "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2RELX") } }
+		};
+
+		public List<RadioListItem> DisagreeToAgreeItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Strongly disagree", "1"),
             new RadioListItem("Disagree", "2"),
