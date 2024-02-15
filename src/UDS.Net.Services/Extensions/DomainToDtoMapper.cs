@@ -443,24 +443,9 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                INBIRMO = fields.INBIRMO,
-                INBIRYR = fields.INBIRYR,
-                INSEX = fields.INSEX,
-                INHISP = fields.INHISP,
-                INHISPOR = fields.INHISPOR,
-                INHISPOX = fields.INHISPOX,
-                INRACE = fields.INRACE,
-                INRACEX = fields.INRACEX,
-                INRASEC = fields.INRASEC,
-                INRASECX = fields.INRASECX,
-                INRATER = fields.INRATER,
-                INRATERX = fields.INRATERX,
-                INEDUC = fields.INEDUC,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
-                INVISITS = fields.INVISITS,
-                INCALLS = fields.INCALLS,
                 INRELY = fields.INRELY,
                 NEWINF = fields.NEWINF
             };

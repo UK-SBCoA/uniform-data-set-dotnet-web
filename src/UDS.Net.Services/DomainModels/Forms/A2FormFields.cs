@@ -43,25 +43,9 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a2Dto = ((A2Dto)dto);
 
-                this.INBIRMO = a2Dto.INBIRMO;
-                this.INBIRYR = a2Dto.INBIRYR;
-                this.INSEX = a2Dto.INSEX;
-                this.NEWINF = a2Dto.NEWINF;
-                this.INHISP = a2Dto.INHISP;
-                this.INHISPOR = a2Dto.INHISPOR;
-                this.INHISPOX = a2Dto.INHISPOX;
-                this.INRACE = a2Dto.INRACE;
-                this.INRACEX = a2Dto.INRACEX;
-                this.INRASEC = a2Dto.INRASEC;
-                this.INRASECX = a2Dto.INRASECX;
-                this.INRATER = a2Dto.INRATER;
-                this.INRATERX = a2Dto.INRATERX;
-                this.INEDUC = a2Dto.INEDUC;
                 this.INRELTO = a2Dto.INRELTO;
                 this.INKNOWN = a2Dto.INKNOWN;
                 this.INLIVWTH = a2Dto.INLIVWTH;
-                this.INVISITS = a2Dto.INVISITS;
-                this.INCALLS = a2Dto.INCALLS;
                 this.INRELY = a2Dto.INRELY;
                 this.NEWINF = a2Dto.NEWINF;
             }
