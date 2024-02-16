@@ -157,7 +157,7 @@ public class DtoToDomainMapping
         var a2 = visit.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
 
         Assert.IsTrue(a2.GetType() == typeof(Form));
-        Assert.IsTrue(a2.Fields.GetType() == typeof(A1FormFields));
+        Assert.IsTrue(a2.Fields.GetType() == typeof(A2FormFields));
 
         var fields = (A2FormFields)a2.Fields;
         var dtoFields = visitDto.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
