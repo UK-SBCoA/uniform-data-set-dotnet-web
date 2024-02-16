@@ -23,175 +23,175 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? CHLDHDCTRY { get; set; }
 
         [Display(Name = "Race--White")]
-        public int? RACEWHITE { get; set; }
+        public bool RACEWHITE { get; set; }
 
         [Display(Name = "Race--White--German")]
-        public int? ETHGERMAN { get; set; }
+        public bool ETHGERMAN { get; set; }
 
         [Display(Name = "Race--White--Irish")]
-        public int? ETHIRISH { get; set; }
+        public bool ETHIRISH { get; set; }
 
         [Display(Name = "Race--White--English")]
-        public int? ETHENGLISH { get; set; }
+        public bool ETHENGLISH { get; set; }
 
         [Display(Name = "Race--White--Italian")]
-        public int? ETHITALIAN { get; set; }
+        public bool ETHITALIAN { get; set; }
 
         [Display(Name = "Race--White--Polish")]
-        public int? ETHPOLISH { get; set; }
+        public bool ETHPOLISH { get; set; }
 
         [Display(Name = "Race--White--French")]
-        public int? ETHFRENCH { get; set; }
+        public bool ETHFRENCH { get; set; }
 
         [Display(Name = "Race--White--Other")]
-        public int? ETHWHIOTH { get; set; }
+        public bool ETHWHIOTH { get; set; }
 
         [Display(Name = "Race--White--Other (specify)")]
         public string? ETHWHIOTHX { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino")]
-        public int? ETHISPANIC { get; set; }
+        public bool ETHISPANIC { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Mexican or Mexican American")]
-        public int? ETHMEXICAN { get; set; }
+        public bool ETHMEXICAN { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Puerto Rican")]
-        public int? ETHPUERTO { get; set; }
+        public bool ETHPUERTO { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Cuban")]
-        public int? ETHCUBAN { get; set; }
+        public bool ETHCUBAN { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Salvadoran")]
-        public int? ETHSALVA { get; set; }
+        public bool ETHSALVA { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Dominican")]
-        public int? ETHDOMIN { get; set; }
+        public bool ETHDOMIN { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Colombian")]
-        public int? ETHCOLOM { get; set; }
+        public bool ETHCOLOM { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Other")]
-        public int? ETHHISOTH { get; set; }
+        public bool ETHHISOTH { get; set; }
 
         [Display(Name = "Race--Hispanic or Latino--Other (Specify)")]
         public string? ETHHISOTHX { get; set; }
 
         [Display(Name = "Race--Black or African American")]
-        public int? RACEBLACK { get; set; }
+        public bool RACEBLACK { get; set; }
 
         [Display(Name = "Race--Black or African American--African American")]
-        public int? ETHAFAMER { get; set; }
+        public bool ETHAFAMER { get; set; }
 
         [Display(Name = "Race--Black or African American--Jamaican")]
-        public int? ETHJAMAICA { get; set; }
+        public bool ETHJAMAICA { get; set; }
 
         [Display(Name = "Race--Black or African American--Haitian")]
-        public int? ETHHAITIAN { get; set; }
+        public bool ETHHAITIAN { get; set; }
 
         [Display(Name = "Race--Black or African American--Nigerian")]
-        public int? ETHNIGERIA { get; set; }
+        public bool ETHNIGERIA { get; set; }
 
         [Display(Name = "Race--Back or African American--Ethiopian")]
-        public int? ETHETHIOP { get; set; }
+        public bool ETHETHIOP { get; set; }
 
         [Display(Name = "Race--Black or African American--Somali")]
-        public int? ETHSOMALI { get; set; }
+        public bool ETHSOMALI { get; set; }
 
         [Display(Name = "Race--Black or African American--Other")]
-        public int? ETHBLKOTH { get; set; }
+        public bool ETHBLKOTH { get; set; }
 
         [Display(Name = "Race--Black or African American--Other (Specify)")]
         public string? ETHBLKOTHX { get; set; }
 
         [Display(Name = "Race--Asian")]
-        public int? RACEASIAN { get; set; }
+        public bool RACEASIAN { get; set; }
 
         [Display(Name = "Race--Asian--Chinese")]
-        public int? ETHCHINESE { get; set; }
+        public bool ETHCHINESE { get; set; }
 
         [Display(Name = "Race--Asian--Filipino")]
-        public int? ETHFILIP { get; set; }
+        public bool ETHFILIP { get; set; }
 
         [Display(Name = "Race--Asian--Asian Indian")]
-        public int? ETHINDIA { get; set; }
+        public bool ETHINDIA { get; set; }
 
         [Display(Name = "Race--Asian--Vietnamese")]
-        public int? ETHVIETNAM { get; set; }
+        public bool ETHVIETNAM { get; set; }
 
         [Display(Name = "Race--Asian--Korean")]
-        public int? ETHKOREAN { get; set; }
+        public bool ETHKOREAN { get; set; }
 
         [Display(Name = "Race--Asian--Japanese")]
-        public int? ETHJAPAN { get; set; }
+        public bool ETHJAPAN { get; set; }
 
         [Display(Name = "Race--Asian--Other")]
-        public int? ETHASNOTH { get; set; }
+        public bool ETHASNOTH { get; set; }
 
         [Display(Name = "Race--Asian--Other (Specify)")]
         public string? ETHASNOTHX { get; set; }
 
         [Display(Name = "Race--American Indian or Alaska Native")]
-        public int? RACEAIAN { get; set; }
+        public bool RACEAIAN { get; set; }
 
         [Display(Name = "Race--American Indian or Alaska Native (Specify)")]
         public string? RACEAIANX { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African")]
-        public int? RACEMENA { get; set; }
+        public bool RACEMENA { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Lebanese")]
-        public int? ETHLEBANON { get; set; }
+        public bool ETHLEBANON { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Iranian")]
-        public int? ETHIRAN { get; set; }
+        public bool ETHIRAN { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Egyptian")]
-        public int? ETHEGYPT { get; set; }
+        public bool ETHEGYPT { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Syrian")]
-        public int? ETHSYRIA { get; set; }
+        public bool ETHSYRIA { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Moroccan")]
-        public int? ETHMOROCCO { get; set; }
+        public bool ETHMOROCCO { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Israeli")]
-        public int? ETHISRAEL { get; set; }
+        public bool ETHISRAEL { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Other")]
-        public int? ETHMENAOTH { get; set; }
+        public bool ETHMENAOTH { get; set; }
 
         [Display(Name = "Race--Middle Eastern or North African--Other (Specify)")]
         public string? ETHMENAOTX { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander")]
-        public int? RACENHPI { get; set; }
+        public bool RACENHPI { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Hawaiian")]
-        public int? ETHHAWAII { get; set; }
+        public bool ETHHAWAII { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Samoan")]
-        public int? ETHSAMOAN { get; set; }
+        public bool ETHSAMOAN { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Chamorro")]
-        public int? ETHCHAMOR { get; set; }
+        public bool ETHCHAMOR { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Tongan")]
-        public int? ETHTONGAN { get; set; }
+        public bool ETHTONGAN { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Fijian")]
-        public int? ETHFIJIAN { get; set; }
+        public bool ETHFIJIAN { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Marshallese")]
-        public int? ETHMARSHAL { get; set; }
+        public bool ETHMARSHAL { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Other")]
-        public int? ETHNHPIOTH { get; set; }
+        public bool ETHNHPIOTH { get; set; }
 
         [Display(Name = "Race--Native Hawaiian or Other Pacific Islander--Other (Specify)")]
         public string? ETHNHPIOTX { get; set; }
 
         [Display(Name = "Race Unknown")]
-        public int? RACEUNKN { get; set; }
+        public bool RACEUNKN { get; set; }
 
         [Display(Name = "Gender--Man")]
         public int? GENMAN { get; set; }
