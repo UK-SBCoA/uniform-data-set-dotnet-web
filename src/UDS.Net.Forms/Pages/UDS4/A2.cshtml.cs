@@ -29,19 +29,19 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("Spouse, partner, or companion (include ex-spouse,ex-partner,fiancé(e),boyfriend,girlfriend)", "1"),
             new RadioListItem("Child (by blood or through marriage or adoption)", "2"),
-            new RadioListItem("Sibling (by blood or thorugh marriage or adoption)", "3"),
+            new RadioListItem("Sibling (by blood or through marriage or adoption)", "3"),
             new RadioListItem("Other relative (by blood or through marriage or adoption)", "4"),
             new RadioListItem("Friend, neighbor, or someone known through family, friends, work, or community (e.g., church)", "5"),
             new RadioListItem("Paid caregiver, health care provider, or clinician", "6")
         };
 
-        public List<RadioListItem> INLIVWTH { get; } = new List<RadioListItem>
+        public List<RadioListItem> LivingSituationListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes (SKIP TO QUESTION 5)", "1")
         };
 
-        public Dictionary<string, UIBehavior> INLIVWTHUIBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> LivingSituationUIBehavior = new Dictionary<string, UIBehavior>
         {
 
             { "0", new UIBehavior { PropertyAttributes = new List<UIPropertyAttributes>
