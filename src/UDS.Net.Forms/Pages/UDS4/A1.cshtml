@@ -13,69 +13,6 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
-        {
-            @*<div class="@rowCSS">
-                <label asp-for="A1.REASON"><span class="counter"></span><span class="counter invisible"></span> @Html.DisplayNameFor(model => model.A1.REASON)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <div class="max-w-lg">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A1.REASON"></p>
-                        <radio-button-group id="A1_REASON" for="A1.REASON" items="Model.ParticipationReasonsListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.REASON"></span>
-                    </div>
-                </div>
-            </div>*@
-
-            <div class="subcounterreset">
-                <div class="@rowCSS">
-                    <label asp-for="A1.REFERSC"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.REFERSC)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A1.REFERSC"></p>
-                        <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.ReferralSourcesUIBehavior"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.REFERSC"></span>
-
-                    </div>
-                </div>
-                @*<div class="@rowCSS">
-                    <label asp-for="A1.LEARNED"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.LEARNED)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A1.LEARNED"></p>
-                        <radio-button-group id="A1_LEARNED" for="A1.LEARNED" items="Model.SecondaryReferralSourcesListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.LEARNED"></span>
-                    </div>
-                </div>*@
-            </div>
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.PRESTAT"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRESTAT)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.PRESTAT"></p>
-                    <radio-button-group id="A1_PRESTAT" for="A1.PRESTAT" items="Model.DiseaseStatusesListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRESTAT"></span>
-                </div>
-            </div>*@
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.PRESPART"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRESPART)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.PRESPART"></p>
-                    <radio-button-group id="A1_PRESPART" for="A1.PRESPART" items="Model.ParticipationsListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRESPART"></span>
-                </div>
-            </div>*@
-
-            <div class="@rowCSS">
-                <label asp-for="A1.SOURCENW"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.SOURCENW)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SOURCENW"></p>
-                    <radio-button-group id="A1_SOURCENW" for="@Model.A1.SOURCENW" items="Model.EnrollmentTypesListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.SOURCENW"></span>
-                </div>
-            </div>
-
-        }
-
-
         <div class="@rowCSS">
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Participant's month and year of birth</label>
@@ -96,6 +33,551 @@
             </div>
         </div>
 
+        <div class="@rowCSS">
+            <label asp-for="@Model.A1.CHLDHDCTRY"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.CHLDHDCTRY)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="A1.CHLDHDCTRY"></p>
+                <div class="mt-2 w-20">
+                    <input asp-for="@Model.A1.CHLDHDCTRY" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1."></span>
+            </div>
+        </div>
+
+        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label class="text-base font-semibold text-gray-900"><span class="counter"></span>What is your ethnicity and race? (check all that apply)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <fieldset class="subsubcounterreset">
+                    <div class="space-y-5">
+                        <div class="relative flex items-start">
+                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                @Html.CheckBox("A1.RACEWHITE", Model.A1.RACEWHITE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label asp-for="A1.RACEWHITE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEWHITE)</label>
+                            </div>
+                        </div>
+                        <div class="ml-10">
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHGERMAN", Model.A1.ETHGERMAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHGERMAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHGERMAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHIRISH", Model.A1.ETHIRISH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHIRISH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHIRISH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHENGLISH", Model.A1.ETHENGLISH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHENGLISH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHENGLISH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D2.ETHITALIAN", Model.A1.ETHITALIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHITALIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHITALIAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHGERMAN", Model.A1.ETHGERMAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHGERMAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHGERMAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHIRISH", Model.A1.ETHIRISH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHIRISH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHIRISH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHENGLISH", Model.A1.ETHENGLISH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHENGLISH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHENGLISH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHITALIAN", Model.A1.ETHITALIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHITALIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHITALIAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHPOLISH", Model.A1.ETHPOLISH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHPOLISH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHPOLISH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHFRENCH", Model.A1.ETHFRENCH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHFRENCH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHFRENCH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHWHIOTH", Model.A1.ETHWHIOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHWHIOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHWHIOTH)</label>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHWHIOTHX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHWHIOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHWHIOTHX)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-start">
+                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                @Html.CheckBox("A1.ETHISPANIC", Model.A1.ETHISPANIC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label asp-for="A1.ETHISPANIC" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHISPANIC)</label>
+                            </div>
+                        </div>
+                        <div class="ml-10">
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHMEXICAN", Model.A1.ETHMEXICAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHMEXICAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHMEXICAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHPUERTO", Model.A1.ETHPUERTO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHPUERTO" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHPUERTO)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHCUBAN", Model.A1.ETHCUBAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHCUBAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHCUBAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D2.ETHSALVA", Model.A1.ETHSALVA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHSALVA" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHSALVA)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHDOMIN", Model.A1.ETHDOMIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHDOMIN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHDOMIN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHCOLOM", Model.A1.ETHCOLOM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHCOLOM" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHCOLOM)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHHISOTH", Model.A1.ETHHISOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHHISOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHHISOTH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHHISOTHX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHHISOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHHISOTHX)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-start">
+                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                @Html.CheckBox("A1.RACEBLACK", Model.A1.RACEBLACK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label asp-for="A1.RACEBLACK" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEBLACK)</label>
+                            </div>
+                        </div>
+                        <div class="ml-10">
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHAFAMER", Model.A1.ETHAFAMER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHAFAMER" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHAFAMER)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHJAMAICA", Model.A1.ETHJAMAICA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHJAMAICA" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHJAMAICA)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHHAITIAN", Model.A1.ETHHAITIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHHAITIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHHAITIAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHNIGERIA", Model.A1.ETHNIGERIA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHNIGERIA" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHNIGERIA)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHETHIOP", Model.A1.ETHETHIOP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHETHIOP" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHETHIOP)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHSOMALI", Model.A1.ETHSOMALI, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHSOMALI" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHSOMALI)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHBLKOTH", Model.A1.ETHBLKOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHBLKOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHBLKOTH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHBLKOTHX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHBLKOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHBLKOTHX)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative flex items-start">
+                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                @Html.CheckBox("A1.RACEASIAN", Model.A1.RACEASIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label asp-for="A1.RACEASIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEASIAN)</label>
+                            </div>
+                        </div>
+                        <div class="ml-10">
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHCHINESE", Model.A1.ETHCHINESE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHCHINESE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHCHINESE)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHFILIP", Model.A1.ETHFILIP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHFILIP" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHFILIP)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHVIETNAM", Model.A1.ETHVIETNAM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHVIETNAM" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHVIETNAM)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHKOREAN", Model.A1.ETHKOREAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHKOREAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHKOREAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHJAPAN", Model.A1.ETHJAPAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHJAPAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHJAPAN)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHASNOTH", Model.A1.ETHASNOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHASNOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHASNOTH)</label>
+                                </div>
+                            </div>
+                            <div class="relative flex items-start">
+                                <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.ETHASNOTHX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.ETHASNOTHX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHASNOTHX)</label>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start">
+                                <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("A1.RACEAIAN", Model.A1.RACEAIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label asp-for="A1.RACEAIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEAIAN)</label>
+                                </div>
+                            </div>
+                            <div class="ml-10">
+                                <div class="relative flex items-start">
+                                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                    <div class="flex h-6 items-center">
+                                        @Html.CheckBox("A1.RACEAIANX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    </div>
+                                    <div class="ml-3 text-sm leading-6">
+                                        <label asp-for="A1.RACEAIANX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEAIANX)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="relative flex items-start">
+                                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                    <div class="flex h-6 items-center">
+                                        @Html.CheckBox("A1.RACEMENA", Model.A1.RACEMENA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    </div>
+                                    <div class="ml-3 text-sm leading-6">
+                                        <label asp-for="A1.RACEMENA" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEMENA)</label>
+                                    </div>
+                                </div>
+                                <div class="ml-10">
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHLEBANON", Model.A1.ETHLEBANON, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHLEBANON" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHLEBANON)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHIRAN", Model.A1.ETHIRAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHIRAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHIRAN)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHEGYPT", Model.A1.ETHEGYPT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHEGYPT" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHEGYPT)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHSYRIA", Model.A1.ETHSYRIA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHSYRIA" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHSYRIA)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHMOROCCO", Model.A1.ETHMOROCCO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHMOROCCO" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHMOROCCO)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHISRAEL", Model.A1.ETHISRAEL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHISRAEL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHISRAEL)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHMENAOTH", Model.A1.ETHMENAOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHMENAOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHMENAOTH)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("A1.ETHMENAOTX", new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="A1.ETHMENAOTX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHMENAOTX)</label>
+                                        </div>
+                                    </div>
+                                    @*<span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ArthritisRegionIndicated"></span>*@
+</fieldset>
+            </div>
+        </div>
+
+        <div class="@rowCSS">
+            <label><span class="counter"></span><span class="counter invisible"></span></label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <div class="max-w-lg">
+                    <p class="text-sm text-gray-500"></p>
+                    <radio-button-group id="A1_REASON" for=""></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="subcounterreset">
+            <div class="@rowCSS">
+                <label asp-for="A1.REFERSC"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.REFERSC)</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.REFERSC"></p>
+                    <radio-button-group id="A1_REFERSC" for="A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.ReferralSourcesUIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.REFERSC"></span>
+
+                </div>
+            </div>
+            @*<div class="@rowCSS">
+                <label asp-for="A1.LEARNED"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1.LEARNED)</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.LEARNED"></p>
+                    <radio-button-group id="A1_LEARNED" for="A1.LEARNED" items="Model.SecondaryReferralSourcesListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.LEARNED"></span>
+                </div>
+            </div>*@
+        </div>
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.PRESTAT"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRESTAT)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.PRESTAT"></p>
+                <radio-button-group id="A1_PRESTAT" for="A1.PRESTAT" items="Model.DiseaseStatusesListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRESTAT"></span>
+            </div>
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.PRESPART"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRESPART)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.PRESPART"></p>
+                <radio-button-group id="A1_PRESPART" for="A1.PRESPART" items="Model.ParticipationsListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRESPART"></span>
+            </div>
+        </div>*@
+
+        <div class="@rowCSS">
+            <label asp-for="A1.SOURCENW"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.SOURCENW)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SOURCENW"></p>
+                <radio-button-group id="A1_SOURCENW" for="@Model.A1.SOURCENW" items="Model.EnrollmentTypesListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.SOURCENW"></span>
+            </div>
+        </div>
+
         @*<div class="@rowCSS">
             <label asp-for="@Model.A1.SEX"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.SEX)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -107,113 +589,112 @@
 
 
 
-        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP))
-        {
-            @*<div class="@rowCSS">
-                <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="A1.HISPANIC"></p>
-                    <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems" ui-behaviors="Model.HispanicLatinoUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPANIC"></span>
-                </div>
-            </div>*@
 
-            @*<div class="@rowCSS">
-                <label asp-for="A1.HISPOR" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPOR)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPOR"></p>
-                    <radio-button-group id="A1.HISPOR" for="@Model.A1.HISPOR" items="Model.OriginsListItems" ui-behaviors="Model.OriginsUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPOR"></span>
-                </div>
-                <div class="mt-4 space-y-4">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPORX"></p>
-                    <label asp-for="@Model.A1.HISPORX">@Html.DisplayNameFor(m => m.A1.HISPORX)</label>
-                    <div class="mt-2">
-                        <input asp-for="@Model.A1.HISPORX" disabled="disabled" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPORX"></span>
-                </div>
-            </div>*@
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.RACE" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACE)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACE"></p>
-                    <radio-button-group id="A1.RACE" for="@Model.A1.RACE" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACE"></span>
-                </div>
-                <div class="mt-4 space-y-4">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACEX"></p>
-                    <label asp-for="@Model.A1.RACEX">@Html.DisplayNameFor(m => m.A1.RACEX)</label>
-                    <div class="mt-2">
-                        <input asp-for="@Model.A1.RACEX" disabled="disabled" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACEX"></span>
-                </div>
-            </div>*@
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.RACESEC" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACESEC)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESEC"></p>
-                    <radio-button-group id="A1.RACESEC" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsSecondaryUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESEC"></span>
-                </div>
-                <div class="mt-4 space-y-4">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESECX"></p>
-                    <label asp-for="@Model.A1.RACESECX">@Html.DisplayNameFor(m => m.A1.RACESECX)</label>
-                    <div class="mt-2">
-                        <input asp-for="@Model.A1.RACESECX" disabled="disabled" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESECX"></span>
-                </div>
-            </div>*@
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.RACETER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACETER)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="A1.RACETER"></p>
-                    <radio-button-group id="A1.RACETER" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsTertiaryUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETER"></span>
-                </div>
-                <div class="mt-4 space-y-4">
-                    <p class="text-sm text-gray-500" asp-description-for="A1.RACETERX"></p>
-                    <label asp-for="@Model.A1.RACETERX">@Html.DisplayNameFor(m => m.A1.RACETERX)</label>
-                    <div class="mt-2">
-                        <input asp-for="@Model.A1.RACETERX" disabled="disabled" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETERX"></span>
-                </div>
-            </div>*@
-
-            @*<div class="@rowCSS">
-                <label asp-for="A1.PRIMLANG"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRIMLANG)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANG"></p>
-                    <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANG"></span>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANX"></p>
-                    <label asp-for="@Model.A1.PRIMLANX">@Html.DisplayNameFor(m => m.A1.PRIMLANX)</label>
-                    <div class="mt-2">
-                        <input asp-for="@Model.A1.PRIMLANX" disabled="disabled" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANX"></span>
-                </div>
-            </div>*@
-
-            <div class="@rowCSS">
-                <label asp-for="@Model.A1.EDUC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EDUC)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="A1.EDUC"></p>
-                    <div class="mt-2 w-20">
-                        <input asp-for="@Model.A1.EDUC" />
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
-                </div>
+        @*<div class="@rowCSS">
+            <label class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPANIC)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="A1.HISPANIC"></p>
+                <radio-button-group id="A1_HISPANIC" for="@Model.A1.HISPANIC" items="Model.HispanicLatinoListItems" ui-behaviors="Model.HispanicLatinoUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPANIC"></span>
             </div>
-        }
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.HISPOR" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.HISPOR)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPOR"></p>
+                <radio-button-group id="A1.HISPOR" for="@Model.A1.HISPOR" items="Model.OriginsListItems" ui-behaviors="Model.OriginsUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPOR"></span>
+            </div>
+            <div class="mt-4 space-y-4">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HISPORX"></p>
+                <label asp-for="@Model.A1.HISPORX">@Html.DisplayNameFor(m => m.A1.HISPORX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.A1.HISPORX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.HISPORX"></span>
+            </div>
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.RACE" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACE)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACE"></p>
+                <radio-button-group id="A1.RACE" for="@Model.A1.RACE" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACE"></span>
+            </div>
+            <div class="mt-4 space-y-4">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACEX"></p>
+                <label asp-for="@Model.A1.RACEX">@Html.DisplayNameFor(m => m.A1.RACEX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.A1.RACEX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACEX"></span>
+            </div>
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.RACESEC" class="text-base font-semibold text-gray-900"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACESEC)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESEC"></p>
+                <radio-button-group id="A1.RACESEC" for="@Model.A1.RACESEC" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsSecondaryUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESEC"></span>
+            </div>
+            <div class="mt-4 space-y-4">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RACESECX"></p>
+                <label asp-for="@Model.A1.RACESECX">@Html.DisplayNameFor(m => m.A1.RACESECX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.A1.RACESECX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACESECX"></span>
+            </div>
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.RACETER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.RACETER)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="A1.RACETER"></p>
+                <radio-button-group id="A1.RACETER" for="@Model.A1.RACETER" items="Model.RacialGroupsListItems" ui-behaviors="Model.RacialGroupsTertiaryUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETER"></span>
+            </div>
+            <div class="mt-4 space-y-4">
+                <p class="text-sm text-gray-500" asp-description-for="A1.RACETERX"></p>
+                <label asp-for="@Model.A1.RACETERX">@Html.DisplayNameFor(m => m.A1.RACETERX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.A1.RACETERX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.RACETERX"></span>
+            </div>
+        </div>*@
+
+        @*<div class="@rowCSS">
+            <label asp-for="A1.PRIMLANG"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1.PRIMLANG)</label>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANG"></p>
+                <radio-button-group id="A1_PRIMLANG" for="@Model.A1.PRIMLANG" items="Model.PrimaryLanguage" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANG"></span>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="A1.PRIMLANX"></p>
+                <label asp-for="@Model.A1.PRIMLANX">@Html.DisplayNameFor(m => m.A1.PRIMLANX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.A1.PRIMLANX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIMLANX"></span>
+            </div>
+        </div>*@
+
+        <div class="@rowCSS">
+            <label asp-for="@Model.A1.EDUC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EDUC)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="A1.EDUC"></p>
+                <div class="mt-2 w-20">
+                    <input asp-for="@Model.A1.EDUC" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
+            </div>
+        </div>
+
 
         <div class="@rowCSS">
             <label asp-for="@Model.A1.MARISTAT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.MARISTAT)</label>
