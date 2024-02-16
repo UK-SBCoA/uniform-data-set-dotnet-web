@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response to co-participant's relationship to participant required")]
         public int? INRELTO { get; set; }
         [Display(Name = "How long has the co-participant known the participant?")]
-        [RequiredOnComplete(ErrorMessage = "Response to how long co-participant has know the participant reuiqred")]
+        [RequiredOnComplete(ErrorMessage = "Response to how long co-participant has know the participant required")]
         [RegularExpression("^(0|[1-9]\\d?|1[01]\\d|120|999)$", ErrorMessage = "Valid range is 0-120 or 999")]
         public int? INKNOWN { get; set; }
         [Display(Name = "Does the co-participant live with the participant?")]
