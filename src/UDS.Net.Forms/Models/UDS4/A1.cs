@@ -194,64 +194,64 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool RACEUNKN { get; set; }
 
         [Display(Name = "Gender--Man")]
-        public int? GENMAN { get; set; }
+        public bool GENMAN { get; set; }
 
         [Display(Name = "Gender--Woman")]
-        public int? GENWOMAN { get; set; }
+        public bool GENWOMAN { get; set; }
 
         [Display(Name = "Gender--Transgender Man")]
-        public int? GENTRMAN { get; set; }
+        public bool GENTRMAN { get; set; }
 
         [Display(Name = "Gender--Transgender Woman")]
-        public int? GENTRWOMAN { get; set; }
+        public bool GENTRWOMAN { get; set; }
 
         [Display(Name = "Gender--Non-binary")]
-        public int? GENNONBI { get; set; }
+        public bool GENNONBI { get; set; }
 
         [Display(Name = "Gender--Two-Spirit")]
-        public int? GENTWOSPIR { get; set; }
+        public bool GENTWOSPIR { get; set; }
 
         [Display(Name = "Gender--Other")]
-        public int? GENOTH { get; set; }
+        public bool GENOTH { get; set; }
 
         [Display(Name = "Gender--Other (Specify)")]
-        public string? GENOTHX { get; set; }
+        public string? GENOTHX { get; set; } 
 
         [Display(Name = "Gender Unknown")]
-        public int? GENDKN { get; set; }
+        public bool GENDKN { get; set; }
 
         [Display(Name = "No Answer on Gender")]
-        public int? GENNOANS { get; set; }
+        public bool GENNOANS { get; set; }
 
-        [Display(Name = "Participant's birth sex")]
+        [Display(Name = "What sex were you assigned at birth, on your original birth certificate?")]
         public int? BIRTHSEX { get; set; }
 
-        [Display(Name = "Intersex")]
+        [Display(Name = "Have you ever been diagnosed by a medical doctor or other health professional with an intersex condition or a \"Difference of Sex Development (DSD)\" or were you born with (or developed naturally in puberty) genitals, reproductive organs, and/or chromosomal patterns that do not fit standard definitions of male or female?")]
         public int? INTERSEX { get; set; }
 
         [Display(Name = "Sexual Orientation--Gay")]
-        public int? SEXORNGAY { get; set; }
+        public bool SEXORNGAY { get; set; }
 
         [Display(Name = "Sexual Orientation--Heterosexual")]
-        public int? SEXORNHET { get; set; }
+        public bool SEXORNHET { get; set; }
 
         [Display(Name = "Sexual Orientation--Bisexual")]
-        public int? SEXORNBI { get; set; }
+        public bool SEXORNBI { get; set; }
 
         [Display(Name = "Sexual Orientation--Two-Spirit")]
-        public int? SEXORNTWOS { get; set; }
+        public bool SEXORNTWOS { get; set; }
 
         [Display(Name = "Sexual Orientation--Other")]
-        public int? SEXORNOTH { get; set; }
+        public bool SEXORNOTH { get; set; }
 
         [Display(Name = "Sexual Orientation--Other (Specify)")]
         public string? SEXORNOTHX { get; set; }
 
         [Display(Name = "Sexual Orientation Unknown")]
-        public int? SEXORNDNK { get; set; }
+        public bool SEXORNDNK { get; set; }
 
         [Display(Name = "No Answer on Sexual Orientation")]
-        public int? SEXORNNOAN { get; set; }
+        public bool SEXORNNOAN { get; set; }
 
         [Display(Name = "Participant's primary language")]
         public int? PREDOMLAN { get; set; }
