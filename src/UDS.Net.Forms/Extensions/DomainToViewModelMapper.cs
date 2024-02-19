@@ -155,6 +155,10 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A1FormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is A1aFormFields)
+                {
+                    vm = ((A1aFormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is A2FormFields)
                 {
                     vm = ((A2FormFields)form.Fields).ToVM(form.Id);
@@ -258,6 +262,75 @@ namespace UDS.Net.Forms.Extensions
                 EDUC = fields.EDUC,
                 ZIP = fields.ZIP,
                 HANDED = fields.HANDED
+            };
+        }
+
+        public static A1a ToVM(this A1aFormFields fields, int formId)
+        {
+            return new A1a()
+            {
+                Id = formId,
+                OWNSCAR = fields.OWNSCAR,
+                TRSPACCESS = fields.TRSPACCESS,
+                TRANSPROB = fields.TRANSPROB,
+                TRANSWORRY = fields.TRANSWORRY,
+                TRSPLONGER = fields.TRSPLONGER,
+                TRSPMED = fields.TRSPMED,
+                INCOMEYR = fields.INCOMEYR,
+                FINSATIS = fields.FINSATIS,
+                BILLPAY = fields.BILLPAY,
+                FINUPSET = fields.FINUPSET,
+                EATLESS = fields.EATLESS,
+                EATLESSYR = fields.EATLESSYR,
+                LESSMEDS = fields.LESSMEDS,
+                LESSMEDSYR = fields.LESSMEDSYR,
+                COMPCOMM = fields.COMPCOMM,
+                COMPUSA = fields.COMPUSA,
+                FAMCOMP = fields.FAMCOMP,
+                GUARDEDU = fields.GUARDEDU,
+                GUARDREL = fields.GUARDREL,
+                GUARDRELX = fields.GUARDRELX,
+                GUARD2EDU = fields.GUARD2EDU,
+                GUARD2REL = fields.GUARD2REL,
+                GUARD2RELX = fields.GUARD2RELX,
+                EMPTINESS = fields.EMPTINESS,
+                MISSPEOPLE = fields.MISSPEOPLE,
+                FRIENDS = fields.FRIENDS,
+                ABANDONED = fields.ABANDONED,
+                CLOSEFRND = fields.CLOSEFRND,
+                PARENTCOMM = fields.PARENTCOMM,
+                CHILDCOMM = fields.CHILDCOMM,
+                FRIENDCOMM = fields.FRIENDCOMM,
+                PARTICIPATE = fields.PARTICIPATE,
+                SAFEHOME = fields.SAFEHOME,
+                SAFECOMM = fields.SAFECOMM,
+                DELAYMED = fields.DELAYMED,
+                SCRIPTPROB = fields.SCRIPTPROB,
+                MISSEDFUP = fields.MISSEDFUP,
+                DOCADVICE = fields.DOCADVICE,
+                HEALTHACC = fields.HEALTHACC,
+                LESSCOURT = fields.LESSCOURT,
+                POORSERV = fields.POORSERV,
+                NOTSMART = fields.NOTSMART,
+                ACTAFRAID = fields.ACTAFRAID,
+                THREATENED = fields.THREATENED,
+                POORMEDTRT = fields.POORMEDTRT,
+                EXPANCEST = fields.EXPANCEST,
+                EXPGENDER = fields.EXPGENDER,
+                EXPRACE = fields.EXPRACE,
+                EXPAGE = fields.EXPAGE,
+                EXPRELIG = fields.EXPRELIG,
+                EXPHEIGHT = fields.EXPHEIGHT,
+                EXPWEIGHT = fields.EXPWEIGHT,
+                EXPAPPEAR = fields.EXPAPPEAR,
+                EXPSEXORN = fields.EXPSEXORN,
+                EXPEDUCINC = fields.EXPEDUCINC,
+                EXPDISAB = fields.EXPDISAB,
+                EXPSKIN = fields.EXPSKIN,
+                EXPOTHER = fields.EXPOTHER,
+                EXPNOTAPP = fields.EXPNOTAPP,
+                EXPNOANS = fields.EXPNOANS,
+                EXPSTRS = fields.EXPSTRS
             };
         }
 

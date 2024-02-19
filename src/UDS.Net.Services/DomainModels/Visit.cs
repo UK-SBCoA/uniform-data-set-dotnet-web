@@ -58,6 +58,7 @@ namespace UDS.Net.Services.DomainModels
                         VisitKind.IVP.ToString(),
                         new FormContract[]
                         {
+                            new FormContract("A1a", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),

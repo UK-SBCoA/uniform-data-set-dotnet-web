@@ -1,5 +1,14 @@
-﻿@page
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A1aModel
 @{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+    string pillNumberCSS = "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800";
+    string labelInstructionCSS = "text-base uppercase text-indigo-600 italic";
 }
 
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question.
+    </p>
+</div>

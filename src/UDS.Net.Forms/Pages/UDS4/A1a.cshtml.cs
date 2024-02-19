@@ -237,5 +237,17 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Never", "6"),
             new RadioListItem("Prefer not to answer", "8")
         };
+
+        public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                A1a = (A1a)BaseForm; // class library should always handle new instances
+            }
+
+            return Page();
+        }
     }
 }
