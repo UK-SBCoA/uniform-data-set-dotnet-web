@@ -20,6 +20,61 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A1 A1 { get; set; } = default!;
 
+        public List<RadioListItem> BIRTHSEXListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Male", "1"),
+            new RadioListItem("Female", "2"),
+            new RadioListItem("Don't know", "9"),
+            new RadioListItem("Prefer not to answer", "8")
+        };
+
+        public List<RadioListItem> INTERSEXListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Don't know", "9"),
+            new RadioListItem("Prefer not to answer", "8")
+        };
+
+        public List<RadioListItem> PREDOMLANListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("English", "1"),
+            new RadioListItem("Spanish", "2"),
+            new RadioListItem("Chinese dialect", "3"),
+            new RadioListItem("Other (specify)", "8"),
+            new RadioListItem("Don't know", "9")
+        };
+
+        public List<RadioListItem> HANDEDListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Left-handed", "1"),
+            new RadioListItem("Right-handed", "2"),
+            new RadioListItem("Ambidextrous", "3"),
+            new RadioListItem("Don't know", "9")
+        };
+
+        public List<RadioListItem> LVLEDUCListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Less than high school", "1"),
+            new RadioListItem("High school or GED", "2"),
+            new RadioListItem("Some college", "3"),
+            new RadioListItem("Bachelor's degree", "4"),
+            new RadioListItem("Master's degree", "5"),
+            new RadioListItem("Doctorate", "6"),
+            new RadioListItem("Don't know", "9")
+        };
+
+        public List<RadioListItem> MARISTATListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Married", "1"),
+            new RadioListItem("Widowed", "2"),
+            new RadioListItem("Divorced", "3"),
+            new RadioListItem("Seperated", "4"),
+            new RadioListItem("Never married (or marriage was annulled)", "5"),
+            new RadioListItem("Living as marrieed/domestic partner", "6"),
+            new RadioListItem("Don't know", "9")
+        };
+
         public List<RadioListItem> HispanicLatinoListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No ", "1"),
