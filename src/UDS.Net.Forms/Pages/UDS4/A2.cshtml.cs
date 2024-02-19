@@ -19,13 +19,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A2 A2 { get; set; } = default!;
 
-        public List<RadioListItem> NEWINF { get; } = new List<RadioListItem>
+        public List<RadioListItem> NEWINFListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1")
         };
 
-        public List<RadioListItem> INRELTO { get; } = new List<RadioListItem>
+        public List<RadioListItem> INRELTOListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Spouse, partner, or companion (include ex-spouse,ex-partner,fiancé(e),boyfriend,girlfriend)", "1"),
             new RadioListItem("Child (by blood or through marriage or adoption)", "2"),
@@ -35,20 +35,20 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Paid caregiver, health care provider, or clinician", "6")
         };
 
-        public List<RadioListItem> LivingSituationListItems { get; } = new List<RadioListItem>
+        public List<RadioListItem> INLIVWTHListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes (SKIP TO QUESTION 5)", "1")
         };
 
-        public Dictionary<string, UIBehavior> LivingSituationUIBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> INLIVWTHOptionsUIBehavior = new Dictionary<string, UIBehavior>
         {
 
             { "0", new UIBehavior { PropertyAttributes = new List<UIPropertyAttributes>
             {
             new UIEnableAttribute("A2.INCNTMOD"),
             new UIEnableAttribute("A2.INCNTFRQ"),
-            new UIEnableAttribute("A2.INCNTMDX"),
+            new UIDisableAttribute("A2.INCNTMDX"),
             new UIEnableAttribute("A2.INCNTTIM")}
             } },
 
@@ -63,7 +63,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
-        public List<RadioListItem> INCNTMOD { get; } = new List<RadioListItem>
+        public List<RadioListItem> INCNTMODListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("In-person", "1"),
             new RadioListItem("Telephone", "2"),
@@ -73,7 +73,18 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Other (SPECIFY)", "6")
         };
 
-        public List<RadioListItem> INCNTFRQ { get; } = new List<RadioListItem>
+        public Dictionary<string, UIBehavior> INCNTMODUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INCNTMDX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INCNTMDX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INCNTMDX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INCNTMDX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A2.INCNTMDX") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A2.INCNTMDX") } },
+
+        };
+
+        public List<RadioListItem> INCNTFRQListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Daily", "1"),
             new RadioListItem("At least three times per week", "2"),
@@ -83,7 +94,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Less than once a month", "6")
         };
 
-        public List<RadioListItem> INCNTTIM { get; } = new List<RadioListItem>
+        public List<RadioListItem> INCNTTIMListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Less than 5 minutes (appropriate for texing or email and may be applicable to other modes of contact as well)", "1"),
             new RadioListItem("5-15 minutes", "2"),
@@ -92,13 +103,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Longer than one hour", "5"),
         };
 
-        public List<RadioListItem> INRELY { get; } = new List<RadioListItem>
+        public List<RadioListItem> INRELYListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
         };
 
-        public List<RadioListItem> INMEMWORS { get; } = new List<RadioListItem>
+        public List<RadioListItem> INMEMWORSListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes, but this does not worry me", "1"),
@@ -106,7 +117,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "9"),
         };
 
-        public List<RadioListItem> INMEMTROUB { get; } = new List<RadioListItem>
+        public List<RadioListItem> INMEMTROUBListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Never", "1"),
             new RadioListItem("Rarely", "2"),
@@ -116,7 +127,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "9"),
         };
 
-        public List<RadioListItem> INMEMTEN { get; } = new List<RadioListItem>
+        public List<RadioListItem> INMEMTENListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Much better", "1"),
             new RadioListItem("A little better", "2"),

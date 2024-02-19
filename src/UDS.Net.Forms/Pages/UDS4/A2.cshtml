@@ -25,7 +25,7 @@
                     <label asp-for="A2.NEWINF"><span class="counter"></span>@Html.DisplayNameFor(m=> m.A2.NEWINF)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.NEWINF"></span>
-                        <radio-button-group id="A2_NEWINF" for="@Model.A2.NEWINF" items="Model.NEWINF"></radio-button-group>
+                        <radio-button-group id="A2_NEWINF" for="@Model.A2.NEWINF" items="Model.NEWINFListItems"></radio-button-group>
                     </div>
 
                 </div>
@@ -42,7 +42,7 @@
                     <label asp-for="A2.INRELTO"><span class="counter"></span>@Html.DisplayNameFor(m=> m.A2.INRELTO)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INRELTO"></span>
-                        <radio-button-group id="A2_INRELTO" for="@Model.A2.INRELTO" items="Model.INRELTO"></radio-button-group>
+                        <radio-button-group id="A2_INRELTO" for="@Model.A2.INRELTO" items="Model.INRELTOListItems"></radio-button-group>
                     </div>
 
                 </div>
@@ -63,19 +63,19 @@
 
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="A2.INLIVWTH"></p>
-                        <radio-button-group id="A2_LivingSituationListItems" for="@Model.A2.INLIVWTH" items="Model.LivingSituationListItems" ui-behaviors="Model.LivingSituationUIBehavior"></radio-button-group>
+                        <radio-button-group id="A2_INLIVWTHOptions" for="@Model.A2.INLIVWTH" items="Model.INLIVWTHListItems" ui-behaviors="Model.INLIVWTHOptionsUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INLIVWTH"></span>
                     </div>
                 </div>
 
                 <div class="subsubcounterreset">
-                    <div class="px-4 py-4 sm:p-2">
+                    <div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="A2.INCNTMOD"><span class="counter"></span> @Html.DisplayNameFor(m => m.A2.INCNTMOD)</label>
 
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="A2.INCNTMOD"></p>
-                                <radio-button-group id="INCNTMOD" for="@Model.A2.INCNTMOD" items="Model.INCNTMOD"></radio-button-group>
+                                <radio-button-group id="INCNTMOD" for="@Model.A2.INCNTMOD" items="Model.INCNTMODListItems" ui-behaviors="Model.INCNTMODUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTMOD"></span>
                             </div>
                             <div>
@@ -83,38 +83,40 @@
                                 <label asp-for="A2.INCNTMDX">@Html.DisplayNameFor(m => m.A2.INCNTMDX)</label>
                                 <div class="mt-2">
                                     <input asp-for="A2.INCNTMDX" />
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTMDX"></span>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="subcounterreset">
-                        <span class="subcounter invisible"></span>
-                        <div class="@rowCSS">
-                            <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTFRQ"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTFRQ)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="A2.INCNTFRQ"></p>
-                                <radio-button-group id="INCNTFRQ" for="@Model.A2.INCNTFRQ" items="Model.INCNTFRQ"></radio-button-group>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTFRQ"></span>
+                        <div class="subcounterreset">
+                            <span class="subcounter invisible"></span>
+                            <div class="@rowCSS">
+                                <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTFRQ"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTFRQ)</label>
+                                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                    <p class="text-sm text-gray-500" asp-description-for="A2.INCNTFRQ"></p>
+                                    <radio-button-group id="INCNTFRQ" for="@Model.A2.INCNTFRQ" items="Model.INCNTFRQListItems"></radio-button-group>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTFRQ"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="@rowCSS">
-                            <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTTIM"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTTIM)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="A2.INCNTTIM"></p>
-                                <radio-button-group id="INCNTTIM" for="@Model.A2.INCNTTIM" items="Model.INCNTTIM"></radio-button-group>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTTIM"></span>
+                            <div class="@rowCSS">
+                                <label class="text-base font-semibold text-gray-900" asp-for="A2.INCNTTIM"><span class="subsubcounter"></span> @Html.DisplayNameFor(model => model.A2.INCNTTIM)</label>
+                                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                    <p class="text-sm text-gray-500" asp-description-for="A2.INCNTTIM"></p>
+                                    <radio-button-group id="INCNTTIM" for="@Model.A2.INCNTTIM" items="Model.INCNTTIMListItems"></radio-button-group>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTTIM"></span>
+                                </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
                 <div class="@rowCSS">
                     <label asp-for="@Model.A2.INRELY"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INRELY)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="A2.INRELY"></p>
-                        <radio-button-group id="INRELY" for="@Model.A2.INRELY" items="Model.INRELY"></radio-button-group>
+                        <radio-button-group id="INRELY" for="@Model.A2.INRELY" items="Model.INRELYListItems"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INRELY"></span>
                     </div>
 
@@ -125,7 +127,7 @@
                     <label asp-for="@Model.A2.INMEMWORS"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INMEMWORS)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="A2.INMEMWORS"></p>
-                        <radio-button-group id="INMEMWORS" for="@Model.A2.INMEMWORS" items="Model.INMEMWORS"></radio-button-group>
+                        <radio-button-group id="INMEMWORS" for="@Model.A2.INMEMWORS" items="Model.INMEMWORSListItems"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMWORS"></span>
                     </div>
 
@@ -135,7 +137,7 @@
                     <label asp-for="@Model.A2.INMEMTROUB"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INMEMTROUB)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="A2.INMEMTROUB"></p>
-                        <radio-button-group id="INMEMTROUB" for="@Model.A2.INMEMTROUB" items="Model.INMEMTROUB"></radio-button-group>
+                        <radio-button-group id="INMEMTROUB" for="@Model.A2.INMEMTROUB" items="Model.INMEMTROUBListItems"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMTROUB"></span>
                     </div>
 
@@ -145,7 +147,7 @@
                     <label asp-for="@Model.A2.INMEMTEN"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INMEMTEN)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="A2.INMEMTEN"></p>
-                        <radio-button-group id="INMEMTEN" for="@Model.A2.INMEMTEN" items="Model.INMEMTEN"></radio-button-group>
+                        <radio-button-group id="INMEMTEN" for="@Model.A2.INMEMTEN" items="Model.INMEMTENListItems"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMTEN"></span>
                     </div>
 
