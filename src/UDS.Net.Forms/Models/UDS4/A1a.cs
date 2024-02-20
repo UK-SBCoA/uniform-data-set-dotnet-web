@@ -232,6 +232,16 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "When you have had day-to-day experiences like those in questions 33 to 38, would you say they have been very stressful, moderately stressful, or not stressful?")]
         public int? EXPSTRS { get; set; }
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+
+            yield break;
+        }
     }
 }
 
