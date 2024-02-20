@@ -277,7 +277,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "What is your primary type of residence?")]
         public int? RESIDENC { get; set; }
 
-        [Display(Name = "What are the first three digits of your ZIP code?")]
+        [Display(Name = "What are the first three digits of the ZIP code of your primary residence?")]
         public string? ZIP { get; set; }
 
         [Display(Name = "Have you ever served in the U.S. Armed Forces, military Reserves, or National Guard?")]
