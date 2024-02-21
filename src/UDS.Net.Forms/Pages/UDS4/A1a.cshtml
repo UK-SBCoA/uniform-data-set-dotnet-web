@@ -171,16 +171,18 @@
                 closer you are to the people at the very top and the lower you are, the closer you are to the people at the very bottom.
             </p>
         </div>
-        <div>
-            <img src="~/Images/ladderscale.png" />
+        <div class="py-8 flex justify-center">
+            <div class="size-72">
+                <img src="~/images/ladderscale.png" />
+            </div>
         </div>
     </div>
     <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-        <div>
+        <div class="subcounterreset">
             <table class="border-separate border-spacing-10">
                 <tr class="align-top">
                     <td>
-                        <label asp-for="A1a.COMPCOMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                        <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
                         <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
                     </td>
@@ -188,7 +190,7 @@
                 </tr>
                 <tr class="align-top">
                     <td>
-                        <label asp-for="A1a.COMPUSA"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.COMPUSA)</label>
+                        <label asp-for="A1a.COMPUSA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPUSA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="A1a.COMPUSA"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPUSA"></span>
                     </td>
@@ -196,7 +198,7 @@
                 </tr>
                 <tr class="align-top">
                     <td>
-                        <label asp-for="A1a.FAMCOMP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.FAMCOMP)</label>
+                        <label asp-for="A1a.FAMCOMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.FAMCOMP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="A1a.FAMCOMP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.FAMCOMP"></span>
                     </td>
