@@ -3,12 +3,207 @@
 @{
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
-    string pillNumberCSS = "inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800";
-    string labelInstructionCSS = "text-base uppercase text-indigo-600 italic";
 }
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by intake interviewer based on ADC scheduling records, participant interview, medical records, and proxy co-participant report (as needed). For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question.
+        <b>INSTRUCTIONS:</b> The following questions are designed to assess your current and past life experiences. These questions will help us understand how certain experiences affect your health.
+        You do not have to answer any question that makes you feel uncomfortable.
     </p>
 </div>
+<div>
+    <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 1 - Transportation</h3>
+</div>
+<div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+    <div class="@rowCSS">
+        <label asp-for="A1a.OWNSCAR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.OWNSCAR)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.OWNSCAR"></p>
+                <radio-button-group id="A1_OWNSCAR" for="A1a.OWNSCAR" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.OWNSCAR"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.TRSPACCESS"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRSPACCESS)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPACCESS"></p>
+                <radio-button-group id="A1_TRSPACCESS" for="A1a.TRSPACCESS" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPACCESS"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.TRANSPROB"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRANSPROB)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRANSPROB"></p>
+                <radio-button-group id="A1_TRANSPROB" for="A1a.TRANSPROB" items="Model.OftenToNeverItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRANSPROB"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.TRANSWORRY"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRANSWORRY)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRANSWORRY"></p>
+                <radio-button-group id="A1_TRANSWORRY" for="A1a.TRANSWORRY" items="Model.OftenToNeverItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRANSWORRY"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.TRSPLONGER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRSPLONGER)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPLONGER"></p>
+                <radio-button-group id="A1_TRSPLONGER" for="A1a.TRSPLONGER" items="Model.OftenToNeverItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPLONGER"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.TRSPMED"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRSPMED)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPMED"></p>
+                <radio-button-group id="A1_TRSPMED" for="A1a.TRSPMED" items="Model.OftenToNeverItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPMED"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 2 - Financial security</h3>
+</div>
+<div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+    <div class="@rowCSS">
+        <label asp-for="A1a.INCOMEYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.INCOMEYR)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.INCOMEYR"></p>
+                <radio-button-group id="A1_INCOMEYR" for="A1a.INCOMEYR" items="Model.INCOMEYRItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.INCOMEYR"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.FINSATIS"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.FINSATIS)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FINSATIS"></p>
+                <radio-button-group id="A1_FINSATIS" for="A1a.FINSATIS" items="Model.FINSATISItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FINSATIS"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.BILLPAY"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.BILLPAY)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.BILLPAY"></p>
+                <radio-button-group id="A1_BILLPAY" for="A1a.BILLPAY" items="Model.BILLPAYItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.BILLPAY"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.FINUPSET"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.FINUPSET)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FINUPSET"></p>
+                <radio-button-group id="A1_FINUPSET" for="A1a.FINUPSET" items="Model.FINUPSETItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FINUPSET"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.EATLESS"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.EATLESS)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EATLESS"></p>
+                <radio-button-group id="A1_EATLESS" for="A1a.EATLESS" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EATLESS"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.EATLESSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.EATLESSYR)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EATLESSYR"></p>
+                <radio-button-group id="A1_EATLESSYR" for="A1a.EATLESSYR" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EATLESSYR"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.LESSMEDS"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.LESSMEDS)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSMEDS"></p>
+                <radio-button-group id="A1_LESSMEDS" for="A1a.LESSMEDS" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.LESSMEDS"></span>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="A1a.LESSMEDSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.LESSMEDSYR)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSMEDSYR"></p>
+                <radio-button-group id="A1_LESSMEDSYR" for="A1a.LESSMEDSYR" items="Model.NoToYesItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.LESSMEDSYR"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div>
+        <div>
+            <p class="counter">
+                Think of this ladder with 10 steps representing where people stand in the United States. At step 10 are people who are the
+                best off  those who have the most money, the most education, and best jobs. At step 1 are the people who are the worst off
+                = those who have the least money, least education, and the worst jobs or no job. The higher up you are on this ladder, the
+                closer you are to the people at the very top and the lower you are, the closer you are to the people at the very bottom.
+            </p>
+        </div>
+        <div>
+            <img src="~/Images/ladderscale.png" />
+        </div>
+    </div>
+    <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+        <div>
+            <table class="border-separate border-spacing-10">
+                <tr class="align-top">
+                    <td>
+                        <label asp-for="A1a.COMPCOMM"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
+                    </td>
+                    <table-cell-radio-buttons id="A1a.COMPCOMM" for="@Model.A1a.COMPCOMM" items="Model.LadderItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="align-top">
+                    <td>
+                        <label asp-for="A1a.COMPUSA"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.COMPUSA)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="A1a.COMPUSA"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPUSA"></span>
+                    </td>
+                    <table-cell-radio-buttons id="A1a.COMPUSA" for="@Model.A1a.COMPUSA" items="Model.LadderItems"></table-cell-radio-buttons>
+                </tr>
+                <tr class="align-top">
+                    <td>
+                        <label asp-for="A1a.FAMCOMP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1a.FAMCOMP)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="A1a.FAMCOMP"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.FAMCOMP"></span>
+                    </td>
+                    <table-cell-radio-buttons id="A1a.FAMCOMP" for="@Model.A1a.FAMCOMP" items="Model.LadderItems"></table-cell-radio-buttons>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+    
