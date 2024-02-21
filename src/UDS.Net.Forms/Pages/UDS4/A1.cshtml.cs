@@ -45,6 +45,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Don't know", "9")
         };
 
+        public Dictionary<string, UIBehavior> LanguageUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.PRIMLANX")  } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } }
+        };
+
         public List<RadioListItem> HANDEDListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Left-handed", "1"),
@@ -105,7 +114,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> MEDVAListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No (IF NO, SKIP TO QUESTION 17)", "0"),
+            new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
             new RadioListItem("Don't know", "9"),
         };
@@ -183,121 +192,187 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "99")
         };
 
-        public Dictionary<string, UIBehavior> OriginsUIBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> SERVEDUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } },
-            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.HISPORX")  } },
-            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.HISPORX") } }
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.MEDVA") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.MEDVA") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.MEDVA") } }
+        };
+
+        public Dictionary<string, UIBehavior> ReferalBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "4", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "5", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "6", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "8", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } }
         };
 
 
-        public Dictionary<string, UIBehavior> RacialGroupsUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
-            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACEX")  } },
-            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } }
-        };
+        //public Dictionary<string, UIBehavior> RacialGroupsUIBehavior = new Dictionary<string, UIBehavior>
+        //{
+        //    { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+        //    { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+        //    { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+        //    { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+        //    { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } },
+        //    { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACEX")  } },
+        //    { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACEX") } }
+        //};
 
-        public Dictionary<string, UIBehavior> RacialGroupsSecondaryUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
-            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACESECX")  } },
-            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } }
-        };
+        //public Dictionary<string, UIBehavior> RacialGroupsSecondaryUIBehavior = new Dictionary<string, UIBehavior>
+        //{
+        //    { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+        //    { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+        //    { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+        //    { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+        //    { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } },
+        //    { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACESECX")  } },
+        //    { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACESECX") } }
+        //};
 
-        public Dictionary<string, UIBehavior> RacialGroupsTertiaryUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
-            { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACETERX")  } },
-            { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } }
-        };
+        //public Dictionary<string, UIBehavior> RacialGroupsTertiaryUIBehavior = new Dictionary<string, UIBehavior>
+        //{
+        //    { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+        //    { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+        //    { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+        //    { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+        //    { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } },
+        //    { "50", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.RACETERX")  } },
+        //    { "99", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.RACETERX") } }
+        //};
 
-        // Property, condition, attribute and value
+        //// Property, condition, attribute and value
 
-        public List<RadioListItem> ParticipationReasonsListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("To participate in a research study", "1"),
-            new RadioListItem("To have clinical evaluation", "2"),
-            new RadioListItem("Both (to participate in a research study and to have clinical evaluation", "4"),
-            new RadioListItem("Unknown", "9")
-        };
+        //public List<RadioListItem> ParticipationReasonsListItems { get; } = new List<RadioListItem>
+        //{
+        //    new RadioListItem("To participate in a research study", "1"),
+        //    new RadioListItem("To have clinical evaluation", "2"),
+        //    new RadioListItem("Both (to participate in a research study and to have clinical evaluation", "4"),
+        //    new RadioListItem("Unknown", "9")
+        //};
 
 
-        public Dictionary<string, UIBehavior> ReferralSourcesUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED")  } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } }
-        };
+        //public Dictionary<string, UIBehavior> ReferralSourcesUIBehavior = new Dictionary<string, UIBehavior>
+        //{
+        //    { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
+        //    { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.LEARNED") } },
+        //    { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+        //    { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+        //    { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+        //    { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } },
+        //    { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED")  } },
+        //    { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.LEARNED") } }
+        //};
 
-        public List<RadioListItem> SecondaryReferralSourcesListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("ADC advertisement (e.g., website, mailing, newspaper ad, community presentation)", "1"),
-            new RadioListItem("News article or TV program mentioning the ADC study", "2"),
-            new RadioListItem("Conference or community event (e.g., community memory walk)", "3"),
-            new RadioListItem("Another organization's media appeal or website", "4"),
-            new RadioListItem("Other", "8"),
-            new RadioListItem("Unknown", "9")
-        };
+        //public List<RadioListItem> SecondaryReferralSourcesListItems { get; } = new List<RadioListItem>
+        //{
+        //    new RadioListItem("ADC advertisement (e.g., website, mailing, newspaper ad, community presentation)", "1"),
+        //    new RadioListItem("News article or TV program mentioning the ADC study", "2"),
+        //    new RadioListItem("Conference or community event (e.g., community memory walk)", "3"),
+        //    new RadioListItem("Another organization's media appeal or website", "4"),
+        //    new RadioListItem("Other", "8"),
+        //    new RadioListItem("Unknown", "9")
+        //};
 
-        public List<RadioListItem> DiseaseStatusesListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Case, patient, or proband", "1"),
-            new RadioListItem("Control or normal", "2"),
-            new RadioListItem("No presumed disease status", "3")
-        };
+        //public List<RadioListItem> DiseaseStatusesListItems { get; } = new List<RadioListItem>
+        //{
+        //    new RadioListItem("Case, patient, or proband", "1"),
+        //    new RadioListItem("Control or normal", "2"),
+        //    new RadioListItem("No presumed disease status", "3")
+        //};
 
-        public List<RadioListItem> ParticipationsListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Initial evaluation only", "1"),
-            new RadioListItem("Longitudinal follow-up planned", "2")
-        };
+        //public List<RadioListItem> ParticipationsListItems { get; } = new List<RadioListItem>
+        //{
+        //    new RadioListItem("Initial evaluation only", "1"),
+        //    new RadioListItem("Longitudinal follow-up planned", "2")
+        //};
 
-        public List<RadioListItem> PrimaryLanguage { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("English", "1"),
-            new RadioListItem("Spanish", "2"),
-            new RadioListItem("Mandarin", "3"),
-            new RadioListItem("Cantonese", "4"),
-            new RadioListItem("Russian", "5"),
-            new RadioListItem("Japanese", "6"),
-            new RadioListItem("Other (specify)", "8"),
-            new RadioListItem("Unknown", "9"),
-        };
-
-        public Dictionary<string, UIBehavior> LanguageUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.PRIMLANX")  } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } }
-        };
+        //public List<RadioListItem> PrimaryLanguage { get; } = new List<RadioListItem>
+        //{
+        //    new RadioListItem("English", "1"),
+        //    new RadioListItem("Spanish", "2"),
+        //    new RadioListItem("Mandarin", "3"),
+        //    new RadioListItem("Cantonese", "4"),
+        //    new RadioListItem("Russian", "5"),
+        //    new RadioListItem("Japanese", "6"),
+        //    new RadioListItem("Other (specify)", "8"),
+        //    new RadioListItem("Unknown", "9"),
+        //};
 
         public A1Model(IVisitService visitService) : base(visitService, "A1")
         {
