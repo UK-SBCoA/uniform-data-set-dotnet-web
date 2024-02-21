@@ -602,8 +602,6 @@
                                 <label asp-for="A1.RACEUNKN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEUNKN)</label>
                             </div>
                         </div>
-
-                        @*<span class="mt-2 text-sm text-red-600" asp-validation-for="D2.ArthritisRegionIndicated"></span>*@
                 </fieldset>
             </div>
         </div>
@@ -814,7 +812,7 @@
                     <label asp-for="A1.PREDOMLAN"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.PREDOMLAN)</label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.PREDOMLAN"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A1.PREDOMLAN)" for="@Model.A1.PREDOMLAN" items="Model.PREDOMLANListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A1.PREDOMLAN)" for="@Model.A1.PREDOMLAN" items="Model.PREDOMLANListItems" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.PREDOMLAN"></span>
                     </div>
                     <div>
@@ -899,7 +897,7 @@
             <label asp-for="A1.SERVED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.SERVED)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SERVED"></p>
-                <radio-button-group id="@Html.IdFor(m => m.A1.SERVED)" for="@Model.A1.SERVED" items="Model.SERVEDListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.A1.SERVED)" for="@Model.A1.SERVED" items="Model.SERVEDListItems" ui-behaviors="Model.SERVEDUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SERVED"></span>
             </div>
         </div>
@@ -908,7 +906,7 @@
             <label asp-for="A1.MEDVA"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.MEDVA)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEDVA"></p>
-                <radio-button-group id="@Html.IdFor(m => m.A1.MEDVA)" for="@Model.A1.MEDVA" items="Model.MEDVAListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.A1.MEDVA)" for="@Model.A1.MEDVA" items="Model.MEDVAListItems" ></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEDVA"></span>
             </div>
         </div>
@@ -1006,7 +1004,7 @@
                     <label asp-for="A1.REFERSC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.REFERSC)</label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFERSC"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A1.REFERSC)" for="@Model.A1.REFERSC" items="Model.ReferralSourcesListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A1.REFERSC)" for="@Model.A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.ReferalBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFERSC"></span>
                     </div>
                     <div>
