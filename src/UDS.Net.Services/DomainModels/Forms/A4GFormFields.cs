@@ -23,16 +23,13 @@ namespace UDS.Net.Services.DomainModels.Forms
         public A4GFormFields() { }
         public A4GFormFields(FormDto dto) : this()
         {
-            if (dto is A4GDto)
+            if (dto is A4Dto)
             {
-                var a4GDto = (A4GDto)dto;
+                var a4GDto = (A4Dto)dto;
 
                 this.ANYMEDS = a4GDto.ANYMEDS;
 
-                foreach (var a4DDto in a4GDto.A4Dtos)
-                {
-                    A4Ds.Add(new A4DFormFields(a4DDto));
-                }
+                // TODO map child collection of rxnormids
             }
         }
     }

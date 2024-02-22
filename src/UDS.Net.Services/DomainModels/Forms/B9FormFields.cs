@@ -71,9 +71,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is B9Dto)
             {
                 var b9Dto = ((B9Dto)dto);
-                DECSUB = b9Dto.DECSUB;
-                DECIN = b9Dto.DECIN;
-                DECCLCOG = b9Dto.DECCLCOG;
                 COGMEM = b9Dto.COGMEM;
                 COGORI = b9Dto.COGORI;
                 COGJUDG = b9Dto.COGJUDG;
@@ -81,20 +78,15 @@ namespace UDS.Net.Services.DomainModels.Forms
                 COGVIS = b9Dto.COGVIS;
                 COGATTN = b9Dto.COGATTN;
                 COGFLUC = b9Dto.COGFLUC;
-                COGFLAGO = b9Dto.COGFLAGO;
                 COGOTHR = b9Dto.COGOTHR;
                 COGOTHRX = b9Dto.COGOTHRX;
-                COGFPRED = b9Dto.COGFPRED;
-                COGFPREX = b9Dto.COGFPREX;
                 COGMODE = b9Dto.COGMODE;
                 COGMODEX = b9Dto.COGMODEX;
-                DECAGE = b9Dto.DECAGE;
                 DECCLBE = b9Dto.DECCLBE;
                 BEAPATHY = b9Dto.BEAPATHY;
                 BEDEP = b9Dto.BEDEP;
                 BEVHALL = b9Dto.BEVHALL;
                 BEVWELL = b9Dto.BEVWELL;
-                BEVHAGO = b9Dto.BEVHAGO;
                 BEAHALL = b9Dto.BEAHALL;
                 BEDEL = b9Dto.BEDEL;
                 BEDISIN = b9Dto.BEDISIN;
@@ -106,28 +98,18 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEANX = b9Dto.BEANX;
                 BEOTHR = b9Dto.BEOTHR;
                 BEOTHRX = b9Dto.BEOTHRX;
-                BEFPRED = b9Dto.BEFPRED;
-                BEFPREDX = b9Dto.BEFPREDX;
                 BEMODE = b9Dto.BEMODE;
                 BEMODEX = b9Dto.BEMODEX;
-                BEAGE = b9Dto.BEAGE;
-                DECCLMOT = b9Dto.DECCLMOT;
                 MOGAIT = b9Dto.MOGAIT;
                 MOFALLS = b9Dto.MOFALLS;
                 MOTREM = b9Dto.MOTREM;
                 MOSLOW = b9Dto.MOSLOW;
-                MOFRST = b9Dto.MOFRST;
                 MOMODE = b9Dto.MOMODE;
                 MOMODEX = b9Dto.MOMODEX;
                 MOMOPARK = b9Dto.MOMOPARK;
-                PARKAGE = b9Dto.PARKAGE;
                 MOMOALS = b9Dto.MOMOALS;
-                ALSAGE = b9Dto.ALSAGE;
-                MOAGE = b9Dto.MOAGE;
                 COURSE = b9Dto.COURSE;
                 FRSTCHG = b9Dto.FRSTCHG;
-                LBDEVAL = b9Dto.LBDEVAL;
-                FTLDEVAL = b9Dto.FTLDEVAL;
             }
         }
         public string GetDescription()
