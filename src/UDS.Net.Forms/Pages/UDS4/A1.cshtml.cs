@@ -45,15 +45,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Don't know", "9")
         };
 
-        public Dictionary<string, UIBehavior> LanguageUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.PRIMLANX")  } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PRIMLANX") } }
-        };
-
         public List<RadioListItem> HANDEDListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Left-handed", "1"),
@@ -192,6 +183,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "99")
         };
 
+        public Dictionary<string, UIBehavior> LanguageUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PREDOMLANX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PREDOMLANX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PREDOMLANX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.PREDOMLANX")  } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.PREDOMLANX") } }
+        };
+
         public Dictionary<string, UIBehavior> SERVEDUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.MEDVA") } },
@@ -199,12 +199,56 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.MEDVA") } }
         };
 
-        public Dictionary<string, UIBehavior> ReferalBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> GENOTHBehavior = new Dictionary<string, UIBehavior>
         {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.GENOTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.GENOTHX") } }
+        };
+
+        public Dictionary<string, UIBehavior> REFERSCUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.REFERSCX")  } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } }
+        };
+
+
+        public Dictionary<string, UIBehavior> REFLEARNEDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+
+                },
+                InstructionalMessage = ""
+            } },
             { "3", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
                     new UIDisableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
                     new UIDisableAttribute("A1.REFOTHWEBX"),
@@ -218,35 +262,47 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "4", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
                     new UIDisableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
                     new UIDisableAttribute("A1.REFOTHWEBX"),
                     new UIDisableAttribute("A1.REFOTHMEDX"),
                     new UIDisableAttribute("A1.REFOTHREGX"),
                     new UIDisableAttribute("A1.REFOTHX")
+
                 },
                 InstructionalMessage = ""
             } },
             { "5", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
                     new UIDisableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
                     new UIDisableAttribute("A1.REFOTHWEBX"),
                     new UIDisableAttribute("A1.REFOTHMEDX"),
                     new UIDisableAttribute("A1.REFOTHREGX"),
                     new UIDisableAttribute("A1.REFOTHX")
+
                 },
                 InstructionalMessage = ""
             } },
             { "6", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
-                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIEnableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "7", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIEnableAttribute("A1.REFCTRREGX"),
                     new UIDisableAttribute("A1.REFOTHWEBX"),
                     new UIDisableAttribute("A1.REFOTHMEDX"),
                     new UIDisableAttribute("A1.REFOTHREGX"),
@@ -257,10 +313,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "8", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
                     new UIDisableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
-                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIEnableAttribute("A1.REFOTHWEBX"),
                     new UIDisableAttribute("A1.REFOTHMEDX"),
                     new UIDisableAttribute("A1.REFOTHREGX"),
                     new UIDisableAttribute("A1.REFOTHX")
@@ -270,18 +325,40 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("A1.REFLEARNED"),
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIEnableAttribute("A1.REFOTHMEDX"),
+                    new UIDisableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "10", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFCTRSOCX"),
+                    new UIDisableAttribute("A1.REFCTRREGX"),
+                    new UIDisableAttribute("A1.REFOTHWEBX"),
+                    new UIDisableAttribute("A1.REFOTHMEDX"),
+                    new UIEnableAttribute("A1.REFOTHREGX"),
+                    new UIDisableAttribute("A1.REFOTHX")
+                },
+                InstructionalMessage = ""
+            } },
+            { "88", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
                     new UIDisableAttribute("A1.REFCTRSOCX"),
                     new UIDisableAttribute("A1.REFCTRREGX"),
                     new UIDisableAttribute("A1.REFOTHWEBX"),
                     new UIDisableAttribute("A1.REFOTHMEDX"),
                     new UIDisableAttribute("A1.REFOTHREGX"),
-                    new UIDisableAttribute("A1.REFOTHX")
+                    new UIEnableAttribute("A1.REFOTHX")
                 },
                 InstructionalMessage = ""
             } }
         };
-
 
         //public Dictionary<string, UIBehavior> RacialGroupsUIBehavior = new Dictionary<string, UIBehavior>
         //{
