@@ -298,7 +298,7 @@ namespace UDS.Net.Forms.Extensions
                 GENNONBI = fields.GENNONBI.HasValue ? fields.GENNONBI.Value != 0 : false,
                 GENTWOSPIR = fields.GENTWOSPIR.HasValue ? fields.GENTWOSPIR.Value != 0 : false,
                 GENOTH = fields.GENOTH.HasValue ? fields.GENOTH.Value != 0 : false,
-                GENOTHX = fields.GENOTHX, 
+                GENOTHX = fields.GENOTHX,
                 GENDKN = fields.GENDKN.HasValue ? fields.GENDKN.Value != 0 : false,
                 GENNOANS = fields.GENNOANS.HasValue ? fields.GENNOANS.Value != 0 : false,
                 BIRTHSEX = fields.BIRTHSEX,
