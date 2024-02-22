@@ -245,7 +245,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(GENOTH), "1", ErrorMessage = "Please indicate current gender identity")]
-        public string? GENOTHX { get; set; } 
+        public string? GENOTHX { get; set; }
 
         [Display(Name = "Don't know")]
         public bool GENDKN { get; set; }
