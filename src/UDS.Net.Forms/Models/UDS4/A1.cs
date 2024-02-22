@@ -369,7 +369,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? REFERSC { get; set; }
 
-        [Display(Name = "Principal referral source - other (specify)")]
+        [Display(Name = "(specify)")]
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
