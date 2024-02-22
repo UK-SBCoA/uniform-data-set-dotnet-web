@@ -50,21 +50,21 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ACTAFRAID { get; set; }
         public int? THREATENED { get; set; }
         public int? POORMEDTRT { get; set; }
-        public bool? EXPANCEST { get; set; }
-        public bool? EXPGENDER { get; set; }
-        public bool? EXPRACE { get; set; }
-        public bool? EXPAGE { get; set; }
-        public bool? EXPRELIG { get; set; }
-        public bool? EXPHEIGHT { get; set; }
-        public bool? EXPWEIGHT { get; set; }
-        public bool? EXPAPPEAR { get; set; }
-        public bool? EXPSEXORN { get; set; }
-        public bool? EXPEDUCINC { get; set; }
-        public bool? EXPDISAB { get; set; }
-        public bool? EXPSKIN { get; set; }
-        public bool? EXPOTHER { get; set; }
-        public bool? EXPNOTAPP { get; set; }
-        public bool? EXPNOANS { get; set; }
+        public bool EXPANCEST { get; set; }
+        public bool EXPGENDER { get; set; }
+        public bool EXPRACE { get; set; }
+        public bool EXPAGE { get; set; }
+        public bool EXPRELIG { get; set; }
+        public bool EXPHEIGHT { get; set; }
+        public bool EXPWEIGHT { get; set; }
+        public bool EXPAPPEAR { get; set; }
+        public bool EXPSEXORN { get; set; }
+        public bool EXPEDUCINC { get; set; }
+        public bool EXPDISAB { get; set; }
+        public bool EXPSKIN { get; set; }
+        public bool EXPOTHER { get; set; }
+        public bool EXPNOTAPP { get; set; }
+        public bool EXPNOANS { get; set; }
         public int? EXPSTRS { get; set; }
 
         public A1aFormFields()
@@ -121,21 +121,21 @@ namespace UDS.Net.Services.DomainModels.Forms
                 ACTAFRAID = a1aDto.ACTAFRAID;
                 THREATENED = a1aDto.THREATENED;
                 POORMEDTRT = a1aDto.POORMEDTRT;
-                EXPANCEST = a1aDto.EXPANCEST;
-                EXPGENDER = a1aDto.EXPGENDER;
-                EXPRACE = a1aDto.EXPRACE;
-                EXPAGE = a1aDto.EXPAGE;
-                EXPRELIG = a1aDto.EXPRELIG;
-                EXPHEIGHT = a1aDto.EXPHEIGHT;
-                EXPWEIGHT = a1aDto.EXPWEIGHT;
-                EXPAPPEAR = a1aDto.EXPAPPEAR;
-                EXPSEXORN = a1aDto.EXPSEXORN;
-                EXPEDUCINC = a1aDto.EXPEDUCINC;
-                EXPDISAB = a1aDto.EXPDISAB;
-                EXPSKIN = a1aDto.EXPSKIN;
-                EXPOTHER = a1aDto.EXPOTHER;
-                EXPNOTAPP = a1aDto.EXPNOTAPP;
-                EXPNOANS = a1aDto.EXPNOANS;
+                EXPANCEST = a1aDto.EXPANCEST.HasValue ? true : false;
+                EXPGENDER = a1aDto.EXPGENDER.HasValue ? true : false;
+                EXPRACE = a1aDto.EXPRACE.HasValue ? true : false;
+                EXPAGE = a1aDto.EXPAGE.HasValue ? true : false;
+                EXPRELIG = a1aDto.EXPRELIG.HasValue ? true : false;
+                EXPHEIGHT = a1aDto.EXPHEIGHT.HasValue ? true : false;
+                EXPWEIGHT = a1aDto.EXPWEIGHT.HasValue ? true : false;
+                EXPAPPEAR = a1aDto.EXPAPPEAR.HasValue ? true : false;
+                EXPSEXORN = a1aDto.EXPSEXORN.HasValue ? true : false;
+                EXPEDUCINC = a1aDto.EXPEDUCINC.HasValue ? true : false;
+                EXPDISAB = a1aDto.EXPDISAB.HasValue ? true : false;
+                EXPSKIN = a1aDto.EXPSKIN.HasValue ? true : false;
+                EXPOTHER = a1aDto.EXPOTHER.HasValue ? true : false;
+                EXPNOTAPP = a1aDto.EXPNOTAPP.HasValue ? true : false;
+                EXPNOANS = a1aDto.EXPNOANS.HasValue ? true : false;
                 EXPSTRS = a1aDto.EXPSTRS;
             }
         }

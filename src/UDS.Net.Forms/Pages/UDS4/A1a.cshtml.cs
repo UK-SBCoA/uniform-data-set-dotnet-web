@@ -208,7 +208,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Prefer not to answer", "8")
         };
 
-        public List<RadioListItem> AllTheTimeToNoneOfTheTime { get; } = new List<RadioListItem>
+        public List<RadioListItem> AllTheTimeToNoneOfTheTimeItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("All of the time", "1"),
             new RadioListItem("Most of the time", "2"),
@@ -235,6 +235,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("A few times a year", "4"),
             new RadioListItem("Less than once a year", "5"),
             new RadioListItem("Never", "6"),
+            new RadioListItem("Prefer not to answer", "8")
+        };
+
+        public List<RadioListItem> StressfulToNotStressfulItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Very stressful", "1"),
+            new RadioListItem("Moderately stressful", "2"),
+            new RadioListItem("Not stressful", "3"),
+            new RadioListItem("Don't know", "9"),
             new RadioListItem("Prefer not to answer", "8")
         };
 

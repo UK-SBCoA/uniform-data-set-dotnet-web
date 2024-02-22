@@ -185,50 +185,50 @@ namespace UDS.Net.Forms.Models.UDS4
         [Range(1, 8)]
         public int? POORMEDTRT { get; set; }
 
-        [Display(Name = "Main reason--Your Ancestry or National Origins")]
-        public bool? EXPANCEST { get; set; }
+        [Display(Name = "Your Ancestry or National Origins")]
+        public bool EXPANCEST { get; set; }
 
-        [Display(Name = "Main reason--Your gender")]
-        public bool? EXPGENDER { get; set; }
+        [Display(Name = "Your gender")]
+        public bool EXPGENDER { get; set; }
 
-        [Display(Name = "Main reason--Your race")]
-        public bool? EXPRACE { get; set; }
+        [Display(Name = "Your race")]
+        public bool EXPRACE { get; set; }
 
-        [Display(Name = "Main reason--Your age")]
-        public bool? EXPAGE { get; set; }
+        [Display(Name = "Your age")]
+        public bool EXPAGE { get; set; }
 
-        [Display(Name = "Main reason--Your religion")]
-        public bool? EXPRELIG { get; set; }
+        [Display(Name = "Your religion")]
+        public bool EXPRELIG { get; set; }
 
-        [Display(Name = "Main reason--Your height")]
-        public bool? EXPHEIGHT { get; set; }
+        [Display(Name = "Your height")]
+        public bool EXPHEIGHT { get; set; }
 
-        [Display(Name = "Main reason--Your weight")]
-        public bool? EXPWEIGHT { get; set; }
+        [Display(Name = "Your weight")]
+        public bool EXPWEIGHT { get; set; }
 
-        [Display(Name = "Main reason--Some other aspect of your physical appearance")]
-        public bool? EXPAPPEAR { get; set; }
+        [Display(Name = "Some other aspect of your physical appearance")]
+        public bool EXPAPPEAR { get; set; }
 
-        [Display(Name = "Main reason--Your sexual orientation")]
-        public bool? EXPSEXORN { get; set; }
+        [Display(Name = "Your sexual orientation")]
+        public bool EXPSEXORN { get; set; }
 
-        [Display(Name = "Main reason--Your education or income level")]
-        public bool? EXPEDUCINC { get; set; }
+        [Display(Name = "Your education or income level")]
+        public bool EXPEDUCINC { get; set; }
 
-        [Display(Name = "Main reason--A physical disability")]
-        public bool? EXPDISAB { get; set; }
+        [Display(Name = "A physical disability")]
+        public bool EXPDISAB { get; set; }
 
-        [Display(Name = "Main reason--Your shade of skin color")]
-        public bool? EXPSKIN { get; set; }
+        [Display(Name = "Your shade of skin color")]
+        public bool EXPSKIN { get; set; }
 
-        [Display(Name = "Main reason -- Other")]
-        public bool? EXPOTHER { get; set; }
+        [Display(Name = "Other")]
+        public bool EXPOTHER { get; set; }
 
-        [Display(Name = "Main reason -- not applicable - I do not have these experiences in my day to day life")]
-        public bool? EXPNOTAPP { get; set; }
+        [Display(Name = "Not applicable - I do not have these experiences in my day to day life (END FORM HERE)")]
+        public bool EXPNOTAPP { get; set; }
 
-        [Display(Name = "Main reason--Prefer not to answer")]
-        public bool? EXPNOANS { get; set; }
+        [Display(Name = "Prefer not to answer")]
+        public bool EXPNOANS { get; set; }
 
         [Display(Name = "When you have had day-to-day experiences like those in questions 33 to 38, would you say they have been very stressful, moderately stressful, or not stressful?")]
         public int? EXPSTRS { get; set; }
