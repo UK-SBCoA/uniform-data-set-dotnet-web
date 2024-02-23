@@ -131,7 +131,14 @@ namespace UDS.Net.Forms.Pages.UDS4
 
 		public Dictionary<string, UIBehavior> GUARD2EDUBehavior = new Dictionary<string, UIBehavior>
 		{
-			{ "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2REL") } }
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "5", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "6", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2REL") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } }
 		};
 
 		public Dictionary<string, UIBehavior> GUARD2RELBehavior = new Dictionary<string, UIBehavior>
