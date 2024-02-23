@@ -12,8 +12,8 @@
 
 
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="Participation.LegacyId"></label>
-                <input asp-for="Participation.LegacyId" />     
+                <label asp-for="Participation.LegacyId">NACC Id</label>
+                <input asp-for="Participation.LegacyId" />
                 <span asp-validation-for="Participation.LegacyId" class="text-red-500"></span>
                 @{
                     var participationId = ViewData["Participation"];

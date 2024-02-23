@@ -26,15 +26,8 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 HEIGHT = b1Dto.HEIGHT;
                 WEIGHT = b1Dto.WEIGHT;
-                BPSYS = b1Dto.BPSYS;
-                BPDIAS = b1Dto.BPDIAS;
                 HRATE = b1Dto.HRATE;
-                VISION = b1Dto.VISION;
-                VISCORR = b1Dto.VISCORR;
-                VISWCORR = b1Dto.VISWCORR;
-                HEARING = b1Dto.HEARING;
-                HEARAID = b1Dto.HEARAID;
-                HEARWAID = b1Dto.HEARWAID;
+                // TODO map new fields
             }
         }
 

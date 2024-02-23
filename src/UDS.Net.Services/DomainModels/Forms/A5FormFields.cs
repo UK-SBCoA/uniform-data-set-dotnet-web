@@ -87,45 +87,29 @@ namespace UDS.Net.Services.DomainModels.Forms
         public A5FormFields() { }
         public A5FormFields(FormDto dto)
         {
-            if (dto is A5Dto)
+            if (dto is A5D2Dto)
             {
-                var a5Dto = (A5Dto)dto;
+                var a5Dto = (A5D2Dto)dto;
 
                 this.TOBAC30 = a5Dto.TOBAC30;
                 this.TOBAC100 = a5Dto.TOBAC100;
                 this.SMOKYRS = a5Dto.SMOKYRS;
                 this.PACKSPER = a5Dto.PACKSPER;
                 this.QUITSMOK = a5Dto.QUITSMOK;
-                this.ALCOCCAS = a5Dto.ALCOCCAS;
-                this.ALCFREQ = a5Dto.ALCFREQ;
-                this.CVHATT = a5Dto.CVHATT;
-                this.HATTMULT = a5Dto.HATTMULT;
-                this.HATTYEAR = a5Dto.HATTYEAR;
                 this.CVAFIB = a5Dto.CVAFIB;
                 this.CVANGIO = a5Dto.CVANGIO;
                 this.CVBYPASS = a5Dto.CVBYPASS;
                 this.CVPACDEF = a5Dto.CVPACDEF;
                 this.CVCHF = a5Dto.CVCHF;
-                this.CVANGINA = a5Dto.CVANGINA;
                 this.CVHVALVE = a5Dto.CVHVALVE;
                 this.CVOTHR = a5Dto.CVOTHR;
                 this.CVOTHRX = a5Dto.CVOTHRX;
                 this.CBSTROKE = a5Dto.CBSTROKE;
                 this.STROKMUL = a5Dto.STROKMUL;
-                this.STROKYR = a5Dto.STROKYR;
                 this.CBTIA = a5Dto.CBTIA;
-                this.TIAMULT = a5Dto.TIAMULT;
-                this.TIAYEAR = a5Dto.TIAYEAR;
                 this.PD = a5Dto.PD;
-                this.PDYR = a5Dto.PDYR;
                 this.PDOTHR = a5Dto.PDOTHR;
-                this.PDOTHRYR = a5Dto.PDOTHRYR;
                 this.SEIZURES = a5Dto.SEIZURES;
-                this.TBI = a5Dto.TBI;
-                this.TBIBRIEF = a5Dto.TBIBRIEF;
-                this.TBIEXTEN = a5Dto.TBIEXTEN;
-                this.TBIWOLOS = a5Dto.TBIWOLOS;
-                this.TBIYEAR = a5Dto.TBIYEAR;
                 this.DIABETES = a5Dto.DIABETES;
                 this.DIABTYPE = a5Dto.DIABTYPE;
                 this.HYPERTEN = a5Dto.HYPERTEN;
@@ -133,12 +117,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.B12DEF = a5Dto.B12DEF;
                 this.THYROID = a5Dto.THYROID;
                 this.ARTHRIT = a5Dto.ARTHRIT;
-                this.ARTHTYPE = a5Dto.ARTHTYPE;
                 this.ARTHTYPX = a5Dto.ARTHTYPX;
-                this.ARTHUPEX = a5Dto.ARTHUPEX;
-                this.ARTHLOEX = a5Dto.ARTHLOEX;
-                this.ARTHSPIN = a5Dto.ARTHSPIN;
-                this.ARTHUNK = a5Dto.ARTHUNK;
                 this.INCONTU = a5Dto.INCONTU;
                 this.INCONTF = a5Dto.INCONTF;
                 this.APNEA = a5Dto.APNEA;
@@ -146,19 +125,16 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INSOMN = a5Dto.INSOMN;
                 this.OTHSLEEP = a5Dto.OTHSLEEP;
                 this.OTHSLEEX = a5Dto.OTHSLEEX;
-                this.ALCOHOL = a5Dto.ALCOHOL;
-                this.ABUSOTHR = a5Dto.ABUSOTHR;
-                this.ABUSX = a5Dto.ABUSX;
                 this.PTSD = a5Dto.PTSD;
                 this.BIPOLAR = a5Dto.BIPOLAR;
                 this.SCHIZ = a5Dto.SCHIZ;
-                this.DEP2YRS = a5Dto.DEP2YRS;
-                this.DEPOTHR = a5Dto.DEPOTHR;
                 this.ANXIETY = a5Dto.ANXIETY;
                 this.OCD = a5Dto.OCD;
                 this.NPSYDEV = a5Dto.NPSYDEV;
                 this.PSYCDIS = a5Dto.PSYCDIS;
                 this.PSYCDISX = a5Dto.PSYCDISX;
+
+                // TODO map new fields
             }
         }
     }

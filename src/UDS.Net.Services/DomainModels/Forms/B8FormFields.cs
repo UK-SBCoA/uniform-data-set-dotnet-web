@@ -57,49 +57,11 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is B8Dto)
             {
                 var b8Dto = ((B8Dto)dto);
-                NORMEXAM = b8Dto.NORMEXAM;
                 PARKSIGN = b8Dto.PARKSIGN;
-                RESTTRL = b8Dto.RESTTRL;
-                RESTTRR = b8Dto.RESTTRR;
-                SLOWINGL = b8Dto.SLOWINGL;
-                SLOWINGR = b8Dto.SLOWINGR;
-                RIGIDL = b8Dto.RIGIDL;
-                RIGIDR = b8Dto.RIGIDR;
-                BRADY = b8Dto.BRADY;
-                PARKGAIT = b8Dto.PARKGAIT;
                 POSTINST = b8Dto.POSTINST;
-                CVDSIGNS = b8Dto.CVDSIGNS;
-                CORTDEF = b8Dto.CORTDEF;
-                SIVDFIND = b8Dto.SIVDFIND;
-                CVDMOTL = b8Dto.CVDMOTL;
-                CVDMOTR = b8Dto.CVDMOTR;
-                CORTVISL = b8Dto.CORTVISL;
-                CORTVISR = b8Dto.CORTVISR;
-                SOMATL = b8Dto.SOMATL;
-                SOMATR = b8Dto.SOMATR;
-                POSTCORT = b8Dto.POSTCORT;
-                PSPCBS = b8Dto.PSPCBS;
-                EYEPSP = b8Dto.EYEPSP;
-                DYSPSP = b8Dto.DYSPSP;
-                AXIALPSP = b8Dto.AXIALPSP;
-                GAITPSP = b8Dto.GAITPSP;
                 APRAXSP = b8Dto.APRAXSP;
-                APRAXL = b8Dto.APRAXL;
-                APRAXR = b8Dto.APRAXR;
-                CORTSENL = b8Dto.CORTSENL;
-                CORTSENR = b8Dto.CORTSENR;
-                ATAXL = b8Dto.ATAXL;
-                ATAXR = b8Dto.ATAXR;
-                ALIENLML = b8Dto.ALIENLML;
-                ALIENLMR = b8Dto.ALIENLMR;
-                DYSTONL = b8Dto.DYSTONL;
-                DYSTONR = b8Dto.DYSTONR;
-                MYOCLLT = b8Dto.MYOCLLT;
-                MYOCLRT = b8Dto.MYOCLRT;
-                ALSFIND = b8Dto.ALSFIND;
-                GAITNPH = b8Dto.GAITNPH;
-                OTHNEUR = b8Dto.OTHNEUR;
-                OTHNEURX = b8Dto.OTHNEURX;
+
+                // TODO map new fields
             }
         }
         public string GetDescription()
