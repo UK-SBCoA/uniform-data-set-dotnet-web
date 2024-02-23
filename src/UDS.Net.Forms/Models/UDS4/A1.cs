@@ -26,6 +26,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "In which country or region did you spend most of your childhood?")]
         [MaxLength(3)]
         [ProhibitedCharacters]
+        [RequiredOnComplete]
         public string? CHLDHDCTRY { get; set; }
 
         [Display(Name = "White")]
@@ -55,7 +56,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHWHIOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHWHIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHWHIOTHX { get; set; }
 
         [Display(Name = "Hispanic or Latino")]
@@ -85,7 +86,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHHISOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHHISOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHHISOTHX { get; set; }
 
         [Display(Name = "Black or African American")]
@@ -115,7 +116,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHBLKOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHBLKOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHBLKOTHX { get; set; }
 
         [Display(Name = "Asian")]
@@ -145,7 +146,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHASNOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHASNOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHASNOTHX { get; set; }
 
         [Display(Name = "American Indian or Alaska Native")]
@@ -154,7 +155,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "American Indian or Alaska Native (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(RACEAIAN), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(RACEAIAN), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? RACEAIANX { get; set; }
 
         [Display(Name = "Middle Eastern or North African")]
@@ -184,7 +185,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHMENAOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHMENAOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHMENAOTX { get; set; }
 
         [Display(Name = "Native Hawaiian or Other Pacific Islander")]
@@ -214,7 +215,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ETHNHPIOTH), "1", ErrorMessage = "Please indicate ethnicity")]
+        [RequiredIf(nameof(ETHNHPIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHNHPIOTX { get; set; }
 
         [Display(Name = "Race Unknown")]
@@ -244,7 +245,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "(Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(GENOTH), "1", ErrorMessage = "Please indicate current gender identity")]
+        [RequiredIf(nameof(GENOTH), "true", ErrorMessage = "Please indicate current gender identity")]
         public string? GENOTHX { get; set; }
 
         [Display(Name = "Don't know")]
@@ -279,7 +280,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "(Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(SEXORNOTH), "1", ErrorMessage = "Please indicate current gender identity")]
+        [RequiredIf(nameof(SEXORNOTH), "true", ErrorMessage = "Please indicate current gender identity")]
         public string? SEXORNOTHX { get; set; }
 
         [Display(Name = "Don't know")]
@@ -293,6 +294,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PREDOMLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(PREDOMLAN), "8", ErrorMessage = "Please specify language")]
         public string? PREDOMLANX { get; set; }
 
         [Display(Name = "Are you left- or right-handed?")]
@@ -370,94 +374,39 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? REFERSC { get; set; }
 
         [Display(Name = "(specify)")]
+        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
         public int? REFLEARNED { get; set; }
 
         [Display(Name = "Center social media - specify")]
+        [RequiredIf(nameof(REFLEARNED), "6", ErrorMessage = "Please specify center social media")]
         public string? REFCTRSOCX { get; set; }
 
         [Display(Name = "Center registry - specify")]
+        [RequiredIf(nameof(REFLEARNED), "7", ErrorMessage = "Please specify center registry")]
         public string? REFCTRREGX { get; set; }
 
         [Display(Name = "Website - specify")]
+        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify website")]
         public string? REFOTHWEBX { get; set; }
 
         [Display(Name = "Media - specify")]
+        [RequiredIf(nameof(REFLEARNED), "9", ErrorMessage = "Please specify media")]
         public string? REFOTHMEDX { get; set; }
 
         [Display(Name = "Other registry - specify")]
+        [RequiredIf(nameof(REFLEARNED), "10", ErrorMessage = "Please specify other registry")]
         public string? REFOTHREGX { get; set; }
 
         [Display(Name = "Other - specify")]
+        [RequiredIf(nameof(REFLEARNED), "88", ErrorMessage = "Please specify")]
         public string? REFOTHX { get; set; }
 
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            //if (Status == FormStatus.Complete)
-            //{
-            //    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-            //    if (visitValue is VisitModel)
-            //    {
-            //        VisitModel visit = (VisitModel)visitValue;
-
-            //        if (visit != null)
-            //        {
-            //            if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.TIP)
-            //            {
-            //                if (!REASON.HasValue)
-            //                    yield return new ValidationResult("Primary reason for coming to ADC is required.", new[] { nameof(REASON) });
-
-            //                if (!REFERSC.HasValue)
-            //                    yield return new ValidationResult("Principal referral source is required.", new[] { nameof(REFERSC) });
-
-            //                if (!PRESTAT.HasValue)
-            //                    yield return new ValidationResult("Presumed disease status at enrollment is required.", new[] { nameof(PRESTAT) });
-
-            //                if (!PRESPART.HasValue)
-            //                    yield return new ValidationResult("Presumed participation is required.", new[] { nameof(PRESPART) });
-
-            //                if (!SOURCENW.HasValue)
-            //                    yield return new ValidationResult("ADC enrollment type is required.", new[] { nameof(SOURCENW) });
-
-            //                if (!HISPANIC.HasValue)
-            //                    yield return new ValidationResult("Ethnicity is required.", new[] { nameof(HISPANIC) });
-
-            //                if (!RACE.HasValue)
-            //                    yield return new ValidationResult("Race is required.", new[] { nameof(RACE) });
-
-            //                // RACESEC is not required, but check to make sure RACE is defined first
-            //                if (RACESEC.HasValue)
-            //                {
-            //                    if (!RACE.HasValue)
-            //                        yield return new ValidationResult("Define primary race before defining secondary race.", new[] { nameof(RACESEC) });
-            //                }
-
-            //                // RACETER is not required, but check to make sure RACESEC is defined first
-            //                if (RACETER.HasValue)
-            //                {
-            //                    if (!RACESEC.HasValue)
-            //                        yield return new ValidationResult("Define secondary race before defining tertiary race.", new[] { nameof(RACETER) });
-            //                }
-
-            //                if (!PRIMLANG.HasValue)
-            //                    yield return new ValidationResult("Primary language is required.", new[] { nameof(PRIMLANG) });
-
-            //                if (!EDUC.HasValue)
-            //                    yield return new ValidationResult("Years of education is required.", new[] { nameof(EDUC) });
-
-            //                if (String.IsNullOrWhiteSpace(ZIP))
-            //                    yield return new ValidationResult("First three characters of ZIP Code is required.", new[] { nameof(ZIP) });
-
-            //                if (!HANDED.HasValue)
-            //                    yield return new ValidationResult("Handedness is required.", new[] { nameof(HANDED) });
-            //            }
-            //        }
-            //    }
-            //}
-
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
