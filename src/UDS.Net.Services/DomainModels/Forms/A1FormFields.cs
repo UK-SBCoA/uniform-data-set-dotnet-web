@@ -214,7 +214,11 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.SEXORNNOAN = a1Dto.SEXORNNOAN;
                 this.PREDOMLAN = a1Dto.PREDOMLAN;
                 this.PREDOMLANX = a1Dto.PREDOMLANX;
+                this.EDUC = a1Dto.EDUC;
                 this.LVLEDUC = a1Dto.LVLEDUC;
+                this.MARISTAT = a1Dto.MARISTAT;
+                this.LIVSITUA = a1Dto.LIVSITUA;
+                this.RESIDENC = a1Dto.RESIDENC;
                 this.SERVED = a1Dto.SERVED;
                 this.MEDVA = a1Dto.MEDVA;
                 this.EXRTIME = a1Dto.EXRTIME;
