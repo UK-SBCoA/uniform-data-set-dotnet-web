@@ -220,7 +220,7 @@
             <label asp-for="A1a.GUARDREL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARDREL)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDREL"></p>
-                <radio-button-group id="A1a.GUARDREL" for="@Model.A1a.GUARDREL" items="Model.RelationshipItems"></radio-button-group>
+                <radio-button-group id="A1a.GUARDREL" for="@Model.A1a.GUARDREL" items="Model.RelationshipItems" ui-behaviors="Model.GUARDRELBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDREL"></span>
             </div>
             <div class="mt-4 space-y-4">
@@ -239,7 +239,7 @@
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2EDU"></p>
-                    <radio-button-group id="A1_GUARD2EDU" for="A1a.GUARD2EDU" items="Model.GUARD2EDUItems"></radio-button-group>
+                    <radio-button-group id="A1_GUARD2EDU" for="A1a.GUARD2EDU" items="Model.GUARD2EDUItems" ui-behaviors="Model.GUARD2EDUBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2EDU"></span>
                 </div>
             </div>
@@ -248,7 +248,7 @@
             <label asp-for="A1a.GUARD2REL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARD2REL)</label>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2REL"></p>
-                <radio-button-group id="A1a.GUARD2REL" for="@Model.A1a.GUARD2REL" items="Model.RelationshipItems"></radio-button-group>
+                <radio-button-group id="A1a.GUARD2REL" for="@Model.A1a.GUARD2REL" items="Model.RelationshipItems" ui-behaviors="Model.GUARD2RELBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2REL"></span>
             </div>
             <div class="mt-4 space-y-4">
@@ -377,7 +377,7 @@
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:pb-0">
     <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
         <label class="counter text-base font-semibold text-gray-900">
-            How safe do you feel in your home and comminity (or neighborhood)?
+            How safe do you feel in your home and community (or neighborhood)?
         </label>
     </div>
     <div class="subcounterreset pl-10">
@@ -406,7 +406,7 @@
 <div>
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 4 - Experiences with the healthcare system</h3>
     <p class="italic">
-        The next 5 questions ask about your experiences with the healthcare system. PLease answer the questions in reference to your regular medical doctors
+        The next 5 questions ask about your experiences with the healthcare system. Please answer the questions in reference to your regular medical doctors
         (not your research study doctors).
     </p>
 </div>
@@ -530,8 +530,8 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> When reflecting on the day -to-day experiences in questions 33 to 38, what do you thnk is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
-        <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0" id="discriminationReasonSection">
             <div class="flex space-x-4">
                 <div>
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a1.</span>
@@ -691,7 +691,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a15.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOANS"></label>
@@ -712,3 +712,7 @@
 </div>
 
 <partial name="_FormFooter" for="@Model.A1a" />
+
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/js_controllers/A1aDiscriminationToggle.js"></script>
+}

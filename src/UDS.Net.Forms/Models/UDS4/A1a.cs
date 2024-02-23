@@ -224,7 +224,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other")]
         public bool EXPOTHER { get; set; }
 
-        [Display(Name = "Not applicable - I do not have these experiences in my day to day life (END FORM HERE)")]
+        [Display(Name = "Not applicable - I do not have these experiences in my day-to-day life (END FORM HERE)")]
         public bool EXPNOTAPP { get; set; }
 
         [Display(Name = "Prefer not to answer")]
