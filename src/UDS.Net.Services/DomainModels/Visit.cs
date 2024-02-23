@@ -69,6 +69,7 @@ namespace UDS.Net.Services.DomainModels
                         VisitKind.FVP.ToString(),
                         new FormContract[]
                         {
+                            new FormContract("A1", true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
@@ -79,6 +80,7 @@ namespace UDS.Net.Services.DomainModels
                         VisitKind.TIP.ToString(),
                         new FormContract[]
                         {
+                            new FormContract("A1", true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
@@ -89,6 +91,7 @@ namespace UDS.Net.Services.DomainModels
                         VisitKind.TFP.ToString(),
                         new FormContract[]
                         {
+                            new FormContract("A1", true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
