@@ -42,12 +42,8 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A2Dto)
             {
                 var a2Dto = ((A2Dto)dto);
-
-                this.INRELTO = a2Dto.INRELTO;
-                this.INKNOWN = a2Dto.INKNOWN;
-                this.INLIVWTH = a2Dto.INLIVWTH;
-                this.INRELY = a2Dto.INRELY;
                 this.NEWINF = a2Dto.NEWINF;
+
             }
         }
     }

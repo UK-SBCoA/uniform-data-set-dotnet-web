@@ -69,13 +69,11 @@ namespace UDS.Net.Services.DomainModels.Forms
                     A3FamilyMemberDto value = (A3FamilyMemberDto)prop.GetValue(dto);
                     if (value != null)
                     {
-                        familyMember.MOB = value.MOB;
                         familyMember.YOB = value.YOB;
                         familyMember.AGD = value.AGD;
-                        familyMember.NEU = value.NEU;
-                        familyMember.PDX = value.PDX;
-                        familyMember.MOE = value.MOE;
                         familyMember.AGO = value.AGO;
+
+                        // TODO map new fields
                     }
                 }
             }
@@ -107,32 +105,14 @@ namespace UDS.Net.Services.DomainModels.Forms
                 var a3Dto = ((A3Dto)dto);
                 this.AFFFAMM = a3Dto.AFFFAMM;
                 this.NWINFMUT = a3Dto.AFFFAMM;
-                this.FADMUT = a3Dto.FADMUT;
-                this.FADMUTX = a3Dto.FADMUTX;
-                this.FADMUSO = a3Dto.FADMUSO;
-                this.FADMUSOX = a3Dto.FADMUSOX;
-                this.FFTDMUT = a3Dto.FFTDMUT;
-                this.FFTDMUTX = a3Dto.FFTDMUTX;
-                this.FFTDMUSO = a3Dto.FFTDMUSO;
-                this.FFTDMUSX = a3Dto.FFTDMUSX;
-                this.FOTHMUT = a3Dto.FOTHMUT;
-                this.FOTHMUTX = a3Dto.FOTHMUTX;
-                this.FOTHMUSO = a3Dto.FOTHMUSO;
-                this.FOTHMUSX = a3Dto.FOTHMUSX;
-                this.MOMMOB = a3Dto.MOMMOB;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
-                this.MOMNEUR = a3Dto.MOMNEUR;
-                this.MOMPRDX = a3Dto.MOMPRDX;
-                this.MOMMOE = a3Dto.MOMMOE;
                 this.MOMAGEO = a3Dto.MOMAGEO;
-                this.DADMOB = a3Dto.DADMOB;
                 this.DADYOB = a3Dto.DADYOB;
                 this.DADDAGE = a3Dto.DADDAGE;
-                this.DADNEUR = a3Dto.DADNEUR;
-                this.DADPRDX = a3Dto.DADPRDX;
-                this.DADMOE = a3Dto.DADMOE;
                 this.DADAGEO = a3Dto.DADAGEO;
+
+                // TODO map new fields
 
                 this.SIBS = a3Dto.SIBS; // the count of siblings
                 // always 20 spots for siblings
