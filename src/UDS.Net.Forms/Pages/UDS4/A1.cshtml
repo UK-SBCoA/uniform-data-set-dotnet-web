@@ -143,6 +143,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHWHIOTHX" />
                                         <label asp-for="A1.ETHWHIOTHX">@Html.DisplayNameFor(m => m.A1.ETHWHIOTHX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHWHIOTHX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +228,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHHISOTHX" />
                                         <label asp-for="A1.ETHHISOTHX">@Html.DisplayNameFor(m => m.A1.ETHHISOTHX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHHISOTHX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -311,6 +313,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHBLKOTHX" />
                                         <label asp-for="A1.ETHBLKOTHX">@Html.DisplayNameFor(m => m.A1.ETHBLKOTHX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHBLKOTHX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -395,6 +398,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHASNOTHX" />
                                         <label asp-for="A1.ETHASNOTHX">@Html.DisplayNameFor(m => m.A1.ETHASNOTHX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHASNOTHX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -415,6 +419,7 @@
                                 <div class="mt-2">
                                     <input asp-for="A1.RACEAIANX" />
                                     <label asp-for="A1.RACEAIANX">@Html.DisplayNameFor(m => m.A1.RACEAIANX)</label>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.RACEAIANX"></span>
                                 </div>
                             </div>
                         </div>
@@ -499,6 +504,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHMENAOTX" />
                                         <label asp-for="A1.ETHMENAOTX">@Html.DisplayNameFor(m => m.A1.ETHMENAOTX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHMENAOTX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -584,6 +590,7 @@
                                     <div class="mt-2">
                                         <input asp-for="A1.ETHNHPIOTX" />
                                         <label asp-for="A1.ETHNHPIOTX">@Html.DisplayNameFor(m => m.A1.ETHNHPIOTX)</label>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHNHPIOTX"></span>
                                     </div>
                                 </div>
                             </div>
@@ -695,6 +702,7 @@
                                 <div class="mt-2">
                                     <input asp-for="A1.GENOTHX" />
                                     <label asp-for="A1.GENOTHX">@Html.DisplayNameFor(m => m.A1.GENOTHX)</label>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GENOTHX"></span>
                                 </div>
                             </div>
                         </div>
@@ -795,6 +803,7 @@
                                 <div class="mt-2">
                                     <input asp-for="A1.SEXORNOTHX" />
                                     <label asp-for="A1.SEXORNOTHX">@Html.DisplayNameFor(m => m.A1.SEXORNOTHX)</label>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SEXORNOTHX"></span>
                                 </div>
                             </div>
                         </div>
@@ -836,6 +845,7 @@
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.PREDOMLANX"></p>
                         <label asp-for="A1.PREDOMLANX">@Html.DisplayNameFor(m => m.A1.PREDOMLANX)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.PREDOMLANX"></span>
                     </div>
                 </div>
             </div>
@@ -997,7 +1007,7 @@
                     <input asp-for="@Model.A1.ADISTATE" />
                 </div>
                 <p class="text-gray-400">
-                    <i>(If unknown, leave blank)</i></pclass="text-gray-400">
+                    <i>(If unknown, leave blank)</i></p class="text-gray-400">
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADISTATE"></span>
             </div>
         </div>
@@ -1024,6 +1034,7 @@
                 <p class="text-gray-400"><i>(If unknown, leave blank)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIOCC"></span>
             </div>
+            <p class="text-gray-400"><i>(Enter three number code from Appendix 2)</i></p>
         </div>
 
         <div class="@rowCSS">
@@ -1070,31 +1081,37 @@
                         <label asp-for="A1.REFCTRSOCX">@Html.DisplayNameFor(m => m.A1.REFCTRSOCX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFCTRSOCX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFCTRSOCX"></span>
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFCTRREGX"></p>
                         <label asp-for="A1.REFCTRREGX">@Html.DisplayNameFor(m => m.A1.REFCTRREGX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFCTRREGX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFCTRREGX"></span>
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHWEBX"></p>
                         <label asp-for="A1.REFOTHWEBX">@Html.DisplayNameFor(m => m.A1.REFOTHWEBX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHWEBX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHWEBX"></span>
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHMEDX"></p>
                         <label asp-for="A1.REFOTHMEDX">@Html.DisplayNameFor(m => m.A1.REFOTHMEDX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHMEDX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHMEDX"></span>
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHREGX"></p>
                         <label asp-for="A1.REFOTHREGX">@Html.DisplayNameFor(m => m.A1.REFOTHREGX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHREGX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHREGX"></span>
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHX"></p>
                         <label asp-for="A1.REFOTHX">@Html.DisplayNameFor(m => m.A1.REFOTHX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHX"></span>
                         </div>
                     </div>
                 </div>
