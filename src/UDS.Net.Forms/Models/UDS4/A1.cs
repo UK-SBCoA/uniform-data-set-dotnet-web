@@ -221,6 +221,27 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Race Unknown")]
         public bool RACEUNKN { get; set; }
 
+        [RequiredOnComplete(ErrorMessage = "Please indicate ethnicity/race.")]
+        [NotMapped]
+        public bool? EthnicityRaceIndicated
+        {
+            get
+            {
+                if ( RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH 
+                    || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
+                    || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
+                    || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
+                    || RACEAIAN
+                    || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHMOROCCO || ETHISRAEL || ETHMENAOTH
+                    || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
+                    || RACEUNKN )
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [Display(Name = "Man")]
         public bool GENMAN { get; set; }
 
@@ -254,6 +275,20 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool GENNOANS { get; set; }
 
+        [RequiredOnComplete(ErrorMessage = "Please indicate current gender identity.")]
+        [NotMapped]
+        public bool? GenderIdentityIndicated
+        {
+            get
+            {
+                if ( GENMAN || GENWOMAN || GENTRMAN || GENTRWOMAN || GENNONBI || GENTWOSPIR || GENOTH || GENDKN || GENNOANS )
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [Display(Name = "What sex were you assigned at birth, on your original birth certificate?")]
         [RequiredOnComplete]
         public int? BIRTHSEX { get; set; }
@@ -276,6 +311,20 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "I use a different term")]
         public bool SEXORNOTH { get; set; }
+
+        [RequiredOnComplete(ErrorMessage = "Please indicate sexual orientation.")]
+        [NotMapped]
+        public bool? SexualOrientstionIndicated
+        {
+            get
+            {
+                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH )
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         [Display(Name = "(Specify)")]
         [MaxLength(60)]
