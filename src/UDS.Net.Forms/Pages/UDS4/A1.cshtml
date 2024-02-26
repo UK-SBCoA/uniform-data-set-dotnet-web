@@ -11,8 +11,7 @@
         medical records, and proxy co-participant report (according to what is deemed to be the most reliable source of information, except
         as indicated for specific questions that may be based on the participants perceptions and experience which only they can provide
         accurate information for). This information can be collected by mail-in survey, electronic capture (web-based), phone or video interview,
-        or during the in-person visit to accommodate and lessen participant visit burden. For additional clarification and examples, see the
-        UDS Coding Guidebook, Form A1. Check only one box per question unless otherwise specified.
+        or during the in-person visit to accommodate and lessen participant visit burden. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question unless otherwise specified.
     </p>
 </div>
 
@@ -128,7 +127,7 @@
                                     <label asp-for="A1.ETHFRENCH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.ETHFRENCH)</label>
                                 </div>
                             </div>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                                 <div class="relative flex items-start">
                                     <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="flex h-6 items-center">
@@ -141,8 +140,8 @@
                                 <div class="relative flex items-start">
                                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                     <div class="mt-2">
-                                        <input asp-for="A1.ETHWHIOTHX" />
                                         <label asp-for="A1.ETHWHIOTHX">@Html.DisplayNameFor(m => m.A1.ETHWHIOTHX)</label>
+                                        <input asp-for="A1.ETHWHIOTHX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHWHIOTHX"></span>
                                     </div>
                                 </div>
