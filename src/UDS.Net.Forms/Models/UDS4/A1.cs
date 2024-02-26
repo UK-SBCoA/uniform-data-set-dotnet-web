@@ -332,7 +332,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? SERVED { get; set; }
 
-        [Display(Name = ". Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
+        [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
         [RequiredIf(nameof(SERVED), "1", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
         [RequiredIf(nameof(SERVED), "9", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
         public int? MEDVA { get; set; }
@@ -373,11 +373,15 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? REFERSC { get; set; }
 
-        [Display(Name = "(specify)")]
+        [Display(Name = "(specify (END FORM HERE)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
         [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
+        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
+        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
         public int? REFLEARNED { get; set; }
 
         [Display(Name = "Center social media - specify")]
