@@ -235,6 +235,16 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if(GUARDEDU.Value == 8 && string.IsNullOrEmpty(GUARDRELX))
+            {
+                yield return new ValidationResult("Other relationship required", new[] { nameof(GUARDRELX) });
+            }
+
+            if (GUARD2REL.Value == 8 && string.IsNullOrEmpty(GUARD2RELX))
+            {
+                yield return new ValidationResult("Other relationship required", new[] { nameof(GUARD2RELX) });
+            }
+
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;

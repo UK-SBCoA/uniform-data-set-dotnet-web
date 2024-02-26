@@ -265,5 +265,15 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return Page();
         }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            BaseForm = A1a; // reassign bounded and derived form to base form for base method
+
+            Visit.Forms.Add(A1a); // visit needs updated form as well
+
+            return await base.OnPostAsync(id); // checks for validation, etc.
+        }
     }
 }
