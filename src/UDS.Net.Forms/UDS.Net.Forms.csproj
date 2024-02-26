@@ -24,7 +24,7 @@
 		<SupportedPlatform Include="browser" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
 		<PackageReference Include="UDS.Net.Dto" Version="2.0.0" />
 		<PackageReference Include="UDS.Net.API.Client" Version="2.0.0" />
 	</ItemGroup>
