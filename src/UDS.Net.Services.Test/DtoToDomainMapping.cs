@@ -124,7 +124,7 @@ public class DtoToDomainMapping
             Number = 1,
             StartDateTime = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS3",
+            Version = "UDS4",
             Forms = new List<FormDto>()
             {
                 new A2Dto
