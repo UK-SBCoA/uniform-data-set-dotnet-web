@@ -337,11 +337,18 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
+                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
+                INCNTMOD = fields.INCNTMOD,
+                INCNTMDX = fields.INCNTMDX,
+                INCNTFRQ = fields.INCNTFRQ,
+                INCNTTIM = fields.INCNTTIM,
                 INRELY = fields.INRELY,
-                NEWINF = fields.NEWINF
+                INMEMWORS = fields.INMEMWORS,
+                INMEMTROUB = fields.INMEMTROUB,
+                INMEMTEN = fields.INMEMTEN,
             };
         }
 
