@@ -53,9 +53,16 @@
                 <div class="mt-2 w-20">
                     <input asp-for="@Model.A1.CHLDHDCTRY" />
                 </div>
+                <p class="text-gray-400">(If unknown, enter AX1)</p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.CHLDHDCTRY"></span>
             </div>
-            <p>(Enter three character code from Appendix 1)</p>
+            <p class="text-gray-400"><i>(Enter three character code from Appendix 1)</i></p>
+            <p class="text-gray-400">
+                <i>
+                    Common codes:
+                    USA – United States; CAN – Canada; MEX – Mexico
+                </i>
+            </p>
         </div>
 
         <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -832,7 +839,7 @@
         <div>
             <div colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A1.PREDOMLAN"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.PREDOMLAN)</label>
+                    <label asp-for="A1.PREDOMLAN"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.PREDOMLAN) <span class="text-gray-400"><i>(Primary language is defined as the predominant language you have used throughout your life. Please take into consideration first language learned and used as well as the length of use.)</i></span></label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.PREDOMLAN"></p>
                         <radio-button-group id="@Html.IdFor(m => m.A1.PREDOMLAN)" for="@Model.A1.PREDOMLAN" items="Model.PREDOMLANListItems" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
@@ -851,12 +858,13 @@
         </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A1.HANDED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.HANDED)</label>
+            <label asp-for="A1.HANDED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.HANDED) <span class="text-gray-400"><i>(for example, which hand would normally be used for writing)?</i></span></label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HANDED"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.HANDED)" for="@Model.A1.HANDED" items="Model.HANDEDListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.HANDED"></span>
             </div>
+            
         </div>
 
         <div class="counter" style="opacity: 0;"></div>
@@ -868,8 +876,8 @@
                     <div class="mt-2 w-20">
                         <input asp-for="@Model.A1.EDUC" />
                     </div>
-                    <p><i>(99 = Unknown)</i></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
+                    <p class="text-gray-400"><i>(99 = Unknown)</i></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
                 </div>
             </div>
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -910,7 +918,7 @@
         </div>
 
         <div class="@rowCSS">
-            <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP)</label>
+            <label asp-for="@Model.A1.ZIP"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.ZIP) <span class="text-gray-400"><i>(For example, if your ZIP code is 12345, enter 123.)</i></span></label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="A1.ZIP"></p>
                 <div class="mt-2 w-20">
@@ -940,7 +948,7 @@
         </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A1.EXRTIME"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EXRTIME)</label>
+            <label asp-for="A1.EXRTIME"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.EXRTIME) <span class="text-gray-400"><i>(Include activity at work, traveling to and from places, fitness activities, and recreational activities.)</i></span></label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.EXRTIME"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.EXRTIME)" for="@Model.A1.EXRTIME" items="Model.EXRTIMEListItems"></radio-button-group>
@@ -1006,8 +1014,9 @@
                     <input asp-for="@Model.A1.ADISTATE" />
                 </div>
                 <p class="text-gray-400">
-                    <i>(If unknown, leave blank)</i></p class="text-gray-400">
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADISTATE"></span>
+                    <i>(If unknown, leave blank)</i>
+                </p>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADISTATE"></span>
             </div>
         </div>
 
@@ -1024,7 +1033,7 @@
         </div>
 
         <div class="@rowCSS">
-            <label asp-for="@Model.A1.PRIOCC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.PRIOCC)</label>
+            <label asp-for="@Model.A1.PRIOCC"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.PRIOCC) <span class="text-gray-400"><i>(Enter three number code from Appendix 2)</i></span></label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="A1.PRIOCC"></p>
                 <div class="mt-2 w-20">
@@ -1033,7 +1042,6 @@
                 <p class="text-gray-400"><i>(If unknown, leave blank)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIOCC"></span>
             </div>
-            <p class="text-gray-400"><i>(Enter three number code from Appendix 2)</i></p>
         </div>
 
         <div class="@rowCSS">
@@ -1069,7 +1077,7 @@
         <div>
             <div colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A1.REFLEARNED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.REFLEARNED)</label>
+                    <label asp-for="A1.REFLEARNED"><span class="counter"></span> @Html.DisplayNameFor(m => m.A1.REFLEARNED) <span class="text-gray-400"><i>(choose most relevant option)</i></span></label>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFLEARNED"></p>
                         <radio-button-group id="@Html.IdFor(m => m.A1.REFLEARNED)" for="@Model.A1.REFLEARNED" items="Model.REFLEARNEDListItems" ui-behaviors="Model.REFLEARNEDUIBehavior"></radio-button-group>
