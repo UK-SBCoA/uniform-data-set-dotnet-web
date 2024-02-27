@@ -227,14 +227,14 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                    if ( RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH
-                    || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
-                    || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                    || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                    || RACEAIAN
-                    || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHMOROCCO || ETHISRAEL || ETHMENAOTH
-                    || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
-                    || RACEUNKN )
+                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH
+                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
+                || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
+                || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
+                || RACEAIAN
+                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHMOROCCO || ETHISRAEL || ETHMENAOTH
+                || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
+                || RACEUNKN)
                 {
                     return true;
                 }
@@ -281,7 +281,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if ( GENMAN || GENWOMAN || GENTRMAN || GENTRWOMAN || GENNONBI || GENTWOSPIR || GENOTH || GENDKN || GENNOANS )
+                if (GENMAN || GENWOMAN || GENTRMAN || GENTRWOMAN || GENNONBI || GENTWOSPIR || GENOTH || GENDKN || GENNOANS)
                 {
                     return true;
                 }
@@ -318,7 +318,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if ( SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH )
+                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH)
                 {
                     return true;
                 }
