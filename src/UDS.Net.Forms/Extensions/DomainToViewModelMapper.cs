@@ -345,7 +345,7 @@ namespace UDS.Net.Forms.Extensions
                 DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
                 {
                     Id = d.Id,
-                    DrugId = d.DRUGID,
+                    RxNormId = d.RxNormId,
                     CreatedAt = d.CreatedAt,
                     CreatedBy = d.CreatedBy,
                     ModifiedBy = d.ModifiedBy,
@@ -366,7 +366,7 @@ namespace UDS.Net.Forms.Extensions
             {
                 return new DrugCodeModel
                 {
-                    DrugId = drugCode.DrugId,
+                    RxNormId = drugCode.RxNormId,
                     DrugName = drugCode.DrugName,
                     BrandName = drugCode.BrandName,
                     IsPopular = drugCode.IsPopular,
@@ -378,7 +378,7 @@ namespace UDS.Net.Forms.Extensions
             return new DrugCodeModel
             {
                 Id = a4.Id,
-                DrugId = drugCode.DrugId,
+                RxNormId = drugCode.RxNormId,
                 DrugName = drugCode.DrugName,
                 BrandName = drugCode.BrandName,
                 IsPopular = drugCode.IsPopular,

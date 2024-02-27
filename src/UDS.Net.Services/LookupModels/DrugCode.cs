@@ -3,7 +3,7 @@ namespace UDS.Net.Services.LookupModels
 {
     public class DrugCode
     {
-        public string DrugId { get; set; }
+        public string RxNormId { get; set; }
 
         public string DrugName { get; set; }
 

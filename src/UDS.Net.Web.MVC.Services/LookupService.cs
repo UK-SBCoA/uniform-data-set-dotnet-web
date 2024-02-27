@@ -32,7 +32,7 @@ namespace UDS.Net.Web.MVC.Services
                 TotalResultsCount = dto.TotalResultsCount,
                 DrugCodes = dto.Results.Select(r => new DrugCode
                 {
-                    DrugId = r.RxNormId.ToString(),
+                    RxNormId = r.RxNormId.ToString(),
                     DrugName = r.DrugName,
                     BrandName = r.BrandName,
                     IsPopular = r.IsPopular,
@@ -52,7 +52,7 @@ namespace UDS.Net.Web.MVC.Services
                 TotalResultsCount = dto.TotalResultsCount,
                 DrugCodes = dto.Results.Select(r => new DrugCode
                 {
-                    DrugId = r.RxNormId.ToString(),
+                    RxNormId = r.RxNormId.ToString(),
                     DrugName = r.DrugName,
                     BrandName = r.BrandName,
                     IsPopular = r.IsPopular,

@@ -247,7 +247,7 @@ namespace UDS.Net.Forms.Extensions
             return new A4DFormFields
             {
                 Id = vm.Id.HasValue ? vm.Id.Value : 0,
-                DRUGID = vm.DrugId,
+                RxNormId = vm.RxNormId,
                 CreatedAt = vm.CreatedAt,
                 CreatedBy = vm.CreatedBy,
                 ModifiedBy = vm.ModifiedBy,

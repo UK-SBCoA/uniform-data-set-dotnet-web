@@ -38,7 +38,7 @@
                                 <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
                                     <input asp-for="PopularDrugCodes[i].Id" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].DrugId" type="hidden" />
+                                    <input asp-for="PopularDrugCodes[i].RxNormId " type="hidden" />
                                     <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
                                     <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
                                     <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
@@ -51,7 +51,7 @@
                                     <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].DrugId</span></label>
+                                    <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                 <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
                                     <input asp-for="OTCDrugCodes[i].Id" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].DrugId" type="hidden" />
+                                    <input asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
                                     <input asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
                                     <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
                                     <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
@@ -96,7 +96,7 @@
                                     <input asp-for="OTCDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].DrugId</span></label>
+                                    <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                         <div class="flex h-6 items-center">
                                             <input asp-for="CustomDrugCodes[i].Id" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].DrugId" type="hidden" />
+                                            <input asp-for="CustomDrugCodes[i].RxNormId" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].DrugName" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
@@ -143,7 +143,7 @@
                                             <input asp-for="CustomDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].DrugId</span></label>
+                                            <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>

@@ -66,9 +66,9 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             foreach (var newCode in Lookup.DrugCodes.Where(d => d.IsSelected).ToList())
             {
-                if (fields.A4Ds.Any(a => a.DRUGID == newCode.DrugId))
+                if (fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId ))
                 {
-                    var existingA4D = fields.A4Ds.Where(d => d.DRUGID == newCode.DrugId).FirstOrDefault();
+                    var existingA4D = fields.A4Ds.Where(d => d.RxNormId == newCode.RxNormId).FirstOrDefault();
 
                     if (existingA4D.IsDeleted)
                     {
@@ -84,7 +84,7 @@ namespace UDS.Net.Forms.Pages.Lookup
                     // add
                     fields.A4Ds.Add(new A4DFormFields
                     {
-                        DRUGID = newCode.DrugId,
+                        RxNormId = newCode.RxNormId,
                         CreatedAt = DateTime.Now,
                         CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username"
                     });

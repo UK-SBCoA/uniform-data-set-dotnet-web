@@ -38,7 +38,7 @@
                         <input asp-for="Lookup.DrugCodes[i].Id" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].DrugName" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].BrandName" type="hidden" />
-                        <input asp-for="Lookup.DrugCodes[i].DrugId" type="hidden" />
+                        <input asp-for="Lookup.DrugCodes[i].RxNormId " type="hidden" />
                         <fieldset>
                             <div class="space-y-5">
                                 <div class="relative flex items-start">
@@ -47,7 +47,7 @@
                                         <input asp-for="Lookup.DrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                     </div>
                                     <div class="ml-3 text-sm leading-6">
-                                        <label for="Lookup_DrugCodes_@(i)__IsSelected" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.Lookup.DrugCodes[i].DrugId</span></label>
+                                        <label for="Lookup_DrugCodes_@(i)__IsSelected" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.Lookup.DrugCodes[i].RxNormId</span></label>
                                     </div>
                                 </div>
                             </div>
