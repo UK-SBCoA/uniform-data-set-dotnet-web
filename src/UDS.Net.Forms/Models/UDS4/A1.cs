@@ -227,7 +227,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if ( RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH 
+                    if ( RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH
                     || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
                     || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
                     || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
@@ -318,7 +318,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH )
+                if ( SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH )
                 {
                     return true;
                 }
