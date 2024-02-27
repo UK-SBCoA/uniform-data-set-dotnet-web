@@ -14,95 +14,43 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A2 : FormModel
     {
-        [Display(Name = "Co-participant's birth month")]
-        [BirthMonth(AllowUnknown = true)]
-        public int? INBIRMO { get; set; }
-
-        [Display(Name = "Co-participant's birth year")]
-        [BirthYear(Minimum = 1850, AllowUnknown = true)]
-        public int? INBIRYR { get; set; }
-
-        [Display(Name = "Co-participant's sex")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? INSEX { get; set; }
-
         [Display(Name = "Is this a new co-participant - i.e., one who was not a co-participant at any past UDS visit?")]
         public int? NEWINF { get; set; }
-
-        [Display(Name = "Does the co-participant report being of Hispanic/Latino ethnicity  (i.e., having origins from a mainly Spanish-speaking Latin American country), regardless of race?")]
-        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Does the co-participant report being of Hispanic/Latino ethnicity?")]
-        public int? INHISP { get; set; }
-
-        [Display(Name = "If yes, what are the co-participant's reported origins?")]
-        [RequiredIf(nameof(INHISP), "2", ErrorMessage = "What are the co-participant's reported origins?")]
-        public int? INHISPOR { get; set; }
-
-        [Display(Name = "Other (SPECIFY)")]
-        [MaxLength(60)]
-        [ProhibitedCharacters]
-        [RequiredIf(nameof(INHISPOR), "50", ErrorMessage = "Indicate other additional origin")]
-        public string? INHISPOX { get; set; }
-
-        [Display(Name = "What does the co-participant report as his or her race?")]
-        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Indicate co-participants race")]
-        public int? INRACE { get; set; }
-
-        [Display(Name = "Other (SPECIFY)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(INRACE), "50", ErrorMessage = "Indicate other additional race")]
-        [ProhibitedCharacters]
-        public string? INRACEX { get; set; }
-
-        [Display(Name = "What additional race does the co-participant report?")]
-        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Indicate additional race")]
-        public int? INRASEC { get; set; }
-
-        [Display(Name = "Other (SPECIFY)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(INRASEC), "50", ErrorMessage = "Indicate other additional race")]
-        [ProhibitedCharacters]
-        public string? INRASECX { get; set; }
-
-        [Display(Name = "What additional race, beyond those reported in Questions 4 and 5, does the co-participant report?")]
-        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Indicate additional race")]
-        public int? INRATER { get; set; }
-
-        [Display(Name = "Other (SPECIFY)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(INRATER), "50", ErrorMessage = "Indicate other additional race")]
-        [ProhibitedCharacters]
-        public string? INRATERX { get; set; }
-
-        [Display(Name = "Co-participant's years of education — use the codes below to report the level achieved; if an attempted level is not completed, enter the number of years completed" +
-         "<br /><br /> 12 = high school or GED<br />  16 = bachelor's degree<br /> 18 = master's degree<br /> 20 = doctorate<br /> 99 = unknown")]
-        [RegularExpression(@"^(99|[0-9]|[1-2][0-9]|3[0-6])$", ErrorMessage = "Co-participants years of education must be within 0 and 36 or 99.")]
-        [RequiredIf(nameof(NEWINF), "1", ErrorMessage = "Indicate years of education")]
-        public int? INEDUC { get; set; }
-
-        [Display(Name = "What is the co-participant's relationship to the participant?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "What is the co-participant’s relationship to the participant?")]
+        [RequiredOnComplete(ErrorMessage = "Response to co-participant's relationship to participant required")]
         public int? INRELTO { get; set; }
-
         [Display(Name = "How long has the co-participant known the participant?")]
-        [RegularExpression(@"^(0|[1-9]\d?|120|999)$", ErrorMessage = "Years known must be within 0-120 or 999")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnComplete(ErrorMessage = "Response to how long co-participant has know the participant required")]
+        [RegularExpression("^(0|[1-9]\\d?|1[01]\\d|120|999)$", ErrorMessage = "Valid range is 0-120 or 999")]
         public int? INKNOWN { get; set; }
-
-        [Display(Name = "Does the co-participant live with the subject?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the co-participant live with the participant?")]
+        [RequiredOnComplete(ErrorMessage = "Response to co-participant living with participant required")]
         public int? INLIVWTH { get; set; }
-
-        [Display(Name = "If no, approximate frequency of in-person visits?")]
-        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Indicate frequency of visits")]
-        public int? INVISITS { get; set; }
-
-        [Display(Name = "If no, approximate frequency of telephone contact?")]
-        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Indicate frequency of telephone calls")]
-        public int? INCALLS { get; set; }
-
-        [Display(Name = "Is there a question about the co-participant's reliability?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "What is the primary mode of contact with the participant?")]
+        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to primary mode of contact required")]
+        public int? INCNTMOD { get; set; }
+        [Display(Name = "Primary mode of contact with the participant - Other (specify)")]
+        [MaxLength(60)]
+        [RequiredIf(nameof(INCNTMOD), "6", ErrorMessage = "If primary mode of contact is 'Other', response is required")]
+        public string? INCNTMDX { get; set; }
+        [Display(Name = "What is the approximate frequency of contact?")]
+        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to frequency of contact required")]
+        public int? INCNTFRQ { get; set; }
+        [Display(Name = "What is the average amount of time spent in contact with the participant during each encounter?")]
+        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to average amount of time spent in contact requried")]
+        public int? INCNTTIM { get; set; }
+        [Display(Name = "Is there a question about the co-participant’s reliability?")]
+        [RequiredOnComplete(ErrorMessage = "Response to co-participant's reliability required")]
         public int? INRELY { get; set; }
+        [Display(Name = "Do you feel like the participant's memory is becoming worse?")]
+        [RequiredOnComplete(ErrorMessage = "Response to participants memory becoming worse required")]
+        public int? INMEMWORS { get; set; }
+        [Display(Name = "About how often does the participant have trouble remembering things?")]
+        [RequiredOnComplete(ErrorMessage = "Response to participants memory required")]
+        public int? INMEMTROUB { get; set; }
+        [Display(Name = "Compared to 10 years ago, would you say that the participant's memory is much worse, a little worse, the same, a little better, or much better?")]
+        [RequiredOnComplete(ErrorMessage = "Response to participants memory since 10 years ago required")]
+        public int? INMEMTEN { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -111,88 +111,74 @@ public class DtoToDomainMapping
     //    Assert.AreEqual(a1DtoFields.HANDED, fields.HANDED);
     //}
 
-    //[TestMethod]
-    //public void A2DtoMapsToDomain()
-    //{
-    //    VisitDto visitDto = new VisitDto
-    //    {
-    //        Id = 1,
-    //        Kind = "IVP",
-    //        CreatedAt = DateTime.Now,
-    //        CreatedBy = EMAIL,
-    //        IsDeleted = false,
-    //        Number = 1,
-    //        StartDateTime = DateTime.Now,
-    //        ParticipationId = 1,
-    //        Version = "UDS3",
-    //        Forms = new List<FormDto>()
-    //        {
-    //            new A2Dto
-    //            {
-    //                Id = 1,
-    //                VisitId = 1,
-    //                Kind = "A2",
-    //                CreatedAt = DateTime.Now,
-    //                CreatedBy = EMAIL,
-    //                IsDeleted = false,
-    //                Status = "Pending",
-    //                INBIRMO = TESTINT,
-    //                INBIRYR = TESTINT,
-    //                INSEX = TESTINT,
-    //                INHISP = TESTINT,
-    //                INHISPOR = TESTINT,
-    //                INHISPOX = TESTSTRING,
-    //                INRACE = TESTINT,
-    //                INRACEX = TESTSTRING,
-    //                INRASEC = TESTINT,
-    //                INRASECX = TESTSTRING,
-    //                INRATER = TESTINT,
-    //                INRATERX = TESTSTRING,
-    //                INEDUC = TESTINT,
-    //                INRELTO = TESTINT,
-    //                INKNOWN = TESTINT,
-    //                INLIVWTH = TESTINT,
-    //                INVISITS = TESTINT,
-    //                INCALLS = TESTINT,
-    //                INRELY = TESTINT
-    //            }
-    //        }
-    //    };
+    [TestMethod]
+    public void A2DtoMapsToDomain()
+    {
+        VisitDto visitDto = new VisitDto
+        {
+            Id = 1,
+            Kind = "IVP",
+            CreatedAt = DateTime.Now,
+            CreatedBy = EMAIL,
+            IsDeleted = false,
+            Number = 1,
+            StartDateTime = DateTime.Now,
+            ParticipationId = 1,
+            Version = "UDS4",
+            Forms = new List<FormDto>()
+            {
+                new A2Dto
+                {
+                    Id = 1,
+                    VisitId = 1,
+                    Kind = "A2",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = EMAIL,
+                    IsDeleted = false,
+                    Status = "Pending",
+                    NEWINF = TESTINT,
+                    INRELTO = TESTINT,
+                    INKNOWN = TESTINT,
+                    INLIVWTH = TESTINT,
+                    INCNTMOD = TESTINT,
+                    INCNTMDX = TESTSTRING,
+                    INCNTFRQ = TESTINT,
+                    INCNTTIM = TESTINT,
+                    INRELY = TESTINT,
+                    INMEMWORS = TESTINT,
+                    INMEMTROUB = TESTINT,
+                    INMEMTEN = TESTINT,
+                }
+            }
+        };
 
-    //    var visit = visitDto.ToDomain(EMAIL);
+        var visit = visitDto.ToDomain(EMAIL);
 
-    //    var a2 = visit.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
+        var a2 = visit.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
 
-    //    Assert.IsTrue(a2.GetType() == typeof(Form));
-    //    Assert.IsTrue(a2.Fields.GetType() == typeof(A2FormFields));
+        Assert.IsTrue(a2.GetType() == typeof(Form));
+        Assert.IsTrue(a2.Fields.GetType() == typeof(A2FormFields));
 
-    //    var fields = (A2FormFields)a2.Fields;
-    //    var dtoFields = visitDto.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
+        var fields = (A2FormFields)a2.Fields;
+        var dtoFields = visitDto.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
 
-    //    Assert.IsNotNull(dtoFields);
+        Assert.IsNotNull(dtoFields);
 
-    //    var a2DtoFields = (A2Dto)dtoFields;
+        var a2DtoFields = (A2Dto)dtoFields;
 
-    //    Assert.AreEqual(a2DtoFields.INBIRMO, fields.INBIRMO);
-    //    Assert.AreEqual(a2DtoFields.INBIRYR, fields.INBIRYR);
-    //    Assert.AreEqual(a2DtoFields.INSEX, fields.INSEX);
-    //    Assert.AreEqual(a2DtoFields.INHISP, fields.INHISP);
-    //    Assert.AreEqual(a2DtoFields.INHISPOR, fields.INHISPOR);
-    //    Assert.AreEqual(a2DtoFields.INHISPOX, fields.INHISPOX);
-    //    Assert.AreEqual(a2DtoFields.INRACE, fields.INRACE);
-    //    Assert.AreEqual(a2DtoFields.INRACEX, fields.INRACEX);
-    //    Assert.AreEqual(a2DtoFields.INRASEC, fields.INRASEC);
-    //    Assert.AreEqual(a2DtoFields.INRASECX, fields.INRASECX);
-    //    Assert.AreEqual(a2DtoFields.INRATER, fields.INRATER);
-    //    Assert.AreEqual(a2DtoFields.INRATERX, fields.INRATERX);
-    //    Assert.AreEqual(a2DtoFields.INEDUC, fields.INEDUC);
-    //    Assert.AreEqual(a2DtoFields.INRELTO, fields.INRELTO);
-    //    Assert.AreEqual(a2DtoFields.INKNOWN, fields.INKNOWN);
-    //    Assert.AreEqual(a2DtoFields.INLIVWTH, fields.INLIVWTH);
-    //    Assert.AreEqual(a2DtoFields.INVISITS, fields.INVISITS);
-    //    Assert.AreEqual(a2DtoFields.INCALLS, fields.INCALLS);
-    //    Assert.AreEqual(a2DtoFields.INRELY, fields.INRELY);
-    //}
+        Assert.AreEqual(a2DtoFields.NEWINF, fields.NEWINF);
+        Assert.AreEqual(a2DtoFields.INRELTO, fields.INRELTO);
+        Assert.AreEqual(a2DtoFields.INKNOWN, fields.INKNOWN);
+        Assert.AreEqual(a2DtoFields.INLIVWTH, fields.INLIVWTH);
+        Assert.AreEqual(a2DtoFields.INCNTMOD, fields.INCNTMOD);
+        Assert.AreEqual(a2DtoFields.INCNTMDX, fields.INCNTMDX);
+        Assert.AreEqual(a2DtoFields.INCNTFRQ, fields.INCNTFRQ);
+        Assert.AreEqual(a2DtoFields.INCNTTIM, fields.INCNTTIM);
+        Assert.AreEqual(a2DtoFields.INRELY, fields.INRELY);
+        Assert.AreEqual(a2DtoFields.INMEMWORS, fields.INMEMWORS);
+        Assert.AreEqual(a2DtoFields.INMEMTROUB, fields.INMEMTROUB);
+        Assert.AreEqual(a2DtoFields.INMEMTEN, fields.INMEMTEN);
+    }
 
     //[TestMethod]
     //public void A3DtoMapsToDomain()

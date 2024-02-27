@@ -76,9 +76,18 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MARISTAT = a1Dto.MARISTAT;
                 LIVSITUA = a1Dto.LIVSITUA;
                 //INDEPEND = a1Dto.INDEPEND;
+                REFERSC = a1Dto.REFERSC;
+                SOURCENW = a1Dto.SOURCENW;
+                BIRTHMO = a1Dto.BIRTHMO;
+                BIRTHYR = a1Dto.BIRTHYR;
+                EDUC = a1Dto.EDUC;
+                MARISTAT = a1Dto.MARISTAT;
+                LIVSITUA = a1Dto.LIVSITUA;
                 RESIDENC = a1Dto.RESIDENC;
                 ZIP = a1Dto.ZIP;
                 HANDED = a1Dto.HANDED;
+
+                // TODO map new fields
             }
         }
     }

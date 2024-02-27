@@ -233,10 +233,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((D1FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is D2FormFields)
-            {
-                dto = ((D2FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is T1FormFields)
             {
                 dto = ((T1FormFields)form.Fields).ToDto();
@@ -274,7 +270,7 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
-            else if (form.Fields is A5FormFields && formKind == "A5")
+            else if (form.Fields is A5FormFields && formKind == "A5D2")
             {
                 dto = ((A5FormFields)form.Fields).ToDto();
             }
@@ -317,10 +313,6 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1FormFields && formKind == "D1")
             {
                 dto = ((D1FormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is D2FormFields && formKind == "D2")
-            {
-                dto = ((D2FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is T1FormFields && formKind == "T1")
             {
@@ -404,30 +396,13 @@ namespace UDS.Net.Services.Extensions
         {
             return new A1Dto()
             {
-                //REASON = fields.REASON,
                 REFERSC = fields.REFERSC,
-                //LEARNED = fields.LEARNED,
-                //PRESTAT = fields.PRESTAT,
-                //PRESPART = fields.PRESPART,
                 SOURCENW = fields.SOURCENW,
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
-                //SEX = fields.SEX,
                 MARISTAT = fields.MARISTAT,
                 LIVSITUA = fields.LIVSITUA,
-                //INDEPEND = fields.INDEPEND,
                 RESIDENC = fields.RESIDENC,
-                //HISPANIC = fields.HISPANIC,
-                //HISPOR = fields.HISPOR,
-                //HISPORX = fields.HISPORX,
-                //RACE = fields.RACE,
-                //RACEX = fields.RACEX,
-                //RACESEC = fields.RACESEC,
-                //RACESECX = fields.RACESECX,
-                //RACETER = fields.RACETER,
-                //RACETERX = fields.RACETERX,
-                //PRIMLANG = fields.PRIMLANG,
-                //PRIMLANX = fields.PRIMLANX,
                 EDUC = fields.EDUC,
                 ZIP = fields.ZIP,
                 HANDED = fields.HANDED
@@ -438,26 +413,18 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                //INBIRMO = fields.INBIRMO,
-                //INBIRYR = fields.INBIRYR,
-                //INSEX = fields.INSEX,
-                //INHISP = fields.INHISP,
-                //INHISPOR = fields.INHISPOR,
-                //INHISPOX = fields.INHISPOX,
-                //INRACE = fields.INRACE,
-                //INRACEX = fields.INRACEX,
-                //INRASEC = fields.INRASEC,
-                //INRASECX = fields.INRASECX,
-                //INRATER = fields.INRATER,
-                //INRATERX = fields.INRATERX,
-                //INEDUC = fields.INEDUC,
+                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
-                //INVISITS = fields.INVISITS,
-                //INCALLS = fields.INCALLS,
+                INCNTMOD = fields.INCNTMOD,
+                INCNTMDX = fields.INCNTMDX,
+                INCNTFRQ = fields.INCNTFRQ,
+                INCNTTIM = fields.INCNTTIM,
                 INRELY = fields.INRELY,
-                NEWINF = fields.NEWINF
+                INMEMWORS = fields.INMEMWORS,
+                INMEMTROUB = fields.INMEMTROUB,
+                INMEMTEN = fields.INMEMTEN,
             };
         }
 
@@ -467,31 +434,11 @@ namespace UDS.Net.Services.Extensions
             {
                 AFFFAMM = fields.AFFFAMM,
                 NWINFMUT = fields.NWINFMUT,
-                FADMUT = fields.FADMUT,
-                FADMUTX = fields.FADMUTX,
-                FADMUSO = fields.FADMUSO,
-                FADMUSOX = fields.FADMUSOX,
-                FFTDMUT = fields.FFTDMUT,
-                FFTDMUTX = fields.FFTDMUTX,
-                FFTDMUSO = fields.FFTDMUSO,
-                FFTDMUSX = fields.FFTDMUSX,
-                FOTHMUT = fields.FOTHMUT,
-                FOTHMUTX = fields.FOTHMUTX,
-                FOTHMUSO = fields.FOTHMUSO,
-                FOTHMUSX = fields.FOTHMUSX,
-                MOMMOB = fields.MOMMOB,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
-                MOMNEUR = fields.MOMNEUR,
-                MOMPRDX = fields.MOMPRDX,
-                MOMMOE = fields.MOMMOE,
                 MOMAGEO = fields.MOMAGEO,
-                DADMOB = fields.DADMOB,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
-                DADNEUR = fields.DADNEUR,
-                DADPRDX = fields.DADPRDX,
-                DADMOE = fields.DADMOE,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS
@@ -585,81 +532,43 @@ namespace UDS.Net.Services.Extensions
             return new A3FamilyMemberDto
             {
                 FormId = formId,
-                MOB = fields.MOB,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
-                NEU = fields.NEU,
-                PDX = fields.PDX,
-                MOE = fields.MOE,
                 AGO = fields.AGO
             };
         }
 
-        public static A4GDto ToDto(this A4GFormFields fields, Form form)
+        public static A4Dto ToDto(this A4GFormFields fields, Form form)
         {
-            return new A4GDto
+            return new A4Dto
             {
-                ANYMEDS = fields.ANYMEDS,
-                A4Dtos = fields.A4Ds.Select(a => a.ToDto(form)).ToList()
+                ANYMEDS = fields.ANYMEDS
             };
         }
 
-        public static A4DDto ToDto(this A4DFormFields fields, Form form)
+        public static A5D2Dto ToDto(this A5FormFields fields)
         {
-            var dto = new A4DDto
-            {
-                Id = fields.Id,
-                DRUGID = fields.DRUGID,
-                CreatedAt = fields.CreatedAt,
-                CreatedBy = fields.CreatedBy,
-                DeletedBy = fields.DeletedBy,
-                IsDeleted = fields.IsDeleted,
-                Kind = "A4D",
-                VisitId = form.VisitId,
-                Status = "2" // TODO Status
-            };
-
-            return dto;
-        }
-
-        public static A5Dto ToDto(this A5FormFields fields)
-        {
-            return new A5Dto
+            return new A5D2Dto
             {
                 TOBAC30 = fields.TOBAC30,
                 TOBAC100 = fields.TOBAC100,
                 SMOKYRS = fields.SMOKYRS,
                 PACKSPER = fields.PACKSPER,
                 QUITSMOK = fields.QUITSMOK,
-                ALCOCCAS = fields.ALCOCCAS,
-                ALCFREQ = fields.ALCFREQ,
-                CVHATT = fields.CVHATT,
-                HATTMULT = fields.HATTMULT,
-                HATTYEAR = fields.HATTYEAR,
                 CVAFIB = fields.CVAFIB,
                 CVANGIO = fields.CVANGIO,
                 CVBYPASS = fields.CVBYPASS,
                 CVPACDEF = fields.CVPACDEF,
                 CVCHF = fields.CVCHF,
-                CVANGINA = fields.CVANGINA,
                 CVHVALVE = fields.CVHVALVE,
                 CVOTHR = fields.CVOTHR,
                 CVOTHRX = fields.CVOTHRX,
                 CBSTROKE = fields.CBSTROKE,
                 STROKMUL = fields.STROKMUL,
-                STROKYR = fields.STROKYR,
                 CBTIA = fields.CBTIA,
-                TIAMULT = fields.TIAMULT,
-                TIAYEAR = fields.TIAYEAR,
                 PD = fields.PD,
-                PDYR = fields.PDYR,
                 PDOTHR = fields.PDOTHR,
                 SEIZURES = fields.SEIZURES,
-                TBI = fields.TBI,
-                TBIBRIEF = fields.TBIBRIEF,
-                TBIEXTEN = fields.TBIEXTEN,
-                TBIWOLOS = fields.TBIWOLOS,
-                TBIYEAR = fields.TBIYEAR,
                 DIABETES = fields.DIABETES,
                 DIABTYPE = fields.DIABTYPE,
                 HYPERTEN = fields.HYPERTEN,
@@ -667,12 +576,7 @@ namespace UDS.Net.Services.Extensions
                 B12DEF = fields.B12DEF,
                 THYROID = fields.THYROID,
                 ARTHRIT = fields.ARTHRIT,
-                ARTHTYPE = fields.ARTHTYPE,
                 ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX,
-                ARTHLOEX = fields.ARTHLOEX,
-                ARTHSPIN = fields.ARTHSPIN,
-                ARTHUNK = fields.ARTHUNK,
                 INCONTU = fields.INCONTU,
                 INCONTF = fields.INCONTF,
                 APNEA = fields.APNEA,
@@ -680,14 +584,9 @@ namespace UDS.Net.Services.Extensions
                 INSOMN = fields.INSOMN,
                 OTHSLEEP = fields.OTHSLEEP,
                 OTHSLEEX = fields.OTHSLEEX,
-                ALCOHOL = fields.ALCOHOL,
-                ABUSOTHR = fields.ABUSOTHR,
-                ABUSX = fields.ABUSX,
                 PTSD = fields.PTSD,
                 BIPOLAR = fields.BIPOLAR,
                 SCHIZ = fields.SCHIZ,
-                DEP2YRS = fields.DEP2YRS,
-                DEPOTHR = fields.DEPOTHR,
                 ANXIETY = fields.ANXIETY,
                 OCD = fields.OCD,
                 NPSYDEV = fields.NPSYDEV,
@@ -702,15 +601,7 @@ namespace UDS.Net.Services.Extensions
             {
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
-                BPSYS = fields.BPSYS,
-                BPDIAS = fields.BPDIAS,
                 HRATE = fields.HRATE,
-                VISION = fields.VISION,
-                VISCORR = fields.VISCORR,
-                VISWCORR = fields.VISWCORR,
-                HEARING = fields.HEARING,
-                HEARAID = fields.HEARAID,
-                HEARWAID = fields.HEARWAID
             };
         }
 
@@ -809,49 +700,9 @@ namespace UDS.Net.Services.Extensions
         {
             return new B8Dto
             {
-                NORMEXAM = fields.NORMEXAM,
                 PARKSIGN = fields.PARKSIGN,
-                RESTTRL = fields.RESTTRL,
-                RESTTRR = fields.RESTTRR,
-                SLOWINGL = fields.SLOWINGL,
-                SLOWINGR = fields.SLOWINGR,
-                RIGIDL = fields.RIGIDL,
-                RIGIDR = fields.RIGIDR,
-                BRADY = fields.BRADY,
-                PARKGAIT = fields.PARKGAIT,
                 POSTINST = fields.POSTINST,
-                CVDSIGNS = fields.CVDSIGNS,
-                CORTDEF = fields.CORTDEF,
-                SIVDFIND = fields.SIVDFIND,
-                CVDMOTL = fields.CVDMOTL,
-                CVDMOTR = fields.CVDMOTR,
-                CORTVISL = fields.CORTVISL,
-                CORTVISR = fields.CORTVISR,
-                SOMATL = fields.SOMATL,
-                SOMATR = fields.SOMATR,
-                POSTCORT = fields.POSTCORT,
-                PSPCBS = fields.PSPCBS,
-                EYEPSP = fields.EYEPSP,
-                DYSPSP = fields.DYSPSP,
-                AXIALPSP = fields.AXIALPSP,
-                GAITPSP = fields.GAITPSP,
-                APRAXSP = fields.APRAXSP,
-                APRAXL = fields.APRAXL,
-                APRAXR = fields.APRAXR,
-                CORTSENL = fields.CORTSENL,
-                CORTSENR = fields.CORTSENR,
-                ATAXL = fields.ATAXL,
-                ATAXR = fields.ATAXR,
-                ALIENLML = fields.ALIENLML,
-                ALIENLMR = fields.ALIENLMR,
-                DYSTONL = fields.DYSTONL,
-                DYSTONR = fields.DYSTONR,
-                MYOCLLT = fields.MYOCLLT,
-                MYOCLRT = fields.MYOCLRT,
-                ALSFIND = fields.ALSFIND,
-                GAITNPH = fields.GAITNPH,
-                OTHNEUR = fields.OTHNEUR,
-                OTHNEURX = fields.OTHNEURX
+                APRAXSP = fields.APRAXSP
             };
         }
 
@@ -859,9 +710,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new B9Dto
             {
-                DECSUB = fields.DECSUB,
-                DECIN = fields.DECIN,
-                DECCLCOG = fields.DECCLCOG,
                 COGMEM = fields.COGMEM,
                 COGORI = fields.COGORI,
                 COGJUDG = fields.COGJUDG,
@@ -869,20 +717,15 @@ namespace UDS.Net.Services.Extensions
                 COGVIS = fields.COGVIS,
                 COGATTN = fields.COGATTN,
                 COGFLUC = fields.COGFLUC,
-                COGFLAGO = fields.COGFLAGO,
                 COGOTHR = fields.COGOTHR,
                 COGOTHRX = fields.COGOTHRX,
-                COGFPRED = fields.COGFPRED,
-                COGFPREX = fields.COGFPREX,
                 COGMODE = fields.COGMODE,
                 COGMODEX = fields.COGMODEX,
-                DECAGE = fields.DECAGE,
                 DECCLBE = fields.DECCLBE,
                 BEAPATHY = fields.BEAPATHY,
                 BEDEP = fields.BEDEP,
                 BEVHALL = fields.BEVHALL,
                 BEVWELL = fields.BEVWELL,
-                BEVHAGO = fields.BEVHAGO,
                 BEAHALL = fields.BEAHALL,
                 BEDEL = fields.BEDISIN,
                 BEDISIN = fields.BEDISIN,
@@ -894,28 +737,18 @@ namespace UDS.Net.Services.Extensions
                 BEANX = fields.BEANX,
                 BEOTHR = fields.BEOTHR,
                 BEOTHRX = fields.BEOTHRX,
-                BEFPRED = fields.BEFPRED,
-                BEFPREDX = fields.BEFPREDX,
                 BEMODE = fields.BEMODE,
                 BEMODEX = fields.BEMODEX,
-                BEAGE = fields.BEAGE,
-                DECCLMOT = fields.DECCLMOT,
                 MOGAIT = fields.MOGAIT,
                 MOFALLS = fields.MOFALLS,
                 MOTREM = fields.MOTREM,
                 MOSLOW = fields.MOSLOW,
-                MOFRST = fields.MOFRST,
                 MOMODE = fields.MOMODE,
                 MOMODEX = fields.MOMODEX,
                 MOMOPARK = fields.MOMOPARK,
-                PARKAGE = fields.PARKAGE,
                 MOMOALS = fields.MOMOALS,
-                ALSAGE = fields.ALSAGE,
-                MOAGE = fields.MOAGE,
                 COURSE = fields.COURSE,
                 FRSTCHG = fields.FRSTCHG,
-                LBDEVAL = fields.LBDEVAL,
-                FTLDEVAL = fields.FTLDEVAL
             };
         }
 
@@ -977,7 +810,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new C2Dto
             {
-                MODCOMM = fields.MODCOMM,
                 MOCACOMP = fields.MOCACOMP,
                 MOCAREAS = fields.MOCAREAS,
                 MOCALOC = fields.MOCALOC,
@@ -1060,18 +892,10 @@ namespace UDS.Net.Services.Extensions
                 REY5INT = fields.REY5INT,
                 REY6REC = fields.REY6REC,
                 REY6INT = fields.REY6INT,
-                OTRAILA = fields.OTRAILA,
-                OTRLARR = fields.OTRLARR,
-                OTRLALI = fields.OTRLALI,
-                OTRAILB = fields.OTRAILB,
-                OTRLBRR = fields.OTRLBRR,
-                OTRLBLI = fields.OTRLBLI,
                 REYDREC = fields.REYDREC,
                 REYDINT = fields.REYDINT,
                 REYTCOR = fields.REYTCOR,
                 REYFPOS = fields.REYFPOS,
-                VNTTOTW = fields.VNTTOTW,
-                VNTPCNC = fields.VNTPCNC,
                 RESPVAL = fields.RESPVAL,
                 RESPHEAR = fields.RESPHEAR,
                 RESPDIST = fields.RESPDIST,
@@ -1219,46 +1043,6 @@ namespace UDS.Net.Services.Extensions
                 COGOTH3 = fields.COGOTH3,
                 COGOTH3F = fields.COGOTH3F,
                 COGOTH3X = fields.COGOTH3X
-            };
-        }
-
-        public static D2Dto ToDto(this D2FormFields fields)
-        {
-            return new D2Dto
-            {
-                CANCER = fields.CANCER,
-                CANCSITE = fields.CANCSITE,
-                DIABET = fields.DIABET,
-                MYOINF = fields.MYOINF,
-                CONGHRT = fields.CONGHRT,
-                AFIBRILL = fields.AFIBRILL,
-                HYPERT = fields.HYPERT,
-                ANGINA = fields.ANGINA,
-                HYPCHOL = fields.HYPCHOL,
-                VB12DEF = fields.VB12DEF,
-                THYDIS = fields.THYDIS,
-                ARTH = fields.ARTH,
-                ARTYPE = fields.ARTYPE,
-                ARTYPEX = fields.ARTYPEX,
-                ARTUPEX = fields.ARTUPEX,
-                ARTLOEX = fields.ARTLOEX,
-                ARTSPIN = fields.ARTSPIN,
-                ARTUNKN = fields.ARTUNKN,
-                URINEINC = fields.URINEINC,
-                BOWLINC = fields.BOWLINC,
-                SLEEPAP = fields.SLEEPAP,
-                REMDIS = fields.REMDIS,
-                HYPOSOM = fields.HYPOSOM,
-                SLEEPOTH = fields.SLEEPOTH,
-                SLEEPOTX = fields.SLEEPOTX,
-                ANGIOCP = fields.ANGIOCP,
-                ANGIOPCI = fields.ANGIOPCI,
-                PACEMAKE = fields.PACEMAKE,
-                HVALVE = fields.HVALVE,
-                ANTIENC = fields.ANTIENC,
-                ANTIENCX = fields.ANTIENCX,
-                OTHCOND = fields.OTHCOND,
-                OTHCONDX = fields.OTHCONDX
             };
         }
 

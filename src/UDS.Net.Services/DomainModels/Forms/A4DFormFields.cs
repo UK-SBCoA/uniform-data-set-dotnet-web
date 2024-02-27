@@ -35,30 +35,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public A4DFormFields() { }
         public A4DFormFields(FormDto dto) : this()
         {
-            if (dto is A4DDto)
-            {
-                var a4DDto = (A4DDto)dto;
-
-                this.DRUGID = a4DDto.DRUGID;
-                this.Id = a4DDto.Id;
-                this.CreatedAt = a4DDto.CreatedAt;
-                this.CreatedBy = a4DDto.CreatedBy;
-                this.ModifiedBy = a4DDto.ModifiedBy;
-                this.DeletedBy = a4DDto.DeletedBy;
-                this.IsDeleted = a4DDto.IsDeleted;
-
-                if (a4DDto.DrugCodeLookup != null)
-                {
-                    this.DrugCode = new DrugCode
-                    {
-                        DrugId = a4DDto.DrugCodeLookup.DrugId,
-                        DrugName = a4DDto.DrugCodeLookup.DrugName,
-                        BrandName = a4DDto.DrugCodeLookup.BrandName,
-                        IsOverTheCounter = a4DDto.DrugCodeLookup.IsOverTheCounter,
-                        IsPopular = a4DDto.DrugCodeLookup.IsPopular
-                    };
-                }
-            }
+            // TODO map rxnormids
         }
     }
 }
