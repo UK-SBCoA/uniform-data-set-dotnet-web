@@ -300,7 +300,6 @@ namespace UDS.Net.Forms.Extensions
                 FOTHMUTX = fields.FOTHMUTX,
                 FOTHMUSO = fields.FOTHMUSO,
                 FOTHMUSX = fields.FOTHMUSX,
-                MOMMOB = fields.MOMMOB,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMNEUR = fields.MOMNEUR,

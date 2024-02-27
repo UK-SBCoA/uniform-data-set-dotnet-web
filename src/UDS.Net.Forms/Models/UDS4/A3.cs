@@ -88,10 +88,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
         public int? NWINFPAR { get; set; }
 
-        [Display(Name = "Mother — birth month")]
-        [BirthMonth(AllowUnknown = true)]
-        public int? MOMMOB { get; set; }
-
         [Display(Name = "Mother — birth year")]
         [BirthYear(AllowUnknown = true)]
         public int? MOMYOB { get; set; }

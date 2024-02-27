@@ -59,6 +59,7 @@ namespace UDS.Net.Services.DomainModels
                         new FormContract[]
                         {
                             new FormContract("A2", true),
+                            new FormContract("A3",true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
@@ -70,6 +71,7 @@ namespace UDS.Net.Services.DomainModels
                         new FormContract[]
                         {
                             new FormContract("A2",true),
+                            new FormContract("A3",true),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),

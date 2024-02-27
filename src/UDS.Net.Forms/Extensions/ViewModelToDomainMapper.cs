@@ -192,7 +192,6 @@ namespace UDS.Net.Forms.Extensions
                 FOTHMUTX = vm.FOTHMUTX,
                 FOTHMUSO = vm.FOTHMUSO,
                 FOTHMUSX = vm.FOTHMUSX,
-                MOMMOB = vm.MOMMOB,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
                 MOMNEUR = vm.MOMNEUR,
