@@ -93,41 +93,41 @@
                         </div>
                     </td>
                     <td>
-                        <div class="w-20">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMNEUR</p>
-                            <input asp-for="@Model.A3.MOMNEUR" />
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
+                            <input asp-for="@Model.A3.MOMETPR" />
                         </div>
                     </td>
                     <td>
-                        <div class="w-20">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMPRDX</p>
-                            <input asp-for="@Model.A3.MOMPRDX" />
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMETSEC</p>
+                            <input asp-for="@Model.A3.MOMETSEC" />
                         </div>
                     </td>
                     <td>
-                        <div class="w-20">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMMOE</p>
-                            <input asp-for="@Model.A3.MOMMOE" />
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMMEVAL</p>
                         </div>
+                        <input asp-for="@Model.A3.MOMMEVAL" />
                     </td>
                     <td>
-                        <div class="w-20">
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
                             <p class="mt-1 text-sm leading-6 text-gray-400">MOMAGEO</p>
-                            <input asp-for="@Model.A3.MOMAGEO" />
                         </div>
+                        <input asp-for="@Model.A3.MOMAGEO" />
+
                     </td>
                 </tr>
                 <tr>
                     <td></td>
                     <td colspan="2">
-                        @*                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMOB"></span> *@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
                     </td>
                     <td colspan="4">
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMNEUR"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMPRDX"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMOE"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
                     </td>
                 </tr>
@@ -151,28 +151,30 @@
 
                     </td>
                     <td>
-                        <div class="w-20">
-                            <input asp-for="@Model.A3.DADNEUR" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADNEUR"></span>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <input asp-for="@Model.A3.DADETPR" />
                         </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR"></span>
                     </td>
                     <td>
-                        <div class="w-20">
-                            <input asp-for="@Model.A3.DADPRDX" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADPRDX"></span>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <input asp-for="@Model.A3.DADETSEC" />
                         </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETSEC"></span>
+
                     </td>
                     <td>
-                        <div class="w-20">
-                            <input asp-for="@Model.A3.DADMOE" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMOE"></span>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <input asp-for="@Model.A3.DADMEVAL" />
                         </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMEVAL"></span>
+
                     </td>
                     <td>
-                        <div class="w-20">
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
                             <input asp-for="@Model.A3.DADAGEO" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
                         </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
                     </td>
                 </tr>
             </tbody>
@@ -426,8 +428,6 @@
     </div>
 </div>
 
-</div>
-</div>
 <partial name="_FormFooter" for="@Model.A3" />
 
 @section Scripts {

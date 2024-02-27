@@ -302,16 +302,16 @@ namespace UDS.Net.Forms.Extensions
                 FOTHMUSX = fields.FOTHMUSX,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
-                MOMNEUR = fields.MOMNEUR,
-                MOMPRDX = fields.MOMPRDX,
-                MOMMOE = fields.MOMMOE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
                 DADMOB = fields.DADMOB,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
-                DADNEUR = fields.DADNEUR,
-                DADPRDX = fields.DADPRDX,
-                DADMOE = fields.DADMOE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS,
@@ -325,12 +325,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMember()
             {
                 FamilyMemberIndex = fields.FamilyMemberIndex,
-                MOB = fields.MOB,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
-                NEU = fields.NEU,
-                PDX = fields.PDX,
-                MOE = fields.MOE,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }

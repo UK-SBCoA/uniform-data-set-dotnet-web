@@ -194,16 +194,16 @@ namespace UDS.Net.Forms.Extensions
                 FOTHMUSX = vm.FOTHMUSX,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
-                MOMNEUR = vm.MOMNEUR,
-                MOMPRDX = vm.MOMPRDX,
-                MOMMOE = vm.MOMMOE,
+                MOMETPR = vm.MOMETPR,
+                MOMETSEC = vm.MOMETSEC,
+                MOMMEVAL = vm.MOMMEVAL,
                 MOMAGEO = vm.MOMAGEO,
                 DADMOB = vm.DADMOB,
                 DADYOB = vm.DADYOB,
                 DADDAGE = vm.DADDAGE,
-                DADNEUR = vm.DADNEUR,
-                DADPRDX = vm.DADPRDX,
-                DADMOE = vm.DADMOE,
+                DADETPR = vm.DADETPR,
+                DADETSEC = vm.DADETSEC,
+                DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
                 KIDS = vm.KIDS,
@@ -219,12 +219,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMemberFormFields()
             {
                 FamilyMemberIndex = vm.FamilyMemberIndex,
-                MOB = vm.MOB,
                 YOB = vm.YOB,
                 AGD = vm.AGD,
-                NEU = vm.NEU,
-                PDX = vm.PDX,
-                MOE = vm.MOE,
+                ETPR = vm.ETPR,
+                ETSEC = vm.ETSEC,
+                MEVAL = vm.MEVAL,
                 AGO = vm.AGO
             };
         }

@@ -7,9 +7,8 @@
     </td>
     <td>
         <fieldset>
-            <div class="grid grid-cols-2 sm:grid-cols-2">
+            <div class="grid grid-cols-1 sm:grid-cols-1">
                 <div class="sm:col-span-1">
-                    <input asp-for="@Model.MOB" placeholder="MM" />
                 </div>
                 <div class="sm:col-span-1">
                     <input asp-for="@Model.YOB" placeholder="YYYY" />
@@ -18,27 +17,27 @@
         </fieldset>
     </td>
     <td>
-        <div class="w-20">
+        <div class="grid grid-cols-1 sm:grid-cols-1">
             <input asp-for="@Model.AGD" />
         </div>
     </td>
     <td>
-        <div class="w-20">
-            <input asp-for="@Model.NEU" />
+        <div class="grid grid-cols-1 sm:grid-cols-1">
+            <input asp-for="@Model.ETPR" />
         </div>
     </td>
     <td>
-        <div class="w-20">
-            <input asp-for="@Model.PDX" />
+        <div class="grid grid-cols-1 sm:grid-cols-1">
+            <input asp-for="@Model.ETSEC" />
         </div>
     </td>
     <td>
-        <div class="w-20">
-            <input asp-for="@Model.MOE" />
+        <div class="grid grid-cols-1 sm:grid-cols-1">
+            <input asp-for="@Model.MEVAL" />
         </div>
     </td>
     <td>
-        <div class="w-20">
+        <div class="grid grid-cols-1 sm:grid-cols-1">
             <input asp-for="@Model.AGO" />
         </div>
     </td>
@@ -46,14 +45,13 @@
 <tr>
     <td></td>
     <td colspan="2">
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="MOB"></span>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="YOB"></span>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGD"></span>
     </td>
     <td colspan="4">
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="NEU"></span>
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="PDX"></span>
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="MOE"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="ETPR"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="ETSEC"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="MEVAL"></span>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGO"></span>
     </td>
 </tr>

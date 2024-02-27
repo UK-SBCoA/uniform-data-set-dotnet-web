@@ -191,16 +191,15 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         if (sibling != null)
                         {
-                            if (sibling.MOB.HasValue || sibling.YOB.HasValue)
+
+                            if (!sibling.AGD.HasValue)
                             {
-                                if (!sibling.AGD.HasValue)
-                                {
-                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
-                                }
+                                ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
                             }
-                            if (sibling.MOB.HasValue || sibling.YOB.HasValue || sibling.AGD.HasValue)
+
+                            if (sibling.YOB.HasValue || sibling.AGD.HasValue)
                             {
-                                if (!sibling.NEU.HasValue)
+                                if (!sibling.ETPR.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this sibling.");
                                 }
@@ -215,16 +214,15 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         if (child != null)
                         {
-                            if (child.MOB.HasValue || child.YOB.HasValue)
                             {
                                 if (!child.AGD.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
                                 }
                             }
-                            if (child.MOB.HasValue || child.YOB.HasValue || child.AGD.HasValue)
+                            if (child.YOB.HasValue || child.AGD.HasValue)
                             {
-                                if (!child.NEU.HasValue)
+                                if (!child.ETPR.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this child.");
                                 }
