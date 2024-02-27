@@ -5,26 +5,18 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A2FormFields : IFormFields
     {
-        public int? INBIRMO { get; set; }
-        public int? INBIRYR { get; set; }
-        public int? INSEX { get; set; }
         public int? NEWINF { get; set; }
-        public int? INHISP { get; set; }
-        public int? INHISPOR { get; set; }
-        public string INHISPOX { get; set; }
-        public int? INRACE { get; set; }
-        public string INRACEX { get; set; }
-        public int? INRASEC { get; set; }
-        public string INRASECX { get; set; }
-        public int? INRATER { get; set; }
-        public string INRATERX { get; set; }
-        public int? INEDUC { get; set; }
         public int? INRELTO { get; set; }
         public int? INKNOWN { get; set; }
         public int? INLIVWTH { get; set; }
-        public int? INVISITS { get; set; }
-        public int? INCALLS { get; set; }
+        public int? INCNTMOD { get; set; }
+        public string INCNTMDX { get; set; }
+        public int? INCNTFRQ { get; set; }
+        public int? INCNTTIM { get; set; }
         public int? INRELY { get; set; }
+        public int? INMEMWORS { get; set; }
+        public int? INMEMTROUB { get; set; }
+        public int? INMEMTEN { get; set; }
 
         public string GetDescription()
         {
@@ -44,6 +36,18 @@ namespace UDS.Net.Services.DomainModels.Forms
                 var a2Dto = ((A2Dto)dto);
                 this.NEWINF = a2Dto.NEWINF;
 
+                this.NEWINF = a2Dto.NEWINF;
+                this.INRELTO = a2Dto.INRELTO;
+                this.INKNOWN = a2Dto.INKNOWN;
+                this.INLIVWTH = a2Dto.INLIVWTH;
+                this.INCNTMOD = a2Dto.INCNTMOD;
+                this.INCNTMDX = a2Dto.INCNTMDX;
+                this.INCNTFRQ = a2Dto.INCNTFRQ;
+                this.INCNTTIM = a2Dto.INCNTTIM;
+                this.INRELY = a2Dto.INRELY;
+                this.INMEMWORS = a2Dto.INMEMWORS;
+                this.INMEMTROUB = a2Dto.INMEMTROUB;
+                this.INMEMTEN = a2Dto.INMEMTEN;
             }
         }
     }

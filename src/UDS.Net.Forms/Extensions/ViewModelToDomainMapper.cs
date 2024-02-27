@@ -239,26 +239,19 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new A2FormFields
             {
-                INBIRMO = vm.INBIRMO,
-                INBIRYR = vm.INBIRYR,
-                INSEX = vm.INSEX,
                 NEWINF = vm.NEWINF,
-                INHISP = vm.INHISP,
-                INHISPOR = vm.INHISPOR,
-                INHISPOX = vm.INHISPOX,
-                INRACE = vm.INRACE,
-                INRACEX = vm.INRACEX,
-                INRASEC = vm.INRASEC,
-                INRASECX = vm.INRASECX,
-                INRATER = vm.INRATER,
-                INRATERX = vm.INRATERX,
-                INEDUC = vm.INEDUC,
                 INRELTO = vm.INRELTO,
                 INKNOWN = vm.INKNOWN,
                 INLIVWTH = vm.INLIVWTH,
-                INVISITS = vm.INVISITS,
-                INCALLS = vm.INCALLS,
-                INRELY = vm.INRELY
+                INCNTMOD = vm.INCNTMOD,
+                INCNTMDX = vm.INCNTMDX,
+                INCNTFRQ = vm.INCNTFRQ,
+                INCNTTIM = vm.INCNTTIM,
+                INRELY = vm.INRELY,
+                INMEMWORS = vm.INMEMWORS,
+                INMEMTROUB = vm.INMEMTROUB,
+                INMEMTEN = vm.INMEMTEN,
+
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
