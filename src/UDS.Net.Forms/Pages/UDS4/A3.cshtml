@@ -24,19 +24,7 @@
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
 
         }
-        else
-        {
-            <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL PARENTS</h3>
 
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.NWINFPAR"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFPAR)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFPAR"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFPAR)" for="@Model.A3.NWINFPAR" items="Model.NewInformationSinceLastVisit"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFPAR"></span>
-                </div>
-            </div>
-        }
     }
 
     <p class="mt-1 text-sm text-gray-500">
@@ -120,15 +108,40 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td colspan="2">
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
+                    <td>
+                        <fieldset>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <div class="sm:col-span-1">
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
+                                </div>
+                            </div>
+                        </fieldset>
                     </td>
-                    <td colspan="4">
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
+                    <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMEVAL"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="grid grid-cols-2 sm:grid-cols-1">
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
+                        </div>
+
                     </td>
                 </tr>
                 <tr class="border-b border-gray-100">
@@ -138,7 +151,7 @@
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" />
                             </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMOB"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB"></span>
                         </fieldset>
                     </td>
                     <td>
