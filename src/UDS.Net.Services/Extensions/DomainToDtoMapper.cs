@@ -466,8 +466,22 @@ namespace UDS.Net.Services.Extensions
         {
             return new A4Dto
             {
-                ANYMEDS = fields.ANYMEDS
+                ANYMEDS = fields.ANYMEDS,
+                A4DetailsDtos = fields.A4Ds.ToDto()
             };
+        }
+
+        public static List<int> ToDto(this List<A4DFormFields> fields)
+        {
+            List<int> rxNormIds = new List<int>();
+            foreach (var field in fields)
+            {
+                if (Int32.TryParse(field.RxNormId, out int rxNormId))
+                {
+                    rxNormIds.Add(rxNormId);
+                }
+            }
+            return rxNormIds;
         }
 
         public static A5D2Dto ToDto(this A5FormFields fields)
