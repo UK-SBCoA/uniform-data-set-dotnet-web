@@ -4,443 +4,443 @@
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
-
 <div>
-    <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric
-        diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the <b>
-            UDS
-            Coding Guidebook
-        </b> <i>for</i> <b>Initial Visit Packet, Form A3.</b>
-    </p>
-</div>
+    <div>
+        <p class="mt-1 text-sm text-gray-500">
+            INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric
+            diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the <b>
+                UDS
+                Coding Guidebook
+            </b> <i>for</i> <b>Initial Visit Packet, Form A3.</b>
+        </p>
+    </div>
 
-<!--// Biological parents //-->
-<div class="">
-    @if (Model.Visit != null)
-    {
-        if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP)
+    <!--// Biological parents //-->
+    <div class="">
+        @if (Model.Visit != null)
         {
-            <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+            if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP)
+            {
+                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+
+            }
 
         }
 
-    }
+        <p class="mt-1 text-sm text-gray-500">
+            For any parent with a neurological or psychiatric diagnosis, the entire row  <u>must be filled out.</u>
+        </p>
+        <p class="mt-1 text-sm text-gray-500">
+            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
+                99
+                = Unknown
+            </b> in the <b>Primary diagnosis</b> column, and <i>skip the subsequent questions</i> in the row. For a parent with no neurological or
+            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
+            the subsequent questions in the row. For a parent with a primary diagnosis but no secondary diagnosis, enter <b>
+                88 = No secondary
+                diagnosis
+            </b> in the Secondary diagnosis column
+        </p>
 
-    <p class="mt-1 text-sm text-gray-500">
-        For any parent with a neurological or psychiatric diagnosis, the entire row  <u>must be filled out.</u>
-    </p>
-    <p class="mt-1 text-sm text-gray-500">
-        If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
-            99
-            = Unknown
-        </b> in the <b>Primary diagnosis</b> column, and <i>skip the subsequent questions</i> in the row. For a parent with no neurological or
-        psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
-        the subsequent questions in the row. For a parent with a primary diagnosis but no secondary diagnosis, enter <b>
-            88 = No secondary
-            diagnosis
-        </b> in the Secondary diagnosis column
-    </p>
+        <div class="subcounterreset m-2">
+            <table class="mt-16 w-full text-left text-sm leading-6">
+                <thead class="border-b border-gray-200 text-gray-900">
+                    <tr>
+                        <th></th>
+                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
+                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th>Primary dx*</th>
+                        <th>Secondary Dx**</th>
+                        <th>Method of evaluation**</th>
+                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                    </tr>
 
-    <div class="subcounterreset m-2">
-        <table class="mt-16 w-full text-left text-sm leading-6">
-            <thead class="border-b border-gray-200 text-gray-900">
-                <tr>
-                    <th></th>
-                    <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                    <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
-                    <th>Primary dx*</th>
-                    <th>Secondary Dx**</th>
-                    <th>Method of evaluation**</th>
-                    <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
 
-                <tr>
-                    <th></th>
-                    <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border-b border-gray-100">
-                    <td><span class="subcounter"></span> Mother</td>
-                    <td>
-                        <fieldset>
-                            <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <div class="sm:col-span-1">
-                                    <p class="mt-1 text-sm leading-6 text-gray-400">MOMYOB</p>
-                                    <input asp-for="@Model.A3.MOMYOB" placeholder="YYYY" />
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-100">
+                        <td><span class="subcounter"></span> Mother</td>
+                        <td>
+                            <fieldset>
+                                <div class="grid grid-cols-2 sm:grid-cols-1">
+                                    <div class="sm:col-span-1">
+                                        <p class="mt-1 text-sm leading-6 text-gray-400">MOMYOB</p>
+                                        <input asp-for="@Model.A3.MOMYOB" placeholder="YYYY" />
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMDAGE</p>
-                            <input asp-for="@Model.A3.MOMDAGE" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
-                            <input asp-for="@Model.A3.MOMETPR" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMETSEC</p>
-                            <input asp-for="@Model.A3.MOMETSEC" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMMEVAL</p>
-                        </div>
-                        <input asp-for="@Model.A3.MOMMEVAL" />
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <p class="mt-1 text-sm leading-6 text-gray-400">MOMAGEO</p>
-                        </div>
-                        <input asp-for="@Model.A3.MOMAGEO" />
-
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <fieldset>
+                            </fieldset>
+                        </td>
+                        <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <div class="sm:col-span-1">
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
+                                <p class="mt-1 text-sm leading-6 text-gray-400">MOMDAGE</p>
+                                <input asp-for="@Model.A3.MOMDAGE" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
+                                <input asp-for="@Model.A3.MOMETPR" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <p class="mt-1 text-sm leading-6 text-gray-400">MOMETSEC</p>
+                                <input asp-for="@Model.A3.MOMETSEC" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <p class="mt-1 text-sm leading-6 text-gray-400">MOMMEVAL</p>
+                            </div>
+                            <input asp-for="@Model.A3.MOMMEVAL" />
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <p class="mt-1 text-sm leading-6 text-gray-400">MOMAGEO</p>
+                            </div>
+                            <input asp-for="@Model.A3.MOMAGEO" />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <fieldset>
+                                <div class="grid grid-cols-2 sm:grid-cols-1">
+                                    <div class="sm:col-span-1">
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
+                                    </div>
                                 </div>
-                            </div>
-                        </fieldset>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMEVAL"></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
-                        </div>
-
-                    </td>
-                </tr>
-                <tr class="border-b border-gray-100">
-                    <td><span class="subcounter"></span> Father</td>
-                    <td>
-                        <fieldset>
+                            </fieldset>
+                        </td>
+                        <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
                             </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB"></span>
-                        </fieldset>
-                    </td>
-                    <td>
-                        <fieldset>
+                        </td>
+                        <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADDAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
                             </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADDAGE"></span>
-                        </fieldset>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMEVAL"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
+                            </div>
 
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <input asp-for="@Model.A3.DADETPR" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR"></span>
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <input asp-for="@Model.A3.DADETSEC" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETSEC"></span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-gray-100">
+                        <td><span class="subcounter"></span> Father</td>
+                        <td>
+                            <fieldset>
+                                <div class="grid grid-cols-2 sm:grid-cols-1">
+                                    <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" />
+                                </div>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB"></span>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <fieldset>
+                                <div class="grid grid-cols-2 sm:grid-cols-1">
+                                    <input asp-for="@Model.A3.DADDAGE" />
+                                </div>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADDAGE"></span>
+                            </fieldset>
 
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <input asp-for="@Model.A3.DADMEVAL" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMEVAL"></span>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <input asp-for="@Model.A3.DADETPR" />
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR"></span>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <input asp-for="@Model.A3.DADETSEC" />
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETSEC"></span>
 
-                    </td>
-                    <td>
-                        <div class="grid grid-cols-2 sm:grid-cols-1">
-                            <input asp-for="@Model.A3.DADAGEO" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <input asp-for="@Model.A3.DADMEVAL" />
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMEVAL"></span>
 
-    </div>
-</div>
+                        </td>
+                        <td>
+                            <div class="grid grid-cols-2 sm:grid-cols-1">
+                                <input asp-for="@Model.A3.DADAGEO" />
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-<div>
-    <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900 text-center">Codes</h3>
-</div>
-
-<div>
-    <table class="mt-16 w-full text-center text-sm leading-6 border-b border-gray-100">
-        <tr class="border-b border-gray-100">
-            <th class="border-b border-gray-100">*DIAGNOSES</th>
-            <th class="border-b border-gray-100">**METHOD OF EVALUATION</th>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>00</b> No known neurological/psychiatric diagnosis</td>
-            <td class="border-b border-gray-100"><b>1</b> Participant/family report</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>01</b> Alzheimer's Disease</td>
-            <td class="border-b border-gray-100"><b>2</b> Medical records</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>02</b> Lewy Body dementia (includes DLB and PDD)</td>
-            <td class="border-b border-gray-100"><b>3</b> Exam (co-enrolled family members)</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>03</b> Vascular dementia</td>
-            <td class="border-b border-gray-100"><b>4</b> Autopsy (if autopsy report available)</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>04</b> Stroke</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>05</b> FTLD* without motor neuron disease</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>06</b> FTLD* with motor neuron disease</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>07</b> Motor Neuron Disease</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>08</b> Parkinson's Disease</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>09</b> Prion pathology</td>
-            <td rowspan="2" class="border-b border-gray-100"><b>*FTLD includes:</b> bvFTD or FTD, PPA (any subtype), CBS or CBD, PSP</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>10</b> Psychiatric condition</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>11</b> Dementia of unknown etiology</td>
-            <td rowspan="4" class="border-b border-gray-100">
-                <b>Abbreviations:</b> bvFTD = behavioral variant frontotemporal
-                dementia, CBS = corticobasal syndrome, CBD = corticobasal
-                degeneration, DLB = dementia with Lewy bodies, FTD =
-                frontotemporal dementia, PDD = Parkinson's disease with dementia,
-                PPA = primary progressive aphasia, PSP = progressive supranuclear
-                palsy
-            </td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>12</b> Other</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100"><b>88</b> No secondary diagnosis</td>
-        </tr>
-        <tr class="border-b border-gray-100">
-            <td class="border-b border-gray-100">
-                <b>99</b> Specific diagnosis unknown (acceptable if method of
-                evaluation is not by exam or autopsy)
-            </td>
-        </tr>
-    </table>
-</div>
-
-<div>
-    <p class="mt-16 text-base leading-7 text-gray-900">
-        <b>YEAR OF BIRTH FOR FULL SIBLINGS & BIOLOGICAL CHILDREN:</b> If birth year is unknown, please provide an approximate
-        year on <b>UDS Initial Visit Form A3</b> and <b>UDS Follow-up Visit Form A3</b> so that the sibling or child with unknown birth year ends
-        up in correct birth order relative to the other siblings/children
-    </p>
-
-</div>
-
-<div>
-    <p class="mt-16 text-base leading-7 text-gray-900">
-        <i>Example:</i> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943;
-        the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
-    </p>
-</div>
-
-<div>
-    <p class="mt-16 text-base leading-7 text-gray-900">
-        Use that same birth year on <b>FTLD Module Form A3a</b>, if applicable, and across all UDS visits so that any new
-        information on a particular sibling or child can be linked to previously submitted information. If it is impossible for the
-        participant and co-participant to estimate the birth year, enter <b>9999=Unknown</b>.
-    </p>
-</div>
-
-<!--// Siblings //-->
-<div>
-    <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">FULL SIBLINGS</h3>
-
-    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-        <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
-        <div class="mt-4 sm:col-span-2 sm:mt-0">
-            <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
-            <input asp-for="@Model.A3.SIBS" />
-            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
         </div>
     </div>
 
-    <p class="mt-1 text-sm text-gray-500">
-        For any full sibling with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
-    </p>
+    <div>
+        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900 text-center">Codes</h3>
+    </div>
 
-    @if (Model.Visit != null)
-    {
-        if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.NWINFSIB"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFSIB"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFSIB)" for="@Model.A3.NWINFSIB" items="Model.NewInformationSinceLastVisit"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFSIB"></span>
-                </div>
-            </div>
-        }
-    }
-
-    <p class="mt-1 text-sm text-gray-500">
-        If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
-            99 =
-            Unknown
-        </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a full sibling with no neurological or
-        psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
-        the subsequent questions in the row. For a full sibling with a primary diagnosis but no secondary diagnosis, enter <b>
-            88 = No secondary
-            diagnosis
-        </b> in the Secondary diagnosis column.
-    </p>
-
-    <div class="subcounterreset m-2">
-        <table class="mt-8 w-full text-left text-sm leading-6">
-            <thead class="border-b border-gray-200 text-gray-900">
-                <tr>
-                    <th></th>
-                    <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                    <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
-                    <th>Primary dx*</th>
-                    <th>Secondary Dx**</th>
-                    <th>Method of evaluation**</th>
-                    <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
-                </tr>
-
-                <tr>
-                    <th></th>
-                    <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
-                {
-                    @Html.EditorFor(m => m.A3.Siblings[i])
-                }
-            </tbody>
+    <div>
+        <table class="mt-16 w-full text-center text-sm leading-6 border-b border-gray-100">
+            <tr class="border-b border-gray-100">
+                <th class="border-b border-gray-100">*DIAGNOSES</th>
+                <th class="border-b border-gray-100">**METHOD OF EVALUATION</th>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>00</b> No known neurological/psychiatric diagnosis</td>
+                <td class="border-b border-gray-100"><b>1</b> Participant/family report</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>01</b> Alzheimer's Disease</td>
+                <td class="border-b border-gray-100"><b>2</b> Medical records</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>02</b> Lewy Body dementia (includes DLB and PDD)</td>
+                <td class="border-b border-gray-100"><b>3</b> Exam (co-enrolled family members)</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>03</b> Vascular dementia</td>
+                <td class="border-b border-gray-100"><b>4</b> Autopsy (if autopsy report available)</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>04</b> Stroke</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>05</b> FTLD* without motor neuron disease</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>06</b> FTLD* with motor neuron disease</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>07</b> Motor Neuron Disease</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>08</b> Parkinson's Disease</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>09</b> Prion pathology</td>
+                <td rowspan="2" class="border-b border-gray-100"><b>*FTLD includes:</b> bvFTD or FTD, PPA (any subtype), CBS or CBD, PSP</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>10</b> Psychiatric condition</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>11</b> Dementia of unknown etiology</td>
+                <td rowspan="4" class="border-b border-gray-100">
+                    <b>Abbreviations:</b> bvFTD = behavioral variant frontotemporal
+                    dementia, CBS = corticobasal syndrome, CBD = corticobasal
+                    degeneration, DLB = dementia with Lewy bodies, FTD =
+                    frontotemporal dementia, PDD = Parkinson's disease with dementia,
+                    PPA = primary progressive aphasia, PSP = progressive supranuclear
+                    palsy
+                </td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>12</b> Other</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100"><b>88</b> No secondary diagnosis</td>
+            </tr>
+            <tr class="border-b border-gray-100">
+                <td class="border-b border-gray-100">
+                    <b>99</b> Specific diagnosis unknown (acceptable if method of
+                    evaluation is not by exam or autopsy)
+                </td>
+            </tr>
         </table>
     </div>
-</div>
 
+    <div>
+        <p class="mt-16 text-base leading-7 text-gray-900">
+            <b>YEAR OF BIRTH FOR FULL SIBLINGS & BIOLOGICAL CHILDREN:</b> If birth year is unknown, please provide an approximate
+            year on <b>UDS Initial Visit Form A3</b> and <b>UDS Follow-up Visit Form A3</b> so that the sibling or child with unknown birth year ends
+            up in correct birth order relative to the other siblings/children
+        </p>
 
-<!--// Children //-->
-<div>
-    <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL CHILDREN</h3>
+    </div>
 
-    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-        <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
-        <div class="mt-4 sm:col-span-2 sm:mt-0">
-            <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
-            <input asp-for="@Model.A3.KIDS" />
-            <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
+    <div>
+        <p class="mt-16 text-base leading-7 text-gray-900">
+            <i>Example:</i> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943;
+            the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
+        </p>
+    </div>
+
+    <div>
+        <p class="mt-16 text-base leading-7 text-gray-900">
+            Use that same birth year on <b>FTLD Module Form A3a</b>, if applicable, and across all UDS visits so that any new
+            information on a particular sibling or child can be linked to previously submitted information. If it is impossible for the
+            participant and co-participant to estimate the birth year, enter <b>9999=Unknown</b>.
+        </p>
+    </div>
+
+    <!--// Siblings //-->
+    <div>
+        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">FULL SIBLINGS</h3>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
+                <input asp-for="@Model.A3.SIBS" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
+            </div>
+        </div>
+
+        <p class="mt-1 text-sm text-gray-500">
+            For any full sibling with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
+        </p>
+
+@*         @if (Model.Visit != null)
+        {
+            if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
+            {
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="A3.NWINFSIB"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFSIB"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFSIB)" for="@Model.A3.NWINFSIB" items="Model.NewInformationSinceLastVisit"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFSIB"></span>
+                    </div>
+                </div>
+            }
+        } *@
+
+        <p class="mt-1 text-sm text-gray-500">
+            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
+                99 =
+                Unknown
+            </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a full sibling with no neurological or
+            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
+            the subsequent questions in the row. For a full sibling with a primary diagnosis but no secondary diagnosis, enter <b>
+                88 = No secondary
+                diagnosis
+            </b> in the Secondary diagnosis column.
+        </p>
+
+        <div class="subcounterreset m-2">
+            <table class="mt-8 w-full text-left text-sm leading-6">
+                <thead class="border-b border-gray-200 text-gray-900">
+                    <tr>
+                        <th></th>
+                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
+                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th>Primary dx*</th>
+                        <th>Secondary Dx**</th>
+                        <th>Method of evaluation**</th>
+                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                    </tr>
+
+                    <tr>
+                        <th></th>
+                        <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
+                    {
+                        @Html.EditorFor(m => m.A3.Siblings[i])
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <p class="mt-1 text-sm text-gray-500">
-        For any biological child with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
-    </p>
 
-    @if (Model.Visit != null)
-    {
-        if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.NWINFKID"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFKID)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFKID"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFKID)" for="@Model.A3.NWINFKID" items="Model.NewInformationSinceLastVisit"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFKID"></span>
-                </div>
+    <!--// Children //-->
+    <div>
+        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL CHILDREN</h3>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
+                <input asp-for="@Model.A3.KIDS" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
             </div>
-        }
-    }
+        </div>
 
-    <p class="mt-1 text-sm text-gray-500">
-        If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
-            99 =
-            Unknown
-        </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a biological child with no neurological
-        or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then
-        skip the subsequent questions in the row. For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>
-            88 = No
-            secondary diagnosis
-        </b> in the Secondary diagnosis column.
-    </p>
+        <p class="mt-1 text-sm text-gray-500">
+            For any biological child with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
+        </p>
 
-    <div class="subcounterreset m-2">
-        <table class="mt-8 w-full text-left text-sm leading-6">
-            <thead class="border-b border-gray-200 text-gray-900">
-                <tr>
-                    <th></th>
-                    <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                    <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
-                    <th>Primary dx*</th>
-                    <th>Secondary Dx**</th>
-                    <th>Method of evaluation**</th>
-                    <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
-                </tr>
+@*         @if (Model.Visit != null)
+        {
+            if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
+            {
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="A3.NWINFKID"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFKID)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFKID"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFKID)" for="@Model.A3.NWINFKID" items="Model.NewInformationSinceLastVisit"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFKID"></span>
+                    </div>
+                </div>
+            }
+        } *@
 
-                <tr>
-                    <th></th>
-                    <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
+        <p class="mt-1 text-sm text-gray-500">
+            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
+                99 =
+                Unknown
+            </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a biological child with no neurological
+            or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then
+            skip the subsequent questions in the row. For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>
+                88 = No
+                secondary diagnosis
+            </b> in the Secondary diagnosis column.
+        </p>
 
-                </tr>
-            </thead>
-            <tbody>
-                @for (var i = 0; i < Model.A3.Children.Count(); i++)
-                {
-                    @Html.EditorFor(m => m.A3.Children[i])
-                }
-            </tbody>
-        </table>
+        <div class="subcounterreset m-2">
+            <table class="mt-8 w-full text-left text-sm leading-6">
+                <thead class="border-b border-gray-200 text-gray-900">
+                    <tr>
+                        <th></th>
+                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
+                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th>Primary dx*</th>
+                        <th>Secondary Dx**</th>
+                        <th>Method of evaluation**</th>
+                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                    </tr>
+
+                    <tr>
+                        <th></th>
+                        <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.A3.Children.Count(); i++)
+                    {
+                        @Html.EditorFor(m => m.A3.Children[i])
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 <partial name="_FormFooter" for="@Model.A3" />
 
 @section Scripts {
