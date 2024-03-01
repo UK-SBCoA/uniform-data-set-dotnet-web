@@ -207,14 +207,70 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> REFERSCUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1.REFERSCX")  } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1.REFERSCX") } }
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIEnableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIEnableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "4", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "5", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "6", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "8", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A1.REFERSCX"),
+                    new UIDisableAttribute("A1.REFLEARNED")
+                },
+                InstructionalMessage = ""
+            } }
         };
 
 
