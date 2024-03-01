@@ -50,10 +50,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "French")]
         public bool ETHFRENCH { get; set; }
 
-        [Display(Name = "White - Other")]
+        [Display(Name = "Other")] // White - Other
         public bool ETHWHIOTH { get; set; }
 
-        [Display(Name = "Other (specify)")]
+        [Display(Name = "White - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHWHIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -80,10 +80,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Colombian")]
         public bool ETHCOLOM { get; set; }
 
-        [Display(Name = "Hispanic or Latino - Other")]
+        [Display(Name = "Other")] // Hispanic or Latino - Other
         public bool ETHHISOTH { get; set; }
 
-        [Display(Name = "Other (Specify)")]
+        [Display(Name = "Hispanic or Latino - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHHISOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -110,10 +110,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Somali")]
         public bool ETHSOMALI { get; set; }
 
-        [Display(Name = "Black or African American - Other")]
+        [Display(Name = "Other")] // Black or African American - Other
         public bool ETHBLKOTH { get; set; }
 
-        [Display(Name = "Other (Specify)")]
+        [Display(Name = "Black or African American - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHBLKOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -140,10 +140,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Japanese")]
         public bool ETHJAPAN { get; set; }
 
-        [Display(Name = "Asian - Other")]
+        [Display(Name = "Other")] // Asian - Other
         public bool ETHASNOTH { get; set; }
 
-        [Display(Name = "Other (Specify)")]
+        [Display(Name = "Asian - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHASNOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -179,16 +179,16 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Israeli")]
         public bool ETHISRAEL { get; set; }
 
-        [Display(Name = "Middle Eastern or North African - Other")]
+        [Display(Name = "Other")] // Middle Eastern or North African - Other
         public bool ETHMENAOTH { get; set; }
 
-        [Display(Name = "Other (Specify)")]
+        [Display(Name = "Middle Eastern or North African - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHMENAOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHMENAOTX { get; set; }
 
-        [Display(Name = "Native Hawaiian or Other Pacific Islander")]
+        [Display(Name = "Native Hawaiian or Pacific Islander")]
         public bool RACENHPI { get; set; }
 
         [Display(Name = "Hawaiian")]
@@ -209,19 +209,19 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Marshallese")]
         public bool ETHMARSHAL { get; set; }
 
-        [Display(Name = "Native Hawaiian or Other Pacific Islander - Other")]
+        [Display(Name = "Other")] // Native Hawaiian or Pacific Islander - Other
         public bool ETHNHPIOTH { get; set; }
 
-        [Display(Name = "Other (Specify)")]
+        [Display(Name = "Native Hawaiian or Pacific Islander - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHNHPIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
         public string? ETHNHPIOTX { get; set; }
 
-        [Display(Name = "Race Unknown")]
+        [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate ethnicity/race.")]
+        [RequiredOnComplete(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
@@ -263,7 +263,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "I use a different term")]
         public bool GENOTH { get; set; }
 
-        [Display(Name = "(Specify)")]
+        [Display(Name = "Gender Identity - Different term (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(GENOTH), "true", ErrorMessage = "Please indicate current gender identity")]
@@ -275,7 +275,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool GENNOANS { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate current gender identity.")]
+        [RequiredOnComplete(ErrorMessage = "Please indicate current gender identity, dont know, or prefer not to answer.")]
         [NotMapped]
         public bool? GenderIdentityIndicated
         {
@@ -312,21 +312,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "I use a different term")]
         public bool SEXORNOTH { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate sexual orientation.")]
-        [NotMapped]
-        public bool? SexualOrientstionIndicated
-        {
-            get
-            {
-                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH)
-                {
-                    return true;
-                }
-                else return null;
-            }
-        }
-
-        [Display(Name = "(Specify)")]
+        [Display(Name = "Sexual Orientation - Different term (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(SEXORNOTH), "true", ErrorMessage = "Please indicate current gender identity")]
@@ -338,11 +324,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool SEXORNNOAN { get; set; }
 
+        [RequiredOnComplete(ErrorMessage = "Please indicate sexual orientation, don't know, or prefer not to answer.")]
+        [NotMapped]
+        public bool? SexualOrientstionIndicated
+        {
+            get
+            {
+                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH || SEXORNDNK || SEXORNNOAN)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [Display(Name = "What is your primary language?")]
         [RequiredOnComplete]
         public int? PREDOMLAN { get; set; }
 
-        [Display(Name = "Other (specify)")]
+        [Display(Name = "Primary Language - Other (Specify)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(PREDOMLAN), "8", ErrorMessage = "Please specify language")]
@@ -422,7 +422,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? REFERSC { get; set; }
 
-        [Display(Name = "(specify (END FORM HERE)")]
+        [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
@@ -433,27 +433,27 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
         public int? REFLEARNED { get; set; }
 
-        [Display(Name = "Center social media - specify")]
+        [Display(Name = "Center social media - Specify")]
         [RequiredIf(nameof(REFLEARNED), "6", ErrorMessage = "Please specify center social media")]
         public string? REFCTRSOCX { get; set; }
 
-        [Display(Name = "Center registry - specify")]
+        [Display(Name = "Center registry - Specify")]
         [RequiredIf(nameof(REFLEARNED), "7", ErrorMessage = "Please specify center registry")]
         public string? REFCTRREGX { get; set; }
 
-        [Display(Name = "Website - specify")]
+        [Display(Name = "Website - Specify")]
         [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify website")]
         public string? REFOTHWEBX { get; set; }
 
-        [Display(Name = "Media - specify")]
+        [Display(Name = "Media - Specify")]
         [RequiredIf(nameof(REFLEARNED), "9", ErrorMessage = "Please specify media")]
         public string? REFOTHMEDX { get; set; }
 
-        [Display(Name = "Other registry - specify")]
+        [Display(Name = "Other registry - Specify")]
         [RequiredIf(nameof(REFLEARNED), "10", ErrorMessage = "Please specify other registry")]
         public string? REFOTHREGX { get; set; }
 
-        [Display(Name = "Other - specify")]
+        [Display(Name = "Other - Specify")]
         [RequiredIf(nameof(REFLEARNED), "88", ErrorMessage = "Please specify")]
         public string? REFOTHX { get; set; }
 
