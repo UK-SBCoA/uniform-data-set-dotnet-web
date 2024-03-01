@@ -66,7 +66,7 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             foreach (var newCode in Lookup.DrugCodes.Where(d => d.IsSelected).ToList())
             {
-                if (fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId ))
+                if (fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId))
                 {
                     var existingA4D = fields.A4Ds.Where(d => d.RxNormId == newCode.RxNormId).FirstOrDefault();
 
