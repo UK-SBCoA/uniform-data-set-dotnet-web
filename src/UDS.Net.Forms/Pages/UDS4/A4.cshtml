@@ -7,126 +7,83 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by the clinician or ADC staff. The purpose of the form is to record all prescription medications taken by the subject <strong>within the two weeks before the current visit</strong>. For prescription medications not listed here, please follow the instructions at the end of this form. OTC (non-prescription) medications need not be reported; however, a short list of medications that could be either prescription or OTC follows the prescription list.
-    </p>
-</div>
-<div>
-    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        INSTRUCTIONS: This form is to be completed by the clinician or ADRC staff. The purpose of this form is to record all prescription medications taken by the participant within the <strong>two weeks before the current visit.</strong> If the participant is receiving any treatments known to significantly impact Alzheimer disease and related dementias (ADRD) biomarkers as part of their clinical care at the time of clinical assessment (e.g., they are receiving aducanumab infusions), the treatment should be included on both this form and the A4a ADRD–Specific Treatments form. For prescription medications not listed here, please follow the instructions at the end of this form. OTC (non-prescription) medications need not be reported; however, a short list of medications that could be either prescription or OTC follows the prescription list. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook> for <strong>Form A4.</strong>
+        <div>
+            <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A4.ANYMEDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4.ANYMEDS)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A4.ANYMEDS"></p>
-                <radio-button-group id="@Html.IdFor(m => m.A4.ANYMEDS)" for="@Model.A4.ANYMEDS" items="Model.MedicationsWithinLastTwoWeeksListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="A4.ANYMEDS"></span>
-            </div>
-        </div>
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                    <label asp-for="A4.ANYMEDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4.ANYMEDS)</label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A4.ANYMEDS"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A4.ANYMEDS)" for="@Model.A4.ANYMEDS" items="Model.MedicationsWithinLastTwoWeeksListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4.ANYMEDS"></span>
+                    </div>
+                </div>
 
-        <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-            @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
-            {
-                for (int i = 0; i < Model.PopularDrugCodes.Count(); i++)
-                {
-                    var displayName = Model.PopularDrugCodes[i].DrugName;
-                    if (!string.IsNullOrWhiteSpace(Model.PopularDrugCodes[i].BrandName))
+                <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
                     {
-                        displayName += " (" + Model.PopularDrugCodes[i].BrandName + ")";
-                    }
-                    <fieldset>
-                        <div class="space-y-5">
-                            <div class="relative flex items-start">
-                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                <div class="flex h-6 items-center">
-                                    <input asp-for="PopularDrugCodes[i].Id" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].RxNormId " type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                    <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
-                                </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                }
-            }
-            else
-            {
-                <p class="sm:gap-4 sm:py-">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
-            }
-        </div>
-
-        @if (Model.OTCDrugCodes != null || Model.OTCDrugCodes.Count() == 0)
-        {
-            <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-                <p>Commonly reported medications that may be purchased over the counter (but that may also be prescription)</p>
-            </div>
-            <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                @for (int i = 0; i < Model.OTCDrugCodes.Count(); i++)
-                {
-                    var displayName = Model.OTCDrugCodes[i].DrugName;
-                    if (!string.IsNullOrWhiteSpace(Model.OTCDrugCodes[i].BrandName))
-                    {
-                        displayName += " (" + Model.OTCDrugCodes[i].BrandName + ")";
-                    }
-                    <fieldset>
-                        <div class="space-y-5">
-                            <div class="relative flex items-start">
-                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                <div class="flex h-6 items-center">
-                                    <input asp-for="OTCDrugCodes[i].Id" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                    <input asp-for="OTCDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
-                                </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                }
-            </div>
-        }
-        else
-        {
-            <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                <p class="">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
-            </div>
-        }
-
-
-        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-            <div>
-                @if (Model.CustomDrugCodes != null || Model.CustomDrugCodes.Count() == 0)
-                {
-                    <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-                        @for (int i = 0; i < Model.CustomDrugCodes.Count(); i++)
+                        for (int i = 0; i < Model.PopularDrugCodes.Count(); i++)
                         {
-                            var displayName = Model.CustomDrugCodes[i].DrugName;
-                            if (!string.IsNullOrWhiteSpace(Model.CustomDrugCodes[i].BrandName))
+                            var displayName = Model.PopularDrugCodes[i].DrugName;
+                            if (!string.IsNullOrWhiteSpace(Model.PopularDrugCodes[i].BrandName))
                             {
-                                displayName += " (" + Model.CustomDrugCodes[i].BrandName + ")";
+                                displayName += " (" + Model.PopularDrugCodes[i].BrandName + ")";
                             }
                             <fieldset>
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                         <div class="flex h-6 items-center">
-                                            <input asp-for="CustomDrugCodes[i].Id" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].RxNormId" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].DrugName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
+                                            <input asp-for="PopularDrugCodes[i].Id" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].RxNormId " type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
+                                            <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                    }
+                    else
+                    {
+                        <p class="sm:gap-4 sm:py-">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
+                    }
+                </div>
+
+                @if (Model.OTCDrugCodes != null || Model.OTCDrugCodes.Count() == 0)
+                {
+                    <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+                        <p>Commonly reported medications that may be purchased over the counter (but that may also be prescription)</p>
+                    </div>
+                    <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        @for (int i = 0; i < Model.OTCDrugCodes.Count(); i++)
+                        {
+                            var displayName = Model.OTCDrugCodes[i].DrugName;
+                            if (!string.IsNullOrWhiteSpace(Model.OTCDrugCodes[i].BrandName))
+                            {
+                                displayName += " (" + Model.OTCDrugCodes[i].BrandName + ")";
+                            }
+                            <fieldset>
+                                <div class="space-y-5">
+                                    <div class="relative flex items-start">
+                                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            <input asp-for="OTCDrugCodes[i].Id" type="hidden" />
+                                            <input asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
+                                            <input asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
+                                            <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
+                                            <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                            <input asp-for="OTCDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -134,12 +91,53 @@
                         }
                     </div>
                 }
+                else
+                {
+                    <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <p class="">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
+                    </div>
+                }
+
+
+                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div>
+                        @if (Model.CustomDrugCodes != null || Model.CustomDrugCodes.Count() == 0)
+                        {
+                            <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+                                @for (int i = 0; i < Model.CustomDrugCodes.Count(); i++)
+                                {
+                                    var displayName = Model.CustomDrugCodes[i].DrugName;
+                                    if (!string.IsNullOrWhiteSpace(Model.CustomDrugCodes[i].BrandName))
+                                    {
+                                        displayName += " (" + Model.CustomDrugCodes[i].BrandName + ")";
+                                    }
+                                    <fieldset>
+                                        <div class="space-y-5">
+                                            <div class="relative flex items-start">
+                                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                                <div class="flex h-6 items-center">
+                                                    <input asp-for="CustomDrugCodes[i].Id" type="hidden" />
+                                                    <input asp-for="CustomDrugCodes[i].RxNormId" type="hidden" />
+                                                    <input asp-for="CustomDrugCodes[i].DrugName" type="hidden" />
+                                                    <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
+                                                    <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                                    <input asp-for="CustomDrugCodes[i].IsSelected" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" disabled />
+                                                </div>
+                                                <div class="ml-3 text-sm leading-6">
+                                                    <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<partial name="_FormFooter" for="@Model.A4" />
+        <partial name="_FormFooter" for="@Model.A4" />
 
-@section Scripts {
-    <script src="~/js/A4.js"></script>
-}
+        @section Scripts {
+            <script src="~/js/A4.js"></script>
+        }
