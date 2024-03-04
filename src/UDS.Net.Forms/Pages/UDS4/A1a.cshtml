@@ -529,7 +529,7 @@
             </div>
         </div>
     </div>
-    <div class="@rowCSS">
+    <div class="@rowCSS" data-controller="checkboxDisable">
         <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
         <div class="mt-4 sm:col-span-2 sm:mt-0" id="discriminationReasonSection">
             <div class="flex space-x-4">
@@ -537,7 +537,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a1.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
                 </div>
                 <div>
                     <label asp-for="A1a.EXPANCEST"></label>
@@ -680,7 +680,11 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a14.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", 
+                    data_checkBoxDisable_target="parent", 
+                    data_action="input->checkboxDisable#ToggleGroup", 
+                    data_checkBoxDisable_targetname_param = "A1a.EXPSTRS", 
+                    data_checkboxDisable_disable_param = "true" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOTAPP"></label>
@@ -712,7 +716,3 @@
 </div>
 
 <partial name="_FormFooter" for="@Model.A1a" />
-
-@section Scripts {
-    <script src="~/_content/UDS.Net.Forms/js/js_controllers/A1aDiscriminationToggle.js"></script>
-}
