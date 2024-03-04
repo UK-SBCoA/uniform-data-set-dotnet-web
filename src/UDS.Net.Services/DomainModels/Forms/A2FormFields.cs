@@ -34,6 +34,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A2Dto)
             {
                 var a2Dto = ((A2Dto)dto);
+                this.NEWINF = a2Dto.NEWINF;
 
                 //this.INBIRMO = a2Dto.INBIRMO;
                 //this.INBIRYR = a2Dto.INBIRYR;
