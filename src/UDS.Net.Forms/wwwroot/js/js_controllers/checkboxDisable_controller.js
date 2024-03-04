@@ -1,33 +1,68 @@
-﻿//a target will have actions and recievers. actions toggle the state and recievers are toggled
+﻿/*
+DESCRIPTION:
+checkboxDisable_controller.js is a custom front end validation for disabling and enabling inputs by their name attribute when a checkbox is checked, using stimulus.js
 
-//right now stimulus attributes on a single checkbox will disable a single radio group.
-//check to see if we can have this disable working in 2 seperate areas on the form
+HTML USAGE:
+<div>
+    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new {@class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",
+        data_checkBoxDisable_target = "checkboxTrigger",
+        data_action = "input->checkboxDisable#ToggleGroup",
+        data_checkBoxDisable_group_param = "A1a.EXPSTRS",
+        data_checkboxDisable_disable_param = "true"})
+</div>
 
-//check to see if we can flip the logic with parameters (may need to get the onload data correctly set first)
+STIMULUS PARAMETERS:
+data_checkboxDisable_group_param = the name of the input(s) you are wanting to disable
+data_checkboxDisable_disable_param = a flag for if clicking the checkbox disables or enables the group. true = disable on check and false = enable on check
+*/
 
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-    static targets = ["parent", "child"]
+    static targets = ["checkboxTrigger"]
 
     initialize() {
-        console.log("checkboxDisable is loaded")
-        //do the loading code here to set the disables on page load
+        this.OnLoad()
     }
 
-    //DEVNOTE: parameters cannot have capital case in name
-    ToggleGroup({ params: { targetname, disable } }) {
+    ToggleGroup({ params: { group, disable } }) {
 
-        //use the target value = the element in context
-        var isChecked = this.parentTarget.checked
+        if (group == undefined || disable == undefined) {
+            return console.error(`Missing required parameter of group or disable on a target element with id: ${this.checkboxTriggerTarget.id}`)
+        }
 
-        var targetElements = document.getElementsByName(targetname)
+        var isChecked = this.checkboxTriggerTarget.checked
+        //apply disable value if the checkbox is checked and the opposite when unchecked
+        var disableValue = isChecked ? disable : !disable
+        //get all elements that are to be effected by checkbox using javascript
+        var targetElements = document.getElementsByName(group)
+
+        if (targetElements.length < 1) {
+            return console.warn(`No targets found to be effected by checkbox of id: ${this.checkboxTriggerTarget.id}`)
+        }
+
         targetElements.forEach((element) => {
-            if (isChecked) {
-                element.disabled = disable
-            } else {
-                element.disabled = !disable
-            }
+            element.disabled = disableValue
+        })
+    }
+
+    OnLoad() {
+        this.checkboxTriggerTargets.forEach(() => {
+
+            let disableString = this.checkboxTriggerTarget.dataset.checkboxdisableDisableParam
+            let group = this.checkboxTriggerTarget.dataset.checkboxdisableGroupParam
+
+            //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
+            //Stimulus only assumes type when using params with an action
+            let disable = new Boolean()
+
+            if (disableString == "false")
+                disable = false
+
+            if (disableString == "true")
+                disable = true
+
+            this.ToggleGroup({ params: { group, disable } })
         })
     }
 }

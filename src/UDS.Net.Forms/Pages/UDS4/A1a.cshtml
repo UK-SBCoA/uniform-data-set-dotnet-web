@@ -681,9 +681,9 @@
                 </div>
                 <div>
                     @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", 
-                    data_checkBoxDisable_target="parent", 
+                    data_checkBoxDisable_target="checkboxTrigger", 
                     data_action="input->checkboxDisable#ToggleGroup", 
-                    data_checkBoxDisable_targetname_param = "A1a.EXPSTRS", 
+                    data_checkBoxDisable_group_param = "A1a.EXPSTRS",
                     data_checkboxDisable_disable_param = "true" })
                 </div>
                 <div>
