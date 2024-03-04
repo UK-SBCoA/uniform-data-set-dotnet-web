@@ -121,21 +121,21 @@ namespace UDS.Net.Services.DomainModels.Forms
                 ACTAFRAID = a1aDto.ACTAFRAID;
                 THREATENED = a1aDto.THREATENED;
                 POORMEDTRT = a1aDto.POORMEDTRT;
-                EXPANCEST = a1aDto.EXPANCEST.HasValue ? true : false;
-                EXPGENDER = a1aDto.EXPGENDER.HasValue ? true : false;
-                EXPRACE = a1aDto.EXPRACE.HasValue ? true : false;
-                EXPAGE = a1aDto.EXPAGE.HasValue ? true : false;
-                EXPRELIG = a1aDto.EXPRELIG.HasValue ? true : false;
-                EXPHEIGHT = a1aDto.EXPHEIGHT.HasValue ? true : false;
-                EXPWEIGHT = a1aDto.EXPWEIGHT.HasValue ? true : false;
-                EXPAPPEAR = a1aDto.EXPAPPEAR.HasValue ? true : false;
-                EXPSEXORN = a1aDto.EXPSEXORN.HasValue ? true : false;
-                EXPEDUCINC = a1aDto.EXPEDUCINC.HasValue ? true : false;
-                EXPDISAB = a1aDto.EXPDISAB.HasValue ? true : false;
-                EXPSKIN = a1aDto.EXPSKIN.HasValue ? true : false;
-                EXPOTHER = a1aDto.EXPOTHER.HasValue ? true : false;
-                EXPNOTAPP = a1aDto.EXPNOTAPP.HasValue ? true : false;
-                EXPNOANS = a1aDto.EXPNOANS.HasValue ? true : false;
+                EXPANCEST = (bool)a1aDto.EXPANCEST;
+                EXPGENDER = (bool)a1aDto.EXPGENDER;
+                EXPRACE = (bool)a1aDto.EXPRACE;
+                EXPAGE = (bool)a1aDto.EXPAGE;
+                EXPRELIG = (bool)a1aDto.EXPRELIG;
+                EXPHEIGHT = (bool)a1aDto.EXPHEIGHT;
+                EXPWEIGHT = (bool)a1aDto.EXPWEIGHT;
+                EXPAPPEAR = (bool)a1aDto.EXPAPPEAR;
+                EXPSEXORN = (bool)a1aDto.EXPSEXORN;
+                EXPEDUCINC = (bool)a1aDto.EXPEDUCINC;
+                EXPDISAB = (bool)a1aDto.EXPDISAB;
+                EXPSKIN = (bool)a1aDto.EXPSKIN;
+                EXPOTHER = (bool)a1aDto.EXPOTHER;
+                EXPNOTAPP = (bool)a1aDto.EXPNOTAPP;
+                EXPNOANS = (bool)a1aDto.EXPNOANS;
                 EXPSTRS = a1aDto.EXPSTRS;
             }
         }
