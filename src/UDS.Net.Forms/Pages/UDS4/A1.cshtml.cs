@@ -92,7 +92,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Retirement community or independent group living", "2"),
             new RadioListItem("Assisted living, adult family home, or boarding home", "3"),
             new RadioListItem("Skilled nursing facility, nursing home, hospital, or hospice", "4"),
-            new RadioListItem("Do not have housing (e.g., staying with others, in a hotel, in a shelter, living\noutside on the street, on a beach, in a car, or in a park)", "5"),
+            new RadioListItem("Do not have housing (e.g., staying with others, in a hotel, in a shelter, living\noutside on the street, on a beach, in a car, or in a park)", "6"),
             new RadioListItem("Don't know", "9")
         };
 
