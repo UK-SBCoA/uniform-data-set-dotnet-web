@@ -308,8 +308,8 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (EXPNOTAPP || EXPNOANS)
                 {
-                    if (EXPANCEST || EXPGENDER || EXPRACE || EXPAGE || EXPRELIG || EXPHEIGHT || 
-                        EXPWEIGHT || EXPAPPEAR || EXPSEXORN || EXPEDUCINC || EXPDISAB || 
+                    if (EXPANCEST || EXPGENDER || EXPRACE || EXPAGE || EXPRELIG || EXPHEIGHT ||
+                        EXPWEIGHT || EXPAPPEAR || EXPSEXORN || EXPEDUCINC || EXPDISAB ||
                         EXPSKIN || EXPOTHER)
                     {
                         return null;
@@ -340,7 +340,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == FormStatus.Complete)
             {
-                if(!EXPNOTAPP && EXPSTRS == null)
+                if (!EXPNOTAPP && EXPSTRS == null)
                 {
                     yield return new ValidationResult("Response required", new[] { nameof(EXPSTRS) });
                 }
