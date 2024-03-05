@@ -5,7 +5,6 @@
     this.maxRows = maxRows;
     this.initialize();
   }
-
   initialize() {
     this.updateRows();
     $(`#${this.inputId}`).on('change', () => this.updateRows());
