@@ -192,17 +192,15 @@ namespace UDS.Net.Forms.Pages.UDS4
                         if (sibling != null)
                         {
 
-                            if (!sibling.AGD.HasValue)
+                            if (sibling.YOB.HasValue && !sibling.AGD.HasValue)
                             {
                                 ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
                             }
 
-                            if (sibling.YOB.HasValue || sibling.AGD.HasValue)
+                            if(sibling.YOB.HasValue && !sibling.ETPR.HasValue)
+
                             {
-                                if (!sibling.ETPR.HasValue)
-                                {
-                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this sibling.");
-                                }
+                                ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");
                             }
                         }
                     }
@@ -215,18 +213,18 @@ namespace UDS.Net.Forms.Pages.UDS4
                         if (child != null)
                         {
                             {
-                                if (!child.AGD.HasValue)
+                                if (child.ETPR.HasValue && !child.AGD.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
                                 }
                             }
-                            if (child.YOB.HasValue || child.AGD.HasValue)
+                            if (child.YOB.HasValue && !child.ETPR.HasValue)
+
                             {
-                                if (!child.ETPR.HasValue)
-                                {
-                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].NEU", "Please provide a value for Primary neurological problem/psychiatric condition for this child.");
-                                }
+                                ModelState.AddModelError($"A3.Siblings[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
                             }
+
+
                         }
                     }
                 }

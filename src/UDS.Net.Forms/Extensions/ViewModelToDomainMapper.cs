@@ -186,7 +186,6 @@ namespace UDS.Net.Forms.Extensions
                 MOMETSEC = vm.MOMETSEC,
                 MOMMEVAL = vm.MOMMEVAL,
                 MOMAGEO = vm.MOMAGEO,
-                DADMOB = vm.DADMOB,
                 DADYOB = vm.DADYOB,
                 DADDAGE = vm.DADDAGE,
                 DADETPR = vm.DADETPR,

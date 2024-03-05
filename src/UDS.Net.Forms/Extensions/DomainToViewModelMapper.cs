@@ -294,7 +294,6 @@ namespace UDS.Net.Forms.Extensions
                 MOMETSEC = fields.MOMETSEC,
                 MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
-                DADMOB = fields.DADMOB,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
                 DADETPR = fields.DADETPR,

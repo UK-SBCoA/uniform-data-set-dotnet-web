@@ -19,35 +19,44 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Mother — birth year")]
         [BirthYear(AllowUnknown = true)]
+        [RequiredOnComplete]
         public int? MOMYOB { get; set; }
 
         [Display(Name = "Mother — age at death")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Mother age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
-        [Required(ErrorMessage = "Please provide an age at death or indicate otherwise")]
+        [RequiredOnComplete(ErrorMessage = "Please provide an age at death or indicate otherwise")]
         public int? MOMDAGE { get; set; }
 
 
         [Display(Name = "Mother — Primary dx")]
-        [RegularExpression("^([0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
+        [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
+        [Diagnosis]
         [RequiredOnComplete]
         public int? MOMETPR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
-        [RegularExpression("^([0-9]|1[0-2]|88|99)$", ErrorMessage ="Codes must be 00-12 88 or 99")]
-        [Diagnosis(AllowUnknown = true)]
+        [RegularExpression("^(0[0-9]|1[0-2]|88|99)$", ErrorMessage = "Codes must be 00-12 88 or 99")]
+        [RequiredIf(nameof(MOMETPR), "01", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "02", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "03", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "04", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "05", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "06", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "07", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "08", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "09", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "10", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "11", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MOMETPR), "12", ErrorMessage = "Response required")]
         public int? MOMETSEC { get; set; }
 
         [Display(Name = "Mother — method of evaluation")]
-        [Range(1, 4, ErrorMessage ="Must be in the range of 1-4")]
+        [Range(1, 4, ErrorMessage = "Must be in the range of 1-4")]
         public int? MOMMEVAL { get; set; }
 
         [Display(Name = "Mother — age of onset")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Mother age of onset must be 0-110, or 999 (unknown)")]
         public int? MOMAGEO { get; set; }
-
-        [Display(Name = "Father — birth month")]
-        [BirthMonth(AllowUnknown = true)]
-        public int? DADMOB { get; set; }
 
         [Display(Name = "Father — birth year")]
         [BirthYear(AllowUnknown = true)]
@@ -59,16 +68,17 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? DADDAGE { get; set; }
 
         [Display(Name = "Father — neurological problem")]
-        [RegularExpression("^([1-5]|8|9)$", ErrorMessage = "Father neurological problem/psychiatric condition invalid. Please see reference.")]
-        [Required(ErrorMessage = "Please provide a value for Primary neurological problem/psychiatric condition")]
+        [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
+        [Required(ErrorMessage = "Please provide a value for Primary dx")]
         public int? DADETPR { get; set; }
 
         [Display(Name = "Father — primary diagnosis")]
-        [Diagnosis(AllowUnknown = true)]
+        [RegularExpression("^(0[0-9]|1[0-2]|88|99)$", ErrorMessage = "Codes must be 00-12 88 or 99")]
+        //[Diagnosis(AllowUnknown = true)]
         public int? DADETSEC { get; set; }
 
         [Display(Name = "Father — method of evaluation")]
-        [Range(1, 7)]
+        [Range(1, 4, ErrorMessage = "Must be in the range of 1-4")]
         public int? DADMEVAL { get; set; }
 
         [Display(Name = "Father — age of onset")]
@@ -83,7 +93,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? NWINFSIB { get; set; }
 
         [Display(Name = "How many known biological children does the participant have?")]
-        [Range(0, 15)]
+        [Range(0, 15, ErrorMessage = "Number of children must be 0-15")]
         public int? KIDS { get; set; }
 
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant’s siblings?")]
