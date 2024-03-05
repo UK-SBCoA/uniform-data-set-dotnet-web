@@ -169,7 +169,7 @@ namespace UDS.Net.Services.Extensions
             FormDto dto = GetDto(form); // get baseline dto
 
             // if the form is a special type then get that type of dto
-            if(form.Fields is A1aFormFields)
+            if (form.Fields is A1aFormFields)
             {
                 dto = ((A1aFormFields)form.Fields).ToDto();
             }

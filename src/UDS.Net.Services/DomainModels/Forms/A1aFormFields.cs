@@ -73,7 +73,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public A1aFormFields(FormDto dto)
         {
-            if(dto is A1aDto)
+            if (dto is A1aDto)
             {
                 var a1aDto = ((A1aDto)dto);
                 OWNSCAR = a1aDto.OWNSCAR;
