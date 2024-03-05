@@ -530,7 +530,12 @@
         </div>
     </div>
     <div class="@rowCSS" data-controller="checkboxDisable">
-        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+        <div>
+            <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidNoResponse"></span>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidExtra"></span>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidNAAndPreferNot"></span>
+        </div>
         <div class="mt-4 sm:col-span-2 sm:mt-0" id="discriminationReasonSection">
             <div class="flex space-x-4">
                 <div>
