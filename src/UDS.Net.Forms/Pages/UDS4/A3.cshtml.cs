@@ -197,7 +197,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
                             }
 
-                            if(sibling.YOB.HasValue && !sibling.ETPR.HasValue)
+                            if (sibling.YOB.HasValue && !sibling.ETPR.HasValue)
 
                             {
                                 ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");

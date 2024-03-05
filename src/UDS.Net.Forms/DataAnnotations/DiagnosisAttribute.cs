@@ -7,7 +7,7 @@ using UDS.Net.Services.Enums;
 public class DiagnosisAttribute : ValidationAttribute, IClientModelValidator
 {
     private static string ERRORMESSAGE = "Diagnosis code invalid. Please see reference.";
-    private static int[] CODES = new int[] { 00,01,02,03,04,05,06,07,08,09,10,11,12,88,99 };
+    private static int[] CODES = new int[] { 00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 88, 99 };
 
     public bool AllowUnknown { get; set; } = false;
 
