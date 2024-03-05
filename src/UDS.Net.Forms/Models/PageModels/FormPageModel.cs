@@ -56,7 +56,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
-            var form = visit.Forms.Where(f => f.Kind.Contains(_formKind)).FirstOrDefault();
+            var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
             BaseForm = form.ToVM(); // this will have the subclass
 
