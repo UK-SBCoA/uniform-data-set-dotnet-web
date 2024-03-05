@@ -83,6 +83,7 @@ namespace UDS.Net.Services.DomainModels
                         VisitKind.TIP.ToString(),
                         new FormContract[]
                         {
+                            new FormContract("A1a", false),
                             new FormContract("A1", true),
                             new FormContract("A2", true),
                             new FormContract("B4", true),
