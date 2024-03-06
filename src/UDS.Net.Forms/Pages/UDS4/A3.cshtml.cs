@@ -221,7 +221,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                             if (child.YOB.HasValue && !child.ETPR.HasValue)
 
                             {
-                                ModelState.AddModelError($"A3.Siblings[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
+                                ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
                             }
 
 
