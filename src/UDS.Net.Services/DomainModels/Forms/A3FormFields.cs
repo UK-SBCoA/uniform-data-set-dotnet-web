@@ -51,7 +51,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4.0";
         }
 
         private A3FamilyMemberFormFields GetFamilyMemberFormFields(int index, string propertyPrefix, A3Dto dto)
@@ -107,8 +107,14 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.NWINFMUT = a3Dto.AFFFAMM;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
+                this.MOMETPR = a3Dto.MOMETPR;
+                this.MOMETSEC = a3Dto.MOMETSEC;
+                this.MOMMEVAL = a3Dto.MOMMEVAL;
                 this.MOMAGEO = a3Dto.MOMAGEO;
                 this.DADYOB = a3Dto.DADYOB;
+                this.DADETPR = a3Dto.DADETPR;
+                this.DADETSEC = a3Dto.DADETSEC;
+                this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
 

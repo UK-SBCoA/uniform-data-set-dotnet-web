@@ -31,7 +31,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Mother — Primary dx")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
         [Diagnosis]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Please provide a value for Primary dx")]
         public int? MOMETPR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
