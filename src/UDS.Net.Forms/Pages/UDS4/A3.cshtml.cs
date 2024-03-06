@@ -197,7 +197,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
                             }
 
-                            if (sibling.YOB.HasValue && !sibling.ETPR.HasValue)
+                            if (sibling.YOB.HasValue && sibling.ETPR == null)
 
                             {
                                 ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");
@@ -213,12 +213,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                         if (child != null)
                         {
                             {
-                                if (child.ETPR.HasValue && !child.AGD.HasValue)
+                                if (child.ETPR != null && !child.AGD.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
                                 }
                             }
-                            if (child.YOB.HasValue && !child.ETPR.HasValue)
+                            if (child.YOB.HasValue && child.ETPR == null)
 
                             {
                                 ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");

@@ -24,15 +24,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MOMMOB { get; set; }
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
-        public int? MOMETPR { get; set; }
-        public int? MOMETSEC { get; set; }
+        public string? MOMETPR { get; set; }
+        public string? MOMETSEC { get; set; }
         public int? MOMMEVAL { get; set; }
         public int? MOMAGEO { get; set; }
         public int? DADMOB { get; set; }
         public int? DADYOB { get; set; }
         public int? DADDAGE { get; set; }
-        public int? DADETPR { get; set; }
-        public int? DADETSEC { get; set; }
+        public string? DADETPR { get; set; }
+        public string? DADETSEC { get; set; }
         public int? DADMEVAL { get; set; }
         public int? DADAGEO { get; set; }
 
@@ -71,6 +71,9 @@ namespace UDS.Net.Services.DomainModels.Forms
                     {
                         familyMember.YOB = value.YOB;
                         familyMember.AGD = value.AGD;
+                        familyMember.ETPR = value.ETPR;
+                        familyMember.ETSEC = value.ETSEC;
+                        familyMember.MEVAL = value.MEVAL;
                         familyMember.AGO = value.AGO;
 
                         // TODO map new fields

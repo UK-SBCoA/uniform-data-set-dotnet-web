@@ -360,9 +360,15 @@ namespace UDS.Net.Services.Extensions
                 NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS
@@ -458,6 +464,9 @@ namespace UDS.Net.Services.Extensions
                 FormId = formId,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }

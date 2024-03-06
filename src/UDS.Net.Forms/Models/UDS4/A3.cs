@@ -30,9 +30,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Mother — Primary dx")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
-        [Diagnosis]
         [RequiredOnComplete(ErrorMessage = "Please provide a value for Primary dx")]
-        public int? MOMETPR { get; set; }
+        public string? MOMETPR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
         [RegularExpression("^(0[0-9]|1[0-2]|88|99)$", ErrorMessage = "Codes must be 00-12 88 or 99")]
@@ -48,7 +47,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MOMETPR), "10", ErrorMessage = "Response required")]
         [RequiredIf(nameof(MOMETPR), "11", ErrorMessage = "Response required")]
         [RequiredIf(nameof(MOMETPR), "12", ErrorMessage = "Response required")]
-        public int? MOMETSEC { get; set; }
+        public string? MOMETSEC { get; set; }
 
         [Display(Name = "Mother — method of evaluation")]
         [Range(1, 4, ErrorMessage = "Must be in the range of 1-4")]
@@ -95,7 +94,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Father — neurological problem")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
         [RequiredOnComplete(ErrorMessage = "Please provide a value for Primary dx")]
-        public int? DADETPR { get; set; }
+        public string? DADETPR { get; set; }
 
         [Display(Name = "Father — primary diagnosis")]
         [RegularExpression("^(0[0-9]|1[0-2]|88|99)$", ErrorMessage = "Codes must be 00-12 88 or 99")]
@@ -111,7 +110,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DADETPR), "10", ErrorMessage = "Response required")]
         [RequiredIf(nameof(DADETPR), "11", ErrorMessage = "Response required")]
         [RequiredIf(nameof(DADETPR), "12", ErrorMessage = "Response required")]
-        public int? DADETSEC { get; set; }
+        public string? DADETSEC { get; set; }
 
         [Display(Name = "Father — method of evaluation")]
         [Range(1, 4, ErrorMessage = "Must be in the range of 1-4")]

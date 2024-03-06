@@ -21,12 +21,11 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Primary Dx")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Neurological problem/psychiatric condition invalid. Please see reference.")]
-        public int? ETPR { get; set; }
+        public string? ETPR { get; set; }
 
         [Display(Name = "Secondary Dx")]
         [RegularExpression("^(0[0-9]|1[0-2]|88|99)$", ErrorMessage = "Codes must be 00-12 88 or 99")]
-        //[Diagnosis(AllowUnknown = true)]
-        public int? ETSEC { get; set; }
+        public string? ETSEC { get; set; }
 
         [Display(Name = "Method of evaluation")]
         [Range(1, 4)]
