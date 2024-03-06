@@ -229,7 +229,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? THREATENED { get; set; }
 
         [Display(Name = "How frequently did you receive poorer service or treatment from doctors or in hospitals compared to other people?")]
-        [Range(1, 8)]
+        [RegularExpression("^([1-5]|8)$", ErrorMessage = "Valid range is 1-5 or 8")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? POORMEDTRT { get; set; }
 
