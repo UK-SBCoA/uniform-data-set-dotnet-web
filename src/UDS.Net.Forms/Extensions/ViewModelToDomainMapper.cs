@@ -340,6 +340,52 @@ namespace UDS.Net.Forms.Extensions
 
         }
 
+        public static Form ToEntity(this A4a vm)
+        {
+            var fields = new A4aFormFields
+            {
+                ADVEVENT = vm.ADVEVENT,
+                ARIAE = vm.ARIAE,
+                ARIAH = vm.ARIAH,
+                ADVERSEOTH = vm.ADVERSEOTH,
+                ADVERSEOTX = vm.ADVERSEOTX,
+                TRTBIOMARK = vm.TRTBIOMARK,
+                Treatment1FormFields = vm.Treatment1.Select(s => s.ToEntity()).ToList(),
+                Treatment2FormFields = vm.Treatment2.Select(s => s.ToEntity()).ToList(),
+                Treatment3FormFields = vm.Treatment3.Select(s => s.ToEntity()).ToList(),
+                Treatment4FormFields = vm.Treatment4.Select(s => s.ToEntity()).ToList(),
+                Treatment5FormFields = vm.Treatment5.Select(s => s.ToEntity()).ToList(),
+                Treatment6FormFields = vm.Treatment6.Select(s => s.ToEntity()).ToList(),
+                Treatment7FormFields = vm.Treatment7.Select(s => s.ToEntity()).ToList(),
+                Treatment8FormFields = vm.Treatment8.Select(s => s.ToEntity()).ToList()
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static A4aTreatmentFormFields ToEntity(this A4aTreatment vm)
+        {
+            return new A4aTreatmentFormFields()
+            {
+                TreatmentIndex = vm.TreatmentIndex,
+                TARGETAB = vm.TARGETAB,
+                TARGETTAU = vm.TARGETTAU,
+                TARGETINF = vm.TARGETINF,
+                TARGETSYN = vm.TARGETSYN,
+                TARGETOTH = vm.TARGETOTH,
+                TARGETOTX = vm.TARGETOTX,
+                TRTTRIAL = vm.TRTTRIAL,
+                NCTNUM = vm.NCTNUM,
+                STARTMO = vm.STARTMO,
+                STARTYEAR = vm.STARTYEAR,
+                ENDMO = vm.ENDMO,
+                ENDYEAR = vm.ENDYEAR,
+                CARETRIAL = vm.CARETRIAL,
+                TRIALGRP = vm.TRIALGRP
+            };
+        }
+
+
         public static Form ToEntity(this A5 vm)
         {
             var fields = new A5FormFields
