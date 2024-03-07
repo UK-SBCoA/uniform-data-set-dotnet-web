@@ -311,21 +311,6 @@
             For any full sibling with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
         </p>
 
-@*         @if (Model.Visit != null)
-        {
-            if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-            {
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A3.NWINFSIB"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFSIB"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFSIB)" for="@Model.A3.NWINFSIB" items="Model.NewInformationSinceLastVisit"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFSIB"></span>
-                    </div>
-                </div>
-            }
-        } *@
-
         <p class="mt-1 text-sm text-gray-500">
             If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
                 99 =
@@ -384,21 +369,6 @@
         <p class="mt-1 text-sm text-gray-500">
             For any biological child with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
         </p>
-
-@*         @if (Model.Visit != null)
-        {
-            if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-            {
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A3.NWINFKID"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFKID)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFKID"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFKID)" for="@Model.A3.NWINFKID" items="Model.NewInformationSinceLastVisit"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFKID"></span>
-                    </div>
-                </div>
-            }
-        } *@
 
         <p class="mt-1 text-sm text-gray-500">
             If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
