@@ -192,16 +192,46 @@ namespace UDS.Net.Forms.Pages.UDS4
                         if (sibling != null)
                         {
 
-                            if (sibling.YOB.HasValue && !sibling.AGD.HasValue)
+                            if (sibling.YOB.HasValue)
                             {
-                                ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
+                                if (!sibling.AGD.HasValue)
+                                {
+                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
+                                }
+
                             }
 
-                            if (sibling.YOB.HasValue && sibling.ETPR == null)
+                            if (sibling.YOB.HasValue || sibling.AGD.HasValue)
 
                             {
-                                ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");
+                                if (sibling.ETPR == null)
+                                {
+
+                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");
+
+                                }
                             }
+
+                            if (sibling.ETPR != null)
+                            {
+                                if (sibling.ETPR != "00" && sibling.ETPR != "99")
+                                {
+                                    if (sibling.ETSEC == null)
+                                    {
+                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETSEC", "Please provide a value for secondary dx.");
+                                    }
+                                    if (!sibling.MEVAL.HasValue)
+                                    {
+                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].MEVAL", "Please provide a value for method of evaluation.");
+                                    }
+                                    if (!sibling.AGO.HasValue)
+                                    {
+                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGO", "Please provide a value for age of onset.");
+
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }
@@ -212,18 +242,44 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         if (child != null)
                         {
+                            if (child.YOB.HasValue)
                             {
-                                if (child.ETPR != null && !child.AGD.HasValue)
+                                if (!child.AGD.HasValue)
                                 {
                                     ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
                                 }
+
                             }
-                            if (child.YOB.HasValue && child.ETPR == null)
+
+                            if (child.YOB.HasValue || child.AGD.HasValue)
 
                             {
-                                ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
-                            }
+                                if (child.ETPR == null)
+                                {
 
+                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
+
+                                }
+                            }
+                            if (child.ETPR != null)
+                            {
+                                if (child.ETPR != "00" && child.ETPR != "99")
+                                {
+                                    if (child.ETSEC == null)
+                                    {
+                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETSEC", "Please provide a value for secondary dx.");
+                                    }
+                                    if (!child.MEVAL.HasValue)
+                                    {
+                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].MEVAL", "Please provide a value for method of evaluation.");
+                                    }
+                                    if (!child.AGO.HasValue)
+                                    {
+                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGO", "Please provide a value for age of onset.");
+
+                                    }
+                                }
+                            }
 
                         }
                     }

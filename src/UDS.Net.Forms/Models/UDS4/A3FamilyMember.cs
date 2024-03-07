@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? AGD { get; set; }
 
         [Display(Name = "Primary Dx")]
-        [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Neurological problem/psychiatric condition invalid. Please see reference.")]
+        [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
         public string? ETPR { get; set; }
 
         [Display(Name = "Secondary Dx")]
