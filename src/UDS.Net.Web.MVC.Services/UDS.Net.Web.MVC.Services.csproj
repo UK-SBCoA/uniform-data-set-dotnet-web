@@ -10,12 +10,12 @@
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Implemented service contract</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>2.0.4</ReleaseVersion>
+		<ReleaseVersion>2.0.3</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="7.0.3" />
-		<PackageReference Include="UDS.Net.Dto" Version="2.0.0" />
-		<PackageReference Include="UDS.Net.API.Client" Version="2.0.0" />
+		<PackageReference Include="UDS.Net.Dto" Version="2.0.1" />
+		<PackageReference Include="UDS.Net.API.Client" Version="2.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Services\UDS.Net.Services.csproj" />
