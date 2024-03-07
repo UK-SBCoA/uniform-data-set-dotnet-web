@@ -56,9 +56,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                 if (drug != null)
                 {
                     // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.DrugId == drug.DrugId))
+                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
                     {
-                        var interacted = interactedDrugIds.Where(s => s.DrugId == drug.DrugId).FirstOrDefault();
+                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
 
                         if (interacted != null)
                         {
@@ -78,9 +78,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                 if (drug != null)
                 {
                     // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.DrugId == drug.DrugId))
+                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
                     {
-                        var interacted = interactedDrugIds.Where(s => s.DrugId == drug.DrugId).FirstOrDefault();
+                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
 
                         if (interacted != null)
                         {

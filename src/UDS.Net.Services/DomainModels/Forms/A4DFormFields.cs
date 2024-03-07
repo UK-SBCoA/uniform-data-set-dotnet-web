@@ -8,7 +8,7 @@ namespace UDS.Net.Services.DomainModels.Forms
     {
         public int Id { get; set; }
 
-        public string DRUGID { get; set; }
+        public string RxNormId { get; set; }
 
         public DrugCode? DrugCode { get; set; }
 

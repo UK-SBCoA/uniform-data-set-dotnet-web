@@ -29,7 +29,16 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 this.ANYMEDS = a4GDto.ANYMEDS;
 
-                // TODO map child collection of rxnormids
+                if ((a4GDto.A4DetailsDtos != null && a4GDto.A4DetailsDtos.Count > 0))
+                {
+                    foreach (var details in a4GDto.A4DetailsDtos)
+                    {
+                        this.A4Ds.Add(new A4DFormFields()
+                        {
+                            RxNormId = details.ToString()
+                        });
+                    }
+                }
             }
         }
     }
