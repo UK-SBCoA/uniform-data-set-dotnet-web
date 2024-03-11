@@ -7,7 +7,6 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class A1a : FormModel
     {
-
         [Display(Name = "Do you or someone in your household currently own a car?")]
         [RegularExpression("^(0|1|8)$", ErrorMessage = "Valid range is 0-1 or 8")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
@@ -120,7 +119,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Specify other relationship")]
         [MaxLength(60)]
         [RequiredIf(nameof(GUARD2REL), "8", ErrorMessage = "Response required")]
-
         public string? GUARD2RELX { get; set; }
 
         [Display(Name = "I experience a general sense of emptiness")]
