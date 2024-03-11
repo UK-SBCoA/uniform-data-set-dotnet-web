@@ -422,15 +422,19 @@ namespace UDS.Net.Forms.Extensions
             {
                 HEIGHT = vm.HEIGHT,
                 WEIGHT = vm.WEIGHT,
-                BPSYS = vm.BPSYS,
-                BPDIAS = vm.BPDIAS,
-                HRATE = vm.HRATE,
-                VISION = vm.VISION,
-                VISCORR = vm.VISCORR,
-                VISWCORR = vm.VISWCORR,
-                HEARING = vm.HEARING,
-                HEARAID = vm.HEARAID,
-                HEARWAID = vm.HEARWAID
+                WAIST1 = vm.WAIST1,
+                WAIST2 = vm.WAIST2,
+                HIP1 = vm.HIP1,
+                HIP2 = vm.HIP2,
+                BPSYSL1 = vm.BPSYSL1,
+                BPDIASL1 = vm.BPDIASL1,
+                BPSYSL2 = vm.BPSYSL2,
+                BPDIASL2 = vm.BPDIASL2,
+                BPSYSR1 = vm.BPSYSR1,
+                BPDIASR1 = vm.BPDIASR1,
+                BPSYSR2 = vm.BPSYSR2,
+                BPDIASR2 = vm.BPDIASR2,
+                HRATE = vm.HRATE
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
