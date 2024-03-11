@@ -19,44 +19,70 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? WEIGHT { get; set; }
 
-        [Display(Name = "Systolic (sitting)")]
-        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|777|888)$", ErrorMessage = "(70-230, 777 = BP Addendum submitted, 888 = Not assessed)")]
+        [Display(Name = "Waist circumference measurements (inches): Measurement 1")]
+        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
         [RequiredOnComplete]
-        public int? BPSYS { get; set; }
+        public int? WAIST1 { get; set; }
 
-        [Display(Name = "Diastolic (sitting)")]
-        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|777|888)$", ErrorMessage = "(30-140, 777 = BP Addendum submitted, 888 = Not assessed)")]
+        [Display(Name = "Waist circumference measurements (inches): Measurement 2")]
+        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
         [RequiredOnComplete]
-        public int? BPDIAS { get; set; }
+        public int? WAIST2 { get; set; }
+
+        [Display(Name = "Hip circumference measurements (inches): Measurement 1")]
+        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? HIP1 { get; set; }
+
+        [Display(Name = "Hip circumference measurements (inches): Measurement 2")]
+        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? HIP2 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Left arm: Systolic Reading 1")]
+        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPSYSL1 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Left arm: Diastolic Reading 1")]
+        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPDIASL1 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Left arm: Systolic Reading 2")]
+        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPSYSL2 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Left arm: Diastolic Reading 2")]
+        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPDIASL2 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Right arm: Systolic Reading 1")]
+        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPSYSR1 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Right arm: Diastolic Reading 1")]
+        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPDIASR1 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Right arm: Systolic Reading 2")]
+        [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPSYSR2 { get; set; }
+
+        [Display(Name = "Participant blood pressure - Right arm: Diastolic Reading 2")]
+        [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
+        [RequiredOnComplete]
+        public int? BPDIASR2 { get; set; }
 
         [Display(Name = "Participant resting heart rate (pulse)")]
         [RegularExpression("^(3[3-9]|[4-9]\\d|1[0-5]\\d|160|888)$", ErrorMessage = "(33-160, 888 = Not assessed)")]
         [RequiredOnComplete]
         public int? HRATE { get; set; }
-
-        [Display(Name = "Without corrective lenses, is the participant’s vision functionally normal?")]
-        [RequiredOnComplete]
-        public int? VISION { get; set; }
-
-        [Display(Name = "Does the participant usually wear corrective lenses?")]
-        [RequiredOnComplete]
-        public int? VISCORR { get; set; }
-
-        [Display(Name = "If yes, is the participant’s vision functionally normal with corrective lenses?")]
-        [RequiredIf(nameof(VISCORR), "1", ErrorMessage = "Specify if the participant’s vision functionally normal with corrective lenses?")]
-        public int? VISWCORR { get; set; }
-
-        [Display(Name = "Without a hearing aid(s), is the participant’s hearing functionally normal?")]
-        [RequiredOnComplete]
-        public int? HEARING { get; set; }
-
-        [Display(Name = "Does the participant usually wear a hearing aid(s)?")]
-        [RequiredOnComplete]
-        public int? HEARAID { get; set; }
-
-        [Display(Name = "If yes, is the participant’s hearing functionally normal with a hearing aid(s)?")]
-        [RequiredIf(nameof(HEARAID), "1", ErrorMessage = "Specify if the participant’s hearing functionally normal with a hearing aid(s)?")]
-        public int? HEARWAID { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
