@@ -64,6 +64,15 @@
     content: counter(section) counter(subsection, lower-alpha) counter(subsubsection, decimal) ".";
 }
 
+.subsubsubcounterreset {
+    counter-reset: subsubsubsection;
+}
+
+.subsubsubcounter::before {
+    counter-increment: subsubsubsection;
+    content: counter(section) counter(subsection, lower-alpha) counter(subsubsection, decimal) counter(subsubsubsection, lower-alpha) ".";
+}
+
 .invisible {
     padding: 0;
     margin: 0;
