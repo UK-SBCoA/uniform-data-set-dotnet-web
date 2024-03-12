@@ -23,26 +23,26 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
         }
 
-    //    public async Task<IActionResult> OnGetAsync(int? id)
-    //    {
-    //        await base.OnGetAsync(id);
+       public async Task<IActionResult> OnGetAsync(int? id)
+       {
+           await base.OnGetAsync(id);
 
-    //        if (BaseForm != null)
-    //        {
-    //            A4a = (A4a)BaseForm;
-    //        }
+           if (BaseForm != null)
+           {
+               A4a = (A4a)BaseForm;
+           }
 
-    //        return Page();
-    //    }
+           return Page();
+       }
 
-    //    [ValidateAntiForgeryToken]
-    //    public async Task<IActionResult> OnPostAsync(int id)
-    //    {
-    //        BaseForm = A4a; // reassign bounded and derived form to base form for base method
+       [ValidateAntiForgeryToken]
+       public async Task<IActionResult> OnPostAsync(int id)
+       {
+            BaseForm = A4a; // reassign bounded and derived form to base form for base method
 
-    //        Visit.Forms.Add(A4a); // visit needs updated form as well
+          Visit.Forms.Add(A4a); // visit needs updated form as well
 
-    //        return await base.OnPostAsync(id); // checks for validation, etc.
-    //    }
+           return await base.OnPostAsync(id); // checks for validation, etc.
+        }
     }
 }

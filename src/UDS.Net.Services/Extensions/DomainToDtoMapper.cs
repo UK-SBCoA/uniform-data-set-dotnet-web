@@ -188,7 +188,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (form.Fields is A4aFormFields)
             {
-                dto = ((A4aFormFields)form.Fields).ToDto();
+                dto = ((A4aFormFields)form.Fields).ToDto(form);
             }
             else if (form.Fields is A5FormFields)
             {
@@ -593,9 +593,9 @@ namespace UDS.Net.Services.Extensions
 
 
 
-        public static A4aDto ToDto(this A4aFormFields fields, int formId)
+        public static A4aDto ToDto(this A4aFormFields fields, Form form)
         {
-            var dto = new A4aDto()
+            return new A4aDto
             {
                 ADVEVENT = fields.ADVEVENT,
                 ARIAE = fields.ARIAE,
@@ -605,7 +605,6 @@ namespace UDS.Net.Services.Extensions
                 TRTBIOMARK = fields.TRTBIOMARK
             };
 
-            return dto;
         }
 
 
