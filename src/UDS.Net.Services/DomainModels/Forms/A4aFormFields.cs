@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using UDS.Net.Dto;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
-	public class A4aFormFields
-	{
+	public class A4aFormFields : IFormFields
+    {
+        public A4aFormFields()
+        {
+        }
+
+        public A4aFormFields(FormDto dto)
+        {
+        }
+
         public int? ADVEVENT { get; set; }
         public bool? ARIAE { get; set; }
         public bool? ARIAH { get; set; }
