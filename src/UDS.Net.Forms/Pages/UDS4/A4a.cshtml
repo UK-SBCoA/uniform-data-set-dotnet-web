@@ -1,0 +1,79 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.A4aModel
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        Test
+    </p>
+</div>
+
+
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Primary Drug Target (check all that apply)
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Specific treatment and/or trial
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Start date (month/year)
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    End date (month/year)
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    How was the treatment provided?
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    If clinical trial, in which group was the participant?
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <input  type="checkbox" value="Amyloid beta" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                        <label class="ml-3 block text-sm font-medium text-gray-700">
+                            Amyloid beta
+                        </label>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <input  type="text" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <input type="text" placeholder="__/____" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <input  type="text" placeholder="__/____" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <input  type="radio" value="Clinical care" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                        <label class="ml-3 block text-sm font-medium text-gray-700">
+                            Clinical care
+                        </label>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <input  type="radio" value="Active treatment" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                        <label class="ml-3 block text-sm font-medium text-gray-700">
+                            Active treatment
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+  @*<partial name="_FormFooter" for="@Model.A4a" />*@
