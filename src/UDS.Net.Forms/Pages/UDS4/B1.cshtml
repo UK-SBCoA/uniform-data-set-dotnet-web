@@ -58,36 +58,116 @@
             measurements should be repeated.
         </div>
     </div>
-    <div class="counter">
-        <p><strong><u>Enter two waist circumference measurements (inches):</u></strong></p>
+    <div>
+        <p class="counter">
+            <strong><u>Enter two waist circumference measurements (inches):</u></strong>
 
 
-        <div class="subsubcounterreset">
-            <div class="subcounterreset">
-                <span class="subcounter invisible"></span>
-                <div class="@rowCSS">
-                    <label asp-for="B1.WAIST1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST1)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST1"></p>
-                        <input asp-for="@Model.B1.WAIST1" type="number" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST1"></span>
+            <div class="subsubcounterreset">
+                <div class="subcounterreset">
+                    <span class="subcounter invisible"></span>
+                    <div class="@rowCSS">
+                        <label asp-for="B1.WAIST1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST1)</label>
+                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST1"></p>
+                            <input asp-for="@Model.B1.WAIST1" type="number" />
+                            <div class="ml-3">
+                                <p class="text-base font-semibold">(888=not assessed)</p>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="@rowCSS">
+                        <label asp-for="B1.WAIST2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST2)</label>
+                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST2"></p>
+                            <input asp-for="@Model.B1.WAIST2" type="number" />
+                            <div class="ml-3">
+                                <p class="text-base font-semibold">(888=not assessed)</p>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST2"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="@rowCSS">
-                    <label asp-for="B1.WAIST2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST2)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST2"></p>
-                        <input asp-for="@Model.B1.WAIST2" type="number" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST2"></span>
+
+            </div>
+    </div>
+    <div>
+        <p class="counter">
+            <strong><u>Enter two hip circumference measurements (inches):</u></strong>
+
+            <div class="subsubcounterreset">
+                <div class="subcounterreset">
+                    <span class="subcounter invisible"></span>
+                    <div class="@rowCSS">
+                        <label asp-for="B1.HIP1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP1)</label>
+                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP1"></p>
+                            <input asp-for="@Model.B1.HIP1" type="number" />
+                            <div class="ml-3">
+                                <p class="text-base font-semibold">(888=not assessed)</p>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HIP1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="@rowCSS">
+                        <label asp-for="B1.HIP2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP2)</label>
+                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP2"></p>
+                            <input asp-for="@Model.B1.HIP2" type="number" />
+                            <div class="ml-3">
+                                <p class="text-base font-semibold">(888=not assessed)</p>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HIP2"></span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
             </div>
+            <div>
+                <p class="counter">
+                    <strong>
+                        <u>
+                            Enter two readings spaced at least one minute apart for each arm.
+                            See detailed instructions below
+                        </u>
+                    </strong>
 
-        </div>
+                    <div class="subsubsubcounterreset">
+                        <div class="subsubcounterreset">
+                            <div class="subcounterreset">
+                                <span class="subcounter invisible"></span>
+                                <span class="subsubcounter invisible"></span>
+                                <div class="@rowCSS">
+                                    <label asp-for="B1.BPSYSL1"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
+                                    <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL1"></p>
+                                        <input asp-for="@Model.B1.BPSYSL1" type="number" />
+                                        <div class="ml-3">
+                                            <p class="text-base font-semibold">(888=not assessed)</p>
+                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSL1"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="@rowCSS">
+                                    <label asp-for="B1.BPDIASL1"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.B1.BPDIASL1)</label>
+                                    <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                                        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPDIASL1"></p>
+                                        <input asp-for="@Model.B1.BPDIASL1" type="number" />
+                                        <div class="ml-3">
+                                            <p class="text-base font-semibold">(888=not assessed)</p>
+                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASL1"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
     </div>
-
     @* <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
