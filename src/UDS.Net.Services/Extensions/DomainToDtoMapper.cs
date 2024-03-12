@@ -320,16 +320,114 @@ namespace UDS.Net.Services.Extensions
         {
             return new A1Dto()
             {
-                REFERSC = fields.REFERSC,
-                SOURCENW = fields.SOURCENW,
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
+                CHLDHDCTRY = fields.CHLDHDCTRY,
+                RACEWHITE = fields.RACEWHITE,
+                ETHGERMAN = fields.ETHGERMAN,
+                ETHIRISH = fields.ETHIRISH,
+                ETHENGLISH = fields.ETHENGLISH,
+                ETHITALIAN = fields.ETHITALIAN,
+                ETHPOLISH = fields.ETHPOLISH,
+                ETHFRENCH = fields.ETHFRENCH,
+                ETHWHIOTH = fields.ETHWHIOTH,
+                ETHWHIOTHX = fields.ETHWHIOTHX,
+                ETHISPANIC = fields.ETHISPANIC,
+                ETHMEXICAN = fields.ETHMEXICAN,
+                ETHPUERTO = fields.ETHPUERTO,
+                ETHCUBAN = fields.ETHCUBAN,
+                ETHSALVA = fields.ETHSALVA,
+                ETHDOMIN = fields.ETHDOMIN,
+                ETHCOLOM = fields.ETHCOLOM,
+                ETHHISOTH = fields.ETHHISOTH,
+                ETHHISOTHX = fields.ETHHISOTHX,
+                RACEBLACK = fields.RACEBLACK,
+                ETHAFAMER = fields.ETHAFAMER,
+                ETHJAMAICA = fields.ETHJAMAICA,
+                ETHHAITIAN = fields.ETHHAITIAN,
+                ETHNIGERIA = fields.ETHNIGERIA,
+                ETHETHIOP = fields.ETHETHIOP,
+                ETHSOMALI = fields.ETHSOMALI,
+                ETHBLKOTH = fields.ETHBLKOTH,
+                ETHBLKOTHX = fields.ETHBLKOTHX,
+                RACEASIAN = fields.RACEASIAN,
+                ETHCHINESE = fields.ETHCHINESE,
+                ETHFILIP = fields.ETHFILIP,
+                ETHINDIA = fields.ETHINDIA,
+                ETHVIETNAM = fields.ETHVIETNAM,
+                ETHKOREAN = fields.ETHKOREAN,
+                ETHJAPAN = fields.ETHJAPAN,
+                ETHASNOTH = fields.ETHASNOTH,
+                ETHASNOTHX = fields.ETHASNOTHX,
+                RACEAIAN = fields.RACEAIAN,
+                RACEAIANX = fields.RACEAIANX,
+                RACEMENA = fields.RACEMENA,
+                ETHLEBANON = fields.ETHLEBANON,
+                ETHIRAN = fields.ETHIRAN,
+                ETHEGYPT = fields.ETHEGYPT,
+                ETHSYRIA = fields.ETHSYRIA,
+                ETHMOROCCO = fields.ETHMOROCCO,
+                ETHISRAEL = fields.ETHISRAEL,
+                ETHMENAOTH = fields.ETHMENAOTH,
+                ETHMENAOTX = fields.ETHMENAOTX,
+                RACENHPI = fields.RACENHPI,
+                ETHHAWAII = fields.ETHHAWAII,
+                ETHSAMOAN = fields.ETHSAMOAN,
+                ETHCHAMOR = fields.ETHCHAMOR,
+                ETHTONGAN = fields.ETHTONGAN,
+                ETHFIJIAN = fields.ETHFIJIAN,
+                ETHMARSHAL = fields.ETHMARSHAL,
+                ETHNHPIOTH = fields.ETHNHPIOTH,
+                ETHNHPIOTX = fields.ETHNHPIOTX,
+                RACEUNKN = fields.RACEUNKN,
+                GENMAN = fields.GENMAN,
+                GENWOMAN = fields.GENWOMAN,
+                GENTRMAN = fields.GENTRMAN,
+                GENTRWOMAN = fields.GENTRWOMAN,
+                GENNONBI = fields.GENNONBI,
+                GENTWOSPIR = fields.GENTWOSPIR,
+                GENOTH = fields.GENOTH,
+                GENOTHX = fields.GENOTHX,
+                GENDKN = fields.GENDKN,
+                GENNOANS = fields.GENNOANS,
+                BIRTHSEX = fields.BIRTHSEX,
+                INTERSEX = fields.INTERSEX,
+                SEXORNGAY = fields.SEXORNGAY,
+                SEXORNHET = fields.SEXORNHET,
+                SEXORNBI = fields.SEXORNBI,
+                SEXORNTWOS = fields.SEXORNTWOS,
+                SEXORNOTH = fields.SEXORNOTH,
+                SEXORNOTHX = fields.SEXORNOTHX,
+                SEXORNDNK = fields.SEXORNDNK,
+                SEXORNNOAN = fields.SEXORNNOAN,
+                PREDOMLAN = fields.PREDOMLAN,
+                PREDOMLANX = fields.PREDOMLANX,
+                HANDED = fields.HANDED,
+                EDUC = fields.EDUC,
+                LVLEDUC = fields.LVLEDUC,
                 MARISTAT = fields.MARISTAT,
                 LIVSITUA = fields.LIVSITUA,
                 RESIDENC = fields.RESIDENC,
-                EDUC = fields.EDUC,
                 ZIP = fields.ZIP,
-                HANDED = fields.HANDED
+                SERVED = fields.SERVED,
+                MEDVA = fields.MEDVA,
+                EXRTIME = fields.EXRTIME,
+                MEMWORS = fields.MEMWORS,
+                MEMTROUB = fields.MEMTROUB,
+                MEMTEN = fields.MEMTEN,
+                ADISTATE = fields.ADISTATE,
+                ADINAT = fields.ADINAT,
+                PRIOCC = fields.PRIOCC,
+                SOURCENW = fields.SOURCENW,
+                REFERSC = fields.REFERSC,
+                REFERSCX = fields.REFERSCX,
+                REFLEARNED = fields.REFLEARNED,
+                REFCTRSOCX = fields.REFCTRSOCX,
+                REFCTRREGX = fields.REFCTRREGX,
+                REFOTHWEBX = fields.REFOTHWEBX,
+                REFOTHMEDX = fields.REFOTHMEDX,
+                REFOTHREGX = fields.REFOTHREGX,
+                REFOTHX = fields.REFOTHX
             };
         }
 
@@ -475,8 +573,22 @@ namespace UDS.Net.Services.Extensions
         {
             return new A4Dto
             {
-                ANYMEDS = fields.ANYMEDS
+                ANYMEDS = fields.ANYMEDS,
+                A4DetailsDtos = fields.A4Ds.ToDto()
             };
+        }
+
+        public static List<int> ToDto(this List<A4DFormFields> fields)
+        {
+            List<int> rxNormIds = new List<int>();
+            foreach (var field in fields)
+            {
+                if (Int32.TryParse(field.RxNormId, out int rxNormId))
+                {
+                    rxNormIds.Add(rxNormId);
+                }
+            }
+            return rxNormIds;
         }
 
         public static A5D2Dto ToDto(this A5FormFields fields)

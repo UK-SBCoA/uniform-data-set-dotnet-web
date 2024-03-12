@@ -13,238 +13,453 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A1 : FormModel
     {
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Primary reason for coming to ADC")]
-        [Range(1, 9)]
-        public int? REASON { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Principal referral source", Description = "If answer is 1 or 2, CONTINUE TO QUESTION 2b; otherwise, SKIP TO QUESTION 3.")]
-        [Range(1, 9)]
-        public int? REFERSC { get; set; }
-
-        [Display(Name = "If the referral source was self-referral or a non-professional contact, how did the referral source learn of the ADC?")]
-        [Range(1, 9)]
-        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "How did the referral source learn of the ADC?")]
-        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "How did the referral source learn of the ADC?")]
-        public int? LEARNED { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Presumed disease status at enrollment")]
-        [Range(1, 3)]
-        public int? PRESTAT { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Presumed participation")]
-        [Range(1, 2)]
-        public int? PRESPART { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "ADC enrollment type")]
-        [Range(1, 2)]
-        public int? SOURCENW { get; set; }
-
-        [Display(Name = "Participant’s month of birth")]
+        [Display(Name = "Participant's month of birth")]
         [BirthMonth]
         [RequiredOnComplete]
         public int? BIRTHMO { get; set; }
 
-        [Display(Name = "Participant’s year of birth")]
+        [Display(Name = "Participant's year of birth")]
         [BirthYear]
         [RequiredOnComplete]
         public int? BIRTHYR { get; set; }
 
-        [Display(Name = "Participant’s sex")]
-        [Range(1, 2)]
+        [Display(Name = "In which country or region did you spend most of your childhood?")]
+        [MaxLength(3)]
+        [ProhibitedCharacters]
         [RequiredOnComplete]
-        public int? SEX { get; set; }
+        public string? CHLDHDCTRY { get; set; }
 
-        [Display(Name = "Participant’s current marital status")]
-        [Range(0, 9)]
+        [Display(Name = "White")]
+        public bool RACEWHITE { get; set; }
+
+        [Display(Name = "German")]
+        public bool ETHGERMAN { get; set; }
+
+        [Display(Name = "Irish")]
+        public bool ETHIRISH { get; set; }
+
+        [Display(Name = "English")]
+        public bool ETHENGLISH { get; set; }
+
+        [Display(Name = "Italian")]
+        public bool ETHITALIAN { get; set; }
+
+        [Display(Name = "Polish")]
+        public bool ETHPOLISH { get; set; }
+
+        [Display(Name = "French")]
+        public bool ETHFRENCH { get; set; }
+
+        [Display(Name = "Other")] // White - Other
+        public bool ETHWHIOTH { get; set; }
+
+        [Display(Name = "White - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHWHIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHWHIOTHX { get; set; }
+
+        [Display(Name = "Hispanic or Latino")]
+        public bool ETHISPANIC { get; set; }
+
+        [Display(Name = "Mexican or Mexican American")]
+        public bool ETHMEXICAN { get; set; }
+
+        [Display(Name = "Puerto Rican")]
+        public bool ETHPUERTO { get; set; }
+
+        [Display(Name = "Cuban")]
+        public bool ETHCUBAN { get; set; }
+
+        [Display(Name = "Salvadoran")]
+        public bool ETHSALVA { get; set; }
+
+        [Display(Name = "Dominican")]
+        public bool ETHDOMIN { get; set; }
+
+        [Display(Name = "Colombian")]
+        public bool ETHCOLOM { get; set; }
+
+        [Display(Name = "Other")] // Hispanic or Latino - Other
+        public bool ETHHISOTH { get; set; }
+
+        [Display(Name = "Hispanic or Latino - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHHISOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHHISOTHX { get; set; }
+
+        [Display(Name = "Black or African American")]
+        public bool RACEBLACK { get; set; }
+
+        [Display(Name = "African American")]
+        public bool ETHAFAMER { get; set; }
+
+        [Display(Name = "Jamaican")]
+        public bool ETHJAMAICA { get; set; }
+
+        [Display(Name = "Haitian")]
+        public bool ETHHAITIAN { get; set; }
+
+        [Display(Name = "Nigerian")]
+        public bool ETHNIGERIA { get; set; }
+
+        [Display(Name = "Ethiopian")]
+        public bool ETHETHIOP { get; set; }
+
+        [Display(Name = "Somali")]
+        public bool ETHSOMALI { get; set; }
+
+        [Display(Name = "Other")] // Black or African American - Other
+        public bool ETHBLKOTH { get; set; }
+
+        [Display(Name = "Black or African American - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHBLKOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHBLKOTHX { get; set; }
+
+        [Display(Name = "Asian")]
+        public bool RACEASIAN { get; set; }
+
+        [Display(Name = "Chinese")]
+        public bool ETHCHINESE { get; set; }
+
+        [Display(Name = "Filipino")]
+        public bool ETHFILIP { get; set; }
+
+        [Display(Name = "Asian Indian")]
+        public bool ETHINDIA { get; set; }
+
+        [Display(Name = "Vietnamese")]
+        public bool ETHVIETNAM { get; set; }
+
+        [Display(Name = "Korean")]
+        public bool ETHKOREAN { get; set; }
+
+        [Display(Name = "Japanese")]
+        public bool ETHJAPAN { get; set; }
+
+        [Display(Name = "Other")] // Asian - Other
+        public bool ETHASNOTH { get; set; }
+
+        [Display(Name = "Asian - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHASNOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHASNOTHX { get; set; }
+
+        [Display(Name = "American Indian or Alaska Native")]
+        public bool RACEAIAN { get; set; }
+
+        [Display(Name = "American Indian or Alaska Native (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(RACEAIAN), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? RACEAIANX { get; set; }
+
+        [Display(Name = "Middle Eastern or North African")]
+        public bool RACEMENA { get; set; }
+
+        [Display(Name = "Lebanese")]
+        public bool ETHLEBANON { get; set; }
+
+        [Display(Name = "Iranian")]
+        public bool ETHIRAN { get; set; }
+
+        [Display(Name = "Egyptian")]
+        public bool ETHEGYPT { get; set; }
+
+        [Display(Name = "Syrian")]
+        public bool ETHSYRIA { get; set; }
+
+        [Display(Name = "Moroccan")]
+        public bool ETHMOROCCO { get; set; }
+
+        [Display(Name = "Israeli")]
+        public bool ETHISRAEL { get; set; }
+
+        [Display(Name = "Other")] // Middle Eastern or North African - Other
+        public bool ETHMENAOTH { get; set; }
+
+        [Display(Name = "Middle Eastern or North African - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHMENAOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHMENAOTX { get; set; }
+
+        [Display(Name = "Native Hawaiian or Pacific Islander")]
+        public bool RACENHPI { get; set; }
+
+        [Display(Name = "Hawaiian")]
+        public bool ETHHAWAII { get; set; }
+
+        [Display(Name = "Samoan")]
+        public bool ETHSAMOAN { get; set; }
+
+        [Display(Name = "Chamorro")]
+        public bool ETHCHAMOR { get; set; }
+
+        [Display(Name = "Tongan")]
+        public bool ETHTONGAN { get; set; }
+
+        [Display(Name = "Fijian")]
+        public bool ETHFIJIAN { get; set; }
+
+        [Display(Name = "Marshallese")]
+        public bool ETHMARSHAL { get; set; }
+
+        [Display(Name = "Other")] // Native Hawaiian or Pacific Islander - Other
+        public bool ETHNHPIOTH { get; set; }
+
+        [Display(Name = "Native Hawaiian or Pacific Islander - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(ETHNHPIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
+        public string? ETHNHPIOTX { get; set; }
+
+        [Display(Name = "Don't know")]
+        public bool RACEUNKN { get; set; }
+
+        [RequiredOnComplete(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
+        [NotMapped]
+        public bool? EthnicityRaceIndicated
+        {
+            get
+            {
+                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH
+                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
+                || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
+                || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
+                || RACEAIAN
+                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHMOROCCO || ETHISRAEL || ETHMENAOTH
+                || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
+                || RACEUNKN)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [Display(Name = "Man")]
+        public bool GENMAN { get; set; }
+
+        [Display(Name = "Woman")]
+        public bool GENWOMAN { get; set; }
+
+        [Display(Name = "Transgender Man")]
+        public bool GENTRMAN { get; set; }
+
+        [Display(Name = "Transgender Woman")]
+        public bool GENTRWOMAN { get; set; }
+
+        [Display(Name = "Non-binary/genderqueer")]
+        public bool GENNONBI { get; set; }
+
+        [Display(Name = "Two-Spirit (if you are AIAN)")]
+        public bool GENTWOSPIR { get; set; }
+
+        [Display(Name = "I use a different term")]
+        public bool GENOTH { get; set; }
+
+        [Display(Name = "Gender Identity - Different term (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(GENOTH), "true", ErrorMessage = "Please indicate current gender identity")]
+        public string? GENOTHX { get; set; }
+
+        [Display(Name = "Don't know")]
+        public bool GENDKN { get; set; }
+
+        [Display(Name = "Prefer not to answer")]
+        public bool GENNOANS { get; set; }
+
+        [RequiredOnComplete(ErrorMessage = "Please indicate current gender identity, dont know, or prefer not to answer.")]
+        [NotMapped]
+        public bool? GenderIdentityIndicated
+        {
+            get
+            {
+                if (GENMAN || GENWOMAN || GENTRMAN || GENTRWOMAN || GENNONBI || GENTWOSPIR || GENOTH || GENDKN || GENNOANS)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [Display(Name = "What sex were you assigned at birth, on your original birth certificate?")]
+        [RequiredOnComplete]
+        public int? BIRTHSEX { get; set; }
+
+        [Display(Name = "Have you ever been diagnosed by a medical doctor or other health professional with an intersex condition or a \"Difference of Sex Development (DSD)\" or were you born with (or developed naturally in puberty) genitals, reproductive organs, and/or chromosomal patterns that do not fit standard definitions of male or female?")]
+        [RequiredOnComplete]
+        public int? INTERSEX { get; set; }
+
+        [Display(Name = "Lesbian or gay")]
+        public bool SEXORNGAY { get; set; }
+
+        [Display(Name = "Straight/heterosexual")]
+        public bool SEXORNHET { get; set; }
+
+        [Display(Name = "Bisexual")]
+        public bool SEXORNBI { get; set; }
+
+        [Display(Name = "Two-Spirit (if you are AIAN)")]
+        public bool SEXORNTWOS { get; set; }
+
+        [Display(Name = "I use a different term")]
+        public bool SEXORNOTH { get; set; }
+
+        [Display(Name = "Sexual Orientation - Different term (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(SEXORNOTH), "true", ErrorMessage = "Please indicate current gender identity")]
+        public string? SEXORNOTHX { get; set; }
+
+        [Display(Name = "Don't know")]
+        public bool SEXORNDNK { get; set; }
+
+        [Display(Name = "Prefer not to answer")]
+        public bool SEXORNNOAN { get; set; }
+
+        [RequiredOnComplete(ErrorMessage = "Please indicate sexual orientation, don't know, or prefer not to answer.")]
+        [NotMapped]
+        public bool? SexualOrientstionIndicated
+        {
+            get
+            {
+                if (SEXORNGAY || SEXORNHET || SEXORNBI || SEXORNTWOS || SEXORNOTH || SEXORNDNK || SEXORNNOAN)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [Display(Name = "What is your primary language?")]
+        [RequiredOnComplete]
+        public int? PREDOMLAN { get; set; }
+
+        [Display(Name = "Primary Language - Other (Specify)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(PREDOMLAN), "8", ErrorMessage = "Please specify language")]
+        public string? PREDOMLANX { get; set; }
+
+        [Display(Name = "Are you left- or right-handed?")]
+        [RequiredOnComplete]
+        public int? HANDED { get; set; }
+
+        [Display(Name = "How many years of education have you completed?")]
+        [RequiredOnComplete]
+        [RegularExpression("^(\\d|[12]\\d|3[0-6]|99)$", ErrorMessage = "Valid range is 0-36 or 99")]
+        public int? EDUC { get; set; }
+
+        [Display(Name = "What is the highest level of education you have achieved?")]
+        [RequiredOnComplete]
+        public int? LVLEDUC { get; set; }
+
+        [Display(Name = "What is your current marital status?")]
         [RequiredOnComplete]
         public int? MARISTAT { get; set; }
 
-        [Display(Name = "What is the participant’s living situation?")]
-        [Range(0, 9)]
+        [Display(Name = "What is your living situation?")]
         [RequiredOnComplete]
         public int? LIVSITUA { get; set; }
 
-        [Display(Name = "What is the participant’s level of independence?")]
-        [Range(0, 9)]
-        [RequiredOnComplete]
-        public int? INDEPEND { get; set; }
-
-        [Display(Name = "What is the participant’s primary type of residence?")]
-        [Range(0, 9)]
+        [Display(Name = "What is your primary type of residence?")]
         [RequiredOnComplete]
         public int? RESIDENC { get; set; }
 
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Does the participant report being of Hispanic/Latino ethnicity (i.e., having origins from a mainly Spanish-speaking Latin American country), regardless of race?")]
-        [Range(0, 9)]
-        public int? HISPANIC { get; set; }
-
-        [Display(Name = "If yes, what are the participant's reported origins?")]
-        [RequiredIf(nameof(HISPANIC), "2", ErrorMessage = "Indicate reported origin.")]
-        [RequiredIf(nameof(HISPANIC), "9", ErrorMessage = "Indicate reported origin.")]
-        [Range(1, 99)]
-        public int? HISPOR { get; set; }
-
-        [Display(Name = "Other (specify)", Prompt = "Other origin")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(HISPOR), "50", ErrorMessage = "Indicate other origin.")]
-        [ProhibitedCharacters]
-        public string? HISPORX { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "What does the participant report as his or her race?")]
-        [Range(1, 99)]
-        public int? RACE { get; set; }
-
-        [Display(Name = "Other (specify)", Prompt = "Other race")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(RACE), "50", ErrorMessage = "Indicate other race.")]
-        [ProhibitedCharacters]
-        public string? RACEX { get; set; }
-
-        /// <summary>
-        /// Never required, but only allowed if primary race is defined
-        /// </summary>
-        [Display(Name = "What additional race does participant report?")]
-        [Range(1, 99)]
-        public int? RACESEC { get; set; }
-
-        [Display(Name = "Other (specify)", Prompt = "Other additional race")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(RACESEC), "50", ErrorMessage = "Indicate other additional race.")]
-        [ProhibitedCharacters]
-        public string? RACESECX { get; set; }
-
-        /// <summary>
-        /// Never required, but only allowed if secondary race is defined
-        /// </summary>
-        [Display(Name = "What additional race, beyond those reported in Questions 9 and 10, does participant report?")]
-        [Range(1, 99)]
-        public int? RACETER { get; set; }
-
-        [Display(Name = "Other (specify)", Prompt = "Other additional race")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(RACETER), "50", ErrorMessage = "Indicate other additional race.")]
-        [ProhibitedCharacters]
-        public string? RACETERX { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Participant’s primary language")]
-        [Range(1, 9)]
-        public int? PRIMLANG { get; set; }
-
-        [Display(Name = "Other (specify)", Prompt = "Other primary language")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(PRIMLANG), "50", ErrorMessage = "Indicate other language.")]
-        [ProhibitedCharacters]
-        public string? PRIMLANX { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Participant’s years of education - use the codes to report the level achieved; if an attempted level is not completed, enter the number of years completed", Description = "12 = high school or GED, 16 = bachelor’s degree, 18 = master’s degree, 20 = doctorate, 99 = unknown")]
-        [Range(0, 99)]
-        public int? EDUC { get; set; }
-
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "ZIP Code (first three characters) of participant’s primary residence")]
-        [StringLength(3)]
+        [Display(Name = "What are the first three digits of the ZIP code of your primary residence?")]
+        [RegularExpression("^(00[6-9]|0[1-9]\\d|[1-9]\\d{2})$", ErrorMessage = "Valid range is 006-999")]
         public string? ZIP { get; set; }
 
-        /// <summary>
-        /// Only required during initial visits
-        /// </summary>
-        [Display(Name = "Is the participant left- or right-handed (for example, which hand would s/ he normally use to write or throw a ball)?")]
-        [Range(1, 9)]
-        public int? HANDED { get; set; }
+        [Display(Name = "Have you ever served in the U.S. Armed Forces, military Reserves, or National Guard?")]
+        [RequiredOnComplete]
+        public int? SERVED { get; set; }
+
+        [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
+        [RequiredIf(nameof(SERVED), "1", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
+        [RequiredIf(nameof(SERVED), "9", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
+        public int? MEDVA { get; set; }
+
+        [Display(Name = "How much time each week do you spend performing activities that cause large increases in breathing or heart rate for at least 10 minutes continuously?")]
+        [RequiredOnComplete]
+        public int? EXRTIME { get; set; }
+
+        [Display(Name = "Do you feel like your memory is becoming worse?")]
+        [RequiredOnComplete]
+        public int? MEMWORS { get; set; }
+
+        [Display(Name = "About how often do you have trouble remembering things?")]
+        [RequiredOnComplete]
+        public int? MEMTROUB { get; set; }
+
+        [Display(Name = "Compared to 10 years ago, would you say that your memory is much worse, a little worse, the same, a little better, or much better?")]
+        [RequiredOnComplete]
+        public int? MEMTEN { get; set; }
+
+        [Display(Name = "ADI state-only decile")]
+        [Range(1, 10)]
+        public int? ADISTATE { get; set; }
+
+        [Display(Name = "ADI national percentile")]
+        [Range(1, 100)]
+        public int? ADINAT { get; set; }
+
+        [Display(Name = "Participant's primary occupation throughout their working life")]
+        [Range(100, 731)]
+        public int? PRIOCC { get; set; }
+
+        [Display(Name = "ADRC enrollment type")]
+        [RequiredOnComplete]
+        public int? SOURCENW { get; set; }
+
+        [Display(Name = "Principal referral source")]
+        [RequiredOnComplete]
+        public int? REFERSC { get; set; }
+
+        [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]
+        [MaxLength(60)]
+        [ProhibitedCharacters]
+        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
+        public string? REFERSCX { get; set; }
+
+        [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
+        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
+        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
+        public int? REFLEARNED { get; set; }
+
+        [Display(Name = "Center social media - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "6", ErrorMessage = "Please specify center social media")]
+        public string? REFCTRSOCX { get; set; }
+
+        [Display(Name = "Center registry - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "7", ErrorMessage = "Please specify center registry")]
+        public string? REFCTRREGX { get; set; }
+
+        [Display(Name = "Website - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify website")]
+        public string? REFOTHWEBX { get; set; }
+
+        [Display(Name = "Media - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "9", ErrorMessage = "Please specify media")]
+        public string? REFOTHMEDX { get; set; }
+
+        [Display(Name = "Other registry - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "10", ErrorMessage = "Please specify other registry")]
+        public string? REFOTHREGX { get; set; }
+
+        [Display(Name = "Other - Specify")]
+        [RequiredIf(nameof(REFLEARNED), "88", ErrorMessage = "Please specify")]
+        public string? REFOTHX { get; set; }
+
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == FormStatus.Complete)
-            {
-                var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                if (visitValue is VisitModel)
-                {
-                    VisitModel visit = (VisitModel)visitValue;
-
-                    if (visit != null)
-                    {
-                        if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.TIP)
-                        {
-                            if (!REASON.HasValue)
-                                yield return new ValidationResult("Primary reason for coming to ADC is required.", new[] { nameof(REASON) });
-
-                            if (!REFERSC.HasValue)
-                                yield return new ValidationResult("Principal referral source is required.", new[] { nameof(REFERSC) });
-
-                            if (!PRESTAT.HasValue)
-                                yield return new ValidationResult("Presumed disease status at enrollment is required.", new[] { nameof(PRESTAT) });
-
-                            if (!PRESPART.HasValue)
-                                yield return new ValidationResult("Presumed participation is required.", new[] { nameof(PRESPART) });
-
-                            if (!SOURCENW.HasValue)
-                                yield return new ValidationResult("ADC enrollment type is required.", new[] { nameof(SOURCENW) });
-
-                            if (!HISPANIC.HasValue)
-                                yield return new ValidationResult("Ethnicity is required.", new[] { nameof(HISPANIC) });
-
-                            if (!RACE.HasValue)
-                                yield return new ValidationResult("Race is required.", new[] { nameof(RACE) });
-
-                            // RACESEC is not required, but check to make sure RACE is defined first
-                            if (RACESEC.HasValue)
-                            {
-                                if (!RACE.HasValue)
-                                    yield return new ValidationResult("Define primary race before defining secondary race.", new[] { nameof(RACESEC) });
-                            }
-
-                            // RACETER is not required, but check to make sure RACESEC is defined first
-                            if (RACETER.HasValue)
-                            {
-                                if (!RACESEC.HasValue)
-                                    yield return new ValidationResult("Define secondary race before defining tertiary race.", new[] { nameof(RACETER) });
-                            }
-
-                            if (!PRIMLANG.HasValue)
-                                yield return new ValidationResult("Primary language is required.", new[] { nameof(PRIMLANG) });
-
-                            if (!EDUC.HasValue)
-                                yield return new ValidationResult("Years of education is required.", new[] { nameof(EDUC) });
-
-                            if (String.IsNullOrWhiteSpace(ZIP))
-                                yield return new ValidationResult("First three characters of ZIP Code is required.", new[] { nameof(ZIP) });
-
-                            if (!HANDED.HasValue)
-                                yield return new ValidationResult("Handedness is required.", new[] { nameof(HANDED) });
-                        }
-                    }
-                }
-            }
-
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
