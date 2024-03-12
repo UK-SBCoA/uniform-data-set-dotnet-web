@@ -127,6 +127,10 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new A4GFormFields(dto);
             }
+            else if (dto is A4aDto)
+            {
+                formFields = new A4aFormFields(dto);
+            }
             else if (dto is A5D2Dto)
             {
                 formFields = new A5FormFields(dto);
@@ -185,6 +189,8 @@ namespace UDS.Net.Services.Extensions
                     title = new A3FormFields().GetDescription();
                 else if (dto.Kind == "A4")
                     title = new A4GFormFields().GetDescription();
+                else if (dto.Kind == "A4a")
+                    title = new A4aFormFields().GetDescription();
                 else if (dto.Kind == "A5D2")
                     title = new A5FormFields().GetDescription();
                 else if (dto.Kind == "B1")

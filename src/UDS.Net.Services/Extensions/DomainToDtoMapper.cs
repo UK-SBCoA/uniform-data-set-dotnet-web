@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -185,6 +186,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
+            else if (form.Fields is A4aFormFields)
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is A5FormFields)
             {
                 dto = ((A5FormFields)form.Fields).ToDto();
@@ -261,6 +266,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is A4GFormFields && formKind == "A4")
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
+            }
+            else if (form.Fields is A4aFormFields && formKind == "A4a")
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form);
             }
             else if (form.Fields is A5FormFields && formKind == "A5D2")
             {
@@ -580,6 +589,46 @@ namespace UDS.Net.Services.Extensions
                 }
             }
             return rxNormIds;
+        }
+
+
+
+        public static A4aDto ToDto(this A4aFormFields fields, int formId)
+        {
+            var dto = new A4aDto()
+            {
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK
+            };
+
+            return dto;
+        }
+
+
+        public static A4aTreatmentDto ToDto(this A4aTreatmentFormFields fields, int formId)
+        {
+            return new A4aTreatmentDto
+            {
+                FormId = formId,
+                TARGETAB = fields.TARGETAB,
+                TARGETTAU = fields.TARGETTAU,
+                TARGETINF = fields.TARGETINF,
+                TARGETSYN = fields.TARGETSYN,
+                TARGETOTH = fields.TARGETOTH,
+                TARGETOTX = fields.TARGETOTX,
+                TRTTRIAL = fields.TRTTRIAL,
+                NCTNUM = fields.NCTNUM,
+                STARTMO = fields.STARTMO,
+                STARTYEAR = fields.STARTYEAR,
+                ENDMO = fields.ENDMO,
+                ENDYEAR = fields.ENDYEAR,
+                CARETRIAL = fields.CARETRIAL,
+                TRIALGRP = fields.TRIALGRP
+            };
         }
 
         public static A5D2Dto ToDto(this A5FormFields fields)
