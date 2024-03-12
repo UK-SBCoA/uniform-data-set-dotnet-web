@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.UDS4;
@@ -19,6 +20,47 @@ public class A5D2Model : FormPageModel
     public A5D2Model(IVisitService visitService) : base(visitService, "A5D2")
     {
     }
+
+    public List<RadioListItem> NoToUnknownItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("No", "0"),
+        new RadioListItem("Yes", "1"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public Dictionary<string, UIBehavior> TOBAC100UIBehavior = new Dictionary<string, UIBehavior>
+    {
+        // { "0", new UIBehavior{
+        // PropertyAttributes = new List<UIPropertyAttributes>
+        // {
+        //     new UIDisableAttribute("A5.SMOKYRS"),
+        //     new UIDisableAttribute("A5.PACKSPER"),
+        //     new UIDisableAttribute("A5.QUITSMOK"),
+        // },
+        // InstructionalMessage = "skip to question 1F"
+
+        // } },
+    };
+
+    public List<RadioListItem> SmokingFrequencyListItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("1 cigarette to less than 1/2 pack", "1"),
+        new RadioListItem("1/2 pack to less than 1 pack", "2"),
+        new RadioListItem("1 pack to less than 1 1/2 packs", "3"),
+        new RadioListItem("1 1/2 packs to less than 2 packs", "4"),
+        new RadioListItem("2 packs or more", "5"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> ALCBINGEItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Never", "0"),
+        new RadioListItem("Monthly or less", "1"),
+        new RadioListItem("2-4 times a month", "2"),
+        new RadioListItem("2-3 times a week", "3"),
+        new RadioListItem("4 or more times a week", "4"),
+        new RadioListItem("Unknown", "9")
+    };
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {

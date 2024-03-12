@@ -5,4 +5,113 @@
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
-<div>test view</div>
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician or ADRC staff based on the medical history interview with the participant
+        and co-participant, as well as review of any medical records that are available. Any new conditions identified during the visit should
+        be included on the form. For additional clarification and examples, see UDS Coding Guidebook for Form A5/D2. Check only one box per question,
+        unless otherwise stated.
+    </p>
+</div>
+<div class="counterreset">
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        @* section 1 *@
+        <div>
+            <span class="counter invisible"></span>
+            <span class="subcounterreset invisible"></span>
+            <div class="text-3xl my-10">Section 1 - Cigarette smoking, alcohol, and substance use</div>
+            <div>
+                <div>
+                    <div class="text-2xl text-indigo-300">
+                        Cigarette smoking
+                    </div>
+                    <div>
+                        <div class="@rowCSS">
+                            <label asp-for="@Model.A5D2.TOBAC100"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.TOBAC100)<br><b>(IF NO OR UNKNOWN, SKIP TO QUESTION 1f)</b></label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.TOBAC100"></p>
+                                <radio-button-group class="&>div" id="@Html.IdFor(m => m.A5D2.TOBAC100)" for="@Model.A5D2.TOBAC100" items="Model.NoToUnknownItems" ui-behaviors="Model.TOBAC100UIBehavior"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.TOBAC100"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS) <b>(99 = Unknown)</b></label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SMOKYRS"></p>
+                                <input asp-for="@Model.A5D2.SMOKYRS" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SMOKYRS"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.PACKSPER"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PACKSPER)</label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PACKSPER"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.PACKSPER)" for="@Model.A5D2.PACKSPER" items="Model.SmokingFrequencyListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PACKSPER"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.TOBAC30"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.TOBAC30)</label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.TOBAC30"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.TOBAC30)" for="@Model.A5D2.TOBAC30" items="Model.NoToUnknownItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.TOBAC30"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.QUITSMOK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)</label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.QUITSMOK"></p>
+                                <input asp-for="@Model.A5D2.QUITSMOK" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.QUITSMOK"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-2xl text-indigo-300">
+                        Alcohol use
+                    </div>
+                    <div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.ALCBINGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCBINGE)</label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ALCBINGE"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.ALCBINGE)" for="@Model.A5D2.ALCBINGE" items="Model.ALCBINGEItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ALCBINGE"></span>
+                            </div>
+                        </div>
+                        <div>
+                            2
+                        </div>
+                        <div>
+                            3
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-2xl text-indigo-300">
+                        Cigarette smoking
+                    </div>
+                    <div>
+                        <div>
+                            1
+                        </div>
+                        <div>
+                            2
+                        </div>
+                        <div>
+                            3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* <div>
+            <div class="text-2xl">Section 2</div>
+        </div>
+        <div>
+            <div class="text-2xl">section 3</div>
+        </div> *@
+    </div>
+</div>
