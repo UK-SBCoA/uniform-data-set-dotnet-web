@@ -16,6 +16,9 @@ namespace UDS.Net.Forms.Pages.UDS4
 {
 	public class A4aModel : FormPageModel
     {
+        [BindProperty]
+        public A4a A4a { get; set; } = default!;
+
         public A4aModel(IVisitService visitService) : base(visitService, "A4a")
         {
         }
