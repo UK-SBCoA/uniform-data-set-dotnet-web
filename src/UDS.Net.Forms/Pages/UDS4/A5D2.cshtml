@@ -1,5 +1,6 @@
 @* TODO:
 - Subcounter for 1j1 and 1j2 are hardcoded for now, create a new class for this situation
+- radio options in the section 2 table aren't centered in the cell
 *@
 
 @page  "{id:int?}"
@@ -143,8 +144,148 @@
             </div>
         </div>
         <div>
-            <div class="text-2xl">Section 2</div>
-
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+                <div>
+                    <p>
+                        <span class="font-bold">In the following sections <span class="italic">(pages 2-7)</span></span> record the presence or absence of a <span class="underline font-bold">history of these conditions</span>
+                        , as determined by the clinician's best judgment following the medical history interview with the participant and co-participant.</br>
+                        <span class="italic">A CONDITION SHOULD BE CONSIDERED...</span>
+                    </p>
+                </div>
+                <div>
+                    <table class="border table-fixed min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr class="divide-x divide-gray-200 dark:divide-gray-700">
+                                <th class="col">Absent:</th>
+                                <th class="col">Recent/Active:</th>
+                                <th class="col">Remote/Inactive:</th>
+                                <th class="col">Unknown (UNK)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="divide-x divide-gray-200 dark:divide-gray-700">
+                                <td>
+                                    <div class="p-4">
+                                        It has never been present
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="p-4">
+                                        It happened within the last year or still requires active management
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="p-4">
+                                        It existed or occured in the past <span class="italic">(more than one year ago)</span>but was resolved or there is no treatment currently under 
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="p-4">
+                                        There is insufficient information available to assess this 
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-3xl my-10">Section 2 - Cardiovascular disease</div>
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
+                <table class="table-fixed border divide-y">
+                    <thead class="bg-gray-50 dark:bg-gray-500">
+                        <tr class="divide-x">
+                            <th colspan="4"></th>
+                            <th class="col">ABSENT</th>
+                            <th class="col">RECENT/ACTIVE</th>
+                            <th class="col">REMOTE/INACTIVE</th>
+                            <th class="col">UNKNOWN</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y subcounterreset">
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.HRTATTACK"><span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTACK)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2b)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HRTATTACK)" for="@Model.A5D2.HRTATTACK" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.HRTATTMULT">2a1. @Html.DisplayNameFor(m => m.A5D2.HRTATTMULT)</label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HRTATTMULT)" for="@Model.A5D2.HRTATTMULT" items="Model.NoToUnknownItems"></table-cell-radio-buttons>
+                        </tr>
+                        <!-- string input example -->
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.HRTATTAGE">2a2. @Html.DisplayNameFor(m => m.A5D2.HRTATTAGE)</label></td>
+                            <td colspan="4">
+                                <input asp-for="A5D2.HRTATTAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTATTAGE"></span>
+                            </td>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CARDARREST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CARDARREST)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2c)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CARDARREST)" for="@Model.A5D2.CARDARREST" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.CARDARRAGE">2b1. @Html.DisplayNameFor(m => m.A5D2.CARDARRAGE) <span class="font-bold">(999 = Unknown)</span></label></td>
+                            <td colspan="4">
+                                <input asp-for="A5D2.CARDARRAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CARDARRAGE"></span>
+                            </td>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVAFIB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVAFIB)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2c)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVAFIB)" for="@Model.A5D2.CVAFIB" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVANGIO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVANGIO)</label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVANGIO)" for="@Model.A5D2.CVANGIO" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVBYPASS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVBYPASS)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2f)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVBYPASS)" for="@Model.A5D2.CVBYPASS" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.BYPASSAGE">2e1. @Html.DisplayNameFor(m => m.A5D2.BYPASSAGE)</label></td>
+                            <td colspan="4">
+                                <input asp-for="A5D2.BYPASSAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.BYPASSAGE"></span>
+                            </td>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVPACDEF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVPACDEF)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2g)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVPACDEF)" for="@Model.A5D2.CVPACDEF" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.PACDEFAGE">2f1. @Html.DisplayNameFor(m => m.A5D2.PACDEFAGE)</label></td>
+                            <td colspan="4">
+                                <input asp-for="A5D2.PACDEFAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PACDEFAGE"></span>
+                            </td>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVCHF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVCHF)</label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVCHF)" for="@Model.A5D2.CVCHF" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4"><label asp-for="A5D2.CVHVALVE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVHVALVE)</br><span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2i)</span></label></td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVHVALVE)" for="@Model.A5D2.CVHVALVE" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="pl-20"><label asp-for="A5D2.VALVEAGE">@Html.DisplayNameFor(m => m.A5D2.VALVEAGE) <span class="font-bold">(999 = Unknown)</span></label></td>
+                            <td colspan="4">
+                                <input asp-for="A5D2.VALVEAGE" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.VALVEAGE"></span>
+                            </td>
+                        </tr>
+                        <tr class="divide-x">
+                            <td colspan="4" class="p-4">
+                                <label asp-for="A5D2.CVOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVOTHR)</br><span class="font-bold">(SPECIFY)</span></label>
+                                <input asp-for="A5D2.CVOTHRX" />
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVOTHR"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVOTHRX"></span>
+                            </td>
+                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVOTHR)" for="@Model.A5D2.CVOTHR" items="Model.ZeroToTwoOrNineItems"></table-cell-radio-buttons>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

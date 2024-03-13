@@ -92,6 +92,14 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
+    public List<RadioListItem> ZeroToTwoOrNineItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("0", "0"),
+        new RadioListItem("1", "1"),
+        new RadioListItem("2", "2"),
+        new RadioListItem("9", "9")
+    };
+
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         await base.OnGetAsync(id);
