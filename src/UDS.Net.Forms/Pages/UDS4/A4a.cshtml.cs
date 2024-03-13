@@ -19,6 +19,14 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A4a A4a { get; set; } = default!;
 
+        public List<RadioListItem> TRTBIOMARKListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown", "9")
+        };
+
+
         public A4aModel(IVisitService visitService) : base(visitService, "A4a")
         {
         }
