@@ -11,6 +11,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -42,7 +43,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 
-            if (A3 != null)
+            if (A3 != null && A3.Status == FormStatus.Complete)
             {
                 if (A3.Siblings != null)
                 {
@@ -141,8 +142,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                     }
                 }
                 return await base.OnPostAsync(id); // checks for validation, etc.
+
             }
-            return RedirectToPage();
+            return await base.OnPostAsync(id);
         }
     }
 }
