@@ -7,73 +7,53 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        Test
+        INSTRUCTIONS: This form should be used to record treatments known to significantly impact Alzheimer disease and related dementias (ADRD) biomarkers, whether received as part of clinical care or a clinical trial. If the participant is receiving one of these treatments as part of their clinical care at the time of clinical assessment (e.g., they are receiving aducanumab infusions), the treatment should be included on both this form and the A4 Medication form. Participation in any ADRD drug trial over an individual's lifetime should be included. If available, the ClinicalTrials.gov identifier should be entered into the "specific treatment and/or trial" cell. Information on the type of treatment can be found via ClinicalTrials.gov and is summarized in "Alzheimer's disease drug development pipeline." 1 This form should be completed based on participant interview and/or co-participant report. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook> for <strong>Form A4a</strong>. Check only <span class="underline">one</span> box per question, unless otherwise stated
     </p>
 </div>
 
+<div class="@rowCSS">
+    <label asp-for="A4a.TRTBIOMARK"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4a.TRTBIOMARK)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.TRTBIOMARK"></p>
+        <radio-button-group id="@Html.IdFor(m => m.A4a.TRTBIOMARK)" for="@Model.A4a.TRTBIOMARK" items="Model.TRTBIOMARKListItems"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.TRTBIOMARK"></span>
+    </div>
+</div>
 
 <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-gray-200">
+        <span class="counter text-base font-semibold text-gray-900">
+            Please provide information about the clinical treatment(s) and/or trial(s)
+        </span>
+        <p class="text-gray-400"><i>(If participant is exposed to more than two treatments and/or trials, use extended table on Page 2):</i></p>
         <thead class="bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Primary Drug Target (check all that apply)
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    Primary Drug Target <i class="text-gray-400">(check all that apply)</i>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     Specific treatment and/or trial
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Start date (month/year)
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    Start date <i class="text-gray-400">(month/year)</i>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    End date (month/year)
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    End date (month/year)<i class="text-gray-400">(check all that apply)</i>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     How was the treatment provided?
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     If clinical trial, in which group was the participant?
                 </th>
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-            <tr>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                        <input  type="checkbox" value="Amyloid beta" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                        <label class="ml-3 block text-sm font-medium text-gray-700">
-                            Amyloid beta
-                        </label>
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <input  type="text" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <input type="text" placeholder="__/____" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <input  type="text" placeholder="__/____" class="mt-1 block w-full bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                        <input  type="radio" value="Clinical care" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                        <label class="ml-3 block text-sm font-medium text-gray-700">
-                            Clinical care
-                        </label>
-                    </div>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                        <input  type="radio" value="Active treatment" class="h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                        <label class="ml-3 block text-sm font-medium text-gray-700">
-                            Active treatment
-                        </label>
-                    </div>
-                </td>
-            </tr>
+
+                @Html.EditorFor(m => m.A4a.Treatment1)
+
         </tbody>
     </table>
 </div>
 
-  @*<partial name="_FormFooter" for="@Model.A4a" />*@
+<partial name="_FormFooter" for="@Model.A4a" />
