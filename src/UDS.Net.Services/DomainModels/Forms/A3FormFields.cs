@@ -108,7 +108,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a3Dto = ((A3Dto)dto);
                 this.AFFFAMM = a3Dto.AFFFAMM;
-                this.NWINFMUT = a3Dto.AFFFAMM;
+                this.NWINFMUT = a3Dto.NWINFMUT;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
                 this.MOMETPR = a3Dto.MOMETPR;
