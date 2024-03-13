@@ -11,6 +11,10 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class A4a : FormModel
     {
+
+        [Display(Name = "Has the participant ever been prescribed or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
+        public int? TRTBIOMARK { get; set; }
+
         public int? ADVEVENT { get; set; }
 
         public bool? ARIAE { get; set; }
@@ -22,8 +26,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [ProhibitedCharacters]
         public string? ADVERSEOTX { get; set; }
-
-        public int? TRTBIOMARK { get; set; }
 
         public List<A4aTreatment> Treatment1 { get; set; } = new List<A4aTreatment>();
 
