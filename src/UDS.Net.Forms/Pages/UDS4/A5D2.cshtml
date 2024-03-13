@@ -1,3 +1,7 @@
+@* TODO:
+- Subcounter for 1j1 and 1j2 are hardcoded for now, create a new class for this situation
+*@
+
 @page  "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A5D2Model
 @{
@@ -27,7 +31,7 @@
                     </div>
                     <div>
                         <div class="@rowCSS">
-                            <label asp-for="@Model.A5D2.TOBAC100"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.TOBAC100)<br><b>(IF NO OR UNKNOWN, SKIP TO QUESTION 1f)</b></label>
+                            <label asp-for="@Model.A5D2.TOBAC100"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.TOBAC100)<br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 1f)</span></label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.TOBAC100"></p>
                                 <radio-button-group class="&>div" id="@Html.IdFor(m => m.A5D2.TOBAC100)" for="@Model.A5D2.TOBAC100" items="Model.NoToUnknownItems" ui-behaviors="Model.TOBAC100UIBehavior"></radio-button-group>
@@ -35,7 +39,7 @@
                             </div>
                         </div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS) <b>(99 = Unknown)</b></label>
+                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS) <span class="font-bold">(99 = Unknown)</span></label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SMOKYRS"></p>
                                 <input asp-for="@Model.A5D2.SMOKYRS" />
@@ -74,6 +78,22 @@
                     </div>
                     <div>
                         <div class="@rowCSS">
+                            <label asp-for="A5D2.ALCFREQYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCFREQYR)</br><span class="font-bold">(IF NEVER OR UNKNOWN, SKIP TO QUESTION 11)</span></label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ALCFREQYR"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.ALCFREQYR)" for="@Model.A5D2.ALCFREQYR" items="Model.ALCFREQYRItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ALCFREQYR"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.ALCDRINKS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCDRINKS)</br><span class="italic"><span class="font-bold">(Standard drink:</span> 12oz of regular beer, 5oz of wine, 1.5oz of distilled spirits)</span></label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ALCDRINKS"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.ALCDRINKS)" for="@Model.A5D2.ALCDRINKS" items="Model.ALCDRINKSItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ALCDRINKS"></span>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
                             <label asp-for="A5D2.ALCBINGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCBINGE)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ALCBINGE"></p>
@@ -81,37 +101,50 @@
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ALCBINGE"></span>
                             </div>
                         </div>
-                        <div>
-                            2
-                        </div>
-                        <div>
-                            3
-                        </div>
                     </div>
                 </div>
                 <div>
                     <div class="text-2xl text-indigo-300">
-                        Cigarette smoking
+                        Substance abuse
                     </div>
                     <div>
-                        <div>
-                            1
+                        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+                            <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span>Has the participant used substances including prescription or recreational drugs that caused significant impairment in one or more of the following
+                            areas: work, driving, legal, social, or others.</label>
                         </div>
-                        <div>
-                            2
+                        <div class="pl-5">
+                            <div class="@rowCSS">
+                                <label asp-for="@Model.A5D2.SUBSTYEAR"><span>1i1.</span> @Html.DisplayNameFor(m => m.A5D2.SUBSTYEAR)</label>
+                                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                    <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SUBSTYEAR"></p>
+                                    <radio-button-group class="&>div" id="@Html.IdFor(m => m.A5D2.SUBSTYEAR)" for="@Model.A5D2.SUBSTYEAR" items="Model.NoToUnknownItems"></radio-button-group>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SUBSTYEAR"></span>
+                                </div>
+                            </div>
+                            <div class="@rowCSS">
+                                <label asp-for="@Model.A5D2.SUBSTPAST"><span>1i2.</span> @Html.DisplayNameFor(m => m.A5D2.SUBSTPAST)</label>
+                                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                    <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SUBSTPAST"></p>
+                                    <radio-button-group class="&>div" id="@Html.IdFor(m => m.A5D2.SUBSTPAST)" for="@Model.A5D2.SUBSTPAST" items="Model.NoToUnknownItems"></radio-button-group>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SUBSTPAST"></span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            3
+                        <div class="@rowCSS">
+                            <label asp-for="A5D2.CANNABIS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANNABIS)</br><span class="italic">(edibles, smoked, or vaporized)</span></label>
+                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CANNABIS"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.CANNABIS)" for="@Model.A5D2.CANNABIS" items="Model.CANNABISItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANNABIS"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        @* <div>
-            <div class="text-2xl">Section 2</div>
-        </div>
         <div>
-            <div class="text-2xl">section 3</div>
-        </div> *@
+            <div class="text-2xl">Section 2</div>
+
+        </div>
     </div>
 </div>

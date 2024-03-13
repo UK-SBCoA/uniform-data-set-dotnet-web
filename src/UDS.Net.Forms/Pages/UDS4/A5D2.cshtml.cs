@@ -52,7 +52,37 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
+    public List<RadioListItem> ALCFREQYRItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Never", "0"),
+        new RadioListItem("Monthly or less", "1"),
+        new RadioListItem("2-4 times a month", "2"),
+        new RadioListItem("2-3 times a week", "3"),
+        new RadioListItem("4 or more times a week", "4"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> ALCDRINKSItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("1 or 2", "1"),
+        new RadioListItem("3 to 4", "2"),
+        new RadioListItem("5 to 6", "3"),
+        new RadioListItem("7 to 9", "4"),
+        new RadioListItem("10 or more", "5"),
+        new RadioListItem("Unknown", "9")
+    };
+
     public List<RadioListItem> ALCBINGEItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Never", "0"),
+        new RadioListItem("Less than once a month", "1"),
+        new RadioListItem("Monthly", "2"),
+        new RadioListItem("Weekly", "3"),
+        new RadioListItem("Daily or almost daily", "4"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> CANNABISItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("Never", "0"),
         new RadioListItem("Monthly or less", "1"),
