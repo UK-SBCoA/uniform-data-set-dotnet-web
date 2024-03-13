@@ -276,7 +276,9 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
+                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
+                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
