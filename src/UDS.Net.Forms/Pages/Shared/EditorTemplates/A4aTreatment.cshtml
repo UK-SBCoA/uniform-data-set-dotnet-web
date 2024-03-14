@@ -1,0 +1,56 @@
+﻿@model UDS.Net.Forms.Models.UDS4.A4aTreatment 
+<td class="px-6 py-3 border-r border-gray-300">
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="flex h-6 items-center">
+            @Html.CheckBox("A4aTreatment.TARGETAB", Model.TARGETAB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="TARGETAB" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETAB)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="flex h-6 items-center">
+            @Html.CheckBox("A4aTreatment.TARGETTAU", Model.TARGETTAU, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="TARGETTAU" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETTAU)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="flex h-6 items-center">
+            @Html.CheckBox("A4aTreatment.TARGETINF", Model.TARGETINF, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="TARGETINF" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETINF)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="flex h-6 items-center">
+            @Html.CheckBox("A4aTreatment.TARGETSYN", Model.TARGETSYN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="TARGETSYN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETSYN)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="flex h-6 items-center">
+            @Html.CheckBox("A4aTreatment.TARGETOTH", Model.TARGETOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETOTH)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+        <div class="mt-2">
+            <input asp-for="TARGETOTX" />
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="TARGETOTX"></span>
+        </div>
+    </div>
+</td>
+
