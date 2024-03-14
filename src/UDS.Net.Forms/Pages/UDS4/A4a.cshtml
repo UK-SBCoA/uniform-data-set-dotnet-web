@@ -25,11 +25,12 @@
         <span class="counter text-base font-semibold text-gray-900">
             Please provide information about the clinical treatment(s) and/or trial(s)
         </span>
-        <p class="text-gray-400"><i>(If participant is exposed to more than two treatments and/or trials, use extended table on Page 2):</i></p>
+        <p class="text-gray-400"><i>(If participant is exposed to more than two treatments and/or trials, use extended table):</i></p>
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    Primary Drug Target <i class="text-gray-400">(check all that apply)</i>
+                    <p>Primary Drug Target </p>
+                    <p><i class="text-gray-400">(check all that apply)</i></p>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     Specific treatment and/or trial
@@ -38,7 +39,7 @@
                     Start date <i class="text-gray-400">(month/year)</i>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    End date (month/year)<i class="text-gray-400">(check all that apply)</i>
+                    End date <i class="text-gray-400">(month/year)</i>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     How was the treatment provided?
@@ -49,9 +50,136 @@
             </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
+            @*@for (var i = 0; i < Model.A4a.Treatment1.Count(); i++)
+        {
+            @Html.EditorFor(m => m.A4a.Treatment1[i])
+        }*@
 
-                @Html.EditorFor(m => m.A4a.Treatment1)
+            <tr class="border-b border-gray-100">
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                </td>
 
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                    <input class="mr-3 block font-medium leading-6 text-gray-900" type="text" />
+                </td>
+
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" placeholder="MM" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" placeholder="YYYY" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" placeholder="MM" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start">
+                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="mt-2">
+                            <input asp-for="A4a.ADVERSEOTH" placeholder="YYYY" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.ADVERSEOTH"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A4a.ADVERSEOTH)" for="@Model.A4a.ADVERSEOTH" items="Model.CARETRIALListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                    </div>
+                </td>
+
+                <td class="px-6 py-3 border-r border-gray-300">
+                    <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.ADVERSEOTH"></p>
+                        <radio-button-group id="@Html.IdFor(m => m.A4a.ADVERSEOTH)" for="@Model.A4a.ADVERSEOTH" items="Model.TRIALGRPistItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                    </div>
+                </td>
+
+            </tr>
         </tbody>
     </table>
 </div>
