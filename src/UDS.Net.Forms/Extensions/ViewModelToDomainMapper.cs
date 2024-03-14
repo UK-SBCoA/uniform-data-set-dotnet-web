@@ -81,6 +81,8 @@ namespace UDS.Net.Forms.Extensions
         {
             if (vm is A1)
                 return ((A1)vm).ToEntity();
+            else if (vm is A1a)
+                return ((A1a)vm).ToEntity();
             else if (vm is A2)
                 return ((A2)vm).ToEntity();
             else if (vm is A3)
@@ -232,6 +234,76 @@ namespace UDS.Net.Forms.Extensions
                 REFOTHREGX = vm.REFOTHREGX,
                 REFOTHX = vm.REFOTHX
 
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static Form ToEntity(this A1a vm)
+        {
+            var fields = new A1aFormFields
+            {
+                OWNSCAR = vm.OWNSCAR,
+                TRSPACCESS = vm.TRSPACCESS,
+                TRANSPROB = vm.TRANSPROB,
+                TRANSWORRY = vm.TRANSWORRY,
+                TRSPLONGER = vm.TRSPLONGER,
+                TRSPMED = vm.TRSPMED,
+                INCOMEYR = vm.INCOMEYR,
+                FINSATIS = vm.FINSATIS,
+                BILLPAY = vm.BILLPAY,
+                FINUPSET = vm.FINUPSET,
+                EATLESS = vm.EATLESS,
+                EATLESSYR = vm.EATLESSYR,
+                LESSMEDS = vm.LESSMEDS,
+                LESSMEDSYR = vm.LESSMEDSYR,
+                COMPCOMM = vm.COMPCOMM,
+                COMPUSA = vm.COMPUSA,
+                FAMCOMP = vm.FAMCOMP,
+                GUARDEDU = vm.GUARDEDU,
+                GUARDREL = vm.GUARDREL,
+                GUARDRELX = vm.GUARDRELX,
+                GUARD2EDU = vm.GUARD2EDU,
+                GUARD2REL = vm.GUARD2REL,
+                GUARD2RELX = vm.GUARD2RELX,
+                EMPTINESS = vm.EMPTINESS,
+                MISSPEOPLE = vm.MISSPEOPLE,
+                FRIENDS = vm.FRIENDS,
+                ABANDONED = vm.ABANDONED,
+                CLOSEFRND = vm.CLOSEFRND,
+                PARENTCOMM = vm.PARENTCOMM,
+                CHILDCOMM = vm.CHILDCOMM,
+                FRIENDCOMM = vm.FRIENDCOMM,
+                PARTICIPATE = vm.PARTICIPATE,
+                SAFEHOME = vm.SAFEHOME,
+                SAFECOMM = vm.SAFECOMM,
+                DELAYMED = vm.DELAYMED,
+                SCRIPTPROB = vm.SCRIPTPROB,
+                MISSEDFUP = vm.MISSEDFUP,
+                DOCADVICE = vm.DOCADVICE,
+                HEALTHACC = vm.HEALTHACC,
+                LESSCOURT = vm.LESSCOURT,
+                POORSERV = vm.POORSERV,
+                NOTSMART = vm.NOTSMART,
+                ACTAFRAID = vm.ACTAFRAID,
+                THREATENED = vm.THREATENED,
+                POORMEDTRT = vm.POORMEDTRT,
+                EXPANCEST = vm.EXPANCEST,
+                EXPGENDER = vm.EXPGENDER,
+                EXPRACE = vm.EXPRACE,
+                EXPAGE = vm.EXPAGE,
+                EXPRELIG = vm.EXPRELIG,
+                EXPHEIGHT = vm.EXPHEIGHT,
+                EXPWEIGHT = vm.EXPWEIGHT,
+                EXPAPPEAR = vm.EXPAPPEAR,
+                EXPSEXORN = vm.EXPSEXORN,
+                EXPEDUCINC = vm.EXPEDUCINC,
+                EXPDISAB = vm.EXPDISAB,
+                EXPSKIN = vm.EXPSKIN,
+                EXPOTHER = vm.EXPOTHER,
+                EXPNOTAPP = vm.EXPNOTAPP,
+                EXPNOANS = vm.EXPNOANS,
+                EXPSTRS = vm.EXPSTRS
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
