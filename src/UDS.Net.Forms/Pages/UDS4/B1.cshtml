@@ -148,33 +148,19 @@
         <br />
 
         <div>
-            <span class="subcounter">
-                <strong>
-                    <u>
-                        Participant blood pressure - Left arm:
-                    </u>
-                </strong>
-            </span>
-        </div>
-        <div class="subsubsubcounterreset">
-            <div class="subsubcounterreset">
-                <div class="subcounterreset">
-                    <span class="subcounter invisible"></span>
-                    <span class="subsubcounter invisible"></span>
+            <div class="subcounter text-base font-semibold text-gray-900">
+                Participant blood pressure - Left arm:
+                <div>
                     <div class="@rowCSS">
-                        <label asp-for="B1.BPSYSL1"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
+                        <label asp-for="B1.BPSYSL1"> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
                         <div class="flex mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL1"></p>
                             <input asp-for="@Model.B1.BPSYSL1" type="number" />
-                            <div class="ml-3">
-                                <p class="text-base font-semibold">(888/888 = not assessed)</p>
+                            <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSL1"></span>
+                                <span class="text-3xl" style="margin-right: 0 5px;">/</span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="@rowCSS">
-                        <label asp-for="B1.BPDIASL1"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.B1.BPDIASL1)</label>
-                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPDIASL1"></p>
                             <input asp-for="@Model.B1.BPDIASL1" type="number" />
                             <div class="ml-3">
@@ -183,25 +169,185 @@
                             </div>
                         </div>
                     </div>
+                    <div class="@rowCSS">
+                        <label asp-for="B1.BPSYSL2"> @Html.DisplayNameFor(m => m.B1.BPSYSL2)</label>
+                        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL2"></p>
+                            <input asp-for="@Model.B1.BPSYSL2" type="number" />
+                            <div>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSL2"></span>
+                                <span class="text-3xl" style="margin-right: 0 5px;">/</span>
+                            </div>
+
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPDIASL2"></p>
+                            <input asp-for="@Model.B1.BPDIASL2" type="number" />
+                            <div class="ml-3">
+                                <p class="text-base font-semibold">(888/888 = not assessed)</p>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASL2"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subcounter text-base font-semibold text-gray-900">
+
+                        Participant blood pressure - Right arm:
+
+                    </div>
 
                 </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div class="@rowCSS">
+                            <label asp-for="B1.BPSYSR1"> @Html.DisplayNameFor(m => m.B1.BPSYSR1)</label>
+                            <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR1"></p>
+                                <input asp-for="@Model.B1.BPSYSR1" type="number" />
+                                <div>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSR1"></span>
+                                    <span class="text-3xl" style="margin-right: 0 5px;">/</span>
+                                </div>
 
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPDIASR1"></p>
+                                <input asp-for="@Model.B1.BPDIASR1" type="number" />
+                                <div class="ml-3">
+                                    <p class="text-base font-semibold">(888/888 = not assessed)</p>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASR1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="@rowCSS">
+                            <label asp-for="B1.BPSYSR2"> @Html.DisplayNameFor(m => m.B1.BPSYSR2)</label>
+                            <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR2"></p>
+                                <input asp-for="@Model.B1.BPSYSR2" type="number" />
+                                <div>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSR2"></span>
+                                    <span class="text-3xl" style="margin-right: 0 5px;">/</span>
+                                </div>
+
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPDIASR2"></p>
+                                <input asp-for="@Model.B1.BPDIASR2" type="number" />
+                                <div class="ml-3">
+                                    <p class="text-base font-semibold">(888/888 = not assessed)</p>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASR2"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="B1.HRATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HRATE)</label>
+        <div class="flex mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HRATE"></p>
+            <input asp-for="@Model.B1.HRATE" type="number" />
+            <div class="ml-3">
+                <p class="text-base font-semibold">(888 = not assessed)</p>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HRATE"></span>
             </div>
         </div>
     </div>
 </div>
-<div class="@rowCSS">
-    <label asp-for="B1.HRATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HRATE)</label>
-    <div class="flex mt-4 sm:col-span-2 sm:mt-0">
-        <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HRATE"></p>
-        <input asp-for="@Model.B1.HRATE" type="number" />
-        <div class="ml-3">
-            <p class="text-base font-semibold">(888 = not assessed)</p>
-            <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HRATE"></span>
+<ul role="list" class="divide-y divide-white/5 pb-2">
+    <li class="font-bold">STEP 1 - Properly prepare the participant:</li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>The participant should avoid caffeine, exercise, and smoking for at least 30 minutes before measurement.</p>
         </div>
-    </div>
-</div>
-@* <div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Ensure that participant has emptied his/her bladder.</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Neither the participant nor the observer should talk during the rest period or during the measurement.</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Remove all clothing covering the location of cuff placement.</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Measurements made while the participant is sitting or lying on an examining table do not fulfill these criteria.</p>
+        </div>
+    </li>
+</ul>
+
+<ul role="list" class="divide-y divide-white/5 pt-2 pb-2">
+    <li class="font-bold">STEP 2 - Use proper technique for BP measurements</li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Use a BP measurement device that has been validated and ensure that the device is calibrated periodically</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Support the participant's arm (e.g., have it resting on a desk ).</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Position the middle of the cuff on the participant's upper arm at the level of the right atrium (midpoint of the sternum)</p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>
+                Use the correct cuff size, such that the bladder encircles 80% of the arm, and note if a larger- or smaller-than-normal cuff size is
+                used.
+            </p>
+        </div>
+    </li>
+    <li class="relative flex items-center space-x-2 py-2">
+        <div class="min-w-0 flex-auto flex items-center gap-x-1">
+            <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                <div class="h-2 w-2 rounded-full bg-current"></div>
+            </div>
+            <p>Either the stethoscope diaphragm or bell may be used for auscultatory readings.</p>
+        </div>
+    </li>
+</ul>
+
+
+
+    @* <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
     @if (Model.Visit != null)
