@@ -4,13 +4,13 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<PackageId>UDS.Net.Services</PackageId>
-		<Version>2.0.5</Version>
+		<Version>2.0.7</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>Service contracts for implmenting your own back-end with MVC web app</Description>
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Service contracts required by MVC web app</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>2.0.5</ReleaseVersion>
+		<ReleaseVersion>2.0.7</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="UDS.Net.Dto" Version="2.0.1" />
