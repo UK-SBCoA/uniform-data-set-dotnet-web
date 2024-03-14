@@ -19,6 +19,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A4a A4a { get; set; } = default!;
 
+        public A4aTreatment A4ATreatment { get; set; }
+
         public List<RadioListItem> TRTBIOMARKListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
@@ -26,7 +28,28 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "9")
         };
 
+        public List<RadioListItem> CARETRIALListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Clinical care", "1"),
+            new RadioListItem("Clinical trial", "2"),
+            new RadioListItem("Clinical care and clinical trial", "3")
+        };
 
+        public List<RadioListItem> TRIALGRPistItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Active treatment", "1"),
+            new RadioListItem("Placebo", "2"),
+            new RadioListItem("Unknown", "9")
+        };
+
+        public List<RadioListItem> ADVEVENTListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (end form here)", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown", "9")
+        };
+
+        
         public A4aModel(IVisitService visitService) : base(visitService, "A4a")
         {
         }
