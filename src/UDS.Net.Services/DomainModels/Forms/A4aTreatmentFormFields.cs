@@ -20,4 +20,3 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? TRIALGRP { get; set; }
 	}
 }
-
