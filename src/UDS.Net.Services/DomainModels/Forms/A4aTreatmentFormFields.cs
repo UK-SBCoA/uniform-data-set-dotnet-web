@@ -1,8 +1,9 @@
 ﻿using System;
+
 namespace UDS.Net.Services.DomainModels.Forms
 {
-	public class A4aTreatmentFormFields
-	{
+    public class A4aTreatmentFormFields
+    {
         public int TreatmentIndex { get; set; }
         public bool? TARGETAB { get; set; }
         public bool? TARGETTAU { get; set; }
@@ -18,5 +19,5 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ENDYEAR { get; set; }
         public int? CARETRIAL { get; set; }
         public int? TRIALGRP { get; set; }
-	}
+    }
 }
