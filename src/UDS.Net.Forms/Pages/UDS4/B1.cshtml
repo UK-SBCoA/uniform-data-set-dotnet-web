@@ -47,11 +47,11 @@
 
     <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3"><b>Instructions for measuring waist and hip circumference in adults</b> </h3>
 
-    <div class="container">
+    <div class="grid grid-cols-2 gap-4 items-center">
         <div>
             <img src="~/_content/UDS.Net.Forms/B1waist_circumference.png" />
         </div>
-        <div class="text">
+        <div class="text-left">
             <b>Waist circumference</b> should be measured at the midpoint between the
             lower margin of the last palpable rib and the top of the iliac crest, using
             a stretch resistant tape. <b>Hip circumference</b> should be measured around
@@ -152,8 +152,10 @@
         <br />
 
         <div>
-            <div class="subcounter text-base font-semibold text-gray-900">
-                Participant blood pressure - Left arm:
+            <div class="subcounter">
+                <span class="text-base font-semibold text-gray-900">
+                    Participant blood pressure - Left arm:
+                </span>
                 <div>
                     <div class="@rowCSS">
                         <label asp-for="B1.BPSYSL1"> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>

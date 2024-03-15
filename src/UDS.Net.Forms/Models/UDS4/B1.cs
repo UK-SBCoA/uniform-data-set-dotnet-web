@@ -41,42 +41,42 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Reading 1")]
         [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Left arm: Systolic Reading 1 Required")]
         public int? BPSYSL1 { get; set; }
 
         [Display(Name = "Reading 1")]
         [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Left arm: Diastolic Reading 1 Required")]
         public int? BPDIASL1 { get; set; }
 
         [Display(Name = "Reading 2")]
         [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Left arm: Systolic Reading 2 Required")]
         public int? BPSYSL2 { get; set; }
 
         [Display(Name = "Reading 2")]
         [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Left arm: Diastolic Reading 2 Required")]
         public int? BPDIASL2 { get; set; }
 
         [Display(Name = "Reading 1")]
         [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Right arm: Systolic Reading 1 Required")]
         public int? BPSYSR1 { get; set; }
 
         [Display(Name = "Participant blood pressure - Right arm: Diastolic Reading 1")]
         [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Right arm: Diastolic Reading 1 Required")]
         public int? BPDIASR1 { get; set; }
 
         [Display(Name = "Reading 2")]
         [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Right arm: Systolic Reading 2 Required")]
         public int? BPSYSR2 { get; set; }
 
         [Display(Name = "Reading 2")]
         [RegularExpression("^(3\\d|[4-9]\\d|1[0-3]\\d|140|888)$", ErrorMessage = "(30-140, 888 = Not assessed)")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Right arm: Diastolic Reading 2 Required")]
         public int? BPDIASR2 { get; set; }
 
         [Display(Name = "Participant resting heart rate (pulse)")]
