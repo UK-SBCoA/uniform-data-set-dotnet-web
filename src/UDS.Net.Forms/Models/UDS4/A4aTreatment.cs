@@ -12,14 +12,19 @@ namespace UDS.Net.Forms.Models.UDS4
     {
         public int TreatmentIndex { get; set; }
 
+        [Display(Name = "Amyloid beta")]
         public bool? TARGETAB { get; set; }
 
+        [Display(Name = "Tau")]
         public bool? TARGETTAU { get; set; }
 
+        [Display(Name = "Inflammation")]
         public bool? TARGETINF { get; set; }
 
+        [Display(Name = "Synaptic plasticity/neuroprotection")]
         public bool? TARGETSYN { get; set; }
 
+        [Display(Name = "Other target(s)")]
         public bool? TARGETOTH { get; set; }
 
         [MaxLength(60)]
@@ -46,6 +51,18 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public int? TRIALGRP { get; set; }
 
+        public List<RadioListItem> CARETRIALListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Clinical care", "1"),
+            new RadioListItem("Clinical trial", "2"),
+            new RadioListItem("Clinical care and clinical trial", "3")
+        };
 
+        public List<RadioListItem> TRIALGRPistItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Active treatment", "1"),
+            new RadioListItem("Placebo", "2"),
+            new RadioListItem("Unknown", "9")
+        };
     }
 }
