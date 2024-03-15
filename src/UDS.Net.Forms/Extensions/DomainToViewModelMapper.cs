@@ -563,14 +563,7 @@ namespace UDS.Net.Forms.Extensions
                 ADVERSEOTH = fields.ADVERSEOTH,
                 ADVERSEOTX = fields.ADVERSEOTX,
                 TRTBIOMARK = fields.TRTBIOMARK,
-                Treatment1 = fields.Treatment1FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment2 = fields.Treatment2FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment3 = fields.Treatment3FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment4 = fields.Treatment4FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment5 = fields.Treatment5FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment6 = fields.Treatment6FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment7 = fields.Treatment7FormFields.Select(s => s.ToVM(formId)).ToList(),
-                Treatment8 = fields.Treatment8FormFields.Select(s => s.ToVM(formId)).ToList(),
+                Treatment = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
 
             };
         }

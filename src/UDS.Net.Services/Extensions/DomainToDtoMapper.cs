@@ -192,7 +192,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (form.Fields is A4aFormFields)
             {
-                dto = ((A4aFormFields)form.Fields).ToDto(form);
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is A5FormFields)
             {
@@ -277,7 +277,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (form.Fields is A4aFormFields && formKind == "A4a")
             {
-                dto = ((A4aFormFields)form.Fields).ToDto(form);
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is A5FormFields && formKind == "A5D2")
             {
@@ -669,9 +669,9 @@ namespace UDS.Net.Services.Extensions
 
 
 
-        public static A4aDto ToDto(this A4aFormFields fields, Form form)
+        public static A4aDto ToDto(this A4aFormFields fields, int formId)
         {
-            return new A4aDto
+            var dto = new A4aDto()
             {
                 ADVEVENT = fields.ADVEVENT,
                 ARIAE = fields.ARIAE,
@@ -681,6 +681,29 @@ namespace UDS.Net.Services.Extensions
                 TRTBIOMARK = fields.TRTBIOMARK
             };
 
+            foreach (var treatment in fields.TreatmentFormFields)
+            {
+                var treatmentDto = treatment.ToDto(formId);
+                if (treatment.TreatmentIndex == 1)
+                    dto.Treatment1 = treatmentDto;
+                else if (treatment.TreatmentIndex == 2)
+                    dto.Treatment2 = treatmentDto;
+                else if (treatment.TreatmentIndex == 3)
+                    dto.Treatment3 = treatmentDto;
+                else if (treatment.TreatmentIndex == 4)
+                    dto.Treatment4 = treatmentDto;
+                else if (treatment.TreatmentIndex == 5)
+                    dto.Treatment5 = treatmentDto;
+                else if (treatment.TreatmentIndex == 6)
+                    dto.Treatment6 = treatmentDto;
+                else if (treatment.TreatmentIndex == 7)
+                    dto.Treatment7 = treatmentDto;
+                else if (treatment.TreatmentIndex == 8)
+                    dto.Treatment8 = treatmentDto;
+
+            }
+
+            return dto;
         }
 
 

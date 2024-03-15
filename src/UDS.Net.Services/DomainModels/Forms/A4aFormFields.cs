@@ -5,7 +5,7 @@ using UDS.Net.Dto;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
-	public class A4aFormFields : IFormFields
+    public class A4aFormFields : IFormFields
     {
         public int? ADVEVENT { get; set; }
         public bool? ARIAE { get; set; }
@@ -13,21 +13,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? ADVERSEOTH { get; set; }
         public string? ADVERSEOTX { get; set; }
         public int? TRTBIOMARK { get; set; }
-        public List<A4aTreatmentFormFields> Treatment1FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment2FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment3FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment4FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment5FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment6FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment7FormFields { get; set; } = new List<A4aTreatmentFormFields>();
-
-        public List<A4aTreatmentFormFields> Treatment8FormFields { get; set; } = new List<A4aTreatmentFormFields>();
+        public List<A4aTreatmentFormFields> TreatmentFormFields { get; set; } = new List<A4aTreatmentFormFields>();
 
         private A4aTreatmentFormFields GetTreatmentFormFields(int index, string propertyPrefix, A4aDto dto)
         {
@@ -67,10 +53,14 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public A4aFormFields()
         {
-
+            for (int i = 1; i <= 8; i++)
+            {
+                var treatment = GetTreatmentFormFields(i, "Treatment", null);
+                TreatmentFormFields.Add(treatment);
+            }
         }
 
-        public A4aFormFields(FormDto dto)
+        public A4aFormFields(FormDto dto) 
         {
             if (dto is A4aDto)
             {
@@ -84,35 +74,8 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 for (int i = 1; i <= 8; i++)
                 {
-                    var treatment = GetTreatmentFormFields(i, "TREATMENT", a4aDto);
-                    switch (i)
-                    {
-                        case 1:
-                            Treatment1FormFields.Add(treatment);
-                            break;
-                        case 2:
-                            Treatment2FormFields.Add(treatment);
-                            break;
-                        case 3:
-                            Treatment3FormFields.Add(treatment);
-                            break;
-                        case 4:
-                            Treatment4FormFields.Add(treatment);
-                            break;
-                        case 5:
-                            Treatment5FormFields.Add(treatment);
-                            break;
-                        case 6:
-                            Treatment6FormFields.Add(treatment);
-                            break;
-                        case 7:
-                            Treatment7FormFields.Add(treatment);
-                            break;
-                        case 8:
-                            Treatment8FormFields.Add(treatment);
-                            break;
-
-                    }
+                    var treatment = GetTreatmentFormFields(i, "Treatmentt", a4aDto);
+                    TreatmentFormFields[i - 1] = treatment;
                 }
             }
         }
@@ -126,6 +89,5 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             return "4.0";
         }
-
     }
 }

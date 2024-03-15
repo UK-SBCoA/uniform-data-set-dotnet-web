@@ -27,21 +27,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [ProhibitedCharacters]
         public string? ADVERSEOTX { get; set; }
 
-        public List<A4aTreatment> Treatment1 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment2 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment3 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment4 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment5 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment6 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment7 { get; set; } = new List<A4aTreatment>();
-
-        public List<A4aTreatment> Treatment8 { get; set; } = new List<A4aTreatment>();
+        public List<A4aTreatment> Treatment { get; set; } = new List<A4aTreatment>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
