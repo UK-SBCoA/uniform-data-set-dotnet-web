@@ -101,7 +101,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MS { get; set; }
         [Display(Name = "Normal-pressure hydrocephalus")]
         public int? HYDROCEPH { get; set; }
-        [Display(Name = "epetitive head impacts (e.g. from contact sports, intimate partner violence, or military duty), regardless of whether it caused symptoms.")]
+        [Display(Name = "Repetitive head impacts (e.g. from contact sports, intimate partner violence, or military duty), regardless of whether it caused symptoms.")]
         public int? HEADIMP { get; set; }
         [Display(Name = "Source of exposure for repeated hits to the head: American football")]
         public bool? IMPAMFOOT { get; set; }
@@ -121,7 +121,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? IMPASSAULT { get; set; }
         [Display(Name = "Source of exposure for repeated hits to the head: Other cause")]
         public bool? IMPOTHER { get; set; }
-        [Display(Name = "Specify other source of exposure for repeated hits to the head")]
         [MaxLength(60)]
         public string? IMPOTHERX { get; set; }
         [Display(Name = "The total length of time in years that the participant was exposed to repeated hits to the head (e.g. playing American football for 7 years)")]
@@ -134,9 +133,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HEADINJCON { get; set; }
         [Display(Name = "Total number of head injuries")]
         public int? HEADINJNUM { get; set; }
-        [Display(Name = "Age of first head injury")]
+        [Display(Name = "Age of first head injury that resulted in a period of feeling \"dazed or confused,\" being unable to recall details of the injury, or loss of consciousness")]
         public int? FIRSTTBI { get; set; }
-        [Display(Name = "Age of most recent head injury")]
+        [Display(Name = "Age of most recent head injury that resulted in a period of feeling \"dazed or confused,\" being unable to recall details of the injury, or loss of consciousness")]
         public int? LASTTBI { get; set; }
         [Display(Name = "Diabetes")]
         public int? DIABETES { get; set; }

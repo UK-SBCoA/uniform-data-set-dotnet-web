@@ -21,7 +21,7 @@ public class A5D2Model : FormPageModel
     {
     }
 
-    public List<RadioListItem> NoToUnknownItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
         new RadioListItem("Yes", "1"),
@@ -92,12 +92,57 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> ZeroToTwoOrNineItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> ConditionsListItems { get; set; } = new List<RadioListItem>
     {
-        new RadioListItem("0", "0"),
-        new RadioListItem("1", "1"),
-        new RadioListItem("2", "2"),
-        new RadioListItem("9", "9")
+        new RadioListItem("Absent", "0"),
+        new RadioListItem("Recent/active", "1"),
+        new RadioListItem("Remote/inactive", "2"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> ConditionsListNoRemoteItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Absent", "0"),
+        new RadioListItem("Recent/active", "1"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> SEIZNUMItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("None", "0"),
+        new RadioListItem("1 or 2", "1"),
+        new RadioListItem("3 or more", "2"),
+        new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> HeadInjuryPeriodItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Less than 5 minutes", "0"),
+        new RadioListItem("5 minutes to less than 30 minutes", "1"),
+        new RadioListItem("30 minutes to less than 24 hours", "2"),
+        new RadioListItem("1 day to less than 7 days", "3"),
+        new RadioListItem("7 days or more", "4"),
+        new RadioListItem("7 days or more", "4"),
+        new RadioListItem("Not applicable, no loss of consciousness", "8"),
+        new RadioListItem("Unknown duration", "9")
+    };
+
+    public List<RadioListItem> HEADINJNUMItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("None", "0"),
+        new RadioListItem("1-2", "1"),
+        new RadioListItem("3-5", "2"),
+        new RadioListItem("6-12", "3"),
+        new RadioListItem("13 or more", "4"),
+        new RadioListItem("Unknown", "9"),
+    };
+
+    public List<RadioListItem> DIABTYPEItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Type 1", "1"),
+        new RadioListItem("Type 2", "2"),
+        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes", "3"),
+        new RadioListItem("Unknown", "9")
     };
 
     public async Task<IActionResult> OnGetAsync(int? id)
