@@ -60,7 +60,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
-        public A4aFormFields(FormDto dto) 
+        public A4aFormFields(FormDto dto)
         {
             if (dto is A4aDto)
             {
