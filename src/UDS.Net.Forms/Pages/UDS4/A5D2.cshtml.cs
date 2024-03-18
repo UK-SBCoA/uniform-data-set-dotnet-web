@@ -145,6 +145,14 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
+    public List<RadioListItem> HoursPerNightItems{ get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("None", "0"),
+        new RadioListItem("< 4 hours per night", "1"),
+        new RadioListItem("> 4 hours per night", "2"),
+        new RadioListItem("Unknown", "9")
+    };
+
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         await base.OnGetAsync(id);
