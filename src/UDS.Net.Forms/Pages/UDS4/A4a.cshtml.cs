@@ -23,7 +23,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> TRTBIOMARKListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
+            new RadioListItem("No (end form here)", "0"),
             new RadioListItem("Yes", "1"),
             new RadioListItem("Unknown", "9")
         };
@@ -33,6 +33,46 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("No (end form here)", "0"),
             new RadioListItem("Yes", "1"),
             new RadioListItem("Unknown", "9")
+        };
+
+        public Dictionary<string, UIBehavior> TRTBIOMARKUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A4a.ADVEVENT") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } }
+        };
+
+        public Dictionary<string, UIBehavior> ADVEVENTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A4a.ARIAE"),
+                    new UIEnableAttribute("A4a.ARIAH"),
+                    new UIEnableAttribute("A4a.ADVERSEOTH")
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A4a.ARIAE"),
+                    new UIEnableAttribute("A4a.ARIAH"),
+                    new UIEnableAttribute("A4a.ADVERSEOTH")
+                },
+                InstructionalMessage = ""
+            } }
         };
 
 
