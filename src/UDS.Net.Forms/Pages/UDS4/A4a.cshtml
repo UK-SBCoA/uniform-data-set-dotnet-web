@@ -3,6 +3,7 @@
 @{
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+    string checkboxCSS = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 }
 
 <div>
@@ -15,41 +16,41 @@
     <label asp-for="A4a.TRTBIOMARK"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4a.TRTBIOMARK)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.TRTBIOMARK"></p>
-        <radio-button-group id="@Html.IdFor(m => m.A4a.TRTBIOMARK)" for="@Model.A4a.TRTBIOMARK" items="Model.TRTBIOMARKListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.A4a.TRTBIOMARK)" for="@Model.A4a.TRTBIOMARK" items="Model.TRTBIOMARKListItems" ui-behaviors="Model.TRTBIOMARKUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.TRTBIOMARK"></span>
     </div>
 </div>
 
 <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200 border-b border-gray-100">
+    <table class="min-w-full divide-y border border-grey divide-gray-100">
         <span class="counter text-base font-semibold text-gray-900">
             Please provide information about the clinical treatment(s) and/or trial(s)
         </span>
-        <p class="text-gray-400"><i>(If participant is exposed to more than two treatments and/or trials, use extended table):</i></p>
-        <thead class="bg-gray-50">
+        <thead class="bg-gray-200 border-b border-black divide-gray-100">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900 ">
                     <p>Primary Drug Target </p>
                     <p><i class="text-gray-400">(check all that apply)</i></p>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     Specific treatment and/or trial
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     Start date <i class="text-gray-400">(month/year)</i>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     End date <i class="text-gray-400">(month/year)</i>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     How was the treatment provided?
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
                     If clinical trial, in which group was the participant?
                 </th>
             </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
+
+        <tbody class="bg-gray-50 divide-y divide-gray-200">
             @for (var i = 0; i < Model.A4a.Treatment.Count(); i++)
             {
                 @Html.EditorFor(m => m.A4a.Treatment[i])
@@ -62,67 +63,65 @@
     <label asp-for="A4a.ADVEVENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4a.ADVEVENT)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.ADVEVENT"></p>
-        <radio-button-group id="@Html.IdFor(m => m.A4a.ADVEVENT)" for="@Model.A4a.ADVEVENT" items="Model.ADVEVENTListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.A4a.ADVEVENT)" for="@Model.A4a.ADVEVENT" items="Model.ADVEVENTListItems" ui-behaviors="Model.ADVEVENTUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVEVENT"></span>
     </div>
 </div>
 
 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-    <div class="mt-4 sm:col-span-2 sm:mt-0">
-        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <div>
-                <label class="text-base font-semibold text-gray-900">
-                    <span class="counter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
-                </label><br />
-                @*<span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GenderIdentityIndicated"></span>*@
-            </div>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <fieldset class="subcounterreset">
-                    <div class="space-y-1">
-                        <div class="relative flex items-start">
-                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="relative flex items-start">
-                                <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                <div class="flex h-6 items-center">
-                                    @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                                </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label asp-for="A4a.ARIAE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAE)</label>
-                                </div>
-                            </div>
-                            <div class="relative flex items-start">
-                                <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                <div class="flex h-6 items-center">
-                                    @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                                </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label asp-for="A4a.ARIAH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAH)</label>
-                                </div>
-                            </div>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-1">
-                                <div class="relative flex items-start">
-                                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                    <div class="flex h-6 items-center">
-                                        @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
-                                    </div>
-                                    <div class="ml-3 text-sm leading-6">
-                                        <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
-                                    </div>
-                                </div>
-                                <div class="relative flex items-start">
-                                    <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                    <div class="mt-2">
-                                        <label asp-for="A4a.ADVERSEOTX">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTX)</label>
-                                        <input asp-for="A4a.ADVERSEOTX" />
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </fieldset>
-            </div>
-        </div>
+    <div>
+        <label class="text-base font-semibold text-gray-900">
+            <span class="counter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
+        </label><br />
+        @*<span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GenderIdentityIndicated"></span>*@
     </div>
- </div>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <fieldset class="subcounterreset">
+            <div class="space-y-1">
+
+                <div class="relative flex items-start">
+                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="A4a.ARIAE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAE)</label>
+                    </div>
+                </div>
+
+                <div class="relative flex items-start">
+                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="A4a.ARIAH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAH)</label>
+                    </div>
+                </div>
+
+                <div class="relative flex items-start">
+                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                    </div>
+                </div>
+                <div class="ml-6">
+                    <label asp-for="A4a.ADVERSEOTX">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTX)</label>
+                    <input asp-for="A4a.ADVERSEOTX" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
+                </div>
+
+            </div>
+        </fieldset>
+    </div>
+</div>
+
 
 <partial name="_FormFooter" for="@Model.A4a" />
+
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/A4a.js"></script>
+}
