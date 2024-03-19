@@ -35,7 +35,7 @@
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WEIGHT"></p>
                     <div class="flex items-center">
-                        <input asp-for="@Model.B1.WEIGHT" type="number" min="50" max="400" />
+                        <input asp-for="@Model.B1.WEIGHT" type="number"/>
                         <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>

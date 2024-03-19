@@ -30,12 +30,12 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? WAIST2 { get; set; }
 
         [Display(Name = "Hip circumference measurements (inches): Measurement 1")]
-        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
+        [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnComplete]
         public int? HIP1 { get; set; }
 
         [Display(Name = "Hip circumference measurements (inches): Measurement 2")]
-        [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
+        [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnComplete]
         public int? HIP2 { get; set; }
 
