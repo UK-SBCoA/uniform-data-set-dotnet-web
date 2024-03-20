@@ -25,6 +25,18 @@ namespace UDS.Net.Forms.Extensions
             vm.IsDeleted = form.IsDeleted;
         }
 
+        public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
+        {
+            return new ParticipationsPaginatedModel
+            {
+                List = participations.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
         public static ParticipationModel ToVM(this Participation participation)
         {
             return new ParticipationModel()
