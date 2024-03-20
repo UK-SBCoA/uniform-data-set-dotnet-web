@@ -42,7 +42,8 @@
         <div class="relative flex items-start">
             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
             <div class="flex h-6 items-center">
-                @Html.CheckBox("A4aTreatment.TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", disabled = "disabled" })
+                @Html.CheckBox("A4aTreatment.TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.Treatment.TARGETOTH\" ]"})
+
             </div>
             <div class="ml-3 text-sm leading-6">
                 <label asp-for="TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETOTH)</label>
@@ -112,7 +113,7 @@
     <td class="px-6 py-3 border-r border-gray-300">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.CARETRIAL"></p>
-            <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems" disabled ></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems" ></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="CARETRIAL"></span>
         </div>
     </td>
@@ -120,7 +121,7 @@
     <td class="px-6 py-3 border-r border-gray-300">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.TRIALGRP"></p>
-            <radio-button-group id="@Html.IdFor(m => m.TRIALGRP)" for="@Model.TRIALGRP" items="Model.TRIALGRPistItems" disabled ></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.TRIALGRP)" for="@Model.TRIALGRP" items="Model.TRIALGRPistItems" ></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="TRIALGRP"></span>
         </div>
     </td>
