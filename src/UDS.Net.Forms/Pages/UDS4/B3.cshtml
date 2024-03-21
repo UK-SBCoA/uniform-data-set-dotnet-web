@@ -5,4 +5,42 @@
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+
+        <b>INSTRUCTIONS:</b> This form is to be completed by the clinician or other trained health professional. Clinician should record results as
+        observed regardless of whether there are non-parkinsonian contributions or explanations for the findings. This form is intended to 1)
+        determine the degree of parkinsonism on any visit, and 2) track the degree of parkinsonism over time. The UPDRS is not intended to
+        establish the presence or absence of parkinsonism. For additional clarification and scoring instructions, see <guidebook kind="@Model.Visit.Kind"></guidebook>
+        for <b>Form B3</b>. For video-recorded examples of administration, see Perlmutter JS. Assessment of Parkinson disease manifestations. Curr
+        Protoc Neurosci. 2009 Oct; Chapter 10: Unit10.1. <a href="https://pubmed.ncbi.nlm.nih.gov/19802812/" style="color: blue; text-decoration: underline;">doi:10.1002/0471142301.ns1001s49</a>
+        . Check only <u>one</u> box per question.
+    </p>
+</div>
+<div>
+    <div style="border: 2px solid lightgrey; display: flex; align-items:center;">
+        <div>
+            @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4" })
+        </div>
+        <div class="text-sm leading-6">
+            <label asp-for="B3.PDNORMAL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B3.PDNORMAL)</label>
+        </div>
+    </div>
+
+    <div class="@rowCSS">
+        <label asp-for="B3.SPEECH"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.SPEECH)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <div class="max-w-lg">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B3.SPEECH"></p>
+                <radio-button-group id="B3_SPEECH" for="B3.SPEECH" items="Model.Speech"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECH"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
 <partial name="_FormFooter" for="@Model.B3" />

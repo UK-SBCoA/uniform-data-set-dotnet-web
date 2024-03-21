@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -10,6 +11,15 @@ namespace UDS.Net.Forms.Pages.UDS4
     {
         [BindProperty]
         public B3 B3 { get; set; } = default!;
+
+        public List<RadioListItem> Speech { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Normal", "0"),
+            new RadioListItem("Slight loss of expression, diction and/or volume", "1"),
+            new RadioListItem("Monotone, slurred but understandable; moderately impaired", "2"),
+            new RadioListItem("Marked impairment, difficult to understand", "3"),
+            new RadioListItem("Unintelligible", "4"),
+        };
 
         public B3Model(IVisitService visitService) : base(visitService, "B3")
         {

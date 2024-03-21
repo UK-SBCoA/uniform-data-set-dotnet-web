@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class B3 : FormModel
     {
-        [Display(Name = "PDNORMAL")]
+        [Display(Name = "(Optional) If the clinician completes the UPDRS examination and determines all items are normal, check this box. If\nthis box is checked, all items will default to 0 in the database.")]
         public bool? PDNORMAL { get; set; }
 
         [Display(Name = "Speech")]
