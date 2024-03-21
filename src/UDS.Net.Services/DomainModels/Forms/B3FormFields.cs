@@ -66,10 +66,73 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? TOTALUPDRS { get; set; }
 
         public B3FormFields()
-        { }
+        {
+        }
 
         public B3FormFields(FormDto dto)
         {
+            if (dto is B3Dto)
+            {
+                var b3dto = ((B3Dto)dto);
+
+                PDNORMAL = b3dto.PDNORMAL;
+                SPEECH = b3dto.SPEECH;
+                SPEECHX = b3dto.SPEECHX;
+                FACEXP = b3dto.FACEXP;
+                FACEXPX = b3dto.FACEXPX;
+                TRESTFAC = b3dto.TRESTFAC;
+                TRESTFAX = b3dto.TRESTFAX;
+                TRESTRHD = b3dto.TRESTRHD;
+                TRESTRHX = b3dto.TRESTRHX;
+                TRESTLHD = b3dto.TRESTLHD;
+                TRESTLHX = b3dto.TRESTLHX;
+                TRESTRFT = b3dto.TRESTRFT;
+                TRESTRFX = b3dto.TRESTRFX;
+                TRESTLFT = b3dto.TRESTLFT;
+                TRESTLFX = b3dto.TRESTLFX;
+                TRACTRHD = b3dto.TRACTRHD;
+                TRACTRHX = b3dto.TRACTRHX;
+                TRACTLHD = b3dto.TRACTLHD;
+                TRACTLHX = b3dto.TRACTLHX;
+                RIGDNECK = b3dto.RIGDNECK;
+                RIGDNEX = b3dto.RIGDNEX;
+                RIGDUPRT = b3dto.RIGDUPRT;
+                RIGDUPRX = b3dto.RIGDUPRX;
+                RIGDUPLF = b3dto.RIGDUPLF;
+                RIGDUPLX = b3dto.RIGDUPLX;
+                RIGDLORT = b3dto.RIGDLORT;
+                RIGDLORX = b3dto.RIGDLORX;
+                RIGDLOLF = b3dto.RIGDLOLF;
+                RIGDLOLX = b3dto.RIGDLOLX;
+                TAPSRT = b3dto.TAPSRT;
+                TAPSRTX = b3dto.TAPSRTX;
+                TAPSLF = b3dto.TAPSLF;
+                TAPSLFX = b3dto.TAPSLFX;
+                HANDMOVR = b3dto.HANDMOVR;
+                HANDMVRX = b3dto.HANDMVRX;
+                HANDMOVL = b3dto.HANDMOVL;
+                HANDMVLX = b3dto.HANDMVLX;
+                HANDALTR = b3dto.HANDALTR;
+                HANDATRX = b3dto.HANDATRX;
+                HANDALTL = b3dto.HANDALTL;
+                HANDATLX = b3dto.HANDATLX;
+                LEGRT = b3dto.LEGRT;
+                LEGRTX = b3dto.LEGRTX;
+                LEGLF = b3dto.LEGLF;
+                LEGLFX = b3dto.LEGLFX;
+                ARISING = b3dto.ARISING;
+                ARISINGX = b3dto.ARISINGX;
+                POSTURE = b3dto.POSTURE;
+                POSTUREX = b3dto.POSTUREX;
+                GAIT = b3dto.GAIT;
+                GAITX = b3dto.GAITX;
+                POSSTAB = b3dto.POSSTAB;
+                POSSTABX = b3dto.POSSTABX;
+                BRADYKIN = b3dto.BRADYKIN;
+                BRADYKIX = b3dto.BRADYKIX;
+                TOTALUPDRS = b3dto.TOTALUPDRS;
+
+            }
 
         }
 

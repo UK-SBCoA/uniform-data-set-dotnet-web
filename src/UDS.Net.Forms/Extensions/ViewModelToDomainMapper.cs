@@ -501,6 +501,7 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B3FormFields
             {
+                PDNORMAL = vm.PDNORMAL,
                 SPEECH = vm.SPEECH,
                 SPEECHX = vm.SPEECHX,
                 FACEXP = vm.FACEXP,
@@ -555,7 +556,7 @@ namespace UDS.Net.Forms.Extensions
                 POSSTABX = vm.POSSTABX,
                 BRADYKIN = vm.BRADYKIN,
                 BRADYKIX = vm.BRADYKIX,
-                TOTALUPDRS = vm.TOTALUPDRS,
+                TOTALUPDRS = vm.TOTALUPDRS
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

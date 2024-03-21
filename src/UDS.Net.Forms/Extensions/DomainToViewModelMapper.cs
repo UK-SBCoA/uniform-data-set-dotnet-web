@@ -704,7 +704,7 @@ namespace UDS.Net.Forms.Extensions
                 POSSTABX = fields.POSSTABX,
                 BRADYKIN = fields.BRADYKIN,
                 BRADYKIX = fields.BRADYKIX,
-                TOTALUPDRS = fields.TOTALUPDRS,
+                TOTALUPDRS = fields.TOTALUPDRS
             };
         }
 

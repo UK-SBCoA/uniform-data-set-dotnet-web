@@ -197,6 +197,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
             }
+            else if (form.Fields is B3FormFields)
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is B4FormFields)
             {
                 dto = ((B4FormFields)form.Fields).ToDto();
@@ -277,6 +281,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is B1FormFields && formKind == "B1")
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B3FormFields && formKind == "B3")
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B4FormFields && formKind == "B4")
             {
