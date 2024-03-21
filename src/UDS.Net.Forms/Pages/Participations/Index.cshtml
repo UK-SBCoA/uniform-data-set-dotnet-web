@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var participation in Model.Participations)
+                            @foreach (var participation in Model.Participations.List)
                             {
                                 <tr>
                                     <td>@participation.Id</td>
@@ -48,6 +48,9 @@
                             }
                         </tbody>
                     </table>
+                </div>
+                <div class="py-4">
+                    <partial name="_PreviousNextButtons" model="Model.Participations" />
                 </div>
             </div>
         </div>

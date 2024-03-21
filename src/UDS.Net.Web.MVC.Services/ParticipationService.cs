@@ -65,7 +65,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            var participationDtos = await _apiClient.ParticipationClient.Get();
+            var participationDtos = await _apiClient.ParticipationClient.Get(pageSize, pageIndex);
 
             if (participationDtos != null)
             {
