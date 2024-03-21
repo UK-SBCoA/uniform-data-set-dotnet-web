@@ -1,0 +1,15 @@
+{
+    "extends": ["stylelint-config-standard"],
+    "rules": {
+        "alpha-value-notation": "never",
+        "comment-empty-line-before": "never",
+        "custom-property-empty-line-before": "never",
+        "declaration-empty-line-before": "never",
+        "selector-no-vendor-prefix": "never",
+        "property-no-vendor-prefix": "never",
+        "color-function-notation": "never",
+        "media-feature-range-notation": "never",
+        "length-zero-no-unit": "never",
+        "selector-class-pattern": "never"
+    }
+}
