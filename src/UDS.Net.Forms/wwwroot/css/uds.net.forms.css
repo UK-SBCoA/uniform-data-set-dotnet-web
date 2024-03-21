@@ -1,40 +1,4 @@
 
-/* TODO These styles are a quick fix for form validation */
-.input-validation-error, [input='number'].input-validation-error, [input='text'].input-validation-error {
-    line-height: 1.25rem !important;
-    font-size: 0.875rem !important;
-    --tw-ring-opacity: 1;
-    --tw-ring-color: rgb(252 165 165 / 1);
-    --tw-ring-inset: inset;
-    border-radius: 0.375rem !important;
-    border-color: rgb(220, 38, 38) !important;
-    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-color: rgb(0 0 0 / 0.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    --tw-ring-offset-shadow: 1;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    --tw-text-opacity: 1;
-    color: rgb(127 29 29 / var(--tw-text-opacity)) !important;
-    width: 100%;
-    max-width: 20rem;
-}
-
-.valid, [input='number'].valid, [input='text'].valid {
-    line-height: 1.25rem !important;
-    font-size: 0.875rem !important;
-    border-radius: 0.375rem !important;
-    border-color: rgb(209, 213, 219) !important;
-    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-color: rgb(0 0 0 / 0.05);
-    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-    --tw-ring-offset-shadow: 1;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    --tw-text-opacity: 1;
-    color: inherit !important;
-    width: 100%;
-    max-width: 20rem;
-}
-
 /* Counters */
 .counterreset {
     counter-reset: section;
@@ -81,8 +45,42 @@
     max-width: 0;
 }
 
+/* stylelint-disable -- Tailwind CSS styling */
+/* TODO These styles are a quick fix for form validation */
+.input-validation-error, [input='number'].input-validation-error, [input='text'].input-validation-error {
+    line-height: 1.25rem !important;
+    font-size: 0.875rem !important;
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(252 165 165 / 1);
+    --tw-ring-inset: inset;
+    border-radius: 0.375rem !important;
+    border-color: rgb(220, 38, 38) !important;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-color: rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    --tw-ring-offset-shadow: 1;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-text-opacity: 1;
+    color: rgb(127 29 29 / var(--tw-text-opacity)) !important;
+    width: 100%;
+    max-width: 20rem;
+}
 
-/* stylelint-disable */
+.valid, [input='number'].valid, [input='text'].valid {
+    line-height: 1.25rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.375rem !important;
+    border-color: rgb(209, 213, 219) !important;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-color: rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    --tw-ring-offset-shadow: 1;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-text-opacity: 1;
+    color: inherit !important;
+    width: 100%;
+    max-width: 20rem;
+}
 /*
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
