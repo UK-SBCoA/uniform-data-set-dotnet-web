@@ -74,8 +74,8 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 for (int i = 1; i <= 8; i++)
                 {
-                    var treatment = GetTreatmentFormFields(i, "Treatment", a4aDto);
-                    TreatmentFormFields.Add(treatment);
+                    var treatment = GetTreatmentFormFields(i, "Treatmentt", a4aDto);
+                    TreatmentFormFields[i - 1] = treatment;
                 }
             }
         }
