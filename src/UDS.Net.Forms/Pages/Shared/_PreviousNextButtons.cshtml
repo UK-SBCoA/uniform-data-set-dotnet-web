@@ -1,0 +1,59 @@
+﻿@model PaginatedModel
+@{
+    var buttonCSS = "relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:outline-offset-0";
+    var disabledCSS = "relative inline-flex items-center rounded-md bg-slate-50 px-3 py-2 text-sm font-semibold text-gray-500 ring-1 ring-inset ring-gray-300 focus-visible:outline-offset-0";
+}
+
+<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+    <div class="hidden sm:block">
+        <p class="text-sm text-gray-700">
+            Showing
+            <span class="font-medium">@Model.CurrentPageStart</span>
+            to
+            <span class="font-medium">@Model.CurrentPageEnd</span>
+            of
+            <span class="font-medium">@Model.Total</span>
+            results
+        </p>
+    </div>
+    <div class="flex flex-1 justify-between sm:justify-end">
+        @if (Model.HasPreviousPage)
+        {
+            @if (Model.Id.HasValue)
+            {
+                <a asp-page="@Model.Action" asp-route-id="@Model.Id.Value" asp-route-pageIndex="@(Model.PageIndex - 1)"
+                   asp-route-search="@Model.Search"
+                   class="@buttonCSS">Previous</a>
+            }
+            else
+            {
+                <a asp-page="@Model.Action" asp-route-pageIndex="@(Model.PageIndex - 1)"
+                   asp-route-search="@Model.Search"
+                   class="@buttonCSS">Previous</a>
+            }
+        }
+        else
+        {
+            <a disabled class="@disabledCSS">Previous</a>
+        }
+        @if (Model.HasNextPage)
+        {
+            @if (Model.Id.HasValue)
+            {
+                <a asp-page="@Model.Action" asp-route-id="@Model.Id.Value" asp-route-pageIndex="@(Model.PageIndex + 1)"
+                   asp-route-search="@Model.Search"
+                   class="ml-3 @buttonCSS">Next</a>
+            }
+            else
+            {
+                <a asp-page="@Model.Action" asp-route-pageIndex="@(Model.PageIndex + 1)"
+                   asp-route-search="@Model.Search"
+                   class="ml-3 @buttonCSS">Next</a>
+            }
+        }
+        else
+        {
+            <a disabled class="ml-3 @disabledCSS">Next</a>
+        }
+    </div>
+</nav>

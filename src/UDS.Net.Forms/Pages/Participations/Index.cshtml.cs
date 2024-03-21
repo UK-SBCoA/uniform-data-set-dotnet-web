@@ -14,18 +14,20 @@ namespace UDS.Net.Forms.Pages.Participations
     {
         private readonly IParticipationService _participationService;
 
-        public IList<ParticipationModel>? Participations { get; set; }
+        public ParticipationsPaginatedModel Participations { get; set; } = new ParticipationsPaginatedModel();
 
         public IndexModel(IParticipationService participationService)
         {
             _participationService = participationService;
         }
 
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(int pageSize = 10, int pageIndex = 1, string search = "")
         {
-            var participations = await _participationService.List("");
+            var participations = await _participationService.List(User.Identity.Name, pageSize, pageIndex);
 
-            Participations = participations.Select(p => p.ToVM()).ToList();
+            int total = await _participationService.Count(User.Identity.Name);
+
+            Participations = participations.ToVM(pageSize, pageIndex, total, search);
 
             return Page();
         }
