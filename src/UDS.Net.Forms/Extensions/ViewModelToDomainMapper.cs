@@ -424,7 +424,7 @@ namespace UDS.Net.Forms.Extensions
                 ADVERSEOTH = vm.ADVERSEOTH,
                 ADVERSEOTX = vm.ADVERSEOTX,
                 TRTBIOMARK = vm.TRTBIOMARK,
-                TreatmentFormFields = vm.Treatment.Select(s => s.ToEntity()).ToList()
+                TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

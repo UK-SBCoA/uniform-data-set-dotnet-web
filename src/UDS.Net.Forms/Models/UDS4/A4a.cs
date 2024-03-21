@@ -49,7 +49,7 @@ namespace UDS.Net.Forms.Models.UDS4
         //    }
         //}
 
-        public List<A4aTreatment> Treatment { get; set; } = new List<A4aTreatment>();
+        public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

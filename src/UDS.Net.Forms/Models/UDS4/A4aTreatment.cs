@@ -8,7 +8,7 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
-    public class A4aTreatment : FormModel
+    public class A4aTreatment
     {
         public int TreatmentIndex { get; set; }
 
@@ -67,28 +67,5 @@ namespace UDS.Net.Forms.Models.UDS4
             new RadioListItem("Placebo", "2"),
             new RadioListItem("Unknown", "9")
         };
-
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            //if (Status == FormStatus.Complete)
-            //{
-            //    if (STARTYEAR.HasValue && (STARTYEAR < 1990 || STARTYEAR > DateTime.Now.Year))
-            //    {
-            //        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(STARTYEAR) });
-            //    }
-
-            //    if (ENDYEAR.HasValue && (ENDYEAR < 1990 || ENDYEAR > DateTime.Now.Year))
-            //    {
-            //        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(ENDYEAR) });
-            //    }
-            //}
-
-            foreach (var result in base.Validate(validationContext))
-            {
-                yield return result;
-            }
-
-            yield break;
-        }
     }
 }

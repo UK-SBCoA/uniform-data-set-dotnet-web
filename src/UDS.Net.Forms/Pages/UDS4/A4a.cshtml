@@ -51,9 +51,9 @@
         </thead>
 
         <tbody class="bg-gray-50 divide-y divide-gray-200">
-            @for (var i = 0; i < Model.A4a.Treatment.Count(); i++)
+            @for (int i = 0; i < Model.A4a.Treatments.Count(); i++)
             {
-                @Html.EditorFor(m => m.A4a.Treatment[i])
+                @Html.EditorFor(m => m.A4a.Treatments[i])
             }
         </tbody>
     </table>
@@ -123,5 +123,5 @@
 <partial name="_FormFooter" for="@Model.A4a" />
 
 @*@section Scripts {
-    <script src="~/_content/UDS.Net.Forms/js/A4a.js"></script>
-}*@
+        <script src="~/_content/UDS.Net.Forms/js/A4a.js"></script>
+    }*@
