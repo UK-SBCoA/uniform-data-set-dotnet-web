@@ -179,6 +179,10 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((B1FormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is B3FormFields)
+                {
+                    vm = ((B3FormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is B4FormFields)
                 {
                     vm = ((B4FormFields)form.Fields).ToVM(form.Id);
@@ -625,6 +629,70 @@ namespace UDS.Net.Forms.Extensions
                 HEARING = fields.HEARING,
                 HEARAID = fields.HEARAID,
                 HEARWAID = fields.HEARWAID
+            };
+        }
+
+        public static B3 ToVM(this B3FormFields fields, int formId)
+        {
+            return new B3()
+            {
+                Id = formId,
+                PDNORMAL = fields.PDNORMAL,
+                SPEECH = fields.SPEECH,
+                SPEECHX = fields.SPEECHX,
+                FACEXP = fields.FACEXP,
+                FACEXPX = fields.FACEXPX,
+                TRESTFAC = fields.TRESTFAC,
+                TRESTFAX = fields.TRESTFAX,
+                TRESTRHD = fields.TRESTRHD,
+                TRESTRHX = fields.TRESTRHX,
+                TRESTLHD = fields.TRESTLHD,
+                TRESTLHX = fields.TRESTLHX,
+                TRESTRFT = fields.TRESTRFT,
+                TRESTRFX = fields.TRESTRFX,
+                TRESTLFT = fields.TRESTLFT,
+                TRESTLFX = fields.TRESTLFX,
+                TRACTRHD = fields.TRACTRHD,
+                TRACTRHX = fields.TRACTRHX,
+                TRACTLHD = fields.TRACTLHD,
+                TRACTLHX = fields.TRACTLHX,
+                RIGDNECK = fields.RIGDNECK,
+                RIGDNEX = fields.RIGDNEX,
+                RIGDUPRT = fields.RIGDUPRT,
+                RIGDUPRX = fields.RIGDUPRX,
+                RIGDUPLF = fields.RIGDUPLF,
+                RIGDUPLX = fields.RIGDUPLX,
+                RIGDLORT = fields.RIGDLORT,
+                RIGDLORX = fields.RIGDLORX,
+                RIGDLOLF = fields.RIGDLOLF,
+                RIGDLOLX = fields.RIGDLOLX,
+                TAPSRT = fields.TAPSRT,
+                TAPSRTX = fields.TAPSRTX,
+                TAPSLF = fields.TAPSLF,
+                TAPSLFX = fields.TAPSLFX,
+                HANDMOVR = fields.HANDMOVR,
+                HANDMVRX = fields.HANDMVRX,
+                HANDMOVL = fields.HANDMOVL,
+                HANDMVLX = fields.HANDMVLX,
+                HANDALTR = fields.HANDALTR,
+                HANDATRX = fields.HANDATRX,
+                HANDALTL = fields.HANDALTL,
+                HANDATLX = fields.HANDATLX,
+                LEGRT = fields.LEGRT,
+                LEGRTX = fields.LEGRTX,
+                LEGLF = fields.LEGLF,
+                LEGLFX = fields.LEGLFX,
+                ARISING = fields.ARISING,
+                ARISINGX = fields.ARISINGX,
+                POSTURE = fields.POSTURE,
+                POSTUREX = fields.POSTUREX,
+                GAIT = fields.GAIT,
+                GAITX = fields.GAITX,
+                POSSTAB = fields.POSSTAB,
+                POSSTABX = fields.POSSTABX,
+                BRADYKIN = fields.BRADYKIN,
+                BRADYKIX = fields.BRADYKIX,
+                TOTALUPDRS = fields.TOTALUPDRS,
             };
         }
 
