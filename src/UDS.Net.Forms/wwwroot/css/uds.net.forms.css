@@ -82,6 +82,7 @@
 }
 
 
+/* stylelint-disable */
 /*
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
@@ -601,6 +602,7 @@ video {
     width: 100%;
 }
 
+/* To-do Change to context media feature range notation */
 @media (min-width: 640px) {
     .container {
         max-width: 640px;
@@ -1106,3 +1108,4 @@ video {
         padding-right: 2rem;
     }
 }
+/* stylelint-enable */
