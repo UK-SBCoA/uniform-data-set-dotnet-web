@@ -70,18 +70,18 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == FormStatus.Complete)
-            {
-                if (STARTYEAR.HasValue && (STARTYEAR < 1990 || STARTYEAR > DateTime.Now.Year))
-                {
-                    yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(STARTYEAR) });
-                }
+            //if (Status == FormStatus.Complete)
+            //{
+            //    if (STARTYEAR.HasValue && (STARTYEAR < 1990 || STARTYEAR > DateTime.Now.Year))
+            //    {
+            //        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(STARTYEAR) });
+            //    }
 
-                if (ENDYEAR.HasValue && (ENDYEAR < 1990 || ENDYEAR > DateTime.Now.Year))
-                {
-                    yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(ENDYEAR) });
-                }
-            }
+            //    if (ENDYEAR.HasValue && (ENDYEAR < 1990 || ENDYEAR > DateTime.Now.Year))
+            //    {
+            //        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(ENDYEAR) });
+            //    }
+            //}
 
             foreach (var result in base.Validate(validationContext))
             {
