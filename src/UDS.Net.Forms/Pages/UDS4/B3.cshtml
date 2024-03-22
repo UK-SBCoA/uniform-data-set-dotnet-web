@@ -18,29 +18,617 @@
     </p>
 </div>
 <div>
-    <div style="border: 2px solid lightgrey; display: flex; align-items:center;">
-        <div>
-            @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4" })
-        </div>
-        <div class="text-sm leading-6">
-            <label asp-for="B3.PDNORMAL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B3.PDNORMAL)</label>
-        </div>
-    </div>
-
-    <div class="@rowCSS">
-        <label asp-for="B3.SPEECH"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.SPEECH)</label>
-        <div class="mt-4 sm:col-span-2 sm:mt-0">
-            <div class="max-w-lg">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B3.SPEECH"></p>
-                <radio-button-group id="B3_SPEECH" for="B3.SPEECH" items="Model.Speech"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECH"></span>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <div style="border: 2px solid lightgrey; display: flex; align-items:center;">
+            <div>
+                @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4 ml-4" })
+            </div>
+            <div class="text-sm leading-6 pt-2">
+                <label asp-for="B3.PDNORMAL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B3.PDNORMAL)</label>
             </div>
         </div>
+
+        <div class="@rowCSS">
+            <label asp-for="B3.SPEECH"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.SPEECH)</label>
+            <div class="mt-2">
+                <div>
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.SPEECH"></p>
+                    <radio-button-group id="B3_SPEECH" for="B3.SPEECH" items="Model.SpeechListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECH"></span>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B3.SPEECHX"></p>
+                <label asp-for="@Model.B3.SPEECHX">@Html.DisplayNameFor(m => m.B3.SPEECHX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.B3.SPEECHX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECHX"></span>
+            </div>
+        </div>
+
+        <div class="@rowCSS">
+            <label asp-for="B3.FACEXP"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.FACEXP)</label>
+            <div class="mt-2">
+                <div>
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.FACEXP"></p>
+                    <radio-button-group id="B3_FACEXP" for="B3.FACEXP" items="Model.FACEXPListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.FACEXP"></span>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B3.FACEXPX"></p>
+                <label asp-for="@Model.B3.FACEXPX">@Html.DisplayNameFor(m => m.B3.FACEXPX)</label>
+                <div class="mt-2">
+                    <input asp-for="@Model.B3.FACEXPX" disabled="disabled" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.FACEXPX"></span>
+            </div>
+        </div>
+
+
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Tremor at rest </h3>
+            <div class="@rowCSS">
+                <label asp-for="B3.TRESTFAC"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRESTFAC)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTFAC"></p>
+                        <radio-button-group id="B3_TRESTFAC" for="B3.TRESTFAC" items="Model.TremorListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTFAC"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTFAX"></p>
+                    <label asp-for="@Model.B3.TRESTFAX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRESTFAX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRESTFAX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTFAX"></span>
+                </div>
+
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="B3.TRESTRHD"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRESTRHD)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRHD"></p>
+                        <radio-button-group id="B3_TRESTRHD" for="B3.TRESTRHD" items="Model.TremorListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRHD"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRHX"></p>
+                    <label asp-for="@Model.B3.TRESTRHX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRESTRHX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRESTRHX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRHX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.TRESTLHD"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRESTLHD)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLHD"></p>
+                        <radio-button-group id="B3_TRESTLHD" for="B3.TRESTLHD" items="Model.TremorListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLHD"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLHX"></p>
+                    <label asp-for="@Model.B3.TRESTLHX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRESTLHX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRESTLHX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLHX"></span>
+                </div>
+
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="B3.TRESTRFT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRESTRFT)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRFT"></p>
+                        <radio-button-group id="B3_TRESTRFT" for="B3.TRESTRFT" items="Model.TremorListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRFT"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRFX"></p>
+                    <label asp-for="@Model.B3.TRESTRFX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRESTRFX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRESTRFX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRFX"></span>
+                </div>
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="B3.TRESTLFT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRESTLFT)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLFT"></p>
+                        <radio-button-group id="B3_TRESTLFT" for="B3.TRESTLFT" items="Model.TremorListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLFT"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLFX"></p>
+                    <label asp-for="@Model.B3.TRESTLFX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRESTLFX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRESTLFX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLFX"></span>
+                </div>
+            </div>
+        </div>
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Action or postural tremor of hands </h3>
+            <div class="@rowCSS">
+                <label asp-for="B3.TRACTRHD"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRACTRHD)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTRHD"></p>
+                        <radio-button-group id="B3_TRACTRHD" for="B3.TRACTRHD" items="Model.HandListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTRHD"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTRHX"></p>
+                    <label asp-for="@Model.B3.TRACTRHX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRACTRHX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRACTRHX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTRHX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.TRACTLHD"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TRACTLHD)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTLHD"></p>
+                        <radio-button-group id="B3_TRACTLHD" for="B3.TRACTLHD" items="Model.HandListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTLHD"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTLHX"></p>
+                    <label asp-for="@Model.B3.TRACTLHX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TRACTLHX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TRACTLHX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTLHX"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Rigidity </h3>
+            <p>(judged on passive movement of major joints with participant relaxed in sitting position; cogwheeling to be ignored)</p>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.RIGDNECK"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.RIGDNECK)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDNECK"></p>
+                        <radio-button-group id="B3_RIGDNECK" for="B3.RIGDNECK" items="Model.RigidityListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDNECK"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDNEX"></p>
+                    <label asp-for="@Model.B3.RIGDNEX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.RIGDNEX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.RIGDNEX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDNEX"></span>
+                </div>
+            </div>
+            <div>
+                <div class="@rowCSS">
+                    <label asp-for="B3.RIGDUPRT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.RIGDUPRT)</label>
+                    <div class="mt-2">
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPRT"></p>
+                            <radio-button-group id="B3_RIGDUPRT" for="B3.RIGDUPRT" items="Model.RigidityListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPRT"></span>
+                        </div>
+                    </div>
+
+                    <div class="subsubcounterreset mt-4">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPRX"></p>
+                        <label asp-for="@Model.B3.RIGDUPRX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.RIGDUPRX)</label>
+                        <div class="mt-2">
+                            <input asp-for="@Model.B3.RIGDUPRX" disabled="disabled" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPRX"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="@rowCSS">
+                    <label asp-for="B3.RIGDUPLF"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.RIGDUPLF)</label>
+                    <div class="mt-2">
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPLF"></p>
+                            <radio-button-group id="B3_RIGDUPLF" for="B3.RIGDUPLF" items="Model.RigidityListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPLF"></span>
+                        </div>
+                    </div>
+
+                    <div class="subsubcounterreset mt-4">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPLX"></p>
+                        <label asp-for="@Model.B3.RIGDUPLX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.RIGDUPLX)</label>
+                        <div class="mt-2">
+                            <input asp-for="@Model.B3.RIGDUPLX" disabled="disabled" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPLX"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="@rowCSS">
+                    <label asp-for="B3.RIGDLORT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.RIGDLORT)</label>
+                    <div class="mt-2">
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLORT"></p>
+                            <radio-button-group id="B3_RIGDLORT" for="B3.RIGDLORT" items="Model.RigidityListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLORT"></span>
+                        </div>
+                    </div>
+
+                    <div class="subsubcounterreset mt-4">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLORX"></p>
+                        <label asp-for="@Model.B3.RIGDLORX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.RIGDLORX)</label>
+                        <div class="mt-2">
+                            <input asp-for="@Model.B3.RIGDLORX" disabled="disabled" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLORX"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="@rowCSS">
+                    <label asp-for="B3.RIGDLOLF"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.RIGDLOLF)</label>
+                    <div class="mt-2">
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLOLF"></p>
+                            <radio-button-group id="B3_RIGDLOLF" for="B3.RIGDLOLF" items="Model.RigidityListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLOLF"></span>
+                        </div>
+                    </div>
+
+                    <div class="subsubcounterreset mt-4">
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLOLX"></p>
+                        <label asp-for="@Model.B3.RIGDLOLX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.RIGDLOLX)</label>
+                        <div class="mt-2">
+                            <input asp-for="@Model.B3.RIGDLOLX" disabled="disabled" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLOLX"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Finger taps</h3>
+            <p>(participant taps thumb with index finger in rapid succession)</p>
+            <div class="@rowCSS">
+                <label asp-for="B3.TAPSRT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TAPSRT)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRT"></p>
+                        <radio-button-group id="B3_TAPSRT" for="B3.TAPSRT" items="Model.FingerListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSRT"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRTX"></p>
+                    <label asp-for="@Model.B3.TAPSRTX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TAPSRTX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TAPSRTX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSRTX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.TAPSLF"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.TAPSLF)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSLF"></p>
+                        <radio-button-group id="B3_TAPSLF" for="B3.TAPSLF" items="Model.FingerListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSLF"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSLFX"></p>
+                    <label asp-for="@Model.B3.TAPSLFX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.TAPSLFX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.TAPSLFX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSLFX"></span>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Hand movements </h3>
+            <p>(participant opens and closes hands in rapid succession)</p>
+            <div class="@rowCSS">
+                <label asp-for="B3.HANDMOVR"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.HANDMOVR)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMOVR"></p>
+                        <radio-button-group id="B3_HANDMOVR" for="B3.HANDMOVR" items="Model.HandMovementsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMOVR"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRTX"></p>
+                    <label asp-for="@Model.B3.HANDMVRX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDMVRX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.HANDMVRX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMVRX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.HANDMOVL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.HANDMOVL)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMOVL"></p>
+                        <radio-button-group id="B3_HANDMOVL" for="B3.HANDMOVR" items="Model.HandMovementsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMOVL"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRTX"></p>
+                    <label asp-for="@Model.B3.HANDMVLX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDMVLX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.HANDMVLX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMVLX"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Rapid alternating movements of hands</h3>
+            <p>(pronation-supination movements of hands, vertically and horizontally, with as large an amplitude as possible, both hands simultaneously)</p>
+            <div class="@rowCSS">
+                <label asp-for="B3.HANDALTR"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.HANDALTR)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDALTR"></p>
+                        <radio-button-group id="HANDALTR" for="B3.HANDALTR" items="Model.RapidHandsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDALTR"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDATRX"></p>
+                    <label asp-for="@Model.B3.HANDATRX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDATRX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.HANDATRX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDATRX"></span>
+                </div>
+
+            </div>
+            <div class="@rowCSS">
+                <label asp-for="B3.HANDALTL"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.HANDALTL)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDALTL"></p>
+                        <radio-button-group id="HANDALTL" for="B3.HANDALTL" items="Model.RapidHandsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDALTL"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDATLX"></p>
+                    <label asp-for="@Model.B3.HANDATLX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDATLX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.HANDATLX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDATLX"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="subcounterreset">
+            <h3 class=" counter text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Leg agility</h3>
+            <p>(participant taps heel on the ground in rapid succession, picking up entire leg; amplitude should be at least 3 inches)</p>
+            <div class="@rowCSS">
+                <label asp-for="B3.LEGRT"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.LEGRT)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGRT"></p>
+                        <radio-button-group id="LEGRT" for="B3.LEGRT" items="Model.LegListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGRT"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGRTX"></p>
+                    <label asp-for="@Model.B3.LEGRTX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.LEGRTX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.LEGRTX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGRTX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.LEGLF"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.B3.LEGLF)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGLF"></p>
+                        <radio-button-group id="LEGLF" for="B3.LEGLF" items="Model.LegListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGLF"></span>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGLFX"></p>
+                    <label asp-for="@Model.B3.LEGLFX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.LEGLFX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.LEGLFX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGLFX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.ARISING"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.ARISING)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.ARISING"></p>
+                        <radio-button-group id="ARISING" for="B3.ARISING" items="Model.ArisingListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.ARISING"></span>
+                    </div>
+                </div>
+
+                <div class="subcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.ARISINGX"></p>
+                    <label asp-for="@Model.B3.ARISINGX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.B3.ARISINGX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.ARISINGX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.ARISINGX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.POSTURE"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.POSTURE)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSTURE"></p>
+                        <radio-button-group id="POSTURE" for="B3.POSTURE" items="Model.PostureListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSTURE"></span>
+                    </div>
+                </div>
+
+                <div class="subcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSTUREX"></p>
+                    <label asp-for="@Model.B3.POSTUREX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.B3.POSTUREX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.POSTUREX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSTUREX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.GAIT"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.GAIT)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.GAIT"></p>
+                        <radio-button-group id="GAIT" for="B3.GAIT" items="Model.GaitListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.GAIT"></span>
+                    </div>
+                </div>
+
+                <div class="subcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.GAITX"></p>
+                    <label asp-for="@Model.B3.GAITX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.B3.GAITX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.GAITX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.GAITX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.POSSTAB"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.POSSTAB)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSSTAB"></p>
+                        <radio-button-group id="POSSTAB" for="B3.POSSTAB" items="Model.PostureStabilityListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSSTAB"></span>
+                    </div>
+                </div>
+
+                <div class="subcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSSTABX"></p>
+                    <label asp-for="@Model.B3.POSSTABX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.B3.POSSTABX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.POSSTABX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSSTABX"></span>
+                </div>
+
+            </div>
+
+            <div class="@rowCSS">
+                <label asp-for="B3.BRADYKIN"><span class="counter"></span> @Html.DisplayNameFor(model => model.B3.BRADYKIN)</label>
+                <div class="mt-2">
+                    <div>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.BRADYKIN"></p>
+                        <radio-button-group id="BRADYKIN" for="B3.BRADYKIN" items="Model.BodyListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.BRADYKIN"></span>
+                    </div>
+                </div>
+
+                <div class="subcounterreset mt-4">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.BRADYKIX"></p>
+                    <label asp-for="@Model.B3.BRADYKIX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.B3.BRADYKIX)</label>
+                    <div class="mt-2">
+                        <input asp-for="@Model.B3.BRADYKIX" disabled="disabled" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.BRADYKIX"></span>
+                </div>
+
+            </div>
+
+            <div style="border: 2px solid lightgrey;">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TOTALUPDRS"></p>
+                <label asp-for="@Model.B3.TOTALUPDRS"><span class="counter mt-3 pt-2"></span>@Html.DisplayNameFor(m => m.B3.TOTALUPDRS)</label>
+                <div class="mt-2 pt-2">
+                    <input asp-for="@Model.B3.TOTALUPDRS" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TOTALUPDRS"></span>
+            </div>
+
+        </div>
     </div>
-
-
-
-
 </div>
 
 <partial name="_FormFooter" for="@Model.B3" />

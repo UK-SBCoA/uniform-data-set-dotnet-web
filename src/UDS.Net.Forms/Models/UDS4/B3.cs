@@ -166,14 +166,14 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? LEGLFX { get; set; }
 
-        [Display(Name = "Arising from chair")]
+        [Display(Name = "Arising from chair (participant attempts to rise from a straight-backed chair, with arms folded across chest)")]
         public int? ARISING { get; set; }
 
         [Display(Name = "Arising from chair untestable (specify)")]
         [MaxLength(60)]
         public string? ARISINGX { get; set; }
 
-        [Display(Name = "Posture")]
+        [Display(Name = "Posture (response to sudden, strong\nposterior displacement produced\nby pull on shoulders while\nparticipant erect with eyes\nopen and feet slightly apart;\nparticipant is prepared)")]
         public int? POSTURE { get; set; }
 
         [Display(Name = "Posture untestable (specify)")]
@@ -194,7 +194,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? POSSTABX { get; set; }
 
-        [Display(Name = "Body bradykinesia and hypokinesia")]
+        [Display(Name = "Body bradykinesia and hypokinesia (combining slowness, hesitancy,decreased arm swing, small amplitude, and poverty of movement in general)")]
         public int? BRADYKIN { get; set; }
 
         [Display(Name = "Body bradykinesia and hypokinesia untestable (specify)")]
