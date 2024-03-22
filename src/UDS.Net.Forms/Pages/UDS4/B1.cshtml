@@ -35,7 +35,7 @@
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WEIGHT"></p>
                     <div class="flex items-center">
-                        <input asp-for="@Model.B1.WEIGHT" type="number"/>
+                        <input asp-for="@Model.B1.WEIGHT" type="number" />
                         <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>
@@ -50,6 +50,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
         <div>
             <img src="~/_content/UDS.Net.Forms/B1waist_circumference.png" />
+            <p><b>Source: </b>NHLBI Obesity Education Initiative, <a href="https://www.nhlbi.nih.gov/" style="color:#1a53ff">nhlbi.nih.gov</a></p>
         </div>
         <div class="text-left">
             <b>Waist circumference</b> should be measured at the midpoint between the
@@ -65,6 +66,10 @@
             Each measurement should be taken twice and entered here. If the
             difference between the two measurements exceeds 0.5 inches, the two
             measurements should be repeated.
+            <br />
+            <br />
+            <b>Source:</b> Waist circumference and waist–hip ratio: report of a WHO expert
+            consultation, Geneva, 8–11 December 2008
         </div>
     </div>
     <div>
@@ -419,6 +424,10 @@
         </li>
 
     </ul>
+    <br />
+    <br />
+    <p><b>Source:</b> Checklist for accurate measurement of BP adapted from AHA Guidelines, Whelton PK et al., Hypertension. 2018; 71: e13-e11.</p>
+
 </div>
 <partial name="_FormFooter" for="@Model.B1" />
 
