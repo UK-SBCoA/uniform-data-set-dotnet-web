@@ -4,66 +4,66 @@
 
     <td class="px-6 py-3 border-r border-gray-300">
         <input asp-for="TreatmentIndex" type="hidden" />
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="flex h-6 items-center">
-                @Html.CheckBox("TARGETAB", Model.TARGETAB, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+        <div class="flex">
+            <div class="flex-1 mr-4">
+                <div class="relative flex items-start">
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("TARGETAB", Model.TARGETAB, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="TARGETAB" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETAB)</label>
+                    </div>
+                </div>
+                <div class="relative flex items-start">
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("TARGETTAU", Model.TARGETTAU, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="TARGETTAU" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETTAU)</label>
+                    </div>
+                </div>
+                <div class="relative flex items-start">
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("TARGETINF", Model.TARGETINF, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="TARGETINF" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETINF)</label>
+                    </div>
+                </div>
             </div>
-            <div class="ml-3 text-sm leading-6">
-                <label asp-for="TARGETAB" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETAB)</label>
-            </div>
-        </div>
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="flex h-6 items-center">
-                @Html.CheckBox("TARGETTAU", Model.TARGETTAU, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", disabled = "disabled" })
-            </div>
-            <div class="ml-3 text-sm leading-6">
-                <label asp-for="TARGETTAU" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETTAU)</label>
-            </div>
-        </div>
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="flex h-6 items-center">
-                @Html.CheckBox("TARGETINF", Model.TARGETINF, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", disabled = "disabled" })
-            </div>
-            <div class="ml-3 text-sm leading-6">
-                <label asp-for="TARGETINF" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETINF)</label>
-            </div>
-        </div>
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="flex h-6 items-center">
-                @Html.CheckBox("TARGETSYN", Model.TARGETSYN, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", disabled = "disabled" })
-            </div>
-            <div class="ml-3 text-sm leading-6">
-                <label asp-for="TARGETSYN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETSYN)</label>
-            </div>
-        </div>
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="flex h-6 items-center">
-                @Html.CheckBox("TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.Treatment.TARGETOTH\" ]" })
+            <div class="flex-1 mr-4">
+                <div class="relative flex items-start">
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("TARGETSYN", Model.TARGETSYN, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="TARGETSYN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETSYN)</label>
+                    </div>
+                </div>
 
-            </div>
-            <div class="ml-3 text-sm leading-6">
-                <label asp-for="TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETOTH)</label>
-            </div>
-        </div>
-        <div class="relative flex items-start">
-            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-            <div class="mt-2">
-                <input asp-for="TARGETOTX" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="TARGETOTX"></span>
+                <div class="relative flex items-start">
+                    <div class="flex h-6 items-center">
+                        @Html.CheckBox("TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4aTreatment.TARGETOTX\" ]" })
+                    </div>
+                    <div class="ml-3 text-sm leading-6">
+                        <label asp-for="TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETOTH)</label>
+                    </div>
+                </div>
+                <div class="relative flex items-start">
+                    <div class="mt-2">
+                        <input asp-for="TARGETOTX" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="TARGETOTX"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </td>
 
-    <td class="px-6 py-3 border-r border-gray-300">
+    <td class="px-6 py-3 border-r border-gray-300 min-w-[250px]">
         <div class="relative flex items-start">
             <span class="mr-3 block font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="TRTTRIAL" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" disabled />
+                <input asp-for="TRTTRIAL" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="TRTTRIAL"></span>
             </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="relative flex items-start">
             <span class="mr-3 block font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="NCTNUM" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="NCT" disabled />
+                <input asp-for="NCTNUM" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="NCT" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="NCTNUM"></span>
             </div>
         </div>
@@ -81,14 +81,14 @@
         <div class="relative flex items-start">
             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="STARTMO" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="MM" disabled />
+                <input asp-for="STARTMO" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="MM" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="STARTMO"></span>
             </div>
         </div>
         <div class="relative flex items-start">
             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="STARTYEAR" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="YYYY" disabled />
+                <input asp-for="STARTYEAR" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="YYYY" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="STARTYEAR"></span>
             </div>
         </div>
@@ -98,20 +98,20 @@
         <div class="relative flex items-start">
             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="ENDMO" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="MM" disabled />
+                <input asp-for="ENDMO" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="MM" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="ENDMO"></span>
             </div>
         </div>
         <div class="relative flex items-start">
             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
             <div class="mt-2">
-                <input asp-for="ENDYEAR" class="treatmentTable disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="YYYY" disabled />
+                <input asp-for="ENDYEAR" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" placeholder="YYYY" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="ENDYEAR"></span>
             </div>
         </div>
     </td>
 
-    <td class="px-6 py-3 border-r border-gray-300">
+    <td class="px-6 py-3 border-r border-gray-300 min-w-[200px]">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.CARETRIAL"></p>
             <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems"></radio-button-group>
@@ -119,7 +119,7 @@
         </div>
     </td>
 
-    <td class="px-6 py-3 border-r border-gray-300">
+    <td class="px-6 py-3 border-r border-gray-300 min-w-[200px]">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.TRIALGRP"></p>
             <radio-button-group id="@Html.IdFor(m => m.TRIALGRP)" for="@Model.TRIALGRP" items="Model.TRIALGRPistItems"></radio-button-group>
@@ -128,3 +128,29 @@
     </td>
 
 </tr>
+@for (int i = 0; i < Model.A4a.Treatments.Count; i++)
+{
+    <div class="relative flex items-start">
+        <div class="flex h-6 items-center">
+            @Html.CheckBoxFor(m => m.A4a.Treatments[i].TARGETOTH ?? false, new
+            {
+     @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+     data_affects = "true",
+     data_affects_toggle_targets = $"[ \"#Treatments_{i}__TARGETOTX\" ]"
+ })
+        </div>
+        <div class="ml-3 text-sm leading-6">
+            <label asp-for="@Model.A4a.Treatments[i].TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.Treatments[i].TARGETOTH)</label>
+        </div>
+    </div>
+    <div class="relative flex items-start">
+        <div class="mt-2">
+            @Html.TextBoxFor(m => m.A4a.Treatments[i].TARGETOTX, new
+            {
+                @class = "treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                id = $"Treatments_{i}__TARGETOTX" // Ensure this ID matches the one referenced in data_affects_toggle_targets
+            })
+            <span asp-validation-for="@Model.A4a.Treatments[i].TARGETOTX" class="text-sm text-red-600"></span>
+        </div>
+    </div>
+}
