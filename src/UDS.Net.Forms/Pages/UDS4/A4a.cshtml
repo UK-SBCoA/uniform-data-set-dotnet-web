@@ -50,7 +50,7 @@
             </tr>
         </thead>
 
-        <tbody class="bg-gray-50 divide-y divide-gray-200">
+        <tbody class="divide-y divide-gray-200">
             @for (int i = 0; i < Model.A4a.Treatments.Count(); i++)
             {
                 @Html.EditorFor(m => m.A4a.Treatments[i])
@@ -68,19 +68,18 @@
     </div>
 </div>
 
-<div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+<div class="subcounterreset ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
         <label class="text-base font-semibold text-gray-900">
-            <span class="counter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
+            <span class="subcounter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
         </label><br />
-        @*<span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.AdverseEventsIndicated"></span>*@
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.AdverseEventsIndicated"></span>
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
-        <fieldset class="subcounterreset">
-            <div class="space-y-1">
-
+        <fieldset class="">
+            <div class="space-y-1 subsubcounterreset">
                 <div class="relative flex items-start">
-                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
                         @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                     </div>
@@ -90,7 +89,7 @@
                 </div>
 
                 <div class="relative flex items-start">
-                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
                         @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                     </div>
@@ -100,7 +99,7 @@
                 </div>
 
                 <div class="relative flex items-start">
-                    <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
                         @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
                     </div>
@@ -113,15 +112,13 @@
                     <input asp-for="A4a.ADVERSEOTX" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
                 </div>
-
             </div>
         </fieldset>
     </div>
 </div>
 
-
 <partial name="_FormFooter" for="@Model.A4a" />
 
-@*@section Scripts {
+@section Scripts {
         <script src="~/_content/UDS.Net.Forms/js/A4a.js"></script>
-    }*@
+    }
