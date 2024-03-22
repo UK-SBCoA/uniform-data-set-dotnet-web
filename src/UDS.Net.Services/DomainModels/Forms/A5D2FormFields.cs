@@ -102,7 +102,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? INSOMN { get; set; }
         public int? OTHSLEEP { get; set; }
         public string? OTHSLEEX { get; set; }
-        public int? CANCER { get; set; }
+        public int? CANCERACTV { get; set; }
         public bool? CANCERPRIM { get; set; }
         public bool? CANCERMETA { get; set; }
         public bool? CANCMETBR { get; set; }
@@ -139,7 +139,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string? OTHCONDX { get; set; }
         public int? MAJORDEP { get; set; }
         public int? OTHERDEP { get; set; }
-        public bool? DEPRTREAT { get; set; }
+        public int? DEPRTREAT { get; set; }
         public int? BIPOLAR { get; set; }
         public int? SCHIZ { get; set; }
         public int? ANXIETY { get; set; }
@@ -284,7 +284,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INSOMN = a5D2Dto.INSOMN;
                 this.OTHSLEEP = a5D2Dto.OTHSLEEP;
                 this.OTHSLEEX = a5D2Dto.OTHSLEEX;
-                this.CANCER = a5D2Dto.CANCER;
+                this.CANCERACTV = a5D2Dto.CANCERACTV;
                 this.CANCERPRIM = a5D2Dto.CANCERPRIM;
                 this.CANCERMETA = a5D2Dto.CANCERMETA;
                 this.CANCMETBR = a5D2Dto.CANCMETBR;
@@ -321,7 +321,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.OTHCONDX = a5D2Dto.OTHCONDX;
                 this.MAJORDEP = a5D2Dto.MAJORDEP;
                 this.OTHERDEP = a5D2Dto.OTHERDEP;
-                this.DEPRTREAT = a5D2Dto.DEPRTREAT;
+                this.DEPRTREAT = a5D2Dto.DEPRTREAT.HasValue ? 1 : 0;
                 this.BIPOLAR = a5D2Dto.BIPOLAR;
                 this.SCHIZ = a5D2Dto.SCHIZ;
                 this.ANXIETY = a5D2Dto.ANXIETY;
