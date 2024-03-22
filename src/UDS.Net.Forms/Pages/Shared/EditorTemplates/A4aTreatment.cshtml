@@ -128,29 +128,3 @@
     </td>
 
 </tr>
-@for (int i = 0; i < Model.A4a.Treatments.Count; i++)
-{
-    <div class="relative flex items-start">
-        <div class="flex h-6 items-center">
-            @Html.CheckBoxFor(m => m.A4a.Treatments[i].TARGETOTH ?? false, new
-            {
-     @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-     data_affects = "true",
-     data_affects_toggle_targets = $"[ \"#Treatments_{i}__TARGETOTX\" ]"
- })
-        </div>
-        <div class="ml-3 text-sm leading-6">
-            <label asp-for="@Model.A4a.Treatments[i].TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.Treatments[i].TARGETOTH)</label>
-        </div>
-    </div>
-    <div class="relative flex items-start">
-        <div class="mt-2">
-            @Html.TextBoxFor(m => m.A4a.Treatments[i].TARGETOTX, new
-            {
-                @class = "treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                id = $"Treatments_{i}__TARGETOTX" // Ensure this ID matches the one referenced in data_affects_toggle_targets
-            })
-            <span asp-validation-for="@Model.A4a.Treatments[i].TARGETOTX" class="text-sm text-red-600"></span>
-        </div>
-    </div>
-}
