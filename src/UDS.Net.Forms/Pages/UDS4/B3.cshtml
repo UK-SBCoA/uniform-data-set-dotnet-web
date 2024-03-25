@@ -390,7 +390,7 @@
                 </div>
 
                 <div class="subsubcounterreset mt-4">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRTX"></p>
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMVRX"></p>
                     <label asp-for="@Model.B3.HANDMVRX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDMVRX)</label>
                     <div class="mt-2">
                         <input asp-for="@Model.B3.HANDMVRX"/>
@@ -405,13 +405,13 @@
                 <div class="mt-2">
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMOVL"></p>
-                        <radio-button-group id="B3_HANDMOVL" for="B3.HANDMOVR" items="Model.HandMovementsListItems" ui-behaviors="Model.HANDMOVLUIBehavior"></radio-button-group>
+                        <radio-button-group id="B3_HANDMOVL" for="B3.HANDMOVL" items="Model.HandMovementsListItems" ui-behaviors="Model.HANDMOVLUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMOVL"></span>
                     </div>
                 </div>
 
                 <div class="subsubcounterreset mt-4">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRTX"></p>
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMVLX"></p>
                     <label asp-for="@Model.B3.HANDMVLX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.B3.HANDMVLX)</label>
                     <div class="mt-2">
                         <input asp-for="@Model.B3.HANDMVLX"/>
