@@ -337,34 +337,22 @@ namespace UDS.Net.Forms.Extensions
             {
                 AFFFAMM = vm.AFFFAMM,
                 NWINFMUT = vm.NWINFMUT,
-                FADMUT = vm.FADMUT,
-                FADMUTX = vm.FADMUTX,
-                FADMUSO = vm.FADMUSO,
-                FADMUSOX = vm.FADMUSOX,
-                FFTDMUT = vm.FFTDMUT,
-                FFTDMUTX = vm.FFTDMUTX,
-                FFTDMUSO = vm.FFTDMUSO,
-                FFTDMUSX = vm.FFTDMUSX,
-                FOTHMUT = vm.FOTHMUT,
-                FOTHMUTX = vm.FOTHMUTX,
-                FOTHMUSO = vm.FOTHMUSO,
-                FOTHMUSX = vm.FOTHMUSX,
-                MOMMOB = vm.MOMMOB,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
-                MOMNEUR = vm.MOMNEUR,
-                MOMPRDX = vm.MOMPRDX,
-                MOMMOE = vm.MOMMOE,
+                MOMETPR = vm.MOMETPR,
+                MOMETSEC = vm.MOMETSEC,
+                MOMMEVAL = vm.MOMMEVAL,
                 MOMAGEO = vm.MOMAGEO,
-                DADMOB = vm.DADMOB,
                 DADYOB = vm.DADYOB,
                 DADDAGE = vm.DADDAGE,
-                DADNEUR = vm.DADNEUR,
-                DADPRDX = vm.DADPRDX,
-                DADMOE = vm.DADMOE,
+                DADETPR = vm.DADETPR,
+                DADETSEC = vm.DADETSEC,
+                DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
+                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
+                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
@@ -377,12 +365,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMemberFormFields()
             {
                 FamilyMemberIndex = vm.FamilyMemberIndex,
-                MOB = vm.MOB,
                 YOB = vm.YOB,
                 AGD = vm.AGD,
-                NEU = vm.NEU,
-                PDX = vm.PDX,
-                MOE = vm.MOE,
+                ETPR = vm.ETPR,
+                ETSEC = vm.ETSEC,
+                MEVAL = vm.MEVAL,
                 AGO = vm.AGO
             };
         }
@@ -535,15 +522,19 @@ namespace UDS.Net.Forms.Extensions
             {
                 HEIGHT = vm.HEIGHT,
                 WEIGHT = vm.WEIGHT,
-                BPSYS = vm.BPSYS,
-                BPDIAS = vm.BPDIAS,
-                HRATE = vm.HRATE,
-                VISION = vm.VISION,
-                VISCORR = vm.VISCORR,
-                VISWCORR = vm.VISWCORR,
-                HEARING = vm.HEARING,
-                HEARAID = vm.HEARAID,
-                HEARWAID = vm.HEARWAID
+                WAIST1 = vm.WAIST1,
+                WAIST2 = vm.WAIST2,
+                HIP1 = vm.HIP1,
+                HIP2 = vm.HIP2,
+                BPSYSL1 = vm.BPSYSL1,
+                BPDIASL1 = vm.BPDIASL1,
+                BPSYSL2 = vm.BPSYSL2,
+                BPDIASL2 = vm.BPDIASL2,
+                BPSYSR1 = vm.BPSYSR1,
+                BPDIASR1 = vm.BPDIASR1,
+                BPSYSR2 = vm.BPSYSR2,
+                BPDIASR2 = vm.BPDIASR2,
+                HRATE = vm.HRATE
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

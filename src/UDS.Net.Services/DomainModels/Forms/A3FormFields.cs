@@ -24,23 +24,24 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MOMMOB { get; set; }
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
-        public int? MOMNEUR { get; set; }
-        public int? MOMPRDX { get; set; }
-        public int? MOMMOE { get; set; }
+        public string? MOMETPR { get; set; }
+        public string? MOMETSEC { get; set; }
+        public int? MOMMEVAL { get; set; }
         public int? MOMAGEO { get; set; }
         public int? DADMOB { get; set; }
         public int? DADYOB { get; set; }
         public int? DADDAGE { get; set; }
-        public int? DADNEUR { get; set; }
-        public int? DADPRDX { get; set; }
-        public int? DADMOE { get; set; }
+        public string? DADETPR { get; set; }
+        public string? DADETSEC { get; set; }
+        public int? DADMEVAL { get; set; }
         public int? DADAGEO { get; set; }
-
         public int? SIBS { get; set; }
+        public int? NWINFSIB { get; set; }
 
         public List<A3FamilyMemberFormFields> SiblingFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
         public int? KIDS { get; set; }
+        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMemberFormFields> KidsFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
@@ -51,7 +52,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4.0";
         }
 
         private A3FamilyMemberFormFields GetFamilyMemberFormFields(int index, string propertyPrefix, A3Dto dto)
@@ -71,6 +72,9 @@ namespace UDS.Net.Services.DomainModels.Forms
                     {
                         familyMember.YOB = value.YOB;
                         familyMember.AGD = value.AGD;
+                        familyMember.ETPR = value.ETPR;
+                        familyMember.ETSEC = value.ETSEC;
+                        familyMember.MEVAL = value.MEVAL;
                         familyMember.AGO = value.AGO;
 
                         // TODO map new fields
@@ -104,13 +108,21 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a3Dto = ((A3Dto)dto);
                 this.AFFFAMM = a3Dto.AFFFAMM;
-                this.NWINFMUT = a3Dto.AFFFAMM;
+                this.NWINFMUT = a3Dto.NWINFMUT;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
+                this.MOMETPR = a3Dto.MOMETPR;
+                this.MOMETSEC = a3Dto.MOMETSEC;
+                this.MOMMEVAL = a3Dto.MOMMEVAL;
                 this.MOMAGEO = a3Dto.MOMAGEO;
                 this.DADYOB = a3Dto.DADYOB;
+                this.DADETPR = a3Dto.DADETPR;
+                this.DADETSEC = a3Dto.DADETSEC;
+                this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
+                this.NWINFSIB = a3Dto.NWINFSIB;
+                this.NWINFKID = a3Dto.NWINFKID;
 
                 // TODO map new fields
 

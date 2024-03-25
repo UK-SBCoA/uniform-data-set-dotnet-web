@@ -25,6 +25,18 @@ namespace UDS.Net.Forms.Extensions
             vm.IsDeleted = form.IsDeleted;
         }
 
+        public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
+        {
+            return new ParticipationsPaginatedModel
+            {
+                List = participations.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
         public static ParticipationModel ToVM(this Participation participation)
         {
             return new ParticipationModel()
@@ -446,34 +458,22 @@ namespace UDS.Net.Forms.Extensions
                 Id = formId,
                 AFFFAMM = fields.AFFFAMM,
                 NWINFMUT = fields.NWINFMUT,
-                FADMUT = fields.FADMUT,
-                FADMUTX = fields.FADMUTX,
-                FADMUSO = fields.FADMUSO,
-                FADMUSOX = fields.FADMUSOX,
-                FFTDMUT = fields.FFTDMUT,
-                FFTDMUTX = fields.FFTDMUTX,
-                FFTDMUSO = fields.FFTDMUSO,
-                FFTDMUSX = fields.FFTDMUSX,
-                FOTHMUT = fields.FOTHMUT,
-                FOTHMUTX = fields.FOTHMUTX,
-                FOTHMUSO = fields.FOTHMUSO,
-                FOTHMUSX = fields.FOTHMUSX,
-                MOMMOB = fields.MOMMOB,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
-                MOMNEUR = fields.MOMNEUR,
-                MOMPRDX = fields.MOMPRDX,
-                MOMMOE = fields.MOMMOE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
-                DADMOB = fields.DADMOB,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
-                DADNEUR = fields.DADNEUR,
-                DADPRDX = fields.DADPRDX,
-                DADMOE = fields.DADMOE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
+                NWINFSIB = fields.NWINFSIB,
                 KIDS = fields.KIDS,
+                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
@@ -484,12 +484,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMember()
             {
                 FamilyMemberIndex = fields.FamilyMemberIndex,
-                MOB = fields.MOB,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
-                NEU = fields.NEU,
-                PDX = fields.PDX,
-                MOE = fields.MOE,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }
@@ -675,15 +674,19 @@ namespace UDS.Net.Forms.Extensions
                 Id = formId,
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
-                BPSYS = fields.BPSYS,
-                BPDIAS = fields.BPDIAS,
-                HRATE = fields.HRATE,
-                VISION = fields.VISION,
-                VISCORR = fields.VISCORR,
-                VISWCORR = fields.VISWCORR,
-                HEARING = fields.HEARING,
-                HEARAID = fields.HEARAID,
-                HEARWAID = fields.HEARWAID
+                WAIST1 = fields.WAIST1,
+                WAIST2 = fields.WAIST2,
+                HIP1 = fields.HIP1,
+                HIP2 = fields.HIP2,
+                BPSYSL1 = fields.BPSYSL1,
+                BPDIASL1 = fields.BPDIASL1,
+                BPSYSL2 = fields.BPSYSL2,
+                BPDIASL2 = fields.BPDIASL2,
+                BPSYSR1 = fields.BPSYSR1,
+                BPDIASR1 = fields.BPDIASR1,
+                BPSYSR2 = fields.BPSYSR2,
+                BPDIASR2 = fields.BPDIASR2,
+                HRATE = fields.HRATE
             };
         }
 

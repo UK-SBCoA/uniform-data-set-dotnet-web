@@ -543,9 +543,15 @@ namespace UDS.Net.Services.Extensions
                 NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS
@@ -641,6 +647,9 @@ namespace UDS.Net.Services.Extensions
                 FormId = formId,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }
@@ -784,6 +793,18 @@ namespace UDS.Net.Services.Extensions
             {
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
+                WAIST1 = fields.WAIST1,
+                WAIST2 = fields.WAIST2,
+                HIP1 = fields.HIP1,
+                HIP2 = fields.HIP2,
+                BPSYSL1 = fields.BPSYSL1,
+                BPDIASL1 = fields.BPDIASL1,
+                BPSYSL2 = fields.BPSYSL2,
+                BPDIASL2 = fields.BPDIASL2,
+                BPSYSR1 = fields.BPSYSR1,
+                BPDIASR1 = fields.BPDIASR1,
+                BPSYSR2 = fields.BPSYSR2,
+                BPDIASR2 = fields.BPDIASR2,
                 HRATE = fields.HRATE,
             };
         }
