@@ -43,7 +43,7 @@
 
                 <div class="relative flex items-start">
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4aTreatment.TARGETOTX\" ]" })
+                        @Html.CheckBox("TARGETOTH", Model.TARGETOTH, new { @class = "treatmentTable h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
                         <label asp-for="TARGETOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.TARGETOTH)</label>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="relative flex items-start">
                     <div class="mt-2">
-                        <input asp-for="TARGETOTX" class="treatmentTable block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                        <input asp-for="TARGETOTX" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="TARGETOTX"></span>
                     </div>
                 </div>
