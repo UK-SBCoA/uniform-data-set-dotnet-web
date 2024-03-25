@@ -51,7 +51,7 @@
         </thead>
 
         <tbody class="divide-y divide-gray-200">
-            @for (int i = 0; i < Model.A4a.Treatments.Count(); i++)
+            @for (int i = 0; i < 2; i++)
             {
                 @Html.EditorFor(m => m.A4a.Treatments[i])
             }
@@ -115,6 +115,45 @@
             </div>
         </fieldset>
     </div>
+</div>
+
+
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y border border-grey divide-gray-100">
+        <span class="text-base font-semibold text-gray-900">
+           2. Please provide information about the clinical treatment(s) and/or trial(s)
+        </span>
+        <thead class="bg-gray-200 border-b border-black divide-gray-100">
+            <tr>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900 ">
+                    <p>Primary Drug Target </p>
+                    <p><i class="text-gray-400">(check all that apply)</i></p>
+                </th>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    Specific treatment and/or trial
+                </th>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    Start date <i class="text-gray-400">(month/year)</i>
+                </th>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    End date <i class="text-gray-400">(month/year)</i>
+                </th>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    How was the treatment provided?
+                </th>
+                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
+                    If clinical trial, in which group was the participant?
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-200">
+            @for (int i = 2; i < Model.A4a.Treatments.Count(); i++)
+            {
+                @Html.EditorFor(model => model.A4a.Treatments[i])
+            }
+        </tbody>
+    </table>
 </div>
 
 <partial name="_FormFooter" for="@Model.A4a" />
