@@ -31,7 +31,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(ADVERSEOTH), "1", ErrorMessage = "Specify other issues.")]
+        [RequiredIf(nameof(ADVERSEOTH), "true", ErrorMessage = "Specify other issues.")]
         [Display(Name = "Specify")]
         public string? ADVERSEOTX { get; set; }
 
@@ -54,6 +54,21 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Status == FormStatus.Complete)
+            {
+                foreach (var treatment in Treatments)
+                {
+                    if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
+                    {
+                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(treatment.STARTYEAR) });
+                    }
+
+                    if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year))
+                    {
+                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(treatment.ENDYEAR) });
+                    }
+                }
+            }
 
             foreach (var result in base.Validate(validationContext))
             {
