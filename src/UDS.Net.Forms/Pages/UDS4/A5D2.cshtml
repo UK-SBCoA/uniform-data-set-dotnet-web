@@ -1,16 +1,22 @@
 @* TODO:
-- Subcounter for 1j1 and 1j2 are hardcoded for now, create a new class for this situation = use subsub counter
 - should i reformat 2i? since the radios fall within the table? Move the string input underneath?
 - 4g3 other question input box? 
 - make sure that all answers have a correctly styled numbering circle
 - attempt to get the subcounters working for 4g1 sub questions
 - labels for questions like 5f1a are copied but still pointing at previous section it was copied from. Asp-for needs to be fixed
 - specify text in other questions for questions like 4g1i cannot add specify text because of styling for label adding property name
-- questions like 5l, with a row and other in same row, need to be made the same. question 5l follows the pdf more, the one in section 2 adds another letter in that format with another row for other
-- CANCERACTV is CANCER in the model. Check the entity to see if this change is persisted from the API 
+- CANCERACTV is CANCER in the model. Check the entity to see if this change is persisted from the API. We will use CANCERACTV, so update on the web to this 
 - section 5 missing subtext under header
 - clean up empty <div></div> in random spots? 
-
+- OTHERCOND property is OTHCOND in the model, this may need to be changed
+- check for empty regular expressions in the model
+- check back through validation to make sure its correct, something weird happened with the copy paste
+- DEPRTREAT is a bool on the backend, but its a 2 choice question. Should this be a int in the api? 
+- adjust table to match columns for 3 part absent, recent/active, and unknown (no remote/inactive)\
+- 4f1 checkbox, at least one needs to to be checked if 4f3 is 1
+- 5a2 another checkbox custom validation, one checked if diabetes is 1 or 2
+- 7a disable logic will be a little tricky, may need to add some buttons if we want to disable OR just leave blank when form end? 
+- add the custom validation logic for checkbox sections. One needs to be selected if parent has value of 1 or 2
 *@
 
 @page  "{id:int?}"
@@ -89,10 +95,10 @@
                     </div>
                     <div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.ALCFREQYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCFREQYR)</br><span class="font-bold">(IF NEVER OR UNKNOWN, SKIP TO QUESTION 11)</span></label>
+                            <label asp-for="A5D2.ALCFREQYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ALCFREQYR)</br><span class="font-bold">(IF NEVER OR UNKNOWN, SKIP TO QUESTION 1i)</span></label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ALCFREQYR"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.A5D2.ALCFREQYR)" for="@Model.A5D2.ALCFREQYR" items="Model.ALCFREQYRItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.A5D2.ALCFREQYR)" for="@Model.A5D2.ALCFREQYR" items="Model.ALCFREQYRItems" ui-behaviors="Model.ALCFREQYRBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ALCFREQYR"></span>
                             </div>
                         </div>
@@ -222,7 +228,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTATTACK"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HRTATTACK)" for="@Model.A5D2.HRTATTACK" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HRTATTACK)" for="@Model.A5D2.HRTATTACK" items="Model.ConditionsListItems" ui-behaviors="Model.HRTATTACKBehavior"></table-cell-radio-buttons>
 
                                 </tr>
                                 @* sub section *@
@@ -257,7 +263,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CARDARREST"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CARDARREST)" for="@Model.A5D2.CARDARREST" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CARDARREST)" for="@Model.A5D2.CARDARREST" items="Model.ConditionsListItems" ui-behaviors="Model.CARDARRESTBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -298,7 +304,21 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVBYPASS"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVBYPASS)" for="@Model.A5D2.CVBYPASS" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVBYPASS)" for="@Model.A5D2.CVBYPASS" items="Model.ConditionsListItems" ui-behaviors="Model.CVBYPASSBehavior"></table-cell-radio-buttons>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="ml-5 subsubcounterreset">
+                                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                                <label asp-for="A5D2.BYPASSAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BYPASSAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                                    <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BYPASSAGE"></p>
+                                                    <input asp-for="@Model.A5D2.BYPASSAGE" />
+                                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.BYPASSAGE"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -307,7 +327,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVPACDEF"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVPACDEF)" for="@Model.A5D2.CVPACDEF" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVPACDEF)" for="@Model.A5D2.CVPACDEF" items="Model.ConditionsListItems" ui-behaviors="Model.CVPACDEFBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -339,7 +359,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVHVALVE"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVHVALVE)" for="@Model.A5D2.CVHVALVE" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVHVALVE)" for="@Model.A5D2.CVHVALVE" items="Model.ConditionsListItems" ui-behaviors="Model.CVHVALVEBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -361,7 +381,7 @@
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVOTHR"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CVOTHR"></span>
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVOTHR)" for="@Model.A5D2.CVOTHR" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVOTHR)" for="@Model.A5D2.CVOTHR" items="Model.ConditionsListItems" ui-behaviors="Model.CVOTHRBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -405,7 +425,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CBSTROKE"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBSTROKE)" for="@Model.A5D2.CBSTROKE" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBSTROKE)" for="@Model.A5D2.CBSTROKE" items="Model.ConditionsListItems" ui-behaviors="Model.CBSTROKEBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 @* sub section *@
                                 <tr>
@@ -434,10 +454,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.STROKSTAT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKSTAT)</label>
-                                        <p class="text-sm text-gray-500" asp-description-for="A5D2.STROKSTAT"></p>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.STROKSTAT"></span>
-
+                                        <div class="ml-6">
+                                            <label asp-for="A5D2.STROKSTAT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKSTAT)</label>
+                                            <p class="text-sm text-gray-500" asp-description-for="A5D2.STROKSTAT"></p>
+                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.STROKSTAT"></span>
+                                        </div>
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.STROKSTAT)" for="@Model.A5D2.STROKSTAT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
@@ -471,7 +492,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CBTIA"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBTIA)" for="@Model.A5D2.CBTIA" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBTIA)" for="@Model.A5D2.CBTIA" items="Model.ConditionsListItems" ui-behaviors="Model.CBTIABehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -514,7 +535,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PD"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PD)" for="@Model.A5D2.PD" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PD)" for="@Model.A5D2.PD" items="Model.ConditionsListNoRemoteItems" ui-behaviors="Model.PDbehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -537,7 +558,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PDOTHR"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PDOTHR)" for="@Model.A5D2.PDOTHR" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PDOTHR)" for="@Model.A5D2.PDOTHR" items="Model.ConditionsListNoRemoteItems" ui-behaviors="Model.PDOTHRBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -555,12 +576,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.SEIZURES"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4b)</span></label>
+                                        <label asp-for="A5D2.SEIZURES"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4d)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.SEIZURES"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SEIZURES"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.SEIZURES)" for="@Model.A5D2.SEIZURES" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.SEIZURES)" for="@Model.A5D2.SEIZURES" items="Model.ConditionsListItems" ui-behaviors="Model.SEIZURESBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -619,18 +640,28 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.HEADIMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADIMP)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4h)</span></label>
-                                        <p class="text-sm text-gray-500" asp-description-for="A5D2.HEADIMP"></p>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HEADIMP"></span>
-
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                            <label asp-for="A5D2.HEADIMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADIMP)</label>
+                                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HEADIMP"></p>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.HEADIMP)" for="@Model.A5D2.HEADIMP" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HEADIMP"></span>
+                                            </div>
+                                        </div>
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HEADIMP)" for="@Model.A5D2.HEADIMP" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
                                 <tr class="subsubcounterreset">
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900"><span class="subsubcounter"></span> Indicate the source(s) of exposure for repeated hits to the head: <span class="italic">(Check all that apply)</span></label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900"><span class="subsubcounter"></span> Indicate the source(s) of exposure for repeated hits to the head: <span class="italic">(Check all that apply)</span></label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HEADIMPCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -727,7 +758,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1i.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPOTHER", Model.A5D2.IMPOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPOTHER", Model.A5D2.IMPOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.IMPOTHERX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPOTHER" class="font-medium text-gray-900"></label>
@@ -761,10 +792,10 @@
                                 <tr>
                                     <td colspan="4">
                                         <div class="@rowCSS">
-                                            <label asp-for="@Model.A5D2.TOBAC100"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJURY)<br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 5a)</span></label>
+                                            <label asp-for="@Model.A5D2.HEADINJURY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJURY)<br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 5a)</span></label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HEADINJURY"></p>
-                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.HEADINJURY)" for="@Model.A5D2.HEADINJURY" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.HEADINJURY)" for="@Model.A5D2.HEADINJURY" items="Model.BasicYesNoListItems" ui-behaviors="Model.HEADINJURYBehavior"></radio-button-group>
                                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HEADINJURY"></span>
                                             </div>
                                         </div>
@@ -836,6 +867,11 @@
                 </div>
             </div>
             <div class="text-3xl my-10">Section 5 - Medical conditions</div>
+            <div>
+                <p>
+                    <span class="underline">If any of the conditions</span> still require active management and/or medications, please select <span class="font-bold">"Recent / Active".</span>
+                </p>
+            </div>
             <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subsubcounterreset">
                 <div>
                     <div class="subcounterreset">
@@ -857,7 +893,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DIABETES"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.DIABETES)" for="@Model.A5D2.DIABETES" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.DIABETES)" for="@Model.A5D2.DIABETES" items="Model.ConditionsListItems" ui-behaviors="Model.DIABETESBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -875,9 +911,16 @@
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Treated with</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Treated with</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DIABETESTreatmentCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -951,7 +994,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HYPERTEN"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERTEN)" for="@Model.A5D2.HYPERTEN" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERTEN)" for="@Model.A5D2.HYPERTEN" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERTENBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -972,7 +1015,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HYPERCHO"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERCHO)" for="@Model.A5D2.HYPERCHO" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERCHO)" for="@Model.A5D2.HYPERCHO" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERCHOBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1017,9 +1060,16 @@
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Type of arthritis</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Type of arthritis</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ARTHRITTypeCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -1050,7 +1100,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f1c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHROTHR", Model.A5D2.ARTHROTHR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHROTHR", Model.A5D2.ARTHROTHR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.ARTHTYPX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHROTHR" class="font-medium text-gray-900"></label>
@@ -1082,9 +1132,16 @@
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Regions affected</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Regions affected</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ARTHRITRegionsCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -1119,10 +1176,6 @@
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHSPIN" class="font-medium text-gray-900"></label>
-                                                                </div>
-                                                                <div class="w-full">
-                                                                    <input asp-for="A5D2.ARTHTYPX" />
-                                                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ARTHTYPX"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1168,7 +1221,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.APNEA"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.APNEA)" for="@Model.A5D2.APNEA" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.APNEA)" for="@Model.A5D2.APNEA" items="Model.ConditionsListItems" ui-behaviors="Model.APNEABehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr class="subsubcounterreset">
                                     <td colspan="4">
@@ -1214,36 +1267,51 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.OTHSLEEP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEP)<span class="font-bold text-sm"> (SPECIFY)</span></label>
+                                        <label asp-for="A5D2.OTHSLEEP"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEP)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.OTHSLEEP"></p>
-                                        <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                            <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHSLEEX"></p>
-                                            <input asp-for="@Model.A5D2.OTHSLEEX" />
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHSLEEX"></span>
-                                        </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHSLEEP"></span>
+
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHSLEEP)" for="@Model.A5D2.OTHSLEEP" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHSLEEP)" for="@Model.A5D2.OTHSLEEP" items="Model.ConditionsListItems" ui-behaviors="Model.OTHSLEEPBehavior"></table-cell-radio-buttons>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="ml-5 @rowCSS">
+                                            <label asp-for="@Model.A5D2.OTHSLEEX"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEX) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHSLEEX"></p>
+                                                <input asp-for="@Model.A5D2.OTHSLEEX" />
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHSLEEX"></span>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.CANCER"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCER)</br>
+                                        <label asp-for="A5D2.CANCERACTV"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERACTV)</br>
                                             <span class="italic text-sm"> (Report all known diagnoses. Exclude non-melanoma skin cancer.</span>
                                             <span class="font-bold">IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5n)</span>
                                         </label>
-                                        <p class="text-sm text-gray-500" asp-description-for="A5D2.CANCER"></p>
-                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCER"></span>
+                                        <p class="text-sm text-gray-500" asp-description-for="A5D2.CANCERACTV"></p>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCERACTV"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CANCER)" for="@Model.A5D2.CANCER" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CANCERACTV)" for="@Model.A5D2.CANCERACTV" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
                                 <tr class="subsubcounterreset">
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Type of cancer</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Type of cancer</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCERACTVTypeCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -1280,10 +1348,6 @@
                                                                     <div class="ml-3 text-sm leading-6">
                                                                         <label asp-for="A5D2.CANCMETBR" class="font-medium text-gray-900"></label>
                                                                     </div>
-                                                                    <div class="w-full">
-                                                                        <input asp-for="A5D2.ARTHTYPX" />
-                                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ARTHTYPX"></span>
-                                                                    </div>
                                                                 </div>
                                                                 <div class="relative flex items-start">
                                                                     <div class="flex h-6 items-center">
@@ -1319,9 +1383,16 @@
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Primary site of cancer:</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Primary site of cancer:</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCERACTVSiteCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -1385,7 +1456,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2f.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCOTHER", Model.A5D2.CANCOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCOTHER", Model.A5D2.CANCOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCOTHERX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCOTHER" class="font-medium text-gray-900"></label>
@@ -1406,9 +1477,16 @@
                                     <td colspan="4">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label class="text-base font-semibold text-gray-900">
-                                                    <span class="subsubcounter"></span> Type of cancer treatment:</br><span class="italic">(Check all that apply)</span>
-                                                </label>
+                                                <div>
+                                                    <div>
+                                                        <label class="text-base font-semibold text-gray-900">
+                                                            <span class="subsubcounter"></span> Type of cancer treatment:</br><span class="italic">(Check all that apply)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div>
+                                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCERACTVTreatmentCheckboxes"></span>
+                                                    </div>
+                                                </div>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <fieldset>
                                                         <div class="space-y-5">
@@ -1417,10 +1495,10 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3a.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCBLOOD", Model.A5D2.CANCBLOOD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCRAD", Model.A5D2.CANCRAD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCBLOOD" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCRAD" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1428,10 +1506,10 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3b.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCBREAST", Model.A5D2.CANCBREAST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCRESECT", Model.A5D2.CANCRESECT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCBREAST" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCRESECT" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1439,10 +1517,10 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3c.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCCOLON", Model.A5D2.CANCCOLON, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCIMMUNO", Model.A5D2.CANCIMMUNO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCCOLON" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCIMMUNO" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1450,10 +1528,10 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3d.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCLUNG", Model.A5D2.CANCLUNG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCBONE", Model.A5D2.CANCBONE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCLUNG" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCBONE" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1461,10 +1539,21 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3e.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCPROST", Model.A5D2.CANCPROST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCCHEMO", Model.A5D2.CANCCHEMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCPROST" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCCHEMO" class="font-medium text-gray-900"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start">
+                                                                <div class="flex h-6 items-center">
+                                                                    <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
+                                                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3e.</span>
+                                                                    </label>
+                                                                    @Html.CheckBox("A5D2.CANCHORM", Model.A5D2.CANCHORM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                </div>
+                                                                <div class="ml-3 text-sm leading-6">
+                                                                    <label asp-for="A5D2.CANCHORM" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                             </div>
                                                             <div class="relative flex items-start">
@@ -1472,14 +1561,14 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3f.</span>
                                                                     </label>
-                                                                        @Html.CheckBox("A5D2.CANCOTHER", Model.A5D2.CANCOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCTROTH", Model.A5D2.CANCTROTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCTROTHX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
-                                                                    <label asp-for="A5D2.CANCOTHER" class="font-medium text-gray-900"></label>
+                                                                    <label asp-for="A5D2.CANCTROTH" class="font-medium text-gray-900"></label>
                                                                 </div>
                                                                 <div class="w-full">
-                                                                    <input asp-for="A5D2.CANCOTHERX" />
-                                                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCOTHERX"></span>
+                                                                    <input asp-for="A5D2.CANCTROTHX" />
+                                                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.CANCTROTHX"></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1510,7 +1599,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.COVID19"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.COVID19)" for="@Model.A5D2.COVID19" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.COVID19)" for="@Model.A5D2.COVID19" items="Model.ConditionsListItems" ui-behaviors="Model.COVID19Behavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1542,7 +1631,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.KIDNEY"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.KIDNEY)" for="@Model.A5D2.KIDNEY" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.KIDNEY)" for="@Model.A5D2.KIDNEY" items="Model.ConditionsListItems" ui-behaviors="Model.KIDNEYBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1558,12 +1647,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.LIVER"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVER)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5q)</span></label>
+                                        <label asp-for="A5D2.LIVER"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVER)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5r)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.LIVER"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.LIVER"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.LIVER)" for="@Model.A5D2.LIVER" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.LIVER)" for="@Model.A5D2.LIVER" items="Model.ConditionsListItems" ui-behaviors="Model.LIVERBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1584,7 +1673,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PVD"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PVD)" for="@Model.A5D2.PVD" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PVD)" for="@Model.A5D2.PVD" items="Model.ConditionsListItems" ui-behaviors="Model.PVDBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1605,7 +1694,7 @@
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HIVDIAG"></span>
 
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HIVDIAG)" for="@Model.A5D2.HIVDIAG" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HIVDIAG)" for="@Model.A5D2.HIVDIAG" items="Model.ConditionsListItems" ui-behaviors="Model.HIVDIAGBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
@@ -1621,16 +1710,24 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label asp-for="A5D2.OTHCOND"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCOND)<span class="font-bold text-sm"> (SPECIFY)</span></label>
+                                        <label asp-for="A5D2.OTHCOND"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCOND)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.OTHCOND"></p>
-                                        <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                            <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHCONDX"></p>
-                                            <input asp-for="@Model.A5D2.OTHCONDX" />
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHCONDX"></span>
-                                        </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHCOND"></span>
+
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHCOND)" for="@Model.A5D2.OTHCOND" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHCOND)" for="@Model.A5D2.OTHCOND" items="Model.ConditionsListItems" ui-behaviors="Model.OTHCONDBehavior"></table-cell-radio-buttons>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="ml-5 @rowCSS">
+                                            <label asp-for="@Model.A5D2.OTHCONDX"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCONDX) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHCONDX"></p>
+                                                <input asp-for="@Model.A5D2.OTHCONDX" />
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHCONDX"></span>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1687,12 +1784,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="ml-5">
-                                            <label asp-for="@Model.A5D2.DEPRTREAT"><span class="subsubcounter"></span> <span class="font-bold">If Recent/Active depressive discorder (Q6a or Q6a2), choose if treated or untreated,</span> @Html.DisplayNameFor(m => m.A5D2.DEPRTREAT)</label>
-                                            <p class="text-sm text-gray-500" asp-description-for="A5D2.DEPRTREAT"></p>
-                                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DEPRTREAT"></span>
+                                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 ml-5">
+                                            <label asp-for="A5D2.DEPRTREAT"><span class="subsubcounter"></span> <span class="font-bold">If Recent/Active depressive disorder (Q6a1 or Q6a2), </span>@Html.DisplayNameFor(m => m.A5D2.DEPRTREAT)</label>
+                                            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                                                <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.DEPRTREAT"></p>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.UntreadedTreatedItems"></radio-button-group>
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DEPRTREAT"></span>
+                                            </div>
                                         </div>
-                                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
                                 <tr class="subsubcounterreset">
@@ -1722,7 +1821,7 @@
                                             <p class="text-sm text-gray-500" asp-description-for="A5D2.ANXIETY"></p>
                                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ANXIETY"></span>
                                         </div>
-                                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ANXIETY)" for="@Model.A5D2.ANXIETY" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ANXIETY)" for="@Model.A5D2.ANXIETY" items="Model.ConditionsListItems" ui-behaviors="Model.ANXIETYBehavior"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
                                 <tr cllass="subsubcounterreset">
@@ -1756,11 +1855,24 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <div class="ml-6">
+                                            <div>
+                                                <label asp-for="@Model.A5D2.OTHANXDIS">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHANXDIS)
+                                                </label>
+                                                <p class="text-sm text-gray-500" asp-description-for="A5D2.OTHANXDIS"></p>
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.OTHANXDIS"></span>
+                                            </div>
+                                            <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHANXDIS)" for="@Model.A5D2.OTHANXDIS" items="Model.ConditionsListItems" ui-behaviors="Model.OTHANXDISBehavior"></table-cell-radio-buttons>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="4">
-                                        <div class="ml-5">
-                                            <div></div>
+                                        <div class="ml-12">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.OTHANXDIS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHANXDIS) <span class="font-bold">(SPECIFY)</span></label>
+                                                <label asp-for="@Model.A5D2.OTHANXDISX"><span>6d4a. </span> @Html.DisplayNameFor(m => m.A5D2.OTHANXDISX) <span class="font-bold">(SPECIFY)</span></label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHANXDISX"></p>
                                                     <input asp-for="@Model.A5D2.OTHANXDISX" />
@@ -1803,14 +1915,14 @@
                                             <p class="text-sm text-gray-500" asp-description-for="A5D2.PSYCDIS"></p>
                                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.PSYCDIS"></span>
                                         </div>
-                                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PSYCDIS)" for="@Model.A5D2.PSYCDIS" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                        <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PSYCDIS)" for="@Model.A5D2.PSYCDIS" items="Model.ConditionsListItems" ui-behaviors="Model.PSYCDISBehavior"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
                                         <div class="ml-6">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.PSYCDIS"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PSYCDIS) <span class="font-bold">(SPECIFY)</span></label>
+                                                <label asp-for="A5D2.PSYCDISX"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PSYCDISX) <span class="font-bold">(SPECIFY)</span></label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PSYCDISX"></p>
                                                     <input asp-for="@Model.A5D2.PSYCDISX" />
@@ -1859,9 +1971,16 @@
                 </div>
             </div>
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label class="text-base font-semibold text-gray-900">
-                    <span class="subcounter"></span> If the participant has stopped having menstraul periods, please indicate the reason.</br><span class="italic">(Check all that apply)</span>
-                </label>
+                <div>
+                    <div>
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="subcounter"></span> If the participant has stopped having menstraul periods, please indicate the reason.</br><span class="italic">(Check all that apply)</span>
+                        </label>
+                    </div>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGEStoppedReasonCheckboxes"></span>
+                    </div>
+                </div>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <fieldset>
                         <div class="space-y-5 subsubcounterreset">
@@ -1958,7 +2077,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CBTIA[1]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSOTH", Model.A5D2.NOMENSOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSOTH", Model.A5D2.NOMENSOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.NOMENSOTHX\" ]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSOTH" class="font-medium text-gray-900"></label>
@@ -1977,7 +2096,7 @@
                     <label asp-for="A5D2.HRT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRT)</br><span class="font-bold">(IF NO OR UNKNOWN, END FORM HERE)</span></label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A5D2.HRT)" for="@Model.A5D2.HRT" items="Model.BasicYesNoListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A5D2.HRT)" for="@Model.A5D2.HRT" items="Model.BasicYesNoListItems" ui-behaviors="Model.HRTBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRT"></span>
                     </div>
                 </div>
@@ -2013,7 +2132,7 @@
                     <label asp-for="A5D2.BCPILLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCPILLS)</br><span class="font-bold">(IF NO OR UNKNOWN, END FORM HERE)</span></label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCPILLS"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A5D2.BCPILLS)" for="@Model.A5D2.BCPILLS" items="Model.BasicYesNoListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.A5D2.BCPILLS)" for="@Model.A5D2.BCPILLS" items="Model.BasicYesNoListItems" ui-behaviors="Model.BCPILLSBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.BCPILLS"></span>
                     </div>
                 </div>

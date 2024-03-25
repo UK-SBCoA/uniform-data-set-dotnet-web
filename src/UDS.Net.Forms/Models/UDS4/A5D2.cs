@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -65,7 +67,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
         public int? HRTATTMULT { get; set; }
         [Display(Name = "Age at most recent heart attack")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
         public int? HRTATTAGE { get; set; }
         [Display(Name = "Cardiac arrest (heart stopped)")]
@@ -73,7 +75,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? CARDARREST { get; set; }
         [Display(Name = "Age at most recent cardiac arrest")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CARDARREST), 1, 2, ErrorMessage = "Please specify.")]
         public int? CARDARRAGE { get; set; }
         [Display(Name = "Atrial fibrillation")]
@@ -98,7 +100,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? CVPACDEF { get; set; }
         [Display(Name = "Age at first pacemaker and/or defibrillator implantation")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
         public int? PACDEFAGE { get; set; }
         [Display(Name = "Congestive heart failure (including pulmonary edema)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -109,7 +111,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? CVHVALVE { get; set; }
         [Display(Name = "Age at most recent heart valve replacement or repair procedure")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVHVALVE), 1, 2, ErrorMessage = "Please specify.")]
         public int? VALVEAGE { get; set; }
         [Display(Name = "Other cardiovascular disease")]
@@ -129,7 +131,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKMUL { get; set; }
         [Display(Name = "Age at most recent stroke")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKAGE { get; set; }
         [Display(Name = "What is status of stroke symptoms?")]
@@ -141,7 +143,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? ANGIOCP { get; set; }
         [Display(Name = "Age at most recent carotid artery surgery or stenting")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? CAROTIDAGE { get; set; }
         [Display(Name = "Transient ischemic attack (TIA)")]
@@ -149,7 +151,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? CBTIA { get; set; }
         [Display(Name = "Age at most recent TIA")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CBTIA), 1, 2, ErrorMessage = "Please specify.")]
         public int? TIAAGE { get; set; }
         [Display(Name = "Parkinson’s disease (PD)")]
@@ -157,7 +159,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? PD { get; set; }
         [Display(Name = "Age at estimated PD symptom onset")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIf(nameof(PD), "1", ErrorMessage = "Please specify.")]
         public int? PDAGE { get; set; }
         [Display(Name = "Other parkinsonism disorder (e.g., DLB)")]
@@ -165,7 +167,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? PDOTHR { get; set; }
         [Display(Name = "Age at parkinsonism disorder diagnosis")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIf(nameof(PDOTHR), "1", ErrorMessage = "Please specify.")]
         public int? PDOTHRAGE { get; set; }
         [Display(Name = "Epilepsy and/or history of seizures (excluding childhood febrile seizures)")]
@@ -269,7 +271,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? HYPERTEN { get; set; }
         [Display(Name = "Age at hypertension diagnosis")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(HYPERTEN), 1, 2, ErrorMessage = "Please specify.")]
         public int? HYPERTAGE { get; set; }
         [Display(Name = "Hypercholesterolemia (or taking medication for high cholesterol)")]
@@ -277,7 +279,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? HYPERCHO { get; set; }
         [Display(Name = "Age at hypercholesterolemia diagnosis")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110)|999$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(HYPERCHO), 1, 2, ErrorMessage = "Please specify.")]
         public int? HYPERCHAGE { get; set; }
         [Display(Name = "B12 deficiency")]
@@ -534,6 +536,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? NOMENSOTH { get; set; }
         [Display(Name = "Specify other reason participant has stopped having menstrual periods")]
         [MaxLength(60)]
+        [RequiredIf(nameof(NOMENSOTH), "true", ErrorMessage = "Please specify.")]
         public string? NOMENSOTHX { get; set; }
         [Display(Name = "Has the participant taken female hormone replacement pills or patches (e.g. estrogen)?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
@@ -559,5 +562,117 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Age at last use of birth control pills")]
         [RegularExpression("^(1\\d|[2-6]\\d|70||88|99)$", ErrorMessage = "Valid range is 10-70 or 88 or 99")]
         public int? BCENDAGE { get; set; }
+
+        [RequiredIf(nameof(HEADIMP), "1", ErrorMessage = "Please indicate at least one sources of exposure.")]
+        [NotMapped]
+        public bool? HEADIMPCheckboxes
+        {
+            get
+            {
+                if (IMPAMFOOT == true || IMPSOCCER == true || IMPHOCKEY == true || IMPBOXING == true || IMPSPORT == true || IMPIPV == true || IMPMILIT == true || IMPASSAULT == true || IMPOTHER == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please indicate at least one type of diabetes treatment")]
+        [NotMapped]
+        public bool? DIABETESTreatmentCheckboxes
+        {
+            get
+            {
+                if (DIABINS == true || DIABMEDS == true || DIABDIET == true || DIABUNK == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(ARTHRIT), 1, 2, ErrorMessage = "Please indicate at least one type of arthritis.")]
+        [NotMapped]
+        public bool? ARTHRITTypeCheckboxes
+        {
+            get
+            {
+                if (ARTHRRHEUM == true || ARTHROSTEO == true || ARTHROTHR == true || ARTHTYPUNK == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(ARTHRIT), 1, 2, ErrorMessage = "Please indicate at least one region affected.")]
+        [NotMapped]
+        public bool? ARTHRITRegionsCheckboxes
+        {
+            get
+            {
+                if (ARTHUPEX == true || ARTHLOEX == true || ARTHSPIN == true || ARTHUNK == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please indicate at least one type of cancer.")]
+        [NotMapped]
+        public bool? CANCERACTVTypeCheckboxes
+        {
+            get
+            {
+                if (CANCERPRIM == true || CANCERMETA == true || CANCMETBR == true || CANCMETOTH == true || CANCERUNK == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please indicate at least one site of cancer.")]
+        [NotMapped]
+        public bool? CANCERACTVSiteCheckboxes
+        {
+            get
+            {
+                if (CANCBLOOD == true || CANCBREAST == true || CANCCOLON == true || CANCLUNG == true || CANCPROST == true || CANCOTHER == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please indicate at least one treatment.")]
+        [NotMapped]
+        public bool? CANCERACTVTreatmentCheckboxes
+        {
+            get
+            {
+                if (CANCRAD == true || CANCRESECT == true || CANCIMMUNO == true || CANCBONE == true || CANCCHEMO == true || CANCHORM == true || CANCTROTH == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredIfRange(nameof(NOMENSAGE), 10, 70, ErrorMessage = "Please indicate at least one reason.")]
+        [NotMapped]
+        public bool? NOMENSAGEStoppedReasonCheckboxes
+        {
+            get
+            {
+                if (NOMENSNAT == true || NOMENSHYST == true || NOMENSSURG == true || NOMENSCHEM == true || NOMENSRAD == true || NOMENSHORM == true || NOMENSESTR == true || NOMENSUNK == true || NOMENSOTH == true)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
     }
 }

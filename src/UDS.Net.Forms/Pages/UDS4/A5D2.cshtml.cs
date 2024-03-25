@@ -21,25 +21,1309 @@ public class A5D2Model : FormPageModel
     {
     }
 
+    public Dictionary<string, UIBehavior> TOBAC100UIBehavior = new Dictionary<string, UIBehavior>
+    {
+         { 
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.SMOKYRS"),
+                         new UIDisableAttribute("A5D2.PACKSPER"),
+                         new UIDisableAttribute("A5D2.TOBAC30"),
+                         new UIDisableAttribute("A5D2.QUITSMOK"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.SMOKYRS"),
+                         new UIEnableAttribute("A5D2.PACKSPER"),
+                         new UIEnableAttribute("A5D2.TOBAC30"),
+                         new UIEnableAttribute("A5D2.QUITSMOK"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.SMOKYRS"),
+                         new UIDisableAttribute("A5D2.PACKSPER"),
+                         new UIDisableAttribute("A5D2.TOBAC30"),
+                         new UIDisableAttribute("A5D2.QUITSMOK"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> ALCFREQYRBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.ALCDRINKS"),
+                         new UIDisableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.ALCDRINKS"),
+                         new UIEnableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.ALCDRINKS"),
+                         new UIEnableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+         {
+            "3", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.ALCDRINKS"),
+                         new UIEnableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+         {
+            "4", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.ALCDRINKS"),
+                         new UIEnableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.ALCDRINKS"),
+                         new UIDisableAttribute("A5D2.ALCBINGE"),
+                     }
+            }
+         },
+    };
+
+    
+    public Dictionary<string, UIBehavior> HRTATTACKBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTATTMULT"),
+                         new UIDisableAttribute("A5D2.PACDEFAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTATTMULT"),
+                         new UIEnableAttribute("A5D2.PACDEFAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTATTMULT"),
+                         new UIEnableAttribute("A5D2.PACDEFAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTATTMULT"),
+                         new UIDisableAttribute("A5D2.PACDEFAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CARDARRESTBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CARDARRAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CARDARRAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CARDARRAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CARDARRAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CVBYPASSBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.BYPASSAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.BYPASSAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.BYPASSAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.BYPASSAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CVPACDEFBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTATTAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTATTAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CVHVALVEBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.VALVEAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.VALVEAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.VALVEAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.VALVEAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CVOTHRBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CVOTHRX"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CVOTHRX"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CVOTHRX"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CVOTHRX"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CBSTROKEBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.STROKMUL"),
+                         new UIDisableAttribute("A5D2.STROKAGE"),
+                         new UIDisableAttribute("A5D2.STROKSTAT"),
+                         new UIDisableAttribute("A5D2.ANGIOCP"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.STROKMUL"),
+                         new UIEnableAttribute("A5D2.STROKAGE"),
+                         new UIEnableAttribute("A5D2.STROKSTAT"),
+                         new UIEnableAttribute("A5D2.ANGIOCP"),
+                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.STROKMUL"),
+                         new UIEnableAttribute("A5D2.STROKAGE"),
+                         new UIEnableAttribute("A5D2.STROKSTAT"),
+                         new UIEnableAttribute("A5D2.ANGIOCP"),
+                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.STROKMUL"),
+                         new UIDisableAttribute("A5D2.STROKAGE"),
+                         new UIDisableAttribute("A5D2.STROKSTAT"),
+                         new UIDisableAttribute("A5D2.ANGIOCP"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> CBTIABehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.TIAAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.TIAAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.TIAAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.TIAAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> PDbehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PDAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PDAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PDAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> PDOTHRBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PDOTHRAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PDOTHRAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PDOTHRAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> SEIZURESBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.SEIZNUM"),
+                         new UIDisableAttribute("A5D2.SEIZAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.SEIZNUM"),
+                         new UIEnableAttribute("A5D2.SEIZAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.SEIZNUM"),
+                         new UIEnableAttribute("A5D2.SEIZAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.SEIZNUM"),
+                         new UIDisableAttribute("A5D2.SEIZAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> HEADINJURYBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HEADINJUNC"),
+                         new UIDisableAttribute("A5D2.HEADINJCON"),
+                         new UIDisableAttribute("A5D2.HEADINJNUM"),
+                         new UIDisableAttribute("A5D2.FIRSTTBI"),
+                         new UIDisableAttribute("A5D2.LASTTBI"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HEADINJUNC"),
+                         new UIEnableAttribute("A5D2.HEADINJCON"),
+                         new UIEnableAttribute("A5D2.HEADINJNUM"),
+                         new UIEnableAttribute("A5D2.FIRSTTBI"),
+                         new UIEnableAttribute("A5D2.LASTTBI"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HEADINJUNC"),
+                         new UIDisableAttribute("A5D2.HEADINJCON"),
+                         new UIDisableAttribute("A5D2.HEADINJNUM"),
+                         new UIDisableAttribute("A5D2.FIRSTTBI"),
+                         new UIDisableAttribute("A5D2.LASTTBI"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> DIABETESBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.DIABTYPE"),
+                         new UIDisableAttribute("A5D2.DIABINS"),
+                         new UIDisableAttribute("A5D2.DIABMEDS"),
+                         new UIDisableAttribute("A5D2.DIABDIET"),
+                         new UIDisableAttribute("A5D2.DIABUNK"),
+                         new UIDisableAttribute("A5D2.DIABAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.DIABTYPE"),
+                         new UIEnableAttribute("A5D2.DIABINS"),
+                         new UIEnableAttribute("A5D2.DIABMEDS"),
+                         new UIEnableAttribute("A5D2.DIABDIET"),
+                         new UIEnableAttribute("A5D2.DIABUNK"),
+                         new UIEnableAttribute("A5D2.DIABAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.DIABTYPE"),
+                         new UIEnableAttribute("A5D2.DIABINS"),
+                         new UIEnableAttribute("A5D2.DIABMEDS"),
+                         new UIEnableAttribute("A5D2.DIABDIET"),
+                         new UIEnableAttribute("A5D2.DIABUNK"),
+                         new UIEnableAttribute("A5D2.DIABAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.DIABTYPE"),
+                         new UIDisableAttribute("A5D2.DIABINS"),
+                         new UIDisableAttribute("A5D2.DIABMEDS"),
+                         new UIDisableAttribute("A5D2.DIABDIET"),
+                         new UIDisableAttribute("A5D2.DIABUNK"),
+                         new UIDisableAttribute("A5D2.DIABAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> HYPERTENBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HYPERTAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HYPERTAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HYPERTAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HYPERTAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> HYPERCHOBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HYPERCHAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HYPERCHAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HYPERCHAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HYPERCHAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> APNEABehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CPAP"),
+                         new UIDisableAttribute("A5D2.APNEAORAL")
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CPAP"),
+                         new UIEnableAttribute("A5D2.APNEAORAL")
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CPAP"),
+                         new UIEnableAttribute("A5D2.APNEAORAL")
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CPAP"),
+                         new UIDisableAttribute("A5D2.APNEAORAL")
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> OTHSLEEPBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHSLEEX"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHSLEEX"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHSLEEX"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHSLEEX"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> COVID19Behavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.COVIDHOSP"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.COVIDHOSP"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.COVIDHOSP"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.COVIDHOSP"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> KIDNEYBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.KIDNEYAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.KIDNEYAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.KIDNEYAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.KIDNEYAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> LIVERBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.LIVERAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.LIVERAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.LIVERAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.LIVERAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> PVDBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PVDAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PVDAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PVDAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PVDAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> HIVDIAGBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HIVAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HIVAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HIVAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HIVAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> OTHCONDBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHCONDX"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHCONDX"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHCONDX"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHCONDX"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> ANXIETYBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.GENERALANX"),
+                         new UIDisableAttribute("A5D2.PANICDIS"),
+                         new UIDisableAttribute("A5D2.OCD"),
+                         new UIDisableAttribute("A5D2.OTHANXDIS"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.GENERALANX"),
+                         new UIEnableAttribute("A5D2.PANICDIS"),
+                         new UIEnableAttribute("A5D2.OCD"),
+                         new UIEnableAttribute("A5D2.OTHANXDIS"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.GENERALANX"),
+                         new UIEnableAttribute("A5D2.PANICDIS"),
+                         new UIEnableAttribute("A5D2.OCD"),
+                         new UIEnableAttribute("A5D2.OTHANXDIS"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.GENERALANX"),
+                         new UIDisableAttribute("A5D2.PANICDIS"),
+                         new UIDisableAttribute("A5D2.OCD"),
+                         new UIDisableAttribute("A5D2.OTHANXDIS"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> OTHANXDISBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHANXDISX"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHANXDISX"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.OTHANXDISX"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.OTHANXDISX"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> PSYCDISBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PSYCDISX"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PSYCDISX"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.PSYCDISX"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.PSYCDISX"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> HRTBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTYEARS"),
+                         new UIDisableAttribute("A5D2.HRTSTRTAGE"),
+                         new UIDisableAttribute("A5D2.HRTENDAGE"),
+                         new UIDisableAttribute("A5D2.BCPILLSYR"),
+                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
+                         new UIDisableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTYEARS"),
+                         new UIEnableAttribute("A5D2.HRTSTRTAGE"),
+                         new UIEnableAttribute("A5D2.HRTENDAGE"),
+                         new UIEnableAttribute("A5D2.BCPILLSYR"),
+                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
+                         new UIEnableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.HRTYEARS"),
+                         new UIEnableAttribute("A5D2.HRTSTRTAGE"),
+                         new UIEnableAttribute("A5D2.HRTENDAGE"),
+                         new UIEnableAttribute("A5D2.BCPILLSYR"),
+                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
+                         new UIEnableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.HRTYEARS"),
+                         new UIDisableAttribute("A5D2.HRTSTRTAGE"),
+                         new UIDisableAttribute("A5D2.HRTENDAGE"),
+                         new UIDisableAttribute("A5D2.BCPILLSYR"),
+                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
+                         new UIDisableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> BCPILLSBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.BCPILLSYR"),
+                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
+                         new UIDisableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.BCPILLSYR"),
+                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
+                         new UIEnableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.BCPILLSYR"),
+                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
+                         new UIEnableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.BCPILLSYR"),
+                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
+                         new UIDisableAttribute("A5D2.BCENDAGE"),
+                     }
+            }
+         },
+    };
+
     public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
         new RadioListItem("Yes", "1"),
         new RadioListItem("Unknown", "9")
-    };
-
-    public Dictionary<string, UIBehavior> TOBAC100UIBehavior = new Dictionary<string, UIBehavior>
-    {
-        // { "0", new UIBehavior{
-        // PropertyAttributes = new List<UIPropertyAttributes>
-        // {
-        //     new UIDisableAttribute("A5.SMOKYRS"),
-        //     new UIDisableAttribute("A5.PACKSPER"),
-        //     new UIDisableAttribute("A5.QUITSMOK"),
-        // },
-        // InstructionalMessage = "skip to question 1F"
-
-        // } },
     };
 
     public List<RadioListItem> SmokingFrequencyListItems { get; set; } = new List<RadioListItem>
@@ -151,6 +1435,12 @@ public class A5D2Model : FormPageModel
         new RadioListItem("< 4 hours per night", "1"),
         new RadioListItem("> 4 hours per night", "2"),
         new RadioListItem("Unknown", "9")
+    };
+
+    public List<RadioListItem> UntreadedTreatedItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Untreaded", "0"),
+        new RadioListItem("Treated with medication and/or counseling", "1")
     };
 
     public async Task<IActionResult> OnGetAsync(int? id)
