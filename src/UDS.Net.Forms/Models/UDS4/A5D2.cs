@@ -13,7 +13,7 @@ using UDS.Net.Services.Enums;
 namespace UDS.Net.Forms.Models.UDS4
 {
     public class A5D2 : FormModel
-    {   
+    {
         [Display(Name = "Has participant smoked more than 100 cigarettes in their life?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
@@ -447,9 +447,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other medical conditions or procedures")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? OTHCOND { get; set; }
+        public int? OTHERCOND { get; set; }
         [Display(Name = "Specify other medical conditions or procedures")]
-        [RequiredIfRange(nameof(OTHCOND), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(OTHERCOND), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHCONDX { get; set; }
         [Display(Name = "Major depressive disorder (DSM-5-TR criteria)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -628,9 +628,9 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (CANCERPRIM == true || CANCERMETA == true || CANCERUNK == true)
                 {
-                    if( CANCERMETA == true)
+                    if (CANCERMETA == true)
                     {
-                        if(CANCMETBR == true || CANCMETOTH == true)
+                        if (CANCMETBR == true || CANCMETOTH == true)
                         {
                             return true;
                         }

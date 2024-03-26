@@ -135,7 +135,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? PVDAGE { get; set; }
         public int? HIVDIAG { get; set; }
         public int? HIVAGE { get; set; }
-        public int? OTHCOND { get; set; }
+        public int? OTHERCOND { get; set; }
         public string? OTHCONDX { get; set; }
         public int? MAJORDEP { get; set; }
         public int? OTHERDEP { get; set; }
@@ -317,7 +317,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.PVDAGE = a5D2Dto.PVDAGE;
                 this.HIVDIAG = a5D2Dto.HIVDIAG;
                 this.HIVAGE = a5D2Dto.HIVAGE;
-                this.OTHCOND = a5D2Dto.OTHCOND;
+                this.OTHERCOND = a5D2Dto.OTHERCOND;
                 this.OTHCONDX = a5D2Dto.OTHCONDX;
                 this.MAJORDEP = a5D2Dto.MAJORDEP;
                 this.OTHERDEP = a5D2Dto.OTHERDEP;

@@ -23,7 +23,7 @@ public class A5D2Model : FormPageModel
 
     public Dictionary<string, UIBehavior> TOBAC100UIBehavior = new Dictionary<string, UIBehavior>
     {
-         { 
+         {
             "0", new UIBehavior
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
@@ -125,7 +125,7 @@ public class A5D2Model : FormPageModel
          },
     };
 
-    
+
     public Dictionary<string, UIBehavior> HRTATTACKBehavior = new Dictionary<string, UIBehavior>
     {
          {
@@ -1564,7 +1564,7 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> HoursPerNightItems{ get; set; } = new List<RadioListItem>
+    public List<RadioListItem> HoursPerNightItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("None", "0"),
         new RadioListItem("< 4 hours per night", "1"),

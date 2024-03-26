@@ -754,7 +754,7 @@ namespace UDS.Net.Forms.Extensions
                 PVDAGE = fields.PVDAGE,
                 HIVDIAG = fields.HIVDIAG,
                 HIVAGE = fields.HIVAGE,
-                OTHCOND = fields.OTHCOND,
+                OTHERCOND = fields.OTHERCOND,
                 OTHCONDX = fields.OTHCONDX,
                 MAJORDEP = fields.MAJORDEP,
                 OTHERDEP = fields.OTHERDEP,

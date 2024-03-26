@@ -609,7 +609,7 @@ namespace UDS.Net.Forms.Extensions
                 PVDAGE = vm.PVDAGE,
                 HIVDIAG = vm.HIVDIAG,
                 HIVAGE = vm.HIVAGE,
-                OTHCOND = vm.OTHCOND,
+                OTHERCOND = vm.OTHERCOND,
                 OTHCONDX = vm.OTHCONDX,
                 MAJORDEP = vm.MAJORDEP,
                 OTHERDEP = vm.OTHERDEP,
