@@ -12,7 +12,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A4a : FormModel
     {
         [RequiredOnComplete]
-        [Display(Name = "Has the participant ever been prescribed or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
+        [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
         [RequiredIf(nameof(TRTBIOMARK), "1", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
