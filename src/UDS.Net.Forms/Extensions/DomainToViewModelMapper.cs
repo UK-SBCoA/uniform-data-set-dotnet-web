@@ -25,6 +25,18 @@ namespace UDS.Net.Forms.Extensions
             vm.IsDeleted = form.IsDeleted;
         }
 
+        public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
+        {
+            return new ParticipationsPaginatedModel
+            {
+                List = participations.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
         public static ParticipationModel ToVM(this Participation participation)
         {
             return new ParticipationModel()
@@ -154,6 +166,10 @@ namespace UDS.Net.Forms.Extensions
                 if (form.Fields is A1FormFields)
                 {
                     vm = ((A1FormFields)form.Fields).ToVM(form.Id);
+                }
+                else if (form.Fields is A1aFormFields)
+                {
+                    vm = ((A1aFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A2FormFields)
                 {
@@ -342,6 +358,75 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static A1a ToVM(this A1aFormFields fields, int formId)
+        {
+            return new A1a()
+            {
+                Id = formId,
+                OWNSCAR = fields.OWNSCAR,
+                TRSPACCESS = fields.TRSPACCESS,
+                TRANSPROB = fields.TRANSPROB,
+                TRANSWORRY = fields.TRANSWORRY,
+                TRSPLONGER = fields.TRSPLONGER,
+                TRSPMED = fields.TRSPMED,
+                INCOMEYR = fields.INCOMEYR,
+                FINSATIS = fields.FINSATIS,
+                BILLPAY = fields.BILLPAY,
+                FINUPSET = fields.FINUPSET,
+                EATLESS = fields.EATLESS,
+                EATLESSYR = fields.EATLESSYR,
+                LESSMEDS = fields.LESSMEDS,
+                LESSMEDSYR = fields.LESSMEDSYR,
+                COMPCOMM = fields.COMPCOMM,
+                COMPUSA = fields.COMPUSA,
+                FAMCOMP = fields.FAMCOMP,
+                GUARDEDU = fields.GUARDEDU,
+                GUARDREL = fields.GUARDREL,
+                GUARDRELX = fields.GUARDRELX,
+                GUARD2EDU = fields.GUARD2EDU,
+                GUARD2REL = fields.GUARD2REL,
+                GUARD2RELX = fields.GUARD2RELX,
+                EMPTINESS = fields.EMPTINESS,
+                MISSPEOPLE = fields.MISSPEOPLE,
+                FRIENDS = fields.FRIENDS,
+                ABANDONED = fields.ABANDONED,
+                CLOSEFRND = fields.CLOSEFRND,
+                PARENTCOMM = fields.PARENTCOMM,
+                CHILDCOMM = fields.CHILDCOMM,
+                FRIENDCOMM = fields.FRIENDCOMM,
+                PARTICIPATE = fields.PARTICIPATE,
+                SAFEHOME = fields.SAFEHOME,
+                SAFECOMM = fields.SAFECOMM,
+                DELAYMED = fields.DELAYMED,
+                SCRIPTPROB = fields.SCRIPTPROB,
+                MISSEDFUP = fields.MISSEDFUP,
+                DOCADVICE = fields.DOCADVICE,
+                HEALTHACC = fields.HEALTHACC,
+                LESSCOURT = fields.LESSCOURT,
+                POORSERV = fields.POORSERV,
+                NOTSMART = fields.NOTSMART,
+                ACTAFRAID = fields.ACTAFRAID,
+                THREATENED = fields.THREATENED,
+                POORMEDTRT = fields.POORMEDTRT,
+                EXPANCEST = fields.EXPANCEST,
+                EXPGENDER = fields.EXPGENDER,
+                EXPRACE = fields.EXPRACE,
+                EXPAGE = fields.EXPAGE,
+                EXPRELIG = fields.EXPRELIG,
+                EXPHEIGHT = fields.EXPHEIGHT,
+                EXPWEIGHT = fields.EXPWEIGHT,
+                EXPAPPEAR = fields.EXPAPPEAR,
+                EXPSEXORN = fields.EXPSEXORN,
+                EXPEDUCINC = fields.EXPEDUCINC,
+                EXPDISAB = fields.EXPDISAB,
+                EXPSKIN = fields.EXPSKIN,
+                EXPOTHER = fields.EXPOTHER,
+                EXPNOTAPP = fields.EXPNOTAPP,
+                EXPNOANS = fields.EXPNOANS,
+                EXPSTRS = fields.EXPSTRS
+            };
+        }
+
         public static A2 ToVM(this A2FormFields fields, int formId)
         {
             return new A2()
@@ -369,34 +454,22 @@ namespace UDS.Net.Forms.Extensions
                 Id = formId,
                 AFFFAMM = fields.AFFFAMM,
                 NWINFMUT = fields.NWINFMUT,
-                FADMUT = fields.FADMUT,
-                FADMUTX = fields.FADMUTX,
-                FADMUSO = fields.FADMUSO,
-                FADMUSOX = fields.FADMUSOX,
-                FFTDMUT = fields.FFTDMUT,
-                FFTDMUTX = fields.FFTDMUTX,
-                FFTDMUSO = fields.FFTDMUSO,
-                FFTDMUSX = fields.FFTDMUSX,
-                FOTHMUT = fields.FOTHMUT,
-                FOTHMUTX = fields.FOTHMUTX,
-                FOTHMUSO = fields.FOTHMUSO,
-                FOTHMUSX = fields.FOTHMUSX,
-                MOMMOB = fields.MOMMOB,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
-                MOMNEUR = fields.MOMNEUR,
-                MOMPRDX = fields.MOMPRDX,
-                MOMMOE = fields.MOMMOE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
-                DADMOB = fields.DADMOB,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
-                DADNEUR = fields.DADNEUR,
-                DADPRDX = fields.DADPRDX,
-                DADMOE = fields.DADMOE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
+                NWINFSIB = fields.NWINFSIB,
                 KIDS = fields.KIDS,
+                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
@@ -407,12 +480,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMember()
             {
                 FamilyMemberIndex = fields.FamilyMemberIndex,
-                MOB = fields.MOB,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
-                NEU = fields.NEU,
-                PDX = fields.PDX,
-                MOE = fields.MOE,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }
@@ -426,7 +498,7 @@ namespace UDS.Net.Forms.Extensions
                 DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
                 {
                     Id = d.Id,
-                    DrugId = d.DRUGID,
+                    RxNormId = d.RxNormId,
                     CreatedAt = d.CreatedAt,
                     CreatedBy = d.CreatedBy,
                     ModifiedBy = d.ModifiedBy,
@@ -447,7 +519,7 @@ namespace UDS.Net.Forms.Extensions
             {
                 return new DrugCodeModel
                 {
-                    DrugId = drugCode.DrugId,
+                    RxNormId = drugCode.RxNormId,
                     DrugName = drugCode.DrugName,
                     BrandName = drugCode.BrandName,
                     IsPopular = drugCode.IsPopular,
@@ -459,7 +531,7 @@ namespace UDS.Net.Forms.Extensions
             return new DrugCodeModel
             {
                 Id = a4.Id,
-                DrugId = drugCode.DrugId,
+                RxNormId = drugCode.RxNormId,
                 DrugName = drugCode.DrugName,
                 BrandName = drugCode.BrandName,
                 IsPopular = drugCode.IsPopular,
@@ -729,15 +801,19 @@ namespace UDS.Net.Forms.Extensions
                 Id = formId,
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
-                BPSYS = fields.BPSYS,
-                BPDIAS = fields.BPDIAS,
-                HRATE = fields.HRATE,
-                VISION = fields.VISION,
-                VISCORR = fields.VISCORR,
-                VISWCORR = fields.VISWCORR,
-                HEARING = fields.HEARING,
-                HEARAID = fields.HEARAID,
-                HEARWAID = fields.HEARWAID
+                WAIST1 = fields.WAIST1,
+                WAIST2 = fields.WAIST2,
+                HIP1 = fields.HIP1,
+                HIP2 = fields.HIP2,
+                BPSYSL1 = fields.BPSYSL1,
+                BPDIASL1 = fields.BPDIASL1,
+                BPSYSL2 = fields.BPSYSL2,
+                BPDIASL2 = fields.BPDIASL2,
+                BPSYSR1 = fields.BPSYSR1,
+                BPDIASR1 = fields.BPDIASR1,
+                BPSYSR2 = fields.BPSYSR2,
+                BPDIASR2 = fields.BPDIASR2,
+                HRATE = fields.HRATE
             };
         }
 

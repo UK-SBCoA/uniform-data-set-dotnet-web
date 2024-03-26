@@ -169,7 +169,11 @@ namespace UDS.Net.Services.Extensions
             FormDto dto = GetDto(form); // get baseline dto
 
             // if the form is a special type then get that type of dto
-            if (form.Fields is A1FormFields)
+            if (form.Fields is A1aFormFields)
+            {
+                dto = ((A1aFormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is A1FormFields)
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
             }
@@ -242,7 +246,11 @@ namespace UDS.Net.Services.Extensions
 
             // if the type of form we want to retun matches the specialized type
             // then return the special dto, otherwise just return the baseline
-            if (form.Fields is A1FormFields && formKind == "A1")
+            if (form.Fields is A1aFormFields && formKind == "A1a")
+            {
+                dto = ((A1aFormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is A1FormFields && formKind == "A1")
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
             }
@@ -306,6 +314,74 @@ namespace UDS.Net.Services.Extensions
             SetBaseProperties(dto, form);
 
             return dto;
+        }
+
+        public static A1aDto ToDto(this A1aFormFields fields)
+        {
+            return new A1aDto()
+            {
+                OWNSCAR = fields.OWNSCAR,
+                TRSPACCESS = fields.TRSPACCESS,
+                TRANSPROB = fields.TRANSPROB,
+                TRANSWORRY = fields.TRANSWORRY,
+                TRSPLONGER = fields.TRSPLONGER,
+                TRSPMED = fields.TRSPMED,
+                INCOMEYR = fields.INCOMEYR,
+                FINSATIS = fields.FINSATIS,
+                BILLPAY = fields.BILLPAY,
+                FINUPSET = fields.FINUPSET,
+                EATLESS = fields.EATLESS,
+                EATLESSYR = fields.EATLESSYR,
+                LESSMEDS = fields.LESSMEDS,
+                LESSMEDSYR = fields.LESSMEDSYR,
+                COMPCOMM = fields.COMPCOMM,
+                COMPUSA = fields.COMPUSA,
+                FAMCOMP = fields.FAMCOMP,
+                GUARDEDU = fields.GUARDEDU,
+                GUARDREL = fields.GUARDREL,
+                GUARDRELX = fields.GUARDRELX,
+                GUARD2EDU = fields.GUARD2EDU,
+                GUARD2REL = fields.GUARD2REL,
+                GUARD2RELX = fields.GUARD2RELX,
+                EMPTINESS = fields.EMPTINESS,
+                MISSPEOPLE = fields.MISSPEOPLE,
+                FRIENDS = fields.FRIENDS,
+                ABANDONED = fields.ABANDONED,
+                CLOSEFRND = fields.CLOSEFRND,
+                PARENTCOMM = fields.PARENTCOMM,
+                CHILDCOMM = fields.CHILDCOMM,
+                FRIENDCOMM = fields.FRIENDCOMM,
+                PARTICIPATE = fields.PARTICIPATE,
+                SAFEHOME = fields.SAFEHOME,
+                SAFECOMM = fields.SAFECOMM,
+                DELAYMED = fields.DELAYMED,
+                SCRIPTPROB = fields.SCRIPTPROB,
+                MISSEDFUP = fields.MISSEDFUP,
+                DOCADVICE = fields.DOCADVICE,
+                HEALTHACC = fields.HEALTHACC,
+                LESSCOURT = fields.LESSCOURT,
+                POORSERV = fields.POORSERV,
+                NOTSMART = fields.NOTSMART,
+                ACTAFRAID = fields.ACTAFRAID,
+                THREATENED = fields.THREATENED,
+                POORMEDTRT = fields.POORMEDTRT,
+                EXPANCEST = fields.EXPANCEST,
+                EXPGENDER = fields.EXPGENDER,
+                EXPRACE = fields.EXPRACE,
+                EXPAGE = fields.EXPAGE,
+                EXPRELIG = fields.EXPRELIG,
+                EXPHEIGHT = fields.EXPHEIGHT,
+                EXPWEIGHT = fields.EXPWEIGHT,
+                EXPAPPEAR = fields.EXPAPPEAR,
+                EXPSEXORN = fields.EXPSEXORN,
+                EXPEDUCINC = fields.EXPEDUCINC,
+                EXPDISAB = fields.EXPDISAB,
+                EXPSKIN = fields.EXPSKIN,
+                EXPOTHER = fields.EXPOTHER,
+                EXPNOTAPP = fields.EXPNOTAPP,
+                EXPNOANS = fields.EXPNOANS,
+                EXPSTRS = fields.EXPSTRS,
+            };
         }
 
         public static A1Dto ToDto(this A1FormFields fields)
@@ -450,9 +526,15 @@ namespace UDS.Net.Services.Extensions
                 NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
+                MOMETPR = fields.MOMETPR,
+                MOMETSEC = fields.MOMETSEC,
+                MOMMEVAL = fields.MOMMEVAL,
                 MOMAGEO = fields.MOMAGEO,
                 DADYOB = fields.DADYOB,
                 DADDAGE = fields.DADDAGE,
+                DADETPR = fields.DADETPR,
+                DADETSEC = fields.DADETSEC,
+                DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS
@@ -548,6 +630,9 @@ namespace UDS.Net.Services.Extensions
                 FormId = formId,
                 YOB = fields.YOB,
                 AGD = fields.AGD,
+                ETPR = fields.ETPR,
+                ETSEC = fields.ETSEC,
+                MEVAL = fields.MEVAL,
                 AGO = fields.AGO
             };
         }
@@ -556,8 +641,22 @@ namespace UDS.Net.Services.Extensions
         {
             return new A4Dto
             {
-                ANYMEDS = fields.ANYMEDS
+                ANYMEDS = fields.ANYMEDS,
+                A4DetailsDtos = fields.A4Ds.ToDto()
             };
+        }
+
+        public static List<int> ToDto(this List<A4DFormFields> fields)
+        {
+            List<int> rxNormIds = new List<int>();
+            foreach (var field in fields)
+            {
+                if (Int32.TryParse(field.RxNormId, out int rxNormId))
+                {
+                    rxNormIds.Add(rxNormId);
+                }
+            }
+            return rxNormIds;
         }
 
         public static A5D2Dto ToDto(this A5D2FormFields fields)
@@ -738,6 +837,18 @@ namespace UDS.Net.Services.Extensions
             {
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
+                WAIST1 = fields.WAIST1,
+                WAIST2 = fields.WAIST2,
+                HIP1 = fields.HIP1,
+                HIP2 = fields.HIP2,
+                BPSYSL1 = fields.BPSYSL1,
+                BPDIASL1 = fields.BPDIASL1,
+                BPSYSL2 = fields.BPSYSL2,
+                BPDIASL2 = fields.BPDIASL2,
+                BPSYSR1 = fields.BPSYSR1,
+                BPDIASR1 = fields.BPDIASR1,
+                BPSYSR2 = fields.BPSYSR2,
+                BPDIASR2 = fields.BPDIASR2,
                 HRATE = fields.HRATE,
             };
         }

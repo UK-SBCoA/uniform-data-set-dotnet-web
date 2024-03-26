@@ -35,8 +35,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a2Dto = ((A2Dto)dto);
                 this.NEWINF = a2Dto.NEWINF;
-
-                this.NEWINF = a2Dto.NEWINF;
                 this.INRELTO = a2Dto.INRELTO;
                 this.INKNOWN = a2Dto.INKNOWN;
                 this.INLIVWTH = a2Dto.INLIVWTH;

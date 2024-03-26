@@ -1,4 +1,51 @@
 
+/* Counters */
+.counterreset {
+    counter-reset: section;
+}
+
+.counter::before {
+    counter-increment: section;
+    content: counter(section) ".";
+    font-weight: 700;
+}
+
+.subcounterreset {
+    counter-reset: subsection;
+}
+
+.subcounter::before {
+    counter-increment: subsection;
+    content: counter(section) counter(subsection, lower-alpha) ".";
+}
+
+.subsubcounterreset {
+    counter-reset: subsubsection;
+}
+
+.subsubcounter::before {
+    counter-increment: subsubsection;
+    content: counter(section) counter(subsection, lower-alpha) counter(subsubsection, decimal) ".";
+}
+
+.subsubsubcounterreset {
+    counter-reset: subsubsubsection;
+}
+
+.subsubsubcounter::before {
+    counter-increment: subsubsubsection;
+    content: counter(section) counter(subsection, lower-alpha) counter(subsubsection, decimal) counter(subsubsubsection, lower-alpha) ".";
+}
+
+.invisible {
+    padding: 0;
+    margin: 0;
+    display: inline-block; /* increment will not work if display is none */
+    width: 0;
+    max-width: 0;
+}
+
+/* stylelint-disable -- Tailwind CSS styling */
 /* TODO These styles are a quick fix for form validation */
 .input-validation-error, [input='number'].input-validation-error, [input='text'].input-validation-error {
     line-height: 1.25rem !important;
@@ -593,6 +640,7 @@ video {
     width: 100%;
 }
 
+/* To-do Change to context media feature range notation */
 @media (min-width: 640px) {
     .container {
         max-width: 640px;
@@ -1098,3 +1146,4 @@ video {
         padding-right: 2rem;
     }
 }
+/* stylelint-enable */

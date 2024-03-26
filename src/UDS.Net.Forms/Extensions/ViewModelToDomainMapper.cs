@@ -81,6 +81,8 @@ namespace UDS.Net.Forms.Extensions
         {
             if (vm is A1)
                 return ((A1)vm).ToEntity();
+            else if (vm is A1a)
+                return ((A1a)vm).ToEntity();
             else if (vm is A2)
                 return ((A2)vm).ToEntity();
             else if (vm is A3)
@@ -237,6 +239,76 @@ namespace UDS.Net.Forms.Extensions
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
+        public static Form ToEntity(this A1a vm)
+        {
+            var fields = new A1aFormFields
+            {
+                OWNSCAR = vm.OWNSCAR,
+                TRSPACCESS = vm.TRSPACCESS,
+                TRANSPROB = vm.TRANSPROB,
+                TRANSWORRY = vm.TRANSWORRY,
+                TRSPLONGER = vm.TRSPLONGER,
+                TRSPMED = vm.TRSPMED,
+                INCOMEYR = vm.INCOMEYR,
+                FINSATIS = vm.FINSATIS,
+                BILLPAY = vm.BILLPAY,
+                FINUPSET = vm.FINUPSET,
+                EATLESS = vm.EATLESS,
+                EATLESSYR = vm.EATLESSYR,
+                LESSMEDS = vm.LESSMEDS,
+                LESSMEDSYR = vm.LESSMEDSYR,
+                COMPCOMM = vm.COMPCOMM,
+                COMPUSA = vm.COMPUSA,
+                FAMCOMP = vm.FAMCOMP,
+                GUARDEDU = vm.GUARDEDU,
+                GUARDREL = vm.GUARDREL,
+                GUARDRELX = vm.GUARDRELX,
+                GUARD2EDU = vm.GUARD2EDU,
+                GUARD2REL = vm.GUARD2REL,
+                GUARD2RELX = vm.GUARD2RELX,
+                EMPTINESS = vm.EMPTINESS,
+                MISSPEOPLE = vm.MISSPEOPLE,
+                FRIENDS = vm.FRIENDS,
+                ABANDONED = vm.ABANDONED,
+                CLOSEFRND = vm.CLOSEFRND,
+                PARENTCOMM = vm.PARENTCOMM,
+                CHILDCOMM = vm.CHILDCOMM,
+                FRIENDCOMM = vm.FRIENDCOMM,
+                PARTICIPATE = vm.PARTICIPATE,
+                SAFEHOME = vm.SAFEHOME,
+                SAFECOMM = vm.SAFECOMM,
+                DELAYMED = vm.DELAYMED,
+                SCRIPTPROB = vm.SCRIPTPROB,
+                MISSEDFUP = vm.MISSEDFUP,
+                DOCADVICE = vm.DOCADVICE,
+                HEALTHACC = vm.HEALTHACC,
+                LESSCOURT = vm.LESSCOURT,
+                POORSERV = vm.POORSERV,
+                NOTSMART = vm.NOTSMART,
+                ACTAFRAID = vm.ACTAFRAID,
+                THREATENED = vm.THREATENED,
+                POORMEDTRT = vm.POORMEDTRT,
+                EXPANCEST = vm.EXPANCEST,
+                EXPGENDER = vm.EXPGENDER,
+                EXPRACE = vm.EXPRACE,
+                EXPAGE = vm.EXPAGE,
+                EXPRELIG = vm.EXPRELIG,
+                EXPHEIGHT = vm.EXPHEIGHT,
+                EXPWEIGHT = vm.EXPWEIGHT,
+                EXPAPPEAR = vm.EXPAPPEAR,
+                EXPSEXORN = vm.EXPSEXORN,
+                EXPEDUCINC = vm.EXPEDUCINC,
+                EXPDISAB = vm.EXPDISAB,
+                EXPSKIN = vm.EXPSKIN,
+                EXPOTHER = vm.EXPOTHER,
+                EXPNOTAPP = vm.EXPNOTAPP,
+                EXPNOANS = vm.EXPNOANS,
+                EXPSTRS = vm.EXPSTRS
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
         public static Form ToEntity(this A2 vm)
         {
             var fields = new A2FormFields
@@ -265,34 +337,22 @@ namespace UDS.Net.Forms.Extensions
             {
                 AFFFAMM = vm.AFFFAMM,
                 NWINFMUT = vm.NWINFMUT,
-                FADMUT = vm.FADMUT,
-                FADMUTX = vm.FADMUTX,
-                FADMUSO = vm.FADMUSO,
-                FADMUSOX = vm.FADMUSOX,
-                FFTDMUT = vm.FFTDMUT,
-                FFTDMUTX = vm.FFTDMUTX,
-                FFTDMUSO = vm.FFTDMUSO,
-                FFTDMUSX = vm.FFTDMUSX,
-                FOTHMUT = vm.FOTHMUT,
-                FOTHMUTX = vm.FOTHMUTX,
-                FOTHMUSO = vm.FOTHMUSO,
-                FOTHMUSX = vm.FOTHMUSX,
-                MOMMOB = vm.MOMMOB,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
-                MOMNEUR = vm.MOMNEUR,
-                MOMPRDX = vm.MOMPRDX,
-                MOMMOE = vm.MOMMOE,
+                MOMETPR = vm.MOMETPR,
+                MOMETSEC = vm.MOMETSEC,
+                MOMMEVAL = vm.MOMMEVAL,
                 MOMAGEO = vm.MOMAGEO,
-                DADMOB = vm.DADMOB,
                 DADYOB = vm.DADYOB,
                 DADDAGE = vm.DADDAGE,
-                DADNEUR = vm.DADNEUR,
-                DADPRDX = vm.DADPRDX,
-                DADMOE = vm.DADMOE,
+                DADETPR = vm.DADETPR,
+                DADETSEC = vm.DADETSEC,
+                DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
+                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
+                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
@@ -305,12 +365,11 @@ namespace UDS.Net.Forms.Extensions
             return new A3FamilyMemberFormFields()
             {
                 FamilyMemberIndex = vm.FamilyMemberIndex,
-                MOB = vm.MOB,
                 YOB = vm.YOB,
                 AGD = vm.AGD,
-                NEU = vm.NEU,
-                PDX = vm.PDX,
-                MOE = vm.MOE,
+                ETPR = vm.ETPR,
+                ETSEC = vm.ETSEC,
+                MEVAL = vm.MEVAL,
                 AGO = vm.AGO
             };
         }
@@ -332,7 +391,7 @@ namespace UDS.Net.Forms.Extensions
             return new A4DFormFields
             {
                 Id = vm.Id.HasValue ? vm.Id.Value : 0,
-                DRUGID = vm.DrugId,
+                RxNormId = vm.RxNormId,
                 CreatedAt = vm.CreatedAt,
                 CreatedBy = vm.CreatedBy,
                 ModifiedBy = vm.ModifiedBy,
@@ -598,15 +657,19 @@ namespace UDS.Net.Forms.Extensions
             {
                 HEIGHT = vm.HEIGHT,
                 WEIGHT = vm.WEIGHT,
-                BPSYS = vm.BPSYS,
-                BPDIAS = vm.BPDIAS,
-                HRATE = vm.HRATE,
-                VISION = vm.VISION,
-                VISCORR = vm.VISCORR,
-                VISWCORR = vm.VISWCORR,
-                HEARING = vm.HEARING,
-                HEARAID = vm.HEARAID,
-                HEARWAID = vm.HEARWAID
+                WAIST1 = vm.WAIST1,
+                WAIST2 = vm.WAIST2,
+                HIP1 = vm.HIP1,
+                HIP2 = vm.HIP2,
+                BPSYSL1 = vm.BPSYSL1,
+                BPDIASL1 = vm.BPDIASL1,
+                BPSYSL2 = vm.BPSYSL2,
+                BPDIASL2 = vm.BPDIASL2,
+                BPSYSR1 = vm.BPSYSR1,
+                BPDIASR1 = vm.BPDIASR1,
+                BPSYSR2 = vm.BPSYSR2,
+                BPDIASR2 = vm.BPDIASR2,
+                HRATE = vm.HRATE
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

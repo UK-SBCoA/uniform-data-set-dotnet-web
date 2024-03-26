@@ -73,6 +73,8 @@ namespace UDS.Net.Services.DomainModels
         {
             if (Kind == "A1")
                 Fields = new A1FormFields();
+            else if (Kind == "A1a")
+                Fields = new A1aFormFields();
             else if (Kind == "A2")
                 Fields = new A2FormFields();
             else if (Kind == "A3")
