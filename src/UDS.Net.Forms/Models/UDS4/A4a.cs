@@ -42,12 +42,27 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (ARIAE.HasValue || ARIAH.HasValue || ADVERSEOTH.HasValue)
+                int counter = 0;
+                if (ARIAE == true)
+                {
+                    counter++;
+                }
+                if (ARIAH == true)
+                {
+                    counter++;
+                }
+                if (ADVERSEOTH == true)
+                {
+                    counter++;
+                }
+                if (counter >= 1)
                 {
                     return true;
                 }
-                else return null;
+                return null;
             }
+
+
         }
 
         public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
