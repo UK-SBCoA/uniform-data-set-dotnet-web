@@ -21,7 +21,7 @@
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         <div style="border: 2px solid lightgrey; display: flex; align-items:center;">
             <div>
-                @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4 ml-4" })
+                @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4 ml-4", id = "pdNormalCheckbox" })
             </div>
             <div class="text-sm leading-6 pt-2">
                 <label asp-for="B3.PDNORMAL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B3.PDNORMAL)</label>
@@ -632,3 +632,8 @@
 </div>
 
 <partial name="_FormFooter" for="@Model.B3" />
+
+
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/B3.js"></script>
+}
