@@ -214,7 +214,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? IMPMILIT { get; set; }
         [Display(Name = "Source of exposure for repeated hits to the head: Physical assault")]
         public bool? IMPASSAULT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Other cause")]
+        [Display(Name = "Source of exposure for repeated hits to the head: Other cause (SPECIFY)")]
         public bool? IMPOTHER { get; set; }
         [MaxLength(60)]
         [RequiredIf(nameof(IMPOTHER), "true", ErrorMessage = "Please specify.")]
@@ -223,7 +223,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIf(nameof(HEADIMP), "1", ErrorMessage = "Please specify.")]
         public int? IMPYEARS { get; set; }
-        [Display(Name = "Head injury (e.g. in a vehicle accident, being hit by an object...)")]
+        [Display(Name = "Head injury (e.g. in a vehicle accident, being hit by an object, in a fall, while playing sports or biking, in an assault, or during military service) that resulted in a period of feeling \"dazed or confused,\" being unable to recall details of the injury, or loss of consciousness (if multiple head injuries, consider most severe episode).")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? HEADINJURY { get; set; }
@@ -231,11 +231,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-4]|8|9)$", ErrorMessage = "Valid range is 0-4 or 8 or 9")]
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJUNC { get; set; }
-        [Display(Name = "After a head injury, what was the longest period...")]
+        [Display(Name = "After a head injury, what was the longest period that the participant was \"dazed or confused\" or unable to recall details of the injury?")]
         [RegularExpression("^([0-4]|8|9)$", ErrorMessage = "Valid range is 0-4 or 8 or 9")]
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJCON { get; set; }
-        [Display(Name = "Total number of head injuries")]
+        [Display(Name = "Total number of head injuries in which the participant felt \"dazed or confused\", unable to recall details of the injury or experienced loss of consciousness?")]
         [RegularExpression("^([0-4]|9)$", ErrorMessage = "Valid range is 0-4 or 9")]
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJNUM { get; set; }
@@ -298,7 +298,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? ARTHRRHEUM { get; set; }
         [Display(Name = "Type of arthritis: Osteoarthritis")]
         public bool? ARTHROSTEO { get; set; }
-        [Display(Name = "Type of arthritis: Other")]
+        [Display(Name = "Type of arthritis: Other (SPECIFY)")]
         public bool? ARTHROTHR { get; set; }
         [Display(Name = "Specify other type of arthritis")]
         [MaxLength(60)]
@@ -356,7 +356,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? CANCERACTV { get; set; }
         [Display(Name = "Type of cancer: Primary/non-metastatic")]
         public bool? CANCERPRIM { get; set; }
-        [Display(Name = "Type of cancer: Metastatic")]
+        [Display(Name = "Type of cancer: Metastatic (CHECK ALL THAT APPLY)")]
         public bool? CANCERMETA { get; set; }
         [Display(Name = "Type of metastatic cancer: Metatstic to brain")]
         public bool? CANCMETBR { get; set; }
@@ -374,7 +374,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? CANCLUNG { get; set; }
         [Display(Name = "Primary site of cancer: Prostate")]
         public bool? CANCPROST { get; set; }
-        [Display(Name = "Primary site of cancer: Other")]
+        [Display(Name = "Primary site of cancer: Other (SPECIFY)")]
         public bool? CANCOTHER { get; set; }
         [Display(Name = "Specify other primary site of cancer")]
         [MaxLength]
@@ -392,7 +392,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? CANCCHEMO { get; set; }
         [Display(Name = "Type of cancer treatment: Hormone therapy")]
         public bool? CANCHORM { get; set; }
-        [Display(Name = "Type of cancer treatment: Other")]
+        [Display(Name = "Type of cancer treatment: Other (SPECIFY)")]
         public bool? CANCTROTH { get; set; }
         [Display(Name = "Specify other type of cancer treatment")]
         [MaxLength(60)]
@@ -512,6 +512,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(PSYCDIS), 1, 2, ErrorMessage = "Please specify.")]
         public string? PSYCDISX { get; set; }
         [Display(Name = "How old was the participant when they had their first menstrual period?")]
+        [RegularExpression("^([5-9]|1\\d|2[0-5]|88|99)$", ErrorMessage = "Valid range is 5-25 or 88 or 99")]
         public int? MENARCHE { get; set; }
         [Display(Name = "How old was the participant when they had their last menstrual period?")]
         [RegularExpression("^(1\\d|[2-6]\\d|70||88|99)$", ErrorMessage = "Valid range is 10-70 or 88 or 99")]
@@ -532,7 +533,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? NOMENSESTR { get; set; }
         [Display(Name = "Unsure of reason participant has stopped having menstrual periods")]
         public bool? NOMENSUNK { get; set; }
-        [Display(Name = "Other reason participant has stopped having menstrual periods")]
+        [Display(Name = "Other reason participant has stopped having menstrual periods (SPECIFY)")]
         public bool? NOMENSOTH { get; set; }
         [Display(Name = "Specify other reason participant has stopped having menstrual periods")]
         [MaxLength(60)]
@@ -619,14 +620,22 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please indicate at least one type of cancer.")]
+        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please provide at least 1 type of cancer or type of metastatic cancer if indicated.")]
         [NotMapped]
         public bool? CANCERACTVTypeCheckboxes
         {
             get
             {
-                if (CANCERPRIM == true || CANCERMETA == true || CANCMETBR == true || CANCMETOTH == true || CANCERUNK == true)
+                if (CANCERPRIM == true || CANCERMETA == true || CANCERUNK == true)
                 {
+                    if( CANCERMETA == true)
+                    {
+                        if(CANCMETBR == true || CANCMETOTH == true)
+                        {
+                            return true;
+                        }
+                        else return null;
+                    }
                     return true;
                 }
                 else return null;

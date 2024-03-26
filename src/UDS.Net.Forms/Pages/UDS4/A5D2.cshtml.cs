@@ -839,6 +839,106 @@ public class A5D2Model : FormPageModel
          },
     };
 
+    public Dictionary<string, UIBehavior> CANCERACTVBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CANCERPRIM"),
+                         new UIDisableAttribute("A5D2.CANCERMETA"),
+                         new UIDisableAttribute("A5D2.CANCERUNK"),
+                         new UIDisableAttribute("A5D2.CANCBLOOD"),
+                         new UIDisableAttribute("A5D2.CANCBREAST"),
+                         new UIDisableAttribute("A5D2.CANCCOLON"),
+                         new UIDisableAttribute("A5D2.CANCLUNG"),
+                         new UIDisableAttribute("A5D2.CANCPROST"),
+                         new UIDisableAttribute("A5D2.CANCOTHER"),
+                         new UIDisableAttribute("A5D2.CANCRAD"),
+                         new UIDisableAttribute("A5D2.CANCRESECT"),
+                         new UIDisableAttribute("A5D2.CANCIMMUNO"),
+                         new UIDisableAttribute("A5D2.CANCBONE"),
+                         new UIDisableAttribute("A5D2.CANCCHEMO"),
+                         new UIDisableAttribute("A5D2.CANCHORM"),
+                         new UIDisableAttribute("A5D2.CANCTROTH"),
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CANCERPRIM"),
+                         new UIEnableAttribute("A5D2.CANCERMETA"),
+                         new UIEnableAttribute("A5D2.CANCERUNK"),
+                         new UIEnableAttribute("A5D2.CANCBLOOD"),
+                         new UIEnableAttribute("A5D2.CANCBREAST"),
+                         new UIEnableAttribute("A5D2.CANCCOLON"),
+                         new UIEnableAttribute("A5D2.CANCLUNG"),
+                         new UIEnableAttribute("A5D2.CANCPROST"),
+                         new UIEnableAttribute("A5D2.CANCOTHER"),
+                         new UIEnableAttribute("A5D2.CANCRAD"),
+                         new UIEnableAttribute("A5D2.CANCRESECT"),
+                         new UIEnableAttribute("A5D2.CANCIMMUNO"),
+                         new UIEnableAttribute("A5D2.CANCBONE"),
+                         new UIEnableAttribute("A5D2.CANCCHEMO"),
+                         new UIEnableAttribute("A5D2.CANCHORM"),
+                         new UIEnableAttribute("A5D2.CANCTROTH"),
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIEnableAttribute("A5D2.CANCERPRIM"),
+                         new UIEnableAttribute("A5D2.CANCERMETA"),
+                         new UIEnableAttribute("A5D2.CANCERUNK"),
+                         new UIEnableAttribute("A5D2.CANCBLOOD"),
+                         new UIEnableAttribute("A5D2.CANCBREAST"),
+                         new UIEnableAttribute("A5D2.CANCCOLON"),
+                         new UIEnableAttribute("A5D2.CANCLUNG"),
+                         new UIEnableAttribute("A5D2.CANCPROST"),
+                         new UIEnableAttribute("A5D2.CANCOTHER"),
+                         new UIEnableAttribute("A5D2.CANCRAD"),
+                         new UIEnableAttribute("A5D2.CANCRESECT"),
+                         new UIEnableAttribute("A5D2.CANCIMMUNO"),
+                         new UIEnableAttribute("A5D2.CANCBONE"),
+                         new UIEnableAttribute("A5D2.CANCCHEMO"),
+                         new UIEnableAttribute("A5D2.CANCHORM"),
+                         new UIEnableAttribute("A5D2.CANCTROTH"),
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                         new UIDisableAttribute("A5D2.CANCERPRIM"),
+                         new UIDisableAttribute("A5D2.CANCERMETA"),
+                         new UIDisableAttribute("A5D2.CANCERUNK"),
+                         new UIDisableAttribute("A5D2.CANCBLOOD"),
+                         new UIDisableAttribute("A5D2.CANCBREAST"),
+                         new UIDisableAttribute("A5D2.CANCCOLON"),
+                         new UIDisableAttribute("A5D2.CANCLUNG"),
+                         new UIDisableAttribute("A5D2.CANCPROST"),
+                         new UIDisableAttribute("A5D2.CANCOTHER"),
+                         new UIDisableAttribute("A5D2.CANCRAD"),
+                         new UIDisableAttribute("A5D2.CANCRESECT"),
+                         new UIDisableAttribute("A5D2.CANCIMMUNO"),
+                         new UIDisableAttribute("A5D2.CANCBONE"),
+                         new UIDisableAttribute("A5D2.CANCCHEMO"),
+                         new UIDisableAttribute("A5D2.CANCHORM"),
+                         new UIDisableAttribute("A5D2.CANCTROTH"),
+                     }
+            }
+         },
+    };
+
     public Dictionary<string, UIBehavior> COVID19Behavior = new Dictionary<string, UIBehavior>
     {
          {
@@ -1221,9 +1321,6 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.HRTYEARS"),
                          new UIDisableAttribute("A5D2.HRTSTRTAGE"),
                          new UIDisableAttribute("A5D2.HRTENDAGE"),
-                         new UIDisableAttribute("A5D2.BCPILLSYR"),
-                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
-                         new UIDisableAttribute("A5D2.BCENDAGE"),
                      }
             }
          },
@@ -1235,9 +1332,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.HRTYEARS"),
                          new UIEnableAttribute("A5D2.HRTSTRTAGE"),
                          new UIEnableAttribute("A5D2.HRTENDAGE"),
-                         new UIEnableAttribute("A5D2.BCPILLSYR"),
-                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
-                         new UIEnableAttribute("A5D2.BCENDAGE"),
                      }
             }
          },
@@ -1249,9 +1343,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.HRTYEARS"),
                          new UIEnableAttribute("A5D2.HRTSTRTAGE"),
                          new UIEnableAttribute("A5D2.HRTENDAGE"),
-                         new UIEnableAttribute("A5D2.BCPILLSYR"),
-                         new UIEnableAttribute("A5D2.BCSTARTAGE"),
-                         new UIEnableAttribute("A5D2.BCENDAGE"),
                      }
             }
          },
@@ -1263,9 +1354,6 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.HRTYEARS"),
                          new UIDisableAttribute("A5D2.HRTSTRTAGE"),
                          new UIDisableAttribute("A5D2.HRTENDAGE"),
-                         new UIDisableAttribute("A5D2.BCPILLSYR"),
-                         new UIDisableAttribute("A5D2.BCSTARTAGE"),
-                         new UIDisableAttribute("A5D2.BCENDAGE"),
                      }
             }
          },
@@ -1319,11 +1407,47 @@ public class A5D2Model : FormPageModel
          },
     };
 
+    public UIRangeToggle MENARCHEBehavior = new UIRangeToggle
+    {
+        Low = 5,
+        High = 99,
+        UIBehavior = new UIBehavior
+        {
+            PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A5D2.NOMENSAGE"),
+                    new UIEnableAttribute("A5D2.HRT"),
+                    new UIEnableAttribute("A5D2.BCPILLS"),
+                },
+        }
+    };
+
+    public UIRangeToggle NOMESAGEBehavior = new UIRangeToggle
+    {
+        Low = 10,
+        High = 70,
+        UIBehavior = new UIBehavior
+        {
+            PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A5D2.NOMENSNAT"),
+                    new UIEnableAttribute("A5D2.NOMENSHYST"),
+                    new UIEnableAttribute("A5D2.NOMENSSURG"),
+                    new UIEnableAttribute("A5D2.NOMENSCHEM"),
+                    new UIEnableAttribute("A5D2.NOMENSRAD"),
+                    new UIEnableAttribute("A5D2.NOMENSHORM"),
+                    new UIEnableAttribute("A5D2.NOMENSESTR"),
+                    new UIEnableAttribute("A5D2.NOMENSUNK"),
+                    new UIEnableAttribute("A5D2.NOMENSOTH"),
+                },
+        }
+    };
+
     public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
         new RadioListItem("Yes", "1"),
-        new RadioListItem("Unknown", "9")
+        new RadioListItem("UNK", "9")
     };
 
     public List<RadioListItem> SmokingFrequencyListItems { get; set; } = new List<RadioListItem>
@@ -1388,6 +1512,7 @@ public class A5D2Model : FormPageModel
     {
         new RadioListItem("Absent", "0"),
         new RadioListItem("Recent/active", "1"),
+        new RadioListItem("", ""),
         new RadioListItem("Unknown", "9")
     };
 
@@ -1399,15 +1524,25 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> HeadInjuryPeriodItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> HeadInjuryUnconsciousItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("Less than 5 minutes", "0"),
         new RadioListItem("5 minutes to less than 30 minutes", "1"),
         new RadioListItem("30 minutes to less than 24 hours", "2"),
         new RadioListItem("1 day to less than 7 days", "3"),
         new RadioListItem("7 days or more", "4"),
-        new RadioListItem("7 days or more", "4"),
         new RadioListItem("Not applicable, no loss of consciousness", "8"),
+        new RadioListItem("Unknown duration", "9")
+    };
+
+    public List<RadioListItem> HeadInjuryDazedItems { get; set; } = new List<RadioListItem>
+    {
+        new RadioListItem("Less than 5 minutes", "0"),
+        new RadioListItem("5 minutes to less than 30 minutes", "1"),
+        new RadioListItem("30 minutes to less than 24 hours", "2"),
+        new RadioListItem("1 day to less than 7 days", "3"),
+        new RadioListItem("7 days or more", "4"),
+        new RadioListItem("Not applicable, never dazed and confused", "8"),
         new RadioListItem("Unknown duration", "9")
     };
 
