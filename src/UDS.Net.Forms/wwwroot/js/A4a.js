@@ -2,11 +2,14 @@
 
     function toggleTreatmentTable(value) {
         var enable = (value == '1' || value == '9');
-        $('.treatmentTable').prop('disabled', !enable);
-        $('input[type=radio][name*="CARETRIAL"]').prop('disabled', !enable);
-        $('input[type=radio][name*="TRIALGRP"]').prop('disabled', !enable);
-    }
+        var fields = $('.treatmentTable, input[type=radio][name*="CARETRIAL"], input[type=radio][name*="TRIALGRP"]');
 
+        fields.prop('disabled', !enable);
+
+        if (!enable) {
+            fields.val(''); 
+        }
+    }
     $('input[type=radio][name*="A4a.TRTBIOMARK"]').change(function () {
         toggleTreatmentTable($(this).val());
     });
