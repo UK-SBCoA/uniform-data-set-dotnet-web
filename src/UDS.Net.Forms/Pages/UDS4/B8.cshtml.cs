@@ -18,24 +18,65 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public B8 B8 { get; set; } = default!;
 
-        public List<RadioListItem> FindingsListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> NEUREXAMListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No abnormal findings (END FORM HERE)", "0"),
-            new RadioListItem("Yes - abnormal findings were consistent with syndromes listed in Questions 2–8", "1"),
-            new RadioListItem("Yes - abnormal findings were consistent with age-associated changes or irrelevant to dementing disorders (e.g., Bell's palsy) (SKIP TO QUESTION 8)", "2")
+            new RadioListItem("No neurologic examination (END FORM HERE)", "0"),
+            new RadioListItem("Comprehensive neurologic examination as suggested in the UDS Coding Guidebook", "1"),
+            new RadioListItem("Focused or partial neurologic examination performed in-person", "2"),
+            new RadioListItem("Focused or partial neurologic examination performed via telehealth", "3")
         };
 
-        public List<RadioListItem> SyndromePresentListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> NORMNREXAMListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
+            new RadioListItem("No abnormal findings (END FORM HERE; If this box is checked, all items will default to 0 = Absent in the database)", "0"),
             new RadioListItem("Yes", "1")
+        };
+
+        public List<RadioListItem> PARKSIGNListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No abnormal signs in this section are present (SKIP TO SECTION 2B; If this box is checked, Q3a through Q3n will default to 0 = Absent in the database)", "0"),
+            new RadioListItem("Yes (IF YES – complete questions 3a–3n and consider completing additional measures as described on page 3)", "1"),
+            new RadioListItem("Not assessed (SKIP TO SECTION 2B; If this box is checked, Q3a through Q3n will default to 8 = Not Assessed in the database)", "8")
+        };
+
+        public List<RadioListItem> SignsListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Absent", "0"),
+            new RadioListItem("Focal or Unilatera", "1"),
+            new RadioListItem("Bilateral & Largely Symmetric", "2"),
+            new RadioListItem("Bilateral & Largely Asymmetric", "3"),
+            new RadioListItem("Not Assessed", "8")
         };
 
         public List<RadioListItem> AssessmentListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("Yes", "1"),
-            new RadioListItem("No", "0"),
-            new RadioListItem("Not assessed", "8")
+            new RadioListItem("Absent", "0"),
+            new RadioListItem("Present", "1"),
+            new RadioListItem("Not Assessed", "8")
+        };
+
+        public List<RadioListItem> OTHERSIGNListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No abnormal signs in this section are present (SKIP TO SECTION 2C; If this box is checked, Q4a through Q4q will default to 0=Absent in the database)", "0"),
+            new RadioListItem("Yes (IF YES – complete questions 4a–4q and consider completing additional measures as described on page 3)", "1"),
+            new RadioListItem("Not assessed (SKIP TO SECTION 2C; If this box is checked, Q4a through Q4q will default to 8 = Not Assessed in the database)", "8")
+        };
+
+        public List<RadioListItem> GaitListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Hemiparetic gait (spastic)", "1"),
+            new RadioListItem("Foot drop gait (lower motor neuron)", "2"),
+            new RadioListItem("Ataxic gait", "3"),
+            new RadioListItem("Apractic magnetic gait", "4"),
+            new RadioListItem("Hypokinetic/parkinsonian gait", "5"),
+            new RadioListItem("Antalgic gait", "6")
+        };
+
+        public List<RadioListItem> GaitFindingListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No abnormal signs in this section are present (END FORM HERE)", "0"),
+            new RadioListItem("Yes (IF YES - complete question 5a and consider completing additional measures as described on page 3)", "1"),
+            new RadioListItem("Not assessed (END FORM HERE)", "8")
         };
 
         public Dictionary<string, UIBehavior> NORMEXAMUIBehavior = new Dictionary<string, UIBehavior>
