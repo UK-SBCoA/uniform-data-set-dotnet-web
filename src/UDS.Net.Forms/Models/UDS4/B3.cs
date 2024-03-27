@@ -258,6 +258,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total UPDRS Score")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
+        [RegularExpression("^([0-9]|[1-9][0-9]|10[0-8]|888)$", ErrorMessage = "Must be an integer between 0-108 or 888")]
         public int? TOTALUPDRS { get; set; }
 
     }
