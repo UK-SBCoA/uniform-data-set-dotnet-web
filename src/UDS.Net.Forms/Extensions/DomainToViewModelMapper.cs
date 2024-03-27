@@ -183,6 +183,10 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is A4aFormFields)
+                {
+                    vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is A5FormFields)
                 {
                     vm = ((A5FormFields)form.Fields).ToVM(form.Id);
@@ -544,6 +548,48 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = a4.IsDeleted
             };
         }
+
+
+
+        public static A4a ToVM(this A4aFormFields fields, int formId)
+        {
+            return new A4a()
+            {
+                Id = formId,
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK,
+                Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
+
+            };
+        }
+
+        public static A4aTreatment ToVM(this A4aTreatmentFormFields fields, int formId)
+        {
+            return new A4aTreatment()
+            {
+                TreatmentIndex = fields.TreatmentIndex,
+                TARGETAB = fields.TARGETAB,
+                TARGETTAU = fields.TARGETTAU,
+                TARGETINF = fields.TARGETINF,
+                TARGETSYN = fields.TARGETSYN,
+                TARGETOTH = fields.TARGETOTH,
+                TARGETOTX = fields.TARGETOTX,
+                TRTTRIAL = fields.TRTTRIAL,
+                NCTNUM = fields.NCTNUM,
+                STARTMO = fields.STARTMO,
+                STARTYEAR = fields.STARTYEAR,
+                ENDMO = fields.ENDMO,
+                ENDYEAR = fields.ENDYEAR,
+                CARETRIAL = fields.CARETRIAL,
+                TRIALGRP = fields.TRIALGRP
+            };
+        }
+
+
 
         public static A5 ToVM(this A5FormFields fields, int formId)
         {
