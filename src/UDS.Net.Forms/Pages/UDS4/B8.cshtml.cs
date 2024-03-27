@@ -62,17 +62,18 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Not assessed (SKIP TO SECTION 2C; If this box is checked, Q4a through Q4q will default to 8 = Not Assessed in the database)", "8")
         };
 
-        public List<RadioListItem> GaitListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> GaitFindingListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Hemiparetic gait (spastic)", "1"),
             new RadioListItem("Foot drop gait (lower motor neuron)", "2"),
             new RadioListItem("Ataxic gait", "3"),
             new RadioListItem("Apractic magnetic gait", "4"),
             new RadioListItem("Hypokinetic/parkinsonian gait", "5"),
-            new RadioListItem("Antalgic gait", "6")
+            new RadioListItem("Antalgic gait", "6"),
+            new RadioListItem("Other", "7")
         };
 
-        public List<RadioListItem> GaitFindingListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> GaitListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No abnormal signs in this section are present (END FORM HERE)", "0"),
             new RadioListItem("Yes (IF YES - complete question 5a and consider completing additional measures as described on page 3)", "1"),
