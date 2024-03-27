@@ -617,22 +617,19 @@
             </div>
 
         </div>
-    </div>
-    <div>
-        <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TOTALUPDRS"></p>
-        <label asp-for="@Model.B3.TOTALUPDRS"><span class="counter"></span>@Html.DisplayNameFor(m => m.B3.TOTALUPDRS)</label>
-        <p class="text-sm font-semibold">
-            (If one or more items are checked
-            "8=Untestable", enter 888)
-        </p>
-        <div class="mt-2 pt-2">
-            <input asp-for="@Model.B3.TOTALUPDRS" />
-            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TOTALUPDRS"></span>
+        <div class="pb-6 pt-6">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TOTALUPDRS"></p>
+            <label asp-for="@Model.B3.TOTALUPDRS"><span class="counter"></span>@Html.DisplayNameFor(m => m.B3.TOTALUPDRS)</label>
+            <p class="text-sm font-semibold">
+                (If one or more items are checked
+                "8=Untestable", enter 888)
+            </p>
+            <div class="mt-2 pt-2">
+                <input asp-for="@Model.B3.TOTALUPDRS" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TOTALUPDRS"></span>
+            </div>
         </div>
     </div>
-
-
-
 </div>
 
 <partial name="_FormFooter" for="@Model.B3" />
