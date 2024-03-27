@@ -9,180 +9,302 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class B8 : FormModel
     {
-        [Display(Name = "Were there abnormal neurological exam findings?")]
+        [Display(Name = "Which of the following was completed on this participant?")]
         [RequiredOnComplete]
-        public int? NORMEXAM { get; set; }
+        public int? NEUREXAM { get; set; }
 
-        [Display(Name = "Parkinsonian signs")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Are parkinsonian signs indicated?")]
+        [Display(Name = "Were there abnormal exam findings?")]
+        public bool? NORMNREXAM { get; set; }
+
+        [Display(Name = "Parkinsonian Signs")]
         public int? PARKSIGN { get; set; }
 
-        [Display(Name = "Resting tremor — left arm")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify resting tremor - left arm")]
-        public int? RESTTRL { get; set; }
+        [Display(Name = "Slowing of fine motor movements")]
+        public int? SLOWINGFM { get; set; }
 
-        [Display(Name = "Resting tremor — right arm")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify resting tremor - right arm")]
-        public int? RESTTRR { get; set; }
+        [Display(Name = "Limb tremor at rest")]
+        public int? TREMREST { get; set; }
 
-        [Display(Name = "Slowing of fine motor movements — left side")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify slowing of fine motor movements - left side")]
-        public int? SLOWINGL { get; set; }
+        [Display(Name = "Limb tremor - postural")]
+        public int? TREMPOST { get; set; }
 
-        [Display(Name = "Slowing of fine motor movements — right side")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify slowing of fine motor movements - right side")]
-        public int? SLOWINGR { get; set; }
+        [Display(Name = "Limb tremor - kinetic")]
+        public int? TREMKINE { get; set; }
 
-        [Display(Name = "Rigidity — left arm")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify rigidity - left arm")]
-        public int? RIGIDL { get; set; }
+        [Display(Name = "Limb rigidity - arm")]
+        public int? RIGIDARM { get; set; }
 
-        [Display(Name = "Rigidity — right arm")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify rigidity - right arm")]
-        public int? RIGIDR { get; set; }
+        [Display(Name = "Limb rigidity - leg")]
+        public int? RIGIDLEG { get; set; }
 
-        [Display(Name = "Bradykinesia")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify bradykinesia indication.")]
-        public int? BRADY { get; set; }
+        [Display(Name = "Limb dystonia - arm")]
+        public int? DYSTARM { get; set; }
 
-        [Display(Name = "Parkinsonian gait disorder")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify parkinsonian gait disorder indication.")]
-        public int? PARKGAIT { get; set; }
+        [Display(Name = "Limb dystonia - leg")]
+        public int? DYSTLEG { get; set; }
+
+        [Display(Name = "Chorea")]
+        public int? CHOREA { get; set; }
+
+        [Display(Name = "Decrement in amplitude of fine motor movements")]
+        public int? AMPMOTOR { get; set; }
+
+        [Display(Name = "Axial rigidity")]
+        public int? AXIALRIG { get; set; }
 
         [Display(Name = "Postural instability")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify postural instability indication.")]
         public int? POSTINST { get; set; }
 
-        [Display(Name = "Neurological sign considered by examiner to be most likely consistent with cerebrovascular disease")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Is cerrebrovascular disease indicated?")]
-        public int? CVDSIGNS { get; set; }
+        [Display(Name = "Facial masking")]
+        public int? MASKING { get; set; }
 
-        [Display(Name = "Cortical cognitive deficit (e.g., aphasia, apraxia, neglect)")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? CORTDEF { get; set; }
+        [Display(Name = "Stooped posture")]
+        public int? STOOPED { get; set; }
 
-        [Display(Name = "Focal or other neurological findings consistent with SIVD (subcortical ischemic vascular dementia)")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? SIVDFIND { get; set; }
+        [Display(Name = "Cortical/Pyramidal/Other Signs")]
+        public int? OTHERSIGN { get; set; }
 
-        [Display(Name = "Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — left side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? CVDMOTL { get; set; }
+        [Display(Name = "Limb apraxia")]
+        public int? LIMBAPRAX { get; set; }
 
-        [Display(Name = "Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — right side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? CVDMOTR { get; set; }
+        [Display(Name = "Face or limb findings in UMN distribution")]
+        public int? UMNDIST { get; set; }
 
-        [Display(Name = "Cortical visual field loss — left side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? CORTVISL { get; set; }
+        [Display(Name = "Face or limb findings in an LMN distribution")]
+        public int? LMNDIST { get; set; }
 
-        [Display(Name = "Cortical visual field loss — right side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? CORTVISR { get; set; }
+        [Display(Name = "Visual field cut")]
+        public int? VFIELDCUT { get; set; }
 
-        [Display(Name = "Somatosensory loss — left side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? SOMATL { get; set; }
+        [Display(Name = "Limb ataxia")]
+        public int? LIMBATAX { get; set; }
 
-        [Display(Name = "Somatosensory loss — right side")]
-        [RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
-        public int? SOMATR { get; set; }
+        [Display(Name = "Myoclonus")]
+        public int? MYOCLON { get; set; }
 
-        [Display(Name = "Higher cortical visual problem suggesting posterior cortical atrophy (e.g., prosopagnosia, simultagnosia, Balint’s syndrome) or apraxia of gaze")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
-        public int? POSTCORT { get; set; }
+        [Display(Name = "Unilateral Somatosensory Loss (localized to the brain; disregard sensory changes localized to the spinal cord or peripheral nerves)")]
+        public int? UNISOMATO { get; set; }
 
-        [Display(Name = "Findings suggestive of progressive supranuclear palsy (PSP), corticobasal syndrome, or other related disorders")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
-        public int? PSPCBS { get; set; }
+        [Display(Name = "Aphasia (disregard complaints of mild dysnomia if not viewed as reflecting a clinically significant change)")]
+        public int? APHASIA { get; set; }
 
-        [Display(Name = "Eye movement changes consistent with PSP")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? EYEPSP { get; set; }
+        [Display(Name = "Alien limb phenomenon")]
+        public int? ALIENLIMB { get; set; }
 
-        [Display(Name = "Dysarthria consistent with PSP")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? DYSPSP { get; set; }
+        [Display(Name = "Hemispatial neglect")]
+        public int? HSPATNEG { get; set; }
 
-        [Display(Name = "Axial rigidity consistent with PSP")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? AXIALPSP { get; set; }
+        [Display(Name = "Prosopagnosia")]
+        public int? PSPOAGNO { get; set; }
 
-        [Display(Name = "Gait disorder consistent with PSP")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? GAITPSP { get; set; }
+        [Display(Name = "Simultanagnosia")]
+        public int? SMTAGNO { get; set; }
+
+        [Display(Name = "Optic ataxia")]
+        public int? OPTICATAX { get; set; }
+
+        [Display(Name = "Apraxia of gaze")]
+        public int? APRAXGAZE { get; set; }
+
+        [Display(Name = "Vertical +/- horizontal gaze palsy")]
+        public int? VHGAZEPAL { get; set; }
+
+        [Display(Name = "Dysarthria*")]
+        public int? DYSARTH { get; set; }
 
         [Display(Name = "Apraxia of speech")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
         public int? APRAXSP { get; set; }
 
-        [Display(Name = "Apraxia consistent with CBS — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? APRAXL { get; set; }
+        [Display(Name = "Gait")]
+        public int? GAITABN { get; set; }
 
-        [Display(Name = "Apraxia consistent with CBS — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? APRAXR { get; set; }
+        [Display(Name = "Finding")]
+        public int? GAITFIND { get; set; }
 
-        [Display(Name = "Cortical sensory deficits consistent with CBS — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? CORTSENL { get; set; }
-
-        [Display(Name = "Cortical sensory deficits consistent with CBS — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? CORTSENR { get; set; }
-
-        [Display(Name = "Ataxia consistent with CBS — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? ATAXL { get; set; }
-
-        [Display(Name = "Ataxia consistent with CBS — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? ATAXR { get; set; }
-
-        [Display(Name = "Alien limb consistent with CBS — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? ALIENLML { get; set; }
-
-        [Display(Name = "Alien limb consistent with CBS — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? ALIENLMR { get; set; }
-
-        [Display(Name = "Dystonia consistent with CBS, PSP, or related disorder — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? DYSTONL { get; set; }
-
-        [Display(Name = "Dystonia consistent with CBS, PSP, or related disorder — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? DYSTONR { get; set; }
-
-        [Display(Name = "Myoclonus consistent with CBS — left side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? MYOCLLT { get; set; }
-
-        [Display(Name = "Myoclonus consistent with CBS — right side")]
-        [RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
-        public int? MYOCLRT { get; set; }
-
-        [Display(Name = "Findings suggesting ALS (e.g., muscle wasting, fasciculations, upper motor and/or lower motor neuron signs)")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
-        public int? ALSFIND { get; set; }
-
-        [Display(Name = "Normal pressure hydrocephalus: gait apraxia")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
-        public int? GAITNPH { get; set; }
-
-        [Display(Name = "Other findings (e.g., cerebella ataxia, chorea, myoclonus) (NOTE: For this question, do not specify symptoms that have already been checked above)")]
-        [RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Indicate other finding.")]
-        [RequiredIf(nameof(NORMEXAM), "2", ErrorMessage = "Indicate other finding.")]
-        public int? OTHNEUR { get; set; }
-
-        [Display(Name = "Yes (specify)")]
+        [Display(Name = "Other gait (Specify)")]
         [MaxLength(60)]
-        [RequiredIf(nameof(OTHNEUR), "1", ErrorMessage = "Specify other findings")]
         [ProhibitedCharacters]
-        public string? OTHNEURX { get; set; }
+        public string? GAITOTHRX { get; set; }
+
+
+
+
+
+
+        //[Display(Name = "Were there abnormal neurological exam findings?")]
+        //[RequiredOnComplete]
+        //public int? NORMEXAM { get; set; }
+
+        //[Display(Name = "Parkinsonian signs")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Are parkinsonian signs indicated?")]
+        //public int? PARKSIGN { get; set; }
+
+        //[Display(Name = "Resting tremor — left arm")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify resting tremor - left arm")]
+        //public int? RESTTRL { get; set; }
+
+        //[Display(Name = "Resting tremor — right arm")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify resting tremor - right arm")]
+        //public int? RESTTRR { get; set; }
+
+        //[Display(Name = "Slowing of fine motor movements — left side")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify slowing of fine motor movements - left side")]
+        //public int? SLOWINGL { get; set; }
+
+        //[Display(Name = "Slowing of fine motor movements — right side")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify slowing of fine motor movements - right side")]
+        //public int? SLOWINGR { get; set; }
+
+        //[Display(Name = "Rigidity — left arm")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify rigidity - left arm")]
+        //public int? RIGIDL { get; set; }
+
+        //[Display(Name = "Rigidity — right arm")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify rigidity - right arm")]
+        //public int? RIGIDR { get; set; }
+
+        //[Display(Name = "Bradykinesia")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify bradykinesia indication.")]
+        //public int? BRADY { get; set; }
+
+        //[Display(Name = "Parkinsonian gait disorder")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify parkinsonian gait disorder indication.")]
+        //public int? PARKGAIT { get; set; }
+
+        //[Display(Name = "Postural instability")]
+        //[RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Specify postural instability indication.")]
+        //public int? POSTINST { get; set; }
+
+        //[Display(Name = "Neurological sign considered by examiner to be most likely consistent with cerebrovascular disease")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Is cerrebrovascular disease indicated?")]
+        //public int? CVDSIGNS { get; set; }
+
+        //[Display(Name = "Cortical cognitive deficit (e.g., aphasia, apraxia, neglect)")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CORTDEF { get; set; }
+
+        //[Display(Name = "Focal or other neurological findings consistent with SIVD (subcortical ischemic vascular dementia)")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? SIVDFIND { get; set; }
+
+        //[Display(Name = "Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — left side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CVDMOTL { get; set; }
+
+        //[Display(Name = "Motor (may include weakness of combination of face, arm, and leg; reflex changes, etc.) — right side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CVDMOTR { get; set; }
+
+        //[Display(Name = "Cortical visual field loss — left side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CORTVISL { get; set; }
+
+        //[Display(Name = "Cortical visual field loss — right side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CORTVISR { get; set; }
+
+        //[Display(Name = "Somatosensory loss — left side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? SOMATL { get; set; }
+
+        //[Display(Name = "Somatosensory loss — right side")]
+        //[RequiredIf(nameof(CVDSIGNS), "1", ErrorMessage = "Answer is required.")]
+        //public int? SOMATR { get; set; }
+
+        //[Display(Name = "Higher cortical visual problem suggesting posterior cortical atrophy (e.g., prosopagnosia, simultagnosia, Balint’s syndrome) or apraxia of gaze")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
+        //public int? POSTCORT { get; set; }
+
+        //[Display(Name = "Findings suggestive of progressive supranuclear palsy (PSP), corticobasal syndrome, or other related disorders")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
+        //public int? PSPCBS { get; set; }
+
+        //[Display(Name = "Eye movement changes consistent with PSP")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? EYEPSP { get; set; }
+
+        //[Display(Name = "Dysarthria consistent with PSP")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? DYSPSP { get; set; }
+
+        //[Display(Name = "Axial rigidity consistent with PSP")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? AXIALPSP { get; set; }
+
+        //[Display(Name = "Gait disorder consistent with PSP")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? GAITPSP { get; set; }
+
+        //[Display(Name = "Apraxia of speech")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? APRAXSP { get; set; }
+
+        //[Display(Name = "Apraxia consistent with CBS — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? APRAXL { get; set; }
+
+        //[Display(Name = "Apraxia consistent with CBS — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? APRAXR { get; set; }
+
+        //[Display(Name = "Cortical sensory deficits consistent with CBS — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CORTSENL { get; set; }
+
+        //[Display(Name = "Cortical sensory deficits consistent with CBS — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? CORTSENR { get; set; }
+
+        //[Display(Name = "Ataxia consistent with CBS — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? ATAXL { get; set; }
+
+        //[Display(Name = "Ataxia consistent with CBS — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? ATAXR { get; set; }
+
+        //[Display(Name = "Alien limb consistent with CBS — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? ALIENLML { get; set; }
+
+        //[Display(Name = "Alien limb consistent with CBS — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? ALIENLMR { get; set; }
+
+        //[Display(Name = "Dystonia consistent with CBS, PSP, or related disorder — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? DYSTONL { get; set; }
+
+        //[Display(Name = "Dystonia consistent with CBS, PSP, or related disorder — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? DYSTONR { get; set; }
+
+        //[Display(Name = "Myoclonus consistent with CBS — left side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? MYOCLLT { get; set; }
+
+        //[Display(Name = "Myoclonus consistent with CBS — right side")]
+        //[RequiredIf(nameof(PSPCBS), "1", ErrorMessage = "Answer is required.")]
+        //public int? MYOCLRT { get; set; }
+
+        //[Display(Name = "Findings suggesting ALS (e.g., muscle wasting, fasciculations, upper motor and/or lower motor neuron signs)")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
+        //public int? ALSFIND { get; set; }
+
+        //[Display(Name = "Normal pressure hydrocephalus: gait apraxia")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Answer is required.")]
+        //public int? GAITNPH { get; set; }
+
+        //[Display(Name = "Other findings (e.g., cerebella ataxia, chorea, myoclonus) (NOTE: For this question, do not specify symptoms that have already been checked above)")]
+        //[RequiredIf(nameof(NORMEXAM), "1", ErrorMessage = "Indicate other finding.")]
+        //[RequiredIf(nameof(NORMEXAM), "2", ErrorMessage = "Indicate other finding.")]
+        //public int? OTHNEUR { get; set; }
+
+        //[Display(Name = "Yes (specify)")]
+        //[MaxLength(60)]
+        //[RequiredIf(nameof(OTHNEUR), "1", ErrorMessage = "Specify other findings")]
+        //[ProhibitedCharacters]
+        //public string? OTHNEURX { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
