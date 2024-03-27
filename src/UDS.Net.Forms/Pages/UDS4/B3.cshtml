@@ -618,10 +618,9 @@
 
         </div>
     </div>
-    <div class="border-solid border-2 border-indigo-500 pb-3">
-
+    <div>
         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TOTALUPDRS"></p>
-        <label asp-for="@Model.B3.TOTALUPDRS">@Html.DisplayNameFor(m => m.B3.TOTALUPDRS)</label>
+        <label asp-for="@Model.B3.TOTALUPDRS"><span class="counter"></span>@Html.DisplayNameFor(m => m.B3.TOTALUPDRS)</label>
         <p class="text-sm font-semibold">
             (If one or more items are checked
             "8=Untestable", enter 888)
