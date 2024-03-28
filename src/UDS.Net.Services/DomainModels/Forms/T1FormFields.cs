@@ -42,7 +42,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "4.0";
+            return "3.0";
         }
     }
 }
