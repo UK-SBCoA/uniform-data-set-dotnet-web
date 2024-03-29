@@ -17,7 +17,7 @@
             <label asp-for="B8.NEUREXAM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.NEUREXAM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.NEUREXAM"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.NEUREXAM)" for="@Model.B8.NEUREXAM" items="Model.NEUREXAMListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.NEUREXAM)" for="@Model.B8.NEUREXAM" items="Model.NEUREXAMListItems" ui-behaviors="Model.NEUREXAMUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.NEUREXAM"></span>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <label asp-for="B8.PARKSIGN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.PARKSIGN)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.PARKSIGN"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.PARKSIGN)" for="@Model.B8.PARKSIGN" items="Model.PARKSIGNListItems" ui-behaviors="Model.PARKSIGNUIBehavior"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.PARKSIGN)" for="@Model.B8.PARKSIGN" items="Model.PARKSIGNListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.PARKSIGN"></span>
             </div>
         </div>
@@ -233,13 +233,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.RIGIDLEG)</label>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.RIGIDLEG"></span>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.RIGIDLEG)" for="@Model.B8.RIGIDLEG" items="Model.SignsListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.MYOCLON)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.MYOCLON"></span>
                     </td>
@@ -350,16 +343,16 @@
             <label asp-for="B8.GAITABN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.GAITABN)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.GAITABN"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.GAITABN)" for="@Model.B8.GAITABN" items="Model.GaitListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.GAITABN)" for="@Model.B8.GAITABN" items="Model.GaitListItems" ui-behaviors="Model.GaitUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.GAITABN"></span>
             </div>
         </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B8.GAITFIND"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.GAITFIND)</label>
+            <label asp-for="B8.GAITFIND"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.GAITFIND)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.GAITFIND"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B8.GAITFIND)" for="@Model.B8.GAITFIND" items="Model.GaitFindingListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B8.GAITFIND)" for="@Model.B8.GAITFIND" items="Model.GaitFindingListItems" ui-behaviors="Model.GaitFindUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.GAITFIND"></span>
                 <input asp-for="@Model.B8.GAITOTHRX" />
                 <label asp-for="@Model.B8.GAITOTHRX"></label>
