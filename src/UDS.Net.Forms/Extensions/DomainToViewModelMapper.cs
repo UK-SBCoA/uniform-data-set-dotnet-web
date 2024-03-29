@@ -745,7 +745,7 @@ namespace UDS.Net.Forms.Extensions
             {
                 Id = formId,
                 NEUREXAM = fields.NEUREXAM,
-                NORMNREXAM = fields.NORMNREXAM,
+                NORMNREXAM = fields.NORMNREXAM.HasValue ? (fields.NORMNREXAM == true ? 1 : 0) : null,
                 PARKSIGN = fields.PARKSIGN,
                 SLOWINGFM = fields.SLOWINGFM,
                 TREMREST = fields.TREMREST,

@@ -604,7 +604,7 @@ namespace UDS.Net.Forms.Extensions
             {
 
                 NEUREXAM = vm.NEUREXAM,
-                NORMNREXAM = vm.NORMNREXAM,
+                NORMNREXAM = vm.NORMNREXAM.HasValue ? vm.NORMNREXAM.Value != 0 : false,
                 PARKSIGN = vm.PARKSIGN,
                 SLOWINGFM = vm.SLOWINGFM,
                 TREMREST = vm.TREMREST,
