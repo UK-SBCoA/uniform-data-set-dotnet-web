@@ -5,752 +5,210 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B9. Check only <span class="underline">one</span> box per question.
+    <p class="italic mt-1 text-sm text-gray-500">
+        <span class="font-bold">INSTRUCTIONS:</span> This form is to be completed by the clinician. <span class="underline">Questions below are not intended for direct administration to participant or co-participant.</span> For all questions the clinician must use their best judgment about
+        whether symptoms are present and make their estimate when symptoms began based on information from participant and co-participant. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span>
+        for <span class="font-bold not-italic">Form B9.</span> Check only <span class="underline">one</span> box per question.
     </p>
 </div>
 <div>
-    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Declines in memory reported by participant and co-participant</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECSUB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECSUB)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECSUB"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECSUB)" for="@Model.B9.DECSUB" items="Model.MemoryDeclineListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECSUB"></span>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECIN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECIN)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECIN"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECIN)" for="@Model.B9.DECIN" items="Model.InformantMemoryDeclineListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECIN"></span>
-            </div>
-        </div>
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Cognitive symptoms</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECCLCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLCOG)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLCOG"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLCOG)" for="@Model.B9.DECCLCOG" items="Model.DECCLCOGListItems" ui-behaviors="Model.DECCLOGUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLCOG"></span>
-            </div>
-        </div>
-
-        <table class="table-auto min-w-full divide-y divide-gray-300">
-            <thead>
-                <tr>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                        <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Indicate whether the participant currently is meaningfully impaired, <i>relative to previously attained</i> abilities, in the following cognitive domains, or has fluctuating cognition</label>
-                    </th>
-                    @foreach (var item in Model.BasicYesNoListItems)
-                    {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
-                    }
-                </tr>
-            </thead>
-            <tbody class="subcounterreset divide-y divide-gray-200">
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGMEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGMEM)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGMEM"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMEM"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGMEM)" for="@Model.B9.COGMEM" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGORI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGORI)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGORI"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGORI"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGORI)" for="@Model.B9.COGORI" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGJUDG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGJUDG)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGJUDG"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGJUDG"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGJUDG)" for="@Model.B9.COGJUDG" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGLANG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGLANG)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGLANG"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGLANG"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGLANG)" for="@Model.B9.COGLANG" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGVIS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGVIS)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGVIS"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGVIS"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGVIS)" for="@Model.B9.COGVIS" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGATTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGATTN)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGATTN"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGATTN"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGATTN)" for="@Model.B9.COGATTN" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.COGFLUC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGFLUC)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.COGFLUC"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGFLUC"></span>
-
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGFLUC)" for="@Model.B9.COGFLUC" items="Model.BasicYesNoListItems" ui-behaviors="Model.COGFLUCUIBehavior"></table-cell-radio-buttons>
-                <tr>
-                    <td>
-                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="B9.COGFLAGO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.COGFLAGO)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGFLAGO"></p>
-                                <input asp-for="@Model.B9.COGFLAGO" />
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGFLAGO"></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="B9.COGOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGOTHR)</label>
-                                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGOTHR"></p>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHR"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.COGOTHR)" for="@Model.B9.COGOTHR" items="Model.SimpleYesNoListItems" ui-behaviors="Model.COGOTHRUIBehavior"></table-cell-radio-buttons>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="B9.COGOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.COGOTHRX)</label>
-                                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGOTHRX"></p>
-                                    <input asp-for="@Model.B9.COGOTHRX" />
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHRX"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        @if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.COGFPRED">
-                    <span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COGFPRED) <br><br>
-                    <span class="text-sm text-black-500">NOTE: Enter 0 if this information was provided on a previously submitted Form B9</span>
-                    <br />
-                    <br />
-                </label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.COGFPRED"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.COGFPRED)" for="@Model.B9.COGFPRED" items="Model.FollowUpCognitiveDomainsListItems" ui-behaviors="Model.COGFPREDFOLLOWUPUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGFPRED"></span>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.COGFPREX"></p>
-                    <label asp-for="B9.COGFPREX">@Html.DisplayNameFor(m => m.B9.COGFPREX)</label>
-                    <div class="mt-2">
-                        <input asp-for="B9.COGFPREX" />
-                    </div>
-                </div>
-            </div>
-        }
-
-        else
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.COGFPRED"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COGFPRED)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.COGFPRED"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.COGFPRED)" for="@Model.B9.COGFPRED" items="Model.CognitiveDomainsListItems" ui-behaviors="Model.COGFPREDUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGFPRED"></span>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.COGFPREX"></p>
-                    <label asp-for="B9.COGFPREX">@Html.DisplayNameFor(m => m.B9.COGFPREX)</label>
-                    <div class="mt-2">
-                        <input asp-for="B9.COGFPREX" />
-                    </div>
-                </div>
-            </div>
-
-        }
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.COGMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COGMODE)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.COGMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.COGMODE)" for="@Model.B9.COGMODE" items="Model.OnsetListItems" ui-behaviors="Model.COGMODEUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMODE"></span>
-            </div>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.COGMODEX"></p>
-                <label asp-for="B9.COGMODEX">@Html.DisplayNameFor(m => m.B9.COGMODEX)</label>
-                <div class="mt-2">
-                    <input asp-for="B9.COGMODEX" />
-                </div>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECAGE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECAGE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECAGE"></p>
-                <input asp-for="@Model.B9.DECAGE" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECAGE"></span>
-            </div>
-        </div>
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Behavioral symptoms</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECCLBE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLBE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLBE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLBE)" for="@Model.B9.DECCLBE" items="Model.DECCLBEListItems" ui-behaviors="Model.DECCLBEUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLBE"></span>
-            </div>
-        </div>
-
-        <table class="table-auto min-w-full divide-y divide-gray-300">
-            <thead>
-                <tr>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                        <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Indicate whether the participant currently manifests meaningful change in behavior in any of the following ways</label>
-                    </th>
-                    @foreach (var item in Model.BasicYesNoListItems)
-                    {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
-                    }
-                </tr>
-            </thead>
-            <tbody class="subcounterreset divide-y divide-gray-200">
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEAPATHY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEAPATHY)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEAPATHY"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEAPATHY"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEAPATHY)" for="@Model.B9.BEAPATHY" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEDEP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEDEP)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEDEP"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEDEP"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEDEP)" for="@Model.B9.BEDEP" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-            </tbody>
-            <tbody class="subsubcounterreset">
-                <tr>
-                    <td colspan="4">
-                        <div class="ml-2">
-                            <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> Psychosis</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-4">
-                            <label asp-for="B9.BEVHALL"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEVHALL)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEVHALL"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEVHALL"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVHALL)" for="@Model.B9.BEVHALL" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEHVHALLUIBehavior"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-6">
-                            <label asp-for="B9.BEVWELL">9c1a. @Html.DisplayNameFor(m => m.B9.BEVWELL)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEVWELL"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEVWELL"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEVWELL)" for="@Model.B9.BEVWELL" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEVWELLUIBehavior"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <div class="ml-6 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="B9.BEVHAGO">9c1b. @Html.DisplayNameFor(m => m.B9.BEVHAGO)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEVHAGO"></p>
-                                <input asp-for="@Model.B9.BEVHAGO" />
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEVHAGO"></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-4">
-                            <label asp-for="B9.BEAHALL"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEAHALL)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEAHALL"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEAHALL"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEAHALL)" for="@Model.B9.BEAHALL" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-4">
-                            <label asp-for="B9.BEDEL"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEDEL)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEDEL"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEDEL"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEDEL)" for="@Model.B9.BEDEL" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-            </tbody>
-            <tbody class=subsubcounterreset>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEDISIN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEDISIN)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEDISIN"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEDISIN"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEDISIN)" for="@Model.B9.BEDISIN" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEIRRIT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEIRRIT)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEIRRIT"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEIRRIT"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEIRRIT)" for="@Model.B9.BEIRRIT" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEAGIT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEAGIT)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEAGIT"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEAGIT"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEAGIT)" for="@Model.B9.BEAGIT" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEPERCH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEPERCH)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEPERCH"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEPERCH"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEPERCH)" for="@Model.B9.BEPERCH" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEREM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEREM)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEREM"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEREM"></span>
-
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEREM)" for="@Model.B9.BEREM" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEREMUIBehavior"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="B9.BEREMAGO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEREMAGO)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEREMAGO"></p>
-                                <input asp-for="@Model.B9.BEREMAGO" />
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEREMAGO"></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.BEANX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEANX)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.BEANX"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEANX"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEANX)" for="@Model.B9.BEANX" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-            </tbody>
-            <tbody class=subsubcounterreset>
-                <tr>
-                    <td>
-                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="B9.BEOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.BEOTHR)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEOTHR"></p>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHR"></span>
-                            </div>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.BEOTHR)" for="@Model.B9.BEOTHR" items="Model.SimpleYesNoListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="B9.BEOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEOTHRX)</label>
-                            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEOTHRX"></p>
-                                <input asp-for="@Model.B9.BEOTHRX" />
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHRX"></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        @if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.BEFPRED">
-                    <span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEFPRED)<br><br>
-                    <span class="text-sm text-black-500">NOTE: Enter 0 if this information was provided on a previously submitted Form B9</span>
-                    <br />
-                    <br />
-                </label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.BEFPRED"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.BEFPRED)" for="@Model.B9.BEFPRED" items="Model.PredominantSymptomFollowUpListItems" ui-behaviors="Model.BEFPREDFOLLOWUPUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEFPRED"></span>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.BEFPREDX"></p>
-                    <label asp-for="B9.BEFPREDX">@Html.DisplayNameFor(m => m.B9.BEFPREDX)</label>
-                    <div class="mt-2">
-                        <input asp-for="B9.BEFPREDX" />
-                    </div>
-                </div>
-            </div>
-        }
-
-        else
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.BEFPRED"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEFPRED)</label>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.BEFPRED"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.BEFPRED)" for="@Model.B9.BEFPRED" items="Model.PredominantSymptomListItems" ui-behaviors="Model.BEFPREDUIBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEFPRED"></span>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="B9.BEFPREDX"></p>
-                    <label asp-for="B9.BEFPREDX">@Html.DisplayNameFor(m => m.B9.BEFPREDX)</label>
-                    <div class="mt-2">
-                        <input asp-for="B9.BEFPREDX" />
-                    </div>
-                </div>
-            </div>
-
-        }
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.BEMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEMODE)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.BEMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.BEMODE)" for="@Model.B9.BEMODE" items="Model.OnsetListItems" ui-behaviors="Model.BEMODEUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEMODE"></span>
-            </div>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.BEMODEX"></p>
-                <label asp-for="B9.BEMODEX">@Html.DisplayNameFor(m => m.B9.BEMODEX)</label>
-                <div class="mt-2">
-                    <input asp-for="B9.BEMODEX" />
-                </div>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.BEAGE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.BEAGE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.BEAGE"></p>
-                <input asp-for="@Model.B9.BEAGE" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEAGE"></span>
-            </div>
-        </div>
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Motor symptoms</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.DECCLMOT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLMOT)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLMOT"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLMOT)" for="@Model.B9.DECCLMOT" items="Model.DECCLMOTListItems" ui-behaviors="Model.DECCLMOTUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLMOT"></span>
-            </div>
-        </div>
-
-        <table class="table-auto min-w-full divide-y divide-gray-300">
-            <thead>
-                <tr>
-                    <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                        <label class="text-base font-semibold text-gray-900"><span class="counter"></span> Indicate whether the participant currently has meaningful change in motor function in any of the following areas</label>
-                    </th>
-                    @foreach (var item in Model.BasicYesNoListItems)
-                    {
-                        <th class="w-16 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
-                    }
-                </tr>
-            </thead>
-            <tbody class="subcounterreset divide-y divide-gray-200">
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.MOGAIT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.MOGAIT)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.MOGAIT"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOGAIT"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.MOGAIT)" for="@Model.B9.MOGAIT" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.MOFALLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.MOFALLS)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.MOFALLS"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOFALLS"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.MOFALLS)" for="@Model.B9.MOFALLS" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.MOTREM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.MOTREM)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.MOTREM"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOTREM"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.MOTREM)" for="@Model.B9.MOTREM" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="ml-2">
-                            <label asp-for="B9.MOSLOW"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.MOSLOW)</label>
-                            <p class="text-sm text-gray-500" asp-description-for="B9.MOSLOW"></p>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOSLOW"></span>
-                        </div>
-                    </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B9.MOSLOW)" for="@Model.B9.MOSLOW" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
-                </tr>
-            </tbody>
-        </table>
-
-        @if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.MOFRST">
-                    <span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOFRST)<br><br>
-                    <span class="text-sm text-black-500">NOTE: Enter 0 if this information was provided on a previously submitted Form B9</span>
-                    <br />
-                    <br />
-                </label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOFRST"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.MOFRST)" for="@Model.B9.MOFRST" items="Model.MotorFunctionFollowUpListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOFRST"></span>
-                </div>
-            </div>
-        }
-
-        else
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.MOFRST"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOFRST)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOFRST"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.MOFRST)" for="@Model.B9.MOFRST" items="Model.MotorFunctionListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOFRST"></span>
-                </div>
-            </div>
-        }
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.MOMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMODE)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.MOMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMODE)" for="@Model.B9.MOMODE" items="Model.OnsetListItems" ui-behaviors="Model.MOMODEUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMODE"></span>
-            </div>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="B9.MOMODEX"></p>
-                <label asp-for="B9.MOMODEX">@Html.DisplayNameFor(m => m.B9.MOMODEX)</label>
-                <div class="mt-2">
-                    <input asp-for="B9.MOMODEX" />
-                </div>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.MOMOPARK"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOPARK)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOMOPARK"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOPARK)" for="@Model.B9.MOMOPARK" items="Model.MOMOPARKListItems" ui-behaviors="Model.MOMOPARKUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOPARK"></span>
-            </div>
-        </div>
-
-        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.PARKAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PARKAGE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.PARKAGE"></p>
-                <input asp-for="@Model.B9.PARKAGE" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PARKAGE"></span>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.MOMOALS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOALS)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOMOALS"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.MOMOALS)" for="@Model.B9.MOMOALS" items="Model.MOMOALSListItems" ui-behaviors="Model.MOMOALSUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOALS"></span>
-            </div>
-        </div>
-
-        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.ALSAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.ALSAGE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.ALSAGE"></p>
-                <input asp-for="@Model.B9.ALSAGE" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.ALSAGE"></span>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.MOAGE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOAGE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.MOAGE"></p>
-                <input asp-for="@Model.B9.MOAGE" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOAGE"></span>
-            </div>
-        </div>
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Overall course of decline and predominant domain</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.COURSE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COURSE)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COURSE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.COURSE)" for="@Model.B9.COURSE" items="Model.CourseOfDeclineListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COURSE"></span>
-            </div>
-        </div>
-
-        @if (Model.Visit.Kind == VisitKind.FVP || Model.Visit.Kind == VisitKind.TFP)
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.FRSTCHG">
-                    <span class="counter"></span> @Html.DisplayNameFor(m => m.B9.FRSTCHG)<br><br>
-                    <span class="text-sm text-black-500">NOTE: Enter 0 if this information was provided on a previously submitted Form B9</span>
-                    <br />
-                    <br />
-                </label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.FRSTCHG"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.FRSTCHG)" for="@Model.B9.FRSTCHG" items="Model.PredominantDomainFollowUpListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.FRSTCHG"></span>
-                </div>
-            </div>
-        }
-
-        else
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="B9.FRSTCHG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.FRSTCHG)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B9.FRSTCHG"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.B9.FRSTCHG)" for="@Model.B9.FRSTCHG" items="Model.PredominantDomainListItems"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.FRSTCHG"></span>
-                </div>
-            </div>
-        }
-
-        <div class="p-1">
-            <p class="mt-2 text-sm text-gray-700">Candidate for further evaluation for Lewy body disease or frontotemporal lobar degeneration</p>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.LBDEVAL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.LBDEVAL)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.LBDEVAL"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.LBDEVAL)" for="@Model.B9.LBDEVAL" items="Model.SimpleYesNoListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.LBDEVAL"></span>
-            </div>
-        </div>
-
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="B9.FTLDEVAL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.FTLDEVAL)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.FTLDEVAL"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.FTLDEVAL)" for="@Model.B9.FTLDEVAL" items="Model.SimpleYesNoListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.FTLDEVAL"></span>
-            </div>
-        </div>
-
+    <div>
+        <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 1 - Changes across domains</h3>
     </div>
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <div class="p-1">
+            <p class="italic mt-2 text-sm text-gray-700">Reported by participant</p>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.DECCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCOG)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCOG"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECCOG)" for="@Model.B9.DECCOG" items="Model.MemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCOG"></span>
+            </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.DECMOT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECMOT)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECMOT"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECMOT)" for="@Model.B9.DECMOT" items="Model.MemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECMOT"></span>
+            </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.PSYCHSYM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.PSYCHSYM)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.PSYCHSYM"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.PSYCHSYM)" for="@Model.B9.PSYCHSYM" items="Model.MemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHSYM"></span>
+            </div>
+        </div>
+        <div class="p-1">
+            <p class="italic mt-2 text-sm text-gray-700">Reported by co-participant</p>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.DECCOGIN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCOGIN)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCOGIN"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECCOGIN)" for="@Model.B9.DECCOGIN" items="Model.InformantMemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCOGIN"></span>
+            </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.DECMOTIN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECMOTIN)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECMOTIN"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECMOTIN)" for="@Model.B9.DECMOTIN" items="Model.InformantMemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECMOTIN"></span>
+            </div>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.PSYCHSYMIN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.PSYCHSYMIN)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.PSYCHSYMIN"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.PSYCHSYMIN)" for="@Model.B9.PSYCHSYMIN" items="Model.InformantMemoryDeclineListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHSYMIN"></span>
+            </div>
+        </div>
+        <div class="p-1">
+            <p class="italic mt-2 text-sm text-gray-700">Reported by clinician</p>
+        </div>
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="B9.DECCLIN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLIN)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLIN"></p>
+                <radio-button-group id="@Html.IdFor(m => m.B9.DECCLIN)" for="@Model.B9.DECCLIN" items="Model.DECCLINListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLIN"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="space-y-5">
+    <div>
+        <p class="mt-2">
+            <span class="font-bold">In the following sections</span> record the phenotype of clinically meaningful symptoms or absence of a <span class="font-bold underline">history of these symptoms,</span>
+            as determined by the clinician's best judgment following the medical history interview with the participant and co-participant.
+        </p>
+    </div>
+    <div>
+        <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 2 - Changes across domains</h3>
+    </div>
+</div>
+<div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+    <div class="p-1">
+        <p class="mt-2 text-gray-700">Consider if the participant currently is meaningfully impaired, <span class="font-bold underline">relative to stable baseline prior to onset of current syndrome:</span></p>
+    </div>
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <label asp-for="B9.DECCLCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLCOG)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLCOG"></p>
+            <radio-button-group id="@Html.IdFor(m => m.B9.DECCLCOG)" for="@Model.B9.DECCLCOG" items="Model.DECCLCOGListItems"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLCOG"></span>
+        </div>
+    </div>
+</div>
+<div class="mt-10 space-y-8 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:pb-0">
+    <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+        <p><span class="counter"></span> Indicate whether the participant is meaningfully impaired in the following cognitive domains or has fluctuating cognition:</p>
+    </div>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="[&_th]:p-5 [&_td]:p-5 w-full text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th colspan="2">Cognitive</th>
+                <th>No</th>
+                <th>Yes</th>
+                <th>Unknown</th>
+            </tr>
+        </thead>
+        <tbody class="subcounterreset">
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGMEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGMEM)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMEM"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGMEM" for="@Model.B9.COGMEM" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGORI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGORI)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGORI"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGORI" for="@Model.B9.COGORI" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGJUDG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGJUDG)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGJUDG"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGJUDG" for="@Model.B9.COGJUDG" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGLANG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGLANG)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGLANG"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGLANG" for="@Model.B9.COGLANG" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGVIS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGVIS)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGVIS"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGVIS" for="@Model.B9.COGVIS" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGATTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGATTN)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGATTN"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGATTN" for="@Model.B9.COGATTN" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGFLUC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGFLUC)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGFLUC"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGFLUC" for="@Model.B9.COGFLUC" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div>
+                        <label asp-for="B9.COGOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGOTHR)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHR"></span>
+                    </div>
+                </td>
+                <table-cell-radio-buttons id="B9.COGOTHR" for="@Model.B9.COGOTHR" items="Model.BasicYesNoOtherListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <div class="grid grid-cols-3">
+                        <div class="ml-6">
+                            <label asp-for="B9.COGOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.COGOTHRX)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHRX"></span>
+                        </div>
+                        <div>
+                            <input asp-for="B9.COGOTHRX" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <partial name="_FormFooter" for="@Model.B9" />

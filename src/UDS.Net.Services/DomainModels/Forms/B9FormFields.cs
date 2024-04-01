@@ -5,9 +5,14 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class B9FormFields : IFormFields
     {
-        public int? DECSUB { get; set; }
-        public int? DECIN { get; set; }
-        public int? DECCLCOG { get; set; }
+        public int? DECCOG { get; set; }
+        public int? DECMOT { get; set; }
+        public int? PSYCHSYM { get; set; }
+        public int? DECCOGIN { get; set; }
+        public int? DECMOTIN { get; set; }
+        public int? PSYCHSYMIN { get; set; }
+        public bool? DECCLIN { get; set; }
+        public bool? DECCLCOG { get; set; }
         public int? COGMEM { get; set; }
         public int? COGORI { get; set; }
         public int? COGJUDG { get; set; }
@@ -15,53 +20,63 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COGVIS { get; set; }
         public int? COGATTN { get; set; }
         public int? COGFLUC { get; set; }
-        public int? COGFLAGO { get; set; }
         public int? COGOTHR { get; set; }
-        public string COGOTHRX { get; set; }
-        public int? COGFPRED { get; set; }
-        public string COGFPREX { get; set; }
+        public string? COGOTHRX { get; set; }
+        public int? COGAGE { get; set; }
         public int? COGMODE { get; set; }
-        public string COGMODEX { get; set; }
-        public int? DECAGE { get; set; }
+        public string? COGMODEX { get; set; }
         public int? DECCLBE { get; set; }
         public int? BEAPATHY { get; set; }
         public int? BEDEP { get; set; }
-        public int? BEVHALL { get; set; }
-        public int? BEVWELL { get; set; }
-        public int? BEVHAGO { get; set; }
-        public int? BEAHALL { get; set; }
-        public int? BEDEL { get; set; }
-        public int? BEDISIN { get; set; }
+        public int? BEANX { get; set; }
+        public int? BEEUPH { get; set; }
         public int? BEIRRIT { get; set; }
         public int? BEAGIT { get; set; }
+        public int? BEHAGE { get; set; }
+        public int? BEVHALL { get; set; }
+        public int? BEVPATT { get; set; }
+        public int? BEVWELL { get; set; }
+        public int? BEAHALL { get; set; }
+        public int? BEAHSIMP { get; set; }
+        public int? BEAHCOMP { get; set; }
+        public int? BEDEL { get; set; }
+        public int? BEAGGRS { get; set; }
+        public int? PSYCHAGE { get; set; }
+        public int? BEDISIN { get; set; }
         public int? BEPERCH { get; set; }
+        public int? BEEMPATH { get; set; }
+        public int? BEOBCOM { get; set; }
+        public int? BEANGER { get; set; }
+        public int? BESUBAB { get; set; }
+        public bool? ALCUSE { get; set; }
+        public bool? SEDUSE { get; set; }
+        public bool? OPIATEUSE { get; set; }
+        public bool? COCAINEUSE { get; set; }
+        public bool? OTHSUBUSE { get; set; }
+        public string? OTHSUBUSEX { get; set; }
+        public int? PERCHAGE { get; set; }
         public int? BEREM { get; set; }
         public int? BEREMAGO { get; set; }
-        public int? BEANX { get; set; }
+        public int? BEREMCONF { get; set; }
         public int? BEOTHR { get; set; }
-        public string BEOTHRX { get; set; }
-        public int? BEFPRED { get; set; }
-        public string BEFPREDX { get; set; }
+        public string? BEOTHRX { get; set; }
         public int? BEMODE { get; set; }
-        public string BEMODEX { get; set; }
-        public int? BEAGE { get; set; }
-        public int? DECCLMOT { get; set; }
+        public string? BEMODEX { get; set; }
+        public bool? DECCLMOT { get; set; }
         public int? MOGAIT { get; set; }
         public int? MOFALLS { get; set; }
-        public int? MOTREM { get; set; }
         public int? MOSLOW { get; set; }
-        public int? MOFRST { get; set; }
+        public int? MOTREM { get; set; }
+        public int? MOLIMB { get; set; }
+        public int? MOFACE { get; set; }
+        public int? MOSPEECH { get; set; }
+        public int? MOTORAGE { get; set; }
         public int? MOMODE { get; set; }
-        public string MOMODEX { get; set; }
+        public string? MOMODEX { get; set; }
         public int? MOMOPARK { get; set; }
-        public int? PARKAGE { get; set; }
         public int? MOMOALS { get; set; }
-        public int? ALSAGE { get; set; }
-        public int? MOAGE { get; set; }
         public int? COURSE { get; set; }
         public int? FRSTCHG { get; set; }
-        public int? LBDEVAL { get; set; }
-        public int? FTLDEVAL { get; set; }
 
         public B9FormFields()
         {
@@ -119,7 +134,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4.0";
         }
     }
 }

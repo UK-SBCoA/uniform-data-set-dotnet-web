@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
@@ -860,11 +861,11 @@ namespace UDS.Net.Services.Extensions
                 BEVHALL = fields.BEVHALL,
                 BEVWELL = fields.BEVWELL,
                 BEAHALL = fields.BEAHALL,
-                BEDEL = fields.BEDISIN,
+                BEDEL = fields.BEDEL,
                 BEDISIN = fields.BEDISIN,
-                BEIRRIT = fields.BEAGIT,
+                BEIRRIT = fields.BEDISIN,
                 BEAGIT = fields.BEAGIT,
-                BEPERCH = fields.BEPERCH,
+                BEPERCH = fields.BEAGIT,
                 BEREM = fields.BEREM,
                 BEREMAGO = fields.BEREMAGO,
                 BEANX = fields.BEANX,

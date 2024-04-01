@@ -1,4 +1,6 @@
-﻿using UDS.Net.Forms.Models;
+﻿using System.Drawing;
+using UDS.Net.Dto;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -655,9 +657,6 @@ namespace UDS.Net.Forms.Extensions
         {
             var fields = new B9FormFields
             {
-                DECSUB = vm.DECSUB,
-                DECIN = vm.DECIN,
-                DECCLCOG = vm.DECCLCOG,
                 COGMEM = vm.COGMEM,
                 COGORI = vm.COGORI,
                 COGJUDG = vm.COGJUDG,
@@ -665,54 +664,39 @@ namespace UDS.Net.Forms.Extensions
                 COGVIS = vm.COGVIS,
                 COGATTN = vm.COGATTN,
                 COGFLUC = vm.COGFLUC,
-                COGFLAGO = vm.COGFLAGO,
                 COGOTHR = vm.COGOTHR,
                 COGOTHRX = vm.COGOTHRX,
-                COGFPRED = vm.COGFPRED,
-                COGFPREX = vm.COGFPREX,
                 COGMODE = vm.COGMODE,
                 COGMODEX = vm.COGMODEX,
-                DECAGE = vm.DECAGE,
                 DECCLBE = vm.DECCLBE,
                 BEAPATHY = vm.BEAPATHY,
                 BEDEP = vm.BEDEP,
                 BEVHALL = vm.BEVHALL,
                 BEVWELL = vm.BEVWELL,
-                BEVHAGO = vm.BEVHAGO,
                 BEAHALL = vm.BEAHALL,
-                BEDEL = vm.BEDISIN,
+                BEDEL = vm.BEDEL,
                 BEDISIN = vm.BEDISIN,
-                BEIRRIT = vm.BEAGIT,
+                BEIRRIT = vm.BEDISIN,
                 BEAGIT = vm.BEAGIT,
-                BEPERCH = vm.BEPERCH,
+                BEPERCH = vm.BEAGIT,
                 BEREM = vm.BEREM,
                 BEREMAGO = vm.BEREMAGO,
                 BEANX = vm.BEANX,
                 BEOTHR = vm.BEOTHR,
                 BEOTHRX = vm.BEOTHRX,
-                BEFPRED = vm.BEFPRED,
-                BEFPREDX = vm.BEFPREDX,
                 BEMODE = vm.BEMODE,
                 BEMODEX = vm.BEMODEX,
-                BEAGE = vm.BEAGE,
-                DECCLMOT = vm.DECCLMOT,
                 MOGAIT = vm.MOGAIT,
                 MOFALLS = vm.MOFALLS,
                 MOTREM = vm.MOTREM,
                 MOSLOW = vm.MOSLOW,
-                MOFRST = vm.MOFRST,
                 MOMODE = vm.MOMODE,
                 MOMODEX = vm.MOMODEX,
                 MOMOPARK = vm.MOMOPARK,
-                PARKAGE = vm.PARKAGE,
                 MOMOALS = vm.MOMOALS,
-                ALSAGE = vm.ALSAGE,
-                MOAGE = vm.MOAGE,
                 COURSE = vm.COURSE,
                 FRSTCHG = vm.FRSTCHG,
-                LBDEVAL = vm.LBDEVAL,
-                FTLDEVAL = vm.FTLDEVAL
-            };
+        };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }

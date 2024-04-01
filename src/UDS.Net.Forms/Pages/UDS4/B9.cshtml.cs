@@ -22,7 +22,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Could not be assessed/subject is too impaired", "8")
+            new RadioListItem("Could not be assessed/participant is too impaired", "8")
         };
 
         public List<RadioListItem> InformantMemoryDeclineListItems { get; set; } = new List<RadioListItem>
@@ -37,6 +37,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
             new RadioListItem("Unknown", "9")
+        };
+
+        public List<RadioListItem> BasicYesNoOtherListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
         };
 
         public List<RadioListItem> MOMOPARKListItems { get; set; } = new List<RadioListItem>
@@ -125,15 +131,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.COGFLAGO") } }
         };
 
-        public List<RadioListItem> SimpleYesNoListItems { get; set; } = new List<RadioListItem>
+        public List<RadioListItem> DECCLINListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
+            new RadioListItem("No (END FORM HERE)", "0"),
             new RadioListItem("Yes", "1")
         };
 
         public List<RadioListItem> DECCLCOGListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (If No, SKIP TO QUESTION 8)", "0"),
+            new RadioListItem("No (If No, SKIP TO QUESTION 11)", "0"),
             new RadioListItem("Yes", "1")
         };
 

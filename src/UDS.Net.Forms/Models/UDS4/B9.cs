@@ -9,268 +9,160 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class B9 : FormModel
     {
-        [Display(Name = "Does the participant report a decline in memory (relative to previously attained abilities)?")]
-        [RequiredOnComplete(ErrorMessage = "Response required for DECSUB")]
-        public int? DECSUB { get; set; }
-
-        [Display(Name = "Does the co-participant report a decline in participant’s memory (relative to previously attained abilities)?")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? DECIN { get; set; }
-
-        #region Cognitive symptoms
-
+        [Display(Name = "Does the participant report a decline in any cognitive domain (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? DECCOG { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the participant report a decline in any motor domain (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? DECMOT { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the participant report the development of any significant neuropsychiatric/behavioral symptoms (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? PSYCHSYM { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the co-participant report a decline in any cognitive domain (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? DECCOGIN { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the co-participant report a change in any motor domain (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? DECMOTIN { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the co-participant report the development of any significant neuropsychiatric/behavioral symptoms (relative to stable baseline prior to onset of current syndrome)?")]
+        public int? PSYCHSYMIN { get; set; }
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Does the participant have any neuropsychiatric/behavioral symptoms or declines in any cognitive or motor domain?")]
+        public bool? DECCLIN { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? DECCLCOG { get; set; }
-
-        [Display(Name = "MEMORY For example, does s/he forget conversations and/or dates, repeat questions and/or statements, misplace things more than usual, forget names of people s/he knows well?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        public bool? DECCLCOG { get; set; }
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in memory.")]
         public int? COGMEM { get; set; }
-
-        [Display(Name = "ORIENTATION For example, does s/he have trouble knowing the day, month, and year, or not recognize familiar locations, or get lost in familiar locations?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in orientation.")]
         public int? COGORI { get; set; }
-
-        [Display(Name = "EXECUTIVE FUNCTION - JUDGMENT, PLANNING, PROBLEM-SOLVING Does s/he have trouble handling money (e.g., tips), paying bills, preparing meals, shopping, using appliances, handling medications, driving?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in executive function (judgment, planning, and problem-solving)")]
         public int? COGJUDG { get; set; }
-
-        [Display(Name = "LANGUAGE Does s/he have hesitant speech, have trouble finding words, use inappropriate words without self-correction?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in language")]
         public int? COGLANG { get; set; }
-
-        [Display(Name = "VISUOSPATIAL FUNCTION Does s/he have difficulty interpreting visual stimuli and finding his/her way around?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in visuospatial function")]
         public int? COGVIS { get; set; }
-
-        [Display(Name = "ATTENTION, CONCENTRATION Does the participant have a short attention span or limited ability to concentrate? Is s/he easily distracted?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently is meaningfully impaired in attention/concentration")]
         public int? COGATTN { get; set; }
-
-        [Display(Name = "FLUCTUATING COGNITION Does the participant exhibit pronounced variation in attention and alertness, noticeably over hours or days — for example, long lapses or periods of staring into space, or times when his/her ideas have a disorganized flow?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently has fluctuating cognition")]
         public int? COGFLUC { get; set; }
-
-        [Display(Name = "If yes, at what age did the fluctuating cognition begin? (The clinician must use his/her best judgment to estimate an age of onset.)")]
-        [RequiredIf(nameof(COGFLUC), "1", ErrorMessage = "Specify age")]
-        [Range(15, 110)]
-        public int? COGFLAGO { get; set; }
-
-        [Display(Name = "Indicate whether the subject currently is meaningfully impaired, relative to previously attained abilities, in other cognitive domains ")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Other cognitive impairment")]
         public int? COGOTHR { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Specification of other cognitive impairment")]
+        [Display(Name = "Specify other cognitive domains")]
         [MaxLength(60)]
-        [ProhibitedCharacters]
         public string? COGOTHRX { get; set; }
-
-        [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the participant’s cognition")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
-        public int? COGFPRED { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(COGFPRED), "8", ErrorMessage = "Specification for other predominant symptom first recognized as a decline in the participant’s cognition")]
-        [MaxLength(60)]
-        [ProhibitedCharacters]
-        public string? COGFPREX { get; set; }
-
-        [Display(Name = "Mode of onset of cognitive symptoms")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
+        public int? COGAGE { get; set; }
+        [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
         public int? COGMODE { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(COGMODE), "4", ErrorMessage = "Specification for mode of onset of other cognitive symptoms")]
+        [Display(Name = "Specify other mode of onset of cognitive symptoms")]
         [MaxLength(60)]
-        [ProhibitedCharacters]
         public string? COGMODEX { get; set; }
-
-        [Display(Name = "Based on clinician’s assessment, at what age did the cognitive decline begin? (The clinician must use his/her best judgment to estimate an age of onset.)")]
-        [Range(15, 110)]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Please provide a value")]
-        public int? DECAGE { get; set; }
-
-        #endregion
-
-        #region Behavioral symptoms
-
-        [Display(Name = "Based on clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
         public int? DECCLBE { get; set; }
-
-        [Display(Name = "APATHY, WITHDRAWAL Has the participant lost interest in or displayed a reduced ability to initiate usual activities and social interaction, such as conversing with family and/or friends?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Apathy, withdrawal")]
         public int? BEAPATHY { get; set; }
-
-        [Display(Name = "DEPRESSED MOOD Has the participant seemed depressed for more than two weeks at a time, e.g., shown loss of interest or pleasure in nearly all activities, sadness, hopelessness, loss of appetite, fatigue?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Depressed mood")]
         public int? BEDEP { get; set; }
-
-        [Display(Name = "Visual hallucinations")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEVHALL { get; set; }
-
-        [Display(Name = "If yes, are the hallucinations well-formed and detailed?")]
-        [RequiredIf(nameof(BEVHALL), "1", ErrorMessage = "Are the hallucinations well-formed and detailed?")]
-        public int? BEVWELL { get; set; }
-
-        [Display(Name = "If well-formed, clear-cut visual hallucinations, at what age did these hallucinations begin?")]
-        [RequiredIf(nameof(BEVWELL), "1", ErrorMessage = "At what age did these hallucinations begin?")]
-        [RegularExpression("^(1[5-9]|[2-9]\\d|10\\d|110|888)$", ErrorMessage = "(15-110, 888 = N/A, not well-formed)")]
-        public int? BEVHAGO { get; set; }
-
-        [Display(Name = "Auditory hallucinations")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEAHALL { get; set; }
-
-        [Display(Name = "Abnormal, false, or delusional beliefs")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEDEL { get; set; }
-
-        [Display(Name = "DISINHIBITION Does the participant use inappropriate coarse language or exhibit inappropriate speech or behaviors in public or in the home? Does s/he talk personally to strangers or have disregard for personal hygiene?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEDISIN { get; set; }
-
-        [Display(Name = "IRRITABILITY Does the participant overreact, e.g., by shouting at family members or others?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEIRRIT { get; set; }
-
-        [Display(Name = "AGITATION Does the participant have trouble sitting still? Does s/he shout, hit, and/or kick?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEAGIT { get; set; }
-
-        [Display(Name = "PERSONALITY CHANGE Does the participant exhibit bizarre behavior 3 or behavior uncharacteristic of the participant, such as unusual collecting, suspiciousness (without delusions), unusual dress, or dietary changes? Does the participant fail to take others’ feelings into account?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEPERCH { get; set; }
-
-        [Display(Name = "REM SLEEP BEHAVIOR DISORDER While sleeping, does the participant appear to act out his/her dreams (e.g., punch or flail their arms, shout, or scream)?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEREM { get; set; }
-
-        [Display(Name = "If Yes, at what age did the REM sleep behavior disorder begin? (The clinician must use his/her best judgment to estimate an age of onset.)")]
-        [RequiredIf(nameof(BEREM), "1", ErrorMessage = "At what age did the REM sleep behavior disorder begin")]
-        [Range(15, 110)]
-        public int? BEREMAGO { get; set; }
-
-        [Display(Name = "ANXIETY For example, does s/he show signs of nervousness (e.g., frequent sighing, anxious facial expressions, or hand-wringing) and/or excessive worrying?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Anxiety")]
         public int? BEANX { get; set; }
-
-        [Display(Name = "Other")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Participant currently manifests meaningful change in behavior - Euphoria")]
+        public int? BEEUPH { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Irritability")]
+        public int? BEIRRIT { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Agitation")]
+        public int? BEAGIT { get; set; }
+        [Display(Name = "If any of the mood-related behavioral symptoms in 12a-12f are present, at what age did they begin?")]
+        public int? BEHAGE { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Visual hallucinations")]
+        public int? BEVHALL { get; set; }
+        [Display(Name = "IF YES, do their hallucinations include patterns that are not definite objects, such as pixelation of flat uniform surfaces?")]
+        public int? BEVPATT { get; set; }
+        [Display(Name = "IF YES, do their hallucinations include well formed and detailed images of objects or people, either as independent images or as part of other objects?")]
+        public int? BEVWELL { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Auditory hallucinations")]
+        public int? BEAHALL { get; set; }
+        [Display(Name = "IF YES, do the auditory hallucinations include simple sounds like knocks or other simple sounds?")]
+        public int? BEAHSIMP { get; set; }
+        [Display(Name = "IF YES, do the auditory hallucinations include complex sounds like voices speaking words, or music?")]
+        public int? BEAHCOMP { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Abnormal, false, or delusional beliefs")]
+        public int? BEDEL { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Aggression")]
+        public int? BEAGGRS { get; set; }
+        [Display(Name = "If any of the psychosis and impulse control-related behavioral symptoms in 12h-12k are present, at what age did they begin?")]
+        public int? PSYCHAGE { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Disinhibition")]
+        public int? BEDISIN { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Personality change")]
+        public int? BEPERCH { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Loss of empathy")]
+        public int? BEEMPATH { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Obsessions/compulsions")]
+        public int? BEOBCOM { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — Explosive anger")]
+        public int? BEANGER { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior - Substance use")]
+        public int? BESUBAB { get; set; }
+        [Display(Name = "Alcohol use")]
+        public bool? ALCUSE { get; set; }
+        [Display(Name = "Sedative/hypnotic use")]
+        public bool? SEDUSE { get; set; }
+        [Display(Name = "Opiate use")]
+        public bool? OPIATEUSE { get; set; }
+        [Display(Name = "Cocaine use")]
+        public bool? COCAINEUSE { get; set; }
+        [Display(Name = "Other substance use")]
+        public bool? OTHSUBUSE { get; set; }
+        [Display(Name = "Specify other substance use")]
+        [MaxLength(60)]
+        public string? OTHSUBUSEX { get; set; }
+        [Display(Name = "If any of the personality-related behavioral symptoms in 12m-12r are present, at what age did they begin?")]
+        public int? PERCHAGE { get; set; }
+        [Display(Name = "Participant currently manifests meaningful change in behavior — REM sleep behavior disorder")]
+        public int? BEREM { get; set; }
+        [Display(Name = "IF YES, at what age did the dream enactment behavior begin?")]
+        public int? BEREMAGO { get; set; }
+        [Display(Name = "Was REM sleep behavior disorder confirmed by polysomnography?")]
+        public int? BEREMCONF { get; set; }
+        [Display(Name = "Other behavioral symptom")]
         public int? BEOTHR { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(BEOTHR), "1", ErrorMessage = "Please provide other value")]
-        [ProhibitedCharacters]
+        [Display(Name = "Participant currently manifests meaningful change in behavior - Other, specify")]
         public string? BEOTHRX { get; set; }
-
-        [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the participant’s behavior")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        public int? BEFPRED { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(BEFPRED), "10", ErrorMessage = "Please provide other value")]
-        [ProhibitedCharacters]
-        public string? BEFPREDX { get; set; }
-
-        [Display(Name = "Mode of onset of behavioral symptoms")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Overall mode of onset for behavioral symptoms")]
         public int? BEMODE { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(BEMODE), "4", ErrorMessage = "Please provide other value")]
-        [ProhibitedCharacters]
+        [Display(Name = "Other mode of onset - specify")]
         public string? BEMODEX { get; set; }
-
-        [Display(Name = "Based on the clinician's assessment, at what age did the behavioral symptoms begin?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Please provide a value")]
-        [Range(15, 110)]
-        public int? BEAGE { get; set; }
-
-        #endregion
-
-        #region Motor Symptoms
-
-        [Display(Name = "Based on the clinician's judgment, is the participant currently experiencing any motor symptoms?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? DECCLMOT { get; set; }
-
-        [Display(Name = "GAIT DISORDER Has the participant's walking changed, not specifically due to arthritis or an injury? Is s/he unsteady, or does s/he shuffle when walking, have little or no arm-swing, or drag a foot?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any motor symptoms?")]
+        public bool? DECCLMOT { get; set; }
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Gait disorder")]
         public int? MOGAIT { get; set; }
-
-        [Display(Name = "FALLS Does the participant fall more than usual?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Falls")]
         public int? MOFALLS { get; set; }
-
-        [Display(Name = "TREMOR Has the participant had rhythmic shaking, especially in the hands, arms, legs, head, mouth, or tongue?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
-        public int? MOTREM { get; set; }
-
-        [Display(Name = "SLOWNESS Has the participant noticeably slowed down in walking, moving, or writing by hand, other than due to an injury or illness? Has his/her facial expression changed or become more \"wooden,\" or masked and unexpressive?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Slowness")]
         public int? MOSLOW { get; set; }
-
-        [Display(Name = "Indicate the predominant symptom that was first recognized as a decline in the participant's motor function")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
-        public int? MOFRST { get; set; }
-
-        [Display(Name = "Mode of onset of motor symptoms")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Tremor")]
+        public int? MOTREM { get; set; }
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Limb weakness")]
+        public int? MOLIMB { get; set; }
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Change in facial expression")]
+        public int? MOFACE { get; set; }
+        [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Change in speech")]
+        public int? MOSPEECH { get; set; }
+        [Display(Name = "If changes in motor function are present in 15a-15g, at what age did they begin?")]
+        public int? MOTORAGE { get; set; }
+        [Display(Name = "Indicate the mode of onset for the most prominent motor problem that is causing the participant's complaints and/or affecting the participant's function.")]
         public int? MOMODE { get; set; }
-
-        [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(MOMODE), "4", ErrorMessage = "Please provide pther value")]
-        [MaxLength(60)]
-        [ProhibitedCharacters]
+        [Display(Name = "Indicate mode of onset for the most prominent motor problem that is causing the participant's complains and or affecting the participant's function - Other, specify")]
         public string? MOMODEX { get; set; }
-
         [Display(Name = "Were changes in motor function suggestive of parkinsonism?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOMOPARK { get; set; }
-
-        [Display(Name = "If Yes, at what age did the motor symptoms suggestive of parkinsonism begin?")]
-        [RequiredIf(nameof(MOMOPARK), "1", ErrorMessage = "Please provide an age")]
-        [Range(15, 110)]
-        public int? PARKAGE { get; set; }
-
         [Display(Name = "Were changes in motor function suggestive of amyotrophic lateral sclerosis?")]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
         public int? MOMOALS { get; set; }
-
-        [Display(Name = "If Yes, at what age did the motor symptoms suggestive of ALS begin?")]
-        [RequiredIf(nameof(MOMOALS), "1", ErrorMessage = "Please provide an age")]
-        [Range(15, 110)]
-        public int? ALSAGE { get; set; }
-
-        [Display(Name = "Based on the clinician's assessment, at what age did the motor changes begin?")]
-        [Range(15, 110)]
-        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Please provide a value")]
-        public int? MOAGE { get; set; }
-
-        #endregion
-
         [Display(Name = "Overall course of decline of cognitive / behavorial / motor syndrome")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? COURSE { get; set; }
-
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? FRSTCHG { get; set; }
-
-        [Display(Name = "Is the participant a potential candidate for further evaluation for Lewy body disease?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? LBDEVAL { get; set; }
-
-        [Display(Name = "Is the participant a potential candidate for further evaluation for frontotemporal lobar degeneration?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? FTLDEVAL { get; set; }
-
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
