@@ -330,6 +330,20 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public List<RadioListItem> VERBALTESTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Rey AVLT (COMPLETE SECTIONS 12 & 13, SKIP SECTIONS 14 & 15)", "1"),
+            new RadioListItem("CERAD (SKIP TO SECTION 14)", "2"),
+
+        };
+
+        public List<RadioListItem> REYMETHODListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("List shown", "1"),
+            new RadioListItem("List read", "2"),
+
+        };
+
         public UIRangeToggle MINTTOTSBehavior = new UIRangeToggle
         {
             Low = 0,

@@ -295,6 +295,9 @@ namespace UDS.Net.Forms.Models.UDS4
 
         #region if test not completed, skip to question 12a
 
+        [Display(Name = "Which verbal learning test was administered?")]
+        public int VERBALTEST { get; set; }
+
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
         public int? MINTTOTS { get; set; }
@@ -436,6 +439,14 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
+        [Display(Name = "List B -- Total recall", Description = "(0-15")]
+        [Range(0, 15)]
+        public int? REYBREC { get; set; }
+
+        [Display(Name = "List B -- Intrusions", Description = "(No limit)")]
+        [Range(0, 99)]
+        public int? REYBINT { get; set; }
+
         [Display(Name = "Trial 6 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 total recall.")]
@@ -483,6 +494,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
         public int? REYDINT { get; set; }
 
+        [Display(Name = "Delay time (minutes)", Description = "(0-85, 99)")]
+        public int? REYDTI { get; set; }
+
+        [Display(Name = "Method of recognition test administration")]
+        public int? REYMETHOD { get; set; }
+
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total correct recognitions.")]
@@ -492,6 +509,49 @@ namespace UDS.Net.Forms.Models.UDS4
         [Range(0, 15)]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
+
+        [Display(Name = "Total recall", Description = "(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)")]
+        public int? CERAD1REC { get; set; }
+
+        [Display(Name = "Can't read", Description = "(0-10)")]
+        public int? CERAD1READ { get; set; }
+
+        [Display(Name = "Intrusions", Description = "(0-99)")]
+        public int? CERAD1INT { get; set; }
+
+        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
+        public int? CERAD2REC { get; set; }
+
+        [Display(Name = "Can't read", Description = "(0-10)")]
+        public int? CERAD2READ { get; set; }
+
+        [Display(Name = "Intrusions", Description = "(0-99)")]
+        public int? CERAD2INT { get; set; }
+
+        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
+        public int? CERAD3REC { get; set; }
+
+        [Display(Name = "Can't read", Description = "(0-10)")]
+        public int? CERAD3READ { get; set; }
+
+        [Display(Name = "Intrusions", Description = "(0-99)")]
+        public int? CERAD3INT { get; set; }
+
+        [Display(Name = "Delay time (minutes", Description = "(0-85,99)")]
+        public int? CERADDTI { get; set; }
+
+        [Display(Name = "J6 Word List Recall: Total number of words correctly recalled", Description = "(0-10,95-98)")]
+        public int? CERADJ6REC { get; set; }
+
+        [Display(Name = "J6 Word List Recall: Total number of intrusions", Description = "(0-99)")]
+        public int? CERADJ6INT { get; set; }
+
+        [Display(Name = "J7 Word List Recognition: Total YES correct", Description = "(0-10,95-98)")]
+        public int? CERADJ7YES { get; set; }
+
+        [Display(Name = "J7 Word List Recognition: Total NO correct", Description = "(0-10,95-98)")]
+        public int? CERADJ7NO { get; set; }
+
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
