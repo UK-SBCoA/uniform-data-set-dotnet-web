@@ -29,31 +29,42 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PSYCHSYMIN { get; set; }
         [RequiredOnComplete(ErrorMessage = "Response required")]
         [Display(Name = "Does the participant have any neuropsychiatric/behavioral symptoms or declines in any cognitive or motor domain?")]
-        public bool? DECCLIN { get; set; }
+        public int? DECCLIN { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
-        public bool? DECCLCOG { get; set; }
+        public int? DECCLCOG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in memory.")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGMEM { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in orientation.")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGORI { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in executive function (judgment, planning, and problem-solving)")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGJUDG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in language")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGLANG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in visuospatial function")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGVIS { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in attention/concentration")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGATTN { get; set; }
         [Display(Name = "Indicate whether the participant currently has fluctuating cognition")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGFLUC { get; set; }
         [Display(Name = "Other cognitive impairment")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGOTHR { get; set; }
         [Display(Name = "Specify other cognitive domains")]
         [MaxLength(60)]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public string? COGOTHRX { get; set; }
         [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
+        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
         public int? COGMODE { get; set; }
         [Display(Name = "Specify other mode of onset of cognitive symptoms")]
         [MaxLength(60)]
@@ -105,15 +116,15 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Participant currently manifests meaningful change in behavior - Substance use")]
         public int? BESUBAB { get; set; }
         [Display(Name = "Alcohol use")]
-        public bool? ALCUSE { get; set; }
+        public int? ALCUSE { get; set; }
         [Display(Name = "Sedative/hypnotic use")]
-        public bool? SEDUSE { get; set; }
+        public int? SEDUSE { get; set; }
         [Display(Name = "Opiate use")]
-        public bool? OPIATEUSE { get; set; }
+        public int? OPIATEUSE { get; set; }
         [Display(Name = "Cocaine use")]
-        public bool? COCAINEUSE { get; set; }
+        public int? COCAINEUSE { get; set; }
         [Display(Name = "Other substance use")]
-        public bool? OTHSUBUSE { get; set; }
+        public int? OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
         [MaxLength(60)]
         public string? OTHSUBUSEX { get; set; }
@@ -134,7 +145,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other mode of onset - specify")]
         public string? BEMODEX { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any motor symptoms?")]
-        public bool? DECCLMOT { get; set; }
+        public int? DECCLMOT { get; set; }
         [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Gait disorder")]
         public int? MOGAIT { get; set; }
         [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Falls")]

@@ -197,8 +197,8 @@
             </tr>
             <tr>
                 <td colspan="5">
-                    <div class="grid grid-cols-3">
-                        <div class="ml-6">
+                    <div class="grid grid-cols-3 ml-6">
+                        <div>
                             <label asp-for="B9.COGOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.COGOTHRX)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHRX"></span>
                         </div>
@@ -208,7 +208,36 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="5">
+                    <div class="grid grid-cols-3">
+                        <div>
+                            <label asp-for="B9.COGAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGAGE)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGAGE"></span>
+                        </div>
+                        <div>
+                            <input asp-for="B9.COGAGE" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
+</div>
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+    <label asp-for="B9.COGMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COGMODE)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGMODE"></p>
+        <radio-button-group id="@Html.IdFor(m => m.B9.COGMODE)" for="@Model.B9.COGMODE" items="Model.COGMODEListItems"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMODE"></span>
+    </div>
+</div>
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 ml-6">
+    <label asp-for="B9.COGMODEX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGMODEX)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGMODEX"></p>
+        <input asp-for="B9.COGMODEX" />
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMODEX"></span>
+    </div>
 </div>
 <partial name="_FormFooter" for="@Model.B9" />

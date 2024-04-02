@@ -45,6 +45,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Yes", "1"),
         };
 
+        public List<RadioListItem> COGMODEListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Gradual", "1"),
+            new RadioListItem("Subacute", "2"),
+            new RadioListItem("Abrupt", "3"),
+            new RadioListItem("Other (SPECIFY)", "4"),
+            new RadioListItem("Unknown", "99"),
+        };
+
         public List<RadioListItem> MOMOPARKListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (If No, SKIP TO QUESTION 18)", "0"),
@@ -65,7 +74,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             {"1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B9.ALSAGE") } },
             {"9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.ALSAGE"), InstructionalMessage ="Skip to question 19" } }
 
-    };
+        };
         public Dictionary<string, UIBehavior> MOMOPARKUIBehavior = new Dictionary<string, UIBehavior>
         {
             {"0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B9.PARKAGE"), InstructionalMessage = "Skip to question 18"} },
