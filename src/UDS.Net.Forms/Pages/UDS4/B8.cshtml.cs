@@ -139,7 +139,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B8.DYSARTH"),
                     new UIDisableAttribute("B8.APRAXSP"),
                     new UIDisableAttribute("B8.GAITABN")
-    
                 },
                 InstructionalMessage = ""
             } },
@@ -267,8 +266,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 InstructionalMessage = ""
             } }
         };
-
-      
 
         public B8Model(IVisitService visitService) : base(visitService, "B8")
         {
