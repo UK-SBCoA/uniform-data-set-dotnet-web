@@ -154,7 +154,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> DECCLBEListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (If No, SKIP TO QUESTION 13)", "0"),
+            new RadioListItem("No (If No, SKIP TO QUESTION 14)", "0"),
             new RadioListItem("Yes", "1")
         };
 

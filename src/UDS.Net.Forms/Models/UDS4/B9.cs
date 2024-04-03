@@ -33,38 +33,38 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
         public int? DECCLCOG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in memory.")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGMEM { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in orientation.")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGORI { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in executive function (judgment, planning, and problem-solving)")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGJUDG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in language")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGLANG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in visuospatial function")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGVIS { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in attention/concentration")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGATTN { get; set; }
         [Display(Name = "Indicate whether the participant currently has fluctuating cognition")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGFLUC { get; set; }
         [Display(Name = "Other cognitive impairment")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGOTHR { get; set; }
         [Display(Name = "Specify other cognitive domains")]
         [MaxLength(60)]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Value required")]
         public string? COGOTHRX { get; set; }
         [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
-        [RequiredIf(nameof(DECCLCOG), "0", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGMODE { get; set; }
         [Display(Name = "Specify other mode of onset of cognitive symptoms")]
         [MaxLength(60)]
@@ -116,7 +116,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Participant currently manifests meaningful change in behavior - Substance use")]
         public int? BESUBAB { get; set; }
         [Display(Name = "Alcohol use")]
-        public int? ALCUSE { get; set; }
+        public bool ALCUSE { get; set; }
         [Display(Name = "Sedative/hypnotic use")]
         public int? SEDUSE { get; set; }
         [Display(Name = "Opiate use")]

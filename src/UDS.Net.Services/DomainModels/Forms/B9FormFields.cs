@@ -92,8 +92,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 DECCOGIN = b9Dto.DECCOGIN;
                 DECMOTIN = b9Dto.DECMOTIN;
                 PSYCHSYMIN = b9Dto.PSYCHSYMIN;
-                DECCLIN = b9Dto.DECCLIN == true ? 1 : null;
-                DECCLCOG = b9Dto.DECCLCOG == true ? 1 : null;
+                DECCLIN = ConvertBoolToInt(b9Dto.DECCLIN);
+                DECCLCOG = ConvertBoolToInt(b9Dto.DECCLCOG);
                 COGMEM = b9Dto.COGMEM;
                 COGORI = b9Dto.COGORI;
                 COGJUDG = b9Dto.COGJUDG;
@@ -129,11 +129,11 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOBCOM = b9Dto.BEOBCOM;
                 BEANGER = b9Dto.BEANGER;
                 BESUBAB = b9Dto.BESUBAB;
-                ALCUSE = b9Dto.ALCUSE == true ? 1 : null;
-                SEDUSE = b9Dto.SEDUSE == true ? 1 : null;
-                OPIATEUSE = b9Dto.OPIATEUSE == true ? 1 : null;
-                COCAINEUSE = b9Dto.COCAINEUSE == true ? 1 : null;
-                OTHSUBUSE = b9Dto.OTHSUBUSE == true ? 1 : null;
+                ALCUSE = ConvertBoolToInt(b9Dto.ALCUSE);
+                SEDUSE = ConvertBoolToInt(b9Dto.SEDUSE);
+                OPIATEUSE = ConvertBoolToInt(b9Dto.OPIATEUSE);
+                COCAINEUSE = ConvertBoolToInt(b9Dto.COCAINEUSE);
+                OTHSUBUSE = ConvertBoolToInt(b9Dto.OTHSUBUSE);
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;
                 BEREM = b9Dto.BEREM;
@@ -143,7 +143,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOTHRX = b9Dto.BEOTHRX;
                 BEMODE = b9Dto.BEMODE;
                 BEMODEX = b9Dto.BEMODEX;
-                DECCLMOT = b9Dto.DECCLMOT == true ? 1 : null;
+                DECCLMOT = ConvertBoolToInt(b9Dto.DECCLMOT);
                 MOGAIT = b9Dto.MOGAIT;
                 MOFALLS = b9Dto.MOFALLS;
                 MOSLOW = b9Dto.MOSLOW;
@@ -160,6 +160,14 @@ namespace UDS.Net.Services.DomainModels.Forms
                 FRSTCHG = b9Dto.FRSTCHG;
             }
         }
+
+        private static int? ConvertBoolToInt(bool? property)
+        {
+            if (property == true) return 1;
+            if (property == false) return 0;
+            return null;
+        }
+
         public string GetDescription()
         {
             return "Clinician Judgment of Symptoms";

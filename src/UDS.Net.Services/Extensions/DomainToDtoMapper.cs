@@ -850,8 +850,8 @@ namespace UDS.Net.Services.Extensions
                 DECCOGIN = fields.DECCOGIN,
                 DECMOTIN = fields.DECMOTIN,
                 PSYCHSYMIN = fields.PSYCHSYMIN,
-                DECCLIN = fields.DECCLIN == 1 ? true : false,
-                DECCLCOG = fields.DECCLCOG == 1 ? true : false,
+                DECCLIN = ConvertIntToBool(fields.DECCLIN),
+                DECCLCOG = ConvertIntToBool(fields.DECCLCOG),
                 COGMEM = fields.COGMEM,
                 COGORI = fields.COGORI,
                 COGJUDG = fields.COGJUDG,
@@ -887,11 +887,11 @@ namespace UDS.Net.Services.Extensions
                 BEOBCOM = fields.BEOBCOM,
                 BEANGER = fields.BEANGER,
                 BESUBAB = fields.BESUBAB,
-                ALCUSE = fields.ALCUSE == 1 ? true : false,
-                SEDUSE = fields.SEDUSE == 1 ? true : false,
-                OPIATEUSE = fields.OPIATEUSE == 1 ? true : false,
-                COCAINEUSE = fields.COCAINEUSE == 1 ? true : false,
-                OTHSUBUSE = fields.OTHSUBUSE == 1 ? true : false,
+                ALCUSE = ConvertIntToBool(fields.ALCUSE),
+                SEDUSE = ConvertIntToBool(fields.SEDUSE),
+                OPIATEUSE = ConvertIntToBool(fields.OPIATEUSE),
+                COCAINEUSE = ConvertIntToBool(fields.COCAINEUSE),
+                OTHSUBUSE = ConvertIntToBool(fields.OTHSUBUSE),
                 OTHSUBUSEX = fields.OTHSUBUSEX,
                 PERCHAGE = fields.PERCHAGE,
                 BEREM = fields.BEREM,
@@ -920,9 +920,11 @@ namespace UDS.Net.Services.Extensions
         }
 
         //DEVNOTE: Do I want to have a function for easily converting the Yes/No radios back to nullable bools to maintain True / false / Null ? 
-        private static bool? ConvertNullIntToNullBool(int? property)
+        private static bool? ConvertIntToBool(int? property)
         {
-            if()
+            if (property == 1) return true;
+            if (property == 0) return false;
+            return null;
         }
 
         public static C1Dto ToDto(this C1FormFields fields)
