@@ -16,7 +16,10 @@
         @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.FVP))
         {
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Montreal Cognitive Assessment (MoCA)</h3>
+                                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 1 —Montreal Cognitive Assessment (MoCA)
+                </h3>
 
                 <div class="subcounterreset m-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -80,18 +83,18 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCATOTS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATOTS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATOTS"></p>
                             <div class="w-24">
                                 <input asp-for="@Model.C2.MOCATOTS" />
                             </div>
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATOTS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCATOTS"></span>
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCATRAI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATRAI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATRAI"></p>
@@ -102,7 +105,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACUBE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACUBE)</label>
 
                         <div>
@@ -114,7 +117,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLOC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLOC)</label>
 
                         <div>
@@ -126,7 +129,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLON"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLON)</label>
 
                         <div>
@@ -138,7 +141,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLOH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLOH)</label>
 
                         <div>
@@ -150,7 +153,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCANAMI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCANAMI)</label>
 
                         <div>
@@ -162,7 +165,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAREGI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAREGI)</label>
 
                         <div>
@@ -174,7 +177,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCADIGI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCADIGI)</label>
 
                         <div>
@@ -186,7 +189,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALETT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALETT)</label>
 
                         <div>
@@ -198,7 +201,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCASER7"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCASER7)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCASER7"></p>
@@ -209,7 +212,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAREPE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAREPE)</label>
 
                         <div>
@@ -221,7 +224,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAFLUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAFLUE)</label>
 
                         <div>
@@ -233,7 +236,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAABST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAABST)</label>
 
                         <div>
@@ -245,7 +248,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECN)</label>
 
                         <div>
@@ -257,7 +260,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECC)</label>
 
                         <div>
@@ -269,7 +272,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECR)</label>
 
                         <div>
@@ -281,7 +284,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORDT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDT)</label>
 
                         <div>
@@ -293,7 +296,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORMO)</label>
 
                         <div>
@@ -305,7 +308,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORYR)</label>
 
                         <div>
@@ -317,7 +320,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORDY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDY)</label>
 
                         <div>
@@ -329,7 +332,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORPL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORPL)</label>
 
                         <div>
@@ -341,7 +344,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
 
                         <div>
@@ -357,8 +360,10 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Administration of the remainder of the battery</h3>
-
+                                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 2 — Administration of the remainder of the battery
+                </h3>
                 <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -391,10 +396,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Craft Story 21 Recall (Immediate)</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 3 — Craft Story 21 Recall (Immediate)
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTVRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTVRS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTVRS"></p>
@@ -405,7 +413,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTURS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTURS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTURS"></p>
@@ -420,10 +428,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Benson Complex Figure Copy</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 4 — Benson Complex Figure Copy
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSBENTC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENTC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENTC"></p>
@@ -437,10 +448,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Number Span Test: Forward</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 5 — Number Span Test: Forward
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORCT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORCT"></p>
@@ -451,7 +465,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORSL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORSL)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORSL"></p>
@@ -466,10 +480,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Number Span Test: Backward</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 6 — Number Span Test: Backward
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACCT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACCT"></p>
@@ -480,7 +497,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACLS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACLS"></p>
@@ -495,10 +512,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Category Fluency</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 7 — Category Fluency
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.ANIMALS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.ANIMALS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.ANIMALS"></p>
@@ -509,7 +529,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VEG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VEG"></p>
@@ -523,10 +543,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Trail Making Test</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 8 — Trail Making Test
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.TRAILA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILA)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILA"></p>
@@ -538,7 +561,7 @@
                     </div>
 
                     <div class="subsubcounterreset m-2">
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.TRAILARR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILARR)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILARR"></p>
@@ -548,7 +571,7 @@
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILARR"></span>
                             </div>
                         </div>
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.TRAILALI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILALI)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILALI"></p>
@@ -560,7 +583,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.TRAILB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILB)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILB"></p>
@@ -572,7 +595,7 @@
                     </div>
 
                     <div class="subsubcounterreset m-2">
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.TRAILBRR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILBRR)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILBRR"></p>
@@ -582,7 +605,7 @@
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILBRR"></span>
                             </div>
                         </div>
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.TRAILBLI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.TRAILBLI)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILBLI"></p>
@@ -596,10 +619,13 @@
                 </div>
             </div>
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Benson Complex Figure Recall</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 9 — Benson Complex Figure Recall
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSBENTD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENTD)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENTD"></p>
@@ -610,7 +636,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSBENRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENRS)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENRS"></p>
@@ -622,10 +648,13 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Craft Story 21 Recall (Delayed)</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 10 — Craft Story 21 Recall (Delayed)
+                </h3>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDVR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDVR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDVR"></p>
@@ -636,7 +665,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDRE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDRE)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDRE"></p>
@@ -647,7 +676,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDTI"></p>
@@ -658,7 +687,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTCUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTCUE)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTCUE"></p>
@@ -670,10 +699,14 @@
             </div>
 
             <div>
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Verbal Fluency: Phonemic Test</h3>
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 11 — Verbal Fluency: Phonemic Test
+                </h3>
+
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFC"></p>
@@ -684,7 +717,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFN"></p>
@@ -695,7 +728,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERNF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERNF)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERNF"></p>
@@ -706,7 +739,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLC"></p>
@@ -717,7 +750,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLR"></p>
@@ -728,7 +761,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLN"></p>
@@ -739,7 +772,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTN"></p>
@@ -750,7 +783,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTE"></p>
@@ -761,7 +794,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTI"></p>
@@ -775,7 +808,7 @@
             </div>
 
             <div class="subcounterreset">
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
                     <div class="flex flex-row space-x-4">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VERBALTEST"></p>
@@ -1012,7 +1045,7 @@
 
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDREC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDREC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDREC"></p>
@@ -1023,7 +1056,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDINT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDINT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDINT"></p>
@@ -1034,7 +1067,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDTI"></p>
@@ -1045,7 +1078,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYMETHOD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYMETHOD)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYMETHOD"></p>
@@ -1054,7 +1087,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYTCOR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYTCOR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYTCOR"></p>
@@ -1065,7 +1098,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYFPOS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYFPOS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYFPOS"></p>
@@ -1082,7 +1115,7 @@
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
                     Section 14 — CERAD Verbal Learning (Immediate)
                 </h3>
-                <p class="counter mb-3 font-semibold">Total number of words correctly recalled and number of intrusions</p>
+                <p class="counter mb-3 font-semibold"> J4 Total number of words correctly recalled and number of intrusions</p>
             </div>
 
             <table class="subcounterreset mt-16 w-full text-left leading-6 border-b border-gray-100">
@@ -1228,7 +1261,7 @@
 
                 <div class="subcounterreset">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADDTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADDTI"></p>
@@ -1239,7 +1272,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADJ6REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ6REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ6REC"></p>
@@ -1250,7 +1283,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADJ6INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ6INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ6INT"></p>
@@ -1261,7 +1294,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADJ7YES"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ7YES)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ7YES"></p>
@@ -1272,7 +1305,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADJ7NO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ7NO)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ7NO"></p>
@@ -1294,7 +1327,7 @@
 
                 <div class="subcounterreset">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTTOTS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTTOTS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTTOTS"></p>
@@ -1305,7 +1338,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTTOTW"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTTOTW)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTTOTW"></p>
@@ -1316,7 +1349,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTSCNG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTSCNG)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTSCNG"></p>
@@ -1327,7 +1360,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTSCNC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTSCNC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTSCNC"></p>
@@ -1338,7 +1371,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTPCNG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTPCNG)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTPCNG"></p>
@@ -1349,7 +1382,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-3">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.MINTPCNC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MINTPCNC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTPCNC"></p>
@@ -1410,16 +1443,157 @@
 
                 <div>
                     <p class="subcounter text-base font-semibold text-gray-900">
-                        What makes this
-                        participant’s responses
-                        less valid?
+                        What makes this participant’s responses less valid?
 
                         <br>
                         <br>
                         <b>(Check all that apply)</b>
                     </p>
                 </div>
+                <div class="subsubcounterreset">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
 
+                            <div>
+                                @Html.CheckBox("C2.RESPHEAR", Model.C2.RESPHEAR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPHEAR"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPDIST", Model.C2.RESPDIST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPDIST"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPINTR", Model.C2.RESPINTR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPINTR"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPDISN", Model.C2.RESPDISN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPDISN"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPFATG", Model.C2.RESPFATG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPFATG"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPEMOT", Model.C2.RESPEMOT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPEMOT"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPASST", Model.C2.RESPASST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPASST"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <div>
+                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                            </div>
+
+                            <div>
+                                @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                            </div>
+                            <div>
+                                <label asp-for="C2.RESPOTH"></label>
+                            </div>
+                        </div>
+                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                            <p class="text-sm text-gray-500" asp-description-for="C2.RESPOTHX"></p>
+                            <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
+                            <div>
+                                <input asp-for="C2.RESPOTHX" />
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         }
@@ -1727,7 +1901,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Rey Auditory Verbal Learning — Immediate (Optional)</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY1REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY1REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY1REC"></p>
@@ -1738,7 +1912,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CERAD1INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERAD1INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1INT"></p>
@@ -1749,7 +1923,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY2REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2REC"></p>
@@ -1760,7 +1934,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY2INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
@@ -1771,7 +1945,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY3REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3REC"></p>
@@ -1782,7 +1956,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY3INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3INT"></p>
@@ -1793,7 +1967,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY4REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4REC"></p>
@@ -1804,7 +1978,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY4INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4INT"></p>
@@ -1815,7 +1989,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY5REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5REC"></p>
@@ -1826,7 +2000,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY5INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5INT"></p>
@@ -1837,7 +2011,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY6REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6REC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6REC"></p>
@@ -1848,7 +2022,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY6INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6INT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6INT"></p>
@@ -1864,7 +2038,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Number Span Test: Forward</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORCT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORCT"></p>
@@ -1875,7 +2049,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORSL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORSL)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORSL"></p>
@@ -1891,7 +2065,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Number Span Test: Number Span Test: Backward</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACCT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACCT"></p>
@@ -1902,7 +2076,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACLS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACLS"></p>
@@ -1918,7 +2092,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Oral Trail Making Test (Optional)</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.OTRAILA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILA)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILA"></p>
@@ -1929,7 +2103,7 @@
                         </div>
                     </div>
                     <fieldset class="subsubcounterreset">
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLARR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLARR)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLARR"></p>
@@ -1940,7 +2114,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLALI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLALI)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLALI"></p>
@@ -1951,7 +2125,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.OTRAILB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILB)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILB"></p>
@@ -1962,7 +2136,7 @@
                         </div>
                     </div>
                     <fieldset class="subsubcounterreset">
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLBRR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBRR)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLBRR"></p>
@@ -1973,7 +2147,7 @@
                             </div>
                         </div>
 
-                        <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLBLI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBLI)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLBLI"></p>
@@ -1990,7 +2164,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Craft Story 21 Recall (Delayed)</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDVR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDVR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDVR"></p>
@@ -2001,7 +2175,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDRE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDRE)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDRE"></p>
@@ -2012,7 +2186,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDTI"></p>
@@ -2023,7 +2197,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTCUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTCUE)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTCUE"></p>
@@ -2037,7 +2211,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Category Fluency</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.ANIMALS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.ANIMALS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.ANIMALS"></p>
@@ -2048,7 +2222,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VEG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VEG"></p>
@@ -2064,7 +2238,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Verbal Fluency: Phonemic Test</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFC"></p>
@@ -2075,7 +2249,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFN"></p>
@@ -2086,7 +2260,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERNF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERNF)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERNF"></p>
@@ -2097,7 +2271,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLC"></p>
@@ -2108,7 +2282,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLR"></p>
@@ -2119,7 +2293,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLN"></p>
@@ -2130,7 +2304,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTN"></p>
@@ -2141,7 +2315,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTE"></p>
@@ -2152,7 +2326,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTI"></p>
@@ -2168,7 +2342,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Rey Auditory Verbal Learning — Delayed recall and recognition (Optional)</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDREC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDREC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDREC"></p>
@@ -2179,7 +2353,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDINT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDINT)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDINT"></p>
@@ -2190,7 +2364,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYTCOR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYTCOR)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYTCOR"></p>
@@ -2201,7 +2375,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYFPOS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYFPOS)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYFPOS"></p>
@@ -2217,7 +2391,7 @@
             <div>
                 <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span>  Verbal Naming Test (Optional)</h3>
                 <div class="subcounterreset m-2">
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VNTTOTW"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTTOTW)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VNTTOTW"></p>
@@ -2228,7 +2402,7 @@
                         </div>
                     </div>
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VNTPCNC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTPCNC)</label>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VNTPCNC"></p>
