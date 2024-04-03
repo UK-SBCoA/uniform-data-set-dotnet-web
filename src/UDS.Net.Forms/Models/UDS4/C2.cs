@@ -43,7 +43,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Was the MoCA affected by hearing impairment?")]
         public int? MOCAHEAR { get; set; }
 
-        [Display(Name = "TOTAL RAW SCORE - UNCORRECTED (Not corrected for education or visual/hearing impairment)", Description = "enter 88 if any of the following MoCA items were not administered: 1g-1l, 1n-1t, 1w-1bb")]
+        [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-30,88)")]
         [RegularExpression("^(\\d|[0-2]\\d|30|88)$", ErrorMessage = "Allowed values are 0-30 or 88 = not administered.")]
         public int? MOCATOTS { get; set; }
 
