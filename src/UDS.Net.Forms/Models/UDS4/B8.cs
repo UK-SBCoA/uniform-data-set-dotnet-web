@@ -80,7 +80,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? STOOPED { get; set; }
 
         [Display(Name = "Cortical/Pyramidal/Other Signs")]
+        [RequiredIf(nameof(PARKSIGN), "0", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
         [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
+        [RequiredIf(nameof(PARKSIGN), "8", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
         public int? OTHERSIGN { get; set; }
 
         [Display(Name = "Limb apraxia")]
@@ -152,7 +154,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? APRAXSP { get; set; }
 
         [Display(Name = "Gait")]
+        [RequiredIf(nameof(OTHERSIGN), "0", ErrorMessage = "Please indicate Gait.")]
         [RequiredIf(nameof(OTHERSIGN), "1", ErrorMessage = "Please indicate Gait.")]
+        [RequiredIf(nameof(OTHERSIGN), "8", ErrorMessage = "Please indicate Gait.")]
         public int? GAITABN { get; set; }
 
         [Display(Name = "Finding")]
