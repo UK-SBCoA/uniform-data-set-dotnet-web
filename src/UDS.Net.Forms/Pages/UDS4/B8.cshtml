@@ -13,6 +13,13 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-300">
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h3 class="ml-5 mt-2 font-bold text-sm text-gray-500 uppercase">Section 1</h3>
+                <p class="ml-2 mt-1 truncate font-bold leading-6 text-indigo-900">Examiner & examination questions</p>
+            </div>
+        </div>
+
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="B8.NEUREXAM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.NEUREXAM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -28,6 +35,20 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.NORMNREXAM"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.NORMNREXAM)" for="@Model.B8.NORMNREXAM" items="Model.NORMNREXAMListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.NORMNREXAM"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-300">
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h3 class="ml-5 mt-2 font-bold text-sm text-gray-500 uppercase">Section 2</h3>
+                <p class="ml-2 mt-1 truncate font-bold leading-6 text-indigo-900">Specific clinical findings</p>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h5 class="ml-5 mt-2 font-semibold text-sm text-gray-500 uppercase">Section 2A</h5>
+                <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Parkinsonian signs </p>
             </div>
         </div>
 
@@ -170,8 +191,14 @@
                 </tr>
 
             </tbody>
-
         </table>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h5 class="ml-5 mt-2 font-semibold text-sm text-gray-500 uppercase">Section 2B</h5>
+                <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Cortical/pyramidal/other signs</p>
+            </div>
+        </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="B8.OTHERSIGN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.OTHERSIGN)</label>
@@ -336,8 +363,14 @@
                 </tr>
 
             </tbody>
-
         </table>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h5 class="ml-5 mt-2 font-semibold text-sm text-gray-500 uppercase">Section 2c</h5>
+                <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Gait</p>
+            </div>
+        </div>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="B8.GAITABN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B8.GAITABN)</label>
