@@ -48,11 +48,11 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BEOBCOM { get; set; }
         public int? BEANGER { get; set; }
         public int? BESUBAB { get; set; }
-        public int? ALCUSE { get; set; }
-        public int? SEDUSE { get; set; }
-        public int? OPIATEUSE { get; set; }
-        public int? COCAINEUSE { get; set; }
-        public int? OTHSUBUSE { get; set; }
+        public bool ALCUSE { get; set; }
+        public bool SEDUSE { get; set; }
+        public bool OPIATEUSE { get; set; }
+        public bool COCAINEUSE { get; set; }
+        public bool OTHSUBUSE { get; set; }
         public string? OTHSUBUSEX { get; set; }
         public int? PERCHAGE { get; set; }
         public int? BEREM { get; set; }
@@ -129,11 +129,11 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOBCOM = b9Dto.BEOBCOM;
                 BEANGER = b9Dto.BEANGER;
                 BESUBAB = b9Dto.BESUBAB;
-                ALCUSE = ConvertBoolToInt(b9Dto.ALCUSE);
-                SEDUSE = ConvertBoolToInt(b9Dto.SEDUSE);
-                OPIATEUSE = ConvertBoolToInt(b9Dto.OPIATEUSE);
-                COCAINEUSE = ConvertBoolToInt(b9Dto.COCAINEUSE);
-                OTHSUBUSE = ConvertBoolToInt(b9Dto.OTHSUBUSE);
+                ALCUSE = b9Dto.ALCUSE.HasValue ? true : false;
+                SEDUSE = b9Dto.SEDUSE.HasValue ? true : false;
+                OPIATEUSE = b9Dto.OPIATEUSE.HasValue ? true : false;
+                COCAINEUSE = b9Dto.COCAINEUSE.HasValue ? true : false;
+                OTHSUBUSE = b9Dto.OTHSUBUSE.HasValue ? true : false;
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;
                 BEREM = b9Dto.BEREM;

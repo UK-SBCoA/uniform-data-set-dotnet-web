@@ -118,13 +118,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Alcohol use")]
         public bool ALCUSE { get; set; }
         [Display(Name = "Sedative/hypnotic use")]
-        public int? SEDUSE { get; set; }
+        public bool SEDUSE { get; set; }
         [Display(Name = "Opiate use")]
-        public int? OPIATEUSE { get; set; }
+        public bool OPIATEUSE { get; set; }
         [Display(Name = "Cocaine use")]
-        public int? COCAINEUSE { get; set; }
+        public bool COCAINEUSE { get; set; }
         [Display(Name = "Other substance use")]
-        public int? OTHSUBUSE { get; set; }
+        public bool OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
         [MaxLength(60)]
         public string? OTHSUBUSEX { get; set; }
