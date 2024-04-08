@@ -35,10 +35,10 @@ namespace UDS.Net.Forms.Pages.UDS4
         public List<RadioListItem> FACEXPListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("Normal", "0"),
-            new RadioListItem("Minimal hypomimia, could be normal “poker face”", "1"),
+            new RadioListItem("Minimal hypomimia, could be normal \"poker face\"", "1"),
             new RadioListItem("Slight but definitely abnormal diminution of facial expression", "2"),
             new RadioListItem("Moderate hypomimia; lips parted some of the time", "3"),
-            new RadioListItem("Masked or fixed facies with severe or complete loss of facial expression; lips parted ¼ inches or more", "4"),
+            new RadioListItem("Masked or fixed facies with severe or complete loss of facial expression; lips parted 1/4 inches or more", "4"),
             new RadioListItem("Untestable (SPECIFY)", "8"),
         };
 

@@ -220,7 +220,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(ARISING), "8", ErrorMessage = "Please specify")]
         public string? ARISINGX { get; set; }
 
-        [Display(Name = "Posture (response to sudden, strong posterior displacement produced by pull on shoulders while participant erect with eyes open and feet slightly apart; participant is prepared)")]
+        [Display(Name = "Posture")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
         public int? POSTURE { get; set; }
 
@@ -238,7 +238,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(GAIT), "8", ErrorMessage = "Please specify")]
         public string? GAITX { get; set; }
 
-        [Display(Name = "Posture stability")]
+        [Display(Name = "Posture stability (response to sudden, strong posterior displacement produced by pull on shoulders while participant erect with eyes open and feet slightly apart; participant is prepared)")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
         public int? POSSTAB { get; set; }
 
