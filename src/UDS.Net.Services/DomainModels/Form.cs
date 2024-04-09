@@ -101,8 +101,8 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new C1FormFields();
             else if (Kind == "C2")
                 Fields = new C2FormFields();
-            else if (Kind == "D1")
-                Fields = new D1FormFields();
+            else if (Kind == "D1a")
+                Fields = new D1aFormFields();
             else if (Kind == "D2")
                 Fields = new D2FormFields();
             else if (Kind == "T1")

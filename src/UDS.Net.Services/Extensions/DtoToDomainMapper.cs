@@ -171,9 +171,9 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new C2FormFields(dto);
             }
-            else if (dto is D1Dto)
+            else if (dto is D1aDto)
             {
-                formFields = new D1FormFields(dto);
+                formFields = new D1aFormFields(dto);
             }
             else if (dto is T1Dto)
             {
@@ -211,8 +211,8 @@ namespace UDS.Net.Services.Extensions
                     title = new C1FormFields().GetDescription();
                 else if (dto.Kind == "C2")
                     title = new C2FormFields().GetDescription();
-                else if (dto.Kind == "D1")
-                    title = new D1FormFields().GetDescription();
+                else if (dto.Kind == "D1a")
+                    title = new D1aFormFields().GetDescription();
                 else if (dto.Kind == "T1")
                     title = new T1FormFields().GetDescription();
             }
