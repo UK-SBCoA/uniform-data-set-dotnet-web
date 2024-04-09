@@ -1,0 +1,119 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.D1aModel
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form D1a. Check only <span class="underline">one</span> box per question.
+    </p>
+</div>
+<!--<div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
+    <div class="px-4 py-5 sm:px-6">
+        This form is divided into three main sections
+    </div>
+    <div class="border-t border-gray-100">
+        <dl class="divide-y divide-gray-100">
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-900">
+                    <p class="text-sm text-gray-500">Section 1</p>
+                    <h3 class="mt-1 font-semibold text-indigo-900">
+                        <a href="#section-1">Cognitive and behavioral status</a>
+                    </h3>
+                </dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Normal cognition / MCI / dementia and dementia syndrome</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-900">
+                    <p class="text-sm text-gray-500">Section 2</p>
+                    <h3 class="mt-1 font-semibold text-indigo-900">
+                        <a href="#section-2">Biomarkers, imaging, and genetics</a>
+                    </h3>
+                </dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Neurodegenerative imaging and CSF biomarkers, imaging evidence for CVD, and known genetic mutations for AD and FTLD</dd>
+            </div>
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-900">
+                    <p class="text-sm text-gray-500">Section 3</p>
+                    <h3 class="mt-1 font-semibold text-indigo-900">
+                        <a href="#section-3">Etiological diagnoses</a>
+                    </h3>
+                </dt>
+                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Presumed etiological diagnoses for the cognitive disorder</dd>
+            </div>
+        </dl>
+    </div>
+</div>
+<div data-controller="fancycheckboxes">
+    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="D1a.DXMETHOD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.DXMETHOD)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.DXMETHOD"></p>-->
+                @*<radio-button-group id="@Html.IdFor(m => m.D1a.DXMETHOD)" for="@Model.D1a.DXMETHOD" ></radio-button-group>*@
+                <!--<span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DXMETHOD"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+            <a name="section-1"></a>
+            <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+                <h3 class="ml-2 mt-2 font-semibold text-sm text-gray-500 uppercase">Section 1</h3>
+                <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Cognitive and behavioral status</p>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="D1a.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.NORMCOG)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.NORMCOG"></p>-->
+                @*<radio-button-group id="@Html.IdFor(m => m.D1a.NORMCOG)" for="@Model.D1a.NORMCOG"></radio-button-group>*@
+                <!--<span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.NORMCOG"></span>
+            </div>
+        </div>
+
+        <div class="p-2 sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-indigo-100">
+            <p class="text-base font-semibold text-gray-900">All-cause dementia</p>
+            <p class="mt-2 text-sm font-semibold text-gray-900">
+                The participant has cognitive or behavioral (neuropsychiatric) symptoms that meet all of the following criteria:
+            </p>
+            <ul class="list-disc ml-4 text-sm">
+                <li>Interfere with ability to function as before at work or at usual activities?</li>
+                <li>Represent a decline from previous levels of functioning?</li>
+                <li>Are not explained by delirium or major psychiatric disorder?</li>
+                <li>
+                    Include cognitive impairment detected and diagnosed through a combination of 1) history-taking and 2) objective cognitive assessment (bedside or neuropsychological testing)?
+                </li>
+            </ul>
+
+            <p class="mt-2 text-sm font-semibold text-gray-900 underline">AND</p>
+            <div class="ml-6">
+                <p class="mt-2 text-sm font-semibold text-gray-900">
+                    Impairment in one* or more of the following domains.
+                </p>
+                <ul class="list-[square] ml-4 text-sm">
+                    <li>Impaired ability to acquire and remember new information</li>
+                    <li>Impaired reasoning and handling of complex tasks, poor judgment</li>
+                    <li>Impaired visuospatial abilities</li>
+                    <li>Impaired language functions</li>
+                    <li>Changes in personality, behavior, or comportment</li>
+                </ul>
+                <p class="mt-2 text-sm text-gray-700 italic">
+                    * In the event of single-domain impairment (e.g., language in PPA, behavior in bvFTD, posterior cortical atrophy), the participant must not fulfill criteria for MCI.
+                </p>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="D1a.DEMENTED"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.DEMENTED)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.DEMENTED"></p>-->
+                @*<radio-button-group id="@Html.IdFor(m => m.D1a.DEMENTED)" for="@Model.D1a.DEMENTED"></radio-button-group>*@
+                <!--<span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DEMENTED"></span>
+            </div>
+        </div>
+    </div>
+</div>-->
+<partial name="_FormFooter" for="@Model.D1a" />
