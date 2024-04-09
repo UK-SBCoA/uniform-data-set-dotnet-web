@@ -510,7 +510,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
 
-        [Display(Name = "Total recall", Description = "(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)")]
+        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
         public int? CERAD1REC { get; set; }
 
         [Display(Name = "Can't read", Description = "(0-10)")]
