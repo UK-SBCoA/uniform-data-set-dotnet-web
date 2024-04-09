@@ -301,7 +301,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORMO)</label>
 
-                        <div class="flex flex-row space-x-4">                          
+                        <div class="flex flex-row space-x-4">
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORMO" />
                             </div>
@@ -313,7 +313,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORYR)</label>
 
-                        <div class="flex flex-row space-x-4">                 
+                        <div class="flex flex-row space-x-4">
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORYR" />
                             </div>
@@ -337,7 +337,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORPL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORPL)</label>
 
-                        <div class="flex flex-row space-x-4">                           
+                        <div class="flex flex-row space-x-4">
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORPL" />
                             </div>
@@ -349,7 +349,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
 
-                        <div class="flex flex-row space-x-4">                     
+                        <div class="flex flex-row space-x-4">
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORCT" />
                             </div>
@@ -835,20 +835,21 @@
                     <tr>
                         <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">Trial 1</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 ">
                                 <label asp-for="C2.REY1REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY1REC)</label>
-                                <div>
+                                <div class="flex flex-row ">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY1REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.REY1REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY1REC"></p></span>
                                 </div>
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY1REC"></p>
+                            <p class="text-sm text-gray-500">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.CERAD1INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERAD1INT)</label>
                                 <div class="flex flex-row">
                                     <div class="w-28">
@@ -864,57 +865,57 @@
                     <tr>
                         <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">Trial 2</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY2REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2REC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2REC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY2REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY2REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2REC"></p></span>
                                 </div>
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY2INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2INT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY2INT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY2INT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
                             </div>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">Trial 3</td>
+                        <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">Trial 3</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY3REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3REC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3REC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY3REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY3REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3REC"></p></span>
                                 </div>
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY3INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3INT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY3INT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY3INT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
                             </div>
                         </td>
                     </tr>
@@ -922,57 +923,58 @@
                     <tr>
                         <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">Trial 4</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY4REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4REC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4REC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY4REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY4REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4REC"></p></span>
                                 </div>
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY4INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4INT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY4INT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY4INT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
                             </div>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">Trial 5</td>
+                        <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">Trial 5</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY5REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5REC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5REC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY5REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY5REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5REC"></p></span>
                                 </div>
+
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY5INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5INT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5INT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY5INT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY5INT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5INT"></p>
                             </div>
                         </td>
                     </tr>
@@ -980,28 +982,28 @@
                     <tr>
                         <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">List B</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REYBREC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYBREC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYBREC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REYBREC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYBREC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYBREC"></p></span>
                                 </div>
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REYBINT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYBINT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYBINT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REYBINT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYBINT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYBINT"></p>
                             </div>
                         </td>
                     </tr>
@@ -1009,28 +1011,28 @@
                     <tr>
                         <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">Trial 6</td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY6REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6REC)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6REC"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY6REC" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY6REC"></span>
+                                    <span class="pl-4"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6REC"></p></span>
                                 </div>
                             </div>
 
                         </td>
                         <td>
-                            <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                            <div class="sm:grid sm:grid-cols-4 sm:items-start sm:gap-4 sm:py-6">
                                 <label asp-for="C2.REY6INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6INT)</label>
-                                <div>
-                                    <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6INT"></p>
+                                <div class="flex flex-row">
                                     <div class="w-28">
                                         <input asp-for="@Model.C2.REY6INT" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY6INT"></span>
                                 </div>
+                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6INT"></p>
                             </div>
                         </td>
                     </tr>
