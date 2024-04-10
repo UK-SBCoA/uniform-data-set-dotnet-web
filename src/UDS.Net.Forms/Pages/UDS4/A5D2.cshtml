@@ -602,7 +602,7 @@
                                             <label asp-for="A5D2.HEADIMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADIMP)</br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 4h)</span></label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HEADIMP"></p>
-                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.HEADIMP)" for="@Model.A5D2.HEADIMP" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.HEADIMP)" for="@Model.A5D2.HEADIMP" items="Model.BasicYesNoListItems" ui-behaviors="Model.HEADIMPCheckboxBehavior"></radio-button-group>
                                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HEADIMP"></span>
                                             </div>
                                         </div>
@@ -628,7 +628,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPAMFOOT">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPAMFOOT", Model.A5D2.IMPAMFOOT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPAMFOOT", Model.A5D2.IMPAMFOOT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPAMFOOT" class="font-medium text-gray-900"></label>
@@ -639,7 +639,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPSOCCER">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPSOCCER", Model.A5D2.IMPSOCCER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPSOCCER", Model.A5D2.IMPSOCCER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPSOCCER" class="font-medium text-gray-900"></label>
@@ -650,7 +650,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPHOCKEY">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPHOCKEY", Model.A5D2.IMPHOCKEY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPHOCKEY", Model.A5D2.IMPHOCKEY, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPHOCKEY" class="font-medium text-gray-900"></label>
@@ -661,7 +661,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPBOXING">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1d.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPBOXING", Model.A5D2.IMPBOXING, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPBOXING", Model.A5D2.IMPBOXING, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPBOXING" class="font-medium text-gray-900"></label>
@@ -672,7 +672,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPSPORT">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1e.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPSPORT", Model.A5D2.IMPSPORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPSPORT", Model.A5D2.IMPSPORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPSPORT" class="font-medium text-gray-900"></label>
@@ -683,7 +683,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPIPV">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1f.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPIPV", Model.A5D2.IMPIPV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPIPV", Model.A5D2.IMPIPV, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPIPV" class="font-medium text-gray-900"></label>
@@ -694,7 +694,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPMILIT">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1g.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPMILIT", Model.A5D2.IMPMILIT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPMILIT", Model.A5D2.IMPMILIT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPMILIT" class="font-medium text-gray-900"></label>
@@ -705,7 +705,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPASSAULT">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1h.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPASSAULT", Model.A5D2.IMPASSAULT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.IMPASSAULT", Model.A5D2.IMPASSAULT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPASSAULT" class="font-medium text-gray-900"></label>
@@ -716,7 +716,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_IMPOTHER">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">4g1i.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.IMPOTHER", Model.A5D2.IMPOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.IMPOTHERX\" ]" })
+                                                                    @Html.CheckBox("A5D2.IMPOTHER", Model.A5D2.IMPOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.IMPOTHERX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.IMPOTHER" class="font-medium text-gray-900"></label>
@@ -1006,7 +1006,7 @@
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.ARTHRIT"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ARTHRIT"></span>
                                     </td>
-                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ARTHRIT)" for="@Model.A5D2.ARTHRIT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
+                                    <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ARTHRIT)" for="@Model.A5D2.ARTHRIT" items="Model.ConditionsListItems" ui-behaviors="Model.ARTHRITCheckboxBehavior"></table-cell-radio-buttons>
                                 </tr>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
                                     <td colspan="8">
@@ -1030,7 +1030,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHRRHEUM">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f1a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHRRHEUM", Model.A5D2.ARTHRRHEUM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHRRHEUM", Model.A5D2.ARTHRRHEUM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHRRHEUM" class="font-medium text-gray-900"></label>
@@ -1041,7 +1041,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHROSTEO">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f1b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHROSTEO", Model.A5D2.ARTHROSTEO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHROSTEO", Model.A5D2.ARTHROSTEO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHROSTEO" class="font-medium text-gray-900"></label>
@@ -1052,7 +1052,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHROTHR">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f1c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHROTHR", Model.A5D2.ARTHROTHR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.ARTHTYPX\" ]" })
+                                                                    @Html.CheckBox("A5D2.ARTHROTHR", Model.A5D2.ARTHROTHR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.ARTHTYPX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHROTHR" class="font-medium text-gray-900"></label>
@@ -1067,7 +1067,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHTYPUNK">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f1d.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHTYPUNK", Model.A5D2.ARTHTYPUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHTYPUNK", Model.A5D2.ARTHTYPUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHTYPUNK" class="font-medium text-gray-900"></label>
@@ -1102,7 +1102,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHUPEX">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f2a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHUPEX", Model.A5D2.ARTHUPEX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHUPEX", Model.A5D2.ARTHUPEX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHUPEX" class="font-medium text-gray-900"></label>
@@ -1113,7 +1113,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHLOEX">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f2b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHLOEX", Model.A5D2.ARTHLOEX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHLOEX", Model.A5D2.ARTHLOEX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHLOEX" class="font-medium text-gray-900"></label>
@@ -1124,7 +1124,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHSPIN">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f2c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHSPIN", Model.A5D2.ARTHSPIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHSPIN", Model.A5D2.ARTHSPIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHSPIN" class="font-medium text-gray-900"></label>
@@ -1135,7 +1135,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_ARTHUNK">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5f2d.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.ARTHUNK", Model.A5D2.ARTHUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.ARTHUNK", Model.A5D2.ARTHUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.ARTHUNK" class="font-medium text-gray-900"></label>
@@ -1266,7 +1266,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCERPRIM">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m1a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCERPRIM", Model.A5D2.CANCERPRIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCERPRIM", Model.A5D2.CANCERPRIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCERPRIM" class="font-medium text-gray-900"></label>
@@ -1277,7 +1277,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCERMETA">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m1b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCERMETA", Model.A5D2.CANCERMETA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCERMETA", Model.A5D2.CANCERMETA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCMETBR\", \"A5D2.CANCMETOTH\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCERMETA" class="font-medium text-gray-900"></label>
@@ -1289,7 +1289,7 @@
                                                                         <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCMETBR">
                                                                             <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m1b1.</span>
                                                                         </label>
-                                                                        @Html.CheckBox("A5D2.CANCMETBR", Model.A5D2.CANCMETBR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCMETBR", Model.A5D2.CANCMETBR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                     </div>
                                                                     <div class="ml-3 text-sm leading-6">
                                                                         <label asp-for="A5D2.CANCMETBR" class="font-medium text-gray-900"></label>
@@ -1300,7 +1300,7 @@
                                                                         <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCMETOTH">
                                                                             <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m1b2.</span>
                                                                         </label>
-                                                                        @Html.CheckBox("A5D2.CANCMETOTH", Model.A5D2.CANCMETOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                        @Html.CheckBox("A5D2.CANCMETOTH", Model.A5D2.CANCMETOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                     </div>
                                                                     <div class="ml-3 text-sm leading-6">
                                                                         <label asp-for="A5D2.CANCMETOTH" class="font-medium text-gray-900"></label>
@@ -1312,7 +1312,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCERUNK">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m1c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCERUNK", Model.A5D2.CANCERUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCERUNK", Model.A5D2.CANCERUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCERUNK" class="font-medium text-gray-900"></label>
@@ -1347,7 +1347,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCBLOOD">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCBLOOD", Model.A5D2.CANCBLOOD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCBLOOD", Model.A5D2.CANCBLOOD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCBLOOD" class="font-medium text-gray-900"></label>
@@ -1358,7 +1358,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCBREAST">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCBREAST", Model.A5D2.CANCBREAST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCBREAST", Model.A5D2.CANCBREAST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCBREAST" class="font-medium text-gray-900"></label>
@@ -1369,7 +1369,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCCOLON">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCCOLON", Model.A5D2.CANCCOLON, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCCOLON", Model.A5D2.CANCCOLON, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCCOLON" class="font-medium text-gray-900"></label>
@@ -1380,7 +1380,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCLUNG">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2d.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCLUNG", Model.A5D2.CANCLUNG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCLUNG", Model.A5D2.CANCLUNG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCLUNG" class="font-medium text-gray-900"></label>
@@ -1391,7 +1391,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCPROST">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2e.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCPROST", Model.A5D2.CANCPROST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCPROST", Model.A5D2.CANCPROST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCPROST" class="font-medium text-gray-900"></label>
@@ -1402,7 +1402,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCOTHER">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m2f.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCOTHER", Model.A5D2.CANCOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCOTHERX\" ]" })
+                                                                    @Html.CheckBox("A5D2.CANCOTHER", Model.A5D2.CANCOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCOTHERX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCOTHER" class="font-medium text-gray-900"></label>
@@ -1441,7 +1441,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCRAD">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3a.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCRAD", Model.A5D2.CANCRAD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCRAD", Model.A5D2.CANCRAD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCRAD" class="font-medium text-gray-900"></label>
@@ -1452,7 +1452,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCRESECT">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3b.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCRESECT", Model.A5D2.CANCRESECT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCRESECT", Model.A5D2.CANCRESECT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCRESECT" class="font-medium text-gray-900"></label>
@@ -1463,7 +1463,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCIMMUNO">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3c.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCIMMUNO", Model.A5D2.CANCIMMUNO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCIMMUNO", Model.A5D2.CANCIMMUNO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCIMMUNO" class="font-medium text-gray-900"></label>
@@ -1474,7 +1474,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCBONE">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3d.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCBONE", Model.A5D2.CANCBONE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCBONE", Model.A5D2.CANCBONE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCBONE" class="font-medium text-gray-900"></label>
@@ -1485,7 +1485,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCCHEMO">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3e.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCCHEMO", Model.A5D2.CANCCHEMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCCHEMO", Model.A5D2.CANCCHEMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCCHEMO" class="font-medium text-gray-900"></label>
@@ -1496,7 +1496,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCHORM">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3e.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCHORM", Model.A5D2.CANCHORM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                                                    @Html.CheckBox("A5D2.CANCHORM", Model.A5D2.CANCHORM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCHORM" class="font-medium text-gray-900"></label>
@@ -1507,7 +1507,7 @@
                                                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_CANCTROTH">
                                                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">5m3f.</span>
                                                                     </label>
-                                                                    @Html.CheckBox("A5D2.CANCTROTH", Model.A5D2.CANCTROTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCTROTHX\" ]" })
+                                                                    @Html.CheckBox("A5D2.CANCTROTH", Model.A5D2.CANCTROTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.CANCTROTHX\" ]" })
                                                                 </div>
                                                                 <div class="ml-3 text-sm leading-6">
                                                                     <label asp-for="A5D2.CANCTROTH" class="font-medium text-gray-900"></label>
@@ -1934,7 +1934,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSNAT">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSNAT", Model.A5D2.NOMENSNAT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSNAT", Model.A5D2.NOMENSNAT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSNAT" class="font-medium text-gray-900"></label>
@@ -1945,7 +1945,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSHYST">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSHYST", Model.A5D2.NOMENSHYST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSHYST", Model.A5D2.NOMENSHYST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSHYST" class="font-medium text-gray-900"></label>
@@ -1956,7 +1956,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSSURG">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSSURG", Model.A5D2.NOMENSSURG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSSURG", Model.A5D2.NOMENSSURG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSSURG" class="font-medium text-gray-900"></label>
@@ -1967,7 +1967,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSCHEM">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSCHEM", Model.A5D2.NOMENSCHEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSCHEM", Model.A5D2.NOMENSCHEM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSCHEM" class="font-medium text-gray-900"></label>
@@ -1978,7 +1978,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSRAD">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSRAD", Model.A5D2.NOMENSRAD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSRAD", Model.A5D2.NOMENSRAD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSRAD" class="font-medium text-gray-900"></label>
@@ -1989,7 +1989,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSHORM">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSHORM", Model.A5D2.NOMENSHORM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSHORM", Model.A5D2.NOMENSHORM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSHORM" class="font-medium text-gray-900"></label>
@@ -2000,7 +2000,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSESTR">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSESTR", Model.A5D2.NOMENSESTR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSESTR", Model.A5D2.NOMENSESTR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSESTR" class="font-medium text-gray-900"></label>
@@ -2011,7 +2011,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSUNK">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSUNK", Model.A5D2.NOMENSUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                    @Html.CheckBox("A5D2.NOMENSUNK", Model.A5D2.NOMENSUNK, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSUNK" class="font-medium text-gray-900"></label>
@@ -2022,7 +2022,7 @@
                                     <label class="mr-3 block text-sm font-medium leading-6 text-gray-900" for="A5D2_NOMENSOTH">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"><span class="subsubcounter"></span></span>
                                     </label>
-                                    @Html.CheckBox("A5D2.NOMENSOTH", Model.A5D2.NOMENSOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.NOMENSOTHX\" ]" })
+                                    @Html.CheckBox("A5D2.NOMENSOTH", Model.A5D2.NOMENSOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A5D2.NOMENSOTHX\" ]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A5D2.NOMENSOTH" class="font-medium text-gray-900"></label>

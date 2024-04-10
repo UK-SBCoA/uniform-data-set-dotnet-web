@@ -862,6 +862,7 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.CANCCHEMO"),
                          new UIDisableAttribute("A5D2.CANCHORM"),
                          new UIDisableAttribute("A5D2.CANCTROTH"),
+                         new UIDisableAttribute("A5D2.CANCERAGE")
                      }
             }
          },
@@ -886,6 +887,7 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.CANCCHEMO"),
                          new UIEnableAttribute("A5D2.CANCHORM"),
                          new UIEnableAttribute("A5D2.CANCTROTH"),
+                         new UIEnableAttribute("A5D2.CANCERAGE")
                      }
             }
          },
@@ -910,6 +912,7 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.CANCCHEMO"),
                          new UIEnableAttribute("A5D2.CANCHORM"),
                          new UIEnableAttribute("A5D2.CANCTROTH"),
+                         new UIEnableAttribute("A5D2.CANCERAGE")
                      }
             }
          },
@@ -934,6 +937,7 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.CANCCHEMO"),
                          new UIDisableAttribute("A5D2.CANCHORM"),
                          new UIDisableAttribute("A5D2.CANCTROTH"),
+                         new UIDisableAttribute("A5D2.CANCERAGE")
                      }
             }
          },
@@ -1523,6 +1527,130 @@ public class A5D2Model : FormPageModel
         new RadioListItem("3 or more", "2"),
         new RadioListItem("Unknown", "9")
     };
+
+    public Dictionary<string, UIBehavior> HEADIMPCheckboxBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIDisableAttribute("A5D2.IMPAMFOOT"),
+                        new UIDisableAttribute("A5D2.IMPSOCCER"),
+                        new UIDisableAttribute("A5D2.IMPHOCKEY"),
+                        new UIDisableAttribute("A5D2.IMPBOXING"),
+                        new UIDisableAttribute("A5D2.IMPSPORT"),
+                        new UIDisableAttribute("A5D2.IMPIPV"),
+                        new UIDisableAttribute("A5D2.IMPMILIT"),
+                        new UIDisableAttribute("A5D2.IMPASSAULT"),
+                        new UIDisableAttribute("A5D2.IMPOTHER")
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIEnableAttribute("A5D2.IMPAMFOOT"),
+                        new UIEnableAttribute("A5D2.IMPSOCCER"),
+                        new UIEnableAttribute("A5D2.IMPHOCKEY"),
+                        new UIEnableAttribute("A5D2.IMPBOXING"),
+                        new UIEnableAttribute("A5D2.IMPSPORT"),
+                        new UIEnableAttribute("A5D2.IMPIPV"),
+                        new UIEnableAttribute("A5D2.IMPMILIT"),
+                        new UIEnableAttribute("A5D2.IMPASSAULT"),
+                        new UIEnableAttribute("A5D2.IMPOTHER")
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIDisableAttribute("A5D2.IMPAMFOOT"),
+                        new UIDisableAttribute("A5D2.IMPSOCCER"),
+                        new UIDisableAttribute("A5D2.IMPHOCKEY"),
+                        new UIDisableAttribute("A5D2.IMPBOXING"),
+                        new UIDisableAttribute("A5D2.IMPSPORT"),
+                        new UIDisableAttribute("A5D2.IMPIPV"),
+                        new UIDisableAttribute("A5D2.IMPMILIT"),
+                        new UIDisableAttribute("A5D2.IMPASSAULT"),
+                        new UIDisableAttribute("A5D2.IMPOTHER")
+                     }
+            }
+         },
+    };
+
+    public Dictionary<string, UIBehavior> ARTHRITCheckboxBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {  
+                        new UIDisableAttribute("A5D2.ARTHRRHEUM"),
+                        new UIDisableAttribute("A5D2.ARTHROSTEO"),
+                        new UIDisableAttribute("A5D2.ARTHROTHR"),
+                        new UIDisableAttribute("A5D2.ARTHTYPUNK"),
+                        new UIDisableAttribute("A5D2.ARTHUPEX"),
+                        new UIDisableAttribute("A5D2.ARTHLOEX"),
+                        new UIDisableAttribute("A5D2.ARTHSPIN"),
+                        new UIDisableAttribute("A5D2.ARTHUNK")
+                     }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIEnableAttribute("A5D2.ARTHRRHEUM"),
+                        new UIEnableAttribute("A5D2.ARTHROSTEO"),
+                        new UIEnableAttribute("A5D2.ARTHROTHR"),
+                        new UIEnableAttribute("A5D2.ARTHTYPUNK"),
+                        new UIEnableAttribute("A5D2.ARTHUPEX"),
+                        new UIEnableAttribute("A5D2.ARTHLOEX"),
+                        new UIEnableAttribute("A5D2.ARTHSPIN"),
+                        new UIEnableAttribute("A5D2.ARTHUNK")
+                     }
+            }
+         },
+         {
+            "2", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIEnableAttribute("A5D2.ARTHRRHEUM"),
+                        new UIEnableAttribute("A5D2.ARTHROSTEO"),
+                        new UIEnableAttribute("A5D2.ARTHROTHR"),
+                        new UIEnableAttribute("A5D2.ARTHTYPUNK"),
+                        new UIEnableAttribute("A5D2.ARTHUPEX"),
+                        new UIEnableAttribute("A5D2.ARTHLOEX"),
+                        new UIEnableAttribute("A5D2.ARTHSPIN"),
+                        new UIEnableAttribute("A5D2.ARTHUNK")
+                     }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                     {
+                        new UIDisableAttribute("A5D2.ARTHRRHEUM"),
+                        new UIDisableAttribute("A5D2.ARTHROSTEO"),
+                        new UIDisableAttribute("A5D2.ARTHROTHR"),
+                        new UIDisableAttribute("A5D2.ARTHTYPUNK"),
+                        new UIDisableAttribute("A5D2.ARTHUPEX"),
+                        new UIDisableAttribute("A5D2.ARTHLOEX"),
+                        new UIDisableAttribute("A5D2.ARTHSPIN"),
+                        new UIDisableAttribute("A5D2.ARTHUNK")
+                     }
+            }
+         },
+    };
+
 
     public List<RadioListItem> HeadInjuryUnconsciousItems { get; set; } = new List<RadioListItem>
     {
