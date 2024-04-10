@@ -227,7 +227,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         }
         public string GetDescription()
         {
-            return "Clinician Diagnosis";
+            return "Clinician Syndrome";
         }
 
         public string GetVersion()
