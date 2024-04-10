@@ -39,26 +39,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Does the participant meet criteria for MCI (amnestic or non-amnestic)?")]
         public int? MCI { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI reason - Evidence of functional impairment (e.g., CDR SB>0 and/or FAS>0), but available cognitive testing is judged to be normal")]
+        [Display(Name = "Evidence of functional impairment (e.g., CDR SB>0 and/or FAS>0), but available cognitive testing is judged to be normal")]
         public bool? IMPNOMCIFU { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI reason - Cognitive testing is abnormal but no clinical concern or functional decline (e.g., CDR SB=0 and FAS=0)")]
+        [Display(Name = "Cognitive testing is abnormal but no clinical concern or functional decline (e.g., CDR SB=0 and FAS=0)")]
         public bool? IMPNOMCICG { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI reason - Longstanding cognitive difficulties, not representing a change from their usual function")]
+        [Display(Name = "Longstanding cognitive difficulties, not representing a change from their usual function")]
         public bool? IMPNOMCLCD { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI reason - Other")]
+        [Display(Name = "Other")]
         public bool? IMPNOMCIO { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI reason - Other (specify)")]
+        [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         public string? IMPNOMCIOX { get; set; }
 
-        [Display(Name = "Cognitively impaired, not MCI")]
+        [Display(Name = "Does the participant meet any criteria for cognitively impaired, not MCI/dementia?")]
         public bool? IMPNOMCI { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Memory")]
+        [Display(Name = "Memory")]
         public bool? CDOMMEM { get; set; }
 
         [Display(Name = "Dementia and MCI affected domains - Language")]
