@@ -17,11 +17,8 @@ jobs:
           with:
             dotnet-version: '8.0.x'
 
-        - name: Install dependencies
-          run: dotnet restore
-
         - name: Build
-          run: dotnet build --no-restore
+          run: dotnet build src/UDS.Net.Web.MVC.Services.Test
 
         - name: Install Playwright
           run: pwsh src/UDS.Net.Web.MVC.Services.Test/bin/Debug/net8.0/playwright.ps1 install --with-deps
