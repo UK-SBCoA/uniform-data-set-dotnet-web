@@ -1,5 +1,5 @@
-﻿using Microsoft.Playwright.MSTest;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Playwright;
+using Microsoft.Playwright.MSTest;
 
 namespace UDS.Net.Web.MVC.Services.Test;
 
@@ -7,11 +7,19 @@ namespace UDS.Net.Web.MVC.Services.Test;
 public class HomepageTests : PageTest
 {
     [TestMethod]
-    public async Task HomepageRedirectsIfNotAuthenticated()
+    public async Task HomepageHasNavigationToParticipations()
     {
-        await Page.GotoAsync("");
+        await Page.GotoAsync("https://localhost:4811");
 
-        await Expect(Page).ToHaveURLAsync("");
+        //var participation = Page.GetByRole(AriaRole.Link, new() { Name = "Participation" });
+
+        //await Expect(participation).ToHaveAttributeAsync("href", "/Participations");
+
+        //var createButton = Page.GetByRole(AriaRole.Link, new() { Name = "New participation" });
+
+        //await Expect(createButton).ToHaveAttributeAsync("href", "/Participations/Create");
+
+        //await participation.ClickAsync();
     }
 }
 
