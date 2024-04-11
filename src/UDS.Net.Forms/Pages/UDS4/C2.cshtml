@@ -1123,151 +1123,151 @@
                 </h3>
                 <p class="counter mb-3 font-semibold"> J4 Total number of words correctly recalled and number of intrusions</p>
             </div>
-
-            <table class="subcounterreset mt-16 w-full text-left leading-6 border-b border-gray-100">
-                <tr>
-                    <th class="border-b border-gray-100 sm:py-6">Trial</th>
-                    <th class="border-b border-gray-100 sm:py-6">Total recall</th>
-                    <th class="border-b border-gray-100 sm:py-6">Can't read</th>
-                    <th class="border-b border-gray-100 sm:py-6"># of intrusions</th>
-                </tr>
-                <tbody>
-                    <tr class="align-top">
-                        <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 1</td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD1REC" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD1REC" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD1REC"></span>
-                                </div>
-                                <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1REC"></p></span>
-                            </div>
-                            <p class="text-sm text-gray-500 text-nowrap pb-3">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
-
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD1READ" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD1READ" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1READ"></span>
-                                </div>
-                                <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1READ"></p></span>
-
-                            </div>
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD1INT" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD1INT" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1INT"></span>
-                                </div>
-                                <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1INT"></p></span>
-
-                            </div>
-                        </td>
-
-                    </tr>
-
+            <div class="overflow-x-auto">
+                <table class="subcounterreset mt-16 w-full text-left leading-6 border-b border-gray-100">
                     <tr>
-                        <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 2</td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3">
-                                <label asp-for="C2.CERAD2REC" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD2REC" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD2REC"></span>
-                                </div>
-                                <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2REC"></p></span>
-
-                            </div>
-
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD2READ" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD2READ" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2READ"></span>
-                                </div>
-                                <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2READ"></p></span>
-
-                            </div>
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD2INT" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD2INT" />
-                                    </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2INT"></span>
-                                </div>
-                                <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2INT"></p></span>
-
-                            </div>
-                        </td>
-
+                        <th class="border-b border-gray-100 sm:py-6">Trial</th>
+                        <th class="border-b border-gray-100 sm:py-6">Total recall</th>
+                        <th class="border-b border-gray-100 sm:py-6">Can't read</th>
+                        <th class="border-b border-gray-100 sm:py-6"># of intrusions</th>
                     </tr>
-
-                    <tr>
-                        <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 3</td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3">
-                                <label asp-for="C2.CERAD3REC" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD3REC" />
+                    <tbody>
+                        <tr class="align-top">
+                            <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 1</td>
+                            <td>
+                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                    <label asp-for="C2.CERAD1REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD1REC" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD1REC"></span>
                                     </div>
-                                    <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD3REC"></span>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1REC"></p></span>
                                 </div>
-                                <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3REC"></p></span>
+                                <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
 
-                            </div>
-
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD3READ" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD3READ" />
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD1READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-25">
+                                            <input asp-for="@Model.C2.CERAD1READ" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1READ"></span>
                                     </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3READ"></span>
-                                </div>
-                                <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3READ"></p></span>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1READ"></p></span>
 
-                            </div>
-                        </td>
-                        <td>
-                            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                <label asp-for="C2.CERAD3INT" show-property-name="false"><span class="subcounter"></span></label>
-                                <div class="flex flex-row">
-                                    <div class="w-28">
-                                        <input asp-for="@Model.C2.CERAD3INT" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD1INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD1INT" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1INT"></span>
                                     </div>
-                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3INT"></span>
+                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1INT"></p></span>
+
                                 </div>
-                                <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3INT"></p></span>
-                            </div>
-                        </td>
+                            </td>
 
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
 
+                        <tr class="align-top">
+                            <td class="flex py-6 pr-4 text-nowrap">Trial 2</td>
+                            <td>
+                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                    <label asp-for="C2.CERAD2REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD2REC" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD2REC"></span>
+                                    </div>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2REC"></p></span>
+
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD2READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD2READ" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2READ"></span>
+                                    </div>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2READ"></p></span>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD2INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD2INT" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2INT"></span>
+                                    </div>
+                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2INT"></p></span>
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr class="align-top">
+                            <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 3</td>
+                            <td>
+                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                    <label asp-for="C2.CERAD3REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD3REC" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD3REC"></span>
+                                    </div>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3REC"></p></span>
+
+                                </div>
+
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD3READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD3READ" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3READ"></span>
+                                    </div>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3READ"></p></span>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="flex py-6">
+                                    <label asp-for="C2.CERAD3INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                    <div class="flex flex-row">
+                                        <div class="w-28 sm:w-28">
+                                            <input asp-for="@Model.C2.CERAD3INT" />
+                                        </div>
+                                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3INT"></span>
+                                    </div>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3INT"></p></span>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div>
                 <h3 class="mb-3 text-base font-semibold leading-7 text-gray-900">
                     Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
