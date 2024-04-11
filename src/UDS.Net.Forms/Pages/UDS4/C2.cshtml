@@ -6,7 +6,7 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500">
+    <p class="mt-1 text-sm text-gray-500 text-nowrap">
         INSTRUCTIONS: This form is to be completed by ADC or clinic staff. For test administration and scoring, see <g-bedebook kind="@Model.Visit.Kind"></g-bedebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).
     </p>
 </div>
@@ -25,12 +25,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACOMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACOMP)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCACOMP"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCACOMP"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCACOMP)" for="@Model.C2.MOCACOMP" items="Model.MoCACompletedListItems" ui-behaviors="Model.MOCACOMPBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACOMP"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCAREAS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCAREAS"></p>
                             <label asp-for="C2.MOCAREAS">@Html.DisplayNameFor(m => m.C2.MOCAREAS)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.MOCAREAS" />
@@ -42,7 +42,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALOC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALOC)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCALOC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCALOC"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCALOC)" for="@Model.C2.MOCALOC" items="Model.LocationListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALOC"></span>
                         </div>
@@ -51,12 +51,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALAN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCALAN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCALAN"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCALAN)" for="@Model.C2.MOCALAN" items="Model.LanguageListItems" ui-behaviors="Model.MOCALANBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALAN"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCALANX"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCALANX"></p>
                             <label asp-for="C2.MOCALANX">@Html.DisplayNameFor(m => m.C2.MOCALANX)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.MOCALANX" />
@@ -68,7 +68,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAVIS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAVIS)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAVIS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAVIS"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCAVIS)" for="@Model.C2.MOCAVIS" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAVIS"></span>
                         </div>
@@ -77,7 +77,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAHEAR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAHEAR)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAHEAR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAHEAR"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCAHEAR)" for="@Model.C2.MOCAHEAR" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAHEAR"></span>
                         </div>
@@ -90,7 +90,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.MOCATOTS" />
                                 </div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATOTS"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCATOTS"></p>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCATOTS"></span>
                         </div>
@@ -102,7 +102,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCATRAI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATRAI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCATRAI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCATRAI"></span>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCACUBE" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCACUBE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCACUBE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACUBE"></span>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCACLOC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCACLOC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCACLOC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLOC"></span>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCACLON" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCACLON"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCACLON"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLON"></span>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCACLOH" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCACLOH"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCACLOH"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLOH"></span>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCANAMI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCANAMI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCANAMI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCANAMI"></span>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAREGI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAREGI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAREGI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREGI"></span>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCADIGI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCADIGI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCADIGI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCADIGI"></span>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCALETT" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCALETT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCALETT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALETT"></span>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCASER7" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCASER7"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCASER7"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCASER7"></span>
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAREPE" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAREPE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAREPE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREPE"></span>
                         </div>
                     </div>
@@ -233,7 +233,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAFLUE" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAFLUE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAFLUE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAFLUE"></span>
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAABST" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAABST"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAABST"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAABST"></span>
                         </div>
                     </div>
@@ -257,7 +257,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECN" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECN"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
                         </div>
                     </div>
@@ -281,7 +281,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECR" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
                         </div>
                     </div>
@@ -293,7 +293,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORDT" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORDT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDT"></span>
                         </div>
                     </div>
@@ -305,7 +305,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORMO" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORMO"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORMO"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORMO"></span>
                         </div>
                     </div>
@@ -317,7 +317,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORYR" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORYR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORYR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORYR"></span>
                         </div>
                     </div>
@@ -329,7 +329,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORDY" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORDY"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDY"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDY"></span>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORPL" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORPL"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORPL"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORPL"></span>
                         </div>
                     </div>
@@ -353,7 +353,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORCT" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORCT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORCT"></span>
                         </div>
                     </div>
@@ -371,7 +371,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.NPSYCLOC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYCLOC)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.NPSYCLOC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.NPSYCLOC"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.NPSYCLOC)" for="@Model.C2.NPSYCLOC" items="Model.LocationListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYCLOC"></span>
                         </div>
@@ -380,12 +380,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYLAN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLAN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLAN"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.NPSYLAN)" for="@Model.C2.NPSYLAN" items="Model.LanguageListItems" ui-behaviors="Model.NPSYLANBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLAN"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLANX"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLANX"></p>
                             <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.NPSYLANX" />
@@ -410,7 +410,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTVRS" ui-range-behavior="Model.CRAFTVRSBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTVRS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTVRS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTVRS"></span>
                         </div>
                     </div>
@@ -421,7 +421,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTURS" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTURS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTURS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTURS"></span>
                         </div>
                     </div>
@@ -442,7 +442,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSBENTC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENTC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSBENTC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENTC"></span>
                         </div>
                     </div>
@@ -462,7 +462,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGFORCT" ui-range-behavior="Model.DIGFORCTBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGFORCT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORCT"></span>
                         </div>
                     </div>
@@ -473,7 +473,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGFORSL" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORSL"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGFORSL"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORSL"></span>
                         </div>
                     </div>
@@ -494,7 +494,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGBACCT" ui-range-behavior="Model.DIGBACCTBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACCT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACCT"></span>
                         </div>
                     </div>
@@ -505,7 +505,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGBACLS" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACLS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACLS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACLS"></span>
                         </div>
                     </div>
@@ -526,7 +526,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.ANIMALS" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.ANIMALS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.ANIMALS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.ANIMALS"></span>
                         </div>
                     </div>
@@ -537,7 +537,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.VEG" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VEG"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VEG"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VEG"></span>
                         </div>
                     </div>
@@ -557,7 +557,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.TRAILA" ui-range-behavior="Model.TRAILABehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILA"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILA"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILA"></span>
                         </div>
                     </div>
@@ -569,7 +569,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.TRAILARR" />
                                 </div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILARR"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILARR"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILARR"></span>
                             </div>
                         </div>
@@ -579,7 +579,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.TRAILALI" />
                                 </div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILALI"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILALI"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILALI"></span>
                             </div>
                         </div>
@@ -591,7 +591,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.TRAILB" ui-range-behavior="Model.TRAILBBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILB"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILB"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILB"></span>
                         </div>
                     </div>
@@ -603,7 +603,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.TRAILBRR" />
                                 </div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILBRR"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILBRR"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILBRR"></span>
                             </div>
                         </div>
@@ -613,7 +613,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.TRAILBLI" />
                                 </div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.TRAILBLI"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.TRAILBLI"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.TRAILBLI"></span>
                             </div>
                         </div>
@@ -633,7 +633,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSBENTD" ui-range-behavior="Model.UDSBENTDBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENTD"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSBENTD"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENTD"></span>
                         </div>
                     </div>
@@ -641,7 +641,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSBENRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENRS)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENRS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSBENRS"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.UDSBENRS)" for="@Model.C2.UDSBENRS" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENRS"></span>
                         </div>
@@ -662,7 +662,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDVR" ui-range-behavior="Model.CRAFTDVRBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDVR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.CRAFTDVR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDVR"></span>
                         </div>
                     </div>
@@ -673,7 +673,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDRE" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDRE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDRE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDRE"></span>
                         </div>
                     </div>
@@ -684,7 +684,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDTI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDTI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDTI"></span>
                         </div>
                     </div>
@@ -692,7 +692,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTCUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTCUE)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTCUE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTCUE"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.CRAFTCUE)" for="@Model.C2.CRAFTCUE" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTCUE"></span>
                         </div>
@@ -714,7 +714,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERFC" ui-range-behavior="Model.UDSVERFCBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.UDSVERFC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFC"></span>
                         </div>
                     </div>
@@ -725,7 +725,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERFN" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFN"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFN"></span>
                         </div>
                     </div>
@@ -736,7 +736,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERNF" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERNF"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERNF"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERNF"></span>
                         </div>
                     </div>
@@ -747,7 +747,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLC" ui-range-behavior="Model.UDSVERLCBehavior" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLC"></span>
                         </div>
                     </div>
@@ -758,7 +758,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLR" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLR"></span>
                         </div>
                     </div>
@@ -769,7 +769,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLN" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLN"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLN"></span>
                         </div>
                     </div>
@@ -780,7 +780,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTN" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
                         </div>
                     </div>
@@ -791,7 +791,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTE" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
                         </div>
                     </div>
@@ -802,7 +802,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
                         </div>
                     </div>
@@ -813,7 +813,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
                     <div class="flex flex-row space-x-4">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VERBALTEST"></p>
+                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VERBALTEST"></p>
                         <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
                     </div>
@@ -846,9 +846,9 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY1REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
                                 </div>
-                                <p class="text-sm text-gray-500">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
+                                <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
 
                             </td>
                             <td class="align-top">
@@ -860,7 +860,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.CERAD1INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -876,7 +876,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY2REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
                                 </div>
 
                             </td>
@@ -889,7 +889,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY2INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -905,7 +905,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY3REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
                                 </div>
 
                             </td>
@@ -918,7 +918,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY3INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -934,7 +934,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY4REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
                                 </div>
 
                             </td>
@@ -947,7 +947,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY4INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -963,7 +963,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY5REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
                                 </div>
 
                             </td>
@@ -976,7 +976,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY5INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -992,7 +992,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYBREC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYBREC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBREC"></p>
                                 </div>
 
                             </td>
@@ -1005,7 +1005,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYBINT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYBINT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBINT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -1021,7 +1021,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY6REC"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
                                 </div>
 
                             </td>
@@ -1034,7 +1034,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REY6INT"></span>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
+                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
                                 </div>
                             </td>
                         </tr>
@@ -1057,7 +1057,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYDREC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDREC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDREC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
                         </div>
                     </div>
@@ -1068,7 +1068,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYDINT" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDINT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDINT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDINT"></span>
                         </div>
                     </div>
@@ -1079,7 +1079,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYDTI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDTI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDTI"></span>
                         </div>
                     </div>
@@ -1087,7 +1087,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYMETHOD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYMETHOD)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYMETHOD"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYMETHOD"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.REYMETHOD)" for="@Model.C2.REYMETHOD" items="Model.REYMETHODListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYMETHOD"></span>
                         </div>
@@ -1099,7 +1099,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYTCOR" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYTCOR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYTCOR"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYTCOR"></span>
                         </div>
                     </div>
@@ -1110,7 +1110,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYFPOS" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYFPOS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYFPOS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYFPOS"></span>
                         </div>
                     </div>
@@ -1143,9 +1143,9 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD1REC"></span>
                                     </div>
-                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1REC"></p></span>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1REC"></p></span>
                                 </div>
-                                <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
 
                             </td>
                             <td>
@@ -1157,7 +1157,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1READ"></span>
                                     </div>
-                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1READ"></p></span>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1READ"></p></span>
 
                                 </div>
                             </td>
@@ -1170,7 +1170,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1INT"></span>
                                     </div>
-                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1INT"></p></span>
+                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1INT"></p></span>
 
                                 </div>
                             </td>
@@ -1188,7 +1188,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD2REC"></span>
                                     </div>
-                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2REC"></p></span>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD2REC"></p></span>
 
                                 </div>
 
@@ -1202,7 +1202,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2READ"></span>
                                     </div>
-                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2READ"></p></span>
+                                    <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD2READ"></p></span>
 
                                 </div>
                             </td>
@@ -1215,7 +1215,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2INT"></span>
                                     </div>
-                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD2INT"></p></span>
+                                    <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD2INT"></p></span>
 
                                 </div>
                             </td>
@@ -1233,7 +1233,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD3REC"></span>
                                     </div>
-                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3REC"></p></span>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD3REC"></p></span>
 
                                 </div>
 
@@ -1247,7 +1247,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3READ"></span>
                                     </div>
-                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3READ"></p></span>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD3READ"></p></span>
 
                                 </div>
                             </td>
@@ -1260,7 +1260,7 @@
                                         </div>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3INT"></span>
                                     </div>
-                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD3INT"></p></span>
+                                    <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD3INT"></p></span>
                                 </div>
                             </td>
 
@@ -1282,7 +1282,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERADDTI" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADDTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADDTI"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADDTI"></span>
                         </div>
                     </div>
@@ -1293,7 +1293,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERADJ6REC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ6REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ6REC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ6REC"></span>
                         </div>
                     </div>
@@ -1304,7 +1304,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERADJ6INT" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ6INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ6INT"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ6INT"></span>
                         </div>
                     </div>
@@ -1315,7 +1315,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERADJ7YES" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ7YES"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7YES"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7YES"></span>
                         </div>
                     </div>
@@ -1326,7 +1326,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERADJ7NO" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERADJ7NO"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7NO"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7NO"></span>
                         </div>
                     </div>
@@ -1348,7 +1348,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTTOTS" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTTOTS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTTOTS"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTTOTS"></span>
                         </div>
                     </div>
@@ -1359,7 +1359,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTTOTW" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTTOTW"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTTOTW"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTTOTW"></span>
                         </div>
                     </div>
@@ -1370,7 +1370,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTSCNG" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTSCNG"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTSCNG"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTSCNG"></span>
                         </div>
                     </div>
@@ -1381,7 +1381,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTSCNC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTSCNC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTSCNC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTSCNC"></span>
                         </div>
                     </div>
@@ -1392,7 +1392,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTPCNG" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTPCNG"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTPCNG"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTPCNG"></span>
                         </div>
                     </div>
@@ -1403,7 +1403,7 @@
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MINTPCNC" />
                             </div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MINTPCNC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTPCNC"></p>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTPCNC"></span>
                         </div>
                     </div>
@@ -1423,7 +1423,7 @@
                         <label asp-for="C2.COGSTAT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.COGSTAT)</label>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.COGSTAT"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.COGSTAT"></p>
                                 <radio-button-group id="@Html.IdFor(m => m.C2.COGSTAT)" for="@Model.C2.COGSTAT" items="Model.OverallListItems"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.COGSTAT"></span>
                             </div>
@@ -1448,7 +1448,7 @@
                         <label asp-for="C2.RESPVAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.RESPVAL)</label>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.RESPVAL"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.RESPVAL"></p>
                                 <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVAL"></span>
                             </div>
@@ -1600,7 +1600,7 @@
                             </div>
                         </div>
                         <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <p class="text-sm text-gray-500" asp-description-for="C2.RESPOTHX"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.RESPOTHX"></p>
                             <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
                             <div>
                                 <input asp-for="C2.RESPOTHX" />
@@ -1619,7 +1619,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="C2.MODCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MODCOMM)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MODCOMM"></p>
+                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MODCOMM"></p>
                         <radio-button-group id="@Html.IdFor(m => m.C2.MODCOMM)" for="@Model.C2.MODCOMM" items="Model.ModeOfCommunication"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MODCOMM"></span>
                     </div>
@@ -1631,12 +1631,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACOMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACOMP)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCACOMP"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCACOMP"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCACOMP)" for="@Model.C2.MOCACOMP" items="Model.MoCACompletedListItems" ui-behaviors="Model.MOCACOMPBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACOMP"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCAREAS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCAREAS"></p>
                             <label asp-for="C2.MOCAREAS">@Html.DisplayNameFor(m => m.C2.MOCAREAS)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.MOCAREAS" />
@@ -1648,12 +1648,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALAN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCALAN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCALAN"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCALAN)" for="@Model.C2.MOCALAN" items="Model.LanguageListItems" ui-behaviors="Model.MOCALANBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALAN"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.MOCALANX"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCALANX"></p>
                             <label asp-for="C2.MOCALANX">@Html.DisplayNameFor(m => m.C2.MOCALANX)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.MOCALANX" />
@@ -1665,7 +1665,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAHEAR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAHEAR)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAHEAR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAHEAR"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.MOCAHEAR)" for="@Model.C2.MOCAHEAR" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAHEAR"></span>
                         </div>
@@ -1674,7 +1674,7 @@
                     <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCATOTS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATOTS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCATOTS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCATOTS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCATOTS" />
                             </div>
@@ -1686,7 +1686,7 @@
                         <label asp-for="C2.MOCADIGI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCADIGI)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCADIGI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCADIGI"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCADIGI" />
                             </div>
@@ -1698,7 +1698,7 @@
                         <label asp-for="C2.MOCALETT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALETT)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCALETT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCALETT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCALETT" />
                             </div>
@@ -1709,7 +1709,7 @@
                     <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCASER7"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCASER7)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCASER7"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCASER7"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCASER7" />
                             </div>
@@ -1721,7 +1721,7 @@
                         <label asp-for="C2.MOCAREPE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAREPE)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAREPE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAREPE"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAREPE" />
                             </div>
@@ -1733,7 +1733,7 @@
                         <label asp-for="C2.MOCAFLUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAFLUE)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAFLUE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAFLUE"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAFLUE" />
                             </div>
@@ -1745,7 +1745,7 @@
                         <label asp-for="C2.MOCAABST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAABST)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAABST"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAABST"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAABST" />
                             </div>
@@ -1757,7 +1757,7 @@
                         <label asp-for="C2.MOCARECN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECN)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECN"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECN" />
                             </div>
@@ -1769,7 +1769,7 @@
                         <label asp-for="C2.MOCARECC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECC)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECC" />
                             </div>
@@ -1781,7 +1781,7 @@
                         <label asp-for="C2.MOCARECR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECR)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCARECR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECR"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCARECR" />
                             </div>
@@ -1793,7 +1793,7 @@
                         <label asp-for="C2.MOCAORDT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDT)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORDT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORDT" />
                             </div>
@@ -1805,7 +1805,7 @@
                         <label asp-for="C2.MOCAORMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORMO)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORMO"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORMO"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORMO" />
                             </div>
@@ -1817,7 +1817,7 @@
                         <label asp-for="C2.MOCAORYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORYR)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORYR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORYR"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORYR" />
                             </div>
@@ -1829,7 +1829,7 @@
                         <label asp-for="C2.MOCAORDY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDY)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORDY"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDY"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORDY" />
                             </div>
@@ -1841,7 +1841,7 @@
                         <label asp-for="C2.MOCAORPL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORPL)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORPL"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORPL"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORPL" />
                             </div>
@@ -1853,7 +1853,7 @@
                         <label asp-for="C2.MOCAORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
 
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.MOCAORCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORCT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCAORCT" />
                             </div>
@@ -1870,12 +1870,12 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYLAN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLAN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLAN"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.NPSYLAN)" for="@Model.C2.NPSYLAN" items="Model.LanguageListItems" ui-behaviors="Model.NPSYLANBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLAN"></span>
                         </div>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLANX"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLANX"></p>
                             <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
                             <div class="mt-2">
                                 <input asp-for="C2.NPSYLANX" />
@@ -1892,7 +1892,7 @@
                     <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTVRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTVRS)</label>
                         <div class="flex flex-row space-x-4">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTVRS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTVRS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTVRS" ui-range-behavior="Model.CRAFTVRSBehavior" />
                             </div>
@@ -1903,7 +1903,7 @@
                     <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTURS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTURS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTURS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTURS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTURS" />
                             </div>
@@ -1919,7 +1919,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY1REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY1REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY1REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
                             </div>
@@ -1930,7 +1930,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CERAD1INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERAD1INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CERAD1INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CERAD1INT" />
                             </div>
@@ -1941,7 +1941,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY2REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY2REC" />
                             </div>
@@ -1952,7 +1952,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY2INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY2INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY2INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY2INT" />
                             </div>
@@ -1963,7 +1963,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY3REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY3REC" />
                             </div>
@@ -1974,7 +1974,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY3INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY3INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY3INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY3INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY3INT" />
                             </div>
@@ -1985,7 +1985,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY4REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY4REC" />
                             </div>
@@ -1996,7 +1996,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY4INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY4INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY4INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY4INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY4INT" />
                             </div>
@@ -2007,7 +2007,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY5REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY5REC" />
                             </div>
@@ -2018,7 +2018,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY5INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY5INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY5INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY5INT" />
                             </div>
@@ -2029,7 +2029,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY6REC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6REC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6REC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY6REC" />
                             </div>
@@ -2040,7 +2040,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REY6INT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REY6INT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REY6INT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REY6INT" />
                             </div>
@@ -2056,7 +2056,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORCT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.DIGFORCT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGFORCT" ui-range-behavior="Model.DIGFORCTBehavior" />
                             </div>
@@ -2067,7 +2067,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORSL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORSL)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGFORSL"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGFORSL"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGFORSL" />
                             </div>
@@ -2083,7 +2083,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACCT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACCT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACCT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGBACCT" ui-range-behavior="Model.DIGBACCTBehavior" />
                             </div>
@@ -2094,7 +2094,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGBACLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACLS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACLS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACLS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.DIGBACLS" />
                             </div>
@@ -2110,7 +2110,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.OTRAILA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILA)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILA"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.OTRAILA" ui-range-behavior="Model.OTRAILABehavior" />
                             </div>
@@ -2121,7 +2121,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLARR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLARR)</label>
                             <div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLARR"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRLARR"></p>
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRLARR" />
                                 </div>
@@ -2132,7 +2132,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLALI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLALI)</label>
                             <div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLALI"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRLALI"></p>
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRLALI" />
                                 </div>
@@ -2143,7 +2143,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.OTRAILB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILB)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRAILB"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRAILB"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.OTRAILB" ui-range-behavior="Model.OTRAILBBehavior" />
                             </div>
@@ -2154,7 +2154,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLBRR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBRR)</label>
                             <div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLBRR"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRLBRR"></p>
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRLBRR" />
                                 </div>
@@ -2165,7 +2165,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="C2.OTRLBLI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBLI)</label>
                             <div>
-                                <p class="text-sm text-gray-500" asp-description-for="@Model.C2.OTRLBLI"></p>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.OTRLBLI"></p>
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRLBLI" />
                                 </div>
@@ -2182,7 +2182,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDVR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDVR)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDVR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDVR"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDVR" ui-range-behavior="Model.CRAFTDVRBehavior" />
                             </div>
@@ -2193,7 +2193,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDRE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDRE)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDRE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDRE"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDRE" />
                             </div>
@@ -2204,7 +2204,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTDTI)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTDTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDTI"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.CRAFTDTI" />
                             </div>
@@ -2215,7 +2215,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTCUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTCUE)</label>
                         <div class="mt-4 sm:col-span-1 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTCUE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTCUE"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.CRAFTCUE)" for="@Model.C2.CRAFTCUE" items="Model.SimpleNoYesListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTCUE"></span>
                         </div>
@@ -2229,7 +2229,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.ANIMALS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.ANIMALS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.ANIMALS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.ANIMALS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.ANIMALS" />
                             </div>
@@ -2240,7 +2240,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VEG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VEG"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VEG"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.VEG" />
                             </div>
@@ -2256,7 +2256,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERFC" ui-range-behavior="Model.UDSVERFCBehavior" />
                             </div>
@@ -2267,7 +2267,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERFN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERFN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERFN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFN"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERFN" />
                             </div>
@@ -2278,7 +2278,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERNF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERNF)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERNF"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERNF"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERNF" />
                             </div>
@@ -2289,7 +2289,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLC" ui-range-behavior="Model.UDSVERLCBehavior" />
                             </div>
@@ -2300,7 +2300,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLR)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLR"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLR" />
                             </div>
@@ -2311,7 +2311,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERLN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLN"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERLN" />
                             </div>
@@ -2322,7 +2322,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTN"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTN" />
                             </div>
@@ -2333,7 +2333,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTE"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTE" />
                             </div>
@@ -2344,7 +2344,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTI"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTI"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.UDSVERTI" />
                             </div>
@@ -2360,7 +2360,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDREC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDREC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDREC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDREC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYDREC" ui-range-behavior="Model.REYDRECBehavior" />
                             </div>
@@ -2371,7 +2371,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYDINT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDINT)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYDINT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDINT"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYDINT" />
                             </div>
@@ -2382,7 +2382,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYTCOR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYTCOR)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYTCOR"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYTCOR"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYTCOR" />
                             </div>
@@ -2393,7 +2393,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.REYFPOS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYFPOS)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.REYFPOS"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYFPOS"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.REYFPOS" />
                             </div>
@@ -2409,7 +2409,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VNTTOTW"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTTOTW)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VNTTOTW"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VNTTOTW"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.VNTTOTW" />
                             </div>
@@ -2420,7 +2420,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.VNTPCNC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTPCNC)</label>
                         <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VNTPCNC"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VNTPCNC"></p>
                             <div class="w-28">
                                 <input asp-for="@Model.C2.VNTPCNC" />
                             </div>
@@ -2436,7 +2436,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.COGSTAT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.COGSTAT)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.COGSTAT"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.COGSTAT"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.COGSTAT)" for="@Model.C2.COGSTAT" items="Model.OverallListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.COGSTAT"></span>
                         </div>
@@ -2451,7 +2451,7 @@
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.RESPVAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.RESPVAL)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.RESPVAL"></p>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.RESPVAL"></p>
                             <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems" ui-behaviors="Model.RESPVALBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVAL"></span>
                         </div>
