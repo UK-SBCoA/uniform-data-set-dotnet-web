@@ -29,7 +29,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredOnComplete(ErrorMessage = "Please specify other target.")]
+        //[RequiredOnComplete(ErrorMessage = "Please specify other target.")]
         public string? TARGETOTX { get; set; }
 
         [MaxLength(60)]
@@ -53,7 +53,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? CARETRIAL { get; set; }
 
         public int? TRIALGRP { get; set; }
-
 
         public List<RadioListItem> CARETRIALListItems { get; } = new List<RadioListItem>
         {
