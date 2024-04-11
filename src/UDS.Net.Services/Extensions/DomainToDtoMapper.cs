@@ -197,6 +197,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
             }
+            else if (form.Fields is B3FormFields)
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is B4FormFields)
             {
                 dto = ((B4FormFields)form.Fields).ToDto();
@@ -273,6 +277,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is B1FormFields && formKind == "B1")
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B3FormFields && formKind == "B3")
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B4FormFields && formKind == "B4")
             {
@@ -853,6 +861,68 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
+        public static B3Dto ToDto(this B3FormFields fields)
+        {
+            return new B3Dto
+            {
+                PDNORMAL = fields.PDNORMAL,
+                SPEECH = fields.SPEECH,
+                SPEECHX = fields.SPEECHX,
+                FACEXP = fields.FACEXP,
+                FACEXPX = fields.FACEXPX,
+                TRESTFAC = fields.TRESTFAC,
+                TRESTFAX = fields.TRESTFAX,
+                TRESTRHD = fields.TRESTRHD,
+                TRESTRHX = fields.TRESTRHX,
+                TRESTLHD = fields.TRESTLHD,
+                TRESTLHX = fields.TRESTLHX,
+                TRESTRFT = fields.TRESTRFT,
+                TRESTRFX = fields.TRESTRFX,
+                TRESTLFT = fields.TRESTLFT,
+                TRESTLFX = fields.TRESTRFX,
+                TRACTRHD = fields.TRACTRHD,
+                TRACTRHX = fields.TRACTRHX,
+                TRACTLHD = fields.TRACTLHD,
+                TRACTLHX = fields.TRACTLHX,
+                RIGDNECK = fields.RIGDNECK,
+                RIGDNEX = fields.RIGDNEX,
+                RIGDUPRT = fields.RIGDUPRT,
+                RIGDUPRX = fields.RIGDUPRX,
+                RIGDUPLF = fields.RIGDUPLF,
+                RIGDUPLX = fields.RIGDUPLX,
+                RIGDLORT = fields.RIGDLORT,
+                RIGDLORX = fields.RIGDLORX,
+                RIGDLOLF = fields.RIGDLOLF,
+                RIGDLOLX = fields.RIGDLOLX,
+                TAPSRT = fields.TAPSRT,
+                TAPSRTX = fields.TAPSRTX,
+                TAPSLF = fields.TAPSLF,
+                TAPSLFX = fields.TAPSLFX,
+                HANDMOVR = fields.HANDMOVR,
+                HANDMVRX = fields.HANDMVRX,
+                HANDMOVL = fields.HANDMOVL,
+                HANDMVLX = fields.HANDMVLX,
+                HANDALTR = fields.HANDALTR,
+                HANDATRX = fields.HANDATRX,
+                HANDALTL = fields.HANDALTL,
+                HANDATLX = fields.HANDATLX,
+                LEGRT = fields.LEGRT,
+                LEGRTX = fields.LEGRTX,
+                LEGLF = fields.LEGLF,
+                LEGLFX = fields.LEGLFX,
+                ARISING = fields.ARISING,
+                ARISINGX = fields.ARISINGX,
+                POSTURE = fields.POSTURE,
+                POSTUREX = fields.POSTUREX,
+                GAIT = fields.GAIT,
+                GAITX = fields.GAITX,
+                POSSTAB = fields.POSSTAB,
+                POSSTABX = fields.POSSTABX,
+                BRADYKIN = fields.BRADYKIN,
+                BRADYKIX = fields.BRADYKIX,
+                TOTALUPDRS = fields.TOTALUPDRS,
+            };
+        }
         public static B4Dto ToDto(this B4FormFields fields)
         {
             return new B4Dto
