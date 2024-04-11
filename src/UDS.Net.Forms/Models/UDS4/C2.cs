@@ -391,7 +391,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MODCOMM { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15,95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
+        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Required if Rey AVLT was administered")]
         public int? REY1REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
