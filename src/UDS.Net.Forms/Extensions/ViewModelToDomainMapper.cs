@@ -93,6 +93,8 @@ namespace UDS.Net.Forms.Extensions
                 return ((A5)vm).ToEntity();
             else if (vm is B1)
                 return ((B1)vm).ToEntity();
+            else if (vm is B3)
+                return ((B3)vm).ToEntity();
             else if (vm is B4)
                 return ((B4)vm).ToEntity();
             else if (vm is B5)
@@ -499,6 +501,71 @@ namespace UDS.Net.Forms.Extensions
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
+        public static Form ToEntity(this B3 vm)
+        {
+            var fields = new B3FormFields
+            {
+                PDNORMAL = vm.PDNORMAL,
+                SPEECH = vm.SPEECH,
+                SPEECHX = vm.SPEECHX,
+                FACEXP = vm.FACEXP,
+                FACEXPX = vm.FACEXPX,
+                TRESTFAC = vm.TRESTFAC,
+                TRESTFAX = vm.TRESTFAX,
+                TRESTRHD = vm.TRESTRHD,
+                TRESTRHX = vm.TRESTRHX,
+                TRESTLHD = vm.TRESTLHD,
+                TRESTLHX = vm.TRESTLHX,
+                TRESTRFT = vm.TRESTRFT,
+                TRESTRFX = vm.TRESTRFX,
+                TRESTLFT = vm.TRESTLFT,
+                TRESTLFX = vm.TRESTLFX,
+                TRACTRHD = vm.TRACTRHD,
+                TRACTRHX = vm.TRACTRHX,
+                TRACTLHD = vm.TRACTLHD,
+                TRACTLHX = vm.TRACTLHX,
+                RIGDNECK = vm.RIGDNECK,
+                RIGDNEX = vm.RIGDNEX,
+                RIGDUPRT = vm.RIGDUPRT,
+                RIGDUPRX = vm.RIGDUPRX,
+                RIGDUPLF = vm.RIGDUPLF,
+                RIGDUPLX = vm.RIGDUPLX,
+                RIGDLORT = vm.RIGDLORT,
+                RIGDLORX = vm.RIGDLORX,
+                RIGDLOLF = vm.RIGDLOLF,
+                RIGDLOLX = vm.RIGDLOLX,
+                TAPSRT = vm.TAPSRT,
+                TAPSRTX = vm.TAPSRTX,
+                TAPSLF = vm.TAPSLF,
+                TAPSLFX = vm.TAPSLFX,
+                HANDMOVR = vm.HANDMOVR,
+                HANDMVRX = vm.HANDMVRX,
+                HANDMOVL = vm.HANDMOVL,
+                HANDMVLX = vm.HANDMVLX,
+                HANDALTR = vm.HANDALTR,
+                HANDATRX = vm.HANDATRX,
+                HANDALTL = vm.HANDALTL,
+                HANDATLX = vm.HANDATLX,
+                LEGRT = vm.LEGRT,
+                LEGRTX = vm.LEGRTX,
+                LEGLF = vm.LEGLF,
+                LEGLFX = vm.LEGLFX,
+                ARISING = vm.ARISING,
+                ARISINGX = vm.ARISINGX,
+                POSTURE = vm.POSTURE,
+                POSTUREX = vm.POSTUREX,
+                GAIT = vm.GAIT,
+                GAITX = vm.GAITX,
+                POSSTAB = vm.POSSTAB,
+                POSSTABX = vm.POSSTABX,
+                BRADYKIN = vm.BRADYKIN,
+                BRADYKIX = vm.BRADYKIX,
+                TOTALUPDRS = vm.TOTALUPDRS
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+
+        }
         public static Form ToEntity(this B4 vm)
         {
             var fields = new B4FormFields
