@@ -6,9 +6,6 @@
 
         fields.prop('disabled', !enable);
 
-        if (!enable) {
-            fields.val(''); 
-        }
     }
     $('input[type=radio][name*="A4a.TRTBIOMARK"]').change(function () {
         toggleTreatmentTable($(this).val());
