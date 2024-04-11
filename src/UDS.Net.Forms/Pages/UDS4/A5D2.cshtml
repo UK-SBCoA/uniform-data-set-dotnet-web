@@ -6,13 +6,11 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by the clinician or ADRC staff based on the medical history interview with the participant
-        and co-participant, as well as review of any medical records that are available. Any new conditions identified during the visit should
-        be included on the form. For additional clarification and examples, see <span class="font-bold">UDS Coding Guidebook</span> for <span class="font-bold">Form A5D2/D2.</span><span class="italic">
-            Check only <span class="underline">one</span> box per question,
-            unless otherwise stated.
-        </span>
+    <p class="mt-1 text-sm text-gray-500 italic">
+        <span class="font-bold not-italic">INSTRUCTIONS:</span> This form is to be completed by the clinician or ADRC staff based on the medical history interview with the participant
+        and co-participant, as well as review of any medical records that are available. Any conditions identified during the visit should be
+            included on the form. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span> for <span class="font-bold not-italic">Form A5/D2</span>. Check only one box per question,
+        unless otherwise stated.
     </p>
 </div>
 <div class="counterreset">
@@ -146,7 +144,7 @@
                 <div>
                     <p>
                         <span class="font-bold">In the following sections <span class="italic">(pages 2-7)</span></span> record the presence or absence of a <span class="underline font-bold">history of these conditions</span>
-                        , as determined by the clinician's best judgment following the medical history interview with the participant and co-participant.</br>
+                        , as determined by the clinician's best judgment following the medical history interview with the participant and co-participant, as well as review of any medical records that are available.</br>
                         <span class="italic">A CONDITION SHOULD BE CONSIDERED...</span>
                     </p>
                 </div>
@@ -608,7 +606,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -759,7 +757,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HEADINJUNC"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJUNC)</label>
@@ -1008,7 +1006,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ARTHRIT)" for="@Model.A5D2.ARTHRIT" items="Model.ConditionsListItems" ui-behaviors="Model.ARTHRITCheckboxBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1172,7 +1170,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.APNEA)" for="@Model.A5D2.APNEA" items="Model.ConditionsListItems" ui-behaviors="Model.APNEABehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.CPAP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CPAP)</label>
@@ -1244,7 +1242,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CANCERACTV)" for="@Model.A5D2.CANCERACTV" items="Model.ConditionsListItems" ui-behaviors="Model.CANCERACTVBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b" class="subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
