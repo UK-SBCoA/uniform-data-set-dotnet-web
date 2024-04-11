@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
+using Microsoft.Extensions.DependencyModel;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.Enums;
@@ -71,17 +72,97 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == FormStatus.Complete)
             {
+                int index = 0; 
                 foreach (var treatment in Treatments)
                 {
+                    var treatmentIdentifier = $"Treatments[{index}]";
+
+                    if (index == 0 && (TRTBIOMARK == 1 || TRTBIOMARK == 9))
+                    {
+                        bool isAnyTargetSet = (treatment.TARGETAB == true || treatment.TARGETTAU == true ||
+                                               treatment.TARGETINF == true || treatment.TARGETSYN == true ||
+                                               treatment.TARGETOTH == true);
+
+                        if (!isAnyTargetSet)
+                        {
+                            yield return new ValidationResult("At least one primary drug target must be specified.", new[] { treatmentIdentifier });
+                        }
+                    }
+
+                    if (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value)
+                    {
+                        if (treatment.TARGETOTX == null)
+                        {
+                            yield return new ValidationResult("Please specify other target.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TARGETOTX)}" });
+                        }
+                    }
+
+                    if ((treatment.TARGETAB.HasValue && treatment.TARGETAB == true) ||
+                       (treatment.TARGETTAU.HasValue && treatment.TARGETTAU == true) ||
+                       (treatment.TARGETINF.HasValue && treatment.TARGETINF == true) ||
+                       (treatment.TARGETSYN.HasValue && treatment.TARGETSYN == true) ||
+                       (treatment.TARGETOTH.HasValue && treatment.TARGETOTH == true))
+                    {
+                        if (treatment.TRTTRIAL == null)
+                        {
+                            yield return new ValidationResult("Please specify.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRTTRIAL)}" });
+                        }
+                    }
+
+                    if (treatment.TRTTRIAL != null)
+                    {
+                        if (!treatment.STARTMO.HasValue)
+                        {
+                            yield return new ValidationResult("Start month is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTMO)}" });
+                        }
+
+                        if (!treatment.STARTYEAR.HasValue)
+                        {
+                            yield return new ValidationResult("Start year is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
+                        }
+                    }
+
+
+                    if (treatment.STARTMO.HasValue || treatment.STARTYEAR.HasValue)
+                    {
+                        if (!treatment.ENDMO.HasValue)
+                        {
+                            yield return new ValidationResult("End month is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDMO)}" });
+                        }
+
+                        if (!treatment.ENDYEAR.HasValue)
+                        {
+                            yield return new ValidationResult("End year is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
+                        }
+                    }
+
+                    if (treatment.ENDMO.HasValue || treatment.ENDYEAR.HasValue)
+                    {
+                        if (!treatment.CARETRIAL.HasValue)
+                        {
+                            yield return new ValidationResult("How was the treatment provided.", new[] { $"{treatmentIdentifier}.{nameof(treatment.CARETRIAL)}" });
+                        }
+                    }
+
+                    if (treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 2)
+                    {
+                        if (!treatment.TRIALGRP.HasValue)
+                        {
+                            yield return new ValidationResult("In which group was the participant.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRIALGRP)}" });
+                        }
+                    }
+
                     if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
                     {
-                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(treatment.STARTYEAR) });
+                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
                     }
 
                     if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year))
                     {
-                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { nameof(treatment.ENDYEAR) });
+                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
+
+                    index++; 
                 }
             }
 
@@ -89,9 +170,8 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 yield return result;
             }
-
-            yield break;
         }
+
     }
 }
 
