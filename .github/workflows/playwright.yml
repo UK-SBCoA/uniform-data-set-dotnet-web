@@ -1,8 +1,10 @@
 name: Playwright Tests
 
 on:
-    pull_request:
-        branches: [ main ]
+    repository_dispatch:
+        types: [playwright]
+    # schedule:
+    #   - cron: '30 6 * * 1-5'
 
 jobs:
     build:
