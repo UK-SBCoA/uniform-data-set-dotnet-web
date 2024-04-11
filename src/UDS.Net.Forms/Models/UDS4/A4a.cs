@@ -72,7 +72,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == FormStatus.Complete)
             {
-                int index = 0; 
+                int index = 0;
                 foreach (var treatment in Treatments)
                 {
                     var treatmentIdentifier = $"Treatments[{index}]";
@@ -162,7 +162,7 @@ namespace UDS.Net.Forms.Models.UDS4
                         yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
 
-                    index++; 
+                    index++;
                 }
             }
 
