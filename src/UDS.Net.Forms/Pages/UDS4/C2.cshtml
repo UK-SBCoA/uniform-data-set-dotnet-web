@@ -814,7 +814,7 @@
                     <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
                     <div class="flex flex-row space-x-4">
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VERBALTEST"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems"></radio-button-group>
+                        <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems" ui-behaviors="Model.VERBALTESTBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
                     </div>
                 </div>
@@ -842,7 +842,7 @@
                                     <label asp-for="C2.REY1REC" show-property-name="false"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="w-28">
-                                            <input asp-for="@Model.C2.REY1REC" />
+                                            <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1REC"></span>
                                         </div>
                                     </div>

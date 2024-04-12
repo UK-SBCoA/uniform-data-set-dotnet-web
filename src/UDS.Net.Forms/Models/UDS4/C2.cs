@@ -442,10 +442,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total recall", Description = "(0-15")]
         [Range(0, 15)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B recall.")]
         public int? REYBREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
         public int? REYBINT { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15)")]

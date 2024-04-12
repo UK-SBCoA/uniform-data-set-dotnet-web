@@ -89,8 +89,16 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REY4INT"),
                     new UIEnableAttribute("C2.REY5REC"),
                     new UIEnableAttribute("C2.REY5INT"),
+                    new UIEnableAttribute("C2.REYBREC"),
+                    new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
-                    new UIEnableAttribute("C2.REY6INT")
+                    new UIEnableAttribute("C2.REY6INT"),
+                    new UIEnableAttribute("C2.REYDREC"),
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
 
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
@@ -337,6 +345,90 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        public Dictionary<string, UIBehavior> VERBALTESTBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY1REC"),
+                    new UIEnableAttribute("C2.REY1INT"),
+                    new UIEnableAttribute("C2.REY2REC"),
+                    new UIEnableAttribute("C2.REY2INT"),
+                    new UIEnableAttribute("C2.REY3REC"),
+                    new UIEnableAttribute("C2.REY3INT"),
+                    new UIEnableAttribute("C2.REY4REC"),
+                    new UIEnableAttribute("C2.REY4INT"),
+                    new UIEnableAttribute("C2.REY5REC"),
+                    new UIEnableAttribute("C2.REY5INT"),
+                    new UIEnableAttribute("C2.REYBREC"),
+                    new UIEnableAttribute("C2.REYBINT"),
+                    new UIEnableAttribute("C2.REY6REC"),
+                    new UIEnableAttribute("C2.REY6INT"),
+                    new UIEnableAttribute("C2.REYDREC"),
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS"),
+                    new UIDisableAttribute("C2.CERAD1REC"),
+                    new UIDisableAttribute("C2.CERAD1READ"),
+                    new UIDisableAttribute("C2.CERAD1INT"),
+                    new UIDisableAttribute("C2.CERAD2REC"),
+                    new UIDisableAttribute("C2.CERAD2READ"),
+                    new UIDisableAttribute("C2.CERAD2INT"),
+                    new UIDisableAttribute("C2.CERAD3REC"),
+                    new UIDisableAttribute("C2.CERAD3READ"),
+                    new UIDisableAttribute("C2.CERAD3INT"),
+                    new UIDisableAttribute("C2.CERADDTI"),
+                    new UIDisableAttribute("C2.CERADJ6REC"),
+                    new UIDisableAttribute("C2.CERADJ6INT"),
+                    new UIDisableAttribute("C2.CERADJ7YES"),
+                    new UIDisableAttribute("C2.CERADJ7NO")
+                },
+                InstructionalMessage = "Complete sections 12 & 13, skip sections 14 & 15"
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("C2.REY1REC"),
+                    new UIDisableAttribute("C2.REY1INT"),
+                    new UIDisableAttribute("C2.REY2REC"),
+                    new UIDisableAttribute("C2.REY2INT"),
+                    new UIDisableAttribute("C2.REY3REC"),
+                    new UIDisableAttribute("C2.REY3INT"),
+                    new UIDisableAttribute("C2.REY4REC"),
+                    new UIDisableAttribute("C2.REY4INT"),
+                    new UIDisableAttribute("C2.REY5REC"),
+                    new UIDisableAttribute("C2.REY5INT"),
+                    new UIDisableAttribute("C2.REYBREC"),
+                    new UIDisableAttribute("C2.REYBINT"),
+                    new UIDisableAttribute("C2.REY6REC"),
+                    new UIDisableAttribute("C2.REY6INT"),
+                    new UIDisableAttribute("C2.REYDREC"),
+                    new UIDisableAttribute("C2.REYDINT"),
+                    new UIDisableAttribute("C2.REYDTI"),
+                    new UIDisableAttribute("C2.REYMETHOD"),
+                    new UIDisableAttribute("C2.REYTCOR"),
+                    new UIDisableAttribute("C2.REYFPOS"),
+                    new UIEnableAttribute("C2.CERAD1REC"),
+                    new UIEnableAttribute("C2.CERAD1READ"),
+                    new UIEnableAttribute("C2.CERAD1INT"),
+                    new UIEnableAttribute("C2.CERAD2REC"),
+                    new UIEnableAttribute("C2.CERAD2READ"),
+                    new UIEnableAttribute("C2.CERAD2INT"),
+                    new UIEnableAttribute("C2.CERAD3REC"),
+                    new UIEnableAttribute("C2.CERAD3READ"),
+                    new UIEnableAttribute("C2.CERAD3INT"),
+                    new UIEnableAttribute("C2.CERADDTI"),
+                    new UIEnableAttribute("C2.CERADJ6REC"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+                    new UIEnableAttribute("C2.CERADJ7NO")
+                },
+                InstructionalMessage = "Skip to section 14"
+            } }
+        };
+
         public List<RadioListItem> REYMETHODListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("List shown", "1"),
@@ -403,7 +495,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.TRAILARR"),
                     new UIEnableAttribute("C2.TRAILALI")
                 },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 8b."
+                InstructionalMessage = "if test not completed, enter reason code, 995-998, and skip to question 8b."
             }
         };
 
