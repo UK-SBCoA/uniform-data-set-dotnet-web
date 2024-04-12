@@ -28,6 +28,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Set VERSION variable from tag
+      # shellcheck disable=SC2116 #ignoring shellcheck globbing and word splitting error here
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
     - name: Build the projects in solution by building the project that uses them all
