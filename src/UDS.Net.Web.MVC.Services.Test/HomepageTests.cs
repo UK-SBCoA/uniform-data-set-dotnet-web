@@ -9,7 +9,7 @@ public class HomepageTests : PageTest
     [TestMethod]
     public async Task HomepageHasNavigationToParticipations()
     {
-        await Page.GotoAsync("https://localhost:4811");
+        await Page.GotoAsync("/");
 
         //var participation = Page.GetByRole(AriaRole.Link, new() { Name = "Participation" });
 
