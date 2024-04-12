@@ -72,6 +72,48 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        public List<RadioListItem> MBIListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 8a)", "0"),
+            new RadioListItem("Yes (CONTINUE TO QUESTION 7a)", "1")
+
+        };
+
+        public List<RadioListItem> SimpleNoYesListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1")
+        };
+
+        public List<RadioListItem> PPASyndromeListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Logopenic PPA", "1"),
+            new RadioListItem("Semantic PPA", "2"),
+            new RadioListItem("Nonfluent/agrammatic PPA", "3"),
+            new RadioListItem("Primary progressive apraxia of speech", "4"),
+            new RadioListItem("PPA other/not otherwise specified", "5")
+        };
+
+        public List<RadioListItem> LBDSYNTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Dementia with Lewy bodies", "1"),
+            new RadioListItem("Parkinson’s disease", "2"),
+            new RadioListItem("Parkinson’s disease dementia syndrome", "3")
+        };
+
+        public List<RadioListItem> PSPSYNTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Richardson’s syndrome criteria", "1"),
+            new RadioListItem("Non-Richardson’s", "2")
+        };
+
+        public List<RadioListItem> MSASYNTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("MSA-predominant cerebellar ataxia (MSA-C)", "1"),
+            new RadioListItem("MSA-predominant Parkinsonism (MSA-P)", "2"),
+            new RadioListItem("MSA-predominant dysautonomia", "3")
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
