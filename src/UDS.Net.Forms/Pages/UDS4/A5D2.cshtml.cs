@@ -1589,7 +1589,7 @@ public class A5D2Model : FormPageModel
             "0", new UIBehavior
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
-                     {  
+                     {
                         new UIDisableAttribute("A5D2.ARTHRRHEUM"),
                         new UIDisableAttribute("A5D2.ARTHROSTEO"),
                         new UIDisableAttribute("A5D2.ARTHROTHR"),
