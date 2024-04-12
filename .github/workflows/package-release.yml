@@ -28,7 +28,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Set VERSION variable from tag
-      # shellcheck disable=SC2086
+      # shellcheck disable=all
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
     - name: Build the projects in solution by building the project that uses them all
