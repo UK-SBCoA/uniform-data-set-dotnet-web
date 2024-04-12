@@ -140,7 +140,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B8.APRAXSP"),
                     new UIDisableAttribute("B8.GAITABN")
                 },
-                InstructionalMessage = ""
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -181,7 +180,86 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B8.APRAXSP"),
                     new UIEnableAttribute("B8.GAITABN")
                 },
-                InstructionalMessage = ""
+            } },
+              { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B8.NORMNREXAM"),
+                    new UIEnableAttribute("B8.PARKSIGN"),
+                    new UIEnableAttribute("B8.SLOWINGFM"),
+                    new UIEnableAttribute("B8.TREMREST"),
+                    new UIEnableAttribute("B8.TREMPOST"),
+                    new UIEnableAttribute("B8.TREMKINE"),
+                    new UIEnableAttribute("B8.RIGIDARM"),
+                    new UIEnableAttribute("B8.RIGIDLEG"),
+                    new UIEnableAttribute("B8.DYSTARM"),
+                    new UIEnableAttribute("B8.DYSTLEG"),
+                    new UIEnableAttribute("B8.CHOREA"),
+                    new UIEnableAttribute("B8.AMPMOTOR"),
+                    new UIEnableAttribute("B8.AXIALRIG"),
+                    new UIEnableAttribute("B8.POSTINST"),
+                    new UIEnableAttribute("B8.MASKING"),
+                    new UIEnableAttribute("B8.STOOPED"),
+                    new UIEnableAttribute("B8.OTHERSIGN"),
+                    new UIEnableAttribute("B8.LIMBAPRAX"),
+                    new UIEnableAttribute("B8.UMNDIST"),
+                    new UIEnableAttribute("B8.LMNDIST"),
+                    new UIEnableAttribute("B8.VFIELDCUT"),
+                    new UIEnableAttribute("B8.LIMBATAX"),
+                    new UIEnableAttribute("B8.MYOCLON"),
+                    new UIEnableAttribute("B8.UNISOMATO"),
+                    new UIEnableAttribute("B8.APHASIA"),
+                    new UIEnableAttribute("B8.ALIENLIMB"),
+                    new UIEnableAttribute("B8.HSPATNEG"),
+                    new UIEnableAttribute("B8.PSPOAGNO"),
+                    new UIEnableAttribute("B8.SMTAGNO"),
+                    new UIEnableAttribute("B8.OPTICATAX"),
+                    new UIEnableAttribute("B8.APRAXGAZE"),
+                    new UIEnableAttribute("B8.VHGAZEPAL"),
+                    new UIEnableAttribute("B8.DYSARTH"),
+                    new UIEnableAttribute("B8.APRAXSP"),
+                    new UIEnableAttribute("B8.GAITABN")
+                },
+            } },
+                { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B8.NORMNREXAM"),
+                    new UIEnableAttribute("B8.PARKSIGN"),
+                    new UIEnableAttribute("B8.SLOWINGFM"),
+                    new UIEnableAttribute("B8.TREMREST"),
+                    new UIEnableAttribute("B8.TREMPOST"),
+                    new UIEnableAttribute("B8.TREMKINE"),
+                    new UIEnableAttribute("B8.RIGIDARM"),
+                    new UIEnableAttribute("B8.RIGIDLEG"),
+                    new UIEnableAttribute("B8.DYSTARM"),
+                    new UIEnableAttribute("B8.DYSTLEG"),
+                    new UIEnableAttribute("B8.CHOREA"),
+                    new UIEnableAttribute("B8.AMPMOTOR"),
+                    new UIEnableAttribute("B8.AXIALRIG"),
+                    new UIEnableAttribute("B8.POSTINST"),
+                    new UIEnableAttribute("B8.MASKING"),
+                    new UIEnableAttribute("B8.STOOPED"),
+                    new UIEnableAttribute("B8.OTHERSIGN"),
+                    new UIEnableAttribute("B8.LIMBAPRAX"),
+                    new UIEnableAttribute("B8.UMNDIST"),
+                    new UIEnableAttribute("B8.LMNDIST"),
+                    new UIEnableAttribute("B8.VFIELDCUT"),
+                    new UIEnableAttribute("B8.LIMBATAX"),
+                    new UIEnableAttribute("B8.MYOCLON"),
+                    new UIEnableAttribute("B8.UNISOMATO"),
+                    new UIEnableAttribute("B8.APHASIA"),
+                    new UIEnableAttribute("B8.ALIENLIMB"),
+                    new UIEnableAttribute("B8.HSPATNEG"),
+                    new UIEnableAttribute("B8.PSPOAGNO"),
+                    new UIEnableAttribute("B8.SMTAGNO"),
+                    new UIEnableAttribute("B8.OPTICATAX"),
+                    new UIEnableAttribute("B8.APRAXGAZE"),
+                    new UIEnableAttribute("B8.VHGAZEPAL"),
+                    new UIEnableAttribute("B8.DYSARTH"),
+                    new UIEnableAttribute("B8.APRAXSP"),
+                    new UIEnableAttribute("B8.GAITABN")
+                }
             } }
         };
 
