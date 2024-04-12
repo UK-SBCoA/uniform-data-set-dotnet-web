@@ -61,40 +61,40 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Memory")]
         public bool? CDOMMEM { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Language")]
+        [Display(Name = "Language")]
         public bool? CDOMLANG { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Attention")]
+        [Display(Name = "Attention")]
         public bool? CDOMATTN { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Executive")]
+        [Display(Name = "Executive")]
         public bool? CDOMEXEC { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Visuospatial")]
+        [Display(Name = "Visuospatial")]
         public bool? CDOMVISU { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Behavioral")]
+        [Display(Name = "Behavioral")] 
         public bool? CDOMBEH { get; set; }
 
-        [Display(Name = "Dementia and MCI affected domains - Apraxia")]
+        [Display(Name = "Apraxia")]
         public bool? CDOMAPRAX { get; set; }
 
         [Display(Name = "Does the participant meet criteria for MBI")]
         public int? MBI { get; set; }
 
-        [Display(Name = "MBI affected domains - Motivation")]
+        [Display(Name = "Motivation (e.g., apathy symptoms on Form B9)")]
         public int? BDOMMOT { get; set; }
 
-        [Display(Name = "MBI affected domains - Affective regulation")]
+        [Display(Name = "Affective regulation (e.g., anxiety, irritability, depression, and/or euphoria symptoms on Form B9)")]
         public int? BDOMAFREG { get; set; }
 
-        [Display(Name = "MBI affected domains - Impulse control")]
+        [Display(Name = "Impulse control (e.g., obsessions/compulsions, personality change, and/or substance abuse symptoms on Form B9)")]
         public int? BDOMIMP { get; set; }
 
-        [Display(Name = "MBI affected domains - Social appropriateness")]
+        [Display(Name = ". Social appropriateness (e.g., disinhibition, personality change, and/or loss of empathy symptoms on Form B9)")]
         public int? BDOMSOCIAL { get; set; }
 
-        [Display(Name = "MBI affected domains - Thought content/perception")]
+        [Display(Name = "Thought content/perception (e.g., delusions and/or hallucinations on Form B9)")]
         public int? BDOMTHTS { get; set; }
 
         [Display(Name = "Amnestic predominant syndrome")]
@@ -130,7 +130,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Primary supranuclear palsy (PSP) syndrome - type")]
         public int? PSPSYNT { get; set; }
 
-        [Display(Name = "raumatic encephalopathy syndrome")]
+        [Display(Name = "Traumatic encephalopathy syndrome")]
         public bool? CTESYN { get; set; }
 
         [Display(Name = "Corticobasal syndrome (CBS)")]
@@ -149,13 +149,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHSYNX { get; set; }
 
-        [Display(Name = "Indicate the source(s) of information used to assign the clinical syndrome - Clinical information (history, CDR)")]
+        [Display(Name = "Clinical information (history, CDR)")]
         public bool? SYNINFCLIN { get; set; }
 
-        [Display(Name = "Indicate the source(s) of information used to assign the clinical syndrome - Cognitive testing")]
+        [Display(Name = "Cognitive testing")]
         public bool? SYNINFCTST { get; set; }
 
-        [Display(Name = "Indicate the source(s) of information used to assign the clinical syndrome - Biomarkers (MRI, PET, CSF, plasma)")]
+        [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
 
         [Display(Name = "Major depressive disorder (present)")]
