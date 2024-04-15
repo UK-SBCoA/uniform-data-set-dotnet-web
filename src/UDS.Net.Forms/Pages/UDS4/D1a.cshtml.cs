@@ -114,6 +114,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("MSA-predominant dysautonomia", "3")
         };
 
+        public List<RadioListItem> EtiologyListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Primary", "1"),
+            new RadioListItem("Contributing", "2"),
+            new RadioListItem("Non-contributing", "3")
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
