@@ -105,6 +105,33 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public UIRangeToggle CERAD1RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERAD1READ"),
+                    new UIEnableAttribute("C2.CERAD1INT"),
+                    new UIEnableAttribute("C2.CERAD2REC"),
+                    new UIEnableAttribute("C2.CERAD2READ"),
+                    new UIEnableAttribute("C2.CERAD2INT"),
+                    new UIEnableAttribute("C2.CERAD3REC"),
+                    new UIEnableAttribute("C2.CERAD3READ"),
+                    new UIEnableAttribute("C2.CERAD3INT"),
+                    new UIEnableAttribute("C2.CERADDTI"),
+                    new UIEnableAttribute("C2.CERADJ6REC"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+                    new UIEnableAttribute("C2.CERADJ7NO")
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            }
+        };
+
         public UIRangeToggle REYDRECBehavior = new UIRangeToggle
         {
             Low = 0,
