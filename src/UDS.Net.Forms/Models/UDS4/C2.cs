@@ -279,8 +279,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? CRAFTDVR { get; set; }
 
-        [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-24)")]
-        [Range(0, 25, ErrorMessage = "Allowed values are 0-24.")]
+        [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-25)")]
+        [Range(0, 25, ErrorMessage = "Allowed values are 0-25.")]
         [RequiredIfRange(nameof(CRAFTDVR), 0, 44, ErrorMessage = "Provide total recalled, paraphrase scoring.")]
         public int? CRAFTDRE { get; set; }
 
@@ -479,6 +479,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
+        [RequiredIf(nameof(VERBALTEST),"1",ErrorMessage = "Response required")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
@@ -487,9 +488,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? REYDINT { get; set; }
 
         [Display(Name = "Delay time (minutes)", Description = "(0-85, 99)")]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
         public int? REYDTI { get; set; }
 
         [Display(Name = "Method of recognition test administration")]
+        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
         public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
@@ -517,8 +520,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD1INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
+        [Display(Name = "Total recall", Description = "(0-10)")]
+        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
         [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2REC { get; set; }
 
@@ -532,8 +535,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
+        [Display(Name = "Total recall", Description = "(0-10)")]
+        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
         [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3REC { get; set; }
 
@@ -547,7 +550,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3INT { get; set; }
 
-        [Display(Name = "Delay time (minutes", Description = "(0-85,99)")]
+        [Display(Name = "Delay time (minutes)", Description = "(0-85,99)")]
         [RegularExpression("^(\\d|[1-7]\\d|8[0-5]|99)$", ErrorMessage = "Allowed values are 0-85 or 99 = unknown.")]
         public int? CERADDTI { get; set; }
 

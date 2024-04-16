@@ -6,7 +6,7 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500 text-nowrap">
+    <p class="mt-1 text-sm text-gray-500">
         INSTRUCTIONS: This form is to be completed by ADC or clinic staff. For test administration and scoring, see <g-bedebook kind="@Model.Visit.Kind"></g-bedebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).
     </p>
 </div>
@@ -84,7 +84,13 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.MOCATOTS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATOTS)</label>
+                        <div class=sm:grid-cols-3>
+                            <label asp-for="C2.MOCATOTS">
+                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATOTS)
+                            </label>
+                            <p class="text-nowrap text-xs">(Not corrected for education or visual/hearing impairment)</p>
+                            <p class="text-nowrap text-xs">(Enter 88 if any of the following MoCA items were not administered: 1g –1l, 1n–1t, 1w–1bb)</p>
+                        </div>
                         <div class="flex flex-row space-x-4">
                             <div class="w-28">
                                 <input asp-for="@Model.C2.MOCATOTS" />
@@ -344,7 +350,7 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.MOCAORCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
+                        <label asp-for="C2.MOCAORCT"><span class="::before">1bb.</span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
 
                         <div class="flex flex-row space-x-4">
                             <div class="w-28">
@@ -1538,7 +1544,7 @@
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.RESPVAL"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.C2.RESPVAL)" for="@Model.C2.RESPVAL" items="Model.RESPVALListItems" ui-behaviors="Model.RESPVALBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVAL"></span>
                             </div>
                         </div>
@@ -1682,7 +1688,7 @@
                             </div>
 
                             <div>
-                                @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                                @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"C2.RESPOTHX\"]" })
                             </div>
                             <div>
                                 <label asp-for="C2.RESPOTH"></label>
