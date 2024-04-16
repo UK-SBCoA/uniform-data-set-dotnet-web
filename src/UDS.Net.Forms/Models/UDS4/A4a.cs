@@ -144,7 +144,7 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
 
-                    if (treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 2)
+                    if ((treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 2) || (treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 3))
                     {
                         if (!treatment.TRIALGRP.HasValue)
                         {
