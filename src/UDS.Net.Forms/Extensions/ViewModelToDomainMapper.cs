@@ -89,6 +89,8 @@ namespace UDS.Net.Forms.Extensions
                 return ((A3)vm).ToEntity();
             else if (vm is A4)
                 return ((A4)vm).ToEntity();
+            else if (vm is A4a)
+                return ((A4a)vm).ToEntity();
             else if (vm is A5)
                 return ((A5)vm).ToEntity();
             else if (vm is B1)
@@ -400,6 +402,45 @@ namespace UDS.Net.Forms.Extensions
             };
 
         }
+
+        public static Form ToEntity(this A4a vm)
+        {
+            var fields = new A4aFormFields
+            {
+                ADVEVENT = vm.ADVEVENT,
+                ARIAE = vm.ARIAE,
+                ARIAH = vm.ARIAH,
+                ADVERSEOTH = vm.ADVERSEOTH,
+                ADVERSEOTX = vm.ADVERSEOTX,
+                TRTBIOMARK = vm.TRTBIOMARK,
+                TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static A4aTreatmentFormFields ToEntity(this A4aTreatment vm)
+        {
+            return new A4aTreatmentFormFields()
+            {
+                TreatmentIndex = vm.TreatmentIndex,
+                TARGETAB = vm.TARGETAB,
+                TARGETTAU = vm.TARGETTAU,
+                TARGETINF = vm.TARGETINF,
+                TARGETSYN = vm.TARGETSYN,
+                TARGETOTH = vm.TARGETOTH,
+                TARGETOTX = vm.TARGETOTX,
+                TRTTRIAL = vm.TRTTRIAL,
+                NCTNUM = vm.NCTNUM,
+                STARTMO = vm.STARTMO,
+                STARTYEAR = vm.STARTYEAR,
+                ENDMO = vm.ENDMO,
+                ENDYEAR = vm.ENDYEAR,
+                CARETRIAL = vm.CARETRIAL,
+                TRIALGRP = vm.TRIALGRP
+            };
+        }
+
 
         public static Form ToEntity(this A5 vm)
         {
