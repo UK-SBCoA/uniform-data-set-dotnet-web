@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
-        [RequiredIf(nameof(MOCACOMP),"1", ErrorMessage = "Which MoCA was administered?")]
+        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Which MoCA was administered?")]
         public int? MOCALOC { get; set; }
 
         [Display(Name = "Language of MoCA administration")]
@@ -164,10 +164,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -192,6 +193,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
+        [RequiredOnComplete(ErrorMessage = "Provide Benson figure score")]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -236,6 +238,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
+        [RequiredOnComplete(ErrorMessage = "Provide number of seconds to complete")]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -254,16 +257,17 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
         [Range(0, 40, ErrorMessage = "Allowed values are 0-40.")]
-        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Provide commission errors")]
         public int? TRAILBRR { get; set; }
 
         [Display(Name = "Number of correct lines", Description = "(0-24)")]
         [Range(0, 24, ErrorMessage = "Allowed values are 0-24.")]
-        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Provide correct lines")]
         public int? TRAILBLI { get; set; }
 
         #endregion
@@ -295,6 +299,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
+        [RequiredOnComplete(ErrorMessage = "Provide score for drawing Benson figure")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -306,6 +311,7 @@ namespace UDS.Net.Forms.Models.UDS4
         #region if test not completed, skip to question 12a
 
         [Display(Name = "Which verbal learning test was administered?")]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int VERBALTEST { get; set; }
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
@@ -394,7 +400,7 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? COGSTAT { get; set; }
 
         [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
@@ -470,34 +476,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
-
-        [Display(Name = "PART A: Total number of seconds to complete", Description = "(0–100, 888, 995 – 998)")]
-        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, or 888 , or 995-998")]
-        public int? OTRAILA { get; set; }
-
-        [Display(Name = " Number of commission errors", Description = "(No limit)")]
-        [Range(0, 99)]
-        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide number of commission errors.")]
-        public int? OTRLARR { get; set; }
-
-        [Display(Name = "Total number correct", Description = "(0-25)")]
-        [Range(0, 25)]
-        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide total number correct.")]
-        public int? OTRLALI { get; set; }
-
-        [Display(Name = "PART B: Total number of seconds to complete", Description = "(0–300, 888, 995 – 998)")]
-        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, or 888 , or 995-998")]
-        public int? OTRAILB { get; set; }
-
-        [Display(Name = "Number of commission errors", Description = "(No limit)")]
-        [Range(0, 99)]
-        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide number of commission errors.")]
-        public int? OTRLBRR { get; set; }
-
-        [Display(Name = "Total number correct", Description = "(0–25)")]
-        [Range(0, 25)]
-        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide total number correct.")]
-        public int? OTRLBLI { get; set; }
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
@@ -600,6 +578,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
         [Range(1, 3)]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? RESPVAL { get; set; }
 
         [Display(Name = "Hearing impairment")]
