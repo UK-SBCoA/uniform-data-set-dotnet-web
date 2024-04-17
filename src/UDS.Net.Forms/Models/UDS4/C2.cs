@@ -557,7 +557,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "J6 Word List Recall: Total number of words correctly recalled", Description = "(0-10,95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIfRange(nameof(CERAD1REC),0,10, ErrorMessage = "Response required")]
+        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required")]
         public int? CERADJ6REC { get; set; }
 
         [Display(Name = "J6 Word List Recall: Total number of intrusions", Description = "(0-99)")]
