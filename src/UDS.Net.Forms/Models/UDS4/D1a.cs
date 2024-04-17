@@ -40,8 +40,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Largely preserved functional independence OR functional dependence that is not related to cognitive decline")]
         public bool? MCICRITFUN { get; set; }
 
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? MCIClinicalCriteriaIndicated
+        {
+            get
+            {
+                if ((MCICRITCLN.HasValue && MCICRITCLN.Value == true) ||
+                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true) ||
+                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true))
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please specify.")]
-        [Display(Name = "Does the participant meet criteria for MCI (amnestic or non-amnestic)?")]
+        [Display(Name = "Does the participant meet all three of the above criteria for MCI (amnestic or non-amnestic)?")]
         public int? MCI { get; set; }
 
         [Display(Name = "Evidence of functional impairment (e.g., CDR SB>0 and/or FAS>0), but available cognitive testing is judged to be normal")]
@@ -60,6 +76,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIf(nameof(IMPNOMCIO), "true", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
+
+        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? CognitivelyImpairedIndicated
+        {
+            get
+            {
+                if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
+                    (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
+                    (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
+                    (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         [Display(Name = "Does the participant meet any criteria for cognitively impaired, not MCI/dementia?")]
         [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please specify.")]
@@ -85,6 +118,25 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Apraxia")]
         public bool? CDOMAPRAX { get; set; }
+
+        [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? AffectedDomainsIndicated
+        {
+            get
+            {
+                if ((CDOMMEM.HasValue && CDOMMEM.Value == true) ||
+                    (CDOMLANG.HasValue && CDOMLANG.Value == true) ||
+                    (CDOMATTN.HasValue && CDOMATTN.Value == true) ||
+                    (CDOMEXEC.HasValue && CDOMEXEC.Value == true) ||
+                    (CDOMVISU.HasValue && CDOMVISU.Value == true) ||
+                    (CDOMBEH.HasValue && CDOMBEH.Value == true))
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         [Display(Name = "Does the participant meet criteria for MBI")]
         [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
@@ -177,35 +229,35 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
 
-        [Display(Name = "Major depressive disorder (present)")]
+        [Display(Name = "Major depressive disorder")]
         public bool? MAJDEPDX { get; set; }
 
         [Display(Name = "Major depressive disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(MAJDEPDX), "True", ErrorMessage = "Please indicate")]
         public int? MAJDEPDIF { get; set; }
 
-        [Display(Name = "Other specified depressive disorder (present)")]
+        [Display(Name = "Other specified depressive disorder")]
         public bool? OTHDEPDX { get; set; }
 
         [Display(Name = "Other specified depressive disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(OTHDEPDX), "True", ErrorMessage = "Please indicate")]
         public int? OTHDEPDIF { get; set; }
 
-        [Display(Name = "Bipolar disorder (present)")]
+        [Display(Name = "Bipolar disorder")]
         public bool? BIPOLDX { get; set; }
 
         [Display(Name = "1Bipolar disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(BIPOLDX), "True", ErrorMessage = "Please indicate")]
         public int? BIPOLDIF { get; set; }
 
-        [Display(Name = "Schizophrenia or other psychotic disorder (present)")]
+        [Display(Name = "Schizophrenia or other psychotic disorder")]
         public bool? SCHIZOP { get; set; }
 
         [Display(Name = "Schizophrenia or other psychotic disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(SCHIZOP), "True", ErrorMessage = "Please indicate")]
         public int? SCHIZOIF { get; set; }
 
-        [Display(Name = "Anxiety disorder (present)")]
+        [Display(Name = "Anxiety disorder")]
         public bool? ANXIET { get; set; }
 
         [Display(Name = "Anxiety disorder (primary/contributing/non-contributing)")]
@@ -224,32 +276,49 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other anxiety disorder")]
         public bool? OTHANXD { get; set; }
 
-        [Display(Name = "Other anxiety disorder (specify)")]
+        [Display(Name = "Other (specify)")]
         [MaxLength(60)]
         public string? OTHANXDX { get; set; }
 
-        [Display(Name = "Post-traumatic stress disorder (PTSD) (present)")]
+        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [NotMapped]
+        public bool? AnxietyDisorderIndicated
+        {
+            get
+            {
+                if ((GENANX.HasValue && GENANX.Value == true) ||
+                    (PANICDISDX.HasValue && PANICDISDX.Value == true) ||
+                    (OCDDX.HasValue && OCDDX.Value == true) ||
+                    (OTHANXD.HasValue && OTHANXD.Value == true))
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [Display(Name = "Post-traumatic stress disorder (PTSD)")]
         public bool? PTSDDX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD) (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(PTSDDX), "True", ErrorMessage = "Please indicate")]
         public int? PTSDDXIF { get; set; }
 
-        [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder (ASD), attention-deficit hyperactivity disorder (ADHD), dyslexia) (present)")]
+        [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder (ASD), attention-deficit hyperactivity disorder (ADHD), dyslexia)")]
         public bool? NDEVDIS { get; set; }
 
         [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder (ASD), attention-deficit hyperactivity disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(NDEVDIS), "True", ErrorMessage = "Please indicate")]
         public int? NDEVDISIF { get; set; }
 
-        [Display(Name = "Delirium (present)")]
+        [Display(Name = "Delirium")]
         public bool? DELIR { get; set; }
 
         [Display(Name = "Delirium (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(DELIR), "True", ErrorMessage = "Please indicate")]
         public int? DELIRIF { get; set; }
 
-        [Display(Name = "Other psychiatric disorder (present)")]
+        [Display(Name = "Other psychiatric disorder")]
         public bool? OTHPSY { get; set; }
 
         [Display(Name = "Other psychiatric disorder (primary/contributing/non-contributing)")]
@@ -261,28 +330,28 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(OTHPSY), "True", ErrorMessage = "Please indicate")]
         public string? OTHPSYX { get; set; }
 
-        [Display(Name = "Traumatic brain injury (present)")]
+        [Display(Name = "Traumatic brain injury")]
         public bool? TBIDX { get; set; }
 
         [Display(Name = "Traumatic brain injury (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(TBIDX), "True", ErrorMessage = "Please indicate")]
         public int? TBIDXIF { get; set; }
 
-        [Display(Name = "Epilepsy (present)")]
+        [Display(Name = "Epilepsy")]
         public bool? EPILEP { get; set; }
 
         [Display(Name = "Epilepsy (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(EPILEP), "True", ErrorMessage = "Please indicate")]
         public int? EPILEPIF { get; set; }
 
-        [Display(Name = "Normal-pressure hydrocephalus (present)")]
+        [Display(Name = "Normal-pressure hydrocephalus")]
         public bool? HYCEPH { get; set; }
 
         [Display(Name = "Normal-pressure hydrocephalus (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(HYCEPH), "True", ErrorMessage = "Please indicate")]
         public int? HYCEPHIF { get; set; }
 
-        [Display(Name = "CNS Neoplasm (present)")]
+        [Display(Name = "CNS Neoplasm")]
         public bool? NEOP { get; set; }
 
         [Display(Name = "CNS Neoplasm (primary/contributing/non-contributing)")]
@@ -293,28 +362,28 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(NEOP), "True", ErrorMessage = "Please indicate")]
         public int? NEOPSTAT { get; set; }
 
-        [Display(Name = "Human Immunodeficiency Virus (HIV) infection (present)")]
+        [Display(Name = "Human Immunodeficiency Virus (HIV) infection")]
         public bool? HIV { get; set; }
 
         [Display(Name = "Human Immunodeficiency Virus (HIV) infection (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(HIV), "True", ErrorMessage = "Please indicate")]
         public int? HIVIF { get; set; }
 
-        [Display(Name = "Post COVID-19 cognitive impairment (present)")]
+        [Display(Name = "Post COVID-19 cognitive impairment")]
         public bool? POSTC19 { get; set; }
 
         [Display(Name = "Post COVID-19 cognitive impairment (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(POSTC19), "True", ErrorMessage = "Please indicate")]
         public int? POSTC19IF { get; set; }
 
-        [Display(Name = "Sleep apnea (i.e., obstructive, central, mixed or complex sleep apnea) (present)")]
+        [Display(Name = "Sleep apnea (i.e., obstructive, central, mixed or complex sleep apnea)")]
         public bool? APNEADX { get; set; }
 
         [Display(Name = "Sleep apnea (i.e., obstructive, central, mixed or complex sleep apnea) (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(APNEADX), "True", ErrorMessage = "Please indicate")]
         public int? APNEADXIF { get; set; }
 
-        [Display(Name = "Cognitive impairment due to other neurologic, genetic, infectious conditions (not listed above), or systemic disease/medical illness (as indicated on Form A5/D2) (present)")]
+        [Display(Name = "Cognitive impairment due to other neurologic, genetic, infectious conditions (not listed above), or systemic disease/medical illness (as indicated on Form A5/D2)")]
         public bool? OTHCOGILL { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, infectious conditions (not listed above), or systemic disease/medical illness (as indicated on Form A5/D2) (primary/contributing/non-contributing)")]
@@ -326,59 +395,59 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(OTHCOGILL), "True", ErrorMessage = "Please indicate")]
         public string? OTHCOGILLX { get; set; }
 
-        [Display(Name = "Cognitive impairment due to alcohol abuse (present)")]
+        [Display(Name = "Cognitive impairment due to alcohol abuse")]
         public bool? ALCDEM { get; set; }
 
         [Display(Name = "Cognitive impairment due to alcohol abuse (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(ALCDEM), "True", ErrorMessage = "Please indicate")]
         public int? ALCDEMIF { get; set; }
 
-        [Display(Name = "Cognitive impairment due to substance use or abuse (present)")]
+        [Display(Name = "Cognitive impairment due to substance use or abuse")]
         public bool? IMPSUB { get; set; }
 
         [Display(Name = "Cognitive impairment due to substance use or abuse (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(IMPSUB), "True", ErrorMessage = "Please indicate")]
         public int? IMPSUBIF { get; set; }
 
-        [Display(Name = "Cognitive impairment due to medications (present)")]
+        [Display(Name = "Cognitive impairment due to medications")]
         public bool? MEDS { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(MEDS), "True", ErrorMessage = "Please indicate")]
         public int? MEDSIF { get; set; }
 
-        [Display(Name = "Cognitive impairment not otherwise specified (NOS) (present)")]
+        [Display(Name = "Cognitive impairment not otherwise specified (NOS)")]
         public bool? COGOTH { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Please indicate")]
         public int? COGOTHIF { get; set; }
 
-        [Display(Name = "Cognitive impairment NOS (specify)")]
+        [Display(Name = "If Present, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Please indicate")]
         public string? COGOTHX { get; set; }
 
-        [Display(Name = "Cognitive impairment not otherwise specified (NOS) (present)")]
+        [Display(Name = "Cognitive impairment not otherwise specified (NOS)")]
         public bool? COGOTH2 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Please indicate")]
         public int? COGOTH2F { get; set; }
 
-        [Display(Name = "Cognitive impairment NOS (specify)")]
+        [Display(Name = "If Present, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH2X { get; set; }
 
-        [Display(Name = "Cognitive impairment not otherwise specified (NOS) (present)")]
+        [Display(Name = "Cognitive impairment not otherwise specified (NOS)")]
         public bool? COGOTH3 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public int? COGOTH3F { get; set; }
 
-        [Display(Name = "Cognitive impairment NOS (specify)")]
+        [Display(Name = "If Present, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
