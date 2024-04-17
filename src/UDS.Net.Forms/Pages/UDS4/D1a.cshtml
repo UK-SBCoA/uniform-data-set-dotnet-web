@@ -24,7 +24,7 @@
     <label asp-for="D1a.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.NORMCOG)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.NORMCOG"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.NORMCOG)" for="@Model.D1a.NORMCOG" items="Model.NORMCOGListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.NORMCOG)" for="@Model.D1a.NORMCOG" items="Model.NORMCOGListItems" ui-behaviors="Model.NORMCOGUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.NORMCOG"></span>
     </div>
 </div>
@@ -33,7 +33,7 @@
     <label asp-for="D1a.SCD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SCD)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.SCD"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.SCD)" for="@Model.D1a.SCD" items="Model.SCDListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.SCD)" for="@Model.D1a.SCD" items="Model.SCDListItems" ui-behaviors="Model.SCDUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SCD"></span>
     </div>
 </div>
@@ -60,6 +60,7 @@
     <div>
         <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Check all criteria that apply in Q4.</label><br />
     </div>
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCIClinicalCriteriaIndicated"></span>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <fieldset class="subsubcounterreset">
             <div class="space-y-1">
@@ -75,19 +76,19 @@
                 <div class="relative flex items-start">
                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("D1a.MCICRITCLN", Model.D1a.MCICRITCLN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        @Html.CheckBox("D1a.MCICRITIMP", Model.D1a.MCICRITIMP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
-                        <label asp-for="D1a.MCICRITCLN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.MCICRITCLN)</label>
+                        <label asp-for="D1a.MCICRITIMP" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.MCICRITIMP)</label>
                     </div>
                 </div>
                 <div class="relative flex items-start">
                     <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("D1a.MCICRITCLN", Model.D1a.MCICRITCLN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        @Html.CheckBox("D1a.MCICRITFUN", Model.D1a.MCICRITFUN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
-                        <label asp-for="D1a.MCICRITCLN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.MCICRITCLN)</label>
+                        <label asp-for="D1a.MCICRITFUN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.MCICRITFUN)</label>
                     </div>
                 </div>
             </div>
@@ -111,6 +112,7 @@
             <span class="counter"></span>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5, using any relevant data. Any conditions
             contributing to impairment (e.g., substance abuse or medications) should be identified in Section 3.
         </label><br />
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CognitivelyImpairedIndicated"></span>
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <fieldset class="subsubcounterreset">
@@ -185,7 +187,7 @@
         (not in the following MBI section) by marking Q6f as Impaired and skipping the MBI section (SKIP TO Q8a). For behavioral changes in
         the context of an MCI (or as an isolated) symptom, consider a diagnosis of MBI in the next section.
     </p>
-    @*<span class="mt-2 text-sm text-red-600" asp-validation-for="D1.DementiaSyndromeIndicated"></span>*@
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AffectedDomainsIndicated"></span>
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
@@ -744,19 +746,19 @@
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
+                <td>
+                    <label>
+                        <span class="counter"></span>Indicate the source(s) of information used to assign the clinical syndrome:
+                        Select one or more as Yes; all others will default to No in the NACC database
+                    </label>
+                </td>
+            </tr>
+            <tr>
                 <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
                 <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Yes</th>
             </tr>
         </thead>
-
-        <tr>
-            <td>
-                <label>
-                    <span class="counter"></span>Indicate the source(s) of information used to assign the clinical syndrome:
-                    Select one or more as Yes; all others will default to No in the NACC database
-                </label>
-            </td>
-        </tr>
+        <tbody>
         <tr>
             <td>
                 <label asp-for="D1a.SYNINFCLIN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCLIN)</label>
@@ -967,6 +969,7 @@
                     <label asp-for="D1a.ANXIET"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.ANXIET)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.ANXIET"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.ANXIETIF"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AnxietyDisorderIndicated"></span>
                 </div>
             </td>
             <td>
@@ -989,47 +992,64 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.ANXIETIF)" for="@Model.D1a.ANXIETIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
         <tr class="subsubcounterreset">
-            <td colspan="6">
-                <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    @*<label asp-for="D1a.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.FTLDSUBT)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="D1a.FTLDSUBT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1a.FTLDSUBT)" for="@Model.D1a.FTLDSUBT" items="Model.FTLDListItems" ui-behaviors="Model.FTLDSUBTUIBehavior"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.FTLDSUBT"></span>
-                    </div>*@
-                    <fieldset>
-                        <div class="space-y-5">
-                            <div class="relative flex items-start">
-                                <div class="flex h-6 items-center">
-                                    *<label asp-for="D1a.GENANX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.GENANX)</label>
-                                    @Html.CheckBox("D1a.GENANX", Model.D1a.GENANX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
-                                </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.D1a.GENANX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                                </div>
-                            </div>
+            <td>
+                <div>
+                    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div>
+                            <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Check all criteria that apply in Q4.</label><br />
                         </div>
-                    </fieldset>
-                    <fieldset>
-                        <div class="space-y-5">
-                            <div class="relative flex items-start">
-                                <div class="flex h-6 items-center">
-                                    *<label asp-for="D1a.GENANX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.GENANX)</label>
-                                    @Html.CheckBox("D1a.GENANX", Model.D1a.GENANX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCIClinicalCriteriaIndicated"></span>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <fieldset class="subsubcounterreset">
+                                <div class="space-y-1">
+                                    <div class="relative flex items-start">
+                                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("D1a.GENANX", Model.D1a.GENANX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="D1a.GENANX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.GENANX)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("D1a.PANICDISDX", Model.D1a.PANICDISDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="D1a.PANICDISDX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.PANICDISDX)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("D1a.OCDDX", Model.D1a.OCDDX, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="D1a.OCDDX" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.OCDDX)</label>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                        <div class="flex h-6 items-center">
+                                            @Html.CheckBox("D1a.OTHANXD", Model.D1a.OTHANXD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        </div>
+                                        <div class="ml-3 text-sm leading-6">
+                                            <label asp-for="D1a.OTHANXD" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1a.OTHANXD)</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500" asp-description-for="D1a.OTHANXDX"></p>
+                                        <label asp-for="D1a.OTHANXDX">@Html.DisplayNameFor(m => m.D1a.OTHANXDX)</label>
+                                        <div class="mt-2">
+                                            <input asp-for="D1a.OTHANXDX" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="ml-3 text-sm leading-6">
-                                    <label for="@Html.IdFor(m => m.D1a.GENANX)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="D1a.OTHANXDX"></p>
-                        <label asp-for="D1a.OTHANXDX">@Html.DisplayNameFor(m => m.D1a.OTHANXDX)</label>
-                        <div class="mt-2">
-                            <input asp-for="D1a.OTHANXDX" />
+                            </fieldset>
                         </div>
                     </div>
+                   
                 </div>
             </td>
         </tr>
