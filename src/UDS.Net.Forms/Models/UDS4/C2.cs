@@ -312,7 +312,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Which verbal learning test was administered?")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int VERBALTEST { get; set; }
+        public int? VERBALTEST { get; set; }
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
@@ -479,7 +479,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
-        [RequiredIf(nameof(VERBALTEST),"1",ErrorMessage = "Response required")]
+        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Response required")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]

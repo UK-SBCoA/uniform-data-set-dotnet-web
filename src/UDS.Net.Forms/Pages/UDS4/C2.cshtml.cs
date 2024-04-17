@@ -168,7 +168,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("C2.RESPFATG"),
                     new UIDisableAttribute("C2.RESPEMOT"),
                     new UIDisableAttribute("C2.RESPASST"),
-                    new UIDisableAttribute("C2.RESPOTH")
+                    new UIDisableAttribute("C2.RESPOTH"),
+                    new UIDisableAttribute("C2.RESPOTHX")
                 },
                 InstructionalMessage = "End form here."
             } },
