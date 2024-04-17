@@ -552,14 +552,17 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Delay time (minutes)", Description = "(0-85,99)")]
         [RegularExpression("^(\\d|[1-7]\\d|8[0-5]|99)$", ErrorMessage = "Allowed values are 0-85 or 99 = unknown.")]
+        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required")]
         public int? CERADDTI { get; set; }
 
         [Display(Name = "J6 Word List Recall: Total number of words correctly recalled", Description = "(0-10,95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
+        [RequiredIfRange(nameof(CERAD1REC),0,10, ErrorMessage = "Response required")]
         public int? CERADJ6REC { get; set; }
 
         [Display(Name = "J6 Word List Recall: Total number of intrusions", Description = "(0-99)")]
         [RegularExpression("^([0-9]|[1-9][0-9]|99)$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(CERADJ6REC), 0, 10, ErrorMessage = "Response required")]
         public int? CERADJ6INT { get; set; }
 
         [Display(Name = "J7 Word List Recognition: Total YES correct", Description = "(0-10,95-98)")]

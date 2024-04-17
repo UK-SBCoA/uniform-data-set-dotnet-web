@@ -132,6 +132,37 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public UIRangeToggle CERADJ6RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            }
+        };
+
+        public UIRangeToggle CERADJ7YESBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERADJ7NO"),
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            }
+        };
+
         public UIRangeToggle REYDRECBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -255,6 +286,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.MOCAREAS"),
                     new UIDisableAttribute("C2.MOCALOC"),
                     new UIDisableAttribute("C2.MOCALAN"),
+                    new UIDisableAttribute("C2.MOCALANX"),
                     new UIDisableAttribute("C2.MOCAVIS"),
                     new UIDisableAttribute("C2.MOCAHEAR"),
                     new UIDisableAttribute("C2.MOCATOTS"),
