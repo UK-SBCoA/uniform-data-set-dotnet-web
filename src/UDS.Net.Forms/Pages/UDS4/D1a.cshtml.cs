@@ -121,6 +121,113 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Non-contributing", "3")
         };
 
+        public Dictionary<string, UIBehavior> NORMCOGUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.SCD"),
+                    new UIDisableAttribute("D1a.SCDDXCONF"),
+                    new UIEnableAttribute("D1a.DEMENTED")
+
+                },
+                InstructionalMessage = "Continue to question 3"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1a.SCD"),
+                    new UIEnableAttribute("D1a.DEMENTED")
+
+                },
+                InstructionalMessage = "Skip to question 2a"
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> SCDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.SCDDXCONF"),
+                    new UIDisableAttribute("D1a.DEMENTED"),
+                    new UIDisableAttribute("D1a.MCICRITCLN"),
+                    new UIDisableAttribute("D1a.MCICRITIMP"),
+                    new UIDisableAttribute("D1a.MCICRITFUN"),
+                    new UIDisableAttribute("D1a.MCI"),
+                    new UIDisableAttribute("D1a.IMPNOMCIFU"),
+                    new UIDisableAttribute("D1a.IMPNOMCICG"),
+                    new UIDisableAttribute("D1a.IMPNOMCLCD"),
+                    new UIDisableAttribute("D1a.IMPNOMCI"),
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX"),
+                    new UIDisableAttribute("D1a.MBI"),
+                    new UIDisableAttribute("D1a.BDOMMOT"),
+                    new UIDisableAttribute("D1a.BDOMAFREG"),
+                    new UIDisableAttribute("D1a.BDOMIMP"),
+                    new UIDisableAttribute("D1a.BDOMSOCIAL"),
+                    new UIDisableAttribute("D1a.BDOMTHTS"),
+                    new UIDisableAttribute("D1a.AMNDEM"),
+                    new UIDisableAttribute("D1a.DYEXECSYN"),
+                    new UIDisableAttribute("D1a.PCA"),
+                    new UIDisableAttribute("D1a.PPASYN"),
+                    new UIDisableAttribute("D1a.FTDSYN"),
+                    new UIDisableAttribute("D1a.LBDSYN"),
+                    new UIDisableAttribute("D1a.NAMNDEM"),
+                    new UIDisableAttribute("D1a.PSPSYN"),
+                    new UIDisableAttribute("D1a.CTESYN"),
+                    new UIDisableAttribute("D1a.CBSSYN"),
+                    new UIDisableAttribute("D1a.MSASYN"),
+                    new UIDisableAttribute("D1a.OTHSYN"),
+                    new UIDisableAttribute("D1a.SYNINFCLIN"),
+                    new UIDisableAttribute("D1a.SYNINFCTST"),
+                    new UIDisableAttribute("D1a.SYNINFBIOM"),
+                    new UIDisableAttribute("D1a.MAJDEPDX"),
+                    new UIDisableAttribute("D1a.OTHDEPDX"),
+                    new UIDisableAttribute("D1a.BIPOLDX"),
+                    new UIDisableAttribute("D1a.SCHIZOP"),
+                    new UIDisableAttribute("D1a.ANXIET"),
+                    new UIDisableAttribute("D1a.GENANX"),
+                    new UIDisableAttribute("D1a.PANICDISDX"),
+                    new UIDisableAttribute("D1a.OCDDX"),
+                    new UIDisableAttribute("D1a.PTSDDX"),
+                    new UIDisableAttribute("D1a.NDEVDIS"),
+                    new UIDisableAttribute("D1a.DELIR"),
+                    new UIDisableAttribute("D1a.OTHPSY"),
+                    new UIDisableAttribute("D1a.TBIDX"),
+                    new UIDisableAttribute("D1a.EPILEP"),
+                    new UIDisableAttribute("D1a.HYCEPH"),
+                    new UIDisableAttribute("D1a.NEOP"),
+                    new UIDisableAttribute("D1a.NEOPSTAT"),
+                    new UIDisableAttribute("D1a.HIV"),
+                    new UIDisableAttribute("D1a.POSTC19"),
+                    new UIDisableAttribute("D1a.APNEADX"),
+                    new UIDisableAttribute("D1a.OTHCOGILL"),
+                    new UIDisableAttribute("D1a.ALCDEM"),
+                    new UIDisableAttribute("D1a.IMPSUB"),
+                    new UIDisableAttribute("D1a.MEDS"),
+                    new UIDisableAttribute("D1a.COGOTH"),
+                    new UIDisableAttribute("D1a.COGOTH2"),
+                    new UIDisableAttribute("D1a.COGOTH3")
+
+                },
+                InstructionalMessage = "Continue to question 3"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1a.SCDDXCONF"),
+
+                },
+                InstructionalMessage = "Skip to question 2a"
+            } },
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
