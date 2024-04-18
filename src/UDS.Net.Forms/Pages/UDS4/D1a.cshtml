@@ -51,7 +51,7 @@
     <label asp-for="D1a.DEMENTED"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.DEMENTED)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.DEMENTED"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.DEMENTED)" for="@Model.D1a.DEMENTED" items="Model.DEMENTEDListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.DEMENTED)" for="@Model.D1a.DEMENTED" items="Model.DEMENTEDListItems" ui-behaviors="Model.DEMENTEDUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DEMENTED"></span>
     </div>
 </div>
@@ -100,7 +100,7 @@
     <label asp-for="D1a.MCI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.MCI)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MCI"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.MCI)" for="@Model.D1a.MCI" items="Model.MCIListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.MCI)" for="@Model.D1a.MCI" items="Model.MCIListItems" ui-behaviors="Model.MCIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCI"></span>
     </div>
 </div>
@@ -358,7 +358,7 @@
     <label asp-for="D1a.MBI"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.MBI)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MBI"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.MBI)" for="@Model.D1a.MBI" items="Model.MBIListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.MBI)" for="@Model.D1a.MBI" items="Model.MBIListItems" ui-behaviors="Model.MBIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MBI"></span>
     </div>
 </div>
@@ -427,7 +427,6 @@
         Select applicable syndrome(s) as present; all others will default to Absent in the NACC database. Note that a participant may not
         meet any clinical criteria (for instance, this is common for MCI and “impaired, not MCI”). In this case, leave 8a-8l blank.
     </label>
-    @*<span class="mt-2 text-sm text-red-600" asp-validation-for="D1.DementiaSyndromeIndicated"></span>*@
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
