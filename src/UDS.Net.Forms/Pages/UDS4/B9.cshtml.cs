@@ -163,6 +163,27 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("No (If No, SKIP TO QUESTION 14)", "0"),
             new RadioListItem("Yes", "1")
         };
+
+        public List<RadioListItem> COURSEListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Gradually progressive", "1"),
+            new RadioListItem("Stepwise", "2"),
+            new RadioListItem("Static", "3"),
+            new RadioListItem("Fluctuating", "4"),
+            new RadioListItem("Improved", "5"),
+            new RadioListItem("Not applicable", "6"),
+            new RadioListItem("Unknown", "9"),
+        };
+
+        public List<RadioListItem> FRSTCHGListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Cognition", "1"),
+            new RadioListItem("Behavior", "2"),
+            new RadioListItem("Motor function", "3"),
+            new RadioListItem("Not applicable", "8"),
+            new RadioListItem("Unknown", "9")
+        };
+
         //public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
         //{
         //     { "0", new UIBehavior {

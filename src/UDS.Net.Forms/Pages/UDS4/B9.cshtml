@@ -790,19 +790,51 @@
         </div>
     </div>
     <div class="relative">
-        <table class="[&_th]:p-5 [&_td]:p-5 w-full text-left">
+        <table class="[&_th]:py-5 [&_td]:py-5 w-full text-left">
             <tbody class="subcounterreset">
                 <tr>
                     <td colspan="2">
                         <div>
-                            <label asp-for="B9.MOGAIT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.MOGAIT)</label>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOGAIT"></span>
+                            <label asp-for="B9.MOMOPARK"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOPARK)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOPARK"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.MOGAIT" for="@Model.B9.MOGAIT" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="B9.MOMOPARK" for="@Model.B9.MOMOPARK" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <label asp-for="B9.MOMOALS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.MOMOALS)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.MOMOALS"></span>
+                        </div>
+                    </td>
+                    <table-cell-radio-buttons id="B9.MOMOALS" for="@Model.B9.MOMOALS" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="space-y-5">
+    <div>
+        <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 5 - Overall course of decline and predominant domain</h3>
+    </div>
+</div>
+<div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <label asp-for="B9.COURSE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COURSE)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COURSE"></p>
+            <radio-button-group id="@Html.IdFor(m => m.B9.COURSE)" for="@Model.B9.COURSE" items="Model.COURSEListItems"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COURSE"></span>
+        </div>
+    </div>
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <label asp-for="B9.FRSTCHG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.FRSTCHG)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B9.FRSTCHG"></p>
+            <radio-button-group id="@Html.IdFor(m => m.B9.FRSTCHG)" for="@Model.B9.FRSTCHG" items="Model.FRSTCHGListItems"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.FRSTCHG"></span>
+        </div>
     </div>
 </div>
 <partial name="_FormFooter" for="@Model.B9" />
