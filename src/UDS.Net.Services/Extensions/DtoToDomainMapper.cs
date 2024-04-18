@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
@@ -131,6 +130,10 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new A4GFormFields(dto);
             }
+            else if (dto is A4aDto)
+            {
+                formFields = new A4aFormFields(dto);
+            }
             else if (dto is A5D2Dto)
             {
                 formFields = new A5FormFields(dto);
@@ -138,6 +141,10 @@ namespace UDS.Net.Services.Extensions
             else if (dto is B1Dto)
             {
                 formFields = new B1FormFields(dto);
+            }
+            else if (dto is B3Dto)
+            {
+                formFields = new B3FormFields(dto);
             }
             else if (dto is B4Dto)
             {
@@ -191,10 +198,14 @@ namespace UDS.Net.Services.Extensions
                     title = new A3FormFields().GetDescription();
                 else if (dto.Kind == "A4")
                     title = new A4GFormFields().GetDescription();
+                else if (dto.Kind == "A4a")
+                    title = new A4aFormFields().GetDescription();
                 else if (dto.Kind == "A5D2")
                     title = new A5FormFields().GetDescription();
                 else if (dto.Kind == "B1")
                     title = new B1FormFields().GetDescription();
+                else if (dto.Kind == "B3")
+                    title = new B3FormFields().GetDescription();
                 else if (dto.Kind == "B4")
                     title = new B4FormFields().GetDescription();
                 else if (dto.Kind == "B5")

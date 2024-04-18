@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -189,6 +190,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
+            else if (form.Fields is A4aFormFields)
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
+            }
             else if (form.Fields is A5FormFields)
             {
                 dto = ((A5FormFields)form.Fields).ToDto();
@@ -196,6 +201,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is B1FormFields)
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B3FormFields)
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B4FormFields)
             {
@@ -270,6 +279,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
+            else if (form.Fields is A4aFormFields && formKind == "A4a")
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
+            }
             else if (form.Fields is A5FormFields && formKind == "A5D2")
             {
                 dto = ((A5FormFields)form.Fields).ToDto();
@@ -277,6 +290,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is B1FormFields && formKind == "B1")
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is B3FormFields && formKind == "B3")
+            {
+                dto = ((B3FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B4FormFields && formKind == "B4")
             {
@@ -667,6 +684,68 @@ namespace UDS.Net.Services.Extensions
             return rxNormIds;
         }
 
+
+
+        public static A4aDto ToDto(this A4aFormFields fields, int formId)
+        {
+            var dto = new A4aDto()
+            {
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK
+            };
+
+            foreach (var treatment in fields.TreatmentFormFields)
+            {
+                var treatmentDto = treatment.ToDto(formId);
+                if (treatment.TreatmentIndex == 1)
+                    dto.Treatment1 = treatmentDto;
+                else if (treatment.TreatmentIndex == 2)
+                    dto.Treatment2 = treatmentDto;
+                else if (treatment.TreatmentIndex == 3)
+                    dto.Treatment3 = treatmentDto;
+                else if (treatment.TreatmentIndex == 4)
+                    dto.Treatment4 = treatmentDto;
+                else if (treatment.TreatmentIndex == 5)
+                    dto.Treatment5 = treatmentDto;
+                else if (treatment.TreatmentIndex == 6)
+                    dto.Treatment6 = treatmentDto;
+                else if (treatment.TreatmentIndex == 7)
+                    dto.Treatment7 = treatmentDto;
+                else if (treatment.TreatmentIndex == 8)
+                    dto.Treatment8 = treatmentDto;
+
+            }
+
+            return dto;
+        }
+
+
+        public static A4aTreatmentDto ToDto(this A4aTreatmentFormFields fields, int formId)
+        {
+            return new A4aTreatmentDto
+            {
+                FormId = formId,
+                TARGETAB = fields.TARGETAB,
+                TARGETTAU = fields.TARGETTAU,
+                TARGETINF = fields.TARGETINF,
+                TARGETSYN = fields.TARGETSYN,
+                TARGETOTH = fields.TARGETOTH,
+                TARGETOTX = fields.TARGETOTX,
+                TRTTRIAL = fields.TRTTRIAL,
+                NCTNUM = fields.NCTNUM,
+                STARTMO = fields.STARTMO,
+                STARTYEAR = fields.STARTYEAR,
+                ENDMO = fields.ENDMO,
+                ENDYEAR = fields.ENDYEAR,
+                CARETRIAL = fields.CARETRIAL,
+                TRIALGRP = fields.TRIALGRP
+            };
+        }
+
         public static A5D2Dto ToDto(this A5FormFields fields)
         {
             return new A5D2Dto
@@ -738,6 +817,68 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
+        public static B3Dto ToDto(this B3FormFields fields)
+        {
+            return new B3Dto
+            {
+                PDNORMAL = fields.PDNORMAL,
+                SPEECH = fields.SPEECH,
+                SPEECHX = fields.SPEECHX,
+                FACEXP = fields.FACEXP,
+                FACEXPX = fields.FACEXPX,
+                TRESTFAC = fields.TRESTFAC,
+                TRESTFAX = fields.TRESTFAX,
+                TRESTRHD = fields.TRESTRHD,
+                TRESTRHX = fields.TRESTRHX,
+                TRESTLHD = fields.TRESTLHD,
+                TRESTLHX = fields.TRESTLHX,
+                TRESTRFT = fields.TRESTRFT,
+                TRESTRFX = fields.TRESTRFX,
+                TRESTLFT = fields.TRESTLFT,
+                TRESTLFX = fields.TRESTRFX,
+                TRACTRHD = fields.TRACTRHD,
+                TRACTRHX = fields.TRACTRHX,
+                TRACTLHD = fields.TRACTLHD,
+                TRACTLHX = fields.TRACTLHX,
+                RIGDNECK = fields.RIGDNECK,
+                RIGDNEX = fields.RIGDNEX,
+                RIGDUPRT = fields.RIGDUPRT,
+                RIGDUPRX = fields.RIGDUPRX,
+                RIGDUPLF = fields.RIGDUPLF,
+                RIGDUPLX = fields.RIGDUPLX,
+                RIGDLORT = fields.RIGDLORT,
+                RIGDLORX = fields.RIGDLORX,
+                RIGDLOLF = fields.RIGDLOLF,
+                RIGDLOLX = fields.RIGDLOLX,
+                TAPSRT = fields.TAPSRT,
+                TAPSRTX = fields.TAPSRTX,
+                TAPSLF = fields.TAPSLF,
+                TAPSLFX = fields.TAPSLFX,
+                HANDMOVR = fields.HANDMOVR,
+                HANDMVRX = fields.HANDMVRX,
+                HANDMOVL = fields.HANDMOVL,
+                HANDMVLX = fields.HANDMVLX,
+                HANDALTR = fields.HANDALTR,
+                HANDATRX = fields.HANDATRX,
+                HANDALTL = fields.HANDALTL,
+                HANDATLX = fields.HANDATLX,
+                LEGRT = fields.LEGRT,
+                LEGRTX = fields.LEGRTX,
+                LEGLF = fields.LEGLF,
+                LEGLFX = fields.LEGLFX,
+                ARISING = fields.ARISING,
+                ARISINGX = fields.ARISINGX,
+                POSTURE = fields.POSTURE,
+                POSTUREX = fields.POSTUREX,
+                GAIT = fields.GAIT,
+                GAITX = fields.GAITX,
+                POSSTAB = fields.POSSTAB,
+                POSSTABX = fields.POSSTABX,
+                BRADYKIN = fields.BRADYKIN,
+                BRADYKIX = fields.BRADYKIX,
+                TOTALUPDRS = fields.TOTALUPDRS,
+            };
+        }
         public static B4Dto ToDto(this B4FormFields fields)
         {
             return new B4Dto

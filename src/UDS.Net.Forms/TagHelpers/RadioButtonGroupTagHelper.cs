@@ -50,7 +50,10 @@ namespace UDS.Net.Forms.TagHelpers
             var expression = For.Name;
             var prefix = ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
             if (!String.IsNullOrWhiteSpace(prefix))
+            {
                 prefix = prefix + ".";
+                expression = prefix + expression;
+            }
 
             var radiosWithName = GenerateRadioInputs(items, expression);
             output.PostContent.AppendHtml(radiosWithName);
