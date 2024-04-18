@@ -69,7 +69,9 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false)
+                            new FormContract("B7", false),
+                            new FormContract("B8", true)
+
                         }
                     },
                     {
@@ -84,7 +86,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false)
+                            new FormContract("B7", false),
+                            new FormContract("B8", true)
                         }
                     },
                     {
@@ -100,7 +103,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false)
+                            new FormContract("B7", false),
+                            new FormContract("B8", true)
                         }
                     },
                     {
@@ -115,7 +119,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
-                            new FormContract("B7", false)
+                            new FormContract("B7", false),
+                            new FormContract("B8", false)
                         }
                     }
                 };

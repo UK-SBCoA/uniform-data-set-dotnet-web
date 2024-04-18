@@ -974,9 +974,44 @@ namespace UDS.Net.Services.Extensions
         {
             return new B8Dto
             {
+                NEUREXAM = fields.NEUREXAM,
+                NORMNREXAM = fields.NORMNREXAM,
                 PARKSIGN = fields.PARKSIGN,
+                SLOWINGFM = fields.SLOWINGFM,
+                TREMREST = fields.TREMREST,
+                TREMPOST = fields.TREMPOST,
+                TREMKINE = fields.TREMKINE,
+                RIGIDARM = fields.RIGIDARM,
+                RIGIDLEG = fields.RIGIDLEG,
+                DYSTARM = fields.DYSTARM,
+                DYSTLEG = fields.DYSTLEG,
+                CHOREA = fields.CHOREA,
+                AMPMOTOR = fields.AMPMOTOR,
+                AXIALRIG = fields.AXIALRIG,
                 POSTINST = fields.POSTINST,
-                APRAXSP = fields.APRAXSP
+                MASKING = fields.MASKING,
+                STOOPED = fields.STOOPED,
+                OTHERSIGN = fields.OTHERSIGN,
+                LIMBAPRAX = fields.LIMBAPRAX,
+                UMNDIST = fields.UMNDIST,
+                LMNDIST = fields.LMNDIST,
+                VFIELDCUT = fields.VFIELDCUT,
+                LIMBATAX = fields.LIMBATAX,
+                MYOCLON = fields.MYOCLON,
+                UNISOMATO = fields.UNISOMATO,
+                APHASIA = fields.APHASIA,
+                ALIENLIMB = fields.ALIENLIMB,
+                HSPATNEG = fields.HSPATNEG,
+                PSPOAGNO = fields.PSPOAGNO,
+                SMTAGNO = fields.SMTAGNO,
+                OPTICATAX = fields.OPTICATAX,
+                APRAXGAZE = fields.APRAXGAZE,
+                VHGAZEPAL = fields.VHGAZEPAL,
+                DYSARTH = fields.DYSARTH,
+                APRAXSP = fields.APRAXSP,
+                GAITABN = fields.GAITABN,
+                GAITFIND = fields.GAITFIND,
+                GAITOTHRX = fields.GAITOTHRX
             };
         }
 
