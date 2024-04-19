@@ -11,6 +11,14 @@
     </p>
 </div>
 
+@*<div class="counter">
+        test
+    </div>
+    <div class="subcounterreset"></div>
+    <div class="subcounter">test</div>
+    <div class="subcounter">test</div>
+    <div class="subcounter">test</div>*@
+
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <label asp-for="D1a.DXMETHOD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.DXMETHOD)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -20,12 +28,29 @@
     </div>
 </div>
 
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-300">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+        <h3 class="ml-5 mt-2 font-bold text-sm text-gray-500 uppercase">Section 1</h3>
+        <p class="ml-2 mt-1 truncate font-bold leading-6 text-indigo-900">Examiner & examination questions</p>
+    </div>
+</div>
+
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <label asp-for="D1a.NORMCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.NORMCOG)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.NORMCOG"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.NORMCOG)" for="@Model.D1a.NORMCOG" items="Model.NORMCOGListItems" ui-behaviors="Model.NORMCOGUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.NORMCOG"></span>
+    </div>
+    <span class="italic text-gray-500">
+        Note: For those with longstanding cognitive impairment that does not represent a decline from their usual functioning, consider
+        checking <strong>Question 5b</strong> for a diagnosis of <strong>“Cognitively Impaired, Not MCI/dementia”</strong> .
+    </span>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Subjective Cognitive Decline</p>
     </div>
 </div>
 
@@ -47,12 +72,51 @@
     </div>
 </div>
 
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Dementia criteria</p>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+    <div class="p-4 bg-white rounded-lg">
+        <h3 class="font-bold text-lg text-indigo-900 mb-2">Requirement #1:</h3>
+        <p class="text-sm font-semibold">Participant has cognitive or behavioral (neuropsychiatric) symptoms that meet all of the following criteria:</p>
+        <ul class="list-disc pl-4">
+            <li>Interfere with ability to function as before at work or at usual activities</li>
+            <li>Represent a decline from previous levels of functioning</li>
+            <li>Are not explained by delirium or major psychiatric disorder</li>
+            <li>Include cognitive impairment detected and diagnosed through a combination of: 1) history-taking; 2) objective assessment (bedside or neuropsychological testing)</li>
+        </ul>
+    </div>
+
+    <div class="p-4 bg-white rounded-lg">
+        <h3 class="font-bold text-lg text-indigo-900 mb-2">Requirement #2:</h3>
+        <p class="text-sm font-semibold">Participant must have impairment in one* or more of the following domains:</p>
+        <ul class="list-disc pl-4">
+            <li>Impaired ability to acquire and remember new information</li>
+            <li>Impaired reasoning and handling of complex tasks, poor judgment</li>
+            <li>Impaired visuospatial abilities</li>
+            <li>Impaired language functions</li>
+            <li>Changes in personality, behavior, or comportment</li>
+        </ul>
+        <p class="text-xs italic pl-4">*In the event of single-domain impairment (e.g., language in PPA, behavior in bvFTD, visuospatial in posterior cortical atrophy, etc.), the participant must not fulfill criteria for MCI.</p>
+    </div>
+</div>
+
+
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <label asp-for="D1a.DEMENTED"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.DEMENTED)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.DEMENTED"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.DEMENTED)" for="@Model.D1a.DEMENTED" items="Model.DEMENTEDListItems" ui-behaviors="Model.DEMENTEDUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DEMENTED"></span>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">MCI core clinical criteria</p>
     </div>
 </div>
 
@@ -103,8 +167,26 @@
         <radio-button-group id="@Html.IdFor(m => m.D1a.MCI)" for="@Model.D1a.MCI" items="Model.MCIListItems" ui-behaviors="Model.MCIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCI"></span>
     </div>
+    <p class="italic text-gray-500">If all three criteria are checked, choose <strong>1=MCI</strong> for Q4b. If less than 3 criteria are met, choose <strong>0=No</strong> for Q4b.</p>
 </div>
 
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Cognitively impaired, not MCI/dementia</p>
+    </div>
+</div>
+
+<div>
+    <p>
+        The purpose of the “Cognitively impaired, not MCI/dementia” category is to capture those individuals with evidence of cognitive
+        impairment or decline who do not meet formal MCI criteria.
+    </p>
+    <p>
+        <strong>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5</strong>, <i>using any relevant data</i>. Any conditions
+        contributing to impairment <i>(e.g., substance abuse or medications)</i> should be identified in Section 3.
+    </p>
+    <i>(Note: If recent onset (not longstanding impairment), indicate the cognitive symptom(s) in Form B9 – Clinician Judgment of Symptoms.)</i>
+</div>
 
 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
@@ -169,30 +251,42 @@
 </div>
 
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-    <label asp-for="D1a.IMPNOMCI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.IMPNOMCI)</label>
+    <label asp-for="D1a.IMPNOMCI">
+        <span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.IMPNOMCI)
+    </label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.IMPNOMCI"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCI"></span>
     </div>
+    <span class="text-gray-500 italic">
+        If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if <strong><u>only</u></strong> the third
+        MCI criteria is met in Q4, select 0=No for Q5b.
+    </span>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Affected Domains – Dementia and MCI</p>
+    </div>
 </div>
 
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <label class="text-base font-semibold text-gray-900">
-        <span class="counter"></span>Choose domains that are impaired at the current visit. Select one or more as Impaired; all others will default to unimpaired in the
+        <span class="counter"></span>Choose domains that are impaired at the current visit. Select one or more as <strong>Impaired</strong>; all others will default to <strong>unimpaired</strong> in the
         NACC database.
     </label>
     <p class="text-sm text-gray-500">
-        Note on behavior changes: For patients with dementia who have behavior changes, record the presence of behavioral changes here
-        (not in the following MBI section) by marking Q6f as Impaired and skipping the MBI section (SKIP TO Q8a). For behavioral changes in
+        Note on <strong>behavior changes</strong>: For patients with dementia who have behavior changes, record the presence of behavioral changes here
+        (not in the following MBI section) by marking Q6f as <strong>Impaired</strong> and skipping the MBI section <strong>(SKIP TO Q8a)</strong>. For behavioral changes in
         the context of an MCI (or as an isolated) symptom, consider a diagnosis of MBI in the next section.
     </p>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AffectedDomainsIndicated"></span>
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
-                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Dementia syndrome</th>
-                <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Impaired</th>
             </tr>
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
@@ -274,7 +368,7 @@
                             <div class="relative flex items-start">
                                 <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1a.", Model.D1a.CDOMEXEC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                    @Html.CheckBox("D1a.CDOMEXEC", Model.D1a.CDOMEXEC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="D1a_" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -354,6 +448,34 @@
     </table>
 </div>
 
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-100">
+    <div class="ml-2 mt-1 flex flex-wrap items-baseline">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">Mild Behavioral Impairment (MBI) core clinical criteria</p>
+    </div>
+</div>
+
+<div>
+    <div class="p-4 bg-white rounded-lg">
+        <ul class="list-disc pl-4">
+            <li>
+                Participant, co-participant, or clinician identifies a change in the participant’s affect, motivation, thought content, behavior, or
+                personality that is clearly different from their usual affect, motivation, thought content, behavior, or personality
+            </li>
+            <li>Symptoms have been present at least intermittently for the last six months or longer</li>
+            <li>Late onset (i.e., age > ~50, unless early onset neurodegenerative syndrome is suspected)</li>
+            <li>
+                Not explained by delirium, other psychiatric disorder by DSM criteria (including recent onset, longstanding or recurrence of
+                longstanding disorder).
+            </li>
+            <li>Symptoms interfere with at least one of these: work, interpersonal relationships, social activities</li>
+            <li>
+                Largely preserved independence in other functional abilities (no change from prior manner/level of functioning, or uses
+                minimal aids or assistance)
+            </li>
+        </ul>
+    </div>
+</div>
+
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <label asp-for="D1a.MBI"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.MBI)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -366,7 +488,16 @@
 <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
     <thead>
         <tr>
-            <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Imaging findings</th>
+            <P>
+                <strong>MBI affected domains</strong> — Select one or more affected domains
+            </P>
+            <span class="italic text-gray-500">
+                (Note: If “Yes” is indicated in any domain below, the participant should have a corresponding symptom checked on Form B9 — Clinician Judgment
+                of Symptoms, either from among the specific symptoms denoted there, or in “other”)
+            </span>
+        </tr>
+        <tr>
+            <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
             @foreach (var item in Model.SimpleNoYesListItems)
             {
                 <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
@@ -416,6 +547,13 @@
         </tr>
     </tbody>
 </table>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6 bg-blue-300">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline">
+        <h3 class="ml-5 mt-2 font-bold text-sm text-gray-500 uppercase">Section 2</h3>
+        <p class="ml-2 mt-1 truncate font-bold leading-6 text-indigo-900">Clinical syndrome</p>
+    </div>
+</div>
 
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <label class="text-base font-semibold text-gray-900">
@@ -758,72 +896,72 @@
             </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <label asp-for="D1a.SYNINFCLIN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCLIN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCLIN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFCLIN"></span>
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.SYNINFCLIN", Model.D1a.SYNINFCLIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_SYNINFCLIN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label asp-for="D1a.SYNINFCTST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCTST)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCTST"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFCTST"></span>
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.SYNINFCTST", Model.D1a.SYNINFCTST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_SYNINFCTST" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+            <tr>
+                <td>
+                    <label asp-for="D1a.SYNINFCLIN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCLIN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCLIN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFCLIN"></span>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.SYNINFCLIN", Model.D1a.SYNINFCLIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_SYNINFCLIN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label asp-for="D1a.SYNINFBIOM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFBIOM)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFBIOM"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFBIOM"></span>
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.SYNINFBIOM", Model.D1a.SYNINFBIOM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_SYNINFBIOM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1a.SYNINFCTST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCTST)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCTST"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFCTST"></span>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.SYNINFCTST", Model.D1a.SYNINFCTST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_SYNINFCTST" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1a.SYNINFBIOM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFBIOM)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFBIOM"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SYNINFBIOM"></span>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.SYNINFBIOM", Model.D1a.SYNINFBIOM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_SYNINFBIOM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -1048,7 +1186,7 @@
                             </fieldset>
                         </div>
                     </div>
-                   
+
                 </div>
             </td>
         </tr>
