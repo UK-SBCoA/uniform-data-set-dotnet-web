@@ -31,6 +31,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Does the participant have any neuropsychiatric/behavioral symptoms or declines in any cognitive or motor domain?")]
         public int? DECCLIN { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? DECCLCOG { get; set; }
         [Display(Name = "Indicate whether the participant currently is meaningfully impaired in memory.")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
@@ -68,6 +69,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? COGMODE { get; set; }
         [Display(Name = "Specify other mode of onset of cognitive symptoms")]
         [MaxLength(60)]
+        [RequiredIf(nameof(COGMODE), "4", ErrorMessage = "Value required")]
         public string? COGMODEX { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
         public int? DECCLBE { get; set; }

@@ -103,7 +103,7 @@
         <label asp-for="B9.DECCLCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.DECCLCOG)</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLCOG"></p>
-            <radio-button-group id="@Html.IdFor(m => m.B9.DECCLCOG)" for="@Model.B9.DECCLCOG" items="Model.DECCLCOGListItems"></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.B9.DECCLCOG)" for="@Model.B9.DECCLCOG" items="Model.DECCLCOGListItems" ui-behaviors="Model.DECCLCOGUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLCOG"></span>
         </div>
     </div>
@@ -193,7 +193,7 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGOTHR"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.COGOTHR" for="@Model.B9.COGOTHR" items="Model.BasicYesNoOtherListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="B9.COGOTHR" for="@Model.B9.COGOTHR" items="Model.BasicYesNoOtherListItems" ui-behaviors="Model.COGOTHRUIBehavior"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="5">
@@ -229,7 +229,7 @@
             <label asp-for="B9.COGMODE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B9.COGMODE)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B9.COGMODE"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B9.COGMODE)" for="@Model.B9.COGMODE" items="Model.ModeOfOnsetItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B9.COGMODE)" for="@Model.B9.COGMODE" items="Model.ModeOfOnsetItems" ui-behaviors="Model.COGMODEUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGMODE"></span>
             </div>
         </div>
