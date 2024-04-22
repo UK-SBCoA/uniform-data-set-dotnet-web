@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 82
 EXPOSE 445
 
+HEALTHCHECK NONE
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["UDS.Net.Web.MVC/UDS.Net.Web.MVC.csproj", "UDS.Net.Web.MVC/"]
@@ -15,6 +17,9 @@ RUN dotnet restore "UDS.Net.Web.MVC/UDS.Net.Web.MVC.csproj"
 COPY . .
 WORKDIR "/src/UDS.Net.Web.MVC"
 RUN dotnet build "UDS.Net.Web.MVC.csproj" -c Release -o /app/build
+
+RUN useradd -m appuser
+USER appuser
 
 FROM build AS publish
 RUN dotnet publish "UDS.Net.Web.MVC.csproj" -c Release -o /app/publish /p:UseAppHost=false
