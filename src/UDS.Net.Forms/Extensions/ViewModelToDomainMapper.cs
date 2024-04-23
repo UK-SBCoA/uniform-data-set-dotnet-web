@@ -115,6 +115,8 @@ namespace UDS.Net.Forms.Extensions
                 return ((C2)vm).ToEntity();
             else if (vm is D1)
                 return ((D1)vm).ToEntity();
+            else if (vm is D1b)
+                return ((D1b)vm).ToEntity();
             else if (vm is D2)
                 return ((D2)vm).ToEntity();
             else if (vm is T1)
@@ -1123,6 +1125,112 @@ namespace UDS.Net.Forms.Extensions
                 COGOTH3 = vm.COGOTH3 ? 1 : 0,
                 COGOTH3F = vm.COGOTH3F,
                 COGOTH3X = vm.COGOTH3X
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static Form ToEntity(this D1b vm)
+        {
+            var fields = new D1bFormFields
+            {
+                BIOMARKDX = vm.BIOMARKDX,
+                FLUIDBIOM = vm.FLUIDBIOM,
+                BLOODAD = vm.BLOODAD,
+                BLOODFTLD = vm.BLOODFTLD,
+                BLOODLBD = vm.BLOODLBD,
+                BLOODOTH = vm.BLOODOTH,
+                BLOODOTHX = vm.BLOODOTHX,
+                CSFAD = vm.CSFAD,
+                CSFFTLD = vm.CSFFTLD,
+                CSFLBD = vm.CSFLBD,
+                CSFOTH = vm.CSFOTH,
+                CSFOTHX = vm.CSFOTHX,
+                IMAGINGDX = vm.IMAGINGDX,
+                PETDX = vm.PETDX,
+                AMYLPET = vm.AMYLPET,
+                TAUPET = vm.TAUPET,
+                FDGPETDX = vm.FDGPETDX,
+                FDGAD = vm.FDGAD,
+                FDGFTLD = vm.FDGFTLD,
+                FDGLBD = vm.FDGLBD,
+                FDGOTH = vm.FDGOTH,
+                FDGOTHX = vm.FDGOTHX,
+                DATSCANDX = vm.DATSCANDX,
+                TRACOTHDX = vm.TRACOTHDX,
+                TRACOTHDXX = vm.TRACOTHDXX,
+                TRACERAD = vm.TRACERAD,
+                TRACERFTLD = vm.TRACERFTLD,
+                TRACERLBD = vm.TRACERLBD,
+                TRACEROTH = vm.TRACEROTH,
+                TRACEROTHX = vm.TRACEROTHX,
+                STRUCTDX = vm.STRUCTDX,
+                STRUCTAD = vm.STRUCTAD,
+                STRUCTFTLD = vm.STRUCTFTLD,
+                STRUCTCVD = vm.STRUCTCVD,
+                IMAGLINF = vm.IMAGLINF,
+                IMAGLAC = vm.IMAGLAC,
+                IMAGMACH = vm.IMAGMACH,
+                IMAGMICH = vm.IMAGMICH,
+                IMAGMWMH = vm.IMAGMWMH,
+                IMAGEWMH = vm.IMAGEWMH,
+                OTHBIOM1 = vm.OTHBIOM1,
+                OTHBIOMX1 = vm.OTHBIOMX1,
+                BIOMAD1 = vm.BIOMAD1,
+                BIOMFTLD1 = vm.BIOMFTLD1,
+                BIOMLBD1 = vm.BIOMLBD1,
+                BIOMOTH1 = vm.BIOMOTH1,
+                BIOMOTHX1 = vm.BIOMOTHX1,
+                OTHBIOM2 = vm.OTHBIOM2,
+                OTHBIOMX2 = vm.OTHBIOMX2,
+                BIOMAD2 = vm.BIOMAD2,
+                BIOMFTLD2 = vm.BIOMFTLD2,
+                BIOMLBD2 = vm.BIOMLBD2,
+                BIOMOTH2 = vm.BIOMOTH2,
+                BIOMOTHX2 = vm.BIOMOTHX2,
+                OTHBIOM3 = vm.OTHBIOM3,
+                OTHBIOMX3 = vm.OTHBIOMX3,
+                BIOMAD3 = vm.BIOMAD3,
+                BIOMFTLD3 = vm.BIOMFTLD3,
+                BIOMLBD3 = vm.BIOMLBD3,
+                BIOMOTH3 = vm.BIOMOTH3,
+                BIOMOTHX3 = vm.BIOMOTHX3,
+                AUTDOMMUT = vm.AUTDOMMUT,
+                ALZDIS = vm.ALZDIS,
+                ALZDISIF = vm.ALZDISIF,
+                LBDIS = vm.LBDIS,
+                LBDIF = vm.LBDIF,
+                FTLD = vm.FTLD,
+                FTLDIF = vm.FTLDIF,
+                PSP = vm.PSP,
+                PSPIF = vm.PSPIF,
+                CORT = vm.CORT,
+                CORTIF = vm.CORTIF,
+                FTLDMO = vm.FTLDMO,
+                FTLDMOIF = vm.FTLDMOIF,
+                FTLDNOS = vm.FTLDNOS,
+                FTLDNOIF = vm.FTLDNOIF,
+                FTLDSUBT = vm.FTLDSUBT,
+                FTLDSUBX = vm.FTLDSUBX,
+                CVD = vm.CVD,
+                CVDIF = vm.CVDIF,
+                MSA = vm.MSA,
+                MSAIF = vm.MSAIF,
+                CTE = vm.CTE,
+                CTEIF = vm.CTEIF,
+                DOWNS = vm.DOWNS,
+                DOWNSIF = vm.DOWNSIF,
+                HUNT = vm.HUNT,
+                HUNTIF = vm.HUNTIF,
+                PRION = vm.PRION,
+                PRIONIF = vm.PRIONIF,
+                CAA = vm.CAA,
+                CAAIF = vm.CAAIF,
+                LATE = vm.LATE,
+                LATEIF = vm.LATEIF,
+                OTHCOG = vm.OTHCOG,
+                OTHCOGIF = vm.OTHCOGIF,
+                OTHCOGX = vm.OTHCOGX
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);

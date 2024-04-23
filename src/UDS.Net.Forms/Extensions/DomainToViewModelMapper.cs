@@ -235,6 +235,10 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((D1FormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is D1bFormFields)
+                {
+                    vm = ((D1bFormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is D2FormFields)
                 {
                     vm = ((D2FormFields)form.Fields).ToVM(form.Id);
@@ -1266,6 +1270,112 @@ namespace UDS.Net.Forms.Extensions
                 COGOTH3 = fields.COGOTH3.HasValue ? fields.COGOTH3.Value != 0 : false,
                 COGOTH3F = fields.COGOTH3F,
                 COGOTH3X = fields.COGOTH3X
+            };
+        }
+
+        public static D1b ToVM(this D1bFormFields fields, int formId)
+        {
+            return new D1b()
+            {
+                Id = formId,
+                BIOMARKDX = fields.BIOMARKDX,
+                FLUIDBIOM = fields.FLUIDBIOM,
+                BLOODAD = fields.BLOODAD,
+                BLOODFTLD = fields.BLOODFTLD,
+                BLOODLBD = fields.BLOODLBD,
+                BLOODOTH = fields.BLOODOTH,
+                BLOODOTHX = fields.BLOODOTHX,
+                CSFAD = fields.CSFAD,
+                CSFFTLD = fields.CSFFTLD,
+                CSFLBD = fields.CSFLBD,
+                CSFOTH = fields.CSFOTH,
+                CSFOTHX = fields.CSFOTHX,
+                IMAGINGDX = fields.IMAGINGDX,
+                PETDX = fields.PETDX,
+                AMYLPET = fields.AMYLPET,
+                TAUPET = fields.TAUPET,
+                FDGPETDX = fields.FDGPETDX,
+                FDGAD = fields.FDGAD,
+                FDGFTLD = fields.FDGFTLD,
+                FDGLBD = fields.FDGLBD,
+                FDGOTH = fields.FDGOTH,
+                FDGOTHX = fields.FDGOTHX,
+                DATSCANDX = fields.DATSCANDX,
+                TRACOTHDX = fields.TRACOTHDX,
+                TRACOTHDXX = fields.TRACOTHDXX,
+                TRACERAD = fields.TRACERAD,
+                TRACERFTLD = fields.TRACERFTLD,
+                TRACERLBD = fields.TRACERLBD,
+                TRACEROTH = fields.TRACEROTH,
+                TRACEROTHX = fields.TRACEROTHX,
+                STRUCTDX = fields.STRUCTDX,
+                STRUCTAD = fields.STRUCTAD,
+                STRUCTFTLD = fields.STRUCTFTLD,
+                STRUCTCVD = fields.STRUCTCVD,
+                IMAGLINF = fields.IMAGLINF,
+                IMAGLAC = fields.IMAGLAC,
+                IMAGMACH = fields.IMAGMACH,
+                IMAGMICH = fields.IMAGMICH,
+                IMAGMWMH = fields.IMAGMWMH,
+                IMAGEWMH = fields.IMAGEWMH,
+                OTHBIOM1 = fields.OTHBIOM1,
+                OTHBIOMX1 = fields.OTHBIOMX1,
+                BIOMAD1 = fields.BIOMAD1,
+                BIOMFTLD1 = fields.BIOMFTLD1,
+                BIOMLBD1 = fields.BIOMLBD1,
+                BIOMOTH1 = fields.BIOMOTH1,
+                BIOMOTHX1 = fields.BIOMOTHX1,
+                OTHBIOM2 = fields.OTHBIOM2,
+                OTHBIOMX2 = fields.OTHBIOMX2,
+                BIOMAD2 = fields.BIOMAD2,
+                BIOMFTLD2 = fields.BIOMFTLD2,
+                BIOMLBD2 = fields.BIOMLBD2,
+                BIOMOTH2 = fields.BIOMOTH2,
+                BIOMOTHX2 = fields.BIOMOTHX2,
+                OTHBIOM3 = fields.OTHBIOM3,
+                OTHBIOMX3 = fields.OTHBIOMX3,
+                BIOMAD3 = fields.BIOMAD3,
+                BIOMFTLD3 = fields.BIOMFTLD3,
+                BIOMLBD3 = fields.BIOMLBD3,
+                BIOMOTH3 = fields.BIOMOTH3,
+                BIOMOTHX3 = fields.BIOMOTHX3,
+                AUTDOMMUT = fields.AUTDOMMUT,
+                ALZDIS = fields.ALZDIS,
+                ALZDISIF = fields.ALZDISIF,
+                LBDIS = fields.LBDIS,
+                LBDIF = fields.LBDIF,
+                FTLD = fields.FTLD,
+                FTLDIF = fields.FTLDIF,
+                PSP = fields.PSP,
+                PSPIF = fields.PSPIF,
+                CORT = fields.CORT,
+                CORTIF = fields.CORTIF,
+                FTLDMO = fields.FTLDMO,
+                FTLDMOIF = fields.FTLDMOIF,
+                FTLDNOS = fields.FTLDNOS,
+                FTLDNOIF = fields.FTLDNOIF,
+                FTLDSUBT = fields.FTLDSUBT,
+                FTLDSUBX = fields.FTLDSUBX,
+                CVD = fields.CVD,
+                CVDIF = fields.CVDIF,
+                MSA = fields.MSA,
+                MSAIF = fields.MSAIF,
+                CTE = fields.CTE,
+                CTEIF = fields.CTEIF,
+                DOWNS = fields.DOWNS,
+                DOWNSIF = fields.DOWNSIF,
+                HUNT = fields.HUNT,
+                HUNTIF = fields.HUNTIF,
+                PRION = fields.PRION,
+                PRIONIF = fields.PRIONIF,
+                CAA = fields.CAA,
+                CAAIF = fields.CAAIF,
+                LATE = fields.LATE,
+                LATEIF = fields.LATEIF,
+                OTHCOG = fields.OTHCOG,
+                OTHCOGIF = fields.OTHCOGIF,
+                OTHCOGX = fields.OTHCOGX
+
             };
         }
 
