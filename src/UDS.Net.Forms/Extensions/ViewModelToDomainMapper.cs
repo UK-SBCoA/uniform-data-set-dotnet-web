@@ -113,8 +113,8 @@ namespace UDS.Net.Forms.Extensions
                 return ((C1)vm).ToEntity();
             else if (vm is C2)
                 return ((C2)vm).ToEntity();
-            else if (vm is D1)
-                return ((D1)vm).ToEntity();
+            else if (vm is D1a)
+                return ((D1a)vm).ToEntity();
             else if (vm is D2)
                 return ((D2)vm).ToEntity();
             else if (vm is T1)
