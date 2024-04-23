@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
-
 namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1a : FormModel
@@ -113,7 +112,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Visuospatial")]
         public bool? CDOMVISU { get; set; }
 
-        [Display(Name = "Behavioral")] 
+        [Display(Name = "Behavioral")]
         public bool? CDOMBEH { get; set; }
 
         [Display(Name = "Apraxia")]
@@ -458,7 +457,6 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 yield return result;
             }
-
             yield break;
         }
     }
