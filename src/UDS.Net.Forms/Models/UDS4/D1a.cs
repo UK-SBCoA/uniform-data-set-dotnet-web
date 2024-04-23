@@ -48,7 +48,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if ((MCICRITCLN.HasValue && MCICRITCLN.Value == true) ||
                     (MCICRITIMP.HasValue && MCICRITIMP.Value == true) ||
-                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true))
+                    (MCICRITFUN.HasValue && MCICRITFUN.Value == true))
                 {
                     return true;
                 }
