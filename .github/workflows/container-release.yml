@@ -17,8 +17,6 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-permissions: read-all
-
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
