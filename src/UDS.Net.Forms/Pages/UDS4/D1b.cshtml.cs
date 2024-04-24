@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
@@ -19,10 +18,10 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public D1b D1b { get; set; } = default!;
 
-
         public D1bModel(IVisitService visitService) : base(visitService, "D1b")
         {
         }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,7 +29,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (BaseForm != null)
             {
-                D1b = (D1b)BaseForm; 
+                D1b = (D1b)BaseForm; // class library should always handle new instances
             }
 
             return Page();
@@ -39,11 +38,11 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
         {
-            BaseForm = D1b; 
+            BaseForm = D1b; // reassign bounded and derived form to base form for base method
 
-            Visit.Forms.Add(D1b); 
+            Visit.Forms.Add(D1b); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); 
+            return await base.OnPostAsync(id); // checks for validation, etc.
         }
     }
 }

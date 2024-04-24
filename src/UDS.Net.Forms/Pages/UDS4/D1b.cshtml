@@ -1,0 +1,14 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.D1bModel
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician for all participants, including cognitively unimpaired. For additional
+        clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, <strong>Form D1b</strong>. Check only <span class="underline">one</span> box per question.
+    </p>
+</div>
+<partial name="_FormFooter" for="@Model.D1b" />
