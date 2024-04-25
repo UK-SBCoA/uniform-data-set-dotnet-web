@@ -17,35 +17,35 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Fluid Biomarkers - Were fluid biomarkers used for assessing the etiological diagnosis?")]
         public int? FLUIDBIOM { get; set; }
 
-        [Display(Name = "Blood-based biomarkers - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? BLOODAD { get; set; }
 
-        [Display(Name = "Blood-based biomarkers - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? BLOODFTLD { get; set; }
 
-        [Display(Name = "Blood-based biomarkers - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? BLOODLBD { get; set; }
 
-        [Display(Name = "Blood-based biomarkers - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? BLOODOTH { get; set; }
 
-        [Display(Name = "Blood-based biomarkers - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BLOODOTHX { get; set; }
 
-        [Display(Name = "CSF-based biomarkers - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? CSFAD { get; set; }
 
-        [Display(Name = "CSF-based biomarkers - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? CSFFTLD { get; set; }
 
-        [Display(Name = "CSF-based biomarkers - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? CSFLBD { get; set; }
 
-        [Display(Name = "CSF-based biomarkers - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
-        [Display(Name = "CSF-based biomarkers - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
 
@@ -64,19 +64,19 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
-        [Display(Name = "FDG PET - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
 
-        [Display(Name = "FDG PET - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? FDGFTLD { get; set; }
 
-        [Display(Name = "FDG PET - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? FDGLBD { get; set; }
 
-        [Display(Name = "FDG PET - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? FDGOTH { get; set; }
 
-        [Display(Name = "FDG PET - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
@@ -90,19 +90,19 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? TRACOTHDXX { get; set; }
 
-        [Display(Name = "Other tracer-based imaging - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? TRACERAD { get; set; }
 
-        [Display(Name = "Other tracer-based imaging - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? TRACERFTLD { get; set; }
 
-        [Display(Name = "Other tracer-based imaging - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? TRACERLBD { get; set; }
 
-        [Display(Name = "Other tracer-based imaging - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? TRACEROTH { get; set; }
 
-        [Display(Name = "Other tracer-based imaging - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? TRACEROTHX { get; set; }
 
