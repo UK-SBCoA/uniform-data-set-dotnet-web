@@ -377,7 +377,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Primary site of cancer: Other (SPECIFY)")]
         public bool? CANCOTHER { get; set; }
         [Display(Name = "Specify other primary site of cancer")]
-        [MaxLength]
+        [MaxLength(60)]
         [RequiredIf(nameof(CANCOTHER), "true", ErrorMessage = "Please specify.")]
         public string? CANCOTHERX { get; set; }
         [Display(Name = "Type of cancer treatment: Radiation")]
@@ -399,7 +399,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(CANCTROTH), "true", ErrorMessage = "Please specify.")]
         public string? CANCTROTHX { get; set; }
         [Display(Name = "Age at most recent cancer diagnosis")]
-        public int? CANCERAGE { get; set; }
+        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Response required")]
+		[RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
+		public int? CANCERAGE { get; set; }
         [Display(Name = "COVID-19 infection")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnComplete(ErrorMessage = "Response required")]
@@ -441,8 +443,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? HIVDIAG { get; set; }
         [Display(Name = "Age at HIV diagnosis")]
-        [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredIfRange(nameof(HIVDIAG), 1, 2, ErrorMessage = "Please specify.")]
+		[RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
+		[RequiredIfRange(nameof(HIVDIAG), 1, 2, ErrorMessage = "Please specify.")]
         public int? HIVAGE { get; set; }
         [Display(Name = "Other medical conditions or procedures")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
