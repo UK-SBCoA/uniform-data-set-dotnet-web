@@ -31,4 +31,4 @@ jobs:
           VALIDATE_SQL: false
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_GITHUB_ACTIONS: false
-          FILTER_REGEX_EXCLUDE: (.*.github/.*|.*wwwroot/lib/.*|.*Migrations/.*)
+          FILTER_REGEX_EXCLUDE: (.*.github/.*|.*wwwroot/lib/.*|.*Migrations/.*|.*.src/UDS.Net.Web.MVC/Dockerfile)
