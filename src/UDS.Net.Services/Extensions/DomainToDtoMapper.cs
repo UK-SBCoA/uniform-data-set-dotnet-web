@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -193,6 +194,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A5D2FormFields)form.Fields).ToDto();
             }
+            else if (form.Fields is A4aFormFields)
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
+            }
             else if (form.Fields is B1FormFields)
             {
                 dto = ((B1FormFields)form.Fields).ToDto();
@@ -273,6 +278,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is A5D2FormFields && formKind == "A5D2")
             {
                 dto = ((A5D2FormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is A4aFormFields && formKind == "A4a")
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is B1FormFields && formKind == "B1")
             {
@@ -839,6 +848,66 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
+        public static A4aDto ToDto(this A4aFormFields fields, int formId)
+        {
+            var dto = new A4aDto()
+            {
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK
+            };
+
+            foreach (var treatment in fields.TreatmentFormFields)
+            {
+                var treatmentDto = treatment.ToDto(formId);
+                if (treatment.TreatmentIndex == 1)
+                    dto.Treatment1 = treatmentDto;
+                else if (treatment.TreatmentIndex == 2)
+                    dto.Treatment2 = treatmentDto;
+                else if (treatment.TreatmentIndex == 3)
+                    dto.Treatment3 = treatmentDto;
+                else if (treatment.TreatmentIndex == 4)
+                    dto.Treatment4 = treatmentDto;
+                else if (treatment.TreatmentIndex == 5)
+                    dto.Treatment5 = treatmentDto;
+                else if (treatment.TreatmentIndex == 6)
+                    dto.Treatment6 = treatmentDto;
+                else if (treatment.TreatmentIndex == 7)
+                    dto.Treatment7 = treatmentDto;
+                else if (treatment.TreatmentIndex == 8)
+                    dto.Treatment8 = treatmentDto;
+
+            }
+
+            return dto;
+        }
+
+
+        public static A4aTreatmentDto ToDto(this A4aTreatmentFormFields fields, int formId)
+        {
+            return new A4aTreatmentDto
+            {
+                FormId = formId,
+                TARGETAB = fields.TARGETAB,
+                TARGETTAU = fields.TARGETTAU,
+                TARGETINF = fields.TARGETINF,
+                TARGETSYN = fields.TARGETSYN,
+                TARGETOTH = fields.TARGETOTH,
+                TARGETOTX = fields.TARGETOTX,
+                TRTTRIAL = fields.TRTTRIAL,
+                NCTNUM = fields.NCTNUM,
+                STARTMO = fields.STARTMO,
+                STARTYEAR = fields.STARTYEAR,
+                ENDMO = fields.ENDMO,
+                ENDYEAR = fields.ENDYEAR,
+                CARETRIAL = fields.CARETRIAL,
+                TRIALGRP = fields.TRIALGRP
+            };
+        }
+
         public static B1Dto ToDto(this B1FormFields fields)
         {
             return new B1Dto
@@ -1018,9 +1087,44 @@ namespace UDS.Net.Services.Extensions
         {
             return new B8Dto
             {
+                NEUREXAM = fields.NEUREXAM,
+                NORMNREXAM = fields.NORMNREXAM,
                 PARKSIGN = fields.PARKSIGN,
+                SLOWINGFM = fields.SLOWINGFM,
+                TREMREST = fields.TREMREST,
+                TREMPOST = fields.TREMPOST,
+                TREMKINE = fields.TREMKINE,
+                RIGIDARM = fields.RIGIDARM,
+                RIGIDLEG = fields.RIGIDLEG,
+                DYSTARM = fields.DYSTARM,
+                DYSTLEG = fields.DYSTLEG,
+                CHOREA = fields.CHOREA,
+                AMPMOTOR = fields.AMPMOTOR,
+                AXIALRIG = fields.AXIALRIG,
                 POSTINST = fields.POSTINST,
-                APRAXSP = fields.APRAXSP
+                MASKING = fields.MASKING,
+                STOOPED = fields.STOOPED,
+                OTHERSIGN = fields.OTHERSIGN,
+                LIMBAPRAX = fields.LIMBAPRAX,
+                UMNDIST = fields.UMNDIST,
+                LMNDIST = fields.LMNDIST,
+                VFIELDCUT = fields.VFIELDCUT,
+                LIMBATAX = fields.LIMBATAX,
+                MYOCLON = fields.MYOCLON,
+                UNISOMATO = fields.UNISOMATO,
+                APHASIA = fields.APHASIA,
+                ALIENLIMB = fields.ALIENLIMB,
+                HSPATNEG = fields.HSPATNEG,
+                PSPOAGNO = fields.PSPOAGNO,
+                SMTAGNO = fields.SMTAGNO,
+                OPTICATAX = fields.OPTICATAX,
+                APRAXGAZE = fields.APRAXGAZE,
+                VHGAZEPAL = fields.VHGAZEPAL,
+                DYSARTH = fields.DYSARTH,
+                APRAXSP = fields.APRAXSP,
+                GAITABN = fields.GAITABN,
+                GAITFIND = fields.GAITFIND,
+                GAITOTHRX = fields.GAITOTHRX
             };
         }
 
