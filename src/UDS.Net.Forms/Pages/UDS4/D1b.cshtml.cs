@@ -85,7 +85,28 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Yes, results were normal or abnormal", "1"),
             new RadioListItem("Yes, results were indeterminate", "2")
         };
-        
+
+        public List<RadioListItem> OTHBIOMListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 11)", "0"),
+            new RadioListItem("Yes, results were normal or abnormal", "1"),
+            new RadioListItem("Yes, results were indeterminate", "2")
+        };
+
+        public List<RadioListItem> AUTDOMMUTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
+            new RadioListItem("Unknown/Not disclosed", "2")
+        };
+
+        public List<RadioListItem> EtiologyListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Primary", "1"),
+            new RadioListItem("Contributing", "2"),
+            new RadioListItem("Non-contributing", "3")
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
