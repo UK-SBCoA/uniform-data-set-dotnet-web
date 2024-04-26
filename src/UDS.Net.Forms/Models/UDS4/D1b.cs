@@ -139,69 +139,69 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
         public int? OTHBIOM1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis? (specify)\tOTHBI")]
+        [Display(Name = "(specify)")]
         [MaxLength(60)]
         public string? OTHBIOMX1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? BIOMAD1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? BIOMFTLD1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? BIOMLBD1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? BIOMOTH1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BIOMOTHX1 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
+        [Display(Name = "Was another biomarker modality used to support an etiological diagnosis?")]
         public int? OTHBIOM2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis? (specify)")]
+        [Display(Name = "(specify)")]
         [MaxLength(60)]
         public string? OTHBIOMX2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? BIOMAD2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? BIOMFTLD2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? BIOMLBD2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? BIOMOTH2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BIOMOTHX2 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
+        [Display(Name = "Was another biomarker modality used to support an etiological diagnosis?")]
         public int? OTHBIOM3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis? (specify)")]
+        [Display(Name = "(specify)")]
         [MaxLength(60)]
         public string? OTHBIOMX3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with AD")]
+        [Display(Name = "Consistent with AD")]
         public int? BIOMAD3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with FTLD")]
+        [Display(Name = "Consistent with FTLD")]
         public int? BIOMFTLD3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with LBD")]
+        [Display(Name = "Consistent with LBD")]
         public int? BIOMLBD3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology")]
+        [Display(Name = "Consistent with other etiology")]
         public int? BIOMOTH3 { get; set; }
 
-        [Display(Name = "Other biomarker modality - Consistent with other etiology (specify)")]
+        [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BIOMOTHX3 { get; set; }
 
