@@ -131,11 +131,11 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOBCOM = b9Dto.BEOBCOM;
                 BEANGER = b9Dto.BEANGER;
                 BESUBAB = b9Dto.BESUBAB;
-                ALCUSE = b9Dto.ALCUSE.HasValue ? true : false;
-                SEDUSE = b9Dto.SEDUSE.HasValue ? true : false;
-                OPIATEUSE = b9Dto.OPIATEUSE.HasValue ? true : false;
-                COCAINEUSE = b9Dto.COCAINEUSE.HasValue ? true : false;
-                OTHSUBUSE = b9Dto.OTHSUBUSE.HasValue ? true : false;
+                ALCUSE = (bool)b9Dto.ALCUSE;
+                SEDUSE = (bool)b9Dto.SEDUSE;
+                OPIATEUSE = (bool)b9Dto.OPIATEUSE;
+                COCAINEUSE = (bool)b9Dto.COCAINEUSE;
+                OTHSUBUSE = (bool)b9Dto.OTHSUBUSE;
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;
                 BEREM = b9Dto.BEREM;

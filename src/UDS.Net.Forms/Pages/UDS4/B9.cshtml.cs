@@ -256,6 +256,78 @@ namespace UDS.Net.Forms.Pages.UDS4
              } },
         };
 
+        public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEAPAHTY"),
+                    new UIDisableAttribute("B9.BEDEP"),
+                    new UIDisableAttribute("B9.BEANX"),
+                    new UIDisableAttribute("B9.BEEUPH"),
+                    new UIDisableAttribute("B9.BEIRRIT"),
+                    new UIDisableAttribute("B9.BEAGIT"),
+                    new UIDisableAttribute("B9.BEVHALL"),
+                    new UIDisableAttribute("B9.BEAHALL"),
+                    new UIDisableAttribute("B9.BEDEL"),
+                    new UIDisableAttribute("B9.BEAGGRS"),
+                    new UIDisableAttribute("B9.PSYCHAGE"),
+                    new UIDisableAttribute("B9.BEDISIN"),
+                    new UIDisableAttribute("B9.BEPERCH"),
+                    new UIDisableAttribute("B9.BEEMPATH"),
+                    new UIDisableAttribute("B9.BEOBCOM"),
+                    new UIDisableAttribute("B9.BEANGER"),
+                    new UIDisableAttribute("B9.BESUBAB"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEAPAHTY"),
+                    new UIEnableAttribute("B9.BEDEP"),
+                    new UIEnableAttribute("B9.BEANX"),
+                    new UIEnableAttribute("B9.BEEUPH"),
+                    new UIEnableAttribute("B9.BEIRRIT"),
+                    new UIEnableAttribute("B9.BEAGIT"),
+                    new UIEnableAttribute("B9.BEVHALL"),
+                    new UIEnableAttribute("B9.BEAHALL"),
+                    new UIEnableAttribute("B9.BEDEL"),
+                    new UIEnableAttribute("B9.BEAGGRS"),
+                    new UIEnableAttribute("B9.PSYCHAGE"),
+                    new UIEnableAttribute("B9.BEDISIN"),
+                    new UIEnableAttribute("B9.BEPERCH"),
+                    new UIEnableAttribute("B9.BEEMPATH"),
+                    new UIEnableAttribute("B9.BEOBCOM"),
+                    new UIEnableAttribute("B9.BEANGER"),
+                    new UIEnableAttribute("B9.BESUBAB"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BESUBABUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.ALCUSE"),
+                    new UIDisableAttribute("B9.SEDUSE"),
+                    new UIDisableAttribute("B9.OPIATEUSE"),
+                    new UIDisableAttribute("B9.COCAINEUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSE"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.ALCUSE"),
+                    new UIEnableAttribute("B9.SEDUSE"),
+                    new UIEnableAttribute("B9.OPIATEUSE"),
+                    new UIEnableAttribute("B9.COCAINEUSE"),
+                    new UIEnableAttribute("B9.OTHSUBUSE"),
+                }
+             } },
+        };
+
         public B9Model(IVisitService visitService) : base(visitService, "B9")
         {
         }

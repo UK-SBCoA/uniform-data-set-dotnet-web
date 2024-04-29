@@ -494,7 +494,7 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BESUBAB"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.BESUBAB" for="@Model.B9.BESUBAB" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="B9.BESUBAB" for="@Model.B9.BESUBAB" items="Model.BasicYesNoListItems" ui-behaviors="Model.BESUBABUIBehavior"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td colspan="5">
@@ -506,12 +506,11 @@
                                 <div>
                                     <small class="italic">(Check all that apply)</small>
                                 </div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BESUBAB"></span>
                             </div>
                             <div class="grid gap-y-5">
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.ALCUSE", Model.B9.ALCUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("B9.ALCUSE", Model.B9.ALCUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.ALCUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.ALCUSE)</label>
@@ -519,7 +518,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.SEDUSE", Model.B9.SEDUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("B9.SEDUSE", Model.B9.SEDUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.SEDUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.SEDUSE)</label>
@@ -527,7 +526,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.OPIATEUSE", Model.B9.OPIATEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("B9.OPIATEUSE", Model.B9.OPIATEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OPIATEUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.OPIATEUSE)</label>
@@ -535,7 +534,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.COCAINEUSE", Model.B9.COCAINEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("B9.COCAINEUSE", Model.B9.COCAINEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.COCAINEUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.COCAINEUSE)</label>
@@ -543,7 +542,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.OTHSUBUSE", Model.B9.OTHSUBUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                        @Html.CheckBox("B9.OTHSUBUSE", Model.B9.OTHSUBUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"B9.OTHSUBUSEX\"]" })
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div>
@@ -630,6 +629,19 @@
                     </div>
                 </td>
                 <table-cell-radio-buttons id="B9.BEOTHR" for="@Model.B9.BEOTHR" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subsubcounterreset">
+                <td colspan="5">
+                    <div class="grid grid-cols-3 ml-6">
+                        <div>
+                            <label asp-for="B9.BEOTHRX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B9.BEOTHRX)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHRX"></span>
+                        </div>
+                        <div>
+                            <input asp-for="B9.BEOTHRX" />
+                        </div>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
