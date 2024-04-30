@@ -107,6 +107,138 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Non-contributing", "3")
         };
 
+        public List<RadioListItem> FTLDSUBTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Tauopathy", "1"),
+            new RadioListItem("TDP-43 proteinopathy", "2"),
+            new RadioListItem("Other", "3"),
+            new RadioListItem("Unknown", "9"),
+        };
+
+        public Dictionary<string, UIBehavior> BIOMARKDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.FLUIDBIOM"),
+                    new UIDisableAttribute("D1b.BLOODAD"),
+                    new UIDisableAttribute("D1b.BLOODFTLD"),
+                    new UIDisableAttribute("D1b.BLOODLBD"),
+                    new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.CSFAD"),
+                    new UIDisableAttribute("D1b.CSFFTLD"),
+                    new UIDisableAttribute("D1b.CSFLBD"),
+                    new UIDisableAttribute("D1b.CSFOTH"),
+                    new UIDisableAttribute("D1b.IMAGINGDX"),
+                    new UIDisableAttribute("D1b.PETDX"),
+                    new UIDisableAttribute("D1b.AMYLPET"),
+                    new UIDisableAttribute("D1b.TAUPET"),
+                    new UIDisableAttribute("D1b.FDGPETDX"),
+                    new UIDisableAttribute("D1b.FDGAD"),
+                    new UIDisableAttribute("D1b.FDGFTLD"),
+                    new UIDisableAttribute("D1b.FDGLBD"),
+                    new UIDisableAttribute("D1b.FDGOTH"),
+                    new UIDisableAttribute("D1b.TRACERAD"),
+                    new UIDisableAttribute("D1b.TRACERFTLD"),
+                    new UIDisableAttribute("D1b.TRACERLBD"),
+                    new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIDisableAttribute("D1b.STRUCTDX"),
+                    new UIDisableAttribute("D1b.STRUCTAD"),
+                    new UIDisableAttribute("D1b.STRUCTFTLD"),
+                    new UIDisableAttribute("D1b.STRUCTCVD"),
+                    new UIDisableAttribute("D1b.OTHBIOM1"),
+                    new UIDisableAttribute("D1b.OTHBIOM2"),
+                    new UIDisableAttribute("D1b.OTHBIOM3"),
+                    new UIDisableAttribute("D1b.AUTDOMMUT"),
+                    new UIDisableAttribute("D1b.FLUIDBIOM"),
+                    new UIDisableAttribute("D1b.FLUIDBIOM"),
+                    new UIDisableAttribute("D1b.FLUIDBIOM"),
+                    new UIDisableAttribute("D1b.FLUIDBIOM"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 12"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.FLUIDBIOM"),
+                },
+                InstructionalMessage = "CONTINUE TO QUESTION 2"
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> FLUIDBIOMUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.BLOODAD"),
+                    new UIDisableAttribute("D1b.BLOODFTLD"),
+                    new UIDisableAttribute("D1b.BLOODLBD"),
+                    new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.CSFAD"),
+                    new UIDisableAttribute("D1b.CSFFTLD"),
+                    new UIDisableAttribute("D1b.CSFLBD"),
+                    new UIDisableAttribute("D1b.CSFOTH"),
+                    new UIEnableAttribute("D1b.IMAGINGDX")
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 5"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.BLOODAD"),
+                    new UIEnableAttribute("D1b.BLOODFTLD"),
+                    new UIEnableAttribute("D1b.BLOODLBD"),
+                    new UIEnableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.CSFAD"),
+                    new UIDisableAttribute("D1b.CSFFTLD"),
+                    new UIDisableAttribute("D1b.CSFLBD"),
+                    new UIDisableAttribute("D1b.CSFOTH"),
+                    new UIEnableAttribute("D1b.IMAGINGDX")
+                },
+                InstructionalMessage = "CONTINUE TO QUESTION 3, and SKIP QUESTIONS 4 – 4d"
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.BLOODAD"),
+                    new UIDisableAttribute("D1b.BLOODFTLD"),
+                    new UIDisableAttribute("D1b.BLOODLBD"),
+                    new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIEnableAttribute("D1b.CSFAD"),
+                    new UIEnableAttribute("D1b.CSFFTLD"),
+                    new UIEnableAttribute("D1b.CSFLBD"),
+                    new UIEnableAttribute("D1b.CSFOTH"),
+                    new UIEnableAttribute("D1b.IMAGINGDX")
+                },
+                InstructionalMessage = "SKIP TO QUESTION 4"
+            } },
+             { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.BLOODAD"),
+                    new UIEnableAttribute("D1b.BLOODFTLD"),
+                    new UIEnableAttribute("D1b.BLOODLBD"),
+                    new UIEnableAttribute("D1b.BLOODOTH"),
+                    new UIEnableAttribute("D1b.CSFAD"),
+                    new UIEnableAttribute("D1b.CSFFTLD"),
+                    new UIEnableAttribute("D1b.CSFLBD"),
+                    new UIEnableAttribute("D1b.CSFOTH"),
+                    new UIEnableAttribute("D1b.IMAGINGDX")
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> BLOODOTHXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
+
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
