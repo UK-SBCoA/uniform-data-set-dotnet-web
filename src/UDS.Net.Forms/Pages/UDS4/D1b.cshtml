@@ -15,7 +15,7 @@
     <label asp-for="D1b.BIOMARKDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMARKDX)</label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMARKDX"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1b.BIOMARKDX)" for="@Model.D1b.BIOMARKDX" items="Model.BIOMARKDXListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1b.BIOMARKDX)" for="@Model.D1b.BIOMARKDX" items="Model.BIOMARKDXListItems" ui-behaviors="Model.BIOMARKDXUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMARKDX"></span>
     </div>
 </div>
@@ -48,7 +48,7 @@
         <label asp-for="D1b.FLUIDBIOM"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.FLUIDBIOM)</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FLUIDBIOM"></p>
-            <radio-button-group id="@Html.IdFor(m => m.D1b.FLUIDBIOM)" for="@Model.D1b.FLUIDBIOM" items="Model.FLUIDBIOMListItems"></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.FLUIDBIOM)" for="@Model.D1b.FLUIDBIOM" items="Model.FLUIDBIOMListItems" ui-behaviors="Model.FLUIDBIOMUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FLUIDBIOM"></span>
         </div>
     </div>
@@ -113,7 +113,7 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODOTH"></span>
 
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODOTH)" for="@Model.D1b.BLOODOTH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODOTH)" for="@Model.D1b.BLOODOTH" items="Model.FindingsListItems" ui-behaviors="Model.BLOODOTHXUIBehavior"></table-cell-radio-buttons>
             </tr>
 
             <tr>
@@ -186,7 +186,7 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFOTH"></span>
 
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFOTH)" for="@Model.D1b.CSFOTH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFOTH)" for="@Model.D1b.CSFOTH" items="Model.FindingsListItems" ui-behaviors="Model.CSFOTHUIBehavior"></table-cell-radio-buttons>
             </tr>
 
             <tr>
@@ -562,20 +562,29 @@
         listed were not assessed using a biomarker modality, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
     </p>
 
-    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
-            <label asp-for="D1b.OTHBIOM1"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM1)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOM1"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM1)" for="@Model.D1b.OTHBIOM1" items="Model.OTHBIOMListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM1"></span>
-                <label asp-for="D1b.OTHBIOMX1">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX1)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX1"></p>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOMX1"></p>
-                <input asp-for="@Model.D1b.OTHBIOMX1" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX1"></span>
-            </div>
-        </div>
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM1"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM1)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM1"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM1)" for="@Model.D1b.OTHBIOM1" items="Model.OTHBIOMListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM1"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX1"></p>
+                            <label asp-for="D1b.OTHBIOMX1">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX1)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX1"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
 
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
@@ -639,22 +648,30 @@
             </tr>
         </tbody>
     </table>
-    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="D1b.OTHBIOM2"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM2)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOM2"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM2)" for="@Model.D1b.OTHBIOM2" items="Model.OTHBIOMListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM2"></span>
-                <label asp-for="D1b.OTHBIOMX2">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX2)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX2"></p>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOMX2"></p>
-                <input asp-for="@Model.D1b.OTHBIOMX2" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX2"></span>
-            </div>
-        </div>
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM2"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM2)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM2"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM2)" for="@Model.D1b.OTHBIOM2" items="Model.OTHBIOMListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM2"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX2"></p>
+                            <label asp-for="D1b.OTHBIOMX2">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX2)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX2"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
-
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
@@ -717,20 +734,29 @@
         </tbody>
     </table>
 
-    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="D1b.OTHBIOM3"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM3)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOM3"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM3)" for="@Model.D1b.OTHBIOM3" items="Model.OTHBIOMListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM3"></span>
-                <label asp-for="D1b.OTHBIOMX3">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX3)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX3"></p>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHBIOMX3"></p>
-                <input asp-for="@Model.D1b.OTHBIOMX3" />
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX3"></span>
-            </div>
-        </div>
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM3"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM3)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM3"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM3)" for="@Model.D1b.OTHBIOM3" items="Model.OTHBIOMListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM3"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX3"></p>
+                            <label asp-for="D1b.OTHBIOMX3">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX3)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX3"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
     </table>
 
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
@@ -929,10 +955,11 @@
                 </td>
                 <td>
                     <span class="subcounter"></span>
+                    <span class="subcounter invisible"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDIF)" for="@Model.D1b.FTLDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
-            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+            <tr class=" odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
                         <label asp-for="D1b.PSP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.PSP)</label>
@@ -959,7 +986,7 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.PSPIF)" for="@Model.D1b.PSPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
-            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
                         <label asp-for="D1b.CORT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.CORT)</label>
@@ -986,7 +1013,7 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CORTIF)" for="@Model.D1b.CORTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
-            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
                         <label asp-for="D1b.FTLDMO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDMO)</label>
@@ -1013,7 +1040,7 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDMOIF)" for="@Model.D1b.FTLDMOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
-            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
                         <label asp-for="D1b.FTLDNOS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDNOS)</label>
@@ -1042,11 +1069,23 @@
             </tr>
             <tr>
                 <td class="pl-5">
-                    <label asp-for="D1b.DATSCANDX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.DATSCANDX)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.DATSCANDX"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1b.DATSCANDX)" for="@Model.D1b.DATSCANDX" items="Model.DATSCANDXListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DATSCANDX"></span>
+                    <div colspan="6">
+                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="D1b.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDSUBT)</label>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBT"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.D1b.FTLDSUBT)" for="@Model.D1b.FTLDSUBT" items="Model.FTLDSUBTListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBT"></span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBX"></p>
+                                <label asp-for="D1b.FTLDSUBX">@Html.DisplayNameFor(m => m.D1b.FTLDSUBX)</label>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBX"></span>
+                                <div class="mt-2">
+                                    <input asp-for="D1b.FTLDSUBX" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -1055,7 +1094,7 @@
                     <div>
                         <label asp-for="D1b.CVD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CVD)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CVD"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CVDIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1082,7 +1121,7 @@
                     <div>
                         <label asp-for="D1b.MSA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.MSA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.MSA"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.MSAIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1109,7 +1148,7 @@
                     <div>
                         <label asp-for="D1b.CTE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CTE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CTE"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTEIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1136,7 +1175,7 @@
                     <div>
                         <label asp-for="D1b.DOWNS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.DOWNS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.DOWNS"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DOWNSIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1163,7 +1202,7 @@
                     <div>
                         <label asp-for="D1b.HUNT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.HUNT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.HUNT"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.HUNTIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1190,7 +1229,7 @@
                     <div>
                         <label asp-for="D1b.PRION"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.PRION)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.PRION"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PRIONIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1217,7 +1256,7 @@
                     <div>
                         <label asp-for="D1b.CAA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CAA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CAA"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CAAIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1244,7 +1283,7 @@
                     <div>
                         <label asp-for="D1b.LATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.LATE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.LATE"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LATEIF"></span>
                     </div>
                 </td>
                 <td>
@@ -1271,7 +1310,7 @@
                     <div>
                         <label asp-for="D1b.OTHCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHCOG)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.OTHCOG"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHCOGIF"></span>
                     </div>
                 </td>
                 <td>
