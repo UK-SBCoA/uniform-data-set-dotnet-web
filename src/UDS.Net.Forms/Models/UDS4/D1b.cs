@@ -250,7 +250,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Primary, contributing, or non-contributing - FTLD not otherwise specified (NOS)")]
         public int? FTLDNOIF { get; set; }
 
-        [Display(Name = "FTLD subtype")]
+        [Display(Name = "If FTLD (QUESTION 14) is present, specify FTLD subtype:")]
         public int? FTLDSUBT { get; set; }
 
         [Display(Name = "Other FTLD subtype (specify)")]
