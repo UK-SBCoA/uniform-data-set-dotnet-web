@@ -83,7 +83,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
-        [Display(Name = "ther tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
+        [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis? (specify)")]

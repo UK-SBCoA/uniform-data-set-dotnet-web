@@ -239,6 +239,270 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        public Dictionary<string, UIBehavior> CSFOTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> IMAGINGDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.PETDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 6b"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.PETDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX"),
+                    new UIDisableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+
+                },
+                InstructionalMessage = "CONTINUE TO QUESTION 6, and SKIP QUESTIONS 7 – 7a3f"
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.PETDX"),
+                    new UIDisableAttribute("D1b.FDGPETDX"),
+                    new UIDisableAttribute("D1b.DATSCANDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 7"
+            } },
+             { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.PETDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> PETDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.AMYLPET"),
+                    new UIDisableAttribute("D1b.TAUPET"),
+                    new UIDisableAttribute("D1b.FDGPETDX"),
+                    new UIDisableAttribute("D1b.DATSCANDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIDisableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1")
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 8"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.AMYLPET"),
+                    new UIEnableAttribute("D1b.TAUPET"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.AMYLPET"),
+                    new UIEnableAttribute("D1b.TAUPET"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> FDGPETDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.FDGAD"),
+                    new UIDisableAttribute("D1b.FDGFTLD"),
+                    new UIDisableAttribute("D1b.FDGLBD"),
+                    new UIDisableAttribute("D1b.FDGOTH"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 6c"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.FDGAD"),
+                    new UIEnableAttribute("D1b.FDGFTLD"),
+                    new UIEnableAttribute("D1b.FDGLBD"),
+                    new UIEnableAttribute("D1b.FDGOTH"),
+                    new UIEnableAttribute("D1b.DATSCANDX")
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.FDGAD"),
+                    new UIEnableAttribute("D1b.FDGFTLD"),
+                    new UIEnableAttribute("D1b.FDGLBD"),
+                    new UIEnableAttribute("D1b.FDGOTH"),
+                    new UIEnableAttribute("D1b.DATSCANDX")
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> FDGOTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> TRACOTHDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.FDGOTHX"),
+                    new UIDisableAttribute("D1b.TRACERAD"),
+                    new UIDisableAttribute("D1b.TRACERFTLD"),
+                    new UIDisableAttribute("D1b.TRACERLBD"),
+                    new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIEnableAttribute("D1b.STRUCTDX")
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 7a"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.FDGOTHX"),
+                    new UIEnableAttribute("D1b.TRACERAD"),
+                    new UIEnableAttribute("D1b.TRACERFTLD"),
+                    new UIEnableAttribute("D1b.TRACERLBD"),
+                    new UIEnableAttribute("D1b.TRACEROTH"),
+                    new UIEnableAttribute("D1b.STRUCTDX")
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.FDGOTHX"),
+                    new UIEnableAttribute("D1b.TRACERAD"),
+                    new UIEnableAttribute("D1b.TRACERFTLD"),
+                    new UIEnableAttribute("D1b.TRACERLBD"),
+                    new UIEnableAttribute("D1b.TRACEROTH"),
+                    new UIEnableAttribute("D1b.STRUCTDX")
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> STRUCTDXUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.STRUCTAD"),
+                    new UIDisableAttribute("D1b.STRUCTFTLD"),
+                    new UIDisableAttribute("D1b.STRUCTCVD"),
+                    new UIEnableAttribute("D1b.OTHBIOM1")
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 8"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.STRUCTAD"),
+                    new UIEnableAttribute("D1b.STRUCTFTLD"),
+                    new UIEnableAttribute("D1b.STRUCTCVD"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.STRUCTAD"),
+                    new UIEnableAttribute("D1b.STRUCTFTLD"),
+                    new UIEnableAttribute("D1b.STRUCTCVD"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> STRUCTCVDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGMWMH"),
+                    new UIDisableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.IMAGLINF"),
+                    new UIEnableAttribute("D1b.IMAGLAC"),
+                    new UIEnableAttribute("D1b.IMAGMACH"),
+                    new UIEnableAttribute("D1b.IMAGMICH"),
+                    new UIEnableAttribute("D1b.IMAGMWMH"),
+                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.IMAGLINF"),
+                    new UIEnableAttribute("D1b.IMAGLAC"),
+                    new UIEnableAttribute("D1b.IMAGMACH"),
+                    new UIEnableAttribute("D1b.IMAGMICH"),
+                    new UIEnableAttribute("D1b.IMAGMWMH"),
+                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                }
+            } },
+        };
+
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);

@@ -219,7 +219,7 @@
         <label asp-for="D1b.IMAGINGDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGINGDX)</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.IMAGINGDX"></p>
-            <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems"></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems" ui-behaviors="Model.IMAGINGDXUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGINGDX"></span>
         </div>
     </div>
@@ -246,8 +246,8 @@
             <label asp-for="D1b.PETDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.PETDX)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.PETDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.PETDX)" for="@Model.D1b.PETDX" items="Model.PETDXListItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.PETDX)" for="@Model.D1b.PETDX" items="Model.PETDXListItems" ui-behaviors="Model.PETDXUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span> 
             </div>
         </div>
     </table>
@@ -286,7 +286,7 @@
             <label asp-for="D1b.FDGPETDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGPETDX)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGPETDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.FDGPETDX)" for="@Model.D1b.FDGPETDX" items="Model.FDGPETDXListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.FDGPETDX)" for="@Model.D1b.FDGPETDX" items="Model.FDGPETDXListItems" ui-behaviors="Model.FDGPETDXUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGPETDX"></span>
             </div>
         </div>
@@ -333,7 +333,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTH"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGOTH)" for="@Model.D1b.FDGOTH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGOTH)" for="@Model.D1b.FDGOTH" items="Model.FindingsListItems" ui-behaviors="Model.FDGOTHUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -366,22 +366,22 @@
             <label asp-for="D1b.TRACOTHDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACOTHDX)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACOTHDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems" ui-behaviors="Model.TRACOTHDXUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDX"></span>
             </div>
         </div>
 
         <tr>
             <td class="pl-5">
-                <label asp-for="D1b.FDGOTHX">@Html.DisplayNameFor(m => m.D1b.FDGOTHX)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTHX"></p>
+                <label asp-for="D1b.TRACOTHDXX">@Html.DisplayNameFor(m => m.D1b.TRACOTHDXX)</label>
+                <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDXX"></p>
             </td>
             <td colspan="4">
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGOTHX"></p>
-                        <input asp-for="@Model.D1b.FDGOTHX" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTHX"></span>
+                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACOTHDXX"></p>
+                        <input asp-for="@Model.D1b.TRACOTHDXX" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDXX"></span>
                     </div>
                 </div>
             </td>
@@ -447,7 +447,7 @@
             <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
             </div>
         </div>
@@ -486,7 +486,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTCVD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTCVD"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr class="subsubsubcounterreset">
                 <td>
