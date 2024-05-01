@@ -160,7 +160,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> DECCLMOTListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (If No, SKIP TO QUESTION 14)", "0"),
+            new RadioListItem("No (If No, SKIP TO QUESTION 19)", "0"),
             new RadioListItem("Yes", "1")
         };
 
@@ -237,7 +237,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.COGATTN"),
                     new UIDisableAttribute("B9.COGFLUC"),
                     new UIDisableAttribute("B9.COGOTHR"),
-                    new UIDisableAttribute("B9.COGAGE")
+                    new UIDisableAttribute("B9.COGAGE"),
+                    new UIDisableAttribute("B9.COGMODE"),
                 }
             } },
             { "1", new UIBehavior {
@@ -251,7 +252,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.COGATTN"),
                     new UIEnableAttribute("B9.COGFLUC"),
                     new UIEnableAttribute("B9.COGOTHR"),
-                    new UIEnableAttribute("B9.COGAGE")
+                    new UIEnableAttribute("B9.COGAGE"),
+                    new UIEnableAttribute("B9.COGMODE"),
                 }
              } },
         };
@@ -278,6 +280,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.BEOBCOM"),
                     new UIDisableAttribute("B9.BEANGER"),
                     new UIDisableAttribute("B9.BESUBAB"),
+                    new UIDisableAttribute("B9.PERCHAGE"),
+                    new UIDisableAttribute("B9.BEREM"),
+                    new UIDisableAttribute("B9.BEOTHR"),
+                    new UIDisableAttribute("B9.BEMODE"),
+                    new UIDisableAttribute("B9.BEHAGE"),
+                    new UIDisableAttribute("B9.BEAPATHY")
                 }
             } },
             { "1", new UIBehavior {
@@ -300,6 +308,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.BEOBCOM"),
                     new UIEnableAttribute("B9.BEANGER"),
                     new UIEnableAttribute("B9.BESUBAB"),
+                    new UIEnableAttribute("B9.PERCHAGE"),
+                    new UIEnableAttribute("B9.BEREM"),
+                    new UIEnableAttribute("B9.BEOTHR"),
+                    new UIEnableAttribute("B9.BEMODE"),
+                    new UIEnableAttribute("B9.BEHAGE"),
+                    new UIEnableAttribute("B9.BEAPATHY")
                 }
              } },
         };
@@ -324,6 +338,243 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.OPIATEUSE"),
                     new UIEnableAttribute("B9.COCAINEUSE"),
                     new UIEnableAttribute("B9.OTHSUBUSE"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEVHALLUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEVPATT"),
+                    new UIDisableAttribute("B9.BEVWELL"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEVPATT"),
+                    new UIEnableAttribute("B9.BEVWELL"),
+                }
+             } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEVPATT"),
+                    new UIDisableAttribute("B9.BEVWELL"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEAHALLUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEAHSIMP"),
+                    new UIDisableAttribute("B9.BEAHCOMP"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEAHSIMP"),
+                    new UIEnableAttribute("B9.BEAHCOMP"),
+                }
+             } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEAHSIMP"),
+                    new UIDisableAttribute("B9.BEAHCOMP"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEREMUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEREMAGO"),
+                    new UIDisableAttribute("B9.BEREMCONF"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEREMAGO"),
+                    new UIEnableAttribute("B9.BEREMCONF"),
+                }
+             } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEREMAGO"),
+                    new UIDisableAttribute("B9.BEREMCONF"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEOTHRUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEOTHRX"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEOTHRX"),
+                }
+             } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEOTHRX"),
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> BEMODEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEMODEX")
+                }
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEMODEX")
+                }
+             } },
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEMODEX")
+                }
+             } },
+            { "4", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEMODEX")
+                }
+            } },
+            { "99", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEMODEX")
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> MOMODEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOMODEX")
+                }
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOMODEX")
+                }
+             } },
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOMODEX")
+                }
+             } },
+            { "4", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.MOMODEX")
+                }
+            } },
+            { "99", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOMODEX")
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> DECCLINUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.DECCLCOG"),
+                    new UIDisableAttribute("B9.COGMODE"),
+                    new UIDisableAttribute("B9.DECCLBE"),
+                    new UIDisableAttribute("B9.DECCLBE"),
+                    new UIDisableAttribute("B9.DECCLMOT"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                    new UIDisableAttribute("B9.COURSE"),
+                    new UIDisableAttribute("B9.FRSTCHG"),
+                    new UIDisableAttribute("B9.BEAPATHY")
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.DECCLCOG"),
+                    new UIEnableAttribute("B9.COGMODE"),
+                    new UIEnableAttribute("B9.DECCLBE"),
+                    new UIEnableAttribute("B9.DECCLBE"),
+                    new UIEnableAttribute("B9.DECCLMOT"),
+                    new UIEnableAttribute("B9.MOMODE"),
+                    new UIEnableAttribute("B9.MOMOPARK"),
+                    new UIEnableAttribute("B9.MOMOALS"),
+                    new UIEnableAttribute("B9.COURSE"),
+                    new UIEnableAttribute("B9.FRSTCHG"),
+                    new UIEnableAttribute("B9.BEAPATHY")
+                }
+             } },
+        };
+
+        public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOGAIT"),
+                    new UIDisableAttribute("B9.MOFALLS"),
+                    new UIDisableAttribute("B9.MOSLOW"),
+                    new UIDisableAttribute("B9.MOTREM"),
+                    new UIDisableAttribute("B9.MOLIMB"),
+                    new UIDisableAttribute("B9.MOFACE"),
+                    new UIDisableAttribute("B9.MOSPEECH"),
+                    new UIDisableAttribute("B9.MOTORAGE"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.MOGAIT"),
+                    new UIEnableAttribute("B9.MOFALLS"),
+                    new UIEnableAttribute("B9.MOSLOW"),
+                    new UIEnableAttribute("B9.MOTREM"),
+                    new UIEnableAttribute("B9.MOLIMB"),
+                    new UIEnableAttribute("B9.MOFACE"),
+                    new UIEnableAttribute("B9.MOSPEECH"),
+                    new UIEnableAttribute("B9.MOTORAGE"),
+                    new UIEnableAttribute("B9.MOMODE"),
+                    new UIEnableAttribute("B9.MOMOPARK"),
+                    new UIEnableAttribute("B9.MOMOALS"),
                 }
              } },
         };

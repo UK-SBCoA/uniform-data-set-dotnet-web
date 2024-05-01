@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -14,6 +16,9 @@ namespace UDS.Net.Forms.Models.UDS4
     //PERCHAGE will need custom validation
     //PERCHAGE will need custom validation
     //MOTORAGE will need custom validation
+
+    //Add regex number ranges to number inputs
+
     public class B9 : FormModel
     {
         [RequiredOnComplete(ErrorMessage = "Response required")]
@@ -69,7 +74,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Value required")]
         public string? COGOTHRX { get; set; }
         [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
-        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
         public int? COGAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
@@ -99,7 +103,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAGIT { get; set; }
         [Display(Name = "If any of the mood-related behavioral symptoms in 12a-12f are present, at what age did they begin?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Visual hallucinations")]
 		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -162,8 +165,10 @@ namespace UDS.Net.Forms.Models.UDS4
 		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
 		public int? BEREM { get; set; }
         [Display(Name = "IF YES, at what age did the dream enactment behavior begin?")]
+        [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         public int? BEREMAGO { get; set; }
         [Display(Name = "Was REM sleep behavior disorder confirmed by polysomnography?")]
+        [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         public int? BEREMCONF { get; set; }
         [Display(Name = "Other behavioral symptom")]
 		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -221,6 +226,99 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? FRSTCHG { get; set; }
+        [NotMapped]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        public bool? COGAGESymptomsPresent
+        {
+            get
+            {
+                if(COGMEM == 1 || COGORI == 1 || COGJUDG == 1 || COGLANG == 1 || COGVIS == 1 || COGATTN == 1 || COGFLUC == 1 || !String.IsNullOrEmpty(COGOTHRX))
+                {
+                    if(COGAGE > 0)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        public bool? BEHAGESymptomsPresent
+        {
+            get
+            {
+                if (BEAPATHY == 1 || BEDEP == 1 || BEANX == 1 || BEEUPH == 1 || BEIRRIT == 1 || BEAGIT == 1)
+                {
+                    if (BEHAGE > 0)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        public bool? PERCHAGESymptomsPresent
+        {
+            get
+            {
+                if (BEVHALL == 1 || BEAHALL == 1 || BEDEL == 1 || BEAGGRS == 1 || PSYCHAGE == 1 || BEDISIN == 1 || BEPERCH == 1 || BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1)
+                {
+                    if (PERCHAGE > 0)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+
+        [NotMapped]
+        [RequiredOnComplete(ErrorMessage = "Response required")]
+        public bool? MOTORAGEMotorChangesPresent
+        {
+            get
+            {
+                if (MOGAIT == 1 || MOFALLS == 1 || MOSLOW == 1 || MOTREM == 1 || MOLIMB == 1 || MOFACE == 1 || MOSPEECH == 1 )
+                {
+                    if (MOTORAGE > 0)
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
