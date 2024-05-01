@@ -507,15 +507,16 @@
                                 </div>
                                 <div>
                                     <small class="italic">(Check all that apply)</small>
+                                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BESUBABCheckboxValidation"></span>
                                 </div>
                             </div>
-                            <div class="grid gap-y-5">
+                            <div class="grid gap-y-5 subsubsubcounterreset">
                                 <div class="flex">
                                     <div>
                                         @Html.CheckBox("B9.ALCUSE", Model.B9.ALCUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
-                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.ALCUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.ALCUSE)</label>
+                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.ALCUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.ALCUSE)</label>
                                     </div>
                                 </div>
                                 <div class="flex">
@@ -523,7 +524,7 @@
                                         @Html.CheckBox("B9.SEDUSE", Model.B9.SEDUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
-                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.SEDUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.SEDUSE)</label>
+                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.SEDUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.SEDUSE)</label>
                                     </div>
                                 </div>
                                 <div class="flex">
@@ -531,7 +532,7 @@
                                         @Html.CheckBox("B9.OPIATEUSE", Model.B9.OPIATEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
-                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OPIATEUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.OPIATEUSE)</label>
+                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OPIATEUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.OPIATEUSE)</label>
                                     </div>
                                 </div>
                                 <div class="flex">
@@ -539,7 +540,7 @@
                                         @Html.CheckBox("B9.COCAINEUSE", Model.B9.COCAINEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
-                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.COCAINEUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.COCAINEUSE)</label>
+                                        <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.COCAINEUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.COCAINEUSE)</label>
                                     </div>
                                 </div>
                                 <div class="flex">
@@ -548,7 +549,7 @@
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div>
-                                            <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OTHSUBUSE"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.B9.OTHSUBUSE)</label>
+                                            <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OTHSUBUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.OTHSUBUSE)</label>
                                         </div>
                                         <div>
                                             <input asp-for="B9.OTHSUBUSEX" />
