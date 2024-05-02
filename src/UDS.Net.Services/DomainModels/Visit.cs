@@ -70,8 +70,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
-                            new FormContract("B9", false),
-                            new FormContract("B8", true)
+                            new FormContract("B8", true),
+                            new FormContract("B9", false)
 
                         }
                     },
@@ -88,8 +88,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
-                            new FormContract("B9", false),
-                            new FormContract("B8", true)
+                            new FormContract("B8", true),
+                            new FormContract("B9", false)
                         }
                     },
                     {
@@ -106,7 +106,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
-                            new FormContract("B8", true)
+                            new FormContract("B8", true),
+                            new FormContract("B9", false)
                         }
                     },
                     {
@@ -122,7 +123,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
-                            new FormContract("B8", false)
+                            new FormContract("B8", false),
+                            new FormContract("B9", false)
                         }
                     }
                 };
