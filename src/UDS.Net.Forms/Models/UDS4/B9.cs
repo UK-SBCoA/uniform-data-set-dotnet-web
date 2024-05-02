@@ -220,7 +220,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Were changes in motor function suggestive of amyotrophic lateral sclerosis?")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? MOMOALS { get; set; }
-        [Display(Name = "Overall course of decline of cognitive / behavorial / motor syndrome")]
+        [Display(Name = "Overall course of decline of cognitive / behavioral / motor syndrome")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? COURSE { get; set; }
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
