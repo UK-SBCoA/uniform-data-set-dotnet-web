@@ -184,6 +184,10 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is A4aFormFields)
+                {
+                    vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is A5FormFields)
                 {
                     vm = ((A5FormFields)form.Fields).ToVM(form.Id);
@@ -191,6 +195,10 @@ namespace UDS.Net.Forms.Extensions
                 else if (form.Fields is B1FormFields)
                 {
                     vm = ((B1FormFields)form.Fields).ToVM(form.Id);
+                }
+                else if (form.Fields is B3FormFields)
+                {
+                    vm = ((B3FormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is B4FormFields)
                 {
@@ -546,6 +554,48 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+
+
+        public static A4a ToVM(this A4aFormFields fields, int formId)
+        {
+            return new A4a()
+            {
+                Id = formId,
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK,
+                Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
+
+            };
+        }
+
+        public static A4aTreatment ToVM(this A4aTreatmentFormFields fields, int formId)
+        {
+            return new A4aTreatment()
+            {
+                TreatmentIndex = fields.TreatmentIndex,
+                TARGETAB = fields.TARGETAB,
+                TARGETTAU = fields.TARGETTAU,
+                TARGETINF = fields.TARGETINF,
+                TARGETSYN = fields.TARGETSYN,
+                TARGETOTH = fields.TARGETOTH,
+                TARGETOTX = fields.TARGETOTX,
+                TRTTRIAL = fields.TRTTRIAL,
+                NCTNUM = fields.NCTNUM,
+                STARTMO = fields.STARTMO,
+                STARTYEAR = fields.STARTYEAR,
+                ENDMO = fields.ENDMO,
+                ENDYEAR = fields.ENDYEAR,
+                CARETRIAL = fields.CARETRIAL,
+                TRIALGRP = fields.TRIALGRP
+            };
+        }
+
+
+
         public static A5 ToVM(this A5FormFields fields, int formId)
         {
             return new A5()
@@ -642,6 +692,70 @@ namespace UDS.Net.Forms.Extensions
                 BPSYSR2 = fields.BPSYSR2,
                 BPDIASR2 = fields.BPDIASR2,
                 HRATE = fields.HRATE
+            };
+        }
+
+        public static B3 ToVM(this B3FormFields fields, int formId)
+        {
+            return new B3()
+            {
+                Id = formId,
+                PDNORMAL = fields.PDNORMAL,
+                SPEECH = fields.SPEECH,
+                SPEECHX = fields.SPEECHX,
+                FACEXP = fields.FACEXP,
+                FACEXPX = fields.FACEXPX,
+                TRESTFAC = fields.TRESTFAC,
+                TRESTFAX = fields.TRESTFAX,
+                TRESTRHD = fields.TRESTRHD,
+                TRESTRHX = fields.TRESTRHX,
+                TRESTLHD = fields.TRESTLHD,
+                TRESTLHX = fields.TRESTLHX,
+                TRESTRFT = fields.TRESTRFT,
+                TRESTRFX = fields.TRESTRFX,
+                TRESTLFT = fields.TRESTLFT,
+                TRESTLFX = fields.TRESTLFX,
+                TRACTRHD = fields.TRACTRHD,
+                TRACTRHX = fields.TRACTRHX,
+                TRACTLHD = fields.TRACTLHD,
+                TRACTLHX = fields.TRACTLHX,
+                RIGDNECK = fields.RIGDNECK,
+                RIGDNEX = fields.RIGDNEX,
+                RIGDUPRT = fields.RIGDUPRT,
+                RIGDUPRX = fields.RIGDUPRX,
+                RIGDUPLF = fields.RIGDUPLF,
+                RIGDUPLX = fields.RIGDUPLX,
+                RIGDLORT = fields.RIGDLORT,
+                RIGDLORX = fields.RIGDLORX,
+                RIGDLOLF = fields.RIGDLOLF,
+                RIGDLOLX = fields.RIGDLOLX,
+                TAPSRT = fields.TAPSRT,
+                TAPSRTX = fields.TAPSRTX,
+                TAPSLF = fields.TAPSLF,
+                TAPSLFX = fields.TAPSLFX,
+                HANDMOVR = fields.HANDMOVR,
+                HANDMVRX = fields.HANDMVRX,
+                HANDMOVL = fields.HANDMOVL,
+                HANDMVLX = fields.HANDMVLX,
+                HANDALTR = fields.HANDALTR,
+                HANDATRX = fields.HANDATRX,
+                HANDALTL = fields.HANDALTL,
+                HANDATLX = fields.HANDATLX,
+                LEGRT = fields.LEGRT,
+                LEGRTX = fields.LEGRTX,
+                LEGLF = fields.LEGLF,
+                LEGLFX = fields.LEGLFX,
+                ARISING = fields.ARISING,
+                ARISINGX = fields.ARISINGX,
+                POSTURE = fields.POSTURE,
+                POSTUREX = fields.POSTUREX,
+                GAIT = fields.GAIT,
+                GAITX = fields.GAITX,
+                POSSTAB = fields.POSSTAB,
+                POSSTABX = fields.POSSTABX,
+                BRADYKIN = fields.BRADYKIN,
+                BRADYKIX = fields.BRADYKIX,
+                TOTALUPDRS = fields.TOTALUPDRS
             };
         }
 
@@ -745,49 +859,44 @@ namespace UDS.Net.Forms.Extensions
             return new B8()
             {
                 Id = formId,
-                NORMEXAM = fields.NORMEXAM,
+                NEUREXAM = fields.NEUREXAM,
+                NORMNREXAM = fields.NORMNREXAM.HasValue ? (fields.NORMNREXAM == true ? 1 : 0) : null,
                 PARKSIGN = fields.PARKSIGN,
-                RESTTRL = fields.RESTTRL,
-                RESTTRR = fields.RESTTRR,
-                SLOWINGL = fields.SLOWINGL,
-                SLOWINGR = fields.SLOWINGR,
-                RIGIDL = fields.RIGIDL,
-                RIGIDR = fields.RIGIDR,
-                BRADY = fields.BRADY,
-                PARKGAIT = fields.PARKGAIT,
+                SLOWINGFM = fields.SLOWINGFM,
+                TREMREST = fields.TREMREST,
+                TREMPOST = fields.TREMPOST,
+                TREMKINE = fields.TREMKINE,
+                RIGIDARM = fields.RIGIDARM,
+                RIGIDLEG = fields.RIGIDLEG,
+                DYSTARM = fields.DYSTARM,
+                DYSTLEG = fields.DYSTLEG,
+                CHOREA = fields.CHOREA,
+                AMPMOTOR = fields.AMPMOTOR,
+                AXIALRIG = fields.AXIALRIG,
                 POSTINST = fields.POSTINST,
-                CVDSIGNS = fields.CVDSIGNS,
-                CORTDEF = fields.CORTDEF,
-                SIVDFIND = fields.SIVDFIND,
-                CVDMOTL = fields.CVDMOTL,
-                CVDMOTR = fields.CVDMOTR,
-                CORTVISL = fields.CORTVISL,
-                CORTVISR = fields.CORTVISR,
-                SOMATL = fields.SOMATL,
-                SOMATR = fields.SOMATR,
-                POSTCORT = fields.POSTCORT,
-                PSPCBS = fields.PSPCBS,
-                EYEPSP = fields.EYEPSP,
-                DYSPSP = fields.DYSPSP,
-                AXIALPSP = fields.AXIALPSP,
-                GAITPSP = fields.GAITPSP,
+                MASKING = fields.MASKING,
+                STOOPED = fields.STOOPED,
+                OTHERSIGN = fields.OTHERSIGN,
+                LIMBAPRAX = fields.LIMBAPRAX,
+                UMNDIST = fields.UMNDIST,
+                LMNDIST = fields.LMNDIST,
+                VFIELDCUT = fields.VFIELDCUT,
+                LIMBATAX = fields.LIMBATAX,
+                MYOCLON = fields.MYOCLON,
+                UNISOMATO = fields.UNISOMATO,
+                APHASIA = fields.APHASIA,
+                ALIENLIMB = fields.ALIENLIMB,
+                HSPATNEG = fields.HSPATNEG,
+                PSPOAGNO = fields.PSPOAGNO,
+                SMTAGNO = fields.SMTAGNO,
+                OPTICATAX = fields.OPTICATAX,
+                APRAXGAZE = fields.APRAXGAZE,
+                VHGAZEPAL = fields.VHGAZEPAL,
+                DYSARTH = fields.DYSARTH,
                 APRAXSP = fields.APRAXSP,
-                APRAXL = fields.APRAXL,
-                APRAXR = fields.APRAXR,
-                CORTSENL = fields.CORTSENL,
-                CORTSENR = fields.CORTSENR,
-                ATAXL = fields.ATAXL,
-                ATAXR = fields.ATAXR,
-                ALIENLML = fields.ALIENLML,
-                ALIENLMR = fields.ALIENLMR,
-                DYSTONL = fields.DYSTONL,
-                DYSTONR = fields.DYSTONR,
-                MYOCLLT = fields.MYOCLLT,
-                MYOCLRT = fields.MYOCLRT,
-                ALSFIND = fields.ALSFIND,
-                GAITNPH = fields.GAITNPH,
-                OTHNEUR = fields.OTHNEUR,
-                OTHNEURX = fields.OTHNEURX
+                GAITABN = fields.GAITABN,
+                GAITFIND = fields.GAITFIND,
+                GAITOTHRX = fields.GAITOTHRX
             };
         }
 

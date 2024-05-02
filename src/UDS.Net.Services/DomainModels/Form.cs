@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
@@ -81,10 +82,14 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new A3FormFields();
             else if (Kind == "A4")
                 Fields = new A4GFormFields();
+            else if (Kind == "A4a")
+                Fields = new A4aFormFields();
             else if (Kind == "A5")
                 Fields = new A5FormFields();
             else if (Kind == "B1")
                 Fields = new B1FormFields();
+            else if (Kind == "B3")
+                Fields = new B3FormFields();
             else if (Kind == "B4")
                 Fields = new B4FormFields();
             else if (Kind == "B5")
