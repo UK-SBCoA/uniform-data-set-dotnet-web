@@ -901,7 +901,7 @@ namespace UDS.Net.Services.Extensions
                 BEOTHRX = fields.BEOTHRX,
                 BEMODE = fields.BEMODE,
                 BEMODEX = fields.BEMODEX,
-                DECCLMOT = fields.DECCLMOT.HasValue ? true : false,
+                DECCLMOT = ConvertIntToBool(fields.DECCLMOT),
                 MOGAIT = fields.MOGAIT,
                 MOFALLS = fields.MOFALLS,
                 MOSLOW = fields.MOSLOW,
@@ -919,7 +919,6 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
-        //DEVNOTE: Do I want to have a function for easily converting the Yes/No radios back to nullable bools to maintain True / false / Null ? 
         private static bool? ConvertIntToBool(int? property)
         {
             if (property == 1) return true;
