@@ -78,8 +78,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
         public int? DECCLBE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Apathy, withdrawal")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEAPATHY { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEAPATHY { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Depressed mood")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEDEP { get; set; }
@@ -99,31 +99,31 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         public int? BEHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Visual hallucinations")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEVHALL { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEVHALL { get; set; }
         [Display(Name = "IF YES, do their hallucinations include patterns that are not definite objects, such as pixelation of flat uniform surfaces?")]
         public int? BEVPATT { get; set; }
         [Display(Name = "IF YES, do their hallucinations include well formed and detailed images of objects or people, either as independent images or as part of other objects?")]
         public int? BEVWELL { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Auditory hallucinations")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEAHALL { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEAHALL { get; set; }
         [Display(Name = "IF YES, do the auditory hallucinations include simple sounds like knocks or other simple sounds?")]
         public int? BEAHSIMP { get; set; }
         [Display(Name = "IF YES, do the auditory hallucinations include complex sounds like voices speaking words, or music?")]
         public int? BEAHCOMP { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Abnormal, false, or delusional beliefs")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEDEL { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEDEL { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Aggression")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEAGGRS { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEAGGRS { get; set; }
         [Display(Name = "If any of the psychosis and impulse control-related behavioral symptoms in 12h-12k are present, at what age did they begin?")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? PSYCHAGE { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? PSYCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Disinhibition")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEDISIN { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEDISIN { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Personality change")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEPERCH { get; set; }
@@ -151,14 +151,14 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
         [MaxLength(60)]
-		[RequiredIf(nameof(OTHSUBUSE), "true", ErrorMessage = "Value required")]
-		public string? OTHSUBUSEX { get; set; }
+        [RequiredIf(nameof(OTHSUBUSE), "true", ErrorMessage = "Value required")]
+        public string? OTHSUBUSEX { get; set; }
         [Display(Name = "If any of the personality-related behavioral symptoms in 12m-12r are present, at what age did they begin?")]
         [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         public int? PERCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — REM sleep behavior disorder")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEREM { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEREM { get; set; }
         [Display(Name = "IF YES, at what age did the dream enactment behavior begin?")]
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
@@ -167,8 +167,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         public int? BEREMCONF { get; set; }
         [Display(Name = "Other behavioral symptom")]
-		[RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
-		public int? BEOTHR { get; set; }
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        public int? BEOTHR { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior - Other, specify")]
         [RequiredIf(nameof(BEOTHR), "1", ErrorMessage = "Value required")]
         [MaxLength(60)]
@@ -232,7 +232,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if(ALCUSE == false && SEDUSE == false && OPIATEUSE == false && COCAINEUSE == false && OTHSUBUSE == false)
+                if (ALCUSE == false && SEDUSE == false && OPIATEUSE == false && COCAINEUSE == false && OTHSUBUSE == false)
                 {
                     return null;
                 }
@@ -246,9 +246,9 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if(COGMEM == 1 || COGORI == 1 || COGJUDG == 1 || COGLANG == 1 || COGVIS == 1 || COGATTN == 1 || COGFLUC == 1 || !String.IsNullOrEmpty(COGOTHRX))
+                if (COGMEM == 1 || COGORI == 1 || COGJUDG == 1 || COGLANG == 1 || COGVIS == 1 || COGATTN == 1 || COGFLUC == 1 || !String.IsNullOrEmpty(COGOTHRX))
                 {
-                    if(COGAGE < 0)
+                    if (COGAGE < 0)
                     {
                         return true;
                     }
@@ -257,7 +257,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
                 else
                 {
-                    if(COGAGE > 0)
+                    if (COGAGE > 0)
                     {
                         return null;
                     }
@@ -328,7 +328,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (MOGAIT == 1 || MOFALLS == 1 || MOSLOW == 1 || MOTREM == 1 || MOLIMB == 1 || MOFACE == 1 || MOSPEECH == 1 )
+                if (MOGAIT == 1 || MOFALLS == 1 || MOSLOW == 1 || MOTREM == 1 || MOLIMB == 1 || MOFACE == 1 || MOSPEECH == 1)
                 {
                     if (MOTORAGE > 0)
                     {
