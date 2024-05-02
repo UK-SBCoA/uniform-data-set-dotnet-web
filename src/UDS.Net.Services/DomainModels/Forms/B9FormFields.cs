@@ -1,6 +1,4 @@
-﻿//Missing CANNABUSE variable for checkbox 12r1e.
-
-using System;
+﻿using System;
 using UDS.Net.Dto;
 
 namespace UDS.Net.Services.DomainModels.Forms
