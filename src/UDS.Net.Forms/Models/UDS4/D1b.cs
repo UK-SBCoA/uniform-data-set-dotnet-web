@@ -11,94 +11,152 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1b : FormModel
     {
+        [Required]
         [Display(Name = "Were any biomarker results used to support the current etiological diagnosis?")]
         public int? BIOMARKDX { get; set; }
 
+        [RequiredIf(nameof(BIOMARKDX), "1", ErrorMessage = "Please indicate.")]
         [Display(Name = "Fluid Biomarkers - Were fluid biomarkers used for assessing the etiological diagnosis?")]
         public int? FLUIDBIOM { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
         public int? BLOODAD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with FTLD")]
         public int? BLOODFTLD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with LBD")]
         public int? BLOODLBD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology")]
         public int? BLOODOTH { get; set; }
 
+        [RequiredIf(nameof(BLOODOTH), "1", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BLOODOTHX { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
         public int? CSFAD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with FTLD")]
         public int? CSFFTLD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with LBD")]
         public int? CSFLBD { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
+        [RequiredIf(nameof(CSFOTHX), "1", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
 
+        [RequiredIf(nameof(FLUIDBIOM), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Imaging - Was imaging used for assessing etiological diagnosis?")]
         public int? IMAGINGDX { get; set; }
 
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Tracer-based PET - Were tracer-based PET measures used in assessing an etiological diagnosis?")]
         public int? PETDX { get; set; }
 
+        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Elevated amyloid")]
         public int? AMYLPET { get; set; }
 
+        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Elevated tau pathology")]
         public int? TAUPET { get; set; }
 
+        [RequiredIf(nameof(IMAGINGDX), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
 
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with FTLD")]
         public int? FDGFTLD { get; set; }
 
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with LBD")]
         public int? FDGLBD { get; set; }
 
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology")]
         public int? FDGOTH { get; set; }
 
+        [RequiredIf(nameof(FDGOTH), "1", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
+        [RequiredIf(nameof(FDGPETDX), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
+        [RequiredIf(nameof(DATSCANDX), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(DATSCANDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(DATSCANDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis? (specify)")]
         [MaxLength(60)]
         public string? TRACOTHDXX { get; set; }
 
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
         public int? TRACERAD { get; set; }
 
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with FTLD")]
         public int? TRACERFTLD { get; set; }
 
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with LBD")]
         public int? TRACERLBD { get; set; }
 
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology")]
         public int? TRACEROTH { get; set; }
 
@@ -225,6 +283,37 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Primary, contributing, or non-contributing - Frontotemporal lobar degeneration")]
         public int? FTLDIF { get; set; }
+
+        [RequiredIf(nameof(FTLD), "true", ErrorMessage = "Please select one.")]
+        [NotMapped]
+        public bool? FTLDIndicated
+        {
+            get
+            {
+                int counter = 0;
+                if (PSP == true)
+                {
+                    counter++;
+                }
+                if (CORT == true)
+                {
+                    counter++;
+                }
+                if (FTLDMO == true)
+                {
+                    counter++;
+                }
+                if (FTLDNOS == true)
+                {
+                    counter++;
+                }
+                if (counter == 1)
+                {
+                    return true;
+                }
+                return null;
+            }
+        }
 
         [Display(Name = "Primary supranuclear palsy (PSP)")]
         public bool? PSP { get; set; }
