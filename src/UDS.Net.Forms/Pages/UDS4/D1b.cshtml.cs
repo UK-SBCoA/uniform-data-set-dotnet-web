@@ -391,7 +391,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("D1b.FDGOTHX"),
+                    new UIDisableAttribute("D1b.TRACOTHDXX"),
                     new UIDisableAttribute("D1b.TRACERAD"),
                     new UIDisableAttribute("D1b.TRACERFTLD"),
                     new UIDisableAttribute("D1b.TRACERLBD"),
@@ -404,7 +404,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.FDGOTHX"),
+                    new UIEnableAttribute("D1b.TRACOTHDXX"),
                     new UIEnableAttribute("D1b.TRACERAD"),
                     new UIEnableAttribute("D1b.TRACERFTLD"),
                     new UIEnableAttribute("D1b.TRACERLBD"),
@@ -416,7 +416,7 @@ namespace UDS.Net.Forms.Pages.UDS4
              { "2", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.FDGOTHX"),
+                    new UIEnableAttribute("D1b.TRACOTHDXX"),
                     new UIEnableAttribute("D1b.TRACERAD"),
                     new UIEnableAttribute("D1b.TRACERFTLD"),
                     new UIEnableAttribute("D1b.TRACERLBD"),
@@ -502,6 +502,169 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        public Dictionary<string, UIBehavior> OTHBIOM1UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.OTHBIOMX1"),
+                    new UIDisableAttribute("D1b.BIOMAD1"),
+                    new UIDisableAttribute("D1b.BIOMFTLD1"),
+                    new UIDisableAttribute("D1b.BIOMLBD1"),
+                    new UIDisableAttribute("D1b.BIOMOTH1"),
+                    new UIDisableAttribute("D1b.OTHBIOM2"),
+                    new UIDisableAttribute("D1b.OTHBIOM3"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 11"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX1"),
+                    new UIEnableAttribute("D1b.BIOMAD1"),
+                    new UIEnableAttribute("D1b.BIOMFTLD1"),
+                    new UIEnableAttribute("D1b.BIOMLBD1"),
+                    new UIEnableAttribute("D1b.BIOMOTH1"),
+                    new UIEnableAttribute("D1b.OTHBIOM2"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX1"),
+                    new UIEnableAttribute("D1b.BIOMAD1"),
+                    new UIEnableAttribute("D1b.BIOMFTLD1"),
+                    new UIEnableAttribute("D1b.BIOMLBD1"),
+                    new UIEnableAttribute("D1b.BIOMOTH1"),
+                    new UIEnableAttribute("D1b.OTHBIOM2"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> OTHBIOM2UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.OTHBIOMX2"),
+                    new UIDisableAttribute("D1b.BIOMAD2"),
+                    new UIDisableAttribute("D1b.BIOMFTLD2"),
+                    new UIDisableAttribute("D1b.BIOMLBD2"),
+                    new UIDisableAttribute("D1b.BIOMOTH2"),
+                    new UIDisableAttribute("D1b.OTHBIOM3"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 11"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX2"),
+                    new UIEnableAttribute("D1b.BIOMAD2"),
+                    new UIEnableAttribute("D1b.BIOMFTLD2"),
+                    new UIEnableAttribute("D1b.BIOMLBD2"),
+                    new UIEnableAttribute("D1b.BIOMOTH2"),
+                    new UIEnableAttribute("D1b.OTHBIOM3"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX2"),
+                    new UIEnableAttribute("D1b.BIOMAD2"),
+                    new UIEnableAttribute("D1b.BIOMFTLD2"),
+                    new UIEnableAttribute("D1b.BIOMLBD2"),
+                    new UIEnableAttribute("D1b.BIOMOTH2"),
+                    new UIEnableAttribute("D1b.OTHBIOM3"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> OTHBIOM3UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.OTHBIOMX3"),
+                    new UIDisableAttribute("D1b.BIOMAD3"),
+                    new UIDisableAttribute("D1b.BIOMFTLD3"),
+                    new UIDisableAttribute("D1b.BIOMLBD3"),
+                    new UIDisableAttribute("D1b.BIOMOTH3"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
+
+                },
+                InstructionalMessage = "SKIP TO QUESTION 11"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX3"),
+                    new UIEnableAttribute("D1b.BIOMAD3"),
+                    new UIEnableAttribute("D1b.BIOMFTLD3"),
+                    new UIEnableAttribute("D1b.BIOMLBD3"),
+                    new UIEnableAttribute("D1b.BIOMOTH3"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
+
+                }
+            } },
+             { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1b.OTHBIOMX3"),
+                    new UIEnableAttribute("D1b.BIOMAD3"),
+                    new UIEnableAttribute("D1b.BIOMFTLD3"),
+                    new UIEnableAttribute("D1b.BIOMLBD3"),
+                    new UIEnableAttribute("D1b.BIOMOTH3"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> BIOMOTH1UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> BIOMOTH2UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> BIOMOTH3UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> FTLDSUBTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } },
+            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FTLDSUBX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } }
+
+        };
+
+        public Dictionary<string, UIBehavior> TRACEROTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
+
+        };
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
