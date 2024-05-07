@@ -247,7 +247,7 @@
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.PETDX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.D1b.PETDX)" for="@Model.D1b.PETDX" items="Model.PETDXListItems" ui-behaviors="Model.PETDXUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span> 
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span>
             </div>
         </div>
     </table>
@@ -336,7 +336,7 @@
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGOTH)" for="@Model.D1b.FDGOTH" items="Model.FindingsListItems" ui-behaviors="Model.FDGOTHUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td>
+                <td class="pl-5">
                     <label asp-for="D1b.FDGOTHX">@Html.DisplayNameFor(m => m.D1b.FDGOTHX)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTHX"></p>
                 </td>
@@ -361,27 +361,27 @@
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DATSCANDX"></span>
             </div>
         </div>
+    </table>
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="D1b.TRACOTHDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACOTHDX)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACOTHDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems" ui-behaviors="Model.TRACOTHDXUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDX"></span>
-            </div>
-        </div>
-
+    <table class="table-auto min-w-full divide-y divide-gray-300">
         <tr>
-            <td class="pl-5">
-                <label asp-for="D1b.TRACOTHDXX">@Html.DisplayNameFor(m => m.D1b.TRACOTHDXX)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDXX"></p>
-            </td>
-            <td colspan="4">
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACOTHDXX"></p>
-                        <input asp-for="@Model.D1b.TRACOTHDXX" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDXX"></span>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.TRACOTHDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACOTHDX)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDX"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems" ui-behaviors="Model.TRACOTHDXUIBehavior"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDX"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDXX"></p>
+                            <label asp-for="D1b.TRACOTHDXX">@Html.DisplayNameFor(m => m.D1b.TRACOTHDXX)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDXX"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.TRACOTHDXX" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </td>
@@ -432,7 +432,7 @@
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACEROTH)" for="@Model.D1b.TRACEROTH" items="Model.FindingsListItems" ui-behaviors="Model.TRACEROTHUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td>
+                <td class="pl-5">
                     <label asp-for="D1b.TRACEROTHX">@Html.DisplayNameFor(m => m.D1b.TRACEROTHX)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TRACEROTHX"></p>
                 </td>
@@ -1354,7 +1354,7 @@
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.OTHCOGIF)" for="@Model.D1b.OTHCOGIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td>
+                <td class="pl-5">
                     <label asp-for="D1b.OTHCOGX">@Html.DisplayNameFor(m => m.D1b.OTHCOGX)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.OTHCOGX"></p>
                 </td>
