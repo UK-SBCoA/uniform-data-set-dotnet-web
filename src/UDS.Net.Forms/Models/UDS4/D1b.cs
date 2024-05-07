@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1b : FormModel
     {
-        [Required]
+        [RequiredOnComplete]
         [Display(Name = "Were any biomarker results used to support the current etiological diagnosis?")]
         public int? BIOMARKDX { get; set; }
 
@@ -44,23 +44,19 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? BLOODOTHX { get; set; }
 
-        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FLUIDBIOM), 2, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? CSFAD { get; set; }
 
-        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FLUIDBIOM), 2, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with FTLD")]
         public int? CSFFTLD { get; set; }
 
-        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FLUIDBIOM), 2, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with LBD")]
         public int? CSFLBD { get; set; }
 
-        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FLUIDBIOM), 2, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
@@ -69,10 +65,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
 
-        [RequiredIf(nameof(FLUIDBIOM), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FLUIDBIOM), 0, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging - Was imaging used for assessing etiological diagnosis?")]
         public int? IMAGINGDX { get; set; }
 
@@ -81,39 +74,32 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Tracer-based PET - Were tracer-based PET measures used in assessing an etiological diagnosis?")]
         public int? PETDX { get; set; }
 
-        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(PETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Elevated amyloid")]
         public int? AMYLPET { get; set; }
 
-        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(PETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Elevated tau pathology")]
         public int? TAUPET { get; set; }
 
         [RequiredIf(nameof(IMAGINGDX), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(PETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
-        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
 
-        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with FTLD")]
         public int? FDGFTLD { get; set; }
 
-        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with LBD")]
         public int? FDGLBD { get; set; }
 
-        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with other etiology")]
         public int? FDGOTH { get; set; }
 
@@ -122,148 +108,176 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
-        [RequiredIf(nameof(FDGPETDX), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(FDGPETDX), 0, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
-        [RequiredIf(nameof(DATSCANDX), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(DATSCANDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(DATSCANDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(DATSCANDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
-        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
-        [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis? (specify)")]
+        [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
+        [Display(Name = "(specify)")]
         [MaxLength(60)]
         public string? TRACOTHDXX { get; set; }
 
-        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? TRACERAD { get; set; }
 
-        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with FTLD")]
         public int? TRACERFTLD { get; set; }
 
-        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with LBD")]
         public int? TRACERLBD { get; set; }
 
-        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with other etiology")]
         public int? TRACEROTH { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
+        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? TRACEROTHX { get; set; }
 
         [Display(Name = "Structural Imaging (i.e., MRI or CT) - Was structural imaging data or information used to support an etiological diagnosis?")]
+        [RequiredIfRange(nameof(TRACOTHDX), 0, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "2", ErrorMessage = "Please indicate.")]
         public int? STRUCTDX { get; set; }
 
         [Display(Name = "Atrophy pattern consistent with AD")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
         public int? STRUCTAD { get; set; }
 
         [Display(Name = "Atrophy pattern consistent with FTLD")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
         public int? STRUCTFTLD { get; set; }
 
         [Display(Name = "Consistent with cerebrovascular disease (CVD)")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
         public int? STRUCTCVD { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGLINF { get; set; }
 
         [Display(Name = "Lacunar infarct(s)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGLAC { get; set; }
 
         [Display(Name = "Macrohemorrhage(s)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGMACH { get; set; }
 
         [Display(Name = "Microhemorrhage(s)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGMICH { get; set; }
 
         [Display(Name = "Moderate white-matter hyperintensity (CHS score 5-6)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGMWMH { get; set; }
 
         [Display(Name = "Extensive white-matter hyperintensity (CHS score 7-8+)")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
         public int? IMAGEWMH { get; set; }
 
         [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
+        [RequiredIf(nameof(PETDX), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIfRange(nameof(STRUCTDX), 0, 2, ErrorMessage = "Please specify.")]
         public int? OTHBIOM1 { get; set; }
 
         [Display(Name = "(specify)")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         [MaxLength(60)]
         public string? OTHBIOMX1 { get; set; }
 
         [Display(Name = "Consistent with AD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMAD1 { get; set; }
 
         [Display(Name = "Consistent with FTLD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMFTLD1 { get; set; }
 
         [Display(Name = "Consistent with LBD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMLBD1 { get; set; }
 
         [Display(Name = "Consistent with other etiology")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMOTH1 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
+        [RequiredIf(nameof(BIOMOTH1), "1", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? BIOMOTHX1 { get; set; }
 
         [Display(Name = "Was another biomarker modality used to support an etiological diagnosis?")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? OTHBIOM2 { get; set; }
 
         [Display(Name = "(specify)")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         [MaxLength(60)]
         public string? OTHBIOMX2 { get; set; }
 
         [Display(Name = "Consistent with AD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMAD2 { get; set; }
 
         [Display(Name = "Consistent with FTLD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMFTLD2 { get; set; }
 
         [Display(Name = "Consistent with LBD")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMLBD2 { get; set; }
 
         [Display(Name = "Consistent with other etiology")]
+        [RequiredIfRange(nameof(OTHBIOM1), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMOTH2 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
+        [RequiredIf(nameof(BIOMOTH2), "1", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? BIOMOTHX2 { get; set; }
 
         [Display(Name = "Was another biomarker modality used to support an etiological diagnosis?")]
+        [RequiredIfRange(nameof(OTHBIOM2), 1, 2, ErrorMessage = "Please specify.")]
         public int? OTHBIOM3 { get; set; }
 
         [Display(Name = "(specify)")]
+        [RequiredIfRange(nameof(OTHBIOM3), 1, 2, ErrorMessage = "Please specify.")]
         [MaxLength(60)]
         public string? OTHBIOMX3 { get; set; }
 
         [Display(Name = "Consistent with AD")]
+        [RequiredIfRange(nameof(OTHBIOM3), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMAD3 { get; set; }
 
         [Display(Name = "Consistent with FTLD")]
+        [RequiredIfRange(nameof(OTHBIOM3), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMFTLD3 { get; set; }
 
         [Display(Name = "Consistent with LBD")]
+        [RequiredIfRange(nameof(OTHBIOM3), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMLBD3 { get; set; }
 
         [Display(Name = "Consistent with other etiology")]
+        [RequiredIfRange(nameof(OTHBIOM3), 1, 2, ErrorMessage = "Please specify.")]
         public int? BIOMOTH3 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
+        [RequiredIf(nameof(BIOMOTH3), "1", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? BIOMOTHX3 { get; set; }
 
         [Display(Name = "Is there an autosomal dominant pathogenic variant to support an etiological diagnosis?")]
+        [RequiredIf(nameof(OTHBIOM1), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(OTHBIOM2), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(OTHBIOM3), "0", ErrorMessage = "Please indicate.")]
         public int? AUTDOMMUT { get; set; }
 
         [Display(Name = "Alzheimer's disease")]
@@ -343,6 +357,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? FTLDSUBT { get; set; }
 
         [Display(Name = "Other FTLD subtype (specify)")]
+        [RequiredIf(nameof(FTLDSUBT), "3", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? FTLDSUBX { get; set; }
 
@@ -401,6 +416,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? OTHCOGIF { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [RequiredIf(nameof(OTHCOG), "true", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
