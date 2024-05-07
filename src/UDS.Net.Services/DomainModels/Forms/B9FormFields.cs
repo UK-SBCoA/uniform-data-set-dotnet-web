@@ -48,12 +48,12 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BEOBCOM { get; set; }
         public int? BEANGER { get; set; }
         public int? BESUBAB { get; set; }
-        public bool ALCUSE { get; set; }
-        public bool SEDUSE { get; set; }
-        public bool OPIATEUSE { get; set; }
-        public bool COCAINEUSE { get; set; }
-        public bool CANNABUSE { get; set; }
-        public bool OTHSUBUSE { get; set; }
+        public bool? ALCUSE { get; set; }
+        public bool? SEDUSE { get; set; }
+        public bool? OPIATEUSE { get; set; }
+        public bool? COCAINEUSE { get; set; }
+        public bool? CANNABUSE { get; set; }
+        public bool? OTHSUBUSE { get; set; }
         public string? OTHSUBUSEX { get; set; }
         public int? PERCHAGE { get; set; }
         public int? BEREM { get; set; }
@@ -130,12 +130,12 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOBCOM = b9Dto.BEOBCOM;
                 BEANGER = b9Dto.BEANGER;
                 BESUBAB = b9Dto.BESUBAB;
-                ALCUSE = ConvertToBool(b9Dto.ALCUSE.Value);
-                SEDUSE = ConvertToBool(b9Dto.SEDUSE);
-                OPIATEUSE = ConvertToBool(b9Dto.OPIATEUSE);
-                COCAINEUSE = ConvertToBool(b9Dto.COCAINEUSE);
-                CANNABUSE = ConvertToBool(b9Dto.CANNABUSE);
-                OTHSUBUSE = ConvertToBool(b9Dto.OTHSUBUSE);
+                ALCUSE = b9Dto.ALCUSE;
+                SEDUSE = b9Dto.SEDUSE;
+                OPIATEUSE = b9Dto.OPIATEUSE;
+                COCAINEUSE = b9Dto.COCAINEUSE;
+                CANNABUSE = b9Dto.CANNABUSE;
+                OTHSUBUSE = b9Dto.OTHSUBUSE;
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;
                 BEREM = b9Dto.BEREM;
@@ -168,12 +168,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (property == true) return 1;
             if (property == false) return 0;
             return null;
-        }
-
-        private static bool ConvertToBool(bool? property)
-        {
-            if (property == null || property == false) return false;
-            else return true;
         }
 
         public string GetDescription()

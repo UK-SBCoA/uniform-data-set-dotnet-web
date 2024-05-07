@@ -140,17 +140,17 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BESUBAB { get; set; }
         [Display(Name = "Alcohol use")]
-        public bool ALCUSE { get; set; }
+        public bool? ALCUSE { get; set; }
         [Display(Name = "Sedative/hypnotic use")]
-        public bool SEDUSE { get; set; }
+        public bool? SEDUSE { get; set; }
         [Display(Name = "Opiate use")]
-        public bool OPIATEUSE { get; set; }
+        public bool? OPIATEUSE { get; set; }
         [Display(Name = "Cocaine use")]
-        public bool COCAINEUSE { get; set; }
+        public bool? COCAINEUSE { get; set; }
         [Display(Name = "Cannabis use")]
-        public bool CANNABUSE { get; set; }
+        public bool? CANNABUSE { get; set; }
         [Display(Name = "Other substance use (SPECIFY)")]
-        public bool OTHSUBUSE { get; set; }
+        public bool? OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
         [MaxLength(60)]
         [RequiredIf(nameof(OTHSUBUSE), "true", ErrorMessage = "Value required")]
