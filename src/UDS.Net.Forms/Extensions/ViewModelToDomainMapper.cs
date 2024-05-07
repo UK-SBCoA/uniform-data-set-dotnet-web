@@ -807,6 +807,7 @@ namespace UDS.Net.Forms.Extensions
                 SEDUSE = vm.SEDUSE,
                 OPIATEUSE = vm.OPIATEUSE,
                 COCAINEUSE = vm.COCAINEUSE,
+                CANNABUSE = vm.CANNABUSE,
                 OTHSUBUSE = vm.OTHSUBUSE,
                 OTHSUBUSEX = vm.OTHSUBUSEX,
                 PERCHAGE = vm.PERCHAGE,

@@ -52,6 +52,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool SEDUSE { get; set; }
         public bool OPIATEUSE { get; set; }
         public bool COCAINEUSE { get; set; }
+        public bool CANNABUSE { get; set; }
         public bool OTHSUBUSE { get; set; }
         public string? OTHSUBUSEX { get; set; }
         public int? PERCHAGE { get; set; }
@@ -133,6 +134,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 SEDUSE = (bool)b9Dto.SEDUSE;
                 OPIATEUSE = (bool)b9Dto.OPIATEUSE;
                 COCAINEUSE = (bool)b9Dto.COCAINEUSE;
+                CANNABUSE = (bool)b9Dto.CANNABUSE;
                 OTHSUBUSE = (bool)b9Dto.OTHSUBUSE;
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;

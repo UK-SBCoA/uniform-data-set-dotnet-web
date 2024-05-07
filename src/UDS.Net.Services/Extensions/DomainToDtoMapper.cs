@@ -1067,6 +1067,7 @@ namespace UDS.Net.Services.Extensions
                 SEDUSE = fields.SEDUSE,
                 OPIATEUSE = fields.OPIATEUSE,
                 COCAINEUSE = fields.COCAINEUSE,
+                CANNABUSE = fields.CANNABUSE,
                 OTHSUBUSE = fields.OTHSUBUSE,
                 OTHSUBUSEX = fields.OTHSUBUSEX,
                 PERCHAGE = fields.PERCHAGE,

@@ -147,6 +147,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool OPIATEUSE { get; set; }
         [Display(Name = "Cocaine use")]
         public bool COCAINEUSE { get; set; }
+        [Display(Name = "Cannabis use")]
+        public bool CANNABUSE { get; set; }
         [Display(Name = "Other substance use (SPECIFY)")]
         public bool OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
