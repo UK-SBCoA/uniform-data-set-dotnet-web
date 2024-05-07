@@ -130,12 +130,12 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOBCOM = b9Dto.BEOBCOM;
                 BEANGER = b9Dto.BEANGER;
                 BESUBAB = b9Dto.BESUBAB;
-                ALCUSE = (bool)b9Dto.ALCUSE;
-                SEDUSE = (bool)b9Dto.SEDUSE;
-                OPIATEUSE = (bool)b9Dto.OPIATEUSE;
-                COCAINEUSE = (bool)b9Dto.COCAINEUSE;
-                CANNABUSE = (bool)b9Dto.CANNABUSE;
-                OTHSUBUSE = (bool)b9Dto.OTHSUBUSE;
+                ALCUSE = ConvertToBool(b9Dto.ALCUSE.Value);
+                SEDUSE = ConvertToBool(b9Dto.SEDUSE);
+                OPIATEUSE = ConvertToBool(b9Dto.OPIATEUSE);
+                COCAINEUSE = ConvertToBool(b9Dto.COCAINEUSE);
+                CANNABUSE = ConvertToBool(b9Dto.CANNABUSE);
+                OTHSUBUSE = ConvertToBool(b9Dto.OTHSUBUSE);
                 OTHSUBUSEX = b9Dto.OTHSUBUSEX;
                 PERCHAGE = b9Dto.PERCHAGE;
                 BEREM = b9Dto.BEREM;
@@ -168,6 +168,12 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (property == true) return 1;
             if (property == false) return 0;
             return null;
+        }
+
+        private static bool ConvertToBool(bool? property)
+        {
+            if (property == null || property == false) return false;
+            else return true;
         }
 
         public string GetDescription()
