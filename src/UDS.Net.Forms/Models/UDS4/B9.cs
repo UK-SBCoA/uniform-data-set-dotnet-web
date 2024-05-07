@@ -147,7 +147,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool OPIATEUSE { get; set; }
         [Display(Name = "Cocaine use")]
         public bool COCAINEUSE { get; set; }
-        [Display(Name = "Other substance use")]
+        [Display(Name = "Other substance use (SPECIFY)")]
         public bool OTHSUBUSE { get; set; }
         [Display(Name = "Specify other substance use")]
         [MaxLength(60)]
@@ -176,7 +176,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Overall mode of onset for behavioral symptoms")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEMODE { get; set; }
-        [Display(Name = "Other mode of onset - specify")]
+        [Display(Name = "Other mode of onset (SPECIFY)")]
         [RequiredIf(nameof(BEMODE), "4", ErrorMessage = "Value required")]
         [MaxLength(60)]
         public string? BEMODEX { get; set; }
