@@ -435,11 +435,11 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if ((FTLD == true) && (FTLDIF == 1)) 
+                if ((FTLD == true) && (FTLDIF == 1))
                 {
                     counter++;
                 }
-                if ((CVD == true) && (CVDIF == 1)) 
+                if ((CVD == true) && (CVDIF == 1))
                 {
                     counter++;
                 }
@@ -447,7 +447,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if ((CTE == true) && (CTEIF == 1)) 
+                if ((CTE == true) && (CTEIF == 1))
                 {
                     counter++;
                 }
