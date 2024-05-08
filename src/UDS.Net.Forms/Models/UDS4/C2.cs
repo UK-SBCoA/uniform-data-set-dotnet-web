@@ -24,7 +24,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Which MoCA was administered?")]
         public int? MOCALOC { get; set; }
 
         [Display(Name = "Language of MoCA administration")]
@@ -44,44 +43,36 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Was the MoCA affected by hearing impairment?")]
         public int? MOCAHEAR { get; set; }
 
-        [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-30,88)")]
+        [Display(Name = "TOTAL RAW SCORE - UNCORRECTED (Not corrected for education or visual/hearing impairment)", Description = "enter 88 if any of the following MoCA items were not administered: 1g-1l, 1n-1t, 1w-1bb")]
         [RegularExpression("^(\\d|[0-2]\\d|30|88)$", ErrorMessage = "Allowed values are 0-30 or 88 = not administered.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATRAI { get; set; }
 
         [Display(Name = " Visuospatial/executive — Cube", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACUBE { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock contour", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLOC { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock numbers", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLON { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock hands", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLOH { get; set; }
 
         [Display(Name = "Language — Naming", Description = "(0-3, 95-98)")]
         [RegularExpression("^([0-3]|9[5-8])$", ErrorMessage = "Allowed values are 0-3 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCANAMI { get; set; }
 
         [Display(Name = "Memory — Registration (two trials)", Description = "(0-10, 95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCAREGI { get; set; }
 
         [Display(Name = "Attention — Digits", Description = "(0-2, 95-98)")]
@@ -118,7 +109,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Delayed recall — No cue", Description = "(0-5, 95-98)")]
         [RegularExpression("^([0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-5 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCARECN { get; set; }
 
         [Display(Name = "Delayed recall — Category cue", Description = "(0-5, 88 = not applicable)")]
@@ -164,11 +154,10 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnComplete]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -193,7 +182,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete(ErrorMessage = "Provide Benson figure score")]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -238,7 +226,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredOnComplete(ErrorMessage = "Provide number of seconds to complete")]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -257,17 +244,16 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
         [Range(0, 40, ErrorMessage = "Allowed values are 0-40.")]
-        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Provide commission errors")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "")]
         public int? TRAILBRR { get; set; }
 
         [Display(Name = "Number of correct lines", Description = "(0-24)")]
         [Range(0, 24, ErrorMessage = "Allowed values are 0-24.")]
-        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "Provide correct lines")]
+        [RequiredIfRange(nameof(TRAILB), 0, 300, ErrorMessage = "")]
         public int? TRAILBLI { get; set; }
 
         #endregion
@@ -279,8 +265,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnComplete]
         public int? CRAFTDVR { get; set; }
 
-        [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-25)")]
-        [Range(0, 25, ErrorMessage = "Allowed values are 0-25.")]
+        [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-24)")]
+        [Range(0, 25, ErrorMessage = "Allowed values are 0-24.")]
         [RequiredIfRange(nameof(CRAFTDVR), 0, 44, ErrorMessage = "Provide total recalled, paraphrase scoring.")]
         public int? CRAFTDRE { get; set; }
 
@@ -299,7 +285,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnComplete(ErrorMessage = "Provide score for drawing Benson figure")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -310,13 +295,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         #region if test not completed, skip to question 12a
 
-        [Display(Name = "Which verbal learning test was administered?")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
-        public int? VERBALTEST { get; set; }
-
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredOnComplete]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
@@ -400,100 +380,108 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnComplete]
         public int? COGSTAT { get; set; }
 
         [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
         [Range(1, 3)]
         public int? MODCOMM { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15,95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
-        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Required if Rey AVLT was administered")]
+        [Display(Name = "Trial 1 - Total recall", Description = "(If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a.)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
         public int? REY1REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 1 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 1 intrusions.")]
         public int? REY1INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
+        [Display(Name = "Trial 2 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 total recall.")]
         public int? REY2REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 2 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 intrusions.")]
         public int? REY2INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
+        [Display(Name = "Trial 3 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 total recall.")]
         public int? REY3REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 3 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
         public int? REY3INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
+        [Display(Name = "Trial 4 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 total recall.")]
         public int? REY4REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 4 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
         public int? REY4INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
+        [Display(Name = "Trial 5 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 total recall.")]
         public int? REY5REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 5 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15")]
-        [Range(0, 15)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B recall.")]
-        public int? REYBREC { get; set; }
-
-        [Display(Name = "Intrusions", Description = "(No limit)")]
-        [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
-        public int? REYBINT { get; set; }
-
-        [Display(Name = "Total recall", Description = "(0-15)")]
+        [Display(Name = "Trial 6 - Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 total recall.")]
         public int? REY6REC { get; set; }
 
-        [Display(Name = "Intrusions", Description = "(No limit)")]
+        [Display(Name = "Trial 6 - Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
+        [Display(Name = "PART A: Total number of seconds to complete", Description = "(0–100, 888, 995 – 998)")]
+        [RegularExpression("^(\\d|[1-9]\\d|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, or 888 , or 995-998")]
+        public int? OTRAILA { get; set; }
+
+        [Display(Name = " Number of commission errors", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide number of commission errors.")]
+        public int? OTRLARR { get; set; }
+
+        [Display(Name = "Total number correct", Description = "(0-25)")]
+        [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Provide total number correct.")]
+        public int? OTRLALI { get; set; }
+
+        [Display(Name = "PART B: Total number of seconds to complete", Description = "(0–300, 888, 995 – 998)")]
+        [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, or 888 , or 995-998")]
+        public int? OTRAILB { get; set; }
+
+        [Display(Name = "Number of commission errors", Description = "(No limit)")]
+        [Range(0, 99)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide number of commission errors.")]
+        public int? OTRLBRR { get; set; }
+
+        [Display(Name = "Total number correct", Description = "(0–25)")]
+        [Range(0, 25)]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Provide total number correct.")]
+        public int? OTRLBLI { get; set; }
+
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
-        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Response required")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
         public int? REYDINT { get; set; }
-
-        [Display(Name = "Delay time (minutes)", Description = "(0-85, 99)")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
-        public int? REYDTI { get; set; }
-
-        [Display(Name = "Method of recognition test administration")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
-        public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
         [Range(0, 15)]
@@ -505,75 +493,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-10,95-98)")]
-        [RequiredIf(nameof(VERBALTEST), "2", ErrorMessage = "Response required if question VERBALTEST equals 2")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        public int? CERAD1REC { get; set; }
-
-        [Display(Name = "Can't read", Description = "(0-10)")]
-        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD1READ { get; set; }
-
-        [Display(Name = "Intrusions", Description = "(0-99)")]
-        [RegularExpression("^([0-9]|[1-9][0-9]|99)$", ErrorMessage = "Allowed values are 0-99.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD1INT { get; set; }
-
-        [Display(Name = "Total recall", Description = "(0-10)")]
-        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD2REC { get; set; }
-
-        [Display(Name = "Can't read", Description = "(0-10)")]
-        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD2READ { get; set; }
-
-        [Display(Name = "Intrusions", Description = "(0-99)")]
-        [RegularExpression("^([0-9]|[1-9][0-9]|99)$", ErrorMessage = "Allowed values are 0-99.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD2INT { get; set; }
-
-        [Display(Name = "Total recall", Description = "(0-10)")]
-        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD3REC { get; set; }
-
-        [Display(Name = "Can't read", Description = "(0-10)")]
-        [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD3READ { get; set; }
-
-        [Display(Name = "Intrusions", Description = "(0-99)")]
-        [RegularExpression("^([0-9]|[1-9][0-9]|99)$", ErrorMessage = "Allowed values are 0-99.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
-        public int? CERAD3INT { get; set; }
-
-        [Display(Name = "Delay time (minutes)", Description = "(0-85,99)")]
-        [RegularExpression("^(\\d|[1-7]\\d|8[0-5]|99)$", ErrorMessage = "Allowed values are 0-85 or 99 = unknown.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required")]
-        public int? CERADDTI { get; set; }
-
-        [Display(Name = "J6 Word List Recall: Total number of words correctly recalled", Description = "(0-10,95-98)")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required")]
-        public int? CERADJ6REC { get; set; }
-
-        [Display(Name = "J6 Word List Recall: Total number of intrusions", Description = "(0-99)")]
-        [RegularExpression("^([0-9]|[1-9][0-9]|99)$", ErrorMessage = "Allowed values are 0-99.")]
-        [RequiredIfRange(nameof(CERADJ6REC), 0, 10, ErrorMessage = "Response required")]
-        public int? CERADJ6INT { get; set; }
-
-        [Display(Name = "J7 Word List Recognition: Total YES correct", Description = "(0-10,95-98)")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        public int? CERADJ7YES { get; set; }
-
-        [Display(Name = "J7 Word List Recognition: Total NO correct", Description = "(0-10,95-98)")]
-        [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        public int? CERADJ7NO { get; set; }
-
-
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
         public int? VNTTOTW { get; set; }
@@ -584,7 +503,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
         [Range(1, 3)]
-        [RequiredOnComplete(ErrorMessage = "Response required")]
         public int? RESPVAL { get; set; }
 
         [Display(Name = "Hearing impairment")]

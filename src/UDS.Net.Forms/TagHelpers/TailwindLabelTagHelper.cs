@@ -38,12 +38,6 @@ namespace UDS.Net.Forms.TagHelpers
                     output.Content.AppendHtml(tag);
                 }
             }
-            else if (!ShowPropertyName)
-            {
-                base.Process(context, output);
-
-                output.Attributes.Add("class", css);
-            }
         }
     }
 }
