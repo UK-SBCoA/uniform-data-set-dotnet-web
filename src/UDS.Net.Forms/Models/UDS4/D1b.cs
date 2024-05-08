@@ -420,6 +420,69 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
+        [RequiredOnComplete(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
+        [NotMapped]
+        public bool? PrimaryDiagnosesIndicated
+        {
+            get
+            {
+                int counter = 0;
+                if ((ALZDIS == true) && (ALZDISIF == 1))
+                {
+                    counter++;
+                }
+                if ((LBDIS == true) && (LBDIF == 1))
+                {
+                    counter++;
+                }
+                if ((FTLD == true) && (FTLDIF == 1)) 
+                {
+                    counter++;
+                }
+                if ((CVD == true) && (CVDIF == 1)) 
+                {
+                    counter++;
+                }
+                if ((MSA == true) && (MSAIF == 1))
+                {
+                    counter++;
+                }
+                if ((CTE == true) && (CTEIF == 1)) 
+                {
+                    counter++;
+                }
+                if ((DOWNS == true) && (DOWNSIF == 1))
+                {
+                    counter++;
+                }
+                if ((HUNT == true) && (HUNTIF == 1))
+                {
+                    counter++;
+                }
+                if ((PRION == true) && (PRIONIF == 1))
+                {
+                    counter++;
+                }
+                if ((CAA == true) && (CAAIF == 1))
+                {
+                    counter++;
+                }
+                if ((LATE == true) && (LATEIF == 1))
+                {
+                    counter++;
+                }
+                if ((OTHCOG == true) && (OTHCOGIF == 1))
+                {
+                    counter++;
+                }
+                if (counter <= 1)
+                {
+                    return true;
+                }
+                return null;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
