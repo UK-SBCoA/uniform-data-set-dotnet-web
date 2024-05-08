@@ -15,7 +15,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? DXMETHOD { get; set; }
 
         [RequiredOnComplete]
-        [Display(Name = "Does the participant have: 1. Unimpaired cognition (e.g., cognitive performance and functional status (i.e., CDR) judged to be unimpaired)? AND2. Unimpaired behavior (i.e., the participant does not exhibit behavior sufficient to diagnose MBI – see MBI section starting at\nQ7) or dementia due to FTLD or LBD and/or FTLD behavior and language domains=0?")]
+        [Display(Name = "Does the participant have: 1. Unimpaired cognition (e.g., cognitive performance and functional status (i.e., CDR) judged to be unimpaired)? AND 2. Unimpaired behavior (i.e., the participant does not exhibit behavior sufficient to diagnose MBI – see MBI section starting at\nQ7) or dementia due to FTLD or LBD and/or FTLD behavior and language domains=0?")]
         public int? NORMCOG { get; set; }
 
         [RequiredIf(nameof(NORMCOG), "1", ErrorMessage = "Please specify.")]
