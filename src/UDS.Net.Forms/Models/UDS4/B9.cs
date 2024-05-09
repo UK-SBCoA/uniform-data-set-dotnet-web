@@ -102,16 +102,20 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEVHALL { get; set; }
         [Display(Name = "IF YES, do their hallucinations include patterns that are not definite objects, such as pixelation of flat uniform surfaces?")]
-        public int? BEVPATT { get; set; }
+		[RequiredIf(nameof(BEVHALL), "1", ErrorMessage = "Value required")]
+		public int? BEVPATT { get; set; }
         [Display(Name = "IF YES, do their hallucinations include well formed and detailed images of objects or people, either as independent images or as part of other objects?")]
-        public int? BEVWELL { get; set; }
+		[RequiredIf(nameof(BEVHALL), "1", ErrorMessage = "Value required")]
+		public int? BEVWELL { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Auditory hallucinations")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAHALL { get; set; }
         [Display(Name = "IF YES, do the auditory hallucinations include simple sounds like knocks or other simple sounds?")]
+        [RequiredIf(nameof(BEAHALL), "1", ErrorMessage = "Value required")]
         public int? BEAHSIMP { get; set; }
         [Display(Name = "IF YES, do the auditory hallucinations include complex sounds like voices speaking words, or music?")]
-        public int? BEAHCOMP { get; set; }
+		[RequiredIf(nameof(BEAHALL), "1", ErrorMessage = "Value required")]
+		public int? BEAHCOMP { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Abnormal, false, or delusional beliefs")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEDEL { get; set; }

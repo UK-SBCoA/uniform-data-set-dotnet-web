@@ -256,7 +256,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.OPIATEUSE"),
                     new UIDisableAttribute("B9.COCAINEUSE"),
                     new UIDisableAttribute("B9.OTHSUBUSE"),
-                }
+					new UIDisableAttribute("B9.CANNABUSE"),
+				}
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -266,7 +267,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.OPIATEUSE"),
                     new UIEnableAttribute("B9.COCAINEUSE"),
                     new UIEnableAttribute("B9.OTHSUBUSE"),
-                }
+					new UIEnableAttribute("B9.CANNABUSE"),
+				}
              } },
         };
 
