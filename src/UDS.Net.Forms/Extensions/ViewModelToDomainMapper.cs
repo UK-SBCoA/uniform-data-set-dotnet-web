@@ -1022,6 +1022,7 @@ namespace UDS.Net.Forms.Extensions
                 BDOMIMP = vm.BDOMIMP,
                 BDOMSOCIAL = vm.BDOMSOCIAL,
                 BDOMTHTS = vm.BDOMTHTS,
+                PREDOMSYN = vm.PREDOMSYN,
                 AMNDEM = vm.AMNDEM,
                 DYEXECSYN = vm.DYEXECSYN,
                 PCA = vm.PCA,

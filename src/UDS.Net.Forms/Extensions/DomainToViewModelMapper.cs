@@ -1165,6 +1165,7 @@ namespace UDS.Net.Forms.Extensions
                 BDOMIMP = fields.BDOMIMP,
                 BDOMSOCIAL = fields.BDOMSOCIAL,
                 BDOMTHTS = fields.BDOMTHTS,
+                PREDOMSYN = fields.PREDOMSYN,
                 AMNDEM = fields.AMNDEM,
                 DYEXECSYN = fields.DYEXECSYN,
                 PCA = fields.PCA,

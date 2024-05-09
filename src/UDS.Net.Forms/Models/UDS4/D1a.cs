@@ -162,6 +162,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
         public int? BDOMTHTS { get; set; }
 
+        [Display(Name = "Is there a predominant clinical syndrome?")]
+        public int? PREDOMSYN { get; set; }
+
         [Display(Name = "Amnestic predominant syndrome")]
         public bool? AMNDEM { get; set; }
 

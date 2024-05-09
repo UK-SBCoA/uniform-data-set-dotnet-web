@@ -33,6 +33,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BDOMIMP { get; set; }
         public int? BDOMSOCIAL { get; set; }
         public int? BDOMTHTS { get; set; }
+        public int? PREDOMSYN { get; set; }
         public bool? AMNDEM { get; set; }
         public bool? DYEXECSYN { get; set; }
         public bool? PCA { get; set; }
@@ -145,6 +146,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BDOMIMP = d1aDto.BDOMIMP;
                 BDOMSOCIAL = d1aDto.BDOMSOCIAL;
                 BDOMTHTS = d1aDto.BDOMTHTS;
+                PREDOMSYN = d1aDto.PREDOMSYN;
                 AMNDEM = d1aDto.AMNDEM;
                 DYEXECSYN = d1aDto.DYEXECSYN;
                 PCA = d1aDto.PCA;
