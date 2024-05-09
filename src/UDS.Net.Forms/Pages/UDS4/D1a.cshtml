@@ -558,7 +558,7 @@
             </p>
         </div>
         <p class="mt-2 text-sm text-gray-900">
-            <span class="counter invisible"></span><strong>The purpose of Section 2 is to assign a clinical syndrome</strong> to participants with dementia and, when appropriate MCI or MBI,
+            <strong>The purpose of Section 2 is to assign a clinical syndrome</strong> to participants with dementia and, when appropriate MCI or MBI,
             using all available clinical, exam, and neuropsychiatric data. This should be done using clinical information and cognitive/
             neuropsychological testing, <strong>ideally without reference to biomarker data</strong> (which is incorporated into the Etiological Diagnoses
             section in Form D1b). This is not always possible and thus Q9 allows centers to record when biomarker data is known and may have
@@ -569,7 +569,14 @@
             meet any clinical criteria (for instance, this is common for MCI and “impaired, not MCI”). In this case, leave 8a-8l blank.
         </p>
     </div>
-
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <label asp-for="D1a.PREDOMSYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.PREDOMSYN)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PREDOMSYN"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1a.PREDOMSYN)" for="@Model.D1a.PREDOMSYN" items="Model.PREDOMSYNListItems" ui-behaviors="Model.PREDOMSYNUIBehavior"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYN"></span>
+        </div>
+    </div>
     <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
         <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
             <thead>
