@@ -74,7 +74,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> MBIListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (SKIP TO QUESTION 8a)", "0"),
+            new RadioListItem("No (SKIP TO QUESTION 8)", "0"),
             new RadioListItem("Yes (CONTINUE TO QUESTION 7a)", "1")
 
         };
@@ -125,6 +125,12 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("Benign", "1"),
             new RadioListItem("Malignant", "2")
+        };
+
+        public List<RadioListItem> PREDOMSYNListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (SKIP TO QUESTION 10) ", "0"),
+            new RadioListItem("Yes", "1")
         };
 
         public Dictionary<string, UIBehavior> NORMCOGUIBehavior = new Dictionary<string, UIBehavior>
@@ -180,6 +186,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.BDOMIMP"),
                     new UIDisableAttribute("D1a.BDOMSOCIAL"),
                     new UIDisableAttribute("D1a.BDOMTHTS"),
+                    new UIDisableAttribute("D1a.PREDOMSYN"),
                     new UIDisableAttribute("D1a.AMNDEM"),
                     new UIDisableAttribute("D1a.DYEXECSYN"),
                     new UIDisableAttribute("D1a.PCA"),
@@ -264,6 +271,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new UIDisableAttribute("D1a.BDOMIMP"),
             new UIDisableAttribute("D1a.BDOMSOCIAL"),
             new UIDisableAttribute("D1a.BDOMTHTS"),
+            new UIDisableAttribute("D1a.PREDOMSYN"),
             new UIDisableAttribute("D1a.AMNDEM"),
             new UIDisableAttribute("D1a.DYEXECSYN"),
             new UIDisableAttribute("D1a.PCA"),
@@ -442,21 +450,45 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.BDOMIMP"),
                     new UIDisableAttribute("D1a.BDOMSOCIAL"),
                     new UIDisableAttribute("D1a.BDOMTHTS"),
-                    new UIEnableAttribute("D1a.AMNDEM"),
-                    new UIEnableAttribute("D1a.DYEXECSYN"),
-                    new UIEnableAttribute("D1a.PCA"),
-                    new UIEnableAttribute("D1a.PPASYN"),
-                    new UIEnableAttribute("D1a.FTDSYN"),
-                    new UIEnableAttribute("D1a.LBDSYN"),
-                    new UIEnableAttribute("D1a.NAMNDEM"),
-                    new UIEnableAttribute("D1a.PSPSYN"),
-                    new UIEnableAttribute("D1a.CTESYN"),
-                    new UIEnableAttribute("D1a.CBSSYN"),
-                    new UIEnableAttribute("D1a.MSASYN"),
-                    new UIEnableAttribute("D1a.OTHSYN"),
-                    new UIEnableAttribute("D1a.SYNINFCLIN"),
-                    new UIEnableAttribute("D1a.SYNINFCTST"),
-                    new UIEnableAttribute("D1a.SYNINFBIOM"),
+                    new UIEnableAttribute("D1a.PREDOMSYN"),
+                },
+                InstructionalMessage =""
+            } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("D1a.BDOMMOT"),
+                    new UIEnableAttribute("D1a.BDOMAFREG"),
+                    new UIEnableAttribute("D1a.BDOMIMP"),
+                    new UIEnableAttribute("D1a.BDOMSOCIAL"),
+                    new UIEnableAttribute("D1a.BDOMTHTS"),
+                    new UIEnableAttribute("D1a.PREDOMSYN"),
+
+                },
+             } }
+        };
+
+        public Dictionary<string, UIBehavior> PREDOMSYNUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.AMNDEM"),
+                    new UIDisableAttribute("D1a.DYEXECSYN"),
+                    new UIDisableAttribute("D1a.PCA"),
+                    new UIDisableAttribute("D1a.PPASYN"),
+                    new UIDisableAttribute("D1a.FTDSYN"),
+                    new UIDisableAttribute("D1a.LBDSYN"),
+                    new UIDisableAttribute("D1a.NAMNDEM"),
+                    new UIDisableAttribute("D1a.PSPSYN"),
+                    new UIDisableAttribute("D1a.CTESYN"),
+                    new UIDisableAttribute("D1a.CBSSYN"),
+                    new UIDisableAttribute("D1a.MSASYN"),
+                    new UIDisableAttribute("D1a.OTHSYN"),
+                    new UIDisableAttribute("D1a.SYNINFCLIN"),
+                    new UIDisableAttribute("D1a.SYNINFCTST"),
+                    new UIDisableAttribute("D1a.SYNINFBIOM"),
                     new UIEnableAttribute("D1a.MAJDEPDX"),
                     new UIEnableAttribute("D1a.OTHDEPDX"),
                     new UIEnableAttribute("D1a.BIPOLDX"),
@@ -491,11 +523,6 @@ namespace UDS.Net.Forms.Pages.UDS4
              { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1a.BDOMMOT"),
-                    new UIEnableAttribute("D1a.BDOMAFREG"),
-                    new UIEnableAttribute("D1a.BDOMIMP"),
-                    new UIEnableAttribute("D1a.BDOMSOCIAL"),
-                    new UIEnableAttribute("D1a.BDOMTHTS"),
                     new UIEnableAttribute("D1a.AMNDEM"),
                     new UIEnableAttribute("D1a.DYEXECSYN"),
                     new UIEnableAttribute("D1a.PCA"),
