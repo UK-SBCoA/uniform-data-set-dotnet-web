@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Largely preserved functional independence OR functional dependence that is not related to cognitive decline")]
         public bool? MCICRITFUN { get; set; }
 
-        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please check one or more MCI core clinical criteria.")]
         [NotMapped]
         public bool? MCIClinicalCriteriaIndicated
         {
@@ -76,7 +76,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMPNOMCIO), "true", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
 
-        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
         [NotMapped]
         public bool? CognitivelyImpairedIndicated
         {
@@ -95,7 +95,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Does the participant meet any criteria for cognitively impaired, not MCI/dementia?")]
         [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please specify.")]
-        public bool? IMPNOMCI { get; set; }
+        public int? IMPNOMCI { get; set; }
 
         [Display(Name = "Memory")]
         public bool? CDOMMEM { get; set; }
@@ -118,7 +118,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Apraxia")]
         public bool? CDOMAPRAX { get; set; }
 
-        [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please check one or more Affected Domain.")]
         [NotMapped]
         public bool? AffectedDomainsIndicated
         {
@@ -178,7 +178,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? PPASYN { get; set; }
 
         [Display(Name = "Primary progressive aphasia (PPA) syndrome - type")]
-        [RequiredIf(nameof(PPASYN), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(PPASYN), "true", ErrorMessage = "Please specify.")]
         public int? PPASYNT { get; set; }
 
         [Display(Name = "Behavioral variant frontotemporal (bvFTD) syndrome")]
@@ -188,7 +188,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? LBDSYN { get; set; }
 
         [Display(Name = "Lewy body syndrome - type")]
-        [RequiredIf(nameof(LBDSYN), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(LBDSYN), "true", ErrorMessage = "Please specify.")]
         public int? LBDSYNT { get; set; }
 
         [Display(Name = "Non-amnestic multidomain syndrome, not PCA, PPA, bvFT, or DLB syndrome")]
@@ -198,7 +198,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? PSPSYN { get; set; }
 
         [Display(Name = "Primary supranuclear palsy (PSP) syndrome - type")]
-        [RequiredIf(nameof(PSPSYN), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(PSPSYN), "true", ErrorMessage = "Please specify.")]
         public int? PSPSYNT { get; set; }
 
         [Display(Name = "Traumatic encephalopathy syndrome")]
@@ -211,7 +211,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? MSASYN { get; set; }
 
         [Display(Name = "Multiple system atrophy (MSA) syndrome - type")]
-        [RequiredIf(nameof(MSASYN), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(MSASYN), "true", ErrorMessage = "Please specify.")]
         public int? MSASYNT { get; set; }
 
         [Display(Name = "Other syndrome")]
@@ -235,35 +235,35 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? MAJDEPDX { get; set; }
 
         [Display(Name = "Major depressive disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(MAJDEPDX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(MAJDEPDX), "true", ErrorMessage = "Please indicate")]
         public int? MAJDEPDIF { get; set; }
 
         [Display(Name = "Other specified depressive disorder")]
         public bool? OTHDEPDX { get; set; }
 
         [Display(Name = "Other specified depressive disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(OTHDEPDX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OTHDEPDX), "true", ErrorMessage = "Please indicate")]
         public int? OTHDEPDIF { get; set; }
 
         [Display(Name = "Bipolar disorder")]
         public bool? BIPOLDX { get; set; }
 
         [Display(Name = "1Bipolar disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(BIPOLDX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(BIPOLDX), "true", ErrorMessage = "Please indicate")]
         public int? BIPOLDIF { get; set; }
 
         [Display(Name = "Schizophrenia or other psychotic disorder")]
         public bool? SCHIZOP { get; set; }
 
         [Display(Name = "Schizophrenia or other psychotic disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(SCHIZOP), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(SCHIZOP), "true", ErrorMessage = "Please indicate")]
         public int? SCHIZOIF { get; set; }
 
         [Display(Name = "Anxiety disorder")]
         public bool? ANXIET { get; set; }
 
         [Display(Name = "Anxiety disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(ANXIET), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please indicate")]
         public bool? ANXIETIF { get; set; }
 
         [Display(Name = "Generalized Anxiety Disorder")]
@@ -282,7 +282,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHANXDX { get; set; }
 
-        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please indicate the type of cognitive impairment  (Question 5a-5e).")]
+        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please check one or more Anxiety disorder")]
         [NotMapped]
         public bool? AnxietyDisorderIndicated
         {
