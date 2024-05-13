@@ -255,7 +255,7 @@
     </label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.IMPNOMCI"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems" ui-behaviors="Model.IMPNOMCIUIBehavior"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCI"></span>
     </div>
     <span class="text-gray-500 italic">
@@ -720,7 +720,7 @@
                             <div class="relative flex items-start">
                                 <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1a.LBDSYN", Model.D1a.LBDSYN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.LBDSYNT\" ]" })
+                                    @Html.CheckBox("D1a.LBDSYN", Model.D1a.LBDSYN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.LBDSYNT\" ]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="D1a_LBDSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
