@@ -117,7 +117,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Apraxia")]
         public bool? CDOMAPRAX { get; set; }
-
+        
+        [RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please check one or more Affected Domain.")]
         [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please check one or more Affected Domain.")]
         [NotMapped]
         public bool? AffectedDomainsIndicated
@@ -137,7 +138,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [Display(Name = "Does the participant meet criteria for MBI (If participant meets criteria for\ndementia an MBI diagnosis is excluded.)")]
+        [Display(Name = "Does the participant meet criteria for MBI (If participant meets criteria for dementia an MBI diagnosis is excluded.)")]
         [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
         [RequiredIf(nameof(IMPNOMCI), "1", ErrorMessage = "Please specify.")]
         public int? MBI { get; set; }
@@ -162,6 +163,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
         public int? BDOMTHTS { get; set; }
 
+        [RequiredIf(nameof(MBI), "0", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
