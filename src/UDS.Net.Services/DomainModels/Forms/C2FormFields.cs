@@ -51,6 +51,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? REY4INT { get; set; }
         public int? REY5REC { get; set; }
         public int? REY5INT { get; set; }
+        public int? REYBREC { get; set; }
+        public int? REYBINT { get; set; }
         public int? REY6REC { get; set; }
         public int? REY6INT { get; set; }
         public int? UDSBENTC { get; set; }
@@ -93,10 +95,27 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? UDSVERTN { get; set; }
         public int? UDSVERTE { get; set; }
         public int? UDSVERTI { get; set; }
+        public int? VERBALTEST { get; set; }
         public int? REYDREC { get; set; }
         public int? REYDINT { get; set; }
+        public int? REYDTI { get; set; }
+        public int? REYMETHOD { get; set; }
         public int? REYTCOR { get; set; }
         public int? REYFPOS { get; set; }
+        public int? CERAD1REC { get; set; }
+        public int? CERAD1READ { get; set; }
+        public int? CERAD1INT { get; set; }
+        public int? CERAD2REC { get; set; }
+        public int? CERAD2READ { get; set; }
+        public int? CERAD2INT { get; set; }
+        public int? CERAD3REC { get; set; }
+        public int? CERAD3READ { get; set; }
+        public int? CERAD3INT { get; set; }
+        public int? CERADDTI { get; set; }
+        public int? CERADJ6REC { get; set; }
+        public int? CERADJ6INT { get; set; }
+        public int? CERADJ7YES { get; set; }
+        public int? CERADJ7NO { get; set; }
         public int? VNTTOTW { get; set; }
         public int? VNTPCNC { get; set; }
         public int? COGSTAT { get; set; }
@@ -188,6 +207,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 UDSVERTN = c2Dto.UDSVERTN;
                 UDSVERTE = c2Dto.UDSVERTE;
                 UDSVERTI = c2Dto.UDSVERTI;
+                VERBALTEST = c2Dto.VERBALTEST;
                 COGSTAT = c2Dto.COGSTAT;
                 REY1REC = c2Dto.REY1REC;
                 REY1INT = c2Dto.REY1INT;
@@ -199,12 +219,30 @@ namespace UDS.Net.Services.DomainModels.Forms
                 REY4INT = c2Dto.REY4INT;
                 REY5REC = c2Dto.REY5REC;
                 REY5INT = c2Dto.REY5INT;
+                REYBREC = c2Dto.REYBREC;
+                REYBINT = c2Dto.REYBINT;
                 REY6REC = c2Dto.REY6REC;
                 REY6INT = c2Dto.REY6INT;
                 REYDREC = c2Dto.REYDREC;
                 REYDINT = c2Dto.REYDINT;
+                REYDTI = c2Dto.REYDTI;
+                REYMETHOD = c2Dto.REYMETHOD;
                 REYTCOR = c2Dto.REYTCOR;
                 REYFPOS = c2Dto.REYFPOS;
+                CERAD1REC = c2Dto.CERAD1REC;
+                CERAD1READ = c2Dto.CERAD1READ;
+                CERAD1INT = c2Dto.CERAD1INT;
+                CERAD2REC = c2Dto.CERAD2REC;
+                CERAD2READ = c2Dto.CERAD2READ;
+                CERAD2INT = c2Dto.CERAD2INT;
+                CERAD3REC = c2Dto.CERAD3REC;
+                CERAD3READ = c2Dto.CERAD3READ;
+                CERAD3INT = c2Dto.CERAD3INT;
+                CERADDTI = c2Dto.CERADDTI;
+                CERADJ6REC = c2Dto.CERADJ6REC;
+                CERADJ6INT = c2Dto.CERADJ6INT;
+                CERADJ7YES = c2Dto.CERADJ7YES;
+                CERADJ7NO = c2Dto.CERADJ7NO;
                 RESPVAL = c2Dto.RESPVAL;
                 RESPHEAR = c2Dto.RESPHEAR;
                 RESPDIST = c2Dto.RESPDIST;
@@ -225,7 +263,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4.0";
         }
     }
 }
