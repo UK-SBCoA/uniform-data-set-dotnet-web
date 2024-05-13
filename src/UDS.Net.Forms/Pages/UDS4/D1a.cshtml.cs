@@ -184,6 +184,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.MCICRITIMP"),
                     new UIEnableAttribute("D1a.MCICRITFUN"),
                     new UIEnableAttribute("D1a.MCI"),
+               
                 }
             } },
 
@@ -219,7 +220,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.IMPNOMCICG"),
                     new UIEnableAttribute("D1a.IMPNOMCLCD"),
                     new UIEnableAttribute("D1a.IMPNOMCIO"),
-                    new UIEnableAttribute("D1a.IMPNOMCI")
+                    new UIEnableAttribute("D1a.IMPNOMCI"),
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX")
                 },
                 InstructionalMessage =""
             } },
@@ -231,37 +239,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.IMPNOMCICG"),
                     new UIDisableAttribute("D1a.IMPNOMCLCD"),
                     new UIDisableAttribute("D1a.IMPNOMCIO"),
-                    new UIDisableAttribute("D1a.IMPNOMCI")
-                }
-             } }
-        };
-
-        public Dictionary<string, UIBehavior> IMPNOMCIUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("D1a.CDOMMEM"),
-                    new UIDisableAttribute("D1a.CDOMLANG"),
-                    new UIDisableAttribute("D1a.CDOMATTN"),
-                    new UIDisableAttribute("D1a.CDOMEXEC"),
-                    new UIDisableAttribute("D1a.CDOMVISU"),
-                    new UIDisableAttribute("D1a.CDOMBEH"),
-                    new UIDisableAttribute("D1a.CDOMAPRAX")
-                },
-                InstructionalMessage =""
-            } },
-
-             { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("D1a.CDOMMEM"),
-                    new UIDisableAttribute("D1a.CDOMLANG"),
-                    new UIDisableAttribute("D1a.CDOMATTN"),
-                    new UIDisableAttribute("D1a.CDOMEXEC"),
-                    new UIDisableAttribute("D1a.CDOMVISU"),
-                    new UIDisableAttribute("D1a.CDOMBEH"),
-                    new UIDisableAttribute("D1a.CDOMAPRAX")
+                    new UIDisableAttribute("D1a.IMPNOMCI"),
+                    new UIEnableAttribute("D1a.CDOMMEM"),
+                    new UIEnableAttribute("D1a.CDOMLANG"),
+                    new UIEnableAttribute("D1a.CDOMATTN"),
+                    new UIEnableAttribute("D1a.CDOMEXEC"),
+                    new UIEnableAttribute("D1a.CDOMVISU"),
+                    new UIEnableAttribute("D1a.CDOMBEH"),
+                    new UIEnableAttribute("D1a.CDOMAPRAX")
                 }
              } }
         };
