@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
+using System.Security.Claims;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
@@ -73,7 +75,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Other (specify)")]
         [MaxLength(60)]
-        [RequiredIf(nameof(IMPNOMCIO), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMPNOMCIO), "True", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
 
         [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
@@ -117,7 +119,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Apraxia")]
         public bool? CDOMAPRAX { get; set; }
-        
+
         [RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please check one or more Affected Domain.")]
         [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please check one or more Affected Domain.")]
         [NotMapped]
@@ -130,7 +132,8 @@ namespace UDS.Net.Forms.Models.UDS4
                     (CDOMATTN.HasValue && CDOMATTN.Value == true) ||
                     (CDOMEXEC.HasValue && CDOMEXEC.Value == true) ||
                     (CDOMVISU.HasValue && CDOMVISU.Value == true) ||
-                    (CDOMBEH.HasValue && CDOMBEH.Value == true))
+                    (CDOMBEH.HasValue && CDOMBEH.Value == true) ||
+                    (CDOMAPRAX.HasValue && CDOMAPRAX.Value == true))
                 {
                     return true;
                 }
@@ -191,7 +194,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? LBDSYN { get; set; }
 
         [Display(Name = "Lewy body syndrome - type")]
-        [RequiredIf(nameof(LBDSYN), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(LBDSYN), "True", ErrorMessage = "Please specify.")]
         public int? LBDSYNT { get; set; }
 
         [Display(Name = "Non-amnestic multidomain syndrome, not PCA, PPA, bvFT, or DLB syndrome")]
@@ -201,7 +204,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? PSPSYN { get; set; }
 
         [Display(Name = "Primary supranuclear palsy (PSP) syndrome - type")]
-        [RequiredIf(nameof(PSPSYN), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(PSPSYN), "True", ErrorMessage = "Please specify.")]
         public int? PSPSYNT { get; set; }
 
         [Display(Name = "Traumatic encephalopathy syndrome")]
@@ -214,7 +217,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? MSASYN { get; set; }
 
         [Display(Name = "Multiple system atrophy (MSA) syndrome - type")]
-        [RequiredIf(nameof(MSASYN), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(MSASYN), "True", ErrorMessage = "Please specify.")]
         public int? MSASYNT { get; set; }
 
         [Display(Name = "Other syndrome")]
@@ -222,7 +225,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Other syndrome (specify)")]
         [MaxLength(60)]
-        [RequiredIf(nameof(OTHSYN), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(OTHSYN), "True", ErrorMessage = "Please specify.")]
         public string? OTHSYNX { get; set; }
 
         [Display(Name = "Clinical information (history, CDR)")]
@@ -238,35 +241,35 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? MAJDEPDX { get; set; }
 
         [Display(Name = "Major depressive disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(MAJDEPDX), "true", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(MAJDEPDX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? MAJDEPDIF { get; set; }
 
         [Display(Name = "Other specified depressive disorder")]
         public bool? OTHDEPDX { get; set; }
 
         [Display(Name = "Other specified depressive disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(OTHDEPDX), "true", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OTHDEPDX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? OTHDEPDIF { get; set; }
 
         [Display(Name = "Bipolar disorder")]
         public bool? BIPOLDX { get; set; }
 
         [Display(Name = "1Bipolar disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(BIPOLDX), "true", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(BIPOLDX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? BIPOLDIF { get; set; }
 
         [Display(Name = "Schizophrenia or other psychotic disorder")]
         public bool? SCHIZOP { get; set; }
 
         [Display(Name = "Schizophrenia or other psychotic disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(SCHIZOP), "true", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(SCHIZOP), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? SCHIZOIF { get; set; }
 
         [Display(Name = "Anxiety disorder")]
         public bool? ANXIET { get; set; }
 
         [Display(Name = "Anxiety disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(ANXIET), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public bool? ANXIETIF { get; set; }
 
         [Display(Name = "Generalized Anxiety Disorder")]
@@ -285,7 +288,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHANXDX { get; set; }
 
-        [RequiredIf(nameof(ANXIET), "true", ErrorMessage = "Please check one or more Anxiety disorder")]
+        [RequiredIf(nameof(ANXIET), "True", ErrorMessage = "Please check one or more Anxiety disorder")]
         [NotMapped]
         public bool? AnxietyDisorderIndicated
         {
@@ -306,28 +309,28 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? PTSDDX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD) (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(PTSDDX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(PTSDDX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? PTSDDXIF { get; set; }
 
         [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder (ASD), attention-deficit hyperactivity disorder (ADHD), dyslexia)")]
         public bool? NDEVDIS { get; set; }
 
         [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder (ASD), attention-deficit hyperactivity disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(NDEVDIS), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(NDEVDIS), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? NDEVDISIF { get; set; }
 
         [Display(Name = "Delirium")]
         public bool? DELIR { get; set; }
 
         [Display(Name = "Delirium (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(DELIR), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(DELIR), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? DELIRIF { get; set; }
 
         [Display(Name = "Other psychiatric disorder")]
         public bool? OTHPSY { get; set; }
 
         [Display(Name = "Other psychiatric disorder (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(OTHPSY), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OTHPSY), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? OTHPSYIF { get; set; }
 
         [Display(Name = "Other psychiatric disorder (specify)")]
@@ -339,28 +342,28 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? TBIDX { get; set; }
 
         [Display(Name = "Traumatic brain injury (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(TBIDX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(TBIDX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? TBIDXIF { get; set; }
 
         [Display(Name = "Epilepsy")]
         public bool? EPILEP { get; set; }
 
         [Display(Name = "Epilepsy (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(EPILEP), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(EPILEP), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? EPILEPIF { get; set; }
 
         [Display(Name = "Normal-pressure hydrocephalus")]
         public bool? HYCEPH { get; set; }
 
         [Display(Name = "Normal-pressure hydrocephalus (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(HYCEPH), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(HYCEPH), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? HYCEPHIF { get; set; }
 
         [Display(Name = "CNS Neoplasm")]
         public bool? NEOP { get; set; }
 
         [Display(Name = "CNS Neoplasm (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(NEOP), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(NEOP), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? NEOPIF { get; set; }
 
         [Display(Name = "CNS Neoplasm - benign or malignant")]
@@ -371,28 +374,28 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? HIV { get; set; }
 
         [Display(Name = "Human Immunodeficiency Virus (HIV) infection (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(HIV), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(HIV), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? HIVIF { get; set; }
 
         [Display(Name = "Post COVID-19 cognitive impairment")]
         public bool? POSTC19 { get; set; }
 
         [Display(Name = "Post COVID-19 cognitive impairment (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(POSTC19), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(POSTC19), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? POSTC19IF { get; set; }
 
         [Display(Name = "Sleep apnea (i.e., obstructive, central, mixed or complex sleep apnea)")]
         public bool? APNEADX { get; set; }
 
         [Display(Name = "Sleep apnea (i.e., obstructive, central, mixed or complex sleep apnea) (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(APNEADX), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(APNEADX), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? APNEADXIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, infectious conditions (not listed above), or systemic disease/medical illness (as indicated on Form A5/D2)")]
         public bool? OTHCOGILL { get; set; }
 
         [Display(Name = "Cognitive impairment due to other neurologic, genetic, infectious conditions (not listed above), or systemic disease/medical illness (as indicated on Form A5/D2) (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(OTHCOGILL), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(OTHCOGILL), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? OTHCILLIF { get; set; }
 
         [Display(Name = "Specify cognitive impairment due to other neurologic, genetic, infection conditions or systemic disease")]
@@ -404,28 +407,28 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? ALCDEM { get; set; }
 
         [Display(Name = "Cognitive impairment due to alcohol abuse (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(ALCDEM), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(ALCDEM), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? ALCDEMIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to substance use or abuse")]
         public bool? IMPSUB { get; set; }
 
         [Display(Name = "Cognitive impairment due to substance use or abuse (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(IMPSUB), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(IMPSUB), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? IMPSUBIF { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications")]
         public bool? MEDS { get; set; }
 
         [Display(Name = "Cognitive impairment due to medications (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(MEDS), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(MEDS), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? MEDSIF { get; set; }
 
         [Display(Name = "Cognitive impairment not otherwise specified (NOS)")]
         public bool? COGOTH { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(COGOTH), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? COGOTHIF { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -437,7 +440,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? COGOTH2 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(COGOTH2), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? COGOTH2F { get; set; }
 
         [Display(Name = "If Present, specify")]
@@ -449,13 +452,227 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? COGOTH3 { get; set; }
 
         [Display(Name = "Cognitive impairment NOS (primary/contributing/non-contributing)")]
-        [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
+        [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
         public int? COGOTH3F { get; set; }
 
         [Display(Name = "If Present, specify")]
         [MaxLength(60)]
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
+
+        [RequiredOnComplete(ErrorMessage = "Select one or more syndrome(s) as Present.")]
+        [NotMapped]
+        public bool? PresentSyndromeIndicated
+        {
+            get
+            {
+                int counter = 0;
+                if (MAJDEPDX == true) 
+                {
+                    counter++;
+                }
+                if (OTHDEPDX == true)
+                {
+                    counter++;
+                }
+                if (BIPOLDX == true) 
+                {
+                    counter++;
+                }
+                if (SCHIZOP == true)
+                {
+                    counter++;
+                }
+                if (ANXIET == true)
+                {
+                    counter++;
+                }
+                if (PTSDDX == true)
+                {
+                    counter++;
+                }
+                if (NDEVDIS == true) 
+                {
+                    counter++;
+                }
+                if (DELIR == true)
+                {
+                    counter++;
+                }
+                if (OTHPSY == true)
+                {
+                    counter++;
+                }
+                if (TBIDX == true)
+                {
+                    counter++;
+                }
+                if (EPILEP == true)
+                {
+                    counter++;
+                }
+                if (HYCEPH == true)
+                {
+                    counter++;
+                }
+                if (NEOP == true)
+                {
+                    counter++;
+                }
+                if (HIV == true)
+                {
+                    counter++;
+                }
+                if (POSTC19 == true)
+                {
+                    counter++;
+                }
+                if (APNEADX == true)
+                {
+                    counter++;
+                }
+                if (OTHCOGILL == true)
+                {
+                    counter++;
+                }
+                if (ALCDEM == true)
+                {
+                    counter++;
+                }
+                if (IMPSUB == true)
+                {
+                    counter++;
+                }
+                if (MEDS == true)
+                {
+                    counter++;
+                }
+                if (COGOTH == true)
+                {
+                    counter++;
+                }
+                if (COGOTH2 == true)
+                {
+                    counter++;
+                }
+                if (COGOTH3 == true)
+                {
+                    counter++;
+                }
+                if (counter >= 1)
+                {
+                    return true;
+                }
+                return null;
+            }
+        }
+
+        [RequiredOnComplete(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
+        [NotMapped]
+        public bool? PrimaryDiagnosesIndicated
+        {
+            get
+            {
+                int counter = 0;
+                if ((MAJDEPDX == true) && (MAJDEPDIF == 1))
+                {
+                    counter++;
+                }
+                if ((OTHDEPDX == true) && (OTHDEPDIF == 1))
+                {
+                    counter++;
+                }
+                if ((BIPOLDX == true) && (BIPOLDIF == 1))
+                {
+                    counter++;
+                }
+                if ((SCHIZOP == true) && (SCHIZOIF == 1))
+                {
+                    counter++;
+                }
+                //if ((ANXIET == true) && (ANXIETIF == 1))
+                //{
+                //    counter++;
+                //}
+                if ((PTSDDX == true) && (PTSDDXIF == 1))
+                {
+                    counter++;
+                }
+                if ((NDEVDIS == true) && (NDEVDISIF == 1))
+                {
+                    counter++;
+                }
+                if ((DELIR == true) && (DELIRIF == 1))
+                {
+                    counter++;
+                }
+                if ((OTHPSY == true) && (OTHPSYIF == 1))
+                {
+                    counter++;
+                }
+                if ((TBIDX == true) && (TBIDXIF == 1))
+                {
+                    counter++;
+                }
+                if ((EPILEP == true) && (EPILEPIF == 1))
+                {
+                    counter++;
+                }
+                if ((HYCEPH == true) && (HYCEPHIF == 1))
+                {
+                    counter++;
+                }
+                if ((NEOP == true) && (NEOPIF == 1))
+                {
+                    counter++;
+                }
+                if ((HIV == true) && (HIVIF == 1))
+                {
+                    counter++;
+                }
+                if ((POSTC19 == true) && (POSTC19IF == 1))
+                {
+                    counter++;
+                }
+                if ((APNEADX == true) && (APNEADXIF == 1))
+                {
+                    counter++;
+                }
+                if ((OTHCOGILL == true) && (OTHCILLIF == 1))
+                {
+                    counter++;
+                }
+                if ((ALCDEM == true) && (ALCDEMIF == 1))
+                {
+                    counter++;
+                }
+                if ((IMPSUB == true) && (IMPSUBIF == 1))
+                {
+                    counter++;
+                }
+                if ((MEDS == true) && (MEDSIF == 1))
+                {
+                    counter++;
+                }
+                if ((COGOTH == true) && (COGOTHIF == 1))
+                {
+                    counter++;
+                }
+                if ((COGOTH2 == true) && (COGOTH2F == 1))
+                {
+                    counter++;
+                }
+                if ((COGOTH3 == true) && (COGOTH3F == 1))
+                {
+                    counter++;
+                }
+                if (counter <= 1)
+                {
+                    return true;
+                }
+                return null;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

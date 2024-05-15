@@ -1022,7 +1022,8 @@
         *In order to diagnose a disorder, <strong>DSM-5-TR criteria require</strong> that symptoms cause clinically significant distress or impairment in
         social, occupational, or other important areas of functioning. For more guidance see the <strong>UDS Coding Guidebook, Form D1a.</strong>
     </p>
-
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PrimaryDiagnosesIndicated"></span>
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PresentSyndromeIndicated"></span>
 </div>
 
 <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
@@ -1148,7 +1149,6 @@
                     <label asp-for="D1a.ANXIET"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.ANXIET)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.ANXIET"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.ANXIETIF"></span>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AnxietyDisorderIndicated"></span>
                 </div>
             </td>
             <td>
@@ -1161,6 +1161,7 @@
                             <div class="ml-3 text-sm leading-6">
                                 <label for="@Html.IdFor(m => m.D1a.ANXIET)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
                             </div>
+
                         </div>
                     </div>
                 </fieldset>
@@ -1176,7 +1177,7 @@
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div>
                             <label class="text-base font-semibold text-gray-900">If present, (SPECIFY) (check all that apply):</label><br />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCIClinicalCriteriaIndicated"></span>
+                                                                                                                                      <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AnxietyDisorderIndicated"></span>
                         </div>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <fieldset class="subsubcounterreset">
@@ -1788,5 +1789,5 @@
 <partial name="_FormFooter" for="@Model.D1a" />
 
 @section Scripts {
-    <script src="~/_content/UDS.Net.Forms/js/D1a.js"></script>
+    <script src="~/_content/UDS.Net.Forms/js/D1a.js"></script>}
 }

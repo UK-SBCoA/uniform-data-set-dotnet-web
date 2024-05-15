@@ -184,7 +184,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.MCICRITIMP"),
                     new UIEnableAttribute("D1a.MCICRITFUN"),
                     new UIEnableAttribute("D1a.MCI"),
-               
+
                 }
             } },
 
@@ -280,9 +280,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> PREDOMSYNUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior {
+             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
+
                     new UIDisableAttribute("D1a.AMNDEM"),
                     new UIDisableAttribute("D1a.DYEXECSYN"),
                     new UIDisableAttribute("D1a.PCA"),
@@ -299,12 +300,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.SYNINFCTST"),
                     new UIDisableAttribute("D1a.SYNINFBIOM")
                 },
-                InstructionalMessage =""
+                InstructionalMessage = ""
             } },
 
              { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
+
                     new UIEnableAttribute("D1a.AMNDEM"),
                     new UIEnableAttribute("D1a.DYEXECSYN"),
                     new UIEnableAttribute("D1a.PCA"),
@@ -320,9 +322,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.SYNINFCLIN"),
                     new UIEnableAttribute("D1a.SYNINFCTST"),
                     new UIEnableAttribute("D1a.SYNINFBIOM")
-
                 },
-             } }
+
+            } }
         };
 
         public async Task<IActionResult> OnGetAsync(int? id)
