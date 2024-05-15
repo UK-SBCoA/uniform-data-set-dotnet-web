@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using UDS.Net.Dto;
@@ -190,13 +191,13 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
+            else if (form.Fields is A5D2FormFields)
+            {
+                dto = ((A5D2FormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is A4aFormFields)
             {
                 dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
-            }
-            else if (form.Fields is A5FormFields)
-            {
-                dto = ((A5FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B1FormFields)
             {
@@ -279,13 +280,13 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
+            else if (form.Fields is A5D2FormFields && formKind == "A5D2")
+            {
+                dto = ((A5D2FormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is A4aFormFields && formKind == "A4a")
             {
                 dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
-            }
-            else if (form.Fields is A5FormFields && formKind == "A5D2")
-            {
-                dto = ((A5FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is B1FormFields && formKind == "B1")
             {
@@ -684,7 +685,177 @@ namespace UDS.Net.Services.Extensions
             return rxNormIds;
         }
 
-
+        public static A5D2Dto ToDto(this A5D2FormFields fields)
+        {
+            return new A5D2Dto
+            {
+                TOBAC100 = fields.TOBAC100,
+                SMOKYRS = fields.SMOKYRS,
+                PACKSPER = fields.PACKSPER,
+                TOBAC30 = fields.TOBAC30,
+                QUITSMOK = fields.QUITSMOK,
+                ALCFREQYR = fields.ALCFREQYR,
+                ALCDRINKS = fields.ALCDRINKS,
+                ALCBINGE = fields.ALCBINGE,
+                SUBSTYEAR = fields.SUBSTYEAR,
+                SUBSTPAST = fields.SUBSTPAST,
+                CANNABIS = fields.CANNABIS,
+                HRTATTACK = fields.HRTATTACK,
+                HRTATTMULT = fields.HRTATTMULT,
+                HRTATTAGE = fields.HRTATTAGE,
+                CARDARREST = fields.CARDARREST,
+                CARDARRAGE = fields.CARDARRAGE,
+                CVAFIB = fields.CVAFIB,
+                CVANGIO = fields.CVANGIO,
+                CVBYPASS = fields.CVBYPASS,
+                BYPASSAGE = fields.BYPASSAGE,
+                CVPACDEF = fields.CVPACDEF,
+                PACDEFAGE = fields.PACDEFAGE,
+                CVCHF = fields.CVCHF,
+                CVHVALVE = fields.CVHVALVE,
+                VALVEAGE = fields.VALVEAGE,
+                CVOTHR = fields.CVOTHR,
+                CVOTHRX = fields.CVOTHRX,
+                CBSTROKE = fields.CBSTROKE,
+                STROKMUL = fields.STROKMUL,
+                STROKAGE = fields.STROKAGE,
+                STROKSTAT = fields.STROKSTAT,
+                ANGIOCP = fields.ANGIOCP,
+                CAROTIDAGE = fields.CAROTIDAGE,
+                CBTIA = fields.CBTIA,
+                TIAAGE = fields.TIAAGE,
+                PD = fields.PD,
+                PDAGE = fields.PDAGE,
+                PDOTHR = fields.PDOTHR,
+                PDOTHRAGE = fields.PDOTHRAGE,
+                SEIZURES = fields.SEIZURES,
+                SEIZNUM = fields.SEIZNUM,
+                SEIZAGE = fields.SEIZAGE,
+                HEADACHE = fields.HEADACHE,
+                MS = fields.MS,
+                HYDROCEPH = fields.HYDROCEPH,
+                HEADIMP = fields.HEADIMP,
+                IMPAMFOOT = fields.IMPAMFOOT,
+                IMPSOCCER = fields.IMPSOCCER,
+                IMPHOCKEY = fields.IMPHOCKEY,
+                IMPBOXING = fields.IMPBOXING,
+                IMPSPORT = fields.IMPSPORT,
+                IMPIPV = fields.IMPIPV,
+                IMPMILIT = fields.IMPMILIT,
+                IMPASSAULT = fields.IMPASSAULT,
+                IMPOTHER = fields.IMPOTHER,
+                IMPOTHERX = fields.IMPOTHERX,
+                IMPYEARS = fields.IMPYEARS,
+                HEADINJURY = fields.HEADINJURY,
+                HEADINJUNC = fields.HEADINJUNC,
+                HEADINJCON = fields.HEADINJCON,
+                HEADINJNUM = fields.HEADINJNUM,
+                FIRSTTBI = fields.FIRSTTBI,
+                LASTTBI = fields.LASTTBI,
+                DIABETES = fields.DIABETES,
+                DIABTYPE = fields.DIABTYPE,
+                DIABINS = fields.DIABINS,
+                DIABMEDS = fields.DIABMEDS,
+                DIABDIET = fields.DIABDIET,
+                DIABUNK = fields.DIABUNK,
+                DIABAGE = fields.DIABAGE,
+                HYPERTEN = fields.HYPERTEN,
+                HYPERTAGE = fields.HYPERTAGE,
+                HYPERCHO = fields.HYPERCHO,
+                HYPERCHAGE = fields.HYPERCHAGE,
+                B12DEF = fields.B12DEF,
+                THYROID = fields.THYROID,
+                ARTHRIT = fields.ARTHRIT,
+                ARTHRRHEUM = fields.ARTHRRHEUM,
+                ARTHROSTEO = fields.ARTHROSTEO,
+                ARTHROTHR = fields.ARTHROTHR,
+                ARTHTYPX = fields.ARTHTYPX,
+                ARTHTYPUNK = fields.ARTHTYPUNK,
+                ARTHUPEX = fields.ARTHUPEX,
+                ARTHLOEX = fields.ARTHLOEX,
+                ARTHSPIN = fields.ARTHSPIN,
+                ARTHUNK = fields.ARTHUNK,
+                INCONTU = fields.INCONTU,
+                INCONTF = fields.INCONTF,
+                APNEA = fields.APNEA,
+                CPAP = fields.CPAP,
+                APNEAORAL = fields.APNEAORAL,
+                RBD = fields.RBD,
+                INSOMN = fields.INSOMN,
+                OTHSLEEP = fields.OTHSLEEP,
+                OTHSLEEX = fields.OTHSLEEX,
+                CANCERACTV = fields.CANCERACTV,
+                CANCERPRIM = fields.CANCERPRIM,
+                CANCERMETA = fields.CANCERMETA,
+                CANCMETBR = fields.CANCMETBR,
+                CANCMETOTH = fields.CANCMETOTH,
+                CANCERUNK = fields.CANCERUNK,
+                CANCBLOOD = fields.CANCBLOOD,
+                CANCBREAST = fields.CANCBREAST,
+                CANCCOLON = fields.CANCCOLON,
+                CANCLUNG = fields.CANCLUNG,
+                CANCPROST = fields.CANCPROST,
+                CANCOTHER = fields.CANCOTHER,
+                CANCOTHERX = fields.CANCOTHERX,
+                CANCRAD = fields.CANCRAD,
+                CANCRESECT = fields.CANCRESECT,
+                CANCIMMUNO = fields.CANCIMMUNO,
+                CANCBONE = fields.CANCBONE,
+                CANCCHEMO = fields.CANCCHEMO,
+                CANCHORM = fields.CANCHORM,
+                CANCTROTH = fields.CANCTROTH,
+                CANCTROTHX = fields.CANCTROTHX,
+                CANCERAGE = fields.CANCERAGE,
+                COVID19 = fields.COVID19,
+                COVIDHOSP = fields.COVIDHOSP,
+                PULMONARY = fields.PULMONARY,
+                KIDNEY = fields.KIDNEY,
+                KIDNEYAGE = fields.KIDNEYAGE,
+                LIVER = fields.LIVER,
+                LIVERAGE = fields.LIVERAGE,
+                PVD = fields.PVD,
+                PVDAGE = fields.PVDAGE,
+                HIVDIAG = fields.HIVDIAG,
+                HIVAGE = fields.HIVAGE,
+                OTHERCOND = fields.OTHERCOND,
+                OTHCONDX = fields.OTHCONDX,
+                MAJORDEP = fields.MAJORDEP,
+                OTHERDEP = fields.OTHERDEP,
+                DEPRTREAT = fields.DEPRTREAT.HasValue ? true : false,
+                BIPOLAR = fields.BIPOLAR,
+                SCHIZ = fields.SCHIZ,
+                ANXIETY = fields.ANXIETY,
+                GENERALANX = fields.GENERALANX,
+                PANICDIS = fields.PANICDIS,
+                OCD = fields.OCD,
+                OTHANXDIS = fields.OTHANXDIS,
+                OTHANXDISX = fields.OTHANXDISX,
+                PTSD = fields.PTSD,
+                NPSYDEV = fields.NPSYDEV,
+                PSYCDIS = fields.PSYCDIS,
+                PSYCDISX = fields.PSYCDISX,
+                MENARCHE = fields.MENARCHE,
+                NOMENSAGE = fields.NOMENSAGE,
+                NOMENSNAT = fields.NOMENSNAT,
+                NOMENSHYST = fields.NOMENSHYST,
+                NOMENSSURG = fields.NOMENSSURG,
+                NOMENSCHEM = fields.NOMENSCHEM,
+                NOMENSRAD = fields.NOMENSRAD,
+                NOMENSHORM = fields.NOMENSHORM,
+                NOMENSESTR = fields.NOMENSESTR,
+                NOMENSUNK = fields.NOMENSUNK,
+                NOMENSOTH = fields.NOMENSOTH,
+                NOMENSOTHX = fields.NOMENSOTHX,
+                HRT = fields.HRT,
+                HRTYEARS = fields.HRTYEARS,
+                HRTSTRTAGE = fields.HRTSTRTAGE,
+                HRTENDAGE = fields.HRTENDAGE,
+                BCPILLS = fields.BCPILLS,
+                BCPILLSYR = fields.BCPILLSYR,
+                BCSTARTAGE = fields.BCSTARTAGE,
+                BCENDAGE = fields.BCENDAGE
+            };
+        }
 
         public static A4aDto ToDto(this A4aFormFields fields, int formId)
         {
@@ -743,55 +914,6 @@ namespace UDS.Net.Services.Extensions
                 ENDYEAR = fields.ENDYEAR,
                 CARETRIAL = fields.CARETRIAL,
                 TRIALGRP = fields.TRIALGRP
-            };
-        }
-
-        public static A5D2Dto ToDto(this A5FormFields fields)
-        {
-            return new A5D2Dto
-            {
-                TOBAC30 = fields.TOBAC30,
-                TOBAC100 = fields.TOBAC100,
-                SMOKYRS = fields.SMOKYRS,
-                PACKSPER = fields.PACKSPER,
-                QUITSMOK = fields.QUITSMOK,
-                CVAFIB = fields.CVAFIB,
-                CVANGIO = fields.CVANGIO,
-                CVBYPASS = fields.CVBYPASS,
-                CVPACDEF = fields.CVPACDEF,
-                CVCHF = fields.CVCHF,
-                CVHVALVE = fields.CVHVALVE,
-                CVOTHR = fields.CVOTHR,
-                CVOTHRX = fields.CVOTHRX,
-                CBSTROKE = fields.CBSTROKE,
-                STROKMUL = fields.STROKMUL,
-                CBTIA = fields.CBTIA,
-                PD = fields.PD,
-                PDOTHR = fields.PDOTHR,
-                SEIZURES = fields.SEIZURES,
-                DIABETES = fields.DIABETES,
-                DIABTYPE = fields.DIABTYPE,
-                HYPERTEN = fields.HYPERTEN,
-                HYPERCHO = fields.HYPERCHO,
-                B12DEF = fields.B12DEF,
-                THYROID = fields.THYROID,
-                ARTHRIT = fields.ARTHRIT,
-                ARTHTYPX = fields.ARTHTYPX,
-                INCONTU = fields.INCONTU,
-                INCONTF = fields.INCONTF,
-                APNEA = fields.APNEA,
-                RBD = fields.RBD,
-                INSOMN = fields.INSOMN,
-                OTHSLEEP = fields.OTHSLEEP,
-                OTHSLEEX = fields.OTHSLEEX,
-                PTSD = fields.PTSD,
-                BIPOLAR = fields.BIPOLAR,
-                SCHIZ = fields.SCHIZ,
-                ANXIETY = fields.ANXIETY,
-                OCD = fields.OCD,
-                NPSYDEV = fields.NPSYDEV,
-                PSYCDIS = fields.PSYCDIS,
-                PSYCDISX = fields.PSYCDISX
             };
         }
 
@@ -1019,6 +1141,14 @@ namespace UDS.Net.Services.Extensions
         {
             return new B9Dto
             {
+                DECCOG = fields.DECCOG,
+                DECMOT = fields.DECMOT,
+                PSYCHSYM = fields.PSYCHSYM,
+                DECCOGIN = fields.DECCOGIN,
+                DECMOTIN = fields.DECMOTIN,
+                PSYCHSYMIN = fields.PSYCHSYMIN,
+                DECCLIN = ConvertIntToBool(fields.DECCLIN),
+                DECCLCOG = ConvertIntToBool(fields.DECCLCOG),
                 COGMEM = fields.COGMEM,
                 COGORI = fields.COGORI,
                 COGJUDG = fields.COGJUDG,
@@ -1028,30 +1158,56 @@ namespace UDS.Net.Services.Extensions
                 COGFLUC = fields.COGFLUC,
                 COGOTHR = fields.COGOTHR,
                 COGOTHRX = fields.COGOTHRX,
+                COGAGE = fields.COGAGE,
                 COGMODE = fields.COGMODE,
                 COGMODEX = fields.COGMODEX,
                 DECCLBE = fields.DECCLBE,
                 BEAPATHY = fields.BEAPATHY,
                 BEDEP = fields.BEDEP,
+                BEANX = fields.BEANX,
+                BEEUPH = fields.BEEUPH,
+                BEIRRIT = fields.BEIRRIT,
+                BEAGIT = fields.BEAGIT,
+                BEHAGE = fields.BEHAGE,
                 BEVHALL = fields.BEVHALL,
+                BEVPATT = fields.BEVPATT,
                 BEVWELL = fields.BEVWELL,
                 BEAHALL = fields.BEAHALL,
-                BEDEL = fields.BEDISIN,
+                BEAHSIMP = fields.BEAHSIMP,
+                BEAHCOMP = fields.BEAHCOMP,
+                BEDEL = fields.BEDEL,
+                BEAGGRS = fields.BEAGGRS,
+                PSYCHAGE = fields.PSYCHAGE,
                 BEDISIN = fields.BEDISIN,
-                BEIRRIT = fields.BEAGIT,
-                BEAGIT = fields.BEAGIT,
                 BEPERCH = fields.BEPERCH,
+                BEEMPATH = fields.BEEMPATH,
+                BEOBCOM = fields.BEOBCOM,
+                BEANGER = fields.BEANGER,
+                BESUBAB = fields.BESUBAB,
+                ALCUSE = fields.ALCUSE,
+                SEDUSE = fields.SEDUSE,
+                OPIATEUSE = fields.OPIATEUSE,
+                COCAINEUSE = fields.COCAINEUSE,
+                CANNABUSE = fields.CANNABUSE,
+                OTHSUBUSE = fields.OTHSUBUSE,
+                OTHSUBUSEX = fields.OTHSUBUSEX,
+                PERCHAGE = fields.PERCHAGE,
                 BEREM = fields.BEREM,
                 BEREMAGO = fields.BEREMAGO,
-                BEANX = fields.BEANX,
+                BEREMCONF = fields.BEREMCONF,
                 BEOTHR = fields.BEOTHR,
                 BEOTHRX = fields.BEOTHRX,
                 BEMODE = fields.BEMODE,
                 BEMODEX = fields.BEMODEX,
+                DECCLMOT = ConvertIntToBool(fields.DECCLMOT),
                 MOGAIT = fields.MOGAIT,
                 MOFALLS = fields.MOFALLS,
-                MOTREM = fields.MOTREM,
                 MOSLOW = fields.MOSLOW,
+                MOTREM = fields.MOTREM,
+                MOLIMB = fields.MOLIMB,
+                MOFACE = fields.MOFACE,
+                MOSPEECH = fields.MOSPEECH,
+                MOTORAGE = fields.MOTORAGE,
                 MOMODE = fields.MOMODE,
                 MOMODEX = fields.MOMODEX,
                 MOMOPARK = fields.MOMOPARK,
@@ -1059,6 +1215,13 @@ namespace UDS.Net.Services.Extensions
                 COURSE = fields.COURSE,
                 FRSTCHG = fields.FRSTCHG,
             };
+        }
+
+        private static bool? ConvertIntToBool(int? property)
+        {
+            if (property == 1) return true;
+            if (property == 0) return false;
+            return null;
         }
 
         public static C1Dto ToDto(this C1FormFields fields)
