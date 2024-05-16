@@ -483,7 +483,7 @@ namespace UDS.Net.Forms.Models.UDS4
             get
             {
                 int counter = 0;
-                if (MAJDEPDX == true) 
+                if (MAJDEPDX == true)
                 {
                     counter++;
                 }
@@ -491,7 +491,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if (BIPOLDX == true) 
+                if (BIPOLDX == true)
                 {
                     counter++;
                 }
@@ -507,7 +507,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if (NDEVDIS == true) 
+                if (NDEVDIS == true)
                 {
                     counter++;
                 }
