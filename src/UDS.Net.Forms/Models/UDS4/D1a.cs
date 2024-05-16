@@ -270,7 +270,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Anxiety disorder (primary/contributing/non-contributing)")]
         [RequiredIf(nameof(ANXIET), "True", ErrorMessage = "Please indicate if given condition is a primary, contributing, or non-contributing.")]
-        public bool? ANXIETIF { get; set; }
+        public int? ANXIETIF { get; set; }
 
         [Display(Name = "Generalized Anxiety Disorder")]
         public bool? GENANX { get; set; }
@@ -590,10 +590,10 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                //if ((ANXIET == true) && (ANXIETIF == 1))
-                //{
-                //    counter++;
-                //}
+                if ((ANXIET == true) && (ANXIETIF == 1))
+                {
+                    counter++;
+                }
                 if ((PTSDDX == true) && (PTSDDXIF == 1))
                 {
                     counter++;

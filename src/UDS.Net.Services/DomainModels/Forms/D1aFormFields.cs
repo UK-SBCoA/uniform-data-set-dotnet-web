@@ -63,7 +63,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? SCHIZOP { get; set; }
         public int? SCHIZOIF { get; set; }
         public bool? ANXIET { get; set; }
-        public bool? ANXIETIF { get; set; }
+        public int? ANXIETIF { get; set; }
         public bool? GENANX { get; set; }
         public bool? PANICDISDX { get; set; }
         public bool? OCDDX { get; set; }
