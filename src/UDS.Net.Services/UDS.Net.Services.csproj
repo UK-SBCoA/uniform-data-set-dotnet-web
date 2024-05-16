@@ -10,9 +10,9 @@
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Service contracts required by MVC web app</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>2.0.17</ReleaseVersion>
+		<ReleaseVersion>2.0.8</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="UDS.Net.Dto" Version="2.0.7" />
+		<PackageReference Include="UDS.Net.Dto" Version="2.0.8" />
 	</ItemGroup>
 </Project>
