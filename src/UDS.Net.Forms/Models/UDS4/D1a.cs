@@ -184,7 +184,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? PPASYN { get; set; }
 
         [Display(Name = "Primary progressive aphasia (PPA) syndrome - type")]
-        [RequiredIf(nameof(PPASYN), "true", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(PPASYN), "True", ErrorMessage = "Please specify.")]
         public int? PPASYNT { get; set; }
 
         [Display(Name = "Behavioral variant frontotemporal (bvFTD) syndrome")]
@@ -236,6 +236,22 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
+
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "Please select one or more source as Yes.")]
+        [NotMapped]
+        public bool? SourceIndicated
+        {
+            get
+            {
+                if ((SYNINFCLIN.HasValue && SYNINFCLIN.Value == true) ||
+                    (SYNINFCTST.HasValue && SYNINFCTST.Value == true) ||
+                    (SYNINFBIOM.HasValue && SYNINFBIOM.Value == true))
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         [Display(Name = "Major depressive disorder")]
         public bool? MAJDEPDX { get; set; }
