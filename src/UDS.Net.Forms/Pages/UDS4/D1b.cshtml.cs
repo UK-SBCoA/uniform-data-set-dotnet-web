@@ -235,7 +235,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
 
         };
 
@@ -243,7 +243,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
 
         };
 
@@ -382,7 +382,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
 
         };
 
@@ -662,7 +662,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
 
         };
 
