@@ -298,7 +298,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Primary, contributing, or non-contributing - Frontotemporal lobar degeneration")]
         public int? FTLDIF { get; set; }
 
-        [RequiredIf(nameof(FTLD), "true", ErrorMessage = "Please select one.")]
+        [RequiredIf(nameof(FTLD), "True", ErrorMessage = "Please select one.")]
         [NotMapped]
         public bool? FTLDIndicated
         {
@@ -416,7 +416,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? OTHCOGIF { get; set; }
 
         [Display(Name = "Other (specify)")]
-        [RequiredIf(nameof(OTHCOG), "true", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(OTHCOG), "True", ErrorMessage = "Please indicate.")]
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
