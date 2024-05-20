@@ -53,7 +53,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> PETDXListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No (SKIP TO QUESTION 8)", "0"),
+            new RadioListItem("No (SKIP TO QUESTION 6b)", "0"),
             new RadioListItem("Yes, results were normal or abnormal", "1"),
             new RadioListItem("Yes, results were indeterminate", "2")
         };
@@ -266,9 +266,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.PETDX"),
-                    new UIEnableAttribute("D1b.FDGPETDX"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIEnableAttribute("D1b.TRACOTHDX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
                     new UIEnableAttribute("D1b.OTHBIOM1"),
 
@@ -291,9 +288,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.PETDX"),
-                    new UIEnableAttribute("D1b.FDGPETDX"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIEnableAttribute("D1b.TRACOTHDX"),
                     new UIEnableAttribute("D1b.STRUCTDX"),
                     new UIEnableAttribute("D1b.OTHBIOM1"),
                 }
@@ -307,25 +301,16 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIDisableAttribute("D1b.AMYLPET"),
                     new UIDisableAttribute("D1b.TAUPET"),
-                    new UIDisableAttribute("D1b.FDGPETDX"),
-                    new UIDisableAttribute("D1b.DATSCANDX"),
-                    new UIDisableAttribute("D1b.TRACOTHDX"),
-                    new UIDisableAttribute("D1b.STRUCTDX"),
-                    new UIEnableAttribute("D1b.OTHBIOM1")
-
+                    new UIEnableAttribute("D1b.FDGPETDX")
                 },
-                InstructionalMessage = "SKIP TO QUESTION 8"
+                InstructionalMessage = ""
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.AMYLPET"),
                     new UIEnableAttribute("D1b.TAUPET"),
-                    new UIEnableAttribute("D1b.FDGPETDX"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIDisableAttribute("D1b.TRACOTHDX"),
-                    new UIEnableAttribute("D1b.STRUCTDX"),
-
+                    new UIEnableAttribute("D1b.FDGPETDX")
                 }
             } },
              { "2", new UIBehavior {
@@ -333,10 +318,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("D1b.AMYLPET"),
                     new UIEnableAttribute("D1b.TAUPET"),
-                    new UIEnableAttribute("D1b.FDGPETDX"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIDisableAttribute("D1b.TRACOTHDX"),
-                    new UIEnableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX")
                 }
             } },
         };
@@ -351,6 +333,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.FDGLBD"),
                     new UIDisableAttribute("D1b.FDGOTH"),
                     new UIEnableAttribute("D1b.DATSCANDX"),
+                     new UIEnableAttribute("D1b.TRACOTHDX")
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 6c"
@@ -362,7 +345,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.FDGFTLD"),
                     new UIEnableAttribute("D1b.FDGLBD"),
                     new UIEnableAttribute("D1b.FDGOTH"),
-                    new UIEnableAttribute("D1b.DATSCANDX")
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX")
 
                 }
             } },
@@ -373,7 +357,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.FDGFTLD"),
                     new UIEnableAttribute("D1b.FDGLBD"),
                     new UIEnableAttribute("D1b.FDGOTH"),
-                    new UIEnableAttribute("D1b.DATSCANDX")
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX")
                 }
             } },
         };
