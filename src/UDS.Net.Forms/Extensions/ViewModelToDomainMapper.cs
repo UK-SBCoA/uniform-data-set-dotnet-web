@@ -117,8 +117,8 @@ namespace UDS.Net.Forms.Extensions
                 return ((C1)vm).ToEntity();
             else if (vm is C2)
                 return ((C2)vm).ToEntity();
-            else if (vm is D1)
-                return ((D1)vm).ToEntity();
+            else if (vm is D1a)
+                return ((D1a)vm).ToEntity();
             else if (vm is D2)
                 return ((D2)vm).ToEntity();
             else if (vm is T1)
@@ -1192,6 +1192,121 @@ namespace UDS.Net.Forms.Extensions
                 RESPASST = vm.RESPASST ? 1 : 0,
                 RESPOTH = vm.RESPOTH ? 1 : 0,
                 RESPOTHX = vm.RESPOTHX
+            };
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
+        }
+
+        public static Form ToEntity(this D1a vm)
+        {
+            var fields = new D1aFormFields
+            {
+                DXMETHOD = vm.DXMETHOD,
+                NORMCOG = vm.NORMCOG,
+                SCD = vm.SCD,
+                SCDDXCONF = vm.SCDDXCONF,
+                DEMENTED = vm.DEMENTED,
+                MCICRITCLN = vm.MCICRITCLN,
+                MCICRITIMP = vm.MCICRITIMP,
+                MCICRITFUN = vm.MCICRITFUN,
+                MCI = vm.MCI,
+                IMPNOMCIFU = vm.IMPNOMCIFU,
+                IMPNOMCICG = vm.IMPNOMCICG,
+                IMPNOMCLCD = vm.IMPNOMCLCD,
+                IMPNOMCIO = vm.IMPNOMCIO,
+                IMPNOMCIOX = vm.IMPNOMCIOX,
+                IMPNOMCI = vm.IMPNOMCI.HasValue ? vm.IMPNOMCI.Value != 0 : false,
+                CDOMMEM = vm.CDOMMEM,
+                CDOMLANG = vm.CDOMLANG,
+                CDOMATTN = vm.CDOMATTN,
+                CDOMEXEC = vm.CDOMEXEC,
+                CDOMVISU = vm.CDOMVISU,
+                CDOMBEH = vm.CDOMBEH,
+                CDOMAPRAX = vm.CDOMAPRAX,
+                MBI = vm.MBI,
+                BDOMMOT = vm.BDOMMOT,
+                BDOMAFREG = vm.BDOMAFREG,
+                BDOMIMP = vm.BDOMIMP,
+                BDOMSOCIAL = vm.BDOMSOCIAL,
+                BDOMTHTS = vm.BDOMTHTS,
+                PREDOMSYN = vm.PREDOMSYN,
+                AMNDEM = vm.AMNDEM,
+                DYEXECSYN = vm.DYEXECSYN,
+                PCA = vm.PCA,
+                PPASYN = vm.PPASYN,
+                PPASYNT = vm.PPASYNT,
+                FTDSYN = vm.FTDSYN,
+                LBDSYN = vm.LBDSYN,
+                LBDSYNT = vm.LBDSYNT,
+                NAMNDEM = vm.NAMNDEM,
+                PSPSYN = vm.PSPSYN,
+                PSPSYNT = vm.PSPSYNT,
+                CTESYN = vm.CTESYN,
+                CBSSYN = vm.CBSSYN,
+                MSASYN = vm.MSASYN,
+                MSASYNT = vm.MSASYNT,
+                OTHSYN = vm.OTHSYN,
+                OTHSYNX = vm.OTHSYNX,
+                SYNINFCLIN = vm.SYNINFCLIN,
+                SYNINFCTST = vm.SYNINFCTST,
+                SYNINFBIOM = vm.SYNINFBIOM,
+                MAJDEPDX = vm.MAJDEPDX,
+                MAJDEPDIF = vm.MAJDEPDIF,
+                OTHDEPDX = vm.OTHDEPDX,
+                OTHDEPDIF = vm.OTHDEPDIF,
+                BIPOLDX = vm.BIPOLDX,
+                BIPOLDIF = vm.BIPOLDIF,
+                SCHIZOP = vm.SCHIZOP,
+                SCHIZOIF = vm.SCHIZOIF,
+                ANXIET = vm.ANXIET,
+                ANXIETIF = vm.ANXIETIF,
+                GENANX = vm.GENANX,
+                PANICDISDX = vm.PANICDISDX,
+                OCDDX = vm.OCDDX,
+                OTHANXD = vm.OTHANXD,
+                OTHANXDX = vm.OTHANXDX,
+                PTSDDX = vm.PTSDDX,
+                PTSDDXIF = vm.PTSDDXIF,
+                NDEVDIS = vm.NDEVDIS,
+                NDEVDISIF = vm.NDEVDISIF,
+                DELIR = vm.DELIR,
+                DELIRIF = vm.DELIRIF,
+                OTHPSY = vm.OTHPSY,
+                OTHPSYIF = vm.OTHPSYIF,
+                OTHPSYX = vm.OTHPSYX,
+                TBIDX = vm.TBIDX,
+                TBIDXIF = vm.TBIDXIF,
+                EPILEP = vm.EPILEP,
+                EPILEPIF = vm.EPILEPIF,
+                HYCEPH = vm.HYCEPH,
+                HYCEPHIF = vm.HYCEPHIF,
+                NEOP = vm.NEOP,
+                NEOPIF = vm.NEOPIF,
+                NEOPSTAT = vm.NEOPSTAT,
+                HIV = vm.HIV,
+                HIVIF = vm.HIVIF,
+                POSTC19 = vm.POSTC19,
+                POSTC19IF = vm.POSTC19IF,
+                APNEADX = vm.APNEADX,
+                APNEADXIF = vm.APNEADXIF,
+                OTHCOGILL = vm.OTHCOGILL,
+                OTHCILLIF = vm.OTHCILLIF,
+                OTHCOGILLX = vm.OTHCOGILLX,
+                ALCDEM = vm.ALCDEM,
+                ALCDEMIF = vm.ALCDEMIF,
+                IMPSUB = vm.IMPSUB,
+                IMPSUBIF = vm.IMPSUBIF,
+                MEDS = vm.MEDS,
+                MEDSIF = vm.MEDSIF,
+                COGOTH = vm.COGOTH,
+                COGOTHIF = vm.COGOTHIF,
+                COGOTHX = vm.COGOTHX,
+                COGOTH2 = vm.COGOTH2,
+                COGOTH2F = vm.COGOTH2F,
+                COGOTH2X = vm.COGOTH2X,
+                COGOTH3 = vm.COGOTH3,
+                COGOTH3F = vm.COGOTH3F,
+                COGOTH3X = vm.COGOTH3X
             };
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
