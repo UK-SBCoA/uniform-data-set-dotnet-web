@@ -1605,7 +1605,7 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
-                };
+            };
         }
 
         public static T1Dto ToDto(this T1FormFields fields)
