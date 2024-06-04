@@ -82,7 +82,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Elevated tau pathology")]
         public int? TAUPET { get; set; }
 
-        [RequiredIf(nameof(IMAGINGDX), "0", ErrorMessage = "Please indicate.")]
         [RequiredIfRange(nameof(PETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
