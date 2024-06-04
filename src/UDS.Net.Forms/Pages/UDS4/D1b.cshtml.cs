@@ -266,7 +266,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("D1b.PETDX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
 
                 },
                 InstructionalMessage = "CONTINUE TO QUESTION 6, and SKIP QUESTIONS 7 – 7a3f"
@@ -413,7 +412,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.STRUCTAD"),
                     new UIDisableAttribute("D1b.STRUCTFTLD"),
                     new UIDisableAttribute("D1b.STRUCTCVD"),
-                    new UIEnableAttribute("D1b.OTHBIOM1")
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 8"
@@ -424,7 +422,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.STRUCTAD"),
                     new UIEnableAttribute("D1b.STRUCTFTLD"),
                     new UIEnableAttribute("D1b.STRUCTCVD"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
 
                 }
             } },
@@ -434,7 +431,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.STRUCTAD"),
                     new UIEnableAttribute("D1b.STRUCTFTLD"),
                     new UIEnableAttribute("D1b.STRUCTCVD"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
                 }
             } },
         };
@@ -450,7 +446,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGMICH"),
                     new UIDisableAttribute("D1b.IMAGMWMH"),
                     new UIDisableAttribute("D1b.IMAGEWMH"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
 
                 }
             } },
@@ -463,7 +458,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGMICH"),
                     new UIEnableAttribute("D1b.IMAGMWMH"),
                     new UIEnableAttribute("D1b.IMAGEWMH"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
 
                 }
             } },
@@ -476,7 +470,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGMICH"),
                     new UIEnableAttribute("D1b.IMAGMWMH"),
                     new UIEnableAttribute("D1b.IMAGEWMH"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
                 }
             } },
         };
@@ -493,7 +486,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMOTH1"),
                     new UIDisableAttribute("D1b.OTHBIOM2"),
                     new UIDisableAttribute("D1b.OTHBIOM3"),
-                    new UIEnableAttribute("D1b.AUTDOMMUT"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 11"
@@ -534,7 +526,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMLBD2"),
                     new UIDisableAttribute("D1b.BIOMOTH2"),
                     new UIDisableAttribute("D1b.OTHBIOM3"),
-                    new UIEnableAttribute("D1b.AUTDOMMUT"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 11"
@@ -574,7 +565,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMFTLD3"),
                     new UIDisableAttribute("D1b.BIOMLBD3"),
                     new UIDisableAttribute("D1b.BIOMOTH3"),
-                    new UIEnableAttribute("D1b.AUTDOMMUT"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 11"
@@ -587,7 +577,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.BIOMFTLD3"),
                     new UIEnableAttribute("D1b.BIOMLBD3"),
                     new UIEnableAttribute("D1b.BIOMOTH3"),
-                    new UIEnableAttribute("D1b.AUTDOMMUT"),
 
                 }
             } },
@@ -599,7 +588,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.BIOMFTLD3"),
                     new UIEnableAttribute("D1b.BIOMLBD3"),
                     new UIEnableAttribute("D1b.BIOMOTH3"),
-                    new UIEnableAttribute("D1b.AUTDOMMUT"),
                 }
             } },
         };
