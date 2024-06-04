@@ -161,7 +161,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.FLUIDBIOM"),
+                    new UIEnableAttribute("D1b.FLUIDBIOM")
                 },
                 InstructionalMessage = "CONTINUE TO QUESTION 2"
             } },
@@ -258,9 +258,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.TRACOTHDX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
                     new UIEnableAttribute("D1b.OTHBIOM1"),
-
                 },
-                InstructionalMessage = "SKIP TO QUESTION 6b"
+                InstructionalMessage = "SKIP TO QUESTION 8"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -279,8 +278,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.FDGPETDX"),
                     new UIDisableAttribute("D1b.DATSCANDX"),
                     new UIDisableAttribute("D1b.TRACOTHDX"),
-                    new UIEnableAttribute("D1b.STRUCTDX"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                    new UIEnableAttribute("D1b.STRUCTDX")
                 },
                 InstructionalMessage = "SKIP TO QUESTION 7"
             } },
@@ -288,8 +286,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.PETDX"),
-                    new UIEnableAttribute("D1b.STRUCTDX"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                    new UIEnableAttribute("D1b.STRUCTDX")
                 }
             } },
         };
@@ -381,7 +378,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.TRACERFTLD"),
                     new UIDisableAttribute("D1b.TRACERLBD"),
                     new UIDisableAttribute("D1b.TRACEROTH"),
-                    new UIEnableAttribute("D1b.STRUCTDX")
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 7a"
@@ -394,7 +390,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.TRACERFTLD"),
                     new UIEnableAttribute("D1b.TRACERLBD"),
                     new UIEnableAttribute("D1b.TRACEROTH"),
-                    new UIEnableAttribute("D1b.STRUCTDX")
 
                 }
             } },
@@ -406,7 +401,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.TRACERFTLD"),
                     new UIEnableAttribute("D1b.TRACERLBD"),
                     new UIEnableAttribute("D1b.TRACEROTH"),
-                    new UIEnableAttribute("D1b.STRUCTDX")
                 }
             } },
         };
