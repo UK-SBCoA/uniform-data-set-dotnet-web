@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
-        [RequiredIf(nameof(CSFOTHX), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(CSFOTH), "1", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
