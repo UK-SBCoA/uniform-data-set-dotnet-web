@@ -161,7 +161,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.FLUIDBIOM")
+                    new UIEnableAttribute("D1b.FLUIDBIOM"),
+                    new UIEnableAttribute("D1b.STRUCTDX"),
+                    new UIEnableAttribute("D1b.OTHBIOM1"),
+                    new UIEnableAttribute("D1b.AUTDOMMUT"),
                 },
                 InstructionalMessage = "CONTINUE TO QUESTION 2"
             } },
@@ -257,7 +260,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.DATSCANDX"),
                     new UIDisableAttribute("D1b.TRACOTHDX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
-                    new UIEnableAttribute("D1b.OTHBIOM1"),
                 },
                 InstructionalMessage = "SKIP TO QUESTION 8"
             } },
