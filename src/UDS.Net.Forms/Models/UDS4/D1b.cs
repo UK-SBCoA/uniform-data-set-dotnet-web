@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1b : FormModel
     {
-        [RequiredOnComplete]
+        [RequiredOnComplete(ErrorMessage = "Please specify if any biomarker results were used to support the current etiological diagnosis.")]
         [Display(Name = "Were any biomarker results used to support the current etiological diagnosis?")]
         public int? BIOMARKDX { get; set; }
 
@@ -353,6 +353,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? FTLDNOIF { get; set; }
 
         [Display(Name = "If FTLD (QUESTION 14) is present, specify FTLD subtype:")]
+        [RequiredIf(nameof(FTLD), "True", ErrorMessage = "Please select one.")]
         public int? FTLDSUBT { get; set; }
 
         [Display(Name = "Other FTLD subtype (specify)")]
