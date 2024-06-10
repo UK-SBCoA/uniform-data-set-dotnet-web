@@ -183,8 +183,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? IMAGEWMH { get; set; }
 
         [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
-        [RequiredIf(nameof(PETDX), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIfRange(nameof(STRUCTDX), 0, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(BIOMARKDX), "1", ErrorMessage = "Please indicate.")]
         public int? OTHBIOM1 { get; set; }
 
         [Display(Name = "(specify)")]
@@ -274,9 +273,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? BIOMOTHX3 { get; set; }
 
         [Display(Name = "Is there an autosomal dominant pathogenic variant to support an etiological diagnosis?")]
-        [RequiredIf(nameof(OTHBIOM1), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(OTHBIOM2), "0", ErrorMessage = "Please indicate.")]
-        [RequiredIf(nameof(OTHBIOM3), "0", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMARKDX), "1", ErrorMessage = "Please indicate.")]
         public int? AUTDOMMUT { get; set; }
 
         [Display(Name = "Alzheimer's disease")]
