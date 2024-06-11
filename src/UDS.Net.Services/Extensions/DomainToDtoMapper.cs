@@ -243,6 +243,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((D1aFormFields)form.Fields).ToDto();
             }
+            else if (form.Fields is D1bFormFields)
+            {
+                dto = ((D1bFormFields)form.Fields).ToDto();
+            }
             else if (form.Fields is T1FormFields)
             {
                 dto = ((T1FormFields)form.Fields).ToDto();
@@ -331,6 +335,10 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1aFormFields && formKind == "D1a")
             {
                 dto = ((D1aFormFields)form.Fields).ToDto();
+            }
+            else if (form.Fields is D1bFormFields && formKind == "D1b")
+            {
+                dto = ((D1bFormFields)form.Fields).ToDto();
             }
             else if (form.Fields is T1FormFields && formKind == "T1")
             {
@@ -1351,7 +1359,6 @@ namespace UDS.Net.Services.Extensions
                 UDSVERTN = fields.UDSVERTN,
                 UDSVERTE = fields.UDSVERTE,
                 UDSVERTI = fields.UDSVERTI,
-                VERBALTEST = fields.VERBALTEST,
                 COGSTAT = fields.COGSTAT,
                 REY1REC = fields.REY1REC,
                 REY1INT = fields.REY1INT,
@@ -1363,30 +1370,12 @@ namespace UDS.Net.Services.Extensions
                 REY4INT = fields.REY4INT,
                 REY5REC = fields.REY5REC,
                 REY5INT = fields.REY5INT,
-                REYBREC = fields.REYBREC,
-                REYBINT = fields.REYBINT,
                 REY6REC = fields.REY6REC,
                 REY6INT = fields.REY6INT,
                 REYDREC = fields.REYDREC,
                 REYDINT = fields.REYDINT,
-                REYDTI = fields.REYDTI,
-                REYMETHOD = fields.REYMETHOD,
                 REYTCOR = fields.REYTCOR,
                 REYFPOS = fields.REYFPOS,
-                CERAD1REC = fields.CERAD1REC,
-                CERAD1READ = fields.CERAD1READ,
-                CERAD1INT = fields.CERAD1INT,
-                CERAD2REC = fields.CERAD2REC,
-                CERAD2READ = fields.CERAD2READ,
-                CERAD2INT = fields.CERAD2INT,
-                CERAD3REC = fields.CERAD3REC,
-                CERAD3READ = fields.CERAD3READ,
-                CERAD3INT = fields.CERAD3INT,
-                CERADDTI = fields.CERADDTI,
-                CERADJ6REC = fields.CERADJ6REC,
-                CERADJ6INT = fields.CERADJ6INT,
-                CERADJ7YES = fields.CERADJ7YES,
-                CERADJ7NO = fields.CERADJ7NO,
                 RESPVAL = fields.RESPVAL,
                 RESPHEAR = fields.RESPHEAR,
                 RESPDIST = fields.RESPDIST,
@@ -1511,6 +1500,111 @@ namespace UDS.Net.Services.Extensions
                 COGOTH3 = fields.COGOTH3,
                 COGOTH3F = fields.COGOTH3F,
                 COGOTH3X = fields.COGOTH3X
+            };
+        }
+
+        public static D1bDto ToDto(this D1bFormFields fields)
+        {
+
+            return new D1bDto
+            {
+                BIOMARKDX = fields.BIOMARKDX,
+                FLUIDBIOM = fields.FLUIDBIOM,
+                BLOODAD = fields.BLOODAD,
+                BLOODFTLD = fields.BLOODFTLD,
+                BLOODLBD = fields.BLOODLBD,
+                BLOODOTH = fields.BLOODOTH,
+                BLOODOTHX = fields.BLOODOTHX,
+                CSFAD = fields.CSFAD,
+                CSFFTLD = fields.CSFFTLD,
+                CSFLBD = fields.CSFLBD,
+                CSFOTH = fields.CSFOTH,
+                CSFOTHX = fields.CSFOTHX,
+                IMAGINGDX = fields.IMAGINGDX,
+                PETDX = fields.PETDX,
+                AMYLPET = fields.AMYLPET,
+                TAUPET = fields.TAUPET,
+                FDGPETDX = fields.FDGPETDX,
+                FDGAD = fields.FDGAD,
+                FDGFTLD = fields.FDGFTLD,
+                FDGLBD = fields.FDGLBD,
+                FDGOTH = fields.FDGOTH,
+                FDGOTHX = fields.FDGOTHX,
+                DATSCANDX = fields.DATSCANDX,
+                TRACOTHDX = fields.TRACOTHDX,
+                TRACOTHDXX = fields.TRACOTHDXX,
+                TRACERAD = fields.TRACERAD,
+                TRACERFTLD = fields.TRACERFTLD,
+                TRACERLBD = fields.TRACERLBD,
+                TRACEROTH = fields.TRACEROTH,
+                TRACEROTHX = fields.TRACEROTHX,
+                STRUCTDX = fields.STRUCTDX,
+                STRUCTAD = fields.STRUCTAD,
+                STRUCTFTLD = fields.STRUCTFTLD,
+                STRUCTCVD = fields.STRUCTCVD,
+                IMAGLINF = fields.IMAGLINF,
+                IMAGLAC = fields.IMAGLAC,
+                IMAGMACH = fields.IMAGMACH,
+                IMAGMICH = fields.IMAGMICH,
+                IMAGMWMH = fields.IMAGMWMH,
+                IMAGEWMH = fields.IMAGEWMH,
+                OTHBIOM1 = fields.OTHBIOM1,
+                OTHBIOMX1 = fields.OTHBIOMX1,
+                BIOMAD1 = fields.BIOMAD1,
+                BIOMFTLD1 = fields.BIOMFTLD1,
+                BIOMLBD1 = fields.BIOMLBD1,
+                BIOMOTH1 = fields.BIOMOTH1,
+                BIOMOTHX1 = fields.BIOMOTHX1,
+                OTHBIOM2 = fields.OTHBIOM2,
+                OTHBIOMX2 = fields.OTHBIOMX2,
+                BIOMAD2 = fields.BIOMAD2,
+                BIOMFTLD2 = fields.BIOMFTLD2,
+                BIOMLBD2 = fields.BIOMLBD2,
+                BIOMOTH2 = fields.BIOMOTH2,
+                BIOMOTHX2 = fields.BIOMOTHX2,
+                OTHBIOM3 = fields.OTHBIOM3,
+                OTHBIOMX3 = fields.OTHBIOMX3,
+                BIOMAD3 = fields.BIOMAD3,
+                BIOMFTLD3 = fields.BIOMFTLD3,
+                BIOMLBD3 = fields.BIOMLBD3,
+                BIOMOTH3 = fields.BIOMOTH3,
+                BIOMOTHX3 = fields.BIOMOTHX3,
+                AUTDOMMUT = fields.AUTDOMMUT,
+                ALZDIS = fields.ALZDIS,
+                ALZDISIF = fields.ALZDISIF,
+                LBDIS = fields.LBDIS,
+                LBDIF = fields.LBDIF,
+                FTLD = fields.FTLD,
+                FTLDIF = fields.FTLDIF,
+                PSP = fields.PSP,
+                PSPIF = fields.PSPIF,
+                CORT = fields.CORT,
+                CORTIF = fields.CORTIF,
+                FTLDMO = fields.FTLDMO,
+                FTLDMOIF = fields.FTLDMOIF,
+                FTLDNOS = fields.FTLDNOS,
+                FTLDNOIF = fields.FTLDNOIF,
+                FTLDSUBT = fields.FTLDSUBT,
+                FTLDSUBX = fields.FTLDSUBX,
+                CVD = fields.CVD,
+                CVDIF = fields.CVDIF,
+                MSA = fields.MSA,
+                MSAIF = fields.MSAIF,
+                CTE = fields.CTE,
+                CTEIF = fields.CTEIF,
+                DOWNS = fields.DOWNS,
+                DOWNSIF = fields.DOWNSIF,
+                HUNT = fields.HUNT,
+                HUNTIF = fields.HUNTIF,
+                PRION = fields.PRION,
+                PRIONIF = fields.PRIONIF,
+                CAA = fields.CAA,
+                CAAIF = fields.CAAIF,
+                LATE = fields.LATE,
+                LATEIF = fields.LATEIF,
+                OTHCOG = fields.OTHCOG,
+                OTHCOGIF = fields.OTHCOGIF,
+                OTHCOGX = fields.OTHCOGX
             };
         }
 
