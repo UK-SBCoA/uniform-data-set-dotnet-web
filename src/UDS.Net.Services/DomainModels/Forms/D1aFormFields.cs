@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -111,6 +113,40 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? COGOTH3 { get; set; }
         public int? COGOTH3F { get; set; }
         public string COGOTH3X { get; set; }
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Clinical Diagnosis";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
 
         public D1aFormFields() { }
         public D1aFormFields(FormDto dto)
@@ -226,15 +262,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 COGOTH3X = d1aDto.COGOTH3X;
 
             }
-        }
-        public string GetDescription()
-        {
-            return "Clinician Syndrome";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

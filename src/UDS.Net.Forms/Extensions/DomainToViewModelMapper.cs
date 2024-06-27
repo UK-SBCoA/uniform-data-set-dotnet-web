@@ -12,13 +12,16 @@ namespace UDS.Net.Forms.Extensions
         private static void SetBaseProperties(Form form, FormModel vm)
         {
             vm.VisitId = form.VisitId;
-            vm.Version = form.Version;
+            vm.FORMVER = form.FORMVER;
             vm.Status = form.Status;
             vm.Kind = form.Kind;
             vm.Title = form.Title;
             vm.Description = form.Description;
-            vm.IsRequiredForVisitKind = form.IsRequiredForVisitKind;
-            vm.ReasonCodeNotIncluded = form.ReasonCode;
+            vm.IsRequiredForPacketKind = form.IsRequiredForPacketKind;
+            vm.NOT = form.NOT;
+            vm.RMREAS = form.RMREAS;
+            vm.RMMODE = form.RMMODE;
+            vm.INITIALS = form.INITIALS;
             vm.CreatedAt = form.CreatedAt;
             vm.CreatedBy = form.CreatedBy;
             vm.ModifiedBy = form.ModifiedBy;
@@ -68,10 +71,11 @@ namespace UDS.Net.Forms.Extensions
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
-                Number = visit.Number,
-                Kind = visit.Kind,
-                Version = visit.Version,
-                StartDateTime = visit.StartDateTime,
+                VISITNUM = visit.VISITNUM,
+                PACKET = visit.PACKET,
+                FORMVER = visit.FORMVER,
+                VISIT_DATE = visit.VISIT_DATE,
+                INITIALS = visit.INITIALS,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
@@ -147,19 +151,24 @@ namespace UDS.Net.Forms.Extensions
             {
                 Id = form.Id,
                 VisitId = form.VisitId,
-                Version = form.Version,
+                FORMVER = form.FORMVER,
                 Kind = form.Kind,
                 Status = form.Status,
                 Title = form.Title,
                 Description = form.Description,
-                IsRequiredForVisitKind = form.IsRequiredForVisitKind,
+                IsRequiredForPacketKind = form.IsRequiredForPacketKind,
                 CreatedAt = form.CreatedAt,
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,
                 DeletedBy = form.DeletedBy,
                 IsDeleted = form.IsDeleted,
-                Language = form.Language,
-                ReasonCodeNotIncluded = form.ReasonCode
+                LANG = form.LANG,
+                NOT = form.NOT,
+                MODE = form.MODE,
+                RMMODE = form.RMMODE,
+                RMREAS = form.RMREAS,
+                FRMDATE = form.FRMDATE,
+                INITIALS = form.INITIALS
             };
 
             if (form.Fields != null)

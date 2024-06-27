@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -79,9 +81,48 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COURSE { get; set; }
         public int? FRSTCHG { get; set; }
 
-        public B9FormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Clinician Judgment of Symptoms";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        private static int? ConvertToNullableInt(bool? property)
+        {
+            if (property == true) return 1;
+            if (property == false) return 0;
+            return null;
+        }
+
+        public B9FormFields() { }
         public B9FormFields(FormDto dto)
         {
             if (dto is B9Dto)
@@ -93,8 +134,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 DECCOGIN = b9Dto.DECCOGIN;
                 DECMOTIN = b9Dto.DECMOTIN;
                 PSYCHSYMIN = b9Dto.PSYCHSYMIN;
-                DECCLIN = ConvertBoolToInt(b9Dto.DECCLIN);
-                DECCLCOG = ConvertBoolToInt(b9Dto.DECCLCOG);
+                DECCLIN = ConvertToNullableInt(b9Dto.DECCLIN);
+                DECCLCOG = ConvertToNullableInt(b9Dto.DECCLCOG);
                 COGMEM = b9Dto.COGMEM;
                 COGORI = b9Dto.COGORI;
                 COGJUDG = b9Dto.COGJUDG;
@@ -145,7 +186,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BEOTHRX = b9Dto.BEOTHRX;
                 BEMODE = b9Dto.BEMODE;
                 BEMODEX = b9Dto.BEMODEX;
-                DECCLMOT = ConvertBoolToInt(b9Dto.DECCLMOT);
+                DECCLMOT = ConvertToNullableInt(b9Dto.DECCLMOT);
                 MOGAIT = b9Dto.MOGAIT;
                 MOFALLS = b9Dto.MOFALLS;
                 MOSLOW = b9Dto.MOSLOW;
@@ -161,23 +202,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 COURSE = b9Dto.COURSE;
                 FRSTCHG = b9Dto.FRSTCHG;
             }
-        }
-
-        private static int? ConvertBoolToInt(bool? property)
-        {
-            if (property == true) return 1;
-            if (property == false) return 0;
-            return null;
-        }
-
-        public string GetDescription()
-        {
-            return "Clinician Judgment of Symptoms";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

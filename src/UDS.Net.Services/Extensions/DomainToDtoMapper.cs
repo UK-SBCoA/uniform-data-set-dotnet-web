@@ -19,9 +19,13 @@ namespace UDS.Net.Services.Extensions
             dto.VisitId = form.VisitId;
             dto.Kind = form.Kind;
             dto.Status = ((int)form.Status).ToString();
-            dto.Language = ((int)form.Language).ToString();
-            dto.IsIncluded = form.IsIncluded;
-            dto.ReasonCode = form.ReasonCode.HasValue ? ((int)form.ReasonCode.Value).ToString() : "";
+            dto.FRMDATE = form.FRMDATE;
+            dto.INITIALS = form.INITIALS;
+            dto.LANG = ((int)form.LANG).ToString();
+            dto.MODE = ((int)form.MODE).ToString();
+            dto.RMREAS = form.RMREAS.HasValue ? ((int)form.RMREAS).ToString() : "";
+            dto.RMMODE = form.RMMODE.HasValue ? ((int)form.RMMODE).ToString() : "";
+            dto.NOT = form.NOT.HasValue ? ((int)form.NOT).ToString() : "";
             dto.CreatedAt = form.CreatedAt;
             dto.CreatedBy = form.CreatedBy;
             dto.ModifiedBy = form.ModifiedBy;
@@ -50,10 +54,11 @@ namespace UDS.Net.Services.Extensions
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
-                Number = visit.Number,
-                Version = visit.Version,
-                Kind = visit.Kind.ToString(),
-                StartDateTime = visit.StartDateTime,
+                VISITNUM = visit.VISITNUM,
+                FORMVER = visit.FORMVER,
+                PACKET = visit.PACKET.ToString(),
+                VISIT_DATE = visit.VISIT_DATE,
+                INITIALS = visit.INITIALS,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
@@ -114,10 +119,11 @@ namespace UDS.Net.Services.Extensions
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
-                Number = visit.Number,
-                Version = visit.Version,
-                Kind = visit.Kind.ToString(),
-                StartDateTime = visit.StartDateTime,
+                VISITNUM = visit.VISITNUM,
+                FORMVER = visit.FORMVER,
+                PACKET = visit.PACKET.ToString(),
+                VISIT_DATE = visit.VISIT_DATE,
+                INITIALS = visit.INITIALS,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
@@ -143,8 +149,16 @@ namespace UDS.Net.Services.Extensions
         private static FormDto GetDto(Form form)
         {
             string reasonCode = "";
-            if (form.Status == FormStatus.NotIncluded && form.ReasonCode.HasValue)
-                reasonCode = ((int)form.ReasonCode).ToString();
+            if (form.Status == FormStatus.NotIncluded && form.NOT.HasValue)
+                reasonCode = ((int)form.NOT).ToString();
+
+            string remoteReasonCode = "";
+            if (form.MODE == FormMode.Remote && form.RMREAS.HasValue)
+                remoteReasonCode = ((int)form.RMREAS).ToString();
+
+            string remoteModality = "";
+            if (form.MODE == FormMode.Remote && form.RMMODE.HasValue)
+                remoteModality = ((int)form.RMMODE).ToString();
 
             // set default formDto and then override with more details if it is a strongly typed object
             FormDto dto = new FormDto()
@@ -153,9 +167,12 @@ namespace UDS.Net.Services.Extensions
                 VisitId = form.VisitId,
                 Kind = form.Kind,
                 Status = ((int)form.Status).ToString(),
-                Language = ((int)form.Language).ToString(),
-                IsIncluded = form.IsIncluded,
-                ReasonCode = reasonCode,
+                LANG = ((int)form.LANG).ToString(),
+                MODE = ((int)form.MODE).ToString(),
+                RMREAS = remoteReasonCode,
+                RMMODE = remoteModality,
+                NOT = reasonCode,
+                INITIALS = form.INITIALS,
                 CreatedAt = form.CreatedAt,
                 CreatedBy = form.CreatedBy,
                 ModifiedBy = form.ModifiedBy,

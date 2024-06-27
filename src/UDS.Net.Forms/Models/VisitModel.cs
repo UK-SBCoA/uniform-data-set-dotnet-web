@@ -14,18 +14,22 @@ namespace UDS.Net.Forms.Models
 
         [Required]
         [Display(Name = "Number")]
-        public int Number { get; set; }
+        public int VISITNUM { get; set; }
 
         [Required(ErrorMessage = "Please select a visit type")]
         [Display(Name = "Type")]
-        public VisitKind Kind { get; set; }
+        public PacketKind PACKET { get; set; }
 
         [Required]
-        public string Version { get; set; } = "";
+        public string FORMVER { get; set; } = "";
 
         [Required]
         [Display(Name = "Date of visit")]
-        public DateTime StartDateTime { get; set; }
+        public DateTime VISIT_DATE { get; set; }
+
+        [Required]
+        [Display(Name = "Examiner initials")]
+        public string INITIALS { get; set; } = "";
 
         [Required]
         public DateTime CreatedAt { get; set; }

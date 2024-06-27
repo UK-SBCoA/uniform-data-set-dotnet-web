@@ -17,7 +17,7 @@ namespace UDS.Net.Forms.Models
         public string Kind { get; set; } = "";
 
         [Required]
-        public string Version { get; set; } = "";
+        public string FORMVER { get; set; } = "";
 
         public string Title { get; set; } = "";
 
@@ -27,13 +27,31 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Status")]
         public FormStatus Status { get; set; }
 
-        public bool IsRequiredForVisitKind { get; set; }
+        public bool IsRequiredForPacketKind { get; set; }
 
         [Display(Name = "Language")]
-        public FormLanguage Language { get; set; }
+        public FormLanguage LANG { get; set; }
+
+        [Required]
+        [Display(Name = "Mode")]
+        public FormMode MODE { get; set; }
 
         [Display(Name = "If not submitted, specify reason")]
-        public ReasonCode? ReasonCodeNotIncluded { get; set; }
+        public NotIncludedReasonCode? NOT { get; set; }
+
+        [Display(Name = "If remote, specify reason")]
+        public RemoteReasonCode? RMREAS { get; set; }
+
+        [Display(Name = "If remote, specify modality")]
+        public RemoteModality? RMMODE { get; set; }
+
+        [Required]
+        [Display(Name = "Examiner initials")]
+        public string INITIALS { get; set; } = "";
+
+        [Required]
+        [Display(Name = "Form date")]
+        public DateTime FRMDATE { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -57,11 +75,11 @@ namespace UDS.Net.Forms.Models
                     $"Choose status to save form",
                     new[] { nameof(Status) });
             }
-            else if (Status == FormStatus.NotIncluded && !ReasonCodeNotIncluded.HasValue)
+            else if (Status == FormStatus.NotIncluded && !NOT.HasValue)
             {
                 yield return new ValidationResult(
                     $"Provide a reason code if form is not included",
-                    new[] { nameof(ReasonCodeNotIncluded) });
+                    new[] { nameof(NotIncludedReasonCode) });
             }
             else if (Status == FormStatus.Complete)
             {
@@ -71,17 +89,32 @@ namespace UDS.Net.Forms.Models
                         $"Form kind is required",
                         new[] { nameof(Kind) });
                 }
-                if (string.IsNullOrWhiteSpace(Version.Trim()))
+                if (string.IsNullOrWhiteSpace(FORMVER.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Form version is required",
-                        new[] { nameof(Version) });
+                        new[] { nameof(FORMVER) });
                 }
                 if (string.IsNullOrWhiteSpace(CreatedBy.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Created by is required",
                         new[] { nameof(CreatedBy) });
+                }
+            }
+            if (MODE == FormMode.Remote)
+            {
+                if (!RMREAS.HasValue)
+                {
+                    yield return new ValidationResult(
+                        $"Remote reason code is required",
+                        new[] { nameof(RMREAS) });
+                }
+                if (!RMMODE.HasValue)
+                {
+                    yield return new ValidationResult(
+                        $"Remote modality is required",
+                        new[] { nameof(RMMODE) });
                 }
             }
         }

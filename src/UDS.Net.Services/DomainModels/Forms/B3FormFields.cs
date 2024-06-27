@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -65,9 +66,41 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string BRADYKIX { get; set; }
         public int? TOTALUPDRS { get; set; }
 
-        public B3FormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.NotCompleted };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.NoCoParticipantOrRemoteVisit, NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>();
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Unified Parkinson's Disease Rating Scale (UPDRS) - Motor Exam";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        public B3FormFields() { }
 
         public B3FormFields(FormDto dto)
         {
@@ -135,17 +168,5 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
 
         }
-
-        public string GetDescription()
-        {
-            return "Neurological Examination Findings";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
-        }
     }
-
-
 }

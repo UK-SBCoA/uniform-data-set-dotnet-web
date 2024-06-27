@@ -117,14 +117,15 @@ public class DtoToDomainMapping
         VisitDto visitDto = new VisitDto
         {
             Id = 1,
-            Kind = "IVP",
+            PACKET = PacketKind.I.ToString(),
             CreatedAt = DateTime.Now,
             CreatedBy = EMAIL,
             IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
+            VISITNUM = 1,
+            VISIT_DATE = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS4",
+            FORMVER = "4",
+            INITIALS = "TST",
             Forms = new List<FormDto>()
             {
                 new A2Dto
@@ -537,14 +538,15 @@ public class DtoToDomainMapping
         VisitDto visitDto = new VisitDto
         {
             Id = 1,
-            Kind = "IVP",
+            PACKET = PacketKind.I.ToString(),
             CreatedAt = DateTime.Now,
             CreatedBy = EMAIL,
             IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
+            VISITNUM = 1,
+            VISIT_DATE = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS4",
+            FORMVER = "4",
+            INITIALS = "TST",
             Forms = new List<FormDto>()
             {
                 new B4Dto
@@ -602,14 +604,15 @@ public class DtoToDomainMapping
         VisitDto visitDto = new VisitDto
         {
             Id = 1,
-            Kind = "IVP",
+            PACKET = PacketKind.I.ToString(),
             CreatedAt = DateTime.Now,
             CreatedBy = EMAIL,
             IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
+            VISITNUM = 1,
+            VISIT_DATE = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS4",
+            FORMVER = "4",
+            INITIALS = "TST",
             Forms = new List<FormDto>()
             {
                 new B5Dto
@@ -699,14 +702,15 @@ public class DtoToDomainMapping
         VisitDto visitDto = new VisitDto
         {
             Id = 1,
-            Kind = "IVP",
+            PACKET = PacketKind.I.ToString(),
             CreatedAt = DateTime.Now,
             CreatedBy = EMAIL,
             IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
+            VISITNUM = 1,
+            VISIT_DATE = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS4",
+            FORMVER = "4",
+            INITIALS = "TST",
             Forms = new List<FormDto>()
             {
                 new B6Dto
@@ -778,14 +782,15 @@ public class DtoToDomainMapping
         VisitDto visitDto = new VisitDto
         {
             Id = 1,
-            Kind = "IVP",
+            PACKET = PacketKind.I.ToString(),
             CreatedAt = DateTime.Now,
             CreatedBy = EMAIL,
             IsDeleted = false,
-            Number = 1,
-            StartDateTime = DateTime.Now,
+            VISITNUM = 1,
+            VISIT_DATE = DateTime.Now,
             ParticipationId = 1,
-            Version = "UDS4",
+            FORMVER = "4",
+            INITIALS = "TST",
             Forms = new List<FormDto>()
             {
                 new B7Dto

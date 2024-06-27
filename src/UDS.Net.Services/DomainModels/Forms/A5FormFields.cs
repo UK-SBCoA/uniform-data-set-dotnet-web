@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -74,6 +76,30 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? PSYCDIS { get; set; }
         public string PSYCDISX { get; set; }
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
             return "Participant health history";
@@ -81,7 +107,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
 
         public A5FormFields() { }

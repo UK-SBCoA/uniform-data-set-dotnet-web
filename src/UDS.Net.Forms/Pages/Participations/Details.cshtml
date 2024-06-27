@@ -7,7 +7,7 @@
 
 
 @if (Model.Participation != null)
- {
+{
 
     <div class="pb-4 pt-6 sm:pb-6">
         <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
@@ -27,9 +27,10 @@
         <thead>
             <tr>
                 <th>Visit number</th>
-                <th>Visit kind</th>
-                <th>Visit version</th>
+                <th>Packet kind</th>
+                <th>Version</th>
                 <th>Date</th>
+                <th>Initials</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,10 +39,11 @@
             @foreach (var visit in Model.Participation.Visits)
             {
                 <tr data-visit-id="@visit.Id">
-                    <td>@visit.Number</td>
-                    <td>@visit.Kind</td>
-                    <td>@visit.Version</td>
-                    <td>@visit.StartDateTime</td>
+                    <td>@visit.VISITNUM</td>
+                    <td>@visit.PACKET</td>
+                    <td>@visit.FORMVER</td>
+                    <td>@visit.VISIT_DATE</td>
+                    <td>@visit.INITIALS</td>
                     <td><a asp-page="/Visits/Details" asp-route-id="@visit.Id">View</a></td>
                 </tr>
             }
@@ -78,7 +80,7 @@
                         <tbody>
                             <!-- for each milstone in the page model-->
                             @foreach (var milestone in Model.Milestones)
-                             {
+                            {
                                 <tr class="align-top">
                                     <td>@milestone.CreatedAt.ToShortDateString()</td>
                                     @{
@@ -98,14 +100,14 @@
                                     <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" asp-route-formId="@milestone.FormId">Edit</a></td>
                                     <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id" asp-route-formId="@milestone.FormId">View</a></td>
                                 </tr>
-                             }
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    }
+}
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>

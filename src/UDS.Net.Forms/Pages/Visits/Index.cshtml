@@ -16,7 +16,8 @@
                 <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Participation Id</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit number</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Version</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit kind</th>
+                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Packet kind</th>
+                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Initials</th>
                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Date</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-6 sm:pr-0"><span class="sr-only">Edit</span></th>
             </tr>
@@ -26,10 +27,11 @@
             {
                 <tr>
                     <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
-                    <td>@visit.Number</td>
-                    <td>@visit.Version</td>
-                    <td>@visit.Kind</td>
-                    <td>@visit.StartDateTime.ToShortDateString()</td>
+                    <td>@visit.VISITNUM</td>
+                    <td>@visit.FORMVER</td>
+                    <td>@visit.PACKET</td>
+                    <td>@visit.INITIALS</td>
+                    <td>@visit.VISIT_DATE.ToShortDateString()</td>
                     <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-indigo-600 hover:text-indigo-900">View</a></th>
                 </tr>
             }

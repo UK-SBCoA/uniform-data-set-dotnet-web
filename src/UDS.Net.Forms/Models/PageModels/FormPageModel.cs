@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (BaseForm != null)
                 {
-                    return $"Participant {Visit.ParticipationId} Visit {Visit.Number} {Visit.Kind}";
+                    return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET}";
                 }
                 return "";
             }

@@ -12,7 +12,7 @@ namespace UDS.Net.Services.DomainModels
 
         public int Id { get; set; }
 
-        public string Version
+        public string FORMVER
         {
             get
             {
@@ -46,17 +46,25 @@ namespace UDS.Net.Services.DomainModels
             }
         }
 
-        public bool IsRequiredForVisitKind { get; set; }
+        public bool IsRequiredForPacketKind { get; }
 
-        public string Kind { get; set; }
+        public string Kind { get; }
 
         public FormStatus Status { get; set; }
 
-        public FormLanguage Language { get; set; }
+        public DateTime FRMDATE { get; set; }
 
-        public bool? IsIncluded { get; private set; } // Is Included is persisted as Status (Not Included)
+        public string INITIALS { get; set; }
 
-        public ReasonCode? ReasonCode { get; set; }
+        public FormLanguage LANG { get; set; }
+
+        public FormMode MODE { get; set; }
+
+        public RemoteReasonCode? RMREAS { get; set; }
+
+        public RemoteModality? RMMODE { get; set; }
+
+        public NotIncludedReasonCode? NOT { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -125,7 +133,7 @@ namespace UDS.Net.Services.DomainModels
 
             Kind = kind;
 
-            IsRequiredForVisitKind = isRequired;
+            IsRequiredForPacketKind = isRequired;
 
             Status = FormStatus.NotStarted;
 
@@ -137,7 +145,7 @@ namespace UDS.Net.Services.DomainModels
             SetFieldsBasedOnKind();
         }
 
-        public Form(int visitId, int id, string title, string kind, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
             VisitId = visitId;
@@ -145,9 +153,13 @@ namespace UDS.Net.Services.DomainModels
             _title = title;
             Kind = kind;
             Status = status;
-            Language = language;
-            IsIncluded = !(Status == FormStatus.NotIncluded);
-            ReasonCode = reasonCode;
+            FRMDATE = formDate;
+            INITIALS = initials;
+            LANG = language;
+            MODE = mode;
+            RMREAS = remoteReasonCode;
+            RMMODE = remoteModality;
+            NOT = notIncludedReasonCode;
 
             CreatedAt = createdAt;
             CreatedBy = createdBy;
@@ -161,29 +173,10 @@ namespace UDS.Net.Services.DomainModels
             }
         }
 
-        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
+            this(visitId, id, title, kind, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
         {
-            Id = id;
-            VisitId = visitId;
-
-            _title = title;
-            Kind = kind;
-            IsRequiredForVisitKind = isRequired;
-            Status = status;
-            Language = language;
-            IsIncluded = !(Status == FormStatus.NotIncluded);
-            ReasonCode = reasonCode;
-
-            CreatedAt = createdAt;
-            CreatedBy = createdBy;
-            ModifiedBy = modifiedBy;
-            DeletedBy = deletedBy;
-            IsDeleted = isDeleted;
-
-            if (fields != null)
-            {
-                Fields = fields;
-            }
+            IsRequiredForPacketKind = isRequired;
         }
 
     }

@@ -8,7 +8,7 @@ using UDS.Net.Services.Enums;
 namespace UDS.Net.Services.DomainModels
 {
     /// <summary>
-    /// Visit domain model
+    /// Visit domain model and forms contracts
     /// </summary>
     public class Visit
     {
@@ -16,13 +16,15 @@ namespace UDS.Net.Services.DomainModels
 
         public int ParticipationId { get; set; }
 
-        public int Number { get; set; }
+        public int VISITNUM { get; set; }
 
-        public string Version { get; set; } = "";
+        public string FORMVER { get; set; } = "";
 
-        public VisitKind Kind { get; set; }
+        public PacketKind PACKET { get; set; }
 
-        public DateTime StartDateTime { get; set; }
+        public DateTime VISIT_DATE { get; set; }
+
+        public string INITIALS { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -48,93 +50,55 @@ namespace UDS.Net.Services.DomainModels
 
         public IList<Form> Forms { get; set; } = new List<Form>();
 
-        private void BuildFormsContract(string version, VisitKind kind, IList<Form> existingForms)
+        private void BuildFormsContract(string version, PacketKind kind, IList<Form> existingForms)
         {
-            if (version == "UDS4")
+            if (version == "4")
             {
                 Dictionary<string, FormContract[]> UDS4 = new Dictionary<string, FormContract[]>
                 {
                     {
-                        VisitKind.IVP.ToString(),
+                        PacketKind.I.ToString(),
                         new FormContract[]
                         {
                             new FormContract("A1", true),
-                            new FormContract("A1a", false),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", true),
-                            new FormContract("A4a", true),
-                            new FormContract("A5D2", false),
-                            new FormContract("B1",true),
-                            new FormContract("B3", true),
+                            new FormContract("A1a", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", true),
+                            new FormContract("A4", false),
+                            new FormContract("A4a", false),
+                            new FormContract("A5D2", true),
+                            new FormContract("B1", false),
+                            new FormContract("B3", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", false),
-                            new FormContract("C2", true),
+                            new FormContract("B9", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
 
                         }
                     },
                     {
-                        VisitKind.FVP.ToString(),
+                        PacketKind.F.ToString(), // TODO follow-up visit contracts haven't been published
                         new FormContract[]
                         {
                             new FormContract("A1", true),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", true),
-                            new FormContract("A4a", true),
+                            new FormContract("A1a", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", true),
+                            new FormContract("A4", false),
+                            new FormContract("A4a", false),
+                            new FormContract("A5D2", true),
+                            new FormContract("B1", false),
+                            new FormContract("B3", false),
                             new FormContract("B4", true),
                             new FormContract("B5", false),
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", false),
-                            new FormContract("C2", true),
-                            new FormContract("D1a", true),
-                            new FormContract("D1b", true)
-                        }
-                    },
-                    {
-                        VisitKind.TIP.ToString(),
-                        new FormContract[]
-                        {
-                            new FormContract("A1", true),
-                            new FormContract("A1a", false),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", true),
-                            new FormContract("A4a", true),
-                            new FormContract("A5D2", false),
-                            new FormContract("B4", true),
-                            new FormContract("B5", false),
-                            new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B8", true),
-                            new FormContract("B9", false),
-                            new FormContract("D1a", true),
-                            new FormContract("D1b", true)
-                        }
-                    },
-                    {
-                        VisitKind.TFP.ToString(),
-                        new FormContract[]
-                        {
-                            new FormContract("A1", true),
-                            new FormContract("A2", true),
-                            new FormContract("A3", false),
-                            new FormContract("A4", true),
-                            new FormContract("A4a", true),
-                            new FormContract("B4", true),
-                            new FormContract("B5", false),
-                            new FormContract("B6", false),
-                            new FormContract("B7", false),
-                            new FormContract("B8", false),
-                            new FormContract("B9", false),
+                            new FormContract("B9", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
                         }
@@ -156,7 +120,7 @@ namespace UDS.Net.Services.DomainModels
                     {
                         var existing = existingForms.Where(f => f.Kind == formContract.Abbreviation).FirstOrDefault();
 
-                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequredForVisitKind, existing.Status, existing.Language, existing.ReasonCode, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields));
+                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields));
                     }
                     else
                     {
@@ -179,14 +143,15 @@ namespace UDS.Net.Services.DomainModels
 
         public int Count { get; private set; }
 
-        public Visit(int id, int number, int participationId, string version, VisitKind kind, DateTime startDateTime, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
+        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
             Id = id;
-            Number = number;
+            VISITNUM = number;
             ParticipationId = participationId;
-            Version = version;
-            Kind = kind;
-            StartDateTime = startDateTime;
+            FORMVER = version;
+            PACKET = packet;
+            VISIT_DATE = visitDate;
+            INITIALS = initials;
             CreatedAt = createdAt;
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
@@ -196,7 +161,7 @@ namespace UDS.Net.Services.DomainModels
             if (existingForms == null)
                 existingForms = new List<Form>();
 
-            BuildFormsContract(Version, Kind, existingForms);
+            BuildFormsContract(FORMVER, PACKET, existingForms);
 
         }
 
@@ -214,7 +179,7 @@ namespace UDS.Net.Services.DomainModels
 
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
-            /// TODO For UDS3 FVP, either C1 or C2 is required, but not both
+            /// TODO For example, in UDS3 FVP, either C1 or C2 is required, but not both
             yield break;
         }
     }

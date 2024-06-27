@@ -64,7 +64,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
                     if (visit != null)
                     {
-                        if (visit.Kind == VisitKind.FVP || visit.Kind == VisitKind.TFP)
+                        if (visit.PACKET == PacketKind.F)
                         {
                             if (!NEWINF.HasValue)
                                 yield return new ValidationResult("Response required", new[] { nameof(NEWINF) });

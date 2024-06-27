@@ -98,7 +98,7 @@ namespace UDS.Net.Forms.TagHelpers
                         // Only set value for statuses that should be allowed to be selected
                         // "NotStarted" should never have a value
                         // "NotIncluded" should only have a value on optional forms
-                        if (i == (int)FormStatus.NotIncluded && form.IsRequiredForVisitKind)
+                        if (i == (int)FormStatus.NotIncluded && form.IsRequiredForPacketKind)
                         {
                             option.Attributes["disabled"] = "disabled";
                         }

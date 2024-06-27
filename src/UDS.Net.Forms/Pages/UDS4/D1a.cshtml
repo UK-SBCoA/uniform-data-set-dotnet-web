@@ -7,7 +7,7 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see the <guidebook kind="@Model.Visit.Kind"></guidebook>, Form D1a. Check only <span class="underline">one</span> box per question.
+        INSTRUCTIONS: This form is to be completed by the clinician. For additional clarification and examples, see the <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form D1a. Check only <span class="underline">one</span> box per question.
     </p>
 </div>
 
@@ -1178,7 +1178,7 @@
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div>
                             <label class="text-base font-semibold text-gray-900">If present, (SPECIFY) (check all that apply):</label><br />
-                                                                                                                                      <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AnxietyDisorderIndicated"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AnxietyDisorderIndicated"></span>
                         </div>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <fieldset class="subsubcounterreset">
@@ -1790,4 +1790,5 @@
 <partial name="_FormFooter" for="@Model.D1a" />
 
 @section Scripts {
-    <script src="~/_content/UDS.Net.Forms/js/D1a.js"></script>}
+    <script src="~/_content/UDS.Net.Forms/js/D1a.js"></script>
+}

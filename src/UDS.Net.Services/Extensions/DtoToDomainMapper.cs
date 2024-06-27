@@ -42,11 +42,11 @@ namespace UDS.Net.Services.Extensions
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
             }
 
-            VisitKind visitKind;
-            if (!Enum.TryParse(dto.Kind, true, out visitKind))
-                visitKind = VisitKind.IVP;
+            PacketKind packetKind;
+            if (!Enum.TryParse(dto.PACKET, true, out packetKind))
+                packetKind = PacketKind.I;
 
-            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, visitKind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
         }
 
         public static Milestone ToDomain(this M1Dto dto)
@@ -240,17 +240,33 @@ namespace UDS.Net.Services.Extensions
                 formStatus = (FormStatus)statusValue;
             }
             FormLanguage formLanguage = FormLanguage.English;
-            if (!string.IsNullOrWhiteSpace(dto.Language) && Int32.TryParse(dto.Language, out int languageValue))
+            if (!string.IsNullOrWhiteSpace(dto.LANG) && Int32.TryParse(dto.LANG, out int languageValue))
             {
                 formLanguage = (FormLanguage)languageValue;
             }
-            ReasonCode? reasonCode = null;
-            if (formStatus == FormStatus.NotIncluded && !string.IsNullOrWhiteSpace(dto.ReasonCode) && Int32.TryParse(dto.ReasonCode, out int reasonCodeValue))
+            NotIncludedReasonCode? notIncludedReasonCode = null;
+            if (formStatus == FormStatus.NotIncluded && !string.IsNullOrWhiteSpace(dto.NOT) && Int32.TryParse(dto.NOT, out int reasonCodeValue))
             {
-                reasonCode = (ReasonCode)reasonCodeValue;
+                notIncludedReasonCode = (NotIncludedReasonCode)reasonCodeValue;
+            }
+            FormMode formMode = FormMode.InPerson;
+            if (!string.IsNullOrWhiteSpace(dto.MODE) && Int32.TryParse(dto.MODE, out int formModeValue))
+            {
+                formMode = (FormMode)formModeValue;
+            }
+            RemoteModality? remoteModality = null;
+            if (!string.IsNullOrWhiteSpace(dto.RMMODE) && Int32.TryParse(dto.RMMODE, out int remoteModalityValue))
+            {
+                remoteModality = (RemoteModality)remoteModalityValue;
             }
 
-            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, formLanguage, reasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+            RemoteReasonCode? remoteReasonCode = null;
+            if (!string.IsNullOrWhiteSpace(dto.RMREAS) && Int32.TryParse(dto.RMREAS, out int remoteReasonCodeValue))
+            {
+                remoteReasonCode = (RemoteReasonCode)remoteReasonCodeValue;
+            }
+
+            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
     }
 }

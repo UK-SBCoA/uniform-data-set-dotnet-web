@@ -253,7 +253,7 @@ namespace UDS.Net.Forms.Models.UDS4
                             if (visitValue is VisitModel)
                             {
                                 VisitModel visit = (VisitModel)visitValue;
-                                var visitDateEntry = visit.StartDateTime;
+                                var visitDateEntry = visit.VISIT_DATE;
 
                                 // we need the visit date
                                 var visitDate = visitDateEntry;

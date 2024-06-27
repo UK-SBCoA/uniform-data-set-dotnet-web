@@ -595,86 +595,67 @@ namespace UDS.Net.Forms.Models.UDS4
 
                 if (Status == FormStatus.Complete)
                 {
-                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                    if (visitValue is VisitModel)
+                    if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                     {
-                        VisitModel visit = (VisitModel)visitValue;
+                        if (!TRAILA.HasValue)
+                            yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
 
-                        if (visit != null)
-                        {
-                            if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.FVP)
-                            {
-                                if (!TRAILA.HasValue)
-                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
+                        if (!MOCALOC.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
 
-                                if (!MOCALOC.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
+                        if (!MOCAVIS.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
 
-                                if (!MOCAVIS.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
+                        if (!MOCATOTS.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
 
-                                if (!MOCATOTS.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
+                        if (!MOCACLOC.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
 
-                                if (!MOCACLOC.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
+                        if (!MOCACLON.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
 
-                                if (!MOCACLON.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
+                        if (!MOCACLOH.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
 
-                                if (!MOCACLOH.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
+                        if (!MOCACUBE.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
 
-                                if (!MOCACUBE.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
+                        if (!MOCANAMI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
 
-                                if (!MOCANAMI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
+                        if (!MOCAREGI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
 
-                                if (!MOCAREGI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
+                        if (!MOCARECN.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
 
-                                if (!MOCARECN.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
+                        if (!MOCATRAI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
 
-                                if (!MOCATRAI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
+                        if (!NPSYCLOC.HasValue)
+                            yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
 
-                                if (!NPSYCLOC.HasValue)
-                                    yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
+                        if (!UDSBENTC.HasValue)
+                            yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
 
-                                if (!UDSBENTC.HasValue)
-                                    yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
+                        if (!UDSBENTD.HasValue)
+                            yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
 
-                                if (!UDSBENTD.HasValue)
-                                    yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
-
-                                if (!MINTTOTS.HasValue)
-                                    yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
-                            }
-                        }
+                        if (!MINTTOTS.HasValue)
+                            yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
                     }
-                }
-
-                if (Status == FormStatus.Complete)
-                {
-                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                    if (visitValue is VisitModel)
+                    else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {
-                        VisitModel visit = (VisitModel)visitValue;
-
-                        if (visit != null)
-                        {
-                            if (visit.Kind == VisitKind.TIP || visit.Kind == VisitKind.TFP)
-                            {
-                                if (!MODCOMM.HasValue)
-                                    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
-
-                                if (!RESPVAL.HasValue)
-                                    yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
-                            }
-                        }
+                        // TODO C2T validation rules here
                     }
+
+                    if (!RESPVAL.HasValue)
+                        yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
+
+                    // TODO should MODCOMM be here now that UDSv4 has MODE?
+                    if (!MODCOMM.HasValue)
+                        yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))

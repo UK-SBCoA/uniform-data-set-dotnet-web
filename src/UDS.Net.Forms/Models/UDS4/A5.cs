@@ -333,7 +333,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (visit != null)
                     {
                         var min = new DateTime(1900, 1, 1);
-                        var max = visit.StartDateTime;
+                        var max = visit.VISIT_DATE;
 
                         if (STROKYR.HasValue && STROKYR.Value != 9999)
                         {

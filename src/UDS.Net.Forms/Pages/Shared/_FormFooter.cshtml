@@ -20,11 +20,10 @@
                 <input asp-for="Id" type="hidden" />
                 <input asp-for="VisitId" type="hidden" />
                 <input asp-for="Kind" type="hidden" />
-                <input asp-for="IsRequiredForVisitKind" type="hidden" />
-                <input asp-for="Version" type="hidden" />
+                <input asp-for="IsRequiredForPacketKind" type="hidden" />
+                <input asp-for="FORMVER" type="hidden" />
                 <input asp-for="Title" type="hidden" />
                 <input asp-for="Description" type="hidden" />
-                <input asp-for="IsRequiredForVisitKind" type="hidden" />
                 <input asp-for="CreatedAt" type="hidden" />
                 <input asp-for="CreatedBy" type="hidden" />
                 <input asp-for="ModifiedBy" type="hidden" />
@@ -38,30 +37,42 @@
 
                 </div>
                 <div>
-                    <label for="@Html.IdFor(m => m.ReasonCodeNotIncluded)" class="block text-sm font-semibold leading-6 text-gray-800">If not submitted, specify reason</label>
+                    <select asp-for="MODE"></select>
+                    <div>
+                        <select asp-for="RMREAS"></select>
+                    </div>
+                    <div>
+                        <select asp-for="RMMODE"></select>
+                    </div>
+                </div>
+                <div>
+                    <label for="@Html.IdFor(m => m.NOT)" class="block text-sm font-semibold leading-6 text-gray-800">If not submitted, specify reason</label>
 
-                    @if (Model.IsRequiredForVisitKind)
+                    @if (Model.IsRequiredForPacketKind)
                     {
-                        <select asp-for="ReasonCodeNotIncluded" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <select asp-for="NOT" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option disabled selected class="disabled:opacity-75">Form is required, MUST submit</option>
                         </select>
                     }
                     else
                     {
-                        <select asp-for="ReasonCodeNotIncluded" asp-items="Html.GetEnumSelectList<ReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <select asp-for="NOT" asp-items="Html.GetEnumSelectList<NotIncludedReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option disabled selected class="disabled:opacity-75">--</option>
                         </select>
                     }
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="ReasonCodeNotIncluded"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="NOT"></span>
 
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="@Html.IdFor(m => m.Language)" class="block text-sm font-semibold leading-6 text-gray-900">Language</label>
-                    <select asp-for="Language" asp-items="Html.GetEnumSelectList<FormLanguage>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></select>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="Language"></span>
+                    <label for="@Html.IdFor(m => m.LANG)" class="block text-sm font-semibold leading-6 text-gray-900">Language</label>
+                    <select asp-for="LANG" asp-items="Html.GetEnumSelectList<FormLanguage>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></select>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="LANG"></span>
 
                 </div>
-
+                <div>
+                    <input asp-for="FRMDATE" />
+                    <input asp-for="INITIALS" />
+                </div>
             </div>
             <div class="mt-8">
                 <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
