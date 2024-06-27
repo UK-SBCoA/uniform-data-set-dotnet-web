@@ -23,11 +23,11 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1)
         {
-            var visits = await _visitService.List("");
+            var visits = await _visitService.List(User.Identity.Name, pageSize, pageIndex);
 
-            Visits = visits.Select(d => d.ToVM()).ToList();
+            Visits = visits.Select(d => d.ToVM()).ToList(); // TODO support pagination
 
             return Page();
         }
