@@ -36,14 +36,20 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Mode")]
         public FormMode MODE { get; set; }
 
+        public List<int> AllowedFormModes { get; set; } = new List<int>();
+
         [Display(Name = "If not submitted, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
+
+        public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
 
         [Display(Name = "If remote, specify reason")]
         public RemoteReasonCode? RMREAS { get; set; }
 
         [Display(Name = "If remote, specify modality")]
         public RemoteModality? RMMODE { get; set; }
+
+        public List<int> AllowedRemoteModalities { get; set; } = new List<int>();
 
         [Required]
         [Display(Name = "Examiner initials")]

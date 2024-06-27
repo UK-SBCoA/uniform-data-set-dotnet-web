@@ -9,10 +9,12 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.TagHelpers
 {
-    [HtmlTargetElement("form-status-select", Attributes = "for")]
-    public class FormStatusEnumSelectList : TagHelper
+    [HtmlTargetElement("enum-select", Attributes = "for")]
+    public class EnumSelectList : TagHelper
     {
-        public IEnumerable<SelectListItem> Items { get; set; }
+        public IEnumerable<SelectListItem> Items { get; set; } = new List<SelectListItem>();
+
+        public IEnumerable<int> EnabledValues { get; set; } = new List<int>();
 
         public ModelExpression For { get; set; }
 
@@ -39,9 +41,9 @@ namespace UDS.Net.Forms.TagHelpers
                 output.Attributes.SetAttribute("name", expression);
                 output.Attributes.SetAttribute("id", expression.Replace(".", "_"));
             }
-            output.Attributes.SetAttribute("data-val-status", expression);
-            output.Attributes.SetAttribute("data-val", "true");
-            output.Attributes.SetAttribute("data-val-required", "Required");
+            //output.Attributes.SetAttribute("data-val-status", expression);
+            //output.Attributes.SetAttribute("data-val", "true");
+            //output.Attributes.SetAttribute("data-val-required", "Required");
 
             output.PostContent.AppendHtml(GenerateOptions());
 
@@ -58,17 +60,14 @@ namespace UDS.Net.Forms.TagHelpers
             var enumValues = Enum.GetValues(typeof(FormStatus));
             var optionsBuilder = new HtmlContentBuilder(enumValues.Length);
 
-            foreach (int i in enumValues)
+            foreach (var i in Items)
             {
                 var option = new TagBuilder("option");
 
                 string formattedName = "";
-                var name = Enum.GetName(typeof(FormStatus), i);
-                if (!string.IsNullOrWhiteSpace(name))
-                {
-                    string[] split = SplitCamelCase(name);
-                    formattedName = string.Join(" ", split);
-                }
+
+                // TODO use description tag helper to get formatted name
+                formattedName = i.Text;
 
                 option.InnerHtml.AppendLine(formattedName);
 
@@ -76,34 +75,21 @@ namespace UDS.Net.Forms.TagHelpers
 
                 if (form != null)
                 {
-                    if ((int)form.Status == i)
-                    {
-                        option.Attributes["selected"] = "true"; // select the current status
-                    }
+                    //if ((int)form.Status == i)
+                    //{
+                    //    option.Attributes["selected"] = "true"; // select the current status
+                    //}
 
-                    // additionally, if the select option is for not started
-                    if (i == (int)FormStatus.NotStarted)
+                    // TODO select option if it matches
+                    var propertyTest = For;
+
+                    var test = EnabledValues;
+                    if (EnabledValues != null && EnabledValues.Count() > 0)
                     {
-                        option.Attributes["disabled"] = "disabled";
-                        if (ViewContext.ViewData.Model != null && ViewContext.ViewData.Model is FormModel)
-                        {
-                            if (form.Id <= 0 && (form.Status == FormStatus.NotStarted))
-                            {
-                                option.Attributes["selected"] = "true";
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // Only set value for statuses that should be allowed to be selected
-                        // "NotStarted" should never have a value
-                        // "NotIncluded" should only have a value on optional forms
-                        if (i == (int)FormStatus.NotIncluded && form.IsRequiredForPacketKind)
+                        if (!EnabledValues.Contains(Int32.Parse(i.Value)))
                         {
                             option.Attributes["disabled"] = "disabled";
                         }
-                        else
-                            option.Attributes["value"] = i.ToString();
                     }
                 }
 
