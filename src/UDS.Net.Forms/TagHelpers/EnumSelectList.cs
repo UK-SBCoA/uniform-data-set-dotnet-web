@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -42,8 +43,8 @@ namespace UDS.Net.Forms.TagHelpers
                 output.Attributes.SetAttribute("id", expression.Replace(".", "_"));
             }
             //output.Attributes.SetAttribute("data-val-status", expression);
-            //output.Attributes.SetAttribute("data-val", "true");
-            //output.Attributes.SetAttribute("data-val-required", "Required");
+            output.Attributes.SetAttribute("data-val", "true");
+            output.Attributes.SetAttribute("data-val-required", "Required");
 
             output.PostContent.AppendHtml(GenerateOptions());
 
@@ -66,8 +67,12 @@ namespace UDS.Net.Forms.TagHelpers
 
                 string formattedName = "";
 
+                if (!string.IsNullOrWhiteSpace(i.Text))
+                {
+                    string[] split = SplitCamelCase(i.Text);
+                    formattedName = string.Join(" ", split);
+                }
                 // TODO use description tag helper to get formatted name
-                formattedName = i.Text;
 
                 option.InnerHtml.AppendLine(formattedName);
 
@@ -75,21 +80,24 @@ namespace UDS.Net.Forms.TagHelpers
 
                 if (form != null)
                 {
+                    // TODO select option if it matches
+                    //var propertyTest = For;
                     //if ((int)form.Status == i)
                     //{
                     //    option.Attributes["selected"] = "true"; // select the current status
                     //}
 
-                    // TODO select option if it matches
-                    var propertyTest = For;
-
-                    var test = EnabledValues;
                     if (EnabledValues != null && EnabledValues.Count() > 0)
                     {
                         if (!EnabledValues.Contains(Int32.Parse(i.Value)))
                         {
                             option.Attributes["disabled"] = "disabled";
                         }
+                    }
+                    else
+                    {
+                        // no enabled values, so everything is disabled
+                        option.Attributes["disabled"] = "disabled";
                     }
                 }
 
