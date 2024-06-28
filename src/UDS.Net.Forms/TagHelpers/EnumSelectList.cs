@@ -15,6 +15,8 @@ namespace UDS.Net.Forms.TagHelpers
     // decorating a class with multiple HtmlTargetElement attributes results in a logical-OR
     [HtmlTargetElement("enum-select")]
     [HtmlTargetElement("enum-select", Attributes = EnabledValuesAttributeName)]
+    [HtmlTargetElement("enum-select", Attributes = ForAttributeName)]
+    [HtmlTargetElement("enum-select", Attributes = ItemsAttributeName)]
     public class EnumSelectList : TagHelper
     {
         private const string ForAttributeName = "for";
