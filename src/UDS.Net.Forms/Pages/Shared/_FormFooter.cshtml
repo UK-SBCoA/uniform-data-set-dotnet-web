@@ -21,6 +21,7 @@
                 <input asp-for="VisitId" type="hidden" />
                 <input asp-for="Kind" type="hidden" />
                 <input asp-for="IsRequiredForPacketKind" type="hidden" />
+                <input asp-for="AllowsRemote" type="hidden" />
                 <input asp-for="FORMVER" type="hidden" />
                 <input asp-for="Title" type="hidden" />
                 <input asp-for="Description" type="hidden" />
@@ -29,6 +30,18 @@
                 <input asp-for="ModifiedBy" type="hidden" />
                 <input asp-for="DeletedBy" type="hidden" />
                 <input asp-for="IsDeleted" type="hidden" />
+                @for (int i = 0; i < Model.AllowedFormModes.Count(); i++)
+                {
+                    <input asp-for="AllowedFormModes[i]" type="hidden" />
+                }
+                @for (int i = 0; i < Model.AllowedNotIncludedReasonCodes.Count(); i++)
+                {
+                    <input asp-for="AllowedNotIncludedReasonCodes[i]" type="hidden" />
+                }
+                @for (int i = 0; i < Model.AllowedRemoteModalities.Count(); i++)
+                {
+                    <input asp-for="AllowedRemoteModalities[i]" type="hidden" />
+                }
 
                 <div>
                     <div>
@@ -38,7 +51,7 @@
                     </div>
                     <div>
                         <label for="@Html.IdFor(m => m.FRMDATE)" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
-                        <input asp-for="FRMDATE" />
+                        <input asp-for="FRMDATE" type="date" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="FRMDATE"></span>
                     </div>
                     <div>
@@ -50,26 +63,46 @@
                 <div>
                     <div>
                         <label for="@Html.IdFor(m => m.RMREAS)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify reason</label>
-                        <enum-select for="RMREAS" items="Html.GetEnumSelectList<RemoteReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option disabled selected class="disabled:opacity-75">--</option>
-                        </enum-select>
+
+                        @if (Model.AllowsRemote)
+                        {
+                            <select asp-for="RMREAS" asp-items="Html.GetEnumSelectList<RemoteReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option disabled selected class="disabled:opacity-75">--</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="RMREAS" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option disabled selected class="disabled:opacity-75">Remote not allowed</option>
+                            </select>
+                        }
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="RMREAS"></span>
                     </div>
                     <div>
                         <label for="@Html.IdFor(m => m.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-                        <enum-select for="RMMODE" items="Html.GetEnumSelectList<RemoteModality>()" enabled-values="@Model.AllowedRemoteModalities" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <option disabled selected class="disabled:opacity-75">--</option>
-                        </enum-select>
+
+                        @if (Model.AllowsRemote)
+                        {
+                            <enum-select for="RMMODE" items="Html.GetEnumSelectList<RemoteModality>()" enabled-values="@Model.AllowedRemoteModalities" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option disabled selected class="disabled:opacity-75">--</option>
+                            </enum-select>
+                        }
+                        else
+                        {
+                            <select asp-for="RMMODE" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option disabled selected class="disabled:opacity-75">Remote not allowed</option>
+                            </select>
+                        }
 
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="RMMODE"></span>
                     </div>
                     <div>
-                        <label for="@Html.IdFor(m => m.NOT)" class="block text-sm font-semibold leading-6 text-gray-800">If not submitted, specify reason</label>
+                        <label for="@Html.IdFor(m => m.NOT)" class="block text-sm font-semibold leading-6 text-gray-800">If not completed, specify reason</label>
 
                         @if (Model.IsRequiredForPacketKind)
                         {
                             <select asp-for="NOT" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <option disabled selected class="disabled:opacity-75">Form is required, MUST submit</option>
+                                <option disabled selected class="disabled:opacity-75">Form is required, MUST complete</option>
                             </select>
                         }
                         else
@@ -89,7 +122,7 @@
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="LANG"></span>
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="@Html.IdFor(m => m.Status)" class="block text-sm font-semibold leading-6 text-gray-900">Status</label>
+                    <label for="@Html.IdFor(m => m.Status)" class="block text-sm font-semibold leading-6 text-gray-900">Save status</label>
                     <form-status-select for="Status" data-val-status="@(Model.GetType().Name + "." + nameof(Model.Status))"></form-status-select>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="Status"></span>
 
