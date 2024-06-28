@@ -53,18 +53,21 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
 
+        [RequiredIf(nameof(MODE), "2")]
         [Display(Name = "If remote, specify reason")]
         public RemoteReasonCode? RMREAS { get; set; }
 
+        [RequiredIf(nameof(MODE), "2")]
         [Display(Name = "If remote, specify modality")]
         public RemoteModality? RMMODE { get; set; }
 
         public List<int> AllowedRemoteModalities { get; set; } = new List<int>();
 
+        [RequiredOnComplete]
         [Display(Name = "Examiner initials")]
         public string INITIALS { get; set; } = "";
 
-        [Required]
+        [RequiredOnComplete]
         [Display(Name = "Form date")]
         public DateTime FRMDATE { get; set; }
 
