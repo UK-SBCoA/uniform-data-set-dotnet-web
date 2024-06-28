@@ -97,7 +97,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("Status", ex.Message);
+                    ModelState.AddModelError($"{BaseForm.GetType().Name}.Status", ex.Message);
                 }
             }
 
