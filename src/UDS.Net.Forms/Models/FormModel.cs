@@ -29,6 +29,16 @@ namespace UDS.Net.Forms.Models
 
         public bool IsRequiredForPacketKind { get; set; }
 
+        public bool AllowsRemote
+        {
+            get
+            {
+                if (AllowedFormModes.Contains((int)FormMode.Remote))
+                    return true;
+                return false;
+            }
+        }
+
         [Display(Name = "Language")]
         public FormLanguage LANG { get; set; }
 
@@ -51,7 +61,6 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedRemoteModalities { get; set; } = new List<int>();
 
-        [Required]
         [Display(Name = "Examiner initials")]
         public string INITIALS { get; set; } = "";
 
