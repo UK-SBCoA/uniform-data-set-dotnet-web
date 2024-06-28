@@ -127,7 +127,7 @@ namespace UDS.Net.Services.DomainModels
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
-        public Form(int visitId, string kind, bool isRequired, string createdBy)
+        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy)
         {
             VisitId = visitId;
 
@@ -136,6 +136,8 @@ namespace UDS.Net.Services.DomainModels
             IsRequiredForPacketKind = isRequired;
 
             Status = FormStatus.NotStarted;
+
+            FRMDATE = visitDate; // for new forms, use the visit date as the default
 
             CreatedBy = createdBy;
 

@@ -50,7 +50,7 @@ namespace UDS.Net.Services.DomainModels
 
         public IList<Form> Forms { get; set; } = new List<Form>();
 
-        private void BuildFormsContract(string version, PacketKind kind, IList<Form> existingForms)
+        private void BuildFormsContract(string version, PacketKind kind, DateTime visitDate, IList<Form> existingForms)
         {
             if (version == "4")
             {
@@ -124,7 +124,7 @@ namespace UDS.Net.Services.DomainModels
                     }
                     else
                     {
-                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequredForVisitKind, CreatedBy));
+                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequredForVisitKind, visitDate, CreatedBy));
                     }
                 }
 
@@ -161,7 +161,7 @@ namespace UDS.Net.Services.DomainModels
             if (existingForms == null)
                 existingForms = new List<Form>();
 
-            BuildFormsContract(FORMVER, PACKET, existingForms);
+            BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
 
         }
 

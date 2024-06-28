@@ -3,32 +3,13 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
 {
     public static class DomainToViewModelMapper
     {
-        private static void SetBaseProperties(Form form, FormModel vm)
-        {
-            vm.VisitId = form.VisitId;
-            vm.FORMVER = form.FORMVER;
-            vm.Status = form.Status;
-            vm.Kind = form.Kind;
-            vm.Title = form.Title;
-            vm.Description = form.Description;
-            vm.IsRequiredForPacketKind = form.IsRequiredForPacketKind;
-            vm.NOT = form.NOT;
-            vm.RMREAS = form.RMREAS;
-            vm.RMMODE = form.RMMODE;
-            vm.INITIALS = form.INITIALS;
-            vm.CreatedAt = form.CreatedAt;
-            vm.CreatedBy = form.CreatedBy;
-            vm.ModifiedBy = form.ModifiedBy;
-            vm.DeletedBy = form.DeletedBy;
-            vm.IsDeleted = form.IsDeleted;
-        }
-
         public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
         {
             return new ParticipationsPaginatedModel
@@ -145,30 +126,34 @@ namespace UDS.Net.Forms.Extensions
             return vm;
         }
 
+        private static void SetFormBaseProperties(Form form, FormModel vm)
+        {
+            vm.VisitId = form.VisitId;
+            vm.FORMVER = form.FORMVER;
+            vm.Status = form.Status;
+            vm.Kind = form.Kind;
+            vm.Title = form.Title;
+            vm.Description = form.Description;
+            vm.IsRequiredForPacketKind = form.IsRequiredForPacketKind;
+            vm.LANG = form.LANG;
+            vm.NOT = form.NOT;
+            vm.MODE = form.MODE;
+            vm.RMREAS = form.RMREAS;
+            vm.RMMODE = form.RMMODE;
+            vm.INITIALS = form.INITIALS;
+            vm.FRMDATE = form.FRMDATE;
+            vm.CreatedAt = form.CreatedAt;
+            vm.CreatedBy = form.CreatedBy;
+            vm.ModifiedBy = form.ModifiedBy;
+            vm.DeletedBy = form.DeletedBy;
+            vm.IsDeleted = form.IsDeleted;
+        }
+
         public static FormModel ToVM(this Form form)
         {
             var vm = new FormModel()
             {
-                Id = form.Id,
-                VisitId = form.VisitId,
-                FORMVER = form.FORMVER,
-                Kind = form.Kind,
-                Status = form.Status,
-                Title = form.Title,
-                Description = form.Description,
-                IsRequiredForPacketKind = form.IsRequiredForPacketKind,
-                CreatedAt = form.CreatedAt,
-                CreatedBy = form.CreatedBy,
-                ModifiedBy = form.ModifiedBy,
-                DeletedBy = form.DeletedBy,
-                IsDeleted = form.IsDeleted,
-                LANG = form.LANG,
-                NOT = form.NOT,
-                MODE = form.MODE,
-                RMMODE = form.RMMODE,
-                RMREAS = form.RMREAS,
-                FRMDATE = form.FRMDATE,
-                INITIALS = form.INITIALS
+                Id = form.Id
             };
 
             if (form.Fields != null)
@@ -261,9 +246,9 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((T1FormFields)form.Fields).ToVM(form.Id);
                 }
-
-                SetBaseProperties(form, vm); // must know the vm type in order to do this
             }
+
+            SetFormBaseProperties(form, vm);
 
             return vm;
         }
