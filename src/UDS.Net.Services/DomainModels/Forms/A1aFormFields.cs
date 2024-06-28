@@ -89,7 +89,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<RemoteModality>(); // form is required for I
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video }; // form is required for I
             }
         }
 
