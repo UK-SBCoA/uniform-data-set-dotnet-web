@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using UDS.Net.Forms.Models;
@@ -10,101 +11,110 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.TagHelpers
 {
-    [HtmlTargetElement("enum-select", Attributes = "for")]
+    // https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.TagHelpers/src/SelectTagHelper.cs
+    // decorating a class with multiple HtmlTargetElement attributes results in a logical-OR
+    [HtmlTargetElement("enum-select")]
+    [HtmlTargetElement("enum-select", Attributes = EnabledValuesAttributeName)]
     public class EnumSelectList : TagHelper
     {
-        public IEnumerable<SelectListItem> Items { get; set; } = new List<SelectListItem>();
-
-        public IEnumerable<int> EnabledValues { get; set; } = new List<int>();
+        private const string ForAttributeName = "for";
+        private const string ItemsAttributeName = "items";
+        private const string EnabledValuesAttributeName = "enabled-values";
 
         public ModelExpression For { get; set; }
+
+        public IEnumerable<SelectListItem> Items { get; set; } = new List<SelectListItem>();
 
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        private string _cssClass = "mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6";
+        protected IHtmlGenerator Generator { get; }
+
+
+        /// <summary>
+        /// A collection of values that should be enabled
+        /// </summary>
+        [HtmlAttributeName(EnabledValuesAttributeName)]
+        public IEnumerable<int> EnabledValues { get; set; } = new List<int>();
+
+        public EnumSelectList(IHtmlGenerator generator)
+        {
+            Generator = generator;
+        }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            ArgumentNullException.ThrowIfNull(context);
+            ArgumentNullException.ThrowIfNull(output);
+
             output.TagName = "select";
-            output.Attributes.SetAttribute("class", _cssClass);
 
-            string expression = "";
-            if (For != null)
-            {
-                // get full name from for model property
-                expression = For.Name;
-                string prefix = ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
-                if (!String.IsNullOrWhiteSpace(prefix))
-                    expression = prefix + "." + expression;
-
-                output.Attributes.SetAttribute("name", expression);
-                output.Attributes.SetAttribute("id", expression.Replace(".", "_"));
-            }
-            //output.Attributes.SetAttribute("data-val-status", expression);
             output.Attributes.SetAttribute("data-val", "true");
             output.Attributes.SetAttribute("data-val-required", "Required");
 
-            output.PostContent.AppendHtml(GenerateOptions());
 
-            base.Process(context, output);
-        }
+            //// Pass through attribute that is also a well-known HTML attribute. Must be done prior to any copying
+            //// from a TagBuilder.
+            //if (Name != null)
+            //{
+            //    output.CopyHtmlAttribute(nameof(Name), context);
+            //}
 
-        private string[] SplitCamelCase(string source)
-        {
-            return Regex.Split(source, @"(?<!^)(?=[A-Z])");
-        }
+            // Ensure GenerateSelect() _never_ looks anything up in ViewData.
+            var items = Items ?? Enumerable.Empty<SelectListItem>();
 
-        private IHtmlContent GenerateOptions()
-        {
-            var enumValues = Enum.GetValues(typeof(FormStatus));
-            var optionsBuilder = new HtmlContentBuilder(enumValues.Length);
-
-            foreach (var i in Items)
+            // Set disabled attribute and use description for text
+            if (EnabledValues != null)
             {
-                var option = new TagBuilder("option");
-
-                string formattedName = "";
-
-                if (!string.IsNullOrWhiteSpace(i.Text))
+                foreach (var item in items)
                 {
-                    string[] split = SplitCamelCase(i.Text);
-                    formattedName = string.Join(" ", split);
+
+                    if (EnabledValues.Count() == 0) // if there are no enabled values all are disabled
+                        item.Disabled = true;
+                    else if (!EnabledValues.Contains(Int32.Parse(item.Value)))
+                        item.Disabled = true;
+
                 }
-                // TODO use description tag helper to get formatted name
-
-                option.InnerHtml.AppendLine(formattedName);
-
-                var form = (FormModel)ViewContext.ViewData.Model;
-
-                if (form != null)
-                {
-                    // TODO select option if it matches
-                    //var propertyTest = For;
-                    //if ((int)form.Status == i)
-                    //{
-                    //    option.Attributes["selected"] = "true"; // select the current status
-                    //}
-
-                    if (EnabledValues != null && EnabledValues.Count() > 0)
-                    {
-                        if (!EnabledValues.Contains(Int32.Parse(i.Value)))
-                        {
-                            option.Attributes["disabled"] = "disabled";
-                        }
-                    }
-                    else
-                    {
-                        // no enabled values, so everything is disabled
-                        option.Attributes["disabled"] = "disabled";
-                    }
-                }
-
-                optionsBuilder.AppendLine(option);
             }
 
-            return optionsBuilder;
+            if (For == null)
+            {
+                var options = Generator.GenerateGroupsAndOptions(optionLabel: null, selectList: items);
+                output.PostContent.AppendHtml(options);
+                return;
+            }
+
+            // Ensure Generator does not throw due to empty "fullName" if user provided a name attribute.
+            //IDictionary<string, object> htmlAttributes = null;
+            //if (string.IsNullOrEmpty(For.Name) &&
+            //    string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix) &&
+            //    !string.IsNullOrEmpty(Name))
+            //{
+            //    htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+            //    {
+            //        { "name", Name },
+            //    };
+            //}
+
+            var tagBuilder = Generator.GenerateSelect(
+                ViewContext,
+                For.ModelExplorer,
+                optionLabel: null,
+                expression: For.Name,
+                selectList: items,
+                allowMultiple: false,
+                htmlAttributes: new Dictionary<string, object>());
+
+            if (tagBuilder != null)
+            {
+                output.MergeAttributes(tagBuilder); // keep attributes from view
+
+                if (tagBuilder.HasInnerHtml)
+                {
+                    output.PostContent.AppendHtml(tagBuilder.InnerHtml);
+                }
+            }
         }
     }
 }
