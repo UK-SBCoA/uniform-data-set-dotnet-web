@@ -18,9 +18,7 @@
                     cssClass = "bg-red-50 border-red-500 text-red-700 hover:bg-red-50 hover:text-red-700";
                 else if (form.Status == FormStatus.InProgress)
                     cssClass = "bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700";
-                else if (form.Status == FormStatus.Complete)
-                    cssClass = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700"; // text-teal-500 group-hover:text-teal-500
-                else if (form.Status == FormStatus.NotIncluded)
+                else if (form.Status == FormStatus.Finalized)
                     cssClass = "bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700";
             }
             var cssClassFormState = "text-gray-500 group-hover:text-gray-500";
@@ -28,9 +26,7 @@
                 cssClassFormState = "text-red-500 group-hover:text-red-500";
             else if (form.Status == FormStatus.InProgress)
                 cssClassFormState = "text-indigo-500 group-hover:text-indigo-500";
-            else if (form.Status == FormStatus.Complete)
-                cssClassFormState = "text-teal-500 group-hover:text-teal-500"; // text-teal-500 group-hover:text-teal-500
-            else if (form.Status == FormStatus.NotIncluded)
+            else if (form.Status == FormStatus.Finalized)
                 cssClassFormState = "text-teal-500 group-hover:text-teal-500";
 
             <a asp-page="/@("UDS"+Model.FORMVER)/@form.Kind" asp-route-id="@Model.Id" asp-route-packetKind="@Model.PACKET" class="@cssClass group border-l-4 px-3 py-2 flex items-center text-sm font-medium">

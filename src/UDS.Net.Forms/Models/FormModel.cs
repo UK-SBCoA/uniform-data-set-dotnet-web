@@ -23,7 +23,8 @@ namespace UDS.Net.Forms.Models
 
         public string Description { get; set; } = "";
 
-        [Required(ErrorMessage = "Choose whether to save in-progress or complete the form")]
+        [Required(ErrorMessage = "Choose whether to save in-progress or finalize the form")]
+        [Range(1, 2, ErrorMessage = "Choose whether to save in-progress or finalize the form")]
         [Display(Name = "Status")]
         public FormStatus Status { get; set; }
 
@@ -48,7 +49,8 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedFormModes { get; set; } = new List<int>();
 
-        [Display(Name = "If not submitted, specify reason")]
+        [RequiredIf(nameof(MODE), "3", ErrorMessage = "Specify reason not completed")]
+        [Display(Name = "If not completed, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
 
         public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
@@ -63,11 +65,11 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedRemoteModalities { get; set; } = new List<int>();
 
-        [RequiredOnComplete]
+        [Required]
         [Display(Name = "Examiner initials")]
         public string INITIALS { get; set; } = "";
 
-        [RequiredOnComplete]
+        [Required]
         [Display(Name = "Form date")]
         public DateTime FRMDATE { get; set; }
 
@@ -93,14 +95,14 @@ namespace UDS.Net.Forms.Models
                     $"Choose status to save form",
                     new[] { nameof(Status) });
             }
-            else if (Status == FormStatus.NotIncluded && !NOT.HasValue)
+            else if (Status == FormStatus.Finalized)
             {
-                yield return new ValidationResult(
-                    $"Provide a reason code if form is not included",
-                    new[] { nameof(NotIncludedReasonCode) });
-            }
-            else if (Status == FormStatus.Complete)
-            {
+                if (MODE == FormMode.NotCompleted && !NOT.HasValue)
+                {
+                    yield return new ValidationResult(
+                        $"Provide a reason code if form is not completed",
+                        new[] { nameof(NotIncludedReasonCode) });
+                }
                 if (string.IsNullOrWhiteSpace(Kind.Trim()))
                 {
                     yield return new ValidationResult(
@@ -119,20 +121,20 @@ namespace UDS.Net.Forms.Models
                         $"Created by is required",
                         new[] { nameof(CreatedBy) });
                 }
-            }
-            if (MODE == FormMode.Remote)
-            {
-                if (!RMREAS.HasValue)
+                if (MODE == FormMode.Remote)
                 {
-                    yield return new ValidationResult(
-                        $"Remote reason code is required",
-                        new[] { nameof(RMREAS) });
-                }
-                if (!RMMODE.HasValue)
-                {
-                    yield return new ValidationResult(
-                        $"Remote modality is required",
-                        new[] { nameof(RMMODE) });
+                    if (!RMREAS.HasValue)
+                    {
+                        yield return new ValidationResult(
+                            $"Remote reason code is required",
+                            new[] { nameof(RMREAS) });
+                    }
+                    if (!RMMODE.HasValue)
+                    {
+                        yield return new ValidationResult(
+                            $"Remote modality is required",
+                            new[] { nameof(RMMODE) });
+                    }
                 }
             }
         }

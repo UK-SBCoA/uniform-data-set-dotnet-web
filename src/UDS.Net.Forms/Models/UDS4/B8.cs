@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class B8 : FormModel
     {
         [Display(Name = "Which of the following was completed on this participant?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NEUREXAM { get; set; }
 
         [Display(Name = "Were there abnormal exam findings?")]

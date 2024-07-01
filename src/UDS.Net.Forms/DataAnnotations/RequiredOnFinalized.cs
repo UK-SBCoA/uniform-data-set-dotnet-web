@@ -5,9 +5,9 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
-    public class RequiredOnCompleteAttribute : RequiredAttribute
+    public class RequiredOnFinalizedAttribute : RequiredAttribute
     {
-        public RequiredOnCompleteAttribute() : base()
+        public RequiredOnFinalizedAttribute() : base()
         {
         }
 
@@ -18,8 +18,8 @@ namespace UDS.Net.Forms.DataAnnotations
             {
                 var form = (FormModel)validationContext.ObjectInstance;
 
-                // only validate if the form is attempting to be completed
-                if (form.Status == FormStatus.Complete)
+                // only validate if the form is attempting to be finalized and mode is NOT not completed
+                if (form.Status == FormStatus.Finalized && form.MODE != FormMode.NotCompleted)
                 {
                     return base.IsValid(value, validationContext);
                 }

@@ -149,7 +149,7 @@ namespace UDS.Net.Services.Extensions
         private static FormDto GetDto(Form form)
         {
             string reasonCode = "";
-            if (form.Status == FormStatus.NotIncluded && form.NOT.HasValue)
+            if (form.MODE == FormMode.NotCompleted && form.NOT.HasValue)
                 reasonCode = ((int)form.NOT).ToString();
 
             string remoteReasonCode = "";

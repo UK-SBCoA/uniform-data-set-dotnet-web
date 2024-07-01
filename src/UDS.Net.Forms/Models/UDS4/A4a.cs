@@ -12,7 +12,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class A4a : FormModel
     {
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
@@ -70,7 +70,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == FormStatus.Complete)
+            if (Status == FormStatus.Finalized)
             {
                 int index = 0;
                 foreach (var treatment in Treatments)

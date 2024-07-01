@@ -13,11 +13,11 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A5 : FormModel
     {
         [Display(Name = "Has subject smoked within the last 30 days?")]
-        [RequiredOnComplete(ErrorMessage = "Has the subject smoked within the last 30 days?")]
+        [RequiredOnFinalized(ErrorMessage = "Has the subject smoked within the last 30 days?")]
         public int? TOBAC30 { get; set; }
 
         [Display(Name = "Has participant smoked more than 100 cigarettes in his/her life?")]
-        [RequiredOnComplete(ErrorMessage = "Has the participant smoked more than 100 cigarettes in their life?")]
+        [RequiredOnFinalized(ErrorMessage = "Has the participant smoked more than 100 cigarettes in their life?")]
         public int? TOBAC100 { get; set; }
 
         [Display(Name = "Total years smoked")]
@@ -35,7 +35,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? QUITSMOK { get; set; }
 
         [Display(Name = "In the past three months,has the subject consumed any alcohol?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ALCOCCAS { get; set; }
 
         [Display(Name = "During the past three months, how often did the subject have at least one drink of any alcoholic beverage such as wine, beer, malt liquor, or spirits?")]
@@ -43,7 +43,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? ALCFREQ { get; set; }
 
         [Display(Name = "Heart attack/cardiac arrest")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVHATT { get; set; }
 
         [Display(Name = "More than one heart attack?")]
@@ -57,35 +57,35 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HATTYEAR { get; set; }
 
         [Display(Name = "Atrial fibrillation")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVAFIB { get; set; }
 
         [Display(Name = "Angioplasty/endarterectomy/stent")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVANGIO { get; set; }
 
         [Display(Name = "Cardiac bypass procedure")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVBYPASS { get; set; }
 
         [Display(Name = "Pacemaker and/or defibrillator")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVPACDEF { get; set; }
 
         [Display(Name = "Congestive heart failure")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVCHF { get; set; }
 
         [Display(Name = "Angina")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVANGINA { get; set; }
 
         [Display(Name = "Heart valve replacement or repair")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVHVALVE { get; set; }
 
         [Display(Name = "Other cardiovascular disease")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CVOTHR { get; set; }
 
 
@@ -97,7 +97,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? CVOTHRX { get; set; }
 
         [Display(Name = "Stroke – by history, not exam (imaging is not required)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CBSTROKE { get; set; }
 
         [Display(Name = "More than one stroke?")]
@@ -111,7 +111,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? STROKYR { get; set; }
 
         [Display(Name = "Transient ischemic attack (TIA)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CBTIA { get; set; }
 
         [Display(Name = "More than one TIA")]
@@ -125,7 +125,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TIAYEAR { get; set; }
 
         [Display(Name = "Parkinson’s disease (PD)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PD { get; set; }
 
         [Display(Name = "Year of PD diagnosis")]
@@ -133,7 +133,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PDYR { get; set; }
 
         [Display(Name = "Other parkinsonian disorder (e.g, PSP, CBD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PDOTHR { get; set; }
 
         [Display(Name = "Year of parkinsonian disorder diagnosis")]
@@ -141,11 +141,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PDOTHRYR { get; set; }
 
         [Display(Name = "Seizures")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? SEIZURES { get; set; }
 
         [Display(Name = "Traumatic brain injury (TBI)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TBI { get; set; }
 
         [Display(Name = "TBI with brief loss of consciousness (<5 minutes)")]
@@ -169,7 +169,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TBIYEAR { get; set; }
 
         [Display(Name = "Diabetes")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIABETES { get; set; }
 
         [Display(Name = "If Recent/active or Remote/inactive, which type?")]
@@ -178,23 +178,23 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? DIABTYPE { get; set; }
 
         [Display(Name = "Hypertension")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? HYPERTEN { get; set; }
 
         [Display(Name = "Hypercholesterolemia")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? HYPERCHO { get; set; }
 
         [Display(Name = "B12 deficiency")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? B12DEF { get; set; }
 
         [Display(Name = "Thyroid disease")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? THYROID { get; set; }
 
         [Display(Name = "Arthritis")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ARTHRIT { get; set; }
 
         [Display(Name = "Type of arthritis")]
@@ -221,27 +221,27 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool ARTHUNK { get; set; }
 
         [Display(Name = "Incontinence - urinary")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? INCONTU { get; set; }
 
         [Display(Name = "Incontinence — bowel")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? INCONTF { get; set; }
 
         [Display(Name = "Sleep apnea")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? APNEA { get; set; }
 
         [Display(Name = "REM sleep behavior disorder (RBD)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? RBD { get; set; }
 
         [Display(Name = "Hyposomnia/insomnia")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? INSOMN { get; set; }
 
         [Display(Name = "Other sleep disorder")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? OTHSLEEP { get; set; }
 
 
@@ -253,11 +253,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHSLEEX { get; set; }
 
         [Display(Name = "Alcohol abuse: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ALCOHOL { get; set; }
 
         [Display(Name = "Other abused substances: Clinically significant impairment occuring over a 12-month period manifested in one of the following areas: work, driving, legal, or social")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ABUSOTHR { get; set; }
 
 
@@ -269,39 +269,39 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ABUSX { get; set; }
 
         [Display(Name = "Post-traumatic stress disorder (PTSD)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PTSD { get; set; }
 
         [Display(Name = "Bipolar disorder")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BIPOLAR { get; set; }
 
         [Display(Name = "Schizophrenia")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? SCHIZ { get; set; }
 
         [Display(Name = "Active depression in the last two years")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DEP2YRS { get; set; }
 
         [Display(Name = "Depression episodes more than two years ago")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DEPOTHR { get; set; }
 
         [Display(Name = "Anxiety")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ANXIETY { get; set; }
 
         [Display(Name = "Obsessive-compulsive disorder (OCD)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? OCD { get; set; }
 
         [Display(Name = "Developmental neuropsychiatric disorders (e.g., autism spectrum disorder [ASD], attention-deficit hyperactivity disorder [ADHD], dyslexia)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NPSYDEV { get; set; }
 
         [Display(Name = "Other psychiatric disorders")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PSYCDIS { get; set; }
 
 
@@ -319,7 +319,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
 
-            if (Status == Services.Enums.FormStatus.Complete)
+            if (Status == Services.Enums.FormStatus.Finalized)
             {
                 bool isValid = false;
                 string errorMessage = "Value must be between 1900 and the current year of the visit date";

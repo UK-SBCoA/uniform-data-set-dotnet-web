@@ -68,7 +68,7 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             var visit = Visit.ToEntity();
 
-            if (BaseForm.Status == FormStatus.Complete || BaseForm.Status == FormStatus.NotIncluded)
+            if (BaseForm.Status == FormStatus.Finalized)
             {
                 /*
                  * ValidationContext describes any member on which validation is performed. It also enables

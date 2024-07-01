@@ -244,15 +244,15 @@ namespace UDS.Net.Services.Extensions
             {
                 formLanguage = (FormLanguage)languageValue;
             }
-            NotIncludedReasonCode? notIncludedReasonCode = null;
-            if (formStatus == FormStatus.NotIncluded && !string.IsNullOrWhiteSpace(dto.NOT) && Int32.TryParse(dto.NOT, out int reasonCodeValue))
-            {
-                notIncludedReasonCode = (NotIncludedReasonCode)reasonCodeValue;
-            }
             FormMode formMode = FormMode.InPerson;
             if (!string.IsNullOrWhiteSpace(dto.MODE) && Int32.TryParse(dto.MODE, out int formModeValue))
             {
                 formMode = (FormMode)formModeValue;
+            }
+            NotIncludedReasonCode? notIncludedReasonCode = null;
+            if (formMode == FormMode.NotCompleted && !string.IsNullOrWhiteSpace(dto.NOT) && Int32.TryParse(dto.NOT, out int notIncludedReasonCodeValue))
+            {
+                notIncludedReasonCode = (NotIncludedReasonCode)notIncludedReasonCodeValue;
             }
             RemoteModality? remoteModality = null;
             if (!string.IsNullOrWhiteSpace(dto.RMMODE) && Int32.TryParse(dto.RMMODE, out int remoteModalityValue))

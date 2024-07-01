@@ -15,7 +15,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class C2 : FormModel
     {
         [Display(Name = "Was any part of MoCA administered?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MOCACOMP { get; set; }
 
         [Display(Name = "If No, enter reason code, 95–98")]
@@ -157,7 +157,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -170,7 +170,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total story units recalled, verbatim scoring", Description = "(0-44, 95-98)")]
         [RegularExpression("^([0-9]|[1-3][0-9]|4[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-44 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CRAFTVRS { get; set; }
 
         [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-25)")]
@@ -188,7 +188,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct trials", Description = "(0-14, 95-98)")]
         [RegularExpression("^(\\d|1[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-14 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGFORCT { get; set; }
 
         [Display(Name = "Longest span forward", Description = "(0, 3-9)")]
@@ -202,7 +202,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct trials", Description = "(0-14, 95-98)")]
         [RegularExpression("^(\\d|1[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-14 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGBACCT { get; set; }
 
         [Display(Name = "Longest span backward", Description = "(0, 2-8)")]
@@ -214,12 +214,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds", Description = "(0-77, 95-98)")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-77 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ANIMALS { get; set; }
 
         [Display(Name = "Vegetables: Total number of vegtables named in 60 seconds", Description = "(0-77, 95-98)")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-77 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? VEG { get; set; }
 
         #region if not completed, skip to question 8b
@@ -262,7 +262,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total story units recalled, verbatim scoring", Description = "(0-44, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|4[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-44 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CRAFTDVR { get; set; }
 
         [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-24)")]
@@ -330,7 +330,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct F-words generated in 1 minute", Description = "(0-40, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "Allowed values are 0-40 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of correct F-words repeated in 1 minute", Description = "(0-15)")]
@@ -349,7 +349,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct L-words generated in 1 minute", Description = "(0-40, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "Allowed values are 0-40 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in 1 minute", Description = "(0-15)")]
@@ -380,7 +380,7 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
         [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
@@ -551,7 +551,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == Services.Enums.FormStatus.Complete)
+            if (Status == Services.Enums.FormStatus.Finalized)
             {
                 // 1g-1l, 1n-1t, or 1w-1bb
                 if (MOCATOTS.HasValue && MOCATRAI.HasValue && MOCACUBE.HasValue &&
@@ -593,7 +593,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     }
                 }
 
-                if (Status == FormStatus.Complete)
+                if (Status == FormStatus.Finalized)
                 {
                     if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                     {

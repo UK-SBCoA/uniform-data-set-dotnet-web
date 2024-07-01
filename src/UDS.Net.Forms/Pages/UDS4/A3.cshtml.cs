@@ -43,7 +43,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 
-            if (A3 != null && A3.Status == FormStatus.Complete)
+            if (A3 != null && A3.Status == FormStatus.Finalized)
             {
                 if (A3.Siblings != null)
                 {

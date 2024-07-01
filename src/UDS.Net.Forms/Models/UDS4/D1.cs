@@ -13,11 +13,11 @@ namespace UDS.Net.Forms.Models.UDS4
     {
         #region Section 1  Cognitive and behavioral status
         [Display(Name = "Diagnosis method — responses in this form are based on diagnosis by")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DXMETHOD { get; set; }
 
         [Display(Name = "Does the subject have normal cognition (global CDR=0 and/or neuropsychological testing within normal range) and normal behavior (i.e., the subject does not exhibit behavior sufficient to diagnose I or dementia due to FTLD or LBD)?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NORMCOG { get; set; }
 
         [Display(Name = "Does the subject meet the criteria for dementia?")]
@@ -208,47 +208,47 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
         #region Section 2   Biomarkers, imaging and genetics
         [Display(Name = "Abnormally elevated amyloid on PET")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? AMYLPET { get; set; }
 
         [Display(Name = "Abnormally low amyloid in CSF")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? AMYLCSF { get; set; }
 
         [Display(Name = "FDG-PET pattern of AD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? FDGAD { get; set; }
 
         [Display(Name = "Hippocampal atrophy")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? HIPPATR { get; set; }
 
         [Display(Name = "Tau PET evidence for AD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TAUPETAD { get; set; }
 
         [Display(Name = "Abnormally elevated CSF tau or ptau")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CSFTAU { get; set; }
 
         [Display(Name = "FDG-PET evidence for frontal or anterior temporal hypometabolism for FTLD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? FDGFTLD { get; set; }
 
         [Display(Name = "Tau PET evidence for FTLD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TPETFTLD { get; set; }
 
         [Display(Name = "Structural MR evidence for frontal or anterior temporal atrophy for FTLD")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MRFTLD { get; set; }
 
         [Display(Name = "Dopamine transporter scan (DATscan) evidence for Lewy body disease")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DATSCAN { get; set; }
 
         [Display(Name = "Other (specify)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? OTHBIOM { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -258,39 +258,39 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHBIOMX { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGLINF { get; set; }
 
         [Display(Name = "Lacunar infarct(s)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGLAC { get; set; }
 
         [Display(Name = "Macrohemorrhage(s)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGMACH { get; set; }
 
         [Display(Name = "Microhemorrhage(s)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGMICH { get; set; }
 
         [Display(Name = "Moderate white-matter hyperintensity (CHS score 5–6)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGMWMH { get; set; }
 
         [Display(Name = "Extensive white-matter hyperintensity (CHS score 7–8+)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? IMAGEWMH { get; set; }
 
         [Display(Name = "Does the subject have a dominantly inherited AD mutation (PSEN1, PSEN2, APP)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ADMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary FTLD mutation (e.g., GRN, VCP, TARBP, FUS, C9orf72, CHMP2B, MAPT)?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? FTLDMUT { get; set; }
 
         [Display(Name = "Does the subject have a hereditary mutation other than an AD or FTLD mutation?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? OTHMUT { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -302,7 +302,7 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
 
         #region One Primary Diagnosis Allowed Questions 11a-39a
-        [RequiredOnComplete(ErrorMessage = "In Section 3, only ONE diagnosis should be indicated as primary.")]
+        [RequiredOnFinalized(ErrorMessage = "In Section 3, only ONE diagnosis should be indicated as primary.")]
         [NotMapped]
         public bool? OnePrimaryDiagnosisAllowed
         {
@@ -483,7 +483,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         #region At Least One Or More Diagnoses Present Questions 11-39
 
-        [RequiredOnComplete(ErrorMessage = "In Section 3, if the particpant does not have normal cognition, at least ONE diagnosis should be indicated as present.")]
+        [RequiredOnFinalized(ErrorMessage = "In Section 3, if the particpant does not have normal cognition, at least ONE diagnosis should be indicated as present.")]
         [NotMapped]
         public bool? OneDiagnosesPresent
         {
