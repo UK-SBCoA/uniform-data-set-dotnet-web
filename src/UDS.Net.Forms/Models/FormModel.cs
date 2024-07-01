@@ -53,11 +53,11 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
 
-        [RequiredIf(nameof(MODE), "2")]
+        [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify reason for remote visit")]
         [Display(Name = "If remote, specify reason")]
         public RemoteReasonCode? RMREAS { get; set; }
 
-        [RequiredIf(nameof(MODE), "2")]
+        [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify remote modality")]
         [Display(Name = "If remote, specify modality")]
         public RemoteModality? RMMODE { get; set; }
 
