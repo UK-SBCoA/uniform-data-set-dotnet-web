@@ -165,10 +165,11 @@ function setValidationStatus(statusValue, modeValue) {
   // get validator object
   let validator = form.validate();
   let settings = validator.settings;
-  console.log("status " + statusValue);
-  console.log("mode " + modeValue);
 
-  if (statusValue === '2' && modeValue != '3') { // TODO don't hardcode status or mode values
+  var formStatusFinalizedValue = $('input[name="Enum.FormStatus.Finalized"]').val();
+  var formModeNotCompletedValue = $('input[name="Enum.FormMode.NotCompleted"]').val();
+
+  if (statusValue === formStatusFinalizedValue && modeValue != formModeNotCompletedValue) {
     // figure out which fields needs to be required
     // enable client-side validation
     settings.ignore = '';

@@ -69,6 +69,8 @@
 
             <div class="divide-y divide-gray-200">
                 <form method="post" id="UDSForm">
+                    <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+                    <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
                     <input asp-for="Visit.Id" type="hidden" />
                     <input asp-for="Visit.ParticipationId" type="hidden" />
                     <input asp-for="Visit.VISITNUM" type="hidden" />
