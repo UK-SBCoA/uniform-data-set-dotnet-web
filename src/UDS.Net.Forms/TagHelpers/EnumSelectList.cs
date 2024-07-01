@@ -52,17 +52,6 @@ namespace UDS.Net.Forms.TagHelpers
 
             output.TagName = "select";
 
-            output.Attributes.SetAttribute("data-val", "true");
-            output.Attributes.SetAttribute("data-val-required", "Required");
-
-
-            //// Pass through attribute that is also a well-known HTML attribute. Must be done prior to any copying
-            //// from a TagBuilder.
-            //if (Name != null)
-            //{
-            //    output.CopyHtmlAttribute(nameof(Name), context);
-            //}
-
             // Ensure GenerateSelect() _never_ looks anything up in ViewData.
             var items = Items ?? Enumerable.Empty<SelectListItem>();
 
@@ -86,18 +75,6 @@ namespace UDS.Net.Forms.TagHelpers
                 output.PostContent.AppendHtml(options);
                 return;
             }
-
-            // Ensure Generator does not throw due to empty "fullName" if user provided a name attribute.
-            //IDictionary<string, object> htmlAttributes = null;
-            //if (string.IsNullOrEmpty(For.Name) &&
-            //    string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix) &&
-            //    !string.IsNullOrEmpty(Name))
-            //{
-            //    htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            //    {
-            //        { "name", Name },
-            //    };
-            //}
 
             var tagBuilder = Generator.GenerateSelect(
                 ViewContext,
