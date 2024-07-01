@@ -108,26 +108,39 @@
                                         var cssClassFormState = "text-gray-900";
 
                                         if (form.Status == FormStatus.NotStarted)
-                                            cssClassFormState = "text-red-500 border-transparent";
+                                            cssClassFormState = "text-red-500";
                                         else if (form.Status == FormStatus.InProgress)
-                                            cssClassFormState = "text-indigo-500 border-transparent";
+                                            cssClassFormState = "text-indigo-500";
                                         else if (form.Status == FormStatus.Complete)
-                                            cssClassFormState = "text-teal-500 bg-teal-50 border-teal";
+                                            cssClassFormState = "text-teal-500";
                                         else if (form.Status == FormStatus.NotIncluded)
-                                            cssClassFormState = "text-teal-500 border-transparent";
+                                            cssClassFormState = "text-teal-500";
 
                                     }
                                     <div class="flex-1 truncate px-4 py-2 text-sm text-center">
-                                        @if (form.Status == FormStatus.NotIncluded)
+                                        @if (form.Status == FormStatus.NotStarted)
                                         {
-                                            <p class="@cssClassFormState font-medium" enum-description-for="@form.NOT"></p>
+                                            <p class="@cssClassFormState font-medium" enum-description-for="@form.Status"></p>
                                         }
                                         else
                                         {
-                                            <p class="@cssClassFormState font-medium" enum-description-for="@form.Status"></p>
-                                            @if (form.Status != FormStatus.NotStarted)
+                                            @if (form.NOT.HasValue)
                                             {
-                                                <p class="text-gray-500" enum-description-for="@form.MODE"></p>
+                                                <!--// If the form is not included display reason code //-->
+                                                <p class="@cssClassFormState font-medium" enum-description-for="@form.MODE"></p>
+                                                <p class="text-gray-500" enum-description-for="@form.NOT"></p>
+                                            }
+                                            else
+                                            {
+                                                if (form.MODE == FormMode.Remote)
+                                                {
+                                                    <p class="@cssClassFormState font-medium" enum-description-for="@form.MODE"></p>
+                                                    <p class="text-gray-500" enum-description-for="@form.RMREAS"></p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="@cssClassFormState font-medium" enum-description-for="@form.Status"></p>
+                                                }
                                             }
                                         }
                                     </div>
