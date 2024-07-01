@@ -95,15 +95,7 @@
                                     }
                                 </div>
                                 <p class="mt-1 truncate text-sm text-gray-500">@form.Title</p>
-                                @if (form.Status != FormStatus.NotStarted)
-                                {
-                                    <p>@form.MODE</p>
-                                    @if (form.MODE == FormMode.Remote)
-                                    {
-                                        <p>@form.RMMODE</p>
-                                        <p>@form.RMREAS</p>
-                                    }
-                                }
+
                             </div>
                         </div>
                         <div>
@@ -111,7 +103,7 @@
                                 <div class="flex w-0 flex-1">
                                     <a asp-page="/UDS@(Model.Visit.FORMVER)/@form.Kind" asp-route-id="@form.VisitId" asp-route-packetKind="@Model.Visit.PACKET" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">Edit</a>
                                 </div>
-                                <div class="-ml-px flex w-0 flex-1">
+                                <div class="flex flex-1 items-center justify-between truncate">
                                     @{
                                         var cssClassFormState = "text-gray-900";
 
@@ -125,16 +117,20 @@
                                             cssClassFormState = "text-teal-500 border-transparent";
 
                                     }
-                                    <span class="@cssClassFormState relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border py-4 text-sm font-semibold">
+                                    <div class="flex-1 truncate px-4 py-2 text-sm text-center">
                                         @if (form.Status == FormStatus.NotIncluded)
                                         {
-                                            @form.NOT
+                                            <p class="@cssClassFormState font-medium" enum-description-for="@form.NOT"></p>
                                         }
                                         else
                                         {
-                                            @form.Status
+                                            <p class="@cssClassFormState font-medium" enum-description-for="@form.Status"></p>
+                                            @if (form.Status != FormStatus.NotStarted)
+                                            {
+                                                <p class="text-gray-500" enum-description-for="@form.MODE"></p>
+                                            }
                                         }
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
