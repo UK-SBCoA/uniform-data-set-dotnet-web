@@ -48,11 +48,10 @@ namespace UDS.Net.Forms.TagHelpers
 
             string description = metadata.Description; // value if there is a display-for
 
-            var modelType = DescriptionFor.ModelExplorer.ModelType; // type
-
-            if (modelType.IsEnum)
+            if (metadata.IsEnum)
             {
-                description = ((Enum)DescriptionFor.ModelExplorer.Model).GetDescription();
+                if (DescriptionFor.ModelExplorer.Model != null)
+                    description = ((Enum)DescriptionFor.ModelExplorer.Model).GetDescription();
             }
 
             output.Attributes.SetAttribute("id", metadata.PropertyName + "-description");
