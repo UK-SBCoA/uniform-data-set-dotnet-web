@@ -157,8 +157,8 @@ $(function () {
 });
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-/* Status */
-function setValidationStatus(statusValue, statusText) {
+/* Save Status and Form Mode */
+function setValidationStatus(statusValue, modeValue) {
   // get the current form
   let form = $('#UDSForm');
 
@@ -166,7 +166,10 @@ function setValidationStatus(statusValue, statusText) {
   let validator = form.validate();
   let settings = validator.settings;
 
-  if (statusValue === '2') { // TODO don't hardcode status value
+  var formStatusFinalizedValue = $('input[name="Enum.FormStatus.Finalized"]').val();
+  var formModeNotCompletedValue = $('input[name="Enum.FormMode.NotCompleted"]').val();
+
+  if (statusValue === formStatusFinalizedValue && modeValue != formModeNotCompletedValue) {
     // figure out which fields needs to be required
     // enable client-side validation
     settings.ignore = '';
@@ -189,20 +192,42 @@ function setValidationStatus(statusValue, statusText) {
   }
 }
 
+/* Initialize state of validation */
 $(function () {
+  let mode = $('select[name$="MODE"]');
   let select = $('select[data-val-status]');
-  if (select.length) {
+  if (mode.length && select.length) {
+    let modeOptionSelected = mode.find(':selected');
     let optionSelected = select.find(':selected');
     if (optionSelected.length) {
-      setValidationStatus(optionSelected.val(), optionSelected.text());
+      setValidationStatus(optionSelected.val(), modeOptionSelected.val());
     }
   }
 });
 
+/* If save-status changes */
 $('select[data-val-status]').on('change', function () {
-  let optionSelected = $('select[data-val-status]').find(':selected');
-  if (optionSelected.length) {
-    setValidationStatus(optionSelected.val(), optionSelected.text());
+  let mode = $('select[name$="MODE"]');
+  let select = $('select[data-val-status]');
+  if (mode.length && select.length) {
+    let modeOptionSelected = mode.find(':selected');
+    let optionSelected = select.find(':selected');
+    if (optionSelected.length) {
+      setValidationStatus(optionSelected.val(), modeOptionSelected.val());
+    }
+  }
+});
+
+/* If form mode changes */
+$('select[name$="MODE"]').on('change', function () {
+  let mode = $('select[name$="MODE"]');
+  let select = $('select[data-val-status]');
+  if (mode.length && select.length) {
+    let modeOptionSelected = mode.find(':selected');
+    let optionSelected = select.find(':selected');
+    if (optionSelected.length) {
+      setValidationStatus(optionSelected.val(), modeOptionSelected.val());
+    }
   }
 });
 

@@ -3,29 +3,13 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
 {
     public static class DomainToViewModelMapper
     {
-        private static void SetBaseProperties(Form form, FormModel vm)
-        {
-            vm.VisitId = form.VisitId;
-            vm.Version = form.Version;
-            vm.Status = form.Status;
-            vm.Kind = form.Kind;
-            vm.Title = form.Title;
-            vm.Description = form.Description;
-            vm.IsRequiredForVisitKind = form.IsRequiredForVisitKind;
-            vm.ReasonCodeNotIncluded = form.ReasonCode;
-            vm.CreatedAt = form.CreatedAt;
-            vm.CreatedBy = form.CreatedBy;
-            vm.ModifiedBy = form.ModifiedBy;
-            vm.DeletedBy = form.DeletedBy;
-            vm.IsDeleted = form.IsDeleted;
-        }
-
         public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
         {
             return new ParticipationsPaginatedModel
@@ -68,10 +52,11 @@ namespace UDS.Net.Forms.Extensions
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
-                Number = visit.Number,
-                Kind = visit.Kind,
-                Version = visit.Version,
-                StartDateTime = visit.StartDateTime,
+                VISITNUM = visit.VISITNUM,
+                PACKET = visit.PACKET,
+                FORMVER = visit.FORMVER,
+                VISIT_DATE = visit.VISIT_DATE,
+                INITIALS = visit.INITIALS,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
@@ -141,25 +126,34 @@ namespace UDS.Net.Forms.Extensions
             return vm;
         }
 
+        private static void SetFormBaseProperties(Form form, FormModel vm)
+        {
+            vm.VisitId = form.VisitId;
+            vm.FORMVER = form.FORMVER;
+            vm.Status = form.Status;
+            vm.Kind = form.Kind;
+            vm.Title = form.Title;
+            vm.Description = form.Description;
+            vm.IsRequiredForPacketKind = form.IsRequiredForPacketKind;
+            vm.LANG = form.LANG;
+            vm.NOT = form.NOT;
+            vm.MODE = form.MODE;
+            vm.RMREAS = form.RMREAS;
+            vm.RMMODE = form.RMMODE;
+            vm.INITIALS = form.INITIALS;
+            vm.FRMDATE = form.FRMDATE;
+            vm.CreatedAt = form.CreatedAt;
+            vm.CreatedBy = form.CreatedBy;
+            vm.ModifiedBy = form.ModifiedBy;
+            vm.DeletedBy = form.DeletedBy;
+            vm.IsDeleted = form.IsDeleted;
+        }
+
         public static FormModel ToVM(this Form form)
         {
             var vm = new FormModel()
             {
-                Id = form.Id,
-                VisitId = form.VisitId,
-                Version = form.Version,
-                Kind = form.Kind,
-                Status = form.Status,
-                Title = form.Title,
-                Description = form.Description,
-                IsRequiredForVisitKind = form.IsRequiredForVisitKind,
-                CreatedAt = form.CreatedAt,
-                CreatedBy = form.CreatedBy,
-                ModifiedBy = form.ModifiedBy,
-                DeletedBy = form.DeletedBy,
-                IsDeleted = form.IsDeleted,
-                Language = form.Language,
-                ReasonCodeNotIncluded = form.ReasonCode
+                Id = form.Id
             };
 
             if (form.Fields != null)
@@ -252,9 +246,9 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((T1FormFields)form.Fields).ToVM(form.Id);
                 }
-
-                SetBaseProperties(form, vm); // must know the vm type in order to do this
             }
+
+            SetFormBaseProperties(form, vm);
 
             return vm;
         }
@@ -264,6 +258,9 @@ namespace UDS.Net.Forms.Extensions
             return new A1()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,
@@ -380,6 +377,9 @@ namespace UDS.Net.Forms.Extensions
             return new A1a()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 OWNSCAR = fields.OWNSCAR,
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
@@ -449,6 +449,9 @@ namespace UDS.Net.Forms.Extensions
             return new A2()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
@@ -469,6 +472,9 @@ namespace UDS.Net.Forms.Extensions
             return new A3()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 AFFFAMM = fields.AFFFAMM,
                 NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
@@ -511,6 +517,9 @@ namespace UDS.Net.Forms.Extensions
             return new A4()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 ANYMEDS = fields.ANYMEDS,
                 DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
                 {
@@ -569,6 +578,9 @@ namespace UDS.Net.Forms.Extensions
             return new A4a()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 ADVEVENT = fields.ADVEVENT,
                 ARIAE = fields.ARIAE,
                 ARIAH = fields.ARIAH,
@@ -609,6 +621,9 @@ namespace UDS.Net.Forms.Extensions
             return new A5()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 TOBAC30 = fields.TOBAC30,
                 TOBAC100 = fields.TOBAC100,
                 SMOKYRS = fields.SMOKYRS,
@@ -685,6 +700,9 @@ namespace UDS.Net.Forms.Extensions
             return new A5D2()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 TOBAC100 = fields.TOBAC100,
                 SMOKYRS = fields.SMOKYRS,
                 PACKSPER = fields.PACKSPER,
@@ -858,6 +876,9 @@ namespace UDS.Net.Forms.Extensions
             return new B1()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 HEIGHT = fields.HEIGHT,
                 WEIGHT = fields.WEIGHT,
                 WAIST1 = fields.WAIST1,
@@ -881,6 +902,9 @@ namespace UDS.Net.Forms.Extensions
             return new B3()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 PDNORMAL = fields.PDNORMAL,
                 SPEECH = fields.SPEECH,
                 SPEECHX = fields.SPEECHX,
@@ -945,6 +969,9 @@ namespace UDS.Net.Forms.Extensions
             return new B4()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 MEMORY = fields.MEMORY,
                 ORIENT = fields.ORIENT,
                 JUDGMENT = fields.JUDGMENT,
@@ -963,6 +990,9 @@ namespace UDS.Net.Forms.Extensions
             return new B5()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 NPIQINF = fields.NPIQINF,
                 NPIQINFX = fields.NPIQINFX,
                 DEL = fields.DEL,
@@ -1022,6 +1052,9 @@ namespace UDS.Net.Forms.Extensions
             return new B7()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 BILLS = fields.BILLS,
                 TAXES = fields.TAXES,
                 SHOPPING = fields.SHOPPING,
@@ -1040,6 +1073,9 @@ namespace UDS.Net.Forms.Extensions
             return new B8()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 NEUREXAM = fields.NEUREXAM,
                 NORMNREXAM = fields.NORMNREXAM.HasValue ? (fields.NORMNREXAM == true ? 1 : 0) : null,
                 PARKSIGN = fields.PARKSIGN,
@@ -1086,6 +1122,9 @@ namespace UDS.Net.Forms.Extensions
             return new B9()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 DECCOG = fields.DECCOG,
                 DECMOT = fields.DECMOT,
                 PSYCHSYM = fields.PSYCHSYM,
@@ -1222,6 +1261,9 @@ namespace UDS.Net.Forms.Extensions
             return new C2()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 MODCOMM = fields.MODCOMM,
                 MOCACOMP = fields.MOCACOMP,
                 MOCAREAS = fields.MOCAREAS,
@@ -1335,6 +1377,9 @@ namespace UDS.Net.Forms.Extensions
             return new D1a()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 DXMETHOD = fields.DXMETHOD,
                 NORMCOG = fields.NORMCOG,
                 SCD = fields.SCD,
@@ -1449,6 +1494,9 @@ namespace UDS.Net.Forms.Extensions
             return new D1b()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 BIOMARKDX = fields.BIOMARKDX,
                 FLUIDBIOM = fields.FLUIDBIOM,
                 BLOODAD = fields.BLOODAD,

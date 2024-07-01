@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (BaseForm != null)
                 {
-                    return $"Participant {Visit.ParticipationId} Visit {Visit.Number} {Visit.Kind}";
+                    return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET}";
                 }
                 return "";
             }
@@ -68,7 +68,7 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             var visit = Visit.ToEntity();
 
-            if (BaseForm.Status == FormStatus.Complete || BaseForm.Status == FormStatus.NotIncluded)
+            if (BaseForm.Status == FormStatus.Finalized)
             {
                 /*
                  * ValidationContext describes any member on which validation is performed. It also enables
@@ -97,7 +97,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("Status", ex.Message);
+                    ModelState.AddModelError($"{BaseForm.GetType().Name}.Status", ex.Message);
                 }
             }
 

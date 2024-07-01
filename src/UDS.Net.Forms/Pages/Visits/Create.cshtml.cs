@@ -61,10 +61,11 @@ namespace UDS.Net.Forms.Pages.Visits
 
             Visit = new VisitModel
             {
-                Version = "UDS4",
+                FORMVER = "4",
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username",
-                StartDateTime = DateTime.Now,
+                CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Unknown",
+                VISIT_DATE = DateTime.Now,
+                INITIALS = User.Identity.IsAuthenticated ? User.Identity.Name : "UNK",
             };
 
             if (participationId.HasValue)
@@ -76,13 +77,11 @@ namespace UDS.Net.Forms.Pages.Visits
             {
                 if (Participation.LastVisitNumber < 1)
                 {
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.IVP.ToString(), Text = "IVP" });
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TIP.ToString(), Text = "TIP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
                 }
                 else if (Participation.LastVisitNumber >= 1)
                 {
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.FVP.ToString(), Text = "FVP" });
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TFP.ToString(), Text = "TFP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
                 }
             }
 

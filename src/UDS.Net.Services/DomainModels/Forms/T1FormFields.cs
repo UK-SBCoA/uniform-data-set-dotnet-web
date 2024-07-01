@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -15,6 +17,30 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? TELMOD { get; set; }
         public int? TELINPER { get; set; }
         public int? TELMILE { get; set; }
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone }; // form is required for I
+            }
+        }
 
         public T1FormFields() { }
         public T1FormFields(FormDto dto)
@@ -42,7 +68,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
     }
 }

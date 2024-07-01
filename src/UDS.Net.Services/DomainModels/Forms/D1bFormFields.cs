@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -105,9 +106,41 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? OTHCOGIF { get; set; }
         public string OTHCOGX { get; set; }
 
-        public D1bFormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Biomarker and Etiological Diagnosis";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        public D1bFormFields() { }
         public D1bFormFields(FormDto dto) : this()
         {
             if (dto is D1bDto)
@@ -212,16 +245,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 OTHCOGX = d1bDto.OTHCOGX;
 
             }
-        }
-
-        public string GetDescription()
-        {
-            return "Biomarkers used to support Etiological Diagnosis";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

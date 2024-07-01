@@ -19,18 +19,18 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Mother — birth year")]
         [BirthYear(AllowUnknown = true)]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MOMYOB { get; set; }
 
         [Display(Name = "Mother — age at death")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Mother age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
-        [RequiredOnComplete(ErrorMessage = "Please provide an age at death or indicate otherwise")]
+        [RequiredOnFinalized(ErrorMessage = "Please provide an age at death or indicate otherwise")]
         public int? MOMDAGE { get; set; }
 
 
         [Display(Name = "Mother — Primary dx")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
-        [RequiredOnComplete(ErrorMessage = "Please provide a value for Primary dx")]
+        [RequiredOnFinalized(ErrorMessage = "Please provide a value for Primary dx")]
         public string? MOMETPR { get; set; }
 
         [Display(Name = "Mother — primary diagnosis")]
@@ -83,17 +83,17 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Father — birth year")]
         [BirthYear(AllowUnknown = true)]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DADYOB { get; set; }
 
         [Display(Name = "Father — age at death")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Father age at death must be 0-110, or 888 (N/A), or 999 (unknown)")]
-        [RequiredOnComplete(ErrorMessage = "Please provide an age at death or indicate otherwise")]
+        [RequiredOnFinalized(ErrorMessage = "Please provide an age at death or indicate otherwise")]
         public int? DADDAGE { get; set; }
 
         [Display(Name = "Father — neurological problem")]
         [RegularExpression("^(0[0-9]|1[0-2]|99)$", ErrorMessage = "Codes must be 00-12 or 99")]
-        [RequiredOnComplete(ErrorMessage = "Please provide a value for Primary dx")]
+        [RequiredOnFinalized(ErrorMessage = "Please provide a value for Primary dx")]
         public string? DADETPR { get; set; }
 
         [Display(Name = "Father — primary diagnosis")]

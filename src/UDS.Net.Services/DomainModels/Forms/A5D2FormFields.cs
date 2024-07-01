@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -173,14 +174,38 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BCSTARTAGE { get; set; }
         public int? BCENDAGE { get; set; }
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
-            return "Participant Health History/ Clinician-assessed Medical Conditions";
+            return "Participant Health History";
         }
 
         public string GetVersion()
         {
-            return "4.0";
+            return "4";
         }
 
         public A5D2FormFields() { }

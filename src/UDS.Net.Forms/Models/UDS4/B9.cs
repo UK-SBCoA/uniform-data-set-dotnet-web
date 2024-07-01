@@ -6,40 +6,31 @@ using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
-
-
-
-
-
-
-
-
     /// <summary>
     /// ViewModel for form with front-end validation
     /// </summary>
-    /// 
-
+    ///
     public class B9 : FormModel
     {
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the participant report a decline in any cognitive domain (relative to stable baseline prior to onset of current syndrome)?")]
         public int? DECCOG { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the participant report a decline in any motor domain (relative to stable baseline prior to onset of current syndrome)?")]
         public int? DECMOT { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the participant report the development of any significant neuropsychiatric/behavioral symptoms (relative to stable baseline prior to onset of current syndrome)?")]
         public int? PSYCHSYM { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the co-participant report a decline in any cognitive domain (relative to stable baseline prior to onset of current syndrome)?")]
         public int? DECCOGIN { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the co-participant report a change in any motor domain (relative to stable baseline prior to onset of current syndrome)?")]
         public int? DECMOTIN { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the co-participant report the development of any significant neuropsychiatric/behavioral symptoms (relative to stable baseline prior to onset of current syndrome)?")]
         public int? PSYCHSYMIN { get; set; }
-        [RequiredOnComplete(ErrorMessage = "Response required")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         [Display(Name = "Does the participant have any neuropsychiatric/behavioral symptoms or declines in any cognitive or motor domain?")]
         public int? DECCLIN { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing meaningful impairment in cognition?")]
@@ -255,7 +246,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
         [NotMapped]
-        [RequiredOnComplete(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
         public bool? COGAGESymptomsPresent
         {
             get
@@ -282,7 +273,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnComplete(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
         public bool? BEHAGESymptomsPresent
         {
             get
@@ -309,7 +300,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnComplete(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
         public bool? PERCHAGESymptomsPresent
         {
             get
@@ -337,7 +328,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
 
         [NotMapped]
-        [RequiredOnComplete(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
         public bool? MOTORAGEMotorChangesPresent
         {
             get

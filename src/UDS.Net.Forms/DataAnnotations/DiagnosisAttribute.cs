@@ -18,7 +18,7 @@ public class DiagnosisAttribute : ValidationAttribute, IClientModelValidator
             var form = (FormModel)validationContext.ObjectInstance;
 
             // Only validate if the form is attempting to be completed
-            if (form.Status == FormStatus.Complete)
+            if (form.Status == FormStatus.Finalized)
             {
                 if (value is int)
                 {

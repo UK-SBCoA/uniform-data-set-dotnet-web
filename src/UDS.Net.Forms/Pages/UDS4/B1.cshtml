@@ -7,43 +7,35 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        <b>INSTRUCTIONS:</b> This form is to be completed by the clinician or appropriately trained research personnel. For additional clarification
-        and examples, see the <guidebook kind="@Model.Visit.Kind"></guidebook>
+        <b>INSTRUCTIONS:</b> This form is to be completed by the clinician or appropriately trained research personnel. For additional clarification and examples, see the <guidebook kind="@Model.Visit.PACKET"></guidebook>
     </p>
 </div>
 
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-    @if (Model.Visit != null)
-    {
-        @if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.FVP)
-        {
-            <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3">Section 1 --- Participant vital signs and anthropometrics </h3>
+    <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3">Section 1 --- Participant vital signs and anthropometrics </h3>
 
-            <div class="@rowCSS">
-                <label asp-for="B1.HEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEIGHT)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HEIGHT"></p>
-                    <div class="flex items-center">
-                        <input asp-for="@Model.B1.HEIGHT" type="number" step=".1" placeholder="0.0" min="36.0" max="88.8" />
-                        <p class="text-base font-semibold ml-2">(88.8 = not assessed)</p>
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEIGHT"></span>
-                </div>
+    <div class="@rowCSS">
+        <label asp-for="B1.HEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEIGHT)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HEIGHT"></p>
+            <div class="flex items-center">
+                <input asp-for="@Model.B1.HEIGHT" type="number" step=".1" placeholder="0.0" min="36.0" max="88.8" />
+                <p class="text-base font-semibold ml-2">(88.8 = not assessed)</p>
             </div>
-            <div class="@rowCSS">
-                <label asp-for="B1.WEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.WEIGHT)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WEIGHT"></p>
-                    <div class="flex items-center">
-                        <input asp-for="@Model.B1.WEIGHT" type="number" />
-                        <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>
-                </div>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEIGHT"></span>
+        </div>
+    </div>
+    <div class="@rowCSS">
+        <label asp-for="B1.WEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.WEIGHT)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WEIGHT"></p>
+            <div class="flex items-center">
+                <input asp-for="@Model.B1.WEIGHT" type="number" />
+                <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
             </div>
-
-        }
-    }
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>
+        </div>
+    </div>
 
     <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3"><b>Instructions for measuring waist and hip circumference in adults</b> </h3>
 

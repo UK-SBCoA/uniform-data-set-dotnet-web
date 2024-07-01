@@ -15,18 +15,18 @@ namespace UDS.Net.Forms.Models.UDS4
     {
         [Display(Name = "Participant's month of birth")]
         [BirthMonth]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BIRTHMO { get; set; }
 
         [Display(Name = "Participant's year of birth")]
         [BirthYear]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BIRTHYR { get; set; }
 
         [Display(Name = "In which country or region did you spend most of your childhood?")]
         [MaxLength(3)]
         [ProhibitedCharacters]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public string? CHLDHDCTRY { get; set; }
 
         [Display(Name = "White")]
@@ -221,7 +221,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
@@ -275,7 +275,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool GENNOANS { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate current gender identity, dont know, or prefer not to answer.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate current gender identity, dont know, or prefer not to answer.")]
         [NotMapped]
         public bool? GenderIdentityIndicated
         {
@@ -290,11 +290,11 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "What sex were you assigned at birth, on your original birth certificate?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BIRTHSEX { get; set; }
 
         [Display(Name = "Have you ever been diagnosed by a medical doctor or other health professional with an intersex condition or a \"Difference of Sex Development (DSD)\" or were you born with (or developed naturally in puberty) genitals, reproductive organs, and/or chromosomal patterns that do not fit standard definitions of male or female?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? INTERSEX { get; set; }
 
         [Display(Name = "Lesbian or gay")]
@@ -324,7 +324,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool SEXORNNOAN { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Please indicate sexual orientation, don't know, or prefer not to answer.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate sexual orientation, don't know, or prefer not to answer.")]
         [NotMapped]
         public bool? SexualOrientstionIndicated
         {
@@ -339,7 +339,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "What is your primary language?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
 
         [Display(Name = "Primary Language - Other (Specify)")]
@@ -349,28 +349,28 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? PREDOMLANX { get; set; }
 
         [Display(Name = "Are you left- or right-handed?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? HANDED { get; set; }
 
         [Display(Name = "How many years of education have you completed?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         [RegularExpression("^(\\d|[12]\\d|3[0-6]|99)$", ErrorMessage = "Valid range is 0-36 or 99")]
         public int? EDUC { get; set; }
 
         [Display(Name = "What is the highest level of education you have achieved?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? LVLEDUC { get; set; }
 
         [Display(Name = "What is your current marital status?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MARISTAT { get; set; }
 
         [Display(Name = "What is your living situation?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? LIVSITUA { get; set; }
 
         [Display(Name = "What is your primary type of residence?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? RESIDENC { get; set; }
 
         [Display(Name = "What are the first three digits of the ZIP code of your primary residence?")]
@@ -378,7 +378,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ZIP { get; set; }
 
         [Display(Name = "Have you ever served in the U.S. Armed Forces, military Reserves, or National Guard?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? SERVED { get; set; }
 
         [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
@@ -387,19 +387,19 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MEDVA { get; set; }
 
         [Display(Name = "How much time each week do you spend performing activities that cause large increases in breathing or heart rate for at least 10 minutes continuously?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? EXRTIME { get; set; }
 
         [Display(Name = "Do you feel like your memory is becoming worse?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MEMWORS { get; set; }
 
         [Display(Name = "About how often do you have trouble remembering things?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MEMTROUB { get; set; }
 
         [Display(Name = "Compared to 10 years ago, would you say that your memory is much worse, a little worse, the same, a little better, or much better?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MEMTEN { get; set; }
 
         [Display(Name = "ADI state-only decile")]
@@ -415,11 +415,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PRIOCC { get; set; }
 
         [Display(Name = "ADRC enrollment type")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? SOURCENW { get; set; }
 
         [Display(Name = "Principal referral source")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? REFERSC { get; set; }
 
         [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]

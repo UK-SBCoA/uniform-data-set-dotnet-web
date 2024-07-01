@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1b : FormModel
     {
-        [RequiredOnComplete(ErrorMessage = "Please specify if any biomarker results were used to support the current etiological diagnosis.")]
+        [RequiredOnFinalized(ErrorMessage = "Please specify if any biomarker results were used to support the current etiological diagnosis.")]
         [Display(Name = "Were any biomarker results used to support the current etiological diagnosis?")]
         public int? BIOMARKDX { get; set; }
 
@@ -417,7 +417,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
+        [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]
         public bool? PrimaryDiagnosesIndicated
         {

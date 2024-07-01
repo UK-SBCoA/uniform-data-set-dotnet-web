@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -45,14 +46,38 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public List<A3FamilyMemberFormFields> KidsFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>(); // form is required for I
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
-            return "Participant family history";
+            return "Participant Family History";
         }
 
         public string GetVersion()
         {
-            return "4.0";
+            return "4";
         }
 
         private A3FamilyMemberFormFields GetFamilyMemberFormFields(int index, string propertyPrefix, A3Dto dto)

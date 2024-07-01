@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -111,9 +113,41 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? RESPOTH { get; set; }
         public string RESPOTHX { get; set; }
 
-        public C2FormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video }; // C2T for telephone and C2 for video
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Neuropsychological Battery Scores";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        public C2FormFields() { }
         public C2FormFields(FormDto dto)
         {
             if (dto is C2Dto)
@@ -217,15 +251,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 RESPOTHX = c2Dto.RESPOTHX;
 
             }
-        }
-        public string GetDescription()
-        {
-            return "Neuropsychological Battery Scores";
-        }
-
-        public string GetVersion()
-        {
-            return "3.0";
         }
     }
 }

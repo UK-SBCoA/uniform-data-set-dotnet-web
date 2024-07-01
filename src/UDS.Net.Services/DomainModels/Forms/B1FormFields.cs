@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -20,6 +22,40 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BPSYSR2 { get; set; }
         public int? BPDIASR2 { get; set; }
         public int? HRATE { get; set; }
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.NoCoParticipantOrRemoteVisit, NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>();
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Evaluation Form - Vital Signs and Anthropometrics";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
 
         public B1FormFields() { }
         public B1FormFields(FormDto dto)
@@ -43,18 +79,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BPSYSR2 = b1Dto.BPSYSR2;
                 BPDIASR2 = b1Dto.BPDIASR2;
                 HRATE = b1Dto.HRATE;
-                // TODO map new fields
             }
-        }
-
-        public string GetDescription()
-        {
-            return "Evaluation Form - Vital Signs and Anthropometrics";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

@@ -10,44 +10,44 @@ namespace UDS.Net.Forms.Models.UDS4
     public class B4 : FormModel
     {
         [Display(Name = "Memory")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? MEMORY { get; set; }
 
         [Display(Name = "Orientation")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? ORIENT { get; set; }
 
         [Display(Name = "Judgment and problem solving")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? JUDGMENT { get; set; }
 
         [Display(Name = "Community affairs")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? COMMUN { get; set; }
 
         [Display(Name = "Homes and hobbies")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? HOMEHOBB { get; set; }
 
         [Display(Name = "Personal care")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? PERSCARE { get; set; }
 
         [Display(Name = "CDR sum of boxes")]
         [RegularExpression("^(0(.5)?|[1-9](.5)?|1[0-5](.5)?|1[6-8])$", ErrorMessage = "0,18 (except scores of 16.5 and 17.5 not possible)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? CDRSUM { get; set; }
 
         [Display(Name = "Global CDR")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? CDRGLOB { get; set; }
 
         [Display(Name = "Behavior, comportment, and personality")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? COMPORT { get; set; }
 
         [Display(Name = "Language")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public double? CDRLANG { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

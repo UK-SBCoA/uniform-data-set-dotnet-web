@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -14,6 +15,40 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string? ADVERSEOTX { get; set; }
         public int? TRTBIOMARK { get; set; }
         public List<A4aTreatmentFormFields> TreatmentFormFields { get; set; } = new List<A4aTreatmentFormFields>();
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "AD–Specific Drug Treatment";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
 
         private A4aTreatmentFormFields GetTreatmentFormFields(int index, string propertyPrefix, A4aDto dto)
         {
@@ -78,16 +113,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                     TreatmentFormFields.Add(treatment);
                 }
             }
-        }
-
-        public string GetDescription()
-        {
-            return "ADRD–Specific Treatments";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

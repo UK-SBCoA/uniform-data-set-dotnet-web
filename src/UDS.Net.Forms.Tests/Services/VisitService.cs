@@ -58,11 +58,11 @@ namespace UDS.Net.Forms.Tests.Services
         {
             return new List<Visit>()
             {
-                new Visit(1, 1, 1,"UDS4", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS4", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS4", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS4", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"UDS4", Net.Services.Enums.VisitKind.IVP, DateTime.Now, DateTime.Now, "email@uky.edu", "", "", false, null)
+                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", DateTime.Now, "email@uky.edu", "", "", false, null),
+                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", DateTime.Now, "email@uky.edu", "", "", false, null)
             };
         }
 

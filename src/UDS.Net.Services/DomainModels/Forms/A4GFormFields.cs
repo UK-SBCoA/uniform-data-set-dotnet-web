@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -10,14 +11,38 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public List<A4DFormFields> A4Ds { get; set; } = new List<A4DFormFields>();
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
-            return "Participant medications";
+            return "Participant Medications";
         }
 
         public string GetVersion()
         {
-            return "4.0";
+            return "4";
         }
 
         public A4GFormFields() { }

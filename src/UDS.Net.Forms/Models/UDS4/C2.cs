@@ -15,7 +15,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class C2 : FormModel
     {
         [Display(Name = "Was any part of MoCA administered?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MOCACOMP { get; set; }
 
         [Display(Name = "If No, enter reason code, 95–98")]
@@ -157,7 +157,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -170,7 +170,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total story units recalled, verbatim scoring", Description = "(0-44, 95-98)")]
         [RegularExpression("^([0-9]|[1-3][0-9]|4[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-44 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CRAFTVRS { get; set; }
 
         [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-25)")]
@@ -188,7 +188,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct trials", Description = "(0-14, 95-98)")]
         [RegularExpression("^(\\d|1[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-14 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGFORCT { get; set; }
 
         [Display(Name = "Longest span forward", Description = "(0, 3-9)")]
@@ -202,7 +202,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct trials", Description = "(0-14, 95-98)")]
         [RegularExpression("^(\\d|1[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-14 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGBACCT { get; set; }
 
         [Display(Name = "Longest span backward", Description = "(0, 2-8)")]
@@ -214,12 +214,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds", Description = "(0-77, 95-98)")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-77 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ANIMALS { get; set; }
 
         [Display(Name = "Vegetables: Total number of vegtables named in 60 seconds", Description = "(0-77, 95-98)")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-77 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? VEG { get; set; }
 
         #region if not completed, skip to question 8b
@@ -262,7 +262,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total story units recalled, verbatim scoring", Description = "(0-44, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|4[0-4]|9[5-8])$", ErrorMessage = "Allowed values are 0-44 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? CRAFTDVR { get; set; }
 
         [Display(Name = "Total story units recalled, paraphrase scoring", Description = "(0-24)")]
@@ -330,7 +330,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct F-words generated in 1 minute", Description = "(0-40, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "Allowed values are 0-40 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of correct F-words repeated in 1 minute", Description = "(0-15)")]
@@ -349,7 +349,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct L-words generated in 1 minute", Description = "(0-40, 95-98)")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "Allowed values are 0-40 or 95-98.")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in 1 minute", Description = "(0-15)")]
@@ -380,7 +380,7 @@ namespace UDS.Net.Forms.Models.UDS4
         #endregion
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
         [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
@@ -551,7 +551,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == Services.Enums.FormStatus.Complete)
+            if (Status == Services.Enums.FormStatus.Finalized)
             {
                 // 1g-1l, 1n-1t, or 1w-1bb
                 if (MOCATOTS.HasValue && MOCATRAI.HasValue && MOCACUBE.HasValue &&
@@ -593,88 +593,69 @@ namespace UDS.Net.Forms.Models.UDS4
                     }
                 }
 
-                if (Status == FormStatus.Complete)
+                if (Status == FormStatus.Finalized)
                 {
-                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                    if (visitValue is VisitModel)
+                    if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                     {
-                        VisitModel visit = (VisitModel)visitValue;
+                        if (!TRAILA.HasValue)
+                            yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
 
-                        if (visit != null)
-                        {
-                            if (visit.Kind == VisitKind.IVP || visit.Kind == VisitKind.FVP)
-                            {
-                                if (!TRAILA.HasValue)
-                                    yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
+                        if (!MOCALOC.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
 
-                                if (!MOCALOC.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
+                        if (!MOCAVIS.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
 
-                                if (!MOCAVIS.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Was the MoCA affected by visual impairment?", new[] { nameof(MOCAVIS) });
+                        if (!MOCATOTS.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
 
-                                if (!MOCATOTS.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Sum all subscores. The maximum score is 30 points.", new[] { nameof(MOCATOTS) });
+                        if (!MOCACLOC.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
 
-                                if (!MOCACLOC.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If clock contour acceptable, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOC) });
+                        if (!MOCACLON.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
 
-                                if (!MOCACLON.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLON) });
+                        if (!MOCACLOH.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
 
-                                if (!MOCACLOH.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("If all clock hands criteria are met, enter 1; otherwise, enter 0.", new[] { nameof(MOCACLOH) });
+                        if (!MOCACUBE.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
 
-                                if (!MOCACUBE.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Assign a point if all cube criteria are met.", new[] { nameof(MOCACUBE) });
+                        if (!MOCANAMI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
 
-                                if (!MOCANAMI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("One point each is given for the following responses: (1) lion (2) rhinoceros or rhino (3) camel or dromedary.", new[] { nameof(MOCANAMI) });
+                        if (!MOCAREGI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
 
-                                if (!MOCAREGI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Count the number correct for both trials.", new[] { nameof(MOCAREGI) });
+                        if (!MOCARECN.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
 
-                                if (!MOCARECN.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Allocate 1 point for each word recalled freely without any cues.", new[] { nameof(MOCARECN) });
+                        if (!MOCATRAI.HasValue && MOCACOMP == 1)
+                            yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
 
-                                if (!MOCATRAI.HasValue && MOCACOMP == 1)
-                                    yield return new ValidationResult("Allocate one point if the pattern was drawn successfully; otherwise, enter 0.", new[] { nameof(MOCATRAI) });
+                        if (!NPSYCLOC.HasValue)
+                            yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
 
-                                if (!NPSYCLOC.HasValue)
-                                    yield return new ValidationResult("The tests following the MoCA were administered field is required.", new[] { nameof(NPSYCLOC) });
+                        if (!UDSBENTC.HasValue)
+                            yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
 
-                                if (!UDSBENTC.HasValue)
-                                    yield return new ValidationResult("The Total Score for copy of Benson figure field is required", new[] { nameof(UDSBENTC) });
+                        if (!UDSBENTD.HasValue)
+                            yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
 
-                                if (!UDSBENTD.HasValue)
-                                    yield return new ValidationResult("Total score for drawing of Benson figure following 10- to 15-minuted delay field is required.", new[] { nameof(UDSBENTD) });
-
-                                if (!MINTTOTS.HasValue)
-                                    yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
-                            }
-                        }
+                        if (!MINTTOTS.HasValue)
+                            yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
                     }
-                }
-
-                if (Status == FormStatus.Complete)
-                {
-                    var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                    if (visitValue is VisitModel)
+                    else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {
-                        VisitModel visit = (VisitModel)visitValue;
-
-                        if (visit != null)
-                        {
-                            if (visit.Kind == VisitKind.TIP || visit.Kind == VisitKind.TFP)
-                            {
-                                if (!MODCOMM.HasValue)
-                                    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
-
-                                if (!RESPVAL.HasValue)
-                                    yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
-                            }
-                        }
+                        // TODO C2T validation rules here
                     }
+
+                    if (!RESPVAL.HasValue)
+                        yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
+
+                    // TODO should MODCOMM be here now that UDSv4 has MODE?
+                    if (!MODCOMM.HasValue)
+                        yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))

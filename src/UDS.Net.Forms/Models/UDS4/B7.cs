@@ -10,43 +10,43 @@ namespace UDS.Net.Forms.Models.UDS4
     public class B7 : FormModel
     {
         [Display(Name = "Writing checks, paying bills, or balancing a checkbook")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BILLS { get; set; }
 
         [Display(Name = "Assembling tax records, business affairs, or other papers")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TAXES { get; set; }
 
         [Display(Name = "Shopping alone for clothes, household necessities, or groceries")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? SHOPPING { get; set; }
 
         [Display(Name = "Playing a game of skill such as bridge or chess, working on a hobby")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? GAMES { get; set; }
 
         [Display(Name = "Heating water, making a cup of coffee, turning off the stove")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? STOVE { get; set; }
 
         [Display(Name = "Preparing a balanced meal")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MEALPREP { get; set; }
 
         [Display(Name = "Keeping track of current events")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? EVENTS { get; set; }
 
         [Display(Name = "Paying attention to and understanding a TV program, book, or magazine")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? PAYATTN { get; set; }
 
         [Display(Name = "Remembering appointments, family occasions, holidays, medications")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? REMDATES { get; set; }
 
         [Display(Name = "Traveling out of the neighborhood, driving, or arranging to take public transportation")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TRAVEL { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

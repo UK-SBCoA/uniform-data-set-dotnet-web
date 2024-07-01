@@ -12,11 +12,11 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1a : FormModel
     {
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         [Display(Name = "Diagnosis method—responses in this form are based on diagnosis by a:")]
         public int? DXMETHOD { get; set; }
 
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         [Display(Name = "Does the participant have: 1. Unimpaired cognition (e.g., cognitive performance and functional status (i.e., CDR) judged to be unimpaired)? AND 2. Unimpaired behavior (i.e., the participant does not exhibit behavior sufficient to diagnose MBI – see MBI section starting at\nQ7) or dementia due to FTLD or LBD and/or FTLD behavior and language domains=0?")]
         public int? NORMCOG { get; set; }
 
@@ -476,7 +476,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredOnComplete(ErrorMessage = "Select one or more syndrome(s) as Present.")]
+        [RequiredOnFinalized(ErrorMessage = "Select one or more syndrome(s) as Present.")]
         [NotMapped]
         public bool? PresentSyndromeIndicated
         {
@@ -583,7 +583,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnComplete(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
+        [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]
         public bool? PrimaryDiagnosesIndicated
         {

@@ -71,7 +71,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static Visit ToEntity(this VisitModel vm)
         {
-            return new Visit(vm.Id, vm.Number, vm.ParticipationId, vm.Version, vm.Kind, vm.StartDateTime, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
+            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
         }
 
         public static List<Form> ToEntity(this IList<FormModel> vm)
@@ -81,57 +81,59 @@ namespace UDS.Net.Forms.Extensions
 
         public static Form ToEntity(this FormModel vm)
         {
+            IFormFields fields = null;
+
             if (vm is A1)
-                return ((A1)vm).ToEntity();
+                fields = ((A1)vm).GetFormFields();
             else if (vm is A1a)
-                return ((A1a)vm).ToEntity();
+                fields = ((A1a)vm).GetFormFields();
             else if (vm is A2)
-                return ((A2)vm).ToEntity();
+                fields = ((A2)vm).GetFormFields();
             else if (vm is A3)
-                return ((A3)vm).ToEntity();
+                fields = ((A3)vm).GetFormFields();
             else if (vm is A4)
-                return ((A4)vm).ToEntity();
+                fields = ((A4)vm).GetFormFields();
             else if (vm is A4a)
-                return ((A4a)vm).ToEntity();
+                fields = ((A4a)vm).GetFormFields();
             else if (vm is A5)
-                return ((A5)vm).ToEntity();
+                fields = ((A5)vm).GetFormFields();
             else if (vm is A5D2)
-                return ((A5D2)vm).ToEntity();
+                fields = ((A5D2)vm).GetFormFields();
             else if (vm is B1)
-                return ((B1)vm).ToEntity();
+                fields = ((B1)vm).GetFormFields();
             else if (vm is B3)
-                return ((B3)vm).ToEntity();
+                fields = ((B3)vm).GetFormFields();
             else if (vm is B4)
-                return ((B4)vm).ToEntity();
+                fields = ((B4)vm).GetFormFields();
             else if (vm is B5)
-                return ((B5)vm).ToEntity();
+                fields = ((B5)vm).GetFormFields();
             else if (vm is B6)
-                return ((B6)vm).ToEntity();
+                fields = ((B6)vm).GetFormFields();
             else if (vm is B7)
-                return ((B7)vm).ToEntity();
+                fields = ((B7)vm).GetFormFields();
             else if (vm is B8)
-                return ((B8)vm).ToEntity();
+                fields = ((B8)vm).GetFormFields();
             else if (vm is B9)
-                return ((B9)vm).ToEntity();
+                fields = ((B9)vm).GetFormFields();
             else if (vm is C1)
-                return ((C1)vm).ToEntity();
+                fields = ((C1)vm).GetFormFields();
             else if (vm is C2)
-                return ((C2)vm).ToEntity();
+                fields = ((C2)vm).GetFormFields();
             else if (vm is D1a)
-                return ((D1a)vm).ToEntity();
+                fields = ((D1a)vm).GetFormFields();
             else if (vm is D1b)
-                return ((D1b)vm).ToEntity();
+                fields = ((D1b)vm).GetFormFields();
             else if (vm is D2)
-                return ((D2)vm).ToEntity();
+                fields = ((D2)vm).GetFormFields();
             else if (vm is T1)
-                return ((T1)vm).ToEntity();
-            else
-                return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, null);
+                fields = ((T1)vm).GetFormFields();
+
+            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.FRMDATE, vm.INITIALS, vm.LANG, vm.MODE, vm.RMREAS, vm.RMMODE, vm.NOT, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this A1 vm)
+        public static IFormFields GetFormFields(this A1 vm)
         {
-            var fields = new A1FormFields
+            return new A1FormFields
             {
                 BIRTHMO = vm.BIRTHMO,
                 BIRTHYR = vm.BIRTHYR,
@@ -243,13 +245,11 @@ namespace UDS.Net.Forms.Extensions
                 REFOTHX = vm.REFOTHX
 
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this A1a vm)
+        public static IFormFields GetFormFields(this A1a vm)
         {
-            var fields = new A1aFormFields
+            return new A1aFormFields
             {
                 OWNSCAR = vm.OWNSCAR,
                 TRSPACCESS = vm.TRSPACCESS,
@@ -313,13 +313,11 @@ namespace UDS.Net.Forms.Extensions
                 EXPNOANS = vm.EXPNOANS,
                 EXPSTRS = vm.EXPSTRS
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this A2 vm)
+        public static IFormFields GetFormFields(this A2 vm)
         {
-            var fields = new A2FormFields
+            return new A2FormFields
             {
                 NEWINF = vm.NEWINF,
                 INRELTO = vm.INRELTO,
@@ -335,13 +333,11 @@ namespace UDS.Net.Forms.Extensions
                 INMEMTEN = vm.INMEMTEN,
 
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this A3 vm)
+        public static IFormFields GetFormFields(this A3 vm)
         {
-            var fields = new A3FormFields
+            return new A3FormFields
             {
                 AFFFAMM = vm.AFFFAMM,
                 NWINFMUT = vm.NWINFMUT,
@@ -364,8 +360,6 @@ namespace UDS.Net.Forms.Extensions
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)
@@ -382,15 +376,13 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static Form ToEntity(this A4 vm)
+        public static IFormFields GetFormFields(this A4 vm)
         {
-            var fields = new A4GFormFields
+            return new A4GFormFields
             {
                 ANYMEDS = vm.ANYMEDS,
                 A4Ds = vm.DrugIds.Select(d => d.ToEntity()).ToList()
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static A4DFormFields ToEntity(this DrugCodeModel vm)
@@ -409,9 +401,9 @@ namespace UDS.Net.Forms.Extensions
 
         }
 
-        public static Form ToEntity(this A4a vm)
+        public static IFormFields GetFormFields(this A4a vm)
         {
-            var fields = new A4aFormFields
+            return new A4aFormFields
             {
                 ADVEVENT = vm.ADVEVENT,
                 ARIAE = vm.ARIAE,
@@ -421,8 +413,6 @@ namespace UDS.Net.Forms.Extensions
                 TRTBIOMARK = vm.TRTBIOMARK,
                 TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
         public static A4aTreatmentFormFields ToEntity(this A4aTreatment vm)
@@ -448,9 +438,9 @@ namespace UDS.Net.Forms.Extensions
         }
 
 
-        public static Form ToEntity(this A5 vm)
+        public static IFormFields GetFormFields(this A5 vm)
         {
-            var fields = new A5FormFields
+            return new A5FormFields
             {
                 TOBAC30 = vm.TOBAC30,
                 TOBAC100 = vm.TOBAC100,
@@ -520,13 +510,11 @@ namespace UDS.Net.Forms.Extensions
                 PSYCDIS = vm.PSYCDIS,
                 PSYCDISX = vm.PSYCDISX
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this A5D2 vm)
+        public static IFormFields GetFormFields(this A5D2 vm)
         {
-            var fields = new A5D2FormFields
+            return new A5D2FormFields
             {
                 TOBAC100 = vm.TOBAC100,
                 SMOKYRS = vm.SMOKYRS,
@@ -694,13 +682,11 @@ namespace UDS.Net.Forms.Extensions
                 BCSTARTAGE = vm.BCSTARTAGE,
                 BCENDAGE = vm.BCENDAGE
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B1 vm)
+        public static IFormFields GetFormFields(this B1 vm)
         {
-            var fields = new B1FormFields
+            return new B1FormFields
             {
                 HEIGHT = vm.HEIGHT,
                 WEIGHT = vm.WEIGHT,
@@ -718,13 +704,11 @@ namespace UDS.Net.Forms.Extensions
                 BPDIASR2 = vm.BPDIASR2,
                 HRATE = vm.HRATE
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B3 vm)
+        public static IFormFields GetFormFields(this B3 vm)
         {
-            var fields = new B3FormFields
+            return new B3FormFields
             {
                 PDNORMAL = vm.PDNORMAL,
                 SPEECH = vm.SPEECH,
@@ -784,12 +768,10 @@ namespace UDS.Net.Forms.Extensions
                 TOTALUPDRS = vm.TOTALUPDRS
             };
 
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
-
         }
-        public static Form ToEntity(this B4 vm)
+        public static IFormFields GetFormFields(this B4 vm)
         {
-            var fields = new B4FormFields
+            return new B4FormFields
             {
                 MEMORY = vm.MEMORY,
                 ORIENT = vm.ORIENT,
@@ -802,13 +784,11 @@ namespace UDS.Net.Forms.Extensions
                 COMPORT = vm.COMPORT,
                 CDRLANG = vm.CDRLANG,
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B5 vm)
+        public static IFormFields GetFormFields(this B5 vm)
         {
-            var fields = new B5FormFields
+            return new B5FormFields
             {
                 NPIQINF = vm.NPIQINF,
                 NPIQINFX = vm.NPIQINFX,
@@ -837,13 +817,11 @@ namespace UDS.Net.Forms.Extensions
                 APP = vm.APP,
                 APPSEV = vm.APPSEV
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B6 vm)
+        public static IFormFields GetFormFields(this B6 vm)
         {
-            var fields = new B6FormFields
+            return new B6FormFields
             {
                 NOGDS = vm.NOGDS ? 1 : 0,
                 SATIS = vm.SATIS,
@@ -863,13 +841,11 @@ namespace UDS.Net.Forms.Extensions
                 BETTER = vm.BETTER,
                 GDS = vm.GDS
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B7 vm)
+        public static IFormFields GetFormFields(this B7 vm)
         {
-            var fields = new B7FormFields
+            return new B7FormFields
             {
                 BILLS = vm.BILLS,
                 TAXES = vm.TAXES,
@@ -882,13 +858,11 @@ namespace UDS.Net.Forms.Extensions
                 REMDATES = vm.REMDATES,
                 TRAVEL = vm.TRAVEL
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B8 vm)
+        public static IFormFields GetFormFields(this B8 vm)
         {
-            var fields = new B8FormFields
+            return new B8FormFields
             {
 
                 NEUREXAM = vm.NEUREXAM,
@@ -930,13 +904,11 @@ namespace UDS.Net.Forms.Extensions
                 GAITFIND = vm.GAITFIND,
                 GAITOTHRX = vm.GAITOTHRX
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this B9 vm)
+        public static IFormFields GetFormFields(this B9 vm)
         {
-            var fields = new B9FormFields
+            return new B9FormFields
             {
                 DECCOG = vm.DECCOG,
                 DECMOT = vm.DECMOT,
@@ -1012,13 +984,11 @@ namespace UDS.Net.Forms.Extensions
                 COURSE = vm.COURSE,
                 FRSTCHG = vm.FRSTCHG,
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this C1 vm)
+        public static IFormFields GetFormFields(this C1 vm)
         {
-            var fields = new C1FormFields
+            return new C1FormFields
             {
                 MMSECOMP = vm.MMSECOMP,
                 MMSEREAS = vm.MMSEREAS,
@@ -1068,13 +1038,11 @@ namespace UDS.Net.Forms.Extensions
                 UDSVERTI = vm.UDSVERTI,
                 COGSTAT = vm.COGSTAT
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this C2 vm)
+        public static IFormFields GetFormFields(this C2 vm)
         {
-            var fields = new C2FormFields
+            return new C2FormFields
             {
                 MODCOMM = vm.MODCOMM,
                 MOCACOMP = vm.MOCACOMP,
@@ -1182,13 +1150,11 @@ namespace UDS.Net.Forms.Extensions
                 RESPOTH = vm.RESPOTH ? 1 : 0,
                 RESPOTHX = vm.RESPOTHX
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this D1a vm)
+        public static IFormFields GetFormFields(this D1a vm)
         {
-            var fields = new D1aFormFields
+            return new D1aFormFields
             {
                 DXMETHOD = vm.DXMETHOD,
                 NORMCOG = vm.NORMCOG,
@@ -1297,13 +1263,11 @@ namespace UDS.Net.Forms.Extensions
                 COGOTH3F = vm.COGOTH3F,
                 COGOTH3X = vm.COGOTH3X
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this D1b vm)
+        public static IFormFields GetFormFields(this D1b vm)
         {
-            var fields = new D1bFormFields
+            return new D1bFormFields
             {
                 BIOMARKDX = vm.BIOMARKDX,
                 FLUIDBIOM = vm.FLUIDBIOM,
@@ -1403,13 +1367,11 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this D2 vm)
+        public static IFormFields GetFormFields(this D2 vm)
         {
-            var fields = new D2FormFields
+            return new D2FormFields
             {
                 CANCER = vm.CANCER,
                 CANCSITE = vm.CANCSITE,
@@ -1445,13 +1407,11 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOND = vm.OTHCOND,
                 OTHCONDX = vm.OTHCONDX
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static Form ToEntity(this T1 vm)
+        public static IFormFields GetFormFields(this T1 vm)
         {
-            var fields = new T1FormFields
+            return new T1FormFields
             {
                 TELCOG = vm.TELCOG,
                 TELILL = vm.TELILL,
@@ -1464,8 +1424,6 @@ namespace UDS.Net.Forms.Extensions
                 TELINPER = vm.TELINPER,
                 TELMILE = vm.TELMILE
             };
-
-            return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.Language, vm.ReasonCodeNotIncluded, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
     }
 }

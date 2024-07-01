@@ -59,18 +59,16 @@
 
 @if (!String.IsNullOrEmpty(statusChangeMessage))
 {
-    <td>
-        <p class="mb-3">@statusChangeMessage</p>
-        <p class="mb-3">Reson(s)</p>
-        <ul class="list-disc list-inside">
-            @foreach (var reason in statusChangeReasons)
-                {
-                <li>@reason</li>
-                }
-        </ul>
-    </td>
+    <p class="mb-3">@statusChangeMessage</p>
+    <p class="mb-3">Reson(s)</p>
+    <ul class="list-disc list-inside">
+        @foreach (var reason in statusChangeReasons)
+        {
+            <li>@reason</li>
+        }
+    </ul>
 }
 else
 {
-    <td>N/A</td>
+    <span>N/A</span>
 }
