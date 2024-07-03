@@ -1027,6 +1027,9 @@ namespace UDS.Net.Forms.Extensions
             return new B6()
             {
                 Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 NOGDS = fields.NOGDS.HasValue ? fields.NOGDS.Value != 0 : false, // (1 != 0) = true, (0 != 0) = false
                 SATIS = fields.SATIS,
                 DROPACT = fields.DROPACT,
