@@ -58,6 +58,11 @@ namespace UDS.Net.Forms.Pages.Visits
             if (Participation != null)
                 SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
 
+            var shortenedInitials = "UNK";
+            if (User.Identity.Name.Length > 3)
+                shortenedInitials = User.Identity.Name.Substring(0, 3);
+            else
+                shortenedInitials = User.Identity.Name;
 
             Visit = new VisitModel
             {
@@ -65,7 +70,7 @@ namespace UDS.Net.Forms.Pages.Visits
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Unknown",
                 VISIT_DATE = DateTime.Now,
-                INITIALS = User.Identity.IsAuthenticated ? User.Identity.Name : "UNK",
+                INITIALS = shortenedInitials
             };
 
             if (participationId.HasValue)

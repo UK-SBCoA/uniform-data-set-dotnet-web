@@ -29,6 +29,7 @@ namespace UDS.Net.Forms.Models
 
         [Required]
         [Display(Name = "Examiner initials")]
+        [MaxLength(3)]
         public string INITIALS { get; set; } = "";
 
         [Required]
