@@ -781,6 +781,8 @@ namespace UDS.Net.Services.Extensions
                 DIABTYPE = fields.DIABTYPE,
                 DIABINS = fields.DIABINS,
                 DIABMEDS = fields.DIABMEDS,
+                DIABGLP1 = fields.DIABGLP1,
+                DIABRECACT = fields.DIABRECACT,
                 DIABDIET = fields.DIABDIET,
                 DIABUNK = fields.DIABUNK,
                 DIABAGE = fields.DIABAGE,
