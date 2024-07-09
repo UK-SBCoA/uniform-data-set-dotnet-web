@@ -75,6 +75,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DIABTYPE { get; set; }
         public bool? DIABINS { get; set; }
         public bool? DIABMEDS { get; set; }
+        public bool? DIABGLP1 { get; set; }
+        public bool? DIABRECACT { get; set; }
         public bool? DIABDIET { get; set; }
         public bool? DIABUNK { get; set; }
         public int? DIABAGE { get; set; }
@@ -281,6 +283,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.DIABTYPE = a5D2Dto.DIABTYPE;
                 this.DIABINS = a5D2Dto.DIABINS;
                 this.DIABMEDS = a5D2Dto.DIABMEDS;
+                this.DIABGLP1 = a5D2Dto.DIABGLP1;
+                this.DIABRECACT = a5D2Dto.DIABRECACT;
                 this.DIABDIET = a5D2Dto.DIABDIET;
                 this.DIABUNK = a5D2Dto.DIABUNK;
                 this.DIABAGE = a5D2Dto.DIABAGE;
