@@ -182,10 +182,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A5FormFields)
-                {
-                    vm = ((A5FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A5D2FormFields)
                 {
                     vm = ((A5D2FormFields)form.Fields).ToVM(form.Id);
@@ -611,87 +607,6 @@ namespace UDS.Net.Forms.Extensions
                 ENDYEAR = fields.ENDYEAR,
                 CARETRIAL = fields.CARETRIAL,
                 TRIALGRP = fields.TRIALGRP
-            };
-        }
-
-
-
-        public static A5 ToVM(this A5FormFields fields, int formId)
-        {
-            return new A5()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                TOBAC30 = fields.TOBAC30,
-                TOBAC100 = fields.TOBAC100,
-                SMOKYRS = fields.SMOKYRS,
-                PACKSPER = fields.PACKSPER,
-                QUITSMOK = fields.QUITSMOK,
-                ALCOCCAS = fields.ALCOCCAS,
-                ALCFREQ = fields.ALCFREQ,
-                CVHATT = fields.CVHATT,
-                HATTMULT = fields.HATTMULT,
-                HATTYEAR = fields.HATTYEAR,
-                CVAFIB = fields.CVAFIB,
-                CVANGIO = fields.CVANGIO,
-                CVBYPASS = fields.CVBYPASS,
-                CVPACDEF = fields.CVPACDEF,
-                CVCHF = fields.CVCHF,
-                CVANGINA = fields.CVANGINA,
-                CVHVALVE = fields.CVHVALVE,
-                CVOTHR = fields.CVOTHR,
-                CVOTHRX = fields.CVOTHRX,
-                CBSTROKE = fields.CBSTROKE,
-                STROKMUL = fields.STROKMUL,
-                STROKYR = fields.STROKYR,
-                CBTIA = fields.CBTIA,
-                TIAMULT = fields.TIAMULT,
-                TIAYEAR = fields.TIAYEAR,
-                PD = fields.PD,
-                PDYR = fields.PDYR,
-                PDOTHR = fields.PDOTHR,
-                PDOTHRYR = fields.PDOTHRYR,
-                SEIZURES = fields.SEIZURES,
-                TBI = fields.TBI,
-                TBIBRIEF = fields.TBIBRIEF,
-                TBIEXTEN = fields.TBIEXTEN,
-                TBIWOLOS = fields.TBIWOLOS,
-                TBIYEAR = fields.TBIYEAR,
-                DIABETES = fields.DIABETES,
-                DIABTYPE = fields.DIABTYPE,
-                HYPERTEN = fields.HYPERTEN,
-                HYPERCHO = fields.HYPERCHO,
-                B12DEF = fields.B12DEF,
-                THYROID = fields.THYROID,
-                ARTHRIT = fields.ARTHRIT,
-                ARTHTYPE = fields.ARTHTYPE,
-                ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX.HasValue ? fields.ARTHUPEX.Value != 0 : false,
-                ARTHLOEX = fields.ARTHLOEX.HasValue ? fields.ARTHLOEX.Value != 0 : false,
-                ARTHSPIN = fields.ARTHSPIN.HasValue ? fields.ARTHSPIN.Value != 0 : false,
-                ARTHUNK = fields.ARTHUNK.HasValue ? fields.ARTHUNK.Value != 0 : false,
-                INCONTU = fields.INCONTU,
-                INCONTF = fields.INCONTF,
-                APNEA = fields.APNEA,
-                RBD = fields.RBD,
-                INSOMN = fields.INSOMN,
-                OTHSLEEP = fields.OTHSLEEP,
-                OTHSLEEX = fields.OTHSLEEX,
-                ALCOHOL = fields.ALCOHOL,
-                ABUSOTHR = fields.ABUSOTHR,
-                ABUSX = fields.ABUSX,
-                PTSD = fields.PTSD,
-                BIPOLAR = fields.BIPOLAR,
-                SCHIZ = fields.SCHIZ,
-                DEP2YRS = fields.DEP2YRS,
-                DEPOTHR = fields.DEPOTHR,
-                ANXIETY = fields.ANXIETY,
-                OCD = fields.OCD,
-                NPSYDEV = fields.NPSYDEV,
-                PSYCDIS = fields.PSYCDIS,
-                PSYCDISX = fields.PSYCDISX
             };
         }
 

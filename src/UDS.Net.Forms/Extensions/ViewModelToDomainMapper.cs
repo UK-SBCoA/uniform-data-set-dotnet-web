@@ -95,8 +95,6 @@ namespace UDS.Net.Forms.Extensions
                 fields = ((A4)vm).GetFormFields();
             else if (vm is A4a)
                 fields = ((A4a)vm).GetFormFields();
-            else if (vm is A5)
-                fields = ((A5)vm).GetFormFields();
             else if (vm is A5D2)
                 fields = ((A5D2)vm).GetFormFields();
             else if (vm is B1)
@@ -437,80 +435,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-
-        public static IFormFields GetFormFields(this A5 vm)
-        {
-            return new A5FormFields
-            {
-                TOBAC30 = vm.TOBAC30,
-                TOBAC100 = vm.TOBAC100,
-                SMOKYRS = vm.SMOKYRS,
-                PACKSPER = vm.PACKSPER,
-                QUITSMOK = vm.QUITSMOK,
-                ALCOCCAS = vm.ALCOCCAS,
-                ALCFREQ = vm.ALCFREQ,
-                CVHATT = vm.CVHATT,
-                HATTMULT = vm.HATTMULT,
-                HATTYEAR = vm.HATTYEAR,
-                CVAFIB = vm.CVAFIB,
-                CVANGIO = vm.CVANGIO,
-                CVBYPASS = vm.CVBYPASS,
-                CVPACDEF = vm.CVPACDEF,
-                CVCHF = vm.CVCHF,
-                CVANGINA = vm.CVANGINA,
-                CVHVALVE = vm.CVHVALVE,
-                CVOTHR = vm.CVOTHR,
-                CVOTHRX = vm.CVOTHRX,
-                CBSTROKE = vm.CBSTROKE,
-                STROKMUL = vm.STROKMUL,
-                STROKYR = vm.STROKYR,
-                CBTIA = vm.CBTIA,
-                TIAMULT = vm.TIAMULT,
-                TIAYEAR = vm.TIAYEAR,
-                PD = vm.PD,
-                PDYR = vm.PDYR,
-                PDOTHR = vm.PDOTHR,
-                SEIZURES = vm.SEIZURES,
-                TBI = vm.TBI,
-                TBIBRIEF = vm.TBIBRIEF,
-                TBIEXTEN = vm.TBIEXTEN,
-                TBIWOLOS = vm.TBIWOLOS,
-                TBIYEAR = vm.TBIYEAR,
-                DIABETES = vm.DIABETES,
-                DIABTYPE = vm.DIABTYPE,
-                HYPERTEN = vm.HYPERTEN,
-                HYPERCHO = vm.HYPERCHO,
-                B12DEF = vm.B12DEF,
-                THYROID = vm.THYROID,
-                ARTHRIT = vm.ARTHRIT,
-                ARTHTYPE = vm.ARTHTYPE,
-                ARTHTYPX = vm.ARTHTYPX,
-                ARTHUPEX = vm.ARTHUPEX ? 1 : 0,
-                ARTHLOEX = vm.ARTHLOEX ? 1 : 0,
-                ARTHSPIN = vm.ARTHSPIN ? 1 : 0,
-                ARTHUNK = vm.ARTHUNK ? 1 : 0,
-                INCONTU = vm.INCONTU,
-                INCONTF = vm.INCONTF,
-                APNEA = vm.APNEA,
-                RBD = vm.RBD,
-                INSOMN = vm.INSOMN,
-                OTHSLEEP = vm.OTHSLEEP,
-                OTHSLEEX = vm.OTHSLEEX,
-                ALCOHOL = vm.ALCOHOL,
-                ABUSOTHR = vm.ABUSOTHR,
-                ABUSX = vm.ABUSX,
-                PTSD = vm.PTSD,
-                BIPOLAR = vm.BIPOLAR,
-                SCHIZ = vm.SCHIZ,
-                DEP2YRS = vm.DEP2YRS,
-                DEPOTHR = vm.DEPOTHR,
-                ANXIETY = vm.ANXIETY,
-                OCD = vm.OCD,
-                NPSYDEV = vm.NPSYDEV,
-                PSYCDIS = vm.PSYCDIS,
-                PSYCDISX = vm.PSYCDISX
-            };
-        }
 
         public static IFormFields GetFormFields(this A5D2 vm)
         {
