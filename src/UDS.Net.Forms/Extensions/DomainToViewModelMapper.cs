@@ -218,10 +218,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((B9FormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is C1FormFields)
-                {
-                    vm = ((C1FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is C2FormFields)
                 {
                     vm = ((C2FormFields)form.Fields).ToVM(form.Id);
@@ -1116,61 +1112,6 @@ namespace UDS.Net.Forms.Extensions
                 MOMOALS = fields.MOMOALS,
                 COURSE = fields.COURSE,
                 FRSTCHG = fields.FRSTCHG,
-            };
-        }
-
-        public static C1 ToVM(this C1FormFields fields, int formId)
-        {
-            return new C1()
-            {
-                Id = formId,
-                MMSECOMP = fields.MMSECOMP,
-                MMSEREAS = fields.MMSEREAS,
-                MMSELOC = fields.MMSELOC,
-                MMSELAN = fields.MMSELAN,
-                MMSELANX = fields.MMSELANX,
-                MMSEVIS = fields.MMSEVIS,
-                MMSEHEAR = fields.MMSEHEAR,
-                MMSEORDA = fields.MMSEORDA,
-                MMSEORLO = fields.MMSEORLO,
-                PENTAGON = fields.PENTAGON,
-                MMSE = fields.MMSE,
-                NPSYCLOC = fields.NPSYCLOC,
-                NPSYLAN = fields.NPSYLAN,
-                NPSYLANX = fields.NPSYLANX,
-                LOGIMO = fields.LOGIMO,
-                LOGIDAY = fields.LOGIDAY,
-                LOGIYR = fields.LOGIYR,
-                LOGIPREV = fields.LOGIPREV,
-                LOGIMEM = fields.LOGIMEM,
-                UDSBENTC = fields.UDSBENTC,
-                DIGIF = fields.DIGIF,
-                DIGIFLEN = fields.DIGIFLEN,
-                DIGIB = fields.DIGIB,
-                DIGIBLEN = fields.DIGIBLEN,
-                ANIMALS = fields.ANIMALS,
-                VEG = fields.VEG,
-                TRAILA = fields.TRAILA,
-                TRAILARR = fields.TRAILARR,
-                TRAILALI = fields.TRAILALI,
-                TRAILB = fields.TRAILB,
-                TRAILBRR = fields.TRAILBRR,
-                TRAILBLI = fields.TRAILBLI,
-                MEMUNITS = fields.MEMUNITS,
-                MEMTIME = fields.MEMTIME,
-                UDSBENTD = fields.UDSBENTD,
-                UDSBENRS = fields.UDSBENRS,
-                BOSTON = fields.BOSTON,
-                UDSVERFC = fields.UDSVERFC,
-                UDSVERFN = fields.UDSVERFN,
-                UDSVERNF = fields.UDSVERNF,
-                UDSVERLC = fields.UDSVERLC,
-                UDSVERLR = fields.UDSVERLR,
-                UDSVERLN = fields.UDSVERLN,
-                UDSVERTN = fields.UDSVERTN,
-                UDSVERTE = fields.UDSVERTE,
-                UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
             };
         }
 

@@ -113,8 +113,6 @@ namespace UDS.Net.Forms.Extensions
                 fields = ((B8)vm).GetFormFields();
             else if (vm is B9)
                 fields = ((B9)vm).GetFormFields();
-            else if (vm is C1)
-                fields = ((C1)vm).GetFormFields();
             else if (vm is C2)
                 fields = ((C2)vm).GetFormFields();
             else if (vm is D1a)
@@ -909,61 +907,6 @@ namespace UDS.Net.Forms.Extensions
                 FRSTCHG = vm.FRSTCHG,
             };
         }
-
-        public static IFormFields GetFormFields(this C1 vm)
-        {
-            return new C1FormFields
-            {
-                MMSECOMP = vm.MMSECOMP,
-                MMSEREAS = vm.MMSEREAS,
-                MMSELOC = vm.MMSELOC,
-                MMSELAN = vm.MMSELAN,
-                MMSELANX = vm.MMSELANX,
-                MMSEVIS = vm.MMSEVIS,
-                MMSEHEAR = vm.MMSEHEAR,
-                MMSEORDA = vm.MMSEORDA,
-                MMSEORLO = vm.MMSEORLO,
-                PENTAGON = vm.PENTAGON,
-                MMSE = vm.MMSE,
-                NPSYCLOC = vm.NPSYCLOC,
-                NPSYLAN = vm.NPSYLAN,
-                NPSYLANX = vm.NPSYLANX,
-                LOGIMO = vm.LOGIMO,
-                LOGIDAY = vm.LOGIDAY,
-                LOGIYR = vm.LOGIYR,
-                LOGIPREV = vm.LOGIPREV,
-                LOGIMEM = vm.LOGIMEM,
-                UDSBENTC = vm.UDSBENTC,
-                DIGIF = vm.DIGIF,
-                DIGIFLEN = vm.DIGIFLEN,
-                DIGIB = vm.DIGIB,
-                DIGIBLEN = vm.DIGIBLEN,
-                ANIMALS = vm.ANIMALS,
-                VEG = vm.VEG,
-                TRAILA = vm.TRAILA,
-                TRAILARR = vm.TRAILARR,
-                TRAILALI = vm.TRAILALI,
-                TRAILB = vm.TRAILB,
-                TRAILBRR = vm.TRAILBRR,
-                TRAILBLI = vm.TRAILBLI,
-                MEMUNITS = vm.MEMUNITS,
-                MEMTIME = vm.MEMTIME,
-                UDSBENTD = vm.UDSBENTD,
-                UDSBENRS = vm.UDSBENRS,
-                BOSTON = vm.BOSTON,
-                UDSVERFC = vm.UDSVERFC,
-                UDSVERFN = vm.UDSVERFN,
-                UDSVERNF = vm.UDSVERNF,
-                UDSVERLC = vm.UDSVERLC,
-                UDSVERLR = vm.UDSVERLR,
-                UDSVERLN = vm.UDSVERLN,
-                UDSVERTN = vm.UDSVERTN,
-                UDSVERTE = vm.UDSVERTE,
-                UDSVERTI = vm.UDSVERTI,
-                COGSTAT = vm.COGSTAT
-            };
-        }
-
         public static IFormFields GetFormFields(this C2 vm)
         {
             return new C2FormFields
