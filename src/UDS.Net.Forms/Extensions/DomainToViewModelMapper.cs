@@ -230,14 +230,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((D1bFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is D2FormFields)
-                {
-                    vm = ((D2FormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is T1FormFields)
-                {
-                    vm = ((T1FormFields)form.Fields).ToVM(form.Id);
-                }
             }
 
             SetFormBaseProperties(form, vm);
@@ -1454,65 +1446,6 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
 
-            };
-        }
-
-        public static D2 ToVM(this D2FormFields fields, int formId)
-        {
-            return new D2()
-            {
-                Id = formId,
-                CANCER = fields.CANCER,
-                CANCSITE = fields.CANCSITE,
-                DIABET = fields.DIABET,
-                MYOINF = fields.MYOINF,
-                CONGHRT = fields.CONGHRT,
-                AFIBRILL = fields.AFIBRILL,
-                HYPERT = fields.HYPERT,
-                ANGINA = fields.ANGINA,
-                HYPCHOL = fields.HYPCHOL,
-                VB12DEF = fields.VB12DEF,
-                THYDIS = fields.THYDIS,
-                ARTH = fields.ARTH,
-                ARTYPE = fields.ARTYPE,
-                ARTYPEX = fields.ARTYPEX,
-                ARTUPEX = fields.ARTUPEX.HasValue ? fields.ARTUPEX.Value != 0 : false,
-                ARTLOEX = fields.ARTLOEX.HasValue ? fields.ARTLOEX.Value != 0 : false,
-                ARTSPIN = fields.ARTSPIN.HasValue ? fields.ARTSPIN.Value != 0 : false,
-                ARTUNKN = fields.ARTUNKN.HasValue ? fields.ARTUNKN.Value != 0 : false,
-                URINEINC = fields.URINEINC,
-                BOWLINC = fields.BOWLINC,
-                SLEEPAP = fields.SLEEPAP,
-                REMDIS = fields.REMDIS,
-                HYPOSOM = fields.HYPOSOM,
-                SLEEPOTH = fields.SLEEPOTH,
-                SLEEPOTX = fields.SLEEPOTX,
-                ANGIOCP = fields.ANGIOCP,
-                ANGIOPCI = fields.ANGIOPCI,
-                PACEMAKE = fields.PACEMAKE,
-                HVALVE = fields.HVALVE,
-                ANTIENC = fields.ANTIENC,
-                ANTIENCX = fields.ANTIENCX,
-                OTHCOND = fields.OTHCOND,
-                OTHCONDX = fields.OTHCONDX
-            };
-        }
-
-        public static T1 ToVM(this T1FormFields fields, int formId)
-        {
-            return new T1()
-            {
-                Id = formId,
-                TELCOG = fields.TELCOG,
-                TELILL = fields.TELILL,
-                TELHOME = fields.TELHOME,
-                TELREFU = fields.TELREFU,
-                TELCOV = fields.TELCOV,
-                TELOTHR = fields.TELOTHR,
-                TELOTHRX = fields.TELOTHRX,
-                TELMOD = fields.TELMOD,
-                TELINPER = fields.TELINPER,
-                TELMILE = fields.TELMILE
             };
         }
     }

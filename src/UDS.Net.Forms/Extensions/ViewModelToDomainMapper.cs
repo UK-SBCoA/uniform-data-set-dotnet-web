@@ -119,10 +119,6 @@ namespace UDS.Net.Forms.Extensions
                 fields = ((D1a)vm).GetFormFields();
             else if (vm is D1b)
                 fields = ((D1b)vm).GetFormFields();
-            else if (vm is D2)
-                fields = ((D2)vm).GetFormFields();
-            else if (vm is T1)
-                fields = ((T1)vm).GetFormFields();
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.FRMDATE, vm.INITIALS, vm.LANG, vm.MODE, vm.RMREAS, vm.RMMODE, vm.NOT, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
@@ -1233,63 +1229,6 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOG = vm.OTHCOG,
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX
-            };
-        }
-
-        public static IFormFields GetFormFields(this D2 vm)
-        {
-            return new D2FormFields
-            {
-                CANCER = vm.CANCER,
-                CANCSITE = vm.CANCSITE,
-                DIABET = vm.DIABET,
-                MYOINF = vm.MYOINF,
-                CONGHRT = vm.CONGHRT,
-                AFIBRILL = vm.AFIBRILL,
-                HYPERT = vm.HYPERT,
-                ANGINA = vm.ANGINA,
-                HYPCHOL = vm.HYPCHOL,
-                VB12DEF = vm.VB12DEF,
-                THYDIS = vm.THYDIS,
-                ARTH = vm.ARTH,
-                ARTYPE = vm.ARTYPE,
-                ARTYPEX = vm.ARTYPEX,
-                ARTUPEX = vm.ARTUPEX ? 1 : 0,
-                ARTLOEX = vm.ARTLOEX ? 1 : 0,
-                ARTSPIN = vm.ARTSPIN ? 1 : 0,
-                ARTUNKN = vm.ARTUNKN ? 1 : 0,
-                URINEINC = vm.URINEINC,
-                BOWLINC = vm.BOWLINC,
-                SLEEPAP = vm.SLEEPAP,
-                REMDIS = vm.REMDIS,
-                HYPOSOM = vm.HYPOSOM,
-                SLEEPOTH = vm.SLEEPOTH,
-                SLEEPOTX = vm.SLEEPOTX,
-                ANGIOCP = vm.ANGIOCP,
-                ANGIOPCI = vm.ANGIOPCI,
-                PACEMAKE = vm.PACEMAKE,
-                HVALVE = vm.HVALVE,
-                ANTIENC = vm.ANTIENC,
-                ANTIENCX = vm.ANTIENCX,
-                OTHCOND = vm.OTHCOND,
-                OTHCONDX = vm.OTHCONDX
-            };
-        }
-
-        public static IFormFields GetFormFields(this T1 vm)
-        {
-            return new T1FormFields
-            {
-                TELCOG = vm.TELCOG,
-                TELILL = vm.TELILL,
-                TELHOME = vm.TELHOME,
-                TELREFU = vm.TELREFU,
-                TELCOV = vm.TELCOV,
-                TELOTHR = vm.TELOTHR,
-                TELOTHRX = vm.TELOTHRX,
-                TELMOD = vm.TELMOD,
-                TELINPER = vm.TELINPER,
-                TELMILE = vm.TELMILE
             };
         }
     }
