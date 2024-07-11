@@ -334,7 +334,7 @@ public class DtoToDomainMapping
     //    Assert.AreEqual(a4DtoFields.A4Dtos.FirstOrDefault().DRUGID, fields.A4Ds.FirstOrDefault().DRUGID);
     //}
 
-  
+
 
     //[TestMethod]
     //public void B1DtoMapsToDomain()
@@ -963,7 +963,7 @@ public class DtoToDomainMapping
     //    }
     //}
 
-  
+
     //[TestMethod]
     //public void C2DtoMapsToDomain()
     //{
@@ -1095,7 +1095,7 @@ public class DtoToDomainMapping
     //    }
     //}
 
- 
+
 
     //[TestMethod]
     //public void D2DtoMapsToDomain()
@@ -1191,5 +1191,5 @@ public class DtoToDomainMapping
     //    }
     //}
 
-  
+
 }
