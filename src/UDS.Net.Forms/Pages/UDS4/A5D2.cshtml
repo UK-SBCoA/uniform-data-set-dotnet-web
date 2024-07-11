@@ -1247,9 +1247,9 @@
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <div>
-                                                    <div>
+                                                    <div class="text-base font-semibold text-gray-900 subsubcounter">
                                                         <label class="text-base font-semibold text-gray-900">
-                                                            <span class="subsubcounter"></span> Type of cancer</br><span class="italic">(Check all that apply)</span>
+                                                             Type of cancer</br><span class="italic">(Check all that apply)</span>
                                                         </label>
                                                     </div>
                                                     <div>
@@ -1327,7 +1327,8 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <div>
+                                                <div class="subsubcounterreset">
+                                                    <span class="subsubcounter invisible"></span>
                                                     <div>
                                                         <label class="text-base font-semibold text-gray-900">
                                                             <span class="subsubcounter"></span> Primary site of cancer:</br><span class="italic">(Check all that apply)</span>
@@ -1421,7 +1422,9 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <div>
+                                                <div class="subsubcounterreset">
+                                                    <span class="subsubcounter invisible"></span>
+                                                    <span class="subsubcounter invisible"></span>
                                                     <div>
                                                         <label class="text-base font-semibold text-gray-900">
                                                             <span class="subsubcounter"></span> Type of cancer treatment:</br><span class="italic">(Check all that apply)</span>
@@ -1524,7 +1527,10 @@
                                 </tr>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
-                                        <div class="ml-5">
+                                        <div class="ml-5 subsubcounterreset">
+                                            <span class="subsubcounter invisible"></span>
+                                            <span class="subsubcounter invisible"></span>
+                                            <span class="subsubcounter invisible"></span>
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.CANCERAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERAGE) <span class="font-bold">(999 = Unknown)</span></label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -1703,7 +1709,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.MAJORDEP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MAJORDEP)</label>
