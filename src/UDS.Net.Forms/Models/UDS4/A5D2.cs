@@ -219,7 +219,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIf(nameof(IMPOTHER), "true", ErrorMessage = "Please specify.")]
         public string? IMPOTHERX { get; set; }
-        [Display(Name = "The total length of time in years that the participant was exposed to repeated hits to the head (e.g. playing American football for 7 years)")]
+        [Display(Name = "Indicate the total length of time in years that the participant was exposed to repeated hits to the head (e.g. playing American football for 7 years)")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIf(nameof(HEADIMP), "1", ErrorMessage = "Please specify.")]
         public int? IMPYEARS { get; set; }
