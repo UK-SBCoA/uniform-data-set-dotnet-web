@@ -1,4 +1,4 @@
-@page  "{id:int?}"
+@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A5D2Model
 @{
     Layout = "_LayoutForm";
@@ -9,7 +9,7 @@
     <p class="mt-1 text-sm text-gray-500 italic">
         <span class="font-bold not-italic">INSTRUCTIONS:</span> This form is to be completed by the clinician or ADRC staff based on the medical history interview with the participant
         and co-participant, as well as review of any medical records that are available. Any conditions identified during the visit should be
-            included on the form. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span> for <span class="font-bold not-italic">Form A5/D2</span>. Check only one box per question,
+        included on the form. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span> for <span class="font-bold not-italic">Form A5/D2</span>. Check only one box per question,
         unless otherwise stated.
     </p>
 </div>
@@ -1249,7 +1249,7 @@
                                                 <div>
                                                     <div class="text-base font-semibold text-gray-900 subsubcounter">
                                                         <label class="text-base font-semibold text-gray-900">
-                                                             Type of cancer</br><span class="italic">(Check all that apply)</span>
+                                                            Type of cancer</br><span class="italic">(Check all that apply)</span>
                                                         </label>
                                                     </div>
                                                     <div>
@@ -2115,5 +2115,7 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/A5D2.js"></script>
+}
 <partial name="_FormFooter" for="@Model.A5D2" />
