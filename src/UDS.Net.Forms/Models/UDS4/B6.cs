@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class B6 : FormModel
     {
-        [Display(Name = "Check this box if the subject is not able to complete the GDS, based on the clinician's best judgment")]
+        [Display(Name = "Check this box and enter “88” below for the Total GDS Score if and only if the participant: 1.) does not attempt the GDS, or 2.) answers fewer than 12 questions.")]
         public bool NOGDS { get; set; }
 
         [Display(Name = "Are you basically satisifed with your life?")]
