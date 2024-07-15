@@ -1551,7 +1551,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPIPV"),
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
-                        new UIDisableAttribute("A5D2.IMPOTHER")
+                        new UIDisableAttribute("A5D2.IMPOTHER"),
+                        new UIDisableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
@@ -1568,7 +1569,8 @@ public class A5D2Model : FormPageModel
                         new UIEnableAttribute("A5D2.IMPIPV"),
                         new UIEnableAttribute("A5D2.IMPMILIT"),
                         new UIEnableAttribute("A5D2.IMPASSAULT"),
-                        new UIEnableAttribute("A5D2.IMPOTHER")
+                        new UIEnableAttribute("A5D2.IMPOTHER"),
+                        new UIEnableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
@@ -1585,7 +1587,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPIPV"),
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
-                        new UIDisableAttribute("A5D2.IMPOTHER")
+                        new UIDisableAttribute("A5D2.IMPOTHER"),
+                        new UIDisableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
