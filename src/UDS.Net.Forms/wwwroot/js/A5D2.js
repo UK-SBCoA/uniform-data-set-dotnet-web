@@ -1,34 +1,22 @@
-﻿/*Implemented on questions 6a1 6a2 and 6a3 or form A5D2*/
-
+﻿/*Implemented on questions 6a1 6a2 and 6a3 form A5D2*/
 
 $(document).ready(function () {
-  let majorDepRadio = document.querySelector('input[name="A5D2.MAJORDEP"]:checked');
-  let otherDepRadio = document.querySelector('input[name="A5D2.OTHERDEP"]:checked');
-  const deprTreatRadios = document.querySelectorAll('input[name="A5D2.DEPRTREAT"]');
+
+  var majorDepRadios = Array.from(document.getElementsByName('A5D2.MAJORDEP'));
+  var otherDepRadios = Array.from(document.getElementsByName('A5D2.OTHERDEP'));
+  var deprTreatRadios = Array.from(document.getElementsByName('A5D2.DEPRTREAT'));
+
 
   function toggleDeprTreat() {
-    const majorDepChecked = majorDepRadio && majorDepRadio.value == '1';
-    const otherDepChecked = otherDepRadio && otherDepRadio.value == '1';
-    const enableDepTreat = majorDepChecked || otherDepChecked;
+    const recentMajorDep = majorDepRadios.some(radio => radio.checked && radio.value == '1');
+    const recentOtherDep = otherDepRadios.some(radio => radio.checked && radio.value == '1');
 
     deprTreatRadios.forEach(radio => {
-      radio.disabled = !enableDepTreat;
+      radio.disabled = !(recentMajorDep || recentOtherDep)
     });
   }
-
-  document.querySelectorAll('input[name="A5D2.MAJORDEP"]').forEach(radio => {
-    radio.addEventListener('change', function () {
-      majorDepRadio = this;
-      toggleDeprTreat();
-    });
-  });
-
-  document.querySelectorAll('input[name="A5D2.OTHERDEP"]').forEach(radio => {
-    radio.addEventListener('change', function () {
-      otherDepRadio = this;
-      toggleDeprTreat();
-    });
-  });
+  majorDepRadios.forEach(radio => radio.addEventListener('change', toggleDeprTreat));
+  otherDepRadios.forEach(radio => radio.addEventListener('change', toggleDeprTreat));
 
   toggleDeprTreat();
 });
