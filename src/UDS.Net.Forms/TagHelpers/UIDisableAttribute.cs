@@ -10,6 +10,11 @@ namespace UDS.Net.Forms.TagHelpers
 
         public UIDisableAttribute(string property)
         {
+            if(property == "A5D2.IMPAMFOOT")
+            {
+
+            }
+
             Dictionary<string, string> disabledAttributes = new Dictionary<string, string>
             {
                 { "disabled", "true" }
