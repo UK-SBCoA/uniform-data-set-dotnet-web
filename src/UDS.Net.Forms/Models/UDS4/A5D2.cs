@@ -259,6 +259,10 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? DIABINS { get; set; }
         [Display(Name = "Diabetes treated with: Oral medications")]
         public bool? DIABMEDS { get; set; }
+        [Display(Name = "Diabetes treated with: GLP-1 receptor activators")]
+        public bool? DIABGLP1 { get; set; }
+        [Display(Name = "Diabetes treated with: Other non-insulin, non-GLP-1 receptor activator injection medication")]
+        public bool? DIABRECACT { get; set; }
         [Display(Name = "Diabetes treated with: Diet")]
         public bool? DIABDIET { get; set; }
         [Display(Name = "Diabetes treated with: Unknown")]

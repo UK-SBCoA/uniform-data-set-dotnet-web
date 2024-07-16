@@ -625,6 +625,8 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.DIABTYPE"),
                          new UIDisableAttribute("A5D2.DIABINS"),
                          new UIDisableAttribute("A5D2.DIABMEDS"),
+                         new UIDisableAttribute("A5D2.DIABGLP1"),
+                         new UIDisableAttribute("A5D2.DIABRECACT"),
                          new UIDisableAttribute("A5D2.DIABDIET"),
                          new UIDisableAttribute("A5D2.DIABUNK"),
                          new UIDisableAttribute("A5D2.DIABAGE"),
@@ -639,6 +641,8 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.DIABTYPE"),
                          new UIEnableAttribute("A5D2.DIABINS"),
                          new UIEnableAttribute("A5D2.DIABMEDS"),
+                         new UIEnableAttribute("A5D2.DIABGLP1"),
+                         new UIEnableAttribute("A5D2.DIABRECACT"),
                          new UIEnableAttribute("A5D2.DIABDIET"),
                          new UIEnableAttribute("A5D2.DIABUNK"),
                          new UIEnableAttribute("A5D2.DIABAGE"),
@@ -653,6 +657,8 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.DIABTYPE"),
                          new UIEnableAttribute("A5D2.DIABINS"),
                          new UIEnableAttribute("A5D2.DIABMEDS"),
+                         new UIEnableAttribute("A5D2.DIABGLP1"),
+                         new UIEnableAttribute("A5D2.DIABRECACT"),
                          new UIEnableAttribute("A5D2.DIABDIET"),
                          new UIEnableAttribute("A5D2.DIABUNK"),
                          new UIEnableAttribute("A5D2.DIABAGE"),
@@ -667,6 +673,8 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.DIABTYPE"),
                          new UIDisableAttribute("A5D2.DIABINS"),
                          new UIDisableAttribute("A5D2.DIABMEDS"),
+                         new UIDisableAttribute("A5D2.DIABGLP1"),
+                         new UIDisableAttribute("A5D2.DIABRECACT"),
                          new UIDisableAttribute("A5D2.DIABDIET"),
                          new UIDisableAttribute("A5D2.DIABUNK"),
                          new UIDisableAttribute("A5D2.DIABAGE"),
@@ -1543,7 +1551,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPIPV"),
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
-                        new UIDisableAttribute("A5D2.IMPOTHER")
+                        new UIDisableAttribute("A5D2.IMPOTHER"),
+                        new UIDisableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
@@ -1560,7 +1569,8 @@ public class A5D2Model : FormPageModel
                         new UIEnableAttribute("A5D2.IMPIPV"),
                         new UIEnableAttribute("A5D2.IMPMILIT"),
                         new UIEnableAttribute("A5D2.IMPASSAULT"),
-                        new UIEnableAttribute("A5D2.IMPOTHER")
+                        new UIEnableAttribute("A5D2.IMPOTHER"),
+                        new UIEnableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
@@ -1577,7 +1587,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPIPV"),
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
-                        new UIDisableAttribute("A5D2.IMPOTHER")
+                        new UIDisableAttribute("A5D2.IMPOTHER"),
+                        new UIDisableAttribute("A5D2.IMPYEARS")
                      }
             }
          },
