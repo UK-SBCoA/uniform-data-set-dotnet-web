@@ -159,6 +159,74 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         };
 
+        public Dictionary<string, UIBehavior> MilestoneTypeUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("Milestone.CHANGEMO"),
+                    new UIEnableAttribute("Milestone.CHANGEDY"),
+                    new UIEnableAttribute("Milestone.CHANGEYR"),
+                    new UIEnableAttribute("Milestone.PROTOCOL"),
+                    new UIEnableAttribute("Milestone.ACONSENT"),
+                    new UIEnableAttribute("Milestone.RECOGIM"),
+                    new UIEnableAttribute("Milestone.REPHYILL"),
+                    new UIEnableAttribute("Milestone.REREFUSE"),
+                    new UIEnableAttribute("Milestone.RENURSE"),
+                    new UIEnableAttribute("Milestone.NURSEMO"),
+                    new UIEnableAttribute("Milestone.NURSEDY"),
+                    new UIEnableAttribute("Milestone.NURSEYR"),
+                    new UIEnableAttribute("Milestone.REJOIN"),
+                    new UIEnableAttribute("Milestone.FTLDDISC"),
+                    new UIEnableAttribute("Milestone.FTLDREAS"),
+                    new UIEnableAttribute("Milestone.FTLDREAX"),
+                    new UIDisableAttribute("Milestone.DECEASED"),
+                    new UIDisableAttribute("Milestone.DISCONT"),
+                    new UIDisableAttribute("Milestone.DEATHMO"),
+                    new UIDisableAttribute("Milestone.DEATHDY"),
+                    new UIDisableAttribute("Milestone.DEATHYR"),
+                    new UIDisableAttribute("Milestone.AUTOPSY"),
+                    new UIDisableAttribute("Milestone.DISCMO"),
+                    new UIDisableAttribute("Milestone.DISCDAY"),
+                    new UIDisableAttribute("Milestone.DISCYR"),
+
+                },
+                InstructionalMessage = ""
+            } },
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("Milestone.CHANGEMO"),
+                    new UIDisableAttribute("Milestone.CHANGEDY"),
+                    new UIDisableAttribute("Milestone.CHANGEYR"),
+                    new UIDisableAttribute("Milestone.PROTOCOL"),
+                    new UIDisableAttribute("Milestone.ACONSENT"),
+                    new UIDisableAttribute("Milestone.RECOGIM"),
+                    new UIDisableAttribute("Milestone.REPHYILL"),
+                    new UIDisableAttribute("Milestone.REREFUSE"),
+                    new UIDisableAttribute("Milestone.RENURSE"),
+                    new UIDisableAttribute("Milestone.NURSEMO"),
+                    new UIDisableAttribute("Milestone.NURSEDY"),
+                    new UIDisableAttribute("Milestone.NURSEYR"),
+                    new UIDisableAttribute("Milestone.REJOIN"),
+                    new UIDisableAttribute("Milestone.FTLDDISC"),
+                    new UIDisableAttribute("Milestone.FTLDREAS"),
+                    new UIDisableAttribute("Milestone.FTLDREAX"),
+                    new UIEnableAttribute("Milestone.DECEASED"),
+                    new UIEnableAttribute("Milestone.DISCONT"),
+                    new UIEnableAttribute("Milestone.DEATHMO"),
+                    new UIEnableAttribute("Milestone.DEATHDY"),
+                    new UIEnableAttribute("Milestone.DEATHYR"),
+                    new UIEnableAttribute("Milestone.AUTOPSY"),
+                    new UIEnableAttribute("Milestone.DISCMO"),
+                    new UIEnableAttribute("Milestone.DISCDAY"),
+                    new UIEnableAttribute("Milestone.DISCYR"),
+
+                },
+                InstructionalMessage = ""
+            } },
+        };
+
         protected private void IsValid(MilestoneModel milestone)
         {
             if (milestone.MilestoneType == 1)
