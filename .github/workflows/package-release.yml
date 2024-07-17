@@ -42,3 +42,9 @@ jobs:
 
     - name: Push packages
       run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols
+
+    - name: Push packages to Nuget.org
+      run: dotnet nuget push UDS.Net.Forms.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }} --skip-duplicate --no-symbols
+
+    - name: Push packages to Nuget.org
+      run: dotnet nuget push UDS.Net.Services.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }} --skip-duplicate --no-symbols
