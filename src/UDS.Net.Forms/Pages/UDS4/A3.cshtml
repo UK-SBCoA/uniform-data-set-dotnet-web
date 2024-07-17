@@ -7,23 +7,14 @@
 <div>
     <div>
         <p class="mt-1 text-sm text-gray-500">
-            INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric
-            diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the
-                <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A3.
+            INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form A3.
         </p>
     </div>
 
     <!--// Biological parents //-->
     <div class="">
-        @if (Model.Visit != null)
-        {
-            if (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.TIP)
-            {
-                <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
 
-            }
-
-        }
+        <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
 
         <p class="mt-1 text-sm text-gray-500">
             For any parent with a neurological or psychiatric diagnosis, the entire row  <u>must be filled out.</u>

@@ -10,14 +10,14 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A4 : FormModel
     {
         [Display(Name = "Is the participant currently taking any medications?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ANYMEDS { get; set; }
 
         public List<DrugCodeModel> DrugIds { get; set; } = new List<DrugCodeModel>();
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == Services.Enums.FormStatus.Complete)
+            if (Status == Services.Enums.FormStatus.Finalized)
             {
                 if (ANYMEDS.HasValue && ANYMEDS.Value == 1)
                 {

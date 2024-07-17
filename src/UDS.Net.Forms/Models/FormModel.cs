@@ -17,23 +17,62 @@ namespace UDS.Net.Forms.Models
         public string Kind { get; set; } = "";
 
         [Required]
-        public string Version { get; set; } = "";
+        public string FORMVER { get; set; } = "";
 
         public string Title { get; set; } = "";
 
         public string Description { get; set; } = "";
 
-        [Required(ErrorMessage = "Choose whether to save in-progress or complete the form")]
+        [Required(ErrorMessage = "Choose whether to save in-progress or finalize the form")]
+        [Range(1, 2, ErrorMessage = "Choose whether to save in-progress or finalize the form")]
         [Display(Name = "Status")]
         public FormStatus Status { get; set; }
 
-        public bool IsRequiredForVisitKind { get; set; }
+        public bool IsRequiredForPacketKind { get; set; }
+
+        public bool AllowsRemote
+        {
+            get
+            {
+                if (AllowedFormModes.Contains((int)FormMode.Remote))
+                    return true;
+                return false;
+            }
+        }
 
         [Display(Name = "Language")]
-        public FormLanguage Language { get; set; }
+        public FormLanguage LANG { get; set; }
 
-        [Display(Name = "If not submitted, specify reason")]
-        public ReasonCode? ReasonCodeNotIncluded { get; set; }
+        [Required]
+        [Display(Name = "Mode")]
+        public FormMode MODE { get; set; }
+
+        public List<int> AllowedFormModes { get; set; } = new List<int>();
+
+        [RequiredIf(nameof(MODE), "3", ErrorMessage = "Specify reason not completed")]
+        [Display(Name = "If not completed, specify reason")]
+        public NotIncludedReasonCode? NOT { get; set; }
+
+        public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
+
+        [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify reason for remote visit")]
+        [Display(Name = "If remote, specify reason")]
+        public RemoteReasonCode? RMREAS { get; set; }
+
+        [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify remote modality")]
+        [Display(Name = "If remote, specify modality")]
+        public RemoteModality? RMMODE { get; set; }
+
+        public List<int> AllowedRemoteModalities { get; set; } = new List<int>();
+
+        [Required]
+        [Display(Name = "Examiner initials")]
+        [MaxLength(3)]
+        public string INITIALS { get; set; } = "";
+
+        [Required]
+        [Display(Name = "Form date")]
+        public DateTime FRMDATE { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -57,31 +96,46 @@ namespace UDS.Net.Forms.Models
                     $"Choose status to save form",
                     new[] { nameof(Status) });
             }
-            else if (Status == FormStatus.NotIncluded && !ReasonCodeNotIncluded.HasValue)
+            else if (Status == FormStatus.Finalized)
             {
-                yield return new ValidationResult(
-                    $"Provide a reason code if form is not included",
-                    new[] { nameof(ReasonCodeNotIncluded) });
-            }
-            else if (Status == FormStatus.Complete)
-            {
+                if (MODE == FormMode.NotCompleted && !NOT.HasValue)
+                {
+                    yield return new ValidationResult(
+                        $"Provide a reason code if form is not completed",
+                        new[] { nameof(NotIncludedReasonCode) });
+                }
                 if (string.IsNullOrWhiteSpace(Kind.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Form kind is required",
                         new[] { nameof(Kind) });
                 }
-                if (string.IsNullOrWhiteSpace(Version.Trim()))
+                if (string.IsNullOrWhiteSpace(FORMVER.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Form version is required",
-                        new[] { nameof(Version) });
+                        new[] { nameof(FORMVER) });
                 }
                 if (string.IsNullOrWhiteSpace(CreatedBy.Trim()))
                 {
                     yield return new ValidationResult(
                         $"Created by is required",
                         new[] { nameof(CreatedBy) });
+                }
+                if (MODE == FormMode.Remote)
+                {
+                    if (!RMREAS.HasValue)
+                    {
+                        yield return new ValidationResult(
+                            $"Remote reason code is required",
+                            new[] { nameof(RMREAS) });
+                    }
+                    if (!RMMODE.HasValue)
+                    {
+                        yield return new ValidationResult(
+                            $"Remote modality is required",
+                            new[] { nameof(RMMODE) });
+                    }
                 }
             }
         }

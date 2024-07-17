@@ -7,7 +7,7 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on participant response. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form B6. Check only <span class="underline">one</span> box per question.
+        INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on participant response. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B6. Check only <span class="underline">one</span> box per question.
     </p>
 </div>
 <div>
@@ -170,6 +170,7 @@
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B6.GDS"></p>
                 <input asp-for="@Model.B6.GDS" />
+                <span class="italic text-gray-500">(max score =15; did not complete = 88)</span>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
             </div>
         </div>

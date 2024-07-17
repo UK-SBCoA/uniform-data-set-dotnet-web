@@ -21,11 +21,12 @@
 @if (Model.Participations != null)
 {
     <div class="space-y-16 py-16 xl:space-y-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
             <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">All participations</h2>
+            <p class="mt-2 text-sm text-gray-700">A list of all participants.</p>
         </div>
         <div class="mt-6 overflow-hidden border-t border-gray-100">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                     <table class="w-full text-left">
                         <thead>
@@ -33,7 +34,7 @@
                                 <th>Participation Id</th>
                                 <th>NACC Id</th>
                                 <th>Visit count</th>
-                                <th></th>
+                                <th><span class="sr-only">View details</span></th>
                             </tr>
                         </thead>
                         <tbody>

@@ -74,19 +74,27 @@ namespace UDS.Net.Forms.TagHelpers
 
                 var cell = new TagBuilder("td");
 
-                var outerDiv = new TagBuilder("div");
-                outerDiv.Attributes["class"] = "relative flex items-start";
+                //if text and value strings are null or empty, only create a <td></td>
+                if (String.IsNullOrEmpty(itemsList[i].Text) && String.IsNullOrEmpty(itemsList[i].Value))
+                {
+                    radioButtonListBuilder.AppendLine(cell);
+                }
+                else
+                {
+                    var outerDiv = new TagBuilder("div");
+                    outerDiv.Attributes["class"] = "relative flex items-start";
 
-                var innerDiv = new TagBuilder("div");
-                innerDiv.Attributes["class"] = "flex items-center";
+                    var innerDiv = new TagBuilder("div");
+                    innerDiv.Attributes["class"] = "flex items-center";
 
-                innerDiv.InnerHtml.AppendLine(radio);
-                innerDiv.InnerHtml.AppendLine(label);
+                    innerDiv.InnerHtml.AppendLine(radio);
+                    innerDiv.InnerHtml.AppendLine(label);
 
-                outerDiv.InnerHtml.AppendLine(innerDiv);
-                cell.InnerHtml.AppendLine(outerDiv);
+                    outerDiv.InnerHtml.AppendLine(innerDiv);
+                    cell.InnerHtml.AppendLine(outerDiv);
 
-                radioButtonListBuilder.AppendLine(cell);
+                    radioButtonListBuilder.AppendLine(cell);
+                }
             }
 
             return radioButtonListBuilder;

@@ -7,7 +7,7 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        INSTRUCTIONS: This form may be completed by intake interviewer based on ADRC scheduling records, participant interview, medical records, and proxy co-participant report (according to what is deemed to be the most reliable source of information, except as indicated for specific questions that may be based on the participants perceptions and experience which only they can provide accurate information for). This information can be collected by mail-in survey, electronic capture (web-based), phone or video interview, or during the in-person visit to accommodate and lessen participant visit burden. For additional clarification and examples, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question unless otherwise specified.
+        INSTRUCTIONS: This form may be completed by intake interviewer based on ADRC scheduling records, participant interview, medical records, and proxy co-participant report (according to what is deemed to be the most reliable source of information, except as indicated for specific questions that may be based on the participants perceptions and experience which only they can provide accurate information for). This information can be collected by mail-in survey, electronic capture (web-based), phone or video interview, or during the in-person visit to accommodate and lessen participant visit burden. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question unless otherwise specified.
     </p>
 </div>
 
@@ -414,7 +414,7 @@
                             <div class="relative flex items-start">
                                 <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("A1.RACEAIAN", Model.A1.RACEAIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A1.RACEAIANX\" ]" })
+                                    @Html.CheckBox("A1.RACEAIAN", Model.A1.RACEAIAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"A1.RACEAIANX\",\"A1.GENTWOSPIR\",\"A1.SEXORNTWOS\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.RACEAIAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEAIAN)</label>
@@ -687,7 +687,7 @@
                         <div class="relative flex items-start">
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
-                                @Html.CheckBox("A1.GENTWOSPIR", Model.A1.GENTWOSPIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("A1.GENTWOSPIR", Model.A1.GENTWOSPIR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.GENTWOSPIR" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENTWOSPIR)</label>
@@ -791,7 +791,7 @@
                         <div class="relative flex items-start">
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
-                                @Html.CheckBox("A1.SEXORNTWOS", Model.A1.SEXORNTWOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("A1.SEXORNTWOS", Model.A1.SEXORNTWOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.SEXORNTWOS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNTWOS)</label>

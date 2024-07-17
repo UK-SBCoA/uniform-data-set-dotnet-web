@@ -35,7 +35,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 var form = (FormModel)validationContext.ObjectInstance;
 
                 // only validate if the form is attempting to be completed
-                if (form.Status == FormStatus.Complete)
+                if (form.Status == FormStatus.Finalized)
                 {
                     // Only validate on the server if form is attempting to be completed
                     var month = (int)value;

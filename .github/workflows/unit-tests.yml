@@ -8,6 +8,8 @@ on:
     branches: [ "main" ]
     paths: [ "src/UDS.Net.Forms" ]
 
+permissions: read-all
+
 jobs:
   build:
 

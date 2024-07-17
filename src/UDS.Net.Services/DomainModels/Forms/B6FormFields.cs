@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -23,9 +25,41 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BETTER { get; set; }
         public int? GDS { get; set; }
 
-        public B6FormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Behavioral Assessment: GDS";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        public B6FormFields() { }
         public B6FormFields(FormDto dto)
         {
             if (dto is B6Dto)
@@ -49,15 +83,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 BETTER = b6Dto.BETTER;
                 GDS = b6Dto.GDS;
             }
-        }
-        public string GetDescription()
-        {
-            return "Geriatric Depression Scale";
-        }
-
-        public string GetVersion()
-        {
-            return "4.0";
         }
     }
 }

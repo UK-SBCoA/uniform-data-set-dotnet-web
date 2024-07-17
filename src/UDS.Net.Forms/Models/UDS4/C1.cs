@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class C1 : FormModel
     {
         [Display(Name = "Was any part of the MMSE completed?")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MMSECOMP { get; set; }
 
         [Display(Name = "No (Enter reason code, 95-98 and SKIP TO QUESTION 2a)")]
@@ -60,11 +60,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MMSE { get; set; }
 
         [Display(Name = "The remainder of the battery (i.e., the tests summarized below) was administered")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? NPSYLAN { get; set; }
 
         [Display(Name = "Other (specify)")]
@@ -83,22 +83,22 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score from the previous test administration")]
         [RegularExpression("^(\\d|1\\d|2[0-5]|88)$", ErrorMessage = "(0-25, 88)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? LOGIPREV { get; set; }
 
         [Display(Name = "Total number of story units recalled from this current test administration")]
         [RegularExpression("^(\\d|1\\d|2[0-5]|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? LOGIMEM { get; set; }
 
         [Display(Name = "Total score for copy of Bension figure")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSBENTC { get; set; }
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length")]
         [RegularExpression("^(\\d|1[0-2]|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGIF { get; set; }
 
         [Display(Name = "Digit span forward length ")]
@@ -108,7 +108,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total number of trials correct before to two consecutive errors at the same digit length ")]
         [RegularExpression("^(\\d|1[0-2]|9[5-8])$", ErrorMessage = "(0-12, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? DIGIB { get; set; }
 
         [Display(Name = "Digit span backward length")]
@@ -118,17 +118,17 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Animals: Total number of animals named in 60 seconds")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "(0-77, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? ANIMALS { get; set; }
 
         [Display(Name = "Vegetables: Total number of vegetables named in 60 seconds")]
         [RegularExpression("^(\\d|[1-6]\\d|7[0-7]|9[5-8])$", ErrorMessage = "(0-77, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? VEG { get; set; }
 
         [Display(Name = "PART A: Total number of seconds to complete")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "(0-150, 995-998)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors")]
@@ -143,7 +143,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "PART B: Total number of seconds to complete")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors")]
@@ -158,7 +158,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total number of story units recalled")]
         [RegularExpression("^(\\d|1\\d|2[0-5]|9[5-8])$", ErrorMessage = "(0-25, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? MEMUNITS { get; set; }
 
         [Display(Name = "Time elapsed since Logical Memory IA–Immediate")]
@@ -168,7 +168,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for 10- to 15-minute delayed drawing of Bension figure")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "(0-17, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus from among four options?")]
@@ -177,12 +177,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score")]
         [RegularExpression("^(\\d|[12]\\d|30|9[5-8])$", ErrorMessage = "(0-30, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? BOSTON { get; set; }
 
         [Display(Name = "Number of correct F-words generated in 1 minute")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERFC { get; set; }
 
         [Display(Name = "Number of F-words repeated in 1 minute")]
@@ -197,7 +197,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Number of correct L-words generated in 1 minute")]
         [RegularExpression("^(\\d|[1-3]\\d|40|9[5-8])$", ErrorMessage = "(0-40, 95-98)")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? UDSVERLC { get; set; }
 
         [Display(Name = "Number of L-words repeated in one minute")]
@@ -226,7 +226,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? UDSVERTI { get; set; }
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participant’s cognitive status is deemed")]
-        [RequiredOnComplete]
+        [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -236,7 +236,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
 
-            if (Status == FormStatus.Complete)
+            if (Status == FormStatus.Finalized)
             {
                 bool isValid = false;
                 string errorMessage = "Logical Memory IA -Immediate previous test date should be within the previous 3 months of the visit date";
@@ -253,7 +253,7 @@ namespace UDS.Net.Forms.Models.UDS4
                             if (visitValue is VisitModel)
                             {
                                 VisitModel visit = (VisitModel)visitValue;
-                                var visitDateEntry = visit.StartDateTime;
+                                var visitDateEntry = visit.VISIT_DATE;
 
                                 // we need the visit date
                                 var visitDate = visitDateEntry;
