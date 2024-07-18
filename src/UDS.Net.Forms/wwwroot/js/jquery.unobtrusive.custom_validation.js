@@ -22,6 +22,10 @@ function setAffect(target, attribute, value) {
         if (element.is(':radio') || element.is(':checked')) {
           element.removeAttr('checked');
         }
+        // ignore value clearing for checkbox disabled elements
+        else if (element.is(':checkbox')) {
+            console.log("the checkbox value test was hit!")
+        }
         else {
           element.val('');
         }
