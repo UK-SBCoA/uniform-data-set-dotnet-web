@@ -18,16 +18,13 @@ function setAffect(target, attribute, value) {
     if (attribute === 'disabled') {
       if (value === 'true' || value === true) {
         element.attr('disabled', 'disabled');
-        // TODO check the element type to decide how to set value to null
-        if (element.is(':radio') || element.is(':checked')) {
-          element.removeAttr('checked');
+        // Disable effect by element type
+        if (element.is(':radio') || element.is(':checked') || (element.is(':checkbox'))) {
+            element.removeAttr('checked');
         }
-        // ignore value clearing for checkbox disabled elements
-        else if (element.is(':checkbox')) {
-            console.log("the checkbox value test was hit!")
-        }
+        //catch all case for all other input types
         else {
-          element.val('');
+            element.val('');
         }
       }
       else {
