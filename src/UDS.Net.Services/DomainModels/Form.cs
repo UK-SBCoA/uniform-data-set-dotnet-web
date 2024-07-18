@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
@@ -11,7 +12,7 @@ namespace UDS.Net.Services.DomainModels
 
         public int Id { get; set; }
 
-        public string Version
+        public string FORMVER
         {
             get
             {
@@ -45,17 +46,25 @@ namespace UDS.Net.Services.DomainModels
             }
         }
 
-        public bool IsRequiredForVisitKind { get; set; }
+        public bool IsRequiredForPacketKind { get; }
 
-        public string Kind { get; set; }
+        public string Kind { get; }
 
         public FormStatus Status { get; set; }
 
-        public FormLanguage Language { get; set; }
+        public DateTime FRMDATE { get; set; }
 
-        public bool? IsIncluded { get; private set; } // Is Included is persisted as Status (Not Included)
+        public string INITIALS { get; set; }
 
-        public ReasonCode? ReasonCode { get; set; }
+        public FormLanguage LANG { get; set; }
+
+        public FormMode MODE { get; set; }
+
+        public RemoteReasonCode? RMREAS { get; set; }
+
+        public RemoteModality? RMMODE { get; set; }
+
+        public NotIncludedReasonCode? NOT { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -73,16 +82,24 @@ namespace UDS.Net.Services.DomainModels
         {
             if (Kind == "A1")
                 Fields = new A1FormFields();
+            else if (Kind == "A1a")
+                Fields = new A1aFormFields();
             else if (Kind == "A2")
                 Fields = new A2FormFields();
             else if (Kind == "A3")
                 Fields = new A3FormFields();
             else if (Kind == "A4")
                 Fields = new A4GFormFields();
+            else if (Kind == "A4a")
+                Fields = new A4aFormFields();
             else if (Kind == "A5")
                 Fields = new A5FormFields();
+            else if (Kind == "A5D2")
+                Fields = new A5D2FormFields();
             else if (Kind == "B1")
                 Fields = new B1FormFields();
+            else if (Kind == "B3")
+                Fields = new B3FormFields();
             else if (Kind == "B4")
                 Fields = new B4FormFields();
             else if (Kind == "B5")
@@ -99,8 +116,10 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new C1FormFields();
             else if (Kind == "C2")
                 Fields = new C2FormFields();
-            else if (Kind == "D1")
-                Fields = new D1FormFields();
+            else if (Kind == "D1a")
+                Fields = new D1aFormFields();
+            else if (Kind == "D1b")
+                Fields = new D1bFormFields();
             else if (Kind == "D2")
                 Fields = new D2FormFields();
             else if (Kind == "T1")
@@ -108,15 +127,17 @@ namespace UDS.Net.Services.DomainModels
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
-        public Form(int visitId, string kind, bool isRequired, string createdBy)
+        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy)
         {
             VisitId = visitId;
 
             Kind = kind;
 
-            IsRequiredForVisitKind = isRequired;
+            IsRequiredForPacketKind = isRequired;
 
             Status = FormStatus.NotStarted;
+
+            FRMDATE = visitDate; // for new forms, use the visit date as the default
 
             CreatedBy = createdBy;
 
@@ -126,7 +147,7 @@ namespace UDS.Net.Services.DomainModels
             SetFieldsBasedOnKind();
         }
 
-        public Form(int visitId, int id, string title, string kind, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
             VisitId = visitId;
@@ -134,9 +155,13 @@ namespace UDS.Net.Services.DomainModels
             _title = title;
             Kind = kind;
             Status = status;
-            Language = language;
-            IsIncluded = !(Status == FormStatus.NotIncluded);
-            ReasonCode = reasonCode;
+            FRMDATE = formDate;
+            INITIALS = initials;
+            LANG = language;
+            MODE = mode;
+            RMREAS = remoteReasonCode;
+            RMMODE = remoteModality;
+            NOT = notIncludedReasonCode;
 
             CreatedAt = createdAt;
             CreatedBy = createdBy;
@@ -150,29 +175,10 @@ namespace UDS.Net.Services.DomainModels
             }
         }
 
-        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, FormLanguage language, ReasonCode? reasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
+            this(visitId, id, title, kind, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
         {
-            Id = id;
-            VisitId = visitId;
-
-            _title = title;
-            Kind = kind;
-            IsRequiredForVisitKind = isRequired;
-            Status = status;
-            Language = language;
-            IsIncluded = !(Status == FormStatus.NotIncluded);
-            ReasonCode = reasonCode;
-
-            CreatedAt = createdAt;
-            CreatedBy = createdBy;
-            ModifiedBy = modifiedBy;
-            DeletedBy = deletedBy;
-            IsDeleted = isDeleted;
-
-            if (fields != null)
-            {
-                Fields = fields;
-            }
+            IsRequiredForPacketKind = isRequired;
         }
 
     }

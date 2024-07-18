@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
@@ -43,11 +42,11 @@ namespace UDS.Net.Services.Extensions
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
             }
 
-            VisitKind visitKind;
-            if (!Enum.TryParse(dto.Kind, true, out visitKind))
-                visitKind = VisitKind.IVP;
+            PacketKind packetKind;
+            if (!Enum.TryParse(dto.PACKET, true, out packetKind))
+                packetKind = PacketKind.I;
 
-            return new Visit(dto.Id, dto.Number, dto.ParticipationId, dto.Version, visitKind, dto.StartDateTime, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
         }
 
         public static Milestone ToDomain(this M1Dto dto)
@@ -115,6 +114,10 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new A1FormFields(dto);
             }
+            else if (dto is A1aDto)
+            {
+                formFields = new A1aFormFields(dto);
+            }
             else if (dto is A2Dto)
             {
                 formFields = new A2FormFields(dto);
@@ -123,17 +126,25 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new A3FormFields(dto);
             }
-            else if (dto is A4GDto)
+            else if (dto is A4Dto)
             {
                 formFields = new A4GFormFields(dto);
             }
-            else if (dto is A5Dto)
+            else if (dto is A4aDto)
             {
-                formFields = new A5FormFields(dto);
+                formFields = new A4aFormFields(dto);
+            }
+            else if (dto is A5D2Dto)
+            {
+                formFields = new A5D2FormFields(dto);
             }
             else if (dto is B1Dto)
             {
                 formFields = new B1FormFields(dto);
+            }
+            else if (dto is B3Dto)
+            {
+                formFields = new B3FormFields(dto);
             }
             else if (dto is B4Dto)
             {
@@ -167,13 +178,13 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new C2FormFields(dto);
             }
-            else if (dto is D1Dto)
+            else if (dto is D1aDto)
             {
-                formFields = new D1FormFields(dto);
+                formFields = new D1aFormFields(dto);
             }
-            else if (dto is D2Dto)
+            else if (dto is D1bDto)
             {
-                formFields = new D2FormFields(dto);
+                formFields = new D1bFormFields(dto);
             }
             else if (dto is T1Dto)
             {
@@ -183,16 +194,22 @@ namespace UDS.Net.Services.Extensions
             {
                 if (dto.Kind == "A1")
                     title = new A1FormFields().GetDescription();
+                else if (dto.Kind == "A1a")
+                    title = new A1aFormFields().GetDescription();
                 else if (dto.Kind == "A2")
                     title = new A2FormFields().GetDescription();
                 else if (dto.Kind == "A3")
                     title = new A3FormFields().GetDescription();
                 else if (dto.Kind == "A4")
                     title = new A4GFormFields().GetDescription();
-                else if (dto.Kind == "A5")
-                    title = new A5FormFields().GetDescription();
+                else if (dto.Kind == "A4a")
+                    title = new A4aFormFields().GetDescription();
+                else if (dto.Kind == "A5D2")
+                    title = new A5D2FormFields().GetDescription();
                 else if (dto.Kind == "B1")
                     title = new B1FormFields().GetDescription();
+                else if (dto.Kind == "B3")
+                    title = new B3FormFields().GetDescription();
                 else if (dto.Kind == "B4")
                     title = new B4FormFields().GetDescription();
                 else if (dto.Kind == "B5")
@@ -209,10 +226,10 @@ namespace UDS.Net.Services.Extensions
                     title = new C1FormFields().GetDescription();
                 else if (dto.Kind == "C2")
                     title = new C2FormFields().GetDescription();
-                else if (dto.Kind == "D1")
-                    title = new D1FormFields().GetDescription();
-                else if (dto.Kind == "D2")
-                    title = new D2FormFields().GetDescription();
+                else if (dto.Kind == "D1a")
+                    title = new D1aFormFields().GetDescription();
+                else if (dto.Kind == "D1b")
+                    title = new D1bFormFields().GetDescription();
                 else if (dto.Kind == "T1")
                     title = new T1FormFields().GetDescription();
             }
@@ -223,17 +240,33 @@ namespace UDS.Net.Services.Extensions
                 formStatus = (FormStatus)statusValue;
             }
             FormLanguage formLanguage = FormLanguage.English;
-            if (!string.IsNullOrWhiteSpace(dto.Language) && Int32.TryParse(dto.Language, out int languageValue))
+            if (!string.IsNullOrWhiteSpace(dto.LANG) && Int32.TryParse(dto.LANG, out int languageValue))
             {
                 formLanguage = (FormLanguage)languageValue;
             }
-            ReasonCode? reasonCode = null;
-            if (formStatus == FormStatus.NotIncluded && !string.IsNullOrWhiteSpace(dto.ReasonCode) && Int32.TryParse(dto.ReasonCode, out int reasonCodeValue))
+            FormMode formMode = FormMode.InPerson;
+            if (!string.IsNullOrWhiteSpace(dto.MODE) && Int32.TryParse(dto.MODE, out int formModeValue))
             {
-                reasonCode = (ReasonCode)reasonCodeValue;
+                formMode = (FormMode)formModeValue;
+            }
+            NotIncludedReasonCode? notIncludedReasonCode = null;
+            if (formMode == FormMode.NotCompleted && !string.IsNullOrWhiteSpace(dto.NOT) && Int32.TryParse(dto.NOT, out int notIncludedReasonCodeValue))
+            {
+                notIncludedReasonCode = (NotIncludedReasonCode)notIncludedReasonCodeValue;
+            }
+            RemoteModality? remoteModality = null;
+            if (!string.IsNullOrWhiteSpace(dto.RMMODE) && Int32.TryParse(dto.RMMODE, out int remoteModalityValue))
+            {
+                remoteModality = (RemoteModality)remoteModalityValue;
             }
 
-            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, formLanguage, reasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+            RemoteReasonCode? remoteReasonCode = null;
+            if (!string.IsNullOrWhiteSpace(dto.RMREAS) && Int32.TryParse(dto.RMREAS, out int remoteReasonCodeValue))
+            {
+                remoteReasonCode = (RemoteReasonCode)remoteReasonCodeValue;
+            }
+
+            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
     }
 }

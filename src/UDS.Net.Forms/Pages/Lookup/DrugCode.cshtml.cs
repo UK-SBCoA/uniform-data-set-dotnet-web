@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 
 namespace UDS.Net.Forms.Pages.Lookup
@@ -73,9 +66,9 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             foreach (var newCode in Lookup.DrugCodes.Where(d => d.IsSelected).ToList())
             {
-                if (fields.A4Ds.Any(a => a.DRUGID == newCode.DrugId))
+                if (fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId))
                 {
-                    var existingA4D = fields.A4Ds.Where(d => d.DRUGID == newCode.DrugId).FirstOrDefault();
+                    var existingA4D = fields.A4Ds.Where(d => d.RxNormId == newCode.RxNormId).FirstOrDefault();
 
                     if (existingA4D.IsDeleted)
                     {
@@ -91,7 +84,7 @@ namespace UDS.Net.Forms.Pages.Lookup
                     // add
                     fields.A4Ds.Add(new A4DFormFields
                     {
-                        DRUGID = newCode.DrugId,
+                        RxNormId = newCode.RxNormId,
                         CreatedAt = DateTime.Now,
                         CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username"
                     });
@@ -100,7 +93,7 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", entity, _formKind);
 
-            return Redirect($"/{entity.Version}/{form.Kind}?Id={entity.Id}&VisitKind={entity.Kind}");
+            return Redirect($"/UDS{entity.FORMVER}/{form.Kind}?Id={entity.Id}&PacketKind={entity.PACKET}");
         }
     }
 }

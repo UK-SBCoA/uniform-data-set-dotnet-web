@@ -1,0 +1,1373 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.D1bModel
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician for all participants, including cognitively unimpaired. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, <strong>Form D1b</strong>. Check only <span class="underline">one</span> box per question.
+    </p>
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1b.BIOMARKDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMARKDX)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMARKDX"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1b.BIOMARKDX)" for="@Model.D1b.BIOMARKDX" items="Model.BIOMARKDXListItems" ui-behaviors="Model.BIOMARKDXUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMARKDX"></span>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <a name="section-1"></a>
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-300">
+        <h3 class="ml-2 mt-2 font-semibold text-sm text-gray-700 uppercase">Section 1</h3>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Biomarkers and imaging
+        </p>
+    </div>
+    <p class="mt-2 text-sm text-gray-900">
+        Complete this section if any of the following biomarker measures were used to <strong><u>support or exclude</u></strong> a presumed etiological
+        diagnosis, including unimpaired individuals who have biomarker characterization. Please complete the checklist below for each data
+        source available and the related questions for each supporting data. Then complete <strong>Section 2: Etiological Diagnosis</strong>. This section is
+        not intended to capture actual data values or register sample availability; instead this section’s purpose is to record what information
+        was used by the clinician (or at consensus) to inform an etiological diagnosis.
+    </p>
+</div>
+
+<div>
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Fluids
+        </p>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1b.FLUIDBIOM"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.FLUIDBIOM)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FLUIDBIOM"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.FLUIDBIOM)" for="@Model.D1b.FLUIDBIOM" items="Model.FLUIDBIOMListItems" ui-behaviors="Model.FLUIDBIOMUIBehavior"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FLUIDBIOM"></span>
+        </div>
+    </div>
+    <p class="mt-2 text-sm text-gray-900">
+        Please use the following questions to indicate the results of the fluid biomarker test(s) used by the clinician (or at consensus) to
+        determine the etiological diagnosis at this visit.
+    </p>
+    <p class="mt-2 text-sm text-gray-900">
+        If a fluid biomarker was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If a fluid biomarker was found to be consistent with
+        a diagnosis, select <strong>1=Yes</strong>. If a fluid biomarker was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
+        listed were not assessed using fluid biomarkers, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+    </p>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <span class="counter"></span>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Blood-based biomarkers
+        </p>
+    </div>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.BLOODAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODAD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODAD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODAD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODAD)" for="@Model.D1b.BLOODAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BLOODFTLD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODFTLD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODFTLD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODFTLD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODFTLD)" for="@Model.D1b.BLOODFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BLOODLBD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODLBD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODLBD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODLBD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODLBD)" for="@Model.D1b.BLOODLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BLOODOTH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODOTH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODOTH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODOTH"></span>
+
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODOTH)" for="@Model.D1b.BLOODOTH" items="Model.FindingsListItems" ui-behaviors="Model.BLOODOTHXUIBehavior"></table-cell-radio-buttons>
+            </tr>
+
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.BLOODOTHX">@Html.DisplayNameFor(m => m.D1b.BLOODOTHX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODOTHX"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BLOODOTHX"></p>
+                            <input asp-for="@Model.D1b.BLOODOTHX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODOTHX"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <span class="counter"></span>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            CSF-based biomarkers
+        </p>
+    </div>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.CSFAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFAD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.CSFAD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFAD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFAD)" for="@Model.D1b.CSFAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.CSFFTLD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFFTLD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.CSFFTLD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFFTLD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFFTLD)" for="@Model.D1b.CSFFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.CSFLBD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFLBD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.CSFLBD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFLBD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFLBD)" for="@Model.D1b.CSFLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.CSFOTH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFOTH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.CSFOTH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFOTH"></span>
+
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFOTH)" for="@Model.D1b.CSFOTH" items="Model.FindingsListItems" ui-behaviors="Model.CSFOTHUIBehavior"></table-cell-radio-buttons>
+            </tr>
+
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.CSFOTHX">@Html.DisplayNameFor(m => m.D1b.CSFOTHX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.CSFOTHX"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.CSFOTHX"></p>
+                            <input asp-for="@Model.D1b.CSFOTHX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFOTHX"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Imaging
+        </p>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1b.IMAGINGDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGINGDX)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.IMAGINGDX"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems" ui-behaviors="Model.IMAGINGDXUIBehavior"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGINGDX"></span>
+        </div>
+    </div>
+    <p class="mt-2 text-sm text-gray-900">
+        Please use the following questions to indicate the results of the fluid biomarker test(s) used by the clinician (or at consensus) to
+        determine the etiological diagnosis at this visit.
+    </p>
+    <p class="mt-2 text-sm text-gray-900">
+        If imaging was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If imaging was found to be consistent with
+        a diagnosis, select <strong>1=Yes</strong>. If imaging was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
+        listed were not assessed using imaging, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+    </p>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <span class="counter"></span>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            PET/SPECT
+        </p>
+    </div>
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+            <label asp-for="D1b.PETDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.PETDX)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.PETDX"></p>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.PETDX)" for="@Model.D1b.PETDX" items="Model.PETDXListItems" ui-behaviors="Model.PETDXUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span>
+            </div>
+        </div>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">If used in diagnosis, indicate the results:</th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.AMYLPET"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.AMYLPET)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.AMYLPET"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.AMYLPET"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.AMYLPET)" for="@Model.D1b.AMYLPET" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.TAUPET"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TAUPET)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TAUPET"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TAUPET"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TAUPET)" for="@Model.D1b.TAUPET" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+        </tbody>
+    </table>
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="D1b.FDGPETDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGPETDX)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGPETDX"></p>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.FDGPETDX)" for="@Model.D1b.FDGPETDX" items="Model.FDGPETDXListItems" ui-behaviors="Model.FDGPETDXUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGPETDX"></span>
+            </div>
+        </div>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.FDGAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGAD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.FDGAD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGAD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGAD)" for="@Model.D1b.FDGAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.FDGFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGFTLD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.FDGFTLD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGFTLD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGFTLD)" for="@Model.D1b.FDGFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.FDGLBD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGLBD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.FDGLBD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGLBD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGLBD)" for="@Model.D1b.FDGLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.FDGOTH"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGOTH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGOTH)" for="@Model.D1b.FDGOTH" items="Model.FindingsListItems" ui-behaviors="Model.FDGOTHUIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.FDGOTHX">@Html.DisplayNameFor(m => m.D1b.FDGOTHX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTHX"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGOTHX"></p>
+                            <input asp-for="@Model.D1b.FDGOTHX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTHX"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+            <label asp-for="D1b.DATSCANDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.DATSCANDX)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.DATSCANDX"></p>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.DATSCANDX)" for="@Model.D1b.DATSCANDX" items="Model.DATSCANDXListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DATSCANDX"></span>
+            </div>
+        </div>
+    </table>
+
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.TRACOTHDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACOTHDX)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDX"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems" ui-behaviors="Model.TRACOTHDXUIBehavior"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDX"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDXX"></p>
+                            <label asp-for="D1b.TRACOTHDXX">@Html.DisplayNameFor(m => m.D1b.TRACOTHDXX)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDXX"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.TRACOTHDXX" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.TRACERAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERAD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERAD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERAD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERAD)" for="@Model.D1b.TRACERAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.TRACERFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERFTLD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERFTLD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERFTLD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERFTLD)" for="@Model.D1b.TRACERFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.TRACERLBD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERLBD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERLBD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERLBD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERLBD)" for="@Model.D1b.TRACERLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.TRACEROTH"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACEROTH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TRACEROTH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACEROTH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACEROTH)" for="@Model.D1b.TRACEROTH" items="Model.FindingsListItems" ui-behaviors="Model.TRACEROTHUIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.TRACEROTHX">@Html.DisplayNameFor(m => m.D1b.TRACEROTHX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.TRACEROTHX"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACEROTHX"></p>
+                            <input asp-for="@Model.D1b.TRACEROTHX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACEROTHX"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <span class="counter"></span>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Structural Imaging
+        </p>
+    </div>
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+            <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
+                <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
+            </div>
+        </div>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.STRUCTAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTAD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTAD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTAD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTAD)" for="@Model.D1b.STRUCTAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.STRUCTFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTFTLD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTFTLD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTFTLD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTFTLD)" for="@Model.D1b.STRUCTFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.STRUCTCVD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTCVD)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTCVD"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTCVD"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subsubsubcounterreset">
+                <td>
+                    <p class="pl-5 text-sm text-gray-500">If there is evidence for CVD on imaging, indicate the findings:</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGLINF"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGLINF)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGLINF"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGLINF"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGLINF)" for="@Model.D1b.IMAGLINF" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGLAC"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGLAC)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGLAC"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGLAC"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGLAC)" for="@Model.D1b.IMAGLAC" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGMACH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMACH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMACH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMACH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMACH)" for="@Model.D1b.IMAGMACH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGMICH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMICH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMICH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMICH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMICH)" for="@Model.D1b.IMAGMICH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGMWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMWMH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMWMH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMWMH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMWMH)" for="@Model.D1b.IMAGMWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.IMAGEWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGEWMH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGEWMH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGEWMH"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGEWMH)" for="@Model.D1b.IMAGEWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Other biomarker modalities <i>(e.g., tissues, skin, retinal imaging, etc.)</i>
+        </p>
+    </div>
+    <p class="mt-2 text-sm text-gray-900">
+        Please use the following questions to indicate the results of any additional biomarker modalities used by the clinician (or at
+        consensus) to support the etiological diagnosis at this visit.
+    </p>
+    <p class="mt-2 text-sm text-gray-900">
+        If a biomarker modality was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If a biomarker modality was found to be consistent with
+        a diagnosis, select <strong>1=Yes</strong>. If a biomarker modality was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
+        listed were not assessed using a biomarker modality, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+    </p>
+
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM1"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM1)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM1"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM1)" for="@Model.D1b.OTHBIOM1" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM1UIBehavior"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM1"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX1"></p>
+                            <label asp-for="D1b.OTHBIOMX1">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX1)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX1"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX1" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMAD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD1)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD1"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD1"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD1)" for="@Model.D1b.BIOMAD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMFTLD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD1)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD1"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD1"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD1)" for="@Model.D1b.BIOMFTLD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMLBD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD1)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD1"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD1"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD1)" for="@Model.D1b.BIOMLBD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMOTH1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH1)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH1"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH1"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH1)" for="@Model.D1b.BIOMOTH1" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH1UIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.BIOMOTHX1">@Html.DisplayNameFor(m => m.D1b.BIOMOTHX1)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTHX1"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX1"></p>
+                            <input asp-for="@Model.D1b.BIOMOTHX1" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX1"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM2"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM2)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM2"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM2)" for="@Model.D1b.OTHBIOM2" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM2UIBehavior"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM2"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX2"></p>
+                            <label asp-for="D1b.OTHBIOMX2">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX2)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX2"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX2" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMAD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD2)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD2"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD2"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD2)" for="@Model.D1b.BIOMAD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMFTLD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD2)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD2"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD2"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD2)" for="@Model.D1b.BIOMFTLD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMLBD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD2)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD2"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD2"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD2)" for="@Model.D1b.BIOMLBD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMOTH2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH2)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH2"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH2"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH2)" for="@Model.D1b.BIOMOTH2" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH2UIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.BIOMOTHX2">@Html.DisplayNameFor(m => m.D1b.BIOMOTHX2)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTHX2"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX2"></p>
+                            <input asp-for="@Model.D1b.BIOMOTHX2" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX2"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <table class="table-auto min-w-full divide-y divide-gray-300">
+        <tr>
+            <td>
+                <div colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1b.OTHBIOM3"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHBIOM3)</label>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM3"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM3)" for="@Model.D1b.OTHBIOM3" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM3UIBehavior"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM3"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX3"></p>
+                            <label asp-for="D1b.OTHBIOMX3">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX3)</label>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX3"></span>
+                            <div class="mt-2">
+                                <input asp-for="D1b.OTHBIOMX3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.FindingsListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMAD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD3)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD3"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD3"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD3)" for="@Model.D1b.BIOMAD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMFTLD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD3)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD3"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD3"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD3)" for="@Model.D1b.BIOMFTLD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMLBD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD3)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD3"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD3"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD3)" for="@Model.D1b.BIOMLBD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <label asp-for="D1b.BIOMOTH3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH3)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH3"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH3"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH3)" for="@Model.D1b.BIOMOTH3" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH3UIBehavior"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.BIOMOTHX3">@Html.DisplayNameFor(m => m.D1b.BIOMOTHX3)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTHX3"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX3"></p>
+                            <input asp-for="@Model.D1b.BIOMOTHX3" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX3"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Supportive genetics
+        </p>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1b.AUTDOMMUT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.AUTDOMMUT)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.AUTDOMMUT"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.AUTDOMMUT)" for="@Model.D1b.AUTDOMMUT" items="Model.AUTDOMMUTListItems"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.AUTDOMMUT"></span>
+        </div>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <a name="section-2"></a>
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-300">
+        <h3 class="ml-2 mt-2 font-semibold text-sm text-gray-700 uppercase">Section 2</h3>
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Etiological diagnoses
+        </p>
+    </div>
+    <p class="mt-2 text-sm text-gray-900">
+        <i>
+            Using all the available data (i.e. clinical, cognitive, biomarker, etc) please provide an etiological diagnosis. For those with no biomarker
+            data, enter a <strong>presumed</strong> etiological diagnosis.
+        </i>
+    </p>
+    <p class="mt-2 text-sm text-gray-900">
+        <strong><u>Must be filled out for all participants</u></strong>. Indicate whether a given condition is a primary, contributing, or non-contributing cause of
+        the observed impairment, based on the clinician’s best judgment. Select one or more etiological diagnoses from questions (below) as
+        <strong>Present</strong>; all others will default to <strong>Absent</strong> in the NACC database. Only one diagnosis should be selected as <strong>1 = Primary</strong>.
+    </p>
+    <p class="mt-2 text-sm text-gray-900">
+        <u><strong>For unimpaired participants:</u></strong> Indicate the presence of any etiological diagnoses by selecting <strong>1 = Present</strong>, and leave the questions
+        on whether the diagnosis was primary, contributing, or non-contributing blank.
+    </p>
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PrimaryDiagnosesIndicated"></span>
+
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Etiologic diagnosis</th>
+                <th class="w-24 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                @foreach (var item in Model.EtiologyListItems)
+                {
+                    <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                }
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr class="subsubcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.ALZDIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.ALZDIS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.ALZDIS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.ALZDISIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.ALZDIS", Model.D1b.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.ALZDISIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.ALZDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.ALZDISIF)" for="@Model.D1b.ALZDISIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.LBDIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.LBDIS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.LBDIS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.LBDIS", Model.D1b.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LBDIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.LBDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.LBDIF)" for="@Model.D1b.LBDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.FTLD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.FTLD)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.FTLD"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.FTLD", Model.D1b.FTLD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDIF\",\"D1b.PSP\",\"D1b.CORT\",\"D1b.FTLDMO\",\"D1b.FTLDNOS\",\"D1b.FTLDSUBT\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.FTLD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                    <span class="subcounter invisible"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDIF)" for="@Model.D1b.FTLDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td>
+                    <p>If <strong>present</strong>, select one:</p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDIndicated"></span>
+                </td>
+            </tr>
+            <tr class=" odd:bg-white even:bg-gray-50 border-b">
+                <td class="pl-5">
+                    <div>
+                        <label asp-for="D1b.PSP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.PSP)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.PSP"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PSPIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.PSP", Model.D1b.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PSPIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.PSP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subsubsubcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.PSPIF)" for="@Model.D1b.PSPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                <td class="pl-5">
+                    <div>
+                        <label asp-for="D1b.CORT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.CORT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.CORT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CORTIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.CORT", Model.D1b.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CORTIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.CORT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subsubsubcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CORTIF)" for="@Model.D1b.CORTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                <td class="pl-5">
+                    <div>
+                        <label asp-for="D1b.FTLDMO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDMO)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDMO"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDMOIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.FTLDMO", Model.D1b.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDMOIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.FTLDMO)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subsubsubcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDMOIF)" for="@Model.D1b.FTLDMOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                <td class="pl-5">
+                    <div>
+                        <label asp-for="D1b.FTLDNOS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDNOS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDNOS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDNOIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.FTLDNOS", Model.D1b.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDNOIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.FTLDNOS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subsubsubcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDNOIF)" for="@Model.D1b.FTLDNOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <div colspan="6">
+                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="D1b.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDSUBT)</label>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBT"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.D1b.FTLDSUBT)" for="@Model.D1b.FTLDSUBT" items="Model.FTLDSUBTListItems" ui-behaviors="Model.FTLDSUBTUIBehavior"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBT"></span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBX"></p>
+                                <label asp-for="D1b.FTLDSUBX">@Html.DisplayNameFor(m => m.D1b.FTLDSUBX)</label>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBX"></span>
+                                <div class="mt-2">
+                                    <input asp-for="D1b.FTLDSUBX" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.CVD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CVD)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.CVD"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CVDIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.CVD", Model.D1b.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CVDIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.CVD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CVDIF)" for="@Model.D1b.CVDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.MSA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.MSA)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.MSA"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.MSAIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.MSA", Model.D1b.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.MSAIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.MSA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.MSAIF)" for="@Model.D1b.MSAIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.CTE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CTE)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.CTE"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTEIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.CTE", Model.D1b.CTE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CTEIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.CTE)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CTEIF)" for="@Model.D1b.CTEIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.DOWNS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.DOWNS)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.DOWNS"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DOWNSIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.DOWNS", Model.D1b.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.DOWNSIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.DOWNS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.DOWNSIF)" for="@Model.D1b.DOWNSIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.HUNT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.HUNT)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.HUNT"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.HUNTIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.HUNT", Model.D1b.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.HUNTIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.HUNT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.HUNTIF)" for="@Model.D1b.HUNTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.PRION"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.PRION)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.PRION"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PRIONIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.PRION", Model.D1b.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PRIONIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.PRION)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.PRIONIF)" for="@Model.D1b.PRIONIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.CAA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CAA)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.CAA"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CAAIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.CAA", Model.D1b.CAA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CAAIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.CAA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CAAIF)" for="@Model.D1b.CAAIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.LATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.LATE)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.LATE"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LATEIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.LATE", Model.D1b.LATE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LATEIF\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.LATE)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.LATEIF)" for="@Model.D1b.LATEIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+                <td>
+                    <div>
+                        <label asp-for="D1b.OTHCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHCOG)</label>
+                        <p class="text-sm text-gray-500" asp-description-for="D1b.OTHCOG"></p>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHCOGIF"></span>
+                    </div>
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1b.OTHCOG", Model.D1b.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.OTHCOGIF\",\"D1b.OTHCOGX\"]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="@Html.IdFor(m => m.D1b.OTHCOG)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+                <td>
+                    <span class="subcounter"></span>
+                </td>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.OTHCOGIF)" for="@Model.D1b.OTHCOGIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr>
+                <td class="pl-5">
+                    <label asp-for="D1b.OTHCOGX">@Html.DisplayNameFor(m => m.D1b.OTHCOGX)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.OTHCOGX"></p>
+                </td>
+                <td colspan="4">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHCOGX"></p>
+                            <input asp-for="@Model.D1b.OTHCOGX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHCOGX"></span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<partial name="_FormFooter" for="@Model.D1b" />

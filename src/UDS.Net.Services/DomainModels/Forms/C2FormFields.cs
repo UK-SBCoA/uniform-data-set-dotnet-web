@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -111,15 +113,46 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? RESPOTH { get; set; }
         public string RESPOTHX { get; set; }
 
-        public C2FormFields()
+        public IEnumerable<FormMode> FormModes
         {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video }; // C2T for telephone and C2 for video
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Neuropsychological Battery Scores";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
+
+        public C2FormFields() { }
         public C2FormFields(FormDto dto)
         {
             if (dto is C2Dto)
             {
                 var c2Dto = ((C2Dto)dto);
-                MODCOMM = c2Dto.MODCOMM;
                 MOCACOMP = c2Dto.MOCACOMP;
                 MOCAREAS = c2Dto.MOCAREAS;
                 MOCALOC = c2Dto.MOCALOC;
@@ -202,18 +235,10 @@ namespace UDS.Net.Services.DomainModels.Forms
                 REY5INT = c2Dto.REY5INT;
                 REY6REC = c2Dto.REY6REC;
                 REY6INT = c2Dto.REY6INT;
-                OTRAILA = c2Dto.OTRAILA;
-                OTRLARR = c2Dto.OTRLARR;
-                OTRLALI = c2Dto.OTRLALI;
-                OTRAILB = c2Dto.OTRAILB;
-                OTRLBRR = c2Dto.OTRLBRR;
-                OTRLBLI = c2Dto.OTRLBLI;
                 REYDREC = c2Dto.REYDREC;
                 REYDINT = c2Dto.REYDINT;
                 REYTCOR = c2Dto.REYTCOR;
                 REYFPOS = c2Dto.REYFPOS;
-                VNTTOTW = c2Dto.VNTTOTW;
-                VNTPCNC = c2Dto.VNTPCNC;
                 RESPVAL = c2Dto.RESPVAL;
                 RESPHEAR = c2Dto.RESPHEAR;
                 RESPDIST = c2Dto.RESPDIST;
@@ -226,15 +251,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 RESPOTHX = c2Dto.RESPOTHX;
 
             }
-        }
-        public string GetDescription()
-        {
-            return "Neuropsychological Battery Scores";
-        }
-
-        public string GetVersion()
-        {
-            return "3.0";
         }
     }
 }

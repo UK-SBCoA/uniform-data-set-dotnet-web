@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -24,34 +25,59 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MOMMOB { get; set; }
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
-        public int? MOMNEUR { get; set; }
-        public int? MOMPRDX { get; set; }
-        public int? MOMMOE { get; set; }
+        public string? MOMETPR { get; set; }
+        public string? MOMETSEC { get; set; }
+        public int? MOMMEVAL { get; set; }
         public int? MOMAGEO { get; set; }
         public int? DADMOB { get; set; }
         public int? DADYOB { get; set; }
         public int? DADDAGE { get; set; }
-        public int? DADNEUR { get; set; }
-        public int? DADPRDX { get; set; }
-        public int? DADMOE { get; set; }
+        public string? DADETPR { get; set; }
+        public string? DADETSEC { get; set; }
+        public int? DADMEVAL { get; set; }
         public int? DADAGEO { get; set; }
-
         public int? SIBS { get; set; }
+        public int? NWINFSIB { get; set; }
 
         public List<A3FamilyMemberFormFields> SiblingFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
         public int? KIDS { get; set; }
+        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMemberFormFields> KidsFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>(); // form is required for I
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
-            return "Participant family history";
+            return "Participant Family History";
         }
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
 
         private A3FamilyMemberFormFields GetFamilyMemberFormFields(int index, string propertyPrefix, A3Dto dto)
@@ -69,13 +95,14 @@ namespace UDS.Net.Services.DomainModels.Forms
                     A3FamilyMemberDto value = (A3FamilyMemberDto)prop.GetValue(dto);
                     if (value != null)
                     {
-                        familyMember.MOB = value.MOB;
                         familyMember.YOB = value.YOB;
                         familyMember.AGD = value.AGD;
-                        familyMember.NEU = value.NEU;
-                        familyMember.PDX = value.PDX;
-                        familyMember.MOE = value.MOE;
+                        familyMember.ETPR = value.ETPR;
+                        familyMember.ETSEC = value.ETSEC;
+                        familyMember.MEVAL = value.MEVAL;
                         familyMember.AGO = value.AGO;
+
+                        // TODO map new fields
                     }
                 }
             }
@@ -106,33 +133,23 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a3Dto = ((A3Dto)dto);
                 this.AFFFAMM = a3Dto.AFFFAMM;
-                this.NWINFMUT = a3Dto.AFFFAMM;
-                this.FADMUT = a3Dto.FADMUT;
-                this.FADMUTX = a3Dto.FADMUTX;
-                this.FADMUSO = a3Dto.FADMUSO;
-                this.FADMUSOX = a3Dto.FADMUSOX;
-                this.FFTDMUT = a3Dto.FFTDMUT;
-                this.FFTDMUTX = a3Dto.FFTDMUTX;
-                this.FFTDMUSO = a3Dto.FFTDMUSO;
-                this.FFTDMUSX = a3Dto.FFTDMUSX;
-                this.FOTHMUT = a3Dto.FOTHMUT;
-                this.FOTHMUTX = a3Dto.FOTHMUTX;
-                this.FOTHMUSO = a3Dto.FOTHMUSO;
-                this.FOTHMUSX = a3Dto.FOTHMUSX;
-                this.MOMMOB = a3Dto.MOMMOB;
+                this.NWINFMUT = a3Dto.NWINFMUT;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
-                this.MOMNEUR = a3Dto.MOMNEUR;
-                this.MOMPRDX = a3Dto.MOMPRDX;
-                this.MOMMOE = a3Dto.MOMMOE;
+                this.MOMETPR = a3Dto.MOMETPR;
+                this.MOMETSEC = a3Dto.MOMETSEC;
+                this.MOMMEVAL = a3Dto.MOMMEVAL;
                 this.MOMAGEO = a3Dto.MOMAGEO;
-                this.DADMOB = a3Dto.DADMOB;
                 this.DADYOB = a3Dto.DADYOB;
+                this.DADETPR = a3Dto.DADETPR;
+                this.DADETSEC = a3Dto.DADETSEC;
+                this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
-                this.DADNEUR = a3Dto.DADNEUR;
-                this.DADPRDX = a3Dto.DADPRDX;
-                this.DADMOE = a3Dto.DADMOE;
                 this.DADAGEO = a3Dto.DADAGEO;
+                this.NWINFSIB = a3Dto.NWINFSIB;
+                this.NWINFKID = a3Dto.NWINFKID;
+
+                // TODO map new fields
 
                 this.SIBS = a3Dto.SIBS; // the count of siblings
                 // always 20 spots for siblings

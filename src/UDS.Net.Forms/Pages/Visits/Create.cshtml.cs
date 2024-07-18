@@ -58,13 +58,19 @@ namespace UDS.Net.Forms.Pages.Visits
             if (Participation != null)
                 SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
 
+            var shortenedInitials = "UNK";
+            if (User.Identity.Name.Length > 3)
+                shortenedInitials = User.Identity.Name.Substring(0, 3);
+            else
+                shortenedInitials = User.Identity.Name;
 
             Visit = new VisitModel
             {
-                Version = "UDS3",
+                FORMVER = "4",
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username",
-                StartDateTime = DateTime.Now,
+                CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Unknown",
+                VISIT_DATE = DateTime.Now,
+                INITIALS = shortenedInitials
             };
 
             if (participationId.HasValue)
@@ -76,13 +82,11 @@ namespace UDS.Net.Forms.Pages.Visits
             {
                 if (Participation.LastVisitNumber < 1)
                 {
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.IVP.ToString(), Text = "IVP" });
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TIP.ToString(), Text = "TIP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
                 }
                 else if (Participation.LastVisitNumber >= 1)
                 {
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.FVP.ToString(), Text = "FVP" });
-                    VisitKindOptions.Add(new SelectListItem { Value = VisitKind.TFP.ToString(), Text = "TFP" });
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
                 }
             }
 

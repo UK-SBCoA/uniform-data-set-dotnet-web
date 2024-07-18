@@ -5,7 +5,7 @@ namespace UDS.Net.Forms.Models
     {
         public int? Id { get; set; }
 
-        public string DrugId { get; set; }
+        public string RxNormId { get; set; }
 
         public string? DrugName { get; set; }
 

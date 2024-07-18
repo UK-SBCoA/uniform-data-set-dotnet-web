@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -7,15 +9,53 @@ namespace UDS.Net.Services.DomainModels.Forms
     {
         public double? HEIGHT { get; set; }
         public int? WEIGHT { get; set; }
-        public int? BPSYS { get; set; }
-        public int? BPDIAS { get; set; }
+        public int? WAIST1 { get; set; }
+        public int? WAIST2 { get; set; }
+        public int? HIP1 { get; set; }
+        public int? HIP2 { get; set; }
+        public int? BPSYSL1 { get; set; }
+        public int? BPDIASL1 { get; set; }
+        public int? BPSYSL2 { get; set; }
+        public int? BPDIASL2 { get; set; }
+        public int? BPSYSR1 { get; set; }
+        public int? BPDIASR1 { get; set; }
+        public int? BPSYSR2 { get; set; }
+        public int? BPDIASR2 { get; set; }
         public int? HRATE { get; set; }
-        public int? VISION { get; set; }
-        public int? VISCORR { get; set; }
-        public int? VISWCORR { get; set; }
-        public int? HEARING { get; set; }
-        public int? HEARAID { get; set; }
-        public int? HEARWAID { get; set; }
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.NoCoParticipantOrRemoteVisit, NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>();
+            }
+        }
+
+        public string GetDescription()
+        {
+            return "Evaluation Form - Vital Signs and Anthropometrics";
+        }
+
+        public string GetVersion()
+        {
+            return "4";
+        }
 
         public B1FormFields() { }
         public B1FormFields(FormDto dto)
@@ -26,26 +66,20 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                 HEIGHT = b1Dto.HEIGHT;
                 WEIGHT = b1Dto.WEIGHT;
-                BPSYS = b1Dto.BPSYS;
-                BPDIAS = b1Dto.BPDIAS;
+                WAIST1 = b1Dto.WAIST1;
+                WAIST2 = b1Dto.WAIST2;
+                HIP1 = b1Dto.HIP1;
+                HIP2 = b1Dto.HIP2;
+                BPSYSL1 = b1Dto.BPSYSL1;
+                BPDIASL1 = b1Dto.BPDIASL1;
+                BPSYSL2 = b1Dto.BPSYSL2;
+                BPDIASL2 = b1Dto.BPDIASL2;
+                BPSYSR1 = b1Dto.BPSYSR1;
+                BPDIASR1 = b1Dto.BPDIASR1;
+                BPSYSR2 = b1Dto.BPSYSR2;
+                BPDIASR2 = b1Dto.BPDIASR2;
                 HRATE = b1Dto.HRATE;
-                VISION = b1Dto.VISION;
-                VISCORR = b1Dto.VISCORR;
-                VISWCORR = b1Dto.VISWCORR;
-                HEARING = b1Dto.HEARING;
-                HEARAID = b1Dto.HEARAID;
-                HEARWAID = b1Dto.HEARWAID;
             }
-        }
-
-        public string GetDescription()
-        {
-            return "Evaluation Form - Physical";
-        }
-
-        public string GetVersion()
-        {
-            return "3.0";
         }
     }
 }

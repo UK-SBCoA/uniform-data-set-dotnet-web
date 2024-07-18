@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
 using UDS.Net.Services.Enums;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class DiagnosisAttribute : ValidationAttribute, IClientModelValidator
 {
     private static string ERRORMESSAGE = "Diagnosis code invalid. Please see reference.";
-    private static int[] CODES = new int[] { 40, 41, 42, 43, 44, 45, 50, 70, 80, 100, 110, 120, 130, 131, 132, 133, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 310, 320, 400, 410, 420, 421, 430, 431, 432, 433, 434, 435, 436, 439, 440, 450, 490, 999 };
+    private static int[] CODES = new int[] { 00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 88, 99 };
 
     public bool AllowUnknown { get; set; } = false;
 
@@ -19,7 +18,7 @@ public class DiagnosisAttribute : ValidationAttribute, IClientModelValidator
             var form = (FormModel)validationContext.ObjectInstance;
 
             // Only validate if the form is attempting to be completed
-            if (form.Status == FormStatus.Complete)
+            if (form.Status == FormStatus.Finalized)
             {
                 if (value is int)
                 {

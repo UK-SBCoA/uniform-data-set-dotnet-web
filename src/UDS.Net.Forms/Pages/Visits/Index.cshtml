@@ -4,33 +4,46 @@
     ViewData["Title"] = "Visits";
 }
 
-<div class="sm:flex-auto">
-    <h1 class="text-xl font-semibold text-gray-900">Active visits</h1>
-    <p class="mt-2 text-sm text-gray-700">A list of in-progress, tabled, and unsubmitted visits.</p>
+<div class="space-y-16 py-16 xl:space-y-20">
+    <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-semibold text-gray-900">All visits</h2>
+        <p class="mt-2 text-sm text-gray-700">A list of in-progress, tabled, and unsubmitted visits.</p>
+    </div>
+    @if (Model.Visits != null)
+    {
+
+        <div class="mt-6 overflow-hidden border-t border-gray-100">
+            <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr>
+                                <th scope="col">Participation Id</th>
+                                <th scope="col">Visit number</th>
+                                <th scope="col">Version</th>
+                                <th scope="col">Packet kind</th>
+                                <th scope="col">Initials</th>
+                                <th scope="col">Date</th>
+                                <th scope="col"><span class="sr-only">View details</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var visit in Model.Visits)
+                            {
+                                <tr>
+                                    <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
+                                    <td>@visit.VISITNUM</td>
+                                    <td>@visit.FORMVER</td>
+                                    <td>@visit.PACKET</td>
+                                    <td>@visit.INITIALS</td>
+                                    <td>@visit.VISIT_DATE.ToShortDateString()</td>
+                                    <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></th>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
 </div>
-@if (Model.Visits != null)
-{
-    <table class="min-w-full divide-y divide-gray-300">
-        <thead>
-            <tr>
-                <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Participation Id</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit number</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Visit kind</th>
-                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">Date</th>
-                <th scope="col" class="relative py-3.5 pl-3 pr-6 sm:pr-0"><span class="sr-only">Edit</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var visit in Model.Visits)
-            {
-                <tr>
-                    <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
-                    <td>@visit.Number</td>
-                    <td>@visit.Kind</td>
-                    <td>@visit.StartDateTime.ToShortDateString()</td>
-                    <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-indigo-600 hover:text-indigo-900">View</a></th>
-                </tr>
-            }
-        </tbody>
-    </table>
-}

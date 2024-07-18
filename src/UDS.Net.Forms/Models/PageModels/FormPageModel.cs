@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS3;
-using UDS.Net.Forms.Pages.UDS3;
+using UDS.Net.Forms.Models.UDS4;
+using UDS.Net.Forms.Pages.UDS4;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services;
 
@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (BaseForm != null)
                 {
-                    return $"Participant {Visit.ParticipationId} Visit {Visit.Number} {Visit.Kind}";
+                    return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET}";
                 }
                 return "";
             }
@@ -56,7 +56,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
-            var form = visit.Forms.Where(f => f.Kind.Contains(_formKind)).FirstOrDefault();
+            var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
             BaseForm = form.ToVM(); // this will have the subclass
 
@@ -68,7 +68,7 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             var visit = Visit.ToEntity();
 
-            if (BaseForm.Status == FormStatus.Complete || BaseForm.Status == FormStatus.NotIncluded)
+            if (BaseForm.Status == FormStatus.Finalized)
             {
                 /*
                  * ValidationContext describes any member on which validation is performed. It also enables
@@ -97,7 +97,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("Status", ex.Message);
+                    ModelState.AddModelError($"{BaseForm.GetType().Name}.Status", ex.Message);
                 }
             }
 

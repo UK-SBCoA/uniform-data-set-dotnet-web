@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
     public class B9FormFields : IFormFields
     {
-        public int? DECSUB { get; set; }
-        public int? DECIN { get; set; }
+        public int? DECCOG { get; set; }
+        public int? DECMOT { get; set; }
+        public int? PSYCHSYM { get; set; }
+        public int? DECCOGIN { get; set; }
+        public int? DECMOTIN { get; set; }
+        public int? PSYCHSYMIN { get; set; }
+        public int? DECCLIN { get; set; }
         public int? DECCLCOG { get; set; }
         public int? COGMEM { get; set; }
         public int? COGORI { get; set; }
@@ -15,121 +22,89 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COGVIS { get; set; }
         public int? COGATTN { get; set; }
         public int? COGFLUC { get; set; }
-        public int? COGFLAGO { get; set; }
         public int? COGOTHR { get; set; }
-        public string COGOTHRX { get; set; }
-        public int? COGFPRED { get; set; }
-        public string COGFPREX { get; set; }
+        public string? COGOTHRX { get; set; }
+        public int? COGAGE { get; set; }
         public int? COGMODE { get; set; }
-        public string COGMODEX { get; set; }
-        public int? DECAGE { get; set; }
+        public string? COGMODEX { get; set; }
         public int? DECCLBE { get; set; }
         public int? BEAPATHY { get; set; }
         public int? BEDEP { get; set; }
-        public int? BEVHALL { get; set; }
-        public int? BEVWELL { get; set; }
-        public int? BEVHAGO { get; set; }
-        public int? BEAHALL { get; set; }
-        public int? BEDEL { get; set; }
-        public int? BEDISIN { get; set; }
+        public int? BEANX { get; set; }
+        public int? BEEUPH { get; set; }
         public int? BEIRRIT { get; set; }
         public int? BEAGIT { get; set; }
+        public int? BEHAGE { get; set; }
+        public int? BEVHALL { get; set; }
+        public int? BEVPATT { get; set; }
+        public int? BEVWELL { get; set; }
+        public int? BEAHALL { get; set; }
+        public int? BEAHSIMP { get; set; }
+        public int? BEAHCOMP { get; set; }
+        public int? BEDEL { get; set; }
+        public int? BEAGGRS { get; set; }
+        public int? PSYCHAGE { get; set; }
+        public int? BEDISIN { get; set; }
         public int? BEPERCH { get; set; }
+        public int? BEEMPATH { get; set; }
+        public int? BEOBCOM { get; set; }
+        public int? BEANGER { get; set; }
+        public int? BESUBAB { get; set; }
+        public bool? ALCUSE { get; set; }
+        public bool? SEDUSE { get; set; }
+        public bool? OPIATEUSE { get; set; }
+        public bool? COCAINEUSE { get; set; }
+        public bool? CANNABUSE { get; set; }
+        public bool? OTHSUBUSE { get; set; }
+        public string? OTHSUBUSEX { get; set; }
+        public int? PERCHAGE { get; set; }
         public int? BEREM { get; set; }
         public int? BEREMAGO { get; set; }
-        public int? BEANX { get; set; }
+        public int? BEREMCONF { get; set; }
         public int? BEOTHR { get; set; }
-        public string BEOTHRX { get; set; }
-        public int? BEFPRED { get; set; }
-        public string BEFPREDX { get; set; }
+        public string? BEOTHRX { get; set; }
         public int? BEMODE { get; set; }
-        public string BEMODEX { get; set; }
-        public int? BEAGE { get; set; }
+        public string? BEMODEX { get; set; }
         public int? DECCLMOT { get; set; }
         public int? MOGAIT { get; set; }
         public int? MOFALLS { get; set; }
-        public int? MOTREM { get; set; }
         public int? MOSLOW { get; set; }
-        public int? MOFRST { get; set; }
+        public int? MOTREM { get; set; }
+        public int? MOLIMB { get; set; }
+        public int? MOFACE { get; set; }
+        public int? MOSPEECH { get; set; }
+        public int? MOTORAGE { get; set; }
         public int? MOMODE { get; set; }
-        public string MOMODEX { get; set; }
+        public string? MOMODEX { get; set; }
         public int? MOMOPARK { get; set; }
-        public int? PARKAGE { get; set; }
         public int? MOMOALS { get; set; }
-        public int? ALSAGE { get; set; }
-        public int? MOAGE { get; set; }
         public int? COURSE { get; set; }
         public int? FRSTCHG { get; set; }
-        public int? LBDEVAL { get; set; }
-        public int? FTLDEVAL { get; set; }
 
-        public B9FormFields()
+        public IEnumerable<FormMode> FormModes
         {
-        }
-        public B9FormFields(FormDto dto)
-        {
-            if (dto is B9Dto)
+            get
             {
-                var b9Dto = ((B9Dto)dto);
-                DECSUB = b9Dto.DECSUB;
-                DECIN = b9Dto.DECIN;
-                DECCLCOG = b9Dto.DECCLCOG;
-                COGMEM = b9Dto.COGMEM;
-                COGORI = b9Dto.COGORI;
-                COGJUDG = b9Dto.COGJUDG;
-                COGLANG = b9Dto.COGLANG;
-                COGVIS = b9Dto.COGVIS;
-                COGATTN = b9Dto.COGATTN;
-                COGFLUC = b9Dto.COGFLUC;
-                COGFLAGO = b9Dto.COGFLAGO;
-                COGOTHR = b9Dto.COGOTHR;
-                COGOTHRX = b9Dto.COGOTHRX;
-                COGFPRED = b9Dto.COGFPRED;
-                COGFPREX = b9Dto.COGFPREX;
-                COGMODE = b9Dto.COGMODE;
-                COGMODEX = b9Dto.COGMODEX;
-                DECAGE = b9Dto.DECAGE;
-                DECCLBE = b9Dto.DECCLBE;
-                BEAPATHY = b9Dto.BEAPATHY;
-                BEDEP = b9Dto.BEDEP;
-                BEVHALL = b9Dto.BEVHALL;
-                BEVWELL = b9Dto.BEVWELL;
-                BEVHAGO = b9Dto.BEVHAGO;
-                BEAHALL = b9Dto.BEAHALL;
-                BEDEL = b9Dto.BEDEL;
-                BEDISIN = b9Dto.BEDISIN;
-                BEIRRIT = b9Dto.BEDISIN;
-                BEAGIT = b9Dto.BEAGIT;
-                BEPERCH = b9Dto.BEAGIT;
-                BEREM = b9Dto.BEREM;
-                BEREMAGO = b9Dto.BEREMAGO;
-                BEANX = b9Dto.BEANX;
-                BEOTHR = b9Dto.BEOTHR;
-                BEOTHRX = b9Dto.BEOTHRX;
-                BEFPRED = b9Dto.BEFPRED;
-                BEFPREDX = b9Dto.BEFPREDX;
-                BEMODE = b9Dto.BEMODE;
-                BEMODEX = b9Dto.BEMODEX;
-                BEAGE = b9Dto.BEAGE;
-                DECCLMOT = b9Dto.DECCLMOT;
-                MOGAIT = b9Dto.MOGAIT;
-                MOFALLS = b9Dto.MOFALLS;
-                MOTREM = b9Dto.MOTREM;
-                MOSLOW = b9Dto.MOSLOW;
-                MOFRST = b9Dto.MOFRST;
-                MOMODE = b9Dto.MOMODE;
-                MOMODEX = b9Dto.MOMODEX;
-                MOMOPARK = b9Dto.MOMOPARK;
-                PARKAGE = b9Dto.PARKAGE;
-                MOMOALS = b9Dto.MOMOALS;
-                ALSAGE = b9Dto.ALSAGE;
-                MOAGE = b9Dto.MOAGE;
-                COURSE = b9Dto.COURSE;
-                FRSTCHG = b9Dto.FRSTCHG;
-                LBDEVAL = b9Dto.LBDEVAL;
-                FTLDEVAL = b9Dto.FTLDEVAL;
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
             }
         }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
             return "Clinician Judgment of Symptoms";
@@ -137,7 +112,96 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
+        }
+
+        private static int? ConvertToNullableInt(bool? property)
+        {
+            if (property == true) return 1;
+            if (property == false) return 0;
+            return null;
+        }
+
+        public B9FormFields() { }
+        public B9FormFields(FormDto dto)
+        {
+            if (dto is B9Dto)
+            {
+                var b9Dto = ((B9Dto)dto);
+                DECCOG = b9Dto.DECCOG;
+                DECMOT = b9Dto.DECMOT;
+                PSYCHSYM = b9Dto.PSYCHSYM;
+                DECCOGIN = b9Dto.DECCOGIN;
+                DECMOTIN = b9Dto.DECMOTIN;
+                PSYCHSYMIN = b9Dto.PSYCHSYMIN;
+                DECCLIN = ConvertToNullableInt(b9Dto.DECCLIN);
+                DECCLCOG = ConvertToNullableInt(b9Dto.DECCLCOG);
+                COGMEM = b9Dto.COGMEM;
+                COGORI = b9Dto.COGORI;
+                COGJUDG = b9Dto.COGJUDG;
+                COGLANG = b9Dto.COGLANG;
+                COGVIS = b9Dto.COGVIS;
+                COGATTN = b9Dto.COGATTN;
+                COGFLUC = b9Dto.COGFLUC;
+                COGOTHR = b9Dto.COGOTHR;
+                COGOTHRX = b9Dto.COGOTHRX;
+                COGAGE = b9Dto.COGAGE;
+                COGMODE = b9Dto.COGMODE;
+                COGMODEX = b9Dto.COGMODEX;
+                DECCLBE = b9Dto.DECCLBE;
+                BEAPATHY = b9Dto.BEAPATHY;
+                BEDEP = b9Dto.BEDEP;
+                BEANX = b9Dto.BEANX;
+                BEEUPH = b9Dto.BEEUPH;
+                BEIRRIT = b9Dto.BEIRRIT;
+                BEAGIT = b9Dto.BEAGIT;
+                BEHAGE = b9Dto.BEHAGE;
+                BEVHALL = b9Dto.BEVHALL;
+                BEVPATT = b9Dto.BEVPATT;
+                BEVWELL = b9Dto.BEVWELL;
+                BEAHALL = b9Dto.BEAHALL;
+                BEAHSIMP = b9Dto.BEAHSIMP;
+                BEAHCOMP = b9Dto.BEAHCOMP;
+                BEDEL = b9Dto.BEDEL;
+                BEAGGRS = b9Dto.BEAGGRS;
+                PSYCHAGE = b9Dto.PSYCHAGE;
+                BEDISIN = b9Dto.BEDISIN;
+                BEPERCH = b9Dto.BEPERCH;
+                BEEMPATH = b9Dto.BEEMPATH;
+                BEOBCOM = b9Dto.BEOBCOM;
+                BEANGER = b9Dto.BEANGER;
+                BESUBAB = b9Dto.BESUBAB;
+                ALCUSE = b9Dto.ALCUSE;
+                SEDUSE = b9Dto.SEDUSE;
+                OPIATEUSE = b9Dto.OPIATEUSE;
+                COCAINEUSE = b9Dto.COCAINEUSE;
+                CANNABUSE = b9Dto.CANNABUSE;
+                OTHSUBUSE = b9Dto.OTHSUBUSE;
+                OTHSUBUSEX = b9Dto.OTHSUBUSEX;
+                PERCHAGE = b9Dto.PERCHAGE;
+                BEREM = b9Dto.BEREM;
+                BEREMAGO = b9Dto.BEREMAGO;
+                BEREMCONF = b9Dto.BEREMCONF;
+                BEOTHR = b9Dto.BEOTHR;
+                BEOTHRX = b9Dto.BEOTHRX;
+                BEMODE = b9Dto.BEMODE;
+                BEMODEX = b9Dto.BEMODEX;
+                DECCLMOT = ConvertToNullableInt(b9Dto.DECCLMOT);
+                MOGAIT = b9Dto.MOGAIT;
+                MOFALLS = b9Dto.MOFALLS;
+                MOSLOW = b9Dto.MOSLOW;
+                MOTREM = b9Dto.MOTREM;
+                MOLIMB = b9Dto.MOLIMB;
+                MOFACE = b9Dto.MOFACE;
+                MOSPEECH = b9Dto.MOSPEECH;
+                MOTORAGE = b9Dto.MOTORAGE;
+                MOMODE = b9Dto.MOMODE;
+                MOMODEX = b9Dto.MOMODEX;
+                MOMOPARK = b9Dto.MOMOPARK;
+                MOMOALS = b9Dto.MOMOALS;
+                COURSE = b9Dto.COURSE;
+                FRSTCHG = b9Dto.FRSTCHG;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
@@ -10,28 +11,58 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public List<A4DFormFields> A4Ds { get; set; } = new List<A4DFormFields>();
 
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
+
         public string GetDescription()
         {
-            return "Participant medications";
+            return "Participant Medications";
         }
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
 
         public A4GFormFields() { }
         public A4GFormFields(FormDto dto) : this()
         {
-            if (dto is A4GDto)
+            if (dto is A4Dto)
             {
-                var a4GDto = (A4GDto)dto;
+                var a4GDto = (A4Dto)dto;
 
                 this.ANYMEDS = a4GDto.ANYMEDS;
 
-                foreach (var a4DDto in a4GDto.A4Dtos)
+                if ((a4GDto.A4DetailsDtos != null && a4GDto.A4DetailsDtos.Count > 0))
                 {
-                    A4Ds.Add(new A4DFormFields(a4DDto));
+                    foreach (var details in a4GDto.A4DetailsDtos)
+                    {
+                        this.A4Ds.Add(new A4DFormFields()
+                        {
+                            RxNormId = details.ToString()
+                        });
+                    }
                 }
             }
         }

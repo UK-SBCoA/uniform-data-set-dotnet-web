@@ -11,27 +11,30 @@
         <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
             <div>
-                <span><b>Create visit for @Model.Participation.LegacyId</b></span>
+                <span><b>Create visit for NACC Id @Model.Participation.LegacyId</b></span>
             </div>
             <br />
             <input type="hidden" asp-for="Visit.ParticipationId" />
             <div>
-                <label asp-for="Visit.Kind"></label>
-                <select asp-for="Visit.Kind" asp-items="Model.VisitKindOptions" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <label asp-for="Visit.PACKET"></label>
+                <select asp-for="Visit.PACKET" asp-items="Model.VisitKindOptions" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <option value=""></option>
                 </select>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="Visit.Kind"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="Visit.PACKET"></span>
             </div>
 
-            <label asp-for="Visit.Number"></label>
-            <input asp-for="Visit.Number" value="@Model.SelectedParticipationNextVisit" />
+            <label asp-for="Visit.VISITNUM"></label>
+            <input asp-for="Visit.VISITNUM" value="@Model.SelectedParticipationNextVisit" />
 
-            <label asp-for="Visit.StartDateTime"></label>
-            <input asp-for="Visit.StartDateTime" />
+            <label asp-for="Visit.VISIT_DATE"></label>
+            <input asp-for="Visit.VISIT_DATE" />
+
+            <label asp-for="Visit.INITIALS"></label>
+            <input asp-for="Visit.INITIALS" />
 
             <input asp-for="Visit.CreatedAt" type="hidden" />
             <input asp-for="Visit.CreatedBy" type="hidden" />
-            <input asp-for="Visit.Version" type="hidden" />
+            <input asp-for="Visit.FORMVER" type="hidden" />
 
             <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
 

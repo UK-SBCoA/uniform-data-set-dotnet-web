@@ -1,39 +1,57 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A2FormFields : IFormFields
     {
-        public int? INBIRMO { get; set; }
-        public int? INBIRYR { get; set; }
-        public int? INSEX { get; set; }
         public int? NEWINF { get; set; }
-        public int? INHISP { get; set; }
-        public int? INHISPOR { get; set; }
-        public string INHISPOX { get; set; }
-        public int? INRACE { get; set; }
-        public string INRACEX { get; set; }
-        public int? INRASEC { get; set; }
-        public string INRASECX { get; set; }
-        public int? INRATER { get; set; }
-        public string INRATERX { get; set; }
-        public int? INEDUC { get; set; }
         public int? INRELTO { get; set; }
         public int? INKNOWN { get; set; }
         public int? INLIVWTH { get; set; }
-        public int? INVISITS { get; set; }
-        public int? INCALLS { get; set; }
+        public int? INCNTMOD { get; set; }
+        public string INCNTMDX { get; set; }
+        public int? INCNTFRQ { get; set; }
+        public int? INCNTTIM { get; set; }
         public int? INRELY { get; set; }
+        public int? INMEMWORS { get; set; }
+        public int? INMEMTROUB { get; set; }
+        public int? INMEMTEN { get; set; }
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.NoCoParticipantOrRemoteVisit, NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
+            }
+        }
 
         public string GetDescription()
         {
-            return "Co-participant demographics";
+            return "Co-Participant Demographics";
         }
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
 
         public A2FormFields() { }
@@ -42,28 +60,18 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A2Dto)
             {
                 var a2Dto = ((A2Dto)dto);
-
-                this.INBIRMO = a2Dto.INBIRMO;
-                this.INBIRYR = a2Dto.INBIRYR;
-                this.INSEX = a2Dto.INSEX;
                 this.NEWINF = a2Dto.NEWINF;
-                this.INHISP = a2Dto.INHISP;
-                this.INHISPOR = a2Dto.INHISPOR;
-                this.INHISPOX = a2Dto.INHISPOX;
-                this.INRACE = a2Dto.INRACE;
-                this.INRACEX = a2Dto.INRACEX;
-                this.INRASEC = a2Dto.INRASEC;
-                this.INRASECX = a2Dto.INRASECX;
-                this.INRATER = a2Dto.INRATER;
-                this.INRATERX = a2Dto.INRATERX;
-                this.INEDUC = a2Dto.INEDUC;
                 this.INRELTO = a2Dto.INRELTO;
                 this.INKNOWN = a2Dto.INKNOWN;
                 this.INLIVWTH = a2Dto.INLIVWTH;
-                this.INVISITS = a2Dto.INVISITS;
-                this.INCALLS = a2Dto.INCALLS;
+                this.INCNTMOD = a2Dto.INCNTMOD;
+                this.INCNTMDX = a2Dto.INCNTMDX;
+                this.INCNTFRQ = a2Dto.INCNTFRQ;
+                this.INCNTTIM = a2Dto.INCNTTIM;
                 this.INRELY = a2Dto.INRELY;
-                this.NEWINF = a2Dto.NEWINF;
+                this.INMEMWORS = a2Dto.INMEMWORS;
+                this.INMEMTROUB = a2Dto.INMEMTROUB;
+                this.INMEMTEN = a2Dto.INMEMTEN;
             }
         }
     }

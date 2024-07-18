@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 82
 EXPOSE 445
 
+HEALTHCHECK NONE
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["UDS.Net.Web.MVC/UDS.Net.Web.MVC.csproj", "UDS.Net.Web.MVC/"]
@@ -23,3 +25,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "UDS.Net.Web.MVC.dll"]
+
+RUN useradd -m appuser
+USER appuser

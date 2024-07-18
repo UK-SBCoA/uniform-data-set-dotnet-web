@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms
 {
+    // TODO remove
+    [Obsolete]
     public class D2FormFields : IFormFields
     {
         public int? CANCER { get; set; }
@@ -39,48 +43,36 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? OTHCOND { get; set; }
         public string OTHCONDX { get; set; }
 
+
+        public IEnumerable<FormMode> FormModes
+        {
+            get
+            {
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+            }
+        }
+
+        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
+        {
+            get
+            {
+                return new List<NotIncludedReasonCode>();
+            }
+        }
+
+        public IEnumerable<RemoteModality> RemoteModalities
+        {
+            get
+            {
+                return new List<RemoteModality>(); // form is required for I
+            }
+        }
+
         public D2FormFields()
         {
         }
         public D2FormFields(FormDto dto)
         {
-            if (dto is D2Dto)
-            {
-                var d2Dto = ((D2Dto)dto);
-                CANCER = d2Dto.CANCER;
-                CANCSITE = d2Dto.CANCSITE;
-                DIABET = d2Dto.DIABET;
-                MYOINF = d2Dto.MYOINF;
-                CONGHRT = d2Dto.CONGHRT;
-                AFIBRILL = d2Dto.AFIBRILL;
-                HYPERT = d2Dto.HYPERT;
-                ANGINA = d2Dto.ANGINA;
-                HYPCHOL = d2Dto.HYPCHOL;
-                VB12DEF = d2Dto.VB12DEF;
-                THYDIS = d2Dto.THYDIS;
-                ARTH = d2Dto.ARTH;
-                ARTYPE = d2Dto.ARTYPE;
-                ARTYPEX = d2Dto.ARTYPEX;
-                ARTUPEX = d2Dto.ARTUPEX;
-                ARTLOEX = d2Dto.ARTLOEX;
-                ARTSPIN = d2Dto.ARTSPIN;
-                ARTUNKN = d2Dto.ARTUNKN;
-                URINEINC = d2Dto.URINEINC;
-                BOWLINC = d2Dto.BOWLINC;
-                SLEEPAP = d2Dto.SLEEPAP;
-                REMDIS = d2Dto.REMDIS;
-                HYPOSOM = d2Dto.HYPOSOM;
-                SLEEPOTH = d2Dto.SLEEPOTH;
-                SLEEPOTX = d2Dto.SLEEPOTX;
-                ANGIOCP = d2Dto.ANGIOCP;
-                ANGIOPCI = d2Dto.ANGIOPCI;
-                PACEMAKE = d2Dto.PACEMAKE;
-                HVALVE = d2Dto.HVALVE;
-                ANTIENC = d2Dto.ANTIENC;
-                ANTIENCX = d2Dto.ANTIENCX;
-                OTHCOND = d2Dto.OTHCOND;
-                OTHCONDX = d2Dto.OTHCONDX;
-            }
         }
 
         public string GetDescription()
@@ -90,7 +82,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetVersion()
         {
-            return "3.0";
+            return "4";
         }
     }
 }
