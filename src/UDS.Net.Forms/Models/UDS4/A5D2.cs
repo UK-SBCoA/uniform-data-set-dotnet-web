@@ -590,11 +590,10 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (DIABINS == true || DIABMEDS == true || DIABDIET == true || DIABUNK == true)
-                {
+                if (DIABINS == true || DIABMEDS == true || DIABGLP1 == true || DIABRECACT == true || DIABDIET == true || DIABUNK == true)
                     return true;
-                }
-                else return null;
+                else
+                    return null;
             }
         }
 
