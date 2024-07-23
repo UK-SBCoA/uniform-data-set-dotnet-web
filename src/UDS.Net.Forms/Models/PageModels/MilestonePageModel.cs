@@ -172,6 +172,7 @@ namespace UDS.Net.Forms.Models.PageModels
                     new UIEnableAttribute("Milestone.RECOGIM"),
                     new UIEnableAttribute("Milestone.REPHYILL"),
                     new UIEnableAttribute("Milestone.REREFUSE"),
+                    new UIEnableAttribute("Milestone.RENAVAIL"),
                     new UIEnableAttribute("Milestone.RENURSE"),
                     new UIEnableAttribute("Milestone.NURSEMO"),
                     new UIEnableAttribute("Milestone.NURSEDY"),
@@ -182,13 +183,6 @@ namespace UDS.Net.Forms.Models.PageModels
                     new UIEnableAttribute("Milestone.FTLDREAX"),
                     new UIDisableAttribute("Milestone.DECEASED"),
                     new UIDisableAttribute("Milestone.DISCONT"),
-                    new UIDisableAttribute("Milestone.DEATHMO"),
-                    new UIDisableAttribute("Milestone.DEATHDY"),
-                    new UIDisableAttribute("Milestone.DEATHYR"),
-                    new UIDisableAttribute("Milestone.AUTOPSY"),
-                    new UIDisableAttribute("Milestone.DISCMO"),
-                    new UIDisableAttribute("Milestone.DISCDAY"),
-                    new UIDisableAttribute("Milestone.DISCYR"),
 
                 },
                 InstructionalMessage = ""
@@ -204,6 +198,7 @@ namespace UDS.Net.Forms.Models.PageModels
                     new UIDisableAttribute("Milestone.RECOGIM"),
                     new UIDisableAttribute("Milestone.REPHYILL"),
                     new UIDisableAttribute("Milestone.REREFUSE"),
+                    new UIDisableAttribute("Milestone.RENAVAIL"),
                     new UIDisableAttribute("Milestone.RENURSE"),
                     new UIDisableAttribute("Milestone.NURSEMO"),
                     new UIDisableAttribute("Milestone.NURSEDY"),
@@ -213,14 +208,7 @@ namespace UDS.Net.Forms.Models.PageModels
                     new UIDisableAttribute("Milestone.FTLDREAS"),
                     new UIDisableAttribute("Milestone.FTLDREAX"),
                     new UIEnableAttribute("Milestone.DECEASED"),
-                    new UIEnableAttribute("Milestone.DISCONT"),
-                    new UIEnableAttribute("Milestone.DEATHMO"),
-                    new UIEnableAttribute("Milestone.DEATHDY"),
-                    new UIEnableAttribute("Milestone.DEATHYR"),
-                    new UIEnableAttribute("Milestone.AUTOPSY"),
-                    new UIEnableAttribute("Milestone.DISCMO"),
-                    new UIEnableAttribute("Milestone.DISCDAY"),
-                    new UIEnableAttribute("Milestone.DISCYR"),
+                    new UIEnableAttribute("Milestone.DISCONT")
 
                 },
                 InstructionalMessage = ""
