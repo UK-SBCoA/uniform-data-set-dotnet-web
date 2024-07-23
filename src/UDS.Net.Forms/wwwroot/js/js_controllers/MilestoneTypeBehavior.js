@@ -49,3 +49,29 @@ $(() => {
         milestoneTypeBehavior.DisableSectionOnChange()
     })
 })
+
+//class MilestoneTypeBehavior {
+//    SetMilestoneType() {
+//        let deceasedInput = $("#Milestone_DECEASED")
+//        let discontInput = $("#Milestone_DISCONT")
+
+//        if ($(deceasedInput).is(':checked') || $(discontInput).is(':checked')) {
+//            $('#Milestone\\.MilestoneType\\[1\\]').prop("checked", true)
+//        } else {
+//            $('#Milestone\\.MilestoneType\\[0\\]').prop("checked", true)
+//        }
+//    }
+//}
+
+//$(() => {
+//    const milestoneTypeBehavior = new MilestoneTypeBehavior()
+
+//    // Wait for the DOM to be fully loaded before setting the MilestoneType
+//    $(document).ready(() => {
+//        milestoneTypeBehavior.SetMilestoneType()
+//    });
+
+//    $("input[name='Milestone.MilestoneType']").on("change", () => {
+//        milestoneTypeBehavior.DisableSectionOnChange()
+//    })
+//})
