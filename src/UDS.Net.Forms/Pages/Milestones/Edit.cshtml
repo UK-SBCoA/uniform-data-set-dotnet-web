@@ -32,7 +32,7 @@
                     </div>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div>
-                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems" ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
+                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MilestoneType)" for="@Model.Milestone.MilestoneType" items="Model.MilestoneTypeItems"  ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
                         </div>
                     </div>
                 </div>

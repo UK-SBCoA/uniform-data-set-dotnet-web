@@ -33,7 +33,7 @@
                     </div>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div>
-                            <radio-button-group id="Milestone.MilestoneType" for="Milestone.MilestoneType" items="Model.MilestoneTypeItems" ui-behaviors="@Model.FTLDREASBehavior"></radio-button-group>
+                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MilestoneType)" for="@Model.Milestone.MilestoneType" items="Model.MilestoneTypeItems"  ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     <div class="sm:col-span-2">
                         <div class="counterreset flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("Milestone.RECOGIM", Model.Milestone.RECOGIM, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RECOGIM"><span class="@pillNumberCSS">1</span> @Html.DisplayNameFor(Model => Model.Milestone.RECOGIM)</label>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.REPHYILL", Model.Milestone.REPHYILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("Milestone.REPHYILL", Model.Milestone.REPHYILL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REPHYILL"><span class="@pillNumberCSS">2</span> @Html.DisplayNameFor(Model => Model.Milestone.REPHYILL)</label>
@@ -165,7 +165,7 @@
                         </div>
                         <div class="flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.REREFUSE", Model.Milestone.REREFUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("Milestone.REREFUSE", Model.Milestone.REREFUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REREFUSE"><span class="@pillNumberCSS">3</span> @Html.DisplayNameFor(Model => Model.Milestone.REREFUSE)</label>
@@ -173,7 +173,7 @@
                         </div>
                         <div class="flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.RENAVAIL", Model.Milestone.RENAVAIL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("Milestone.RENAVAIL", Model.Milestone.RENAVAIL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RENAVAIL"><span class="@pillNumberCSS">4</span> @Html.DisplayNameFor(Model => Model.Milestone.RENAVAIL)</label>
@@ -181,7 +181,7 @@
                         </div>
                         <div class="flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.RENURSE", Model.Milestone.RENURSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.NURSEMO\", \"Milestone.NURSEDY\", \"Milestone.NURSEYR\" ]" })
+                                @Html.CheckBox("Milestone.RENURSE", Model.Milestone.RENURSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.NURSEMO\", \"Milestone.NURSEDY\", \"Milestone.NURSEYR\" ]" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.RENURSE"><span class="@pillNumberCSS">5</span> @Html.DisplayNameFor(Model => Model.Milestone.RENURSE)</label>
@@ -221,7 +221,7 @@
                         </div>
                         <div class="flex items-top">
                             <div>
-                                @Html.CheckBox("Milestone.REJOIN", Model.Milestone.REJOIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                                @Html.CheckBox("Milestone.REJOIN", Model.Milestone.REJOIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="Milestone.REJOIN"><span class="@pillNumberCSS">6</span> @Html.DisplayNameFor(Model => Model.Milestone.REJOIN)</label>
@@ -243,7 +243,7 @@
                             <span class="counter"></span>
                         </div>
                         <div class="pl-3">
-                            @Html.CheckBox("Milestone.FTLDDISC", Model.Milestone.FTLDDISC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            @Html.CheckBox("Milestone.FTLDDISC", Model.Milestone.FTLDDISC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                         </div>
                     </div>
                     <div class="ml-3 counterreset">
@@ -285,7 +285,7 @@
                             <span class="counter invisible"></span><span class="subcounter"></span>
                         </div>
                         <div class="mx-3">
-                            @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
+                            @Html.CheckBox("Milestone.DECEASED", Model.Milestone.DECEASED, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DEATHMO\", \"Milestone.DEATHDY\", \"Milestone.DEATHYR\", \"Milestone.AUTOPSY\" ]", data_fancycheckboxes_target = "checkbox" })
                         </div>
                         <div>
                             <label asp-for="@Model.Milestone.DECEASED"><span class="@pillNumberCSS">Deceased</span> @Html.DisplayNameFor(model => model.Milestone.DECEASED) <small class="@labelInstructionCSS normal-case">(Complete DEATH section)</small></label>
@@ -301,7 +301,7 @@
                             <span class="subcounter"></span>
                         </div>
                         <div class="mx-3">
-                            @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
+                            @Html.CheckBox("Milestone.DISCONT", Model.Milestone.DISCONT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"Milestone.DISCMO\", \"Milestone.DISCDAY\", \"Milestone.DISCYR\", \"Milestone.DROPREAS\" ]", data_fancycheckboxes_target = "checkbox" })
                         </div>
                         <div>
                             <label asp-for="@Model.Milestone.DISCONT"><span class="@pillNumberCSS">Withdrawn</span> @Html.DisplayNameFor(model => model.Milestone.DISCONT) <small class="@labelInstructionCSS normal-case">(Complete DROPPED section)</small></label>
@@ -444,6 +444,6 @@
     <input class="invisible" asp-for="@Model.Milestone.ModifiedBy" />
 </form>
 
-@section Scripts {
+@*@section Scripts {
     <script src="~/_content/UDS.Net.Forms/js/js_controllers/MilestoneTypeBehavior.js"></script>
-}
+}*@
