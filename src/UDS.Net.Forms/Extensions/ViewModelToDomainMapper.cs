@@ -501,6 +501,8 @@ namespace UDS.Net.Forms.Extensions
                 DIABTYPE = vm.DIABTYPE,
                 DIABINS = vm.DIABINS,
                 DIABMEDS = vm.DIABMEDS,
+                DIABGLP1 = vm.DIABGLP1,
+                DIABRECACT = vm.DIABRECACT,
                 DIABDIET = vm.DIABDIET,
                 DIABUNK = vm.DIABUNK,
                 DIABAGE = vm.DIABAGE,
