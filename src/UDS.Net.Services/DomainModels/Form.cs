@@ -92,8 +92,6 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new A4GFormFields();
             else if (Kind == "A4a")
                 Fields = new A4aFormFields();
-            else if (Kind == "A5")
-                Fields = new A5FormFields();
             else if (Kind == "A5D2")
                 Fields = new A5D2FormFields();
             else if (Kind == "B1")
@@ -112,18 +110,12 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new B8FormFields();
             else if (Kind == "B9")
                 Fields = new B9FormFields();
-            else if (Kind == "C1")
-                Fields = new C1FormFields();
             else if (Kind == "C2")
                 Fields = new C2FormFields();
             else if (Kind == "D1a")
                 Fields = new D1aFormFields();
             else if (Kind == "D1b")
                 Fields = new D1bFormFields();
-            else if (Kind == "D2")
-                Fields = new D2FormFields();
-            else if (Kind == "T1")
-                Fields = new T1FormFields();
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
