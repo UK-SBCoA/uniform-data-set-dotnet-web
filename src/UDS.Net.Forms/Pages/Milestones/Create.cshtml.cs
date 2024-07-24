@@ -21,6 +21,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
                 IsDeleted = false,
+                MilestoneType = null
             };
 
             Milestone = newMilstone;
