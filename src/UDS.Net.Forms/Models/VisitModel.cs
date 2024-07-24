@@ -32,6 +32,8 @@ namespace UDS.Net.Forms.Models
         [MaxLength(3)]
         public string INITIALS { get; set; } = "";
 
+        public bool CanBeFinalized { get; set; } = false;
+
         [Required]
         public DateTime CreatedAt { get; set; }
 
