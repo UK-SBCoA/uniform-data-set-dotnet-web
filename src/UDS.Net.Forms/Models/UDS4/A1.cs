@@ -47,13 +47,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Polish")]
         public bool ETHPOLISH { get; set; }
 
-        [Display(Name = "French")]
+        [Display(Name = "Scottish HAD A DOCUMENTATION NAME CHANGE")]
         public bool ETHFRENCH { get; set; }
 
         [Display(Name = "Other")] // White - Other
         public bool ETHWHIOTH { get; set; }
 
-        [Display(Name = "White - Other (Specify)")]
+        [Display(Name = "White - Other")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHWHIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -62,7 +62,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Hispanic or Latino")]
         public bool ETHISPANIC { get; set; }
 
-        [Display(Name = "Mexican or Mexican American")]
+        [Display(Name = "Mexican HAD A DOCUMENTATION NAME CHANGE")]
         public bool ETHMEXICAN { get; set; }
 
         [Display(Name = "Puerto Rican")]
@@ -113,7 +113,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other")] // Black or African American - Other
         public bool ETHBLKOTH { get; set; }
 
-        [Display(Name = "Black or African American - Other (Specify)")]
+        [Display(Name = "Black or African American - Other")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHBLKOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -143,7 +143,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other")] // Asian - Other
         public bool ETHASNOTH { get; set; }
 
-        [Display(Name = "Asian - Other (Specify)")]
+        [Display(Name = "Asian - Other")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHASNOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -152,7 +152,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "American Indian or Alaska Native")]
         public bool RACEAIAN { get; set; }
 
-        [Display(Name = "American Indian or Alaska Native (Specify)")]
+        [Display(Name = "American Indian or Alaska Native")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(RACEAIAN), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -173,7 +173,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Syrian")]
         public bool ETHSYRIA { get; set; }
 
-        [Display(Name = "Moroccan")]
+        [Display(Name = "Iraqi HAD A DOCUMENTATION NAME CHANGE")]
         public bool ETHMOROCCO { get; set; }
 
         [Display(Name = "Israeli")]
@@ -182,7 +182,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other")] // Middle Eastern or North African - Other
         public bool ETHMENAOTH { get; set; }
 
-        [Display(Name = "Middle Eastern or North African - Other (Specify)")]
+        [Display(Name = "Middle Eastern or North African - Other")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHMENAOTH), "true", ErrorMessage = "Please indicate ethnicity")]
@@ -191,7 +191,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Native Hawaiian or Pacific Islander")]
         public bool RACENHPI { get; set; }
 
-        [Display(Name = "Hawaiian")]
+        [Display(Name = "Native Hawaiian HAD A DOCUMENTATION NAME CHANGE")]
         public bool ETHHAWAII { get; set; }
 
         [Display(Name = "Samoan")]
@@ -212,7 +212,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other")] // Native Hawaiian or Pacific Islander - Other
         public bool ETHNHPIOTH { get; set; }
 
-        [Display(Name = "Native Hawaiian or Pacific Islander - Other (Specify)")]
+        [Display(Name = "Native Hawaiian or Pacific Islander - Other")]
         [MaxLength(60)]
         [ProhibitedCharacters]
         [RequiredIf(nameof(ETHNHPIOTH), "true", ErrorMessage = "Please indicate ethnicity")]
