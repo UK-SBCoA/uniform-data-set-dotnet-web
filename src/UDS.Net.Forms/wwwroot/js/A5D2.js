@@ -11,7 +11,7 @@ $(document).ready(function () {
     const recentMajorDep = majorDepRadios.some(radio => radio.checked && radio.value == '1');
     const recentOtherDep = otherDepRadios.some(radio => radio.checked && radio.value == '1');
 
-    deprTreatRadios.forEach(radio => {
+  deprTreatRadios.forEach(radio => {
       radio.disabled = !(recentMajorDep || recentOtherDep)
     });
   }

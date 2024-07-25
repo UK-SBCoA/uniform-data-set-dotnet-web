@@ -350,7 +350,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.OTHCONDX = a5D2Dto.OTHCONDX;
                 this.MAJORDEP = a5D2Dto.MAJORDEP;
                 this.OTHERDEP = a5D2Dto.OTHERDEP;
-                this.DEPRTREAT = a5D2Dto.DEPRTREAT.HasValue ? 1 : 0;
+                this.DEPRTREAT = a5D2Dto.DEPRTREAT.HasValue ? Convert.ToInt32(a5D2Dto.DEPRTREAT.Value) : (int?)null;
                 this.BIPOLAR = a5D2Dto.BIPOLAR;
                 this.SCHIZ = a5D2Dto.SCHIZ;
                 this.ANXIETY = a5D2Dto.ANXIETY;
