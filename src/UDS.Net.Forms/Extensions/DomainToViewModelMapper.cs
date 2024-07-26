@@ -183,10 +183,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A5FormFields)
-                {
-                    vm = ((A5FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A5D2FormFields)
                 {
                     vm = ((A5D2FormFields)form.Fields).ToVM(form.Id);
@@ -223,10 +219,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((B9FormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is C1FormFields)
-                {
-                    vm = ((C1FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is C2FormFields)
                 {
                     vm = ((C2FormFields)form.Fields).ToVM(form.Id);
@@ -238,14 +230,6 @@ namespace UDS.Net.Forms.Extensions
                 else if (form.Fields is D1bFormFields)
                 {
                     vm = ((D1bFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is D2FormFields)
-                {
-                    vm = ((D2FormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is T1FormFields)
-                {
-                    vm = ((T1FormFields)form.Fields).ToVM(form.Id);
                 }
             }
 
@@ -612,87 +596,6 @@ namespace UDS.Net.Forms.Extensions
                 ENDYEAR = fields.ENDYEAR,
                 CARETRIAL = fields.CARETRIAL,
                 TRIALGRP = fields.TRIALGRP
-            };
-        }
-
-
-
-        public static A5 ToVM(this A5FormFields fields, int formId)
-        {
-            return new A5()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                TOBAC30 = fields.TOBAC30,
-                TOBAC100 = fields.TOBAC100,
-                SMOKYRS = fields.SMOKYRS,
-                PACKSPER = fields.PACKSPER,
-                QUITSMOK = fields.QUITSMOK,
-                ALCOCCAS = fields.ALCOCCAS,
-                ALCFREQ = fields.ALCFREQ,
-                CVHATT = fields.CVHATT,
-                HATTMULT = fields.HATTMULT,
-                HATTYEAR = fields.HATTYEAR,
-                CVAFIB = fields.CVAFIB,
-                CVANGIO = fields.CVANGIO,
-                CVBYPASS = fields.CVBYPASS,
-                CVPACDEF = fields.CVPACDEF,
-                CVCHF = fields.CVCHF,
-                CVANGINA = fields.CVANGINA,
-                CVHVALVE = fields.CVHVALVE,
-                CVOTHR = fields.CVOTHR,
-                CVOTHRX = fields.CVOTHRX,
-                CBSTROKE = fields.CBSTROKE,
-                STROKMUL = fields.STROKMUL,
-                STROKYR = fields.STROKYR,
-                CBTIA = fields.CBTIA,
-                TIAMULT = fields.TIAMULT,
-                TIAYEAR = fields.TIAYEAR,
-                PD = fields.PD,
-                PDYR = fields.PDYR,
-                PDOTHR = fields.PDOTHR,
-                PDOTHRYR = fields.PDOTHRYR,
-                SEIZURES = fields.SEIZURES,
-                TBI = fields.TBI,
-                TBIBRIEF = fields.TBIBRIEF,
-                TBIEXTEN = fields.TBIEXTEN,
-                TBIWOLOS = fields.TBIWOLOS,
-                TBIYEAR = fields.TBIYEAR,
-                DIABETES = fields.DIABETES,
-                DIABTYPE = fields.DIABTYPE,
-                HYPERTEN = fields.HYPERTEN,
-                HYPERCHO = fields.HYPERCHO,
-                B12DEF = fields.B12DEF,
-                THYROID = fields.THYROID,
-                ARTHRIT = fields.ARTHRIT,
-                ARTHTYPE = fields.ARTHTYPE,
-                ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX.HasValue ? fields.ARTHUPEX.Value != 0 : false,
-                ARTHLOEX = fields.ARTHLOEX.HasValue ? fields.ARTHLOEX.Value != 0 : false,
-                ARTHSPIN = fields.ARTHSPIN.HasValue ? fields.ARTHSPIN.Value != 0 : false,
-                ARTHUNK = fields.ARTHUNK.HasValue ? fields.ARTHUNK.Value != 0 : false,
-                INCONTU = fields.INCONTU,
-                INCONTF = fields.INCONTF,
-                APNEA = fields.APNEA,
-                RBD = fields.RBD,
-                INSOMN = fields.INSOMN,
-                OTHSLEEP = fields.OTHSLEEP,
-                OTHSLEEX = fields.OTHSLEEX,
-                ALCOHOL = fields.ALCOHOL,
-                ABUSOTHR = fields.ABUSOTHR,
-                ABUSX = fields.ABUSX,
-                PTSD = fields.PTSD,
-                BIPOLAR = fields.BIPOLAR,
-                SCHIZ = fields.SCHIZ,
-                DEP2YRS = fields.DEP2YRS,
-                DEPOTHR = fields.DEPOTHR,
-                ANXIETY = fields.ANXIETY,
-                OCD = fields.OCD,
-                NPSYDEV = fields.NPSYDEV,
-                PSYCDIS = fields.PSYCDIS,
-                PSYCDISX = fields.PSYCDISX
             };
         }
 
@@ -1207,61 +1110,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static C1 ToVM(this C1FormFields fields, int formId)
-        {
-            return new C1()
-            {
-                Id = formId,
-                MMSECOMP = fields.MMSECOMP,
-                MMSEREAS = fields.MMSEREAS,
-                MMSELOC = fields.MMSELOC,
-                MMSELAN = fields.MMSELAN,
-                MMSELANX = fields.MMSELANX,
-                MMSEVIS = fields.MMSEVIS,
-                MMSEHEAR = fields.MMSEHEAR,
-                MMSEORDA = fields.MMSEORDA,
-                MMSEORLO = fields.MMSEORLO,
-                PENTAGON = fields.PENTAGON,
-                MMSE = fields.MMSE,
-                NPSYCLOC = fields.NPSYCLOC,
-                NPSYLAN = fields.NPSYLAN,
-                NPSYLANX = fields.NPSYLANX,
-                LOGIMO = fields.LOGIMO,
-                LOGIDAY = fields.LOGIDAY,
-                LOGIYR = fields.LOGIYR,
-                LOGIPREV = fields.LOGIPREV,
-                LOGIMEM = fields.LOGIMEM,
-                UDSBENTC = fields.UDSBENTC,
-                DIGIF = fields.DIGIF,
-                DIGIFLEN = fields.DIGIFLEN,
-                DIGIB = fields.DIGIB,
-                DIGIBLEN = fields.DIGIBLEN,
-                ANIMALS = fields.ANIMALS,
-                VEG = fields.VEG,
-                TRAILA = fields.TRAILA,
-                TRAILARR = fields.TRAILARR,
-                TRAILALI = fields.TRAILALI,
-                TRAILB = fields.TRAILB,
-                TRAILBRR = fields.TRAILBRR,
-                TRAILBLI = fields.TRAILBLI,
-                MEMUNITS = fields.MEMUNITS,
-                MEMTIME = fields.MEMTIME,
-                UDSBENTD = fields.UDSBENTD,
-                UDSBENRS = fields.UDSBENRS,
-                BOSTON = fields.BOSTON,
-                UDSVERFC = fields.UDSVERFC,
-                UDSVERFN = fields.UDSVERFN,
-                UDSVERNF = fields.UDSVERNF,
-                UDSVERLC = fields.UDSVERLC,
-                UDSVERLR = fields.UDSVERLR,
-                UDSVERLN = fields.UDSVERLN,
-                UDSVERTN = fields.UDSVERTN,
-                UDSVERTE = fields.UDSVERTE,
-                UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
-            };
-        }
-
         public static C2 ToVM(this C2FormFields fields, int formId)
         {
             return new C2()
@@ -1601,65 +1449,6 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
 
-            };
-        }
-
-        public static D2 ToVM(this D2FormFields fields, int formId)
-        {
-            return new D2()
-            {
-                Id = formId,
-                CANCER = fields.CANCER,
-                CANCSITE = fields.CANCSITE,
-                DIABET = fields.DIABET,
-                MYOINF = fields.MYOINF,
-                CONGHRT = fields.CONGHRT,
-                AFIBRILL = fields.AFIBRILL,
-                HYPERT = fields.HYPERT,
-                ANGINA = fields.ANGINA,
-                HYPCHOL = fields.HYPCHOL,
-                VB12DEF = fields.VB12DEF,
-                THYDIS = fields.THYDIS,
-                ARTH = fields.ARTH,
-                ARTYPE = fields.ARTYPE,
-                ARTYPEX = fields.ARTYPEX,
-                ARTUPEX = fields.ARTUPEX.HasValue ? fields.ARTUPEX.Value != 0 : false,
-                ARTLOEX = fields.ARTLOEX.HasValue ? fields.ARTLOEX.Value != 0 : false,
-                ARTSPIN = fields.ARTSPIN.HasValue ? fields.ARTSPIN.Value != 0 : false,
-                ARTUNKN = fields.ARTUNKN.HasValue ? fields.ARTUNKN.Value != 0 : false,
-                URINEINC = fields.URINEINC,
-                BOWLINC = fields.BOWLINC,
-                SLEEPAP = fields.SLEEPAP,
-                REMDIS = fields.REMDIS,
-                HYPOSOM = fields.HYPOSOM,
-                SLEEPOTH = fields.SLEEPOTH,
-                SLEEPOTX = fields.SLEEPOTX,
-                ANGIOCP = fields.ANGIOCP,
-                ANGIOPCI = fields.ANGIOPCI,
-                PACEMAKE = fields.PACEMAKE,
-                HVALVE = fields.HVALVE,
-                ANTIENC = fields.ANTIENC,
-                ANTIENCX = fields.ANTIENCX,
-                OTHCOND = fields.OTHCOND,
-                OTHCONDX = fields.OTHCONDX
-            };
-        }
-
-        public static T1 ToVM(this T1FormFields fields, int formId)
-        {
-            return new T1()
-            {
-                Id = formId,
-                TELCOG = fields.TELCOG,
-                TELILL = fields.TELILL,
-                TELHOME = fields.TELHOME,
-                TELREFU = fields.TELREFU,
-                TELCOV = fields.TELCOV,
-                TELOTHR = fields.TELOTHR,
-                TELOTHRX = fields.TELOTHRX,
-                TELMOD = fields.TELMOD,
-                TELINPER = fields.TELINPER,
-                TELMILE = fields.TELMILE
             };
         }
     }
