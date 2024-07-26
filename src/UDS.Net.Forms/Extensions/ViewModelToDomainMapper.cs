@@ -179,7 +179,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHIRAN = vm.ETHIRAN ? 1 : 0,
                 ETHEGYPT = vm.ETHEGYPT ? 1 : 0,
                 ETHSYRIA = vm.ETHSYRIA ? 1 : 0,
-                ETHIRAQI= vm.ETHIRAQI? 1 : 0,
+                ETHIRAQI = vm.ETHIRAQI ? 1 : 0,
                 ETHISRAEL = vm.ETHISRAEL ? 1 : 0,
                 ETHMENAOTH = vm.ETHMENAOTH ? 1 : 0,
                 ETHMENAOTX = vm.ETHMENAOTX,
