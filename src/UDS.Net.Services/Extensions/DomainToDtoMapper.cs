@@ -469,7 +469,7 @@ namespace UDS.Net.Services.Extensions
                 ETHIRAN = fields.ETHIRAN,
                 ETHEGYPT = fields.ETHEGYPT,
                 ETHSYRIA = fields.ETHSYRIA,
-                ETHIRAQI= fields.ETHMOROCCO,
+                ETHIRAQI= fields.ETHIRAQI,
                 ETHISRAEL = fields.ETHISRAEL,
                 ETHMENAOTH = fields.ETHMENAOTH,
                 ETHMENAOTX = fields.ETHMENAOTX,

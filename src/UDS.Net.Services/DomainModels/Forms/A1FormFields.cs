@@ -203,7 +203,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHIRAN = a1Dto.ETHIRAN;
                 this.ETHEGYPT = a1Dto.ETHEGYPT;
                 this.ETHSYRIA = a1Dto.ETHSYRIA;
-                this.ETHIRAQI= a1Dto.ETHMOROCCO;
+                this.ETHIRAQI = a1Dto.ETHIRAQI;
                 this.ETHISRAEL = a1Dto.ETHISRAEL;
                 this.ETHMENAOTH = a1Dto.ETHMENAOTH;
                 this.ETHMENAOTX = a1Dto.ETHMENAOTX;
