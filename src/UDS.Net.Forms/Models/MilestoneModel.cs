@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
+
 namespace UDS.Net.Forms.Models
 {
     public class MilestoneModel
@@ -44,10 +45,8 @@ namespace UDS.Net.Forms.Models
         public int? FTLDREAS { get; set; }
         public string? FTLDREAX { get; set; }
         [Display(Name = "Participant has died")]
-        [RequiredIf(nameof(MILESTONETYPE), "0", ErrorMessage = "Please indicate")]
         public bool? DECEASED { get; set; }
         [Display(Name = "Participant has been dropped from ADC")]
-        [RequiredIf(nameof(MILESTONETYPE), "0", ErrorMessage = "Please indicate")]
         public bool? DISCONT { get; set; }
         public int? DEATHMO { get; set; }
         public int? DEATHDY { get; set; }
@@ -63,14 +62,12 @@ namespace UDS.Net.Forms.Models
         public string? CreatedBy { get; set; }
         public string? ModifiedBy { get; set; }
         public string? DeletedBy { get; set; }
-        public bool IsDeleted { get; set; }
-        //Temporary properties only used in the view and NOT sent to the API 
+        public bool IsDeleted { get; set; } 
         [Required]
         [Display(Name = "Which milestone type are you reporting?")]
         [Range(0, 1)]
-        [NotMapped]
-        //MilestoneType plays a role in client-side validation, must be answered but not stored
         public int? MILESTONETYPE { get; set; }
+        //Temporary properties only used in the view and NOT sent to the API
         //validation properties used as targets for validation messages in the manual validation
         [NotMapped]
         public int ProtocolReasonValidation { get; set; }
