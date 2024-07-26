@@ -47,8 +47,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Polish")]
         public bool ETHPOLISH { get; set; }
 
-        [Display(Name = "Scottish HAD A DOCUMENTATION NAME CHANGE")]
-        public bool ETHFRENCH { get; set; }
+        [Display(Name = "Scottish")]
+        public bool ETHSCOTT { get; set; }
 
         [Display(Name = "Other")] // White - Other
         public bool ETHWHIOTH { get; set; }
@@ -62,7 +62,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Hispanic or Latino")]
         public bool ETHISPANIC { get; set; }
 
-        [Display(Name = "Mexican HAD A DOCUMENTATION NAME CHANGE")]
+        [Display(Name = "Mexican")]
         public bool ETHMEXICAN { get; set; }
 
         [Display(Name = "Puerto Rican")]
@@ -173,8 +173,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Syrian")]
         public bool ETHSYRIA { get; set; }
 
-        [Display(Name = "Iraqi HAD A DOCUMENTATION NAME CHANGE")]
-        public bool ETHMOROCCO { get; set; }
+        [Display(Name = "Iraqi")]
+        public bool ETHIRAQI { get; set; }
 
         [Display(Name = "Israeli")]
         public bool ETHISRAEL { get; set; }
@@ -191,7 +191,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Native Hawaiian or Pacific Islander")]
         public bool RACENHPI { get; set; }
 
-        [Display(Name = "Native Hawaiian HAD A DOCUMENTATION NAME CHANGE")]
+        [Display(Name = "Native Hawaiian")]
         public bool ETHHAWAII { get; set; }
 
         [Display(Name = "Samoan")]
@@ -227,12 +227,12 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHFRENCH || ETHWHIOTH
+                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
                 || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
                 || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
                 || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
                 || RACEAIAN
-                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHMOROCCO || ETHISRAEL || ETHMENAOTH
+                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI|| ETHISRAEL || ETHMENAOTH
                 || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
                 || RACEUNKN)
                 {

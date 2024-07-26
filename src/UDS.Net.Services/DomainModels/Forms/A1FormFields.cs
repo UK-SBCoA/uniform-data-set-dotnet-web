@@ -17,7 +17,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ETHENGLISH { get; set; }
         public int? ETHITALIAN { get; set; }
         public int? ETHPOLISH { get; set; }
-        public int? ETHFRENCH { get; set; }
+        public int? ETHSCOTT { get; set; }
         public int? ETHWHIOTH { get; set; }
         public string ETHWHIOTHX { get; set; }
         public int? ETHISPANIC { get; set; }
@@ -54,7 +54,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ETHIRAN { get; set; }
         public int? ETHEGYPT { get; set; }
         public int? ETHSYRIA { get; set; }
-        public int? ETHMOROCCO { get; set; }
+        public int? ETHIRAQI{ get; set; }
         public int? ETHISRAEL { get; set; }
         public int? ETHMENAOTH { get; set; }
         public string ETHMENAOTX { get; set; }
@@ -166,7 +166,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHENGLISH = a1Dto.ETHENGLISH;
                 this.ETHITALIAN = a1Dto.ETHITALIAN;
                 this.ETHPOLISH = a1Dto.ETHPOLISH;
-                this.ETHFRENCH = a1Dto.ETHFRENCH;
+                this.ETHSCOTT = a1Dto.ETHSCOTT;
                 this.ETHWHIOTH = a1Dto.ETHWHIOTH;
                 this.ETHWHIOTHX = a1Dto.ETHWHIOTHX;
                 this.ETHISPANIC = a1Dto.ETHISPANIC;
@@ -203,7 +203,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHIRAN = a1Dto.ETHIRAN;
                 this.ETHEGYPT = a1Dto.ETHEGYPT;
                 this.ETHSYRIA = a1Dto.ETHSYRIA;
-                this.ETHMOROCCO = a1Dto.ETHMOROCCO;
+                this.ETHIRAQI= a1Dto.ETHMOROCCO;
                 this.ETHISRAEL = a1Dto.ETHISRAEL;
                 this.ETHMENAOTH = a1Dto.ETHMENAOTH;
                 this.ETHMENAOTX = a1Dto.ETHMENAOTX;
