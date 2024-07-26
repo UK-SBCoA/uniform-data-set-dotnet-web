@@ -33,7 +33,7 @@
                     </div>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div>
-                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MILESTONETYPE)" for="@Model.Milestone.MILESTONETYPE" items="Model.MilestoneTypeItems"  ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
+                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MILESTONETYPE)" for="@Model.Milestone.MILESTONETYPE" items="Model.MilestoneTypeItems"></radio-button-group>
                         </div>
                     </div>
                 </div>
@@ -444,6 +444,6 @@
     <input class="invisible" asp-for="@Model.Milestone.ModifiedBy" />
 </form>
 
-@*@section Scripts {
+@section Scripts {
     <script src="~/_content/UDS.Net.Forms/js/js_controllers/MilestoneTypeBehavior.js"></script>
-}*@
+}
