@@ -217,7 +217,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
         protected private void IsValid(MilestoneModel milestone)
         {
-            if (milestone.MilestoneType == 1)
+            if (milestone.MILESTONETYPE == 1)
             {
                 ValidateMonth(milestone.CHANGEMO, "Milestone.CHANGEMO");
                 ValidateDay(milestone.CHANGEDY, "Milestone.CHANGEDY");
@@ -251,7 +251,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 }
             }
 
-            if (milestone.MilestoneType == 0)
+            if (milestone.MILESTONETYPE == 0)
             {
                 if (milestone.DECEASED == false && milestone.DISCONT == false)
                 {
