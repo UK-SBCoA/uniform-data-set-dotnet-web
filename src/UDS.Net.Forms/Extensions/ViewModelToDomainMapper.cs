@@ -71,7 +71,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static Visit ToEntity(this VisitModel vm)
         {
-            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
+            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
         }
 
         public static List<Form> ToEntity(this IList<FormModel> vm)

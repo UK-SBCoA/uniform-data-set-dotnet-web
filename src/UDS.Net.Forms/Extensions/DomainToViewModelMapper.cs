@@ -57,11 +57,13 @@ namespace UDS.Net.Forms.Extensions
                 FORMVER = visit.FORMVER,
                 VISIT_DATE = visit.VISIT_DATE,
                 INITIALS = visit.INITIALS,
+                Status = visit.Status,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
+                CanBeFinalized = visit.IsFinalizable,
                 Forms = visit.Forms.ToVM()
             };
         }
