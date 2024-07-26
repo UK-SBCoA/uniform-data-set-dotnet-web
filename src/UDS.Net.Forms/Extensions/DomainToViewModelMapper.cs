@@ -291,7 +291,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHIRAN = fields.ETHIRAN.HasValue ? fields.ETHIRAN.Value != 0 : false,
                 ETHEGYPT = fields.ETHEGYPT.HasValue ? fields.ETHEGYPT.Value != 0 : false,
                 ETHSYRIA = fields.ETHSYRIA.HasValue ? fields.ETHSYRIA.Value != 0 : false,
-                ETHIRAQI= fields.ETHIRAQI.HasValue ? fields.ETHIRAQI.Value != 0 : false,
+                ETHIRAQI = fields.ETHIRAQI.HasValue ? fields.ETHIRAQI.Value != 0 : false,
                 ETHISRAEL = fields.ETHISRAEL.HasValue ? fields.ETHISRAEL.Value != 0 : false,
                 ETHMENAOTH = fields.ETHMENAOTH.HasValue ? fields.ETHMENAOTH.Value != 0 : false,
                 ETHMENAOTX = fields.ETHMENAOTX,

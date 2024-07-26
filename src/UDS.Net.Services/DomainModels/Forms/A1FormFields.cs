@@ -54,7 +54,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ETHIRAN { get; set; }
         public int? ETHEGYPT { get; set; }
         public int? ETHSYRIA { get; set; }
-        public int? ETHIRAQI{ get; set; }
+        public int? ETHIRAQI { get; set; }
         public int? ETHISRAEL { get; set; }
         public int? ETHMENAOTH { get; set; }
         public string ETHMENAOTX { get; set; }
