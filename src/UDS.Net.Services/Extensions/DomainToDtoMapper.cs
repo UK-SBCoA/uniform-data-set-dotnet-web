@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
@@ -14,7 +17,6 @@ namespace UDS.Net.Services.Extensions
     {
         private static void SetBaseProperties(FormDto dto, Form form)
         {
-
             dto.Id = form.Id;
             dto.VisitId = form.VisitId;
             dto.Kind = form.Kind;
@@ -33,6 +35,23 @@ namespace UDS.Net.Services.Extensions
             dto.IsDeleted = form.IsDeleted;
         }
 
+        private static void SetBaseVisitProperties(VisitDto dto, Visit visit)
+        {
+            dto.Id = visit.Id;
+            dto.ParticipationId = visit.ParticipationId;
+            dto.VISITNUM = visit.VISITNUM;
+            dto.FORMVER = visit.FORMVER;
+            dto.PACKET = visit.PACKET.ToString();
+            dto.VISIT_DATE = visit.VISIT_DATE;
+            dto.INITIALS = visit.INITIALS;
+            dto.Status = ((int)visit.Status).ToString();
+            dto.CreatedAt = visit.CreatedAt;
+            dto.CreatedBy = visit.CreatedBy;
+            dto.ModifiedBy = visit.ModifiedBy;
+            dto.DeletedBy = visit.DeletedBy;
+            dto.IsDeleted = visit.IsDeleted;
+        }
+
         public static ParticipationDto ToDto(this Participation participation)
         {
             return new ParticipationDto
@@ -47,28 +66,6 @@ namespace UDS.Net.Services.Extensions
                 VisitCount = participation.VisitCount,
                 LastVisitNumber = participation.LastVisitNumber
             };
-        }
-        public static VisitDto ToDto(this Visit visit)
-        {
-            var dto = new VisitDto()
-            {
-                Id = visit.Id,
-                ParticipationId = visit.ParticipationId,
-                VISITNUM = visit.VISITNUM,
-                FORMVER = visit.FORMVER,
-                PACKET = visit.PACKET.ToString(),
-                VISIT_DATE = visit.VISIT_DATE,
-                INITIALS = visit.INITIALS,
-                CreatedAt = visit.CreatedAt,
-                CreatedBy = visit.CreatedBy,
-                ModifiedBy = visit.ModifiedBy,
-                DeletedBy = visit.DeletedBy,
-                IsDeleted = visit.IsDeleted
-            };
-            if (visit.Forms != null)
-                dto.Forms = visit.Forms.ToDto();
-
-            return dto;
         }
 
         public static M1Dto ToDto(this Milestone milestone)
@@ -113,25 +110,64 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
+        public static VisitDto ToDto(this Visit visit)
+        {
+            var dto = new VisitDto();
+            SetBaseVisitProperties(dto, visit);
+
+            if (visit.Forms != null)
+                dto.Forms = visit.Forms.ToDto();
+
+            return dto;
+        }
+
         public static VisitDto ToDto(this Visit visit, string formKind)
         {
-            var dto = new VisitDto()
-            {
-                Id = visit.Id,
-                ParticipationId = visit.ParticipationId,
-                VISITNUM = visit.VISITNUM,
-                FORMVER = visit.FORMVER,
-                PACKET = visit.PACKET.ToString(),
-                VISIT_DATE = visit.VISIT_DATE,
-                INITIALS = visit.INITIALS,
-                CreatedAt = visit.CreatedAt,
-                CreatedBy = visit.CreatedBy,
-                ModifiedBy = visit.ModifiedBy,
-                DeletedBy = visit.DeletedBy,
-                IsDeleted = visit.IsDeleted
-            };
+            var dto = visit.ToDto();
+
             if (visit.Forms != null)
                 dto.Forms = visit.Forms.ToDto(formKind);
+
+            return dto;
+        }
+
+        public static PacketSubmissionDto ToDto(this PacketSubmission packetSubmission)
+        {
+            var dto = new PacketSubmissionDto
+            {
+                Id = packetSubmission.Id,
+                VisitId = packetSubmission.VisitId,
+                SubmissionDate = packetSubmission.SubmissionDate,
+                CreatedBy = packetSubmission.CreatedBy,
+                CreatedAt = packetSubmission.CreatedAt,
+                ModifiedBy = packetSubmission.ModifiedBy,
+                DeletedBy = packetSubmission.DeletedBy,
+                IsDeleted = packetSubmission.IsDeleted
+            };
+
+            if (packetSubmission.Errors != null)
+                dto.PacketSubmissionErrors = packetSubmission.Errors.Select(e => e.ToDto(packetSubmission.Id)).ToList();
+
+            return dto;
+        }
+
+        public static PacketSubmissionErrorDto ToDto(this PacketSubmissionError error, int packetSubmissionId)
+        {
+            var dto = new PacketSubmissionErrorDto
+            {
+                Id = error.Id,
+                PacketSubmissionId = packetSubmissionId,
+                FormKind = error.FormKind,
+                Level = ((int)error.Level).ToString(),
+                Message = error.Message,
+                AssignedTo = error.AssignedTo,
+                ResolvedBy = error.ResolvedBy,
+                CreatedAt = error.CreatedAt,
+                CreatedBy = error.CreatedBy,
+                ModifiedBy = error.ModifiedBy,
+                DeletedBy = error.DeletedBy,
+                IsDeleted = error.IsDeleted
+            };
 
             return dto;
         }
@@ -905,7 +941,6 @@ namespace UDS.Net.Services.Extensions
             return dto;
         }
 
-
         public static A4aTreatmentDto ToDto(this A4aTreatmentFormFields fields, int formId)
         {
             return new A4aTreatmentDto
@@ -1012,6 +1047,7 @@ namespace UDS.Net.Services.Extensions
                 TOTALUPDRS = fields.TOTALUPDRS,
             };
         }
+
         public static B4Dto ToDto(this B4FormFields fields)
         {
             return new B4Dto

@@ -165,6 +165,8 @@ namespace UDS.Net.Services.DomainModels
             {
                 Fields = fields;
             }
+
+            // TODO if form fields MODE does not include NotCompleted then it is required
         }
 
         public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :

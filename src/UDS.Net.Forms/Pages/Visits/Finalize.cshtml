@@ -1,4 +1,10 @@
-﻿@page
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.Visits.FinalizeModel
 @{
+    ViewData["Title"] = Model.PageTitle;
 }
 
+@if (Model.Visit != null)
+{
+    <strong>@Model.Visit.Status</strong>
+}

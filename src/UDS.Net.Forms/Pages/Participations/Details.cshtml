@@ -60,7 +60,7 @@
                                     <td>@visit.FORMVER</td>
                                     <td>@visit.VISIT_DATE.ToShortDateString()</td>
                                     <td>@visit.INITIALS</td>
-                                    <td></td>
+                                    <td>@visit.Status</td>
                                     <td><a asp-page="/Visits/Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">View</a></td>
                                 </tr>
                             }
