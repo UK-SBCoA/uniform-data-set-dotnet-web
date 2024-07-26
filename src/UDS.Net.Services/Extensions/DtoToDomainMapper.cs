@@ -171,10 +171,6 @@ namespace UDS.Net.Services.Extensions
             {
                 formFields = new B9FormFields(dto);
             }
-            else if (dto is C1Dto)
-            {
-                formFields = new C1FormFields(dto);
-            }
             else if (dto is C2Dto)
             {
                 formFields = new C2FormFields(dto);
@@ -186,10 +182,6 @@ namespace UDS.Net.Services.Extensions
             else if (dto is D1bDto)
             {
                 formFields = new D1bFormFields(dto);
-            }
-            else if (dto is T1Dto)
-            {
-                formFields = new T1FormFields(dto);
             }
             else
             {
@@ -223,16 +215,12 @@ namespace UDS.Net.Services.Extensions
                     title = new B8FormFields().GetDescription();
                 else if (dto.Kind == "B9")
                     title = new B9FormFields().GetDescription();
-                else if (dto.Kind == "C1")
-                    title = new C1FormFields().GetDescription();
                 else if (dto.Kind == "C2")
                     title = new C2FormFields().GetDescription();
                 else if (dto.Kind == "D1a")
                     title = new D1aFormFields().GetDescription();
                 else if (dto.Kind == "D1b")
                     title = new D1bFormFields().GetDescription();
-                else if (dto.Kind == "T1")
-                    title = new T1FormFields().GetDescription();
             }
 
             FormStatus formStatus = FormStatus.NotStarted;

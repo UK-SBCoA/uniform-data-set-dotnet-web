@@ -134,7 +134,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
-                         new UIDisableAttribute("A5D2.PACDEFAGE"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -144,7 +144,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
-                         new UIEnableAttribute("A5D2.PACDEFAGE"),
+                         new UIEnableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -154,7 +154,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
-                         new UIEnableAttribute("A5D2.PACDEFAGE"),
+                         new UIEnableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -164,7 +164,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
-                         new UIDisableAttribute("A5D2.PACDEFAGE"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -257,7 +257,7 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                         new UIDisableAttribute("A5D2.PACDEFAGE"),
                      }
             }
          },
@@ -266,7 +266,7 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIEnableAttribute("A5D2.HRTATTAGE"),
+                         new UIEnableAttribute("A5D2.PACDEFAGE"),
                      }
             }
          },
@@ -275,7 +275,7 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIEnableAttribute("A5D2.HRTATTAGE"),
+                         new UIEnableAttribute("A5D2.PACDEFAGE"),
                      }
             }
          },
@@ -284,7 +284,7 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                         new UIDisableAttribute("A5D2.PACDEFAGE"),
                      }
             }
          },

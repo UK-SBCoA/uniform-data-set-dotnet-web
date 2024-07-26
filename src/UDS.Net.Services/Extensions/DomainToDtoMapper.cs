@@ -249,10 +249,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B9FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is C1FormFields)
-            {
-                dto = ((C1FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is C2FormFields)
             {
                 dto = ((C2FormFields)form.Fields).ToDto();
@@ -264,10 +260,6 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1bFormFields)
             {
                 dto = ((D1bFormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is T1FormFields)
-            {
-                dto = ((T1FormFields)form.Fields).ToDto();
             }
 
             SetBaseProperties(dto, form);
@@ -342,10 +334,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B9FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is C1FormFields && formKind == "C1")
-            {
-                dto = ((C1FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is C2FormFields && formKind == "C2")
             {
                 dto = ((C2FormFields)form.Fields).ToDto();
@@ -357,10 +345,6 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1bFormFields && formKind == "D1b")
             {
                 dto = ((D1bFormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is T1FormFields && formKind == "T1")
-            {
-                dto = ((T1FormFields)form.Fields).ToDto();
             }
 
             SetBaseProperties(dto, form);
@@ -1252,60 +1236,6 @@ namespace UDS.Net.Services.Extensions
             return null;
         }
 
-        public static C1Dto ToDto(this C1FormFields fields)
-        {
-            return new C1Dto
-            {
-                MMSECOMP = fields.MMSECOMP,
-                MMSEREAS = fields.MMSEREAS,
-                MMSELOC = fields.MMSELOC,
-                MMSELAN = fields.MMSELAN,
-                MMSELANX = fields.MMSELANX,
-                MMSEVIS = fields.MMSEVIS,
-                MMSEHEAR = fields.MMSEHEAR,
-                MMSEORDA = fields.MMSEORDA,
-                MMSEORLO = fields.MMSEORLO,
-                PENTAGON = fields.PENTAGON,
-                MMSE = fields.MMSE,
-                NPSYCLOC = fields.NPSYCLOC,
-                NPSYLAN = fields.NPSYLAN,
-                NPSYLANX = fields.NPSYLANX,
-                LOGIMO = fields.LOGIMO,
-                LOGIDAY = fields.LOGIDAY,
-                LOGIYR = fields.LOGIYR,
-                LOGIPREV = fields.LOGIPREV,
-                LOGIMEM = fields.LOGIMEM,
-                UDSBENTC = fields.UDSBENTC,
-                DIGIF = fields.DIGIF,
-                DIGIFLEN = fields.DIGIFLEN,
-                DIGIB = fields.DIGIB,
-                DIGIBLEN = fields.DIGIBLEN,
-                ANIMALS = fields.ANIMALS,
-                VEG = fields.VEG,
-                TRAILA = fields.TRAILA,
-                TRAILARR = fields.TRAILARR,
-                TRAILALI = fields.TRAILALI,
-                TRAILB = fields.TRAILB,
-                TRAILBRR = fields.TRAILBRR,
-                TRAILBLI = fields.TRAILBLI,
-                MEMUNITS = fields.MEMUNITS,
-                MEMTIME = fields.MEMTIME,
-                UDSBENTD = fields.UDSBENTD,
-                UDSBENRS = fields.UDSBENRS,
-                BOSTON = fields.BOSTON,
-                UDSVERFC = fields.UDSVERFC,
-                UDSVERFN = fields.UDSVERFN,
-                UDSVERNF = fields.UDSVERNF,
-                UDSVERLC = fields.UDSVERLC,
-                UDSVERLR = fields.UDSVERLR,
-                UDSVERLN = fields.UDSVERLN,
-                UDSVERTN = fields.UDSVERTN,
-                UDSVERTE = fields.UDSVERTE,
-                UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
-            };
-        }
-
         public static C2Dto ToDto(this C2FormFields fields)
         {
             return new C2Dto
@@ -1625,23 +1555,6 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
-            };
-        }
-
-        public static T1Dto ToDto(this T1FormFields fields)
-        {
-            return new T1Dto
-            {
-                TELCOG = fields.TELCOG,
-                TELILL = fields.TELILL,
-                TELHOME = fields.TELHOME,
-                TELREFU = fields.TELREFU,
-                TELCOV = fields.TELCOV,
-                TELOTHR = fields.TELOTHR,
-                TELOTHRX = fields.TELOTHRX,
-                TELMOD = fields.TELMOD,
-                TELINPER = fields.TELINPER,
-                TELMILE = fields.TELMILE
             };
         }
     }
