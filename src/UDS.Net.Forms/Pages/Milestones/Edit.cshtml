@@ -27,12 +27,12 @@
             <div class="p-16 xl:space-y-20">
                 <div class="@rowCSS">
                     <div>
-                        <label asp-for="Milestone.MilestoneType">@Html.DisplayNameFor(model => model.Milestone.MilestoneType)</label>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.MilestoneType"></span>
+                        <label asp-for="Milestone.MILESTONETYPE">@Html.DisplayNameFor(model => model.Milestone.MILESTONETYPE)</label>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.Milestone.MILESTONETYPE"></span>
                     </div>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <div>
-                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MilestoneType)" for="@Model.Milestone.MilestoneType" items="Model.MilestoneTypeItems"  ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
+                            <radio-button-group id="@Html.IdFor(m => m.Milestone.MILESTONETYPE)" for="@Model.Milestone.MILESTONETYPE" items="Model.MilestoneTypeItems"  ui-behaviors="@Model.MilestoneTypeUIBehavior"></radio-button-group>
                         </div>
                     </div>
                 </div>
