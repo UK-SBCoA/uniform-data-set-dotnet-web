@@ -20,8 +20,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 ParticipationId = participationId,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
-                IsDeleted = false,
-                MilestoneType = null
+                IsDeleted = false
             };
 
             Milestone = newMilstone;
