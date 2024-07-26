@@ -40,6 +40,7 @@ namespace UDS.Net.Services.DomainModels
         public string ModifiedBy { get; set; }
         public string DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
+        public int? MILESTONETYPE { get; set; }
     }
 }
 
