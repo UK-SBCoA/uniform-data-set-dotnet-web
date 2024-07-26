@@ -66,6 +66,7 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = vm.ModifiedBy,
                 DeletedBy = vm.DeletedBy,
                 IsDeleted = vm.IsDeleted,
+                MILESTONETYPE = vm.MILESTONETYPE
             };
         }
 

@@ -88,7 +88,8 @@ namespace UDS.Net.Services.Extensions
                 CreatedBy = dto.CreatedBy,
                 ModifiedBy = dto.ModifiedBy,
                 DeletedBy = dto.DeletedBy,
-                IsDeleted = dto.IsDeleted
+                IsDeleted = dto.IsDeleted,
+                MILESTONETYPE = dto.MILESTONETYPE
             };
         }
 
