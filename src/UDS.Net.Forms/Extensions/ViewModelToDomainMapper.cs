@@ -95,8 +95,6 @@ namespace UDS.Net.Forms.Extensions
                 fields = ((A4)vm).GetFormFields();
             else if (vm is A4a)
                 fields = ((A4a)vm).GetFormFields();
-            else if (vm is A5)
-                fields = ((A5)vm).GetFormFields();
             else if (vm is A5D2)
                 fields = ((A5D2)vm).GetFormFields();
             else if (vm is B1)
@@ -115,18 +113,12 @@ namespace UDS.Net.Forms.Extensions
                 fields = ((B8)vm).GetFormFields();
             else if (vm is B9)
                 fields = ((B9)vm).GetFormFields();
-            else if (vm is C1)
-                fields = ((C1)vm).GetFormFields();
             else if (vm is C2)
                 fields = ((C2)vm).GetFormFields();
             else if (vm is D1a)
                 fields = ((D1a)vm).GetFormFields();
             else if (vm is D1b)
                 fields = ((D1b)vm).GetFormFields();
-            else if (vm is D2)
-                fields = ((D2)vm).GetFormFields();
-            else if (vm is T1)
-                fields = ((T1)vm).GetFormFields();
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.FRMDATE, vm.INITIALS, vm.LANG, vm.MODE, vm.RMREAS, vm.RMMODE, vm.NOT, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
@@ -437,80 +429,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-
-        public static IFormFields GetFormFields(this A5 vm)
-        {
-            return new A5FormFields
-            {
-                TOBAC30 = vm.TOBAC30,
-                TOBAC100 = vm.TOBAC100,
-                SMOKYRS = vm.SMOKYRS,
-                PACKSPER = vm.PACKSPER,
-                QUITSMOK = vm.QUITSMOK,
-                ALCOCCAS = vm.ALCOCCAS,
-                ALCFREQ = vm.ALCFREQ,
-                CVHATT = vm.CVHATT,
-                HATTMULT = vm.HATTMULT,
-                HATTYEAR = vm.HATTYEAR,
-                CVAFIB = vm.CVAFIB,
-                CVANGIO = vm.CVANGIO,
-                CVBYPASS = vm.CVBYPASS,
-                CVPACDEF = vm.CVPACDEF,
-                CVCHF = vm.CVCHF,
-                CVANGINA = vm.CVANGINA,
-                CVHVALVE = vm.CVHVALVE,
-                CVOTHR = vm.CVOTHR,
-                CVOTHRX = vm.CVOTHRX,
-                CBSTROKE = vm.CBSTROKE,
-                STROKMUL = vm.STROKMUL,
-                STROKYR = vm.STROKYR,
-                CBTIA = vm.CBTIA,
-                TIAMULT = vm.TIAMULT,
-                TIAYEAR = vm.TIAYEAR,
-                PD = vm.PD,
-                PDYR = vm.PDYR,
-                PDOTHR = vm.PDOTHR,
-                SEIZURES = vm.SEIZURES,
-                TBI = vm.TBI,
-                TBIBRIEF = vm.TBIBRIEF,
-                TBIEXTEN = vm.TBIEXTEN,
-                TBIWOLOS = vm.TBIWOLOS,
-                TBIYEAR = vm.TBIYEAR,
-                DIABETES = vm.DIABETES,
-                DIABTYPE = vm.DIABTYPE,
-                HYPERTEN = vm.HYPERTEN,
-                HYPERCHO = vm.HYPERCHO,
-                B12DEF = vm.B12DEF,
-                THYROID = vm.THYROID,
-                ARTHRIT = vm.ARTHRIT,
-                ARTHTYPE = vm.ARTHTYPE,
-                ARTHTYPX = vm.ARTHTYPX,
-                ARTHUPEX = vm.ARTHUPEX ? 1 : 0,
-                ARTHLOEX = vm.ARTHLOEX ? 1 : 0,
-                ARTHSPIN = vm.ARTHSPIN ? 1 : 0,
-                ARTHUNK = vm.ARTHUNK ? 1 : 0,
-                INCONTU = vm.INCONTU,
-                INCONTF = vm.INCONTF,
-                APNEA = vm.APNEA,
-                RBD = vm.RBD,
-                INSOMN = vm.INSOMN,
-                OTHSLEEP = vm.OTHSLEEP,
-                OTHSLEEX = vm.OTHSLEEX,
-                ALCOHOL = vm.ALCOHOL,
-                ABUSOTHR = vm.ABUSOTHR,
-                ABUSX = vm.ABUSX,
-                PTSD = vm.PTSD,
-                BIPOLAR = vm.BIPOLAR,
-                SCHIZ = vm.SCHIZ,
-                DEP2YRS = vm.DEP2YRS,
-                DEPOTHR = vm.DEPOTHR,
-                ANXIETY = vm.ANXIETY,
-                OCD = vm.OCD,
-                NPSYDEV = vm.NPSYDEV,
-                PSYCDIS = vm.PSYCDIS,
-                PSYCDISX = vm.PSYCDISX
-            };
-        }
 
         public static IFormFields GetFormFields(this A5D2 vm)
         {
@@ -987,61 +905,6 @@ namespace UDS.Net.Forms.Extensions
                 FRSTCHG = vm.FRSTCHG,
             };
         }
-
-        public static IFormFields GetFormFields(this C1 vm)
-        {
-            return new C1FormFields
-            {
-                MMSECOMP = vm.MMSECOMP,
-                MMSEREAS = vm.MMSEREAS,
-                MMSELOC = vm.MMSELOC,
-                MMSELAN = vm.MMSELAN,
-                MMSELANX = vm.MMSELANX,
-                MMSEVIS = vm.MMSEVIS,
-                MMSEHEAR = vm.MMSEHEAR,
-                MMSEORDA = vm.MMSEORDA,
-                MMSEORLO = vm.MMSEORLO,
-                PENTAGON = vm.PENTAGON,
-                MMSE = vm.MMSE,
-                NPSYCLOC = vm.NPSYCLOC,
-                NPSYLAN = vm.NPSYLAN,
-                NPSYLANX = vm.NPSYLANX,
-                LOGIMO = vm.LOGIMO,
-                LOGIDAY = vm.LOGIDAY,
-                LOGIYR = vm.LOGIYR,
-                LOGIPREV = vm.LOGIPREV,
-                LOGIMEM = vm.LOGIMEM,
-                UDSBENTC = vm.UDSBENTC,
-                DIGIF = vm.DIGIF,
-                DIGIFLEN = vm.DIGIFLEN,
-                DIGIB = vm.DIGIB,
-                DIGIBLEN = vm.DIGIBLEN,
-                ANIMALS = vm.ANIMALS,
-                VEG = vm.VEG,
-                TRAILA = vm.TRAILA,
-                TRAILARR = vm.TRAILARR,
-                TRAILALI = vm.TRAILALI,
-                TRAILB = vm.TRAILB,
-                TRAILBRR = vm.TRAILBRR,
-                TRAILBLI = vm.TRAILBLI,
-                MEMUNITS = vm.MEMUNITS,
-                MEMTIME = vm.MEMTIME,
-                UDSBENTD = vm.UDSBENTD,
-                UDSBENRS = vm.UDSBENRS,
-                BOSTON = vm.BOSTON,
-                UDSVERFC = vm.UDSVERFC,
-                UDSVERFN = vm.UDSVERFN,
-                UDSVERNF = vm.UDSVERNF,
-                UDSVERLC = vm.UDSVERLC,
-                UDSVERLR = vm.UDSVERLR,
-                UDSVERLN = vm.UDSVERLN,
-                UDSVERTN = vm.UDSVERTN,
-                UDSVERTE = vm.UDSVERTE,
-                UDSVERTI = vm.UDSVERTI,
-                COGSTAT = vm.COGSTAT
-            };
-        }
-
         public static IFormFields GetFormFields(this C2 vm)
         {
             return new C2FormFields
@@ -1368,63 +1231,6 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOG = vm.OTHCOG,
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX
-            };
-        }
-
-        public static IFormFields GetFormFields(this D2 vm)
-        {
-            return new D2FormFields
-            {
-                CANCER = vm.CANCER,
-                CANCSITE = vm.CANCSITE,
-                DIABET = vm.DIABET,
-                MYOINF = vm.MYOINF,
-                CONGHRT = vm.CONGHRT,
-                AFIBRILL = vm.AFIBRILL,
-                HYPERT = vm.HYPERT,
-                ANGINA = vm.ANGINA,
-                HYPCHOL = vm.HYPCHOL,
-                VB12DEF = vm.VB12DEF,
-                THYDIS = vm.THYDIS,
-                ARTH = vm.ARTH,
-                ARTYPE = vm.ARTYPE,
-                ARTYPEX = vm.ARTYPEX,
-                ARTUPEX = vm.ARTUPEX ? 1 : 0,
-                ARTLOEX = vm.ARTLOEX ? 1 : 0,
-                ARTSPIN = vm.ARTSPIN ? 1 : 0,
-                ARTUNKN = vm.ARTUNKN ? 1 : 0,
-                URINEINC = vm.URINEINC,
-                BOWLINC = vm.BOWLINC,
-                SLEEPAP = vm.SLEEPAP,
-                REMDIS = vm.REMDIS,
-                HYPOSOM = vm.HYPOSOM,
-                SLEEPOTH = vm.SLEEPOTH,
-                SLEEPOTX = vm.SLEEPOTX,
-                ANGIOCP = vm.ANGIOCP,
-                ANGIOPCI = vm.ANGIOPCI,
-                PACEMAKE = vm.PACEMAKE,
-                HVALVE = vm.HVALVE,
-                ANTIENC = vm.ANTIENC,
-                ANTIENCX = vm.ANTIENCX,
-                OTHCOND = vm.OTHCOND,
-                OTHCONDX = vm.OTHCONDX
-            };
-        }
-
-        public static IFormFields GetFormFields(this T1 vm)
-        {
-            return new T1FormFields
-            {
-                TELCOG = vm.TELCOG,
-                TELILL = vm.TELILL,
-                TELHOME = vm.TELHOME,
-                TELREFU = vm.TELREFU,
-                TELCOV = vm.TELCOV,
-                TELOTHR = vm.TELOTHR,
-                TELOTHRX = vm.TELOTHRX,
-                TELMOD = vm.TELMOD,
-                TELINPER = vm.TELINPER,
-                TELMILE = vm.TELMILE
             };
         }
     }
