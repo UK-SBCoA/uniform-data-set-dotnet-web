@@ -26,7 +26,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? ETHCUBAN { get; set; }
         public int? ETHSALVA { get; set; }
         public int? ETHDOMIN { get; set; }
-        public int? ETHCOLOM { get; set; }
+        public int? ETHGUATEM { get; set; }
         public int? ETHHISOTH { get; set; }
         public string ETHHISOTHX { get; set; }
         public int? RACEBLACK { get; set; }
@@ -175,7 +175,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHCUBAN = a1Dto.ETHCUBAN;
                 this.ETHSALVA = a1Dto.ETHSALVA;
                 this.ETHDOMIN = a1Dto.ETHDOMIN;
-                this.ETHCOLOM = a1Dto.ETHCOLOM;
+                this.ETHGUATEM = a1Dto.ETHGUATEM;
                 this.ETHHISOTH = a1Dto.ETHHISOTH;
                 this.ETHHISOTHX = a1Dto.ETHHISOTHX;
                 this.RACEBLACK = a1Dto.RACEBLACK;

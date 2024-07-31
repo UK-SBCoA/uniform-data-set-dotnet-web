@@ -441,7 +441,7 @@ namespace UDS.Net.Services.Extensions
                 ETHCUBAN = fields.ETHCUBAN,
                 ETHSALVA = fields.ETHSALVA,
                 ETHDOMIN = fields.ETHDOMIN,
-                ETHCOLOM = fields.ETHCOLOM,
+                ETHGUATEM = fields.ETHGUATEM,
                 ETHHISOTH = fields.ETHHISOTH,
                 ETHHISOTHX = fields.ETHHISOTHX,
                 RACEBLACK = fields.RACEBLACK,

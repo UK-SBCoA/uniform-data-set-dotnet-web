@@ -77,8 +77,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Dominican")]
         public bool ETHDOMIN { get; set; }
 
-        [Display(Name = "Colombian")]
-        public bool ETHCOLOM { get; set; }
+        [Display(Name = "Guatemalan")]
+        public bool ETHGUATEM { get; set; }
 
         [Display(Name = "Other")] // Hispanic or Latino - Other
         public bool ETHHISOTH { get; set; }
@@ -228,7 +228,7 @@ namespace UDS.Net.Forms.Models.UDS4
             get
             {
                 if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHCOLOM || ETHHISOTH
+                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
                 || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
                 || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
                 || RACEAIAN

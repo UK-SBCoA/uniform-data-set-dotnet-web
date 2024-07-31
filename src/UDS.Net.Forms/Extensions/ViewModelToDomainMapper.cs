@@ -151,7 +151,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHCUBAN = vm.ETHCUBAN ? 1 : 0,
                 ETHSALVA = vm.ETHSALVA ? 1 : 0,
                 ETHDOMIN = vm.ETHDOMIN ? 1 : 0,
-                ETHCOLOM = vm.ETHCOLOM ? 1 : 0,
+                ETHGUATEM = vm.ETHGUATEM ? 1 : 0,
                 ETHHISOTH = vm.ETHHISOTH ? 1 : 0,
                 ETHHISOTHX = vm.ETHHISOTHX,
                 RACEBLACK = vm.RACEBLACK ? 1 : 0,

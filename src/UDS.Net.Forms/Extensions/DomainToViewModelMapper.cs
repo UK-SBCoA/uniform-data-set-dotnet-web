@@ -263,7 +263,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHCUBAN = fields.ETHCUBAN.HasValue ? fields.ETHCUBAN.Value != 0 : false,
                 ETHSALVA = fields.ETHSALVA.HasValue ? fields.ETHSALVA.Value != 0 : false,
                 ETHDOMIN = fields.ETHDOMIN.HasValue ? fields.ETHDOMIN.Value != 0 : false,
-                ETHCOLOM = fields.ETHCOLOM.HasValue ? fields.ETHCOLOM.Value != 0 : false,
+                ETHGUATEM = fields.ETHGUATEM.HasValue ? fields.ETHGUATEM.Value != 0 : false,
                 ETHHISOTH = fields.ETHHISOTH.HasValue ? fields.ETHHISOTH.Value != 0 : false,
                 ETHHISOTHX = fields.ETHHISOTHX,
                 RACEBLACK = fields.RACEBLACK.HasValue ? fields.RACEBLACK.Value != 0 : false,
