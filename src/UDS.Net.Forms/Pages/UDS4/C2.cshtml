@@ -7,7 +7,7 @@
 
 <div>
     <p class="mt-1 text-sm text-gray-500">
-        <b>INSTRUCTIONS:</b>  This form is to be completed by ADC or clinic staff. For test administration and scoring, see <guidebook kind="@Model.Visit.Kind"></guidebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).Any new participants who enroll in the UDS after the implementation of UDSv4 must be
+        <b>INSTRUCTIONS:</b>  This form is to be completed by ADC or clinic staff. For test administration and scoring, see <guidebook kind="@Model.C2"></guidebook>, Form C2. Any new participants who enroll in the UDS after the implementation of UDS3 must be assessed with the new neuropsychological test battery (Form C2).Any new participants who enroll in the UDS after the implementation of UDSv4 must be
         assessed with the new neuropsychological test battery (Form C2 or C2T). <br />
         <b>KEY:</b> If the participant cannot complete any of the following exams, please give the reason by entering one of the following codes:
         95 / 995 = Physical problem 96 / 996 = Cognitive/behavior problem 97 / 997 = Other problem 98 / 998 = Verbal refusal
@@ -16,9 +16,9 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && (Model.Visit.Kind == VisitKind.IVP || Model.Visit.Kind == VisitKind.FVP))
+        @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote))
         {
-            <div>
+           
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
                     Section 1 —Montreal Cognitive Assessment (MoCA)
@@ -51,8 +51,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREAS"></span>
                     </div>
-                </div>
-
+                
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALAN)</label>
                         <div>
@@ -69,8 +68,6 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALANX"></span>
                         </div>
                     </div>
-                </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAVIS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAVIS)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -79,7 +76,6 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAVIS"></span>
                         </div>
                     </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAHEAR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAHEAR)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -89,8 +85,6 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALANX"></span>
                     </div>
-                </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div class=sm:grid-cols-3>
                             <label asp-for="C2.MOCATOTS">
@@ -107,7 +101,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCATOTS"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCATRAI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCATRAI)</label>
@@ -119,7 +113,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCATRAI"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACUBE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACUBE)</label>
@@ -132,7 +126,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACUBE"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLOC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLOC)</label>
@@ -144,7 +138,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLOC"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLON"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLON)</label>
@@ -157,7 +151,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLON"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCACLOH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCACLOH)</label>
@@ -170,7 +164,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACLOH"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCANAMI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCANAMI)</label>
@@ -183,7 +177,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCANAMI"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAREGI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAREGI)</label>
@@ -196,7 +190,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREGI"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCADIGI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCADIGI)</label>
@@ -209,7 +203,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCADIGI"></span>
                     </div>
-                </div>
+               
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCALETT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCALETT)</label>
@@ -222,7 +216,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALETT"></span>
                     </div>
-                </div>
+               
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCASER7"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCASER7)</label>
@@ -234,7 +228,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCASER7"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAREPE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAREPE)</label>
@@ -247,7 +241,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREPE"></span>
                     </div>
-                </div>
+               
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAFLUE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAFLUE)</label>
@@ -260,7 +254,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAFLUE"></span>
                     </div>
-                </div>
+              
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAABST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAABST)</label>
@@ -273,7 +267,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAABST"></span>
                     </div>
-                </div>
+               
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECN)</label>
@@ -286,7 +280,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECC)</label>
@@ -299,7 +293,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCARECR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCARECR)</label>
@@ -312,8 +306,6 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
                     </div>
-                </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORDT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDT)</label>
 
@@ -325,8 +317,6 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDT"></span>
                     </div>
-                </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORMO)</label>
 
@@ -338,7 +328,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORMO"></span>
                     </div>
-                </div>
+               
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORYR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORYR)</label>
@@ -351,7 +341,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORYR"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORDY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDY)</label>
@@ -364,7 +354,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDY"></span>
                     </div>
-                </div>
+              
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORPL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORPL)</label>
@@ -377,7 +367,7 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORPL"></span>
                     </div>
-                </div>
+                
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.MOCAORCT"><span class="::before">1bb.</span> @Html.DisplayNameFor(m => m.C2.MOCAORCT)</label>
@@ -390,10 +380,11 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORCT"></span>
                     </div>
-                </div>
-
-            </div>
-        </div>
+                
+                    </div>
+            
+            
+       
 
         <div>
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Administration of the remainder of the battery</h3>
@@ -512,8 +503,8 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
+           
+      
 
         <div>
             <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Number Span Test: Backward</h3>
@@ -633,7 +624,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
 
             <div>
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
@@ -840,7 +831,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
             <div>
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
@@ -952,8 +943,8 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
                     </div>
                 </div>
-            </div>
-        </div>
+            
+        
 
             <div>
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">

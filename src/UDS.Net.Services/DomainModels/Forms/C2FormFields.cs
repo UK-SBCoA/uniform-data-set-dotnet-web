@@ -290,15 +290,15 @@ namespace UDS.Net.Services.DomainModels.Forms
 
             }
         }
-        public string GetDescription()
-        {
-            return "Neuropsychological Battery Scores";
-        }
+        //public string GetDescription()
+        //{
+        //    return "Neuropsychological Battery Scores";
+        //}
 
-        public string GetVersion()
-        {
-            return "4.0";
-        }
+        //public string GetVersion()
+        //{
+        //    return "4.0";
+        //}
     }
 }
 
