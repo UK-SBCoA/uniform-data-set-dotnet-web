@@ -72,7 +72,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIDisableAttribute("Milestone.ACONSENT")
+                        new UIEnableAttribute("Milestone.ACONSENT")
                     }
                 }
             },
@@ -172,9 +172,12 @@ namespace UDS.Net.Forms.Models.PageModels
                     ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
-                if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1 && milestone.ACONSENT == null)
+                if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1)
                 {
-                    ModelState.AddModelError("Milestone.ACONSENT", "Autopsy status required");
+                    if (milestone.ACONSENT == null)
+                    {
+                        ModelState.AddModelError("Milestone.ACONSENT", "Autopsy status required");
+                    }
                 }
 
                 if (milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
