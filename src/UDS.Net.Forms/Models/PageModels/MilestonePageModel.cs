@@ -249,7 +249,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 ModelState.AddModelError(property, "Must have a value for day");
             }
 
-            if (dayValue < 1 || dayValue > 12 && dayValue != 99)
+            if (dayValue < 1 || dayValue > 31 && dayValue != 99)
             {
                 ModelState.AddModelError(property, "Provide a valid day between 1 - 31 or 99");
             }
