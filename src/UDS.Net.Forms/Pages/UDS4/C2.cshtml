@@ -16,7 +16,7 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote))
+        @if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson))
         {
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
@@ -432,185 +432,21 @@
             <div>
                 <div class="subcounterreset m-2">
 
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.CRAFTVRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTVRS)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTVRS"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.CRAFTVRS" ui-range-behavior="Model.CRAFTVRSBehavior" />
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div class=sm:grid-cols-3>
+                                <label asp-for="C2.CRAFTVRS">
+                                    <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTVRS)
+                                </label>
+                                <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 4a.)</p>
+                            </div>
+                            <div class="flex flex-row space-x-4">
+                                <div class="w-28">
+                                    <input asp-for="@Model.C2.CRAFTVRS" ui-range-behavior="Model.CRAFTVRSBehavior" />
+                                </div>
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTVRS"></p>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTVRS"></span>
                         </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.CRAFTURS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTURS)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.CRAFTURS"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.CRAFTURS" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTURS"></span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 4 —Benson Complex Figure Copy
-                </h3>
-            </div>
-
-            <div>
-                <div class="subcounterreset m-2">
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.UDSBENTC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENTC)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSBENTC"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.UDSBENTC" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENTC"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 5 —  Number Span Test: Forward
-                </h3>
-            </div>
-            <div>
-
-                <div class="subcounterreset m-2">
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.NPSYCLOC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYCLOC)</label>
-                        <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.NPSYCLOC"></p>
-                            <radio-button-group id="@Html.IdFor(m => m.C2.NPSYCLOC)" for="@Model.C2.NPSYCLOC" items="Model.LocationListItems"></radio-button-group>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYCLOC"></span>
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORCT"></span>
-                    </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYLAN)</label>
-                    <div>
-                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLAN"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C2.NPSYLAN)" for="@Model.C2.NPSYLAN" items="Model.LanguageListItems" ui-behaviors="Model.NPSYLANBehavior"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLAN"></span>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.NPSYLANX"></p>
-                        <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
-                        <div class="mt-2">
-                            <input asp-for="C2.NPSYLANX" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLANX"></span>
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORSL"></span>
-                </div>
-            </div>
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 6 —  Number Span Test: Backward
-                </h3>
-            </div>
-
-            <div>
-                <div class="subcounterreset m-2">
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.DIGBACCT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACCT)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACCT"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.DIGBACCT" ui-range-behavior="Model.DIGBACCTBehavior" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACCT"></span>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.DIGBACLS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGBACLS)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.DIGBACLS"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.DIGBACLS" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACLS"></span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 7 —  Category Fluency
-                </h3>
-            </div>
-
-            <div>
-                <div class="subcounterreset m-2">
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.ANIMALS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.ANIMALS)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.ANIMALS"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.ANIMALS" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.ANIMALS"></span>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="C2.VEG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)</label>
-                        <div>
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.C2.VEG"></p>
-                            <div class="w-24">
-                                <input asp-for="@Model.C2.VEG" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VEG"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 8 —  Trail Making Test
-                </h3>
-            </div>
-            <div>
-                <div class="subcounterreset m-2">
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <div class=sm:grid-cols-3>
-                            <label asp-for="C2.CRAFTVRS">
-                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTVRS)
-                            </label>
-                            <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95–98, and SKIP TO QUESTION 4a.)</p>
-                        </div>
-                        <div class="flex flex-row space-x-4">
-                            <div class="w-28">
-                                <input asp-for="@Model.C2.CRAFTVRS" ui-range-behavior="Model.CRAFTVRSBehavior" />
-                            </div>
-                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTVRS"></p>
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTVRS"></span>
-                    </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.CRAFTURS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CRAFTURS)</label>
@@ -625,15 +461,15 @@
 
                 </div>
             </div>
+
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 9 —  Benson Complex Figure Recall
+                    Section 4 —Benson Complex Figure Copy
                 </h3>
             </div>
 
             <div>
-
                 <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -653,14 +489,12 @@
                     </div>
                 </div>
             </div>
-
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 10 —  Craft Story 21 Recall (Delayed)
+                    Section 5 —  Number Span Test: Forward
                 </h3>
             </div>
-
             <div>
 
                 <div class="subcounterreset m-2">
@@ -680,7 +514,6 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORCT"></span>
                     </div>
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.DIGFORSL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORSL)</label>
                         <div class="flex flex-row space-x-4">
@@ -691,18 +524,18 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORSL"></span>
                     </div>
-
                 </div>
+
             </div>
 
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 11 — Verbal Fluency: Phonemic Test
+                    Section 6 —  Number Span Test: Backward
                 </h3>
             </div>
-            <div>
 
+            <div>
                 <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -734,15 +567,15 @@
 
                 </div>
             </div>
+
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 12 — Rey Auditory Verbal Learning (Immediate)
+                    Section 7 —  Category Fluency
                 </h3>
             </div>
 
             <div>
-
                 <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -760,34 +593,30 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.ANIMALS"></span>
                     </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <div class=sm:grid-cols-3>
-                        <label asp-for="C2.VEG">
-                            <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)
-                        </label>
-                        <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95–98)</p>
-                    </div>
-                    <div class="flex flex-row space-x-4">
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.VEG" />
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid-cols-3">
+                            <label asp-for="C2.VEG">
+                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VEG)
+                            </label>
+                            <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95–98)</p>
                         </div>
-                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VEG"></p>
-                    </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VEG"></span>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.VEG" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VEG"></p>
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VEG"></span>
 
+                    </div>
                 </div>
             </div>
-
-
             <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
+                <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 13 — Rey Auditory Verbal Learning (Delayed Recall and Recognition)
+                    Section 8 —  Trail Making Test
                 </h3>
             </div>
-
             <div>
 
                 <div class="subcounterreset m-2">
@@ -874,11 +703,16 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <div class="subcounterreset m-2">
 
+
+                </div>
+            </div>
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 14 — CERAD Verbal Learning (Immediate)
+                    Section 9 —  Benson Complex Figure Recall
                 </h3>
             </div>
 
@@ -901,108 +735,30 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENTD"></span>
                     </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSBENRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENRS)</label>
-                    <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSBENRS"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C2.UDSBENRS)" for="@Model.C2.UDSBENRS" items="Model.SimpleNoYesListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENRS"></span>
-                    </div>
-                </div>
 
 
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERNF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERNF)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERNF"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERNF" />
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="C2.UDSBENRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSBENRS)</label>
+                        <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSBENRS"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.C2.UDSBENRS)" for="@Model.C2.UDSBENRS" items="Model.SimpleNoYesListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSBENRS"></span>
                         </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERNF"></span>
                     </div>
-                </div>
 
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERLC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLC)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLC"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERLC" ui-range-behavior="Model.UDSVERLCBehavior" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLC"></span>
-                    </div>
                 </div>
-
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERLR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLR)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLR"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERLR" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLR"></span>
-                    </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERLN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERLN)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERLN"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERLN" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLN"></span>
-                    </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTN"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERTN" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
-                    </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTE"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERTE" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
-                    </div>
-                </div>
-
-                <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
-                    <div>
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.C2.UDSVERTI"></p>
-                        <div class="w-28">
-                            <input asp-for="@Model.C2.UDSVERTI" />
-                        </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
-                    </div>
-                </div>
-
             </div>
 
             <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
+                <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
+                    Section 10 —  Craft Story 21 Recall (Delayed)
                 </h3>
             </div>
 
             <div>
 
                 <div class="subcounterreset m-2">
-
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div class=sm:grid-cols-3>
                             <label asp-for="C2.CRAFTDVR">
@@ -1052,16 +808,16 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTCUE"></span>
                     </div>
+
                 </div>
             </div>
 
             <div class="@rowCSS">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 16 — Multilingual Naming Test (MINT)
+                    Section 11 — Verbal Fluency: Phonemic Test
                 </h3>
             </div>
-
             <div>
 
                 <div class="subcounterreset m-2">
@@ -1180,19 +936,328 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
                     </div>
+                    <div class="subcounterreset">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
+                            <div class="flex flex-row space-x-4">
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VERBALTEST"></p>
+                                <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems" ui-behaviors="Model.VERBALTESTBehavior"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900">
+                    Section 12 — Rey Auditory Verbal Learning (Immediate)
+                </h3>
+            </div>
+
+            <div>
+
+                <div class="subcounterreset m-2">
+                    <p class="counter mb-3 font-semibold">Total number of words correctly recalled and number of intrusions</p>
+
+                    <table class="mt-16 w-full text-left leading-6 border-b border-gray-100">
+                        <thead>
+                            <tr>
+                                <th class="border-b border-gray-100 sm:py-6">Trial</th>
+                                <th class="border-b border-gray-100 sm:py-6">Total recall</th>
+                                <th class="border-b border-gray-100 sm:py-6"># of intrusions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 1</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY1REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1REC"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
+                                    </div>
+                                    <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
+
+                                </td>
+                                <td class="align-top">
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY1INT" show-property-name="false" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY1INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1INT"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 2</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY2REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY2REC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2REC"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY2INT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY2INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2INT"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 3</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY3REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY3REC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3REC"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY3INT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY3INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3INT"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 4</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY4REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY4REC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4REC"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY4INT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY4INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4INT"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 5</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY5REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY5REC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5REC"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY5INT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY5INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5INT"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">List B</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REYBREC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REYBREC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBREC"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBREC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REYBINT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REYBINT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBINT"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBINT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="align-top">
+                                <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 6</td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY6REC" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY6REC" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6REC"></span>
+
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                                        <label asp-for="C2.REY6INT" show-property-name="false"><span class="subcounter"></span></label>
+                                        <div class="flex flex-row">
+                                            <div class="w-28">
+                                                <input asp-for="@Model.C2.REY6INT" />
+                                                <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6INT"></span>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
+                    <span class="counter invisible"></span>
+                    Section 13 — Rey Auditory Verbal Learning (Delayed Recall and Recognition)
+                </h3>
+
+            </div>
+
+            <div>
+
+                <div class="subcounterreset m-2">
+                </div>
+
+
+
+
+
+            </div>
+
+
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 14 — CERAD Verbal Learning (Immediate)
+                </h3>
+            </div>
+
+            <div>
+
+                <div class="subcounterreset m-2">
+
+
+                </div>
+
+              
+
+            </div>
+
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
+                    <span class="counter invisible"></span>
+                    Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
+                </h3>
+            </div>
+
+            <div>
+
+                <div class="subcounterreset m-2">
+
+                  
                 </div>
             </div>
 
-            <div class="subcounterreset">
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
-                    <div class="flex flex-row space-x-4">
-                        <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VERBALTEST"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems" ui-behaviors="Model.VERBALTESTBehavior"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
-                    </div>
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 16 — Multilingual Naming Test (MINT)
+                </h3>
+            </div>
+
+            <div>
+
+                <div class="subcounterreset m-2">
+
+                  
                 </div>
             </div>
+
 
             <div class="@rowCSS">
                 <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
@@ -1201,230 +1266,8 @@
             </div>
 
             <div>
-                <p class="counter mb-3 font-semibold">Total number of words correctly recalled and number of intrusions</p>
 
-                <table class="mt-16 w-full text-left leading-6 border-b border-gray-100">
-                    <thead>
-                        <tr>
-                            <th class="border-b border-gray-100 sm:py-6">Trial</th>
-                            <th class="border-b border-gray-100 sm:py-6">Total recall</th>
-                            <th class="border-b border-gray-100 sm:py-6"># of intrusions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 1</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY1REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1REC"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
-                                </div>
-                                <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
 
-                            </td>
-                            <td class="align-top">
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY1INT" show-property-name="false" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY1INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1INT"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 2</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY2REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY2REC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2REC"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY2INT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY2INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2INT"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 3</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY3REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY3REC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3REC"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY3INT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY3INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3INT"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 4</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY4REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY4REC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4REC"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY4INT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY4INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4INT"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 5</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY5REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY5REC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5REC"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY5INT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY5INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5INT"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">List B</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REYBREC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REYBREC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBREC"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBREC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REYBINT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REYBINT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBINT"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBINT"></p>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr class="align-top">
-                            <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 6</td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY6REC" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY6REC" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6REC"></span>
-
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
-                                </div>
-
-                            </td>
-                            <td>
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                    <label asp-for="C2.REY6INT" show-property-name="false"><span class="subcounter"></span></label>
-                                    <div class="flex flex-row">
-                                        <div class="w-28">
-                                            <input asp-for="@Model.C2.REY6INT" />
-                                            <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6INT"></span>
-                                        </div>
-                                    </div>
-                                    <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
 
             </div>
             <div class="@rowCSS">
