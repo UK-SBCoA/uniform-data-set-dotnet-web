@@ -70,6 +70,11 @@ namespace UDS.Net.Forms.Tests.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<Visit> GetByIdWithSubmissions(string username, int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

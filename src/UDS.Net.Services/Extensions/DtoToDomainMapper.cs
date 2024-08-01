@@ -39,9 +39,7 @@ namespace UDS.Net.Services.Extensions
             IList<Form> existingForms = new List<Form>();
 
             if (dto.Forms != null)
-            {
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
-            }
 
             PacketKind packetKind = PacketKind.I;
 
@@ -58,8 +56,12 @@ namespace UDS.Net.Services.Extensions
                     packetStatus = status;
             }
 
+            IList<PacketSubmission> packetSubmissions = new List<PacketSubmission>();
 
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            if (dto.PacketSubmissions != null)
+                packetSubmissions = dto.PacketSubmissions.ToDomain(dto.Id, username);
+
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
         }
 
         public static Milestone ToDomain(this M1Dto dto)
@@ -268,6 +270,16 @@ namespace UDS.Net.Services.Extensions
             }
 
             return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+        }
+
+        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, int visitId, string username)
+        {
+            if (dto == null)
+                return new List<PacketSubmission>();
+            else
+            {
+                return dto.Select(p => p.ToDomain()).ToList();
+            }
         }
 
         public static PacketSubmission ToDomain(this PacketSubmissionDto dto)

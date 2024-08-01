@@ -39,9 +39,16 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Packet submission not found");
         }
 
-        public Task<IEnumerable<PacketSubmission>> List(string username, int pageSize = 10, int pageIndex = 1)
+        public async Task<IEnumerable<PacketSubmission>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            throw new NotImplementedException();
+            List<PacketSubmission> submissions = new List<PacketSubmission>();
+
+            var dto = await _apiClient.PacketSubmissionClient.Get(pageSize, pageIndex);
+
+            //if (dto != null)
+            //    submissions = dto.ToDomain();
+
+            return submissions;
         }
 
         public Task<PacketSubmission> Patch(string username, PacketSubmission entity)

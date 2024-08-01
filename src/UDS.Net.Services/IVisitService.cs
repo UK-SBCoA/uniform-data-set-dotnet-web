@@ -9,6 +9,8 @@ namespace UDS.Net.Services
     {
         Task<Visit> GetByIdWithForm(string username, int id, string formId);
 
+        Task<Visit> GetByIdWithSubmissions(string username, int id);
+
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
     }
 }

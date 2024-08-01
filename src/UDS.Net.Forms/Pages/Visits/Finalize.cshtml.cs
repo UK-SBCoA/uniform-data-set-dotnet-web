@@ -13,6 +13,10 @@ namespace UDS.Net.Forms.Pages.Visits
     public class FinalizeModel : VisitPageModel
     {
         public FinalizeModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService) { }
+
+        // TODO run some checks and display results of warnings across all forms and all visits
+
+
     }
 }
 
