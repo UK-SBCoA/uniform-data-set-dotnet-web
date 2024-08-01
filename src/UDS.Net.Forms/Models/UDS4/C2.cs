@@ -736,8 +736,8 @@ namespace UDS.Net.Forms.Models.UDS4
                         yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
 
                     // TODO should MODCOMM be here now that UDSv4 has MODE?
-                    if (!MODCOMM.HasValue)
-                        yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
+                    //if (!MODCOMM.HasValue)
+                    //    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))
