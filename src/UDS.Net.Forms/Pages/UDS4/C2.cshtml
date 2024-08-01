@@ -1201,83 +1201,6 @@
             <div>
 
                 <div class="subcounterreset m-2">
-                </div>
-
-
-
-
-
-            </div>
-
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 14 — CERAD Verbal Learning (Immediate)
-                </h3>
-            </div>
-
-            <div>
-
-                <div class="subcounterreset m-2">
-
-
-                </div>
-
-              
-
-            </div>
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
-                    <span class="counter invisible"></span>
-                    Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
-                </h3>
-            </div>
-
-            <div>
-
-                <div class="subcounterreset m-2">
-
-                  
-                </div>
-            </div>
-
-            <div class="@rowCSS">
-                <h3 class="font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 16 — Multilingual Naming Test (MINT)
-                </h3>
-            </div>
-
-            <div>
-
-                <div class="subcounterreset m-2">
-
-                  
-                </div>
-            </div>
-
-
-            <div class="@rowCSS">
-                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
-                    Section 17 — Overall appraisal
-                </h3>
-            </div>
-
-            <div>
-
-
-
-            </div>
-            <div class="@rowCSS">
-                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
-                    <span class="counter invisible"></span>
-                    Section 18 — Validity of participant’s response
-                </h3>
-            </div>
-            <div>
-                <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div class=sm:grid-cols-3>
@@ -1347,18 +1270,22 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYFPOS"></span>
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
-            <div>
-                @*                 <div class="@rowCSS">
-            <h3 class="font-semibold leading-7 text-gray-900">
-            Section 14 — CERAD Verbal Learning (Immediate)
-            </h3>
-            </div> *@
-                <p class="counter mb-3 font-semibold"> J4 Total number of words correctly recalled and number of intrusions</p>
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900">
+                    Section 14 — CERAD Verbal Learning (Immediate)
+                </h3>
             </div>
+            <h2 class="counter text-sm mb-3 text-base font-semibold leading-7 text-gray-900">
+                J4 Word List Memory Task: Total number of words correctly recalled and number of intrusions
+            </h2>
+
             <div class="overflow-x-auto">
+
                 <table class="subcounterreset mt-16 w-full text-left leading-6 border-b border-gray-100">
                     <tr>
                         <th class="border-b border-gray-100 sm:py-6">Trial</th>
@@ -1493,17 +1420,19 @@
                         </tr>
                     </tbody>
                 </table>
+
             </div>
+
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900 text-nowrap">
+                    <span class="counter invisible"></span>
+                    Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
+                </h3>
+            </div>
+
             <div>
-                @*                 <div class="@rowCSS">
-            <h3 class="font-semibold leading-7 text-gray-900">
-            Section 15 — CERAD Verbal Learning (Delayed Recall and Recognition)
-            </h3>
-            </div> *@
-                <span class="counter invisible"></span>
 
-                <div class="subcounterreset">
-
+                <div class="subcounterreset m-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <label asp-for="C2.CERADDTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADDTI)</label>
                         <div class="flex flex-row space-x-4">
@@ -1569,19 +1498,20 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7NO"></span>
                     </div>
 
+                  
                 </div>
             </div>
 
+            <div class="@rowCSS">
+                <h3 class="font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 16 — Multilingual Naming Test (MINT)
+                </h3>
+            </div>
+
             <div>
-                @*                 <div class="@rowCSS">
-            <h3 class="font-semibold leading-7 text-gray-900">
-            Section 16 — Multilingual Naming Test (MINT)
-            </h3>
-            </div> *@
-                <span class="counter invisible"></span>
 
-                <div class="subcounterreset">
-
+                <div class="subcounterreset m-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                         <div class=sm:grid-cols-3>
                             <label asp-for="C2.MINTTOTS">
@@ -1652,19 +1582,20 @@
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTPCNC"></span>
                     </div>
-
+                  
                 </div>
             </div>
 
-            <div>
-                @*                 <div class="@rowCSS">
-            <h3 class="font-semibold leading-7 text-gray-900">
-            Section 17 — Overall appraisal
-            </h3>
-            </div> *@
-                <span class="counter invisible"></span>
 
-                <div class="subcounterreset">
+            <div class="@rowCSS">
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 17 — Overall appraisal
+                </h3>
+            </div>
+
+            <div>
+                <div class="subcounterreset m-2">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.COGSTAT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.COGSTAT)</label>
@@ -1676,23 +1607,22 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
-
+            <div class="@rowCSS">
+                <h3 class="mb-6 text-base font-semibold leading-7 text-gray-900">
+                    <span class="counter invisible"></span>
+                    Section 18 — Validity of participant’s response
+                </h3>
+            </div>
+            <h2 class="text-sm mb-3 text-base font-semibold leading-7 text-gray-900">
+                Please record your impression of whether hearing or other factors significantly influenced test results. It can be difficult to judge, but
+                it is helpful in adjudication and data analysis to know that such an influence may have been present.
+            </h2>
             <div>
-                @*                 <div class="@rowCSS">
-            <h3 class="font-semibold leading-7 text-gray-900">
-            Section 18 — Validity of participant’s response
-            </h3>
-            </div> *@
-                <span class="counter invisible"></span>
-                <h2 class="text-sm mb-3 text-base font-semibold leading-7 text-gray-900">
-                    Please record your impression of whether hearing or other factors significantly influenced test results. It can be difficult to judge, but
-                    it is helpful in adjudication and data analysis to know that such an influence may have been present.
-                </h2>
-
-                <div class="subcounterreset">
-
+                <div class="subcounterreset m-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="C2.RESPVAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.RESPVAL)</label>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1703,162 +1633,163 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div>
+                        <p class="subcounter text-base font-semibold text-gray-900">
+                            What makes this participant’s responses less valid?
+
+                            <br>
+                            <br>
+                            <b>(Check all that apply)</b>
+                        </p>
+                    </div>
+                    <div class="subsubcounterreset">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPHEAR", Model.C2.RESPHEAR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPHEAR"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPDIST", Model.C2.RESPDIST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPDIST"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPINTR", Model.C2.RESPINTR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPINTR"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPDISN", Model.C2.RESPDISN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPDISN"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPFATG", Model.C2.RESPFATG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPFATG"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPEMOT", Model.C2.RESPEMOT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPEMOT"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPASST", Model.C2.RESPASST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPASST"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
+                            <div class="mt-4 sm:col-span-1 sm:mt-0">
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <div>
+                                    <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
+                                </div>
+
+                                <div>
+                                    @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"C2.RESPOTHX\"]" })
+                                </div>
+                                <div>
+                                    <label asp-for="C2.RESPOTH"></label>
+                                </div>
+                            </div>
+                            <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
+                                <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.RESPOTHX"></p>
+                                <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
+                                <div>
+                                    <input asp-for="C2.RESPOTHX" />
+                                </div>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
-
-                <div>
-                    <p class="subcounter text-base font-semibold text-gray-900">
-                        What makes this participant’s responses less valid?
-
-                        <br>
-                        <br>
-                        <b>(Check all that apply)</b>
-                    </p>
-                </div>
-                <div class="subsubcounterreset">
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPHEAR", Model.C2.RESPHEAR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPHEAR"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPDIST", Model.C2.RESPDIST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPDIST"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPINTR", Model.C2.RESPINTR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPINTR"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPDISN", Model.C2.RESPDISN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPDISN"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPFATG", Model.C2.RESPFATG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPFATG"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPEMOT", Model.C2.RESPEMOT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPEMOT"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPASST", Model.C2.RESPASST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPASST"></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-1">
-                        <div class="mt-4 sm:col-span-1 sm:mt-0">
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <div>
-                                <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
-                            </div>
-
-                            <div>
-                                @Html.CheckBox("C2.RESPOTH", Model.C2.RESPOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"C2.RESPOTHX\"]" })
-                            </div>
-                            <div>
-                                <label asp-for="C2.RESPOTH"></label>
-                            </div>
-                        </div>
-                        <div class="mt-4 sm:mt-0 flex space-x-4 items-center sm:col-span-1">
-                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.RESPOTHX"></p>
-                            <label asp-for="C2.RESPOTHX">@Html.DisplayNameFor(m => m.C2.RESPOTHX)</label>
-                            <div>
-                                <input asp-for="C2.RESPOTHX" />
-                            </div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         }
     </div>
