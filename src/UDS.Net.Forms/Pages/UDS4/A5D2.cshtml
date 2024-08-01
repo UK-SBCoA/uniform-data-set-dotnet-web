@@ -1,4 +1,4 @@
-@page  "{id:int?}"
+@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A5D2Model
 @{
     Layout = "_LayoutForm";
@@ -9,7 +9,7 @@
     <p class="mt-1 text-sm text-gray-500 italic">
         <span class="font-bold not-italic">INSTRUCTIONS:</span> This form is to be completed by the clinician or ADRC staff based on the medical history interview with the participant
         and co-participant, as well as review of any medical records that are available. Any conditions identified during the visit should be
-            included on the form. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span> for <span class="font-bold not-italic">Form A5/D2</span>. Check only one box per question,
+        included on the form. For additional clarification and examples, see <span class="font-bold not-italic">UDS Coding Guidebook</span> for <span class="font-bold not-italic">Form A5/D2</span>. Check only one box per question,
         unless otherwise stated.
     </p>
 </div>
@@ -476,7 +476,7 @@
                 </div>
             </div>
             <div class="text-3xl my-10">Section 4 - Neurologic conditions</div>
-            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subsubcounterreset">
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
                 <div>
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
@@ -542,7 +542,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.SEIZURES)" for="@Model.A5D2.SEIZURES" items="Model.ConditionsListItems" ui-behaviors="Model.SEIZURESBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -828,7 +828,7 @@
                     <span class="underline">If any of the conditions</span> still require active management and/or medications, please select <span class="font-bold">"Recent / Active".</span>
                 </p>
             </div>
-            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subsubcounterreset">
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
                 <div>
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
@@ -850,7 +850,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.DIABETES)" for="@Model.A5D2.DIABETES" items="Model.ConditionsListItems" ui-behaviors="Model.DIABETESBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.DIABTYPE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABTYPE)</label>
@@ -972,10 +972,10 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERTEN)" for="@Model.A5D2.HYPERTEN" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERTENBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.HYPERTAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.HYPERTAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTAGE) <span class="font-bold">(999 = Unknown)</span></label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERTAGE"></p>
                                                 <input asp-for="@Model.A5D2.HYPERTAGE" />
@@ -984,7 +984,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td>
                                         <label asp-for="A5D2.HYPERCHO"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHO)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5d)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HYPERCHO"></p>
@@ -992,10 +992,10 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERCHO)" for="@Model.A5D2.HYPERCHO" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERCHOBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.HYPERCHAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.HYPERCHAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHAGE) <span class="font-bold">(999 = Unknown)</span></label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERCHAGE"></p>
                                                 <input asp-for="@Model.A5D2.HYPERCHAGE" />
@@ -1269,9 +1269,9 @@
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <div>
-                                                    <div>
+                                                    <div class="text-base font-semibold text-gray-900 subsubcounter">
                                                         <label class="text-base font-semibold text-gray-900">
-                                                            <span class="subsubcounter"></span> Type of cancer</br><span class="italic">(Check all that apply)</span>
+                                                            Type of cancer</br><span class="italic">(Check all that apply)</span>
                                                         </label>
                                                     </div>
                                                     <div>
@@ -1700,7 +1700,7 @@
                     of functioning. For more guidance see the <span class="font-bold">UDS Coding Guidebook, Form A5/D2.</span>
                 </p>
             </div>
-            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subsubcounterreset">
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
                 <div>
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
@@ -1757,7 +1757,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="subsubcounterreset">
+                                <tr>
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.BIPOLAR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BIPOLAR)</label>
@@ -2131,5 +2131,7 @@
         </div>
     </div>
 </div>
-
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/A5D2.js"></script>
+}
 <partial name="_FormFooter" for="@Model.A5D2" />
