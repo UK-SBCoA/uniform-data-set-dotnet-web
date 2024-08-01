@@ -832,7 +832,7 @@ namespace UDS.Net.Services.Extensions
                 OTHCONDX = fields.OTHCONDX,
                 MAJORDEP = fields.MAJORDEP,
                 OTHERDEP = fields.OTHERDEP,
-                DEPRTREAT = fields.DEPRTREAT.HasValue ? true : false,
+                DEPRTREAT = ConvertIntToBool(fields.DEPRTREAT),
                 BIPOLAR = fields.BIPOLAR,
                 SCHIZ = fields.SCHIZ,
                 ANXIETY = fields.ANXIETY,
