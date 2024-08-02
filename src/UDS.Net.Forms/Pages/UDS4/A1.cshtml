@@ -620,7 +620,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                        @* Don't know *@
+                        <div class="relative flex items-start">
+                            <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                            <div class="flex h-6 items-center">
+                                @Html.CheckBox("A1.RACEUNKN", Model.A1.RACEUNKN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            </div>
+                            <div class="ml-3 text-sm leading-6">
+                                <label asp-for="A1.RACEUNKN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.RACEUNKN)</label>
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
             </div>
