@@ -248,14 +248,20 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if ((RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
+                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
                     || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
                     || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
                     || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
                     || RACEAIAN
                     || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
                     || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH)
-                && !RACEUNKN)
+                {
+                    if (RACEUNKN)
+                        return null;
+                    else
+                        return true;
+                }
+                else if (RACEUNKN)
                     return true;
                 else
                     return null;
