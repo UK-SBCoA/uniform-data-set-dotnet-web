@@ -74,7 +74,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", true), // C2C2T
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
 
@@ -98,7 +99,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", true), // C2C2T
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
                         }
