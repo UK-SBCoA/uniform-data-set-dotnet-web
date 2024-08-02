@@ -242,6 +242,26 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known ethnicity/race.")]
+        [NotMapped]
+        public bool? EthnicityRaceUnknownOnly
+        {
+            get
+            {
+                if ((RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
+                    || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
+                    || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
+                    || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
+                    || RACEAIAN
+                    || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
+                    || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH)
+                && !RACEUNKN)
+                    return true;
+                else
+                    return null;
+            }
+        }
+
         [Display(Name = "Man")]
         public bool GENMAN { get; set; }
 
