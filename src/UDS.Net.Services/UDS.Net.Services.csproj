@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<PackageId>UDS.Net.Services</PackageId>
-		<Version>3.0.6-preview.2</Version>
+		<Version>4.0.1-preview.1</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>Service contracts for implmenting your own back-end with MVC web app</Description>
 		<Owners>UK-SBCoA</Owners>
