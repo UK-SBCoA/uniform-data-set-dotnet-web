@@ -110,6 +110,7 @@ namespace UDS.Net.Services.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
+                MILESTONETYPE = milestone.MILESTONETYPE
             };
         }
 

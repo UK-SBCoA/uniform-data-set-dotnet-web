@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
+
 
 namespace UDS.Net.Forms.Models
 {
@@ -61,13 +63,13 @@ namespace UDS.Net.Forms.Models
         public string? ModifiedBy { get; set; }
         public string? DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
-        //Temporary properties only used in the view and NOT sent to the API 
         [Required]
         [Display(Name = "Which milestone type are you reporting?")]
         [Range(0, 1)]
-        //MilestoneType plays a role in client-side validation, must be answered but not stored
-        public int MilestoneType { get; set; }
+        public int? MILESTONETYPE { get; set; }
+        //Temporary properties only used in the view and NOT sent to the API
         //validation properties used as targets for validation messages in the manual validation
+        [NotMapped]
         public int ProtocolReasonValidation { get; set; }
     }
 }

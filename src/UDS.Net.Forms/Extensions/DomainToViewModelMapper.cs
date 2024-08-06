@@ -106,6 +106,7 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
+                MILESTONETYPE = milestone.MILESTONETYPE
             };
         }
 
