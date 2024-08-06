@@ -30,7 +30,8 @@ function setAffect(target, attribute, value) {
         else {
           element.val("");
         }
-      } else {
+      }
+      else {
         element.removeAttr("disabled");
       }
     }
@@ -60,14 +61,16 @@ function compareRange(low, high, targets, value) {
         setAffect(target, "disabled", true);
       });
     });
-  } else {
+  } 
+  else {
     if (value >= low && value <= high) {
       $.each(targets, function (index, behavior) {
         $.each(behavior, function (target, affects) {
           setAffect(target, "disabled", false);
         });
       });
-    } else {
+    } 
+    else {
       $.each(targets, function (index, behavior) {
         $.each(behavior, function (target, affects) {
           setAffect(target, "disabled", true);
@@ -92,12 +95,14 @@ $(function () {
             setAffects(targets);
           }
         }
-      } else if ($(this).data("affects-toggle-targets")) {
+      } 
+      else if ($(this).data("affects-toggle-targets")) {
         // checkboxes
         let isSelected = $(this).is(":checked");
         let toggleTargets = $(this).data("affects-toggle-targets");
         toggleAffects(toggleTargets, isSelected);
-      } else if ($(this).data("affects-range-targets")) {
+      } 
+      else if ($(this).data("affects-range-targets")) {
         // text or number inputs
         let low = $(this).data("affects-range-low");
         let high = $(this).data("affects-range-high");
@@ -111,11 +116,13 @@ $(function () {
         if ($(this).data("affects-targets")) {
           let targets = $(this).data("affects-targets");
           setAffects(targets);
-        } else if ($(this).data("affects-toggle-targets")) {
+        } 
+        else if ($(this).data("affects-toggle-targets")) {
           let isSelected = $(this).is(":checked");
           let toggleTargets = $(this).data("affects-toggle-targets");
           toggleAffects(toggleTargets, isSelected);
-        } else if ($(this).data("affects-range-targets")) {
+        } 
+        else if ($(this).data("affects-range-targets")) {
           // change event fires when input unfocused
           let low = $(this).data("affects-range-low");
           let high = $(this).data("affects-range-high");
@@ -140,7 +147,8 @@ $(function () {
       if (element.is(":radio")) {
         if (element.is(":checked")) {
           // console.log(element.attr('name') + " checked");
-        } else {
+        } 
+        else {
           let toggleTargets = element.data("affects-targets");
           $.each(toggleTargets, function (index, behavior) {
             $.each(behavior, function (target, affects) {
@@ -177,7 +185,8 @@ function setValidationStatus(statusValue, modeValue) {
     // figure out which fields needs to be required
     // enable client-side validation
     settings.ignore = "";
-  } else {
+  } 
+  else {
     // get errors that were created using jQuery.validate.unobtrusive
     // and remove messages
     let errors = form.find(".field-validation-error span");
