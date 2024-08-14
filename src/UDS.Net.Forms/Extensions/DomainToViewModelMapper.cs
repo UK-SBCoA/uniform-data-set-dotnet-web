@@ -108,6 +108,7 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
+                MILESTONETYPE = milestone.MILESTONETYPE
             };
         }
 
@@ -256,7 +257,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHENGLISH = fields.ETHENGLISH.HasValue ? fields.ETHENGLISH.Value != 0 : false,
                 ETHITALIAN = fields.ETHITALIAN.HasValue ? fields.ETHITALIAN.Value != 0 : false,
                 ETHPOLISH = fields.ETHPOLISH.HasValue ? fields.ETHPOLISH.Value != 0 : false,
-                ETHFRENCH = fields.ETHFRENCH.HasValue ? fields.ETHFRENCH.Value != 0 : false,
+                ETHSCOTT = fields.ETHSCOTT.HasValue ? fields.ETHSCOTT.Value != 0 : false,
                 ETHWHIOTH = fields.ETHWHIOTH.HasValue ? fields.ETHWHIOTH.Value != 0 : false,
                 ETHWHIOTHX = fields.ETHWHIOTHX,
                 ETHISPANIC = fields.ETHISPANIC.HasValue ? fields.ETHISPANIC.Value != 0 : false,
@@ -265,7 +266,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHCUBAN = fields.ETHCUBAN.HasValue ? fields.ETHCUBAN.Value != 0 : false,
                 ETHSALVA = fields.ETHSALVA.HasValue ? fields.ETHSALVA.Value != 0 : false,
                 ETHDOMIN = fields.ETHDOMIN.HasValue ? fields.ETHDOMIN.Value != 0 : false,
-                ETHCOLOM = fields.ETHCOLOM.HasValue ? fields.ETHCOLOM.Value != 0 : false,
+                ETHGUATEM = fields.ETHGUATEM.HasValue ? fields.ETHGUATEM.Value != 0 : false,
                 ETHHISOTH = fields.ETHHISOTH.HasValue ? fields.ETHHISOTH.Value != 0 : false,
                 ETHHISOTHX = fields.ETHHISOTHX,
                 RACEBLACK = fields.RACEBLACK.HasValue ? fields.RACEBLACK.Value != 0 : false,
@@ -293,7 +294,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHIRAN = fields.ETHIRAN.HasValue ? fields.ETHIRAN.Value != 0 : false,
                 ETHEGYPT = fields.ETHEGYPT.HasValue ? fields.ETHEGYPT.Value != 0 : false,
                 ETHSYRIA = fields.ETHSYRIA.HasValue ? fields.ETHSYRIA.Value != 0 : false,
-                ETHMOROCCO = fields.ETHMOROCCO.HasValue ? fields.ETHMOROCCO.Value != 0 : false,
+                ETHIRAQI = fields.ETHIRAQI.HasValue ? fields.ETHIRAQI.Value != 0 : false,
                 ETHISRAEL = fields.ETHISRAEL.HasValue ? fields.ETHISRAEL.Value != 0 : false,
                 ETHMENAOTH = fields.ETHMENAOTH.HasValue ? fields.ETHMENAOTH.Value != 0 : false,
                 ETHMENAOTX = fields.ETHMENAOTX,
@@ -1189,6 +1190,7 @@ namespace UDS.Net.Forms.Extensions
                 UDSVERTN = fields.UDSVERTN,
                 UDSVERTE = fields.UDSVERTE,
                 UDSVERTI = fields.UDSVERTI,
+                VERBALTEST = fields.VERBALTEST,
                 COGSTAT = fields.COGSTAT,
                 REY1REC = fields.REY1REC,
                 REY1INT = fields.REY1INT,
@@ -1200,18 +1202,30 @@ namespace UDS.Net.Forms.Extensions
                 REY4INT = fields.REY4INT,
                 REY5REC = fields.REY5REC,
                 REY5INT = fields.REY5INT,
+                REYBREC = fields.REYBREC,
+                REYBINT = fields.REYBINT,
                 REY6REC = fields.REY6REC,
                 REY6INT = fields.REY6INT,
-                OTRAILA = fields.OTRAILA,
-                OTRLARR = fields.OTRLARR,
-                OTRLALI = fields.OTRLALI,
-                OTRAILB = fields.OTRAILB,
-                OTRLBRR = fields.OTRLBRR,
-                OTRLBLI = fields.OTRLBLI,
                 REYDREC = fields.REYDREC,
                 REYDINT = fields.REYDINT,
+                REYDTI = fields.REYDTI,
+                REYMETHOD = fields.REYMETHOD,
                 REYTCOR = fields.REYTCOR,
                 REYFPOS = fields.REYFPOS,
+                CERAD1REC = fields.CERAD1REC,
+                CERAD1READ = fields.CERAD1READ,
+                CERAD1INT = fields.CERAD1INT,
+                CERAD2REC = fields.CERAD2REC,
+                CERAD2READ = fields.CERAD2READ,
+                CERAD2INT = fields.CERAD2INT,
+                CERAD3REC = fields.CERAD3REC,
+                CERAD3READ = fields.CERAD3READ,
+                CERAD3INT = fields.CERAD3INT,
+                CERADDTI = fields.CERADDTI,
+                CERADJ6REC = fields.CERADJ6REC,
+                CERADJ6INT = fields.CERADJ6INT,
+                CERADJ7YES = fields.CERADJ7YES,
+                CERADJ7NO = fields.CERADJ7NO,
                 VNTTOTW = fields.VNTTOTW,
                 VNTPCNC = fields.VNTPCNC,
                 RESPVAL = fields.RESPVAL,
@@ -1226,7 +1240,6 @@ namespace UDS.Net.Forms.Extensions
                 RESPOTHX = fields.RESPOTHX
             };
         }
-
         public static D1a ToVM(this D1aFormFields fields, int formId)
         {
             return new D1a()
