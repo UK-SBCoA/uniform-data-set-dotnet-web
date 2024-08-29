@@ -32,6 +32,11 @@ namespace UDS.Net.Forms.Models
         [MaxLength(3)]
         public string INITIALS { get; set; } = "";
 
+        [Display(Name = "Status")]
+        public PacketStatus Status { get; set; }
+
+        public bool CanBeFinalized { get; set; } = false;
+
         [Required]
         public DateTime CreatedAt { get; set; }
 
@@ -48,6 +53,7 @@ namespace UDS.Net.Forms.Models
 
         public virtual IList<FormModel> Forms { get; set; } = new List<FormModel>();
 
+        public virtual IList<PacketSubmissionModel> PacketSubmissions { get; set; } = new List<PacketSubmissionModel>();
     }
 }
 

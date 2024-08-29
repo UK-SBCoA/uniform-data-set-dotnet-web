@@ -4,6 +4,7 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
@@ -38,15 +39,29 @@ namespace UDS.Net.Services.Extensions
             IList<Form> existingForms = new List<Form>();
 
             if (dto.Forms != null)
-            {
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
+
+            PacketKind packetKind = PacketKind.I;
+
+            if (!string.IsNullOrWhiteSpace(dto.PACKET))
+            {
+                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
+                    packetKind = kind;
             }
 
-            PacketKind packetKind;
-            if (!Enum.TryParse(dto.PACKET, true, out packetKind))
-                packetKind = PacketKind.I;
+            PacketStatus packetStatus = PacketStatus.Unsubmitted;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                if (!Enum.TryParse(dto.Status, true, out PacketStatus status))
+                    packetStatus = status;
+            }
 
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            IList<PacketSubmission> packetSubmissions = new List<PacketSubmission>();
+
+            if (dto.PacketSubmissions != null)
+                packetSubmissions = dto.PacketSubmissions.ToDomain(dto.Id, username);
+
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
         }
 
         public static Milestone ToDomain(this M1Dto dto)
@@ -256,6 +271,40 @@ namespace UDS.Net.Services.Extensions
             }
 
             return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+        }
+
+        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, int visitId, string username)
+        {
+            if (dto == null)
+                return new List<PacketSubmission>();
+            else
+            {
+                return dto.Select(p => p.ToDomain()).ToList();
+            }
+        }
+
+        public static PacketSubmission ToDomain(this PacketSubmissionDto dto)
+        {
+            if (dto.PacketSubmissionErrors != null && dto.PacketSubmissionErrors.Count() > 0)
+            {
+                var errors = dto.PacketSubmissionErrors.Select(e => e.ToDomain()).ToList();
+
+                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, errors);
+            }
+            else
+                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount);
+        }
+
+        public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)
+        {
+            PacketSubmissionErrorLevel packetSubmissionErrorLevel = PacketSubmissionErrorLevel.Information;
+            if (!string.IsNullOrWhiteSpace(dto.Level))
+            {
+                if (Enum.TryParse(dto.Level, true, out PacketSubmissionErrorLevel level))
+                    packetSubmissionErrorLevel = level;
+            }
+
+            return new PacketSubmissionError(dto.Id, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
         }
     }
 }
