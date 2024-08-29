@@ -1,9 +1,15 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.PageModels;
+using UDS.Net.Services;
+
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
-    public class Edit
+    public class EditModel : PacketSubmissionPageModel
     {
-        public Edit()
+        public EditModel(IVisitService visitService, IPacketSubmissionService packetSubmissionService) : base(visitService, packetSubmissionService)
         {
         }
     }

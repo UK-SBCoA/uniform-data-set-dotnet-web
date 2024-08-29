@@ -1,4 +1,10 @@
-﻿@page
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.PacketSubmissions.ExportModel
 @{
+    ViewData["Title"] = "Export packet submission";
 }
 
+@if (Model.Processed)
+{
+    <script type="text/javascript">window.close();</script>
+}

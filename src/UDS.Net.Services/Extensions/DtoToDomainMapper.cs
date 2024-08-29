@@ -289,10 +289,10 @@ namespace UDS.Net.Services.Extensions
             {
                 var errors = dto.PacketSubmissionErrors.Select(e => e.ToDomain()).ToList();
 
-                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, errors);
+                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, errors);
             }
             else
-                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
+                return new PacketSubmission(dto.Id, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount);
         }
 
         public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)

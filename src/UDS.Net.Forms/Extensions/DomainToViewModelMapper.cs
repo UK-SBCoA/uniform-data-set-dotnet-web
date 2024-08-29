@@ -3,6 +3,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
@@ -65,6 +66,66 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = visit.IsDeleted,
                 CanBeFinalized = visit.IsFinalizable,
                 Forms = visit.Forms.ToVM()
+            };
+        }
+
+        public static PacketSubmissionsModel ToVM(this IEnumerable<PacketSubmission> packetSubmissions)
+        {
+            PacketSubmissionsModel vm = new PacketSubmissionsModel();
+
+            if (packetSubmissions != null)
+            {
+                foreach (var packetSubmission in packetSubmissions)
+                {
+                    vm.List.Add(packetSubmission.ToVM());
+                }
+            }
+
+            return vm;
+        }
+
+        public static PacketSubmissionModel ToVM(this PacketSubmission packetSubmission)
+        {
+            PacketSubmissionModel vm = new PacketSubmissionModel();
+
+            if (packetSubmission != null)
+            {
+                vm.Id = packetSubmission.Id;
+                vm.SubmissionDate = packetSubmission.SubmissionDate;
+                vm.CreatedAt = packetSubmission.CreatedAt;
+                vm.CreatedBy = packetSubmission.CreatedBy;
+                vm.ModifiedBy = packetSubmission.ModifiedBy;
+                vm.ErrorCount = packetSubmission.ErrorCount;
+
+                if (packetSubmission.Errors != null)
+                {
+                    vm.Errors = packetSubmission.Errors.ToVM();
+                }
+            }
+
+            return vm;
+        }
+
+        public static PacketSubmissionErrorsPaginatedModel ToVM(this List<PacketSubmissionError> packetSubmissionErrors)
+        {
+            PacketSubmissionErrorsPaginatedModel vm = new PacketSubmissionErrorsPaginatedModel();
+
+            if (packetSubmissionErrors != null)
+            {
+                foreach (var error in packetSubmissionErrors)
+                {
+                    vm.List.Add(error.ToVM());
+                }
+            }
+
+            return vm;
+        }
+
+        public static PacketSubmissionErrorModel ToVM(this PacketSubmissionError packetSubmissionError)
+        {
+            return new PacketSubmissionErrorModel
+            {
+                // TODO error model properties
             };
         }
 

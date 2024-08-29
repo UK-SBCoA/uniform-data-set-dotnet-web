@@ -60,16 +60,12 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Visit with form not found");
         }
 
-        public async Task<Visit> GetByIdWithSubmissions(string username, int id) // TODO Upgrade to include pagination on submissions
+        public async Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
         {
-            var visitDto = await _apiClient.VisitClient.Get(id);
+            var visitDto = await _apiClient.VisitClient.GetWithPacketSubmissions(id, pageSize, pageIndex);
 
             if (visitDto != null)
             {
-                var submissionsDto = await _apiClient.PacketSubmissionClient.GetPacketSubmissionsByVisit(id);
-
-                visitDto.PacketSubmissions = submissionsDto;
-
                 return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
             }
 
