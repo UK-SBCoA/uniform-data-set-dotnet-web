@@ -49,6 +49,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATOTS { get; set; }
 
+        [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
+        [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
+        public int? MOCBTOTS { get; set; }
+
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]

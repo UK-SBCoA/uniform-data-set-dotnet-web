@@ -919,6 +919,7 @@ namespace UDS.Net.Forms.Extensions
                 MOCAVIS = vm.MOCAVIS,
                 MOCAHEAR = vm.MOCAHEAR,
                 MOCATOTS = vm.MOCATOTS,
+                //MOCBTOTS = vm.MOCBTOTS,
                 MOCATRAI = vm.MOCATRAI,
                 MOCACUBE = vm.MOCACUBE,
                 MOCACLOC = vm.MOCACLOC,
