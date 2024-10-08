@@ -579,26 +579,32 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
         [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
+        [RequiredOnFinalized]
         public int? OTRAILA { get; set; }
 
         [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
         [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILA),0,100, ErrorMessage = "Response Required")]
         public int? OTRLARR { get; set; }
 
         [Display(Name = "Part A - Number of correct lines", Description = "(0-25)")]
         [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Response Required")]
         public int? OTRLALI { get; set; }
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
         [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
+        [RequiredOnFinalized]
         public int? OTRAILB { get; set; }
 
         [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
         [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
         public int? OTRLBRR { get; set; }
 
         [Display(Name = "Number of correct lines", Description = "(0-25)")]
         [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
         public int? OTRLBLI { get; set; }
 
 

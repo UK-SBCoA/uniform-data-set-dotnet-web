@@ -2700,7 +2700,7 @@
                             </div>
                             <div class="flex flex-row space-x-4">
                                 <div class="w-28">
-                                    <input asp-for="@Model.C2.OTRAILA" />
+                                    <input asp-for="@Model.C2.OTRAILA" ui-range-behavior="Model.OTRAILABehavior" />
                                 </div>
                                 <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>
                             </div>
@@ -2754,7 +2754,7 @@
                         </div>
                         <div class="flex flex-row space-x-4">
                             <div class="w-28">
-                                <input asp-for="@Model.C2.OTRAILB" />
+                                <input asp-for="@Model.C2.OTRAILB" ui-range-behavior="Model.OTRAILBBehavior" />
                             </div>
                             <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILB"></p>
                         </div>
