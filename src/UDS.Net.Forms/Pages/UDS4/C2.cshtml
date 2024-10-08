@@ -2702,7 +2702,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRAILA" />
                                 </div>
-                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>                                                           
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILA"></span>
                         </div>
@@ -2717,7 +2717,7 @@
                                 <div class="w-28">
                                     <input asp-for="@Model.C2.OTRLARR" />
                                 </div>
-                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLARR"></p>                           
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLARR"></p>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLARR"></span>
 
@@ -2800,8 +2800,8 @@
                 </h3>
             </div>
 
-            <div class="counter hidden">
-
+            <div>
+                <span class="counter invisible"></span>
                 <div class="subcounterreset m-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div class=sm:grid-cols-3>
@@ -2995,7 +2995,8 @@
                 </h3>
             </div>
             <div>
-                <div class="subcounterrestet">
+                <span class="counter invisible"></span>
+                <div class="subcounterreset">
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <div class=sm:grid-cols-3>
@@ -3069,6 +3070,37 @@
             <div>
 
                 <div class="subcounterreset m-2">
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div>
+                            <label asp-for="C2.VNTTOTW"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTTOTW)</label>
+                            <p class="text-nowrap text-xs">(If test was not completed, enter reason code, 95-98. If test was skipped because optional, enter 88.)</p>
+                        </div>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.VNTTOTW" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VNTTOTW"></p>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VNTTOTW"></span>
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div>
+                            <label asp-for="C2.VNTPCNC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.VNTPCNC)</label>
+                            <p class="text-nowrap text-xs">
+                                (If test was not completed, enter reason code, 95-98. If test was skipped because optional or if no cues were
+                                given, enter 88)
+                            </p>
+                        </div>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.VNTPCNC" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VNTPCNC"></p>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VNTPCNC"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
