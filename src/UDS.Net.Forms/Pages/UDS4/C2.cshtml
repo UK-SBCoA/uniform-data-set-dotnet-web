@@ -2681,12 +2681,117 @@
             <div class="@rowCSS shadow-sm">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
-                    Section 10 — Oral Trail Making Test (Optional) @* TODO Add Properties to model *@
+                    Section 10 — Oral Trail Making Test (Optional) @* TODO Add Properties to model & Map*@
                 </h3>
             </div>
             <div>
 
                 <div class="subcounterreset m-2">
+                    <div class="subsubcounterreset">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div>
+                                <label asp-for="C2.OTRAILA">
+                                    <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILA)
+                                </label>
+                                <p class="text-nowrap text-xs">
+                                    (If test not completed, enter reason code, 995–998. If test was skipped because optional, enter 888. SKIP
+                                    TO QUESTION 10b.)
+                                </p>
+                            </div>
+                            <div class="flex flex-row space-x-4">
+                                <div class="w-28">
+                                    <input asp-for="@Model.C2.OTRAILA" />
+                                </div>
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>                                                           
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILA"></span>
+                        </div>
+
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div>
+                                <label asp-for="C2.OTRLARR">
+                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLARR)
+                                </label>
+                            </div>
+                            <div class="flex flex-row space-x-4">
+                                <div class="w-28">
+                                    <input asp-for="@Model.C2.OTRLARR" />
+                                </div>
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLARR"></p>                           
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLARR"></span>
+
+
+                        </div>
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <div>
+                                <label asp-for="C2.OTRLALI">
+                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLALI)
+                                </label>
+                            </div>
+                            <div class="flex flex-row space-x-4">
+                                <div class="w-28">
+                                    <input asp-for="@Model.C2.OTRLALI" />
+                                </div>
+                                <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLALI"></p>
+                            </div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLALI"></span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsubcounterreset">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class=sm:grid-cols-3>
+                            <label asp-for="C2.OTRAILB">
+                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRAILB)
+                            </label>
+                            <p class="text-nowrap text-xs">
+                                (If test not completed, enter reason code, 995–998. If test was skipped because optional, enter 888. SKIP
+                                TO QUESTION 11a.)
+                            </p>
+                        </div>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.OTRAILB" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILB"></p>
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILB"></span>
+
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class=sm:grid-cols-3>
+                            <label asp-for="C2.OTRLBRR">
+                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBRR)
+                            </label>
+                        </div>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.OTRLBRR" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLBRR"></p>
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLBRR"></span>
+
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class=sm:grid-cols-3>
+                            <label asp-for="C2.OTRLBLI">
+                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.C2.OTRLBLI)
+                            </label>
+                        </div>
+                        <div class="flex flex-row space-x-4">
+                            <div class="w-28">
+                                <input asp-for="@Model.C2.OTRLBLI" />
+                            </div>
+                            <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLBLI"></p>
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLBLI"></span>
+                    </div>
                 </div>
             </div>
             <div class="@rowCSS shadow-sm">
@@ -2987,7 +3092,7 @@
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.COGSTAT"></span>
                             </div>
                         </div>
-                    </div>              
+                    </div>
                 </div>
             </div>
 

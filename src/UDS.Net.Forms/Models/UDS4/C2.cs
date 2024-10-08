@@ -577,6 +577,30 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
         public int? CERADJ7NO { get; set; }
 
+        [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
+        [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
+        public int? OTRAILA { get; set; }
+
+        [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        public int? OTRLARR { get; set; }
+
+        [Display(Name = "Part A - Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        public int? OTRLALI { get; set; }
+
+        [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
+        [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
+        public int? OTRAILB { get; set; }
+
+        [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        public int? OTRLBRR { get; set; }
+
+        [Display(Name = "Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        public int? OTRLBLI { get; set; }
+
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
