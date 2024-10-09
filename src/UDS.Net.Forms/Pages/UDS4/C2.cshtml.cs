@@ -290,6 +290,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("C2.MOCAVIS"),
                     new UIDisableAttribute("C2.MOCAHEAR"),
                     new UIDisableAttribute("C2.MOCATOTS"),
+                    new UIDisableAttribute("C2.MOCBTOTS"),
                     new UIDisableAttribute("C2.MOCATRAI"),
                     new UIDisableAttribute("C2.MOCACUBE"),
                     new UIDisableAttribute("C2.MOCACLOC"),
@@ -324,6 +325,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.MOCAVIS"),
                     new UIEnableAttribute("C2.MOCAHEAR"),
                     new UIEnableAttribute("C2.MOCATOTS"),
+                    new UIEnableAttribute("C2.MOCBTOTS"),
                     new UIEnableAttribute("C2.MOCATRAI"),
                     new UIEnableAttribute("C2.MOCACUBE"),
                     new UIEnableAttribute("C2.MOCACLOC"),
@@ -402,6 +404,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("Rey AVLT (COMPLETE SECTIONS 12 & 13, SKIP SECTIONS 14 & 15)", "1"),
             new RadioListItem("CERAD (SKIP TO SECTION 14)", "2"),
+
+        };
+
+        public List<RadioListItem> VERBALTESTC2TListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Rey AVLT (COMPLETE SECTIONS 6 & 13, SKIP SECTIONS 7 & 9)", "1"),
+            new RadioListItem("CERAD (COMPLETE SECTIONS 7 & 9 SKIP SECTIONS 6 & 13)", "2"),
 
         };
 

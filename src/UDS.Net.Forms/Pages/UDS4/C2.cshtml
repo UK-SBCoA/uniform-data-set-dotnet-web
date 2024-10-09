@@ -16,7 +16,7 @@
 <div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
-        @if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson))
+        @if ((Model.C2.MODE == FormMode.InPerson))
         {
             <div class="@rowCSS shadow-sm">
                 <h3 class="font-semibold leading-7 text-gray-900">
@@ -1791,7 +1791,7 @@
             </div>
         }
 
-        @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote))
+        @if ((Model.C2.MODE == FormMode.Remote))
         {
             <div class="@rowCSS shadow-sm">
                 <h3 class="font-semibold leading-7 text-gray-900">
@@ -2199,7 +2199,7 @@
                             <label asp-for="C2.VERBALTEST"> @Html.DisplayNameFor(m => m.C2.VERBALTEST)</label>
                             <div class="flex flex-row space-x-4">
                                 <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VERBALTEST"></p>
-                                <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTListItems" ui-behaviors="Model.VERBALTESTBehavior"></radio-button-group>
+                                <radio-button-group id="@Html.IdFor(m => m.C2.VERBALTEST)" for="@Model.C2.VERBALTEST" items="Model.VERBALTESTC2TListItems" ui-behaviors="Model.VERBALTESTBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
                             </div>
                         </div>
