@@ -5,16 +5,19 @@ using UDS.Net.API.Client;
 using UDS.Net.Services;
 using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels.Submission;
+using Microsoft.Extensions.Configuration;
 
 namespace UDS.Net.Web.MVC.Services
 {
     public class PacketSubmissionService : IPacketSubmissionService
     {
         private readonly IApiClient _apiClient;
+        private readonly IConfiguration _configuration;
 
-        public PacketSubmissionService(IApiClient apiClient)
+        public PacketSubmissionService(IApiClient apiClient, IConfiguration configuration)
         {
             _apiClient = apiClient;
+            _configuration = configuration;
         }
 
         public async Task<PacketSubmission> Add(string username, PacketSubmission entity)
@@ -33,8 +36,22 @@ namespace UDS.Net.Web.MVC.Services
         {
             var packetSubmissionDto = await _apiClient.PacketSubmissionClient.Get(id);
 
+            var adrcId = _configuration.GetSection("ADRC:Id");
+
             if (packetSubmissionDto != null)
-                return packetSubmissionDto.ToDomain();
+                return packetSubmissionDto.ToDomain(adrcId.Value);
+
+            throw new Exception("Packet submission not found");
+        }
+
+        public async Task<PacketSubmission> GetPacketSubmissionWithForms(string username, int id)
+        {
+            var packetSubmissionDto = await _apiClient.PacketSubmissionClient.GetPacketSubmissionWithForms(id);
+
+            var adrcId = _configuration.GetSection("ADRC:Id");
+
+            if (packetSubmissionDto != null)
+                return packetSubmissionDto.ToDomain(adrcId.Value);
 
             throw new Exception("Packet submission not found");
         }

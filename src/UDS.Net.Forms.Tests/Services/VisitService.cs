@@ -29,6 +29,11 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
+        public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Visit> GetByIdWithForm(string username, int id, string formId)
         {
             throw new NotImplementedException();
@@ -71,10 +76,6 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
-        public Task<Visit> GetByIdWithSubmissions(string username, int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
