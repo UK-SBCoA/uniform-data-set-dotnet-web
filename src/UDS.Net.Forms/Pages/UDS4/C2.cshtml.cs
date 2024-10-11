@@ -640,6 +640,29 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return Page();
         }
+        public async Task<IActionResult> OnGetC2Async(int? id)
+        {
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                C2 = (C2)BaseForm; // class library should always handle new instances
+            }
+
+            return Partial("_C2",this);
+        }
+
+        public async Task<IActionResult> OnGetC2TAsync(int? id)
+        {
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                C2 = (C2)BaseForm; // class library should always handle new instances
+            }
+
+            return Partial("_C2T", this);
+        }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
