@@ -13,7 +13,7 @@
 		<ReleaseVersion>4.1.0-preview.2</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="System.Text.Json" Version="7.0.3" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 		<PackageReference Include="UDS.Net.Dto" Version="4.1.0-preview.6" />
 		<PackageReference Include="UDS.Net.API.Client" Version="4.1.0-preview.6" />
 	</ItemGroup>
