@@ -20,10 +20,11 @@
                             <tr>
                                 <th scope="col">Participation Id</th>
                                 <th scope="col">Visit number</th>
-                                <th scope="col">Version</th>
                                 <th scope="col">Packet kind</th>
                                 <th scope="col">Initials</th>
                                 <th scope="col">Date</th>
+                                <th>Status</th>
+                                <th></th>
                                 <th scope="col"><span class="sr-only">View details</span></th>
                             </tr>
                         </thead>
@@ -33,11 +34,12 @@
                                 <tr>
                                     <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
                                     <td>@visit.VISITNUM</td>
-                                    <td>@visit.FORMVER</td>
                                     <td>@visit.PACKET</td>
                                     <td>@visit.INITIALS</td>
                                     <td>@visit.VISIT_DATE.ToShortDateString()</td>
-                                    <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></th>
+                                    <td>@visit.Status</td>
+                                    <td>@visit.CanBeFinalized</td>
+                                    <td><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></td>
                                 </tr>
                             }
                         </tbody>

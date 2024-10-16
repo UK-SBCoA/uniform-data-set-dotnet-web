@@ -15,7 +15,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public PacketSubmissionErrorLevel Level { get; set; }
 
-        public string ResolvedBy { get; set; }
+        public string ResolvedBy { get; set; } // null means the error has not been resolved
 
         public DateTime CreatedAt { get; set; }
 

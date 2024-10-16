@@ -18,7 +18,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public IList<Form> Forms { get; set; }
 
-        public int ErrorCount { get; set; } = 0;
+        public int? ErrorCount { get; set; } // if error count is null then no response was received from submission
 
         public List<PacketSubmissionError> Errors { get; set; } = new List<PacketSubmissionError>();
 

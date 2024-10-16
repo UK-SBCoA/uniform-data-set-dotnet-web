@@ -49,7 +49,7 @@ namespace UDS.Net.Services.Extensions
                     packetKind = kind;
             }
 
-            PacketStatus packetStatus = PacketStatus.Unsubmitted;
+            PacketStatus packetStatus = PacketStatus.Pending;
             if (!string.IsNullOrWhiteSpace(dto.Status))
             {
                 if (!Enum.TryParse(dto.Status, true, out PacketStatus status))
