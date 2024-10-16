@@ -1,6 +1,8 @@
 ﻿@model C2Model
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     Layout = "_LayoutForm";
+
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 <turbo-frame id="C2">
@@ -1778,4 +1780,7 @@
             </div>
         </div>
     </div>
+    <div asp-validation-summary="All" class="mt-1 text-sm text-red-700">
+    </div>
+    <partial name="_FormFooter" for="@Model.C2" />
 </turbo-frame>

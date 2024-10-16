@@ -43,7 +43,7 @@
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     </div>
 </div>
+<a data-turbo-frame="C2" asp-page="/UDS4/C2" asp-page-handler="C2" asp-route-id="@Model.Visit.Id" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Add C2</a>
 <turbo-frame id="C2">
-
 </turbo-frame>
-<partial name="_FormFooter" for="@Model.C2" />
+<div asp-validation-summary="All" class="text-red-600"></div>
