@@ -180,6 +180,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MOCAVIS = c2Dto.MOCAVIS;
                 MOCAHEAR = c2Dto.MOCAHEAR;
                 MOCATOTS = c2Dto.MOCATOTS;
+                //MOCBTOTS = c2Dto.MOCBTOTS;
                 MOCATRAI = c2Dto.MOCATRAI;
                 MOCACUBE = c2Dto.MOCACUBE;
                 MOCACLOC = c2Dto.MOCACLOC;

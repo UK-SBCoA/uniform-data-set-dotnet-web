@@ -49,6 +49,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATOTS { get; set; }
 
+        [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
+        [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
+        public int? MOCBTOTS { get; set; }
+
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
         [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
@@ -572,6 +576,36 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "J7 Word List Recognition: Total NO correct", Description = "(0-10,95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
         public int? CERADJ7NO { get; set; }
+
+        [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
+        [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
+        [RequiredOnFinalized]
+        public int? OTRAILA { get; set; }
+
+        [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILA),0,100, ErrorMessage = "Response Required")]
+        public int? OTRLARR { get; set; }
+
+        [Display(Name = "Part A - Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Response Required")]
+        public int? OTRLALI { get; set; }
+
+        [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
+        [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
+        [RequiredOnFinalized]
+        public int? OTRAILB { get; set; }
+
+        [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
+        public int? OTRLBRR { get; set; }
+
+        [Display(Name = "Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
+        public int? OTRLBLI { get; set; }
 
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]

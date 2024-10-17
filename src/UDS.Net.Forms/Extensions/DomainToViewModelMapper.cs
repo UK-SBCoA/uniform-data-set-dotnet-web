@@ -1127,6 +1127,7 @@ namespace UDS.Net.Forms.Extensions
                 MOCAVIS = fields.MOCAVIS,
                 MOCAHEAR = fields.MOCAHEAR,
                 MOCATOTS = fields.MOCATOTS,
+                //MOCBTOTS = fields.MOCBTOTS,
                 MOCATRAI = fields.MOCATRAI,
                 MOCACUBE = fields.MOCACUBE,
                 MOCACLOC = fields.MOCACLOC,
