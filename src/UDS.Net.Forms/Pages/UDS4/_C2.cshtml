@@ -1,11 +1,11 @@
 ﻿@model C2Model
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    Layout = "_LayoutForm";
+
 
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 <turbo-frame id="C2">
+
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
         <div class="@rowCSS shadow-sm">
@@ -1783,4 +1783,7 @@
     <div asp-validation-summary="All" class="mt-1 text-sm text-red-700">
     </div>
     <partial name="_FormFooter" for="@Model.C2" />
+    <script src="~/_content/UDS.Net.Forms/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/_content/UDS.Net.Forms/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/_content/UDS.Net.Forms/js/jquery.unobtrusive.custom_validation.js" asp-append-version="true"></script>
 </turbo-frame>

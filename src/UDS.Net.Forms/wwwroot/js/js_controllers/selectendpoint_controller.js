@@ -21,6 +21,6 @@ export default class extends Controller {
       } else {
         turboFrame.src = `${inPersonEndPoint}`;
       }
-    } 
+    }
   }
 }

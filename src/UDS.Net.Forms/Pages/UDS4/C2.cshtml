@@ -2,6 +2,7 @@
 @model UDS.Net.Forms.Pages.UDS4.C2Model
 @{
     Layout = "_LayoutForm";
+
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
@@ -21,18 +22,17 @@
     </div>
     <div>
         <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-        <enum-select 
-            data-controller="selectendpoint"  
-            data-selectendpoint-target="dropdown"
-            data-selectendpoint-visit-id-value="@Model.C2.VisitId" 
-            data-action="change->selectendpoint#checkDropdown"
-            data-turboframe="C2"
-            data-remote-end-point="../C2/@Model.BaseForm.VisitId?handler=C2T"
-            data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
-            for="@Model.C2.RMMODE" 
-            items="Html.GetEnumSelectList<RemoteModality>()" 
-            enabled-values="@Model.C2.AllowedRemoteModalities" 
-            class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <enum-select data-controller="selectendpoint"
+                     data-selectendpoint-target="dropdown"
+                     data-selectendpoint-visit-id-value="@Model.C2.VisitId"
+                     data-action="change->selectendpoint#checkDropdown"
+                     data-turboframe="C2"
+                     data-remote-end-point="../C2/@Model.BaseForm.VisitId?handler=C2T"
+                     data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
+                     for="@Model.C2.RMMODE"
+                     items="Html.GetEnumSelectList<RemoteModality>()"
+                     enabled-values="@Model.C2.AllowedRemoteModalities"
+                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
             <option disabled selected class="disabled:opacity-75">--</option>
         </enum-select>
     </div>
@@ -43,7 +43,22 @@
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     </div>
 </div>
-<a data-turbo-frame="C2" asp-page="/UDS4/C2" asp-page-handler="C2" asp-route-id="@Model.Visit.Id" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Add C2</a>
-<turbo-frame id="C2">
-</turbo-frame>
+<form id="C2" asp-page-handler="C2" data-validate="true">
+    <a data-turbo-frame="C2" asp-page="/UDS4/C2" asp-page-handler="C2" asp-route-id="@Model.Visit.Id" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Add C2</a>
+    <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+    <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
+    <input asp-for="Visit.Id" type="hidden" />
+    <input asp-for="Visit.ParticipationId" type="hidden" />
+    <input asp-for="Visit.VISITNUM" type="hidden" />
+    <input asp-for="Visit.PACKET" type="hidden" />
+    <input asp-for="Visit.FORMVER" type="hidden" />
+    <input asp-for="Visit.VISIT_DATE" type="hidden" />
+    <input asp-for="Visit.INITIALS" type="hidden" />
+    <input asp-for="Visit.CreatedAt" type="hidden" />
+    <input asp-for="Visit.CreatedBy" type="hidden" />
+    <input asp-for="Visit.ModifiedBy" type="hidden" />
+    <input asp-for="Visit.DeletedBy" type="hidden" />
+    <turbo-frame id="C2">
+    </turbo-frame>
+</form>
 <div asp-validation-summary="All" class="text-red-600"></div>
