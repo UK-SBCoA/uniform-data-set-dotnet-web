@@ -122,7 +122,9 @@ namespace UDS.Net.Forms.Models.PageModels
                     var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
                     if (!ModelState.IsValid)
-                        return Partial("_C2", C2);
+
+                    Response.ContentType = "text/vnd.turbo-stream.html";
+                    return Partial("_C2Validation", C2);
                 };
             }
 

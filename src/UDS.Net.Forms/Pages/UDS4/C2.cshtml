@@ -44,7 +44,6 @@
     </div>
 </div>
 <form id="C2" asp-page-handler="C2" data-validate="true">
-    <a data-turbo-frame="C2" asp-page="/UDS4/C2" asp-page-handler="C2" asp-route-id="@Model.Visit.Id" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Add C2</a>
     <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
     <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
     <input asp-for="Visit.Id" type="hidden" />
@@ -59,6 +58,17 @@
     <input asp-for="Visit.ModifiedBy" type="hidden" />
     <input asp-for="Visit.DeletedBy" type="hidden" />
     <turbo-frame id="C2">
+        @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote) && (Model.C2.RMMODE == RemoteModality.Telephone))
+
+        {
+            <partial name="_C2T" model="@Model" />
+        }
+
+        else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
+
+        {
+            <partial name="_C2" model="@Model" />
+        }
+
     </turbo-frame>
 </form>
-<div asp-validation-summary="All" class="text-red-600"></div>
