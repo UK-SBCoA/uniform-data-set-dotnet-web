@@ -1,11 +1,11 @@
 ﻿
 
 //handles the dropdowns to determine whether C2 or C2T is used
-const mode = document.getElementById("modeselect");
+const modality = document.getElementById("modalityselect");
 const inputElement = document.getElementById("remote");
 
-mode.addEventListener("change", function () {
-  if (mode.value === "2") {
+modality.addEventListener("change", function () {
+  if (modality.value === "2") {
     inputElement.disabled = false;
   } else {
     inputElement.disabled = true
