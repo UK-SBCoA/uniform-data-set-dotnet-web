@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["dropdown"]
   static values = { visitId: Number }
 
-  checkDropdown(event) {
+  remoteModeDropdown(event) {
     const dropdown = this.dropdownTarget;
     const dropdownValue = dropdown.value;
     const visitId = this.visitIdValue;
@@ -19,6 +19,22 @@ export default class extends Controller {
       if (dropdownValue == 1) {
         turboFrame.src = `${remoteEndPoint}`;
       } else {
+        turboFrame.src = `${inPersonEndPoint}`;
+      }
+    }
+  }
+  modeDropdown(event) {
+    const dropdown = this.dropdownTarget;
+    const dropdownValue = dropdown.value;
+    const visitId = this.visitIdValue;
+
+    const turboFrameId = dropdown.dataset.turboframe;
+    const turboFrame = document.querySelector(`turbo-frame#${turboFrameId}`);
+
+    const inPersonEndPoint = dropdown.dataset.inPersonEndPoint;
+
+    if (visitId) {
+      if (dropdownValue == 1) {
         turboFrame.src = `${inPersonEndPoint}`;
       }
     }
