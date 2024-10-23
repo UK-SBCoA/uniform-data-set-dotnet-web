@@ -22,7 +22,7 @@ namespace UDS.Net.Forms.Models
 
         public string? ModifiedBy { get; set; }
 
-        public int ErrorCount { get; set; } = 0;
+        public int? ErrorCount { get; set; }
 
         public virtual PacketSubmissionErrorsPaginatedModel Errors { get; set; } = new PacketSubmissionErrorsPaginatedModel();
         public string GetFileName(string participantLegacyId, DateTime visitDate)
