@@ -649,7 +649,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            return Partial("_C2",this);
+            return Partial("_C2", this);
         }
 
         public async Task<IActionResult> OnGetC2TAsync(int? id)
