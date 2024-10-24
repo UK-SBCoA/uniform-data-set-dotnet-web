@@ -55,6 +55,7 @@ namespace UDS.Net.Forms.Models
 
         public virtual IList<FormModel> Forms { get; set; } = new List<FormModel>();
 
+        public virtual IList<PacketSubmissionErrorModel> UnresolvedErrors { get; set; } = new List<PacketSubmissionErrorModel>();
     }
 }
 

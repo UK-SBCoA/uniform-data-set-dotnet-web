@@ -55,6 +55,14 @@ namespace UDS.Net.Services.DomainModels
         {
             get
             {
+                // if ti has been submitted and error results are pending
+                if (this.Status == PacketStatus.Submitted)
+                    return false;
+
+                // if it has already been submitted and it has unresolved errors
+                if (this.UnresolvedErrorCount.HasValue && this.UnresolvedErrorCount.Value > 0)
+                    return false;
+
                 bool finalizable = false;
 
                 if (this.Forms != null && this.Forms.Count() > 0 && _formsContract != null)
@@ -87,7 +95,6 @@ namespace UDS.Net.Services.DomainModels
         public Participation Participation { get; set; } = new Participation();
 
         public IList<Form> Forms { get; set; } = new List<Form>();
-
 
         private void BuildFormsContract(string version, PacketKind kind, DateTime visitDate, IList<Form> existingForms)
         {
@@ -180,9 +187,11 @@ namespace UDS.Net.Services.DomainModels
             return true;
         }
 
-        public int ErrorCount { get; private set; }
+        public int? UnresolvedErrorCount { get; private set; }
 
-        public int Count { get; private set; }
+        public IList<PacketSubmissionError> UnresolvedErrors { get; set; } = new List<PacketSubmissionError>();
+
+        //public int Count { get; private set; }
 
         public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
@@ -193,7 +202,7 @@ namespace UDS.Net.Services.DomainModels
             PACKET = packet;
             VISIT_DATE = visitDate;
             INITIALS = initials;
-            Status = (PacketStatus)status;
+            Status = status;
             CreatedAt = createdAt;
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
@@ -204,10 +213,33 @@ namespace UDS.Net.Services.DomainModels
                 existingForms = new List<Form>();
 
             BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
-
         }
 
+        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
+        {
+            Id = id;
+            VISITNUM = number;
+            ParticipationId = participationId;
+            FORMVER = version;
+            PACKET = packet;
+            VISIT_DATE = visitDate;
+            INITIALS = initials;
+            Status = status;
+            CreatedAt = createdAt;
+            CreatedBy = createdBy;
+            ModifiedBy = modifiedBy;
+            DeletedBy = deletedBy;
+            IsDeleted = IsDeleted;
+            UnresolvedErrorCount = unresolvedErrorCount;
 
+            if (existingForms == null)
+                existingForms = new List<Form>();
+
+            BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
+
+            if (unresolvedErrors != null)
+                UnresolvedErrors = unresolvedErrors;
+        }
 
         // TODO There's form fields and then there's validation rules for the form fields based on visit type
         // look up generics builder

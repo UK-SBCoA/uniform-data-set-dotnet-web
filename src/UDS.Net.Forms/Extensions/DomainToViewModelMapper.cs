@@ -49,7 +49,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static VisitModel ToVM(this Visit visit)
         {
-            return new VisitModel()
+            var vm = new VisitModel()
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
@@ -65,8 +65,14 @@ namespace UDS.Net.Forms.Extensions
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
                 CanBeFinalized = visit.IsFinalizable,
-                Forms = visit.Forms.ToVM()
+                Forms = visit.Forms.ToVM(),
+                TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
             };
+
+            if (visit.UnresolvedErrors != null)
+                vm.UnresolvedErrors = visit.UnresolvedErrors.ToVM();
+
+            return vm;
         }
 
         public static PacketModel ToVM(this Packet packet)
@@ -124,7 +130,7 @@ namespace UDS.Net.Forms.Extensions
             return vm;
         }
 
-        public static List<PacketSubmissionErrorModel> ToVM(this List<PacketSubmissionError> packetSubmissionErrors)
+        public static List<PacketSubmissionErrorModel> ToVM(this IList<PacketSubmissionError> packetSubmissionErrors)
         {
             List<PacketSubmissionErrorModel> vm = new List<PacketSubmissionErrorModel>();
 
@@ -143,7 +149,17 @@ namespace UDS.Net.Forms.Extensions
         {
             return new PacketSubmissionErrorModel
             {
-                // TODO error model properties
+                Id = packetSubmissionError.Id,
+                FormKind = packetSubmissionError.FormKind,
+                Message = packetSubmissionError.Message,
+                AssignedTo = packetSubmissionError.AssignedTo,
+                Level = packetSubmissionError.Level,
+                ResolvedBy = packetSubmissionError.ResolvedBy,
+                CreatedBy = packetSubmissionError.CreatedBy,
+                CreatedAt = packetSubmissionError.CreatedAt,
+                ModifiedBy = packetSubmissionError.ModifiedBy,
+                DeletedBy = packetSubmissionError.DeletedBy,
+                IsDeleted = packetSubmissionError.IsDeleted
             };
         }
 

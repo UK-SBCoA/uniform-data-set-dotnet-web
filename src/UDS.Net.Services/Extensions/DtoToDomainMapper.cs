@@ -41,6 +41,11 @@ namespace UDS.Net.Services.Extensions
             if (dto.Forms != null)
                 existingForms = dto.Forms.ToDomain(dto.Id, username);
 
+            IList<PacketSubmissionError> errors = new List<PacketSubmissionError>();
+
+            if (dto.UnresolvedErrors != null)
+                errors = dto.UnresolvedErrors.Select(e => e.ToDomain()).ToList();
+
             PacketKind packetKind = PacketKind.I;
 
             if (!string.IsNullOrWhiteSpace(dto.PACKET))
@@ -52,11 +57,11 @@ namespace UDS.Net.Services.Extensions
             PacketStatus packetStatus = PacketStatus.Pending;
             if (!string.IsNullOrWhiteSpace(dto.Status))
             {
-                if (!Enum.TryParse(dto.Status, true, out PacketStatus status))
+                if (Enum.TryParse(dto.Status, true, out PacketStatus status))
                     packetStatus = status;
             }
 
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
         }
 
 
