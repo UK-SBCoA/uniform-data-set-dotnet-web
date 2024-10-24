@@ -292,7 +292,7 @@ namespace UDS.Net.Services.Extensions
             PacketStatus packetStatus = PacketStatus.Pending;
             if (!string.IsNullOrWhiteSpace(dto.Status))
             {
-                if (!Enum.TryParse(dto.Status, true, out PacketStatus status))
+                if (Enum.TryParse(dto.Status, true, out PacketStatus status))
                     packetStatus = status;
             }
 

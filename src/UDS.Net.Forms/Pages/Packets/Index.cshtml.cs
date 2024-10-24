@@ -27,7 +27,10 @@ namespace UDS.Net.Forms.Pages.Packets
         {
             List<PacketStatus> statuses = new List<PacketStatus>
             {
-                PacketStatus.Finalized
+                PacketStatus.Finalized,
+                PacketStatus.Submitted,
+                PacketStatus.FailedErrorChecks,
+                PacketStatus.PassedErrorChecks
             };
 
             var packets = await _packetService.List(User.Identity.Name, statuses, pageSize, pageIndex);

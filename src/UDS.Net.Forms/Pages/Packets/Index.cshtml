@@ -1,5 +1,55 @@
 ﻿@page
 @model UDS.Net.Forms.Pages.Packets.IndexModel
 @{
+    ViewData["Title"] = "Packets";
 }
 
+<div class="space-y-16 py-16 xl:space-y-20">
+    <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-xl font-semibold text-gray-900">All packets</h2>
+        <p class="mt-2 text-sm text-gray-700">A list of finalized, submitted, and passed/failed.</p>
+    </div>
+    @if (Model.Packets != null)
+    {
+        <div class="mt-6 overflow-hidden border-t border-gray-100">
+            <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
+                <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr>
+                                <th scope="col">Participation Id</th>
+                                <th scope="col">Visit number</th>
+                                <th scope="col">Packet kind</th>
+                                <th scope="col">Initials</th>
+                                <th scope="col">Date</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th scope="col"><span class="sr-only">View details</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var packet in Model.Packets)
+                            {
+                                <tr>
+                                    <td><a asp-page="/Participations/Details" asp-route-id="@packet.ParticipationId">@(packet.Participation != null ? packet.Participation.LegacyId : packet.ParticipationId)</a></td>
+                                    <td>@packet.VISITNUM</td>
+                                    <td>@packet.PACKET</td>
+                                    <td>@packet.INITIALS</td>
+                                    <td>@packet.VISIT_DATE.ToShortDateString()</td>
+                                    <td>@packet.Status</td>
+                                    <td>
+                                        @if (packet.TotalUnresolvedErrorCount.HasValue)
+                                        {
+                                            <span>@packet.TotalUnresolvedErrorCount errors</span>
+                                        }
+                                    </td>
+                                    <td><a asp-page="Details" asp-route-id="@packet.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
