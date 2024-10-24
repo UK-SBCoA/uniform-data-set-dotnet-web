@@ -9,59 +9,49 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class IndexModel : PageModel
     {
-        protected readonly IVisitService _visitService;
         protected readonly IParticipationService _participationService;
-        protected readonly IPacketSubmissionService _packetSubmissionService;
+        protected readonly IPacketService _packetService;
 
-        public VisitModel Visit { get; set; }
-
-        public PacketSubmissionsModel Submissions { get; set; }
+        public PacketModel Packet { get; set; }
 
         public string PageTitle
         {
             get
             {
-                if (Visit != null)
+                if (Packet != null)
                 {
-                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} Packet Submissions";
+                    return $"Participant {Packet.Participation.LegacyId} Visit {Packet.VISITNUM} Packet Submissions";
                 }
                 return "";
             }
         }
 
-        public IndexModel(IVisitService visitService, IParticipationService participationService, IPacketSubmissionService packetSubmissionService) : base()
+        public IndexModel(IParticipationService participationService, IPacketService packetService) : base()
         {
-            _visitService = visitService;
             _participationService = participationService;
-            _packetSubmissionService = packetSubmissionService;
+            _packetService = packetService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? visitId = null, int pageSize = 10, int pageIndex = 1)
+        public async Task<IActionResult> OnGetAsync(int? packetId = null, int pageSize = 10, int pageIndex = 1)
         {
-            if (visitId.HasValue)
+            if (packetId.HasValue)
             {
-                var visit = await _visitService.GetByIdWithSubmissions(User.Identity.Name, visitId.Value);
+                var packet = await _packetService.GetById(User.Identity.Name, packetId.Value);
 
-                if (visit == null)
+                if (packet == null)
                     return NotFound();
 
-                var participation = await _participationService.GetById("", visit.ParticipationId);
+                var participation = await _participationService.GetById("", packet.ParticipationId);
 
                 if (participation == null)
                     return NotFound();
 
-                Visit = visit.ToVM();
+                Packet = packet.ToVM();
 
-                Visit.Participation = participation.ToVM();
-
-                Submissions = visit.Submissions.ToVM();
+                Packet.Participation = participation.ToVM();
             }
             else
             {
-                // if there is no visit id, get all packet submissions paginated
-                var packetSubmissions = await _packetSubmissionService.List(User.Identity.Name, pageSize, pageIndex);
-
-                Submissions = packetSubmissions.ToVM();
             }
 
             return Page();

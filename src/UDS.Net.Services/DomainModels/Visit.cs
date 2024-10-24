@@ -88,7 +88,6 @@ namespace UDS.Net.Services.DomainModels
 
         public IList<Form> Forms { get; set; } = new List<Form>();
 
-        public IList<PacketSubmission> Submissions { get; set; } = new List<PacketSubmission>();
 
         private void BuildFormsContract(string version, PacketKind kind, DateTime visitDate, IList<Form> existingForms)
         {
@@ -208,12 +207,6 @@ namespace UDS.Net.Services.DomainModels
 
         }
 
-        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, IList<PacketSubmission> packetSubmissions) :
-            this(id, number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms)
-        {
-            if (packetSubmissions != null)
-                Submissions = packetSubmissions;
-        }
 
 
         // TODO There's form fields and then there's validation rules for the form fields based on visit type

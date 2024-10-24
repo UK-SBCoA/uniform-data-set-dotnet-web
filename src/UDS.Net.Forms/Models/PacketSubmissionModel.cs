@@ -24,7 +24,8 @@ namespace UDS.Net.Forms.Models
 
         public int? ErrorCount { get; set; }
 
-        public virtual PacketSubmissionErrorsPaginatedModel Errors { get; set; } = new PacketSubmissionErrorsPaginatedModel();
+        public List<PacketSubmissionErrorModel> Errors { get; set; } = new List<PacketSubmissionErrorModel>();
+
         public string GetFileName(string participantLegacyId, DateTime visitDate)
         {
             return $"UDS_{participantLegacyId}_{visitDate.Year}_EXPORTED_{SubmissionDate.ToFileTime()}.csv";

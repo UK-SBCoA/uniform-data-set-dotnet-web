@@ -88,6 +88,10 @@ namespace UDS.Net.Forms.Models
         [Required]
         public bool IsDeleted { get; set; }
 
+        public int? UnresolvedErrorCount { get; set; }
+
+        public List<PacketSubmissionErrorModel> UnresolvedErrors { get; set; } = new List<PacketSubmissionErrorModel>();
+
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == FormStatus.NotStarted)

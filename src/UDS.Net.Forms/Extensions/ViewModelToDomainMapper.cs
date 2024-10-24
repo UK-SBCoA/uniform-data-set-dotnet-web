@@ -76,6 +76,23 @@ namespace UDS.Net.Forms.Extensions
             return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
         }
 
+        public static Packet ToEntity(this PacketModel vm)
+        {
+            return new Packet(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(), vm.PacketSubmissions.ToEntity());
+        }
+
+        public static List<PacketSubmission> ToEntity(this IList<PacketSubmissionModel> vm)
+        {
+            List<PacketSubmission> submissions = new List<PacketSubmission>();
+
+            if (vm != null)
+            {
+                submissions = vm.Select(p => p.ToEntity()).ToList();
+            }
+
+            return submissions;
+        }
+
         public static PacketSubmission ToEntity(this PacketSubmissionModel vm)
         {
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.VisitId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, 0);

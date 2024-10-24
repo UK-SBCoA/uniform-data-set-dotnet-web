@@ -9,9 +9,9 @@ using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
-    public class DetailsModel : PacketSubmissionPageModel
+    public class DetailsModel : PacketPageModel
     {
-        public DetailsModel(IVisitService visitService, IPacketSubmissionService packetSubmissionService) : base(visitService, packetSubmissionService)
+        public DetailsModel(IPacketService packetService) : base(packetService)
         {
         }
     }

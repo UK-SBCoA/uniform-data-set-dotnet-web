@@ -69,17 +69,35 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static PacketSubmissionsModel ToVM(this IEnumerable<PacketSubmission> packetSubmissions)
+        public static PacketModel ToVM(this Packet packet)
         {
-            PacketSubmissionsModel vm = new PacketSubmissionsModel();
-
-            if (packetSubmissions != null)
+            return new PacketModel()
             {
-                foreach (var packetSubmission in packetSubmissions)
-                {
-                    vm.List.Add(packetSubmission.ToVM());
-                }
-            }
+                Id = packet.Id,
+                ParticipationId = packet.ParticipationId,
+                VISITNUM = packet.VISITNUM,
+                PACKET = packet.PACKET,
+                FORMVER = packet.FORMVER,
+                VISIT_DATE = packet.VISIT_DATE,
+                INITIALS = packet.INITIALS,
+                Status = packet.Status,
+                CreatedAt = packet.CreatedAt,
+                CreatedBy = packet.CreatedBy,
+                ModifiedBy = packet.ModifiedBy,
+                DeletedBy = packet.DeletedBy,
+                IsDeleted = packet.IsDeleted,
+                CanBeFinalized = packet.IsFinalizable,
+                Forms = packet.Forms.ToVM(),
+                PacketSubmissions = packet.Submissions.ToVM()
+            };
+        }
+
+        public static List<PacketSubmissionModel> ToVM(this IList<PacketSubmission> packetSubmissions)
+        {
+            List<PacketSubmissionModel> vm = new List<PacketSubmissionModel>();
+
+            if (packetSubmissions != null && packetSubmissions.Count() > 0)
+                vm = packetSubmissions.Select(p => p.ToVM()).ToList();
 
             return vm;
         }
@@ -106,15 +124,15 @@ namespace UDS.Net.Forms.Extensions
             return vm;
         }
 
-        public static PacketSubmissionErrorsPaginatedModel ToVM(this List<PacketSubmissionError> packetSubmissionErrors)
+        public static List<PacketSubmissionErrorModel> ToVM(this List<PacketSubmissionError> packetSubmissionErrors)
         {
-            PacketSubmissionErrorsPaginatedModel vm = new PacketSubmissionErrorsPaginatedModel();
+            List<PacketSubmissionErrorModel> vm = new List<PacketSubmissionErrorModel>();
 
             if (packetSubmissionErrors != null)
             {
                 foreach (var error in packetSubmissionErrors)
                 {
-                    vm.List.Add(error.ToVM());
+                    vm.Add(error.ToVM());
                 }
             }
 

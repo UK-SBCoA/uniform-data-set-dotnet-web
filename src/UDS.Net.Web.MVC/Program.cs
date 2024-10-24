@@ -33,7 +33,7 @@ var adrcId = configuration.GetValue<string>("ADRC:Id");
 builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
 builder.Services.AddSingleton<ILookupService, LookupService>();
-builder.Services.AddSingleton<IPacketSubmissionService, PacketSubmissionService>();
+builder.Services.AddSingleton<IPacketService, PacketService>();
 
 ////*************************************************************************************************
 

@@ -56,13 +56,9 @@ namespace UDS.Net.Services.Extensions
                     packetStatus = status;
             }
 
-            IList<PacketSubmission> packetSubmissions = new List<PacketSubmission>();
-
-            if (dto.PacketSubmissions != null)
-                packetSubmissions = dto.PacketSubmissions.ToDomain("", dto.Id, username); // we do not need the adrcid until packet submission/export
-
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms);
         }
+
 
         public static Milestone ToDomain(this M1Dto dto)
         {
@@ -271,6 +267,37 @@ namespace UDS.Net.Services.Extensions
             }
 
             return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+        }
+
+        public static Packet ToDomain(this PacketDto dto, string username)
+        {
+            IList<Form> existingForms = new List<Form>();
+
+            if (dto.Forms != null)
+                existingForms = dto.Forms.ToDomain(dto.Id, username);
+
+            PacketKind packetKind = PacketKind.I;
+
+            if (!string.IsNullOrWhiteSpace(dto.PACKET))
+            {
+                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
+                    packetKind = kind;
+            }
+
+            PacketStatus packetStatus = PacketStatus.Pending;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                if (!Enum.TryParse(dto.Status, true, out PacketStatus status))
+                    packetStatus = status;
+            }
+
+            IList<PacketSubmission> packetSubmissions = new List<PacketSubmission>();
+
+            if (dto.PacketSubmissions != null)
+                packetSubmissions = dto.PacketSubmissions.ToDomain("", dto.Id, username); // we do not need the adrcid until packet submission/export
+
+            return new Packet(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
+
         }
 
         public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username)

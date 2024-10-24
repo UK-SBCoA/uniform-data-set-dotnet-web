@@ -11,32 +11,30 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class CreateModel : PageModel
     {
-        protected readonly IVisitService _visitService;
         protected readonly IParticipationService _participationService;
-        protected readonly IPacketSubmissionService _packetSubmissionService;
+        protected readonly IPacketService _packetService;
 
         [BindProperty]
         public PacketSubmissionModel? PacketSubmission { get; set; }
 
-        public VisitModel? Visit { get; set; }
+        public PacketModel? Packet { get; set; }
 
         public string PageTitle
         {
             get
             {
-                if (Visit != null)
+                if (Packet != null)
                 {
-                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} Packet Submissions";
+                    return $"Participant {Packet.Participation.LegacyId} Visit {Packet.VISITNUM} Packet Submissions";
                 }
                 return "";
             }
         }
 
-        public CreateModel(IVisitService visitService, IParticipationService participationService, IPacketSubmissionService packetSubmissionService)
+        public CreateModel(IParticipationService participationService, IPacketService packetService)
         {
-            _visitService = visitService;
             _participationService = participationService;
-            _packetSubmissionService = packetSubmissionService;
+            _packetService = packetService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? visitId)
@@ -44,23 +42,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (visitId == null || visitId == 0)
                 return NotFound();
 
-            var visit = await _visitService.GetById("", visitId.Value);
+            var packet = await _packetService.GetById("", visitId.Value);
 
-            if (visit == null)
+            if (packet == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", visit.ParticipationId);
+            var participation = await _participationService.GetById("", packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
 
-            Visit = visit.ToVM();
+            Packet = packet.ToVM();
 
-            Visit.Participation = participation.ToVM();
+            Packet.Participation = participation.ToVM();
 
             PacketSubmission = new PacketSubmissionModel
             {
-                VisitId = visit.Id,
+                VisitId = packet.Id,
                 SubmissionDate = DateTime.Now,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
@@ -77,7 +75,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             try
             {
                 // TODO add isn't working yet
-                await _packetSubmissionService.Add(User.Identity.IsAuthenticated ? User.Identity.Name : "Username", PacketSubmission.ToEntity());
+                await _packetService.Update(User.Identity.IsAuthenticated ? User.Identity.Name : "Username", Packet.ToEntity());
             }
             catch (Exception ex)
             {

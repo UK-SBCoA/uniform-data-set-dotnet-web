@@ -60,18 +60,6 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Visit with form not found");
         }
 
-        public async Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
-        {
-            var visitDto = await _apiClient.VisitClient.GetWithPacketSubmissions(id, pageSize, pageIndex);
-
-            if (visitDto != null)
-            {
-                return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
-            }
-
-            throw new Exception("Visit with form not found");
-        }
-
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
             var visitDtos = await _apiClient.VisitClient.Get();

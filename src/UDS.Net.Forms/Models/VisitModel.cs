@@ -37,6 +37,8 @@ namespace UDS.Net.Forms.Models
 
         public bool CanBeFinalized { get; set; } = false;
 
+        public int? TotalUnresolvedErrorCount { get; set; }
+
         [Required]
         public DateTime CreatedAt { get; set; }
 
@@ -53,7 +55,6 @@ namespace UDS.Net.Forms.Models
 
         public virtual IList<FormModel> Forms { get; set; } = new List<FormModel>();
 
-        public virtual IList<PacketSubmissionModel> PacketSubmissions { get; set; } = new List<PacketSubmissionModel>();
     }
 }
 

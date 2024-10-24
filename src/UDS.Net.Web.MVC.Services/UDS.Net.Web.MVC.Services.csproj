@@ -14,8 +14,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />
-		<PackageReference Include="UDS.Net.Dto" Version="4.1.0-preview.6" />
-		<PackageReference Include="UDS.Net.API.Client" Version="4.1.0-preview.6" />
+		<PackageReference Include="UDS.Net.Dto" Version="4.1.0-preview.10" />
+		<PackageReference Include="UDS.Net.API.Client" Version="4.1.0-preview.10" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Services\UDS.Net.Services.csproj" />

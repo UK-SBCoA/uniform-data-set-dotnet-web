@@ -132,6 +132,19 @@ namespace UDS.Net.Services.Extensions
             return dto;
         }
 
+        public static PacketDto ToDto(this Packet packet)
+        {
+            var dto = new PacketDto();
+
+            dto.Id = packet.Id;
+            dto.Status = packet.Status.ToString();
+
+            if (packet.Submissions != null)
+                dto.PacketSubmissions = packet.Submissions.Select(s => s.ToDto()).ToList();
+
+            return dto;
+        }
+
         public static PacketSubmissionDto ToDto(this PacketSubmission packetSubmission)
         {
             var dto = new PacketSubmissionDto

@@ -32,7 +32,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public bool IsDeleted { get; set; }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int errorCount)
+        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount)
         {
             Id = id;
             ADRCId = adrcId;
@@ -46,12 +46,12 @@ namespace UDS.Net.Services.DomainModels.Submission
             ErrorCount = errorCount;
         }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int errorCount, IList<Form> forms) : this(id, adrcId, submissionDate, visitId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
+        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount, IList<Form> forms) : this(id, adrcId, submissionDate, visitId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
             Forms = forms;
         }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int errorCount, IList<PacketSubmissionError> errors) : this(id, adrcId, submissionDate, visitId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
+        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int visitId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount, IList<PacketSubmissionError> errors) : this(id, adrcId, submissionDate, visitId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
             if (errors != null)
             {

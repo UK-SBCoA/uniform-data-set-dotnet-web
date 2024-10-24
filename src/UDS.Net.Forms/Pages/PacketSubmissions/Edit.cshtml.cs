@@ -7,9 +7,9 @@ using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
-    public class EditModel : PacketSubmissionPageModel
+    public class EditModel : PacketPageModel
     {
-        public EditModel(IVisitService visitService, IPacketSubmissionService packetSubmissionService) : base(visitService, packetSubmissionService)
+        public EditModel(IPacketService packetSubmissionService) : base(packetSubmissionService)
         {
         }
     }
