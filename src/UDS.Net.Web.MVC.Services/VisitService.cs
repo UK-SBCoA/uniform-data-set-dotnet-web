@@ -62,7 +62,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            var visitDtos = await _apiClient.VisitClient.Get();
+            var visitDtos = await _apiClient.VisitClient.Get(pageSize, pageIndex);
 
             if (visitDtos != null)
             {

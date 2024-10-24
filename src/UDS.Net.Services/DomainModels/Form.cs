@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels
@@ -77,6 +79,8 @@ namespace UDS.Net.Services.DomainModels
         public bool IsDeleted { get; set; }
 
         public IFormFields Fields { get; set; }
+
+        public List<PacketSubmissionError> UnresolvedErrors = new List<PacketSubmissionError>();
 
         private void SetFieldsBasedOnKind()
         {
@@ -165,6 +169,8 @@ namespace UDS.Net.Services.DomainModels
             {
                 Fields = fields;
             }
+
+            // TODO if form fields MODE does not include NotCompleted then it is required
         }
 
         public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
@@ -173,6 +179,10 @@ namespace UDS.Net.Services.DomainModels
             IsRequiredForPacketKind = isRequired;
         }
 
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields, List<PacketSubmissionError> unresolvedErrors) : this(visitId, id, title, kind, isRequired, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
+        {
+            UnresolvedErrors = unresolvedErrors;
+        }
     }
 }
 
