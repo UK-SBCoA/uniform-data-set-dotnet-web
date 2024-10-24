@@ -3,6 +3,8 @@
 @{
     Layout = "_LayoutForm";
 
+
+
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
@@ -27,8 +29,10 @@
                      items="Html.GetEnumSelectList<FormMode>()"
                      enabled-values="@Model.C2.AllowedFormModes"
                      id="modalityselect"
-                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
+                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <option disabled selected class="opacity-75">--</option>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+        </enum-select>
     </div>
     <div>
         <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
@@ -50,40 +54,25 @@
 
     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
 </div>
-<div>
-    <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-    </div>
-</div>
-<form id="C2" asp-page-handler="C2" data-validate="true">
-    <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
-    <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
-    <input asp-for="Visit.Id" type="hidden" />
-    <input asp-for="Visit.ParticipationId" type="hidden" />
-    <input asp-for="Visit.VISITNUM" type="hidden" />
-    <input asp-for="Visit.PACKET" type="hidden" />
-    <input asp-for="Visit.FORMVER" type="hidden" />
-    <input asp-for="Visit.VISIT_DATE" type="hidden" />
-    <input asp-for="Visit.INITIALS" type="hidden" />
-    <input asp-for="Visit.CreatedAt" type="hidden" />
-    <input asp-for="Visit.CreatedBy" type="hidden" />
-    <input asp-for="Visit.ModifiedBy" type="hidden" />
-    <input asp-for="Visit.DeletedBy" type="hidden" />
-    <turbo-frame id="C2">
-        @if (Model.Visit != null && (Model.C2.RMMODE == RemoteModality.Telephone))
+<turbo-frame id="C2">
+    @if (Model.Visit != null && (Model.C2.RMMODE == RemoteModality.Telephone))
 
-        {
-            <partial name="_C2T" model="@Model" />
-        }
 
-        else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
 
-        {
-            <partial name="_C2" model="@Model" />
-        }
-        <script src="https://cdn.skypack.dev/pin/@@hotwired/turbo@v7.2.4-ZifPufG8LWXS2LFpHP7B/mode=imports/optimized/@@hotwired/turbo.js" type="module"></script>
-
-    </turbo-frame>
-    @section Scripts {
-        <script src="~/_content/UDS.Net.Forms/js/C2.js"></script>
+    {
+        <partial name="_C2T" model="@Model" />
     }
-</form>
+
+
+
+    else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
+
+
+
+    {
+        <partial name="_C2" model="@Model" />
+    }
+</turbo-frame>
+@section Scripts {
+    <script src="~/_content/UDS.Net.Forms/js/C2.js"></script>
+}
