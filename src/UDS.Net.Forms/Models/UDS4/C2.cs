@@ -586,12 +586,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
         [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
-        [RequiredIf(nameof(RMMODE),"Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
         public int? OTRAILA { get; set; }
 
         [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
         [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
-        [RequiredIfRange(nameof(OTRAILA),0,100, ErrorMessage = "Response Required")]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Response Required")]
         public int? OTRLARR { get; set; }
 
         [Display(Name = "Part A - Number of correct lines", Description = "(0-25)")]
