@@ -101,9 +101,18 @@ namespace UDS.Net.Web.MVC.Services
             throw new NotImplementedException();
         }
 
-        public Task<Packet> Update(string username, Packet entity)
+        public async Task<Packet> Update(string username, Packet entity)
         {
-            throw new NotImplementedException();
+            await _apiClient.PacketClient.Put(entity.Id, entity.ToDto());
+
+            var packetDto = await _apiClient.PacketClient.Get(entity.Id);
+
+            var adrcId = _configuration.GetSection("ADRC:Id");
+
+            if (packetDto != null)
+                return packetDto.ToDomain(username);
+
+            throw new Exception("Packet not found");
         }
     }
 }

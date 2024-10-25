@@ -123,7 +123,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static List<PacketSubmissionModel> ToVM(this IList<PacketSubmission> packetSubmissions)
+        public static List<PacketSubmissionModel> ToVM(this IReadOnlyList<PacketSubmission> packetSubmissions)
         {
             List<PacketSubmissionModel> vm = new List<PacketSubmissionModel>();
 

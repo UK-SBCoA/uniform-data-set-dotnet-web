@@ -82,11 +82,24 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             Packet.Participation = participation.ToVM();
 
-            Packet.NewPacketSubmission = newPacketSubmission;
+            ModelState.Clear();
 
+            TryValidateModel(newPacketSubmission);
 
-            //if (!ModelState.IsValid)
-            //    return Partial("_Create", Packet);
+            if (!ModelState.IsValid)
+            {
+                Packet.NewPacketSubmission = newPacketSubmission;
+                return Partial("_Create", Packet);
+            }
+
+            packet.AddSubmission(newPacketSubmission.ToEntity()); // this ensures the packet's state is set according to business rules
+
+            await _packetService.Update(User.Identity.Name, packet);
+
+            var updatedPacket = await _packetService.GetById(User.Identity.Name, visitId); // get updated packet
+
+            Packet = updatedPacket.ToVM();
+            Packet.Participation = participation.ToVM();
 
             return Partial("_Index", Packet);
         }
