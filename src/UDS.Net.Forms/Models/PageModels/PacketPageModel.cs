@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Models.PageModels
 {
@@ -12,6 +13,18 @@ namespace UDS.Net.Forms.Models.PageModels
 
         [BindProperty]
         public PacketModel? Packet { get; set; }
+
+        public string PageTitle
+        {
+            get
+            {
+                if (Packet != null)
+                {
+                    return $"Visit {Packet.VISITNUM} Packet Submission";
+                }
+                return "";
+            }
+        }
 
         public PacketPageModel(IPacketService packetService) : base()
         {

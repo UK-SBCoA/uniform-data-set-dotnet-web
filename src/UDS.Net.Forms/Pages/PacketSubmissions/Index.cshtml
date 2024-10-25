@@ -17,46 +17,5 @@
             </a>
         </div>
     </div>
-    @if (Model.Packet.Participation != null && Model.Packet.PacketSubmissions != null)
-    {
-        <div class="space-y-16 py-16 xl:space-y-20">
-            <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
-                <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">All packet submissions</h2>
-                <p class="mt-2 text-sm text-gray-700">A list of all packet submissions.</p>
-            </div>
-            <div class="mt-6 overflow-hidden border-t border-gray-100">
-                <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
-                    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                        <table class="w-full text-left">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Submission date</th>
-                                    <th>Download</th>
-                                    <th>Error count</th>
-                                    <th><span class="sr-only">Edit errors</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var packetSubmission in Model.Packet.PacketSubmissions)
-                                {
-                                    <tr>
-                                        <td>@packetSubmission.Id</td>
-                                        <td>@packetSubmission.SubmissionDate</td>
-                                        <td>
-                                            <a asp-page="Export" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                @(packetSubmission.GetFileName(Model.Packet.Participation.LegacyId, Model.Packet.VISIT_DATE))
-                                            </a>
-                                        </td>
-                                        <td>@packetSubmission.ErrorCount</td>
-                                        <td><a asp-page="Details" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Edit</a></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
+    <partial name="_Index" model="Model.Packet" />
 }
