@@ -8,7 +8,7 @@
         <div class="space-y-16 py-16 xl:space-y-20">
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Packet submissions</h2>
-                <p class="mt-2 text-sm text-gray-700">A new submission may only be created after all errors have been resolved</p>
+                <p class="mt-2 text-sm text-gray-700">A new submission may only be created after all errors have been resolved from previous submission and packet re-finalized.</p>
             </div>
             <div class="mt-6 overflow-hidden border-t border-gray-100">
                 <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
@@ -32,12 +32,21 @@
                                         <td>
                                             @if (!packetSubmission.ErrorCount.HasValue)
                                             {
-                                                <a asp-page="Export" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                <a asp-page="../PacketSubmissions/Export" asp-route-visitId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
                                                     @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
                                                 </a>
                                             }
                                         </td>
-                                        <td>@packetSubmission.ErrorCount</td>
+                                        <td>
+                                            @if (packetSubmission.ErrorCount.HasValue)
+                                            {
+                                                <span>@packetSubmission.ErrorCount errors</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Pending response from NACC</span>
+                                            }
+                                        </td>
                                         <td><a asp-page="Edit" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Edit</a></td>
                                     </tr>
                                 }
