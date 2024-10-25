@@ -64,7 +64,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
             };
 
-            return Page();
+            return Partial("_Create", Packet);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -81,6 +81,36 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
             }
             return RedirectToPage("./Index", new { VisitId = PacketSubmission.VisitId });
+        }
+
+        public async Task<IActionResult> OnCreatePartialAsync(int? visitId)
+        {
+            if (visitId == null || visitId == 0)
+                return NotFound();
+
+            var packet = await _packetService.GetById("", visitId.Value);
+
+            if (packet == null)
+                return NotFound();
+
+            var participation = await _participationService.GetById("", packet.ParticipationId);
+
+            if (participation == null)
+                return NotFound();
+
+            Packet = packet.ToVM();
+
+            Packet.Participation = participation.ToVM();
+
+            //PacketSubmission = new PacketSubmissionModel
+            //{
+            //    VisitId = packet.Id,
+            //    SubmissionDate = DateTime.Now,
+            //    CreatedAt = DateTime.UtcNow,
+            //    CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
+            //};
+
+            return Partial("_Create");
         }
     }
 }

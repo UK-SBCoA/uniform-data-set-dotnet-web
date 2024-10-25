@@ -29,12 +29,15 @@
                                     <td>@packetSubmission.Id</td>
                                     <td>@packetSubmission.SubmissionDate</td>
                                     <td>
-                                        <a asp-page="Export" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                            @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
-                                        </a>
+                                        @if (!packetSubmission.ErrorCount.HasValue)
+                                        {
+                                            <a asp-page="Export" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                            </a>
+                                        }
                                     </td>
                                     <td>@packetSubmission.ErrorCount</td>
-                                    <td><a asp-page="Details" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Edit</a></td>
+                                    <td><a asp-page="Edit" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Edit</a></td>
                                 </tr>
                             }
                         </tbody>
