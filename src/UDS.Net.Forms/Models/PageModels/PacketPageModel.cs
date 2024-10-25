@@ -9,6 +9,7 @@ namespace UDS.Net.Forms.Models.PageModels
 {
     public class PacketPageModel : PageModel
     {
+        protected readonly IParticipationService _participationService;
         protected readonly IPacketService _packetService;
 
         [BindProperty]
@@ -20,14 +21,15 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (Packet != null)
                 {
-                    return $"Visit {Packet.VISITNUM} Packet Submission";
+                    return $"Participant {Packet.Participation.LegacyId} Visit {Packet.VISITNUM} Packet Submission";
                 }
                 return "";
             }
         }
 
-        public PacketPageModel(IPacketService packetService) : base()
+        public PacketPageModel(IParticipationService participationService, IPacketService packetService) : base()
         {
+            _participationService = participationService;
             _packetService = packetService;
         }
 
@@ -41,7 +43,15 @@ namespace UDS.Net.Forms.Models.PageModels
             if (packet == null)
                 return NotFound();
 
+
+            var participation = await _participationService.GetById("", packet.ParticipationId);
+
+            if (participation == null)
+                return NotFound();
+
             Packet = packet.ToVM();
+
+            Packet.Participation = participation.ToVM();
 
             return Page();
         }

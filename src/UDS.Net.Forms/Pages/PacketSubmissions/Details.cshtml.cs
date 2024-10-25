@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class DetailsModel : PacketPageModel
     {
-        public DetailsModel(IPacketService packetService) : base(packetService)
+        public DetailsModel(IParticipationService participationService, IPacketService packetService) : base(participationService, packetService)
         {
         }
     }

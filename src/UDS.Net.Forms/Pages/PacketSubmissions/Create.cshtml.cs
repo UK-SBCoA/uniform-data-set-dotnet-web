@@ -6,6 +6,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -15,8 +16,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
 
         [BindProperty]
-        public PacketSubmissionModel? PacketSubmission { get; set; }
-
         public PacketModel? Packet { get; set; }
 
         public string PageTitle
@@ -37,7 +36,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             _packetService = packetService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int? visitId)
+        public async Task<IActionResult> OnGetPartialAsync(int? visitId)
         {
             if (visitId == null || visitId == 0)
                 return NotFound();
@@ -56,7 +55,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             Packet.Participation = participation.ToVM();
 
-            PacketSubmission = new PacketSubmissionModel
+            Packet.NewPacketSubmission = new PacketSubmissionModel
             {
                 VisitId = packet.Id,
                 SubmissionDate = DateTime.Now,
@@ -67,28 +66,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return Partial("_Create", Packet);
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int visitId, PacketSubmissionModel newPacketSubmission)
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            try
-            {
-                // TODO add isn't working yet
-                await _packetService.Update(User.Identity.IsAuthenticated ? User.Identity.Name : "Username", Packet.ToEntity());
-            }
-            catch (Exception ex)
-            {
-            }
-            return RedirectToPage("./Index", new { VisitId = PacketSubmission.VisitId });
-        }
-
-        public async Task<IActionResult> OnCreatePartialAsync(int? visitId)
-        {
-            if (visitId == null || visitId == 0)
-                return NotFound();
-
-            var packet = await _packetService.GetById("", visitId.Value);
+            var packet = await _packetService.GetById("", visitId);
 
             if (packet == null)
                 return NotFound();
@@ -102,15 +82,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             Packet.Participation = participation.ToVM();
 
-            //PacketSubmission = new PacketSubmissionModel
-            //{
-            //    VisitId = packet.Id,
-            //    SubmissionDate = DateTime.Now,
-            //    CreatedAt = DateTime.UtcNow,
-            //    CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
-            //};
+            Packet.NewPacketSubmission = newPacketSubmission;
 
-            return Partial("_Create");
+
+            //if (!ModelState.IsValid)
+            //    return Partial("_Create", Packet);
+
+            return Partial("_Index", Packet);
         }
     }
 }

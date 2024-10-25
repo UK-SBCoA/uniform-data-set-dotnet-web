@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class EditModel : PacketPageModel
     {
-        public EditModel(IPacketService packetSubmissionService) : base(packetSubmissionService)
+        public EditModel(IParticipationService participationService, IPacketService packetSubmissionService) : base(participationService, packetSubmissionService)
         {
         }
     }
