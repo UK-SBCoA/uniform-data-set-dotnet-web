@@ -16,14 +16,14 @@ namespace UDS.Net.Forms.Pages.Packets
     {
         private readonly IPacketService _packetService;
 
-        public IList<PacketModel>? Packets { get; set; }
+        public PacketsPaginatedModel Packets { get; set; } = new PacketsPaginatedModel();
 
         public IndexModel(IPacketService packetService)
         {
             _packetService = packetService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1)
+        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
         {
             List<PacketStatus> statuses = new List<PacketStatus>
             {
@@ -35,7 +35,9 @@ namespace UDS.Net.Forms.Pages.Packets
 
             var packets = await _packetService.List(User.Identity.Name, statuses, pageSize, pageIndex);
 
-            Packets = packets.Select(p => p.ToVM()).ToList();
+            int total = await _packetService.Count(User.Identity.Name, statuses);
+
+            Packets = packets.ToVM(pageSize, pageIndex, total, search);
 
             return Page();
         }

@@ -28,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var packet in Model.Packets)
+                            @foreach (var packet in Model.Packets.List)
                             {
                                 <tr>
                                     <td><a asp-page="/Participations/Details" asp-route-id="@packet.ParticipationId">@(packet.Participation != null ? packet.Participation.LegacyId : packet.ParticipationId)</a></td>
@@ -48,6 +48,9 @@
                             }
                         </tbody>
                     </table>
+                </div>
+                <div class="py-4">
+                    <partial name="_PreviousNextButtons" model="Model.Packets" />
                 </div>
             </div>
         </div>

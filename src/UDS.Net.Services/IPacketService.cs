@@ -13,6 +13,8 @@ namespace UDS.Net.Services
 
         Task<List<Packet>> List(string username, List<PacketStatus> statuses, int pageSize = 10, int pageIndex = 1);
 
+        Task<int> Count(string username, List<PacketStatus> statuses);
+
         // TODO create packet submission error methods
 
     }

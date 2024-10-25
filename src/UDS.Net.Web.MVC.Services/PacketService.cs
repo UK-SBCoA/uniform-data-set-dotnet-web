@@ -34,6 +34,13 @@ namespace UDS.Net.Web.MVC.Services
             return await _apiClient.PacketClient.Count();
         }
 
+        public async Task<int> Count(string username, List<PacketStatus> statuses)
+        {
+            string[] stringStatuses = statuses.Select(s => s.ToString()).ToArray();
+
+            return await _apiClient.PacketClient.CountByStatusAndAssignee(stringStatuses, "");
+        }
+
         public async Task<Packet> GetById(string username, int id)
         {
             var packetDto = await _apiClient.PacketClient.Get(id);

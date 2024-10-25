@@ -16,18 +16,20 @@ namespace UDS.Net.Forms.Pages.Visits
     {
         private readonly IVisitService _visitService;
 
-        public IList<VisitModel>? Visits { get; set; }
+        public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
         public IndexModel(IVisitService visitService)
         {
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1)
+        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
         {
             var visits = await _visitService.List(User.Identity.Name, pageSize, pageIndex);
 
-            Visits = visits.Select(d => d.ToVM()).ToList(); // TODO support pagination
+            int total = await _visitService.Count(User.Identity.Name);
+
+            Visits = visits.ToVM(pageSize, pageIndex, total, search);
 
             return Page();
         }

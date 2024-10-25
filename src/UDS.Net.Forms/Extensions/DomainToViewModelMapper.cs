@@ -35,6 +35,18 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
+        {
+            return new VisitsPaginatedModel
+            {
+                List = visits.Select(v => v.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
         public static List<VisitModel> ToVM(this IList<Visit> visits)
         {
             List<VisitModel> vm = new List<VisitModel>();
@@ -74,6 +86,19 @@ namespace UDS.Net.Forms.Extensions
 
             return vm;
         }
+
+        public static PacketsPaginatedModel ToVM(this IEnumerable<Packet> packets, int pageSize, int pageIndex, int total, string search)
+        {
+            return new PacketsPaginatedModel
+            {
+                List = packets.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
 
         public static PacketModel ToVM(this Packet packet)
         {
