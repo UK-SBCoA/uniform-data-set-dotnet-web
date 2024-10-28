@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Models
             }
         }
 
-        public string Search { get; set; }
+        public string Search { get; set; } = "";
         public string Action { get; set; } = "Index";
         public int? Id { get; set; } = null; // sometimes the paginated list is a child of the current object, do we might need an id
     }

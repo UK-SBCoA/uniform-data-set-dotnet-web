@@ -52,7 +52,7 @@ namespace UDS.Net.Forms.Pages.Participations
             if (!ModelState.IsValid)
                 return Page();
 
-            await _participationService.Add("", Participation.ToEntity());
+            await _participationService.Add(User.Identity.IsAuthenticated ? User.Identity.Name : "Username", Participation.ToEntity());
 
             return RedirectToPage("./Index");
         }

@@ -11,7 +11,6 @@
     </div>
     @if (Model.Visits != null)
     {
-
         <div class="mt-6 overflow-hidden border-t border-gray-100">
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
@@ -20,28 +19,38 @@
                             <tr>
                                 <th scope="col">Participation Id</th>
                                 <th scope="col">Visit number</th>
-                                <th scope="col">Version</th>
                                 <th scope="col">Packet kind</th>
                                 <th scope="col">Initials</th>
                                 <th scope="col">Date</th>
+                                <th>Status</th>
+                                <th></th>
                                 <th scope="col"><span class="sr-only">View details</span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var visit in Model.Visits)
+                            @foreach (var visit in Model.Visits.List)
                             {
                                 <tr>
                                     <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
                                     <td>@visit.VISITNUM</td>
-                                    <td>@visit.FORMVER</td>
                                     <td>@visit.PACKET</td>
                                     <td>@visit.INITIALS</td>
                                     <td>@visit.VISIT_DATE.ToShortDateString()</td>
-                                    <th><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></th>
+                                    <td>@visit.Status</td>
+                                    <td>
+                                        @if (visit.TotalUnresolvedErrorCount.HasValue)
+                                        {
+                                            <span>@visit.TotalUnresolvedErrorCount errors</span>
+                                        }
+                                    </td>
+                                    <td><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></td>
                                 </tr>
                             }
                         </tbody>
                     </table>
+                </div>
+                <div class="py-4">
+                    <partial name="_PreviousNextButtons" model="Model.Visits" />
                 </div>
             </div>
         </div>
