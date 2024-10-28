@@ -175,6 +175,7 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmissionErrorModel
             {
                 Id = packetSubmissionError.Id,
+                PacketSubmissionId = packetSubmissionError.PacketSubmissionId,
                 FormKind = packetSubmissionError.FormKind,
                 Message = packetSubmissionError.Message,
                 AssignedTo = packetSubmissionError.AssignedTo,
@@ -270,6 +271,12 @@ namespace UDS.Net.Forms.Extensions
             vm.ModifiedBy = form.ModifiedBy;
             vm.DeletedBy = form.DeletedBy;
             vm.IsDeleted = form.IsDeleted;
+
+            if (form.UnresolvedErrors != null && form.UnresolvedErrors.Count() > 0)
+            {
+                vm.UnresolvedErrors = form.UnresolvedErrors.ToVM();
+                vm.UnresolvedErrorCount = form.UnresolvedErrors.Count();
+            }
         }
 
         public static FormModel ToVM(this Form form)

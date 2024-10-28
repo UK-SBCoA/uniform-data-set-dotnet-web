@@ -7,6 +7,8 @@ namespace UDS.Net.Services.DomainModels.Submission
     {
         public int Id { get; set; }
 
+        public int PacketSubmissionId { get; set; }
+
         public string FormKind { get; set; }
 
         public string Message { get; set; }
@@ -45,9 +47,10 @@ namespace UDS.Net.Services.DomainModels.Submission
             IsDeleted = true;
         }
 
-        public PacketSubmissionError(int id, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string resolvedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted)
+        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string resolvedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted)
         {
             Id = id;
+            PacketSubmissionId = packetSubmissionId;
             FormKind = formKind;
             Message = message;
             AssignedTo = assignedTo;

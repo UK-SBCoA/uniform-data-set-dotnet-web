@@ -25,6 +25,7 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
         {
+
             var visits = await _visitService.List(User.Identity.Name, pageSize, pageIndex);
 
             int total = await _visitService.Count(User.Identity.Name);

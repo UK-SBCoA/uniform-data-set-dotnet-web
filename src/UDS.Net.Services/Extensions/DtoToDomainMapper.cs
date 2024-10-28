@@ -44,7 +44,17 @@ namespace UDS.Net.Services.Extensions
             IList<PacketSubmissionError> errors = new List<PacketSubmissionError>();
 
             if (dto.UnresolvedErrors != null)
+            {
                 errors = dto.UnresolvedErrors.Select(e => e.ToDomain()).ToList();
+
+                if (existingForms != null)
+                {
+                    foreach (var form in existingForms)
+                    {
+                        form.UnresolvedErrors = errors.Where(e => e.FormKind == form.Kind).ToList();
+                    }
+                }
+            }
 
             PacketKind packetKind = PacketKind.I;
 
@@ -347,7 +357,7 @@ namespace UDS.Net.Services.Extensions
                     packetSubmissionErrorLevel = level;
             }
 
-            return new PacketSubmissionError(dto.Id, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
+            return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
         }
     }
 }

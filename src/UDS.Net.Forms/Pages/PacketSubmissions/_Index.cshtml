@@ -16,7 +16,6 @@
                         <table class="w-full text-left">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Submission date</th>
                                     <th>Download</th>
                                     <th>Error count</th>
@@ -27,8 +26,10 @@
                                 @foreach (var packetSubmission in Model.PacketSubmissions)
                                 {
                                     <tr>
-                                        <td>@packetSubmission.Id</td>
-                                        <td>@packetSubmission.SubmissionDate</td>
+                                        <td>
+                                            @packetSubmission.SubmissionDate<br />
+                                            @packetSubmission.CreatedBy
+                                        </td>
                                         <td>
                                             @if (!packetSubmission.ErrorCount.HasValue)
                                             {
@@ -36,10 +37,16 @@
                                                     @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
                                                 </a>
                                             }
+                                            else
+                                            {
+                                                <span>@(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
+                                            }
                                         </td>
                                         <td>
                                             @if (packetSubmission.ErrorCount.HasValue)
                                             {
+                                                <span>@packetSubmission.Errors.Where(e => String.IsNullOrWhiteSpace(e.ResolvedBy) == false).Count()</span>
+                                                <span>&#47;</span>
                                                 <span>@packetSubmission.ErrorCount errors</span>
                                             }
                                             else
@@ -47,7 +54,10 @@
                                                 <span>Pending response from NACC</span>
                                             }
                                         </td>
-                                        <td><a asp-page="Edit" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Edit</a></td>
+                                        <td>
+                                            <a asp-page="Edit" asp-route-id="@packetSubmission.Id" asp-route-errorCount="0" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</a>
+                                            <a asp-page="Edit" asp-route-id="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
