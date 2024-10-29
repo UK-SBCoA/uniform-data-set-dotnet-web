@@ -3,6 +3,7 @@ using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
@@ -34,6 +35,18 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
+        {
+            return new VisitsPaginatedModel
+            {
+                List = visits.Select(v => v.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
         public static List<VisitModel> ToVM(this IList<Visit> visits)
         {
             List<VisitModel> vm = new List<VisitModel>();
@@ -48,7 +61,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static VisitModel ToVM(this Visit visit)
         {
-            return new VisitModel()
+            var vm = new VisitModel()
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
@@ -57,12 +70,122 @@ namespace UDS.Net.Forms.Extensions
                 FORMVER = visit.FORMVER,
                 VISIT_DATE = visit.VISIT_DATE,
                 INITIALS = visit.INITIALS,
+                Status = visit.Status,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
-                Forms = visit.Forms.ToVM()
+                CanBeFinalized = visit.IsFinalizable,
+                Forms = visit.Forms.ToVM(),
+                TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
+            };
+
+            if (visit.UnresolvedErrors != null)
+                vm.UnresolvedErrors = visit.UnresolvedErrors.ToVM();
+
+            return vm;
+        }
+
+        public static PacketsPaginatedModel ToVM(this IEnumerable<Packet> packets, int pageSize, int pageIndex, int total, string search)
+        {
+            return new PacketsPaginatedModel
+            {
+                List = packets.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
+
+        public static PacketModel ToVM(this Packet packet)
+        {
+            return new PacketModel()
+            {
+                Id = packet.Id,
+                ParticipationId = packet.ParticipationId,
+                VISITNUM = packet.VISITNUM,
+                PACKET = packet.PACKET,
+                FORMVER = packet.FORMVER,
+                VISIT_DATE = packet.VISIT_DATE,
+                INITIALS = packet.INITIALS,
+                Status = packet.Status,
+                CreatedAt = packet.CreatedAt,
+                CreatedBy = packet.CreatedBy,
+                ModifiedBy = packet.ModifiedBy,
+                DeletedBy = packet.DeletedBy,
+                IsDeleted = packet.IsDeleted,
+                CanBeFinalized = packet.IsFinalizable,
+                Forms = packet.Forms.ToVM(),
+                PacketSubmissions = packet.Submissions.ToVM()
+            };
+        }
+
+        public static List<PacketSubmissionModel> ToVM(this IReadOnlyList<PacketSubmission> packetSubmissions)
+        {
+            List<PacketSubmissionModel> vm = new List<PacketSubmissionModel>();
+
+            if (packetSubmissions != null && packetSubmissions.Count() > 0)
+                vm = packetSubmissions.Select(p => p.ToVM()).ToList();
+
+            return vm;
+        }
+
+        public static PacketSubmissionModel ToVM(this PacketSubmission packetSubmission)
+        {
+            PacketSubmissionModel vm = new PacketSubmissionModel();
+
+            if (packetSubmission != null)
+            {
+                vm.Id = packetSubmission.Id;
+                vm.SubmissionDate = packetSubmission.SubmissionDate;
+                vm.CreatedAt = packetSubmission.CreatedAt;
+                vm.CreatedBy = packetSubmission.CreatedBy;
+                vm.ModifiedBy = packetSubmission.ModifiedBy;
+                vm.ErrorCount = packetSubmission.ErrorCount;
+
+                if (packetSubmission.Errors != null)
+                {
+                    vm.Errors = packetSubmission.Errors.ToVM();
+                }
+            }
+
+            return vm;
+        }
+
+        public static List<PacketSubmissionErrorModel> ToVM(this IList<PacketSubmissionError> packetSubmissionErrors)
+        {
+            List<PacketSubmissionErrorModel> vm = new List<PacketSubmissionErrorModel>();
+
+            if (packetSubmissionErrors != null)
+            {
+                foreach (var error in packetSubmissionErrors)
+                {
+                    vm.Add(error.ToVM());
+                }
+            }
+
+            return vm;
+        }
+
+        public static PacketSubmissionErrorModel ToVM(this PacketSubmissionError packetSubmissionError)
+        {
+            return new PacketSubmissionErrorModel
+            {
+                Id = packetSubmissionError.Id,
+                PacketSubmissionId = packetSubmissionError.PacketSubmissionId,
+                FormKind = packetSubmissionError.FormKind,
+                Message = packetSubmissionError.Message,
+                AssignedTo = packetSubmissionError.AssignedTo,
+                Level = packetSubmissionError.Level,
+                ResolvedBy = packetSubmissionError.ResolvedBy,
+                CreatedBy = packetSubmissionError.CreatedBy,
+                CreatedAt = packetSubmissionError.CreatedAt,
+                ModifiedBy = packetSubmissionError.ModifiedBy,
+                DeletedBy = packetSubmissionError.DeletedBy,
+                IsDeleted = packetSubmissionError.IsDeleted
             };
         }
 
@@ -148,6 +271,12 @@ namespace UDS.Net.Forms.Extensions
             vm.ModifiedBy = form.ModifiedBy;
             vm.DeletedBy = form.DeletedBy;
             vm.IsDeleted = form.IsDeleted;
+
+            if (form.UnresolvedErrors != null && form.UnresolvedErrors.Count() > 0)
+            {
+                vm.UnresolvedErrors = form.UnresolvedErrors.ToVM();
+                vm.UnresolvedErrorCount = form.UnresolvedErrors.Count();
+            }
         }
 
         public static FormModel ToVM(this Form form)

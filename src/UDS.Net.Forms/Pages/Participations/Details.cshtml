@@ -47,6 +47,7 @@
                                 <th>Date</th>
                                 <th>Initials</th>
                                 <th>Status</th>
+                                <th></th>
                                 <th><span class="sr-only">View visit details</span></th>
                             </tr>
                         </thead>
@@ -60,7 +61,13 @@
                                     <td>@visit.FORMVER</td>
                                     <td>@visit.VISIT_DATE.ToShortDateString()</td>
                                     <td>@visit.INITIALS</td>
-                                    <td></td>
+                                    <td>@visit.Status</td>
+                                    <td>
+                                        @if (visit.TotalUnresolvedErrorCount.HasValue)
+                                        {
+                                            <span>@visit.TotalUnresolvedErrorCount errors</span>
+                                        }
+                                    </td>
                                     <td><a asp-page="/Visits/Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">View</a></td>
                                 </tr>
                             }
@@ -93,7 +100,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Yype</th>
+                                <th>Type</th>
                                 <th>Details</th>
                                 <th>Progress</th>
                                 <th></th>

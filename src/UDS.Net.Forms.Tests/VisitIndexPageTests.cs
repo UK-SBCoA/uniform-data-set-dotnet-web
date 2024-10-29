@@ -8,7 +8,7 @@ public class VisitIndexPageTests
 {
     [Fact]
     public async void OnGetAsync_PopulatesThePageModel_WithAListOfVisits()
-    { 
+    {
         IVisitService visitService = new VisitService();
 
         var expectedVisits = VisitService.GetSeedingVisits();
@@ -21,6 +21,6 @@ public class VisitIndexPageTests
 
         Assert.Equal(
             expectedVisits.OrderBy(v => v.Id).Select(v => v.Id),
-            actualVisits.OrderBy(v => v.Id).Select(v => v.Id));
+            actualVisits.List.OrderBy(v => v.Id).Select(v => v.Id));
     }
 }

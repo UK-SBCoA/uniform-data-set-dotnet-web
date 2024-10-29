@@ -41,12 +41,12 @@ namespace UDS.Net.Forms.Models
             if (id == null || id == 0)
                 return NotFound();
 
-            var visit = await _visitService.GetById("", id.Value);
+            var visit = await _visitService.GetById(User.Identity.Name, id.Value);
 
             if (visit == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", visit.ParticipationId);
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
 
             if (participation == null)
                 return NotFound();
