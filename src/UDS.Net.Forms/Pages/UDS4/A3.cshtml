@@ -2,6 +2,7 @@
 @model UDS.Net.Forms.Pages.UDS4.A3Model
 @{
     Layout = "_LayoutForm";
+
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 <div>
@@ -23,9 +24,10 @@
             If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
                 99
                 = Unknown
-            </b> in the <b>Primary diagnosis</b> column, and <i>skip the subsequent questions</i> in the row. For a parent with no neurological or
-            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
-            the subsequent questions in the row. For a parent with a primary diagnosis but no secondary diagnosis, enter <b>
+            </b> in the <b>Primary diagnosis</b> column, and <span class="italic">skip the subsequent questions in the row </span>. For a parent with no neurological or
+            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then   <span class="italic">
+                skip the subsequent questions in the row.
+            </span> For a parent with a primary diagnosis but no secondary diagnosis, enter <b>
                 88 = No secondary
                 diagnosis
             </b> in the Secondary diagnosis column
@@ -36,12 +38,12 @@
                 <thead class="border-b border-gray-200 text-gray-900">
                     <tr>
                         <th></th>
-                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th rowspan="2" style="text-align:center">Birth year <br /> <span class="italic" style="font-weight: normal;">(9999= Unknown)</span></th>
+                        <th rowspan="2" style="text-align:center">Age at death <br /> <span class="italic" style="font-weight: normal;"> (888=N/A, 999=Unknown))</span></th>
                         <th>Primary dx*</th>
                         <th>Secondary Dx**</th>
                         <th>Method of evaluation**</th>
-                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                        <th rowspan="2">Age of onset of primary dx <br /> <span class="italic" style="font-weight: normal;">(999= Unknown)</span></th>
                     </tr>
 
                     <tr>
@@ -205,11 +207,11 @@
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>02</b> Lewy Body dementia (includes DLB and PDD)</td>
-                <td class="border-b border-gray-100"><b>3</b> Exam (co-enrolled family members)</td>
+                <td class="border-b border-gray-100"><b>3</b> Exam <span class="italic">(co-enrolled family members) </span></td>
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>03</b> Vascular dementia</td>
-                <td class="border-b border-gray-100"><b>4</b> Autopsy (if autopsy report available)</td>
+                <td class="border-b border-gray-100"><b>4</b> Autopsy <span class="italic">(co-enrolled family members) </span> </td>
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>04</b> Stroke</td>
@@ -228,7 +230,8 @@
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>09</b> Prion pathology</td>
-                <td rowspan="2" class="border-b border-gray-100"><b>*FTLD includes:</b> bvFTD or FTD, PPA (any subtype), CBS or CBD, PSP</td>
+
+                <td rowspan="2" class="border-b border-gray-100">   <span class="italic"> <b>*FTLD includes:</b> bvFTD or FTD, PPA (any subtype), CBS or CBD, PSP </span> </td>
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>10</b> Psychiatric condition</td>
@@ -236,12 +239,14 @@
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>11</b> Dementia of unknown etiology</td>
                 <td rowspan="4" class="border-b border-gray-100">
-                    <b>Abbreviations:</b> bvFTD = behavioral variant frontotemporal
-                    dementia, CBS = corticobasal syndrome, CBD = corticobasal
-                    degeneration, DLB = dementia with Lewy bodies, FTD =
-                    frontotemporal dementia, PDD = Parkinson's disease with dementia,
-                    PPA = primary progressive aphasia, PSP = progressive supranuclear
-                    palsy
+                    <span class="italic">
+                        <b>Abbreviations:</b> bvFTD = behavioral variant frontotemporal
+                        dementia, CBS = corticobasal syndrome, CBD = corticobasal
+                        degeneration, DLB = dementia with Lewy bodies, FTD =
+                        frontotemporal dementia, PDD = Parkinson's disease with dementia,
+                        PPA = primary progressive aphasia, PSP = progressive supranuclear
+                        palsy
+                    </span>
                 </td>
             </tr>
             <tr class="border-b border-gray-100">
@@ -252,8 +257,10 @@
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100 pl-2 pr-8 pt-2" style="padding-left: 0">
-                    <b>99</b> Specific diagnosis unknown (acceptable if method of
-                    evaluation is not by exam or autopsy)
+                    <b>99</b> Specific diagnosis unknown <span class="italic">
+                        (acceptable if method of
+                        evaluation is not by exam or autopsy)
+                    </span>
                 </td>
             </tr>
         </table>
@@ -270,14 +277,18 @@
 
     <div>
         <p class="mt-16 text-base leading-7 text-gray-900">
-            <i>Example:</i> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943;
-            the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
+            <span class="italic">
+                <i>Example:</i> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943;
+                the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
+            </span>
         </p>
     </div>
 
     <div>
         <p class="mt-16 text-base leading-7 text-gray-900">
-            Use that same birth year on <b>FTLD Module Form A3a</b>, if applicable, and across all UDS visits so that any new
+            Use that same birth year on <b>FTLD Module Form A3a</b> <span class="italic">
+                , if applicable,
+            </span> and across all UDS visits so that any new
             information on a particular sibling or child can be linked to previously submitted information. If it is impossible for the
             participant and co-participant to estimate the birth year, enter <b>9999=Unknown</b>.
         </p>
@@ -297,6 +308,11 @@
         </div>
 
         <p class="mt-1 text-sm text-gray-500">
+            <b>
+                If participant has no full sibilings, SKIP TO QUESTION 3; <span class="italic">
+                    otherwise, provide information on all full siblings.
+                </span>
+            </b>
             For any full sibling with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
         </p>
 
@@ -304,9 +320,12 @@
             If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
                 99 =
                 Unknown
-            </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a full sibling with no neurological or
-            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then skip
-            the subsequent questions in the row. For a full sibling with a primary diagnosis but no secondary diagnosis, enter <b>
+            </b> in the <b>Primary diagnosis</b> column, and  <span class="italic">
+                skip the subsequent questions in the row.
+            </span> For a full sibling with no neurological or
+            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then <span class="italic">
+                skip the subsequent questions in the row.
+            </span> For a full sibling with a primary diagnosis but no secondary diagnosis, enter <b>
                 88 = No secondary
                 diagnosis
             </b> in the Secondary diagnosis column.
@@ -317,12 +336,25 @@
                 <thead class="border-b border-gray-200 text-gray-900">
                     <tr>
                         <th></th>
-                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th rowspan="2" style="text-align:center">
+                            Birth year <br />  <span class="italic" style="font-weight: normal;">
+                                (9999= Unknown)
+                            </span>
+                        </th>
+                        <th rowspan="2" style="text-align:center">
+                            Age at death <br />
+                            <span class="italic" style="font-weight: normal;">
+                                (888=N/A, 999=Unknown)
+                            </span>
+                        </th>
                         <th>Primary dx*</th>
                         <th>Secondary Dx**</th>
                         <th>Method of evaluation**</th>
-                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                        <th rowspan="2">
+                            Age of onset of primary dx <br /><span class="italic" style="font-weight: normal;">
+                                (999=unknown)
+                            </span>
+                        </th>
                     </tr>
 
                     <tr>
@@ -333,6 +365,7 @@
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
+
                     {
                         @Html.EditorFor(m => m.A3.Siblings[i])
                     }
@@ -356,6 +389,11 @@
         </div>
 
         <p class="mt-1 text-sm text-gray-500">
+            If participant has no biological children, <strong>END FORM HERE</strong>; <span class="italic">otherwise, provide information on all biological children.</span>
+        </p>
+
+
+        <p class="mt-1 text-sm text-gray-500">
             For any biological child with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
         </p>
 
@@ -363,9 +401,10 @@
             If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
                 99 =
                 Unknown
-            </b> in the <b>Primary diagnosis</b> column, and skip the subsequent questions in the row. For a biological child with no neurological
-            or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then
-            skip the subsequent questions in the row. For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>
+            </b> in the <b>Primary diagnosis</b> column, and  <span class="italic"> skip the subsequent questions in the row.</span> For a biological child with no neurological
+            or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then  <span class="italic">
+                skip the subsequent questions in the row.
+            </span> For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>
                 88 = No
                 secondary diagnosis
             </b> in the Secondary diagnosis column.
@@ -376,12 +415,34 @@
                 <thead class="border-b border-gray-200 text-gray-900">
                     <tr>
                         <th></th>
-                        <th rowspan="2" style="text-align:center">Birth year <br /> (9999= Unknown)</th>
-                        <th rowspan="2" style="text-align:center">Age at death <br /> (888=N/A, 999=Unknown)</th>
+                        <th rowspan="2" style="text-align:center">
+                            Birth year <br />
+                            <span class="italic" style="font-weight: normal;">
+                                (9999= Unknown)
+                            </span>
+
+                        </th>
+                        <th rowspan="2" style="text-align:center">
+                            Age at death <br />
+
+                            <span class="italic" style="font-weight: normal;">
+
+
+                                (888=N/A, 999=Unknown)
+
+                            </span>
+                        </th>
                         <th>Primary dx*</th>
                         <th>Secondary Dx**</th>
                         <th>Method of evaluation**</th>
-                        <th rowspan="2">Age of onset of primary dx <br />(999=unknown)</th>
+                        <th rowspan="2">
+                            Age of onset of primary dx <br />
+                            <span class="italic" style="font-weight: normal;">
+
+                                (999=unknown)
+
+                            </span>
+                        </th>
                     </tr>
 
                     <tr>
@@ -392,6 +453,7 @@
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
+
                     {
                         @Html.EditorFor(m => m.A3.Children[i])
                     }
