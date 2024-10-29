@@ -209,11 +209,11 @@
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>02</b> Lewy Body dementia (includes DLB and PDD)</td>
-                <td class="border-b border-gray-100"><b>3</b> Exam <span class="italic"> (if autopsy report available) </span></td>
+                <td class="border-b border-gray-100"><b>3</b> Exam <span class="italic"> (co-enrolled family members)</span></td>
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>03</b> Vascular dementia</td>
-                <td class="border-b border-gray-100"><b>4</b> Autopsy <span class="italic">(co-enrolled family members) </span> </td>
+                <td class="border-b border-gray-100"><b>4</b> Autopsy <span class="italic"> (if autopsy report available)</span> </td>
             </tr>
             <tr class="border-b border-gray-100">
                 <td class="border-b border-gray-100"><b>04</b> Stroke</td>
@@ -367,9 +367,6 @@
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
-
-
-
                     {
                         @Html.EditorFor(m => m.A3.Siblings[i])
                     }
@@ -457,9 +454,6 @@
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
-
-
-
                     {
                         @Html.EditorFor(m => m.A3.Children[i])
                     }
