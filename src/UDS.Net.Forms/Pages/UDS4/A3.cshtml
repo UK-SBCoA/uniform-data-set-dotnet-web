@@ -3,6 +3,8 @@
 @{
     Layout = "_LayoutForm";
 
+
+
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 <div>
@@ -366,6 +368,8 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
 
+
+
                     {
                         @Html.EditorFor(m => m.A3.Siblings[i])
                     }
@@ -453,6 +457,8 @@
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
+
+
 
                     {
                         @Html.EditorFor(m => m.A3.Children[i])
