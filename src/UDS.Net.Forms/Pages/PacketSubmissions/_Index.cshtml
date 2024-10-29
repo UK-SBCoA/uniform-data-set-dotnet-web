@@ -33,7 +33,7 @@
                                         <td>
                                             @if (!packetSubmission.ErrorCount.HasValue)
                                             {
-                                                <a asp-page="../PacketSubmissions/Export" asp-route-visitId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
                                                     @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
                                                 </a>
                                             }

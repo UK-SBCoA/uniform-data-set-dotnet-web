@@ -30,13 +30,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             _participationService = participationService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int visitId)
+        public async Task<IActionResult> OnGetAsync(int packetId)
         {
-            if (visitId == 0)
+            if (packetId == 0)
                 return NotFound();
 
             // TODO use temporal tables to get the data at that point in time of the submission and eventually use the packet submission id here
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, visitId);
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
             var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
