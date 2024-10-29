@@ -36,12 +36,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             _packetService = packetService;
         }
 
-        public async Task<IActionResult> OnGetPartialAsync(int? visitId)
+        public async Task<IActionResult> OnGetPartialAsync(int? packetId)
         {
-            if (visitId == null || visitId == 0)
+            if (packetId == null || packetId == 0)
                 return NotFound();
 
-            var packet = await _packetService.GetById("", visitId.Value);
+            var packet = await _packetService.GetById("", packetId.Value);
 
             if (packet == null)
                 return NotFound();
@@ -57,7 +57,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             Packet.NewPacketSubmission = new PacketSubmissionModel
             {
-                VisitId = packet.Id,
+                PacketId = packet.Id,
                 SubmissionDate = DateTime.Now,
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
@@ -66,9 +66,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return Partial("_Create", Packet);
         }
 
-        public async Task<IActionResult> OnPostAsync(int visitId, PacketSubmissionModel newPacketSubmission)
+        public async Task<IActionResult> OnPostAsync(int packetId, PacketSubmissionModel newPacketSubmission)
         {
-            var packet = await _packetService.GetById("", visitId);
+            var packet = await _packetService.GetById("", packetId);
 
             if (packet == null)
                 return NotFound();
@@ -96,7 +96,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             await _packetService.Update(User.Identity.Name, packet);
 
-            var updatedPacket = await _packetService.GetById(User.Identity.Name, visitId); // get updated packet
+            var updatedPacket = await _packetService.GetById(User.Identity.Name, packetId); // get updated packet
 
             Packet = updatedPacket.ToVM();
             Packet.Participation = participation.ToVM();

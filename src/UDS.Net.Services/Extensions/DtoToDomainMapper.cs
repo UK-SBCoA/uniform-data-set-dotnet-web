@@ -327,25 +327,26 @@ namespace UDS.Net.Services.Extensions
 
         public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId)
         {
+            // packet inherits from visits, so packet id == visit id
             if (dto.Forms != null && dto.Forms.Count() > 0)
             {
                 IList<Form> forms = new List<Form>();
 
                 foreach (var form in dto.Forms)
                 {
-                    forms.Add(form.ToDomain(dto.VisitId, form.CreatedBy));
+                    forms.Add(form.ToDomain(dto.PacketId, form.CreatedBy));
                 }
 
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, forms);
+                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, forms);
             }
             else if (dto.PacketSubmissionErrors != null && dto.PacketSubmissionErrors.Count() > 0)
             {
                 var errors = dto.PacketSubmissionErrors.Select(e => e.ToDomain()).ToList();
 
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, errors);
+                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, errors);
             }
             else
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.VisitId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount);
+                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount);
         }
 
         public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)
