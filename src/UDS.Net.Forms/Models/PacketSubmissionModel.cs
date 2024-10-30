@@ -8,7 +8,7 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
-        public int VisitId { get; set; }
+        public int PacketId { get; set; }
 
         [Required]
         [Display(Name = "Submission date")]

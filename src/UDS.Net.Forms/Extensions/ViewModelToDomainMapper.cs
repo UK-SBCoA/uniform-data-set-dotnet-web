@@ -95,7 +95,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static PacketSubmission ToEntity(this PacketSubmissionModel vm)
         {
-            return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.VisitId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, 0);
+            return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, 0);
         }
 
         public static List<Form> ToEntity(this IList<FormModel> vm)

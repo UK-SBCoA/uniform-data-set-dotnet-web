@@ -150,7 +150,7 @@ namespace UDS.Net.Services.Extensions
             var dto = new PacketSubmissionDto
             {
                 Id = packetSubmission.Id,
-                VisitId = packetSubmission.VisitId,
+                PacketId = packetSubmission.PacketId,
                 SubmissionDate = packetSubmission.SubmissionDate,
                 CreatedBy = packetSubmission.CreatedBy,
                 CreatedAt = packetSubmission.CreatedAt,
