@@ -8,28 +8,21 @@
 <div>
     <div>
         <p class="mt-1 text-sm text-gray-500">
-            INSTRUCTIONS: This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form A3.
+            INSTRUCTIONS: <span class="italic">This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the</span> <guidebook kind="@Model.Visit.PACKET"></guidebook> <span class="italic">for</span> Form A3.
         </p>
     </div>
 
     <!--// Biological parents //-->
     <div class="">
-
-        <h3 class="text-base font-semibold leading-7 text-gray-900"><span class="counter"></span> Biological parents</h3>
+        <h3 class="text-base font-semibold leading-7 text-gray-900">
+            Section <span class="counter"></span> Biological parents
+        </h3>
 
         <p class="mt-1 text-sm text-gray-500">
             For any parent with a neurological or psychiatric diagnosis, the entire row  <u>must be filled out.</u>
         </p>
         <p class="mt-1 text-sm text-gray-500">
-            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
-                99
-                = Unknown
-            </b> in the <b>Primary diagnosis</b> column, and <span class="italic">skip the subsequent questions in the row </span>. For a parent with no neurological or
-            psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then   <span class="italic">
-                skip the subsequent questions in the row.
-            </span> For a parent with a primary diagnosis but no secondary diagnosis, enter <b>
-                88 = No secondary diagnosis
-            </b> in the Secondary diagnosis column
+            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>99 = Unknown </b> in the <b>Primary diagnosis</b> column, and <span class="italic">skip the subsequent questions in the row </span>. For a parent with no neurological or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the <b>Primary diagnosis</b> column, and then <span class="italic">skip the subsequent questions in the row.</span> For a parent with a primary diagnosis but no secondary diagnosis, enter <b>88 = No secondary diagnosis</b> in the Secondary diagnosis column.
         </p>
 
         <div class="subcounterreset m-2">
@@ -294,7 +287,7 @@
 
     <!--// Siblings //-->
     <div>
-        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">FULL SIBLINGS</h3>
+        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 2. Full siblings</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
@@ -335,35 +328,28 @@
                     <tr>
                         <th></th>
                         <th rowspan="2" style="text-align:center">
-                            Birth year <br />  <span class="italic" style="font-weight: normal;">
-                                (9999= Unknown)
-                            </span>
+                            Birth year <br />
+                            <span class="italic" style="font-weight: normal;">(9999= Unknown)</span>
                         </th>
                         <th rowspan="2" style="text-align:center">
                             Age at death <br />
-                            <span class="italic" style="font-weight: normal;">
-                                (888=N/A, 999=Unknown)
-                            </span>
+                            <span class="italic" style="font-weight: normal;">(888=N/A, 999=Unknown)</span>
                         </th>
                         <th>Primary dx*</th>
                         <th>Secondary Dx**</th>
                         <th>Method of evaluation**</th>
                         <th rowspan="2">
-                            Age of onset of primary dx <br /><span class="italic" style="font-weight: normal;">
-                                (999=unknown)
-                            </span>
+                            Age of onset of primary dx <br />
+                            <span class="italic" style="font-weight: normal;">(999=unknown)</span>
                         </th>
                     </tr>
-
                     <tr>
                         <th></th>
                         <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
-
                     {
                         @Html.EditorFor(m => m.A3.Siblings[i])
                     }
@@ -375,7 +361,7 @@
 
     <!--// Children //-->
     <div>
-        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">BIOLOGICAL CHILDREN</h3>
+        <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 3. Biological children</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
@@ -390,67 +376,45 @@
             If participant has no biological children, <strong>END FORM HERE</strong>; <span class="italic">otherwise, provide information on all biological children.</span>
         </p>
 
-
         <p class="mt-1 text-sm text-gray-500">
             For any biological child with a neurological or psychiatric diagnosis, the entire row <u>must be filled out.</u>
         </p>
 
         <p class="mt-1 text-sm text-gray-500">
-            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>
-                99 =
-                Unknown
-            </b> in the <b>Primary diagnosis</b> column, and  <span class="italic"> skip the subsequent questions in the row.</span> For a biological child with no neurological
-            or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then  <span class="italic">
-                skip the subsequent questions in the row.
-            </span> For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>
-                88 = No
-                secondary diagnosis
-            </b> in the Secondary diagnosis column.
+            If the clinician cannot determine the primary neurological/psychiatric diagnosis after reviewing all available evidence, enter <b>99 = Unknown</b> in the <b>Primary diagnosis</b> column, and  <span class="italic"> skip the subsequent questions in the row.</span> For a biological child with no neurological or psychiatric diagnosis, enter <b>00 = No known neurological/psychiatric diagnosis</b> in the Primary diagnosis column, and then <span class="italic">skip the subsequent questions in the row.</span> For a biological child with a primary diagnosis but no secondary diagnosis, enter <b>88 = No secondary diagnosis</b> in the Secondary diagnosis column.
         </p>
 
         <div class="subcounterreset m-2">
             <table class="mt-8 w-full text-left text-sm leading-6">
                 <thead class="border-b border-gray-200 text-gray-900">
-                    <tr>
-                        <th></th>
-                        <th rowspan="2" style="text-align:center">
+                    <tr class="text-center bg-blue-200">
+                        <th rowspan="2"></th>
+                        <th rowspan="2">
                             Birth year <br />
-                            <span class="italic" style="font-weight: normal;">
-                                (9999= Unknown)
-                            </span>
+                            <span class="italic font-normal">(9999= Unknown)</span>
                         </th>
-                        <th rowspan="2" style="text-align:center">
+                        <th rowspan="2">
                             Age at death <br />
-
-                            <span class="italic" style="font-weight: normal;">
-
-
-                                (888=N/A, 999=Unknown)
-
-                            </span>
+                            <span class="italic font-normal">(888=N/A, 999=Unknown)</span>
                         </th>
                         <th>Primary dx*</th>
                         <th>Secondary Dx**</th>
                         <th>Method of evaluation**</th>
                         <th rowspan="2">
                             Age of onset of primary dx <br />
-                            <span class="italic" style="font-weight: normal;">
-
-                                (999=unknown)
-
-                            </span>
+                            <span class="italic font-normal">(999=unknown)</span>
                         </th>
                     </tr>
-
                     <tr>
-                        <th></th>
-                        <th colspan="3" style="border: 2px solid lightgrey; text-align: center; padding: 8px;">******SEE LIST OF CODES******</th>
-
+                        <th colspan="3" class="bg-blue-400">
+                            <div class="text-white text-center p-1">
+                                ****** SEE LIST OF CODES ******
+                            </div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
-
                     {
                         @Html.EditorFor(m => m.A3.Children[i])
                     }
