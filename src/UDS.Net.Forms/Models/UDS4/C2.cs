@@ -617,10 +617,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
         public int? VNTTOTW { get; set; }
 
         [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
