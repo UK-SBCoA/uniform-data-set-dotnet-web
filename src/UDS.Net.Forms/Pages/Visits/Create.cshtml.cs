@@ -37,11 +37,11 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             if (visitNumber <= 1)
             {
-                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString(), Selected = true });
             }
             else
             {
-                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString(), Selected = true });
             }
         }
 
@@ -103,13 +103,15 @@ namespace UDS.Net.Forms.Pages.Visits
                 return Page();
             }
 
+            int newId = 0;
             if (Visit != null)
             {
                 Visit.Forms = new List<FormModel>(); // initialize form set
-                await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
+                var newVisit = await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
+                newId = newVisit.Id;
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { Id = newId });
         }
     }
 }
