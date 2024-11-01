@@ -109,6 +109,13 @@ namespace UDS.Net.Web.MVC.Services
             var dto = entity.ToDto(formId);
             return await UpdateVisit(username, dto);
         }
+
+        public async Task<int> GetNextVisitNumber(string username, int participationId)
+        {
+            var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+            return participation.LastVisitNumber + 1;
+        }
     }
 }
 

@@ -19,12 +19,13 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IVisitService _visitService;
 
         public SelectList ParticipationsSelectList { get; private set; }
-        public int SelectedParticipationNextVisit { get; private set; } = 0;
 
         [BindProperty]
         public VisitModel? Visit { get; set; }
 
         public Participation? Participation { get; set; }
+
+        public List<SelectListItem> VisitKindOptions { get; set; } = new List<SelectListItem>();
 
         public CreateModel(IVisitService visitService, IParticipationService participationService)
         {
@@ -32,7 +33,19 @@ namespace UDS.Net.Forms.Pages.Visits
             _participationService = participationService;
         }
 
-        public async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
+        private void PopulateVisitKindOptions(int visitNumber)
+        {
+            if (visitNumber <= 1)
+            {
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
+            }
+            else
+            {
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
+            }
+        }
+
+        private async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
         {
             Participation selectedParticipation = null;
             var participations = await _participationService.List("");
@@ -44,19 +57,16 @@ namespace UDS.Net.Forms.Pages.Visits
                 nameof(Participation.Id),
                 nameof(Participation.LegacyId),
                 selectedParticipation.Id);
-
         }
-
-        public List<SelectListItem> VisitKindOptions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? participationId)
         {
+            if (!participationId.HasValue)
+                return NotFound();
+
             await PopulateParticipationsDropDownList(participationId);
 
             Participation = await _participationService.GetById(User.Identity.Name, participationId.Value);
-
-            if (Participation != null)
-                SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
 
             var shortenedInitials = "UNK";
             if (User.Identity.Name.Length > 3)
@@ -66,37 +76,30 @@ namespace UDS.Net.Forms.Pages.Visits
 
             Visit = new VisitModel
             {
+                ParticipationId = participationId.Value,
                 FORMVER = "4",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Unknown",
                 VISIT_DATE = DateTime.Now,
-                INITIALS = shortenedInitials
+                INITIALS = shortenedInitials.ToUpper(),
+                VISITNUM = await _visitService.GetNextVisitNumber(User.Identity.Name, participationId.Value)
             };
 
-            if (participationId.HasValue)
-                Visit.ParticipationId = participationId.Value;
-
-            VisitKindOptions = new List<SelectListItem>();
-
-            if (Participation != null)
-            {
-                if (Participation.LastVisitNumber < 1)
-                {
-                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
-                }
-                else if (Participation.LastVisitNumber >= 1)
-                {
-                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
-                }
-            }
+            PopulateVisitKindOptions(Visit.VISITNUM);
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? participationId)
+        public async Task<IActionResult> OnPostAsync(int participationId)
         {
             if (!ModelState.IsValid)
             {
+                await PopulateParticipationsDropDownList(participationId);
+
+                Participation = await _participationService.GetById(User.Identity.Name, participationId);
+
+                PopulateVisitKindOptions(Visit.VISITNUM);
+
                 return Page();
             }
 

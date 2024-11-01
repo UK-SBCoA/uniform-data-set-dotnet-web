@@ -10,6 +10,8 @@ namespace UDS.Net.Services
         Task<Visit> GetByIdWithForm(string username, int id, string formId);
 
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
+
+        Task<int> GetNextVisitNumber(string username, int participationId);
     }
 }
 
