@@ -31,7 +31,8 @@ namespace UDS.Net.Forms.Extensions
                 LegacyId = participation.LegacyId,
                 VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
                 Visits = participation.Visits.ToVM(),
-                LastVisitNumber = participation.LastVisitNumber
+                LastVisitNumber = participation.LastVisitNumber,
+                Status = participation.Status
             };
         }
 
