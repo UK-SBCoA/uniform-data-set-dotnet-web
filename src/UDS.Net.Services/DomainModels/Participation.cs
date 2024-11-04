@@ -24,6 +24,8 @@ namespace UDS.Net.Services.DomainModels
         public int VisitCount { get; set; }
 
         public int LastVisitNumber { get; set; }
+
+        public string Status { get; set; }
     }
 }
 

@@ -76,6 +76,15 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
+        public Task<int> GetNextVisitNumber(string username, int participationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
