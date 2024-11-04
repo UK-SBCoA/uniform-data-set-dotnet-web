@@ -12,6 +12,8 @@ namespace UDS.Net.Services
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
 
         Task<int> GetNextVisitNumber(string username, int participationId);
+
+        Task<int> GetVisitCountByVersion(string username, int participationId, string version);
     }
 }
 

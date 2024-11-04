@@ -116,6 +116,18 @@ namespace UDS.Net.Web.MVC.Services
 
             return participation.LastVisitNumber + 1;
         }
+
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            if (version.Contains("4"))
+            {
+                var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+                return participation.VisitCount;
+            }
+            else
+                throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
+        }
     }
 }
 
