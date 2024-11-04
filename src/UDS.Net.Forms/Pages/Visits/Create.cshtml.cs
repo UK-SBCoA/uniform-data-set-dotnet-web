@@ -36,7 +36,7 @@ namespace UDS.Net.Forms.Pages.Visits
         private void PopulateVisitKindOptions(int udsv4VisitCount)
         {
             // the visit number could be > 1, but the first uds version 4 visit will always be I
-            if (udsv4VisitCount <= 1)
+            if (udsv4VisitCount == 0)
             {
                 VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString(), Selected = true });
             }
