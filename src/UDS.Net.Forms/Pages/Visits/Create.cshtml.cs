@@ -18,8 +18,6 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IParticipationService _participationService;
         protected readonly IVisitService _visitService;
 
-        public SelectList ParticipationsSelectList { get; private set; }
-
         [BindProperty]
         public VisitModel? Visit { get; set; }
 
@@ -46,26 +44,10 @@ namespace UDS.Net.Forms.Pages.Visits
             }
         }
 
-        private async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
-        {
-            Participation selectedParticipation = null;
-            var participations = await _participationService.List("");
-
-            if (selectedParticipationId.HasValue)
-                selectedParticipation = participations.FirstOrDefault(p => p.Id == selectedParticipationId);
-
-            ParticipationsSelectList = new SelectList(participations,
-                nameof(Participation.Id),
-                nameof(Participation.LegacyId),
-                selectedParticipation.Id);
-        }
-
         public async Task<IActionResult> OnGetAsync(int? participationId)
         {
             if (!participationId.HasValue)
                 return NotFound();
-
-            await PopulateParticipationsDropDownList(participationId);
 
             Participation = await _participationService.GetById(User.Identity.Name, participationId.Value);
 
@@ -97,8 +79,6 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             if (!ModelState.IsValid)
             {
-                await PopulateParticipationsDropDownList(participationId);
-
                 Participation = await _participationService.GetById(User.Identity.Name, participationId);
 
                 PopulateVisitKindOptions(Visit.VISITNUM);
