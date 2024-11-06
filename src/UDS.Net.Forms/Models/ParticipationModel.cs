@@ -27,7 +27,7 @@ namespace UDS.Net.Forms.Models
 
         public int LastVisitNumber { get; set; }
 
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
     }
 }
 
