@@ -678,26 +678,36 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == Services.Enums.FormStatus.Finalized)
             {
-                // 1g-1l, 1n-1t, or 1w-1bb
-                if (MOCATOTS.HasValue && MOCATRAI.HasValue && MOCACUBE.HasValue &&
-                    MOCACLOC.HasValue && MOCACLON.HasValue && MOCACLOH.HasValue &&
-                    MOCANAMI.HasValue && MOCADIGI.HasValue && MOCALETT.HasValue &&
-                    MOCASER7.HasValue && MOCAREPE.HasValue && MOCAFLUE.HasValue &&
-                    MOCAABST.HasValue && MOCARECN.HasValue && MOCAORDT.HasValue &&
-                    MOCAORMO.HasValue && MOCAORYR.HasValue && MOCAORDY.HasValue &&
-                    MOCAORPL.HasValue && MOCAORCT.HasValue)
+                // If **any** of the following MoCA items were not administered: 1g –1l, 1n–1t, 1w–1bb, then MOCATOTS must be 88
+                // 1g MOCATRAI
+                // 1h MOCACUBE
+                // 1i MOCACLOC
+                // 1j MOCACLON
+                // 1k MOCACLOH
+                // 1l MOCANAMI
+                //
+                // 1n MOCADIGI
+                // 1o MOCALETT
+                // 1p MOCASER7
+                // 1q MOCAREPE
+                // 1r MOCAFLUE
+                // 1s MOCAABST
+                // 1t MOCARECN
+                //
+                // 1w MOCAORDT
+                // 1x MOCAORMO
+                // 1y MOCAORYR
+                // 1z MOCAORDY
+                // 1aa MOCAORPL
+                // 1bb MOCAORCT
+                if (MOCATOTS.HasValue &&
+                    ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
+                    || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
+                    || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
                 {
-                    if (MOCATRAI.Value >= 95 && MOCACUBE.Value >= 95 &&
-                    MOCACLOC.Value >= 95 && MOCACLON.Value >= 95 && MOCACLOH.Value >= 95 &&
-                    MOCANAMI.Value >= 95 && MOCADIGI.Value >= 95 && MOCAFLUE.Value >= 95 &&
-                    MOCAABST.Value >= 95 && MOCARECN.Value >= 95 && MOCAORDT.Value >= 95 &&
-                    MOCAORMO.Value >= 95 && MOCAORYR.Value >= 95 && MOCAORDY.Value >= 95 &&
-                    MOCAORPL.Value >= 95 && MOCAORCT.Value >= 95)
+                    if (MOCATOTS.Value != 88)
                     {
-                        if (MOCATOTS.Value != 88)
-                        {
-                            yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
-                        }
+                        yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
                     }
                 }
 
