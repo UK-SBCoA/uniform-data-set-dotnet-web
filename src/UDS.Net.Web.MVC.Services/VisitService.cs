@@ -109,6 +109,25 @@ namespace UDS.Net.Web.MVC.Services
             var dto = entity.ToDto(formId);
             return await UpdateVisit(username, dto);
         }
+
+        public async Task<int> GetNextVisitNumber(string username, int participationId)
+        {
+            var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+            return participation.LastVisitNumber + 1;
+        }
+
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            if (version.Contains("4"))
+            {
+                var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+                return participation.VisitCount;
+            }
+            else
+                throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
+        }
     }
 }
 

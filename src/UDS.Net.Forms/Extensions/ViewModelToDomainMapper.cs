@@ -22,8 +22,8 @@ namespace UDS.Net.Forms.Extensions
                 DeletedBy = vm.DeletedBy,
                 IsDeleted = vm.IsDeleted,
                 VisitCount = vm.VisitCount,
-                LastVisitNumber = vm.LastVisitNumber
-
+                LastVisitNumber = vm.LastVisitNumber,
+                Status = vm.Status
             };
         }
 
