@@ -44,11 +44,17 @@
                 }
 
                 <div>
-                    <div>
-                        <label for="@Html.IdFor(m => m.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
-                        <enum-select for="MODE" items="Html.GetEnumSelectList<FormMode>()" enabled-values="@Model.AllowedFormModes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="MODE"></span>
-                    </div>
+                    @if (Model.Kind != "C2")
+
+                    {
+
+                        <div>
+                            <label for="@Html.IdFor(m => m.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
+                            <enum-select for="MODE" items="Html.GetEnumSelectList<FormMode>()" enabled-values="@Model.AllowedFormModes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="MODE"></span>
+                        </div>
+
+                    }
                     <div>
                         <label for="@Html.IdFor(m => m.FRMDATE)" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
                         <input asp-for="FRMDATE" type="date" />
@@ -79,13 +85,16 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="RMREAS"></span>
                     </div>
                     <div>
-                        <label for="@Html.IdFor(m => m.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-
-                        @if (Model.AllowsRemote)
+                        @if (Model.AllowsRemote && Model.Kind != "C2")
                         {
+                            <label for="@Html.IdFor(m => m.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
                             <enum-select for="RMMODE" items="Html.GetEnumSelectList<RemoteModality>()" enabled-values="@Model.AllowedRemoteModalities" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option disabled selected class="disabled:opacity-75">--</option>
                             </enum-select>
+                        }
+                        else if (Model.Kind == "C2")
+                        {
+
                         }
                         else
                         {
@@ -93,7 +102,6 @@
                                 <option disabled selected class="disabled:opacity-75">Remote not allowed</option>
                             </select>
                         }
-
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="RMMODE"></span>
                     </div>
                     <div>
