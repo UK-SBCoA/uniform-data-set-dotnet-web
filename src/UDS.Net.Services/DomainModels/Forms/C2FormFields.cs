@@ -19,6 +19,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MOCATRAI { get; set; }
         public int? MOCACUBE { get; set; }
         public int? MOCACLOC { get; set; }
+        public int? MOCBTOTS { get; set; }
         public int? MOCACLON { get; set; }
         public int? MOCACLOH { get; set; }
         public int? MOCANAMI { get; set; }
@@ -64,6 +65,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DIGBACLS { get; set; }
         public int? OTRAILA { get; set; }
         public int? OTRLARR { get; set; }
+        public int? OTRALI { get; set; }
         public int? OTRLALI { get; set; }
         public int? OTRAILB { get; set; }
         public int? OTRLBRR { get; set; }
@@ -180,6 +182,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MOCAVIS = c2Dto.MOCAVIS;
                 MOCAHEAR = c2Dto.MOCAHEAR;
                 MOCATOTS = c2Dto.MOCATOTS;
+                MOCBTOTS = c2Dto.MOCBTOTS;
                 MOCATRAI = c2Dto.MOCATRAI;
                 MOCACUBE = c2Dto.MOCACUBE;
                 MOCACLOC = c2Dto.MOCACLOC;
@@ -263,6 +266,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 REYMETHOD = c2Dto.REYMETHOD;
                 REYTCOR = c2Dto.REYTCOR;
                 REYFPOS = c2Dto.REYFPOS;
+                VNTTOTW = c2Dto.VNTTOTW;
+                VNTPCNC = c2Dto.VNTPCNC;
                 CERAD1REC = c2Dto.CERAD1REC;
                 CERAD1READ = c2Dto.CERAD1READ;
                 CERAD1INT = c2Dto.CERAD1INT;
@@ -277,6 +282,12 @@ namespace UDS.Net.Services.DomainModels.Forms
                 CERADJ6INT = c2Dto.CERADJ6INT;
                 CERADJ7YES = c2Dto.CERADJ7YES;
                 CERADJ7NO = c2Dto.CERADJ7NO;
+                OTRAILA = c2Dto.OTRAILA;
+                OTRLARR = c2Dto.OTRLARR;
+                OTRLALI = c2Dto.OTRLALI;
+                OTRAILB = c2Dto.OTRAILB;
+                OTRLBRR = c2Dto.OTRLBRR;
+                OTRLBLI = c2Dto.OTRLBLI;
                 RESPVAL = c2Dto.RESPVAL;
                 RESPHEAR = c2Dto.RESPHEAR;
                 RESPDIST = c2Dto.RESPDIST;

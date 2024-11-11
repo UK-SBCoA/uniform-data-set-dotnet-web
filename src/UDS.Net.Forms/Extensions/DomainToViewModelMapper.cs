@@ -31,7 +31,8 @@ namespace UDS.Net.Forms.Extensions
                 LegacyId = participation.LegacyId,
                 VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
                 Visits = participation.Visits.ToVM(),
-                LastVisitNumber = participation.LastVisitNumber
+                LastVisitNumber = participation.LastVisitNumber,
+                Status = participation.Status
             };
         }
 
@@ -1256,6 +1257,7 @@ namespace UDS.Net.Forms.Extensions
                 MOCAVIS = fields.MOCAVIS,
                 MOCAHEAR = fields.MOCAHEAR,
                 MOCATOTS = fields.MOCATOTS,
+                MOCBTOTS = fields.MOCBTOTS,
                 MOCATRAI = fields.MOCATRAI,
                 MOCACUBE = fields.MOCACUBE,
                 MOCACLOC = fields.MOCACLOC,
@@ -1353,6 +1355,12 @@ namespace UDS.Net.Forms.Extensions
                 CERADJ6INT = fields.CERADJ6INT,
                 CERADJ7YES = fields.CERADJ7YES,
                 CERADJ7NO = fields.CERADJ7NO,
+                OTRAILA = fields.OTRAILA,
+                OTRLARR = fields.OTRLARR,
+                OTRLALI = fields.OTRLALI,
+                OTRAILB = fields.OTRAILB,
+                OTRLBRR = fields.OTRLBRR,
+                OTRLBLI = fields.OTRLBLI,
                 VNTTOTW = fields.VNTTOTW,
                 VNTPCNC = fields.VNTPCNC,
                 RESPVAL = fields.RESPVAL,

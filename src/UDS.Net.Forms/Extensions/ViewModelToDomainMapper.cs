@@ -22,8 +22,8 @@ namespace UDS.Net.Forms.Extensions
                 DeletedBy = vm.DeletedBy,
                 IsDeleted = vm.IsDeleted,
                 VisitCount = vm.VisitCount,
-                LastVisitNumber = vm.LastVisitNumber
-
+                LastVisitNumber = vm.LastVisitNumber,
+                Status = vm.Status
             };
         }
 
@@ -942,6 +942,7 @@ namespace UDS.Net.Forms.Extensions
                 MOCAVIS = vm.MOCAVIS,
                 MOCAHEAR = vm.MOCAHEAR,
                 MOCATOTS = vm.MOCATOTS,
+                MOCBTOTS = vm.MOCBTOTS,
                 MOCATRAI = vm.MOCATRAI,
                 MOCACUBE = vm.MOCACUBE,
                 MOCACLOC = vm.MOCACLOC,
@@ -1039,6 +1040,12 @@ namespace UDS.Net.Forms.Extensions
                 CERADJ6INT = vm.CERADJ6INT,
                 CERADJ7YES = vm.CERADJ7YES,
                 CERADJ7NO = vm.CERADJ7NO,
+                OTRAILA = vm.OTRAILA,
+                OTRLARR = vm.OTRLARR,
+                OTRLALI = vm.OTRLALI,
+                OTRAILB = vm.OTRAILB,
+                OTRLBRR = vm.OTRLBRR,
+                OTRLBLI = vm.OTRLBLI,
                 VNTTOTW = vm.VNTTOTW,
                 VNTPCNC = vm.VNTPCNC,
                 RESPVAL = vm.RESPVAL,

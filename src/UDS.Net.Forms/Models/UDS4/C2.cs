@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAREAS { get; set; }
 
         [Display(Name = "MoCA was administered")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Which MoCA was administered?")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Which MoCA was administered?")]
         public int? MOCALOC { get; set; }
 
         [Display(Name = "Language of MoCA administration")]
@@ -46,42 +46,46 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-30,88)")]
         [RegularExpression("^(\\d|[0-2]\\d|30|88)$", ErrorMessage = "Allowed values are 0-30 or 88 = not administered.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATOTS { get; set; }
+
+        [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
+        [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
+        public int? MOCBTOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCATRAI { get; set; }
 
         [Display(Name = " Visuospatial/executive — Cube", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACUBE { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock contour", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLOC { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock numbers", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLON { get; set; }
 
         [Display(Name = "Visuospatial/executive — Clock hands", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCACLOH { get; set; }
 
         [Display(Name = "Language — Naming", Description = "(0-3, 95-98)")]
         [RegularExpression("^([0-3]|9[5-8])$", ErrorMessage = "Allowed values are 0-3 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCANAMI { get; set; }
 
         [Display(Name = "Memory — Registration (two trials)", Description = "(0-10, 95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIf(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCAREGI { get; set; }
 
         [Display(Name = "Attention — Digits", Description = "(0-2, 95-98)")]
@@ -164,7 +168,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredOnFinalized]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
@@ -193,7 +198,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnFinalized(ErrorMessage = "Provide Benson figure score")]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -238,7 +244,9 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredOnFinalized(ErrorMessage = "Provide number of seconds to complete")]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
+
         public int? TRAILA { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -257,7 +265,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -299,7 +308,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredOnFinalized(ErrorMessage = "Provide score for drawing Benson figure")]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -316,7 +326,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredOnFinalized]
+        [RequiredIf(nameof(RMMODE), "Video")]
+        [RequiredIf(nameof(MODE), "In-Person")]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
@@ -573,13 +584,45 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
         public int? CERADJ7NO { get; set; }
 
+        [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
+        [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
+        public int? OTRAILA { get; set; }
+
+        [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Response Required")]
+        public int? OTRLARR { get; set; }
+
+        [Display(Name = "Part A - Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILA), 0, 100, ErrorMessage = "Response Required")]
+        public int? OTRLALI { get; set; }
+
+        [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
+        [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
+        public int? OTRAILB { get; set; }
+
+        [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
+        [RegularExpression("^\\d{1,2}$", ErrorMessage = "Allowed values are 0-99.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
+        public int? OTRLBRR { get; set; }
+
+        [Display(Name = "Number of correct lines", Description = "(0-25)")]
+        [RegularExpression("^(\\d|1\\d|2[0-5])$", ErrorMessage = "Allowed values are 0-25.")]
+        [RequiredIfRange(nameof(OTRAILB), 0, 300, ErrorMessage = "Response Required")]
+        public int? OTRLBLI { get; set; }
+
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
         public int? VNTTOTW { get; set; }
 
         [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
+        [RequiredIf(nameof(RMMODE), "Telephone")]
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
@@ -635,26 +678,36 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == Services.Enums.FormStatus.Finalized)
             {
-                // 1g-1l, 1n-1t, or 1w-1bb
-                if (MOCATOTS.HasValue && MOCATRAI.HasValue && MOCACUBE.HasValue &&
-                    MOCACLOC.HasValue && MOCACLON.HasValue && MOCACLOH.HasValue &&
-                    MOCANAMI.HasValue && MOCADIGI.HasValue && MOCALETT.HasValue &&
-                    MOCASER7.HasValue && MOCAREPE.HasValue && MOCAFLUE.HasValue &&
-                    MOCAABST.HasValue && MOCARECN.HasValue && MOCAORDT.HasValue &&
-                    MOCAORMO.HasValue && MOCAORYR.HasValue && MOCAORDY.HasValue &&
-                    MOCAORPL.HasValue && MOCAORCT.HasValue)
+                // If **any** of the following MoCA items were not administered: 1g –1l, 1n–1t, 1w–1bb, then MOCATOTS must be 88
+                // 1g MOCATRAI
+                // 1h MOCACUBE
+                // 1i MOCACLOC
+                // 1j MOCACLON
+                // 1k MOCACLOH
+                // 1l MOCANAMI
+                //
+                // 1n MOCADIGI
+                // 1o MOCALETT
+                // 1p MOCASER7
+                // 1q MOCAREPE
+                // 1r MOCAFLUE
+                // 1s MOCAABST
+                // 1t MOCARECN
+                //
+                // 1w MOCAORDT
+                // 1x MOCAORMO
+                // 1y MOCAORYR
+                // 1z MOCAORDY
+                // 1aa MOCAORPL
+                // 1bb MOCAORCT
+                if (MOCATOTS.HasValue &&
+                    ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
+                    || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
+                    || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
                 {
-                    if (MOCATRAI.Value >= 95 && MOCACUBE.Value >= 95 &&
-                    MOCACLOC.Value >= 95 && MOCACLON.Value >= 95 && MOCACLOH.Value >= 95 &&
-                    MOCANAMI.Value >= 95 && MOCADIGI.Value >= 95 && MOCAFLUE.Value >= 95 &&
-                    MOCAABST.Value >= 95 && MOCARECN.Value >= 95 && MOCAORDT.Value >= 95 &&
-                    MOCAORMO.Value >= 95 && MOCAORYR.Value >= 95 && MOCAORDY.Value >= 95 &&
-                    MOCAORPL.Value >= 95 && MOCAORCT.Value >= 95)
+                    if (MOCATOTS.Value != 88)
                     {
-                        if (MOCATOTS.Value != 88)
-                        {
-                            yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
-                        }
+                        yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
                     }
                 }
 
