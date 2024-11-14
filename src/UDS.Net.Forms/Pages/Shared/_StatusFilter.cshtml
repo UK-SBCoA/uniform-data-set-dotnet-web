@@ -1,15 +1,16 @@
-<div>
+<div data-controller="dropdown">
     <div class="border-t border-gray-200 px-4 py-6">
         <h3 class="-mx-2 -my-3 flow-root">
             <!-- Expand/collapse section button -->
-            <button type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
+            <button data-dropdown-target="button" data-action="click->dropdown#toggle click@window->dropdown#hide" type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
                 <div class="flex">
-                    <span class="font-medium text-gray-900">Status</span>
-                    <span class="ml-6 flex items-center">
-                        <!-- Expand icon, show/hide based on section open state. -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                        </svg>
+                    <div class="flex space-x-2">
+                        <span class="font-medium text-gray-900">Status</span>
+                        <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
+                            2
+                        </div>
+                    </div>
+                    <span>
                         <!-- Collapse icon, show/hide based on section open state. -->
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
@@ -19,7 +20,7 @@
             </button>
         </h3>
         <!-- Filter section, show/hide based on section state. -->
-        <div class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
+        <div data-dropdown-target="menu" class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
             <div class="space-y-3 border border-gray-300 rounded pl-3 py-3">
                 <div class="flex items-center">
                     <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
