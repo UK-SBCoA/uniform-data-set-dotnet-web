@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Services;
-using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using UDS.Net.Forms.Models;
+using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -23,7 +17,7 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
+        public async Task<IActionResult> OnGetAsync(int pageSize = 1, int pageIndex = 1, string search = "")
         {
 
             var visits = await _visitService.List(User.Identity.Name, pageSize, pageIndex);
