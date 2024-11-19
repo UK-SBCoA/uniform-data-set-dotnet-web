@@ -34,15 +34,20 @@ export default class extends Controller {
     var isChecked = this.checkboxTriggerTarget.checked
     //apply disable value if the checkbox is checked and the opposite when unchecked
     var disableValue = isChecked ? disable : !disable
-    //get all elements that are to be affected by checkbox using javascript
-    var targetElements = document.getElementsByName(group)
+    //split the group parameter into an array of property names
+    var propertyNames = group.split(',')
 
-    if (targetElements.length < 1) {
-      return console.warn(`No targets found to be affected by checkbox of id: ${this.checkboxTriggerTarget.id}`)
-    }
+    propertyNames.forEach(groupName => {
+      //get all elements that are to be affected by checkbox using javascript
+      var targetElements = document.getElementsByName(groupName.trim())
 
-    targetElements.forEach((element) => {
-      element.disabled = disableValue
+      if (targetElements.length < 1) {
+        return console.warn(`No targets found to be affected by checkbox of id: ${this.checkboxTriggerTarget.id} for group: ${groupName}`)
+      }
+
+      targetElements.forEach((element) => {
+        element.disabled = disableValue
+      })
     })
   }
 
