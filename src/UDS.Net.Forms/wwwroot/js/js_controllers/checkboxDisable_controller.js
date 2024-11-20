@@ -25,24 +25,26 @@ export default class extends Controller {
     this.OnLoad()
   }
 
-  ToggleGroup({ params: { group, disable } }) {
+  ToggleGroup(event) {
+    const { group, disable } = event.params;
+    const checkbox = event.currentTarget;
 
     if (group == undefined || disable == undefined) {
       return console.error(`Missing required parameter of group or disable on a target element with id: ${this.checkboxTriggerTarget.id}`)
     }
 
-    var isChecked = this.checkboxTriggerTarget.checked
+    var isChecked = checkbox.checked
     //apply disable value if the checkbox is checked and the opposite when unchecked
     var disableValue = isChecked ? disable : !disable
     //split the group parameter into an array of property names
     var propertyNames = group.split(',')
 
-    propertyNames.forEach(groupName => {
+    propertyNames.forEach(propertyName => {
       //get all elements that are to be affected by checkbox using javascript
-      var targetElements = document.getElementsByName(groupName.trim())
+      var targetElements = document.getElementsByName(propertyName.trim());
 
       if (targetElements.length < 1) {
-        return console.warn(`No targets found to be affected by checkbox of id: ${this.checkboxTriggerTarget.id} for group: ${groupName}`)
+        return console.warn(`No targets found to be affected by checkbox of id: ${checkbox.id} for property: ${propertyName}`)
       }
 
       targetElements.forEach((element) => {
@@ -52,10 +54,9 @@ export default class extends Controller {
   }
 
   OnLoad() {
-    this.checkboxTriggerTargets.forEach(() => {
-
-      let disableString = this.checkboxTriggerTarget.dataset.checkboxdisableDisableParam
-      let group = this.checkboxTriggerTarget.dataset.checkboxdisableGroupParam
+    this.checkboxTriggerTargets.forEach((checkbox) => {
+      let disableString = checkbox.dataset.checkboxdisableDisableParam
+      let group = checkbox.dataset.checkboxdisableGroupParam
 
       //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
       //Stimulus only assumes type when using params with an action
@@ -67,7 +68,7 @@ export default class extends Controller {
       if (disableString == "true")
         disable = true
 
-      this.ToggleGroup({ params: { group, disable } })
+      this.ToggleGroup({ params: { group, disable }, currentTarget: checkbox })
     })
   }
 }
