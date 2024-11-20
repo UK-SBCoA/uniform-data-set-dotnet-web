@@ -25,6 +25,9 @@ namespace UDS.Net.Forms.Pages.Visits
                 StatusFilter.StatusList = statuses;
             }
 
+            StatusFilter.StatusCount = StatusFilter.StatusList.Count();
+            StatusFilter.StatusListString = string.Join(",", StatusFilter.StatusList);
+
             var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, StatusFilter.StatusList);
 
             int total = await _visitService.Count(User.Identity.Name);
