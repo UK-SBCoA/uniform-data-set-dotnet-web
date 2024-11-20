@@ -1,52 +1,44 @@
+@model StatusFilterModel
+
 <div data-controller="dropdown">
-    <div class="border-t border-gray-200 px-4 py-6">
-        <h3 class="-mx-2 -my-3 flow-root">
-            <!-- Expand/collapse section button -->
-            <button data-dropdown-target="button" data-action="click->dropdown#toggle click@window->dropdown#hide" type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
-                <div class="flex">
-                    <div class="flex space-x-2">
-                        <span class="font-medium text-gray-900">Status</span>
-                        <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
-                            2
+    <form asp-page-handler="filteredasync" method="get">
+        <div class="border-t border-gray-200 px-4 py-6">
+            <h3 class="-mx-2 -my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button data-dropdown-target="button" data-action="click->dropdown#toggle click@window->dropdown#hide" type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
+                    <div class="flex">
+                        <div class="flex space-x-2">
+                            <span class="font-medium text-gray-900">Status</span>
+                            <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
+                                2
+                            </div>
                         </div>
+                        <span>
+                            <!-- Collapse icon, show/hide based on section open state. -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </span>
                     </div>
-                    <span>
-                        <!-- Collapse icon, show/hide based on section open state. -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </span>
-                </div>
-            </button>
-        </h3>
-        <!-- Filter section, show/hide based on section state. -->
-        <div data-dropdown-target="menu" class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
-            <div class="space-y-3 border border-gray-300 rounded pl-3 py-3">
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Pending</label>
-                </div>
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Finalized</label>
-                </div>
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Submitted</label>
-                </div>
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Failed Error Checks</label>
-                </div>
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Passed Error Checks</label>
-                </div>
-                <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-900">Frozen</label>
+                </button>
+            </h3>
+            <!-- Filter section, show/hide based on section state. -->
+            <div data-dropdown-target="menu" class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
+                <div class="space-y-5 border border-gray-300 rounded pl-3 py-3">
+                    <div class="space-y-3">
+                        @foreach (var status in Model.PacketStatuses)
+                        {
+                            <div class="flex items-center">
+                                <input id="status_[@status]" name="statuses" value="@status" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="status_[@status]" class="ml-3 min-w-0 flex-1 text-gray-900">@status</label>
+                            </div>
+                        }
+                    </div>
+                    <div class="flex justify-center">
+                        <button type="submit" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Apply</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+     </form>
 </div>

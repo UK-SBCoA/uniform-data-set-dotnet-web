@@ -11,16 +11,21 @@ namespace UDS.Net.Forms.Pages.Visits
         private readonly IVisitService _visitService;
 
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
+        public StatusFilterModel StatusFilter { get; set; } = new StatusFilterModel();
 
         public IndexModel(IVisitService visitService)
         {
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 1, int pageIndex = 1, string search = "")
+        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = null, string[] statuses = null)
         {
+            if (statuses != null)
+            {
+                StatusFilter.StatusList = statuses;
+            }
 
-            var visits = await _visitService.List(User.Identity.Name, pageSize, pageIndex);
+            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, StatusFilter.StatusList);
 
             int total = await _visitService.Count(User.Identity.Name);
 
@@ -28,6 +33,5 @@ namespace UDS.Net.Forms.Pages.Visits
 
             return Page();
         }
-
     }
 }

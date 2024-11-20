@@ -1,0 +1,10 @@
+﻿using UDS.Net.Services.Enums;
+
+namespace UDS.Net.Forms.Models
+{
+    public class StatusFilterModel
+    {
+        public List<string> PacketStatuses { get; set; } = Enum.GetNames(typeof(PacketStatus)).ToList();
+        public string[] StatusList { get; set; } = [PacketStatus.Pending.ToString(), PacketStatus.FailedErrorChecks.ToString()];
+    }
+}

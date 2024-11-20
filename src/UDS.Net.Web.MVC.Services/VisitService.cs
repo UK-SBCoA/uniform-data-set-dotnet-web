@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Net;
-using System.Text.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
-using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
+using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -67,6 +65,21 @@ namespace UDS.Net.Web.MVC.Services
             if (visitDtos != null)
             {
                 return visitDtos.Select(d => d.ToDomain(username)).ToList();
+            }
+
+            return new List<Visit>();
+        }
+
+        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
+        {
+            if (statuses != null)
+            {
+                var visitDtos = await _apiClient.VisitClient.GetVisitsAtStatus(statuses, pageSize, pageIndex);
+
+                if (visitDtos != null)
+                {
+                    return visitDtos.Select(d => d.ToDomain(username)).ToList();
+                }
             }
 
             return new List<Visit>();
