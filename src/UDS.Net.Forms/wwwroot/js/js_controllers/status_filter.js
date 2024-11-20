@@ -1,29 +1,55 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ['statusCheckbox', 'statusString', 'apply']
+    static targets = ['statusCheckbox', 'statusString', 'apply', 'toggleAll']
 
     connect() {
         this.SetCheckboxes();
+        this.SetToggleAllCheckbox();
     }
 
     SetCheckboxes() {
-        let checkboxElements = this.statusCheckboxTargets
         let statusList = this.statusStringTarget.value.split(",")
 
-        checkboxElements.forEach((checkbox) => {
+        this.statusCheckboxTargets.forEach((checkbox) => {
             if (statusList.includes(checkbox.value)) {
                 checkbox.checked = true;
             }
         })
     }
 
+    SetToggleAllCheckbox() {
+        //if all checkboxes are checked, check will be checked runs once on connect
+        let statusCount = this.statusCheckboxTargets.length;
+        let checkedCount = 0;
+
+        this.statusCheckboxTargets.forEach((checkbox) => {
+            if (checkbox.checked) {
+                checkedCount++
+            }
+        })
+
+        if (statusCount == checkedCount) this.toggleAllTarget.checked = true
+    }
+
+    ToggleAllStatuses() {
+        let checkAll = false
+
+        if (this.toggleAllTarget.checked) checkAll = true;
+
+        this.statusCheckboxTargets.forEach((checkbox) => {
+            checkbox.checked = checkAll
+        })
+
+        this.CheckStatusFilterCount()
+    }
+
     CheckStatusFilterCount() {
-        let checkboxElements = this.statusCheckboxTargets
+        //if no status is selected, disable apply button
         let checkedCount = 0;
         let disableApply = true;
 
-        checkboxElements.forEach((checkbox) => {
+        this.statusCheckboxTargets.forEach((checkbox) => {
             if (checkbox.checked) checkedCount++
 
             if (checkedCount > 0) disableApply = false
