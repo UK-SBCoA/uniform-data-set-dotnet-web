@@ -15,7 +15,7 @@
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                     <div class="justify-items-end">
-                        <partial name="_StatusFilter" model="Model.StatusFilter" />
+                        <partial name="_VisitStatusFilter" model="Model.Visits" />
                     </div>
                     <table class="w-full text-left">
                         <thead>
@@ -53,7 +53,7 @@
                     </table>
                 </div>
                 <div class="py-4">
-                    <partial name="_PreviousNextButtons" model="Model.Visits" />
+                    <partial name="_VisitPreviousNextButtons" model="Model.Visits" />
                 </div>
             </div>
         </div>

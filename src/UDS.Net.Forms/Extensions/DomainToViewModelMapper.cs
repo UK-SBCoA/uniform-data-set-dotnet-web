@@ -34,16 +34,23 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
+        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search, string[] statuses)
         {
-            return new VisitsPaginatedModel
+            VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
             {
                 List = visits.Select(v => v.ToVM()).ToList(),
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 Total = total,
-                Search = search
+                Search = search,
             };
+
+            if (statuses != null)
+            {
+                visitPaginatedModel.StatusFilter.StatusList = statuses;
+            }
+
+            return visitPaginatedModel;
         }
 
         public static List<VisitModel> ToVM(this IList<Visit> visits)

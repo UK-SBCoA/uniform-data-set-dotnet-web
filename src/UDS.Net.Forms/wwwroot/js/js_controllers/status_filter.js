@@ -1,15 +1,16 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-    static targets = ['statusCheckbox', 'statusString', 'apply', 'toggleAll']
+    static targets = ['statusCheckbox', 'currentStatusString', 'newStatusString', 'apply', 'toggleAll']
 
     connect() {
         this.SetCheckboxes();
         this.SetToggleAllCheckbox();
+        this.BuildStatusListString();
     }
 
     SetCheckboxes() {
-        let statusList = this.statusStringTarget.value.split(",")
+        let statusList = this.currentStatusStringTarget.value.split(",")
 
         this.statusCheckboxTargets.forEach((checkbox) => {
             if (statusList.includes(checkbox.value)) {
@@ -60,5 +61,21 @@ export default class extends Controller {
 
     DisableApply(disable) {
         this.applyTarget.disabled = disable;
+    }
+
+    //create comma delimeted string of statuses from checkbox interaction
+    BuildStatusListString() {
+        let statusListString = ""
+
+        this.statusCheckboxTargets.forEach((checkbox) => {
+            if (checkbox.checked) {
+                statusListString += checkbox.value + ','
+            }
+        })
+
+        //remove trailing comma
+        statusListString = statusListString.slice(0, -1);
+
+        this.newStatusStringTarget.value = statusListString
     }
 }

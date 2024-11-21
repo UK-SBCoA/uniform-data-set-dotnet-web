@@ -1,7 +1,7 @@
-@model StatusFilterModel
+@model VisitsPaginatedModel
 
 <div data-controller="dropdown">
-    <form asp-page-handler="filteredasync" method="get">
+    <form method="get">
         <div class="border-t border-gray-200 px-4 py-6">
             <h3 class="-mx-2 -my-3 flow-root">
                 <!-- Expand/collapse section button -->
@@ -10,7 +10,7 @@
                         <div class="flex space-x-2">
                             <span class="font-medium text-gray-900">Status</span>
                             <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
-                                @Model.StatusCount
+                                @Model.StatusFilter.StatusCount
                             </div>
                         </div>
                         <span>
@@ -30,10 +30,10 @@
                             <input data-statusFilter-target="toggleAll"  id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                             <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
                         </div>
-                        @foreach (var status in Model.PacketStatuses)
+                        @foreach (var status in Model.StatusFilter.PacketStatuses)
                         {
-                            <div class="flex items-center" data-action="click->statusFilter#CheckStatusFilterCount">
-                                <input data-statusFilter-target="statusCheckbox" id="status_[@status]" name="statuses" value="@status" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <div class="flex items-center" data-action="click->statusFilter#CheckStatusFilterCount click->statusFilter#BuildStatusListString">
+                                <input data-statusFilter-target="statusCheckbox" id="status_[@status]" value="@status" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 <label for="status_[@status]" class="ml-3 min-w-0 flex-1 text-gray-900">@status</label>
                             </div>
                         }
@@ -42,7 +42,8 @@
                         <button data-statusFilter-target="apply" type="submit" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400">Apply</button>
                     </div>
                 </div>
-                <input disabled data-statusFilter-target="statusString" class="hidden" asp-for="StatusListString" />
+                <input disabled data-statusFilter-target="currentStatusString" class="hidden" asp-for="StatusFilter.StatusListString" />
+                <input data-statusFilter-target="newStatusString" class="hidden" name="statuses" type="text"/>
             </div>
         </div>
      </form>
