@@ -29,6 +29,7 @@ export default class extends Controller {
       this.menuTarget.classList.add('scale-100');
       this.menuTarget.classList.remove('opacity-0');
       this.menuTarget.classList.add('opacity-100');
+      this.menuTarget.classList.remove('hidden');
     }
   }
 
@@ -38,6 +39,7 @@ export default class extends Controller {
       this.menuTarget.classList.add('scale-95');
       this.menuTarget.classList.add('opacity-0');
       this.menuTarget.classList.remove('opacity-100');
+      this.menuTarget.classList.add('hidden');
     }
   }
 }
