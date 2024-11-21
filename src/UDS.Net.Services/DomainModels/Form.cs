@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels
@@ -78,6 +80,8 @@ namespace UDS.Net.Services.DomainModels
 
         public IFormFields Fields { get; set; }
 
+        public List<PacketSubmissionError> UnresolvedErrors = new List<PacketSubmissionError>();
+
         private void SetFieldsBasedOnKind()
         {
             if (Kind == "A1")
@@ -92,8 +96,6 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new A4GFormFields();
             else if (Kind == "A4a")
                 Fields = new A4aFormFields();
-            else if (Kind == "A5")
-                Fields = new A5FormFields();
             else if (Kind == "A5D2")
                 Fields = new A5D2FormFields();
             else if (Kind == "B1")
@@ -112,18 +114,12 @@ namespace UDS.Net.Services.DomainModels
                 Fields = new B8FormFields();
             else if (Kind == "B9")
                 Fields = new B9FormFields();
-            else if (Kind == "C1")
-                Fields = new C1FormFields();
             else if (Kind == "C2")
                 Fields = new C2FormFields();
             else if (Kind == "D1a")
                 Fields = new D1aFormFields();
             else if (Kind == "D1b")
                 Fields = new D1bFormFields();
-            else if (Kind == "D2")
-                Fields = new D2FormFields();
-            else if (Kind == "T1")
-                Fields = new T1FormFields();
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
@@ -173,6 +169,8 @@ namespace UDS.Net.Services.DomainModels
             {
                 Fields = fields;
             }
+
+            // TODO if form fields MODE does not include NotCompleted then it is required
         }
 
         public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
@@ -181,6 +179,10 @@ namespace UDS.Net.Services.DomainModels
             IsRequiredForPacketKind = isRequired;
         }
 
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields, List<PacketSubmissionError> unresolvedErrors) : this(visitId, id, title, kind, isRequired, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
+        {
+            UnresolvedErrors = unresolvedErrors;
+        }
     }
 }
 

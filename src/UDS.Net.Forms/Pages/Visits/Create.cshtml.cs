@@ -18,13 +18,12 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IParticipationService _participationService;
         protected readonly IVisitService _visitService;
 
-        public SelectList ParticipationsSelectList { get; private set; }
-        public int SelectedParticipationNextVisit { get; private set; } = 0;
-
         [BindProperty]
         public VisitModel? Visit { get; set; }
 
         public Participation? Participation { get; set; }
+
+        public List<SelectListItem> VisitKindOptions { get; set; } = new List<SelectListItem>();
 
         public CreateModel(IVisitService visitService, IParticipationService participationService)
         {
@@ -32,31 +31,25 @@ namespace UDS.Net.Forms.Pages.Visits
             _participationService = participationService;
         }
 
-        public async Task PopulateParticipationsDropDownList(int? selectedParticipationId)
+        private void PopulateVisitKindOptions(int udsv4VisitCount)
         {
-            Participation selectedParticipation = null;
-            var participations = await _participationService.List("");
-
-            if (selectedParticipationId.HasValue)
-                selectedParticipation = participations.FirstOrDefault(p => p.Id == selectedParticipationId);
-
-            ParticipationsSelectList = new SelectList(participations,
-                nameof(Participation.Id),
-                nameof(Participation.LegacyId),
-                selectedParticipation.Id);
-
+            // the visit number could be > 1, but the first uds version 4 visit will always be I
+            if (udsv4VisitCount == 0)
+            {
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString(), Selected = true });
+            }
+            else
+            {
+                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString(), Selected = true });
+            }
         }
-
-        public List<SelectListItem> VisitKindOptions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? participationId)
         {
-            await PopulateParticipationsDropDownList(participationId);
+            if (!participationId.HasValue)
+                return NotFound();
 
             Participation = await _participationService.GetById(User.Identity.Name, participationId.Value);
-
-            if (Participation != null)
-                SelectedParticipationNextVisit = Participation.LastVisitNumber + 1;
 
             var shortenedInitials = "UNK";
             if (User.Identity.Name.Length > 3)
@@ -66,47 +59,42 @@ namespace UDS.Net.Forms.Pages.Visits
 
             Visit = new VisitModel
             {
+                ParticipationId = participationId.Value,
                 FORMVER = "4",
                 CreatedAt = DateTime.UtcNow,
                 CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Unknown",
                 VISIT_DATE = DateTime.Now,
-                INITIALS = shortenedInitials
+                INITIALS = shortenedInitials.ToUpper(),
+                VISITNUM = await _visitService.GetNextVisitNumber(User.Identity.Name, participationId.Value)
             };
 
-            if (participationId.HasValue)
-                Visit.ParticipationId = participationId.Value;
+            int countOfVersion4Visits = await _visitService.GetVisitCountByVersion(User.Identity.Name, participationId.Value, "4");
 
-            VisitKindOptions = new List<SelectListItem>();
-
-            if (Participation != null)
-            {
-                if (Participation.LastVisitNumber < 1)
-                {
-                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString() });
-                }
-                else if (Participation.LastVisitNumber >= 1)
-                {
-                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.F.ToString(), Text = PacketKind.F.ToString() });
-                }
-            }
+            PopulateVisitKindOptions(countOfVersion4Visits);
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? participationId)
+        public async Task<IActionResult> OnPostAsync(int participationId)
         {
             if (!ModelState.IsValid)
             {
+                Participation = await _participationService.GetById(User.Identity.Name, participationId);
+
+                PopulateVisitKindOptions(Visit.VISITNUM);
+
                 return Page();
             }
 
+            int newId = 0;
             if (Visit != null)
             {
                 Visit.Forms = new List<FormModel>(); // initialize form set
-                await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
+                var newVisit = await _visitService.Add(User.Identity?.Name, Visit.ToEntity());
+                newId = newVisit.Id;
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { Id = newId });
         }
     }
 }

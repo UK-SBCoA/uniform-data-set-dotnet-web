@@ -89,11 +89,77 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REY4INT"),
                     new UIEnableAttribute("C2.REY5REC"),
                     new UIEnableAttribute("C2.REY5INT"),
+                    new UIEnableAttribute("C2.REYBREC"),
+                    new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
-                    new UIEnableAttribute("C2.REY6INT")
+                    new UIEnableAttribute("C2.REY6INT"),
+                    new UIEnableAttribute("C2.REYDREC"),
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
 
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
+            }
+        };
+
+        public UIRangeToggle CERAD1RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERAD1READ"),
+                    new UIEnableAttribute("C2.CERAD1INT"),
+                    new UIEnableAttribute("C2.CERAD2REC"),
+                    new UIEnableAttribute("C2.CERAD2READ"),
+                    new UIEnableAttribute("C2.CERAD2INT"),
+                    new UIEnableAttribute("C2.CERAD3REC"),
+                    new UIEnableAttribute("C2.CERAD3READ"),
+                    new UIEnableAttribute("C2.CERAD3INT"),
+                    new UIEnableAttribute("C2.CERADDTI"),
+                    new UIEnableAttribute("C2.CERADJ6REC"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+                    new UIEnableAttribute("C2.CERADJ7NO")
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            }
+        };
+
+        public UIRangeToggle CERADJ6RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            }
+        };
+
+        public UIRangeToggle CERADJ7YESBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 10,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.CERADJ7NO"),
+                },
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
             }
         };
 
@@ -133,7 +199,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("C2.RESPFATG"),
                     new UIDisableAttribute("C2.RESPEMOT"),
                     new UIDisableAttribute("C2.RESPASST"),
-                    new UIDisableAttribute("C2.RESPOTH")
+                    new UIDisableAttribute("C2.RESPOTH"),
+                    new UIDisableAttribute("C2.RESPOTHX")
                 },
                 InstructionalMessage = "End form here."
             } },
@@ -219,9 +286,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.MOCAREAS"),
                     new UIDisableAttribute("C2.MOCALOC"),
                     new UIDisableAttribute("C2.MOCALAN"),
+                    new UIDisableAttribute("C2.MOCALANX"),
                     new UIDisableAttribute("C2.MOCAVIS"),
                     new UIDisableAttribute("C2.MOCAHEAR"),
                     new UIDisableAttribute("C2.MOCATOTS"),
+                    new UIDisableAttribute("C2.MOCBTOTS"),
                     new UIDisableAttribute("C2.MOCATRAI"),
                     new UIDisableAttribute("C2.MOCACUBE"),
                     new UIDisableAttribute("C2.MOCACLOC"),
@@ -256,6 +325,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.MOCAVIS"),
                     new UIEnableAttribute("C2.MOCAHEAR"),
                     new UIEnableAttribute("C2.MOCATOTS"),
+                    new UIEnableAttribute("C2.MOCBTOTS"),
                     new UIEnableAttribute("C2.MOCATRAI"),
                     new UIEnableAttribute("C2.MOCACUBE"),
                     new UIEnableAttribute("C2.MOCACLOC"),
@@ -330,6 +400,111 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public List<RadioListItem> VERBALTESTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Rey AVLT (COMPLETE SECTIONS 12 & 13, SKIP SECTIONS 14 & 15)", "1"),
+            new RadioListItem("CERAD (SKIP TO SECTION 14)", "2"),
+
+        };
+
+        public List<RadioListItem> VERBALTESTC2TListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Rey AVLT (COMPLETE SECTIONS 6 & 13, SKIP SECTIONS 7 & 9)", "1"),
+            new RadioListItem("CERAD (COMPLETE SECTIONS 7 & 9 SKIP SECTIONS 6 & 13)", "2"),
+
+        };
+
+        public Dictionary<string, UIBehavior> VERBALTESTBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY1REC"),
+                    new UIEnableAttribute("C2.REY1INT"),
+                    new UIEnableAttribute("C2.REY2REC"),
+                    new UIEnableAttribute("C2.REY2INT"),
+                    new UIEnableAttribute("C2.REY3REC"),
+                    new UIEnableAttribute("C2.REY3INT"),
+                    new UIEnableAttribute("C2.REY4REC"),
+                    new UIEnableAttribute("C2.REY4INT"),
+                    new UIEnableAttribute("C2.REY5REC"),
+                    new UIEnableAttribute("C2.REY5INT"),
+                    new UIEnableAttribute("C2.REYBREC"),
+                    new UIEnableAttribute("C2.REYBINT"),
+                    new UIEnableAttribute("C2.REY6REC"),
+                    new UIEnableAttribute("C2.REY6INT"),
+                    new UIEnableAttribute("C2.REYDREC"),
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS"),
+                    new UIDisableAttribute("C2.CERAD1REC"),
+                    new UIDisableAttribute("C2.CERAD1READ"),
+                    new UIDisableAttribute("C2.CERAD1INT"),
+                    new UIDisableAttribute("C2.CERAD2REC"),
+                    new UIDisableAttribute("C2.CERAD2READ"),
+                    new UIDisableAttribute("C2.CERAD2INT"),
+                    new UIDisableAttribute("C2.CERAD3REC"),
+                    new UIDisableAttribute("C2.CERAD3READ"),
+                    new UIDisableAttribute("C2.CERAD3INT"),
+                    new UIDisableAttribute("C2.CERADDTI"),
+                    new UIDisableAttribute("C2.CERADJ6REC"),
+                    new UIDisableAttribute("C2.CERADJ6INT"),
+                    new UIDisableAttribute("C2.CERADJ7YES"),
+                    new UIDisableAttribute("C2.CERADJ7NO")
+                },
+                InstructionalMessage = "Complete sections 12 & 13, skip sections 14 & 15"
+            } },
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("C2.REY1REC"),
+                    new UIDisableAttribute("C2.REY1INT"),
+                    new UIDisableAttribute("C2.REY2REC"),
+                    new UIDisableAttribute("C2.REY2INT"),
+                    new UIDisableAttribute("C2.REY3REC"),
+                    new UIDisableAttribute("C2.REY3INT"),
+                    new UIDisableAttribute("C2.REY4REC"),
+                    new UIDisableAttribute("C2.REY4INT"),
+                    new UIDisableAttribute("C2.REY5REC"),
+                    new UIDisableAttribute("C2.REY5INT"),
+                    new UIDisableAttribute("C2.REYBREC"),
+                    new UIDisableAttribute("C2.REYBINT"),
+                    new UIDisableAttribute("C2.REY6REC"),
+                    new UIDisableAttribute("C2.REY6INT"),
+                    new UIDisableAttribute("C2.REYDREC"),
+                    new UIDisableAttribute("C2.REYDINT"),
+                    new UIDisableAttribute("C2.REYDTI"),
+                    new UIDisableAttribute("C2.REYMETHOD"),
+                    new UIDisableAttribute("C2.REYTCOR"),
+                    new UIDisableAttribute("C2.REYFPOS"),
+                    new UIEnableAttribute("C2.CERAD1REC"),
+                    new UIEnableAttribute("C2.CERAD1READ"),
+                    new UIEnableAttribute("C2.CERAD1INT"),
+                    new UIEnableAttribute("C2.CERAD2REC"),
+                    new UIEnableAttribute("C2.CERAD2READ"),
+                    new UIEnableAttribute("C2.CERAD2INT"),
+                    new UIEnableAttribute("C2.CERAD3REC"),
+                    new UIEnableAttribute("C2.CERAD3READ"),
+                    new UIEnableAttribute("C2.CERAD3INT"),
+                    new UIEnableAttribute("C2.CERADDTI"),
+                    new UIEnableAttribute("C2.CERADJ6REC"),
+                    new UIEnableAttribute("C2.CERADJ6INT"),
+                    new UIEnableAttribute("C2.CERADJ7YES"),
+                    new UIEnableAttribute("C2.CERADJ7NO")
+                },
+                InstructionalMessage = "Skip to section 14"
+            } }
+        };
+
+        public List<RadioListItem> REYMETHODListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("List shown", "1"),
+            new RadioListItem("List read", "2"),
+
+        };
+
         public UIRangeToggle MINTTOTSBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -389,7 +564,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.TRAILARR"),
                     new UIEnableAttribute("C2.TRAILALI")
                 },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 8b."
+                InstructionalMessage = "if test not completed, enter reason code, 995-998, and skip to question 8b."
             }
         };
 
@@ -465,6 +640,29 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return Page();
         }
+        public async Task<IActionResult> OnGetC2Async(int? id)
+        {
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                C2 = (C2)BaseForm; // class library should always handle new instances
+            }
+
+            return Partial("_C2", this);
+        }
+
+        public async Task<IActionResult> OnGetC2TAsync(int? id)
+        {
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                C2 = (C2)BaseForm; // class library should always handle new instances
+            }
+
+            return Partial("_C2T", this);
+        }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
@@ -473,7 +671,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(C2); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id); // checks for validation, etc.          
         }
     }
 }

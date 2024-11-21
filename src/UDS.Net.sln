@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{395296FB-4036-4FC9-A8DC-A50F96D35623}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{EF687CA4-D15B-4E2F-97BA-64AAB218E395}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{963C5DBF-B27F-4273-A4FA-7369A6AE3BA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC.Services.Test", "UDS.Net.Web.MVC.Services.Test\UDS.Net.Web.MVC.Services.Test.csproj", "{7879003A-AF57-4662-A66B-6A33FA09325C}"
 EndProject
@@ -49,10 +49,10 @@ Global
 		{395296FB-4036-4FC9-A8DC-A50F96D35623}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{395296FB-4036-4FC9-A8DC-A50F96D35623}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{395296FB-4036-4FC9-A8DC-A50F96D35623}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF687CA4-D15B-4E2F-97BA-64AAB218E395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF687CA4-D15B-4E2F-97BA-64AAB218E395}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF687CA4-D15B-4E2F-97BA-64AAB218E395}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF687CA4-D15B-4E2F-97BA-64AAB218E395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{963C5DBF-B27F-4273-A4FA-7369A6AE3BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{963C5DBF-B27F-4273-A4FA-7369A6AE3BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{963C5DBF-B27F-4273-A4FA-7369A6AE3BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{963C5DBF-B27F-4273-A4FA-7369A6AE3BA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7879003A-AF57-4662-A66B-6A33FA09325C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7879003A-AF57-4662-A66B-6A33FA09325C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7879003A-AF57-4662-A66B-6A33FA09325C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,6 +65,6 @@ Global
 		SolutionGuid = {3268D734-1592-4E39-88A2-3A53468CC430}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 3.0.0-preview.1
+		version = 4.3.0
 	EndGlobalSection
 EndGlobal

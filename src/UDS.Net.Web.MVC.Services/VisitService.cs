@@ -27,9 +27,9 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Visit> Add(string username, Visit entity)
         {
-            await _apiClient.VisitClient.Post(entity.ToDto());
+            var dto = await _apiClient.VisitClient.Post(entity.ToDto());
 
-            return entity;
+            return dto.ToDomain(username);
         }
 
         public async Task<int> Count(string username)
@@ -62,7 +62,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            var visitDtos = await _apiClient.VisitClient.Get();
+            var visitDtos = await _apiClient.VisitClient.Get(pageSize, pageIndex);
 
             if (visitDtos != null)
             {
@@ -108,6 +108,25 @@ namespace UDS.Net.Web.MVC.Services
         {
             var dto = entity.ToDto(formId);
             return await UpdateVisit(username, dto);
+        }
+
+        public async Task<int> GetNextVisitNumber(string username, int participationId)
+        {
+            var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+            return participation.LastVisitNumber + 1;
+        }
+
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            if (version.Contains("4"))
+            {
+                var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+                return participation.VisitCount;
+            }
+            else
+                throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
         }
     }
 }

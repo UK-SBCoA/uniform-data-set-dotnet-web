@@ -26,6 +26,8 @@ namespace UDS.Net.Forms.Models
         public IList<VisitModel> Visits { get; set; } = new List<VisitModel>();
 
         public int LastVisitNumber { get; set; }
+
+        public string Status { get; set; } = "";
     }
 }
 
