@@ -16,6 +16,7 @@ namespace UDS.Net.Services
 
         Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null);
 
+        Task<int> CountByStatus(string username, string[] statuses = null);
     }
 }
 

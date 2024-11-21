@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Pages.Visits
 
             var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, StatusFilter.StatusList);
 
-            int total = await _visitService.Count(User.Identity.Name);
+            int total = await _visitService.CountByStatus(User.Identity.Name, StatusFilter.StatusList);
 
             Visits = visits.ToVM(pageSize, pageIndex, total, search);
 

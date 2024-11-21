@@ -35,6 +35,11 @@ namespace UDS.Net.Web.MVC.Services
             return await _apiClient.VisitClient.Count();
         }
 
+        public async Task<int> CountByStatus(string username, string[] statuses = null)
+        {
+            return await _apiClient.VisitClient.GetCountOfVisitsAtStatus(statuses);
+        }
+
         public async Task<Visit> GetById(string username, int id)
         {
             var visitDto = await _apiClient.VisitClient.Get(id);
