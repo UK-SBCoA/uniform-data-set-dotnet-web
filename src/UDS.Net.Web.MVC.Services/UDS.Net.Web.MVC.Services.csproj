@@ -4,14 +4,15 @@
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<PackageId>UDS.Net.MVC.Services</PackageId>
-		<Version>4.2.0</Version>
+		<Version>4.3.0</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>Implemented service layer for using MVC front-end with API back-end</Description>
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Implemented service contract</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>4.2.0</ReleaseVersion>
+		<ReleaseVersion>4.3.0</ReleaseVersion>
 	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 		<PackageReference Include="UDS.Net.Dto" Version="4.3.0" />
