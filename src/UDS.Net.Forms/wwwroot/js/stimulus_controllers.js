@@ -5,7 +5,7 @@ import MobileMenu from "./js_controllers/mobilemenu_controller.js"
 import FancyCheckboxes from "./js_controllers/fancycheckboxes_controller.js"
 import CheckboxDisable from "./js_controllers/checkboxDisable_controller.js"
 import selectendpoint_controller from "./js_controllers/selectendpoint_controller.js"
-import StatusFilter from "./js_controllers/status_filter.js"
+import checkboxSelectAll from "./js_controllers/checkboxSelectAll_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -15,4 +15,4 @@ Stimulus.register("mobilemenu", MobileMenu)
 Stimulus.register("fancycheckboxes", FancyCheckboxes)
 Stimulus.register("checkboxDisable", CheckboxDisable)
 Stimulus.register("selectendpoint", selectendpoint_controller)
-Stimulus.register("statusFilter", StatusFilter)
+Stimulus.register("checkboxSelectAll", checkboxSelectAll)
