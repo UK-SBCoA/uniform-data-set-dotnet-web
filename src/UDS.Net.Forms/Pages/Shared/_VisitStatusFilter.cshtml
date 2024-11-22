@@ -1,4 +1,4 @@
-@model StatusFilterModel
+@model List<SelectListItem>
 
 <div data-controller="dropdown">
     <form method="get">
@@ -10,7 +10,7 @@
                         <div class="flex space-x-2">
                             <span class="font-medium text-gray-900">Status</span>
                             <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
-                                @Model.SelectedStatusCount
+                                @Model.Where(l => l.Selected == true).Count()
                             </div>
                         </div>
                         <span>
@@ -30,11 +30,18 @@
                             <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                             <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
                         </div>
-                        @for (int i = 0; i < Model.StatusList.Count(); i++)
+                        @for (int i = 0; i < Model.Count(); i++)
                         {
                             <div class="flex items-center">
-                                <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="Model.StatusList" value="@Model.StatusList[i].Value" type="checkbox" selected="@Model.StatusList[i].Selected" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="StatusList[@i]" class="ml-3 min-w-0 flex-1 text-gray-900">@Model.StatusList[i].Text</label>
+                                @if (Model[i].Selected)
+                                {
+                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="StatusList" value="@Model[i].Value" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                }
+                                else
+                                {
+                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="StatusList" value="@Model[i].Value" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                }
+                                <label for="StatusList[@i]" class="ml-3 min-w-0 flex-1 text-gray-900">@Model[i].Text</label>
                             </div>
                         }
                     </div>

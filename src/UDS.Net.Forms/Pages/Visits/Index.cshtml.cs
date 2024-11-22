@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -14,7 +15,7 @@ namespace UDS.Net.Forms.Pages.Visits
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
         [BindProperty]
-        public StatusFilterModel StatusFilter { get; set; } = new StatusFilterModel();
+        public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>();
 
         public IndexModel(IVisitService visitService)
         {
@@ -23,7 +24,7 @@ namespace UDS.Net.Forms.Pages.Visits
             // sets list of selectitems
             foreach (var status in Enum.GetValues(typeof(PacketStatus)))
             {
-                StatusFilter.StatusList.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                StatusList.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Text = status.ToString(),
                     Value = status.ToString()
@@ -34,9 +35,9 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            if (StatusFilter.SelectedStatusCount == 0)
+            if (StatusList.Where(l => l.Selected == true).Count() == 0)
             {
-                foreach (var status in StatusFilter.StatusList)
+                foreach (var status in StatusList)
                 {
                     if (status.Value == PacketStatus.Pending.ToString())
                         status.Selected = true;
@@ -45,13 +46,13 @@ namespace UDS.Net.Forms.Pages.Visits
                 }
             }
 
-            var selected = StatusFilter.ToArray();
+            var selected = StatusList.Where(s => s.Selected == true).Select(s => s.Value).ToArray();
 
-            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, StatusFilter.ToArray());
+            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, selected);
 
-            int total = await _visitService.CountByStatus(User.Identity.Name, StatusFilter.ToArray());
+            int total = await _visitService.CountByStatus(User.Identity.Name, selected);
 
-            Visits = visits.ToVM(pageSize, pageIndex, total, search, StatusFilter.ToArray());
+            Visits = visits.ToVM(pageSize, pageIndex, total, search, selected);
 
             return Page();
         }
