@@ -11,7 +11,7 @@
                 </div>
                 <div class="hidden lg:ml-10 lg:block">
                     <div class="flex space-x-4">
-                        <partial name="_MainMenuItems" model="@(new MenuItemViewModel())"></partial>
+                        <partial name="_MainMenuItems" model="@(new MenuItemViewModel())" />
                     </div>
                 </div>
             </div>
@@ -20,10 +20,10 @@
             <div class="hidden lg:ml-4 lg:block">
                 <div class="flex items-center">
                     <!--// Notifications dropdown //-->
-                    <partial name="_NotificationsPartial"></partial>
+                    <partial name="_NotificationsPartial" />
 
                     <!--// Profile dropdown //-->
-                    <partial name="_LoginPartial"></partial>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
 
@@ -48,5 +48,5 @@
     </div>
 
     <!--// Mobile menu, show/hide based on menu state. //-->
-    <partial name="_MobileLoginPartial"></partial>
+    <partial name="_MobileLoginPartial" />
 </nav>
