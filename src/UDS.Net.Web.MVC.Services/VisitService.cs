@@ -27,9 +27,9 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Visit> Add(string username, Visit entity)
         {
-            var dto = await _apiClient.VisitClient.Post(entity.ToDto());
+            await _apiClient.VisitClient.Post(entity.ToDto());
 
-            return dto.ToDomain(username);
+            return entity;
         }
 
         public async Task<int> Count(string username)
