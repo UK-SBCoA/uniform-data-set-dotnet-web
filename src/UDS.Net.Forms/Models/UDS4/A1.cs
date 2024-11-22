@@ -364,6 +364,22 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [RequiredOnFinalized(ErrorMessage = "Both question 15(A1.SERVED) and 16(A1.MEDVA) cannot have a value of \"Don't Know\"")]
+        [NotMapped]
+        public bool? ServedAndVaCare
+        {
+            get
+            {
+                if (SERVED == 9 && MEDVA != 9 ||
+                    SERVED == 1 && (MEDVA == 9 || MEDVA == 1 || MEDVA == 0) ||
+                    SERVED == 0 && MEDVA == null)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
