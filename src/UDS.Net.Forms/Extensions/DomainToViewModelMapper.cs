@@ -45,11 +45,6 @@ namespace UDS.Net.Forms.Extensions
                 Search = search,
             };
 
-            if (statuses != null)
-            {
-                visitPaginatedModel.StatusFilter.StatusList = statuses;
-            }
-
             return visitPaginatedModel;
         }
 

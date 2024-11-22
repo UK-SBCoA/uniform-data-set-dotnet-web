@@ -3,7 +3,6 @@
     public class VisitsPaginatedModel : PaginatedModel
     {
         public List<VisitModel> List { get; set; } = new List<VisitModel>();
-        public StatusFilterModel StatusFilter { get; set; } = new StatusFilterModel();
     }
 }
 

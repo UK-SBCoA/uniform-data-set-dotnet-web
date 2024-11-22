@@ -1,4 +1,4 @@
-@model VisitsPaginatedModel
+@model StatusFilterModel
 
 <div data-controller="dropdown">
     <form method="get">
@@ -10,7 +10,7 @@
                         <div class="flex space-x-2">
                             <span class="font-medium text-gray-900">Status</span>
                             <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
-                                @Model.StatusFilter.StatusCount
+                                @Model.SelectedStatusCount
                             </div>
                         </div>
                         <span>
@@ -27,14 +27,14 @@
                 <div class="space-y-5 border border-gray-300 rounded pl-3 py-3">
                     <div data-controller="checkboxSelectAll" class="space-y-3">
                         <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllStatuses">
-                            <input data-checkboxSelectAll-target="toggleAll"  id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                             <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
                         </div>
-                        @foreach (var status in Model.StatusFilter.PacketStatuses)
+                        @for (int i = 0; i < Model.StatusList.Count(); i++)
                         {
                             <div class="flex items-center">
-                                <input data-checkboxSelectAll-target="checkBox" id="status_[@status]" value="@status" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="status_[@status]" class="ml-3 min-w-0 flex-1 text-gray-900">@status</label>
+                                <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="Model.StatusList" value="@Model.StatusList[i].Value" type="checkbox" selected="@Model.StatusList[i].Selected" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                <label for="StatusList[@i]" class="ml-3 min-w-0 flex-1 text-gray-900">@Model.StatusList[i].Text</label>
                             </div>
                         }
                     </div>
@@ -44,5 +44,5 @@
                 </div>
             </div>
         </div>
-     </form>
+    </form>
 </div>
