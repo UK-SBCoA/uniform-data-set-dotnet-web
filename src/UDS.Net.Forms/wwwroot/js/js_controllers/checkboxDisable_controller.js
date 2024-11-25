@@ -54,7 +54,7 @@ export default class extends Controller {
   }
 
   OnLoad() {
-    this.checkboxTriggerTargets.forEach((checkbox) => {
+    for (let checkbox of this.checkboxTriggerTargets) {
       let disableString = checkbox.dataset.checkboxdisableDisableParam
       let group = checkbox.dataset.checkboxdisableGroupParam
 
@@ -68,7 +68,10 @@ export default class extends Controller {
       if (disableString == "true")
         disable = true
 
-      this.ToggleGroup({ params: { group, disable }, currentTarget: checkbox })
-    })
+      if (checkbox.checked) {
+        this.ToggleGroup({ params: { group, disable }, currentTarget: checkbox })
+        break;
+      }
+    }
   }
 }
