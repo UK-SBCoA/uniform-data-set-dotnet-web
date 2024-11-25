@@ -379,7 +379,32 @@ namespace UDS.Net.Forms.Models.UDS4
                 else return null;
             }
         }
-
+        [RequiredOnFinalized(ErrorMessage = "If response 4f is checked then responses 4h and 4i must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritGender
+        {
+            get
+            {
+                if (GENTWOSPIR == true && (GENDKN == true || GENNOANS == true))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+        [RequiredOnFinalized(ErrorMessage = "If response 7a is checked then responses 7f and 7g must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritSexOrientation
+        {
+            get
+            {
+                if (SEXORNTWOS == true && (SEXORNDNK == true || GENNOANS == SEXORNNOAN))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
