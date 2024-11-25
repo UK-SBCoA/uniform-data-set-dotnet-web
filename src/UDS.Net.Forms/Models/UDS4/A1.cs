@@ -398,7 +398,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (SEXORNTWOS == true && (SEXORNDNK == true || GENNOANS == SEXORNNOAN))
+                if (SEXORNTWOS == true && (SEXORNDNK == true || SEXORNNOAN == true))
                 {
                     return null;
                 }
