@@ -33,17 +33,30 @@ namespace UDS.Net.Forms.Pages.Visits
 
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = null)
+        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = null, string[]? statuses = null)
         {
-            if (StatusList.Where(l => l.Selected == true).Count() == 0)
+            //if filter was not previously used, redirect to set query parameters for previous/next buttons partial
+            if (statuses == null)
             {
-                foreach (var status in StatusList)
+                return RedirectToPage("Index", new { statuses = new string[] { "Pending", "Frozen" } });
+            }
+
+            //previous and next buttons will return a single comma delimeted string item in array, seperate and split into statuses
+            if (statuses.Count() == 1)
+            {
+                statuses = statuses[0].Split(',');
+            }
+
+            for (var i = 0; i < StatusList.Count(); i++)
+            {
+                foreach (var status in statuses)
                 {
-                    if (status.Value == PacketStatus.Pending.ToString())
-                        status.Selected = true;
-                    if (status.Value == PacketStatus.FailedErrorChecks.ToString())
-                        status.Selected = true;
+                    if (StatusList[i].Text == status)
+                    {
+                        StatusList[i].Selected = true;
+                    }
                 }
+
             }
 
             var selected = StatusList.Where(s => s.Selected == true).Select(s => s.Value).ToArray();
