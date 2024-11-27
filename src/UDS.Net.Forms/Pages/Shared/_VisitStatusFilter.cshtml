@@ -35,7 +35,7 @@
                             <div class="flex items-center">
                                 @if (Model[i].Selected)
                                 {
-                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="statuses" value="@Model[i].Text" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="statuses" value="@Model[i].Value" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 }
                                 else
                                 {

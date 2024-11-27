@@ -15,6 +15,6 @@
 
 <a asp-page="/Participations/Index" class="@inactiveStyle">Participation</a>
 
-<a asp-page="/Visits/Index" class="@inactiveStyle">Visits</a>
+<a asp-page="/Visits/Index" asp-route-statuses="Pending,FailedErrorChecks" class="@inactiveStyle">Visits</a>
 
 <a asp-page="/Packets/Index" class="@inactiveStyle">Packet submissions</a>

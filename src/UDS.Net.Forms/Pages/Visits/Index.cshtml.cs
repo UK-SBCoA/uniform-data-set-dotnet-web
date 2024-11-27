@@ -33,13 +33,9 @@ namespace UDS.Net.Forms.Pages.Visits
 
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = null, string[]? statuses = null)
+        public async Task<IActionResult> OnGetAsync(string[] statuses, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            //if filter was not previously used, redirect to set query parameters for previous/next buttons partial
-            if (statuses == null)
-            {
-                return RedirectToPage("Index", new { statuses = new string[] { "Pending", "Frozen" } });
-            }
+            if (statuses == null || statuses.Length == 0) throw new ArgumentNullException("statuses route parameter must be provided within a page link to visits index");
 
             //previous and next buttons will return a single comma delimeted string item in array, seperate and split into statuses
             if (statuses.Count() == 1)
