@@ -34,7 +34,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search, string[] statuses)
+        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
         {
             VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
             {

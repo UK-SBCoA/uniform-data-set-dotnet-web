@@ -75,11 +75,11 @@ namespace UDS.Net.Web.MVC.Services
             return new List<Visit>();
         }
 
-        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
+        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] filterItems = null)
         {
-            if (statuses != null)
+            if (filterItems != null)
             {
-                var visitDtos = await _apiClient.VisitClient.GetVisitsAtStatus(statuses, pageSize, pageIndex);
+                var visitDtos = await _apiClient.VisitClient.GetVisitsAtStatus(filterItems, pageSize, pageIndex);
 
                 if (visitDtos != null)
                 {

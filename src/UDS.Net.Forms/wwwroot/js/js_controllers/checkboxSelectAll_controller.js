@@ -21,7 +21,7 @@ export default class extends Controller {
         if (checkboxCount == checkedCount) this.toggleAllTarget.checked = true
     }
 
-    ToggleAllStatuses() {
+    ToggleAllCheckboxes() {
         let checkAll = false
 
         if (this.toggleAllTarget.checked) checkAll = true;

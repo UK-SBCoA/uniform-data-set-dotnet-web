@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -14,54 +13,40 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
-        [BindProperty]
-        public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>();
+        public FilterModel Filter = new FilterModel(Enum.GetValues(typeof(PacketStatus)));
 
         public IndexModel(IVisitService visitService)
         {
             _visitService = visitService;
-
-            // sets list of selectitems
-            foreach (var status in Enum.GetValues(typeof(PacketStatus)))
-            {
-                StatusList.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                {
-                    Text = status.ToString(),
-                    Value = status.ToString()
-                });
-            }
-
         }
 
-        public async Task<IActionResult> OnGetAsync(string[] statuses, int pageSize = 10, int pageIndex = 1, string search = null)
+        public async Task<IActionResult> OnGetAsync(string[] filterItems, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            if (statuses == null || statuses.Length == 0) throw new ArgumentNullException("statuses route parameter must be provided within a page link to visits index");
+            if (filterItems == null || filterItems.Length == 0) throw new ArgumentNullException("filterItems array route parameter must be provided for filter");
 
-            //previous and next buttons will return a single comma delimeted string item in array, seperate and split into statuses
-            if (statuses.Count() == 1)
+            //previous and next buttons will return a single comma delimeted string item in array, seperate and split into filter array
+            if (filterItems.Count() == 1)
             {
-                statuses = statuses[0].Split(',');
+                filterItems = filterItems[0].Split(',');
             }
 
-            for (var i = 0; i < StatusList.Count(); i++)
+            for (var i = 0; i < Filter.FilterList.Count(); i++)
             {
-                foreach (var status in statuses)
+                foreach (var item in filterItems)
                 {
-                    if (StatusList[i].Text == status)
+                    if (Filter.FilterList[i].Text == item)
                     {
-                        StatusList[i].Selected = true;
+                        Filter.FilterList[i].Selected = true;
+                        Filter.SelectedItems.Add(Filter.FilterList[i].Text.ToString());
                     }
                 }
-
             }
 
-            var selected = StatusList.Where(s => s.Selected == true).Select(s => s.Value).ToArray();
+            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
 
-            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, selected);
+            int total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
 
-            int total = await _visitService.CountByStatus(User.Identity.Name, selected);
-
-            Visits = visits.ToVM(pageSize, pageIndex, total, search, selected);
+            Visits = visits.ToVM(pageSize, pageIndex, total, search);
 
             return Page();
         }

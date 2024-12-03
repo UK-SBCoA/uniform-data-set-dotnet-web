@@ -1,4 +1,4 @@
-@model List<SelectListItem>
+@model FilterModel
 
 <div data-controller="dropdown">
     <form method="get">
@@ -10,7 +10,7 @@
                         <div class="flex space-x-2">
                             <span class="font-medium text-gray-900">Status</span>
                             <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
-                                @Model.Where(l => l.Selected == true).Count()
+                                @Model.FilterList.Where(l => l.Selected == true).Count()
                             </div>
                         </div>
                         <span>
@@ -26,22 +26,22 @@
             <div data-dropdown-target="menu" class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
                 <div class="space-y-5 border border-gray-300 rounded pl-3 py-3">
                     <div data-controller="checkboxSelectAll" class="space-y-3">
-                        <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllStatuses">
+                        <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllCheckboxes">
                             <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                             <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
                         </div>
-                        @for (int i = 0; i < Model.Count(); i++)
+                        @for (int i = 0; i < Model.FilterList.Count(); i++)
                         {
                             <div class="flex items-center">
-                                @if (Model[i].Selected)
+                                @if (Model.FilterList[i].Selected)
                                 {
-                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="statuses" value="@Model[i].Value" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filterItems" value="@Model.FilterList[i].Text" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 }
                                 else
                                 {
-                                    <input data-checkboxSelectAll-target="checkBox" id="StatusList[@i]" name="statuses" value="@Model[i].Value" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filterItems" value="@Model.FilterList[i].Text" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 }
-                                <label for="StatusList[@i]" class="ml-3 min-w-0 flex-1 text-gray-900">@Model[i].Text</label>
+                                <label for="FilterList[@i].Text" class="ml-3 min-w-0 flex-1 text-gray-900">@Model.FilterList[i].Text</label>
                             </div>
                         }
                     </div>
