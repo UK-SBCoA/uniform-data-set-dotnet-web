@@ -1281,27 +1281,18 @@ namespace UDS.Net.Forms.Extensions
         {
             return new Filter()
             {
-                FilterList = filter.FilterList.ToDomain(),
+                FilterList = filter.FilterList.Select(f => f.ToDomain()).ToList(),
                 SelectedItems = filter.SelectedItems
             };
         }
 
-        public static List<FilterItem> ToDomain(this List<FilterItemModel> filterList)
+        public static FilterItem ToDomain(this FilterItemModel filterItem)
         {
-            List<FilterItem> filterItems = new List<FilterItem>();
-
-            foreach (var filter in filterList)
+            return new FilterItem()
             {
-                FilterItem filterItem = new FilterItem()
-                {
-                    Text = filter.Text,
-                    Selected = filter.Selected,
-                };
-
-                filterItems.Add(filterItem);
-            }
-
-            return filterItems;
+                Text = filterItem.Text,
+                Selected = filterItem.Selected,
+            };
         }
     }
 }

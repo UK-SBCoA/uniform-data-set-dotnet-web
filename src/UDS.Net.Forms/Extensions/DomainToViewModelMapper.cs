@@ -1606,27 +1606,18 @@ namespace UDS.Net.Forms.Extensions
         {
             return new FilterModel()
             {
-                FilterList = filter.FilterList.ToVM(),
+                FilterList = filter.FilterList.Select(f => f.ToVM()).ToList(),
                 SelectedItems = filter.SelectedItems
             };
         }
 
-        public static List<FilterItemModel> ToVM(this List<FilterItem> filterList)
+        public static FilterItemModel ToVM(this FilterItem filterItem)
         {
-            List<FilterItemModel> filterItems = new List<FilterItemModel>();
-
-            foreach (var filter in filterList)
+            return new FilterItemModel()
             {
-                FilterItemModel filterItem = new FilterItemModel()
-                {
-                    Text = filter.Text,
-                    Selected = filter.Selected,
-                };
-
-                filterItems.Add(filterItem);
-            }
-
-            return filterItems;
+                Text = filterItem.Text,
+                Selected = filterItem.Selected,
+            };
         }
     }
 }
