@@ -1,8 +1,7 @@
-﻿using System.Drawing;
-using UDS.Net.Dto;
-using UDS.Net.Forms.Models;
+﻿using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Filter;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 
@@ -1276,6 +1275,33 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX
             };
+        }
+
+        public static Filter ToDomain(this FilterModel filter)
+        {
+            return new Filter()
+            {
+                FilterList = filter.FilterList.ToDomain(),
+                SelectedItems = filter.SelectedItems
+            };
+        }
+
+        public static List<FilterItem> ToDomain(this List<FilterItemModel> filterList)
+        {
+            List<FilterItem> filterItems = new List<FilterItem>();
+
+            foreach (var filter in filterList)
+            {
+                FilterItem filterItem = new FilterItem()
+                {
+                    Text = filter.Text,
+                    Selected = filter.Selected,
+                };
+
+                filterItems.Add(filterItem);
+            }
+
+            return filterItems;
         }
     }
 }

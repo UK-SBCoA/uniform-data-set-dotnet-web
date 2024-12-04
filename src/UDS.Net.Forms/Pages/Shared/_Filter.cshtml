@@ -35,11 +35,11 @@
                             <div class="flex items-center">
                                 @if (Model.FilterList[i].Selected)
                                 {
-                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filterItems" value="@Model.FilterList[i].Text" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filter" value="@Model.FilterList[i].Text" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 }
                                 else
                                 {
-                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filterItems" value="@Model.FilterList[i].Text" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <input data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filter" value="@Model.FilterList[i].Text" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 }
                                 <label for="FilterList[@i].Text" class="ml-3 min-w-0 flex-1 text-gray-900">@Model.FilterList[i].Text</label>
                             </div>

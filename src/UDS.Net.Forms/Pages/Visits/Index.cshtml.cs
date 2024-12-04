@@ -10,37 +10,24 @@ namespace UDS.Net.Forms.Pages.Visits
     public class IndexModel : PageModel
     {
         private readonly IVisitService _visitService;
+        private readonly IFilterService _filterService;
 
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
+        //Initialize Filter model with a string array of items
+        //test case for manual filter values: new string[] { "FailedErrorChecks", "test1", "test2" }
         public FilterModel Filter = new FilterModel(Enum.GetValues(typeof(PacketStatus)));
 
-        public IndexModel(IVisitService visitService)
+        public IndexModel(IVisitService visitService, IFilterService filterService)
         {
             _visitService = visitService;
+            _filterService = filterService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string[] filterItems, int pageSize = 10, int pageIndex = 1, string search = null)
+        public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            if (filterItems == null || filterItems.Length == 0) throw new ArgumentNullException("filterItems array route parameter must be provided for filter");
-
-            //previous and next buttons will return a single comma delimeted string item in array, seperate and split into filter array
-            if (filterItems.Count() == 1)
-            {
-                filterItems = filterItems[0].Split(',');
-            }
-
-            for (var i = 0; i < Filter.FilterList.Count(); i++)
-            {
-                foreach (var item in filterItems)
-                {
-                    if (Filter.FilterList[i].Text == item)
-                    {
-                        Filter.FilterList[i].Selected = true;
-                        Filter.SelectedItems.Add(Filter.FilterList[i].Text.ToString());
-                    }
-                }
-            }
+            //Modify filter property with filter service
+            Filter = _filterService.SetFilterData(filter, Filter.ToDomain()).ToVM();
 
             var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
 

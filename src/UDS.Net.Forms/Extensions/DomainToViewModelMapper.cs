@@ -1,6 +1,7 @@
 ﻿using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Filter;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.LookupModels;
@@ -1599,6 +1600,33 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGX = fields.OTHCOGX
 
             };
+        }
+
+        public static FilterModel ToVM(this Filter filter)
+        {
+            return new FilterModel()
+            {
+                FilterList = filter.FilterList.ToVM(),
+                SelectedItems = filter.SelectedItems
+            };
+        }
+
+        public static List<FilterItemModel> ToVM(this List<FilterItem> filterList)
+        {
+            List<FilterItemModel> filterItems = new List<FilterItemModel>();
+
+            foreach (var filter in filterList)
+            {
+                FilterItemModel filterItem = new FilterItemModel()
+                {
+                    Text = filter.Text,
+                    Selected = filter.Selected,
+                };
+
+                filterItems.Add(filterItem);
+            }
+
+            return filterItems;
         }
     }
 }

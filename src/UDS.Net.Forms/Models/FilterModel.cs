@@ -1,23 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace UDS.Net.Forms.Models
+﻿namespace UDS.Net.Forms.Models
 {
     public class FilterModel
     {
-        public List<SelectListItem> FilterList { get; set; } = new List<SelectListItem>();
+        public List<FilterItemModel> FilterList { get; set; } = new List<FilterItemModel>();
         public List<string> SelectedItems { get; set; } = new List<string>();
 
-        public FilterModel(Array items)
+        public FilterModel(Array? items = null)
         {
-            if (items.Length > 0)
+            // Allowing null items default for use with the mapper extensions.
+            // Mapper functions MUST be able to create a new object without values
+            if (items != null)
             {
-                foreach (var item in items)
+                if (items.Length > 0)
                 {
-                    FilterList.Add(new SelectListItem
+                    foreach (var item in items)
                     {
-                        Text = item.ToString(),
-                        Selected = false
-                    });
+                        FilterList.Add(new FilterItemModel
+                        {
+                            Text = item.ToString(),
+                            Selected = false
+                        });
+                    }
                 }
             }
         }
