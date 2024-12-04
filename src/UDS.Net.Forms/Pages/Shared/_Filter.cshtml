@@ -28,7 +28,7 @@
                     <div data-controller="checkboxSelectAll" class="space-y-3">
                         <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllCheckboxes">
                             <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                            <label data-checkboxSelectAll-target="toggleAllLabel" for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
+                            <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
                         </div>
                         @for (int i = 0; i < Model.FilterList.Count(); i++)
                         {
