@@ -8,7 +8,7 @@ export default class extends Controller {
     }
 
     SetToggleAllCheckbox() {
-        //if all checkboxes are checked, check will be checked runs once on connect
+        //if all checkboxes are checked, check will be checked. Runs once on connect
         let checkboxCount = this.checkBoxTargets.length;
         let checkedCount = 0;
 

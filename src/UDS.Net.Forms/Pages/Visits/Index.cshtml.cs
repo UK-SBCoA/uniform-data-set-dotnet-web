@@ -15,7 +15,6 @@ namespace UDS.Net.Forms.Pages.Visits
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
         //Initialize Filter model with a string array of items
-        //test case for manual filter values: new string[] { "FailedErrorChecks", "test1", "test2" }
         public FilterModel Filter = new FilterModel(Enum.GetValues(typeof(PacketStatus)));
 
         public IndexModel(IVisitService visitService, IFilterService filterService)

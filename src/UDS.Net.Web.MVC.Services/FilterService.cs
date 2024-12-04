@@ -21,7 +21,7 @@ namespace UDS.Net.Web.MVC.Services
             }
 
             //can be sent a single comma delimeted string item in filterQuery and an array
-            //If it is a delimeted string, seperate into array
+            //If it is a delimeted string, seperate into array. asp-routes will provide comma delimeted string
             if (filterQuery.Count() == 1)
             {
                 filterQuery = filterQuery[0].Split(',');
