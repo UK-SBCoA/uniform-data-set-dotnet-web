@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -17,6 +9,8 @@ namespace UDS.Net.Forms.Pages.UDS4
 {
     public class A1Model : FormPageModel
     {
+        protected readonly ILookupService _lookupService;
+
         [BindProperty]
         public A1 A1 { get; set; } = default!;
 
@@ -416,9 +410,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A1Model(IVisitService visitService) : base(visitService, "A1")
+        public A1Model(IVisitService visitService, ILookupService lookupService) : base(visitService, "A1")
         {
+            _lookupService = lookupService;
         }
+
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -437,6 +434,12 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A1; // reassign bounded and derived form to base form for base method
 
+            var countryCode = await _lookupService.LookupCountryCode(A1.CHLDHDCTRY);
+
+            if(countryCode.Error != null)
+            {
+                ModelState.AddModelError(A1.CHLDHDCTRY,$"The country code {A1.CHLDHDCTRY} entered for question 2 is invalid.");
+            }
             Visit.Forms.Add(A1); // visit needs updated form as well
 
             return await base.OnPostAsync(id); // checks for validation, etc.

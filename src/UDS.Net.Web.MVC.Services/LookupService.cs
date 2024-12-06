@@ -3,12 +3,11 @@ using System;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
-using UDS.Net.Services.Extensions;
-using UDS.Net.Services.DomainModels;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -58,6 +57,21 @@ namespace UDS.Net.Web.MVC.Services
                     IsPopular = r.IsPopular,
                     IsOverTheCounter = r.IsOverTheCounter
                 }).ToList()
+            };
+        }
+
+        public async Task<LookupCountryCodeDto> LookupCountryCode(string countryCode)
+        {
+            var dto = await _apiClient.LookupClient.LookupCountryCode(countryCode);
+         
+            return new LookupCountryCodeDto
+            {
+                Id = dto.Id,
+                Code = dto.Code,
+                Country = dto.Country,
+                IsActive = dto.IsActive,
+                ReasonChangedCode = dto.ReasonChangedCode,
+                Error = dto.Error
             };
         }
 
