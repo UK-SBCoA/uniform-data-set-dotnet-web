@@ -1,6 +1,4 @@
-﻿using System;
-using UDS.Net.Dto;
-using UDS.Net.Services;
+﻿using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Tests.Services
@@ -82,6 +80,16 @@ namespace UDS.Net.Forms.Tests.Services
         }
 
         public Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> CountByStatus(string username, string[] statuses = null)
         {
             throw new NotImplementedException();
         }

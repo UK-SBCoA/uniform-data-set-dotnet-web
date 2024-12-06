@@ -1,10 +1,9 @@
-﻿using System.Drawing;
-using UDS.Net.Forms.Models;
+﻿using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Filter;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
@@ -38,14 +37,16 @@ namespace UDS.Net.Forms.Extensions
 
         public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
         {
-            return new VisitsPaginatedModel
+            VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
             {
                 List = visits.Select(v => v.ToVM()).ToList(),
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 Total = total,
-                Search = search
+                Search = search,
             };
+
+            return visitPaginatedModel;
         }
 
         public static List<VisitModel> ToVM(this IList<Visit> visits)
@@ -1598,6 +1599,24 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
 
+            };
+        }
+
+        public static FilterModel ToVM(this Filter filter)
+        {
+            return new FilterModel()
+            {
+                FilterList = filter.FilterList.Select(f => f.ToVM()).ToList(),
+                SelectedItems = filter.SelectedItems
+            };
+        }
+
+        public static FilterItemModel ToVM(this FilterItem filterItem)
+        {
+            return new FilterItemModel()
+            {
+                Text = filterItem.Text,
+                Selected = filterItem.Selected,
             };
         }
     }
