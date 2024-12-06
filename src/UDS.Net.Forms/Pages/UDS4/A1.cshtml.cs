@@ -4,6 +4,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -434,12 +435,19 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A1; // reassign bounded and derived form to base form for base method
 
-            var countryCode = await _lookupService.LookupCountryCode(A1.CHLDHDCTRY);
-
-            if(countryCode.Error != null)
+            if (BaseForm.Status == FormStatus.Finalized)
             {
-                ModelState.AddModelError(A1.CHLDHDCTRY,$"The country code {A1.CHLDHDCTRY} entered for question 2 is invalid.");
+                if (A1.CHLDHDCTRY != null)
+                {
+                    var countryCode = await _lookupService.LookupCountryCode(A1.CHLDHDCTRY);
+
+                    if (countryCode.Code == null)
+                    {
+                        ModelState.AddModelError(A1.CHLDHDCTRY, $"The country code \"{A1.CHLDHDCTRY}\" entered for question 2 ('CHLDHDCTRY') is invalid.");
+                    }
+                }
             }
+
             Visit.Forms.Add(A1); // visit needs updated form as well
 
             return await base.OnPostAsync(id); // checks for validation, etc.
