@@ -13,8 +13,8 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
-        //Initialize Filter model with a string array of items
-        public FilterModel Filter = new FilterModel(Enum.GetValues(typeof(PacketStatus)));
+        //Create pageModel filter property to apply values to
+        public FilterModel Filter;
 
         public IndexModel(IVisitService visitService)
         {
@@ -23,8 +23,8 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            //Modify filter property with filter service
-            Filter = new FilterModel(Filter.FilterList, filter.ToList());
+            //set Filter property to new filter with supplied array items and filter query
+            Filter = new FilterModel(Enum.GetValues(typeof(PacketStatus)), filter.ToList());
 
             var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
 
