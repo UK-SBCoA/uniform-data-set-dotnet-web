@@ -34,7 +34,6 @@ builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
 builder.Services.AddSingleton<ILookupService, LookupService>();
 builder.Services.AddSingleton<IPacketService, PacketService>();
-builder.Services.AddSingleton<IFilterService, FilterService>();
 
 ////*************************************************************************************************
 
