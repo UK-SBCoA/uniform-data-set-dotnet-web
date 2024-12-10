@@ -443,7 +443,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                     if (countryCode.Code == null)
                     {
-                        ModelState.AddModelError(A1.CHLDHDCTRY, $"The country code \"{A1.CHLDHDCTRY}\" entered for question 2 ('CHLDHDCTRY') is invalid.");
+                        ModelState.AddModelError("A1.CHLDHDCTRY", $"The country code \"{A1.CHLDHDCTRY}\" entered for question 2 ('CHLDHDCTRY') is invalid.");
                     }
                 }
             }
