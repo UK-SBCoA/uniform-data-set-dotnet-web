@@ -431,6 +431,20 @@ namespace UDS.Net.Forms.Models.UDS4
                 else return true;
             }
         }
+
+        [RequiredOnFinalized(ErrorMessage = "If question 16 ('MEDVA') is marked as 'Yes' then question 15 ('SERVED') cannot equal 'Don't Know'")]
+        [NotMapped]
+        public bool? VAMedCare
+        {
+            get
+            {
+                if (MEDVA == 1 && SERVED == 9)
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
