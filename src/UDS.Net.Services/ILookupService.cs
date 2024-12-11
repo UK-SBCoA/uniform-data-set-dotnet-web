@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UDS.Net.Dto;
 using UDS.Net.Services.LookupModels;
 

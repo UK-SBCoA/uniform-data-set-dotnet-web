@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
-using Microsoft.AspNetCore.Mvc;
 
 namespace UDS.Net.Web.MVC.Services
 {
