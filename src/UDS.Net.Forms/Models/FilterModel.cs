@@ -6,13 +6,20 @@
         public List<string> SelectedItems { get; set; } = new List<string>();
 
         //Constructor for creating a new filterModel using existing FilterModel data
-        public FilterModel(Array items, List<string>? selectedItems = null)
+        public FilterModel(List<string> items, List<string>? selectedItems = null)
         {
+            //if selected items is not provided, turn it into an empty list. 
+            //providing an empty selectedItems argument is NOT a null argument
+            if (selectedItems == null)
+            {
+                selectedItems = new List<string>();
+            }
+
             List<FilterItemModel> itemsList = new List<FilterItemModel>();
 
             foreach (var item in items)
             {
-                string newFilterItemText = item.ToString();
+                string newFilterItemText = item;
 
                 itemsList.Add(new FilterItemModel
                 {
@@ -21,8 +28,8 @@
                 });
             }
 
-            //if filterQuery is null, then select all filter options and end method
-            if (selectedItems == null || selectedItems.Count == 0)
+            //if selectedItems is null, then add all items to selectedItems list
+            if (selectedItems.Count == 0)
             {
                 foreach (var item in itemsList)
                 {
@@ -37,6 +44,7 @@
                 selectedItems = selectedItems[0].Split(',').ToList();
             }
 
+            //set selected true in itemsList if item is in selectedItems
             for (var i = 0; i < itemsList.Count(); i++)
             {
                 foreach (var item in selectedItems)

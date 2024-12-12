@@ -2,7 +2,7 @@
 {
     public class FilterItemModel
     {
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
         public bool Selected { get; set; }
     }
 }
