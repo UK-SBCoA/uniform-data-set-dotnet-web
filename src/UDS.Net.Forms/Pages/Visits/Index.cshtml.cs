@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Pages.Visits
         public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = null)
         {
             //set Filter property to new filter with supplied array items and filter query
-            Filter = new FilterModel([.. Enum.GetNames(typeof(PacketStatus))], filter.ToList());
+            Filter = new FilterModel([.. Enum.GetNames(typeof(PacketStatus))], [.. filter]);
 
             var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
 

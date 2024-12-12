@@ -23,7 +23,7 @@
 
                 itemsList.Add(new FilterItemModel
                 {
-                    Text = newFilterItemText,
+                    Text = newFilterItemText != null ? newFilterItemText : "Item",
                     Selected = false
                 });
             }
