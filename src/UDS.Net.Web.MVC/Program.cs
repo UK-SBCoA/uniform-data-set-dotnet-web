@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
+using System.Diagnostics;
 using UDS.Net.API.Client;
 using UDS.Net.Services;
 using UDS.Net.Web.MVC.Data;
 using UDS.Net.Web.MVC.Services;
-using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
-using Microsoft.Extensions.FileProviders;
-using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -28,9 +28,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddUDSApiClient(configuration.GetValue<string>("DownstreamApis:UDSNetApi:BaseUrl"));
 
+var adrcId = configuration.GetValue<string>("ADRC:Id");
+
 builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
 builder.Services.AddSingleton<ILookupService, LookupService>();
+builder.Services.AddSingleton<IPacketService, PacketService>();
 
 ////*************************************************************************************************
 

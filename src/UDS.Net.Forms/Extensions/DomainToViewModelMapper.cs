@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using UDS.Net.Forms.Models;
+﻿using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.Enums;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
@@ -30,8 +29,23 @@ namespace UDS.Net.Forms.Extensions
                 LegacyId = participation.LegacyId,
                 VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
                 Visits = participation.Visits.ToVM(),
-                LastVisitNumber = participation.LastVisitNumber
+                LastVisitNumber = participation.LastVisitNumber,
+                Status = participation.Status
             };
+        }
+
+        public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
+        {
+            VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
+            {
+                List = visits.Select(v => v.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search,
+            };
+
+            return visitPaginatedModel;
         }
 
         public static List<VisitModel> ToVM(this IList<Visit> visits)
@@ -48,7 +62,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static VisitModel ToVM(this Visit visit)
         {
-            return new VisitModel()
+            var vm = new VisitModel()
             {
                 Id = visit.Id,
                 ParticipationId = visit.ParticipationId,
@@ -57,12 +71,122 @@ namespace UDS.Net.Forms.Extensions
                 FORMVER = visit.FORMVER,
                 VISIT_DATE = visit.VISIT_DATE,
                 INITIALS = visit.INITIALS,
+                Status = visit.Status,
                 CreatedAt = visit.CreatedAt,
                 CreatedBy = visit.CreatedBy,
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
-                Forms = visit.Forms.ToVM()
+                CanBeFinalized = visit.IsFinalizable,
+                Forms = visit.Forms.ToVM(),
+                TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
+            };
+
+            if (visit.UnresolvedErrors != null)
+                vm.UnresolvedErrors = visit.UnresolvedErrors.ToVM();
+
+            return vm;
+        }
+
+        public static PacketsPaginatedModel ToVM(this IEnumerable<Packet> packets, int pageSize, int pageIndex, int total, string search)
+        {
+            return new PacketsPaginatedModel
+            {
+                List = packets.Select(p => p.ToVM()).ToList(),
+                PageSize = pageSize,
+                PageIndex = pageIndex,
+                Total = total,
+                Search = search
+            };
+        }
+
+
+        public static PacketModel ToVM(this Packet packet)
+        {
+            return new PacketModel()
+            {
+                Id = packet.Id,
+                ParticipationId = packet.ParticipationId,
+                VISITNUM = packet.VISITNUM,
+                PACKET = packet.PACKET,
+                FORMVER = packet.FORMVER,
+                VISIT_DATE = packet.VISIT_DATE,
+                INITIALS = packet.INITIALS,
+                Status = packet.Status,
+                CreatedAt = packet.CreatedAt,
+                CreatedBy = packet.CreatedBy,
+                ModifiedBy = packet.ModifiedBy,
+                DeletedBy = packet.DeletedBy,
+                IsDeleted = packet.IsDeleted,
+                CanBeFinalized = packet.IsFinalizable,
+                Forms = packet.Forms.ToVM(),
+                PacketSubmissions = packet.Submissions.ToVM()
+            };
+        }
+
+        public static List<PacketSubmissionModel> ToVM(this IReadOnlyList<PacketSubmission> packetSubmissions)
+        {
+            List<PacketSubmissionModel> vm = new List<PacketSubmissionModel>();
+
+            if (packetSubmissions != null && packetSubmissions.Count() > 0)
+                vm = packetSubmissions.Select(p => p.ToVM()).ToList();
+
+            return vm;
+        }
+
+        public static PacketSubmissionModel ToVM(this PacketSubmission packetSubmission)
+        {
+            PacketSubmissionModel vm = new PacketSubmissionModel();
+
+            if (packetSubmission != null)
+            {
+                vm.Id = packetSubmission.Id;
+                vm.SubmissionDate = packetSubmission.SubmissionDate;
+                vm.CreatedAt = packetSubmission.CreatedAt;
+                vm.CreatedBy = packetSubmission.CreatedBy;
+                vm.ModifiedBy = packetSubmission.ModifiedBy;
+                vm.ErrorCount = packetSubmission.ErrorCount;
+
+                if (packetSubmission.Errors != null)
+                {
+                    vm.Errors = packetSubmission.Errors.ToVM();
+                }
+            }
+
+            return vm;
+        }
+
+        public static List<PacketSubmissionErrorModel> ToVM(this IList<PacketSubmissionError> packetSubmissionErrors)
+        {
+            List<PacketSubmissionErrorModel> vm = new List<PacketSubmissionErrorModel>();
+
+            if (packetSubmissionErrors != null)
+            {
+                foreach (var error in packetSubmissionErrors)
+                {
+                    vm.Add(error.ToVM());
+                }
+            }
+
+            return vm;
+        }
+
+        public static PacketSubmissionErrorModel ToVM(this PacketSubmissionError packetSubmissionError)
+        {
+            return new PacketSubmissionErrorModel
+            {
+                Id = packetSubmissionError.Id,
+                PacketSubmissionId = packetSubmissionError.PacketSubmissionId,
+                FormKind = packetSubmissionError.FormKind,
+                Message = packetSubmissionError.Message,
+                AssignedTo = packetSubmissionError.AssignedTo,
+                Level = packetSubmissionError.Level,
+                ResolvedBy = packetSubmissionError.ResolvedBy,
+                CreatedBy = packetSubmissionError.CreatedBy,
+                CreatedAt = packetSubmissionError.CreatedAt,
+                ModifiedBy = packetSubmissionError.ModifiedBy,
+                DeletedBy = packetSubmissionError.DeletedBy,
+                IsDeleted = packetSubmissionError.IsDeleted
             };
         }
 
@@ -106,6 +230,7 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
+                MILESTONETYPE = milestone.MILESTONETYPE
             };
         }
 
@@ -147,6 +272,12 @@ namespace UDS.Net.Forms.Extensions
             vm.ModifiedBy = form.ModifiedBy;
             vm.DeletedBy = form.DeletedBy;
             vm.IsDeleted = form.IsDeleted;
+
+            if (form.UnresolvedErrors != null && form.UnresolvedErrors.Count() > 0)
+            {
+                vm.UnresolvedErrors = form.UnresolvedErrors.ToVM();
+                vm.UnresolvedErrorCount = form.UnresolvedErrors.Count();
+            }
         }
 
         public static FormModel ToVM(this Form form)
@@ -181,10 +312,6 @@ namespace UDS.Net.Forms.Extensions
                 else if (form.Fields is A4aFormFields)
                 {
                     vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A5FormFields)
-                {
-                    vm = ((A5FormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A5D2FormFields)
                 {
@@ -222,10 +349,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((B9FormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is C1FormFields)
-                {
-                    vm = ((C1FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is C2FormFields)
                 {
                     vm = ((C2FormFields)form.Fields).ToVM(form.Id);
@@ -237,14 +360,6 @@ namespace UDS.Net.Forms.Extensions
                 else if (form.Fields is D1bFormFields)
                 {
                     vm = ((D1bFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is D2FormFields)
-                {
-                    vm = ((D2FormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is T1FormFields)
-                {
-                    vm = ((T1FormFields)form.Fields).ToVM(form.Id);
                 }
             }
 
@@ -270,7 +385,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHENGLISH = fields.ETHENGLISH.HasValue ? fields.ETHENGLISH.Value != 0 : false,
                 ETHITALIAN = fields.ETHITALIAN.HasValue ? fields.ETHITALIAN.Value != 0 : false,
                 ETHPOLISH = fields.ETHPOLISH.HasValue ? fields.ETHPOLISH.Value != 0 : false,
-                ETHFRENCH = fields.ETHFRENCH.HasValue ? fields.ETHFRENCH.Value != 0 : false,
+                ETHSCOTT = fields.ETHSCOTT.HasValue ? fields.ETHSCOTT.Value != 0 : false,
                 ETHWHIOTH = fields.ETHWHIOTH.HasValue ? fields.ETHWHIOTH.Value != 0 : false,
                 ETHWHIOTHX = fields.ETHWHIOTHX,
                 ETHISPANIC = fields.ETHISPANIC.HasValue ? fields.ETHISPANIC.Value != 0 : false,
@@ -279,7 +394,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHCUBAN = fields.ETHCUBAN.HasValue ? fields.ETHCUBAN.Value != 0 : false,
                 ETHSALVA = fields.ETHSALVA.HasValue ? fields.ETHSALVA.Value != 0 : false,
                 ETHDOMIN = fields.ETHDOMIN.HasValue ? fields.ETHDOMIN.Value != 0 : false,
-                ETHCOLOM = fields.ETHCOLOM.HasValue ? fields.ETHCOLOM.Value != 0 : false,
+                ETHGUATEM = fields.ETHGUATEM.HasValue ? fields.ETHGUATEM.Value != 0 : false,
                 ETHHISOTH = fields.ETHHISOTH.HasValue ? fields.ETHHISOTH.Value != 0 : false,
                 ETHHISOTHX = fields.ETHHISOTHX,
                 RACEBLACK = fields.RACEBLACK.HasValue ? fields.RACEBLACK.Value != 0 : false,
@@ -307,7 +422,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHIRAN = fields.ETHIRAN.HasValue ? fields.ETHIRAN.Value != 0 : false,
                 ETHEGYPT = fields.ETHEGYPT.HasValue ? fields.ETHEGYPT.Value != 0 : false,
                 ETHSYRIA = fields.ETHSYRIA.HasValue ? fields.ETHSYRIA.Value != 0 : false,
-                ETHMOROCCO = fields.ETHMOROCCO.HasValue ? fields.ETHMOROCCO.Value != 0 : false,
+                ETHIRAQI = fields.ETHIRAQI.HasValue ? fields.ETHIRAQI.Value != 0 : false,
                 ETHISRAEL = fields.ETHISRAEL.HasValue ? fields.ETHISRAEL.Value != 0 : false,
                 ETHMENAOTH = fields.ETHMENAOTH.HasValue ? fields.ETHMENAOTH.Value != 0 : false,
                 ETHMENAOTX = fields.ETHMENAOTX,
@@ -611,87 +726,6 @@ namespace UDS.Net.Forms.Extensions
                 ENDYEAR = fields.ENDYEAR,
                 CARETRIAL = fields.CARETRIAL,
                 TRIALGRP = fields.TRIALGRP
-            };
-        }
-
-
-
-        public static A5 ToVM(this A5FormFields fields, int formId)
-        {
-            return new A5()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                TOBAC30 = fields.TOBAC30,
-                TOBAC100 = fields.TOBAC100,
-                SMOKYRS = fields.SMOKYRS,
-                PACKSPER = fields.PACKSPER,
-                QUITSMOK = fields.QUITSMOK,
-                ALCOCCAS = fields.ALCOCCAS,
-                ALCFREQ = fields.ALCFREQ,
-                CVHATT = fields.CVHATT,
-                HATTMULT = fields.HATTMULT,
-                HATTYEAR = fields.HATTYEAR,
-                CVAFIB = fields.CVAFIB,
-                CVANGIO = fields.CVANGIO,
-                CVBYPASS = fields.CVBYPASS,
-                CVPACDEF = fields.CVPACDEF,
-                CVCHF = fields.CVCHF,
-                CVANGINA = fields.CVANGINA,
-                CVHVALVE = fields.CVHVALVE,
-                CVOTHR = fields.CVOTHR,
-                CVOTHRX = fields.CVOTHRX,
-                CBSTROKE = fields.CBSTROKE,
-                STROKMUL = fields.STROKMUL,
-                STROKYR = fields.STROKYR,
-                CBTIA = fields.CBTIA,
-                TIAMULT = fields.TIAMULT,
-                TIAYEAR = fields.TIAYEAR,
-                PD = fields.PD,
-                PDYR = fields.PDYR,
-                PDOTHR = fields.PDOTHR,
-                PDOTHRYR = fields.PDOTHRYR,
-                SEIZURES = fields.SEIZURES,
-                TBI = fields.TBI,
-                TBIBRIEF = fields.TBIBRIEF,
-                TBIEXTEN = fields.TBIEXTEN,
-                TBIWOLOS = fields.TBIWOLOS,
-                TBIYEAR = fields.TBIYEAR,
-                DIABETES = fields.DIABETES,
-                DIABTYPE = fields.DIABTYPE,
-                HYPERTEN = fields.HYPERTEN,
-                HYPERCHO = fields.HYPERCHO,
-                B12DEF = fields.B12DEF,
-                THYROID = fields.THYROID,
-                ARTHRIT = fields.ARTHRIT,
-                ARTHTYPE = fields.ARTHTYPE,
-                ARTHTYPX = fields.ARTHTYPX,
-                ARTHUPEX = fields.ARTHUPEX.HasValue ? fields.ARTHUPEX.Value != 0 : false,
-                ARTHLOEX = fields.ARTHLOEX.HasValue ? fields.ARTHLOEX.Value != 0 : false,
-                ARTHSPIN = fields.ARTHSPIN.HasValue ? fields.ARTHSPIN.Value != 0 : false,
-                ARTHUNK = fields.ARTHUNK.HasValue ? fields.ARTHUNK.Value != 0 : false,
-                INCONTU = fields.INCONTU,
-                INCONTF = fields.INCONTF,
-                APNEA = fields.APNEA,
-                RBD = fields.RBD,
-                INSOMN = fields.INSOMN,
-                OTHSLEEP = fields.OTHSLEEP,
-                OTHSLEEX = fields.OTHSLEEX,
-                ALCOHOL = fields.ALCOHOL,
-                ABUSOTHR = fields.ABUSOTHR,
-                ABUSX = fields.ABUSX,
-                PTSD = fields.PTSD,
-                BIPOLAR = fields.BIPOLAR,
-                SCHIZ = fields.SCHIZ,
-                DEP2YRS = fields.DEP2YRS,
-                DEPOTHR = fields.DEPOTHR,
-                ANXIETY = fields.ANXIETY,
-                OCD = fields.OCD,
-                NPSYDEV = fields.NPSYDEV,
-                PSYCDIS = fields.PSYCDIS,
-                PSYCDISX = fields.PSYCDISX
             };
         }
 
@@ -1206,61 +1240,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static C1 ToVM(this C1FormFields fields, int formId)
-        {
-            return new C1()
-            {
-                Id = formId,
-                MMSECOMP = fields.MMSECOMP,
-                MMSEREAS = fields.MMSEREAS,
-                MMSELOC = fields.MMSELOC,
-                MMSELAN = fields.MMSELAN,
-                MMSELANX = fields.MMSELANX,
-                MMSEVIS = fields.MMSEVIS,
-                MMSEHEAR = fields.MMSEHEAR,
-                MMSEORDA = fields.MMSEORDA,
-                MMSEORLO = fields.MMSEORLO,
-                PENTAGON = fields.PENTAGON,
-                MMSE = fields.MMSE,
-                NPSYCLOC = fields.NPSYCLOC,
-                NPSYLAN = fields.NPSYLAN,
-                NPSYLANX = fields.NPSYLANX,
-                LOGIMO = fields.LOGIMO,
-                LOGIDAY = fields.LOGIDAY,
-                LOGIYR = fields.LOGIYR,
-                LOGIPREV = fields.LOGIPREV,
-                LOGIMEM = fields.LOGIMEM,
-                UDSBENTC = fields.UDSBENTC,
-                DIGIF = fields.DIGIF,
-                DIGIFLEN = fields.DIGIFLEN,
-                DIGIB = fields.DIGIB,
-                DIGIBLEN = fields.DIGIBLEN,
-                ANIMALS = fields.ANIMALS,
-                VEG = fields.VEG,
-                TRAILA = fields.TRAILA,
-                TRAILARR = fields.TRAILARR,
-                TRAILALI = fields.TRAILALI,
-                TRAILB = fields.TRAILB,
-                TRAILBRR = fields.TRAILBRR,
-                TRAILBLI = fields.TRAILBLI,
-                MEMUNITS = fields.MEMUNITS,
-                MEMTIME = fields.MEMTIME,
-                UDSBENTD = fields.UDSBENTD,
-                UDSBENRS = fields.UDSBENRS,
-                BOSTON = fields.BOSTON,
-                UDSVERFC = fields.UDSVERFC,
-                UDSVERFN = fields.UDSVERFN,
-                UDSVERNF = fields.UDSVERNF,
-                UDSVERLC = fields.UDSVERLC,
-                UDSVERLR = fields.UDSVERLR,
-                UDSVERLN = fields.UDSVERLN,
-                UDSVERTN = fields.UDSVERTN,
-                UDSVERTE = fields.UDSVERTE,
-                UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
-            };
-        }
-
         public static C2 ToVM(this C2FormFields fields, int formId)
         {
             return new C2()
@@ -1278,6 +1257,7 @@ namespace UDS.Net.Forms.Extensions
                 MOCAVIS = fields.MOCAVIS,
                 MOCAHEAR = fields.MOCAHEAR,
                 MOCATOTS = fields.MOCATOTS,
+                MOCBTOTS = fields.MOCBTOTS,
                 MOCATRAI = fields.MOCATRAI,
                 MOCACUBE = fields.MOCACUBE,
                 MOCACLOC = fields.MOCACLOC,
@@ -1339,6 +1319,7 @@ namespace UDS.Net.Forms.Extensions
                 UDSVERTN = fields.UDSVERTN,
                 UDSVERTE = fields.UDSVERTE,
                 UDSVERTI = fields.UDSVERTI,
+                VERBALTEST = fields.VERBALTEST,
                 COGSTAT = fields.COGSTAT,
                 REY1REC = fields.REY1REC,
                 REY1INT = fields.REY1INT,
@@ -1350,18 +1331,36 @@ namespace UDS.Net.Forms.Extensions
                 REY4INT = fields.REY4INT,
                 REY5REC = fields.REY5REC,
                 REY5INT = fields.REY5INT,
+                REYBREC = fields.REYBREC,
+                REYBINT = fields.REYBINT,
                 REY6REC = fields.REY6REC,
                 REY6INT = fields.REY6INT,
+                REYDREC = fields.REYDREC,
+                REYDINT = fields.REYDINT,
+                REYDTI = fields.REYDTI,
+                REYMETHOD = fields.REYMETHOD,
+                REYTCOR = fields.REYTCOR,
+                REYFPOS = fields.REYFPOS,
+                CERAD1REC = fields.CERAD1REC,
+                CERAD1READ = fields.CERAD1READ,
+                CERAD1INT = fields.CERAD1INT,
+                CERAD2REC = fields.CERAD2REC,
+                CERAD2READ = fields.CERAD2READ,
+                CERAD2INT = fields.CERAD2INT,
+                CERAD3REC = fields.CERAD3REC,
+                CERAD3READ = fields.CERAD3READ,
+                CERAD3INT = fields.CERAD3INT,
+                CERADDTI = fields.CERADDTI,
+                CERADJ6REC = fields.CERADJ6REC,
+                CERADJ6INT = fields.CERADJ6INT,
+                CERADJ7YES = fields.CERADJ7YES,
+                CERADJ7NO = fields.CERADJ7NO,
                 OTRAILA = fields.OTRAILA,
                 OTRLARR = fields.OTRLARR,
                 OTRLALI = fields.OTRLALI,
                 OTRAILB = fields.OTRAILB,
                 OTRLBRR = fields.OTRLBRR,
                 OTRLBLI = fields.OTRLBLI,
-                REYDREC = fields.REYDREC,
-                REYDINT = fields.REYDINT,
-                REYTCOR = fields.REYTCOR,
-                REYFPOS = fields.REYFPOS,
                 VNTTOTW = fields.VNTTOTW,
                 VNTPCNC = fields.VNTPCNC,
                 RESPVAL = fields.RESPVAL,
@@ -1376,7 +1375,6 @@ namespace UDS.Net.Forms.Extensions
                 RESPOTHX = fields.RESPOTHX
             };
         }
-
         public static D1a ToVM(this D1aFormFields fields, int formId)
         {
             return new D1a()
@@ -1600,65 +1598,6 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
 
-            };
-        }
-
-        public static D2 ToVM(this D2FormFields fields, int formId)
-        {
-            return new D2()
-            {
-                Id = formId,
-                CANCER = fields.CANCER,
-                CANCSITE = fields.CANCSITE,
-                DIABET = fields.DIABET,
-                MYOINF = fields.MYOINF,
-                CONGHRT = fields.CONGHRT,
-                AFIBRILL = fields.AFIBRILL,
-                HYPERT = fields.HYPERT,
-                ANGINA = fields.ANGINA,
-                HYPCHOL = fields.HYPCHOL,
-                VB12DEF = fields.VB12DEF,
-                THYDIS = fields.THYDIS,
-                ARTH = fields.ARTH,
-                ARTYPE = fields.ARTYPE,
-                ARTYPEX = fields.ARTYPEX,
-                ARTUPEX = fields.ARTUPEX.HasValue ? fields.ARTUPEX.Value != 0 : false,
-                ARTLOEX = fields.ARTLOEX.HasValue ? fields.ARTLOEX.Value != 0 : false,
-                ARTSPIN = fields.ARTSPIN.HasValue ? fields.ARTSPIN.Value != 0 : false,
-                ARTUNKN = fields.ARTUNKN.HasValue ? fields.ARTUNKN.Value != 0 : false,
-                URINEINC = fields.URINEINC,
-                BOWLINC = fields.BOWLINC,
-                SLEEPAP = fields.SLEEPAP,
-                REMDIS = fields.REMDIS,
-                HYPOSOM = fields.HYPOSOM,
-                SLEEPOTH = fields.SLEEPOTH,
-                SLEEPOTX = fields.SLEEPOTX,
-                ANGIOCP = fields.ANGIOCP,
-                ANGIOPCI = fields.ANGIOPCI,
-                PACEMAKE = fields.PACEMAKE,
-                HVALVE = fields.HVALVE,
-                ANTIENC = fields.ANTIENC,
-                ANTIENCX = fields.ANTIENCX,
-                OTHCOND = fields.OTHCOND,
-                OTHCONDX = fields.OTHCONDX
-            };
-        }
-
-        public static T1 ToVM(this T1FormFields fields, int formId)
-        {
-            return new T1()
-            {
-                Id = formId,
-                TELCOG = fields.TELCOG,
-                TELILL = fields.TELILL,
-                TELHOME = fields.TELHOME,
-                TELREFU = fields.TELREFU,
-                TELCOV = fields.TELCOV,
-                TELOTHR = fields.TELOTHR,
-                TELOTHRX = fields.TELOTHRX,
-                TELMOD = fields.TELMOD,
-                TELINPER = fields.TELINPER,
-                TELMILE = fields.TELMILE
             };
         }
     }

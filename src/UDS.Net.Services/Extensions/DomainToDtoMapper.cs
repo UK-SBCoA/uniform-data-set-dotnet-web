@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.Extensions
@@ -14,7 +17,6 @@ namespace UDS.Net.Services.Extensions
     {
         private static void SetBaseProperties(FormDto dto, Form form)
         {
-
             dto.Id = form.Id;
             dto.VisitId = form.VisitId;
             dto.Kind = form.Kind;
@@ -33,6 +35,23 @@ namespace UDS.Net.Services.Extensions
             dto.IsDeleted = form.IsDeleted;
         }
 
+        private static void SetBaseVisitProperties(VisitDto dto, Visit visit)
+        {
+            dto.Id = visit.Id;
+            dto.ParticipationId = visit.ParticipationId;
+            dto.VISITNUM = visit.VISITNUM;
+            dto.FORMVER = visit.FORMVER;
+            dto.PACKET = visit.PACKET.ToString();
+            dto.VISIT_DATE = visit.VISIT_DATE;
+            dto.INITIALS = visit.INITIALS;
+            dto.Status = ((int)visit.Status).ToString();
+            dto.CreatedAt = visit.CreatedAt;
+            dto.CreatedBy = visit.CreatedBy;
+            dto.ModifiedBy = visit.ModifiedBy;
+            dto.DeletedBy = visit.DeletedBy;
+            dto.IsDeleted = visit.IsDeleted;
+        }
+
         public static ParticipationDto ToDto(this Participation participation)
         {
             return new ParticipationDto
@@ -47,28 +66,6 @@ namespace UDS.Net.Services.Extensions
                 VisitCount = participation.VisitCount,
                 LastVisitNumber = participation.LastVisitNumber
             };
-        }
-        public static VisitDto ToDto(this Visit visit)
-        {
-            var dto = new VisitDto()
-            {
-                Id = visit.Id,
-                ParticipationId = visit.ParticipationId,
-                VISITNUM = visit.VISITNUM,
-                FORMVER = visit.FORMVER,
-                PACKET = visit.PACKET.ToString(),
-                VISIT_DATE = visit.VISIT_DATE,
-                INITIALS = visit.INITIALS,
-                CreatedAt = visit.CreatedAt,
-                CreatedBy = visit.CreatedBy,
-                ModifiedBy = visit.ModifiedBy,
-                DeletedBy = visit.DeletedBy,
-                IsDeleted = visit.IsDeleted
-            };
-            if (visit.Forms != null)
-                dto.Forms = visit.Forms.ToDto();
-
-            return dto;
         }
 
         public static M1Dto ToDto(this Milestone milestone)
@@ -110,28 +107,81 @@ namespace UDS.Net.Services.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
+                MILESTONETYPE = milestone.MILESTONETYPE
             };
+        }
+
+        public static VisitDto ToDto(this Visit visit)
+        {
+            var dto = new VisitDto();
+            SetBaseVisitProperties(dto, visit);
+
+            if (visit.Forms != null)
+                dto.Forms = visit.Forms.ToDto();
+
+            return dto;
         }
 
         public static VisitDto ToDto(this Visit visit, string formKind)
         {
-            var dto = new VisitDto()
-            {
-                Id = visit.Id,
-                ParticipationId = visit.ParticipationId,
-                VISITNUM = visit.VISITNUM,
-                FORMVER = visit.FORMVER,
-                PACKET = visit.PACKET.ToString(),
-                VISIT_DATE = visit.VISIT_DATE,
-                INITIALS = visit.INITIALS,
-                CreatedAt = visit.CreatedAt,
-                CreatedBy = visit.CreatedBy,
-                ModifiedBy = visit.ModifiedBy,
-                DeletedBy = visit.DeletedBy,
-                IsDeleted = visit.IsDeleted
-            };
+            var dto = visit.ToDto();
+
             if (visit.Forms != null)
                 dto.Forms = visit.Forms.ToDto(formKind);
+
+            return dto;
+        }
+
+        public static PacketDto ToDto(this Packet packet)
+        {
+            var dto = new PacketDto();
+
+            dto.Id = packet.Id;
+            dto.Status = packet.Status.ToString();
+
+            if (packet.Submissions != null)
+                dto.PacketSubmissions = packet.Submissions.Select(s => s.ToDto()).ToList();
+
+            return dto;
+        }
+
+        public static PacketSubmissionDto ToDto(this PacketSubmission packetSubmission)
+        {
+            var dto = new PacketSubmissionDto
+            {
+                Id = packetSubmission.Id,
+                PacketId = packetSubmission.PacketId,
+                SubmissionDate = packetSubmission.SubmissionDate,
+                CreatedBy = packetSubmission.CreatedBy,
+                CreatedAt = packetSubmission.CreatedAt,
+                ModifiedBy = packetSubmission.ModifiedBy,
+                DeletedBy = packetSubmission.DeletedBy,
+                IsDeleted = packetSubmission.IsDeleted
+            };
+
+            if (packetSubmission.Errors != null)
+                dto.PacketSubmissionErrors = packetSubmission.Errors.Select(e => e.ToDto(packetSubmission.Id)).ToList();
+
+            return dto;
+        }
+
+        public static PacketSubmissionErrorDto ToDto(this PacketSubmissionError error, int packetSubmissionId)
+        {
+            var dto = new PacketSubmissionErrorDto
+            {
+                Id = error.Id,
+                PacketSubmissionId = packetSubmissionId,
+                FormKind = error.FormKind,
+                Level = ((int)error.Level).ToString(),
+                Message = error.Message,
+                AssignedTo = error.AssignedTo,
+                ResolvedBy = error.ResolvedBy,
+                CreatedAt = error.CreatedAt,
+                CreatedBy = error.CreatedBy,
+                ModifiedBy = error.ModifiedBy,
+                DeletedBy = error.DeletedBy,
+                IsDeleted = error.IsDeleted
+            };
 
             return dto;
         }
@@ -248,10 +298,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B9FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is C1FormFields)
-            {
-                dto = ((C1FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is C2FormFields)
             {
                 dto = ((C2FormFields)form.Fields).ToDto();
@@ -263,10 +309,6 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1bFormFields)
             {
                 dto = ((D1bFormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is T1FormFields)
-            {
-                dto = ((T1FormFields)form.Fields).ToDto();
             }
 
             SetBaseProperties(dto, form);
@@ -341,10 +383,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((B9FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is C1FormFields && formKind == "C1")
-            {
-                dto = ((C1FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is C2FormFields && formKind == "C2")
             {
                 dto = ((C2FormFields)form.Fields).ToDto();
@@ -356,10 +394,6 @@ namespace UDS.Net.Services.Extensions
             else if (form.Fields is D1bFormFields && formKind == "D1b")
             {
                 dto = ((D1bFormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is T1FormFields && formKind == "T1")
-            {
-                dto = ((T1FormFields)form.Fields).ToDto();
             }
 
             SetBaseProperties(dto, form);
@@ -448,7 +482,7 @@ namespace UDS.Net.Services.Extensions
                 ETHENGLISH = fields.ETHENGLISH,
                 ETHITALIAN = fields.ETHITALIAN,
                 ETHPOLISH = fields.ETHPOLISH,
-                ETHFRENCH = fields.ETHFRENCH,
+                ETHSCOTT = fields.ETHSCOTT,
                 ETHWHIOTH = fields.ETHWHIOTH,
                 ETHWHIOTHX = fields.ETHWHIOTHX,
                 ETHISPANIC = fields.ETHISPANIC,
@@ -457,7 +491,7 @@ namespace UDS.Net.Services.Extensions
                 ETHCUBAN = fields.ETHCUBAN,
                 ETHSALVA = fields.ETHSALVA,
                 ETHDOMIN = fields.ETHDOMIN,
-                ETHCOLOM = fields.ETHCOLOM,
+                ETHGUATEM = fields.ETHGUATEM,
                 ETHHISOTH = fields.ETHHISOTH,
                 ETHHISOTHX = fields.ETHHISOTHX,
                 RACEBLACK = fields.RACEBLACK,
@@ -485,7 +519,7 @@ namespace UDS.Net.Services.Extensions
                 ETHIRAN = fields.ETHIRAN,
                 ETHEGYPT = fields.ETHEGYPT,
                 ETHSYRIA = fields.ETHSYRIA,
-                ETHMOROCCO = fields.ETHMOROCCO,
+                ETHIRAQI = fields.ETHIRAQI,
                 ETHISRAEL = fields.ETHISRAEL,
                 ETHMENAOTH = fields.ETHMENAOTH,
                 ETHMENAOTX = fields.ETHMENAOTX,
@@ -848,7 +882,7 @@ namespace UDS.Net.Services.Extensions
                 OTHCONDX = fields.OTHCONDX,
                 MAJORDEP = fields.MAJORDEP,
                 OTHERDEP = fields.OTHERDEP,
-                DEPRTREAT = fields.DEPRTREAT.HasValue ? true : false,
+                DEPRTREAT = ConvertIntToBool(fields.DEPRTREAT),
                 BIPOLAR = fields.BIPOLAR,
                 SCHIZ = fields.SCHIZ,
                 ANXIETY = fields.ANXIETY,
@@ -920,7 +954,6 @@ namespace UDS.Net.Services.Extensions
 
             return dto;
         }
-
 
         public static A4aTreatmentDto ToDto(this A4aTreatmentFormFields fields, int formId)
         {
@@ -1028,6 +1061,7 @@ namespace UDS.Net.Services.Extensions
                 TOTALUPDRS = fields.TOTALUPDRS,
             };
         }
+
         public static B4Dto ToDto(this B4FormFields fields)
         {
             return new B4Dto
@@ -1251,60 +1285,6 @@ namespace UDS.Net.Services.Extensions
             return null;
         }
 
-        public static C1Dto ToDto(this C1FormFields fields)
-        {
-            return new C1Dto
-            {
-                MMSECOMP = fields.MMSECOMP,
-                MMSEREAS = fields.MMSEREAS,
-                MMSELOC = fields.MMSELOC,
-                MMSELAN = fields.MMSELAN,
-                MMSELANX = fields.MMSELANX,
-                MMSEVIS = fields.MMSEVIS,
-                MMSEHEAR = fields.MMSEHEAR,
-                MMSEORDA = fields.MMSEORDA,
-                MMSEORLO = fields.MMSEORLO,
-                PENTAGON = fields.PENTAGON,
-                MMSE = fields.MMSE,
-                NPSYCLOC = fields.NPSYCLOC,
-                NPSYLAN = fields.NPSYLAN,
-                NPSYLANX = fields.NPSYLANX,
-                LOGIMO = fields.LOGIMO,
-                LOGIDAY = fields.LOGIDAY,
-                LOGIYR = fields.LOGIYR,
-                LOGIPREV = fields.LOGIPREV,
-                LOGIMEM = fields.LOGIMEM,
-                UDSBENTC = fields.UDSBENTC,
-                DIGIF = fields.DIGIF,
-                DIGIFLEN = fields.DIGIFLEN,
-                DIGIB = fields.DIGIB,
-                DIGIBLEN = fields.DIGIBLEN,
-                ANIMALS = fields.ANIMALS,
-                VEG = fields.VEG,
-                TRAILA = fields.TRAILA,
-                TRAILARR = fields.TRAILARR,
-                TRAILALI = fields.TRAILALI,
-                TRAILB = fields.TRAILB,
-                TRAILBRR = fields.TRAILBRR,
-                TRAILBLI = fields.TRAILBLI,
-                MEMUNITS = fields.MEMUNITS,
-                MEMTIME = fields.MEMTIME,
-                UDSBENTD = fields.UDSBENTD,
-                UDSBENRS = fields.UDSBENRS,
-                BOSTON = fields.BOSTON,
-                UDSVERFC = fields.UDSVERFC,
-                UDSVERFN = fields.UDSVERFN,
-                UDSVERNF = fields.UDSVERNF,
-                UDSVERLC = fields.UDSVERLC,
-                UDSVERLR = fields.UDSVERLR,
-                UDSVERLN = fields.UDSVERLN,
-                UDSVERTN = fields.UDSVERTN,
-                UDSVERTE = fields.UDSVERTE,
-                UDSVERTI = fields.UDSVERTI,
-                COGSTAT = fields.COGSTAT
-            };
-        }
-
         public static C2Dto ToDto(this C2FormFields fields)
         {
             return new C2Dto
@@ -1317,6 +1297,7 @@ namespace UDS.Net.Services.Extensions
                 MOCAVIS = fields.MOCAVIS,
                 MOCAHEAR = fields.MOCAHEAR,
                 MOCATOTS = fields.MOCATOTS,
+                MOCBTOTS = fields.MOCBTOTS,
                 MOCATRAI = fields.MOCATRAI,
                 MOCACUBE = fields.MOCACUBE,
                 MOCACLOC = fields.MOCACLOC,
@@ -1378,6 +1359,7 @@ namespace UDS.Net.Services.Extensions
                 UDSVERTN = fields.UDSVERTN,
                 UDSVERTE = fields.UDSVERTE,
                 UDSVERTI = fields.UDSVERTI,
+                VERBALTEST = fields.VERBALTEST,
                 COGSTAT = fields.COGSTAT,
                 REY1REC = fields.REY1REC,
                 REY1INT = fields.REY1INT,
@@ -1389,12 +1371,38 @@ namespace UDS.Net.Services.Extensions
                 REY4INT = fields.REY4INT,
                 REY5REC = fields.REY5REC,
                 REY5INT = fields.REY5INT,
+                REYBREC = fields.REYBREC,
+                REYBINT = fields.REYBINT,
                 REY6REC = fields.REY6REC,
                 REY6INT = fields.REY6INT,
                 REYDREC = fields.REYDREC,
                 REYDINT = fields.REYDINT,
+                REYDTI = fields.REYDTI,
+                REYMETHOD = fields.REYMETHOD,
                 REYTCOR = fields.REYTCOR,
                 REYFPOS = fields.REYFPOS,
+                VNTTOTW = fields.VNTTOTW,
+                VNTPCNC = fields.VNTPCNC,
+                CERAD1REC = fields.CERAD1REC,
+                CERAD1READ = fields.CERAD1READ,
+                CERAD1INT = fields.CERAD1INT,
+                CERAD2REC = fields.CERAD2REC,
+                CERAD2READ = fields.CERAD2READ,
+                CERAD2INT = fields.CERAD2INT,
+                CERAD3REC = fields.CERAD3REC,
+                CERAD3READ = fields.CERAD3READ,
+                CERAD3INT = fields.CERAD3INT,
+                CERADDTI = fields.CERADDTI,
+                CERADJ6REC = fields.CERADJ6REC,
+                CERADJ6INT = fields.CERADJ6INT,
+                CERADJ7YES = fields.CERADJ7YES,
+                CERADJ7NO = fields.CERADJ7NO,
+                OTRAILA = fields.OTRAILA,
+                OTRLARR = fields.OTRLARR,
+                OTRLALI = fields.OTRLALI,
+                OTRAILB = fields.OTRAILB,
+                OTRLBRR = fields.OTRLBRR,
+                OTRLBLI = fields.OTRLBLI,
                 RESPVAL = fields.RESPVAL,
                 RESPHEAR = fields.RESPHEAR,
                 RESPDIST = fields.RESPDIST,
@@ -1624,23 +1632,6 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
-            };
-        }
-
-        public static T1Dto ToDto(this T1FormFields fields)
-        {
-            return new T1Dto
-            {
-                TELCOG = fields.TELCOG,
-                TELILL = fields.TELILL,
-                TELHOME = fields.TELHOME,
-                TELREFU = fields.TELREFU,
-                TELCOV = fields.TELCOV,
-                TELOTHR = fields.TELOTHR,
-                TELOTHRX = fields.TELOTHRX,
-                TELMOD = fields.TELMOD,
-                TELINPER = fields.TELINPER,
-                TELMILE = fields.TELMILE
             };
         }
     }

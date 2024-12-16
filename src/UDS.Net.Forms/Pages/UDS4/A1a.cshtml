@@ -81,7 +81,14 @@
 </div>
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     <div class="@rowCSS">
-        <label asp-for="A1a.INCOMEYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.INCOMEYR)</label>
+        <div>
+            <label asp-for="A1a.INCOMEYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.INCOMEYR)</label>
+            <br />
+            <em class="text-base font-semibold text-gray-900">
+                This information will be kept confidential and will not be shared in a way that identifies you with any
+                other person, organization or government entity
+            </em>
+        </div>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.INCOMEYR"></p>

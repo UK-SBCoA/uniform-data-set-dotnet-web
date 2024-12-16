@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -46,11 +38,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-4]|9)$", ErrorMessage = "Valid range is 0-4 or 9")]
         [RequiredIfRange(nameof(ALCFREQYR), 1, 4, ErrorMessage = "Please specify.")]
         public int? ALCBINGE { get; set; }
-        [Display(Name = "Participant used substances including prescription or recreational drugs that caused significant impairment in work, legal, driving, or social areas within the past 12 months")]
+        [Display(Name = "Within the past 12 months")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SUBSTYEAR { get; set; }
-        [Display(Name = "Participant used substances including prescription or recreational drugs that caused significant impairment in work, legal, driving, or social areas prior to 12 months ago")]
+        [Display(Name = "Prior to 12 months ago")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SUBSTPAST { get; set; }
@@ -219,7 +211,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIf(nameof(IMPOTHER), "true", ErrorMessage = "Please specify.")]
         public string? IMPOTHERX { get; set; }
-        [Display(Name = "The total length of time in years that the participant was exposed to repeated hits to the head (e.g. playing American football for 7 years)")]
+        [Display(Name = "Indicate the total length of time in years that the participant was exposed to repeated hits to the head (e.g. playing American football for 7 years)")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIf(nameof(HEADIMP), "1", ErrorMessage = "Please specify.")]
         public int? IMPYEARS { get; set; }
@@ -467,7 +459,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? OTHERDEP { get; set; }
         [Display(Name = "Choose if treated or untreated")]
         [RegularExpression("^([0-1])$", ErrorMessage = "Valid range is 0-1")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
+        [RequiredIf(nameof(OTHERDEP), "1", ErrorMessage = "Response required")]
+        [RequiredIf(nameof(MAJORDEP), "1", ErrorMessage = "Response required")]
         public int? DEPRTREAT { get; set; }
         [Display(Name = "Bipolar disorder(DSM - 5 - TR criteria)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]

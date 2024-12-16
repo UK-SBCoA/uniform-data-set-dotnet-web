@@ -1,0 +1,45 @@
+﻿@page "{id:int?}"
+@model UDS.Net.Forms.Pages.Packets.DetailsModel
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+
+<div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+    <div class="py-6 lg:col-span-3">
+        @if (Model.Packet != null)
+        {
+            <nav class="space-y-1">
+                <a asp-page="Index" class="bg-indigo-50 border-indigo-500 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-700 group border-l-4 px-3 py-2 flex items-center text-sm font-medium">
+                    Back
+                </a>
+            </nav>
+        }
+
+    </div>
+    <div class="lg:col-span-9 px-5 py-6">
+        <div class="pb-4 pt-6 sm:pb-6">
+            <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
+                @if (Model.Packet.Status == PacketStatus.Finalized || Model.Packet.Status == PacketStatus.PassedErrorChecks)
+                {
+                    <a data-turbo-frame="PacketSubmissions" asp-page="../PacketSubmissions/Create" asp-page-handler="Partial" asp-route-visitId="@Model.Packet.Id" class="ml-auto flex items-center gap-x-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <svg class="-ml-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"></path>
+                        </svg>
+                        New packet submission
+                    </a>
+                }
+                else
+                {
+                    <button disabled class="ml-auto bg-gray-300 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm">
+                        <svg class="-ml-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z"></path>
+                        </svg>
+                        New packet submission
+                    </button>
+                }
+            </div>
+        </div>
+        <partial name="../PacketSubmissions/_Index" model="Model.Packet" />
+    </div>
+</div>

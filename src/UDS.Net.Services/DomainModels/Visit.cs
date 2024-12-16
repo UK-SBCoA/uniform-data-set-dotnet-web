@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels
@@ -12,6 +13,8 @@ namespace UDS.Net.Services.DomainModels
     /// </summary>
     public class Visit
     {
+        private Dictionary<string, FormContract[]> _formsContract = new Dictionary<string, FormContract[]>();
+
         public int Id { get; set; }
 
         public int ParticipationId { get; set; }
@@ -25,6 +28,8 @@ namespace UDS.Net.Services.DomainModels
         public DateTime VISIT_DATE { get; set; }
 
         public string INITIALS { get; set; }
+
+        public PacketStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -46,6 +51,47 @@ namespace UDS.Net.Services.DomainModels
 
         }
 
+        public bool IsFinalizable
+        {
+            get
+            {
+                // if ti has been submitted and error results are pending
+                if (this.Status == PacketStatus.Submitted)
+                    return false;
+
+                // if it has already been submitted and it has unresolved errors
+                if (this.UnresolvedErrorCount.HasValue && this.UnresolvedErrorCount.Value > 0)
+                    return false;
+
+                bool finalizable = false;
+
+                if (this.Forms != null && this.Forms.Count() > 0 && _formsContract != null)
+                {
+                    var packetKindFormsContract = _formsContract.Where(u => u.Key == this.PACKET.ToString()).FirstOrDefault();
+                    if (packetKindFormsContract.Value != null) // do we have a contract matching the packet kind?
+                    {
+                        foreach (var formContract in packetKindFormsContract.Value)
+                        {
+                            if (this.Forms.Where(f => formContract.Abbreviation == f.Kind).Any())
+                            {
+                                // if the form contract exists
+                                var form = this.Forms.Where(f => formContract.Abbreviation == f.Kind).FirstOrDefault();
+
+                                if (formContract.IsRequredForVisitKind && form.Status != FormStatus.Finalized)
+                                {
+                                    finalizable = false;
+                                    break; // we can exit out of the loop because one required form is not yet finalized
+                                }
+                            }
+                            finalizable = true; // if we loop through all the forms contract and all the required forms are finalized, then the entire visit is finalizable
+                        }
+                    }
+                }
+
+                return finalizable;
+            }
+        }
+
         public Participation Participation { get; set; } = new Participation();
 
         public IList<Form> Forms { get; set; } = new List<Form>();
@@ -54,7 +100,7 @@ namespace UDS.Net.Services.DomainModels
         {
             if (version == "4")
             {
-                Dictionary<string, FormContract[]> UDS4 = new Dictionary<string, FormContract[]>
+                _formsContract = new Dictionary<string, FormContract[]>
                 {
                     {
                         PacketKind.I.ToString(),
@@ -74,7 +120,8 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", true), // C2C2T
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
 
@@ -98,14 +145,15 @@ namespace UDS.Net.Services.DomainModels
                             new FormContract("B6", false),
                             new FormContract("B7", false),
                             new FormContract("B8", true),
-                            new FormContract("B9", true), // C2C2T
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
                             new FormContract("D1a", true),
                             new FormContract("D1b", true)
                         }
                     }
                 };
 
-                var formDefinitions = UDS4.Where(u => u.Key == kind.ToString()).FirstOrDefault();
+                var formDefinitions = _formsContract.Where(u => u.Key == kind.ToString()).FirstOrDefault();
 
                 foreach (var formContract in formDefinitions.Value)
                 {
@@ -120,7 +168,7 @@ namespace UDS.Net.Services.DomainModels
                     {
                         var existing = existingForms.Where(f => f.Kind == formContract.Abbreviation).FirstOrDefault();
 
-                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields));
+                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequredForVisitKind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields, existing.UnresolvedErrors));
                     }
                     else
                     {
@@ -139,11 +187,13 @@ namespace UDS.Net.Services.DomainModels
             return true;
         }
 
-        public int ErrorCount { get; private set; }
+        public int? UnresolvedErrorCount { get; private set; }
 
-        public int Count { get; private set; }
+        public IList<PacketSubmissionError> UnresolvedErrors { get; set; } = new List<PacketSubmissionError>();
 
-        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
+        //public int Count { get; private set; }
+
+        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
             Id = id;
             VISITNUM = number;
@@ -152,6 +202,7 @@ namespace UDS.Net.Services.DomainModels
             PACKET = packet;
             VISIT_DATE = visitDate;
             INITIALS = initials;
+            Status = status;
             CreatedAt = createdAt;
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
@@ -162,7 +213,32 @@ namespace UDS.Net.Services.DomainModels
                 existingForms = new List<Form>();
 
             BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
+        }
 
+        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
+        {
+            Id = id;
+            VISITNUM = number;
+            ParticipationId = participationId;
+            FORMVER = version;
+            PACKET = packet;
+            VISIT_DATE = visitDate;
+            INITIALS = initials;
+            Status = status;
+            CreatedAt = createdAt;
+            CreatedBy = createdBy;
+            ModifiedBy = modifiedBy;
+            DeletedBy = deletedBy;
+            IsDeleted = IsDeleted;
+            UnresolvedErrorCount = unresolvedErrorCount;
+
+            if (existingForms == null)
+                existingForms = new List<Form>();
+
+            BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
+
+            if (unresolvedErrors != null)
+                UnresolvedErrors = unresolvedErrors;
         }
 
         // TODO There's form fields and then there's validation rules for the form fields based on visit type

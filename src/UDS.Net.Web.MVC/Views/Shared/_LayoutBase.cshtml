@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - UDS.Net.Web.MVC</title>
 
-    <partial name="_LayoutHtmlHeadPartial"></partial>
+    <partial name="_LayoutHtmlHeadPartial" />
     <link rel="stylesheet" href="~/UDS.Net.Web.MVC.styles.css" asp-append-version="true" />
 </head>
 <body class="h-full">
@@ -25,8 +25,8 @@
         </main>
     </div>
 
-    <partial name="_Footer"></partial>
-    <partial name="_LayoutScriptsPartial"></partial>
+    <partial name="_Footer" />
+    <partial name="_LayoutScriptsPartial" />
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

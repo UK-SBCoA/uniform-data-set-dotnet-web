@@ -1,0 +1,19 @@
+﻿@using UDS.Net.Forms.Pages.UDS4;
+@model C2Model
+
+<turbo-stream target="C2" action="replace">
+    <template>
+        @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote) && (Model.C2.RMMODE == RemoteModality.Telephone))
+
+        {
+            <partial name="_C2T" model="@Model" />
+        }
+
+        else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
+
+        {
+            <partial name="_C2" model="@Model" />
+        }
+            <script src="~/_content/UDS.Net.Forms/js/jquery.unobtrusive.custom_validation.js" asp-append-version="true"></script>
+    </template>
+</turbo-stream>

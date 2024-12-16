@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Net;
-using System.Text.Json;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
-using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
+using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -27,14 +25,19 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Visit> Add(string username, Visit entity)
         {
-            await _apiClient.VisitClient.Post(entity.ToDto());
+            var dto = await _apiClient.VisitClient.Post(entity.ToDto());
 
-            return entity;
+            return dto.ToDomain(username);
         }
 
         public async Task<int> Count(string username)
         {
             return await _apiClient.VisitClient.Count();
+        }
+
+        public async Task<int> CountByStatus(string username, string[] statuses = null)
+        {
+            return await _apiClient.VisitClient.GetCountOfVisitsAtStatus(statuses);
         }
 
         public async Task<Visit> GetById(string username, int id)
@@ -62,11 +65,26 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            var visitDtos = await _apiClient.VisitClient.Get();
+            var visitDtos = await _apiClient.VisitClient.Get(pageSize, pageIndex);
 
             if (visitDtos != null)
             {
                 return visitDtos.Select(d => d.ToDomain(username)).ToList();
+            }
+
+            return new List<Visit>();
+        }
+
+        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] filterItems = null)
+        {
+            if (filterItems != null)
+            {
+                var visitDtos = await _apiClient.VisitClient.GetVisitsAtStatus(filterItems, pageSize, pageIndex);
+
+                if (visitDtos != null)
+                {
+                    return visitDtos.Select(d => d.ToDomain(username)).ToList();
+                }
             }
 
             return new List<Visit>();
@@ -108,6 +126,25 @@ namespace UDS.Net.Web.MVC.Services
         {
             var dto = entity.ToDto(formId);
             return await UpdateVisit(username, dto);
+        }
+
+        public async Task<int> GetNextVisitNumber(string username, int participationId)
+        {
+            var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+            return participation.LastVisitNumber + 1;
+        }
+
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        {
+            if (version.Contains("4"))
+            {
+                var participation = await _apiClient.ParticipationClient.Get(participationId);
+
+                return participation.VisitCount;
+            }
+            else
+                throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
         }
     }
 }
