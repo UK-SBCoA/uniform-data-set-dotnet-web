@@ -405,32 +405,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 else return true;
             }
         }
-        [RequiredOnFinalized(ErrorMessage = "GENOTHX must be blank when response 4g. is unchecked")]
-        [NotMapped]
-        public bool? GenderSpecify
-        {
-            get
-            {
-                if (!string.IsNullOrWhiteSpace(GENOTHX) && GENOTH == false)
-                {
-                    return null;
-                }
-                else return true;
-            }
-        }
-        [RequiredOnFinalized(ErrorMessage = "SEXORNOTHX must be blank when response 7e. is unchecked")]
-        [NotMapped]
-        public bool? SexOrientationSpecify
-        {
-            get
-            {
-                if (!string.IsNullOrWhiteSpace(SEXORNOTHX) && SEXORNOTH == false)
-                {
-                    return null;
-                }
-                else return true;
-            }
-        }
 
         [RequiredOnFinalized(ErrorMessage = "If question 16 ('MEDVA') is marked as 'Yes' then question 15 ('SERVED') cannot equal 'Don't Know'")]
         [NotMapped]
