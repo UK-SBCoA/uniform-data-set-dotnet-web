@@ -23,9 +23,30 @@ namespace UDS.Net.Forms.Pages.Participations
 
         public async Task<IActionResult> OnGet(int pageSize = 10, int pageIndex = 1, string search = "")
         {
-            var participations = await _participationService.List(User.Identity.Name, pageSize, pageIndex);
+            var participations = new List<Services.DomainModels.Participation>();
+            int total = 0;
 
-            int total = await _participationService.Count(User.Identity.Name);
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                var participation = await _participationService.GetByLegacyId(User.Identity.Name, search);
+
+                if (participation != null)
+                {
+                    participations.Add(participation);
+                    total = 1;
+                }
+            }
+            else
+            {
+                total = await _participationService.Count(User.Identity.Name);
+                if (total > 0)
+                {
+                    var page = await _participationService.List(User.Identity.Name, pageSize, pageIndex);
+
+                    if (page != null)
+                        participations.AddRange(page);
+                }
+            }
 
             Participations = participations.ToVM(pageSize, pageIndex, total, search);
 

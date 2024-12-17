@@ -49,13 +49,13 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Participation not found.");
         }
 
-        public async Task<ParticipationDto> GetByLegacyId(string legacyId)
+        public async Task<Participation> GetByLegacyId(string username, string legacyId)
         {
             try
             {
                 var participation = await _apiClient.ParticipationClient.GetByLegacyId(legacyId);
 
-                return participation;
+                return participation.ToDomain(username);
             }
             catch (Exception ex)
             {
