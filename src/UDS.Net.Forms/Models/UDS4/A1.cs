@@ -376,7 +376,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         return null;
                     }
-                }    
+                }
                 return true;
             }
         }
