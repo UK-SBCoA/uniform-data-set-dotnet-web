@@ -657,6 +657,8 @@
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your current gender identity? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GenderIdentityIndicated"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritGender"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritSexOrientation"></span>
             </div>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <fieldset class="subcounterreset">
@@ -793,6 +795,7 @@
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your sexual orientation? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SexualOrientstionIndicated"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritSexOrientation"></span>
             </div>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <fieldset class="subcounterreset">
@@ -871,7 +874,9 @@
                         <div class="relative flex items-start">
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
-                                @Html.CheckBox("A1.SEXORNNOAN", Model.A1.SEXORNNOAN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", 
+                                @Html.CheckBox("A1.SEXORNNOAN", Model.A1.SEXORNNOAN, new
+                                {
+                                    @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                                 data_checkBoxDisable_target = "checkboxTrigger",
                                 data_action = "input->checkboxDisable#ToggleGroup",
 
@@ -984,6 +989,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SERVED"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.SERVED)" for="@Model.A1.SERVED" items="Model.SERVEDListItems" ui-behaviors="Model.SERVEDUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SERVED"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ServedAndVaCare"></span>
             </div>
         </div>
 
@@ -993,6 +999,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEDVA"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MEDVA)" for="@Model.A1.MEDVA" items="Model.MEDVAListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEDVA"></span>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ServedAndVaCare"></span>
             </div>
         </div>
 
