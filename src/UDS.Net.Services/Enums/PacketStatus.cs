@@ -1,5 +1,4 @@
-﻿using System;
-namespace UDS.Net.Services.Enums
+﻿namespace UDS.Net.Services.Enums
 {
     public enum PacketStatus
     {
