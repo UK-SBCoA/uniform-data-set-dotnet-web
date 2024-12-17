@@ -364,21 +364,23 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "Both question 15(A1.SERVED) and 16(A1.MEDVA) cannot have a value of \"Don't Know\"")]
+        [RequiredOnFinalized(ErrorMessage = "If Q16. MEDVA (VA medical care) = 1 (Yes) then Q15. SERVED (served in armed forces) should not equal 9 (Don't know),it should be equal to 1 (Yes)")]
         [NotMapped]
         public bool? ServedAndVaCare
         {
             get
             {
-                if (SERVED == 9 && MEDVA != 9 ||
-                    SERVED == 1 && (MEDVA == 9 || MEDVA == 1 || MEDVA == 0) ||
-                    SERVED == 0 && MEDVA == null)
+                if (SERVED == 9)
                 {
-                    return true;
-                }
-                else return null;
+                    if (MEDVA == 1)
+                    {
+                        return null;
+                    }
+                }    
+                return true;
             }
         }
+
         [RequiredOnFinalized(ErrorMessage = "If response 4f is checked then responses 4h and 4i must be blank")]
         [NotMapped]
         public bool? TwoSpiritGender
@@ -406,19 +408,6 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If question 16 ('MEDVA') is marked as 'Yes' then question 15 ('SERVED') cannot equal 'Don't Know'")]
-        [NotMapped]
-        public bool? VAMedCare
-        {
-            get
-            {
-                if (MEDVA == 1 && SERVED == 9)
-                {
-                    return null;
-                }
-                else return true;
-            }
-        }
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
