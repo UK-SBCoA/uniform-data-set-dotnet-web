@@ -671,22 +671,24 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         //non mapped property MOCARECN =! 88 && MOCARECC =! 88 && MOCARECR != 88 then all 3 properties should be <= 5
-        [RequiredOnFinalized(ErrorMessage = "If questions 1t, 1u, and 1v are NOT 88, then the sum of these 3 should be less than or equal to 5")]
+        [RequiredOnFinalized(ErrorMessage = "For Delayed recall questions: 'No cue', 'Category cue', and 'Recognition' the sum of questions with a value of 0 - 5 should be less than or equal to 5")]
         [NotMapped]
         public bool? DelayedRecallValidSum
         {
             get
             {
-                if (MOCARECN != 88 && MOCARECC != 88 && MOCARECR != 88)
-                {
-                    if (MOCARECN + MOCARECC + MOCARECR > 5) return null;
-                }
+                //if input is an exception value (93 - 95 or 88) then calculate as 0 in total
+                int? mocarecnValue = MOCARECN >= 95 || MOCARECN == null ? 0 : MOCARECN;
+                int? mocareccValue = MOCARECC == 88 || MOCARECC == null ? 0 : MOCARECC;
+                int? mocarecrValue = MOCARECR == 88 || MOCARECR == null ? 0 : MOCARECR;
+
+                if (mocarecnValue + mocareccValue + mocarecrValue > 5) return null;
 
                 return true;
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If question 1t is equal to 5, then 1u should equal 88 and 1v should equal 88")]
+        [RequiredOnFinalized(ErrorMessage = "If Delayed recall - No cue is equal to 5, then Delayed recall - Category cue and Delayed recall - Recognition should both be 88")]
         [NotMapped]
         public bool? MOCARECRAndMOCARECCValidValues
         {
@@ -694,14 +696,14 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (MOCARECN == 5)
                 {
-                    if (MOCARECC != 88 && MOCARECR != 88) return null;
+                    if (MOCARECC != 88 || MOCARECR != 88) return null;
                 }
 
                 return true;
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If the sum of questions 1t and 1u are equal to 5, then 1v should equal 88")]
+        [RequiredOnFinalized(ErrorMessage = "If the sum of Delayed recall - No cue and Delayed recall - Category are equal to 5, then Delayed recall - Recognition should be 88")]
         [NotMapped]
         public bool? MOCARECRValidValue
         {
