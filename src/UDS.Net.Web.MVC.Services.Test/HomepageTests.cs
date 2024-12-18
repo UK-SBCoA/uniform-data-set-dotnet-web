@@ -39,6 +39,10 @@ public class HomepageTests : PageTest
         await Page.GetByPlaceholder("password").FillAsync(password);
         await Page.GetByRole(AriaRole.Button, new() { Name = "Log in" }).ClickAsync();
 
+        await Context.StorageStateAsync(new()
+        {
+            Path = "../../../.auth/state.json"
+        });
     }
 
     [TestMethod]
