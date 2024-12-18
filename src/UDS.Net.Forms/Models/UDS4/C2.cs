@@ -677,10 +677,25 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
+                int? mocarecnValue = 0;
+                int? mocareccValue = 0;
+                int? mocarecrValue = 0;
+
                 //if input is an exception value (93 - 95 or 88) then calculate as 0 in total
-                int? mocarecnValue = MOCARECN >= 95 || MOCARECN == null ? 0 : MOCARECN;
-                int? mocareccValue = MOCARECC == 88 || MOCARECC == null ? 0 : MOCARECC;
-                int? mocarecrValue = MOCARECR == 88 || MOCARECR == null ? 0 : MOCARECR;
+                if (MOCARECN != null)
+                {
+                    mocarecnValue = MOCARECN >= 95 ? 0 : MOCARECN;
+                }
+
+                if (MOCARECC != null)
+                {
+                    mocareccValue = MOCARECC == 88 ? 0 : MOCARECC;
+                }
+
+                if (MOCARECR != null)
+                {
+                    mocarecrValue = MOCARECR == 88 ? 0 : MOCARECR;
+                }
 
                 if (mocarecnValue + mocareccValue + mocarecrValue > 5) return null;
 
