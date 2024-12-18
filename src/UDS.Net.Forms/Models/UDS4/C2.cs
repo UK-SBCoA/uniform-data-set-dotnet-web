@@ -670,7 +670,6 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        //non mapped property MOCARECN =! 88 && MOCARECC =! 88 && MOCARECR != 88 then all 3 properties should be <= 5
         [RequiredOnFinalized(ErrorMessage = "For Delayed recall questions: 'No cue', 'Category cue', and 'Recognition' the sum of questions with a value of 0 - 5 should be less than or equal to 5")]
         [NotMapped]
         public bool? DelayedRecallValidSum
