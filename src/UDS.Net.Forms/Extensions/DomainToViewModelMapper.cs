@@ -34,6 +34,18 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static ParticipationModel ToShallowVM(this Participation participation)
+        {
+            return new ParticipationModel()
+            {
+                Id = participation.Id,
+                LegacyId = participation.LegacyId,
+                VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
+                LastVisitNumber = participation.LastVisitNumber,
+                Status = participation.Status
+            };
+        }
+
         public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
         {
             VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
@@ -84,6 +96,9 @@ namespace UDS.Net.Forms.Extensions
 
             if (visit.UnresolvedErrors != null)
                 vm.UnresolvedErrors = visit.UnresolvedErrors.ToVM();
+
+            if (visit.Participation != null && visit.ParticipationId == visit.Participation.Id)
+                vm.Participation = visit.Participation.ToShallowVM();
 
             return vm;
         }

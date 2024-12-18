@@ -20,7 +20,7 @@
                     <table class="w-full text-left">
                         <thead>
                             <tr>
-                                <th scope="col">Participation Id</th>
+                                <th scope="col">NACC Id</th>
                                 <th scope="col">Visit number</th>
                                 <th scope="col">Packet kind</th>
                                 <th scope="col">Initials</th>
@@ -34,7 +34,7 @@
                             @foreach (var visit in Model.Visits.List)
                             {
                                 <tr>
-                                    <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
+                                    <td data-participation-id="@visit.ParticipationId"><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
                                     <td>@visit.VISITNUM</td>
                                     <td>@visit.PACKET</td>
                                     <td>@visit.INITIALS</td>

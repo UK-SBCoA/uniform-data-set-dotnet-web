@@ -8,10 +8,8 @@ namespace UDS.Net.Forms.TagHelpers
     /// </summary>
     public class GuidebookTagHelper : TagHelper
     {
-        private const string IVP = "https://github.com/naccdata/uniform-data-set";
-        private const string FVP = "https://github.com/naccdata/uniform-data-set";
-        private const string TIP = "https://github.com/naccdata/uniform-data-set";
-        private const string TFP = "https://github.com/naccdata/uniform-data-set";
+        private const string I = "https://files.alz.washington.edu/documentation/uds4-ivp-coding-guidebook.pdf";
+        private const string F = "https://files.alz.washington.edu/documentation/uds4-ivp-coding-guidebook.pdf"; // There is no guidebook specifically for follow-up visits yet
 
         public string Kind { get; set; }
 
@@ -19,15 +17,11 @@ namespace UDS.Net.Forms.TagHelpers
         {
             output.TagName = "a";
 
-            string url = IVP;
+            string url = I;
             if (!String.IsNullOrWhiteSpace(Kind))
             {
-                if (Kind == "FVP")
-                    url = FVP;
-                else if (Kind == "TIP")
-                    url = TIP;
-                else if (Kind == "TFP")
-                    url = TFP;
+                if (Kind == "F")
+                    url = F;
             }
             output.Attributes.SetAttribute("href", url);
             output.Attributes.SetAttribute("target", "_blank");
@@ -35,14 +29,10 @@ namespace UDS.Net.Forms.TagHelpers
 
             string packetKindDisplay = "UDS Coding Guidebook for Visit Packet";
 
-            if (Kind == "IVP")
-                packetKindDisplay = "UDS Coding Guidebook for In-person Initial Visit Packet";
-            else if (Kind == "FVP")
-                packetKindDisplay = "UDS Coding Guidebook for Follow-up Visit Packet";
-            else if (Kind == "TIP")
-                packetKindDisplay = "UDS Coding Guidebook for Telephone Initial Visit Packet";
-            else if (Kind == "TFP")
-                packetKindDisplay = "UDS Coding Guidebook for Telephone Follow-up Visit Packet";
+            if (Kind == "I")
+                packetKindDisplay = "UDS Coding Guidebook for UDSv4 Initial Visit Packet";
+            else if (Kind == "F")
+                packetKindDisplay = "UDS Coding Guidebook for UDSv4 Follow-up Visit Packet";
 
             output.Content.Append($"{packetKindDisplay}");
         }

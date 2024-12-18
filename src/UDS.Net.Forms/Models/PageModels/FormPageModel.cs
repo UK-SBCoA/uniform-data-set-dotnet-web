@@ -60,6 +60,17 @@ namespace UDS.Net.Forms.Models.PageModels
 
             BaseForm = form.ToVM(); // this will have the subclass
 
+            if (String.IsNullOrWhiteSpace(BaseForm.INITIALS))
+            {
+                var shortenedInitials = Visit.INITIALS;
+                if (User.Identity.Name.Length > 3)
+                    shortenedInitials = User.Identity.Name.Substring(0, 3);
+                else
+                    shortenedInitials = User.Identity.Name;
+
+                BaseForm.INITIALS = shortenedInitials;
+            }
+
             return Page();
         }
 
