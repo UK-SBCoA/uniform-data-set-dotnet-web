@@ -5,6 +5,8 @@
 
 .DS_Store
 appsettings.Development.json
+# Playwright .auth
+.auth
 
 # User-specific files
 *.rsuser
