@@ -3,13 +3,17 @@ DESCRIPTION:
 checkboxDisable_controller.js is for custom UI behavior for disabling and enabling inputs by their name attribute when a checkbox is checked, using stimulus.js
 
 HTML USAGE:
-<div>
-    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new {@class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",
-        data_checkBoxDisable_target = "checkboxTrigger",
-        data_action = "input->checkboxDisable#ToggleGroup",
-        data_checkBoxDisable_group_param = "A1a.EXPSTRS",
-        data_checkboxDisable_disable_param = "true"})
-</div>
+     <div class="flex h-6 items-center">
+                 @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
+                     {
+                         @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                         data_checkBoxDisable_target = "checkboxTrigger",
+                         data_action = "input->checkboxDisable#ToggleGroup",
+                         data_checkBoxDisable_enableGroup_param = "",
+                         data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
+                         data_checkboxDisable_toggleState_param = "true"
+                     })
+             </div>
 
 STIMULUS PARAMETERS:
 data_checkboxDisable_group_param = the name of the input(s) you are wanting to disable
@@ -43,7 +47,7 @@ export default class extends Controller {
       //get all elements that are to be affected by checkbox using javascript
       var targetElements = document.getElementsByName(propertyName.trim());
 
-      if (targetElements.length < 1) {
+      if (targetElements.length == undefined) {
         return console.warn('No targets found to be affected by checkbox of id: ${checkbox.id} for property: ${propertyName}')
       }
 
@@ -56,15 +60,13 @@ export default class extends Controller {
   ToggleGroup(event) {
     const { enablegroup, disablegroup, togglestate } = event.params;
     const checkbox = event.currentTarget;
-    console.log(event.params);
+    /*    console.log(event.params);*/
 
     if (togglestate == undefined || enablegroup == undefined || disablegroup == undefined) {
       return console.error('Missing required parameters on a target element with id: ${this.checkboxTriggerTarget.id}')
     }
 
     var isChecked = checkbox.checked
-    //apply disable value if the checkbox is checked and the opposite when unchecked
-    //var disableValue = isChecked ? disable : !disable
 
     if (isChecked == togglestate) {
       this.IterateAndSetDisable(enablegroup, false);
@@ -86,9 +88,9 @@ export default class extends Controller {
       let enableGroup = checkbox.dataset.checkboxdisableEnablegroupParam
       let disableGroup = checkbox.dataset.checkboxdisableDisablegroupParam
 
-      console.log(toggleStateString);
-      console.log(enableGroup);
-      console.log(disableGroup);
+      //console.log(toggleStateString);
+      //console.log(enableGroup);
+      //console.log(disableGroup);
       //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
       //Stimulus only assumes type when using params with an action
       let toggleState = new Boolean()
