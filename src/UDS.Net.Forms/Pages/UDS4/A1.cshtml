@@ -721,7 +721,16 @@
                             <div class="relative flex items-start">
                                 <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("A1.GENOTH", Model.A1.GENOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A1.GENOTHX\" ]" })
+                                    <!--// GENOTH is pretty complex because it needs to enable and also disable //-->
+                                    @Html.CheckBox("A1.GENOTH", Model.A1.GENOTH, new
+                                    {
+                                        @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                        data_checkBoxDisable_target = "checkboxTrigger",
+                                        data_action = "input->checkboxDisable#ToggleGroup",
+                                        data_checkBoxDisable_enableGroup_param = "A1.GENOTHX",
+                                        data_checkBoxDisable_disableGroup_param = "A1.GENDKN,A1.GENNOANS",
+                                        data_checkboxDisable_toggleState_param = "true"
+                                    })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.GENOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENOTH)</label>
@@ -744,8 +753,9 @@
                                         @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                                         data_checkBoxDisable_target = "checkboxTrigger",
                                         data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_group_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
-                                        data_checkboxDisable_disable_param = "true"
+                                        data_checkBoxDisable_enableGroup_param = "",
+                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
+                                        data_checkboxDisable_toggleState_param = "true"
                                     })
                             </div>
                             <div class="ml-3 text-sm leading-6">
@@ -760,8 +770,9 @@
                                         @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                                         data_checkBoxDisable_target = "checkboxTrigger",
                                         data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_group_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
-                                        data_checkboxDisable_disable_param = "true"
+                                        data_checkBoxDisable_enableGroup_param = "",
+                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
+                                        data_checkboxDisable_toggleState_param = "true"
                                     })
                             </div>
                             <div class="ml-3 text-sm leading-6">
@@ -863,8 +874,9 @@
                                         @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                                         data_checkBoxDisable_target = "checkboxTrigger",
                                         data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_group_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNOTHX",
-                                        data_checkboxDisable_disable_param = "true"
+                                        data_checkBoxDisable_enableGroup_param = "",
+                                        data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNOTHX",
+                                        data_checkboxDisable_toggleState_param = "true"
                                     })
                             </div>
                             <div class="ml-3 text-sm leading-6">
@@ -877,11 +889,11 @@
                                 @Html.CheckBox("A1.SEXORNNOAN", Model.A1.SEXORNNOAN, new
                                 {
                                     @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                data_checkBoxDisable_target = "checkboxTrigger",
-                                data_action = "input->checkboxDisable#ToggleGroup",
-
-                                        data_checkBoxDisable_group_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK,A1.SEXORNOTHX",
-                                        data_checkboxDisable_disable_param = "true"
+                                    data_checkBoxDisable_target = "checkboxTrigger",
+                                    data_action = "input->checkboxDisable#ToggleGroup",
+                                    data_checkBoxDisable_enableGroup_param = "",
+                                    data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK,A1.SEXORNOTHX",
+                                    data_checkboxDisable_toggleState_param = "true"
                                 })
                             </div>
                             <div class="ml-3 text-sm leading-6">

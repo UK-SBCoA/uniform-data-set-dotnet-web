@@ -25,18 +25,18 @@ export default class extends Controller {
     this.OnLoad()
   }
 
-  ToggleGroup(event) {
-    const { group, disable } = event.params;
-    const checkbox = event.currentTarget;
+  /*
+    There are only two states to a checkbox. We need:
+    1. Which state will control the toggle (currently named disable)
+    2. When the toggle is activated then EnableGroup inputs will be enabled
+    3. When the toggle is activated then DisableGroup inputs will be disabled
+  */
 
-    if (group == undefined || disable == undefined) {
-      return console.error(`Missing required parameter of group or disable on a target element with id: ${this.checkboxTriggerTarget.id}`)
-    }
-
-    var isChecked = checkbox.checked
-    //apply disable value if the checkbox is checked and the opposite when unchecked
-    var disableValue = isChecked ? disable : !disable
+  IterateAndSetDisable(group, disableValue) {
     //split the group parameter into an array of property names
+    if (group == undefined) {
+      return console.log('Nothing here to change the state to');
+    }
     var propertyNames = group.split(',')
 
     propertyNames.forEach(propertyName => {
@@ -44,32 +44,63 @@ export default class extends Controller {
       var targetElements = document.getElementsByName(propertyName.trim());
 
       if (targetElements.length < 1) {
-        return console.warn(`No targets found to be affected by checkbox of id: ${checkbox.id} for property: ${propertyName}`)
+        return console.warn('No targets found to be affected by checkbox of id: ${checkbox.id} for property: ${propertyName}')
       }
 
       targetElements.forEach((element) => {
-        element.disabled = disableValue
+        element.disabled = disableValue;
       })
-    })
+    });
+  }
+
+  ToggleGroup(event) {
+    const { enablegroup, disablegroup, togglestate } = event.params;
+    const checkbox = event.currentTarget;
+    console.log(event.params);
+
+    if (togglestate == undefined || enablegroup == undefined || disablegroup == undefined) {
+      return console.error('Missing required parameters on a target element with id: ${this.checkboxTriggerTarget.id}')
+    }
+
+    var isChecked = checkbox.checked
+    //apply disable value if the checkbox is checked and the opposite when unchecked
+    //var disableValue = isChecked ? disable : !disable
+
+    if (isChecked == togglestate) {
+      this.IterateAndSetDisable(enablegroup, false);
+      this.IterateAndSetDisable(disablegroup, true);
+    }
+    else {
+      this.IterateAndSetDisable(enablegroup, true);
+      this.IterateAndSetDisable(disablegroup, false);
+    }
+
+
+
+
   }
 
   OnLoad() {
     for (let checkbox of this.checkboxTriggerTargets) {
-      let disableString = checkbox.dataset.checkboxdisableDisableParam
-      let group = checkbox.dataset.checkboxdisableGroupParam
+      let toggleStateString = checkbox.dataset.checkboxdisableTogglestateParam
+      let enableGroup = checkbox.dataset.checkboxdisableEnablegroupParam
+      let disableGroup = checkbox.dataset.checkboxdisableDisablegroupParam
 
+      console.log(toggleStateString);
+      console.log(enableGroup);
+      console.log(disableGroup);
       //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
       //Stimulus only assumes type when using params with an action
-      let disable = new Boolean()
+      let toggleState = new Boolean()
 
-      if (disableString == "false")
-        disable = false
+      if (toggleStateString == "false")
+        toggleState = false
 
-      if (disableString == "true")
-        disable = true
+      if (toggleStateString == "true")
+        toggleState = true
 
       if (checkbox.checked) {
-        this.ToggleGroup({ params: { group, disable }, currentTarget: checkbox })
+        this.ToggleGroup({ params: { enableGroup, disableGroup, toggleState }, currentTarget: checkbox })
         break;
       }
     }
