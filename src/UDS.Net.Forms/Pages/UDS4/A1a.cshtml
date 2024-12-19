@@ -712,11 +712,14 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a14.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",
-                    data_checkBoxDisable_target="checkboxTrigger",
-                    data_action="input->checkboxDisable#ToggleGroup",
-                    data_checkBoxDisable_group_param = "A1a.EXPSTRS",
-                    data_checkboxDisable_disable_param = "true" })
+                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new 
+                    {   @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",
+                        data_checkBoxDisable_target="checkboxTrigger",
+                        data_action="input->checkboxDisable#ToggleGroup",
+                        data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
+                        data_checkBoxDisable_enableGroup_param = "",
+                        data_checkboxDisable_toggleState_param = "true"
+                    })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOTAPP"></label>
