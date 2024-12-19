@@ -15,9 +15,6 @@ HTML USAGE:
                      })
              </div>
 
-STIMULUS PARAMETERS:
-data_checkboxDisable_group_param = the name of the input(s) you are wanting to disable
-data_checkboxDisable_disable_param = a flag for if clicking the checkbox disables or enables the group. true = disable on check and false = enable on check
 */
 
 import { Controller } from '@hotwired/stimulus';
