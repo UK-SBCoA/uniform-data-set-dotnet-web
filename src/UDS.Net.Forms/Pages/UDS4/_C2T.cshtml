@@ -151,7 +151,10 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECN"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DelayedRecallValidSum"></span>
+                </div>
             </div>
 
             <div class="@rowCSS">
@@ -163,7 +166,10 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECC"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRAndMOCARECCValidValues"></span>
+                </div>
             </div>
 
             <div class="@rowCSS">
@@ -175,8 +181,12 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECR"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRValidValue"></span>
+                </div>
             </div>
+
             <div class="@rowCSS">
                 <label asp-for="C2.MOCAORDT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORDT)</label>
 
