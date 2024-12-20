@@ -72,7 +72,6 @@
                     <radio-button-group id="@Html.IdFor(m => m.C2.MOCAHEAR)" for="@Model.C2.MOCAHEAR" items="Model.SimpleNoYesListItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAHEAR"></span>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALANX"></span>
             </div>
 
             <div class="@rowCSS">
@@ -1592,6 +1591,7 @@
                         <br>
                         <br>
                         <b>(Check all that apply)</b>
+                        <span asp-validation-for="RESPVALReasonIndicated" class="mt-2 text-sm text-red-600"></span>
                     </p>
                 </div>
                 <div class="subsubcounterreset">
