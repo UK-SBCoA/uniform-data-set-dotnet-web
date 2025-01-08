@@ -59,9 +59,9 @@ export default class extends Controller {
     const checkbox = event.currentTarget;
     /*    console.log(event.params);*/
 
-    if (togglestate == undefined || enablegroup == undefined || disablegroup == undefined) {
-      return console.error('Missing required parameters on a target element with id: ${this.checkboxTriggerTarget.id}')
-    }
+    //if (togglestate == undefined || enablegroup == undefined || disablegroup == undefined) {
+    //  return console.error($'Missing required parameters on a target element with id: this.event.checkbox')
+    //}
 
     var isChecked = checkbox.checked
 
@@ -82,24 +82,24 @@ export default class extends Controller {
   OnLoad() {
     for (let checkbox of this.checkboxTriggerTargets) {
       let toggleStateString = checkbox.dataset.checkboxdisableTogglestateParam
-      let enableGroup = checkbox.dataset.checkboxdisableEnablegroupParam
-      let disableGroup = checkbox.dataset.checkboxdisableDisablegroupParam
+      let enablegroup = checkbox.dataset.checkboxdisableEnablegroupParam
+      let disablegroup = checkbox.dataset.checkboxdisableDisablegroupParam
 
-      //console.log(toggleStateString);
-      //console.log(enableGroup);
-      //console.log(disableGroup);
+      console.log(toggleStateString);
+      console.log(enablegroup);
+      console.log(disablegroup);
       //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
       //Stimulus only assumes type when using params with an action
-      let toggleState = new Boolean()
+      let togglestate = new Boolean()
 
       if (toggleStateString == "false")
-        toggleState = false
+        togglestate = false
 
       if (toggleStateString == "true")
-        toggleState = true
+        togglestate = true
 
       if (checkbox.checked) {
-        this.ToggleGroup({ params: { enableGroup, disableGroup, toggleState }, currentTarget: checkbox })
+        this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox })
         break;
       }
     }
