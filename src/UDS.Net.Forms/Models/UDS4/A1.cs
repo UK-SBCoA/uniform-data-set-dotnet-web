@@ -394,7 +394,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 else return true;
             }
         }
-        [RequiredOnFinalized(ErrorMessage = "If response 7a is checked then responses 7f and 7g must be blank")]
+        [RequiredOnFinalized(ErrorMessage = "If response 7d is checked then responses 7f and 7g must be blank")]
         [NotMapped]
         public bool? TwoSpiritSexOrientation
         {

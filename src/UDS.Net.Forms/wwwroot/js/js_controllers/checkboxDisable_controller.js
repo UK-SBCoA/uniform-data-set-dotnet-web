@@ -17,6 +17,11 @@ HTML USAGE:
 
 */
 
+/*
+ TODO This controller was initally created to support the A1a form. The complexity grew when the code was modified to support the A1 form as well.
+ We should be able to refactor this so that it uses the stimulus targets instead of the the group params that are currently used.
+*/
+
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
@@ -57,11 +62,6 @@ export default class extends Controller {
   ToggleGroup(event) {
     const { enablegroup, disablegroup, togglestate } = event.params;
     const checkbox = event.currentTarget;
-    /*    console.log(event.params);*/
-
-    //if (togglestate == undefined || enablegroup == undefined || disablegroup == undefined) {
-    //  return console.error($'Missing required parameters on a target element with id: this.event.checkbox')
-    //}
 
     var isChecked = checkbox.checked
 
@@ -74,9 +74,6 @@ export default class extends Controller {
       this.IterateAndSetDisable(disablegroup, false);
     }
 
-
-
-
   }
 
   OnLoad() {
@@ -84,10 +81,8 @@ export default class extends Controller {
       let toggleStateString = checkbox.dataset.checkboxdisableTogglestateParam
       let enablegroup = checkbox.dataset.checkboxdisableEnablegroupParam
       let disablegroup = checkbox.dataset.checkboxdisableDisablegroupParam
+      let disableElement = checkbox.dataset.checkboxdisableDisableonloadParam
 
-      console.log(toggleStateString);
-      console.log(enablegroup);
-      console.log(disablegroup);
       //due to javascript typing, a boolean needs to be set manually to the destructured parameter or it will read as a string
       //Stimulus only assumes type when using params with an action
       let togglestate = new Boolean()
@@ -98,10 +93,28 @@ export default class extends Controller {
       if (toggleStateString == "true")
         togglestate = true
 
-      if (checkbox.checked) {
-        this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox })
-        break;
+      if (checkbox.dataset.checkboxdisableDisableonloadParam == undefined) {
+        if (checkbox.checked) {
+          this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox })
+        }
+      }
+
+      if (checkbox.dataset.checkboxdisableDisableonloadParam) {
+        if (checkbox.checked) {
+          this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox });
+        } else {
+          this.DisableElement(disableElement);
+        }
       }
     }
+  }
+
+  DisableElement(element) {
+
+    var targetElements = document.getElementsByName(element.trim());
+    targetElements.forEach((element) => {
+      element.disabled = true;
+    })
+
   }
 }
