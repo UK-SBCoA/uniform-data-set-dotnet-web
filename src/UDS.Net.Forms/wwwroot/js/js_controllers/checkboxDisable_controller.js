@@ -59,6 +59,9 @@ export default class extends Controller {
     });
   }
 
+  /*
+    ToggleGroup is called when the checkbox is changed
+  */
   ToggleGroup(event) {
     const { enablegroup, disablegroup, togglestate } = event.params;
     const checkbox = event.currentTarget;
@@ -93,28 +96,9 @@ export default class extends Controller {
       if (toggleStateString == "true")
         togglestate = true
 
-      if (checkbox.dataset.checkboxdisableDisableonloadParam == undefined) {
-        if (checkbox.checked) {
-          this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox })
-        }
-      }
-
-      if (checkbox.dataset.checkboxdisableDisableonloadParam) {
-        if (checkbox.checked) {
-          this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox });
-        } else {
-          this.DisableElement(disableElement);
-        }
-      }
+      // Need to call toggle group on each checkboxDisable checkbox
+      console.log("Setting up state for " + checkbox.id);
+      this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox });
     }
-  }
-
-  DisableElement(element) {
-
-    var targetElements = document.getElementsByName(element.trim());
-    targetElements.forEach((element) => {
-      element.disabled = true;
-    })
-
   }
 }
