@@ -97,9 +97,11 @@ export default class extends Controller {
         togglestate = true
 
       // Need to call toggle group on each checkboxDisable checkbox
-      console.log("Setting up state for " + checkbox.id);
-      // TODO if checkbox is disabled, don't run togglegroup
-      this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox });
+      // console.log("Setting up state for " + checkbox.id);
+      // if checkbox is disabled, don't run togglegroup
+      if (checkbox.disabled == false) {
+        this.ToggleGroup({ params: { enablegroup, disablegroup, togglestate }, currentTarget: checkbox });
+      }
     }
   }
 }
