@@ -92,7 +92,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? CVPACDEF { get; set; }
         [Display(Name = "Age at first pacemaker and/or defibrillator implantation")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
         public int? PACDEFAGE { get; set; }
         [Display(Name = "Congestive heart failure (including pulmonary edema)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
