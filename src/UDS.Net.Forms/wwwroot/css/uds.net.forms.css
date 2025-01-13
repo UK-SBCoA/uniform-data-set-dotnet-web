@@ -1,9 +1,5 @@
 
 /* Counters */
-#loadingSpinner {
-    display: none;
-}
-
 .counterreset {
     counter-reset: section;
 }
