@@ -139,7 +139,10 @@ namespace UDS.Net.Forms.Pages.UDS4
                             vm.IsDeleted = true; // unchecked (soft delete)
                         }
                     }
-                    A4.DrugIds.Add(vm);
+                    // We now have a scenario where custom drug ids can be manually entered, so there is potential for duplicates
+                    // across popular, OTC, and custom lists. We'll check for duplicates before adding drug to list of DrugIds.
+                    if (!A4.DrugIds.Where(d => d.RxNormId == vm.RxNormId && d.IsDeleted == false).Any())
+                        A4.DrugIds.Add(vm);
                 }
             }
         }
