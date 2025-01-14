@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HRTATTMULT { get; set; }
         [Display(Name = "Age at most recent heart attack")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
         public int? HRTATTAGE { get; set; }
         [Display(Name = "Cardiac arrest (heart stopped)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
