@@ -7,7 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <ReleaseVersion>4.6.8</ReleaseVersion>
+    <ReleaseVersion>4.6.11</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>
