@@ -4,6 +4,7 @@
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
     string checkboxCSS = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
+    int defaultMedsMedian = (int)Math.Ceiling((double)Model.PopularDrugCodes.Count / 2);
 }
 
 <div>
@@ -21,35 +22,40 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+                <div class="grid lg:grid-cols-2 sm:grid-cols-1" >
+                <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                     @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
                     {
-                        for (int i = 0; i < Model.PopularDrugCodes.Count(); i++)
+                        @foreach (var drugCode in Model.PopularDrugCodes.Take(defaultMedsMedian))
                         {
-                            var displayName = Model.PopularDrugCodes[i].DrugName;
-                            if (!string.IsNullOrWhiteSpace(Model.PopularDrugCodes[i].BrandName))
+                            var index = 0;
+                            var displayName = drugCode.DrugName;
+                            if (!string.IsNullOrWhiteSpace(drugCode.BrandName))
                             {
-                                displayName += " (" + Model.PopularDrugCodes[i].BrandName + ")";
+                                displayName += " (" + drugCode.BrandName + ")";
                             }
+                            <div>
                             <fieldset>
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                         <div class="flex h-6 items-center">
-                                            <input asp-for="PopularDrugCodes[i].Id" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].RxNormId " type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" disabled />
+                                            <input asp-for="PopularDrugCodes[index]" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].RxNormId " type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].DrugName" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].BrandName" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].IsOverTheCounter" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].IsPopular" type="hidden" />
+                                            <input asp-for="PopularDrugCodes[index].IsSelected" type="checkbox" class="@checkboxCSS" disabled />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
+                                            <label for="@Html.IdFor(m => m.PopularDrugCodes[index].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[index].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
+                            </div>
+                            index++;
                         }
                     }
                     else
@@ -57,6 +63,53 @@
                         <p class="sm:gap-4 sm:py-">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
                     }
                 </div>
+
+                <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+                    @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
+
+                    {
+                        @foreach (var drugCode in Model.PopularDrugCodes.Skip(defaultMedsMedian))
+
+                        {
+                            var index = 0;
+                            var displayName = drugCode.DrugName;
+                            if (!string.IsNullOrWhiteSpace(drugCode.BrandName))
+                            {
+
+                                displayName += " (" + drugCode.BrandName + ")";
+                            }
+                            <div>
+                                <fieldset>
+                                    <div class="space-y-5">
+                                        <div class="relative flex items-start">
+                                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                            <div class="flex h-6 items-center">
+                                                <input asp-for="PopularDrugCodes[index]" type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].RxNormId " type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].DrugName" type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].BrandName" type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].IsOverTheCounter" type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].IsPopular" type="hidden" />
+                                                <input asp-for="PopularDrugCodes[index].IsSelected" type="checkbox" class="@checkboxCSS" disabled />
+                                            </div>
+                                            <div class="ml-3 text-sm leading-6">
+                                                <label for="@Html.IdFor(m => m.PopularDrugCodes[index].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[index].RxNormId</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            index++;
+                        }
+                    }
+                    else
+
+                    {
+                        <p class="sm:gap-4 sm:py-">No drug codes found in the reference. Ask your IT to insert drug codes from NACC reference.</p>
+                    }
+                </div>
+                </div>
+
 
                 @if (Model.OTCDrugCodes != null || Model.OTCDrugCodes.Count() == 0)
                 {
