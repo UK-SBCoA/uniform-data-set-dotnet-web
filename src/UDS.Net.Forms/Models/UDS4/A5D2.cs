@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HRTATTMULT { get; set; }
         [Display(Name = "Age at most recent heart attack")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
         public int? HRTATTAGE { get; set; }
         [Display(Name = "Cardiac arrest (heart stopped)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -92,7 +92,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? CVPACDEF { get; set; }
         [Display(Name = "Age at first pacemaker and/or defibrillator implantation")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(HRTATTACK), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
         public int? PACDEFAGE { get; set; }
         [Display(Name = "Congestive heart failure (including pulmonary edema)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -221,23 +221,23 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HEADINJURY { get; set; }
         [Display(Name = "After a head injury, what was the longest period of time that the participant was unconscious?")]
         [RegularExpression("^([0-4]|8|9)$", ErrorMessage = "Valid range is 0-4 or 8 or 9")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJUNC { get; set; }
         [Display(Name = "After a head injury, what was the longest period that the participant was \"dazed or confused\" or unable to recall details of the injury?")]
         [RegularExpression("^([0-4]|8|9)$", ErrorMessage = "Valid range is 0-4 or 8 or 9")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJCON { get; set; }
         [Display(Name = "Total number of head injuries in which the participant felt \"dazed or confused\", unable to recall details of the injury or experienced loss of consciousness?")]
         [RegularExpression("^([0-4]|9)$", ErrorMessage = "Valid range is 0-4 or 9")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Please specify.")]
         public int? HEADINJNUM { get; set; }
         [Display(Name = "Age of first head injury that resulted in a period of feeling \"dazed or confused,\" being unable to recall details of the injury, or loss of consciousness")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Please specify.")]
         public int? FIRSTTBI { get; set; }
         [Display(Name = "Age of most recent head injury that resulted in a period of feeling \"dazed or confused,\" being unable to recall details of the injury, or loss of consciousness")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
-        [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Please specify.")]
         public int? LASTTBI { get; set; }
         [Display(Name = "Diabetes")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
