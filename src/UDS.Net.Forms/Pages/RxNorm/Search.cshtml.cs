@@ -9,8 +9,20 @@ namespace UDS.Net.Forms.Pages.RxNorm
 {
     public class SearchModel : PageModel
     {
-        public void OnGet()
+        [BindProperty]
+        public int Id { get; set; } = 0;
+
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (id.HasValue)
+                Id = id.Value;
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            return Page();
         }
     }
 }

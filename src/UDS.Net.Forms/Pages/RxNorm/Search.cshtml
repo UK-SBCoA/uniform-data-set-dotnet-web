@@ -1,5 +1,12 @@
-﻿@page
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.RxNorm.SearchModel
 @{
+    ViewData["Title"] = "Search RxNorm";
 }
 
+<turbo-frame id="RxNorm">
+    <a asp-page="/UDS4/A4" asp-route-id="">Back</a>
+    <form method="post">
+        <input type="submit" value="Save" />
+    </form>
+</turbo-frame>

@@ -106,7 +106,7 @@
                 <p>Use the "Add" button to search for a valid RXNorm code by drug or brand name.</p>
             </div>
             <div>
-                <a asp-page="/RxNorm/Search">Add</a>
+                <a asp-page="/RxNorm/Search" asp-route-id="@Model.Visit.Id">Add</a>
             </div>
         </div>
         <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
