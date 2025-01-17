@@ -26,8 +26,11 @@
             <!-- Left Column Popular Drug Codes -->
             <div class="grid lg:grid-cols-2 sm:grid-cols-1" >
                 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-                    @for (int i = 0; i < Model.PopularDrugCodes.Take(defaultMedsMedian).Count(); i++)
-                    {
+
+                   @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
+                   {
+                        for (int i = 0; i < Model.PopularDrugCodes.Take(defaultMedsMedian).Count(); i++)
+                        {
                         var drugCode = Model.PopularDrugCodes[i];
                         var displayName = drugCode.DrugName;
                         if (!string.IsNullOrWhiteSpace(drugCode.BrandName))
@@ -46,23 +49,26 @@
                                             <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" disabled />
+                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS"/>
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
-                                        </div>
+                                       </div>
                                     </div>
                                 </div>
                             </fieldset>
                             </div>
                             i++;
                         }
-
+                    }
                 </div>
 
                 <!-- Right Column Popular Drug Codes -->
                 <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-                    @for (int i = defaultMedsMedian; i < Model.PopularDrugCodes.Count(); i++)
+
+                    @if (Model.PopularDrugCodes != null || Model.PopularDrugCodes.Count() == 0)
+
+                        for (int i = defaultMedsMedian; i < Model.PopularDrugCodes.Count(); i++)
                             {
                                 var drugCode = Model.PopularDrugCodes[i];
                                 var displayName = drugCode.DrugName;
@@ -82,7 +88,7 @@
                                                 <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                                <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" disabled />
+                                                <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS"/>
                                             </div>
                                             <div class="ml-3 text-sm leading-6">
                                                 <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
@@ -92,11 +98,12 @@
                                 </fieldset>
                             </div>
                             i++;
-                            }
+                        }
+                        
                 </div>
             </div>
-
-            @if (Model.OTCDrugCodes != null || Model.OTCDrugCodes.Count() == 0)
+            <!-- OTC Drug Codes -->
+                @if (Model.OTCDrugCodes != null || Model.OTCDrugCodes.Count() == 0)
             {
                 <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                     <p>Commonly reported medications that may be purchased over the counter (but that may also be prescription)</p>
