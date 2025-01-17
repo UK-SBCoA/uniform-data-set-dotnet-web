@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using rxNorm.Net.Api.Wrapper;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
@@ -17,6 +18,7 @@ namespace UDS.Net.Forms.Pages.UDS4
     public class A4Model : FormPageModel
     {
         protected readonly ILookupService _lookupService;
+        protected readonly IRxNormClient _rxNormClient;
 
         [BindProperty]
         public A4 A4 { get; set; } = default!;
@@ -37,9 +39,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Yes", "1")
         };
 
-        public A4Model(IVisitService visitService, ILookupService lookupService) : base(visitService, "A4")
+        public A4Model(IVisitService visitService, ILookupService lookupService, IRxNormClient rxNormClient) : base(visitService, "A4")
         {
             _lookupService = lookupService;
+            _rxNormClient = rxNormClient ?? throw new ArgumentNullException(nameof(rxNormClient));
         }
 
         private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
@@ -110,6 +113,8 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
+            var search = await _rxNormClient.SearchDisplayTermsAsync("tylenol");
+
             return Page();
         }
 
@@ -163,6 +168,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
                 AssessDrugId(c);
             }
+
 
             BaseForm = A4; // reassign bounded and derived form to base form for base method
 
