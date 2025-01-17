@@ -9,8 +9,10 @@ namespace UDS.Net.Forms.Pages.RxNorm
 {
     public class SelectModel : PageModel
     {
-        public void OnGet()
+        public async Task<IActionResult> OnGet(int id, string searchTerm)
         {
+            var test = "";
+            return Page();
         }
     }
 }

@@ -2,11 +2,29 @@
 @model UDS.Net.Forms.Pages.RxNorm.SearchModel
 @{
     ViewData["Title"] = "Search RxNorm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+
 }
 
 <turbo-frame id="RxNorm">
-    <a asp-page="/UDS4/A4" asp-route-id="">Back</a>
+    <a asp-page="/UDS4/A4" asp-route-id="@Model.RxNormLookup.Id">Back</a>
     <form method="post">
-        <input type="submit" value="Save" />
+        <div class="@rowCSS">
+            <div>
+                <label asp-for="@Model.RxNormLookup.SearchTerm">@Html.DisplayNameFor(m => m.RxNormLookup.SearchTerm)</label>
+                <p class="text-gray-400"><i>Search by brand or generic name</i></p>
+            </div>
+            <div>
+                <p class="text-sm text-gray-500" asp-description-for="RxNormLookup.SearchTerm"></p>
+                <div class="mt-2 w-20">
+                    <input asp-for="@Model.RxNormLookup.SearchTerm" />
+                </div>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.RxNormLookup.SearchTerm"></span>
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
+
+        <input type="submit" value="Search" />
     </form>
 </turbo-frame>
