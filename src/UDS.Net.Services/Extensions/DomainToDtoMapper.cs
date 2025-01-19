@@ -10,6 +10,7 @@ using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -1632,6 +1633,18 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
+            };
+        }
+
+        public static DrugCodeDto ToDto(this DrugCode drugCode)
+        {
+            return new DrugCodeDto
+            {
+                RxNormId = Int32.Parse(drugCode.RxNormId),
+                DrugName = drugCode.DrugName,
+                BrandName = drugCode.BrandName,
+                IsOverTheCounter = drugCode.IsOverTheCounter,
+                IsPopular = drugCode.IsPopular
             };
         }
     }

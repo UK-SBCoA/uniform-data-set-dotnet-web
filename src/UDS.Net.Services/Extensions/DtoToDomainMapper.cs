@@ -6,6 +6,7 @@ using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -402,6 +403,18 @@ namespace UDS.Net.Services.Extensions
             }
 
             return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
+        }
+
+        public static DrugCode ToDomain(this DrugCodeDto dto)
+        {
+            return new DrugCode
+            {
+                RxNormId = dto.RxNormId.ToString(),
+                DrugName = dto.DrugName,
+                BrandName = dto.BrandName,
+                IsOverTheCounter = dto.IsOverTheCounter,
+                IsPopular = dto.IsPopular
+            };
         }
     }
 }

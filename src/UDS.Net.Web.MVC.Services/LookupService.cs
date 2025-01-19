@@ -3,20 +3,24 @@ using System;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
+using UDS.Net.Services.Extensions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
+using rxNorm.Net.Api.Wrapper;
 
 namespace UDS.Net.Web.MVC.Services
 {
     public class LookupService : ILookupService
     {
         private readonly IApiClient _apiClient;
+        private readonly IRxNormClient _rxNormClient;
 
-        public LookupService(IApiClient apiClient)
+        public LookupService(IApiClient apiClient, IRxNormClient rxNormClient)
         {
             _apiClient = apiClient;
+            _rxNormClient = rxNormClient;
         }
 
         public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1)
@@ -28,34 +32,20 @@ namespace UDS.Net.Web.MVC.Services
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 TotalResultsCount = dto.TotalResultsCount,
-                DrugCodes = dto.Results.Select(r => new DrugCode
-                {
-                    RxNormId = r.RxNormId.ToString(),
-                    DrugName = r.DrugName,
-                    BrandName = r.BrandName,
-                    IsPopular = r.IsPopular,
-                    IsOverTheCounter = r.IsOverTheCounter
-                }).ToList()
+                DrugCodes = dto.Results.Select(r => r.ToDomain()).ToList()
             };
         }
 
-        public async Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, bool onlyPopular = true, string searchTerm = "")
+        public async Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, string searchTerm = "")
         {
-            var dto = await _apiClient.LookupClient.SearchDrugCodes(pageSize, pageSize, onlyPopular, searchTerm);
+            var dto = await _apiClient.LookupClient.SearchDrugCodes(pageSize, pageSize, searchTerm);
 
             return new DrugCodeLookup
             {
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 TotalResultsCount = dto.TotalResultsCount,
-                DrugCodes = dto.Results.Select(r => new DrugCode
-                {
-                    RxNormId = r.RxNormId.ToString(),
-                    DrugName = r.DrugName,
-                    BrandName = r.BrandName,
-                    IsPopular = r.IsPopular,
-                    IsOverTheCounter = r.IsOverTheCounter
-                }).ToList()
+                DrugCodes = dto.Results.Select(r => r.ToDomain()).ToList()
             };
         }
 
@@ -72,6 +62,38 @@ namespace UDS.Net.Web.MVC.Services
                 ReasonChangedCode = dto.ReasonChangedCode,
                 Error = dto.Error
             };
+        }
+
+        public async Task<List<string>> LookupRxNormDisplayTerms()
+        {
+            var results = await _rxNormClient.GetDisplayTermsAsync();
+
+            if (results != null)
+                return results.ToList();
+            else
+                return new List<string>();
+        }
+
+        public async Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20)
+        {
+            var matches = await _rxNormClient.GetApproximateMatches(searchTerm, false, pageSize);
+            if (matches != null)
+            {
+                return matches.Select(m => new RxNorm
+                {
+                    Name = m.Name,
+                    RxCUI = m.RxCUI
+                }).ToList();
+            }
+            else
+                return new List<RxNorm>();
+        }
+
+        public async Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode)
+        {
+            var added = await _apiClient.LookupClient.AddDrugCode(newDrugCode.ToDto());
+
+            return added.ToDomain();
         }
 
         [Obsolete]

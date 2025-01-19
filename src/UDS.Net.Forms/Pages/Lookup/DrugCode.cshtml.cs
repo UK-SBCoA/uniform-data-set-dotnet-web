@@ -40,7 +40,7 @@ namespace UDS.Net.Forms.Pages.Lookup
             {
                 Lookup.SearchTerm = searchTerm.Trim();
 
-                var lookup = await _lookupService.SearchDrugCodes(10, 1, false, searchTerm);
+                var lookup = await _lookupService.SearchDrugCodes(10, 1, searchTerm);
 
                 if (lookup != null)
                     Lookup.DrugCodes = lookup.DrugCodes.Select(c => c.ToVM()).ToList();

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using rxNorm.Net.Api.Wrapper;
 using System.Diagnostics;
 using UDS.Net.API.Client;
 using UDS.Net.Services;
@@ -34,6 +35,8 @@ builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
 builder.Services.AddSingleton<ILookupService, LookupService>();
 builder.Services.AddSingleton<IPacketService, PacketService>();
+
+builder.Services.AddSingleton<IRxNormClient, RxNormClient>();
 
 ////*************************************************************************************************
 
