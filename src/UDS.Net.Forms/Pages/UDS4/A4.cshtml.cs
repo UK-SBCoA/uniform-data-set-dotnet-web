@@ -11,6 +11,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -42,6 +43,31 @@ namespace UDS.Net.Forms.Pages.UDS4
             _lookupService = lookupService;
         }
 
+        private void PopulateDrugCodeList(List<DrugCodeModel> viewModel, List<DrugCodeModel> interactedDrugIds, List<DrugCode> list)
+        {
+            foreach (var drug in list)
+            {
+                if (drug != null)
+                {
+                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
+                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
+                    {
+                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
+
+                        if (interacted != null)
+                        {
+                            viewModel.Add(drug.ToVM(interacted));
+
+                            interactedDrugIds.Remove(interacted);
+                        }
+                    }
+                    else
+                        viewModel.Add(drug.ToVM()); // checkbox has never been interacted with
+
+                }
+            }
+        }
+
         private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
         {
             var lookup = await _lookupService.LookupDrugCodes(200, 1); // returns popular drugs (prescription + otc) and custom
@@ -52,71 +78,14 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             var custom = lookup.DrugCodes.Where(d => d.IsPopular == false && d.IsOverTheCounter == false).ToList();
 
-            //  popular drug list combined with previously interacted checkboxes
-            foreach (var drug in popular)
-            {
-                if (drug != null)
-                {
-                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
-                    {
-                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
+            // combine popular drug list with previously interacted checkboxes
+            PopulateDrugCodeList(PopularDrugCodes, interactedDrugIds, popular);
 
-                        if (interacted != null)
-                        {
-                            PopularDrugCodes.Add(drug.ToVM(interacted));
+            // combine otc drug list with previously interacted checkboxes
+            PopulateDrugCodeList(OTCDrugCodes, interactedDrugIds, otc);
 
-                            interactedDrugIds.Remove(interacted);
-                        }
-                    }
-                    else
-                        PopularDrugCodes.Add(drug.ToVM()); // checkbox has never been interacted with
-                }
-            }
-
-            // otc drug list combined with previously interacted checkboxes
-            foreach (var drug in otc)
-            {
-                if (drug != null)
-                {
-                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
-                    {
-                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
-
-                        if (interacted != null)
-                        {
-                            OTCDrugCodes.Add(drug.ToVM(interacted));
-
-                            interactedDrugIds.Remove(interacted);
-                        }
-                    }
-                    else
-                        OTCDrugCodes.Add(drug.ToVM()); // checkbox has never been interacted with
-                }
-            }
-
-            foreach (var drug in custom)
-            {
-                if (drug != null)
-                {
-                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
-                    {
-                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
-
-                        if (interacted != null)
-                        {
-                            CustomDrugCodes.Add(drug.ToVM(interacted));
-
-                            interactedDrugIds.Remove(interacted);
-                        }
-                    }
-                    else
-                        CustomDrugCodes.Add(drug.ToVM()); // checkbox has never been interacted with
-
-                }
-            }
+            // combine custom with previously interacted checkboxes
+            PopulateDrugCodeList(CustomDrugCodes, interactedDrugIds, custom);
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
