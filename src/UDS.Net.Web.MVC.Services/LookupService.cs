@@ -3,6 +3,7 @@ using System;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
+using UDS.Net.Services.Extensions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,34 +32,20 @@ namespace UDS.Net.Web.MVC.Services
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 TotalResultsCount = dto.TotalResultsCount,
-                DrugCodes = dto.Results.Select(r => new DrugCode
-                {
-                    RxNormId = r.RxNormId.ToString(),
-                    DrugName = r.DrugName,
-                    BrandName = r.BrandName,
-                    IsPopular = r.IsPopular,
-                    IsOverTheCounter = r.IsOverTheCounter
-                }).ToList()
+                DrugCodes = dto.Results.Select(r => r.ToDomain()).ToList()
             };
         }
 
-        public async Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, bool onlyPopular = true, string searchTerm = "")
+        public async Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, string searchTerm = "")
         {
-            var dto = await _apiClient.LookupClient.SearchDrugCodes(pageSize, pageSize, onlyPopular, searchTerm);
+            var dto = await _apiClient.LookupClient.SearchDrugCodes(pageSize, pageSize, searchTerm);
 
             return new DrugCodeLookup
             {
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 TotalResultsCount = dto.TotalResultsCount,
-                DrugCodes = dto.Results.Select(r => new DrugCode
-                {
-                    RxNormId = r.RxNormId.ToString(),
-                    DrugName = r.DrugName,
-                    BrandName = r.BrandName,
-                    IsPopular = r.IsPopular,
-                    IsOverTheCounter = r.IsOverTheCounter
-                }).ToList()
+                DrugCodes = dto.Results.Select(r => r.ToDomain()).ToList()
             };
         }
 
@@ -102,6 +89,13 @@ namespace UDS.Net.Web.MVC.Services
                 return new List<RxNorm>();
         }
 
+        public async Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode)
+        {
+            var added = await _apiClient.LookupClient.AddDrugCode(newDrugCode.ToDto());
+
+            return added.ToDomain();
+        }
+
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
         {
@@ -143,7 +137,6 @@ namespace UDS.Net.Web.MVC.Services
         {
             throw new NotImplementedException();
         }
-
     }
 }
 

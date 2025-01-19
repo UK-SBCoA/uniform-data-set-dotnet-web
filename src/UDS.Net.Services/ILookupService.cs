@@ -9,13 +9,15 @@ namespace UDS.Net.Services
     {
         Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1);
 
-        Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, bool onlyPopular = true, string? searchTerm = "");
+        Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, string? searchTerm = "");
 
         Task<LookupCountryCodeDto> LookupCountryCode(string countryCode);
 
         Task<List<string>> LookupRxNormDisplayTerms();
 
         Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20);
+
+        Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode);
     }
 }
 

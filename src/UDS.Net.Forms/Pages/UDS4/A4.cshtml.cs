@@ -44,11 +44,13 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
         {
-            var lookup = await _lookupService.LookupDrugCodes(100, 1); // returns popular drugs (prescription + otc)
+            var lookup = await _lookupService.LookupDrugCodes(200, 1); // returns popular drugs (prescription + otc) and custom
 
-            var popular = lookup.DrugCodes.Where(d => d.IsOverTheCounter == false).ToList();
+            var popular = lookup.DrugCodes.Where(d => d.IsPopular == true && d.IsOverTheCounter == false).ToList();
 
             var otc = lookup.DrugCodes.Where(d => d.IsOverTheCounter == true).ToList();
+
+            var custom = lookup.DrugCodes.Where(d => d.IsPopular == false && d.IsOverTheCounter == false).ToList();
 
             //  popular drug list combined with previously interacted checkboxes
             foreach (var drug in popular)
@@ -94,9 +96,27 @@ namespace UDS.Net.Forms.Pages.UDS4
                 }
             }
 
-            // now whatever is left are the custom drug codes that were added to the visit
-            CustomDrugCodes = interactedDrugIds;
+            foreach (var drug in custom)
+            {
+                if (drug != null)
+                {
+                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
+                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
+                    {
+                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
 
+                        if (interacted != null)
+                        {
+                            CustomDrugCodes.Add(drug.ToVM(interacted));
+
+                            interactedDrugIds.Remove(interacted);
+                        }
+                    }
+                    else
+                        CustomDrugCodes.Add(drug.ToVM()); // checkbox has never been interacted with
+
+                }
+            }
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)

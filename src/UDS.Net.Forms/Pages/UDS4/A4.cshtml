@@ -100,15 +100,7 @@
             </div>
         }
 
-        <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
-            <div>
-                <p><strong>If a medication is not listed above</strong></p>
-                <p>Use the "Add" button to search for a valid RXNorm code by drug or brand name.</p>
-            </div>
-            <div>
-                <a asp-page="/RxNorm/Search" asp-route-id="@Model.Visit.Id">Add</a>
-            </div>
-        </div>
+        <!--// Custom medications //-->
         <div class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
             <div>
                 @if (Model.CustomDrugCodes != null || Model.CustomDrugCodes.Count() == 0)
@@ -142,6 +134,15 @@
                         }
                     </div>
                 }
+            </div>
+        </div>
+        <div class="flex flex-col sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+            <div>
+                <p><strong>If a medication is not listed above</strong></p>
+                <p>Use the "Add" button to search for a valid RXNorm code by drug or brand name.</p>
+            </div>
+            <div>
+                <a asp-page="/RxNorm/Search" asp-route-id="@Model.Visit.Id">Add</a>
             </div>
         </div>
     </div>

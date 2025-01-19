@@ -30,7 +30,8 @@ namespace UDS.Net.Forms.Pages.RxNorm
             RxNormLookup = new RxNormLookupModel()
             {
                 Id = id,
-                SearchTerm = searchTerm
+                SearchTerm = searchTerm,
+                SearchResults = new Dictionary<string, string>()
             };
 
             if (String.IsNullOrWhiteSpace(searchTerm))

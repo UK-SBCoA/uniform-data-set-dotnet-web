@@ -20,9 +20,9 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.10" />
-		<PackageReference Include="UDS.Net.API.Client" Version="4.4.0" />
-		<PackageReference Include="UDS.Net.Dto" Version="4.4.0" />
-		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.2" />
+		<PackageReference Include="UDS.Net.API.Client" Version="4.5.0-preview.1" />
+		<PackageReference Include="UDS.Net.Dto" Version="4.5.0-preview.1" />
+		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Forms\UDS.Net.Forms.csproj">
