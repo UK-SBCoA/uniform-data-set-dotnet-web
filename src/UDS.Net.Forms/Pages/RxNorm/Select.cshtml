@@ -4,3 +4,22 @@
     ViewData["Title"] = "Select a medication";
 }
 
+@if (Model.RxNormLookup.SearchResults != null)
+{
+    <table>
+        <tbody>
+            @foreach (var result in Model.RxNormLookup.SearchResults)
+            {
+                <tr>
+                    <td>
+                        <form method="post" asp-route-id="@Model.RxNormLookup.Id">
+                            @result.Key
+                            <input type="hidden" name="rxCUI" value="@result.Value" />
+                            <input type="submit" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

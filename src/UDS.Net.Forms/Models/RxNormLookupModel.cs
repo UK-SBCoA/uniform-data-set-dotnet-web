@@ -7,7 +7,7 @@ namespace UDS.Net.Forms.Models
 
         public int ResultsCount { get; set; } = 0;
 
-        public List<string> SearchResults { get; set; }
+        public Dictionary<string, string> SearchResults { get; set; }
 
         public string SearchTerm { get; set; }
 

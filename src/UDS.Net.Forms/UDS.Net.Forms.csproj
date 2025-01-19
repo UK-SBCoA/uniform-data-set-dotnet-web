@@ -37,6 +37,5 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.0" />
 	</ItemGroup>
 </Project>

@@ -4,21 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using rxNorm.Net.Api.Wrapper;
 using UDS.Net.Forms.Models;
+using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.RxNorm
 {
     public class SearchModel : PageModel
     {
-        protected readonly IRxNormClient _rxNormClient;
+        protected readonly ILookupService _lookupService;
 
         [BindProperty]
         public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
-        public SearchModel(IRxNormClient rxNormClient)
+        public SearchModel(ILookupService lookupService)
         {
-            _rxNormClient = rxNormClient;
+            _lookupService = lookupService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -38,25 +38,28 @@ namespace UDS.Net.Forms.Pages.RxNorm
                 return Page();
             }
 
-            var results = await _rxNormClient.SearchDisplayTermsAsync(RxNormLookup.SearchTerm);
-
-            if (results != null)
+            try
             {
-                RxNormLookup.ResultsCount = results.Count();
-                if (RxNormLookup.ResultsCount > 0)
-                    RxNormLookup.SearchResults = results.ToList();
+
+                var results = await _lookupService.LookupRxNormApproximateMatches(RxNormLookup.SearchTerm);
+
+                var count = results.Where(t => t.Name.ToLower().Contains(RxNormLookup.SearchTerm.ToLower())).Count();
+
+                if (count > 0)
+                {
+                    return RedirectToPage("/RxNorm/Select", new { Id = RxNormLookup.Id, SearchTerm = RxNormLookup.SearchTerm });
+                }
                 else
                 {
                     ModelState.AddModelError("RxNormLookup.SearchTerm", "No results found.");
                     return Page();
                 }
             }
-            else
+            catch (Exception ex)
             {
                 ModelState.AddModelError("RxNormLookup.SearchTerm", "Trouble accessing RxNorm web api. Please use RxNav: https://lhncbc.nlm.nih.gov/RxNav/ to find RxCUI and submit ticket to DMS to update packet.");
                 return Page();
             }
-            return RedirectToPage("/RxNorm/Select", new { Id = RxNormLookup.Id, SearchTerm = RxNormLookup.SearchTerm });
         }
     }
 }

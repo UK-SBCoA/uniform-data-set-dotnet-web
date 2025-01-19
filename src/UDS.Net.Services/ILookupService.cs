@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UDS.Net.Dto;
 using UDS.Net.Services.LookupModels;
 
@@ -12,6 +13,9 @@ namespace UDS.Net.Services
 
         Task<LookupCountryCodeDto> LookupCountryCode(string countryCode);
 
+        Task<List<string>> LookupRxNormDisplayTerms();
+
+        Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20);
     }
 }
 
