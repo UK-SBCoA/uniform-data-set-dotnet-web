@@ -214,23 +214,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         public int? MOTORAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent motor problem that is causing the participant's complaints and/or affecting the participant's function.")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMODE { get; set; }
         [Display(Name = "Indicate mode of onset for the most prominent motor problem that is causing the participant's complains and or affecting the participant's function - Other, specify")]
         [RequiredIf(nameof(MOMODE), "4", ErrorMessage = "Value required")]
         [MaxLength(60)]
         public string? MOMODEX { get; set; }
         [Display(Name = "Were changes in motor function suggestive of parkinsonism?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMOPARK { get; set; }
         [Display(Name = "Were changes in motor function suggestive of amyotrophic lateral sclerosis?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMOALS { get; set; }
         [Display(Name = "Overall course of decline of cognitive / behavioral / motor syndrome")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? COURSE { get; set; }
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? FRSTCHG { get; set; }
         [NotMapped]
         [RequiredIf(nameof(BESUBAB), "1", ErrorMessage = "Please select at least one substance")]
