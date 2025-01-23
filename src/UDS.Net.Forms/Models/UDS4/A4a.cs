@@ -147,14 +147,14 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
 
-                    if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year) && (treatment.STARTYEAR.Value != 9999) && (treatment.STARTYEAR.Value != 8888))
+                    if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
                     {
                         yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
                     }
 
                     if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year) && (treatment.ENDYEAR.Value != 9999) && (treatment.ENDYEAR.Value != 8888))
                     {
-                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
+                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
 
                     index++;
