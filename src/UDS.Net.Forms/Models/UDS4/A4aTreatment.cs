@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -40,13 +36,14 @@ namespace UDS.Net.Forms.Models.UDS4
         [ProhibitedCharacters]
         public string? NCTNUM { get; set; }
 
-        [Range(1, 12)]
+        [RegularExpression("^([1-9]|1[0-2]|88|99)$", ErrorMessage = "Valid range is 0-36 or 88 or 99")]
         public int? STARTMO { get; set; }
 
         public int? STARTYEAR { get; set; }
 
-        [Range(1, 12)]
+        [RegularExpression("^([1-9]|1[0-2]|88|99)$", ErrorMessage = "Valid range is 0-36 or 88 or 99")]
         public int? ENDMO { get; set; }
+
 
         public int? ENDYEAR { get; set; }
 
