@@ -41,7 +41,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public int? STARTYEAR { get; set; }
 
-        [RegularExpression("^([1-9]|1[0-2]|88|99)$", ErrorMessage = "Valid range is 0-36 or 88 or 99")]
+        [RegularExpression("^([1-9]|1[0-2]|88|99)$", ErrorMessage = "Valid range is 1 - 12 or 88 or 99")]
         public int? ENDMO { get; set; }
 
 
