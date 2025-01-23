@@ -441,7 +441,11 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHAGE"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.PSYCHAGE" for="@Model.B9.PSYCHAGE" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <td colspan="2">
+                        <div>
+                            <input asp-for="B9.PSYCHAGE" />
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -571,7 +575,7 @@
                 <tr>
                     <td colspan="5">
                         <div class="grid grid-cols-3">
-                        <div>
+                            <div>
                                 <label asp-for="B9.PERCHAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PERCHAGE)</label>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGE"></span>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGESymptomsPresent"></span>

@@ -122,7 +122,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Participant currently manifests meaningful change in behavior — Aggression")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAGGRS { get; set; }
-        [Display(Name = "If any of the psychosis and impulse control-related behavioral symptoms in 12h-12k are present, at what age did they begin?")]
+        [Display(Name = "If any of the psychosis and impulse control–related behavioral changes in 12h–12k are present, at what age did they begin? (The clinician must use their best judgment to estimate an age of onset. If multiple symptoms are identified, denote the age of the earliest symptom.)")]
+        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? PSYCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Disinhibition")]
