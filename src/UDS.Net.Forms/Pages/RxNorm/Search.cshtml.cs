@@ -40,7 +40,6 @@ namespace UDS.Net.Forms.Pages.RxNorm
 
             try
             {
-
                 var results = await _lookupService.LookupRxNormApproximateMatches(RxNormLookup.SearchTerm);
 
                 var count = results.Where(t => t.Name.ToLower().Contains(RxNormLookup.SearchTerm.ToLower())).Count();

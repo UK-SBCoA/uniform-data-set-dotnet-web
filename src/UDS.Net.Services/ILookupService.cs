@@ -11,6 +11,8 @@ namespace UDS.Net.Services
 
         Task<DrugCodeLookup> SearchDrugCodes(int pageSize = 10, int pageIndex = 1, string? searchTerm = "");
 
+        Task<DrugCodeLookup> FindDrugCode(string rxCUI);
+
         Task<LookupCountryCodeDto> LookupCountryCode(string countryCode);
 
         Task<List<string>> LookupRxNormDisplayTerms();

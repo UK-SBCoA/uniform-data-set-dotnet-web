@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
@@ -37,22 +38,66 @@ namespace UDS.Net.Forms.Pages.RxNorm
             if (String.IsNullOrWhiteSpace(searchTerm))
                 return RedirectToPage("/RxNorm/Search", new { Id = id });
 
-            var results = await _lookupService.LookupRxNormApproximateMatches(searchTerm);
+            // search local storage before querying rxNorm
+            // we want to prevent as many duplicates as possible
+            var search = await _lookupService.SearchDrugCodes(10, 1, RxNormLookup.SearchTerm);
 
-            // WORKAROUND simplify results (rx norm has duplicate names)
-            foreach (var result in results)
+            if (search.TotalResultsCount > 0 && search.DrugCodes != null && search.DrugCodes.Count > 0)
             {
-                if (!RxNormLookup.SearchResults.Where(s => s.Key == result.Name).Any())
-                    RxNormLookup.SearchResults.Add(result.Name, result.RxCUI);
+                foreach (var drugCode in search.DrugCodes)
+                {
+                    RxNormLookup.SearchResults.Add(drugCode.DrugName, drugCode.RxNormId);
+                }
+            }
+            else
+            {
+                var results = await _lookupService.LookupRxNormApproximateMatches(searchTerm);
+
+                foreach (var result in results)
+                {
+                    // WORKAROUND simplify results (rx norm has duplicate names)
+                    // Duplicate names with different casing like:
+                    // Azithromycin
+                    // azithromycin
+                    // AZITHROMYCIN
+                    if (!RxNormLookup.SearchResults.Where(s => s.Key.ToLower() == result.Name.ToLower()).Any() && !RxNormLookup.SearchResults.Where(s => s.Value == result.RxCUI).Any())
+                        RxNormLookup.SearchResults.Add(result.Name, result.RxCUI);
+                }
             }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPost(int id, string rxCUI)
+        public async Task<IActionResult> OnPost(int id, string rxCUI, string drugName)
         {
             if (!String.IsNullOrWhiteSpace(rxCUI))
             {
+                A4DFormFields newDrug = new A4DFormFields()
+                {
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = User.Identity.Name
+                };
+
+                var lookup = await _lookupService.FindDrugCode(rxCUI);
+                if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)
+                {
+                    // Drug code already exists in local lookup
+                    lookup.DrugCodes.FirstOrDefault();
+                    newDrug.RxNormId = rxCUI;
+                }
+                else
+                {
+                    // Drug code isn't in local db, so we need to add it before assigning to A4
+                    await _lookupService.AddDrugCodeToLookup(new Services.LookupModels.DrugCode
+                    {
+                        RxNormId = rxCUI,
+                        DrugName = drugName,
+                        BrandName = "",
+                        IsOverTheCounter = false,
+                        IsPopular = false
+                    });
+                }
+
                 var visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id, "A4");
                 if (visit != null)
                 {
@@ -65,12 +110,7 @@ namespace UDS.Net.Forms.Pages.RxNorm
                             if (!fields.A4Ds.Where(a => a.RxNormId == rxCUI).Any())
                             {
                                 fields.ANYMEDS = 1;
-                                fields.A4Ds.Add(new A4DFormFields
-                                {
-                                    RxNormId = rxCUI,
-                                    CreatedAt = DateTime.Now,
-                                    CreatedBy = User.Identity.Name
-                                });
+                                fields.A4Ds.Add(newDrug);
                                 await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, "A4");
                             }
                         }

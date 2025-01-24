@@ -49,6 +49,48 @@ namespace UDS.Net.Web.MVC.Services
             };
         }
 
+        public async Task<DrugCodeLookup> FindDrugCode(string rxCUI)
+        {
+            if (Int32.TryParse(rxCUI, out int rxNormId))
+            {
+                var dto = await _apiClient.LookupClient.FindDrugCode(rxNormId);
+                if (dto != null)
+                {
+                    if (dto.TotalResultsCount > 0 && dto.Results != null && dto.Results.Count() > 0)
+                    {
+                        var result = dto.Results.FirstOrDefault();
+                        return new DrugCodeLookup
+                        {
+                            PageSize = 1,
+                            PageIndex = 1,
+                            TotalResultsCount = 1,
+                            DrugCodes = new List<DrugCode>()
+                            {
+                                result.ToDomain()
+                            }
+                        };
+                    }
+                }
+            }
+
+            return new DrugCodeLookup
+            {
+                PageSize = 1,
+                PageIndex = 1,
+                TotalResultsCount = 0,
+                DrugCodes = new List<DrugCode>()
+            };
+        }
+
+        public async Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode)
+        {
+            var dto = newDrugCode.ToDto();
+
+            var added = await _apiClient.LookupClient.AddDrugCode(dto);
+
+            return added.ToDomain();
+        }
+
         public async Task<LookupCountryCodeDto> LookupCountryCode(string countryCode)
         {
             var dto = await _apiClient.LookupClient.LookupCountryCode(countryCode);
@@ -89,12 +131,6 @@ namespace UDS.Net.Web.MVC.Services
                 return new List<RxNorm>();
         }
 
-        public async Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode)
-        {
-            var added = await _apiClient.LookupClient.AddDrugCode(newDrugCode.ToDto());
-
-            return added.ToDomain();
-        }
 
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
@@ -137,6 +173,7 @@ namespace UDS.Net.Web.MVC.Services
         {
             throw new NotImplementedException();
         }
+
     }
 }
 
