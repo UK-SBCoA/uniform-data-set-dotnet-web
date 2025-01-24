@@ -6,7 +6,10 @@ $(document).ready(function () {
     var majorDepRadios = Array.from(document.getElementsByName("A5D2.MAJORDEP"));
     var otherDepRadios = Array.from(document.getElementsByName("A5D2.OTHERDEP"));
     var deprTreatRadios = Array.from(document.getElementsByName("A5D2.DEPRTREAT"));
-
+    let NOMENSAGEInput = document.getElementById("A5D2_NOMENSAGE");
+    //Get NOMENSAGE checkboxes
+    let NOMENSAGECheckboxSection = document.getElementById("NOMENSAGECheckboxSection");
+    let NOMENSAGECheckboxes = NOMENSAGECheckboxSection.querySelectorAll('input[type="checkbox"');
 
     function toggleDeprTreat() {
         const recentMajorDep = majorDepRadios.some(
@@ -21,6 +24,18 @@ $(document).ready(function () {
         });
     }
 
+    function ToggleNOMENSAGECheckboxes() {
+        if (NOMENSAGEInput.value >= 10 && NOMENSAGEInput.value <= 70 | NOMENSAGEInput.value == 99) {
+            NOMENSAGECheckboxes.forEach((checkbox) => {
+                checkbox.disabled = false
+            })
+        } else {
+            NOMENSAGECheckboxes.forEach((checkbox) => {
+                checkbox.disabled = true
+            })
+        }
+    }
+
     //Event listeners
     majorDepRadios.forEach((radio) =>
         radio.addEventListener("change", toggleDeprTreat),
@@ -30,7 +45,10 @@ $(document).ready(function () {
         radio.addEventListener("change", toggleDeprTreat),
     );
 
+    NOMENSAGEInput.addEventListener("change", ToggleNOMENSAGECheckboxes)
+
 
     //On load methods
     toggleDeprTreat();
+    ToggleNOMENSAGECheckboxes()
 });

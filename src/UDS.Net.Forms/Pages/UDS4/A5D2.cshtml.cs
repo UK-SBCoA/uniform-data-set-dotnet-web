@@ -1434,27 +1434,6 @@ public class A5D2Model : FormPageModel
         }
     };
 
-    public UIRangeToggle NOMENSAGEBehavior = new UIRangeToggle
-    {
-        Low = 10,
-        High = 70,
-        UIBehavior = new UIBehavior
-        {
-            PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("A5D2.NOMENSNAT"),
-                    new UIEnableAttribute("A5D2.NOMENSHYST"),
-                    new UIEnableAttribute("A5D2.NOMENSSURG"),
-                    new UIEnableAttribute("A5D2.NOMENSCHEM"),
-                    new UIEnableAttribute("A5D2.NOMENSRAD"),
-                    new UIEnableAttribute("A5D2.NOMENSHORM"),
-                    new UIEnableAttribute("A5D2.NOMENSESTR"),
-                    new UIEnableAttribute("A5D2.NOMENSUNK"),
-                    new UIEnableAttribute("A5D2.NOMENSOTH"),
-                },
-        }
-    };
-
     public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
