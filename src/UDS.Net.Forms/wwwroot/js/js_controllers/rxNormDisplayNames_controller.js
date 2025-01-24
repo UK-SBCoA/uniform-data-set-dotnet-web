@@ -4,7 +4,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["list"]
-  static values = { fetchedLetters: Array }
+  static values = {
+    fetchedLetters: String
+  }
 
   initialize() {
   }
@@ -15,16 +17,14 @@ export default class extends Controller {
 
   async fetchData({ detail: { content } }) {
     var search = content;
-    console.log(this.fetchedLettersValue)
     if (!this.fetchedLettersValue.includes(search)) {
-      this.fetchedLettersValue.push(search)
-      console.log("fetching for " + search)
+      this.fetchedLettersValue = this.fetchedLettersValue + search;
+      //console.log("fetching for " + search)
       try {
         const response = await fetch("https://rxnav.nlm.nih.gov/REST/displaynames.json")
         const data = await response.json()
 
-        // Update the target element with the received data
-        //this.resultTarget.textContent = data.message
+        // Update the list with the received data
         data.displayTermsList.term.forEach(item => {
           var startsWithMatcher = new RegExp("^" + search, "i")
           if (startsWithMatcher.test(item)) {
@@ -39,7 +39,6 @@ export default class extends Controller {
             newLi.classList.add("hover:text-white")
             newLi.setAttribute("data-autocomplete-target", "item")
             newLi.setAttribute("data-action", "click->autocomplete#setSearchBox")
-            newLi.id = "option"
             newLi.role = "option"
             newLi.tabIndex = -1
             this.listTarget.appendChild(newLi)
