@@ -4,39 +4,51 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["list"]
+  static values = { fetchedLetters: Array }
 
-  connect() {
-    this.fetchData()
-
+  initialize() {
   }
 
-  async fetchData() {
-    try {
-      const response = await fetch("https://rxnav.nlm.nih.gov/REST/displaynames.json")
-      const data = await response.json()
-      console.log(data.displayTermsList)
-      // Update the target element with the received data
-      //this.resultTarget.textContent = data.message
-      data.displayTermsList.term.map((item) => {
-        const newLi = document.createElement("li")
-        newLi.textContent = item // Set the content of the new list item
-        newLi.classList.add("cursor-default")
-        newLi.classList.add("rounded-md")
-        newLi.classList.add("px-4")
-        newLi.classList.add("py-2")
-        newLi.classList.add("select-none")
-        newLi.classList.add("hover:bg-indigo-600")
-        newLi.classList.add("hover:text-white")
-        newLi.setAttribute("data-autocomplete-target", "item")
-        newLi.setAttribute("data-action", "click->autocomplete#setSearchBox")
-        newLi.id = "option"
-        newLi.role = "option"
-        newLi.tabIndex = -1
-        this.listTarget.appendChild(newLi)
-      })
+  connect() {
+    this.fetchData({ detail: { content: "a" } }); // initialize with "a" drugs
+  }
 
-    } catch (error) {
-      console.error("Error fetching data:", error)
+  async fetchData({ detail: { content } }) {
+    var search = content;
+    console.log(this.fetchedLettersValue)
+    if (!this.fetchedLettersValue.includes(search)) {
+      this.fetchedLettersValue.push(search)
+      console.log("fetching for " + search)
+      try {
+        const response = await fetch("https://rxnav.nlm.nih.gov/REST/displaynames.json")
+        const data = await response.json()
+
+        // Update the target element with the received data
+        //this.resultTarget.textContent = data.message
+        data.displayTermsList.term.forEach(item => {
+          var startsWithMatcher = new RegExp("^" + search, "i")
+          if (startsWithMatcher.test(item)) {
+            const newLi = document.createElement("li")
+            newLi.textContent = item // Set the content of the new list item
+            newLi.classList.add("cursor-default")
+            newLi.classList.add("rounded-md")
+            newLi.classList.add("px-4")
+            newLi.classList.add("py-2")
+            newLi.classList.add("select-none")
+            newLi.classList.add("hover:bg-indigo-600")
+            newLi.classList.add("hover:text-white")
+            newLi.setAttribute("data-autocomplete-target", "item")
+            newLi.setAttribute("data-action", "click->autocomplete#setSearchBox")
+            newLi.id = "option"
+            newLi.role = "option"
+            newLi.tabIndex = -1
+            this.listTarget.appendChild(newLi)
+          }
+        })
+
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
     }
   }
 

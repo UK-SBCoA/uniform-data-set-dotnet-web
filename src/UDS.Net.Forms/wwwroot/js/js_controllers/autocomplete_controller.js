@@ -14,15 +14,23 @@ export default class extends Controller {
   }
 
   filterList(event) {
-    var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
-    this.itemTargets.map((item) => {
-      if (startsWithMatcher.test(item.innerHTML)) {
-        item.classList.remove("hidden")
+    // we will call the rxNormDisplayNames controller (list is ~30K)
+    if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
+      if (this.searchBoxTarget.value.length == 1) {
+        // this will trigger an event for rxNormDisplayNames to handle and load new entries (instead of all 30K at once)
+        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
       }
-      else {
-        item.classList.add("hidden")
-      }
-    });
+
+      var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
+      this.itemTargets.map((item) => {
+        if (startsWithMatcher.test(item.innerHTML)) {
+          item.classList.remove("hidden")
+        }
+        else {
+          item.classList.add("hidden")
+        }
+      });
+    }
     // TODO check if list is empty and if so, display the no results
   }
 
