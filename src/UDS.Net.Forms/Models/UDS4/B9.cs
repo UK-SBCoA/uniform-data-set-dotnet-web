@@ -172,10 +172,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Was REM sleep behavior disorder confirmed by polysomnography?")]
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         public int? BEREMCONF { get; set; }
-        [Display(Name = "Other behavioral symptom")]
+        [Display(Name = "Other behavioral changes")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEOTHR { get; set; }
-        [Display(Name = "Participant currently manifests meaningful change in behavior - Other, specify")]
+        [Display(Name = "Other behavior changes (SPECIFY)")]
         [RequiredIf(nameof(BEOTHR), "1", ErrorMessage = "Value required")]
         [MaxLength(60)]
         public string? BEOTHRX { get; set; }
