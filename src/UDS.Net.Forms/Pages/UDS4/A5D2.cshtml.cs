@@ -1434,7 +1434,7 @@ public class A5D2Model : FormPageModel
         }
     };
 
-    public UIRangeToggle NOMESAGEBehavior = new UIRangeToggle
+    public UIRangeToggle NOMENSAGEBehavior = new UIRangeToggle
     {
         Low = 10,
         High = 70,
