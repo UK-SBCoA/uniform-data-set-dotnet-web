@@ -275,7 +275,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Required if any respsone for questions 12h–12k are present. Must be blank when no psychosis is present")]
+        [RequiredOnFinalized(ErrorMessage = "Required if any response for questions 12h–12k are present. Must be blank when no psychosis is present.")]
         public bool? PSYCHAGESymptomsPresent
         {
             get
@@ -302,12 +302,13 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Required if any personality-related behavioral symptoms in 12m-12r are present. Must be blank when no psychosis is present.")]
         public bool? PERCHAGESymptomsPresent
         {
             get
             {
-                if (BEVHALL == 1 || BEAHALL == 1 || BEDEL == 1 || BEAGGRS == 1 || PSYCHAGE == 1 || BEDISIN == 1 || BEPERCH == 1 || BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1)
+                // if any 12m-12r = 1
+                if (BEDISIN == 1 || BEPERCH == 1 || BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1)
                 {
                     if (PERCHAGE > 0)
                     {
