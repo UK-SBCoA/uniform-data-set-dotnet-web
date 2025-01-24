@@ -6,25 +6,28 @@
 
 }
 
-<turbo-frame id="RxNorm">
-    <a asp-page="/UDS4/A4" asp-route-id="@Model.RxNormLookup.Id">Back</a>
-    <form method="post">
-        <div class="@rowCSS">
-            <div>
-                <label asp-for="@Model.RxNormLookup.SearchTerm">@Html.DisplayNameFor(m => m.RxNormLookup.SearchTerm)</label>
-                <p class="text-gray-400"><i>Search by brand or generic name</i></p>
-            </div>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="RxNormLookup.SearchTerm"></p>
-                <div class="mt-2 w-20">
-                    <input asp-for="@Model.RxNormLookup.SearchTerm" />
+<div class="px-2 py-5">
+
+    <turbo-frame id="RxNorm">
+        <a asp-page="/UDS4/A4" asp-route-id="@Model.RxNormLookup.Id" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+        <form method="post">
+            <div class="@rowCSS">
+                <div>
+                    <label asp-for="@Model.RxNormLookup.SearchTerm">@Html.DisplayNameFor(m => m.RxNormLookup.SearchTerm)</label>
+                    <p class="text-gray-400"><i>Search by brand or generic name</i></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.RxNormLookup.SearchTerm"></span>
+                <div>
+                    <p class="text-sm text-gray-500" asp-description-for="RxNormLookup.SearchTerm"></p>
+                    <div class="mt-2 w-20">
+                        <input asp-for="@Model.RxNormLookup.SearchTerm" />
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.RxNormLookup.SearchTerm"></span>
+                </div>
             </div>
-        </div>
 
-        <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
+            <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
 
-        <input type="submit" value="Search" />
-    </form>
-</turbo-frame>
+            <input type="submit" value="Search" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
+        </form>
+    </turbo-frame>
+</div>
