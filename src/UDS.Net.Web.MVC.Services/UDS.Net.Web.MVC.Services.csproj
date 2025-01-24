@@ -10,7 +10,7 @@
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Implemented service contract</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>4.6.12</ReleaseVersion>
+		<ReleaseVersion>4.6.15</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
