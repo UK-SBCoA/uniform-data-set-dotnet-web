@@ -10,24 +10,37 @@
 
     <turbo-frame id="RxNorm">
         <a asp-page="/UDS4/A4" asp-route-id="@Model.RxNormLookup.Id" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
-        <form method="post">
-            <div class="@rowCSS">
-                <div>
-                    <label asp-for="@Model.RxNormLookup.SearchTerm">@Html.DisplayNameFor(m => m.RxNormLookup.SearchTerm)</label>
-                    <p class="text-gray-400"><i>Search by brand or generic name</i></p>
-                </div>
-                <div>
-                    <p class="text-sm text-gray-500" asp-description-for="RxNormLookup.SearchTerm"></p>
-                    <div class="mt-2 w-20">
-                        <input asp-for="@Model.RxNormLookup.SearchTerm" />
+
+        <div class="bg-white py-16 sm:py-24 lg:py-32">
+            <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <h2 class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">Search RxNorm</h2>
+                <form method="post" class="w-full max-w-md lg:col-span-5 lg:pt-2">
+                    <div class="flex gap-x-4">
+                        <label asp-for="@Model.RxNormLookup.SearchTerm" class="sr-only">@Html.DisplayNameFor(m => m.RxNormLookup.SearchTerm)</label>
+                        <input asp-for="@Model.RxNormLookup.SearchTerm" placeholder="Search by drug or brand name" class="min-w-0 flex-auto rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                        <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
+
+                        <input type="submit" value="Search" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
+
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.RxNormLookup.SearchTerm"></span>
-                </div>
+                    <!--// Autocomplete //-->
+                    <div class="mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all invisible">
+                        <ul class="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800" id="options" role="listbox">
+                            <!-- Active: "bg-indigo-600 text-white outline-hidden" -->
+                            <li class="cursor-default rounded-md px-4 py-2 select-none" id="option-1" role="option" tabindex="-1">Leslie Alexander</li>
+                            <li class="cursor-default rounded-md px-4 py-2 select-none" id="option-2" role="option" tabindex="-1">Michael Foster</li>
+                            <li class="cursor-default rounded-md px-4 py-2 select-none" id="option-3" role="option" tabindex="-1">Dries Vincent</li>
+                            <li class="cursor-default rounded-md px-4 py-2 select-none" id="option-4" role="option" tabindex="-1">Lindsay Walton</li>
+                            <li class="cursor-default rounded-md px-4 py-2 select-none" id="option-5" role="option" tabindex="-1">Courtney Henry</li>
+                        </ul>
+                    </div>
+                    <!--// No results //-->
+                    <div class="bg-slate-50 px-16 py-20 text-center invisible">
+                        <h2 class="font-semibold text-slate-900">No results found</h2>
+                        <p class="mt-2 text-sm/6 text-slate-600">We can’t find anything with that term at the moment, try searching something else.</p>
+                    </div>
+                </form>
             </div>
-
-            <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
-
-            <input type="submit" value="Search" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" />
-        </form>
+        </div>
     </turbo-frame>
 </div>
