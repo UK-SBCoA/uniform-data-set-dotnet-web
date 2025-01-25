@@ -82,13 +82,13 @@ namespace UDS.Net.Forms.Pages.RxNorm
                 if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)
                 {
                     // Drug code already exists in local lookup
-                    lookup.DrugCodes.FirstOrDefault();
-                    newDrug.RxNormId = rxCUI;
+                    var existing = lookup.DrugCodes.FirstOrDefault();
+                    newDrug.RxNormId = existing.RxNormId;
                 }
                 else
                 {
                     // Drug code isn't in local db, so we need to add it before assigning to A4
-                    await _lookupService.AddDrugCodeToLookup(new Services.LookupModels.DrugCode
+                    var added = await _lookupService.AddDrugCodeToLookup(new Services.LookupModels.DrugCode
                     {
                         RxNormId = rxCUI,
                         DrugName = drugName,
@@ -96,6 +96,7 @@ namespace UDS.Net.Forms.Pages.RxNorm
                         IsOverTheCounter = false,
                         IsPopular = false
                     });
+                    newDrug.RxNormId = added.RxNormId;
                 }
 
                 var visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id, "A4");
@@ -104,6 +105,7 @@ namespace UDS.Net.Forms.Pages.RxNorm
                     var form = visit.Forms.FirstOrDefault(f => f.Kind == "A4");
                     if (form != null)
                     {
+                        form.Status = Services.Enums.FormStatus.InProgress;
                         var fields = (A4GFormFields)form.Fields;
                         if (fields != null)
                         {
