@@ -153,7 +153,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 AssessDrugId(c);
             }
 
-
             BaseForm = A4; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A4); // visit needs updated form as well
@@ -164,8 +163,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
             else
             {
+                if (A4.Id == 0)
+                    ModelState.AddModelError("A4.ANYMEDS", "Please save form before searching RxNorm for new custom medications");
+
                 await base.OnPostAsync(id);
-                return RedirectToPage("/RxNorm/Search", new { Id = id });
+
+                if (ModelState.IsValid)
+                    return RedirectToPage("/RxNorm/Search", new { Id = id });
+                else
+                    return Page();
             }
         }
     }
