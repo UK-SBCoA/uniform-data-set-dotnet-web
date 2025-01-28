@@ -10,7 +10,7 @@
         INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on participant response. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B6. Check only <span class="underline">one</span> box per question.
     </p>
 </div>
-<div>
+<div data-controller="b6">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -41,7 +41,7 @@
                     }
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200" data-target="radioTable">
                 <tr>
                     <td>
                         <label asp-for="B6.SATIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B6.SATIS)</label>
