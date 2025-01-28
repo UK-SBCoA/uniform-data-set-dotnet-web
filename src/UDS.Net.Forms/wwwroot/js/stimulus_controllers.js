@@ -6,6 +6,8 @@ import FancyCheckboxes from "./js_controllers/fancycheckboxes_controller.js"
 import CheckboxDisable from "./js_controllers/checkboxDisable_controller.js"
 import selectendpoint_controller from "./js_controllers/selectendpoint_controller.js"
 import checkboxSelectAll from "./js_controllers/checkboxSelectAll_controller.js"
+import rxNormDisplayNames from "./js_controllers/rxNormDisplayNames_controller.js"
+import autocomplete from "./js_controllers/autocomplete_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -16,3 +18,5 @@ Stimulus.register("fancycheckboxes", FancyCheckboxes)
 Stimulus.register("checkboxDisable", CheckboxDisable)
 Stimulus.register("selectendpoint", selectendpoint_controller)
 Stimulus.register("checkboxSelectAll", checkboxSelectAll)
+Stimulus.register("rxNormDisplayNames", rxNormDisplayNames)
+Stimulus.register("autocomplete", autocomplete)
