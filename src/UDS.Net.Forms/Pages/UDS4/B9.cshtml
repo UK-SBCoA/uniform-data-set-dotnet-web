@@ -439,9 +439,14 @@
                         <div>
                             <label asp-for="B9.PSYCHAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PSYCHAGE)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHAGE"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHAGESymptomsPresent"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.PSYCHAGE" for="@Model.B9.PSYCHAGE" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <td colspan="2">
+                        <div>
+                            <input asp-for="B9.PSYCHAGE" />
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -571,7 +576,7 @@
                 <tr>
                     <td colspan="5">
                         <div class="grid grid-cols-3">
-                        <div>
+                            <div>
                                 <label asp-for="B9.PERCHAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PERCHAGE)</label>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGE"></span>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGESymptomsPresent"></span>
@@ -639,7 +644,7 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHR"></span>
                     </div>
                 </td>
-                <table-cell-radio-buttons id="B9.BEOTHR" for="@Model.B9.BEOTHR" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="B9.BEOTHR" for="@Model.B9.BEOTHR" items="Model.BasicYesNoOtherListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr class="subsubcounterreset">
                 <td colspan="5">
@@ -681,8 +686,7 @@
     </div>
     <div>
         <p class="mt-2">
-            Consider if the participant currently has meaningful change in motor function <span class="underline font-bold">that represents a change
-            relative to a stable baseline prior to the current syndrome and is potentially due to a disorder affecting the central nervous system:</span>
+            Consider if the participant currently has meaningful change in motor function <span class="underline font-bold">that represents a change relative to a stable baseline prior to the current syndrome and is potentially due to a disorder affecting the central nervous system:</span>
         </p>
     </div>
 </div>
