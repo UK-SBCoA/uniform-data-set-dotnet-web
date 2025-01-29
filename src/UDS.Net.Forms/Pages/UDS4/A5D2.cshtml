@@ -416,7 +416,16 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+
+                                <tbody>
+                                    <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                        <th class="w-[1000px]"></th>
+                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Never improved</th>
+                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Partially improved</th>
+                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/back to normal</th>
+                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Unknown</th>
+                                    </tr>
+                                <tr class="odd:bg-white even:bg-gray-50 border-b">                 
                                     <td>
                                         <div class="ml-6">
                                             <label asp-for="A5D2.STROKSTAT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKSTAT)</label>
@@ -426,6 +435,8 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.STROKSTAT)" for="@Model.A5D2.STROKSTAT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
+
+                                </tbody>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5">
