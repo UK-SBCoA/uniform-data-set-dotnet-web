@@ -28,7 +28,7 @@
             </fieldset>
         </div>
 
-        <table class="table-auto min-w-full divide-y divide-gray-300">
+        <table class="table-auto min-w-full divide-y divide-gray-300" data-b6-target="radioTable">
             <caption class="caption-top">
                 <strong>Instruct the participant:</strong> "In the next part of this interview, I will ask you questions about your feelings. Some of the questions I will ask you may not apply, and some may make you feel uncomfortable. For each question, please answer "yes" or "no," depending on how you have been feeling <strong>in the past week, including today.</strong>"
             </caption>
@@ -169,7 +169,7 @@
             <label asp-for="B6.GDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B6.GDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B6.GDS"></p>
-                <input asp-for="@Model.B6.GDS" />
+                <input readonly asp-for="@Model.B6.GDS" data-b6-target="GDSInput"/>
                 <span class="italic text-gray-500">(max score =15; did not complete = 88)</span>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
             </div>

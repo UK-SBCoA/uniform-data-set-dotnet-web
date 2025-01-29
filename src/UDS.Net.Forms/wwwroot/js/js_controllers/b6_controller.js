@@ -8,10 +8,34 @@ export default class extends Controller {
     ]
 
     connect() {
-        //add on change to each radio input to run the calculation
+        this.CreateRadioButtonEvents()
+        this.CalculateGDS()
     }
 
     CalculateGDS() {
-        //check each checked radio value and set GDS. If any radios are 9 then GDS is automatically 88
+        //If "Did not answer" radio detected, stop calculation loop
+        let noCompleteFlag = false
+
+        //reset values for recalculation
+        this.GDSInputTarget.value = ""
+
+        this.radioTableTarget.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
+            if (!noCompleteFlag) {
+                if (radio.value == 9) {
+                    this.GDSInputTarget.value = 88
+                    noCompleteFlag = true
+                } else {
+                    this.GDSInputTarget.value = Number(this.GDSInputTarget.value) + Number(radio.value)
+                }
+            }
+        })
+    }
+
+    CreateRadioButtonEvents() {
+        this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
+            radio.addEventListener("change", () => {
+                this.CalculateGDS()
+            })
+        })
     }
 }
