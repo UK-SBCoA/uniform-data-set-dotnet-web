@@ -99,7 +99,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Static", "3"),
             new RadioListItem("Fluctuating", "4"),
             new RadioListItem("Improved", "5"),
-            new RadioListItem("Not applicable", "6"),
+            new RadioListItem("Not applicable", "8"),
             new RadioListItem("Unknown", "9"),
         };
 
