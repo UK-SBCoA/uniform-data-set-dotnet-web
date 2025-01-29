@@ -38,4 +38,11 @@ export default class extends Controller {
             })
         })
     }
+
+    //GDS must be 88 if NOGDS checkbox is checked. Auto set for user on check
+    NOGDSBehavior(event) {
+        if (event.target.checked) {
+            this.GDSInputTarget.value = 88
+        }
+    }
 }

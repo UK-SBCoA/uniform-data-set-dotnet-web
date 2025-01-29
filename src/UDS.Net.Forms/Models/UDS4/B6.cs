@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -73,9 +74,23 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BETTER { get; set; }
 
         [Display(Name = "Sum of all circled answers for Total GDS Score")]
-        [RegularExpression("^([1-9]|1[0-5]|88)$", ErrorMessage = "(0-15, 88)")]
+        [RegularExpression("^([0-9]|1[0-5]|88)$", ErrorMessage = "(0-15, 88)")]
         [RequiredIf(nameof(NOGDS), "False", ErrorMessage = "Total GDS Score is required.")]
         public int? GDS { get; set; }
+
+        [RequiredIf(nameof(NOGDS), "True", ErrorMessage = "If NOGDS checkbox is selected, then the total score must be 88")]
+        [NotMapped]
+        public bool? GDSNotCompleteChecked
+        {
+            get
+            {
+                if (GDS.HasValue && GDS.Value == 88)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
