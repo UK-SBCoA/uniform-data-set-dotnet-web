@@ -130,7 +130,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APPSEV") } }
         };
 
-        public B5Model(IVisitService visitService) : base(visitService, "B5")
+        public B5Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B5")
         {
         }
 

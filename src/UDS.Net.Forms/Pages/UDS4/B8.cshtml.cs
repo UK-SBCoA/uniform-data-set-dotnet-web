@@ -263,7 +263,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public B8Model(IVisitService visitService) : base(visitService, "B8")
+        public B8Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B8")
         {
         }
 

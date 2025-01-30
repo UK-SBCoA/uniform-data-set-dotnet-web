@@ -139,7 +139,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
 
 
-        public A2Model(IVisitService visitService) : base(visitService, "A2")
+        public A2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A2")
         {
         }
 

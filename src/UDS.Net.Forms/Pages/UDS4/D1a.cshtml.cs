@@ -19,7 +19,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public D1a D1a { get; set; } = default!;
 
-        public D1aModel(IVisitService visitService) : base(visitService, "D1a")
+        public D1aModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "D1a")
         {
         }
 
