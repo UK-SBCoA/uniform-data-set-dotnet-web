@@ -1941,7 +1941,7 @@
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.NOMENSAGE"></p>
-                        <input asp-for="@Model.A5D2.NOMENSAGE" ui-range-behavior="Model.NOMESAGEBehavior" />
+                        <input asp-for="@Model.A5D2.NOMENSAGE" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
                     </div>
                 </div>
@@ -1958,7 +1958,7 @@
                     </div>
                 </div>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <fieldset>
+                    <fieldset id="NOMENSAGECheckboxSection">
                         <div class="space-y-5 subsubcounterreset">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
