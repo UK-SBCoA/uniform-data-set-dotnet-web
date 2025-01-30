@@ -10,6 +10,10 @@ namespace UDS.Net.Services
 
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
 
+        Task<List<string>> GetFormOrder(string username, int visitId);
+
+        Task<string> GetNextFormKind(string username, int visitId, string currentFormKind);
+
         Task<int> GetNextVisitNumber(string username, int participationId);
 
         Task<int> GetVisitCountByVersion(string username, int participationId, string version);

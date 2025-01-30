@@ -617,7 +617,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
-        public C2Model(IVisitService visitService) : base(visitService, "C2")
+        public C2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "C2")
         {
         }
 

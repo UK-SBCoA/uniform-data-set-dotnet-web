@@ -38,4 +38,4 @@ jobs:
     - name: Push packages to Nuget.org
       run: dotnet nuget push UDS.Net.*.nupkg -k $NUGET_AUTH_TOKEN --source 'https://api.nuget.org/v3/index.json' --skip-duplicate --no-symbols
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }}
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_ORG_TOKEN }}
