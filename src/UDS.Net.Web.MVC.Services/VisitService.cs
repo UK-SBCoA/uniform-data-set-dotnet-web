@@ -147,20 +147,20 @@ namespace UDS.Net.Web.MVC.Services
                 throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
         }
 
-        public async Task<string> GetNextFormId(string username, int visitId, string currentFormId)
+        public async Task<string> GetNextFormKind(string username, int visitId, string currentFormKind)
         {
-            var visit = await GetById(username, visitId);
+            var ordering = await GetFormOrder(username, visitId);
 
             string nextFormId = "";
 
-            for (int i = 0; i < visit.Forms.Count(); i++)
+            for (int i = 0; i < ordering.Count(); i++)
             {
-                if (visit.Forms[i].Kind == currentFormId)
+                if (ordering[i] == currentFormKind)
                 {
                     // check if there is a next form
-                    if (i + 1 < visit.Forms.Count())
+                    if (i + 1 < ordering.Count())
                     {
-                        nextFormId = visit.Forms[i + 1].Kind;
+                        nextFormId = ordering[i + 1];
                         break;
                     }
                 }
@@ -170,10 +170,11 @@ namespace UDS.Net.Web.MVC.Services
             return nextFormId;
         }
 
-        public async Task<List<Form>> SortForms(string username, List<Form> forms)
+        public async Task<List<string>> GetFormOrder(string username, int visitId)
         {
             // In this implementation we are sorting by kind alphabetically, but other organizations may want the flexibilty to order forms by another parameter.
-            return forms.OrderBy(f => f.Kind).ToList();
+            var visit = await GetById(username, visitId);
+            return visit.Forms.OrderBy(f => f.Kind).Select(f => f.Kind).ToList();
         }
     }
 }
