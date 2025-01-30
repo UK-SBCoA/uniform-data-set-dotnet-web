@@ -23,6 +23,8 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         source-url: https://nuget.pkg.github.com/UK-SBCoA/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }}
         
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
@@ -37,4 +39,4 @@ jobs:
       run: dotnet pack src/UDS.Net.Services -c Release -o .
 
     - name: Push packages to Nuget.org
-      run: dotnet nuget push UDS.Net.*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }} --skip-duplicate --no-symbols
+      run: dotnet nuget push UDS.Net.*.nupkg --source 'https://api.nuget.org/v3/index.json' --skip-duplicate --no-symbols
