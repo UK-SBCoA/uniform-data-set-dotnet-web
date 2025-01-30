@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Models
             {
                 if (Visit != null)
                 {
-                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM}";
+                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
                 }
                 return "";
             }

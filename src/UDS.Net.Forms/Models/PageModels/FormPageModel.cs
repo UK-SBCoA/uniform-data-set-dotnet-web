@@ -34,9 +34,9 @@ namespace UDS.Net.Forms.Models.PageModels
                 if (Visit != null)
                 {
                     if (Visit.Participation != null)
-                        return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} {Visit.PACKET}";
+                        return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
                     else
-                        return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET}";
+                        return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
                 }
                 return "";
             }
@@ -61,7 +61,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
-            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId, false);
 
             if (participation == null)
                 return NotFound();
@@ -132,7 +132,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
-            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId, false);
 
             if (participation == null)
                 return NotFound();
