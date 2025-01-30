@@ -411,12 +411,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A1Model(IVisitService visitService, ILookupService lookupService) : base(visitService, "A1")
+        public A1Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService) : base(visitService, participationService, "A1")
         {
             _lookupService = lookupService;
         }
-
-
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

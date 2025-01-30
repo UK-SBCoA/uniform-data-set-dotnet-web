@@ -17,6 +17,11 @@ namespace UDS.Net.Forms.Models.PageModels
 {
     public class FormPageModel : PageModel
     {
+        protected readonly IVisitService _visitService;
+        protected readonly IParticipationService _participationService;
+
+        protected string _formKind { get; set; }
+
         [BindProperty]
         public VisitModel Visit { get; set; } = default!;
 
@@ -37,13 +42,10 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
-
-        protected readonly IVisitService _visitService;
-        protected string _formKind { get; set; }
-
-        public FormPageModel(IVisitService visitService, string formKind) : base()
+        public FormPageModel(IVisitService visitService, IParticipationService participationService, string formKind) : base()
         {
             _visitService = visitService;
+            _participationService = participationService;
             _formKind = formKind;
         }
 
@@ -58,6 +60,13 @@ namespace UDS.Net.Forms.Models.PageModels
                 return NotFound();
 
             Visit = visit.ToVM();
+
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
+
+            if (participation == null)
+                return NotFound();
+
+            Visit.Participation = participation.ToVM();
 
             var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
@@ -123,11 +132,18 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
+
+            if (participation == null)
+                return NotFound();
+
+            Visit.Participation = participation.ToVM();
+
             if (BaseForm.Kind == "C2")
             {
                 if (BaseForm != null)
                 {
-                    var C2 = new C2Model(_visitService);
+                    var C2 = new C2Model(_visitService, _participationService);
 
                     C2.Visit = Visit;
                     C2.BaseForm = BaseForm;
