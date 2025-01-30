@@ -18,3 +18,21 @@ $(document).ready(function () {
 
   modality.addEventListener("change", handleDropdownChange);
 });
+
+document.addEventListener('turbo:before-fetch-request', function (event) {
+    if (event.target.id === 'C2') {
+        const spinner = document.getElementById('loadingSpinner');
+        if (spinner) {
+            spinner.style.display = 'block';
+        }
+    }
+});
+
+document.addEventListener('turbo:frame-load', function (event) {
+    if (event.target.id === 'C2') {
+        const spinner = document.getElementById('loadingSpinner');
+        if (spinner) {
+            spinner.style.display = 'none';  
+        }
+    }
+});
