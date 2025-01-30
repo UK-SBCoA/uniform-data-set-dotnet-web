@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Pages.Participations
             if (id == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", id.Value);
+            var participation = await _participationService.GetById(User.Identity.Name, id.Value, true);
 
             if (participation == null)
                 return NotFound();

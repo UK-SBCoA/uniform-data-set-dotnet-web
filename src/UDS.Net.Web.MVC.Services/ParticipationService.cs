@@ -65,6 +65,9 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
         {
+            if (includeVisits)
+                return await GetById(username, id);
+
             var participationDto = await _apiClient.ParticipationClient.Get(id); // Other services can use includeVisits to determine whether the underlying service should include visits or not
 
             if (participationDto != null)
