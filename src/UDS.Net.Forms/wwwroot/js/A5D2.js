@@ -58,6 +58,7 @@ $(document).ready(function () {
 
     NOMENSAGEInput.addEventListener("change", ToggleNOMENSAGECheckboxes)
 
+    MENARCHEInput.addEventListener("change", MENARCHEBehavior)
 
     //On load methods
     toggleDeprTreat();
