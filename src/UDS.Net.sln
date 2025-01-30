@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Forms", "UDS.Net.Forms\UDS.Net.Forms.csproj", "{A1A16BC1-B30D-41DE-AD48-471EC278B8C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms", "UDS.Net.Forms\UDS.Net.Forms.csproj", "{A1A16BC1-B30D-41DE-AD48-471EC278B8C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Services", "UDS.Net.Services\UDS.Net.Services.csproj", "{2859D284-F0ED-47CE-9B1D-70DE32451D6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services", "UDS.Net.Services\UDS.Net.Services.csproj", "{2859D284-F0ED-47CE-9B1D-70DE32451D6D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Forms.Tests", "UDS.Net.Forms.Tests\UDS.Net.Forms.Tests.csproj", "{B1AC7F77-4264-441E-A8C2-847ADFCF8BCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms.Tests", "UDS.Net.Forms.Tests\UDS.Net.Forms.Tests.csproj", "{B1AC7F77-4264-441E-A8C2-847ADFCF8BCF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC.Services", "UDS.Net.Web.MVC.Services\UDS.Net.Web.MVC.Services.csproj", "{5B18B13C-475D-4F58-947B-A80F49CF3F7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC.Services", "UDS.Net.Web.MVC.Services\UDS.Net.Web.MVC.Services.csproj", "{5B18B13C-475D-4F58-947B-A80F49CF3F7C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{332BFB18-1431-4572-BE96-757D0221FBCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{332BFB18-1431-4572-BE96-757D0221FBCE}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6817EBB4-66CB-445E-B155-FACEBC97A344}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{4B98485B-9E58-4613-AF6A-186FC4B4D7F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6817EBB4-66CB-445E-B155-FACEBC97A344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6817EBB4-66CB-445E-B155-FACEBC97A344}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6817EBB4-66CB-445E-B155-FACEBC97A344}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6817EBB4-66CB-445E-B155-FACEBC97A344}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B98485B-9E58-4613-AF6A-186FC4B4D7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B98485B-9E58-4613-AF6A-186FC4B4D7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B98485B-9E58-4613-AF6A-186FC4B4D7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B98485B-9E58-4613-AF6A-186FC4B4D7F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +59,6 @@ Global
 		SolutionGuid = {3268D734-1592-4E39-88A2-3A53468CC430}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 5.0.1
+		version = 6.0.0-preview.1
 	EndGlobalSection
 EndGlobal
