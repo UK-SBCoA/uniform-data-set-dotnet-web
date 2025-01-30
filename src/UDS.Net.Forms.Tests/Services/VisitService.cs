@@ -93,6 +93,16 @@ namespace UDS.Net.Forms.Tests.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<string> GetNextFormId(string username, int visitId, string currentFormId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Form>> SortForms(string username, List<Form> forms)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
