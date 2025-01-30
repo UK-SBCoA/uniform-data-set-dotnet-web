@@ -9,7 +9,9 @@ $(document).ready(function () {
     let NOMENSAGEInput = document.getElementById("A5D2_NOMENSAGE");
     let MENARCHEInput = document.getElementById("A5D2_MENARCHE");
 
-
+    //Get NOMENSAGE checkboxes
+    let NOMENSAGECheckboxSection = document.getElementById("NOMENSAGECheckboxSection");
+    let NOMENSAGECheckboxes = NOMENSAGECheckboxSection.querySelectorAll('input[type="checkbox"]');
 
     function toggleDeprTreat() {
         const recentMajorDep = majorDepRadios.some(
@@ -33,6 +35,18 @@ $(document).ready(function () {
         }
     }
 
+    function ToggleNOMENSAGECheckboxes() {
+        if (NOMENSAGEInput.value >= 10 && NOMENSAGEInput.value <= 70 | NOMENSAGEInput.value == 99) {
+            NOMENSAGECheckboxes.forEach((checkbox) => {
+                checkbox.disabled = false
+            })
+        } else {
+            NOMENSAGECheckboxes.forEach((checkbox) => {
+                checkbox.disabled = true
+            })
+        }
+    }
+
     //Event listeners
     majorDepRadios.forEach((radio) =>
         radio.addEventListener("change", toggleDeprTreat),
@@ -42,9 +56,11 @@ $(document).ready(function () {
         radio.addEventListener("change", toggleDeprTreat),
     );
 
-    MENARCHEInput.addEventListener("change", MENARCHEBehavior)
+    NOMENSAGEInput.addEventListener("change", ToggleNOMENSAGECheckboxes)
+
 
     //On load methods
     toggleDeprTreat();
     MENARCHEBehavior();
+    ToggleNOMENSAGECheckboxes()
 });

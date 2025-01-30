@@ -671,6 +671,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [RequiredIfRange(nameof(NOMENSAGE), 10, 70, ErrorMessage = "Please indicate at least one reason.")]
+        [RequiredIf(nameof(NOMENSAGE), "99", ErrorMessage = "Please indicate at least one reason.")]
         [NotMapped]
         public bool? NOMENSAGEStoppedReasonCheckboxes
         {
