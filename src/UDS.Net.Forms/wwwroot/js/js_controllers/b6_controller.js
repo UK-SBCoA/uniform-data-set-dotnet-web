@@ -4,12 +4,14 @@ export default class extends Controller {
 
     static targets = [
         "radioTable",
-        "GDSInput"
+        "GDSInput",
+        "NOGDSInput"
     ]
 
-    connect() {
+    connect() { 
         this.CreateRadioButtonEvents()
         this.CalculateGDS()
+        this.NOGDSBehavior()
     }
 
     CalculateGDS() {
@@ -40,9 +42,19 @@ export default class extends Controller {
     }
 
     //GDS must be 88 if NOGDS checkbox is checked. Auto set for user on check
-    NOGDSBehavior(event) {
-        if (event.target.checked) {
+    NOGDSBehavior() {
+        if (this.NOGDSInputTarget.checked) {
             this.GDSInputTarget.value = 88
+            this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.disabled = true
+            })
+        } else {
+            this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.disabled = false
+            })
+
+            //recalculate GDS with enabled radios
+            this.CalculateGDS()
         }
     }
 }
