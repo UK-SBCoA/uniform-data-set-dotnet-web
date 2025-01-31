@@ -35,7 +35,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Severe", "3"),
         };
 
-        public B4Model(IVisitService visitService) : base(visitService, "B4")
+        public B4Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B4")
         {
         }
 

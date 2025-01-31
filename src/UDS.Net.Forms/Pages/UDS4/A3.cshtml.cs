@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A3 A3 { get; set; } = default!;
 
-        public A3Model(IVisitService visitService) : base(visitService, "A3")
+        public A3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A3")
         {
         }
 

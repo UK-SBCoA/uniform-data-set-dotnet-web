@@ -423,7 +423,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B3.BRADYKIX") } },
         };
 
-        public B3Model(IVisitService visitService) : base(visitService, "B3")
+        public B3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B3")
         {
         }
 

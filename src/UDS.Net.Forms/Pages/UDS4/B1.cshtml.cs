@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B1.HEARWAID") } }
         };
 
-        public B1Model(IVisitService visitService) : base(visitService, "B1")
+        public B1Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B1")
         {
         }
 
