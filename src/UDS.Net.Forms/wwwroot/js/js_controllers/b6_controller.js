@@ -23,10 +23,12 @@ export default class extends Controller {
 
         this.radioTableTarget.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
             if (!noCompleteFlag) {
-                if (radio.value == 9) {
+                if (radio.value == 9 | this.NOGDSInputTarget.checked) {
                     this.GDSInputTarget.value = 88
                     noCompleteFlag = true
-                } else {
+                }
+                else
+                {
                     this.GDSInputTarget.value = Number(this.GDSInputTarget.value) + Number(radio.value)
                 }
             }
@@ -45,14 +47,7 @@ export default class extends Controller {
     NOGDSBehavior() {
         if (this.NOGDSInputTarget.checked) {
             this.GDSInputTarget.value = 88
-            this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
-                radio.disabled = true
-            })
         } else {
-            this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
-                radio.disabled = false
-            })
-
             //recalculate GDS with enabled radios
             this.CalculateGDS()
         }
