@@ -137,7 +137,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id, string? addCustomMed)
+        public new async Task<IActionResult> OnPostAsync(int id, string? addCustomMed, string? goNext = null)
         {
             // Reassemble the model's A4D state based on the bound properties
             foreach (var p in PopularDrugCodes)
@@ -159,7 +159,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (string.IsNullOrWhiteSpace(addCustomMed))
             {
-                return await base.OnPostAsync(id); // checks for validation, etc.
+                return await base.OnPostAsync(id, goNext); // checks for validation, etc.
             }
             else
             {

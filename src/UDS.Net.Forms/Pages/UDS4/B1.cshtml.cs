@@ -56,13 +56,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id)
+        public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B1;
 
             Visit.Forms.Add(B1);
 
-            return await base.OnPostAsync(id); // checks for domain-level business rules validation
+            return await base.OnPostAsync(id, goNext); // checks for domain-level business rules validation
         }
     }
 }

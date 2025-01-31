@@ -28,6 +28,8 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Status")]
         public FormStatus Status { get; set; }
 
+        public string? NextFormKind { get; set; }
+
         public bool IsRequiredForPacketKind { get; set; }
 
         public bool AllowsRemote
