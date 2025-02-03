@@ -83,11 +83,14 @@ namespace UDS.Net.Forms.Models.PageModels
                 BaseForm.INITIALS = shortenedInitials;
             }
 
+            // Set next form kind for better UX between forms
+            BaseForm.NextFormKind = await _visitService.GetNextFormKind(User.Identity.Name, id.Value, _formKind);
+
             return Page();
         }
 
         [ValidateAntiForgeryToken]
-        protected async Task<IActionResult> OnPostAsync(int id)
+        protected async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             var visit = Visit.ToEntity();
 
@@ -116,7 +119,10 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, _formKind);
 
-                    return RedirectToAction("Details", "Visits", new { Id = Visit.Id });
+                    if (!String.IsNullOrWhiteSpace(goNext) && !String.IsNullOrWhiteSpace(BaseForm.NextFormKind))
+                        return RedirectToPage(BaseForm.NextFormKind, new { Id = Visit.Id, PacketKind = Visit.PACKET });
+                    else
+                        return RedirectToAction("Details", "Visits", new { Id = Visit.Id });
                 }
                 catch (Exception ex)
                 {
