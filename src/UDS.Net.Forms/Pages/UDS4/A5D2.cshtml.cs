@@ -1709,12 +1709,12 @@ public class A5D2Model : FormPageModel
     }
 
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
     {
         BaseForm = A5D2; // reassign bounded and derived form to base form for base method
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
-        return await base.OnPostAsync(id); // checks for validation, etc.
+        return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
 }
