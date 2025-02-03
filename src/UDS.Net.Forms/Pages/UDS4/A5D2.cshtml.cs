@@ -1419,6 +1419,20 @@ public class A5D2Model : FormPageModel
          },
     };
 
+    public UIRangeToggle MENARCHEBehavior = new UIRangeToggle
+    {
+        Low = 5,
+        High = 99,
+        UIBehavior = new UIBehavior
+        {
+            PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A5D2.HRT"),
+                    new UIEnableAttribute("A5D2.BCPILLS"),
+                },
+        }
+    };
+
     public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
