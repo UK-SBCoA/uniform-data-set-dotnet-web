@@ -139,7 +139,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
 
 
-        public A2Model(IVisitService visitService) : base(visitService, "A2")
+        public A2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A2")
         {
         }
 
@@ -157,13 +157,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A2; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A2); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

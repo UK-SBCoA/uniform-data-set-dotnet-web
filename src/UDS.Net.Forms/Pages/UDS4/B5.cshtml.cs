@@ -130,7 +130,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("B5.APPSEV") } }
         };
 
-        public B5Model(IVisitService visitService) : base(visitService, "B5")
+        public B5Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B5")
         {
         }
 
@@ -147,13 +147,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B5; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(B5); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

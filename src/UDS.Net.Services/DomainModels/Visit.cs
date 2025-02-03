@@ -241,6 +241,15 @@ namespace UDS.Net.Services.DomainModels
                 UnresolvedErrors = unresolvedErrors;
         }
 
+        public Visit(int id, int number, int participationId, Participation participation, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
+            : this(id, number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms)
+        {
+            if (participation != null)
+            {
+                Participation = participation;
+            }
+        }
+
         // TODO There's form fields and then there's validation rules for the form fields based on visit type
         // look up generics builder
         // https://stackoverflow.com/questions/30895888/setting-common-base-class-properties-when-creating-objects

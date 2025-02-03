@@ -245,6 +245,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.MARISTAT = a1Dto.MARISTAT;
                 this.LIVSITUA = a1Dto.LIVSITUA;
                 this.RESIDENC = a1Dto.RESIDENC;
+                this.ZIP = a1Dto.ZIP;
                 this.SERVED = a1Dto.SERVED;
                 this.MEDVA = a1Dto.MEDVA;
                 this.EXRTIME = a1Dto.EXRTIME;

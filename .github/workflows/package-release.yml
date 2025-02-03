@@ -1,4 +1,4 @@
-name: Package release
+name: Package release to GitHub Package Registry
 
 on:
   workflow_dispatch:
@@ -11,8 +11,6 @@ jobs:
   pack:
     name: Package and publish
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     timeout-minutes: 30
 
     steps:
@@ -23,7 +21,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.x'
         source-url: https://nuget.pkg.github.com/UK-SBCoA/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -42,6 +40,3 @@ jobs:
 
     - name: Push packages to GitHub
       run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols
-
-    - name: Push packages to Nuget.org
-      run: dotnet nuget push UDS.Net.*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key ${{ secrets.NUGETORG_API_KEY_UDSNET_WEB }} --skip-duplicate --no-symbols

@@ -1,5 +1,4 @@
-﻿using System;
-namespace UDS.Net.Forms.Models
+﻿namespace UDS.Net.Forms.Models
 {
     public class VisitsPaginatedModel : PaginatedModel
     {

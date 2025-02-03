@@ -63,6 +63,20 @@ namespace UDS.Net.Web.MVC.Services
             }
         }
 
+        public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
+        {
+            if (includeVisits)
+                return await GetById(username, id);
+
+            var participationDto = await _apiClient.ParticipationClient.Get(id); // Other services can use includeVisits to determine whether the underlying service should include visits or not
+
+            if (participationDto != null)
+            {
+                return participationDto.ToDomain(username);
+            }
+            throw new Exception("Participation not found.");
+        }
+
         public async Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
             var participationDtos = await _apiClient.ParticipationClient.Get(pageSize, pageIndex);

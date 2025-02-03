@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Services
@@ -11,9 +10,17 @@ namespace UDS.Net.Services
 
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
 
+        Task<List<string>> GetFormOrder(string username, int visitId);
+
+        Task<string> GetNextFormKind(string username, int visitId, string currentFormKind);
+
         Task<int> GetNextVisitNumber(string username, int participationId);
 
         Task<int> GetVisitCountByVersion(string username, int participationId, string version);
+
+        Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] filterItems = null);
+
+        Task<int> CountByStatus(string username, string[] statuses = null);
     }
 }
 

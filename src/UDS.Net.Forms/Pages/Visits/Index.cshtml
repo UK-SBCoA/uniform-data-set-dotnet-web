@@ -14,10 +14,13 @@
         <div class="mt-6 overflow-hidden border-t border-gray-100">
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                    <div class="justify-items-end">
+                        <partial name="_Filter" model="Model.Filter" />
+                    </div>
                     <table class="w-full text-left">
                         <thead>
                             <tr>
-                                <th scope="col">Participation Id</th>
+                                <th scope="col">NACC Id</th>
                                 <th scope="col">Visit number</th>
                                 <th scope="col">Packet kind</th>
                                 <th scope="col">Initials</th>
@@ -31,7 +34,7 @@
                             @foreach (var visit in Model.Visits.List)
                             {
                                 <tr>
-                                    <td><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
+                                    <td data-participation-id="@visit.ParticipationId"><a asp-page="/Participations/Details" asp-route-id="@visit.ParticipationId">@(visit.Participation != null ? visit.Participation.LegacyId : visit.ParticipationId)</a></td>
                                     <td>@visit.VISITNUM</td>
                                     <td>@visit.PACKET</td>
                                     <td>@visit.INITIALS</td>

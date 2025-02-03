@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public D1b D1b { get; set; } = default!;
 
-        public D1bModel(IVisitService visitService) : base(visitService, "D1b")
+        public D1bModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "D1b")
         {
         }
 
@@ -648,13 +648,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = D1b; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(D1b); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

@@ -364,6 +364,77 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [RequiredOnFinalized(ErrorMessage = "If Q16. MEDVA (VA medical care) = 1 (Yes) then Q15. SERVED (served in armed forces) should not equal 9 (Don't know),it should be equal to 1 (Yes)")]
+        [NotMapped]
+        public bool? ServedAndVaCare
+        {
+            get
+            {
+                if (SERVED == 9)
+                {
+                    if (MEDVA == 1)
+                    {
+                        return null;
+                    }
+                }
+                return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If response 4f is checked then responses 4h and 4i must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritGender
+        {
+            get
+            {
+                if (GENTWOSPIR == true && (GENDKN == true || GENNOANS == true))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+        [RequiredOnFinalized(ErrorMessage = "If response 7d is checked then responses 7f and 7g must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritSexOrientation
+        {
+            get
+            {
+                if (SEXORNTWOS == true && (SEXORNDNK == true || SEXORNNOAN == true))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "GENOTHX must be blank when response 4g. is unchecked")]
+        [NotMapped]
+        public bool? GenderSpecify
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(GENOTHX) && GENOTH == false)
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+        [RequiredOnFinalized(ErrorMessage = "SEXORNOTHX must be blank when response 7e. is unchecked")]
+        [NotMapped]
+        public bool? SexOrientationSpecify
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(SEXORNOTHX) && SEXORNOTH == false)
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }

@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
     public class A1Model : FormPageModel
     {
+        protected readonly ILookupService _lookupService;
+
         [BindProperty]
         public A1 A1 { get; set; } = default!;
 
@@ -416,8 +411,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A1Model(IVisitService visitService) : base(visitService, "A1")
+        public A1Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService) : base(visitService, participationService, "A1")
         {
+            _lookupService = lookupService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -433,13 +429,26 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A1; // reassign bounded and derived form to base form for base method
 
+            if (BaseForm.Status == FormStatus.Finalized)
+            {
+                if (A1.CHLDHDCTRY != null)
+                {
+                    var countryCode = await _lookupService.LookupCountryCode(A1.CHLDHDCTRY);
+
+                    if (countryCode.Code == null)
+                    {
+                        ModelState.AddModelError("A1.CHLDHDCTRY", $"The country code \"{A1.CHLDHDCTRY}\" entered for question 2 ('CHLDHDCTRY') is invalid.");
+                    }
+                }
+            }
+
             Visit.Forms.Add(A1); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

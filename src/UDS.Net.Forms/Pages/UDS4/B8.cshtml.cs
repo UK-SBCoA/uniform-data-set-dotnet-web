@@ -263,7 +263,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public B8Model(IVisitService visitService) : base(visitService, "B8")
+        public B8Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B8")
         {
         }
 
@@ -280,13 +280,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B8;
 
             Visit.Forms.Add(B8);
 
-            return await base.OnPostAsync(id); // checks for domain-level business rules validation
+            return await base.OnPostAsync(id, goNext); // checks for domain-level business rules validation
 
         }
     }

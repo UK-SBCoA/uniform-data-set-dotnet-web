@@ -575,7 +575,11 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if (counter >= 1)
+                if (NORMCOG == 0 && counter >= 1)
+                {
+                    return true;
+                }
+                else if (NORMCOG == 1 && counter == 0)
                 {
                     return true;
                 }
