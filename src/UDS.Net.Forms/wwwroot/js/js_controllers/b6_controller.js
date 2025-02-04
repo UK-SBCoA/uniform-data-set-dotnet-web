@@ -15,24 +15,21 @@ export default class extends Controller {
     }
 
     CalculateGDS() {
-        //If "Did not answer" radio detected, stop calculation loop
-        let noCompleteFlag = false
+
+        let skipCalculation = this.NOGDSInputTarget.checked ? true : false
 
         //reset values for recalculation
         this.GDSInputTarget.value = ""
 
-        this.radioTableTarget.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
-            if (!noCompleteFlag) {
-                if (radio.value == 9 | this.NOGDSInputTarget.checked) {
-                    this.GDSInputTarget.value = 88
-                    noCompleteFlag = true
-                }
-                else
-                {
+        if (!skipCalculation) {
+            this.radioTableTarget.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
+                if (Number(radio.value) != 9) {
                     this.GDSInputTarget.value = Number(this.GDSInputTarget.value) + Number(radio.value)
                 }
-            }
-        })
+            })
+        } else {
+            this.GDSInputTarget.value = 88
+        }
     }
 
     CreateRadioButtonEvents() {

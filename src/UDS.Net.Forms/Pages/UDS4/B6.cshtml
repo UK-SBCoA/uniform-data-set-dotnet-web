@@ -24,6 +24,9 @@
                             <label asp-for="B6.NOGDS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B6.NOGDS)</label>
                         </div>
                     </div>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSValidation"></span>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -176,6 +179,9 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDSNotCompleteChecked"></span>
+                </div>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSValidation"></span>
                 </div>
             </div>
         </div>
