@@ -115,7 +115,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     WRTHLESS,
                     ENERGY,
                     HOPELESS,
-                    BETTER         
+                    BETTER
                 };
 
                 int answeredGDSCount = GDSScoreValues.Where(x => x.HasValue && x.Value != 9).Count();
@@ -123,11 +123,15 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (answeredGDSCount < 12 && (GDS != 88 || NOGDS != true))
                 {
                     return null;
-                } else if (answeredGDSCount >= 12 && (GDS == 88 || NOGDS == true)) {
-                    return false;
                 }
-
-                return true;
+                else if (answeredGDSCount >= 12 && (GDS == 88 || NOGDS == true))
+                {
+                    return null;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 
