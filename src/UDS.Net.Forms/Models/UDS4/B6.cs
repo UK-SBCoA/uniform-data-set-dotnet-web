@@ -95,7 +95,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [RequiredOnFinalized(ErrorMessage = "If fewer than 12 questions were answered NOGDS must be checked and the total score equal to \"88\"")]
         [NotMapped]
-        public bool? NOGDSValidation
+        public bool? NOGDSCheckedValidation
         {
             get
             {
@@ -132,6 +132,21 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     return true;
                 }
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If NOGDS is selected the GDS total score must be equal to \"88\"")]
+        [NotMapped]
+        public bool? GDSSumAndNOGDSValidation
+        {
+            get
+            {
+                if(NOGDS && GDS.HasValue && GDS != 88)
+                {
+                    return null;
+                }
+
+                return true;
             }
         }
 
