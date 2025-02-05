@@ -30,7 +30,7 @@
                 cssClassFormState = "text-teal-500 group-hover:text-teal-500";
 
             <a asp-page="/@("UDS"+Model.FORMVER)/@form.Kind" asp-route-id="@Model.Id" asp-route-packetKind="@Model.PACKET" class="@cssClass group border-l-4 px-3 py-2 flex items-center text-sm font-medium">
-                <span class="@cssClassFormState flex-shrink-0 -ml-1 mr-3 h-6 w-8">@form.Kind</span>
+                <span class="@cssClassFormState flex-shrink-0 -ml-1 mr-3 h-6 w-8 text-clip overflow-hidden">@form.Kind</span>
                 <span class="truncate">@form.Title</span>
             </a>
         }

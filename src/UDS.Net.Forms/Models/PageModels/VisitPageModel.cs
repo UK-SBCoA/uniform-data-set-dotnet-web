@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Models
             {
                 if (Visit != null)
                 {
-                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM}";
+                    return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
                 }
                 return "";
             }
@@ -53,6 +53,21 @@ namespace UDS.Net.Forms.Models
 
             Visit = visit.ToVM();
             Visit.Participation = participation.ToVM();
+
+            // Re-order forms
+            if (Visit.Forms != null)
+            {
+                // Sort forms
+                var ordering = await _visitService.GetFormOrder(User.Identity.Name, id.Value);
+                List<FormModel> forms = new List<FormModel>();
+                foreach (var kind in ordering)
+                {
+                    var form = Visit.Forms.Where(f => f.Kind == kind).FirstOrDefault();
+                    if (form != null)
+                        forms.Add(form);
+                }
+                Visit.Forms = forms;
+            }
 
             return Page();
         }

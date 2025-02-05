@@ -17,7 +17,7 @@ public class A5D2Model : FormPageModel
     [BindProperty]
     public A5D2 A5D2 { get; set; } = default!;
 
-    public A5D2Model(IVisitService visitService) : base(visitService, "A5D2")
+    public A5D2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A5D2")
     {
     }
 
@@ -1434,27 +1434,6 @@ public class A5D2Model : FormPageModel
         }
     };
 
-    public UIRangeToggle NOMESAGEBehavior = new UIRangeToggle
-    {
-        Low = 10,
-        High = 70,
-        UIBehavior = new UIBehavior
-        {
-            PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("A5D2.NOMENSNAT"),
-                    new UIEnableAttribute("A5D2.NOMENSHYST"),
-                    new UIEnableAttribute("A5D2.NOMENSSURG"),
-                    new UIEnableAttribute("A5D2.NOMENSCHEM"),
-                    new UIEnableAttribute("A5D2.NOMENSRAD"),
-                    new UIEnableAttribute("A5D2.NOMENSHORM"),
-                    new UIEnableAttribute("A5D2.NOMENSESTR"),
-                    new UIEnableAttribute("A5D2.NOMENSUNK"),
-                    new UIEnableAttribute("A5D2.NOMENSOTH"),
-                },
-        }
-    };
-
     public List<RadioListItem> BasicYesNoListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("No", "0"),
@@ -1730,12 +1709,12 @@ public class A5D2Model : FormPageModel
     }
 
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
     {
         BaseForm = A5D2; // reassign bounded and derived form to base form for base method
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
-        return await base.OnPostAsync(id); // checks for validation, etc.
+        return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
 }

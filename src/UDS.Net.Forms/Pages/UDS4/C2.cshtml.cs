@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using UDS.Net.Forms.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -625,7 +617,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
-        public C2Model(IVisitService visitService) : base(visitService, "C2")
+        public C2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "C2")
         {
         }
 
@@ -665,13 +657,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = C2; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(C2); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.          
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.          
         }
     }
 }

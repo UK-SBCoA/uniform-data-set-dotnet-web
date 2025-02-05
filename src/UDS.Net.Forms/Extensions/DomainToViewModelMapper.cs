@@ -1,10 +1,8 @@
-﻿using System.Drawing;
-using UDS.Net.Forms.Models;
+﻿using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Extensions
@@ -36,16 +34,30 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static ParticipationModel ToShallowVM(this Participation participation)
+        {
+            return new ParticipationModel()
+            {
+                Id = participation.Id,
+                LegacyId = participation.LegacyId,
+                VisitCount = participation.Visits == null ? participation.VisitCount : participation.Visits.Count(), // TODO possibly use visitcount on the object??
+                LastVisitNumber = participation.LastVisitNumber,
+                Status = participation.Status
+            };
+        }
+
         public static VisitsPaginatedModel ToVM(this IEnumerable<Visit> visits, int pageSize, int pageIndex, int total, string search)
         {
-            return new VisitsPaginatedModel
+            VisitsPaginatedModel visitPaginatedModel = new VisitsPaginatedModel
             {
                 List = visits.Select(v => v.ToVM()).ToList(),
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 Total = total,
-                Search = search
+                Search = search,
             };
+
+            return visitPaginatedModel;
         }
 
         public static List<VisitModel> ToVM(this IList<Visit> visits)
@@ -84,6 +96,9 @@ namespace UDS.Net.Forms.Extensions
 
             if (visit.UnresolvedErrors != null)
                 vm.UnresolvedErrors = visit.UnresolvedErrors.ToVM();
+
+            if (visit.Participation != null && visit.ParticipationId == visit.Participation.Id)
+                vm.Participation = visit.Participation.ToShallowVM();
 
             return vm;
         }

@@ -423,7 +423,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("B3.BRADYKIX") } },
         };
 
-        public B3Model(IVisitService visitService) : base(visitService, "B3")
+        public B3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B3")
         {
         }
 
@@ -441,13 +441,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id)
+        public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B3;
 
             Visit.Forms.Add(B3);
 
-            return await base.OnPostAsync(id); // checks for domain-level business rules validation
+            return await base.OnPostAsync(id, goNext); // checks for domain-level business rules validation
         }
 
     }

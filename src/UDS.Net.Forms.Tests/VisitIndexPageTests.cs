@@ -1,6 +1,7 @@
 ﻿using UDS.Net.Forms.Pages.Visits;
 using UDS.Net.Forms.Tests.Services;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Tests;
 
@@ -15,7 +16,8 @@ public class VisitIndexPageTests
 
         var pageModel = new IndexModel(visitService);
 
-        await pageModel.OnGetAsync();
+        string[] filters = Enum.GetNames(typeof(PacketStatus));
+        await pageModel.OnGetAsync(filters);
 
         var actualVisits = pageModel.Visits;
 

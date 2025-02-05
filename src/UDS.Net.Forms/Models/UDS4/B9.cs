@@ -65,7 +65,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Value required")]
         public string? COGOTHRX { get; set; }
         [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
-        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
+        [RegularExpression("^(1[5-9]|[2-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 15 - 110")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value Required")]
         public int? COGAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value required")]
@@ -121,8 +122,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Participant currently manifests meaningful change in behavior — Aggression")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAGGRS { get; set; }
-        [Display(Name = "If any of the psychosis and impulse control-related behavioral symptoms in 12h-12k are present, at what age did they begin?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [Display(Name = "If any of the psychosis and impulse control–related behavioral changes in 12h–12k are present, at what age did they begin? (The clinician must use their best judgment to estimate an age of onset. If multiple symptoms are identified, denote the age of the earliest symptom.)")]
+        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         public int? PSYCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Disinhibition")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -171,10 +172,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Was REM sleep behavior disorder confirmed by polysomnography?")]
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
         public int? BEREMCONF { get; set; }
-        [Display(Name = "Other behavioral symptom")]
+        [Display(Name = "Other behavioral changes")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEOTHR { get; set; }
-        [Display(Name = "Participant currently manifests meaningful change in behavior - Other, specify")]
+        [Display(Name = "Other behavior changes (SPECIFY)")]
         [RequiredIf(nameof(BEOTHR), "1", ErrorMessage = "Value required")]
         [MaxLength(60)]
         public string? BEOTHRX { get; set; }
@@ -213,23 +214,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         public int? MOTORAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent motor problem that is causing the participant's complaints and/or affecting the participant's function.")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMODE { get; set; }
         [Display(Name = "Indicate mode of onset for the most prominent motor problem that is causing the participant's complains and or affecting the participant's function - Other, specify")]
         [RequiredIf(nameof(MOMODE), "4", ErrorMessage = "Value required")]
         [MaxLength(60)]
         public string? MOMODEX { get; set; }
         [Display(Name = "Were changes in motor function suggestive of parkinsonism?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMOPARK { get; set; }
         [Display(Name = "Were changes in motor function suggestive of amyotrophic lateral sclerosis?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
         public int? MOMOALS { get; set; }
         [Display(Name = "Overall course of decline of cognitive / behavioral / motor syndrome")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? COURSE { get; set; }
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? FRSTCHG { get; set; }
         [NotMapped]
         [RequiredIf(nameof(BESUBAB), "1", ErrorMessage = "Please select at least one substance")]
@@ -243,32 +244,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
 
                 return true;
-            }
-        }
-        [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
-        public bool? COGAGESymptomsPresent
-        {
-            get
-            {
-                if (COGMEM == 1 || COGORI == 1 || COGJUDG == 1 || COGLANG == 1 || COGVIS == 1 || COGATTN == 1 || COGFLUC == 1 || !String.IsNullOrEmpty(COGOTHRX))
-                {
-                    if (COGAGE < 0)
-                    {
-                        return true;
-                    }
-
-                    return null;
-                }
-                else
-                {
-                    if (COGAGE > 0)
-                    {
-                        return null;
-                    }
-
-                    return true;
-                }
             }
         }
 
@@ -300,12 +275,40 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Invalid Response")]
+        [RequiredOnFinalized(ErrorMessage = "Required if any response for questions 12h–12k are present. Must be blank when no psychosis is present.")]
+        public bool? PSYCHAGESymptomsPresent
+        {
+            get
+            {
+                if (BEVHALL == 1 || BEVPATT == 1 || BEVWELL == 1 || BEAHALL == 1 || BEAHSIMP == 1 || BEAHCOMP == 1 || BEDEL == 1 || BEAGGRS == 1)
+                {
+                    if (PSYCHAGE > 0)
+                    {
+                        return true;
+                    }
+
+                    return null;
+                }
+                else
+                {
+                    if (PSYCHAGE == null)
+                    {
+                        return true;
+                    }
+
+                    return null;
+                }
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Required if any personality-related behavioral symptoms in 12m-12r are present. Must be blank when no psychosis is present.")]
         public bool? PERCHAGESymptomsPresent
         {
             get
             {
-                if (BEVHALL == 1 || BEAHALL == 1 || BEDEL == 1 || BEAGGRS == 1 || PSYCHAGE == 1 || BEDISIN == 1 || BEPERCH == 1 || BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1)
+                // if any 12m-12r = 1
+                if (BEDISIN == 1 || BEPERCH == 1 || BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1)
                 {
                     if (PERCHAGE > 0)
                     {

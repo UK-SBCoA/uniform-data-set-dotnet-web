@@ -1,9 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Xml.Linq;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -674,6 +670,68 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [RequiredOnFinalized(ErrorMessage = "For Delayed recall questions: 'No cue', 'Category cue', and 'Recognition' the sum of questions with a value of 0 - 5 should be less than or equal to 5")]
+        [NotMapped]
+        public bool? DelayedRecallValidSum
+        {
+            get
+            {
+                int? mocarecnValue = 0;
+                int? mocareccValue = 0;
+                int? mocarecrValue = 0;
+
+                //if input is an exception value (93 - 95 or 88) then calculate as 0 in total
+                if (MOCARECN != null)
+                {
+                    mocarecnValue = MOCARECN >= 95 ? 0 : MOCARECN;
+                }
+
+                if (MOCARECC != null)
+                {
+                    mocareccValue = MOCARECC == 88 ? 0 : MOCARECC;
+                }
+
+                if (MOCARECR != null)
+                {
+                    mocarecrValue = MOCARECR == 88 ? 0 : MOCARECR;
+                }
+
+                if (mocarecnValue + mocareccValue + mocarecrValue > 5) return null;
+
+                return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If Delayed recall - No cue is equal to 5, then Delayed recall - Category cue and Delayed recall - Recognition should both be 88")]
+        [NotMapped]
+        public bool? MOCARECRAndMOCARECCValidValues
+        {
+            get
+            {
+                if (MOCARECN == 5)
+                {
+                    if (MOCARECC != 88 || MOCARECR != 88) return null;
+                }
+
+                return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If the sum of Delayed recall - No cue and Delayed recall - Category are equal to 5, then Delayed recall - Recognition should be 88")]
+        [NotMapped]
+        public bool? MOCARECRValidValue
+        {
+            get
+            {
+                if (MOCARECN + MOCARECC == 5)
+                {
+                    if (MOCARECR != 88) return null;
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
@@ -708,23 +766,6 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (MOCATOTS.Value != 88)
                     {
                         yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
-                    }
-                }
-
-                // 1t, 1u, 1v
-                // Page 8: https://files.alz.washington.edu/documentation/uds3-np-c2-instructions.pdf
-                if (MOCARECN.HasValue && MOCARECC.HasValue && MOCARECR.HasValue &&
-                    MOCARECN.Value < 95)
-                {
-                    int count = MOCARECN.Value;
-                    if (MOCARECC.Value != 88)
-                        count += MOCARECC.Value;
-                    if (MOCARECR.Value != 88)
-                        count += MOCARECR.Value;
-
-                    if (count > 5)
-                    {
-                        yield return new ValidationResult("The total possible words recalled and entered in Questions 1t, 1u, and 1v should be 5 or less.", new[] { nameof(MOCARECN) });
                     }
                 }
 
