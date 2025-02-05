@@ -141,7 +141,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if(NOGDS && GDS.HasValue && GDS != 88)
+                if (NOGDS && GDS.HasValue && GDS != 88)
                 {
                     return null;
                 }
