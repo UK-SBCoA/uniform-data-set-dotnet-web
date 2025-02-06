@@ -486,7 +486,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
-        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Response required")]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
