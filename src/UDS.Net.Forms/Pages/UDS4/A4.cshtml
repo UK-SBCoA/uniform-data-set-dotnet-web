@@ -4,9 +4,9 @@
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
     string checkboxCSS = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
-    int defaultMedsMedian = (int)Math.Ceiling((double)Model.PopularDrugCodes.Count / 2);
-    int defaultMedsMedianOTC = (int)Math.Ceiling((double)Model.OTCDrugCodes.Count / 2);
-    int defaultMedsMedianCustom = (int)Math.Ceiling((double)Model.CustomDrugCodes.Count / 2);
+    int popularMedsMedian = (int)Math.Ceiling((double)Model.PopularDrugCodes.Count / 2);
+    int otcMedsMedian = (int)Math.Ceiling((double)Model.OTCDrugCodes.Count / 2);
+    int customMedsMedian = (int)Math.Ceiling((double)Model.CustomDrugCodes.Count / 2);
 }
 
 <p class="mt-1 text-sm text-gray-500">
@@ -31,16 +31,13 @@
             <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.PopularDrugCodes != null && Model.PopularDrugCodes.Count() > 0)
                 {
-                    for (int i = 0; i < defaultMedsMedian; i++)
+                    for (int i = 0; i < popularMedsMedian; i++)
                     {
                         var drugCode = Model.PopularDrugCodes[i];
                         var displayName = drugCode.DrugName;
 
                         if (!string.IsNullOrWhiteSpace(drugCode.BrandName))
-
-                        {
                             displayName += " (" + drugCode.BrandName + ")";
-                        }
                         <div>
                             <fieldset>
                                 <div class="space-y-5">
@@ -53,7 +50,7 @@
                                             <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="@Model.PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
+                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
@@ -70,7 +67,7 @@
             <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.PopularDrugCodes != null && Model.PopularDrugCodes.Count() > 0)
                 {
-                    for (int j = defaultMedsMedian; j < Model.PopularDrugCodes.Count; j++)
+                    for (int j = popularMedsMedian; j < Model.PopularDrugCodes.Count; j++)
                     {
                         var drugCode = Model.PopularDrugCodes[j];
                         var displayName = drugCode.DrugName;
@@ -118,7 +115,7 @@
             <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.OTCDrugCodes != null && Model.OTCDrugCodes.Count() > 0)
                 {
-                    for (int i = 0; i < defaultMedsMedianOTC; i++)
+                    for (int i = 0; i < otcMedsMedian; i++)
                     {
                         var drugCode = Model.OTCDrugCodes[i];
                         var displayName = drugCode.DrugName;
@@ -139,7 +136,7 @@
                                             <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="OTCDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="@Model.OTCDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
+                                            <input asp-for="OTCDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
@@ -156,7 +153,7 @@
             <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.OTCDrugCodes != null && Model.OTCDrugCodes.Count() > 0)
                 {
-                    for (int j = defaultMedsMedianOTC; j < Model.OTCDrugCodes.Count; j++)
+                    for (int j = otcMedsMedian; j < Model.OTCDrugCodes.Count; j++)
                     {
                         var drugCode = Model.OTCDrugCodes[j];
                         var displayName = drugCode.DrugName;
@@ -210,7 +207,7 @@
             <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.CustomDrugCodes != null && Model.CustomDrugCodes.Count() > 0)
                 {
-                    for (int i = 0; i < defaultMedsMedianCustom; i++)
+                    for (int i = 0; i < customMedsMedian; i++)
                     {
                         var drugCode = Model.CustomDrugCodes[i];
                         var displayName = drugCode.DrugName;
@@ -231,7 +228,7 @@
                                             <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="@Model.CustomDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
+                                            <input asp-for="CustomDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
@@ -248,7 +245,7 @@
             <div class="flex flex-col sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
                 @if (Model.CustomDrugCodes != null && Model.CustomDrugCodes.Count() > 0)
                 {
-                    for (int j = defaultMedsMedianCustom; j < Model.CustomDrugCodes.Count; j++)
+                    for (int j = customMedsMedian; j < Model.CustomDrugCodes.Count; j++)
                     {
                         var drugCode = Model.CustomDrugCodes[j];
                         var displayName = drugCode.DrugName;
