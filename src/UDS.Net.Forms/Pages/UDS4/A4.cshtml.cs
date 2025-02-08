@@ -15,6 +15,7 @@ using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
+    [RequestFormLimits(ValueCountLimit = 5000)]
     public class A4Model : FormPageModel
     {
         protected readonly ILookupService _lookupService;
@@ -151,6 +152,11 @@ namespace UDS.Net.Forms.Pages.UDS4
             foreach (var c in CustomDrugCodes)
             {
                 AssessDrugId(c);
+            }
+
+            if (A4.DrugIds.Count() > 40)
+            {
+                ModelState.AddModelError("A4.ANYMEDS", "Only a maximum of 40 drugs can be assigned.");
             }
 
             BaseForm = A4; // reassign bounded and derived form to base form for base method
