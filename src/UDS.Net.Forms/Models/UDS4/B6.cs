@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Schema;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -73,9 +75,80 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BETTER { get; set; }
 
         [Display(Name = "Sum of all circled answers for Total GDS Score")]
-        [RegularExpression("^([1-9]|1[0-5]|88)$", ErrorMessage = "(0-15, 88)")]
+        [RegularExpression("^([0-9]|1[0-5]|88)$", ErrorMessage = "(0-15, 88)")]
         [RequiredIf(nameof(NOGDS), "False", ErrorMessage = "Total GDS Score is required.")]
         public int? GDS { get; set; }
+
+        [RequiredIf(nameof(NOGDS), "True", ErrorMessage = "If NOGDS checkbox is selected, then the total score must be 88")]
+        [NotMapped]
+        public bool? GDSNotCompleteChecked
+        {
+            get
+            {
+                if (GDS.HasValue && GDS.Value == 88)
+                {
+                    return true;
+                }
+                else return null;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If fewer than 12 questions were answered NOGDS must be checked and the total score equal to \"88\"")]
+        [NotMapped]
+        public bool? NOGDSCheckedValidation
+        {
+            get
+            {
+                List<int?> GDSScoreValues = new List<int?>()
+                {
+                    SATIS,
+                    DROPACT,
+                    EMPTY,
+                    BORED,
+                    SPIRITS,
+                    AFRAID,
+                    HAPPY,
+                    HELPLESS,
+                    STAYHOME,
+                    MEMPROB,
+                    WONDRFUL,
+                    WRTHLESS,
+                    ENERGY,
+                    HOPELESS,
+                    BETTER
+                };
+
+                int answeredGDSCount = GDSScoreValues.Where(x => x.HasValue && x.Value != 9).Count();
+
+                if (answeredGDSCount < 12 && (GDS != 88 || NOGDS != true))
+                {
+                    return null;
+                }
+                else if (answeredGDSCount >= 12 && (GDS == 88 || NOGDS == true))
+                {
+                    return null;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If NOGDS is selected the GDS total score must be equal to \"88\"")]
+        [NotMapped]
+        public bool? GDSSumAndNOGDSValidation
+        {
+            get
+            {
+                if (NOGDS && GDS.HasValue && GDS != 88)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -411,12 +411,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A1Model(IVisitService visitService, ILookupService lookupService) : base(visitService, "A1")
+        public A1Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService) : base(visitService, participationService, "A1")
         {
             _lookupService = lookupService;
         }
-
-
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -431,7 +429,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A1; // reassign bounded and derived form to base form for base method
 
@@ -450,7 +448,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A1); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

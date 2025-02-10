@@ -17,6 +17,11 @@ namespace UDS.Net.Forms.Models.PageModels
 {
     public class FormPageModel : PageModel
     {
+        protected readonly IVisitService _visitService;
+        protected readonly IParticipationService _participationService;
+
+        protected string _formKind { get; set; }
+
         [BindProperty]
         public VisitModel Visit { get; set; } = default!;
 
@@ -26,21 +31,21 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             get
             {
-                if (BaseForm != null)
+                if (Visit != null)
                 {
-                    return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET}";
+                    if (Visit.Participation != null)
+                        return $"Participant {Visit.Participation.LegacyId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
+                    else
+                        return $"Participant {Visit.ParticipationId} Visit {Visit.VISITNUM} {Visit.PACKET.GetDescription()}";
                 }
                 return "";
             }
         }
 
-
-        protected readonly IVisitService _visitService;
-        protected string _formKind { get; set; }
-
-        public FormPageModel(IVisitService visitService, string formKind) : base()
+        public FormPageModel(IVisitService visitService, IParticipationService participationService, string formKind) : base()
         {
             _visitService = visitService;
+            _participationService = participationService;
             _formKind = formKind;
         }
 
@@ -55,6 +60,13 @@ namespace UDS.Net.Forms.Models.PageModels
                 return NotFound();
 
             Visit = visit.ToVM();
+
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId, false);
+
+            if (participation == null)
+                return NotFound();
+
+            Visit.Participation = participation.ToVM();
 
             var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
@@ -71,11 +83,14 @@ namespace UDS.Net.Forms.Models.PageModels
                 BaseForm.INITIALS = shortenedInitials;
             }
 
+            // Set next form kind for better UX between forms
+            BaseForm.NextFormKind = await _visitService.GetNextFormKind(User.Identity.Name, id.Value, _formKind);
+
             return Page();
         }
 
         [ValidateAntiForgeryToken]
-        protected async Task<IActionResult> OnPostAsync(int id)
+        protected async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             var visit = Visit.ToEntity();
 
@@ -104,7 +119,10 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, _formKind);
 
-                    return RedirectToAction("Details", "Visits", new { Id = Visit.Id });
+                    if (!String.IsNullOrWhiteSpace(goNext) && !String.IsNullOrWhiteSpace(BaseForm.NextFormKind))
+                        return RedirectToPage(BaseForm.NextFormKind, new { Id = Visit.Id, PacketKind = Visit.PACKET });
+                    else
+                        return RedirectToAction("Details", "Visits", new { Id = Visit.Id });
                 }
                 catch (Exception ex)
                 {
@@ -120,11 +138,18 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit = visit.ToVM();
 
+            var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId, false);
+
+            if (participation == null)
+                return NotFound();
+
+            Visit.Participation = participation.ToVM();
+
             if (BaseForm.Kind == "C2")
             {
                 if (BaseForm != null)
                 {
-                    var C2 = new C2Model(_visitService);
+                    var C2 = new C2Model(_visitService, _participationService);
 
                     C2.Visit = Visit;
                     C2.BaseForm = BaseForm;

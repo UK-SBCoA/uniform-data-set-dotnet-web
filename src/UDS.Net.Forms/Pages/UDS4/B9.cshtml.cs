@@ -99,7 +99,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Static", "3"),
             new RadioListItem("Fluctuating", "4"),
             new RadioListItem("Improved", "5"),
-            new RadioListItem("Not applicable", "6"),
+            new RadioListItem("Not applicable", "8"),
             new RadioListItem("Unknown", "9"),
         };
 
@@ -509,7 +509,7 @@ namespace UDS.Net.Forms.Pages.UDS4
              } },
         };
 
-        public B9Model(IVisitService visitService) : base(visitService, "B9")
+        public B9Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B9")
         {
         }
 
@@ -526,13 +526,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B9; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(B9); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

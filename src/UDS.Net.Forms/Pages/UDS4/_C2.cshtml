@@ -72,7 +72,6 @@
                     <radio-button-group id="@Html.IdFor(m => m.C2.MOCAHEAR)" for="@Model.C2.MOCAHEAR" items="Model.SimpleNoYesListItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAHEAR"></span>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALANX"></span>
             </div>
 
             <div class="@rowCSS">
@@ -247,7 +246,10 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECN"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DelayedRecallValidSum"></span>
+                </div>
             </div>
 
             <div class="@rowCSS">
@@ -259,7 +261,10 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECC"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRAndMOCARECCValidValues"></span>
+                </div>
             </div>
 
             <div class="@rowCSS">
@@ -271,7 +276,10 @@
                     </div>
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCARECR"></p>
                 </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRValidValue"></span>
+                </div>
             </div>
 
             <div class="@rowCSS">
@@ -1592,6 +1600,7 @@
                         <br>
                         <br>
                         <b>(Check all that apply)</b>
+                        <span asp-validation-for="C2.RESPVALReasonIndicated" class="mt-2 text-sm text-red-600"></span>
                     </p>
                 </div>
                 <div class="subsubcounterreset">

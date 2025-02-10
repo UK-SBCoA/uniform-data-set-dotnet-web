@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A3 A3 { get; set; } = default!;
 
-        public A3Model(IVisitService visitService) : base(visitService, "A3")
+        public A3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A3")
         {
         }
 
@@ -37,7 +37,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id)
+        public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
 
@@ -141,10 +141,10 @@ namespace UDS.Net.Forms.Pages.UDS4
                         }
                     }
                 }
-                return await base.OnPostAsync(id); // checks for validation, etc.
+                return await base.OnPostAsync(id, goNext); // checks for validation, etc.
 
             }
-            return await base.OnPostAsync(id);
+            return await base.OnPostAsync(id, goNext);
         }
     }
 }

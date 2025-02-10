@@ -10,7 +10,7 @@
         INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on participant response. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B6. Check only <span class="underline">one</span> box per question.
     </p>
 </div>
-<div>
+<div data-controller="b6">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -18,17 +18,20 @@
                 <div class="space-y-5">
                     <div class="relative flex items-start">
                         <div class="flex h-6 items-center">
-                            @Html.CheckBox("B6.NOGDS", Model.B6.NOGDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            @Html.CheckBox("B6.NOGDS", Model.B6.NOGDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600", @data_b6_target="NOGDSInput", @data_action="input->b6#NOGDSBehavior" })
                         </div>
                         <div class="ml-3 text-sm leading-6">
                             <label asp-for="B6.NOGDS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B6.NOGDS)</label>
                         </div>
                     </div>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSCheckedValidation"></span>
+                    </div>
                 </div>
             </fieldset>
         </div>
 
-        <table class="table-auto min-w-full divide-y divide-gray-300">
+        <table class="table-auto min-w-full divide-y divide-gray-300" data-b6-target="radioTable">
             <caption class="caption-top">
                 <strong>Instruct the participant:</strong> "In the next part of this interview, I will ask you questions about your feelings. Some of the questions I will ask you may not apply, and some may make you feel uncomfortable. For each question, please answer "yes" or "no," depending on how you have been feeling <strong>in the past week, including today.</strong>"
             </caption>
@@ -41,7 +44,7 @@
                     }
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200" data-target="radioTable">
                 <tr>
                     <td>
                         <label asp-for="B6.SATIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B6.SATIS)</label>
@@ -169,9 +172,17 @@
             <label asp-for="B6.GDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B6.GDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B6.GDS"></p>
-                <input asp-for="@Model.B6.GDS" />
+                <input readonly asp-for="@Model.B6.GDS" data-b6-target="GDSInput"/>
                 <span class="italic text-gray-500">(max score =15; did not complete = 88)</span>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
+                </div>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDSNotCompleteChecked"></span>
+                </div>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSCheckedValidation"></span>
+                </div>
             </div>
         </div>
     </div>
