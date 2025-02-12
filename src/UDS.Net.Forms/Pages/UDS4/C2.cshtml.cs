@@ -64,6 +64,22 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
+                },
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
+            }
+        };
         public UIRangeToggle REY1RECBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -164,10 +180,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
                     new UIEnableAttribute("C2.REYTCOR"),
                     new UIEnableAttribute("C2.REYFPOS")
                 },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98. If test was skipped because optional or\nnot available in Spanish translation, enter 88, and SKIP TO QUESTION 12a."
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a."
             }
         };
 
