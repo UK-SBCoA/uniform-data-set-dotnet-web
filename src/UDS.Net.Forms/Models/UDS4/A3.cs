@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? NWINFMUT { get; set; } // follow-up visits
 
         [Display(Name = "Mother — birth year")]
-        [BirthYear(AllowUnknown = true , Parent = true)]
+        [BirthYear(AllowUnknown = true, Parent = true)]
         [RequiredOnFinalized]
         public int? MOMYOB { get; set; }
 
