@@ -1427,7 +1427,6 @@ public class A5D2Model : FormPageModel
         {
             PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A5D2.NOMENSAGE"),
                     new UIEnableAttribute("A5D2.HRT"),
                     new UIEnableAttribute("A5D2.BCPILLS"),
                 },

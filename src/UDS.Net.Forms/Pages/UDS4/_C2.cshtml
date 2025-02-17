@@ -1177,7 +1177,7 @@
                     </div>
                     <div class="flex flex-row space-x-4">
                         <div class="w-28">
-                            <input asp-for="@Model.C2.REYDREC" />
+                            <input asp-for="@Model.C2.REYDREC" ui-range-behavior="Model.REYDRECBehavior" />
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDREC"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>

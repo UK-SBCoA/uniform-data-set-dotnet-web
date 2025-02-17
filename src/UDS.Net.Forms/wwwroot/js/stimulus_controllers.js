@@ -9,6 +9,7 @@ import checkboxSelectAll from "./js_controllers/checkboxSelectAll_controller.js"
 import rxNormDisplayNames from "./js_controllers/rxNormDisplayNames_controller.js"
 import autocomplete from "./js_controllers/autocomplete_controller.js"
 import autocalculate from "./js_controllers/autocalculate_controller.js"
+import b6 from "./js_controllers/b6_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -22,3 +23,4 @@ Stimulus.register("checkboxSelectAll", checkboxSelectAll)
 Stimulus.register("rxNormDisplayNames", rxNormDisplayNames)
 Stimulus.register("autocomplete", autocomplete)
 Stimulus.register("autocalculate", autocalculate)
+Stimulus.register("b6", b6)
