@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -129,7 +128,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Rarely", "2"),
             new RadioListItem("Sometimes", "3"),
             new RadioListItem("Often", "4"),
-            new RadioListItem("Much worse", "5"),
+            new RadioListItem("Very often", "5"),
             new RadioListItem("Don't know / Prefer not to answer", "9")
         };
 
@@ -139,7 +138,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("A little better", "2"),
             new RadioListItem("The same", "3"),
             new RadioListItem("A little worse", "4"),
-            new RadioListItem("Very often ", "5"),
+            new RadioListItem("Much worse", "5"),
             new RadioListItem("Don't know / Prefer not to answer", "9")
         };
 
