@@ -55,7 +55,7 @@ namespace UDS.Net.Forms.DataAnnotations
 
                     if (Parent)
                     {
-                        if (year < Minimum || year > DateTime.Now.Year - 20)
+                        if (year < Minimum || year > ParentMaximum)
                         {
                             return new ValidationResult(GetErrorMessage());
                         }
