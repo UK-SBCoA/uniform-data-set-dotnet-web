@@ -16,17 +16,32 @@ export default class extends Controller {
 
     CalculateGDS() {
 
-        let skipCalculation = this.NOGDSInputTarget.checked ? true : false
+        const totalQuestionCount = 15
 
-        //reset values for recalculation
-        this.GDSInputTarget.value = ""
+        let skipCalculation = this.NOGDSInputTarget.checked ? true : false
+        let GDSScore = 0;
+        let unansweredCount = 0
 
         if (!skipCalculation) {
-            this.radioTableTarget.querySelectorAll('input[type="radio"]:checked').forEach((radio) => {
+
+            let checkedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked')
+
+            checkedRadios.forEach((radio) => {
                 if (Number(radio.value) != 9) {
-                    this.GDSInputTarget.value = Number(this.GDSInputTarget.value) + Number(radio.value)
+                    GDSScore += Number(radio.value)
+                } else {
+                    unansweredCount++
                 }
             })
+
+            //display the total only when all questions have been answered
+            if (checkedRadios.length == totalQuestionCount) {
+                if (unansweredCount == 0) {
+                    this.GDSInputTarget.value = GDSScore
+                } else {
+                    this.GDSInputTarget.value = this.ProrateGDSScore(GDSScore, checkedRadios.length, unansweredCount)
+                }
+            }
         } else {
             this.GDSInputTarget.value = 88
         }
@@ -48,5 +63,9 @@ export default class extends Controller {
             //recalculate GDS with enabled radios
             this.CalculateGDS()
         }
+    }
+
+    ProrateGDSScore(GDSScore, answeredCount, unansweredCount) {
+        return Math.round(GDSScore + ((GDSScore / answeredCount) * unansweredCount))
     }
 }
