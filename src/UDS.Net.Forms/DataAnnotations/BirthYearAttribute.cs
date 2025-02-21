@@ -10,8 +10,10 @@ namespace UDS.Net.Forms.DataAnnotations
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class BirthYearAttribute : ValidationAttribute, IClientModelValidator
     {
-        public int Minimum { get; set; } = 1875; // A1 minimum is default
+        public int Minimum { get; set; } = 1850; // A1 minimum is default
         public int Maximum { get; } = DateTime.Now.Year - 15; // Maximum for A1 or A2 is always current year minus 15
+        public bool Parent { get; set; } = false;
+        public int ParentMaximum { get; } = DateTime.Now.Year - 20; // Maximum for parent in A3
         public bool AllowUnknown { get; set; } = false;
 
         public void AddValidation(ClientModelValidationContext context)
@@ -20,12 +22,16 @@ namespace UDS.Net.Forms.DataAnnotations
             MergeAttribute(context.Attributes, "data-val-birthyear", GetErrorMessage());
             MergeAttribute(context.Attributes, "data-val-birthyear-minimum", Minimum.ToString(CultureInfo.InvariantCulture));
             MergeAttribute(context.Attributes, "data-val-birthyear-maximum", Maximum.ToString(CultureInfo.InvariantCulture));
+            MergeAttribute(context.Attributes, "data-val-birthyear-parentmaximum", ParentMaximum.ToString(CultureInfo.InvariantCulture));
             MergeAttribute(context.Attributes, "data-val-birthyear-allowunknown", AllowUnknown.ToString().ToLower());
+            MergeAttribute(context.Attributes, "data-val-birthyear-parent", Parent.ToString().ToLower());
         }
 
         public string GetErrorMessage()
         {
-            if (AllowUnknown)
+            if (Parent && AllowUnknown)
+                return $"Birth year must be between {Minimum} and {ParentMaximum}, or 9999 (unknown).";
+            else if (AllowUnknown)
                 return $"Birth year must be between {Minimum} and {Maximum}, or 9999 (unknown).";
             else
                 return $"Birth year must be between {Minimum} and {Maximum}.";
@@ -45,6 +51,14 @@ namespace UDS.Net.Forms.DataAnnotations
                     if (AllowUnknown && year == 9999)
                     {
                         return ValidationResult.Success;
+                    }
+
+                    if (Parent)
+                    {
+                        if (year < Minimum || year > ParentMaximum)
+                        {
+                            return new ValidationResult(GetErrorMessage());
+                        }
                     }
 
                     if (year < Minimum || year > Maximum)
