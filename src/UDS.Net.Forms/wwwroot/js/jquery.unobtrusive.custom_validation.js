@@ -318,7 +318,7 @@ $.validator.unobtrusive.adapters.add(
 
     let minimum = parseInt(options.params.minimum);
     let maximum = parseInt(options.params.maximum);
-    let parentmaximum = parseInt(options.params.parentmaximum)
+    let parentmaximum = parseInt(options.params.parentmaximum);
     let parent = options.params.parent;
     let allowUnknown = options.params.allowunknown; // TODO parse bool
 
