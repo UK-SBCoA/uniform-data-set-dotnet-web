@@ -22,6 +22,7 @@ namespace UDS.Net.Forms.DataAnnotations
             MergeAttribute(context.Attributes, "data-val-birthyear", GetErrorMessage());
             MergeAttribute(context.Attributes, "data-val-birthyear-minimum", Minimum.ToString(CultureInfo.InvariantCulture));
             MergeAttribute(context.Attributes, "data-val-birthyear-maximum", Maximum.ToString(CultureInfo.InvariantCulture));
+            MergeAttribute(context.Attributes, "data-val-birthyear-parentmaximum", ParentMaximum.ToString(CultureInfo.InvariantCulture));
             MergeAttribute(context.Attributes, "data-val-birthyear-allowunknown", AllowUnknown.ToString().ToLower());
             MergeAttribute(context.Attributes, "data-val-birthyear-parent", Parent.ToString().ToLower());
         }
