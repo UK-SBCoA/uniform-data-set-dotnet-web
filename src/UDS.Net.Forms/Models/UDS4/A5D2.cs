@@ -511,12 +511,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(PSYCDIS), 1, 2, ErrorMessage = "Please specify.")]
         public string? PSYCDISX { get; set; }
         [Display(Name = "How old was the participant when they had their first menstrual period?")]
-        [RegularExpression("^([5-9]|1\\d|2[0-5]|88|99)$", ErrorMessage = "Valid range is 5-25 or 88 or 99")]
+        [RegularExpression("^([5-9]|1\\d|2[0-5]|888|999)$", ErrorMessage = "Valid range is 5-25 or 888 or 999")]
         public int? MENARCHE { get; set; }
         [Display(Name = "How old was the participant when they had their last menstrual period?")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70||88|99)$", ErrorMessage = "Valid range is 10-70 or 88 or 99")]
-        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
-        [RequiredIf(nameof(MENARCHE), "99", ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
+        [RegularExpression("^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
+        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        [RequiredIf(nameof(MENARCHE), "999", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         public int? NOMENSAGE { get; set; }
         [Display(Name = "Participant has stopped having menstrual periods due to natural menopause")]
         public bool? NOMENSNAT { get; set; }
@@ -543,43 +543,43 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Has the participant taken female hormone replacement pills or patches (e.g. estrogen)?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
-        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
-        [RequiredIf(nameof(MENARCHE), "99", ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
+        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        [RequiredIf(nameof(MENARCHE), "999", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         public int? HRT { get; set; }
 
         [Display(Name = "Total number of years participant has taken female hormone replacement pills")]
-        [RegularExpression("^(\\d|[1-6]\\d|70|99)$", ErrorMessage = "Valid range is 0-70 or 99")]
+        [RegularExpression("^(\\d|[1-8]\\d|90|999)$", ErrorMessage = "Valid range is 0-90 or 999")]
         [RequiredIf(nameof(HRT), "1", ErrorMessage = "Required if HRT = Yes")]
         public int? HRTYEARS { get; set; }
 
         [Display(Name = "Age at first use of female hormone replacement pills")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70|99)$", ErrorMessage = "Valid range is 10-70 or 99")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIf(nameof(HRT), "1", ErrorMessage = "Required if HRT = Yes")]
         public int? HRTSTRTAGE { get; set; }
 
         [Display(Name = "Age at last use of female hormone replacement pills")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70||88|99)$", ErrorMessage = "Valid range is 10-70 or 88 or 99")]
+        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Valid range is 10-110 or 888 or 999")]
         [RequiredIf(nameof(HRT), "1", ErrorMessage = "Required if HRT = Yes")]
         public int? HRTENDAGE { get; set; }
 
         [Display(Name = "Has the participant ever taken birth control pills?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
-        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
-        [RequiredIf(nameof(MENARCHE), "99", ErrorMessage = "Required if MENARCHE is 5 - 25 or 99")]
+        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        [RequiredIf(nameof(MENARCHE), "999", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         public int? BCPILLS { get; set; }
 
         [Display(Name = "Total number of years participant has taken birth control pills")]
-        [RegularExpression("^(\\d|[1-4]\\d|50|99)$", ErrorMessage = "Valid range is 0-50 or 99")]
+        [RegularExpression("^(\\d|[1-4]\\d|50|999)$", ErrorMessage = "Valid range is 0-50 or 999")]
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Required if BCPILLS = Yes")]
         public int? BCPILLSYR { get; set; }
 
         [Display(Name = "Age at first use of birth control pills")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70|99)$", ErrorMessage = "Valid range is 10-70 or 99")]
+        [RegularExpression("^(1\\d|[2-6]\\d|70|999)$", ErrorMessage = "Valid range is 10-70 or 999")]
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Required if BCPILLS = Yes")]
         public int? BCSTARTAGE { get; set; }
 
         [Display(Name = "Age at last use of birth control pills")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70||88|99)$", ErrorMessage = "Valid range is 10-70 or 88 or 99")]
+        [RegularExpression("^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Required if BCPILLS = Yes")]
         public int? BCENDAGE { get; set; }
 
@@ -689,7 +689,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [RequiredIfRange(nameof(NOMENSAGE), 10, 70, ErrorMessage = "Please indicate at least one reason.")]
-        [RequiredIf(nameof(NOMENSAGE), "99", ErrorMessage = "Please indicate at least one reason.")]
+        [RequiredIf(nameof(NOMENSAGE), "999", ErrorMessage = "Please indicate at least one reason.")]
         [NotMapped]
         public bool? NOMENSAGEStoppedReasonCheckboxes
         {
