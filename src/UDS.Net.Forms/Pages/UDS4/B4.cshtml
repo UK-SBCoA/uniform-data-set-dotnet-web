@@ -44,7 +44,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
                 </tr>
-                <tr data-b4-target="MEMORY">
+                <tr data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM">
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -59,7 +59,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe difficulty with time relationships; usually disoriented to time, often to place</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Oriented to person only</td>
                 </tr>
-                <tr data-b4-target="ORIENT">
+                <tr data-b4-target="ORIENT" data-action="change->b4#updateCDRSUM">
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -74,7 +74,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Severely impaired in handling problems, similarities, and differences; social judgment usually impaired</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Unable to make judgments or solve problems</td>
                 </tr>
-                <tr data-b4-target="JUDGMENT">
+                <tr data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM">
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -89,7 +89,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears well enough to be taken to functions outside the family home</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home</td>
                 </tr>
-                <tr data-b4-target="COMMUN">
+                <tr data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM">
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -104,7 +104,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Only simple chores preserved; very restricted interests, poorly maintained</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">No significant function in the home</td>
                 </tr>
-                <tr data-b4-target="HOMEHOBB">
+                <tr data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM">
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -118,7 +118,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Requires assistance in dressing, hygiene, keeping of personal effects</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
                 </tr>
-                <tr data-b4-target="PERSCARE">
+                <tr data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM">
                     <!--// Only 4 options for Personal Care (PERSCARE) so the first two cells need to be merged //-->
                     @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
                     {
@@ -150,7 +150,7 @@
             <label asp-for="B4.CDRGLOB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRGLOB)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRGLOB"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems" data-b4-target="CDRGLOB">
+                <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems" data-b4-target="CDRGLOB" data-action="change->b4#updateCDRSUM">
                 </radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRGLOB"></span>
             </div>

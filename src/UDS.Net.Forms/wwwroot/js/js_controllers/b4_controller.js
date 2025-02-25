@@ -4,17 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = ["CDRSUM", "CDRGLOB", "MEMORY", "ORIENT", "JUDGMENT", "COMMUN", "HOMEHOBB", "PERSCARE", "CDRGLOB"];
 
-    connect() {
-        console.log("Connected!");
-        this.MEMORYTarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.ORIENTTarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.PERSCARETarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.JUDGMENTTarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.COMMUNTarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.HOMEHOBBTarget.addEventListener("change", this.updateCDRSUM.bind(this));
-        this.PERSCARETarget.addEventListener("change", this.updateCDRSUM.bind(this));
-    }
-
     updateCDRSUM() {
         const memoryValue = parseFloat(this.getSelectedValue(this.MEMORYTarget));
         const orientValue = parseFloat(this.getSelectedValue(this.ORIENTTarget));
@@ -53,7 +42,6 @@ export default class extends Controller {
         // When 3 categories = MEMORY, then CDR = MEMORY
         else if (memoryValue >= 0) {
             const scoresSimilarToM = secondaryScores.filter(score => score === memoryValue);
-            console.log("scoresSimilarToM:", scoresSimilarToM);
 
             if (scoresSimilarToM.length >= 3) {
                 result = memoryValue;
@@ -71,9 +59,6 @@ export default class extends Controller {
                         lessThanMemoryMap[score] = (lessThanMemoryMap[score] || 0) + 1;
                     }
                 });
-
-                console.log("Greater than M:", greaterThanMemoryMap);
-                console.log("Less than M:", lessThanMemoryMap);
 
                 // Count total entries on each side
                 const greaterThanCount = Object.values(greaterThanMemoryMap).reduce((acc, count) => acc + count, 0);
