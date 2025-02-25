@@ -5,12 +5,12 @@ export default class extends Controller {
     static targets = ["CDRSUM", "CDRGLOB", "MEMORY", "ORIENT", "JUDGMENT", "COMMUN", "HOMEHOBB", "PERSCARE", "CDRGLOB"];
 
     updateCDRSUM() {
-        const memoryValue = parseFloat(this.getSelectedValue(this.MEMORYTarget));
-        const orientValue = parseFloat(this.getSelectedValue(this.ORIENTTarget));
-        const judgmentValue = parseFloat(this.getSelectedValue(this.JUDGMENTTarget));
-        const communValue = parseFloat(this.getSelectedValue(this.COMMUNTarget));
-        const homehobbValue = parseFloat(this.getSelectedValue(this.HOMEHOBBTarget));
-        const perscareValue = parseFloat(this.getSelectedValue(this.PERSCARETarget));
+        const memoryValue = parseFloat(this.getFloatValue(this.MEMORYTarget));
+        const orientValue = parseFloat(this.getFloatValue (this.ORIENTTarget));
+        const judgmentValue = parseFloat(this.getFloatValue (this.JUDGMENTTarget));
+        const communValue = parseFloat(this.getFloatValue (this.COMMUNTarget));
+        const homehobbValue = parseFloat(this.getFloatValue (this.HOMEHOBBTarget));
+        const perscareValue = parseFloat(this.getFloatValue (this.PERSCARETarget));
 
         let result = null;
         const secondaryScores = [orientValue, judgmentValue, communValue, homehobbValue, perscareValue];
@@ -114,10 +114,10 @@ export default class extends Controller {
                 }
             }
         }
-        this.autoSelectRadioButton(result);
+        this.updateCRGLOB(result);
     }
 
-    autoSelectRadioButton(result) {
+    updateCRGLOB(result) {
         const radioButtons = this.CDRGLOBTarget.querySelectorAll('input[type="radio"]');
 
         radioButtons.forEach((radioButton) => {
@@ -129,8 +129,8 @@ export default class extends Controller {
         console.log(`CDRGLOB set to: ${result}`);     
     }
 
-    getSelectedValue(target) {
+    getFloatValue(target) {
         const selectedRadio = target.querySelector('input[type="radio"]:checked');
-        return selectedRadio ? selectedRadio.value : null;
+        return selectedRadio ? parseFloat(selectedRadio.value) : NaN;
     }
 }
