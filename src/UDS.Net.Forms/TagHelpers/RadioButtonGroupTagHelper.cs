@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection.Emit;
-using Microsoft.AspNetCore.Html;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -36,7 +34,6 @@ namespace UDS.Net.Forms.TagHelpers
             }
 
             output.TagName = "fieldset"; // overwrites custom tag
-            output.Attributes.SetAttribute("class", "mt-4 space-y-2");
 
             if (For == null)
             {
@@ -55,11 +52,16 @@ namespace UDS.Net.Forms.TagHelpers
                 expression = prefix + expression;
             }
 
-            var radiosWithName = GenerateRadioInputs(items, expression);
+            // if the radio button group has Stimulus data attributes, render them on the child inputs
+            var radiosWithName = GenerateRadioInputs(items, expression, output.Attributes);
             output.PostContent.AppendHtml(radiosWithName);
+
+            // clear any parent attributes, but save them to be rendered on child inputs
+            output.Attributes.Clear();
+            output.Attributes.SetAttribute("class", "mt-4 space-y-2");
         }
 
-        private IHtmlContent GenerateRadioInputs(IEnumerable<RadioListItem> items, string name)
+        private IHtmlContent GenerateRadioInputs(IEnumerable<RadioListItem> items, string name, TagHelperAttributeList? parentAttributes = null)
         {
             if (!(items is IList<RadioListItem> itemsList))
             {
@@ -76,9 +78,8 @@ namespace UDS.Net.Forms.TagHelpers
             for (var i = 0; i < itemsList.Count; i++)
             {
                 var item = itemsList[i];
-                var radio = GenerateRadioInput(item, i, name);
+                var radio = GenerateRadioInput(item, i, name, parentAttributes);
                 var label = GenerateLabel(item, i);
-
 
                 var outerDiv = new TagBuilder("div");
                 outerDiv.Attributes["class"] = "relative flex items-start";
@@ -97,7 +98,7 @@ namespace UDS.Net.Forms.TagHelpers
             return radioButtonListBuilder;
         }
 
-        private TagBuilder GenerateRadioInput(RadioListItem item, int index, string name)
+        private TagBuilder GenerateRadioInput(RadioListItem item, int index, string name, TagHelperAttributeList? parentAttributes = null)
         {
             var selected = false;
             var modelValue = "";
@@ -113,6 +114,13 @@ namespace UDS.Net.Forms.TagHelpers
             tagBuilder.Attributes["id"] = $"{Id}[{index}]";
             tagBuilder.Attributes["value"] = item.Value;
             tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
+            if (parentAttributes != null)
+            {
+                foreach (var attribute in parentAttributes)
+                {
+                    tagBuilder.Attributes.Add(new KeyValuePair<string, string?>(attribute.Name, attribute.Value.ToString()));
+                }
+            }
 
             if (!String.IsNullOrWhiteSpace(name))
             {
