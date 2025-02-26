@@ -476,7 +476,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Select one or more syndrome(s) as Present.")]
+        [RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "Select one or more syndrome(s) as Present.")]
         [NotMapped]
         public bool? PresentSyndromeIndicated
         {
