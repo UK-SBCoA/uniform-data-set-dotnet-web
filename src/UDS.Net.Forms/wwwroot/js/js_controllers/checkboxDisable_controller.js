@@ -6,7 +6,7 @@ HTML USAGE:
      <div class="flex h-6 items-center">
                  @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
                      {
-                         @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                         @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                          data_checkBoxDisable_target = "checkboxTrigger",
                          data_action = "input->checkboxDisable#ToggleGroup",
                          data_checkBoxDisable_enableGroup_param = "",

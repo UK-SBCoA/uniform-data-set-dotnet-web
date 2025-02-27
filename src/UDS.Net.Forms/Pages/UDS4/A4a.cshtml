@@ -3,7 +3,7 @@
 @{
     Layout = "_LayoutForm";
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
-    string checkboxCSS = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
+    string checkboxCSS = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 }
 
 <div>
@@ -92,7 +92,7 @@
                 <div class="relative flex items-start">
                     <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                        @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
                         <label asp-for="A4a.ARIAE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAE)</label>
@@ -102,7 +102,7 @@
                 <div class="relative flex items-start">
                     <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                        @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
                         <label asp-for="A4a.ARIAH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAH)</label>
@@ -112,7 +112,7 @@
                 <div class="relative flex items-start">
                     <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                     <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
+                        @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
                     </div>
                     <div class="ml-3 text-sm leading-6">
                         <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
