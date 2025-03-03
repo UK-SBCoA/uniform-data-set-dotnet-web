@@ -57,6 +57,33 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "If all three criteria in question 4 are checked, choose 1=MCI. If less than 3 criteria are met, choose 0=No.")]
+        public bool? MCICriteriaValidation
+        {
+            get
+            {
+                if(MCI.HasValue)
+                {
+                    var criteriaCount = 0;
+
+                    criteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+
+                    if(criteriaCount == 3)
+                    {
+                        return MCI.Value == 1 ? true : null;
+                    }
+
+                    return MCI.Value == 0 ? true : null;
+                }
+
+                return null;
+            }
+        }
+
+
         [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please specify.")]
         [Display(Name = "Does the participant meet all three of the above criteria for MCI (amnestic or non-amnestic)?")]
         public int? MCI { get; set; }
@@ -78,20 +105,67 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMPNOMCIO), "True", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
 
-        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
+        //If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes
+        // this looks like q5 criteria CAN be unchecked? 
+
+        //[RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
+        //[NotMapped]
+        //public bool? CognitivelyImpairedIndicated
+        //{
+        //    get
+        //    {
+        //        if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
+        //            (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
+        //            (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
+        //            (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
+        //        {
+        //            return true;
+        //        }
+        //        else return null;
+        //    }
+        //}
+
+        [RequiredIf(nameof(MCI), "0", ErrorMessage = "If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if only the third MCI criteria is met in Q4, select 0=No for Q5b.")]
         [NotMapped]
-        public bool? CognitivelyImpairedIndicated
+        public bool? IMPNOMCICriteriaValidation
         {
             get
             {
-                if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
-                    (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
-                    (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
-                    (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
+                if (IMPNOMCI.HasValue)
                 {
-                    return true;
+                    var IMPNOMCICriteriaCount = 0;
+
+                    IMPNOMCICriteriaCount += IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCICG.HasValue && IMPNOMCICG.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCIO.HasValue && IMPNOMCIO.Value == true ? 1 : 0;
+
+                    if (IMPNOMCICriteriaCount > 0)
+                    {
+                        return IMPNOMCI.Value == 1 ? true : null;
+                    }
+
+                    if (IMPNOMCICriteriaCount <= 0)
+                    {
+                        var MCICriteriaCount = 0;
+
+                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+
+                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value == true)
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+
+                        if (MCICriteriaCount > 0)
+                        {
+                            return IMPNOMCI.Value == 1 ? true : null;
+                        }
+                    }
                 }
-                else return null;
+
+                return null;
             }
         }
 
