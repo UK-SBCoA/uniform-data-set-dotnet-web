@@ -95,8 +95,7 @@
                     </div>
                     <div class="mt-4 sm:col-span-1 sm:mt-0">
                         <div class="flex items-center">
-                            <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400
-text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]" id="Milestone.PROTOCOL[0]" name="Milestone.PROTOCOL" type="radio" value="1">
+                            <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]" id="Milestone.PROTOCOL[0]" name="Milestone.PROTOCOL" type="radio" value="1">
                             <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="Milestone.PROTOCOL[0]">
                                 <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span>
                                 Annual UDS follow-up by telephone (CONTINUE TO QUESTION 2A1)
@@ -105,8 +104,7 @@ text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-5
 
                         <div class="relative flex items-start">
                             <div class="flex items-center">
-                                <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400
-text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]" id="Milestone.PROTOCOL[1]" name="Milestone.PROTOCOL" type="radio" value="2">
+                                <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;false&quot;} } ]" id="Milestone.PROTOCOL[1]" name="Milestone.PROTOCOL" type="radio" value="2">
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="Milestone.PROTOCOL[1]">
                                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">2</span>
                                     Minimal contact (CONTINUE TO QUESTION 2A1)
@@ -132,8 +130,7 @@ text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-5
 
                         <div class="relative flex items-start">
                             <div class="flex items-center">
-                                <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400
-text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]" id="Milestone.PROTOCOL[2]" name="Milestone.PROTOCOL" type="radio" value="3">
+                                <input asp-for="@Model.Milestone.PROTOCOL" class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-affects="true" data-affects-targets="[ {&quot;Milestone.ACONSENT&quot;: {&quot;disabled&quot;: &quot;true&quot;} } ]" id="Milestone.PROTOCOL[2]" name="Milestone.PROTOCOL" type="radio" value="3">
                                 <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="Milestone.PROTOCOL[2]">
                                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">3</span>
                                     Annual in-person UDS follow-up
@@ -438,14 +435,14 @@ text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-5
         </div>
     </div>
 
-    <input class="invisible" asp-for="@Model.Milestone.ParticipationId" />
-    <input class="invisible" asp-for="@Model.Milestone.CreatedAt" />
-    <input class="invisible" asp-for="@Model.Milestone.CreatedBy" />
-    <input class="invisible" asp-for="@Model.Milestone.Status" />
-    <input class="invisible" asp-for="@Model.Milestone.IsDeleted" />
-    <input class="invisible" asp-for="@Model.Milestone.FormId" />
-    <input class="invisible" asp-for="@Model.Milestone.Id" />
-    <input class="invisible" asp-for="@Model.Milestone.ModifiedBy" />
+    <input type="hidden" asp-for="@Model.Milestone.ParticipationId" />
+    <input type="hidden" asp-for="@Model.Milestone.CreatedAt" />
+    <input type="hidden" asp-for="@Model.Milestone.CreatedBy" />
+    <input type="hidden" asp-for="@Model.Milestone.Status" />
+    <input type="hidden" asp-for="@Model.Milestone.IsDeleted" />
+    <input type="hidden" asp-for="@Model.Milestone.FormId" />
+    <input type="hidden" asp-for="@Model.Milestone.Id" />
+    <input type="hidden" asp-for="@Model.Milestone.ModifiedBy" />
 </form>
 
 @section Scripts {
