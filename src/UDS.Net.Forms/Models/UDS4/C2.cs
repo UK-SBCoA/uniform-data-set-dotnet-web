@@ -790,7 +790,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (MOCBTOTS.Value != 88)
                         {
-                            yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCATOTS) });
+                            yield return new ValidationResult("If 1e–1k or 1n–1s were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCATOTS) });
                         }
                     }
                 }
