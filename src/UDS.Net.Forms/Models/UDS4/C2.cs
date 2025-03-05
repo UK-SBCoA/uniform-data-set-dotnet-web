@@ -47,8 +47,9 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
         [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
-        public int? MOCBTOTS { get; set; }
+        [RequiredIfTelephoneVisitAttribute(nameof(RMMODE), "Finalized")]
 
+        public int? MOCBTOTS { get; set; }
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
         [RegularExpression("^([0-1]|9[5-8])$", ErrorMessage = "Allowed values are 0-1 or 95-98.")]
         [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
@@ -790,7 +791,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (MOCBTOTS.Value != 88)
                         {
-                            yield return new ValidationResult("If 1e–1k or 1n–1s were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCATOTS) });
+                            yield return new ValidationResult("If 1e–1k or 1n–1s were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCBTOTS) });
                         }
                     }
                 }
