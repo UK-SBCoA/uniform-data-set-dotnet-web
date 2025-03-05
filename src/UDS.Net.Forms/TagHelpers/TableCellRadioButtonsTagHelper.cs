@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace UDS.Net.Forms.TagHelpers
 {
@@ -115,7 +113,7 @@ namespace UDS.Net.Forms.TagHelpers
             tagBuilder.Attributes["type"] = "radio";
             tagBuilder.Attributes["id"] = $"{Id}[{index}]";
             tagBuilder.Attributes["value"] = item.Value;
-            tagBuilder.Attributes["class"] = "h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
+            tagBuilder.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
             if (!String.IsNullOrWhiteSpace(name))
             {

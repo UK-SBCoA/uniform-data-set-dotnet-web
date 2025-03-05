@@ -407,7 +407,7 @@ $.validator.unobtrusive.adapters.add(
           // reset css
           element.removeClass("input-validation-error");
           element.addClass(
-            "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+            "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
           );
           // reset error messages
           let validator = $("#UDSForm").validate();
@@ -468,7 +468,7 @@ $.validator.unobtrusive.adapters.add(
               // reset css
               element.removeClass("input-validation-error");
               element.addClass(
-                "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
               );
               // reset error messages
               let validator = $("#UDSForm").validate();
