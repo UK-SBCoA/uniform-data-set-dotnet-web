@@ -41,22 +41,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Largely preserved functional independence OR functional dependence that is not related to cognitive decline")]
         public bool? MCICRITFUN { get; set; }
 
-        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please check one or more MCI core clinical criteria.")]
-        [NotMapped]
-        public bool? MCIClinicalCriteriaIndicated
-        {
-            get
-            {
-                if ((MCICRITCLN.HasValue && MCICRITCLN.Value == true) ||
-                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true) ||
-                    (MCICRITFUN.HasValue && MCICRITFUN.Value == true))
-                {
-                    return true;
-                }
-                else return null;
-            }
-        }
-
         [NotMapped]
         [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "If all three criteria in question 4 are checked, choose 1=MCI. If less than 3 criteria are met, choose 0=No.")]
         public bool? MCICriteriaValidation
@@ -71,15 +55,18 @@ namespace UDS.Net.Forms.Models.UDS4
                     criteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
                     criteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
 
-                    if(criteriaCount == 3)
+                    if (criteriaCount == 3)
                     {
                         return MCI.Value == 1 ? true : null;
+                    } 
+                    
+                    if(criteriaCount == 0)
+                    {
+                        return MCI.Value == 0 ? true : null;
                     }
-
-                    return MCI.Value == 0 ? true : null;
                 }
 
-                return null;
+                return true;
             }
         }
 
@@ -245,6 +232,40 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a dementia syndrome must be marked as present")]
+        [NotMapped]
+        public bool? PREDOMSYNSyndromePresent
+        {
+            get
+            {
+                if (PREDOMSYN == 1)
+                {
+                    //one of the 8 sub qustions must be present
+                    var PREDOMSYNSyndromeCount = 0;
+
+                    if (AMNDEM.HasValue && AMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (DYEXECSYN.HasValue && DYEXECSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PCA.HasValue && PCA.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PPASYN.HasValue && PPASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (FTDSYN.HasValue && FTDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (LBDSYN.HasValue && LBDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (NAMNDEM.HasValue && NAMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PSPSYN.HasValue && PSPSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CTESYN.HasValue && CTESYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CBSSYN.HasValue && CBSSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (MSASYN.HasValue && MSASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
+
+                    if (PREDOMSYNSyndromeCount == 0)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         [Display(Name = "Amnestic predominant syndrome")]
         public bool? AMNDEM { get; set; }
 
@@ -311,7 +332,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "Please select one or more source as Yes.")]
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a source must be selected.")]
         [NotMapped]
         public bool? SourceIndicated
         {
@@ -550,7 +571,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "Select one or more syndrome(s) as Present.")]
+        [RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "If a predominant clinical syndrome was not present in question 8, a condition must be selected.")]
         [NotMapped]
         public bool? PresentSyndromeIndicated
         {
@@ -649,14 +670,12 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if (NORMCOG == 0 && counter >= 1)
+
+                if (counter >= 1)
                 {
                     return true;
                 }
-                else if (NORMCOG == 1 && counter == 0)
-                {
-                    return true;
-                }
+                
                 return null;
             }
         }
