@@ -47,7 +47,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if(MCI.HasValue)
+                if (MCI.HasValue)
                 {
                     var criteriaCount = 0;
 
@@ -58,9 +58,9 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (criteriaCount == 3)
                     {
                         return MCI.Value == 1 ? true : null;
-                    } 
-                    
-                    if(criteriaCount == 0)
+                    }
+
+                    if (criteriaCount == 0)
                     {
                         return MCI.Value == 0 ? true : null;
                     }
@@ -91,26 +91,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIf(nameof(IMPNOMCIO), "True", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
-
-        //If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes
-        // this looks like q5 criteria CAN be unchecked? 
-
-        //[RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
-        //[NotMapped]
-        //public bool? CognitivelyImpairedIndicated
-        //{
-        //    get
-        //    {
-        //        if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
-        //            (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
-        //            (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
-        //            (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
-        //        {
-        //            return true;
-        //        }
-        //        else return null;
-        //    }
-        //}
 
         [RequiredIf(nameof(MCI), "0", ErrorMessage = "If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if only the third MCI criteria is met in Q4, select 0=No for Q5b.")]
         [NotMapped]
@@ -675,7 +655,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     return true;
                 }
-                
+
                 return null;
             }
         }
