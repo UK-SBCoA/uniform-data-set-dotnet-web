@@ -376,6 +376,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? OTHANXD { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [RequiredIf(nameof(OTHANXD), "true", ErrorMessage = "Please provide other anxiety disorder.")]
         [MaxLength(60)]
         public string? OTHANXDX { get; set; }
 
