@@ -47,6 +47,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
         [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
+        [RequiredIfTelephoneVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCBTOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
@@ -758,16 +759,43 @@ namespace UDS.Net.Forms.Models.UDS4
                 // 1z MOCAORDY
                 // 1aa MOCAORPL
                 // 1bb MOCAORCT
-                if (MOCATOTS.HasValue &&
-                    ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
-                    || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
-                    || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                 {
-                    if (MOCATOTS.Value != 88)
+                    if (MOCATOTS.HasValue &&
+                        ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
+                        || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
+                        || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
                     {
-                        yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
+                        if (MOCATOTS.Value != 88)
+                        {
+                            yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
+                        }
                     }
                 }
+                else if ((MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone))
+                {
+                    if (MOCBTOTS.HasValue &&
+                        ((MOCADIGI.HasValue && MOCADIGI.Value >= 95 && MOCADIGI.Value <= 98) ||
+                        (MOCALETT.HasValue && MOCALETT.Value >= 95 && MOCALETT.Value <= 98) ||
+                        (MOCASER7.HasValue && MOCASER7.Value >= 95 && MOCASER7.Value <= 98) ||
+                        (MOCAREPE.HasValue && MOCAREPE.Value >= 95 && MOCAREPE.Value <= 98) ||
+                        (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95 && MOCAFLUE.Value <= 98) ||
+                        (MOCAABST.HasValue && MOCAABST.Value >= 95 && MOCAABST.Value <= 98) ||
+                        (MOCARECN.HasValue && MOCARECN.Value >= 95 && MOCARECN.Value <= 98) ||
+                        (MOCAORDT.HasValue && MOCAORDT.Value >= 95 && MOCAORDT.Value <= 98) ||
+                        (MOCAORMO.HasValue && MOCAORMO.Value >= 95 && MOCAORMO.Value <= 98) ||
+                        (MOCAORYR.HasValue && MOCAORYR.Value >= 95 && MOCAORYR.Value <= 98) ||
+                        (MOCAORDY.HasValue && MOCAORDY.Value >= 95 && MOCAORDY.Value <= 98) ||
+                        (MOCAORPL.HasValue && MOCAORPL.Value >= 95 && MOCAORPL.Value <= 98) ||
+                        (MOCAORCT.HasValue && MOCAORCT.Value >= 95 && MOCAORCT.Value <= 98)))
+                    {
+                        if (MOCBTOTS.Value != 88)
+                        {
+                            yield return new ValidationResult("If 1e–1k or 1n–1s were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCBTOTS) });
+                        }
+                    }
+                }
+
 
                 if (Status == FormStatus.Finalized)
                 {

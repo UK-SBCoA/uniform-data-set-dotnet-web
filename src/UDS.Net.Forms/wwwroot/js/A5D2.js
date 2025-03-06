@@ -27,7 +27,7 @@ $(document).ready(function () {
   }
 
   function MENARCHEBehavior() {
-    if (MENARCHEInput.value >= 5 && MENARCHEInput.value <= 25 | MENARCHEInput.value == 99) {
+    if (MENARCHEInput.value >= 5 && MENARCHEInput.value <= 25 | MENARCHEInput.value == 999) {
       NOMENSAGEInput.disabled = false
     } else {
       NOMENSAGEInput.disabled = true
@@ -37,7 +37,7 @@ $(document).ready(function () {
   }
 
   function ToggleNOMENSAGECheckboxes() {
-    if (NOMENSAGEInput.value >= 10 && NOMENSAGEInput.value <= 70 | NOMENSAGEInput.value == 99) {
+    if (NOMENSAGEInput.value >= 10 && NOMENSAGEInput.value <= 70 | NOMENSAGEInput.value == 999) {
       NOMENSAGECheckboxes.forEach((checkbox) => {
         checkbox.disabled = false
       })
