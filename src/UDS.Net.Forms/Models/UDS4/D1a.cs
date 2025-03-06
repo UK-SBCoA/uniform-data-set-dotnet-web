@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Models.UDS4
                         return MCI.Value == 1 ? true : null;
                     }
 
-                    if (criteriaCount == 0)
+                    if (criteriaCount < 3)
                     {
                         return MCI.Value == 0 ? true : null;
                     }
