@@ -27,11 +27,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? TRANSWORRY { get; set; }
 
-        [Display(Name = "In the past 30 days, how often did it take you longer to get somewhere than it would have taken you if you had different transportation?")]
-        [RegularExpression("^([1-3]|8)$", ErrorMessage = "Valid range is 1-3 or 8")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? TRSPLONGER { get; set; }
-
         [Display(Name = "In the past 30 days, how often has a lack of transportation kept you from medical appointments or from doing things needed for daily living?")]
         [RegularExpression("^([1-3]|8)$", ErrorMessage = "Valid range is 1-3 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]

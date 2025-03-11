@@ -11,7 +11,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? TRSPACCESS { get; set; }
         public int? TRANSPROB { get; set; }
         public int? TRANSWORRY { get; set; }
-        public int? TRSPLONGER { get; set; }
         public int? TRSPMED { get; set; }
         public int? INCOMEYR { get; set; }
         public int? FINSATIS { get; set; }
@@ -113,7 +112,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 TRSPACCESS = a1aDto.TRSPACCESS;
                 TRANSPROB = a1aDto.TRANSPROB;
                 TRANSWORRY = a1aDto.TRANSWORRY;
-                TRSPLONGER = a1aDto.TRSPLONGER;
                 TRSPMED = a1aDto.TRSPMED;
                 INCOMEYR = a1aDto.INCOMEYR;
                 FINSATIS = a1aDto.FINSATIS;

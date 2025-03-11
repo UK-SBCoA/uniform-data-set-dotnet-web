@@ -269,7 +269,6 @@ namespace UDS.Net.Forms.Extensions
                 TRSPACCESS = vm.TRSPACCESS,
                 TRANSPROB = vm.TRANSPROB,
                 TRANSWORRY = vm.TRANSWORRY,
-                TRSPLONGER = vm.TRSPLONGER,
                 TRSPMED = vm.TRSPMED,
                 INCOMEYR = vm.INCOMEYR,
                 FINSATIS = vm.FINSATIS,
