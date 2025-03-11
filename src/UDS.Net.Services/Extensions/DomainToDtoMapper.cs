@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -424,11 +420,6 @@ namespace UDS.Net.Services.Extensions
                 COMPUSA = fields.COMPUSA,
                 FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
