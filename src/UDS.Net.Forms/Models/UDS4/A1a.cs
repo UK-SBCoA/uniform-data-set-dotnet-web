@@ -77,15 +77,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? COMPCOMM { get; set; }
 
-        [Display(Name = "Where would you place yourself on this ladder compared to others in the U.S.?")]
-        [RegularExpression("^([1-9]|10)$", ErrorMessage = "Valid range is 1-10")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? COMPUSA { get; set; }
-
-        [Display(Name = "Thinking of your childhood, where would your family have been placed on this ladder compared to others in your community (or neighborhood)?")]
-        [RegularExpression("^([1-9]|10)$", ErrorMessage = "Valid range is 1-10")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? FAMCOMP { get; set; }
 
         [Display(Name = "Thinking of the person who raised you, what was their highest level of education completed?")]
         [RegularExpression("^([1-6]|9)$", ErrorMessage = "Valid range is 1-6 or 9")]

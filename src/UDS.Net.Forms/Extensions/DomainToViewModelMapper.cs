@@ -524,8 +524,6 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
                 GUARDREL = fields.GUARDREL,
                 GUARDRELX = fields.GUARDRELX,

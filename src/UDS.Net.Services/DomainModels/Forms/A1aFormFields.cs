@@ -21,8 +21,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? LESSMEDS { get; set; }
         public int? LESSMEDSYR { get; set; }
         public int? COMPCOMM { get; set; }
-        public int? COMPUSA { get; set; }
-        public int? FAMCOMP { get; set; }
         public int? GUARDEDU { get; set; }
         public int? GUARDREL { get; set; }
         public string GUARDRELX { get; set; }
@@ -122,8 +120,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 LESSMEDS = a1aDto.LESSMEDS;
                 LESSMEDSYR = a1aDto.LESSMEDSYR;
                 COMPCOMM = a1aDto.COMPCOMM;
-                COMPUSA = a1aDto.COMPUSA;
-                FAMCOMP = a1aDto.FAMCOMP;
                 GUARDEDU = a1aDto.GUARDEDU;
                 GUARDREL = a1aDto.GUARDREL;
                 GUARDRELX = a1aDto.GUARDRELX;

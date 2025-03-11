@@ -279,8 +279,6 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDS = vm.LESSMEDS,
                 LESSMEDSYR = vm.LESSMEDSYR,
                 COMPCOMM = vm.COMPCOMM,
-                COMPUSA = vm.COMPUSA,
-                FAMCOMP = vm.FAMCOMP,
                 GUARDEDU = vm.GUARDEDU,
                 GUARDREL = vm.GUARDREL,
                 GUARDRELX = vm.GUARDRELX,
