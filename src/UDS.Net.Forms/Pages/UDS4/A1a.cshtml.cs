@@ -84,6 +84,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("1", "1"),
         };
 
+        public List<RadioListItem> PreferNotToAnswer { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("Prefer not to answer","88"),
+
+        };
+
         public List<RadioListItem> GUARDEDUItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("Never attended school or only attended kindergarten", "1"),
