@@ -38,9 +38,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> FindingsListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1"),
-            new RadioListItem("Indeterminate", "9")
+            new RadioListItem("No, inconsistent", "0"),
+            new RadioListItem("Yes, consistent", "1"),
+            new RadioListItem("Indeterminate", "9"),
+            new RadioListItem("Not assessed", "8")
         };
 
         public List<RadioListItem> IMAGINGDXListItems { get; set; } = new List<RadioListItem>

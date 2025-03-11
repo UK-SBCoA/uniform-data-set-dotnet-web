@@ -41,21 +41,35 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Largely preserved functional independence OR functional dependence that is not related to cognitive decline")]
         public bool? MCICRITFUN { get; set; }
 
-        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please check one or more MCI core clinical criteria.")]
         [NotMapped]
-        public bool? MCIClinicalCriteriaIndicated
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "If all three criteria in question 4 are checked, choose 1=MCI. If less than 3 criteria are met, choose 0=No.")]
+        public bool? MCICriteriaValidation
         {
             get
             {
-                if ((MCICRITCLN.HasValue && MCICRITCLN.Value == true) ||
-                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true) ||
-                    (MCICRITFUN.HasValue && MCICRITFUN.Value == true))
+                if (MCI.HasValue)
                 {
-                    return true;
+                    var criteriaCount = 0;
+
+                    criteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+
+                    if (criteriaCount == 3)
+                    {
+                        return MCI.Value == 1 ? true : null;
+                    }
+
+                    if (criteriaCount < 3)
+                    {
+                        return MCI.Value == 0 ? true : null;
+                    }
                 }
-                else return null;
+
+                return true;
             }
         }
+
 
         [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please specify.")]
         [Display(Name = "Does the participant meet all three of the above criteria for MCI (amnestic or non-amnestic)?")]
@@ -78,20 +92,47 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMPNOMCIO), "True", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
 
-        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
+        [RequiredIf(nameof(MCI), "0", ErrorMessage = "If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if only the third MCI criteria is met in Q4, select 0=No for Q5b.")]
         [NotMapped]
-        public bool? CognitivelyImpairedIndicated
+        public bool? IMPNOMCICriteriaValidation
         {
             get
             {
-                if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
-                    (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
-                    (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
-                    (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
+                if (IMPNOMCI.HasValue)
                 {
-                    return true;
+                    var IMPNOMCICriteriaCount = 0;
+
+                    IMPNOMCICriteriaCount += IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCICG.HasValue && IMPNOMCICG.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += IMPNOMCIO.HasValue && IMPNOMCIO.Value == true ? 1 : 0;
+
+                    if (IMPNOMCICriteriaCount > 0)
+                    {
+                        return IMPNOMCI.Value == 1 ? true : null;
+                    }
+
+                    if (IMPNOMCICriteriaCount <= 0)
+                    {
+                        var MCICriteriaCount = 0;
+
+                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+
+                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value == true)
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+
+                        if (MCICriteriaCount > 0)
+                        {
+                            return IMPNOMCI.Value == 1 ? true : null;
+                        }
+                    }
                 }
-                else return null;
+
+                return null;
             }
         }
 
@@ -171,6 +212,40 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a dementia syndrome must be marked as present")]
+        [NotMapped]
+        public bool? PREDOMSYNSyndromePresent
+        {
+            get
+            {
+                if (PREDOMSYN == 1)
+                {
+                    //one of the 8 sub qustions must be present
+                    var PREDOMSYNSyndromeCount = 0;
+
+                    if (AMNDEM.HasValue && AMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (DYEXECSYN.HasValue && DYEXECSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PCA.HasValue && PCA.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PPASYN.HasValue && PPASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (FTDSYN.HasValue && FTDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (LBDSYN.HasValue && LBDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (NAMNDEM.HasValue && NAMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PSPSYN.HasValue && PSPSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CTESYN.HasValue && CTESYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CBSSYN.HasValue && CBSSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (MSASYN.HasValue && MSASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
+
+                    if (PREDOMSYNSyndromeCount == 0)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         [Display(Name = "Amnestic predominant syndrome")]
         public bool? AMNDEM { get; set; }
 
@@ -237,7 +312,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "Please select one or more source as Yes.")]
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a source must be selected.")]
         [NotMapped]
         public bool? SourceIndicated
         {
@@ -477,7 +552,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Select one or more syndrome(s) as Present.")]
+        [RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "If a predominant clinical syndrome was not present in question 8, a condition must be selected.")]
         [NotMapped]
         public bool? PresentSyndromeIndicated
         {
@@ -576,14 +651,12 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if (NORMCOG == 0 && counter >= 1)
+
+                if (counter >= 1)
                 {
                     return true;
                 }
-                else if (NORMCOG == 1 && counter == 0)
-                {
-                    return true;
-                }
+
                 return null;
             }
         }

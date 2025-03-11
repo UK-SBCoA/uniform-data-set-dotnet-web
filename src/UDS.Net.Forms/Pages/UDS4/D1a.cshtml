@@ -122,7 +122,6 @@
     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
         <div>
             <label class="text-base font-semibold text-gray-900"><span class="counter subcounterreset"></span>Check all criteria that apply in Q4.</label><br />
-            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCIClinicalCriteriaIndicated"></span>
         </div>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <fieldset class="subsubcounterreset">
@@ -166,6 +165,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MCI"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.MCI)" for="@Model.D1a.MCI" items="Model.MCIListItems" ui-behaviors="Model.MCIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCI"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MCICriteriaValidation"></span>
     </div>
     <p class="italic text-gray-500">If all three criteria are checked, choose <strong>1=MCI</strong> for Q4b. If less than 3 criteria are met, choose <strong>0=No</strong> for Q4b.</p>
 </div>
@@ -193,7 +193,6 @@
             <span class="counter"></span>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5, using any relevant data. Any conditions
             contributing to impairment (e.g., substance abuse or medications) should be identified in Section 3.
         </label><br />
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CognitivelyImpairedIndicated"></span>
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <fieldset class="subsubcounterreset">
@@ -257,6 +256,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.IMPNOMCI"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCI"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCICriteriaValidation"></span>
     </div>
     <span class="text-gray-500 italic">
         If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if <strong><u>only</u></strong> the third
@@ -578,6 +578,7 @@
     </div>
 </div>
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYNSyndromePresent"></span>
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr class="odd:bg-white even:bg-gray-50 border-b">
@@ -923,7 +924,9 @@
                         <span class="counter"></span>Indicate the source(s) of information used to assign the clinical syndrome:
                         Select one or more as Yes; all others will default to No in the NACC database
                     </label>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SourceIndicated"></span>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SourceIndicated"></span>
+                    </div>
                 </td>
             </tr>
             <tr class="odd:bg-white even:bg-gray-50 border-b">
