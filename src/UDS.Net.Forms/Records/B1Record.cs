@@ -20,11 +20,8 @@ namespace UDS.Net.Forms.Records
         [Name("modeb1")]
         public int Mode { get; init; } = (int)form.MODE;
 
-        [Name("rmreasb1")]
-        public int? RmReas { get; init; } = form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
-
-        [Name("rmmodeb1")]
-        public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+        [Name("b1not")]
+        public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
     }
 }
 

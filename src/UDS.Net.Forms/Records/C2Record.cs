@@ -8,22 +8,22 @@ namespace UDS.Net.Forms.Records
     {
         internal Form form { get; init; }
 
-        [Name("frmdatec2")]
+        [Name("frmdatec2ct2")]
         public string FrmDate { get; init; } = form.FRMDATE.ToShortDateString();
 
-        [Name("initialsc2")]
+        [Name("initialsc2ct2")]
         public string Initials { get; init; } = form.INITIALS;
 
-        [Name("langc2")]
+        [Name("langc2ct2")]
         public int Lang { get; init; } = (int)form.LANG;
 
-        [Name("modec2")]
+        [Name("modec2ct2")]
         public int Mode { get; init; } = (int)form.MODE;
 
-        [Name("rmreasc2")]
+        [Name("rmreasc2ct2")]
         public int? RmReas { get; init; } = form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
 
-        [Name("rmmodec2")]
+        [Name("rmmodec2ct2")]
         public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
     }
 }
