@@ -1,10 +1,5 @@
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -63,7 +58,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (visit.PACKET == PacketKind.F)
                         {
-
+                            yield return new ValidationResult("Response required");
                         }
                     }
                 }
