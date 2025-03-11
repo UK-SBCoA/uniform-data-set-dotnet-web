@@ -608,8 +608,6 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A3Dto()
             {
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,

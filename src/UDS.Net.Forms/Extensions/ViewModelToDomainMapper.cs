@@ -353,8 +353,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A3FormFields
             {
-                AFFFAMM = vm.AFFFAMM,
-                NWINFMUT = vm.NWINFMUT,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
                 MOMETPR = vm.MOMETPR,
@@ -368,9 +366,7 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
-                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
-                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
