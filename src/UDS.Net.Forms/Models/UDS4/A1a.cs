@@ -72,7 +72,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? LESSMEDSYR { get; set; }
 
-        [Display(Name = "Where would you place yourself on this ladder compared to others in your community (or neighborhood)? Please mark the number where you would place yourself.")]
+        [Display(Name = "Where would you place yourself on this ladder compared to others in your community (or neighborhood)? Please mark the number where you would place yourself. (88 = prefer not to answer)")]
         [RegularExpression("^([1-9]|10|88)$", ErrorMessage = "Valid range is 1-10 or 88")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? COMPCOMM { get; set; }
