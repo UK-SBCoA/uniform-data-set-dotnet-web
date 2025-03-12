@@ -11,27 +11,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public C2 C2 { get; set; } = default!;
 
-        //public List<SelectListItem> ReasonCodeListItems { get; set; } = new List<SelectListItem>
-        //{
-        //    new SelectListItem("Physical problem", "95"),
-        //    new SelectListItem("Cognitive/behavior problem", "96"),
-        //    new SelectListItem("Other problem", "97"),
-        //    new SelectListItem("Verbal refusal", "98")
-        //};
-
-        //public UIRangeToggle VNTTOTWDBehavior = new UIRangeToggle
-        //{
-        //    Low = 0,
-        //    High = 50,
-        //    UIBehavior = new UIBehavior
-        //    {
-        //        PropertyAttributes = new List<UIPropertyAttributes>
-        //        {
-        //            new UIEnableAttribute("C2.VNTPCNC")
-        //        },
-        //        InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped\nbecause optional, enter 88, and SKIP TO QUESTION 12b."
-        //    }
-        //};
         public UIRangeToggle OTRAILABehavior = new UIRangeToggle
         {
             Low = 0,
