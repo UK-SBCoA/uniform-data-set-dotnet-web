@@ -735,9 +735,9 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if(MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
                 {
-                    if(CERAD1REC >= 0 && CERAD1REC <= 10)
+                    if (CERAD1REC >= 0 && CERAD1REC <= 10)
                     {
                         return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
                     }
