@@ -53,14 +53,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (visitValue is VisitModel)
                 {
                     VisitModel visit = (VisitModel)visitValue;
-
-                    if (visit != null)
-                    {
-                        if (visit.PACKET == PacketKind.F)
-                        {
-                            yield return new ValidationResult("Response required");
-                        }
-                    }
                 }
             }
             foreach (var result in base.Validate(validationContext))
