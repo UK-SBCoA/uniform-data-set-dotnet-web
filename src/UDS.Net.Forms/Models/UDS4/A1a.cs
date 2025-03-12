@@ -27,11 +27,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? TRANSWORRY { get; set; }
 
-        [Display(Name = "In the past 30 days, how often did it take you longer to get somewhere than it would have taken you if you had different transportation?")]
-        [RegularExpression("^([1-3]|8)$", ErrorMessage = "Valid range is 1-3 or 8")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? TRSPLONGER { get; set; }
-
         [Display(Name = "In the past 30 days, how often has a lack of transportation kept you from medical appointments or from doing things needed for daily living?")]
         [RegularExpression("^([1-3]|8)$", ErrorMessage = "Valid range is 1-3 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
@@ -77,20 +72,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? LESSMEDSYR { get; set; }
 
-        [Display(Name = "Where would you place yourself on this ladder compared to others in your community (or neighborhood)? Please mark the number where you would place yourself.")]
-        [RegularExpression("^([1-9]|10)$", ErrorMessage = "Valid range is 1-10")]
+        [Display(Name = "Where would you place yourself on this ladder compared to others in your community (or neighborhood)? Please mark the number where you would place yourself. (88 = prefer not to answer)")]
+        [RegularExpression("^([1-9]|10|88)$", ErrorMessage = "Valid range is 1-10 or 88")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? COMPCOMM { get; set; }
 
-        [Display(Name = "Where would you place yourself on this ladder compared to others in the U.S.?")]
-        [RegularExpression("^([1-9]|10)$", ErrorMessage = "Valid range is 1-10")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? COMPUSA { get; set; }
-
-        [Display(Name = "Thinking of your childhood, where would your family have been placed on this ladder compared to others in your community (or neighborhood)?")]
-        [RegularExpression("^([1-9]|10)$", ErrorMessage = "Valid range is 1-10")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? FAMCOMP { get; set; }
 
         [Display(Name = "Thinking of the person who raised you, what was their highest level of education completed?")]
         [RegularExpression("^([1-6]|9)$", ErrorMessage = "Valid range is 1-6 or 9")]

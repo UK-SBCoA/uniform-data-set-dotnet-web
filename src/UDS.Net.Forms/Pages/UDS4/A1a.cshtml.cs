@@ -81,6 +81,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("3", "3"),
             new RadioListItem("2", "2"),
             new RadioListItem("1", "1"),
+            new RadioListItem("Prefer not to answer", "88")
         };
 
         public List<RadioListItem> GUARDEDUItems { get; } = new List<RadioListItem>
