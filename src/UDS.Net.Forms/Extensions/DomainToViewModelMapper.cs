@@ -596,8 +596,6 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,
@@ -611,9 +609,7 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
-                NWINFSIB = fields.NWINFSIB,
                 KIDS = fields.KIDS,
-                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
