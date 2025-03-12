@@ -1263,7 +1263,6 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                MODCOMM = fields.MODCOMM,
                 MOCACOMP = fields.MOCACOMP,
                 MOCAREAS = fields.MOCAREAS,
                 MOCALOC = fields.MOCALOC,

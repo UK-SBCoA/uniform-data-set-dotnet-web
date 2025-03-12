@@ -931,7 +931,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new C2FormFields
             {
-                MODCOMM = vm.MODCOMM,
                 MOCACOMP = vm.MOCACOMP,
                 MOCAREAS = vm.MOCAREAS,
                 MOCALOC = vm.MOCALOC,
