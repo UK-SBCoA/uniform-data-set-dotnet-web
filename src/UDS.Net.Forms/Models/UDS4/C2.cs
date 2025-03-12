@@ -520,7 +520,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD1READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -535,7 +534,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -550,7 +548,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -727,6 +724,24 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (MOCARECN + MOCARECC == 5)
                 {
                     if (MOCARECR != 88) return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Values required if trial 1 total recall is 0 - 10 for in-person and remote video modalities")]
+        public bool? CERADREADValidation
+        {
+            get
+            {
+                if(MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if(CERAD1REC >= 0 && CERAD1REC <= 10)
+                    {
+                        return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
+                    }
                 }
 
                 return true;
