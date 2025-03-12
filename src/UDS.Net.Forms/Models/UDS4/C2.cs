@@ -748,7 +748,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Value required iftotal delayed recall is 0 - 15 for in-person and remote video modalities")]
+        [RequiredOnFinalized(ErrorMessage = "Value required if total delayed recall is 0 - 15 for in-person and remote video modalities")]
         public bool? REYMETHODValidation
         {
             get
@@ -757,7 +757,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     if (REYDREC >= 0 && REYDREC <= 10)
                     {
-                        return !REYDREC.HasValue ? true : null;
+                        return REYDREC.HasValue ? true : null;
                     }
                 }
 
