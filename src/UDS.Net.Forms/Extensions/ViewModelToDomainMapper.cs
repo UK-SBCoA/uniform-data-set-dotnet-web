@@ -269,7 +269,6 @@ namespace UDS.Net.Forms.Extensions
                 TRSPACCESS = vm.TRSPACCESS,
                 TRANSPROB = vm.TRANSPROB,
                 TRANSWORRY = vm.TRANSWORRY,
-                TRSPLONGER = vm.TRSPLONGER,
                 TRSPMED = vm.TRSPMED,
                 INCOMEYR = vm.INCOMEYR,
                 FINSATIS = vm.FINSATIS,
@@ -280,8 +279,6 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDS = vm.LESSMEDS,
                 LESSMEDSYR = vm.LESSMEDSYR,
                 COMPCOMM = vm.COMPCOMM,
-                COMPUSA = vm.COMPUSA,
-                FAMCOMP = vm.FAMCOMP,
                 GUARDEDU = vm.GUARDEDU,
                 EMPTINESS = vm.EMPTINESS,
                 MISSPEOPLE = vm.MISSPEOPLE,
@@ -347,8 +344,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A3FormFields
             {
-                AFFFAMM = vm.AFFFAMM,
-                NWINFMUT = vm.NWINFMUT,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
                 MOMETPR = vm.MOMETPR,
@@ -362,9 +357,7 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
-                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
-                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };

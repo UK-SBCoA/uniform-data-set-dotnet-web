@@ -8,28 +8,12 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A3FormFields : IFormFields
     {
-        public int? AFFFAMM { get; set; } // initial visits
-        public int? NWINFMUT { get; set; } // follow-up visits
-        public int? FADMUT { get; set; }
-        public string? FADMUTX { get; set; }
-        public int? FADMUSO { get; set; }
-        public string? FADMUSOX { get; set; }
-        public int? FFTDMUT { get; set; }
-        public string? FFTDMUTX { get; set; }
-        public int? FFTDMUSO { get; set; }
-        public string? FFTDMUSX { get; set; }
-        public int? FOTHMUT { get; set; }
-        public string? FOTHMUTX { get; set; }
-        public int? FOTHMUSO { get; set; }
-        public string? FOTHMUSX { get; set; }
-        public int? MOMMOB { get; set; }
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
         public string? MOMETPR { get; set; }
         public string? MOMETSEC { get; set; }
         public int? MOMMEVAL { get; set; }
         public int? MOMAGEO { get; set; }
-        public int? DADMOB { get; set; }
         public int? DADYOB { get; set; }
         public int? DADDAGE { get; set; }
         public string? DADETPR { get; set; }
@@ -37,12 +21,10 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DADMEVAL { get; set; }
         public int? DADAGEO { get; set; }
         public int? SIBS { get; set; }
-        public int? NWINFSIB { get; set; }
 
         public List<A3FamilyMemberFormFields> SiblingFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
         public int? KIDS { get; set; }
-        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMemberFormFields> KidsFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
@@ -132,8 +114,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A3Dto)
             {
                 var a3Dto = ((A3Dto)dto);
-                this.AFFFAMM = a3Dto.AFFFAMM;
-                this.NWINFMUT = a3Dto.NWINFMUT;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
                 this.MOMETPR = a3Dto.MOMETPR;
@@ -146,8 +126,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
-                this.NWINFSIB = a3Dto.NWINFSIB;
-                this.NWINFKID = a3Dto.NWINFKID;
 
                 // TODO map new fields
 
