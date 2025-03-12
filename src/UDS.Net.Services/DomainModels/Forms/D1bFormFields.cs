@@ -46,8 +46,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? IMAGLAC { get; set; }
         public int? IMAGMACH { get; set; }
         public int? IMAGMICH { get; set; }
-        public int? IMAGMWMH { get; set; }
-        public int? IMAGEWMH { get; set; }
+        public int? IMAGWMH { get; set; }
+        public int? IMAGWMHSEV { get; set; }
         public int? OTHBIOM1 { get; set; }
         public string OTHBIOMX1 { get; set; }
         public int? BIOMAD1 { get; set; }
@@ -184,8 +184,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 IMAGLAC = d1bDto.IMAGLAC;
                 IMAGMACH = d1bDto.IMAGMACH;
                 IMAGMICH = d1bDto.IMAGMICH;
-                IMAGMWMH = d1bDto.IMAGMWMH;
-                IMAGEWMH = d1bDto.IMAGEWMH;
+                IMAGWMH = null; // TODO map to dto when updated api
+                IMAGWMHSEV = null;  // TODO map to dto when updated api
                 OTHBIOM1 = d1bDto.OTHBIOM1;
                 OTHBIOMX1 = d1bDto.OTHBIOMX1;
                 BIOMAD1 = d1bDto.BIOMAD1;

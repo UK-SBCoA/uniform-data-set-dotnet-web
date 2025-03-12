@@ -1565,8 +1565,10 @@ namespace UDS.Net.Services.Extensions
                 IMAGLAC = fields.IMAGLAC,
                 IMAGMACH = fields.IMAGMACH,
                 IMAGMICH = fields.IMAGMICH,
-                IMAGMWMH = fields.IMAGMWMH,
-                IMAGEWMH = fields.IMAGEWMH,
+                IMAGMWMH = null, // TODO remove
+                IMAGEWMH = null, // TODO remove
+                // TODO add IMAGWMH
+                // TODO add IMAGWMHSEV
                 OTHBIOM1 = fields.OTHBIOM1,
                 OTHBIOMX1 = fields.OTHBIOMX1,
                 BIOMAD1 = fields.BIOMAD1,

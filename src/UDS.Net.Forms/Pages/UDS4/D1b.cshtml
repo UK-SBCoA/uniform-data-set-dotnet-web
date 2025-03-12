@@ -537,19 +537,20 @@
             </tr>
             <tr>
                 <td class="pl-5">
-                    <label asp-for="D1b.IMAGMWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMWMH"></span>
+                    <label asp-for="D1b.IMAGWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGWMH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMH"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMWMH)" for="@Model.D1b.IMAGMWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGWMH)" for="@Model.D1b.IMAGWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td class="pl-5">
-                    <label asp-for="D1b.IMAGEWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGEWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGEWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGEWMH"></span>
+                <td class="pl-6">
+                    <label asp-for="D1b.IMAGWMHSEV"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGWMHSEV)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMHSEV"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMHSEV"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGEWMH)" for="@Model.D1b.IMAGEWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <!--// TODO Change this to two options with a different layout //-->
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGWMHSEV)" for="@Model.D1b.IMAGWMHSEV" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
         </tbody>
     </table>
