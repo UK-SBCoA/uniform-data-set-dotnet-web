@@ -500,7 +500,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? REYDTI { get; set; }
 
         [Display(Name = "Method of recognition test administration")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
         public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
@@ -741,6 +740,24 @@ namespace UDS.Net.Forms.Models.UDS4
                     if(CERAD1REC >= 0 && CERAD1REC <= 10)
                     {
                         return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Value required iftotal delayed recall is 0 - 15 for in-person and remote video modalities")]
+        public bool? REYMETHODValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REYDREC >= 0 && REYDREC <= 10)
+                    {
+                        return !REYDREC.HasValue ? true : null;
                     }
                 }
 
