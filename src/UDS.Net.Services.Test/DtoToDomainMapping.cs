@@ -137,7 +137,6 @@ public class DtoToDomainMapping
                     CreatedBy = EMAIL,
                     IsDeleted = false,
                     Status = "Pending",
-                    NEWINF = TESTINT,
                     INRELTO = TESTINT,
                     INKNOWN = TESTINT,
                     INLIVWTH = TESTINT,
@@ -167,7 +166,6 @@ public class DtoToDomainMapping
 
         var a2DtoFields = (A2Dto)dtoFields;
 
-        Assert.AreEqual(a2DtoFields.NEWINF, fields.NEWINF);
         Assert.AreEqual(a2DtoFields.INRELTO, fields.INRELTO);
         Assert.AreEqual(a2DtoFields.INKNOWN, fields.INKNOWN);
         Assert.AreEqual(a2DtoFields.INLIVWTH, fields.INLIVWTH);
