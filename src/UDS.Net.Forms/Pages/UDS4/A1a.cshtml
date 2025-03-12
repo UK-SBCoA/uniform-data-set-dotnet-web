@@ -166,12 +166,12 @@
                 closer you are to the people at the very top and the lower you are, the closer you are to the people at the very bottom.
             </p>
         </div>
-        <div class="sm:grid sm:grid-cols-1 xl:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+        <div class="sm:grid sm:grid-cols-1 xl:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
             <div class="subcounterreset sm:grid sm:gap-10">
                 <div>
                     <table class="table-auto w-full">
                         <tr class="align-top">
-                            <td colspan="10">
+                            <td colspan="11">
                                 <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
                                 <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
@@ -181,16 +181,6 @@
                             <table-cell-radio-buttons id="A1a.COMPCOMM" for="@Model.A1a.COMPCOMM" items="Model.LadderItems"></table-cell-radio-buttons>
                         </tr>
                     </table>
-                    <div class="py-8 flex justify-end">
-                    <radio-button-group id="A1a.COMPCOMM" for="A1a.COMPCOMM" items="Model.PreferNotToAnswer"></radio-button-group>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="py-8 flex justify-center">
-                    <div class="size-72">
-                        <img src="~/_content/UDS.Net.Forms/ladderscale.png" />
-                    </div>
                 </div>
             </div>
         </div>
@@ -534,7 +524,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a1.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600"})
+                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPANCEST"></label>
@@ -677,10 +667,11 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a14.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new 
-                    {   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
-                        data_checkBoxDisable_target="checkboxTrigger",
-                        data_action="input->checkboxDisable#ToggleGroup",
+                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new
+                    {
+                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
+                        data_checkBoxDisable_target = "checkboxTrigger",
+                        data_action = "input->checkboxDisable#ToggleGroup",
                         data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
                         data_checkBoxDisable_enableGroup_param = "",
                         data_checkboxDisable_toggleState_param = "true"
@@ -695,7 +686,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a15.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600"})
+                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOANS"></label>
