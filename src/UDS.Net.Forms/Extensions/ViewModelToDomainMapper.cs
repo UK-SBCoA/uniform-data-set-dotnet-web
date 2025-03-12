@@ -328,7 +328,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A2FormFields
             {
-                NEWINF = vm.NEWINF,
                 INRELTO = vm.INRELTO,
                 INKNOWN = vm.INKNOWN,
                 INLIVWTH = vm.INLIVWTH,
