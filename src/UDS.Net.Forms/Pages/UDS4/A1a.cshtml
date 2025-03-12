@@ -241,50 +241,6 @@
                 </div>
             </div>
         </div>
-        <div class="@rowCSS pl-10">
-            <label asp-for="A1a.GUARDREL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARDREL)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDREL"></p>
-                <radio-button-group id="A1a.GUARDREL" for="@Model.A1a.GUARDREL" items="Model.RelationshipItems" ui-behaviors="Model.GUARDRELBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDREL"></span>
-            </div>
-            <div class="mt-4 space-y-4">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDRELX"></p>
-                <label asp-for="@Model.A1a.GUARDRELX">@Html.DisplayNameFor(m => m.A1a.GUARDRELX)</label>
-                <div class="mt-2">
-                    <input asp-for="@Model.A1a.GUARDRELX" disabled="disabled" />
-                </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDRELX"></span>
-            </div>
-        </div>
-    </div>
-    <div class="sm:py-6">
-        <div class="@rowCSS">
-            <label asp-for="A1a.GUARD2EDU"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.GUARD2EDU)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <div class="max-w-lg">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2EDU"></p>
-                    <radio-button-group id="A1_GUARD2EDU" for="A1a.GUARD2EDU" items="Model.GUARD2EDUItems" ui-behaviors="Model.GUARD2EDUBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2EDU"></span>
-                </div>
-            </div>
-        </div>
-        <div class="@rowCSS pl-10">
-            <label asp-for="A1a.GUARD2REL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARD2REL)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2REL"></p>
-                <radio-button-group id="A1a.GUARD2REL" for="@Model.A1a.GUARD2REL" items="Model.RelationshipItems" ui-behaviors="Model.GUARD2RELBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2REL"></span>
-            </div>
-            <div class="mt-4 space-y-4">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2RELX"></p>
-                <label asp-for="@Model.A1a.GUARD2RELX">@Html.DisplayNameFor(m => m.A1a.GUARD2RELX)</label>
-                <div class="mt-2">
-                    <input asp-for="@Model.A1a.GUARD2RELX" disabled="disabled" />
-                </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2RELX"></span>
-            </div>
-        </div>
     </div>
 </div>
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
