@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -25,11 +24,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COMPUSA { get; set; }
         public int? FAMCOMP { get; set; }
         public int? GUARDEDU { get; set; }
-        public int? GUARDREL { get; set; }
-        public string GUARDRELX { get; set; }
-        public int? GUARD2EDU { get; set; }
-        public int? GUARD2REL { get; set; }
-        public string GUARD2RELX { get; set; }
         public int? EMPTINESS { get; set; }
         public int? MISSPEOPLE { get; set; }
         public int? FRIENDS { get; set; }
@@ -127,11 +121,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 COMPUSA = a1aDto.COMPUSA;
                 FAMCOMP = a1aDto.FAMCOMP;
                 GUARDEDU = a1aDto.GUARDEDU;
-                GUARDREL = a1aDto.GUARDREL;
-                GUARDRELX = a1aDto.GUARDRELX;
-                GUARD2EDU = a1aDto.GUARD2EDU;
-                GUARD2REL = a1aDto.GUARD2REL;
-                GUARD2RELX = a1aDto.GUARD2RELX;
                 EMPTINESS = a1aDto.EMPTINESS;
                 MISSPEOPLE = a1aDto.MISSPEOPLE;
                 FRIENDS = a1aDto.FRIENDS;
