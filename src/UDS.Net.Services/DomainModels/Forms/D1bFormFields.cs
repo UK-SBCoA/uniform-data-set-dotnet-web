@@ -184,8 +184,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 IMAGLAC = d1bDto.IMAGLAC;
                 IMAGMACH = d1bDto.IMAGMACH;
                 IMAGMICH = d1bDto.IMAGMICH;
-                IMAGWMH = null; // TODO map to dto when updated api
-                IMAGWMHSEV = null;  // TODO map to dto when updated api
+                IMAGWMH = d1bDto.IMAGWMH;
+                IMAGWMHSEV = d1bDto.IMAGWMHSEV;
                 OTHBIOM1 = d1bDto.OTHBIOM1;
                 OTHBIOMX1 = d1bDto.OTHBIOMX1;
                 BIOMAD1 = d1bDto.BIOMAD1;
