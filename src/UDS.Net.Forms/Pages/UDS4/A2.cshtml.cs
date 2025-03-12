@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -18,12 +10,6 @@ namespace UDS.Net.Forms.Pages.UDS4
     {
         [BindProperty]
         public A2 A2 { get; set; } = default!;
-
-        public List<RadioListItem> NEWINFListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1")
-        };
 
         public List<RadioListItem> INRELTOListItems { get; } = new List<RadioListItem>
         {

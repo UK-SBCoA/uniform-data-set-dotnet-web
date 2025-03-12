@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -421,11 +417,6 @@ namespace UDS.Net.Services.Extensions
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
@@ -586,7 +577,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,

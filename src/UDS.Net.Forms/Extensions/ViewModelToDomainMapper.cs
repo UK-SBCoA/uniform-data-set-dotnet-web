@@ -280,11 +280,6 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDSYR = vm.LESSMEDSYR,
                 COMPCOMM = vm.COMPCOMM,
                 GUARDEDU = vm.GUARDEDU,
-                GUARDREL = vm.GUARDREL,
-                GUARDRELX = vm.GUARDRELX,
-                GUARD2EDU = vm.GUARD2EDU,
-                GUARD2REL = vm.GUARD2REL,
-                GUARD2RELX = vm.GUARD2RELX,
                 EMPTINESS = vm.EMPTINESS,
                 MISSPEOPLE = vm.MISSPEOPLE,
                 FRIENDS = vm.FRIENDS,
@@ -330,7 +325,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A2FormFields
             {
-                NEWINF = vm.NEWINF,
                 INRELTO = vm.INRELTO,
                 INKNOWN = vm.INKNOWN,
                 INLIVWTH = vm.INLIVWTH,

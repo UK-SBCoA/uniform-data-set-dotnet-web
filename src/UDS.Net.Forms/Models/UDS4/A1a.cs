@@ -83,30 +83,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? GUARDEDU { get; set; }
 
-        [Display(Name = "What was this person's relationship to you?")]
-        [RegularExpression("^([1-6]|8)$", ErrorMessage = "Valid range is 1-6 or 8")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? GUARDREL { get; set; }
-
-        [Display(Name = "Specify other relationship")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(GUARDREL), "8", ErrorMessage = "Response required")]
-        public string? GUARDRELX { get; set; }
-
-        [Display(Name = "If there was a second person who raised you (e.g., your mother, father, grandmother, etc.?), what was that person's highest level of education completed?")]
-        [RegularExpression("^([1-6]|8|9)$", ErrorMessage = "Valid range is 1-6 or 8 - 9")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
-        public int? GUARD2EDU { get; set; }
-
-        [Display(Name = "What was this second person's relationship to you (if applicable)?")]
-        [RegularExpression("^([1-6]|8)$", ErrorMessage = "Valid range is 1-6 or 8")]
-        public int? GUARD2REL { get; set; }
-
-        [Display(Name = "Specify other relationship")]
-        [MaxLength(60)]
-        [RequiredIf(nameof(GUARD2REL), "8", ErrorMessage = "Response required")]
-        public string? GUARD2RELX { get; set; }
-
         [Display(Name = "I experience a general sense of emptiness")]
         [RegularExpression("^([1-5]|8)$", ErrorMessage = "Valid range is 1-5 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
