@@ -1243,7 +1243,6 @@ namespace UDS.Net.Forms.Extensions
                 LBDIS = vm.LBDIS,
                 LBDIF = vm.LBDIF,
                 FTLD = vm.FTLD,
-                FTLDIF = vm.FTLDIF,
                 PSP = vm.PSP,
                 PSPIF = vm.PSPIF,
                 CORT = vm.CORT,
