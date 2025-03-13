@@ -411,10 +411,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
-        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
-        [Range(1, 3)]
-        public int? MODCOMM { get; set; }
-
         [Display(Name = "Total recall", Description = "(0-15,95-98)")]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Required if Rey AVLT was administered")]
@@ -856,10 +852,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
                     if (!RESPVAL.HasValue)
                         yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
-
-                    // TODO should MODCOMM be here now that UDSv4 has MODE?
-                    //if (!MODCOMM.HasValue)
-                    //    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))

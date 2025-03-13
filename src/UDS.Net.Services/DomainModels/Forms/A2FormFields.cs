@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -7,7 +6,6 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A2FormFields : IFormFields
     {
-        public int? NEWINF { get; set; }
         public int? INRELTO { get; set; }
         public int? INKNOWN { get; set; }
         public int? INLIVWTH { get; set; }
@@ -60,7 +58,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A2Dto)
             {
                 var a2Dto = ((A2Dto)dto);
-                this.NEWINF = a2Dto.NEWINF;
                 this.INRELTO = a2Dto.INRELTO;
                 this.INKNOWN = a2Dto.INKNOWN;
                 this.INLIVWTH = a2Dto.INLIVWTH;

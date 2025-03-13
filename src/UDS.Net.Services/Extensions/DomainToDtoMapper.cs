@@ -406,7 +406,6 @@ namespace UDS.Net.Services.Extensions
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
                 TRANSWORRY = fields.TRANSWORRY,
-                TRSPLONGER = fields.TRSPLONGER,
                 TRSPMED = fields.TRSPMED,
                 INCOMEYR = fields.INCOMEYR,
                 FINSATIS = fields.FINSATIS,
@@ -417,8 +416,6 @@ namespace UDS.Net.Services.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
@@ -580,7 +577,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -599,8 +595,6 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A3Dto()
             {
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,
