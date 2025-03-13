@@ -729,6 +729,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        // validate CERAD1READ, CERAD2READ, and CERAD3READ in C2 (InPerson and Video modalities) for value when CERAD1REC is 0 - 10
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "Values required if trial 1 total recall is 0 - 10 for in-person and remote video modalities")]
         public bool? CERADREADValidation
@@ -747,6 +748,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        // validate REYMETHOD in C2 (InPerson and Video modalities) for value when REDREC >= 0 and <=15 
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "Value required if total delayed recall is 0 - 15 for in-person and remote video modalities")]
         public bool? REYMETHODValidation
@@ -755,9 +757,9 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
                 {
-                    if (REYDREC >= 0 && REYDREC <= 10)
+                    if (REYDREC >= 0 && REYDREC <= 15)
                     {
-                        return REYDREC.HasValue ? true : null;
+                        return REYMETHOD.HasValue ? true : null;
                     }
                 }
 
