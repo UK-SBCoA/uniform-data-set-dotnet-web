@@ -64,7 +64,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DIGBACLS { get; set; }
         public int? OTRAILA { get; set; }
         public int? OTRLARR { get; set; }
-        public int? OTRALI { get; set; }
         public int? OTRLALI { get; set; }
         public int? OTRAILB { get; set; }
         public int? OTRLBRR { get; set; }
