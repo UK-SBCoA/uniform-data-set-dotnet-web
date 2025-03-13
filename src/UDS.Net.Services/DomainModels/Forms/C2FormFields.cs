@@ -7,7 +7,6 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class C2FormFields : IFormFields
     {
-        public int? MODCOMM { get; set; }
         public int? MOCACOMP { get; set; }
         public int? MOCAREAS { get; set; }
         public int? MOCALOC { get; set; }
