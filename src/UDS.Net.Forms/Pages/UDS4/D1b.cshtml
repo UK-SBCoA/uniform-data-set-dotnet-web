@@ -452,16 +452,15 @@
             Structural Imaging
         </p>
     </div>
-    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
-            <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
-            </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
         </div>
-    </table>
+    </div>
 
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
@@ -498,10 +497,14 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
             </tr>
-            <tr class="subsubsubcounterreset">
-                <td>
-                    <p class="pl-5 text-sm text-gray-500">If there is evidence for CVD on imaging, indicate the findings:</p>
-                </td>
+        </tbody>
+        <tbody class="subsubsubcounterreset">
+            <tr>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">If there is evidence for CVD on imaging, indicate the findings:</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">No</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Yes</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Indeterminate</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Not assessed</th>
             </tr>
             <tr>
                 <td class="pl-5">
@@ -537,19 +540,21 @@
             </tr>
             <tr>
                 <td class="pl-5">
-                    <label asp-for="D1b.IMAGMWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMWMH"></span>
+                    <label asp-for="D1b.IMAGWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGWMH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMH"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMWMH)" for="@Model.D1b.IMAGMWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGWMH)" for="@Model.D1b.IMAGWMH" items="Model.FindingsListItems" ui-behaviors="Model.IMAGWMHUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td class="pl-5">
-                    <label asp-for="D1b.IMAGEWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGEWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGEWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGEWMH"></span>
+                <td class="pl-10">
+                    <label asp-for="D1b.IMAGWMHSEV">7a3e1. If <strong>Yes</strong> choose the severity</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMHSEV"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMHSEV"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGEWMH)" for="@Model.D1b.IMAGEWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <td colspan="4">
+                    <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGWMHSEV)" for="@Model.D1b.IMAGWMHSEV" items="Model.IMAGWMHSEVListItems"></radio-button-group>
+                </td>
             </tr>
         </tbody>
     </table>

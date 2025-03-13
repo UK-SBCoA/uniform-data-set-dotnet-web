@@ -103,10 +103,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
+        // TODO when is DATSCANDX required?
         [RequiredIfRange(nameof(FDGPETDX), 0, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
+        // TODO when is TRACOTHDX required?
         [RequiredIfRange(nameof(DATSCANDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
@@ -133,50 +135,53 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TRACEROTH { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Please indicate other etiology.")]
         [MaxLength(60)]
         public string? TRACEROTHX { get; set; }
 
+        // TODO need custom validation property to check against TRACOTHDX scenarios and TRACERAD, TRACERFTLD, TRACERLBD, TRACEROTH
+
         [Display(Name = "Structural Imaging (i.e., MRI or CT) - Was structural imaging data or information used to support an etiological diagnosis?")]
         [RequiredIfRange(nameof(TRACOTHDX), 0, 2, ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(IMAGINGDX), "2", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(IMAGINGDX), "2", ErrorMessage = "Please indicate if imaging supports an etiological diagnosis.")]
         public int? STRUCTDX { get; set; }
 
         [Display(Name = "Atrophy pattern consistent with AD")]
-        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with AD.")]
         public int? STRUCTAD { get; set; }
 
         [Display(Name = "Atrophy pattern consistent with FTLD")]
-        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with FTLD.")]
         public int? STRUCTFTLD { get; set; }
 
         [Display(Name = "Consistent with cerebrovascular disease (CVD)")]
-        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with CVD.")]
         public int? STRUCTCVD { get; set; }
 
         [Display(Name = "Large vessel infarct(s)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate large vessel infarct(s).")]
         public int? IMAGLINF { get; set; }
 
         [Display(Name = "Lacunar infarct(s)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate lacunar infarct(s).")]
         public int? IMAGLAC { get; set; }
 
         [Display(Name = "Macrohemorrhage(s)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate macrohemorrhage(s).")]
         public int? IMAGMACH { get; set; }
 
         [Display(Name = "Microhemorrhage(s)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate microphemorrhage(s).")]
         public int? IMAGMICH { get; set; }
 
-        [Display(Name = "Moderate white-matter hyperintensity (CHS score 5-6)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
-        public int? IMAGMWMH { get; set; }
+        [Display(Name = "White matter hyperintensity")]
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate white matter hyperintensity.")]
+        public int? IMAGWMH { get; set; }
 
-        [Display(Name = "Extensive white-matter hyperintensity (CHS score 7-8+)")]
-        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate.")]
-        public int? IMAGEWMH { get; set; }
+        // If IMAGWMH = 1 yes, choose severity
+        [Display(Name = "White matter hyperintensity severity)")]
+        [RequiredIf(nameof(IMAGWMH), "1", ErrorMessage = "Please indicate white matter hyperintensity severity.")]
+        public int? IMAGWMHSEV { get; set; }
 
         [Display(Name = "Other biomarker modality - Was another biomarker modality used to support an etiological diagnosis?")]
         [RequiredIf(nameof(BIOMARKDX), "1", ErrorMessage = "Please indicate.")]
