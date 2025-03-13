@@ -499,6 +499,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
         public int? REYDTI { get; set; }
 
+        // Custom validation - REYMETHODValidation(): require a value on the C2 when REDREC >= 0 and <=15
         [Display(Name = "Method of recognition test administration")]
         public int? REYMETHOD { get; set; }
 
