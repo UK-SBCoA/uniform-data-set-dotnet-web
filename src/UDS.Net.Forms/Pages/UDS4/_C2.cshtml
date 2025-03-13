@@ -1211,7 +1211,7 @@
                     <div class="mt-4 sm:col-span-1 sm:mt-0">
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYMETHOD"></p>
                         <radio-button-group id="@Html.IdFor(m => m.C2.REYMETHOD)" for="@Model.C2.REYMETHOD" items="Model.REYMETHODListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYMETHOD"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYMETHODValidation"></span>
                     </div>
                 </div>
 
@@ -1251,12 +1251,18 @@
         </h2>
 
         <div class="overflow-x-auto">
-
             <table class="subcounterreset mt-16 w-full text-left leading-6 border-b border-gray-100">
                 <tr>
                     <th class="border-b border-gray-100 sm:py-6">Trial</th>
                     <th class="border-b border-gray-100 sm:py-6">Total recall</th>
-                    <th class="border-b border-gray-100 sm:py-6">Can't read</th>
+                    <th class="border-b border-gray-100 sm:py-6">
+                        <div>
+                            Can't read
+                        </div>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.CERADREADValidation"></span>
+                        </div>
+                    </th>
                     <th class="border-b border-gray-100 sm:py-6"># of intrusions</th>
                 </tr>
                 <tbody>

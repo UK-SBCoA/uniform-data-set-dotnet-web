@@ -495,8 +495,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
         public int? REYDTI { get; set; }
 
+        // Custom validation - REYMETHODValidation(): value required on complete on the C2 when REDREC >= 0 and <=15
         [Display(Name = "Method of recognition test administration")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
         public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
@@ -516,7 +516,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD1READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -531,7 +530,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -546,7 +544,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -723,6 +720,44 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (MOCARECN + MOCARECC == 5)
                 {
                     if (MOCARECR != 88) return null;
+                }
+
+                return true;
+            }
+        }
+
+        // validate CERAD1READ, CERAD2READ, and CERAD3READ in C2 (InPerson and Video modalities) for value when CERAD1REC is 0 - 10
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Values required if trial 1 total recall is 0 - 10 for in-person and remote video modalities")]
+        public bool? CERADREADValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (CERAD1REC >= 0 && CERAD1REC <= 10)
+                    {
+                        return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        // validate REYMETHOD in C2 (InPerson and Video modalities) for value when REDREC >= 0 and <=15 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Value required if total delayed recall is 0 - 15 for in-person and remote video modalities")]
+        public bool? REYMETHODValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REYDREC >= 0 && REYDREC <= 15)
+                    {
+                        return REYMETHOD.HasValue ? true : null;
+                    }
                 }
 
                 return true;
