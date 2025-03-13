@@ -1588,7 +1588,6 @@ namespace UDS.Net.Services.Extensions
                 LBDIS = fields.LBDIS,
                 LBDIF = fields.LBDIF,
                 FTLD = fields.FTLD,
-                FTLDIF = fields.FTLDIF,
                 PSP = fields.PSP,
                 PSPIF = fields.PSPIF,
                 CORT = fields.CORT,

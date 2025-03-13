@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -75,7 +73,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? LBDIS { get; set; }
         public int? LBDIF { get; set; }
         public bool? FTLD { get; set; }
-        public int? FTLDIF { get; set; }
         public bool? PSP { get; set; }
         public int? PSPIF { get; set; }
         public bool? CORT { get; set; }
@@ -213,7 +210,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 LBDIS = d1bDto.LBDIS;
                 LBDIF = d1bDto.LBDIF;
                 FTLD = d1bDto.FTLD;
-                FTLDIF = d1bDto.FTLDIF;
                 PSP = d1bDto.PSP;
                 PSPIF = d1bDto.PSPIF;
                 CORT = d1bDto.CORT;
