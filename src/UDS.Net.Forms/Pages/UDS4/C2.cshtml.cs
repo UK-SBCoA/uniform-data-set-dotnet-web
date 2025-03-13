@@ -225,13 +225,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public List<RadioListItem> ModeOfCommunication { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("Telephone", "1"),
-            new RadioListItem("Video-assisted conference", "2"),
-            new RadioListItem("Some combination of the two", "3")
-        };
-
         public List<RadioListItem> SimpleNoYesListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
