@@ -269,7 +269,6 @@ namespace UDS.Net.Forms.Extensions
                 TRSPACCESS = vm.TRSPACCESS,
                 TRANSPROB = vm.TRANSPROB,
                 TRANSWORRY = vm.TRANSWORRY,
-                TRSPLONGER = vm.TRSPLONGER,
                 TRSPMED = vm.TRSPMED,
                 INCOMEYR = vm.INCOMEYR,
                 FINSATIS = vm.FINSATIS,
@@ -280,14 +279,7 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDS = vm.LESSMEDS,
                 LESSMEDSYR = vm.LESSMEDSYR,
                 COMPCOMM = vm.COMPCOMM,
-                COMPUSA = vm.COMPUSA,
-                FAMCOMP = vm.FAMCOMP,
                 GUARDEDU = vm.GUARDEDU,
-                GUARDREL = vm.GUARDREL,
-                GUARDRELX = vm.GUARDRELX,
-                GUARD2EDU = vm.GUARD2EDU,
-                GUARD2REL = vm.GUARD2REL,
-                GUARD2RELX = vm.GUARD2RELX,
                 EMPTINESS = vm.EMPTINESS,
                 MISSPEOPLE = vm.MISSPEOPLE,
                 FRIENDS = vm.FRIENDS,
@@ -333,7 +325,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A2FormFields
             {
-                NEWINF = vm.NEWINF,
                 INRELTO = vm.INRELTO,
                 INKNOWN = vm.INKNOWN,
                 INLIVWTH = vm.INLIVWTH,
@@ -353,8 +344,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new A3FormFields
             {
-                AFFFAMM = vm.AFFFAMM,
-                NWINFMUT = vm.NWINFMUT,
                 MOMYOB = vm.MOMYOB,
                 MOMDAGE = vm.MOMDAGE,
                 MOMETPR = vm.MOMETPR,
@@ -368,9 +357,7 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = vm.DADMEVAL,
                 DADAGEO = vm.DADAGEO,
                 SIBS = vm.SIBS,
-                NWINFSIB = vm.NWINFSIB,
                 KIDS = vm.KIDS,
-                NWINFKID = vm.NWINFKID,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
             };
@@ -931,7 +918,6 @@ namespace UDS.Net.Forms.Extensions
         {
             return new C2FormFields
             {
-                MODCOMM = vm.MODCOMM,
                 MOCACOMP = vm.MOCACOMP,
                 MOCAREAS = vm.MOCAREAS,
                 MOCALOC = vm.MOCALOC,

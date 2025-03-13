@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -410,7 +406,6 @@ namespace UDS.Net.Services.Extensions
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
                 TRANSWORRY = fields.TRANSWORRY,
-                TRSPLONGER = fields.TRSPLONGER,
                 TRSPMED = fields.TRSPMED,
                 INCOMEYR = fields.INCOMEYR,
                 FINSATIS = fields.FINSATIS,
@@ -421,14 +416,7 @@ namespace UDS.Net.Services.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
@@ -589,7 +577,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -608,8 +595,6 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A3Dto()
             {
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,

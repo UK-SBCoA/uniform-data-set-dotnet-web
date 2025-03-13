@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -11,7 +10,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? TRSPACCESS { get; set; }
         public int? TRANSPROB { get; set; }
         public int? TRANSWORRY { get; set; }
-        public int? TRSPLONGER { get; set; }
         public int? TRSPMED { get; set; }
         public int? INCOMEYR { get; set; }
         public int? FINSATIS { get; set; }
@@ -22,14 +20,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? LESSMEDS { get; set; }
         public int? LESSMEDSYR { get; set; }
         public int? COMPCOMM { get; set; }
-        public int? COMPUSA { get; set; }
-        public int? FAMCOMP { get; set; }
         public int? GUARDEDU { get; set; }
-        public int? GUARDREL { get; set; }
-        public string GUARDRELX { get; set; }
-        public int? GUARD2EDU { get; set; }
-        public int? GUARD2REL { get; set; }
-        public string GUARD2RELX { get; set; }
         public int? EMPTINESS { get; set; }
         public int? MISSPEOPLE { get; set; }
         public int? FRIENDS { get; set; }
@@ -113,7 +104,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 TRSPACCESS = a1aDto.TRSPACCESS;
                 TRANSPROB = a1aDto.TRANSPROB;
                 TRANSWORRY = a1aDto.TRANSWORRY;
-                TRSPLONGER = a1aDto.TRSPLONGER;
                 TRSPMED = a1aDto.TRSPMED;
                 INCOMEYR = a1aDto.INCOMEYR;
                 FINSATIS = a1aDto.FINSATIS;
@@ -124,14 +114,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 LESSMEDS = a1aDto.LESSMEDS;
                 LESSMEDSYR = a1aDto.LESSMEDSYR;
                 COMPCOMM = a1aDto.COMPCOMM;
-                COMPUSA = a1aDto.COMPUSA;
-                FAMCOMP = a1aDto.FAMCOMP;
                 GUARDEDU = a1aDto.GUARDEDU;
-                GUARDREL = a1aDto.GUARDREL;
-                GUARDRELX = a1aDto.GUARDRELX;
-                GUARD2EDU = a1aDto.GUARD2EDU;
-                GUARD2REL = a1aDto.GUARD2REL;
-                GUARD2RELX = a1aDto.GUARD2RELX;
                 EMPTINESS = a1aDto.EMPTINESS;
                 MISSPEOPLE = a1aDto.MISSPEOPLE;
                 FRIENDS = a1aDto.FRIENDS;
