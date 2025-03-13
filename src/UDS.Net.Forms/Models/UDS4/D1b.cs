@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 
@@ -291,9 +287,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Frontotemporal lobar degeneration")]
         public bool? FTLD { get; set; }
 
-        [Display(Name = "Primary, contributing, or non-contributing - Frontotemporal lobar degeneration")]
-        public int? FTLDIF { get; set; }
-
         [RequiredIf(nameof(FTLD), "True", ErrorMessage = "Please select one.")]
         [NotMapped]
         public bool? FTLDIndicated
@@ -432,7 +425,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     counter++;
                 }
-                if ((FTLD == true) && (FTLDIF == 1))
+                if (FTLD == true)
                 {
                     counter++;
                 }
