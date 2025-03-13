@@ -27,7 +27,7 @@ namespace UDS.Net.Forms.Records
         public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
 
         [Name("admina1a")]
-        public int? Admina1a { get; set; } = 2;
+        public int? Admin { get; set; } = 2;
 
         [Name("a1anot")]
         public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
