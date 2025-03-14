@@ -45,7 +45,6 @@ namespace UDS.Net.Forms.TagHelpers
             var prefix = ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
             if (!String.IsNullOrWhiteSpace(prefix))
                 prefix = prefix + ".";
-            //var radiosWithName = GenerateRadioInputs(items, expression, output.Attributes);
 
             var cellsWithName = GenerateTableCellRadioInputs(items, expression, output.Attributes);
             output.PostContent.SetHtmlContent(cellsWithName);
