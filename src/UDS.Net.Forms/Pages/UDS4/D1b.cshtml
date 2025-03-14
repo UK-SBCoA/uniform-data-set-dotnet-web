@@ -1169,7 +1169,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.CTE", Model.D1b.CTE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CTEIF\"]" })
+                                    @Html.CheckBox("D1b.CTE", Model.D1b.CTE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CTEIF\", \"D1b.CTECERT\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.CTE)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1182,6 +1182,19 @@
                     <span class="subcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CTEIF)" for="@Model.D1b.CTEIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset">
+                <td class="pl-5">
+                    <div colspan="6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="D1b.CTECERT"><span class="subcounter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CTECERT)</label>
+                            <div>
+                                <radio-button-group id="@Html.IdFor(m => m.D1b.CTECERT)" for="@Model.D1b.CTECERT" items="Model.CTECERTListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTECERT"></span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
             <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
                 <td>

@@ -15,8 +15,8 @@
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="8.0.5" />
-		<PackageReference Include="UDS.Net.Dto" Version="5.0.0" />
-		<PackageReference Include="UDS.Net.API.Client" Version="5.0.0" />
+		<PackageReference Include="UDS.Net.Dto" Version="5.1.0" />
+		<PackageReference Include="UDS.Net.API.Client" Version="5.1.0" />
 		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.5" />
 	</ItemGroup>
 	<ItemGroup>

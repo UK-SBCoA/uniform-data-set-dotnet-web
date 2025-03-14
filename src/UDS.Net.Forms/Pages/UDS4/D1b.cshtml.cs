@@ -123,6 +123,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "9"),
         };
 
+        public List<RadioListItem> CTECERTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Suggestive CTE", "1"),
+            new RadioListItem("Possible CTE", "2"),
+            new RadioListItem("Probable CTE", "3"),
+        };
+
         public Dictionary<string, UIBehavior> BIOMARKDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
