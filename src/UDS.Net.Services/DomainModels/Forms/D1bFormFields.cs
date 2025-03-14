@@ -227,6 +227,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MSAIF = d1bDto.MSAIF;
                 CTE = d1bDto.CTE;
                 CTEIF = d1bDto.CTEIF;
+                CTECERT = d1bDto.CTECERT;
                 DOWNS = d1bDto.DOWNS;
                 DOWNSIF = d1bDto.DOWNSIF;
                 HUNT = d1bDto.HUNT;
