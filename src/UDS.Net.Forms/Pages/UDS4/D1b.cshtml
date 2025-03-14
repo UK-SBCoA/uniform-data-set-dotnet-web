@@ -1183,11 +1183,11 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CTEIF)" for="@Model.D1b.CTEIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
-            <tr>
+            <tr class="subcounterreset">
                 <td class="pl-5">
                     <div colspan="6">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label asp-for="D1b.CTECERT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CTECERT)</label>
+                            <label asp-for="D1b.CTECERT"><span class="subcounter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CTECERT)</label>
                             <div>
                                 <radio-button-group id="@Html.IdFor(m => m.D1b.CTECERT)" for="@Model.D1b.CTECERT" items="Model.CTECERTListItems"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTECERT"></span>
