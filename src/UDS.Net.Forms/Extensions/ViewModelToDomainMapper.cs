@@ -1245,6 +1245,7 @@ namespace UDS.Net.Forms.Extensions
                 MSAIF = vm.MSAIF,
                 CTE = vm.CTE,
                 CTEIF = vm.CTEIF,
+                CTECERT = vm.CTECERT,
                 DOWNS = vm.DOWNS,
                 DOWNSIF = vm.DOWNSIF,
                 HUNT = vm.HUNT,

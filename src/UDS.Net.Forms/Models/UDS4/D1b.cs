@@ -374,6 +374,10 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Primary, contributing, or non-contributing - Chronic traumatic encephalopathy")]
         public int? CTEIF { get; set; }
 
+        [Display(Name = "If CTE (QUESTION 17) is present, specify certainty:")]
+        [RequiredIf(nameof(CTE), "True", ErrorMessage = "Value required")]
+        public int? CTECERT { get; set; }
+
         [Display(Name = "Down syndrome")]
         public bool? DOWNS { get; set; }
 

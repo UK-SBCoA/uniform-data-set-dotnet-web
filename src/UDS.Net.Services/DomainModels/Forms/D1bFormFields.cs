@@ -89,6 +89,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MSAIF { get; set; }
         public bool? CTE { get; set; }
         public int? CTEIF { get; set; }
+        public int? CTECERT { get; set; }
         public bool? DOWNS { get; set; }
         public int? DOWNSIF { get; set; }
         public bool? HUNT { get; set; }

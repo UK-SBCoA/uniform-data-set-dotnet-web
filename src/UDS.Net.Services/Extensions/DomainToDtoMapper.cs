@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -1604,6 +1605,7 @@ namespace UDS.Net.Services.Extensions
                 MSAIF = fields.MSAIF,
                 CTE = fields.CTE,
                 CTEIF = fields.CTEIF,
+                CTECERT = fields.CTECERT,
                 DOWNS = fields.DOWNS,
                 DOWNSIF = fields.DOWNSIF,
                 HUNT = fields.HUNT,

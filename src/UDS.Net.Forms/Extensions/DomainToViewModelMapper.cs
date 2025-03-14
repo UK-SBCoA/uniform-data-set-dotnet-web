@@ -1584,6 +1584,7 @@ namespace UDS.Net.Forms.Extensions
                 MSAIF = fields.MSAIF,
                 CTE = fields.CTE,
                 CTEIF = fields.CTEIF,
+                CTECERT = fields.CTECERT,
                 DOWNS = fields.DOWNS,
                 DOWNSIF = fields.DOWNSIF,
                 HUNT = fields.HUNT,
