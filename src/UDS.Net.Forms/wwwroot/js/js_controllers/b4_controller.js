@@ -2,15 +2,15 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["CDRSUM", "CDRGLOB", "MEMORY", "ORIENT", "JUDGMENT", "COMMUN", "HOMEHOBB", "PERSCARE", "CDRGLOB"];
+    static targets = ["CDRSUM", "CDRGLOB", "MEMORY", "ORIENT", "JUDGMENT", "COMMUN", "HOMEHOBB", "PERSCARE"];
 
     updateCDRSUM() {
-        const memoryValue = parseFloat(this.getFloatValue(this.MEMORYTarget));
-        const orientValue = parseFloat(this.getFloatValue (this.ORIENTTarget));
-        const judgmentValue = parseFloat(this.getFloatValue (this.JUDGMENTTarget));
-        const communValue = parseFloat(this.getFloatValue (this.COMMUNTarget));
-        const homehobbValue = parseFloat(this.getFloatValue (this.HOMEHOBBTarget));
-        const perscareValue = parseFloat(this.getFloatValue (this.PERSCARETarget));
+        const memoryValue = this.getFloatValueFor("MEMORY");
+        const orientValue = this.getFloatValueFor("ORIENT");
+        const judgmentValue = this.getFloatValueFor("JUDGMENT");
+        const communValue = this.getFloatValueFor("COMMUN");
+        const homehobbValue = this.getFloatValueFor("HOMEHOBB");
+        const perscareValue = this.getFloatValueFor("PERSCARE");
 
         let result = null;
         const secondaryScores = [orientValue, judgmentValue, communValue, homehobbValue, perscareValue];
@@ -118,19 +118,19 @@ export default class extends Controller {
     }
 
     updateCRGLOB(result) {
-        const radioButtons = this.CDRGLOBTarget.querySelectorAll('input[type="radio"]');
-
-        radioButtons.forEach((radioButton) => {
-            if (parseFloat(radioButton.value) === result) {
-                radioButton.checked = true;
-            }
+        this.CDRGLOBTargets.forEach((radioButton) => {
+            radioButton.checked = parseFloat(radioButton.value) === result;
         });
-
-        console.log(`CDRGLOB set to: ${result}`);     
+        console.log(`CDRGLOB set to: ${result}`);
     }
 
-    getFloatValue(target) {
-        const selectedRadio = target.querySelector('input[type="radio"]:checked');
-        return selectedRadio ? parseFloat(selectedRadio.value) : NaN;
+
+    getFloatValueFor(targetName) {
+        const targetArray = this[`${targetName}Targets`];
+        if (!targetArray || !targetArray.length) {
+            return 0;
+        }
+        const selectedRadio = targetArray.find(el => el.checked);
+        return selectedRadio ? parseFloat(selectedRadio.value) : 0;
     }
 }
