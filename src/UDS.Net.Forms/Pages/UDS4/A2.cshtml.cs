@@ -34,7 +34,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
             new UIEnableAttribute("A2.INCNTMOD"),
             new UIEnableAttribute("A2.INCNTFRQ"),
-            new UIDisableAttribute("A2.INCNTMDX"),
             new UIEnableAttribute("A2.INCNTTIM")}
             } },
 
@@ -42,7 +41,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
             new UIDisableAttribute("A2.INCNTMOD"),
             new UIDisableAttribute("A2.INCNTFRQ"),
-            new UIDisableAttribute("A2.INCNTMDX"),
             new UIDisableAttribute("A2.INCNTTIM")
             }
             } }

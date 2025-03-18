@@ -142,8 +142,7 @@ namespace UDS.Net.Forms.Models.UDS4
         // TODO need custom validation property to check against TRACOTHDX scenarios and TRACERAD, TRACERFTLD, TRACERLBD, TRACEROTH
 
         [Display(Name = "Structural Imaging (i.e., MRI or CT) - Was structural imaging data or information used to support an etiological diagnosis?")]
-        [RequiredIfRange(nameof(TRACOTHDX), 0, 2, ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(IMAGINGDX), "2", ErrorMessage = "Please indicate if imaging supports an etiological diagnosis.")]
+        [RequiredIfRange(nameof(IMAGINGDX), 2, 3, ErrorMessage = "Please specify.")]
         public int? STRUCTDX { get; set; }
 
         [Display(Name = "Atrophy pattern consistent with AD")]
