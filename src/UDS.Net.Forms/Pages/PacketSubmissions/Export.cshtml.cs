@@ -106,7 +106,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             foreach (var prop in a3FamilyProps)
                             {
                                 if (prop.Name != "FamilyMemberIndex")
-                                    csv.WriteField($"SIB{siblingField.FamilyMemberIndex}{prop.Name.ToLower()}");
+                                    csv.WriteField($"sib{siblingField.FamilyMemberIndex}{prop.Name.ToLower()}");
                             }
                         }
                         // kids
@@ -116,7 +116,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             foreach (var prop in a3FamilyProps)
                             {
                                 if (prop.Name != "FamilyMemberIndex")
-                                    csv.WriteField($"KID{kidField.FamilyMemberIndex}{prop.Name.ToLower()}");
+                                    csv.WriteField($"kid{kidField.FamilyMemberIndex}{prop.Name.ToLower()}");
                             }
                         }
                     }
