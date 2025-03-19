@@ -108,9 +108,9 @@ namespace UDS.Net.Forms.Models.UDS4
                     else
                     {
                         var MCICriteriaCount = 0;
-                        MCICriteriaCount += (MCICRITCLN.HasValue && MCICRITCLN.Value) ? 1 : 0;
-                        MCICriteriaCount += (MCICRITIMP.HasValue && MCICRITIMP.Value) ? 1 : 0;
-                        MCICriteriaCount += (MCICRITFUN.HasValue && MCICRITFUN.Value) ? 1 : 0;
+                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
 
                         if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value)
                         {
