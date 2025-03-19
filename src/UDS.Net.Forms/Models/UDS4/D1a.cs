@@ -1,12 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
-using System.Security.Claims;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -111,23 +105,24 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         return IMPNOMCI.Value == 1 ? true : null;
                     }
-
-                    if (IMPNOMCICriteriaCount <= 0)
+                    else
                     {
                         var MCICriteriaCount = 0;
+                        MCICriteriaCount += (MCICRITCLN.HasValue && MCICRITCLN.Value) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITIMP.HasValue && MCICRITIMP.Value) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITFUN.HasValue && MCICRITFUN.Value) ? 1 : 0;
 
-                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
-
-                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value == true)
+                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value)
                         {
                             return IMPNOMCI.Value == 0 ? true : null;
                         }
-
-                        if (MCICriteriaCount > 0)
+                        else if (MCICriteriaCount > 0)
                         {
                             return IMPNOMCI.Value == 1 ? true : null;
+                        }
+                        else
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
                         }
                     }
                 }
