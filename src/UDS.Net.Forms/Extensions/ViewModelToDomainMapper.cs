@@ -30,7 +30,6 @@ namespace UDS.Net.Forms.Extensions
             return new Milestone
             {
                 Id = vm.Id,
-                FormId = vm.FormId,
                 ParticipationId = vm.ParticipationId,
                 Status = vm.Status,
                 CHANGEMO = vm.CHANGEMO,

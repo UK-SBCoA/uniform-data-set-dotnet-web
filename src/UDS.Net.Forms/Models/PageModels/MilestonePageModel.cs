@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 
@@ -7,159 +8,18 @@ namespace UDS.Net.Forms.Models.PageModels
 {
     public class MilestonePageModel : PageModel
     {
-        protected readonly IParticipationService _participationService;
+        protected readonly IMilestoneService _milestoneService;
 
         [BindProperty]
         public MilestoneModel? Milestone { get; set; }
 
-        public MilestonePageModel(IParticipationService participationService)
+        public MilestonePageModel(IMilestoneService milestoneService)
         {
-            _participationService = participationService;
+            _milestoneService = milestoneService;
         }
 
-        public List<RadioListItem> MilestoneTypeItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Data-collection status CHANGE followed by CONTINUED CONTACT with participant (Box A)", "1"),
-            new RadioListItem("Change followed by NO FURTHER CONTACT with participant (Box B)", "0")
-        };
-
-        public List<RadioListItem> ProtocolItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Annual UDS follow-up by telephone (CONTINUE TO QUESTION 2A1)", "1"),
-            new RadioListItem("Minimal contact (CONTINUE TO QUESTION 2A1)", "2"),
-            new RadioListItem("Annual in-person UDS follow-up", "3")
-        };
-
-        public List<RadioListItem> AconsentItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (CONTINUE TO QUESTION 2B)", "0"),
-            new RadioListItem("Yes (CONTINUE TO QUESTION 2B)", "1")
-        };
-
-        public List<RadioListItem> AutopsyItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No ADC autopsy expected", "0"),
-            new RadioListItem("An ADC autopsy has been done; data submitted or pending", "1")
-        };
-
-        public List<RadioListItem> DropReasonItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("ADC decision or protocol", "1"),
-            new RadioListItem("Participant or co-participant asked to be dropped (ie. withdrawn)", "2")
-        };
-
-        public List<RadioListItem> FTLDREASItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("ADC decision", "1"),
-            new RadioListItem("Participant/co-participant refused", "2"),
-            new RadioListItem("Co-participant not available", "3"),
-            new RadioListItem("Other, specify below", "4")
-        };
-
-        public Dictionary<string, UIBehavior> ProtocolBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "3", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            },
-            {
-                "1", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            },
-            {
-                "2", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            }
-        };
-
-        public Dictionary<string, UIBehavior> FTLDREASBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "4", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "1", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "2", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "3", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-        };
-
-        public Dictionary<string, UIBehavior> DECEASEDBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "true", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.DEATHDY"),
-                        new UIEnableAttribute("Milestone.DEATHYR"),
-                        new UIEnableAttribute("Milestone.AUTOPSY"),
-                        new UIDisableAttribute("Milestone.DISCDAY"),
-                        new UIDisableAttribute("Milestone.DISCYR"),
-                        new UIDisableAttribute("Milestone.DROPREAS")
-                    }
-                }
-            },
-            {
-                "false", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.DEATHDY"),
-                        new UIDisableAttribute("Milestone.DEATHYR"),
-                        new UIDisableAttribute("Milestone.AUTOPSY"),
-                        new UIEnableAttribute("Milestone.DISCDAY"),
-                        new UIEnableAttribute("Milestone.DISCYR"),
-                        new UIEnableAttribute("Milestone.DROPREAS")
-                    }
-                }
-            }
-        };
-
-        protected private void IsValid(MilestoneModel milestone)
+        // TODO Move this to NotMapped properties in the view model and use custom annotations for required if
+        protected private void Validate(MilestoneModel milestone)
         {
             if (milestone.MILESTONETYPE == 1)
             {
@@ -269,6 +129,30 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 ModelState.AddModelError(property, "Provide a valid year between 2015 - 2999");
             }
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (Milestone == null)
+            {
+                return Page();
+            }
+
+            Validate(Milestone);
+
+            if (ModelState.IsValid)
+            {
+                // upsert based on the id
+                if (Milestone.Id == 0)
+                    await _milestoneService.Add(User.Identity.Name, Milestone.ToEntity());
+                else
+                    await _milestoneService.Update(User.Identity.Name, Milestone.ToEntity());
+
+                return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            }
+
+            return Page();
         }
     }
 }

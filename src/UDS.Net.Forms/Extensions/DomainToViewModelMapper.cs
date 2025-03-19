@@ -210,7 +210,6 @@ namespace UDS.Net.Forms.Extensions
             return new MilestoneModel()
             {
                 Id = milestone.Id,
-                FormId = milestone.FormId,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
