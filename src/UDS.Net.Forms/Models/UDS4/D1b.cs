@@ -425,51 +425,63 @@ namespace UDS.Net.Forms.Models.UDS4
             get
             {
                 int counter = 0;
-                if ((ALZDIS == true) && (ALZDISIF == 1))
+                if (ALZDISIF == 1)
                 {
                     counter++;
                 }
-                if ((LBDIS == true) && (LBDIF == 1))
+                if (LBDIF == 1)
                 {
                     counter++;
                 }
-                if (FTLD == true)
+                if (PSPIF == 1)
                 {
                     counter++;
                 }
-                if ((CVD == true) && (CVDIF == 1))
+                if (CORTIF == 1)
                 {
                     counter++;
                 }
-                if ((MSA == true) && (MSAIF == 1))
+                if (FTLDMOIF == 1)
                 {
                     counter++;
                 }
-                if ((CTE == true) && (CTEIF == 1))
+                if (FTLDNOIF == 1)
                 {
                     counter++;
                 }
-                if ((DOWNS == true) && (DOWNSIF == 1))
+                if (CVDIF == 1)
                 {
                     counter++;
                 }
-                if ((HUNT == true) && (HUNTIF == 1))
+                if (MSAIF == 1)
                 {
                     counter++;
                 }
-                if ((PRION == true) && (PRIONIF == 1))
+                if (CTEIF == 1)
                 {
                     counter++;
                 }
-                if ((CAA == true) && (CAAIF == 1))
+                if (DOWNSIF == 1)
                 {
                     counter++;
                 }
-                if ((LATE == true) && (LATEIF == 1))
+                if (HUNTIF == 1)
                 {
                     counter++;
                 }
-                if ((OTHCOG == true) && (OTHCOGIF == 1))
+                if (PRIONIF == 1)
+                {
+                    counter++;
+                }
+                if (CAAIF == 1)
+                {
+                    counter++;
+                }
+                if (LATEIF == 1)
+                {
+                    counter++;
+                }
+                if (OTHCOGIF == 1)
                 {
                     counter++;
                 }
