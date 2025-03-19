@@ -387,10 +387,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         {
             foreach (var property in typeof(T).GetProperties())
             {
+                if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
+                {
+                    string propertyName = property.Name.ToLower();
 
-                string propertyName = property.Name.ToLower();
-
-                csv.WriteField(propertyName);
+                    csv.WriteField(propertyName);
+                }
             }
         }
     }
