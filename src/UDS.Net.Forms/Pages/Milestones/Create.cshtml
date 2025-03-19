@@ -1,9 +1,8 @@
 ﻿@page
 @model UDS.Net.Forms.Pages.Milestones.CreateModel
 
-
 @{
-    ViewData["Title"] = "Create milestone";
+    ViewData["Title"] = Model.PageTitle;
 }
 
 <form method="post" data-turbo="false">
@@ -24,7 +23,7 @@
         <div>
             <partial name="_MilestoneFormFields" model="@Model.Milestone" />
             <div class="p-16">
-                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add</button>
             </div>
         </div>
     </div>

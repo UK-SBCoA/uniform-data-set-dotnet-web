@@ -16,6 +16,8 @@ namespace UDS.Net.Forms.Models
         [Required]
         public int ParticipationId { get; set; }
 
+        public virtual ParticipationModel? Participation { get; set; }
+
         [Display(Name = "Status")]
         public string Status { get; set; } = "Complete";
 

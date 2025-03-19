@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 {
     public class DetailsModel : EditModel
     {
-        public DetailsModel(IMilestoneService milestoneService) : base(milestoneService)
+        public DetailsModel(IMilestoneService milestoneService, IParticipationService participationService) : base(milestoneService, participationService)
         {
         }
     }

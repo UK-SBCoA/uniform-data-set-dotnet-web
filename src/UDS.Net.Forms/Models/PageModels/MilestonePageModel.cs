@@ -3,19 +3,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Models.PageModels
 {
     public class MilestonePageModel : PageModel
     {
         protected readonly IMilestoneService _milestoneService;
+        protected readonly IParticipationService _participationService;
 
         [BindProperty]
         public MilestoneModel? Milestone { get; set; }
 
-        public MilestonePageModel(IMilestoneService milestoneService)
+        public string PageTitle { get; set; }
+
+        public MilestonePageModel(IMilestoneService milestoneService, IParticipationService participationService)
         {
             _milestoneService = milestoneService;
+            _participationService = participationService;
         }
 
         // TODO Move this to NotMapped properties in the view model and use custom annotations for required if
@@ -131,6 +136,52 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
+        public async Task<IActionResult> OnGetAsync(int id, string createdBy, string modifiedBy)
+        {
+            // Check if this is the beginning of an create, details, or edit
+            if (!String.IsNullOrWhiteSpace(createdBy))
+            {
+                // create new
+                Milestone = new MilestoneModel()
+                {
+                    ParticipationId = id,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
+                    IsDeleted = false
+                };
+                PageTitle = "Create milestone for ";
+            }
+            else
+            {
+                // find existing for details or edit
+                var milestoneFound = await _milestoneService.GetById(User.Identity.Name, id);
+
+                if (milestoneFound == null)
+                {
+                    return NotFound("No milestone found.");
+                }
+                Milestone = milestoneFound.ToVM();
+                PageTitle = "Milestone for ";
+
+                // if edit set modifiedby and override title
+                if (!String.IsNullOrWhiteSpace(modifiedBy))
+                {
+                    Milestone.ModifiedBy = User.Identity.Name;
+                    PageTitle = "Edit milestone for ";
+                }
+            }
+
+            var participation = await _participationService.GetById(User.Identity.Name, id, false);
+
+            if (participation == null)
+                return NotFound("No participation found.");
+
+            Milestone.Participation = participation.ToVM();
+            PageTitle += Milestone.Participation.LegacyId;
+
+            return Page();
+        }
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync()
         {
@@ -151,6 +202,13 @@ namespace UDS.Net.Forms.Models.PageModels
 
                 return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
             }
+
+            var participation = await _participationService.GetById(User.Identity.Name, Milestone.ParticipationId, false);
+
+            if (participation == null)
+                return NotFound();
+
+            Milestone.Participation = participation.ToVM();
 
             return Page();
         }
