@@ -21,8 +21,8 @@ namespace UDS.Net.Web.MVC.Services
         // Previously AddMilestone
         public async Task<Milestone> Add(string username, Milestone entity)
         {
-            await _apiClient.ParticipationClient.PostMilestone(entity.ParticipationId, entity.ToDto());
-            // TODO use MilestoneClient
+            await _apiClient.MilestoneClient.Post(entity.ToDto());
+
             return entity;
         }
 
@@ -34,14 +34,14 @@ namespace UDS.Net.Web.MVC.Services
         // Previously GetMilestoneById(int id, int formId)
         public async Task<Milestone> GetById(string username, int id)
         {
-            M1Dto milestone = await _apiClient.ParticipationClient.GetMilestone(id, id);
+            M1Dto milestone = await _apiClient.MilestoneClient.Get(id);
 
             return milestone.ToDomain();
         }
 
         public async Task<IEnumerable<Milestone>> List(string username, int participationId, int pageSize = 10, int pageIndex = 1)
         {
-            IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);
+            IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.GetMilestones(participationId, pageSize, pageIndex);
 
             return milestones.ToDomain();
         }
@@ -64,7 +64,7 @@ namespace UDS.Net.Web.MVC.Services
         // Previously UpdateMilestone(int id, int formId, Milestone milestone)
         public async Task<Milestone> Update(string username, Milestone entity)
         {
-            await _apiClient.ParticipationClient.PutMilestone(entity.Id, entity.FormId, entity.ToDto());
+            await _apiClient.MilestoneClient.Put(entity.Id, entity.ToDto());
 
             return entity;
         }
