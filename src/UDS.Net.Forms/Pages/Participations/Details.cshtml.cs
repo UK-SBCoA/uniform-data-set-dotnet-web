@@ -21,7 +21,7 @@ namespace UDS.Net.Forms.Pages.Participations
             _milestoneService = milestoneService;
         }
 
-        protected async Task<IActionResult> OnGetAsync(int? id, int visitPageSize = 10, int visitPageIndex = 1, int milestonePageSize = 10, int milestonePageIndex = 1)
+        public async Task<IActionResult> OnGetAsync(int? id, int visitPageSize = 10, int visitPageIndex = 1, int milestonePageSize = 10, int milestonePageIndex = 1)
         {
             if (id == null)
                 return NotFound();
