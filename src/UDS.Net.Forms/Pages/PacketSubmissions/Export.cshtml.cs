@@ -82,22 +82,22 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1 != null)
                     {
                         csv.WriteHeader<A1Record>();
-                        csv.WriteHeader<A1FormFields>();
+                        WriteFormFields(new A1FormFields(), csv);
                     }
                     if (a1a != null)
                     {
                         csv.WriteHeader<A1aRecord>();
-                        csv.WriteHeader<A1aFormFields>();
+                        WriteFormFields(new A1aFormFields(), csv);
                     }
                     if (a2 != null)
                     {
                         csv.WriteHeader<A2Record>();
-                        csv.WriteHeader<A2FormFields>();
+                        WriteFormFields(new A2FormFields(), csv);
                     }
                     if (a3 != null)
                     {
                         csv.WriteHeader<A3Record>();
-                        csv.WriteHeader<A3FormFields>();
+                        WriteFormFields(new A3FormFields(), csv);
 
                         // siblings
                         var siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields; // we always have a list of 20 siblings
@@ -106,7 +106,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             foreach (var prop in a3FamilyProps)
                             {
                                 if (prop.Name != "FamilyMemberIndex")
-                                    csv.WriteField($"SIB{siblingField.FamilyMemberIndex}{prop.Name}");
+                                    csv.WriteField($"SIB{siblingField.FamilyMemberIndex}{prop.Name.ToLower()}");
                             }
                         }
                         // kids
@@ -116,14 +116,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             foreach (var prop in a3FamilyProps)
                             {
                                 if (prop.Name != "FamilyMemberIndex")
-                                    csv.WriteField($"KID{kidField.FamilyMemberIndex}{prop.Name}");
+                                    csv.WriteField($"KID{kidField.FamilyMemberIndex}{prop.Name.ToLower()}");
                             }
                         }
                     }
                     if (a4 != null)
                     {
                         csv.WriteHeader<A4Record>();
-                        csv.WriteHeader<A4GFormFields>();
+                        WriteFormFields(new A4GFormFields(), csv);
 
                         // we need to hold 40 fields for rxnormids
                         for (int i = 1; i <= 40; i++)
@@ -134,7 +134,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4a != null)
                     {
                         csv.WriteHeader<A4aRecord>();
-                        csv.WriteHeader<A4aFormFields>();
+                        WriteFormFields(new A4aFormFields(), csv);
 
                         var treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields; // we always have a list of count 8
 
@@ -144,7 +144,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             {
                                 if (prop.Name != "TreatmentIndex")
                                 {
-                                    csv.WriteField($"{prop.Name}{treatment.TreatmentIndex}");
+                                    csv.WriteField($"{prop.Name.ToLower()}{treatment.TreatmentIndex}");
                                 }
                             }
                         }
@@ -152,62 +152,62 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a5d2 != null)
                     {
                         csv.WriteHeader<A5D2Record>();
-                        csv.WriteHeader<A5D2FormFields>();
+                        WriteFormFields(new A5D2FormFields(), csv);
                     }
                     if (b1 != null)
                     {
                         csv.WriteHeader<B1Record>();
-                        csv.WriteHeader<B1FormFields>();
+                        WriteFormFields(new B1FormFields(), csv);
                     }
                     if (b3 != null)
                     {
                         csv.WriteHeader<B3Record>();
-                        csv.WriteHeader<B3FormFields>();
+                        WriteFormFields(new B3FormFields(), csv);
                     }
                     if (b4 != null)
                     {
                         csv.WriteHeader<B4Record>();
-                        csv.WriteHeader<B4FormFields>();
+                        WriteFormFields(new B4FormFields(), csv);
                     }
                     if (b5 != null)
                     {
                         csv.WriteHeader<B5Record>();
-                        csv.WriteHeader<B5FormFields>();
+                        WriteFormFields(new B5FormFields(), csv);
                     }
                     if (b6 != null)
                     {
                         csv.WriteHeader<B6Record>();
-                        csv.WriteHeader<B6FormFields>();
+                        WriteFormFields(new B6FormFields(), csv);
                     }
                     if (b7 != null)
                     {
                         csv.WriteHeader<B7Record>();
-                        csv.WriteHeader<B7FormFields>();
+                        WriteFormFields(new B7FormFields(), csv);
                     }
                     if (b8 != null)
                     {
                         csv.WriteHeader<B8Record>();
-                        csv.WriteHeader<B8FormFields>();
+                        WriteFormFields(new B8FormFields(), csv);
                     }
                     if (b9 != null)
                     {
                         csv.WriteHeader<B9Record>();
-                        csv.WriteHeader<B9FormFields>();
+                        WriteFormFields(new B9FormFields(), csv);
                     }
                     if (c2 != null)
                     {
                         csv.WriteHeader<C2Record>();
-                        csv.WriteHeader<C2FormFields>();
+                        WriteFormFields(new C2FormFields(), csv);
                     }
                     if (d1a != null)
                     {
                         csv.WriteHeader<D1aRecord>();
-                        csv.WriteHeader<D1aFormFields>();
+                        WriteFormFields(new D1aFormFields(), csv);
                     }
                     if (d1b != null)
                     {
                         csv.WriteHeader<D1bRecord>();
-                        csv.WriteHeader<D1bFormFields>();
+                        WriteFormFields(new D1bFormFields(), csv);
                     }
 
                     csv.NextRecord(); // end of header row
@@ -381,6 +381,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return File(memoryStream, "text/csv", filename);
             }
             return null;
+        }
+
+        private void WriteFormFields<T>(T formFields, CsvWriter csv)
+        {
+            foreach (var property in typeof(T).GetProperties())
+            {
+
+                string propertyName = property.Name.ToLower();
+
+                csv.WriteField(propertyName);
+            }
         }
     }
 }
