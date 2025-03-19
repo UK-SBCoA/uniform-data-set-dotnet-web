@@ -10,10 +10,5 @@ namespace UDS.Net.Forms.Pages.Milestones
         public EditModel(IMilestoneService milestoneService, IParticipationService participationService) : base(milestoneService, participationService)
         {
         }
-
-        public async Task<IActionResult> OnGet(int id)
-        {
-            return await base.OnGetAsync(id, "", User.Identity.Name);
-        }
     }
 }

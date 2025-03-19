@@ -28,38 +28,38 @@ namespace UDS.Net.Forms.Models.PageModels
         {
             if (milestone.MILESTONETYPE == 1)
             {
-                ValidateMonth(milestone.CHANGEMO, "Milestone.CHANGEMO");
-                ValidateDay(milestone.CHANGEDY, "Milestone.CHANGEDY");
-                ValidateYear(milestone.CHANGEYR, "Milestone.CHANGEYR");
+                ValidateMonth(milestone.CHANGEMO, "CHANGEMO");
+                ValidateDay(milestone.CHANGEDY, "CHANGEDY");
+                ValidateYear(milestone.CHANGEYR, "CHANGEYR");
 
                 if (milestone.PROTOCOL == null)
                 {
-                    ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
+                    ModelState.AddModelError("PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
                 if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1)
                 {
                     if (milestone.ACONSENT == null)
                     {
-                        ModelState.AddModelError("Milestone.ACONSENT", "Autopsy status required");
+                        ModelState.AddModelError("ACONSENT", "Autopsy status required");
                     }
                 }
 
                 if (milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
                 {
-                    ModelState.AddModelError("Milestone.ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
+                    ModelState.AddModelError("ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
                 }
 
                 if (milestone.RENURSE == true)
                 {
-                    ValidateMonth(milestone.NURSEMO, "Milestone.NURSEMO");
-                    ValidateDay(milestone.NURSEDY, "Milestone.NURSEDY");
-                    ValidateYear(milestone.NURSEYR, "Milestone.NURSEYR");
+                    ValidateMonth(milestone.NURSEMO, "NURSEMO");
+                    ValidateDay(milestone.NURSEDY, "NURSEDY");
+                    ValidateYear(milestone.NURSEYR, "NURSEYR");
                 }
 
                 if (milestone.FTLDREAS == 4 && String.IsNullOrEmpty(milestone.FTLDREAX))
                 {
-                    ModelState.AddModelError("Milestone.FTLDREAX", "Must have a value when indicating reason of other");
+                    ModelState.AddModelError("FTLDREAX", "Must have a value when indicating reason of other");
                 }
             }
 
@@ -67,31 +67,31 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (milestone.DECEASED == false && milestone.DISCONT == false)
                 {
-                    ModelState.AddModelError("Milestone.DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
-                    ModelState.AddModelError("Milestone.DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
+                    ModelState.AddModelError("DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
+                    ModelState.AddModelError("DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
                 }
 
                 if (milestone.DECEASED == true)
                 {
-                    ValidateMonth(milestone.DEATHMO, "Milestone.DEATHMO");
-                    ValidateDay(milestone.DEATHDY, "Milestone.DEATHDY");
-                    ValidateYear(milestone.DEATHYR, "Milestone.DEATHYR");
+                    ValidateMonth(milestone.DEATHMO, "DEATHMO");
+                    ValidateDay(milestone.DEATHDY, "DEATHDY");
+                    ValidateYear(milestone.DEATHYR, "DEATHYR");
 
                     if (milestone.AUTOPSY == null)
                     {
-                        ModelState.AddModelError("Milestone.AUTOPSY", "Must have a value");
+                        ModelState.AddModelError("AUTOPSY", "Must have a value");
                     }
                 }
 
                 if (milestone.DISCONT == true)
                 {
-                    ValidateMonth(milestone.DISCMO, "Milestone.DISCMO");
-                    ValidateDay(milestone.DISCDAY, "Milestone.DISCDAY");
-                    ValidateYear(milestone.DISCYR, "Milestone.DISCYR");
+                    ValidateMonth(milestone.DISCMO, "DISCMO");
+                    ValidateDay(milestone.DISCDAY, "DISCDAY");
+                    ValidateYear(milestone.DISCYR, "DISCYR");
 
                     if (milestone.DROPREAS == null)
                     {
-                        ModelState.AddModelError("Milestone.DROPREAS", "Must have a value");
+                        ModelState.AddModelError("DROPREAS", "Must have a value");
                     }
                 }
             }
@@ -136,15 +136,18 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
-        public async Task<IActionResult> OnGetAsync(int id, string createdBy, string modifiedBy)
+        public async Task<IActionResult> OnGetAsync(int id, int? participationId)
         {
             // Check if this is the beginning of an create, details, or edit
-            if (!String.IsNullOrWhiteSpace(createdBy))
+            if (id == 0)
             {
                 // create new
+                if (!participationId.HasValue)
+                    return NotFound("Requires participation id");
+
                 Milestone = new MilestoneModel()
                 {
-                    ParticipationId = id,
+                    ParticipationId = participationId.Value,
                     CreatedAt = DateTime.UtcNow,
                     CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
                     IsDeleted = false
@@ -163,21 +166,17 @@ namespace UDS.Net.Forms.Models.PageModels
                 Milestone = milestoneFound.ToVM();
                 PageTitle = "Milestone for ";
 
-                // if edit set modifiedby and override title
-                if (!String.IsNullOrWhiteSpace(modifiedBy))
-                {
-                    Milestone.ModifiedBy = User.Identity.Name;
-                    PageTitle = "Edit milestone for ";
-                }
+                // set modifiedby in case it is for editing
+                Milestone.ModifiedBy = User.Identity.Name;
             }
 
-            var participation = await _participationService.GetById(User.Identity.Name, id, false);
+            var participation = await _participationService.GetById(User.Identity.Name, Milestone.ParticipationId, false);
 
             if (participation == null)
                 return NotFound("No participation found.");
 
             Milestone.Participation = participation.ToVM();
-            PageTitle += Milestone.Participation.LegacyId;
+            PageTitle += "Participant " + Milestone.Participation.LegacyId;
 
             return Page();
         }
