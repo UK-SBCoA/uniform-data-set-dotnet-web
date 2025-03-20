@@ -1,200 +1,65 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Models.PageModels
 {
     public class MilestonePageModel : PageModel
     {
+        protected readonly IMilestoneService _milestoneService;
         protected readonly IParticipationService _participationService;
 
         [BindProperty]
         public MilestoneModel? Milestone { get; set; }
 
-        public MilestonePageModel(IParticipationService participationService)
+        public string PageTitle { get; set; }
+
+        public MilestonePageModel(IMilestoneService milestoneService, IParticipationService participationService)
         {
+            _milestoneService = milestoneService;
             _participationService = participationService;
         }
 
-        public List<RadioListItem> MilestoneTypeItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Data-collection status CHANGE followed by CONTINUED CONTACT with participant (Box A)", "1"),
-            new RadioListItem("Change followed by NO FURTHER CONTACT with participant (Box B)", "0")
-        };
-
-        public List<RadioListItem> ProtocolItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Annual UDS follow-up by telephone (CONTINUE TO QUESTION 2A1)", "1"),
-            new RadioListItem("Minimal contact (CONTINUE TO QUESTION 2A1)", "2"),
-            new RadioListItem("Annual in-person UDS follow-up", "3")
-        };
-
-        public List<RadioListItem> AconsentItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (CONTINUE TO QUESTION 2B)", "0"),
-            new RadioListItem("Yes (CONTINUE TO QUESTION 2B)", "1")
-        };
-
-        public List<RadioListItem> AutopsyItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No ADC autopsy expected", "0"),
-            new RadioListItem("An ADC autopsy has been done; data submitted or pending", "1")
-        };
-
-        public List<RadioListItem> DropReasonItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("ADC decision or protocol", "1"),
-            new RadioListItem("Participant or co-participant asked to be dropped (ie. withdrawn)", "2")
-        };
-
-        public List<RadioListItem> FTLDREASItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("ADC decision", "1"),
-            new RadioListItem("Participant/co-participant refused", "2"),
-            new RadioListItem("Co-participant not available", "3"),
-            new RadioListItem("Other, specify below", "4")
-        };
-
-        public Dictionary<string, UIBehavior> ProtocolBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "3", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            },
-            {
-                "1", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            },
-            {
-                "2", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            }
-        };
-
-        public Dictionary<string, UIBehavior> FTLDREASBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "4", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "1", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "2", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-            {
-                "3", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
-                    }
-                }
-            },
-        };
-
-        public Dictionary<string, UIBehavior> DECEASEDBehavior = new Dictionary<string, UIBehavior>
-        {
-            {
-                "true", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.DEATHDY"),
-                        new UIEnableAttribute("Milestone.DEATHYR"),
-                        new UIEnableAttribute("Milestone.AUTOPSY"),
-                        new UIDisableAttribute("Milestone.DISCDAY"),
-                        new UIDisableAttribute("Milestone.DISCYR"),
-                        new UIDisableAttribute("Milestone.DROPREAS")
-                    }
-                }
-            },
-            {
-                "false", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIDisableAttribute("Milestone.DEATHDY"),
-                        new UIDisableAttribute("Milestone.DEATHYR"),
-                        new UIDisableAttribute("Milestone.AUTOPSY"),
-                        new UIEnableAttribute("Milestone.DISCDAY"),
-                        new UIEnableAttribute("Milestone.DISCYR"),
-                        new UIEnableAttribute("Milestone.DROPREAS")
-                    }
-                }
-            }
-        };
-
-        protected private void IsValid(MilestoneModel milestone)
+        // TODO Move this to NotMapped properties in the view model and use custom annotations for required if
+        protected private void Validate(MilestoneModel milestone)
         {
             if (milestone.MILESTONETYPE == 1)
             {
-                ValidateMonth(milestone.CHANGEMO, "Milestone.CHANGEMO");
-                ValidateDay(milestone.CHANGEDY, "Milestone.CHANGEDY");
-                ValidateYear(milestone.CHANGEYR, "Milestone.CHANGEYR");
+                ValidateMonth(milestone.CHANGEMO, "CHANGEMO");
+                ValidateDay(milestone.CHANGEDY, "CHANGEDY");
+                ValidateYear(milestone.CHANGEYR, "CHANGEYR");
 
                 if (milestone.PROTOCOL == null)
                 {
-                    ModelState.AddModelError("Milestone.PROTOCOL", "Must have a value when indicating continued contact");
+                    ModelState.AddModelError("PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
                 if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1)
                 {
                     if (milestone.ACONSENT == null)
                     {
-                        ModelState.AddModelError("Milestone.ACONSENT", "Autopsy status required");
+                        ModelState.AddModelError("ACONSENT", "Autopsy status required");
                     }
                 }
 
                 if (milestone.RECOGIM == false && milestone.REPHYILL == false && milestone.REREFUSE == false && milestone.RENAVAIL == false && milestone.RENURSE == false && milestone.REJOIN == false)
                 {
-                    ModelState.AddModelError("Milestone.ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
+                    ModelState.AddModelError("ProtocolReasonValidation", "Must select AT LEAST ONE reason for change as indicated in 2a");
                 }
 
                 if (milestone.RENURSE == true)
                 {
-                    ValidateMonth(milestone.NURSEMO, "Milestone.NURSEMO");
-                    ValidateDay(milestone.NURSEDY, "Milestone.NURSEDY");
-                    ValidateYear(milestone.NURSEYR, "Milestone.NURSEYR");
+                    ValidateMonth(milestone.NURSEMO, "NURSEMO");
+                    ValidateDay(milestone.NURSEDY, "NURSEDY");
+                    ValidateYear(milestone.NURSEYR, "NURSEYR");
                 }
 
                 if (milestone.FTLDREAS == 4 && String.IsNullOrEmpty(milestone.FTLDREAX))
                 {
-                    ModelState.AddModelError("Milestone.FTLDREAX", "Must have a value when indicating reason of other");
+                    ModelState.AddModelError("FTLDREAX", "Must have a value when indicating reason of other");
                 }
             }
 
@@ -202,31 +67,31 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (milestone.DECEASED == false && milestone.DISCONT == false)
                 {
-                    ModelState.AddModelError("Milestone.DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
-                    ModelState.AddModelError("Milestone.DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
+                    ModelState.AddModelError("DECEASED", "When indicating no further contact, Deceased OR Discontinued must be select");
+                    ModelState.AddModelError("DISCONT", "When indicating no further contact, Deceased OR Discontinued must be select");
                 }
 
                 if (milestone.DECEASED == true)
                 {
-                    ValidateMonth(milestone.DEATHMO, "Milestone.DEATHMO");
-                    ValidateDay(milestone.DEATHDY, "Milestone.DEATHDY");
-                    ValidateYear(milestone.DEATHYR, "Milestone.DEATHYR");
+                    ValidateMonth(milestone.DEATHMO, "DEATHMO");
+                    ValidateDay(milestone.DEATHDY, "DEATHDY");
+                    ValidateYear(milestone.DEATHYR, "DEATHYR");
 
                     if (milestone.AUTOPSY == null)
                     {
-                        ModelState.AddModelError("Milestone.AUTOPSY", "Must have a value");
+                        ModelState.AddModelError("AUTOPSY", "Must have a value");
                     }
                 }
 
                 if (milestone.DISCONT == true)
                 {
-                    ValidateMonth(milestone.DISCMO, "Milestone.DISCMO");
-                    ValidateDay(milestone.DISCDAY, "Milestone.DISCDAY");
-                    ValidateYear(milestone.DISCYR, "Milestone.DISCYR");
+                    ValidateMonth(milestone.DISCMO, "DISCMO");
+                    ValidateDay(milestone.DISCDAY, "DISCDAY");
+                    ValidateYear(milestone.DISCYR, "DISCYR");
 
                     if (milestone.DROPREAS == null)
                     {
-                        ModelState.AddModelError("Milestone.DROPREAS", "Must have a value");
+                        ModelState.AddModelError("DROPREAS", "Must have a value");
                     }
                 }
             }
@@ -269,6 +134,83 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 ModelState.AddModelError(property, "Provide a valid year between 2015 - 2999");
             }
+        }
+
+        public async Task<IActionResult> OnGetAsync(int id, int? participationId)
+        {
+            // Check if this is the beginning of an create, details, or edit
+            if (id == 0)
+            {
+                // create new
+                if (!participationId.HasValue)
+                    return NotFound("Requires participation id");
+
+                Milestone = new MilestoneModel()
+                {
+                    ParticipationId = participationId.Value,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = User.Identity!.IsAuthenticated ? User.Identity.Name : "Username",
+                    IsDeleted = false
+                };
+                PageTitle = "Create milestone for ";
+            }
+            else
+            {
+                // find existing for details or edit
+                var milestoneFound = await _milestoneService.GetById(User.Identity.Name, id);
+
+                if (milestoneFound == null)
+                {
+                    return NotFound("No milestone found.");
+                }
+                Milestone = milestoneFound.ToVM();
+                PageTitle = "Milestone for ";
+
+                // set modifiedby in case it is for editing
+                Milestone.ModifiedBy = User.Identity.Name;
+            }
+
+            var participation = await _participationService.GetById(User.Identity.Name, Milestone.ParticipationId, false);
+
+            if (participation == null)
+                return NotFound("No participation found.");
+
+            Milestone.Participation = participation.ToVM();
+            PageTitle += "Participant " + Milestone.Participation.LegacyId;
+
+            return Page();
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (Milestone == null)
+            {
+                return Page();
+            }
+
+            Validate(Milestone);
+
+            if (ModelState.IsValid)
+            {
+                var milestone = Milestone.ToEntity();
+                // upsert based on the id
+                if (Milestone.Id == 0)
+                    await _milestoneService.Add(User.Identity.Name, milestone);
+                else
+                    await _milestoneService.Update(User.Identity.Name, milestone);
+
+                return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
+            }
+
+            var participation = await _participationService.GetById(User.Identity.Name, Milestone.ParticipationId, false);
+
+            if (participation == null)
+                return NotFound();
+
+            Milestone.Participation = participation.ToVM();
+
+            return Page();
         }
     }
 }

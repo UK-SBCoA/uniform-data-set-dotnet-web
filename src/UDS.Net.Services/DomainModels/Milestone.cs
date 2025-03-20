@@ -5,8 +5,8 @@ namespace UDS.Net.Services.DomainModels
     public class Milestone
     {
         public int Id { get; set; }
-        public int FormId { get; set; }
         public int ParticipationId { get; set; }
+        public virtual Participation Participation { get; set; }
         public string Status { get; set; }
         public int? CHANGEMO { get; set; }
         public int? CHANGEDY { get; set; }

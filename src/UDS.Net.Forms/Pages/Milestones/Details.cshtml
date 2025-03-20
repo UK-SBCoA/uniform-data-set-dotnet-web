@@ -2,36 +2,24 @@
 @model UDS.Net.Forms.Pages.Milestones.DetailsModel
 
 @{
-    ViewData["Title"] = "Milestone details";
+    ViewData["Title"] = Model.PageTitle;
 }
 
+<nav class="hidden sm:flex" aria-label="Breadcrumb">
+    <ol role="list" class="flex items-center space-x-4">
+        <li>
+            <div class="flex">
+                <a asp-page="/Participations/Details" asp-route-id="@Model.Milestone.ParticipationId" class="text-sm font-medium text-gray-500 hover:text-gray-700">Participation @(Model.Milestone.Participation != null ? Model.Milestone.Participation.LegacyId : "")</a>
+            </div>
+        </li>
+    </ol>
+</nav>
+
 <div class="space-y-16 p-16 xl:space-y-20">
+    <input type="hidden" asp-for="Milestone.Id" />
+    <input type="hidden" asp-for="Milestone.ParticipationId" />
     <table class="table-auto border-separate border-spacing-y-5">
         <tbody>
-            <tr>
-                <td>
-                    <label asp-for="Milestone.Id">@Html.DisplayNameFor(model => model.Milestone.Id)</label>
-                </td>
-                <td>
-                    <input readonly asp-for="Milestone.Id" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Milestone.FormId">@Html.DisplayNameFor(model => model.Milestone.FormId)</label>
-                </td>
-                <td>
-                    <input readonly asp-for="Milestone.FormId" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label asp-for="Milestone.ParticipationId">@Html.DisplayNameFor(model => model.Milestone.ParticipationId)</label>
-                </td>
-                <td>
-                    <input readonly asp-for="Milestone.ParticipationId" />
-                </td>
-            </tr>
             <tr>
                 <td>
                     <label asp-for="Milestone.Status">@Html.DisplayNameFor(model => model.Milestone.Status)</label>

@@ -207,10 +207,9 @@ namespace UDS.Net.Forms.Extensions
 
         public static MilestoneModel ToVM(this Milestone milestone)
         {
-            return new MilestoneModel()
+            var vm = new MilestoneModel()
             {
                 Id = milestone.Id,
-                FormId = milestone.FormId,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
@@ -247,6 +246,11 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = milestone.IsDeleted,
                 MILESTONETYPE = milestone.MILESTONETYPE
             };
+
+            if (milestone.Participation != null)
+                vm.Participation = milestone.Participation.ToShallowVM();
+
+            return vm;
         }
 
         public static IEnumerable<MilestoneModel> ToVM(this IEnumerable<Milestone> milestones)
