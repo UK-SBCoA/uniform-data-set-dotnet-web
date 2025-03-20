@@ -383,15 +383,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return null;
         }
 
+        // Custom write method for formfields to convert property names to lower case
         private void WriteFormFields<T>(T formFields, CsvWriter csv)
         {
             foreach (var property in typeof(T).GetProperties())
             {
-                if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
+                if (property != null)
                 {
-                    string propertyName = property.Name.ToLower();
-
-                    csv.WriteField(propertyName);
+                    if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
+                    {
+                        csv.WriteField(property.Name.ToLower());
+                    }
                 }
             }
         }
