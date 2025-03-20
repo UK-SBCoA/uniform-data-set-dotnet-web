@@ -109,7 +109,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? DATSCANDX { get; set; }
 
         // TODO when is TRACOTHDX required?
-        [RequiredIfRange(nameof(DATSCANDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(IMAGINGDX), 1, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
@@ -500,6 +500,17 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
 
+            if (TRACERAD.HasValue && TRACERFTLD.HasValue && TRACERLBD.HasValue && TRACEROTH.HasValue)
+            {
+                if (TRACERAD.Value == 8 &&
+                    TRACERFTLD.Value == 8 &&
+                    TRACERLBD.Value == 8 &&
+                    TRACEROTH.Value == 8)
+                {
+                    yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when all are provided.",
+                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
+                }
+            }
             yield break;
         }
     }
