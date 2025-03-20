@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
+using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.Enums;
 
 
@@ -105,6 +106,26 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Which milestone type are you reporting?")]
         [Range(0, 1)]
         public int? MILESTONETYPE { get; set; }
+
+        [NotMapped]
+        public string DisplayChangeDate
+        {
+            get
+            {
+                if (MILESTONETYPE.HasValue && MILESTONETYPE.Value == 1)
+                {
+                    return $"{CHANGEMO}/{CHANGEDY}/{CHANGEYR}";
+                }
+                else
+                {
+                    if (DECEASED.HasValue && DECEASED.Value == true)
+                        return $"{DEATHMO}/{DEATHDY}/{DEATHYR}";
+                    else if (DISCONT.HasValue && DISCONT.Value == true)
+                        return $"{DISCMO}/{DISCDAY}/{DISCYR}";
+                }
+                return "--/--/----";
+            }
+        }
 
         //Temporary properties only used in the view and NOT sent to the API
         //validation properties used as targets for validation messages in the manual validation

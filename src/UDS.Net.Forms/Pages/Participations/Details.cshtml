@@ -84,10 +84,10 @@
         <div class="mt-6 overflow-hidden">
             <div class="mx-auto max-w-12xl">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                    <table class="w-full text-left">
+                    <table class="min-w-full divide-y divide-gray-300 text-left">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>Milestone date</th>
                                 <th>Type</th>
                                 <th>Details</th>
                                 <th>Progress</th>
@@ -95,12 +95,15 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white">
                             <!-- for each milstone in the page model-->
                             @foreach (var milestone in Model.Milestones)
                             {
-                                <tr class="align-top">
-                                    <td>@milestone.CreatedAt.ToShortDateString()</td>
+                                <tr class="even:bg-gray-50">
+                                    <td class="whitespace-nowrap py-4 text-sm text-gray-500">
+                                        <div class="truncate text-sm font-medium text-gray-500">Created @milestone.CreatedAt.ToShortDateString()</div>
+                                        <div class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">@milestone.DisplayChangeDate</div>
+                                    </td>
                                     <td>
                                         @if (milestone.DECEASED == true || milestone.DISCONT == true)
                                         {
