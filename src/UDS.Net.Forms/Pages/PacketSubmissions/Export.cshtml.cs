@@ -390,7 +390,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 if (property != null)
                 {
-                    if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
+                    if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
                     {
                         csv.WriteField(property.Name.ToLower());
                     }
