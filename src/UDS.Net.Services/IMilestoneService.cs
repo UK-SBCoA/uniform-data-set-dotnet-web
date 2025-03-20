@@ -7,7 +7,7 @@ namespace UDS.Net.Services
 {
     public interface IMilestoneService : IService<Milestone>
     {
-        Task<IEnumerable<Milestone>> List(string username, int participationId, int pageSize = 10, int pageIndex = 1);
+        Task<IEnumerable<Milestone>> Find(string username, int participationId, int pageSize = 10, int pageIndex = 1);
     }
 }
 

@@ -33,7 +33,7 @@ namespace UDS.Net.Forms.Pages.Participations
 
             Participation = participation.ToVM();
 
-            var milestones = await _milestoneService.List(User.Identity.Name, id.Value, milestonePageSize, milestonePageIndex);
+            var milestones = await _milestoneService.Find(User.Identity.Name, id.Value, milestonePageSize, milestonePageIndex);
 
             Milestones = milestones.ToVM();
 

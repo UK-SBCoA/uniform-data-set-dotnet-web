@@ -26,9 +26,9 @@ namespace UDS.Net.Web.MVC.Services
             return entity;
         }
 
-        public Task<int> Count(string username)
+        public async Task<int> Count(string username)
         {
-            throw new NotImplementedException();
+            return await _apiClient.MilestoneClient.Count();
         }
 
         // Previously GetMilestoneById(int id, int formId)
@@ -39,16 +39,18 @@ namespace UDS.Net.Web.MVC.Services
             return milestone.ToDomain();
         }
 
-        public async Task<IEnumerable<Milestone>> List(string username, int participationId, int pageSize = 10, int pageIndex = 1)
+        public async Task<IEnumerable<Milestone>> Find(string username, int participationId, int pageSize = 10, int pageIndex = 1)
         {
-            IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.GetMilestones(participationId, pageSize, pageIndex);
+            IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.GetMilestonesByParticipation(participationId, pageSize, pageIndex);
 
             return milestones.ToDomain();
         }
 
-        public Task<IEnumerable<Milestone>> List(string username, int pageSize = 10, int pageIndex = 1)
+        public async Task<IEnumerable<Milestone>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            throw new NotImplementedException();
+            IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.Get(pageSize, pageIndex);
+
+            return milestones.ToDomain();
         }
 
         public Task<Milestone> Patch(string username, Milestone entity)

@@ -4,3 +4,62 @@
     ViewData["Title"] = "Milestones";
 }
 
+@if (Model.Milestones != null && Model.Milestones.List != null)
+{
+    <div class="mx-auto max-w-12xl">
+        <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+            <table class="w-full text-left">
+                <thead>
+                    <tr>
+                        <th>Participant</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Details</th>
+                        <th>Progress</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- for each milstone in the page model-->
+                    @foreach (var milestone in Model.Milestones.List)
+                    {
+                        <tr class="align-top">
+                            <td>
+                                <a asp-page="/Participations/Details" asp-route-id="@milestone.ParticipationId" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">
+                                    @if (milestone.Participation != null)
+                                    {
+                                        <span>@milestone.Participation.LegacyId</span>
+                                    }
+                                    else
+                                    {
+                                        @milestone.ParticipationId
+                                    }
+                                </a>
+                            </td>
+                            <td>@milestone.CreatedAt.ToShortDateString()</td>
+                            <td>
+                                @if (milestone.DECEASED == true || milestone.DISCONT == true)
+                                {
+                                    <span>Change followed by NO FURTHER CONTACT</span>
+                                }
+                                else
+                                {
+                                    <span>Change followed by continued contact</span>
+                                }
+                            </td>
+                            <td>
+                                <partial name="_MilestoneDetails" model="@milestone" />
+                            </td>
+                            <td>@milestone.Status</td>
+                            <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id">Edit</a></td>
+                            <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+<partial name="_PreviousNextButtons" model="Model.Milestones"></partial>

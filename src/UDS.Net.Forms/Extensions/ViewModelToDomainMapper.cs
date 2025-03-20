@@ -66,6 +66,7 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = vm.IsDeleted,
                 MILESTONETYPE = vm.MILESTONETYPE
             };
+
         }
 
         public static Visit ToEntity(this VisitModel vm)

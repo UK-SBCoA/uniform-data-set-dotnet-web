@@ -193,11 +193,12 @@ namespace UDS.Net.Forms.Models.PageModels
 
             if (ModelState.IsValid)
             {
+                var milestone = Milestone.ToEntity();
                 // upsert based on the id
                 if (Milestone.Id == 0)
-                    await _milestoneService.Add(User.Identity.Name, Milestone.ToEntity());
+                    await _milestoneService.Add(User.Identity.Name, milestone);
                 else
-                    await _milestoneService.Update(User.Identity.Name, Milestone.ToEntity());
+                    await _milestoneService.Update(User.Identity.Name, milestone);
 
                 return RedirectToPage("/Participations/Details", new { Id = Milestone.ParticipationId });
             }
