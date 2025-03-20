@@ -82,22 +82,22 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1 != null)
                     {
                         csv.WriteHeader<A1Record>();
-                        WriteFormFields(new A1FormFields(), csv);
+                        csv.WriteHeaderLowercase<A1FormFields>();
                     }
                     if (a1a != null)
                     {
                         csv.WriteHeader<A1aRecord>();
-                        WriteFormFields(new A1aFormFields(), csv);
+                        csv.WriteHeaderLowercase<A1aFormFields>();
                     }
                     if (a2 != null)
                     {
                         csv.WriteHeader<A2Record>();
-                        WriteFormFields(new A2FormFields(), csv);
+                        csv.WriteHeaderLowercase<A2FormFields>();
                     }
                     if (a3 != null)
                     {
                         csv.WriteHeader<A3Record>();
-                        WriteFormFields(new A3FormFields(), csv);
+                        csv.WriteHeaderLowercase<A3FormFields>();
 
                         // siblings
                         var siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields; // we always have a list of 20 siblings
@@ -123,7 +123,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4 != null)
                     {
                         csv.WriteHeader<A4Record>();
-                        WriteFormFields(new A4GFormFields(), csv);
+                        csv.WriteHeaderLowercase<A4GFormFields>();
 
                         // we need to hold 40 fields for rxnormids
                         for (int i = 1; i <= 40; i++)
@@ -134,7 +134,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4a != null)
                     {
                         csv.WriteHeader<A4aRecord>();
-                        WriteFormFields(new A4aFormFields(), csv);
+                        csv.WriteHeaderLowercase<A4aFormFields>();
 
                         var treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields; // we always have a list of count 8
 
@@ -152,62 +152,62 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a5d2 != null)
                     {
                         csv.WriteHeader<A5D2Record>();
-                        WriteFormFields(new A5D2FormFields(), csv);
+                        csv.WriteHeaderLowercase<A5D2FormFields>();
                     }
                     if (b1 != null)
                     {
                         csv.WriteHeader<B1Record>();
-                        WriteFormFields(new B1FormFields(), csv);
+                        csv.WriteHeaderLowercase<B1FormFields>();
                     }
                     if (b3 != null)
                     {
                         csv.WriteHeader<B3Record>();
-                        WriteFormFields(new B3FormFields(), csv);
+                        csv.WriteHeaderLowercase<B3FormFields>();
                     }
                     if (b4 != null)
                     {
                         csv.WriteHeader<B4Record>();
-                        WriteFormFields(new B4FormFields(), csv);
+                        csv.WriteHeaderLowercase<B4FormFields>();
                     }
                     if (b5 != null)
                     {
                         csv.WriteHeader<B5Record>();
-                        WriteFormFields(new B5FormFields(), csv);
+                        csv.WriteHeaderLowercase<B5FormFields>();
                     }
                     if (b6 != null)
                     {
                         csv.WriteHeader<B6Record>();
-                        WriteFormFields(new B6FormFields(), csv);
+                        csv.WriteHeaderLowercase<B6FormFields>();
                     }
                     if (b7 != null)
                     {
                         csv.WriteHeader<B7Record>();
-                        WriteFormFields(new B7FormFields(), csv);
+                        csv.WriteHeaderLowercase<B7FormFields>();
                     }
                     if (b8 != null)
                     {
                         csv.WriteHeader<B8Record>();
-                        WriteFormFields(new B8FormFields(), csv);
+                        csv.WriteHeaderLowercase<B8FormFields>();
                     }
                     if (b9 != null)
                     {
                         csv.WriteHeader<B9Record>();
-                        WriteFormFields(new B9FormFields(), csv);
+                        csv.WriteHeaderLowercase<B9FormFields>();
                     }
                     if (c2 != null)
                     {
                         csv.WriteHeader<C2Record>();
-                        WriteFormFields(new C2FormFields(), csv);
+                        csv.WriteHeaderLowercase<C2FormFields>();
                     }
                     if (d1a != null)
                     {
                         csv.WriteHeader<D1aRecord>();
-                        WriteFormFields(new D1aFormFields(), csv);
+                        csv.WriteHeaderLowercase<D1aFormFields>();
                     }
                     if (d1b != null)
                     {
                         csv.WriteHeader<D1bRecord>();
-                        WriteFormFields(new D1bFormFields(), csv);
+                        csv.WriteHeaderLowercase<D1bFormFields>();
                     }
 
                     csv.NextRecord(); // end of header row
@@ -381,21 +381,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return File(memoryStream, "text/csv", filename);
             }
             return null;
-        }
-
-        // Custom write method for formfields to convert property names to lower case
-        private void WriteFormFields<T>(T formFields, CsvWriter csv)
-        {
-            foreach (var property in typeof(T).GetProperties())
-            {
-                if (property != null)
-                {
-                    if (property.PropertyType.IsPrimitive || property.PropertyType == typeof(int?) || property.PropertyType == typeof(bool?) || property.PropertyType == typeof(decimal) || property.PropertyType == typeof(decimal?) || property.PropertyType == typeof(double?) || property.PropertyType == typeof(string))
-                    {
-                        csv.WriteField(property.Name.ToLower());
-                    }
-                }
-            }
         }
     }
 }
