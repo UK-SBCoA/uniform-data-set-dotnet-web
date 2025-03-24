@@ -43,6 +43,12 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (MCI.HasValue)
                 {
+                    //  If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled.
+                    if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
+                    {
+                        return true;
+                    }
+
                     var criteriaCount = 0;
 
                     criteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
@@ -92,14 +98,70 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
+                // If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled
+                if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
+                {
+                    return true;
+                }
+                // If (MCICRITFUN=1 and MCICRITCLN != 1 and MCICRITIMP != 1) then IMPNOMCI must equal 0
+                if (MCICRITFUN == true && MCICRITCLN != true && MCICRITIMP != true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN == true) ||
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN == true)
+)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if ((MCICRITCLN != true && MCICRITIMP != true && MCICRITFUN != true) &&
+                   ((IMPNOMCIFU == true) || (IMPNOMCICG == true) || (IMPNOMCLCD == true) || (IMPNOMCIO == true)))
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (MCICRITCLN == true || MCICRITIMP == true || MCICRITFUN == true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value == 0)
+                    {
+                        return null;
+                    }
+                }
+
                 if (IMPNOMCI.HasValue)
                 {
                     var IMPNOMCICriteriaCount = 0;
-
-                    IMPNOMCICriteriaCount += IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCICG.HasValue && IMPNOMCICG.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCIO.HasValue && IMPNOMCIO.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIFU == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCICG == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCLCD == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIO == true) ? 1 : 0;
 
                     if (IMPNOMCICriteriaCount > 0)
                     {
@@ -108,17 +170,17 @@ namespace UDS.Net.Forms.Models.UDS4
                     else
                     {
                         var MCICriteriaCount = 0;
-                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+                        MCICriteriaCount += (MCICRITCLN == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITIMP == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITFUN == true) ? 1 : 0;
 
-                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value)
+                        if (MCICriteriaCount == 1 && MCICRITFUN == true)
                         {
                             return IMPNOMCI.Value == 0 ? true : null;
                         }
                         else if (MCICriteriaCount > 0)
                         {
-                            return IMPNOMCI.Value == 1 ? true : null;
+                            return IMPNOMCI.Value == 0 ? true : null;
                         }
                         else
                         {
@@ -126,7 +188,6 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
                 }
-
                 return null;
             }
         }
