@@ -1,16 +1,11 @@
-﻿using System;
-using System.Formats.Asn1;
-using System.Globalization;
-using System.Reflection;
+﻿using System.Globalization;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.PageModels;
-using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
@@ -53,6 +48,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
                 {
+                    // Register globally.
+                    csv.Context.TypeConverterCache.AddConverter<bool>(new BoolStringToIntConverter());
+
                     var record = new CsvRecord(packetSubmission.ADRCId, participant, packet);
                     var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
                     var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
@@ -381,6 +379,25 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return File(memoryStream, "text/csv", filename);
             }
             return null;
+        }
+
+        public class BoolStringToIntConverter : DefaultTypeConverter
+        {
+            public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
+            {
+                var b = value as bool?;
+
+                if (b == true)
+                {
+                    return "1";
+                }
+                else if (b == false)
+                {
+                    return "0";
+                }
+
+                return base.ConvertToString(value, row, memberMapData);
+            }
         }
     }
 }
