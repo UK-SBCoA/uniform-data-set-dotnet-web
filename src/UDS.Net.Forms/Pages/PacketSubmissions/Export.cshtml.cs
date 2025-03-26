@@ -48,7 +48,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 var memoryStream = new MemoryStream();
 
-                var streamWriter = new StreamWriter(memoryStream, Encoding.UTF8);
+                var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false));
 
                 using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
                 {

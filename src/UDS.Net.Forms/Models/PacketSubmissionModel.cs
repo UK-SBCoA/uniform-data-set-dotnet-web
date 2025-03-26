@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.Models
 
         public string GetFileName(string participantLegacyId, DateTime visitDate)
         {
-            return $"UDS_{participantLegacyId}_{visitDate.Year}_EXPORTED_{SubmissionDate.ToFileTime()}.csv";
+            return $"UDS_{participantLegacyId}_{visitDate.Year}_EXPORTED_{SubmissionDate.ToFileTime()}-uds.csv";
         }
     }
 }
