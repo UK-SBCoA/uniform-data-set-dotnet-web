@@ -12,7 +12,7 @@ namespace UDS.Net.Services.Extensions
 {
     public static class DtoToDomainMapper
     {
-        public static Participation ToDomain(this ParticipationDto dto, string username)
+        public static Participation ToDomain(this ParticipationDto dto, string username = "")
         {
             var participation = new Participation()
             {
@@ -121,10 +121,9 @@ namespace UDS.Net.Services.Extensions
 
         public static Milestone ToDomain(this M1Dto dto)
         {
-            return new Milestone()
+            var milestone = new Milestone()
             {
                 Id = dto.Id,
-                FormId = dto.FormId,
                 ParticipationId = dto.ParticipationId,
                 Status = dto.Status,
                 CHANGEMO = dto.CHANGEMO,
@@ -161,6 +160,11 @@ namespace UDS.Net.Services.Extensions
                 IsDeleted = dto.IsDeleted,
                 MILESTONETYPE = dto.MILESTONETYPE
             };
+
+            if (dto.Participation != null)
+                milestone.Participation = dto.Participation.ToDomain(dto.CreatedBy);
+
+            return milestone;
         }
 
         public static IEnumerable<Milestone> ToDomain(this IEnumerable<M1Dto> m1Dtos)
