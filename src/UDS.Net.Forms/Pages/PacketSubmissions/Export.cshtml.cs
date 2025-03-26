@@ -54,9 +54,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     // Register globally.
                     csv.Context.TypeConverterCache.AddConverter<bool>(new BoolStringToIntConverter());
 
-                    var ADRCID = !String.IsNullOrEmpty(_configuration["ADRC:Id"]) ? _configuration["ADRC:Id"] : string.Empty;
-
-                    var record = new CsvRecord(ADRCID, participant, packet);
+                    var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, participant, packet);
                     var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
                     var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
                     var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
