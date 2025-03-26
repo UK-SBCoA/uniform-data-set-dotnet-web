@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Models
 {

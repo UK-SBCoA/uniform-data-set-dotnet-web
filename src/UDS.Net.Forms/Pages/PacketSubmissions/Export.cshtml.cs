@@ -1,8 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
 using CsvHelper;
-using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
