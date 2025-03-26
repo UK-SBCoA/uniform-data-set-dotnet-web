@@ -10,6 +10,7 @@ using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Forms.Overrides.CsvHelper;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -382,25 +383,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return File(memoryStream, "text/csv", filename);
             }
             return null;
-        }
-
-        public class BoolStringToIntConverter : DefaultTypeConverter
-        {
-            public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
-            {
-                var b = value as bool?;
-
-                if (b == true)
-                {
-                    return "1";
-                }
-                else if (b == false)
-                {
-                    return "0";
-                }
-
-                return base.ConvertToString(value, row, memberMapData);
-            }
         }
     }
 }
