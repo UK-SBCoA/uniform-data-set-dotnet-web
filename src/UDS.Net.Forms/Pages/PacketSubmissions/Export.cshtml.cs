@@ -5,6 +5,7 @@ using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
@@ -16,13 +17,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
     {
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
+        private readonly IConfiguration _configuration;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
         {
             _packetService = packetService;
             _participationService = participationService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -51,7 +54,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     // Register globally.
                     csv.Context.TypeConverterCache.AddConverter<bool>(new BoolStringToIntConverter());
 
-                    var record = new CsvRecord(packetSubmission.ADRCId, participant, packet);
+                    var ADRCID = !String.IsNullOrEmpty(_configuration["ADRC:Id"]) ? _configuration["ADRC:Id"] : string.Empty;
+
+                    var record = new CsvRecord(ADRCID, participant, packet);
                     var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
                     var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
                     var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
