@@ -522,7 +522,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (rad == 8 && ftld == 8 && lbd == 8 && oth == 8)
                 {
                     yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when TRACOTHDX = 1 or 2.",
-                        new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
+                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
                 }
             }
 
