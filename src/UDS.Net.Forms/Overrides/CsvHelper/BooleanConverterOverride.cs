@@ -4,7 +4,7 @@ using CsvHelper.TypeConversion;
 
 namespace UDS.Net.Forms.Overrides.CsvHelper
 {
-    // Override boolean converter to handle boolean values with 1 & 0 instead of "True" & "False"
+    // Override boolean converter to return boolean values as 1 & 0 instead of "True" & "False"
     public class BoolStringToIntConverter : BooleanConverter
     {
         public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
