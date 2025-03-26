@@ -48,7 +48,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 var memoryStream = new MemoryStream();
 
-                // A new UTF8Encoding object is instantiated to remove BOM from file
+                // A new UTF8Encoding object is instantiated in argument to remove BOM from file
+                // https://learn.microsoft.com/en-us/dotnet/api/system.text.encoding.utf8?view=net-8.0#remarks
+
                 // UTF8Encoding object should be instaniated with second argument as true for security reasons
                 // https://learn.microsoft.com/en-us/dotnet/api/system.text.utf8encoding.-ctor?view=net-8.0#system-text-utf8encoding-ctor(system-boolean-system-boolean)
                 var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
