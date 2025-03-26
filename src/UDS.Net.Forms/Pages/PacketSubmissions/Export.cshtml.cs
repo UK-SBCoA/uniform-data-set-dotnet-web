@@ -48,7 +48,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 var memoryStream = new MemoryStream();
 
-                var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false));
+                // A new UTF8Encoding object is instantiated to remove BOM from file
+                // UTF8Encoding object should be instaniated with second argument as true for security reasons
+                // https://learn.microsoft.com/en-us/dotnet/api/system.text.utf8encoding.-ctor?view=net-8.0#system-text-utf8encoding-ctor(system-boolean-system-boolean)
+                var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
                 using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
                 {
