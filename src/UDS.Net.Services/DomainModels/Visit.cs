@@ -128,6 +128,31 @@ namespace UDS.Net.Services.DomainModels
                         }
                     },
                     {
+                        PacketKind.I4.ToString(),
+                        new FormContract[]
+                        {
+                            new FormContract("A1", true),
+                            new FormContract("A1a", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", true),
+                            new FormContract("A4", false),
+                            new FormContract("A4a", false),
+                            new FormContract("A5D2", true),
+                            new FormContract("B1", false),
+                            new FormContract("B3", false),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B8", true),
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
+                            new FormContract("D1a", true),
+                            new FormContract("D1b", true)
+
+                        }
+                    },
+                    {
                         PacketKind.F.ToString(), // TODO follow-up visit contracts haven't been published
                         new FormContract[]
                         {
