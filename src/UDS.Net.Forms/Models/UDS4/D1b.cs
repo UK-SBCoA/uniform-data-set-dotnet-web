@@ -157,6 +157,27 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with CVD.")]
         public int? STRUCTCVD { get; set; }
 
+        // If STRUCTCVD is 1, then at least one value from IMAGLINF, IMAGLAC, IMAGMACH, IMAGMICH, IMAGWMH must not be 8
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "If there is evidence for CVD on imaging, at least one of 7a3a - 7a3e must not be 8 - Not assessed")]
+        [NotMapped]
+        public bool? STRUCTCVDFindingsValidation
+        {
+            get
+            {
+                var STRUCTCVDFindingsCount = 0;
+
+                if (IMAGLINF.HasValue && IMAGLINF.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGLAC.HasValue && IMAGLAC.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGMACH.HasValue && IMAGMACH.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGMICH.HasValue && IMAGMICH.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGWMH.HasValue && IMAGWMH.Value == 8) STRUCTCVDFindingsCount++;
+
+                if (STRUCTCVDFindingsCount == 5) return null;
+
+                return true;
+            }
+        }
+
         [Display(Name = "Large vessel infarct(s)")]
         [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate large vessel infarct(s).")]
         public int? IMAGLINF { get; set; }
