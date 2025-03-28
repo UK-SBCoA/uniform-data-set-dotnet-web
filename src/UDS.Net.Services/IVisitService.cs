@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services
 {
@@ -21,6 +22,14 @@ namespace UDS.Net.Services
         Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] filterItems = null);
 
         Task<int> CountByStatus(string username, string[] statuses = null);
+
+        /// <summary>
+        /// Only updates the status on the visit
+        /// </summary>
+        /// <param name="username">User modifying the status</param>
+        /// <param name="entity">Visit with the new status</param>
+        /// <returns>Updated visit</returns>
+        Task<Visit> PatchStatus(string username, Visit entity);
     }
 }
 

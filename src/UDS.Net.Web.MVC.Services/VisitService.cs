@@ -6,6 +6,7 @@ using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
@@ -175,6 +176,16 @@ namespace UDS.Net.Web.MVC.Services
             // In this implementation we are sorting by kind alphabetically, but other organizations may want the flexibilty to order forms by another parameter.
             var visit = await GetById(username, visitId);
             return visit.Forms.OrderBy(f => f.Kind).Select(f => f.Kind).ToList();
+        }
+
+        public async Task<Visit> PatchStatus(string username, Visit entity)
+        {
+            if (entity == null)
+                return null;
+
+            var dto = await _apiClient.VisitClient.Put(entity.Id, entity.ToDto());
+
+            return dto.ToDomain(username);
         }
     }
 }
