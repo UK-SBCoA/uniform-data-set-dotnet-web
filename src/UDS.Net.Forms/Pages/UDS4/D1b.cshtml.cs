@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown/Not disclosed", "2")
+            new RadioListItem("Unknown/Not disclosed", "9")
         };
 
         public List<RadioListItem> EtiologyListItems { get; set; } = new List<RadioListItem>
