@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Records
         internal Form form { get; init; }
 
         [Name("frmdated1b")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToShortDateString();
+        public string FrmDate { get; init; } = form.FRMDATE.ToString("dd-MM-yyyy");
 
         [Name("initialsd1b")]
         public string Initials { get; init; } = form.INITIALS;
