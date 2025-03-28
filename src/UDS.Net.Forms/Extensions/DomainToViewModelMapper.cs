@@ -89,7 +89,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
-                CanBeFinalized = visit.IsFinalizable,
+                CanBeFinalized = visit.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = visit.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = visit.Forms.ToVM(),
                 TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
             };
@@ -133,7 +134,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = packet.ModifiedBy,
                 DeletedBy = packet.DeletedBy,
                 IsDeleted = packet.IsDeleted,
-                CanBeFinalized = packet.IsFinalizable,
+                CanBeFinalized = packet.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
                 PacketSubmissions = packet.Submissions.ToVM()
             };
@@ -207,10 +209,9 @@ namespace UDS.Net.Forms.Extensions
 
         public static MilestoneModel ToVM(this Milestone milestone)
         {
-            return new MilestoneModel()
+            var vm = new MilestoneModel()
             {
                 Id = milestone.Id,
-                FormId = milestone.FormId,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
@@ -247,6 +248,11 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = milestone.IsDeleted,
                 MILESTONETYPE = milestone.MILESTONETYPE
             };
+
+            if (milestone.Participation != null)
+                vm.Participation = milestone.Participation.ToShallowVM();
+
+            return vm;
         }
 
         public static IEnumerable<MilestoneModel> ToVM(this IEnumerable<Milestone> milestones)

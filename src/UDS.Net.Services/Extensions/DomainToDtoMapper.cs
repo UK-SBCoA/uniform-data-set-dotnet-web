@@ -70,7 +70,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new M1Dto
             {
-                FormId = milestone.FormId,
+                Id = milestone.Id,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,

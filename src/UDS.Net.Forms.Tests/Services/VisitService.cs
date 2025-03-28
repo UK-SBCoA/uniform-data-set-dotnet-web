@@ -103,6 +103,11 @@ namespace UDS.Net.Forms.Tests.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<Visit> PatchStatus(string username, Visit entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
