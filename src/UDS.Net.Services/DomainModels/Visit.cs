@@ -29,7 +29,7 @@ namespace UDS.Net.Services.DomainModels
 
         public string INITIALS { get; set; }
 
-        public PacketStatus Status { get; set; }
+        public PacketStatus Status { get; private set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -51,20 +51,20 @@ namespace UDS.Net.Services.DomainModels
 
         }
 
+        /// <summary>
+        /// This only checks if it could be finalized, not that it follows the rules for status changes
+        /// </summary>
         public bool IsFinalizable
         {
             get
             {
-                // if ti has been submitted and error results are pending
-                if (this.Status == PacketStatus.Submitted)
-                    return false;
+                bool finalizable = false;
 
-                // if it has already been submitted and it has unresolved errors
+                // double check that it does not have unresolved errors
                 if (this.UnresolvedErrorCount.HasValue && this.UnresolvedErrorCount.Value > 0)
                     return false;
 
-                bool finalizable = false;
-
+                // now check that all the forms follow the contract to be finalized
                 if (this.Forms != null && this.Forms.Count() > 0 && _formsContract != null)
                 {
                     var packetKindFormsContract = _formsContract.Where(u => u.Key == this.PACKET.ToString()).FirstOrDefault();
@@ -218,6 +218,57 @@ namespace UDS.Net.Services.DomainModels
 
         //public int Count { get; private set; }
 
+        public bool TryUpdateStatus(PacketStatus status)
+        {
+            bool updatePossible = false;
+            if (this.Status == PacketStatus.Pending)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+                else if (status == PacketStatus.Finalized)
+                {
+                    if (this.IsFinalizable)
+                        updatePossible = true;
+                }
+            }
+            else if (this.Status == PacketStatus.Finalized)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true; // revert
+                else if (status == PacketStatus.Submitted)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.FailedErrorChecks)
+            {
+                // when errors are attempted to be resolved status can be moved back to pending
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.PassedErrorChecks)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+                else if (status == PacketStatus.Frozen)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.Frozen)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            return updatePossible;
+        }
+
+        public bool UpdateStatus(PacketStatus status)
+        {
+            if (TryUpdateStatus(status))
+            {
+                this.Status = status;
+                return true;
+            }
+            return false;
+        }
+
         public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
             Id = id;
@@ -283,14 +334,57 @@ namespace UDS.Net.Services.DomainModels
         public bool TryValidate()
         {
             // TODO validate the visit against any rules that might have changed due to form fields changing
-            GetModelErrors();
-            return true;
+            var errors = GetModelErrors();
+            if (errors != null && errors.Count() > 0)
+                return false;
+            else
+                return true;
         }
+
+        // Iterator method in c# retrieves elements one by one
+        //public virtual IEnumerable<VisitValidationResult> GetModelErrors()
+        //{
+        //    /// TODO For example, in UDS3 FVP, either C1 or C2 is required, but not both
+
+        //    // A1 sex and D1a menstruation
+        //    var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+        //    var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+
+        //    if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
+        //    {
+        //        if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
+        //        {
+        //            yield return new VisitValidationResult(
+        //                $"A1 sex cannot be male and A5D2 menstration details be provi.",
+        //                new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) });
+        //        }
+        //    }
+
+        //    yield break;
+        //}
 
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
-            /// TODO For example, in UDS3 FVP, either C1 or C2 is required, but not both
-            yield break;
+            List<VisitValidationResult> results = new List<VisitValidationResult>();
+
+            if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
+            {
+                // A1 sex and D1a menstruation
+                var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+                var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+
+                if (a1 != null && a5d2 != null)
+                {
+                    if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
+                    {
+                        results.Add(new VisitValidationResult(
+                            $"A1 sex cannot be male and A5D2 menstration details be provi.",
+                            new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
+                    }
+                }
+            }
+
+            return results;
         }
     }
 }

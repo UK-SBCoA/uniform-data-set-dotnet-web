@@ -89,7 +89,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
-                CanBeFinalized = visit.IsFinalizable,
+                CanBeFinalized = visit.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = visit.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = visit.Forms.ToVM(),
                 TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
             };
@@ -133,7 +134,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = packet.ModifiedBy,
                 DeletedBy = packet.DeletedBy,
                 IsDeleted = packet.IsDeleted,
-                CanBeFinalized = packet.IsFinalizable,
+                CanBeFinalized = packet.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
                 PacketSubmissions = packet.Submissions.ToVM()
             };
