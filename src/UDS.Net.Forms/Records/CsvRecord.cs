@@ -30,17 +30,9 @@ namespace UDS.Net.Forms.Records
         [Name("formver")]
         public string FormVer { get; init; } = "4";
 
-        [Index(5)]
-        [Name("dssub")]
-        public int Dssub { get; init; } = 0;
-
         [Index(6)]
-        [Name("visit_date")]
-        public string VisitDate { get; init; } = visit.VISIT_DATE.ToShortDateString();
-
-        [Index(7)]
-        [Name("initials")]
-        public string Initials { get; init; } = visit.INITIALS;
+        [Name("visitdate")]
+        public string VisitDate { get; init; } = visit.VISIT_DATE.ToString("dd-MM-yyyy");
     }
 }
 

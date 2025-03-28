@@ -7,7 +7,6 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class C2FormFields : IFormFields
     {
-        public int? MODCOMM { get; set; }
         public int? MOCACOMP { get; set; }
         public int? MOCAREAS { get; set; }
         public int? MOCALOC { get; set; }
@@ -65,7 +64,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DIGBACLS { get; set; }
         public int? OTRAILA { get; set; }
         public int? OTRLARR { get; set; }
-        public int? OTRALI { get; set; }
         public int? OTRLALI { get; set; }
         public int? OTRAILB { get; set; }
         public int? OTRLBRR { get; set; }

@@ -89,7 +89,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = visit.ModifiedBy,
                 DeletedBy = visit.DeletedBy,
                 IsDeleted = visit.IsDeleted,
-                CanBeFinalized = visit.IsFinalizable,
+                CanBeFinalized = visit.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = visit.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = visit.Forms.ToVM(),
                 TotalUnresolvedErrorCount = visit.UnresolvedErrorCount
             };
@@ -133,7 +134,8 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = packet.ModifiedBy,
                 DeletedBy = packet.DeletedBy,
                 IsDeleted = packet.IsDeleted,
-                CanBeFinalized = packet.IsFinalizable,
+                CanBeFinalized = packet.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
+                CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
                 PacketSubmissions = packet.Submissions.ToVM()
             };
@@ -207,10 +209,9 @@ namespace UDS.Net.Forms.Extensions
 
         public static MilestoneModel ToVM(this Milestone milestone)
         {
-            return new MilestoneModel()
+            var vm = new MilestoneModel()
             {
                 Id = milestone.Id,
-                FormId = milestone.FormId,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
@@ -247,6 +248,11 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = milestone.IsDeleted,
                 MILESTONETYPE = milestone.MILESTONETYPE
             };
+
+            if (milestone.Participation != null)
+                vm.Participation = milestone.Participation.ToShallowVM();
+
+            return vm;
         }
 
         public static IEnumerable<MilestoneModel> ToVM(this IEnumerable<Milestone> milestones)
@@ -514,7 +520,6 @@ namespace UDS.Net.Forms.Extensions
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
                 TRANSWORRY = fields.TRANSWORRY,
-                TRSPLONGER = fields.TRSPLONGER,
                 TRSPMED = fields.TRSPMED,
                 INCOMEYR = fields.INCOMEYR,
                 FINSATIS = fields.FINSATIS,
@@ -525,14 +530,7 @@ namespace UDS.Net.Forms.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
@@ -582,7 +580,6 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -605,8 +602,6 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,
@@ -620,9 +615,7 @@ namespace UDS.Net.Forms.Extensions
                 DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
-                NWINFSIB = fields.NWINFSIB,
                 KIDS = fields.KIDS,
-                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
@@ -1263,7 +1256,6 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                MODCOMM = fields.MODCOMM,
                 MOCACOMP = fields.MOCACOMP,
                 MOCAREAS = fields.MOCAREAS,
                 MOCALOC = fields.MOCALOC,
@@ -1553,8 +1545,8 @@ namespace UDS.Net.Forms.Extensions
                 IMAGLAC = fields.IMAGLAC,
                 IMAGMACH = fields.IMAGMACH,
                 IMAGMICH = fields.IMAGMICH,
-                IMAGMWMH = fields.IMAGMWMH,
-                IMAGEWMH = fields.IMAGEWMH,
+                IMAGWMH = fields.IMAGWMH,
+                IMAGWMHSEV = fields.IMAGWMHSEV,
                 OTHBIOM1 = fields.OTHBIOM1,
                 OTHBIOMX1 = fields.OTHBIOMX1,
                 BIOMAD1 = fields.BIOMAD1,
@@ -1582,7 +1574,6 @@ namespace UDS.Net.Forms.Extensions
                 LBDIS = fields.LBDIS,
                 LBDIF = fields.LBDIF,
                 FTLD = fields.FTLD,
-                FTLDIF = fields.FTLDIF,
                 PSP = fields.PSP,
                 PSPIF = fields.PSPIF,
                 CORT = fields.CORT,
@@ -1599,6 +1590,7 @@ namespace UDS.Net.Forms.Extensions
                 MSAIF = fields.MSAIF,
                 CTE = fields.CTE,
                 CTEIF = fields.CTEIF,
+                CTECERT = fields.CTECERT,
                 DOWNS = fields.DOWNS,
                 DOWNSIF = fields.DOWNSIF,
                 HUNT = fields.HUNT,

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
+using System.Runtime.ExceptionServices;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -73,7 +70,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new M1Dto
             {
-                FormId = milestone.FormId,
+                Id = milestone.Id,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
@@ -410,7 +407,6 @@ namespace UDS.Net.Services.Extensions
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
                 TRANSWORRY = fields.TRANSWORRY,
-                TRSPLONGER = fields.TRSPLONGER,
                 TRSPMED = fields.TRSPMED,
                 INCOMEYR = fields.INCOMEYR,
                 FINSATIS = fields.FINSATIS,
@@ -421,14 +417,7 @@ namespace UDS.Net.Services.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
@@ -589,7 +578,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -608,8 +596,6 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A3Dto()
             {
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,
@@ -1574,8 +1560,8 @@ namespace UDS.Net.Services.Extensions
                 IMAGLAC = fields.IMAGLAC,
                 IMAGMACH = fields.IMAGMACH,
                 IMAGMICH = fields.IMAGMICH,
-                IMAGMWMH = fields.IMAGMWMH,
-                IMAGEWMH = fields.IMAGEWMH,
+                IMAGWMH = fields.IMAGWMH,
+                IMAGWMHSEV = fields.IMAGWMHSEV,
                 OTHBIOM1 = fields.OTHBIOM1,
                 OTHBIOMX1 = fields.OTHBIOMX1,
                 BIOMAD1 = fields.BIOMAD1,
@@ -1603,7 +1589,6 @@ namespace UDS.Net.Services.Extensions
                 LBDIS = fields.LBDIS,
                 LBDIF = fields.LBDIF,
                 FTLD = fields.FTLD,
-                FTLDIF = fields.FTLDIF,
                 PSP = fields.PSP,
                 PSPIF = fields.PSPIF,
                 CORT = fields.CORT,
@@ -1620,6 +1605,7 @@ namespace UDS.Net.Services.Extensions
                 MSAIF = fields.MSAIF,
                 CTE = fields.CTE,
                 CTEIF = fields.CTEIF,
+                CTECERT = fields.CTECERT,
                 DOWNS = fields.DOWNS,
                 DOWNSIF = fields.DOWNSIF,
                 HUNT = fields.HUNT,

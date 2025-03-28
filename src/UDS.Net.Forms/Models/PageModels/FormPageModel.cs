@@ -113,10 +113,21 @@ namespace UDS.Net.Forms.Models.PageModels
                 }
             }
 
+            if (!visit.TryUpdateStatus(PacketStatus.Pending))
+            {
+                ModelState.AddModelError($"{BaseForm.GetType().Name}.Status", $"Form cannot be modified because packet is in {visit.Status.ToString()} status.");
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (visit.Status != PacketStatus.Pending)
+                    {
+                        visit.UpdateStatus(PacketStatus.Pending);
+                        await _visitService.PatchStatus(User.Identity.Name, visit);
+                    }
+
                     await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, _formKind);
 
                     if (!String.IsNullOrWhiteSpace(goNext) && !String.IsNullOrWhiteSpace(BaseForm.NextFormKind))

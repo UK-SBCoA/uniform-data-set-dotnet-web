@@ -411,10 +411,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
-        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
-        [Range(1, 3)]
-        public int? MODCOMM { get; set; }
-
         [Display(Name = "Total recall", Description = "(0-15,95-98)")]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Required if Rey AVLT was administered")]
@@ -499,8 +495,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
         public int? REYDTI { get; set; }
 
+        // Custom validation - REYMETHODValidation(): value required on complete on the C2 when REDREC >= 0 and <=15
         [Display(Name = "Method of recognition test administration")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
         public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
@@ -520,7 +516,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD1READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -535,7 +530,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -550,7 +544,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -733,6 +726,44 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        // validate CERAD1READ, CERAD2READ, and CERAD3READ in C2 (InPerson and Video modalities) for value when CERAD1REC is 0 - 10
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Values required if trial 1 total recall is 0 - 10 for in-person and remote video modalities")]
+        public bool? CERADREADValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (CERAD1REC >= 0 && CERAD1REC <= 10)
+                    {
+                        return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        // validate REYMETHOD in C2 (InPerson and Video modalities) for value when REDREC >= 0 and <=15 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Value required if total delayed recall is 0 - 15 for in-person and remote video modalities")]
+        public bool? REYMETHODValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REYDREC >= 0 && REYDREC <= 15)
+                    {
+                        return REYMETHOD.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
@@ -856,10 +887,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
                     if (!RESPVAL.HasValue)
                         yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
-
-                    // TODO should MODCOMM be here now that UDSv4 has MODE?
-                    //if (!MODCOMM.HasValue)
-                    //    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))

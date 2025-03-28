@@ -44,6 +44,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Not assessed", "8")
         };
 
+        // If IMAGWMH yes, choose the severity
+        public List<RadioListItem> IMAGWMHSEVListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Moderate white-matter hyperintensity (CHS score 5-6)", "1"),
+            new RadioListItem("Extensive white-matter hyperintensity (CHS score 7-8+)", "2")
+        };
+
         public List<RadioListItem> IMAGINGDXListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (SKIP TO QUESTION 8)", "0"),
@@ -114,6 +121,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("TDP-43 proteinopathy", "2"),
             new RadioListItem("Other", "3"),
             new RadioListItem("Unknown", "9"),
+        };
+
+        public List<RadioListItem> CTECERTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Suggestive CTE", "1"),
+            new RadioListItem("Possible CTE", "2"),
+            new RadioListItem("Probable CTE", "3"),
         };
 
         public Dictionary<string, UIBehavior> BIOMARKDXUIBehavior = new Dictionary<string, UIBehavior>
@@ -447,8 +461,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGLAC"),
                     new UIDisableAttribute("D1b.IMAGMACH"),
                     new UIDisableAttribute("D1b.IMAGMICH"),
-                    new UIDisableAttribute("D1b.IMAGMWMH"),
-                    new UIDisableAttribute("D1b.IMAGEWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
 
                 }
             } },
@@ -459,8 +472,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGLAC"),
                     new UIEnableAttribute("D1b.IMAGMACH"),
                     new UIEnableAttribute("D1b.IMAGMICH"),
-                    new UIEnableAttribute("D1b.IMAGMWMH"),
-                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.IMAGWMH"),
 
                 }
             } },
@@ -471,10 +483,18 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGLAC"),
                     new UIEnableAttribute("D1b.IMAGMACH"),
                     new UIEnableAttribute("D1b.IMAGMICH"),
-                    new UIEnableAttribute("D1b.IMAGMWMH"),
-                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.IMAGWMH"),
                 }
             } },
+        };
+
+        public Dictionary<string, UIBehavior> IMAGWMHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.IMAGWMHSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } }
         };
 
         public Dictionary<string, UIBehavior> OTHBIOM1UIBehavior = new Dictionary<string, UIBehavior>

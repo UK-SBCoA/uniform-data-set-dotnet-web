@@ -5,10 +5,12 @@ namespace UDS.Net.Services.Enums
 {
     public enum PacketKind
     {
-        [Description("Initial")]
+        [Description("Initial for new participants")]
         I,
         [Description("Follow-up")]
-        F
+        F,
+        [Description("Initial for existing participants")]
+        I4
     }
 }
 
