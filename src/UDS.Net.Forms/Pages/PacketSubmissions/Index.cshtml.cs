@@ -41,7 +41,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 if (packet == null)
                     return NotFound();
 
-                var participation = await _participationService.GetById("", packet.ParticipationId);
+                var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
                 if (participation == null)
                     return NotFound();

@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Pages.Participations
             if (id == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", id.Value);
+            var participation = await _participationService.GetById(User.Identity.Name, id.Value);
 
             if (participation == null)
                 return NotFound();
@@ -49,7 +49,7 @@ namespace UDS.Net.Forms.Pages.Participations
             {
                 var participation = Participation.ToEntity();
 
-                var updatedParticipation = _participationService.Update("", participation);
+                var updatedParticipation = _participationService.Update(User.Identity.Name, participation);
 
                 if (updatedParticipation != null)
                     return RedirectToPage("Details", new { Id = participation.Id });
