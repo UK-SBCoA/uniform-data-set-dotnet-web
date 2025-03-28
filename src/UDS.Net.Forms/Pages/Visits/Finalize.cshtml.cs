@@ -63,8 +63,6 @@ namespace UDS.Net.Forms.Pages.Visits
 
             Packet = packet.ToVM();
 
-            var a1 = Packet.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
-
             Packet.Participation = participation.ToVM();
 
             return Page();
