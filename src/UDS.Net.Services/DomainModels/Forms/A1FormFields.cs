@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -12,7 +10,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BIRTHYR { get; set; }
         public string CHLDHDCTRY { get; set; }
         public int? RACEWHITE { get; set; }
-        public int? ETHGERMAN { get; set; }
+        public bool? ETHGERMAN { get; set; }
         public int? ETHIRISH { get; set; }
         public int? ETHENGLISH { get; set; }
         public int? ETHITALIAN { get; set; }
@@ -161,7 +159,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.BIRTHYR = a1Dto.BIRTHYR;
                 this.CHLDHDCTRY = a1Dto.CHLDHDCTRY;
                 this.RACEWHITE = a1Dto.RACEWHITE;
-                this.ETHGERMAN = a1Dto.ETHGERMAN;
+                this.ETHGERMAN = a1Dto.ETHGERMAN.Value == 1 ? true : (bool?)null;
                 this.ETHIRISH = a1Dto.ETHIRISH;
                 this.ETHENGLISH = a1Dto.ETHENGLISH;
                 this.ETHITALIAN = a1Dto.ETHITALIAN;

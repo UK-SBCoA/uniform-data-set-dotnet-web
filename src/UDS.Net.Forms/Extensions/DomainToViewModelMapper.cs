@@ -401,7 +401,7 @@ namespace UDS.Net.Forms.Extensions
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,
                 RACEWHITE = fields.RACEWHITE.HasValue ? fields.RACEWHITE.Value != 0 : false,
-                ETHGERMAN = fields.ETHGERMAN.HasValue ? fields.ETHGERMAN.Value != 0 : false,
+                ETHGERMAN = fields.ETHGERMAN.HasValue && fields.ETHGERMAN.Value == true ? true : false,
                 ETHIRISH = fields.ETHIRISH.HasValue ? fields.ETHIRISH.Value != 0 : false,
                 ETHENGLISH = fields.ETHENGLISH.HasValue ? fields.ETHENGLISH.Value != 0 : false,
                 ETHITALIAN = fields.ETHITALIAN.HasValue ? fields.ETHITALIAN.Value != 0 : false,

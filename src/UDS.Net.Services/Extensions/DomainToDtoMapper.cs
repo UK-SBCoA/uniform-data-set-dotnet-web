@@ -467,7 +467,7 @@ namespace UDS.Net.Services.Extensions
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,
                 RACEWHITE = fields.RACEWHITE,
-                ETHGERMAN = fields.ETHGERMAN,
+                ETHGERMAN = fields.ETHGERMAN.HasValue ? 1 : 0,
                 ETHIRISH = fields.ETHIRISH,
                 ETHENGLISH = fields.ETHENGLISH,
                 ETHITALIAN = fields.ETHITALIAN,
