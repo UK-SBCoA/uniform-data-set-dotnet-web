@@ -9,18 +9,26 @@ namespace UDS.Net.Forms.Overrides.CsvHelper
     {
         public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
-            var b = value as bool?;
+            // test to check for a specific variable
 
-            if (b == true)
+            //if(memberMapData.Member != null)
+            //{
+            //    if(memberMapData.Member.Name.ToString() == "ETHGERMAN")
+            //    {
+            //        var test = 0;
+            //    }
+            //}
+
+            var boolValue = value as bool?;
+
+            if (boolValue == true)
             {
                 return "1";
             }
-            else if (b == false)
+            else
             {
-                return "0";
+                return string.Empty;
             }
-
-            return base.ConvertToString(value, row, memberMapData);
         }
     }
 }

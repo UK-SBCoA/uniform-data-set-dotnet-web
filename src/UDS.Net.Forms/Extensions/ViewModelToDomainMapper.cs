@@ -159,7 +159,7 @@ namespace UDS.Net.Forms.Extensions
                 HANDED = vm.HANDED,
                 CHLDHDCTRY = vm.CHLDHDCTRY,
                 RACEWHITE = vm.RACEWHITE ? 1 : 0,
-                ETHGERMAN = vm.ETHGERMAN ? 1 : 0,
+                ETHGERMAN = vm.ETHGERMAN ? true : null,
                 ETHIRISH = vm.ETHIRISH ? 1 : 0,
                 ETHENGLISH = vm.ETHENGLISH ? 1 : 0,
                 ETHITALIAN = vm.ETHITALIAN ? 1 : 0,
