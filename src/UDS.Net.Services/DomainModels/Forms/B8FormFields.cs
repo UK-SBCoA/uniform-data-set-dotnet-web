@@ -8,7 +8,7 @@ namespace UDS.Net.Services.DomainModels.Forms
     public class B8FormFields : IFormFields
     {
         public int? NEUREXAM { get; set; }
-        public bool? NORMNREXAM { get; set; }
+        public int? NORMNREXAM { get; set; }
         public int? PARKSIGN { get; set; }
         public int? SLOWINGFM { get; set; }
         public int? TREMREST { get; set; }
@@ -87,7 +87,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var b8Dto = ((B8Dto)dto);
                 NEUREXAM = b8Dto.NEUREXAM;
-                NORMNREXAM = b8Dto.NORMNREXAM;
+                NORMNREXAM = b8Dto.NORMNREXAM.HasValue && b8Dto.NORMNREXAM.Value == true ? 1 : 0;
                 PARKSIGN = b8Dto.PARKSIGN;
                 SLOWINGFM = b8Dto.SLOWINGFM;
                 TREMREST = b8Dto.TREMREST;
