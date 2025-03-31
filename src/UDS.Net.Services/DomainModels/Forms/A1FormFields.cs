@@ -232,10 +232,10 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.SEXORNHET = a1Dto.SEXORNHET;
                 this.SEXORNBI = a1Dto.SEXORNBI.Value == 1 ? true : (bool?)null;
                 this.SEXORNTWOS = a1Dto.SEXORNTWOS.Value == 1 ? true : (bool?)null;
-                this.SEXORNOTH = a1Dto.SEXORNOTH;
+                this.SEXORNOTH = a1Dto.SEXORNOTH.Value == 1 ? true : (bool?)null;
                 this.SEXORNOTHX = a1Dto.SEXORNOTHX;
-                this.SEXORNDNK = a1Dto.SEXORNDNK;
-                this.SEXORNNOAN = a1Dto.SEXORNNOAN;
+                this.SEXORNDNK = a1Dto.SEXORNDNK.Value == 1 ? true : (bool?)null;
+                this.SEXORNNOAN = a1Dto.SEXORNNOAN.Value == 1 ? true : (bool?)null;
                 this.PREDOMLAN = a1Dto.PREDOMLAN;
                 this.PREDOMLANX = a1Dto.PREDOMLANX;
                 this.HANDED = a1Dto.HANDED;
