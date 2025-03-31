@@ -122,14 +122,14 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? VNTPCNC { get; set; }
         public int? COGSTAT { get; set; }
         public int? RESPVAL { get; set; }
-        public int? RESPHEAR { get; set; }
-        public int? RESPDIST { get; set; }
-        public int? RESPINTR { get; set; }
-        public int? RESPDISN { get; set; }
-        public int? RESPFATG { get; set; }
-        public int? RESPEMOT { get; set; }
-        public int? RESPASST { get; set; }
-        public int? RESPOTH { get; set; }
+        public bool? RESPHEAR { get; set; }
+        public bool? RESPDIST { get; set; }
+        public bool? RESPINTR { get; set; }
+        public bool? RESPDISN { get; set; }
+        public bool? RESPFATG { get; set; }
+        public bool? RESPEMOT { get; set; }
+        public bool? RESPASST { get; set; }
+        public bool? RESPOTH { get; set; }
         public string RESPOTHX { get; set; }
 
         public IEnumerable<FormMode> FormModes
@@ -287,14 +287,14 @@ namespace UDS.Net.Services.DomainModels.Forms
                 OTRLBRR = c2Dto.OTRLBRR;
                 OTRLBLI = c2Dto.OTRLBLI;
                 RESPVAL = c2Dto.RESPVAL;
-                RESPHEAR = c2Dto.RESPHEAR;
-                RESPDIST = c2Dto.RESPDIST;
-                RESPINTR = c2Dto.RESPINTR;
-                RESPDISN = c2Dto.RESPDISN;
-                RESPFATG = c2Dto.RESPFATG;
-                RESPEMOT = c2Dto.RESPEMOT;
-                RESPASST = c2Dto.RESPASST;
-                RESPOTH = c2Dto.RESPOTH;
+                RESPHEAR = c2Dto.RESPHEAR.Value == 1 ? true : (bool?)null;
+                RESPDIST = c2Dto.RESPDIST.Value == 1 ? true : (bool?)null;
+                RESPINTR = c2Dto.RESPINTR.Value == 1 ? true : (bool?)null;
+                RESPDISN = c2Dto.RESPDISN.Value == 1 ? true : (bool?)null;
+                RESPFATG = c2Dto.RESPFATG.Value == 1 ? true : (bool?)null;
+                RESPEMOT = c2Dto.RESPEMOT.Value == 1 ? true : (bool?)null;
+                RESPASST = c2Dto.RESPASST.Value == 1 ? true : (bool?)null;
+                RESPOTH = c2Dto.RESPOTH.Value == 1 ? true : (bool?)null;
                 RESPOTHX = c2Dto.RESPOTHX;
 
             }
