@@ -201,7 +201,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHIRAN = vm.ETHIRAN ? true : null,
                 ETHEGYPT = vm.ETHEGYPT ? true : null,
                 ETHSYRIA = vm.ETHSYRIA ? true : null,
-                ETHIRAQI = vm.ETHIRAQI ? 1 : 0,
+                ETHIRAQI = vm.ETHIRAQI ? true : null,
                 ETHISRAEL = vm.ETHISRAEL ? true : null,
                 ETHMENAOTH = vm.ETHMENAOTH ? true : null,
                 ETHMENAOTX = vm.ETHMENAOTX,
@@ -224,7 +224,7 @@ namespace UDS.Net.Forms.Extensions
                 GENOTH = vm.GENOTH ? true : null,
                 GENOTHX = vm.GENOTHX,
                 GENDKN = vm.GENDKN ? true : null,
-                GENNOANS = vm.GENNOANS ? 1 : 0,
+                GENNOANS = vm.GENNOANS ? true : null,
                 BIRTHSEX = vm.BIRTHSEX,
                 INTERSEX = vm.INTERSEX,
                 SEXORNGAY = vm.SEXORNGAY ? true : null,
@@ -795,7 +795,7 @@ namespace UDS.Net.Forms.Extensions
             {
 
                 NEUREXAM = vm.NEUREXAM,
-                NORMNREXAM = vm.NORMNREXAM.HasValue ? vm.NORMNREXAM.Value != 0 : false,
+                NORMNREXAM = vm.NORMNREXAM,
                 PARKSIGN = vm.PARKSIGN,
                 SLOWINGFM = vm.SLOWINGFM,
                 TREMREST = vm.TREMREST,

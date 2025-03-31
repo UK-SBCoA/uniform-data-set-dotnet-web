@@ -509,7 +509,7 @@ namespace UDS.Net.Services.Extensions
                 ETHIRAN = fields.ETHIRAN.HasValue ? 1 : 0,
                 ETHEGYPT = fields.ETHEGYPT.HasValue ? 1 : 0,
                 ETHSYRIA = fields.ETHSYRIA.HasValue ? 1 : 0,
-                ETHIRAQI = fields.ETHIRAQI,
+                ETHIRAQI = fields.ETHIRAQI.HasValue ? 1 : 0,
                 ETHISRAEL = fields.ETHISRAEL.HasValue ? 1 : 0,
                 ETHMENAOTH = fields.ETHMENAOTH.HasValue ? 1 : 0,
                 ETHMENAOTX = fields.ETHMENAOTX,
@@ -532,7 +532,7 @@ namespace UDS.Net.Services.Extensions
                 GENOTH = fields.GENOTH.HasValue ? 1 : 0,
                 GENOTHX = fields.GENOTHX,
                 GENDKN = fields.GENDKN.HasValue ? 1 : 0,
-                GENNOANS = fields.GENNOANS,
+                GENNOANS = fields.GENNOANS.HasValue ? 1 : 0,
                 BIRTHSEX = fields.BIRTHSEX,
                 INTERSEX = fields.INTERSEX,
                 SEXORNGAY = fields.SEXORNGAY.HasValue ? 1 : 0,
@@ -1145,7 +1145,7 @@ namespace UDS.Net.Services.Extensions
             return new B8Dto
             {
                 NEUREXAM = fields.NEUREXAM,
-                NORMNREXAM = fields.NORMNREXAM,
+                NORMNREXAM = ConvertIntToBool(fields.NORMNREXAM),
                 PARKSIGN = fields.PARKSIGN,
                 SLOWINGFM = fields.SLOWINGFM,
                 TREMREST = fields.TREMREST,

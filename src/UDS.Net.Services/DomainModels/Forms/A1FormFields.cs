@@ -53,7 +53,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? ETHIRAN { get; set; }
         public bool? ETHEGYPT { get; set; }
         public bool? ETHSYRIA { get; set; }
-        public int? ETHIRAQI { get; set; }
+        public bool? ETHIRAQI { get; set; }
         public bool? ETHISRAEL { get; set; }
         public bool? ETHMENAOTH { get; set; }
         public string ETHMENAOTX { get; set; }
@@ -76,7 +76,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? GENOTH { get; set; }
         public string GENOTHX { get; set; }
         public bool? GENDKN { get; set; }
-        public int? GENNOANS { get; set; }
+        public bool? GENNOANS { get; set; }
         public int? BIRTHSEX { get; set; }
         public int? INTERSEX { get; set; }
         public bool? SEXORNGAY { get; set; }
@@ -202,7 +202,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHIRAN = a1Dto.ETHIRAN.Value == 1 ? true : (bool?)null;
                 this.ETHEGYPT = a1Dto.ETHEGYPT.Value == 1 ? true : (bool?)null;
                 this.ETHSYRIA = a1Dto.ETHSYRIA.Value == 1 ? true : (bool?)null;
-                this.ETHIRAQI = a1Dto.ETHIRAQI;
+                this.ETHIRAQI = a1Dto.ETHIRAQI.Value == 1 ? true : (bool?)null;
                 this.ETHISRAEL = a1Dto.ETHISRAEL.Value == 1 ? true : (bool?)null;
                 this.ETHMENAOTH = a1Dto.ETHMENAOTH.Value == 1 ? true : (bool?)null;
                 this.ETHMENAOTX = a1Dto.ETHMENAOTX;
@@ -225,7 +225,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.GENOTH = a1Dto.GENOTH.Value == 1 ? true : (bool?)null;
                 this.GENOTHX = a1Dto.GENOTHX;
                 this.GENDKN = a1Dto.GENDKN.Value == 1 ? true : (bool?)null;
-                this.GENNOANS = a1Dto.GENNOANS;
+                this.GENNOANS = a1Dto.GENNOANS.Value == 1 ? true : (bool?)null;
                 this.BIRTHSEX = a1Dto.BIRTHSEX;
                 this.INTERSEX = a1Dto.INTERSEX;
                 this.SEXORNGAY = a1Dto.SEXORNGAY.Value == 1 ? true : (bool?)null;
