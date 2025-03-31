@@ -46,7 +46,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     //  If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled.
                     if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
                     {
-                        return true;
+                        return MCI == 1 ? true : null;
                     }
 
                     var criteriaCount = 0;
