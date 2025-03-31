@@ -35,7 +35,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? BLOODOTH { get; set; }
 
-        [RequiredIf(nameof(BLOODOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BLOODOTH), "0", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
+        [RequiredIf(nameof(BLOODOTH), "1", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
+        [RequiredIf(nameof(BLOODOTH), "9", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BLOODOTHX { get; set; }
@@ -56,7 +58,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
-        [RequiredIf(nameof(CSFOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(CSFOTH), "0", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
+        [RequiredIf(nameof(CSFOTH), "1", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
+        [RequiredIf(nameof(CSFOTH), "9", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
@@ -98,7 +102,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? FDGOTH { get; set; }
 
-        [RequiredIf(nameof(FDGOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGOTH), "0", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
+        [RequiredIf(nameof(FDGOTH), "1", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
+        [RequiredIf(nameof(FDGOTH), "9", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
@@ -135,7 +141,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TRACEROTH { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Please indicate other etiology.")]
+        [RequiredIf(nameof(TRACEROTH), "0", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
+        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
+        [RequiredIf(nameof(TRACEROTH), "9", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
         [MaxLength(60)]
         public string? TRACEROTHX { get; set; }
 
@@ -208,7 +216,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH1 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH1), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH1), "0", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH1), "1", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH1), "9", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX1 { get; set; }
 
@@ -238,7 +248,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH2 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH2), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH2), "0", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH2), "1", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH2), "9", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX2 { get; set; }
 
@@ -268,7 +280,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH3 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH3), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH3), "0", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH3), "1", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH3), "9", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX3 { get; set; }
 
