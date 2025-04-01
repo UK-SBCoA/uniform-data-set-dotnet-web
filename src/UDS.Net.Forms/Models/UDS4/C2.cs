@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json.Linq;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -879,6 +880,21 @@ namespace UDS.Net.Forms.Models.UDS4
 
                         if (!MINTTOTS.HasValue)
                             yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
+                        else
+                        {
+                            // check MINTTOTS validation
+                            if (MINTSCNC.HasValue && (MINTTOTS.Value >= 0 && MINTTOTS.Value <= 32) && (MINTSCNC.Value >= 0 && MINTSCNC.Value <= 32))
+                            {
+                                if (MINTTOTW.HasValue)
+                                {
+                                    int total = MINTTOTW.Value + MINTSCNC.Value;
+                                    if (total != MINTTOTS.Value)
+                                    {
+                                        yield return new ValidationResult("If semantic cue is provided, MINTTOTS must equal MINTTOTW + MINTSCNC.", new[] { nameof(MINTTOTS) });
+                                    }
+                                }
+                            }
+                        }
                     }
                     else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {

@@ -35,7 +35,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? BLOODOTH { get; set; }
 
-        [RequiredIf(nameof(BLOODOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BLOODOTH), "0", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
+        [RequiredIf(nameof(BLOODOTH), "1", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
+        [RequiredIf(nameof(BLOODOTH), "9", ErrorMessage = "Specify other etiology assessed by blood-based biomarkers.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? BLOODOTHX { get; set; }
@@ -56,7 +58,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? CSFOTH { get; set; }
 
-        [RequiredIf(nameof(CSFOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(CSFOTH), "0", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
+        [RequiredIf(nameof(CSFOTH), "1", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
+        [RequiredIf(nameof(CSFOTH), "9", ErrorMessage = "Specify other etiology assessed by CSF-based biomarkers.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? CSFOTHX { get; set; }
@@ -98,18 +102,18 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with other etiology")]
         public int? FDGOTH { get; set; }
 
-        [RequiredIf(nameof(FDGOTH), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(FDGOTH), "0", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
+        [RequiredIf(nameof(FDGOTH), "1", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
+        [RequiredIf(nameof(FDGOTH), "9", ErrorMessage = "Specify other etiology assessed by FDG PET.")]
         [Display(Name = "Consistent with other etiology (specify)")]
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
-        // TODO when is DATSCANDX required?
-        [RequiredIfRange(nameof(FDGPETDX), 0, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(IMAGINGDX), 1, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
-        // TODO when is TRACOTHDX required?
-        [RequiredIfRange(nameof(DATSCANDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(IMAGINGDX), 1, 3, ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
@@ -135,7 +139,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TRACEROTH { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Please indicate other etiology.")]
+        [RequiredIf(nameof(TRACEROTH), "0", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
+        [RequiredIf(nameof(TRACEROTH), "1", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
+        [RequiredIf(nameof(TRACEROTH), "9", ErrorMessage = "Specify other etiology assessed by other tracer-based imaging.")]
         [MaxLength(60)]
         public string? TRACEROTHX { get; set; }
 
@@ -229,7 +235,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH1 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH1), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH1), "0", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH1), "1", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH1), "9", ErrorMessage = "Specify other etiology assessed by Q8 other biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX1 { get; set; }
 
@@ -259,7 +267,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH2 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH2), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH2), "0", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH2), "1", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH2), "9", ErrorMessage = "Specify other etiology assessed by Q9 another biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX2 { get; set; }
 
@@ -289,7 +299,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BIOMOTH3 { get; set; }
 
         [Display(Name = "Consistent with other etiology (specify)")]
-        [RequiredIf(nameof(BIOMOTH3), "1", ErrorMessage = "Please indicate.")]
+        [RequiredIf(nameof(BIOMOTH3), "0", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH3), "1", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
+        [RequiredIf(nameof(BIOMOTH3), "9", ErrorMessage = "Specify other etiology assessed by Q10 another biomarker modality.")]
         [MaxLength(60)]
         public string? BIOMOTHX3 { get; set; }
 
@@ -519,6 +531,34 @@ namespace UDS.Net.Forms.Models.UDS4
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
+            }
+
+            if (TRACEROTH != 1 && !string.IsNullOrWhiteSpace(TRACEROTHX))
+            {
+                yield return new ValidationResult(
+                    "TRACEROTHX should not be provided unless TRACEROTH is marked as '1' (yes).",
+                    new[] { "TRACEROTHX" });
+            }
+
+
+            if ((IMAGINGDX == 1 || IMAGINGDX == 3) && TRACOTHDX == null)
+            {
+                yield return new ValidationResult("TRACOTHDX is required when IMAGINGDX is 1 or 3.",
+                    new[] { "TRACOTHDX" });
+            }
+
+            if (TRACOTHDX == 1 || TRACOTHDX == 2)
+            {
+                int rad = TRACERAD ?? 8;
+                int ftld = TRACERFTLD ?? 8;
+                int lbd = TRACERLBD ?? 8;
+                int oth = TRACEROTH ?? 8;
+
+                if (rad == 8 && ftld == 8 && lbd == 8 && oth == 8)
+                {
+                    yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when TRACOTHDX = 1 or 2.",
+                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
+                }
             }
 
             yield break;

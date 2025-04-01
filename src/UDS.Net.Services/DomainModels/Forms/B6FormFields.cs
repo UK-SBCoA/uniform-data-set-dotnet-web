@@ -7,7 +7,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class B6FormFields : IFormFields
     {
-        public int? NOGDS { get; set; }
+        public bool? NOGDS { get; set; }
         public int? SATIS { get; set; }
         public int? DROPACT { get; set; }
         public int? EMPTY { get; set; }
@@ -65,7 +65,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is B6Dto)
             {
                 var b6Dto = ((B6Dto)dto);
-                NOGDS = b6Dto.NOGDS;
+                NOGDS = b6Dto.NOGDS.Value == 1 ? true : (bool?)null;
                 SATIS = b6Dto.SATIS;
                 DROPACT = b6Dto.DROPACT;
                 EMPTY = b6Dto.EMPTY;

@@ -105,7 +105,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown/Not disclosed", "2")
+            new RadioListItem("Unknown/Not disclosed", "9")
         };
 
         public List<RadioListItem> EtiologyListItems { get; set; } = new List<RadioListItem>
@@ -251,17 +251,19 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> BLOODOTHXUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
 
         };
 
         public Dictionary<string, UIBehavior> CSFOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
 
         };
 
@@ -378,9 +380,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> FDGOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
 
         };
 
@@ -627,25 +630,28 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> BIOMOTH1UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
 
         };
 
         public Dictionary<string, UIBehavior> BIOMOTH2UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
 
         };
 
         public Dictionary<string, UIBehavior> BIOMOTH3UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } }
 
         };
 
@@ -660,9 +666,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> TRACEROTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
 
         };
 
