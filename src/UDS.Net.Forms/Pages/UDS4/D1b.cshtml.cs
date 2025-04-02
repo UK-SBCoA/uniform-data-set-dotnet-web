@@ -479,14 +479,24 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                 }
             } },
-             { "2", new UIBehavior {
+             { "8", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.IMAGLINF"),
-                    new UIEnableAttribute("D1b.IMAGLAC"),
-                    new UIEnableAttribute("D1b.IMAGMACH"),
-                    new UIEnableAttribute("D1b.IMAGMICH"),
-                    new UIEnableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                }
+            } },
+             { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
                 }
             } },
         };
