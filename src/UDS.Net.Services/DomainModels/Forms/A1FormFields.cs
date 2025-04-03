@@ -12,7 +12,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string CHLDHDCTRY { get; set; }
         public int? RACEWHITE { get; set; }
         public bool? ETHGERMAN { get; set; }
-        public int? ETHIRISH { get; set; }
+        public bool? ETHIRISH { get; set; }
         public int? ETHENGLISH { get; set; }
         public bool? ETHITALIAN { get; set; }
         public bool? ETHPOLISH { get; set; }
@@ -68,7 +68,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string ETHNHPIOTX { get; set; }
         public bool? RACEUNKN { get; set; }
         public bool? GENMAN { get; set; }
-        public int? GENWOMAN { get; set; }
+        public bool? GENWOMAN { get; set; }
         public bool? GENTRMAN { get; set; }
         public bool? GENTRWOMAN { get; set; }
         public bool? GENNONBI { get; set; }
@@ -161,7 +161,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.CHLDHDCTRY = a1Dto.CHLDHDCTRY;
                 this.RACEWHITE = a1Dto.RACEWHITE;
                 this.ETHGERMAN = a1Dto.ETHGERMAN.Value == 1 ? true : (bool?)null;
-                this.ETHIRISH = a1Dto.ETHIRISH;
+                this.ETHIRISH = a1Dto.ETHIRISH.Value == 1 ? true : (bool?)null;
                 this.ETHENGLISH = a1Dto.ETHENGLISH;
                 this.ETHITALIAN = a1Dto.ETHITALIAN.Value == 1 ? true : (bool?)null;
                 this.ETHPOLISH = a1Dto.ETHPOLISH.Value == 1 ? true : (bool?)null;
@@ -217,7 +217,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHNHPIOTX = a1Dto.ETHNHPIOTX;
                 this.RACEUNKN = a1Dto.RACEUNKN.Value == 1 ? true : (bool?)null;
                 this.GENMAN = a1Dto.GENMAN.Value == 1 ? true : (bool?)null;
-                this.GENWOMAN = a1Dto.GENWOMAN;
+                this.GENWOMAN = a1Dto.GENWOMAN.Value == 1 ? true : (bool?)null;
                 this.GENTRMAN = a1Dto.GENTRMAN.Value == 1 ? true : (bool?)null;
                 this.GENTRWOMAN = a1Dto.GENTRWOMAN.Value == 1 ? true : (bool?)null;
                 this.GENNONBI = a1Dto.GENNONBI.Value == 1 ? true : (bool?)null;
