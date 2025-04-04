@@ -46,7 +46,8 @@ namespace UDS.Net.Services.DomainModels
         {
             get
             {
-                return GetValidity("", 0);
+                //return GetValidity("", 0);
+                return TryValidate();
             }
 
         }
@@ -367,28 +368,29 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
+            // A1 sex and D1a menstruation
+            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+
+            if (a1 != null && a5d2 != null && b5 != null)
+            {
+                if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
+                {
+                    results.Add(new VisitValidationResult(
+                        $"A1 sex cannot be male and A5D2 menstration details be provided.",
+                        new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
+                }
+                if (b5.ANX == 0 && a5d2.ANXIETY == 1)
+                {
+                    results.Add(new VisitValidationResult(
+                        $"B1 anxiety cannot be 0 (no) and A5D2 anxiety be 1 (active).",
+                        new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                }
+            }
             if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
             {
-                // A1 sex and D1a menstruation
-                var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-                var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-                var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
 
-                if (a1 != null && a5d2 != null && b5 != null)
-                {
-                    if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
-                    {
-                        results.Add(new VisitValidationResult(
-                            $"A1 sex cannot be male and A5D2 menstration details be provided.",
-                            new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
-                    }
-                    if (b5.ANX == 0 && a5d2.ANXIETY == 1)
-                    {
-                        results.Add(new VisitValidationResult(
-                            $"B1 anxiety cannot be 0 (no) and A5D2 anxiety be 1 (active).",
-                            new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
-                    }
-                }
             }
 
             return results;
