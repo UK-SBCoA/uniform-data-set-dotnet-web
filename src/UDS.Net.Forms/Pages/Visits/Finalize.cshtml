@@ -63,13 +63,9 @@
 
             <!--// Output from finalizing visit using Turbo streams //-->
             <div class="overflow-hidden rounded-md bg-white shadow m-12">
-                <ul role="list" class="divide-y divide-gray-200 text-gray-500">
-                    <li class="px-6 py-4">
-                        Are you sure that you want to indicate that this packet is ready for submission to NACC?
-                    </li>
+                <turbo-frame id="PacketValidate" src="_Validate/@Model.Packet.Id">
 
-                    <!-- More items... -->
-                </ul>
+                </turbo-frame>
             </div>
 
         }

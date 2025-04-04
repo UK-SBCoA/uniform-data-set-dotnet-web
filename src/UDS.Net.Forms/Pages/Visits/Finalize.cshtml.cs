@@ -96,10 +96,13 @@ namespace UDS.Net.Forms.Pages.Visits
         }
 
         // Called when page loads
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public IEnumerable<VisitValidationResult> _Validate(int id)
         {
-            var packet = Packet.ToEntity();
+            // Is Packet null, which is loaded first?
+            var test = Packet;
+
+            var packet = Packet.ToEntity();//await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
             packet.TryValidate();
 
@@ -108,13 +111,14 @@ namespace UDS.Net.Forms.Pages.Visits
             if (!packet.IsValid)
             {
                 var list = packet.GetModelErrors();
-                foreach (var item in list)
-                {
-                    yield return item;
-                }
+                return list;
+                //foreach (var item in list)
+                //{
+                //    yield return item;
+                //}
             }
-
-            yield break;
+            return null;
+            //yield break;
         }
     }
 }

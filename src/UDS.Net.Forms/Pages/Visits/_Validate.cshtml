@@ -1,0 +1,24 @@
+﻿@model IEnumerable<UDS.Net.Services.VisitValidationResult>
+@{
+}
+
+<turbo-frame id="PacketValidate">
+    @if (Model != null)
+    {
+        <ul role="list" class="divide-y divide-gray-200 text-gray-500">
+            @foreach (var result in Model)
+            {
+                <li class="px-6 py-4">
+                    @result.ErrorMessage
+                </li>
+            }
+
+            <!-- More items... -->
+        </ul>
+    }
+    else
+    {
+        <p>No validation errors.</p>
+        <p>Are you sure that you want to indicate that this packet is ready for submission to NACC?</p>
+    }
+</turbo-frame>
