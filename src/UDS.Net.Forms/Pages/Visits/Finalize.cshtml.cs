@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -96,13 +97,12 @@ namespace UDS.Net.Forms.Pages.Visits
         }
 
         // Called when page loads
-        [HttpGet]
-        public IEnumerable<VisitValidationResult> _Validate(int id)
+        public async Task<IActionResult> OnGetValidate(int id)
         {
             // Is Packet null, which is loaded first?
             var test = Packet;
 
-            var packet = Packet.ToEntity();//await _packetService.GetPacketWithForms(User.Identity.Name, id);
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
             packet.TryValidate();
 
@@ -111,13 +111,13 @@ namespace UDS.Net.Forms.Pages.Visits
             if (!packet.IsValid)
             {
                 var list = packet.GetModelErrors();
-                return list;
+                return Partial("_Validate", list);
                 //foreach (var item in list)
                 //{
                 //    yield return item;
                 //}
             }
-            return null;
+            return Partial("_Validate", null);
             //yield break;
         }
     }

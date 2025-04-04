@@ -61,9 +61,8 @@
             </div>
 
 
-            <!--// Output from finalizing visit using Turbo streams //-->
             <div class="overflow-hidden rounded-md bg-white shadow m-12">
-                <turbo-frame id="PacketValidate" src="_Validate/@Model.Packet.Id">
+                <turbo-frame id="PacketValidate" src="@Model.Packet.Id?handler=Validate">
 
                 </turbo-frame>
             </div>
