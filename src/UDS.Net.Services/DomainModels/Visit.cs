@@ -375,7 +375,7 @@ namespace UDS.Net.Services.DomainModels
 
             if (a1 != null && a5d2 != null && b5 != null)
             {
-                if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
+                if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
                 {
                     results.Add(new VisitValidationResult(
                         $"A1 sex cannot be male and A5D2 menstration details be provided.",
