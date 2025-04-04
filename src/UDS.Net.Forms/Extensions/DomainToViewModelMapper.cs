@@ -137,7 +137,8 @@ namespace UDS.Net.Forms.Extensions
                 CanBeFinalized = packet.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
                 CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
-                PacketSubmissions = packet.Submissions.ToVM()
+                PacketSubmissions = packet.Submissions.ToVM(),
+                IsValid = packet.IsValid
             };
         }
 

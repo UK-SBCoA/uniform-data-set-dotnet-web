@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="mt-5 flex lg:ml-4 lg:mt-0">
-                        @if (Model.Packet.CanBeFinalized)
+                        @if (Model.Packet.CanBeFinalized && Model.Packet.IsValid)
                         {
                             <form method="post">
                                 <button type="submit" class="bg-indigo-600 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm">
@@ -62,7 +62,8 @@
 
 
             <turbo-frame id="PacketValidate" src="@Model.Packet.Id?handler=Validate">
-
+                <div class="overflow-hidden rounded-md bg-white shadow m-12">
+                </div>
             </turbo-frame>
 
         }
