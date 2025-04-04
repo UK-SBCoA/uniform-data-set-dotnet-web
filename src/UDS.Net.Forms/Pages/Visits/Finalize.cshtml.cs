@@ -96,12 +96,8 @@ namespace UDS.Net.Forms.Pages.Visits
             return RedirectToAction("Index", "Visits", new { Filter = Services.Enums.PacketStatus.Finalized.ToString() });
         }
 
-        // Called when page loads
         public async Task<IActionResult> OnGetValidate(int id)
         {
-            // Is Packet null, which is loaded first?
-            var test = Packet;
-
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
             packet.TryValidate();
@@ -112,13 +108,8 @@ namespace UDS.Net.Forms.Pages.Visits
             {
                 var list = packet.GetModelErrors();
                 return Partial("_Validate", list);
-                //foreach (var item in list)
-                //{
-                //    yield return item;
-                //}
             }
             return Partial("_Validate", null);
-            //yield break;
         }
     }
 }
