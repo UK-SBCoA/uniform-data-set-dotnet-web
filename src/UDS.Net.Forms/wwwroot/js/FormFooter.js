@@ -1,11 +1,15 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿(function () {
+
   const modeSelect = document.querySelector('[name$=".MODE"]');
   const remoteReasonSelect = document.querySelector('[name$=".RMREAS"]');
   const remoteMode = document.querySelector('[name$=".RMMODE"]');
   const notCompletedReason = document.querySelector('[name$=".NOT"]')
 
   function resetToDefault(select) {
-    if (select) select.selectedIndex = 0
+    if (select) {
+      select.selectedIndex = 0
+      select.disabled = true
+    }
   }
   modeSelect.addEventListener('change', function () {
 
@@ -19,10 +23,14 @@
     }
     if (mode === 2) { //Remote
       resetToDefault(notCompletedReason);
+      remoteReasonSelect.disabled = false;
+      remoteMode.disabled = false;
+
     }
     if (mode === 3) { //Not Completed
       resetToDefault(remoteReasonSelect);
       resetToDefault(remoteMode);
+      notCompletedReason.disabled = false;
     }
-  });
-});
+  })
+})();
