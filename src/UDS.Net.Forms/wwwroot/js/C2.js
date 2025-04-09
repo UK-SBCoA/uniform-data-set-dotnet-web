@@ -36,3 +36,16 @@ document.addEventListener('turbo:frame-load', function (event) {
         }
     }
 });
+
+//Set REYDREC to REY1REC when REY1REC is 95 - 98
+let REY1RECInput = document.getElementById("C2_REY1REC")
+let REYDRECInput = document.getElementById("C2_REYDREC")
+
+REY1RECInput.addEventListener('change', () => {
+    if (parseInt(REY1RECInput.value) >= 95 && parseInt(REY1RECInput.value) <= 98) {
+        REYDRECInput.value = REY1RECInput.value
+    }
+    else {
+        REYDRECInput.value = ""
+    }
+})
