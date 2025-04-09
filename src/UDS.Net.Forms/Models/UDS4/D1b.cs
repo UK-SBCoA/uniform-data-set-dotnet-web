@@ -451,6 +451,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
+        [NotMapped]
+        [Display(Name = "CSF-based biomarkers validation")]
+        public bool? CSFBiomarkersValidation
+        {
+            get
+            {
+                if (CSFAD != null && CSFFTLD != null && CSFLBD != null && CSFOTH != null)
+                {
+                    if (CSFAD != 8 || CSFFTLD != 8 || CSFLBD != 8 || CSFOTH != 8)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return null;
+            }
+        }
+
         [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]
         public bool? PrimaryDiagnosesIndicated
@@ -561,6 +579,13 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
             }
 
+            if (CSFBiomarkersValidation == false)
+            {
+                yield return new ValidationResult(
+                    "At least one CSF-based biomarker must not be 8.",
+                    new[] { nameof(CSFOTH) }
+                );
+            }
             yield break;
         }
     }

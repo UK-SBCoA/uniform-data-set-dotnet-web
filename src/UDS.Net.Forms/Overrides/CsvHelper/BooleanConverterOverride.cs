@@ -5,20 +5,14 @@ using CsvHelper.TypeConversion;
 namespace UDS.Net.Forms.Overrides.CsvHelper
 {
     // Override boolean converter to return boolean values as 1 & 0 instead of "True" & "False"
-    public class BoolStringToIntConverter : BooleanConverter
+
+    // Original class can be found at: https://github.com/JoshClose/CsvHelper/blob/master/src/CsvHelper/TypeConversion/BooleanConverter.cs
+
+    public class BooleanConverterOverride : BooleanConverter
     {
+        //Property metadata will come through as memberMapData
         public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
-            // test to check for a specific variable
-
-            //if(memberMapData.Member != null)
-            //{
-            //    if(memberMapData.Member.Name.ToString() == "ETHGERMAN")
-            //    {
-            //        var test = 0;
-            //    }
-            //}
-
             var boolValue = value as bool?;
 
             if (boolValue == true)
