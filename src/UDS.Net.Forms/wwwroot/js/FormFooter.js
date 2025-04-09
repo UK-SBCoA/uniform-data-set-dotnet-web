@@ -11,9 +11,7 @@
       select.disabled = true
     }
   }
-  modeSelect.addEventListener('change', function () {
-
-    const mode = parseInt(this.value);
+  function setValues(mode) {
 
     if (mode === 1) { //In person
       resetToDefault(remoteReasonSelect);
@@ -32,5 +30,17 @@
       resetToDefault(remoteMode);
       notCompletedReason.disabled = false;
     }
-  })
+  }
+
+  if (modeSelect) {
+    // Handle initial state
+    const initialMode = parseInt(modeSelect.value);
+    setValues(initialMode);
+
+    // Listen for changes
+    modeSelect.addEventListener('change', function () {
+      const selectedMode = parseInt(this.value);
+      setValues(selectedMode);
+    });
+  }
 })();
