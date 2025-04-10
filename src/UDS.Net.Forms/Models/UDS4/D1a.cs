@@ -292,12 +292,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (MSASYN.HasValue && MSASYN.Value == true) PREDOMSYNSyndromeCount++;
                     if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
 
-                    if (PREDOMSYNSyndromeCount == 0)
-                    {
-                        return null;
-                    }
-
-                    if (PREDOMSYNSyndromeCount > 1)
+                    if (PREDOMSYNSyndromeCount == 0 || PREDOMSYNSyndromeCount > 1)
                     {
                         return null;
                     }
