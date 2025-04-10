@@ -268,7 +268,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a dementia syndrome must be marked as present")]
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, only a single dementia syndrome must be marked as present")]
         [NotMapped]
         public bool? PREDOMSYNSyndromePresent
         {
@@ -276,7 +276,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (PREDOMSYN == 1)
                 {
-                    //one of the 8 sub qustions must be present
+                    //only one of the 8 sub qustions can and must be marked as present
                     var PREDOMSYNSyndromeCount = 0;
 
                     if (AMNDEM.HasValue && AMNDEM.Value == true) PREDOMSYNSyndromeCount++;
@@ -293,6 +293,11 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
 
                     if (PREDOMSYNSyndromeCount == 0)
+                    {
+                        return null;
+                    }
+
+                    if (PREDOMSYNSyndromeCount > 1)
                     {
                         return null;
                     }

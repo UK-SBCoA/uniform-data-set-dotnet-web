@@ -564,10 +564,6 @@
         section in Form D1b). This is not always possible and thus Q9 allows centers to record when biomarker data is known and may have
         influenced the clinical diagnosis.
     </p>
-    <p class="mt-2 text-sm text-gray-900">
-        Select applicable syndrome(s) as present; all others will default to Absent in the NACC database. Note that a participant may not
-        meet any clinical criteria (for instance, this is common for MCI and “impaired, not MCI”). In this case, leave 8a-8l blank.
-    </p>
 </div>
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <label asp-for="D1a.PREDOMSYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.PREDOMSYN)</label>
@@ -578,6 +574,9 @@
     </div>
 </div>
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <p class="mt-2 text-sm text-gray-900">
+        Select the predominant syndrome as present; all others will default to Absent in the NACC database.
+    </p>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYNSyndromePresent"></span>
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
