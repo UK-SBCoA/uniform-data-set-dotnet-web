@@ -566,9 +566,14 @@
     </p>
 </div>
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-    <label asp-for="D1a.PREDOMSYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.PREDOMSYN)</label>
+    <div>
+        <label asp-for="D1a.PREDOMSYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.PREDOMSYN)</label>
+        <p class="text-sm italic text-gray-500">
+            Note that the participant may not meet any clinical criteria or may not have a predominant syndrome
+            (for instance, this is common for MCI and “impaired, not MCI”). In this case, select “No.”
+        </p>
+    </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
-        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PREDOMSYN"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.PREDOMSYN)" for="@Model.D1a.PREDOMSYN" items="Model.PREDOMSYNListItems" ui-behaviors="Model.PREDOMSYNUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYN"></span>
     </div>
