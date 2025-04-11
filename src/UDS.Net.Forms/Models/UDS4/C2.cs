@@ -765,6 +765,25 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
+        public bool? REYDRECValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
+                    {
+                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
