@@ -109,11 +109,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
-        [RequiredIfRange(nameof(IMAGINGDX), 1, 3, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please specify.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
-        [RequiredIfRange(nameof(IMAGINGDX), 1, 3, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
