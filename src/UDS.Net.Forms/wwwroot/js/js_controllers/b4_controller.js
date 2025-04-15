@@ -23,6 +23,7 @@ export default class extends Controller {
             result = 0;
             this.updateCRGLOB(result);
             return;
+        }
 
         if (memoryValue === 0.5) {
             const countScoresGreaterThanEqual1 = secondaryScores.filter(score => score >= 1).length;
