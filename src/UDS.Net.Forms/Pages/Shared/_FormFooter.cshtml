@@ -45,7 +45,7 @@
                     <input asp-for="AllowedRemoteModalities[i]" type="hidden" />
                 }
 
-                <div>
+                <div data-dropdownreset-target="trigger"> @*adding target here to avoid a missing target error on the C2 form*@
                     @if (Model.Kind != "C2")
 
                     {
