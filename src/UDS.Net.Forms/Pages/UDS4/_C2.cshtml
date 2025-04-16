@@ -954,7 +954,7 @@
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
                                 </div>
-                                <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a.)</p>
+                                <p class="text-sm text-gray-500 text-nowrap">If test was not completed, enter reason code, 95-98. Complete QUESTION 13a and SKIP TO QUESTION 16a.</p>
 
                             </td>
                             <td class="align-top">
@@ -1181,6 +1181,7 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDREC"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDRECValidation"></span>
                     </div>
                 </div>
 

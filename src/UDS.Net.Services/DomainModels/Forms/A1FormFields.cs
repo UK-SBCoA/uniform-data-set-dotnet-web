@@ -10,13 +10,13 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BIRTHMO { get; set; }
         public int? BIRTHYR { get; set; }
         public string CHLDHDCTRY { get; set; }
-        public int? RACEWHITE { get; set; }
+        public bool? RACEWHITE { get; set; }
         public bool? ETHGERMAN { get; set; }
-        public int? ETHIRISH { get; set; }
-        public int? ETHENGLISH { get; set; }
+        public bool? ETHIRISH { get; set; }
+        public bool? ETHENGLISH { get; set; }
         public bool? ETHITALIAN { get; set; }
         public bool? ETHPOLISH { get; set; }
-        public int? ETHSCOTT { get; set; }
+        public bool? ETHSCOTT { get; set; }
         public bool? ETHWHIOTH { get; set; }
         public string ETHWHIOTHX { get; set; }
         public bool? ETHISPANIC { get; set; }
@@ -68,7 +68,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public string ETHNHPIOTX { get; set; }
         public bool? RACEUNKN { get; set; }
         public bool? GENMAN { get; set; }
-        public int? GENWOMAN { get; set; }
+        public bool? GENWOMAN { get; set; }
         public bool? GENTRMAN { get; set; }
         public bool? GENTRWOMAN { get; set; }
         public bool? GENNONBI { get; set; }
@@ -80,7 +80,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BIRTHSEX { get; set; }
         public int? INTERSEX { get; set; }
         public bool? SEXORNGAY { get; set; }
-        public int? SEXORNHET { get; set; }
+        public bool? SEXORNHET { get; set; }
         public bool? SEXORNBI { get; set; }
         public bool? SEXORNTWOS { get; set; }
         public bool? SEXORNOTH { get; set; }
@@ -159,13 +159,13 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.BIRTHMO = a1Dto.BIRTHMO;
                 this.BIRTHYR = a1Dto.BIRTHYR;
                 this.CHLDHDCTRY = a1Dto.CHLDHDCTRY;
-                this.RACEWHITE = a1Dto.RACEWHITE;
+                this.RACEWHITE = a1Dto.RACEWHITE.Value == 1 ? true : (bool?)null;
                 this.ETHGERMAN = a1Dto.ETHGERMAN.Value == 1 ? true : (bool?)null;
-                this.ETHIRISH = a1Dto.ETHIRISH;
-                this.ETHENGLISH = a1Dto.ETHENGLISH;
+                this.ETHIRISH = a1Dto.ETHIRISH.Value == 1 ? true : (bool?)null;
+                this.ETHENGLISH = a1Dto.ETHENGLISH.Value == 1 ? true : (bool?)null;
                 this.ETHITALIAN = a1Dto.ETHITALIAN.Value == 1 ? true : (bool?)null;
                 this.ETHPOLISH = a1Dto.ETHPOLISH.Value == 1 ? true : (bool?)null;
-                this.ETHSCOTT = a1Dto.ETHSCOTT;
+                this.ETHSCOTT = a1Dto.ETHSCOTT.Value == 1 ? true : (bool?)null;
                 this.ETHWHIOTH = a1Dto.ETHWHIOTH.Value == 1 ? true : (bool?)null;
                 this.ETHWHIOTHX = a1Dto.ETHWHIOTHX;
                 this.ETHISPANIC = a1Dto.ETHISPANIC.Value == 1 ? true : (bool?)null;
@@ -217,7 +217,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.ETHNHPIOTX = a1Dto.ETHNHPIOTX;
                 this.RACEUNKN = a1Dto.RACEUNKN.Value == 1 ? true : (bool?)null;
                 this.GENMAN = a1Dto.GENMAN.Value == 1 ? true : (bool?)null;
-                this.GENWOMAN = a1Dto.GENWOMAN;
+                this.GENWOMAN = a1Dto.GENWOMAN.Value == 1 ? true : (bool?)null;
                 this.GENTRMAN = a1Dto.GENTRMAN.Value == 1 ? true : (bool?)null;
                 this.GENTRWOMAN = a1Dto.GENTRWOMAN.Value == 1 ? true : (bool?)null;
                 this.GENNONBI = a1Dto.GENNONBI.Value == 1 ? true : (bool?)null;
@@ -229,7 +229,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.BIRTHSEX = a1Dto.BIRTHSEX;
                 this.INTERSEX = a1Dto.INTERSEX;
                 this.SEXORNGAY = a1Dto.SEXORNGAY.Value == 1 ? true : (bool?)null;
-                this.SEXORNHET = a1Dto.SEXORNHET;
+                this.SEXORNHET = a1Dto.SEXORNHET.Value == 1 ? true : (bool?)null;
                 this.SEXORNBI = a1Dto.SEXORNBI.Value == 1 ? true : (bool?)null;
                 this.SEXORNTWOS = a1Dto.SEXORNTWOS.Value == 1 ? true : (bool?)null;
                 this.SEXORNOTH = a1Dto.SEXORNOTH.Value == 1 ? true : (bool?)null;

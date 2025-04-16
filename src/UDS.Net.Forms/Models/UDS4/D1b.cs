@@ -109,13 +109,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? FDGOTHX { get; set; }
 
-        // TODO when is DATSCANDX required?
-        [RequiredIfRange(nameof(FDGPETDX), 0, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please specify.")]
         [Display(Name = "Dopamine Transporter (DAT) Scan - Was DAT Scan data or information used to support an etiological diagnosis?")]
         public int? DATSCANDX { get; set; }
 
-        // TODO when is TRACOTHDX required?
-        [RequiredIfRange(nameof(DATSCANDX), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
@@ -164,6 +164,27 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with cerebrovascular disease (CVD)")]
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with CVD.")]
         public int? STRUCTCVD { get; set; }
+
+        // If STRUCTCVD is 1, then at least one value from IMAGLINF, IMAGLAC, IMAGMACH, IMAGMICH, IMAGWMH must not be 8
+        [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "If there is evidence for CVD on imaging, at least one of 7a3a - 7a3e must not be 8 - Not assessed")]
+        [NotMapped]
+        public bool? STRUCTCVDFindingsValidation
+        {
+            get
+            {
+                var STRUCTCVDFindingsCount = 0;
+
+                if (IMAGLINF.HasValue && IMAGLINF.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGLAC.HasValue && IMAGLAC.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGMACH.HasValue && IMAGMACH.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGMICH.HasValue && IMAGMICH.Value == 8) STRUCTCVDFindingsCount++;
+                if (IMAGWMH.HasValue && IMAGWMH.Value == 8) STRUCTCVDFindingsCount++;
+
+                if (STRUCTCVDFindingsCount == 5) return null;
+
+                return true;
+            }
+        }
 
         [Display(Name = "Large vessel infarct(s)")]
         [RequiredIf(nameof(STRUCTCVD), "1", ErrorMessage = "Please indicate large vessel infarct(s).")]
@@ -432,6 +453,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? OTHCOGX { get; set; }
 
+        [NotMapped]
+        [Display(Name = "CSF-based biomarkers validation")]
+        public bool? CSFBiomarkersValidation
+        {
+            get
+            {
+                if (CSFAD != null && CSFFTLD != null && CSFLBD != null && CSFOTH != null)
+                {
+                    if (CSFAD != 8 || CSFFTLD != 8 || CSFLBD != 8 || CSFOTH != 8)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return null;
+            }
+        }
+
         [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]
         public bool? PrimaryDiagnosesIndicated
@@ -514,6 +553,41 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
 
+            if (TRACEROTH != 1 && !string.IsNullOrWhiteSpace(TRACEROTHX))
+            {
+                yield return new ValidationResult(
+                    "TRACEROTHX should not be provided unless TRACEROTH is marked as '1' (yes).",
+                    new[] { "TRACEROTHX" });
+            }
+
+
+            if ((IMAGINGDX == 1 || IMAGINGDX == 3) && TRACOTHDX == null)
+            {
+                yield return new ValidationResult("TRACOTHDX is required when IMAGINGDX is 1 or 3.",
+                    new[] { "TRACOTHDX" });
+            }
+
+            if (TRACOTHDX == 1 || TRACOTHDX == 2)
+            {
+                int rad = TRACERAD ?? 8;
+                int ftld = TRACERFTLD ?? 8;
+                int lbd = TRACERLBD ?? 8;
+                int oth = TRACEROTH ?? 8;
+
+                if (rad == 8 && ftld == 8 && lbd == 8 && oth == 8)
+                {
+                    yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when TRACOTHDX = 1 or 2.",
+                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
+                }
+            }
+
+            if (CSFBiomarkersValidation == false)
+            {
+                yield return new ValidationResult(
+                    "At least one CSF-based biomarker must not be 8.",
+                    new[] { nameof(CSFOTH) }
+                );
+            }
             yield break;
         }
     }

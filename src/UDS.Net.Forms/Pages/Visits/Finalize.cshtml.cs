@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -95,11 +96,9 @@ namespace UDS.Net.Forms.Pages.Visits
             return RedirectToAction("Index", "Visits", new { Filter = Services.Enums.PacketStatus.Finalized.ToString() });
         }
 
-        // Called when page loads
-        [ValidateAntiForgeryToken]
-        public IEnumerable<VisitValidationResult> _Validate(int id)
+        public async Task<IActionResult> OnGetValidate(int id)
         {
-            var packet = Packet.ToEntity();
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
             packet.TryValidate();
 
@@ -108,13 +107,9 @@ namespace UDS.Net.Forms.Pages.Visits
             if (!packet.IsValid)
             {
                 var list = packet.GetModelErrors();
-                foreach (var item in list)
-                {
-                    yield return item;
-                }
+                return Partial("_Validate", list);
             }
-
-            yield break;
+            return Partial("_Validate", null);
         }
     }
 }
