@@ -20,6 +20,30 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Consistent with AD")]
         public int? BLOODAD { get; set; }
 
+        [NotMapped]
+        [Display(Name = "Blood‑based biomarkers validation")]
+        public bool? BloodBiomarkersValidation
+        {
+            get
+            {
+                if (BLOODAD.HasValue
+                    && BLOODFTLD.HasValue
+                    && BLOODLBD.HasValue
+                    && BLOODOTH.HasValue)
+                {
+                    if (BLOODAD != 8
+                     || BLOODFTLD != 8
+                     || BLOODLBD != 8
+                     || BLOODOTH != 8)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return null;
+            }
+        }
+
         [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with FTLD")]
@@ -586,6 +610,14 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return new ValidationResult(
                     "At least one CSF-based biomarker must not be 8.",
                     new[] { nameof(CSFOTH) }
+                );
+            }
+
+            if (BloodBiomarkersValidation == true)
+            {
+                yield return new ValidationResult(
+                    "Either BLOODAD, BLOODFTLD, BLOODLBD, or BLOODOTH must not be 8.",
+                    new[] { nameof(BLOODOTH) }
                 );
             }
             yield break;
