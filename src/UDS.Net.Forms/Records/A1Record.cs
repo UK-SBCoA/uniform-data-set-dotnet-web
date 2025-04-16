@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Records
         internal Form form { get; init; }
 
         [Name("frmdatea1")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToString("MM-dd-yyyy");
+        public string FrmDate { get; init; } = form.FRMDATE.ToString(RecordConstants.dateFormatString);
 
         [Name("initialsa1")]
         public string Initials { get; init; } = form.INITIALS;
