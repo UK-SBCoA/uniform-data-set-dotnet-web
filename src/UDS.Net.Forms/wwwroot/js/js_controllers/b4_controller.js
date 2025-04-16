@@ -36,7 +36,7 @@ export default class extends Controller {
         } else if (memoryValue === 0) {
             const countScoresGreaterThanEqual05 = secondaryScores.filter(score => score >= 0.5).length;
 
-            // CDRGLOB = 0.5 if there are at least 2 scores >= 0.5
+            // CDR = 0.5 if there are at least 2 scores >= 0.5
             if (countScoresGreaterThanEqual05 >= 2) {
                 result = 0.5;
             } else {
@@ -44,9 +44,9 @@ export default class extends Controller {
             }
         }
 
-        // When 3 categories = MEMORY, then CDRGLOB = MEMORY
-        else if (memoryValue >= 0) {
-            // If Memory is 1 or greater, CDRGLOB has to be at least 0.5
+        // When 3 categories = MEMORY, then CDR = MEMORY
+        if (memoryValue >= 0) {
+            // If Memory is 1 or greater, CDR has to be at least 0.5
             if (memoryValue >= 1) {
                 const zeroCount = secondaryScores.filter(score => score === 0).length;
                 if (zeroCount >= 3) {
@@ -63,7 +63,7 @@ export default class extends Controller {
                 return;
             }
 
-            // Majority rule (greater/less than memory)
+            // Majority rule (greater/less than memory).
             else {
                 const greaterThanMemoryMap = {};
                 const lessThanMemoryMap = {};
@@ -80,46 +80,41 @@ export default class extends Controller {
                 const greaterThanCount = Object.values(greaterThanMemoryMap).reduce((acc, count) => acc + count, 0);
                 const lessThanCount = Object.values(lessThanMemoryMap).reduce((acc, count) => acc + count, 0);
 
-                // Case 1: 3 or more on the greater side of M, then CDRGLOB = secondary categories
-                if (greaterThanCount >= 3) {
+                // Case 1: 3 or more on the greater side of M, then CDR = secondary categories.
+                if (greaterThanCount >= 3 && lessThanCount != 2) {
                     const majorityGreaterScore = Object.entries(greaterThanMemoryMap).reduce((prev, current) =>
                         prev[1] > current[1] ? prev : current
                     );
                     result = parseFloat(majorityGreaterScore[0]);
-                    console.log("case 1 met");
                 }
 
-                // Case 2: 3 or more on the lesser side of M, then CDRGLOB = secondary categories
+                // Case 2: 3 or more on the lesser side of M, then CDR = secondary categories.
                 else if (lessThanCount >= 3) {
                     const majorityLessScore = Object.entries(lessThanMemoryMap).reduce((prev, current) =>
                         prev[1] > current[1] ? prev : current
                     );
                     result = parseFloat(majorityLessScore[0]);
-                    console.log("case 2 met");
                 }
 
-                // Case 3: 3 on one side and 2 on the other side, then CDRGLOB = MEMORY.
+                // Case 3: 3 on one side and 2 on the other side, then CDR = MEMORY.
                 if ((greaterThanCount === 3 && lessThanCount === 2) ||
                     (lessThanCount === 3 && greaterThanCount === 2)) {
-                    console.log("case 3 met");
                     result = memoryValue;
                     this.updateCRGLOB(result);
                     return;
                 }
 
-                // Tied scores closest to M
+                // Tied scores cases
                 // If we have 2 tie blocks (two categories each) on both sides of M, then CDR = M.
                 if (greaterThanCount <= 2 && lessThanCount <= 2) {
-                    result = memoryValue;
-                    console.log("Tie rule 1 is met");
+                    result = memoryValue; 
                 }
-                else if (greaterThanCount >= 3) {
+                else if (greaterThanCount >= 3 && lessThanCount != 2) {
                     // Case 1: Majority rule on the greater side of M.
                     const majorityGreaterScore = Object.entries(greaterThanMemoryMap).reduce((prev, current) =>
                         prev[1] > current[1] ? prev : current
                     );
                     result = parseFloat(majorityGreaterScore[0]);
-                    console.log("Case 1 met; majority on the greater side.");
                 }
                 else if (lessThanCount >= 3) {
                     // Case 2: Majority rule on the lesser side of M.
@@ -127,7 +122,6 @@ export default class extends Controller {
                         prev[1] > current[1] ? prev : current
                     );
                     result = parseFloat(majorityLessScore[0]);
-                    console.log("Case 2 met; majority on the lesser side.");
                 }
                 else {
                     // If none of the above applies, default to M.

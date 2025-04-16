@@ -119,13 +119,13 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
                 </tr>
 
-                <tr data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM">
+                <tr>
                     @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
                     {
                         <td @(i == 0 ? "colspan=2" : "")>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio"  value="@Model.ImpairmentSimpleListItems[i].Value" @(Model.B4.PERSCARE != null && Model.B4.PERSCARE.ToString() == Model.ImpairmentSimpleListItems[i].Value ? "checked" : "")>
+                                    <input class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio" value="@Model.ImpairmentSimpleListItems[i].Value" @(Model.B4.PERSCARE != null && Model.B4.PERSCARE.ToString() == Model.ImpairmentSimpleListItems[i].Value ? "checked" : "") data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B4_PERSCARE[@i]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ImpairmentSimpleListItems[i].Value</span>
                                     </label>
