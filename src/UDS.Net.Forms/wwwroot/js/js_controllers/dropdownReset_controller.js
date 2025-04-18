@@ -5,9 +5,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["trigger", "remote", "notCompleted"]
 
-  connect() {
-    this.setDropdowns(this.triggerTarget.value)
-  }
 
   update(event) {
     this.setDropdowns(event.target.value)
