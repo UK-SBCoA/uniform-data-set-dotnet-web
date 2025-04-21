@@ -20,19 +20,16 @@ export default class extends Controller {
         this.CDRSUMTarget.value = sum;
 
         if (memoryValue === 0.5 && secondaryScores.every(score => score === 0)) {
-            result = 0;
+            result = 0.5;
             this.updateCRGLOB(result);
             return;
         }
 
         if (memoryValue === 0.5) {
             const countScoresGreaterThanEqual1 = secondaryScores.filter(score => score >= 1).length;
-
-            if (countScoresGreaterThanEqual1 >= 3) {
-                result = 1;
-            } else {
-                result = 0.5;
-            }
+            const result = countScoresGreaterThanEqual1 >= 3 ? 1 : 0.5;
+            this.updateCRGLOB(result);
+            return;
         } else if (memoryValue === 0) {
             const countScoresGreaterThanEqual05 = secondaryScores.filter(score => score >= 0.5).length;
 
