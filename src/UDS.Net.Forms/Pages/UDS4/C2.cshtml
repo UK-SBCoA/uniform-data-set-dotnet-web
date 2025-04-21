@@ -7,88 +7,91 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500 italic">
-        <strong>INSTRUCTIONS:</strong>  This form is to be completed by ADRC or clinic staff. For test administration and scoring, see <guidebook kind="@Model.C2"></guidebook>, Form C2 or C2T. Any new participants who enroll in the UDS after the implementation of UDSv4 must be assessed with the new neuropsychological test battery (Form C2 or C2T).
-    </p>
-    <p class="mt-1 text-sm text-gray-500">
-        <strong>KEY:</strong> If the participant cannot complete any of the following exams, please give the reason by entering one of the following codes:
-    </p>
-    <p class="mt-1 text-sm text-gray-500 grid grid-cols-1 md:grid-cols-4 gap-4">
-        <span>95 / 995 = Physical problem</span>
-        <span>96 / 996 = Cognitive/behavior problem</span>
-        <span>97 / 997 = Other problem</span>
-        <span>98 / 998 = Verbal refusal</span>
-    </p>
-</div>
-<div class="sm:grid sm:grid-cols-1 sm:items-start">
-    <div class="flex items-center p-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50" role="alert">
-        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-        </svg>
-        <span class="sr-only">Info</span>
-        <div>
-            <span class="font-medium">Info Alert! </span> Modality selection will determine whether the C2 or C2T form is displayed.
-        </div>
-    </div>
-</div>
-<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
     <div>
-        <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
-        <enum-select data-controller="selectendpoint"
-                     data-selectendpoint-target="dropdown"
-                     data-selectendpoint-visit-id-value="@Model.C2.VisitId"
-                     data-action="change->selectendpoint#modeDropdown"
-                     data-turboframe="C2"
-                     data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
-                     for="@Model.C2.MODE"
-                     items="Html.GetEnumSelectList<FormMode>()"
-                     enabled-values="@Model.C2.AllowedFormModes"
-                     id="modalityselect"
-                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <option disabled selected class="opacity-75">--</option>
-        </enum-select>
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+        <p class="mt-1 text-sm text-gray-500 italic">
+            <strong>INSTRUCTIONS:</strong>  This form is to be completed by ADRC or clinic staff. For test administration and scoring, see <guidebook kind="@Model.C2"></guidebook>, Form C2 or C2T. Any new participants who enroll in the UDS after the implementation of UDSv4 must be assessed with the new neuropsychological test battery (Form C2 or C2T).
+        </p>
+        <p class="mt-1 text-sm text-gray-500">
+            <strong>KEY:</strong> If the participant cannot complete any of the following exams, please give the reason by entering one of the following codes:
+        </p>
+        <p class="mt-1 text-sm text-gray-500 grid grid-cols-1 md:grid-cols-4 gap-4">
+            <span>95 / 995 = Physical problem</span>
+            <span>96 / 996 = Cognitive/behavior problem</span>
+            <span>97 / 997 = Other problem</span>
+            <span>98 / 998 = Verbal refusal</span>
+        </p>
     </div>
-    <div>
-        <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-        <enum-select data-controller="selectendpoint"
-                     data-selectendpoint-target="dropdown"
-                     data-selectendpoint-visit-id-value="@Model.C2.VisitId"
-                     data-action="change->selectendpoint#remoteModeDropdown"
-                     data-turboframe="C2"
-                     data-remote-end-point="../C2/@Model.BaseForm.VisitId?handler=C2T"
-                     data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
-                     for="@Model.C2.RMMODE"
-                     items="Html.GetEnumSelectList<RemoteModality>()"
-                     enabled-values="@Model.C2.AllowedRemoteModalities"
-                     id="remote"
-                     class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-            <option disabled selected class="disabled:opacity-75">--</option>
-        </enum-select>
-    </div>
-
-    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
-</div>
-<turbo-frame id="C2">
-    <div role="status" id="loadingSpinner" style="display: none;">
-        <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500">
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    <div class="sm:grid sm:grid-cols-1 sm:items-start">
+        <div class="flex items-center p-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
-            Loading...
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Info Alert! </span> Modality selection will determine whether the C2 or C2T form is displayed.
+            </div>
         </div>
     </div>
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
+        <div>
+            <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
+            <enum-select data-controller="selectendpoint"
+                         data-selectendpoint-target="dropdown"
+                         data-selectendpoint-visit-id-value="@Model.C2.VisitId"
+                         data-action="change->selectendpoint#modeDropdown"
+                         data-turboframe="C2"
+                         data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
+                         for="@Model.C2.MODE"
+                         items="Html.GetEnumSelectList<FormMode>()"
+                         enabled-values="@Model.C2.AllowedFormModes"
+                         id="modalityselect"
+                         class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option disabled selected class="opacity-75">--</option>
+            </enum-select>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+        </div>
+        <div>
+            <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
+            <enum-select data-controller="selectendpoint"
+                         data-selectendpoint-target="dropdown"
+                         data-selectendpoint-visit-id-value="@Model.C2.VisitId"
+                         data-action="change->selectendpoint#remoteModeDropdown"
+                         data-turboframe="C2"
+                         data-remote-end-point="../C2/@Model.BaseForm.VisitId?handler=C2T"
+                         data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
+                         for="@Model.C2.RMMODE"
+                         items="Html.GetEnumSelectList<RemoteModality>()"
+                         enabled-values="@Model.C2.AllowedRemoteModalities"
+                         id="remote"
+                         class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option disabled selected class="disabled:opacity-75">--</option>
+            </enum-select>
+        </div>
 
-    @if (Model.Visit != null && (Model.C2.RMMODE == RemoteModality.Telephone))
-    {
-        <partial name="_C2T" model="@Model" />
-    }
-    else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
-    {
-        <partial name="_C2" model="@Model" />
-    }
-</turbo-frame>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
+    </div>
+    <turbo-frame id="C2">
+        <div role="status" id="loadingSpinner" style="display: none;">
+            <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Loading...
+            </div>
+        </div>
+
+        @if (Model.Visit != null && (Model.C2.RMMODE == RemoteModality.Telephone))
+        {
+            <partial name="_C2T" model="@Model" />
+        }
+        else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
+        {
+            <partial name="_C2" model="@Model" />
+        }
+    </turbo-frame>
+</div>
+
 @section Scripts {
     <script src="~/_content/UDS.Net.Forms/js/C2.js"></script>
 }

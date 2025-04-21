@@ -1,12 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
-using System.Security.Claims;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -49,6 +43,12 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (MCI.HasValue)
                 {
+                    //  If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled.
+                    if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
+                    {
+                        return MCI == 1 ? true : null;
+                    }
+
                     var criteriaCount = 0;
 
                     criteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
@@ -98,40 +98,96 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
+                // If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled
+                if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
+                {
+                    return true;
+                }
+                // If (MCICRITFUN=1 and MCICRITCLN != 1 and MCICRITIMP != 1) then IMPNOMCI must equal 0
+                if (MCICRITFUN == true && MCICRITCLN != true && MCICRITIMP != true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN == true) ||
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN == true)
+)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if ((MCICRITCLN != true && MCICRITIMP != true && MCICRITFUN != true) &&
+                   ((IMPNOMCIFU == true) || (IMPNOMCICG == true) || (IMPNOMCLCD == true) || (IMPNOMCIO == true)))
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (MCICRITCLN == true || MCICRITIMP == true || MCICRITFUN == true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value == 0)
+                    {
+                        return null;
+                    }
+                }
+
                 if (IMPNOMCI.HasValue)
                 {
                     var IMPNOMCICriteriaCount = 0;
-
-                    IMPNOMCICriteriaCount += IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCICG.HasValue && IMPNOMCICG.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true ? 1 : 0;
-                    IMPNOMCICriteriaCount += IMPNOMCIO.HasValue && IMPNOMCIO.Value == true ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIFU == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCICG == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCLCD == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIO == true) ? 1 : 0;
 
                     if (IMPNOMCICriteriaCount > 0)
                     {
                         return IMPNOMCI.Value == 1 ? true : null;
                     }
-
-                    if (IMPNOMCICriteriaCount <= 0)
+                    else
                     {
                         var MCICriteriaCount = 0;
+                        MCICriteriaCount += (MCICRITCLN == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITIMP == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITFUN == true) ? 1 : 0;
 
-                        MCICriteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
-                        MCICriteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
-
-                        if (MCICriteriaCount == 1 && MCICRITFUN.HasValue && MCICRITFUN.Value == true)
+                        if (MCICriteriaCount == 1 && MCICRITFUN == true)
                         {
                             return IMPNOMCI.Value == 0 ? true : null;
                         }
-
-                        if (MCICriteriaCount > 0)
+                        else if (MCICriteriaCount > 0)
                         {
-                            return IMPNOMCI.Value == 1 ? true : null;
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+                        else
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
                         }
                     }
                 }
-
                 return null;
             }
         }
@@ -212,7 +268,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a dementia syndrome must be marked as present")]
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, only a single dementia syndrome must be marked as present")]
         [NotMapped]
         public bool? PREDOMSYNSyndromePresent
         {
@@ -220,7 +276,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (PREDOMSYN == 1)
                 {
-                    //one of the 8 sub qustions must be present
+                    //only one of the 8 sub qustions can and must be marked as present
                     var PREDOMSYNSyndromeCount = 0;
 
                     if (AMNDEM.HasValue && AMNDEM.Value == true) PREDOMSYNSyndromeCount++;
@@ -236,7 +292,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (MSASYN.HasValue && MSASYN.Value == true) PREDOMSYNSyndromeCount++;
                     if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
 
-                    if (PREDOMSYNSyndromeCount == 0)
+                    if (PREDOMSYNSyndromeCount == 0 || PREDOMSYNSyndromeCount > 1)
                     {
                         return null;
                     }

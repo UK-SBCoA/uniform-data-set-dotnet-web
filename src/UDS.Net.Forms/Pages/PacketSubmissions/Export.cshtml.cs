@@ -55,8 +55,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
                 {
-                    // Register globally.
-                    csv.Context.TypeConverterCache.AddConverter<bool>(new BoolStringToIntConverter());
+                    // Register custom converters globally.
+                    // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
+                    csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
+                    csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
 
                     var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, participant, packet);
                     var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();

@@ -137,7 +137,8 @@ namespace UDS.Net.Forms.Extensions
                 CanBeFinalized = packet.TryUpdateStatus(Services.Enums.PacketStatus.Finalized),
                 CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
-                PacketSubmissions = packet.Submissions.ToVM()
+                PacketSubmissions = packet.Submissions.ToVM(),
+                IsValid = packet.IsValid
             };
         }
 
@@ -400,13 +401,13 @@ namespace UDS.Net.Forms.Extensions
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,
-                RACEWHITE = fields.RACEWHITE.HasValue ? fields.RACEWHITE.Value != 0 : false,
+                RACEWHITE = fields.RACEWHITE.HasValue && fields.RACEWHITE.Value == true ? true : false,
                 ETHGERMAN = fields.ETHGERMAN.HasValue && fields.ETHGERMAN.Value == true ? true : false,
-                ETHIRISH = fields.ETHIRISH.HasValue ? fields.ETHIRISH.Value != 0 : false,
-                ETHENGLISH = fields.ETHENGLISH.HasValue ? fields.ETHENGLISH.Value != 0 : false,
+                ETHIRISH = fields.ETHIRISH.HasValue && fields.ETHIRISH.Value == true ? true : false,
+                ETHENGLISH = fields.ETHENGLISH.HasValue && fields.ETHENGLISH.Value == true ? true : false,
                 ETHITALIAN = fields.ETHITALIAN.HasValue && fields.ETHITALIAN.Value == true ? true : false,
                 ETHPOLISH = fields.ETHPOLISH.HasValue && fields.ETHPOLISH.Value == true ? true : false,
-                ETHSCOTT = fields.ETHSCOTT.HasValue ? fields.ETHSCOTT.Value != 0 : false,
+                ETHSCOTT = fields.ETHSCOTT.HasValue && fields.ETHSCOTT.Value == true ? true : false,
                 ETHWHIOTH = fields.ETHWHIOTH.HasValue && fields.ETHWHIOTH.Value == true ? true : false,
                 ETHWHIOTHX = fields.ETHWHIOTHX,
                 ETHISPANIC = fields.ETHISPANIC.HasValue && fields.ETHISPANIC.Value == true ? true : false,
@@ -458,7 +459,7 @@ namespace UDS.Net.Forms.Extensions
                 ETHNHPIOTX = fields.ETHNHPIOTX,
                 RACEUNKN = fields.RACEUNKN.HasValue && fields.RACEUNKN.Value == true ? true : false,
                 GENMAN = fields.GENMAN.HasValue && fields.GENMAN.Value == true ? true : false,
-                GENWOMAN = fields.GENWOMAN.HasValue ? fields.GENWOMAN.Value != 0 : false,
+                GENWOMAN = fields.GENWOMAN.HasValue && fields.GENWOMAN.Value == true ? true : false,
                 GENTRMAN = fields.GENTRMAN.HasValue && fields.GENTRMAN.Value == true ? true : false,
                 GENTRWOMAN = fields.GENTRWOMAN.HasValue && fields.GENTRWOMAN.Value == true ? true : false,
                 GENNONBI = fields.GENNONBI.HasValue && fields.GENNONBI.Value == true ? true : false,
@@ -470,7 +471,7 @@ namespace UDS.Net.Forms.Extensions
                 BIRTHSEX = fields.BIRTHSEX,
                 INTERSEX = fields.INTERSEX,
                 SEXORNGAY = fields.SEXORNGAY.HasValue && fields.SEXORNGAY.Value == true ? true : false,
-                SEXORNHET = fields.SEXORNHET.HasValue ? fields.SEXORNHET.Value != 0 : false,
+                SEXORNHET = fields.SEXORNHET.HasValue && fields.SEXORNHET.Value == true ? true : false,
                 SEXORNBI = fields.SEXORNBI.HasValue && fields.SEXORNBI.Value == true ? true : false,
                 SEXORNTWOS = fields.SEXORNTWOS.HasValue && fields.SEXORNTWOS.Value == true ? true : false,
                 SEXORNOTH = fields.SEXORNOTH.HasValue && fields.SEXORNOTH.Value == true ? true : false,

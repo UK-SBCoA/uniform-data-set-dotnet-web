@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.Records
 
         [Index(6)]
         [Name("visitdate")]
-        public string VisitDate { get; init; } = visit.VISIT_DATE.ToString("dd-MM-yyyy");
+        public string VisitDate { get; init; } = visit.VISIT_DATE.ToString(RecordConstants.dateFormatString);
     }
 }
 
