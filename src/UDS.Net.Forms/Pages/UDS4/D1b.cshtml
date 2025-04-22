@@ -253,7 +253,10 @@
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
-                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">If used in diagnosis, indicate the results:</th>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    If used in diagnosis, indicate the results:<br />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.SPECTValidation"></span>
+                </th>
                 @foreach (var item in Model.FindingsListItems)
                 {
                     <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>

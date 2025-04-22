@@ -91,6 +91,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Elevated amyloid")]
         public int? AMYLPET { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(PETDX), "1", ErrorMessage = "Either AMYLPET or TAUPET must not be 8.")]
+        [RequiredIf(nameof(PETDX), "2", ErrorMessage = "Either AMYLPET or TAUPET must not be 8.")]
+        public bool? SPECTValidation
+        {
+            get
+            {
+                if (AMYLPET != null && TAUPET != null)
+                {
+                    if (AMYLPET != 8 || TAUPET != 8)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
+
         [RequiredIfRange(nameof(PETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Elevated tau pathology")]
         public int? TAUPET { get; set; }
