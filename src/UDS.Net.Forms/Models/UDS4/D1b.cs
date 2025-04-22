@@ -21,28 +21,17 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BLOODAD { get; set; }
 
         [NotMapped]
+        public bool AllBloodAre8
+            => BLOODAD == 8
+            && BLOODFTLD == 8
+            && BLOODLBD == 8
+            && BLOODOTH == 8;
+
+        [NotMapped]
         [Display(Name = "Blood‑based biomarkers validation")]
-        public bool? BloodBiomarkersValidation
-        {
-            get
-            {
-                if (BLOODAD.HasValue
-                    && BLOODFTLD.HasValue
-                    && BLOODLBD.HasValue
-                    && BLOODOTH.HasValue)
-                {
-                    if (BLOODAD != 8
-                     || BLOODFTLD != 8
-                     || BLOODLBD != 8
-                     || BLOODOTH != 8)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                return null;
-            }
-        }
+        [RequiredIf(nameof(AllBloodAre8), "True",
+            ErrorMessage = "At least one blood‑based biomarker must not be 8.")]
+        public bool? BloodBiomarkersValidation { get; set; }
 
         [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
@@ -613,13 +602,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 );
             }
 
-            if (BloodBiomarkersValidation == true)
-            {
-                yield return new ValidationResult(
-                    "Either BLOODAD, BLOODFTLD, BLOODLBD, or BLOODOTH must not be 8.",
-                    new[] { nameof(BLOODOTH) }
-                );
-            }
             yield break;
         }
     }
