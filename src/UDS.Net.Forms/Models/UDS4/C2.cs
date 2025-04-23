@@ -823,7 +823,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (questionsCount == 19)
                     {
                         return MOCATOTS.Value == questionsSum ? true : null;
-                    }  
+                    }
                 }
 
                 return true;
