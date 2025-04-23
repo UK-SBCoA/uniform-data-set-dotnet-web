@@ -784,6 +784,76 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredOnFinalized]
+        public bool? MOCATOTSSumValidation
+        {
+            get
+            {
+                if (MOCATOTS.HasValue)
+                {
+                    int MOCATOTSSubQuestionsSum = 0;
+                    int MOCATOTSSubQuestionsCount = 0;
+
+                    //C2 in-person & video modalities
+                    if (MODE == FormMode.InPerson || MODE == FormMode.Remote && RMMODE == RemoteModality.Video)
+                    {
+                        if (MOCATRAI.HasValue && MOCATRAI.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCATRAI.Value; }
+                        if (MOCACUBE.HasValue && MOCACUBE.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCACUBE.Value; }
+                        if (MOCACLOC.HasValue && MOCACLOC.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCACLOC.Value; }
+                        if (MOCACLON.HasValue && MOCACLON.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCACLON.Value; }
+                        if (MOCACLOH.HasValue && MOCACLOH.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCACLOH.Value; }
+                        if (MOCANAMI.HasValue && MOCANAMI.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCANAMI.Value; }
+                        if (MOCADIGI.HasValue && MOCADIGI.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCADIGI.Value; }
+                        if (MOCALETT.HasValue && MOCALETT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCALETT.Value; }
+                        if (MOCASER7.HasValue && MOCASER7.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCASER7.Value; }
+                        if (MOCAREPE.HasValue && MOCAREPE.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAREPE.Value; }
+                        if (MOCAFLUE.HasValue && MOCAFLUE.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAFLUE.Value; }
+                        if (MOCAABST.HasValue && MOCAABST.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAABST.Value; }
+                        if (MOCARECN.HasValue && MOCARECN.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCARECN.Value; }
+                        if (MOCAORDT.HasValue && MOCAORDT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORDT.Value; }
+                        if (MOCAORMO.HasValue && MOCAORMO.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORMO.Value; }
+                        if (MOCAORYR.HasValue && MOCAORYR.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORYR.Value; }
+                        if (MOCAORDY.HasValue && MOCAORDY.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORDY.Value; }
+                        if (MOCAORPL.HasValue && MOCAORPL.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORPL.Value; }
+                        if (MOCAORCT.HasValue && MOCAORCT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORCT.Value; }
+                    }
+
+                    //C2T telephone modality
+                    if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
+                    {
+                        if (MOCADIGI.HasValue && MOCADIGI.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCADIGI.Value; }
+                        if (MOCALETT.HasValue && MOCALETT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCALETT.Value; }
+                        if (MOCASER7.HasValue && MOCASER7.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCASER7.Value; }
+                        if (MOCAREPE.HasValue && MOCAREPE.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAREPE.Value; }
+                        if (MOCAFLUE.HasValue && MOCAFLUE.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAFLUE.Value; }
+                        if (MOCAABST.HasValue && MOCAABST.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAABST.Value; }
+                        if (MOCARECN.HasValue && MOCARECN.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCARECN.Value; }
+                        if (MOCAORDT.HasValue && MOCAORDT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORDT.Value; }
+                        if (MOCAORMO.HasValue && MOCAORMO.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORMO.Value; }
+                        if (MOCAORYR.HasValue && MOCAORYR.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORYR.Value; }
+                        if (MOCAORDY.HasValue && MOCAORDY.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORDY.Value; }
+                        if (MOCAORPL.HasValue && MOCAORPL.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORPL.Value; }
+                        if (MOCAORCT.HasValue && MOCAORCT.Value < 95) { MOCATOTSSubQuestionsSum++; MOCATOTSSubQuestionsCount += MOCAORCT.Value; }
+                    }
+
+                    //In-person & video modalities: If all sub questions answered, MOCATOTS must be the sum of answered questions
+                    if (MOCATOTSSubQuestionsCount == 19)
+                    {
+                        return MOCATOTS.Value == MOCATOTSSubQuestionsSum ? true : false;
+                    }
+
+                    //Telephone modality: If all sub questions answered, MOCATOTS must be the sum of answered questions
+                    if (MOCATOTSSubQuestionsCount == 13)
+                    {
+                        return MOCATOTS.Value == MOCATOTSSubQuestionsSum ? true : false;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
