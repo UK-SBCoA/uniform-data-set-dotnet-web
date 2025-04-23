@@ -51,7 +51,7 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedFormModes { get; set; } = new List<int>();
 
-        [RequiredIf(nameof(MODE), "3", ErrorMessage = "Specify reason not completed")]
+        [RequiredIf(nameof(MODE), "0", ErrorMessage = "Specify reason not completed")]
         [Display(Name = "If not completed, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
 
