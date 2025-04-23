@@ -1,11 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-
+﻿using System.ComponentModel;
 namespace UDS.Net.Services.Enums
 {
     // A2: 94, No co-participant|95, Physical problem|96, Cognitive/behavioral problem|97, Other|98, Verbal refusal
     // B1, B3: 94, Remote visit|95, Physical problem|96, Cognitive/behavioral problem|97, Other|98, Verbal refusal
-    // D1A
     public enum NotIncludedReasonCode
     {
         [Description("No co-participant/Remote visit")]
