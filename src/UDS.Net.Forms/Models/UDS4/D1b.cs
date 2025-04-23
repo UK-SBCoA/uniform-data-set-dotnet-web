@@ -15,23 +15,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Fluid Biomarkers - Were fluid biomarkers used for assessing the etiological diagnosis?")]
         public int? FLUIDBIOM { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "At least one blood-based biomarker must be assessed.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "At least one blood-based biomarker must be assessed.")]
+        public bool? BloodBiomarkersValidation
+        {
+            get
+            {
+                if (BLOODAD == 8 && BLOODFTLD == 8 && BLOODLBD == 8 && BLOODOTH == 8)
+                    return null;
+
+                return true;
+            }
+
+        }
+
         [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
         public int? BLOODAD { get; set; }
-
-        [NotMapped]
-        public bool AllBloodAre8
-            => BLOODAD == 8
-            && BLOODFTLD == 8
-            && BLOODLBD == 8
-            && BLOODOTH == 8;
-
-        [NotMapped]
-        [Display(Name = "Blood‑based biomarkers validation")]
-        [RequiredIf(nameof(AllBloodAre8), "True",
-            ErrorMessage = "At least one blood‑based biomarker must not be 8.")]
-        public bool? BloodBiomarkersValidation { get; set; }
 
         [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
