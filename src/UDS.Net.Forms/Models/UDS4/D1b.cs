@@ -15,6 +15,21 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Fluid Biomarkers - Were fluid biomarkers used for assessing the etiological diagnosis?")]
         public int? FLUIDBIOM { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "At least one blood-based biomarker must be assessed.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "At least one blood-based biomarker must be assessed.")]
+        public bool? BloodBiomarkersValidation
+        {
+            get
+            {
+                if (BLOODAD == 8 && BLOODFTLD == 8 && BLOODLBD == 8 && BLOODOTH == 8)
+                    return null;
+
+                return true;
+            }
+
+        }
+
         [RequiredIf(nameof(FLUIDBIOM), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Consistent with AD")]
@@ -606,6 +621,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     new[] { nameof(CSFOTH) }
                 );
             }
+
             yield break;
         }
     }
