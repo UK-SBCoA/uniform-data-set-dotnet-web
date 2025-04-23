@@ -787,7 +787,7 @@ namespace UDS.Net.Forms.Models.UDS4
         //MOCATOTS = sum of 1g-1l, 1n-1t, and 1w-1bb when all these sub questions are < 95
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "If questions 1g-1l, 1n-1t, and 1w-1bb are all completed, the Total Raw Score - Uncorrected needs to be the sum of these answers.")]
-        public bool? MOCATOTSInPersonValidation
+        public bool? MOCATOTSSumValidation
         {
             get
             {
