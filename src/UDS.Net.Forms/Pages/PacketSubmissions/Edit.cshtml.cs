@@ -11,6 +11,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
     {
         public EditModel(IParticipationService participationService, IPacketService packetSubmissionService) : base(participationService, packetSubmissionService)
         {
+            //Marvin Dev: Edit page model
+            
+            //Post route for submitting error count from the packet submissions edit view
         }
     }
 }
