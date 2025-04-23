@@ -72,7 +72,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>();
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
             }
         }
 
