@@ -80,6 +80,9 @@
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
             <tr>
+                <span asp-validation-for="D1b.BloodBiomarkersValidation"
+                      class="mt-2 text-sm text-red-600">
+                </span>
                 <td>
                     <label asp-for="D1b.BLOODAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODAD"></p>
