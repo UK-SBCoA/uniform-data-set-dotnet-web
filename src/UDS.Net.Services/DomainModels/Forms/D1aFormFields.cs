@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -118,7 +117,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
             }
         }
 
@@ -126,7 +125,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
+                return new List<NotIncludedReasonCode>() { };
             }
         }
 
@@ -134,7 +133,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video, RemoteModality.Mail, RemoteModality.Electronic };
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
             }
         }
 
