@@ -84,6 +84,22 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Imaging - Was imaging used for assessing etiological diagnosis?")]
         public int? IMAGINGDX { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "At least one imaging modality must be assessed.")]
+        [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "At least one imaging modality must be assessed.")]
+        public bool? ImagingModalitiesValidation
+        {
+            get
+            {
+                if ((PETDX != 1 && PETDX != 2) &&
+                    (FDGPETDX != 1 && FDGPETDX != 2) &&
+                    (DATSCANDX != 1 && DATSCANDX != 2) &&
+                    (TRACOTHDX != 1 && TRACOTHDX != 2))
+                    return null;
+                return true;
+            }
+        }
+
         [RequiredIf(nameof(IMAGINGDX), "1", ErrorMessage = "Please indicate.")]
         [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please indicate.")]
         [Display(Name = "Tracer-based PET - Were tracer-based PET measures used in assessing an etiological diagnosis?")]
