@@ -80,6 +80,15 @@ function compareRange(low, high, targets, value) {
   }
 }
 
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
 $(function () {
   let affects = $("[data-affects]");
   if (affects.length) {
@@ -111,26 +120,29 @@ $(function () {
         compareRange(low, high, targets, $(this).val());
       }
 
-      // watch for changes
-      $(this).on("change", function () {
-        if ($(this).data("affects-targets")) {
-          let targets = $(this).data("affects-targets");
-          setAffects(targets);
-        } 
-        else if ($(this).data("affects-toggle-targets")) {
-          let isSelected = $(this).is(":checked");
-          let toggleTargets = $(this).data("affects-toggle-targets");
-          toggleAffects(toggleTargets, isSelected);
-        } 
-        else if ($(this).data("affects-range-targets")) {
-          // change event fires when input unfocused
-          let low = $(this).data("affects-range-low");
-          let high = $(this).data("affects-range-high");
-          let targets = $(this).data("affects-range-targets");
+        // watch for changes
+        $(this).on("change", function () {
+            if ($(this).data("affects-targets")) {
+                let targets = $(this).data("affects-targets");
+                setAffects(targets);
+            }
+            else if ($(this).data("affects-toggle-targets")) {
+                let isSelected = $(this).is(":checked");
+                let toggleTargets = $(this).data("affects-toggle-targets");
+                toggleAffects(toggleTargets, isSelected);
+            }
+        });
 
-          compareRange(low, high, targets, $(this).val());
+        // if it's a range input, add a debounced input handler
+        if ($(this).data("affects-range-targets")) {
+            let low = $(this).data("affects-range-low");
+            let high = $(this).data("affects-range-high");
+            let targets = $(this).data("affects-range-targets");
+
+            $(this).on("input", debounce(function () {
+                compareRange(low, high, targets, $(this).val());
+            }, 300));
         }
-      });
     });
 
     // after checking each input, check to see if some should have a default state
