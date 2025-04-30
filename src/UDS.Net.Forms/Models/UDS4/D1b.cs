@@ -135,6 +135,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
+        [NotMapped]
+        [Display(Name = "FDG Etiology validation")]
+        public bool? FDGEtiologyValidation
+        {
+            get
+            {
+                if (FDGAD != null && FDGFTLD != null && FDGLBD != null && FDGOTH != null)
+                {
+                    if (FDGAD != 8 || FDGFTLD != 8 || FDGLBD != 8 || FDGOTH != 8)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                return null;
+            }
+        }
+
         [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
@@ -636,6 +654,14 @@ namespace UDS.Net.Forms.Models.UDS4
                     "At least one CSF-based biomarker must not be 8.",
                     new[] { nameof(CSFOTH) }
                 );
+            }
+
+            if(FDGEtiologyValidation == false)
+            {
+                yield return new ValidationResult(
+                    "At least one FDG etiology must must not be 8",
+                    new[] { nameof(FDGOTH)}
+                    );
             }
 
             yield break;
