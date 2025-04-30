@@ -111,5 +111,14 @@ namespace UDS.Net.Forms.Pages.Visits
             }
             return Partial("_Validate", null);
         }
+
+        public async Task<IActionResult> OnGetAlerts(int id)
+        {
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
+
+            var list = packet.GetModelAlerts();
+
+            return Partial("_Alerts", list);
+        }
     }
 }
