@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace UDS.Net.Services.Enums
 {
@@ -10,7 +9,9 @@ namespace UDS.Net.Services.Enums
         [Description("In progress")]
         InProgress,
         [Description("Finalized")]
-        Finalized
+        Finalized,
+        [Description("Not Complete")]
+        NotComplete
     }
 }
 
