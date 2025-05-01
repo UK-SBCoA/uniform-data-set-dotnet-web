@@ -656,10 +656,10 @@ namespace UDS.Net.Forms.Models.UDS4
                 );
             }
 
-            if(FDGEtiologyValidation == false)
+            if (FDGEtiologyValidation == false)
             {
                 yield return new ValidationResult(
-                    "At least one FDG etiology must not be 8",
+                    "At least one FDG Etiology must not be 8",
                     new[] { nameof(FDGOTH)}
                     );
             }
