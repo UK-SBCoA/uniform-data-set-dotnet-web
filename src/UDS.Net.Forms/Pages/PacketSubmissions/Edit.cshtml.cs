@@ -16,89 +16,46 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IParticipationService _participationService;
         protected readonly IPacketService _packetService;
 
-        [BindProperty]
-        public int PacketSubmissionId { get; set; }
-        [BindProperty]
-        public int PacketId { get; set; }
-        [BindProperty]
-        public int? ErrorCount { get; set; }
-
-        public PacketModel? Packet { get; set; }
-
         public EditModel(IParticipationService participationService, IPacketService packetService)
         {
             _participationService = participationService;
             _packetService = packetService;
         }
 
-        // In the get we need to grab all the packet data because packet.update is how the submissions is created/modified. Packet submissions are referenced as a child of packet in the application
-
-        //packetSubmissionId will be used to target and modify the individual packet submission in the post route
-        public IActionResult OnGetPartialAsync(int packetSubmissionId, int packetId)
+        public IActionResult OnGetPartial(int packetSubmissionId, int packetId)
         {
-            PacketSubmissionId = packetSubmissionId;
-            PacketId = packetId;
+            PacketSubmissionModel PacketSubmission = new PacketSubmissionModel
+            {
+                Id = packetSubmissionId,
+                PacketId = packetId
+            };
 
-            return Partial("_Edit");
+            return Partial("_Edit", PacketSubmission);
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission)
         {
+            Packet packetFound = await _packetService.GetById(User.Identity.Name, packetSubmission.PacketId);
 
-            // NOTE: need to modify and save data that was updated from existing packet. Currently, converting to page model Packet is losing data, but existing packet isn't the approppraite type for Update()
+            if (packetFound == null)
+                return NotFound("No packet found when submitting a packet submission error count");
 
-            Packet packetFound = await _packetService.GetById(User.Identity.Name, PacketId);
-
-            // Update status to failed error checks if error count is saved
+            // Update status to failed error checks when error count is saved
             if (packetFound.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                 packetFound.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-            //// when a submission is added, the overall packet state needs to be changed as well
-            //if (TryUpdateStatus(PacketStatus.Submitted))
-            //    UpdateStatus(PacketStatus.Submitted);
+            var packetFoundParticipation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
 
-            if (packetFound == null)
-                return NotFound();
+            if (packetFoundParticipation == null)
+                return NotFound("No participation found within the packet receiving the submission error count update");
 
-            var participation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
+            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, packetFound, (int)packetSubmission.ErrorCount, packetSubmission.Id);
 
-            if (participation == null)
-                return NotFound();
+            // Create a packetModel to return to the index
+            PacketModel packet = updatedPacket.ToVM();
+            packet.Participation = packetFoundParticipation.ToVM();
 
-
-            // Modify packet submission from list by packet submission Id
-            PacketSubmission packetToEdit = packetFound.Submissions.Where(p => p.Id == PacketSubmissionId).FirstOrDefault();
-
-            if (packetToEdit == null)
-                return NotFound();
-
-            // get index of packet submission to edit
-            int packetSubmissionEditIndex = packetFound.Submissions.IndexOf(packetToEdit);
-
-            packetFound.Submissions[packetSubmissionEditIndex].ErrorCount = ErrorCount;
-
-            // Don't validate for now
-
-            //ModelState.Clear();
-
-            //TryValidateModel(newPacketSubmission);
-
-            //if (!ModelState.IsValid)
-            //{
-            //    Packet.NewPacketSubmission = newPacketSubmission;
-            //    return Partial("_Create", Packet);
-            //}
-
-            //packet.AddSubmission(newPacketSubmission.ToEntity()); // this ensures the packet's state is set according to business rules
-
-            await _packetService.Update(User.Identity.Name, packetFound);
-
-            //var updatedPacket = await _packetService.GetById(User.Identity.Name, PacketId); // get updated packet
-
-            Packet = packetFound.ToVM();
-            Packet.Participation = participation.ToVM();
-
-            return Partial("_Index", Packet);
+            return Partial("_Index", packet);
         }
     }
 }

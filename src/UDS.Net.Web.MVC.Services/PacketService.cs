@@ -114,6 +114,21 @@ namespace UDS.Net.Web.MVC.Services
 
             throw new Exception("Packet not found");
         }
+
+        public async Task<Packet> UpdatePacketSubmissionErrorCount(string username, Packet packetToEdit, int errorCount, int packetSubmissionId)
+        {
+            PacketSubmission submissionToEdit = packetToEdit.Submissions.Where(p => p.Id == packetSubmissionId).FirstOrDefault();
+
+            if (submissionToEdit == null)
+                throw new Exception("Packet submission not found");
+
+            // get index of packet submission to edit
+            int submissionEditIndex = packetToEdit.Submissions.IndexOf(submissionToEdit);
+
+            packetToEdit.Submissions[submissionEditIndex].ErrorCount = errorCount;
+
+            return await Update(username, packetToEdit);
+        }
     }
 }
 
