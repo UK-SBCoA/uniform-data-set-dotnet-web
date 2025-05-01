@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json.Linq;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -47,6 +48,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Raw Score - Uncorrected", Description = "(0-22,88)")]
         [RegularExpression("^(\\d|1\\d|2[0-2]|88)$", ErrorMessage = "Allowed values are 0-22 or 88 = not administered.")]
+        [RequiredIfTelephoneVisit(nameof(MOCACOMP), "1", ErrorMessage = "Response required")]
         public int? MOCBTOTS { get; set; }
 
         [Display(Name = "Visuospatial/executive — Trails", Description = "(0-1, 95-98)")]
@@ -410,10 +412,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized]
         public int? COGSTAT { get; set; }
 
-        [Display(Name = "What modality of communication was used to administer this neuropsychological battery?")]
-        [Range(1, 3)]
-        public int? MODCOMM { get; set; }
-
         [Display(Name = "Total recall", Description = "(0-15,95-98)")]
         [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Required if Rey AVLT was administered")]
@@ -484,9 +482,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
-        [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88 or 95-98.")]
-        [RequiredIf(nameof(VERBALTEST), "1", ErrorMessage = "Response required")]
+        [Display(Name = "Total delayed recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
+        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
@@ -498,8 +496,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide delay time.")]
         public int? REYDTI { get; set; }
 
+        // Custom validation - REYMETHODValidation(): value required on complete on the C2 when REDREC >= 0 and <=15
         [Display(Name = "Method of recognition test administration")]
-        [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Response required")]
         public int? REYMETHOD { get; set; }
 
         [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
@@ -519,7 +517,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD1READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -534,7 +531,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD2READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -549,7 +545,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Can't read", Description = "(0-10)")]
         [RegularExpression("^(10|[0-9])$", ErrorMessage = "Allowed values are 0-10.")]
-        [RequiredIfRange(nameof(CERAD1REC), 0, 10, ErrorMessage = "Response required.")]
         public int? CERAD3READ { get; set; }
 
         [Display(Name = "Intrusions", Description = "(0-99)")]
@@ -732,6 +727,109 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        // validate CERAD1READ, CERAD2READ, and CERAD3READ in C2 (InPerson and Video modalities) for value when CERAD1REC is 0 - 10
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Values required if trial 1 total recall is 0 - 10 for in-person and remote video modalities")]
+        public bool? CERADREADValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (CERAD1REC >= 0 && CERAD1REC <= 10)
+                    {
+                        return CERAD1READ.HasValue && CERAD2READ.HasValue && CERAD3READ.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        // validate REYMETHOD in C2 (InPerson and Video modalities) for value when REDREC >= 0 and <=15 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Value required if total delayed recall is 0 - 15 for in-person and remote video modalities")]
+        public bool? REYMETHODValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REYDREC >= 0 && REYDREC <= 15)
+                    {
+                        return REYMETHOD.HasValue ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
+        public bool? REYDRECValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
+                    {
+                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        //MOCATOTS = sum of 1g-1l, 1n-1t, and 1w-1bb when all these sub questions are < 95
+        [NotMapped]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "If questions 1g-1l, 1n-1t, and 1w-1bb are all completed, the Total Raw Score - Uncorrected needs to be the sum of these answers.")]
+        public bool? MOCATOTSSumValidation
+        {
+            get
+            {
+                if (MOCATOTS.HasValue && MOCATOTS != 88)
+                {
+                    int questionsSum = 0;
+                    int questionsCount = 0;
+
+                    if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                    {
+                        if (MOCATRAI.HasValue && MOCATRAI.Value < 95) { questionsCount++; questionsSum += MOCATRAI.Value; }
+                        if (MOCACUBE.HasValue && MOCACUBE.Value < 95) { questionsCount++; questionsSum += MOCACUBE.Value; }
+                        if (MOCACLOC.HasValue && MOCACLOC.Value < 95) { questionsCount++; questionsSum += MOCACLOC.Value; }
+                        if (MOCACLON.HasValue && MOCACLON.Value < 95) { questionsCount++; questionsSum += MOCACLON.Value; }
+                        if (MOCACLOH.HasValue && MOCACLOH.Value < 95) { questionsCount++; questionsSum += MOCACLOH.Value; }
+                        if (MOCANAMI.HasValue && MOCANAMI.Value < 95) { questionsCount++; questionsSum += MOCANAMI.Value; }
+                        if (MOCADIGI.HasValue && MOCADIGI.Value < 95) { questionsCount++; questionsSum += MOCADIGI.Value; }
+                        if (MOCALETT.HasValue && MOCALETT.Value < 95) { questionsCount++; questionsSum += MOCALETT.Value; }
+                        if (MOCASER7.HasValue && MOCASER7.Value < 95) { questionsCount++; questionsSum += MOCASER7.Value; }
+                        if (MOCAREPE.HasValue && MOCAREPE.Value < 95) { questionsCount++; questionsSum += MOCAREPE.Value; }
+                        if (MOCAFLUE.HasValue && MOCAFLUE.Value < 95) { questionsCount++; questionsSum += MOCAFLUE.Value; }
+                        if (MOCAABST.HasValue && MOCAABST.Value < 95) { questionsCount++; questionsSum += MOCAABST.Value; }
+                        if (MOCARECN.HasValue && MOCARECN.Value < 95) { questionsCount++; questionsSum += MOCARECN.Value; }
+                        if (MOCAORDT.HasValue && MOCAORDT.Value < 95) { questionsCount++; questionsSum += MOCAORDT.Value; }
+                        if (MOCAORMO.HasValue && MOCAORMO.Value < 95) { questionsCount++; questionsSum += MOCAORMO.Value; }
+                        if (MOCAORYR.HasValue && MOCAORYR.Value < 95) { questionsCount++; questionsSum += MOCAORYR.Value; }
+                        if (MOCAORDY.HasValue && MOCAORDY.Value < 95) { questionsCount++; questionsSum += MOCAORDY.Value; }
+                        if (MOCAORPL.HasValue && MOCAORPL.Value < 95) { questionsCount++; questionsSum += MOCAORPL.Value; }
+                        if (MOCAORCT.HasValue && MOCAORCT.Value < 95) { questionsCount++; questionsSum += MOCAORCT.Value; }
+                    }
+
+                    //number of sub questions
+                    if (questionsCount == 19)
+                    {
+                        return MOCATOTS.Value == questionsSum ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
@@ -758,16 +856,43 @@ namespace UDS.Net.Forms.Models.UDS4
                 // 1z MOCAORDY
                 // 1aa MOCAORPL
                 // 1bb MOCAORCT
-                if (MOCATOTS.HasValue &&
-                    ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
-                    || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
-                    || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                 {
-                    if (MOCATOTS.Value != 88)
+                    if (MOCATOTS.HasValue &&
+                        ((MOCATRAI.HasValue && MOCATRAI.Value >= 95) || (MOCACUBE.HasValue && MOCACUBE.Value >= 95) || (MOCACLOC.HasValue && MOCACLOC.Value >= 95) || (MOCACLON.HasValue && MOCACLON.Value >= 95) || (MOCACLOH.HasValue && MOCACLOH.Value >= 95) || (MOCANAMI.HasValue && MOCANAMI.Value >= 95)
+                        || (MOCADIGI.HasValue && MOCADIGI.Value >= 95) || (MOCALETT.HasValue && MOCALETT.Value >= 95) || (MOCASER7.HasValue && MOCASER7.Value >= 95) || (MOCAREPE.HasValue && MOCAREPE.Value >= 95) || (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95) || (MOCAABST.HasValue && MOCAABST.Value >= 95) || (MOCARECN.HasValue && MOCARECN.Value >= 95)
+                        || (MOCAORDT.HasValue && MOCAORDT.Value >= 95) || (MOCAORMO.HasValue && MOCAORMO.Value >= 95) || (MOCAORYR.HasValue && MOCAORYR.Value >= 95) || (MOCAORDY.HasValue && MOCAORDY.Value >= 95) || (MOCAORPL.HasValue && MOCAORPL.Value >= 95) || (MOCAORCT.HasValue && MOCAORCT.Value >= 95)))
                     {
-                        yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
+                        if (MOCATOTS.Value != 88)
+                        {
+                            yield return new ValidationResult("If 1g-1l, 1n-1t, or 1w-1bb were not administered then MOCATOTS must be 88.", new[] { nameof(MOCATOTS) });
+                        }
                     }
                 }
+                else if ((MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone))
+                {
+                    if (MOCBTOTS.HasValue &&
+                        ((MOCADIGI.HasValue && MOCADIGI.Value >= 95 && MOCADIGI.Value <= 98) ||
+                        (MOCALETT.HasValue && MOCALETT.Value >= 95 && MOCALETT.Value <= 98) ||
+                        (MOCASER7.HasValue && MOCASER7.Value >= 95 && MOCASER7.Value <= 98) ||
+                        (MOCAREPE.HasValue && MOCAREPE.Value >= 95 && MOCAREPE.Value <= 98) ||
+                        (MOCAFLUE.HasValue && MOCAFLUE.Value >= 95 && MOCAFLUE.Value <= 98) ||
+                        (MOCAABST.HasValue && MOCAABST.Value >= 95 && MOCAABST.Value <= 98) ||
+                        (MOCARECN.HasValue && MOCARECN.Value >= 95 && MOCARECN.Value <= 98) ||
+                        (MOCAORDT.HasValue && MOCAORDT.Value >= 95 && MOCAORDT.Value <= 98) ||
+                        (MOCAORMO.HasValue && MOCAORMO.Value >= 95 && MOCAORMO.Value <= 98) ||
+                        (MOCAORYR.HasValue && MOCAORYR.Value >= 95 && MOCAORYR.Value <= 98) ||
+                        (MOCAORDY.HasValue && MOCAORDY.Value >= 95 && MOCAORDY.Value <= 98) ||
+                        (MOCAORPL.HasValue && MOCAORPL.Value >= 95 && MOCAORPL.Value <= 98) ||
+                        (MOCAORCT.HasValue && MOCAORCT.Value >= 95 && MOCAORCT.Value <= 98)))
+                    {
+                        if (MOCBTOTS.Value != 88)
+                        {
+                            yield return new ValidationResult("If 1e–1k or 1n–1s were not administered then MOCBTOTS must be 88.", new[] { nameof(MOCBTOTS) });
+                        }
+                    }
+                }
+
 
                 if (Status == FormStatus.Finalized)
                 {
@@ -820,6 +945,21 @@ namespace UDS.Net.Forms.Models.UDS4
 
                         if (!MINTTOTS.HasValue)
                             yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
+                        else
+                        {
+                            // check MINTTOTS validation
+                            if (MINTSCNC.HasValue && (MINTTOTS.Value >= 0 && MINTTOTS.Value <= 32) && (MINTSCNC.Value >= 0 && MINTSCNC.Value <= 32))
+                            {
+                                if (MINTTOTW.HasValue)
+                                {
+                                    int total = MINTTOTW.Value + MINTSCNC.Value;
+                                    if (total != MINTTOTS.Value)
+                                    {
+                                        yield return new ValidationResult("If semantic cue is provided, MINTTOTS must equal MINTTOTW + MINTSCNC.", new[] { nameof(MINTTOTS) });
+                                    }
+                                }
+                            }
+                        }
                     }
                     else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {
@@ -828,10 +968,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
                     if (!RESPVAL.HasValue)
                         yield return new ValidationResult("How valid do you think the participant’s responses are?", new[] { nameof(RESPVAL) });
-
-                    // TODO should MODCOMM be here now that UDSv4 has MODE?
-                    //if (!MODCOMM.HasValue)
-                    //    yield return new ValidationResult("The What modality of communication was used to administer this neuropsychological battery? field is required?", new[] { nameof(MODCOMM) });
                 }
 
                 foreach (var result in base.Validate(validationContext))

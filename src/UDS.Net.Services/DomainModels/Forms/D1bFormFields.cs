@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -46,8 +44,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? IMAGLAC { get; set; }
         public int? IMAGMACH { get; set; }
         public int? IMAGMICH { get; set; }
-        public int? IMAGMWMH { get; set; }
-        public int? IMAGEWMH { get; set; }
+        public int? IMAGWMH { get; set; }
+        public int? IMAGWMHSEV { get; set; }
         public int? OTHBIOM1 { get; set; }
         public string OTHBIOMX1 { get; set; }
         public int? BIOMAD1 { get; set; }
@@ -75,7 +73,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? LBDIS { get; set; }
         public int? LBDIF { get; set; }
         public bool? FTLD { get; set; }
-        public int? FTLDIF { get; set; }
         public bool? PSP { get; set; }
         public int? PSPIF { get; set; }
         public bool? CORT { get; set; }
@@ -92,6 +89,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MSAIF { get; set; }
         public bool? CTE { get; set; }
         public int? CTEIF { get; set; }
+        public int? CTECERT { get; set; }
         public bool? DOWNS { get; set; }
         public int? DOWNSIF { get; set; }
         public bool? HUNT { get; set; }
@@ -184,8 +182,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 IMAGLAC = d1bDto.IMAGLAC;
                 IMAGMACH = d1bDto.IMAGMACH;
                 IMAGMICH = d1bDto.IMAGMICH;
-                IMAGMWMH = d1bDto.IMAGMWMH;
-                IMAGEWMH = d1bDto.IMAGEWMH;
+                IMAGWMH = d1bDto.IMAGWMH;
+                IMAGWMHSEV = d1bDto.IMAGWMHSEV;
                 OTHBIOM1 = d1bDto.OTHBIOM1;
                 OTHBIOMX1 = d1bDto.OTHBIOMX1;
                 BIOMAD1 = d1bDto.BIOMAD1;
@@ -213,7 +211,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 LBDIS = d1bDto.LBDIS;
                 LBDIF = d1bDto.LBDIF;
                 FTLD = d1bDto.FTLD;
-                FTLDIF = d1bDto.FTLDIF;
                 PSP = d1bDto.PSP;
                 PSPIF = d1bDto.PSPIF;
                 CORT = d1bDto.CORT;
@@ -230,6 +227,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 MSAIF = d1bDto.MSAIF;
                 CTE = d1bDto.CTE;
                 CTEIF = d1bDto.CTEIF;
+                CTECERT = d1bDto.CTECERT;
                 DOWNS = d1bDto.DOWNS;
                 DOWNSIF = d1bDto.DOWNSIF;
                 HUNT = d1bDto.HUNT;

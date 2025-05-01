@@ -31,12 +31,17 @@ namespace UDS.Net.Forms.Pages.Visits
             _participationService = participationService;
         }
 
-        private void PopulateVisitKindOptions(int udsv4VisitCount)
+        private void PopulateVisitKindOptions(int nextVisitNumber, int udsv4VisitCount)
         {
             // the visit number could be > 1, but the first uds version 4 visit will always be I
             if (udsv4VisitCount == 0)
             {
-                VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString(), Selected = true });
+                // is the participant new or existing?
+                if (nextVisitNumber == 1)
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I.ToString(), Text = PacketKind.I.ToString(), Selected = true });
+                else
+                    VisitKindOptions.Add(new SelectListItem { Value = PacketKind.I4.ToString(), Text = PacketKind.I4.ToString(), Selected = true });
+
             }
             else
             {
@@ -70,7 +75,7 @@ namespace UDS.Net.Forms.Pages.Visits
 
             int countOfVersion4Visits = await _visitService.GetVisitCountByVersion(User.Identity.Name, participationId.Value, "4");
 
-            PopulateVisitKindOptions(countOfVersion4Visits);
+            PopulateVisitKindOptions(Visit.VISITNUM, countOfVersion4Visits);
 
             return Page();
         }
@@ -81,7 +86,7 @@ namespace UDS.Net.Forms.Pages.Visits
             {
                 Participation = await _participationService.GetById(User.Identity.Name, participationId);
 
-                PopulateVisitKindOptions(Visit.VISITNUM);
+                PopulateVisitKindOptions(Visit.VISITNUM, Visit.VISITNUM);
 
                 return Page();
             }

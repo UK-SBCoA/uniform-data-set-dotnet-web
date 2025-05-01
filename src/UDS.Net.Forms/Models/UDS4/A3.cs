@@ -10,15 +10,8 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A3 : FormModel
     {
-        [Display(Name = "Are there affected first-degree relatives (biological parents, full siblings, or biological children)?")]
-        [RegularExpression("^(0|1|9)$")]
-        public int? AFFFAMM { get; set; } // initial visits
-
-        [Display(Name = "Since the last visit, is new information available concerning genetic mutations addressed by Questions 2a through 4b, below?\n“Affected” = having dementia or one of the non-normal diagnoses listed in Appendix 1")]
-        public int? NWINFMUT { get; set; } // follow-up visits
-
         [Display(Name = "Mother — birth year")]
-        [BirthYear(AllowUnknown = true)]
+        [BirthYear(AllowUnknown = true, Parent = true)]
         [RequiredOnFinalized]
         public int? MOMYOB { get; set; }
 
@@ -82,7 +75,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOMAGEO { get; set; }
 
         [Display(Name = "Father — birth year")]
-        [BirthYear(AllowUnknown = true)]
+        [BirthYear(AllowUnknown = true, Parent = true)]
         [RequiredOnFinalized]
         public int? DADYOB { get; set; }
 
@@ -146,17 +139,13 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "How many full siblings does the participant have? (77 = adopted, unknown)")]
         [RegularExpression("^(\\d|[1]\\d|20|77)$", ErrorMessage = "Number of siblings must be 0-20, or 77 = adopted, unknown")]
+        [RequiredOnFinalized]
         public int? SIBS { get; set; }
-
-        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant’s siblings?")]
-        public int? NWINFSIB { get; set; }
 
         [Display(Name = "How many known biological children does the participant have?")]
         [Range(0, 15, ErrorMessage = "Number of children must be 0-15")]
+        [RequiredOnFinalized]
         public int? KIDS { get; set; }
-
-        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant’s siblings?")]
-        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMember> Siblings { get; set; } = new List<A3FamilyMember>();
 

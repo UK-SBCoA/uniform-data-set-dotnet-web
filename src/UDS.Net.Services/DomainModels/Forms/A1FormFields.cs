@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -11,83 +10,83 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BIRTHMO { get; set; }
         public int? BIRTHYR { get; set; }
         public string CHLDHDCTRY { get; set; }
-        public int? RACEWHITE { get; set; }
-        public int? ETHGERMAN { get; set; }
-        public int? ETHIRISH { get; set; }
-        public int? ETHENGLISH { get; set; }
-        public int? ETHITALIAN { get; set; }
-        public int? ETHPOLISH { get; set; }
-        public int? ETHSCOTT { get; set; }
-        public int? ETHWHIOTH { get; set; }
+        public bool? RACEWHITE { get; set; }
+        public bool? ETHGERMAN { get; set; }
+        public bool? ETHIRISH { get; set; }
+        public bool? ETHENGLISH { get; set; }
+        public bool? ETHITALIAN { get; set; }
+        public bool? ETHPOLISH { get; set; }
+        public bool? ETHSCOTT { get; set; }
+        public bool? ETHWHIOTH { get; set; }
         public string ETHWHIOTHX { get; set; }
-        public int? ETHISPANIC { get; set; }
-        public int? ETHMEXICAN { get; set; }
-        public int? ETHPUERTO { get; set; }
-        public int? ETHCUBAN { get; set; }
-        public int? ETHSALVA { get; set; }
-        public int? ETHDOMIN { get; set; }
-        public int? ETHGUATEM { get; set; }
-        public int? ETHHISOTH { get; set; }
+        public bool? ETHISPANIC { get; set; }
+        public bool? ETHMEXICAN { get; set; }
+        public bool? ETHPUERTO { get; set; }
+        public bool? ETHCUBAN { get; set; }
+        public bool? ETHSALVA { get; set; }
+        public bool? ETHDOMIN { get; set; }
+        public bool? ETHGUATEM { get; set; }
+        public bool? ETHHISOTH { get; set; }
         public string ETHHISOTHX { get; set; }
-        public int? RACEBLACK { get; set; }
-        public int? ETHAFAMER { get; set; }
-        public int? ETHJAMAICA { get; set; }
-        public int? ETHHAITIAN { get; set; }
-        public int? ETHNIGERIA { get; set; }
-        public int? ETHETHIOP { get; set; }
-        public int? ETHSOMALI { get; set; }
-        public int? ETHBLKOTH { get; set; }
+        public bool? RACEBLACK { get; set; }
+        public bool? ETHAFAMER { get; set; }
+        public bool? ETHJAMAICA { get; set; }
+        public bool? ETHHAITIAN { get; set; }
+        public bool? ETHNIGERIA { get; set; }
+        public bool? ETHETHIOP { get; set; }
+        public bool? ETHSOMALI { get; set; }
+        public bool? ETHBLKOTH { get; set; }
         public string ETHBLKOTHX { get; set; }
-        public int? RACEASIAN { get; set; }
-        public int? ETHCHINESE { get; set; }
-        public int? ETHFILIP { get; set; }
-        public int? ETHINDIA { get; set; }
-        public int? ETHVIETNAM { get; set; }
-        public int? ETHKOREAN { get; set; }
-        public int? ETHJAPAN { get; set; }
-        public int? ETHASNOTH { get; set; }
+        public bool? RACEASIAN { get; set; }
+        public bool? ETHCHINESE { get; set; }
+        public bool? ETHFILIP { get; set; }
+        public bool? ETHINDIA { get; set; }
+        public bool? ETHVIETNAM { get; set; }
+        public bool? ETHKOREAN { get; set; }
+        public bool? ETHJAPAN { get; set; }
+        public bool? ETHASNOTH { get; set; }
         public string ETHASNOTHX { get; set; }
-        public int? RACEAIAN { get; set; }
+        public bool? RACEAIAN { get; set; }
         public string RACEAIANX { get; set; }
-        public int? RACEMENA { get; set; }
-        public int? ETHLEBANON { get; set; }
-        public int? ETHIRAN { get; set; }
-        public int? ETHEGYPT { get; set; }
-        public int? ETHSYRIA { get; set; }
-        public int? ETHIRAQI { get; set; }
-        public int? ETHISRAEL { get; set; }
-        public int? ETHMENAOTH { get; set; }
+        public bool? RACEMENA { get; set; }
+        public bool? ETHLEBANON { get; set; }
+        public bool? ETHIRAN { get; set; }
+        public bool? ETHEGYPT { get; set; }
+        public bool? ETHSYRIA { get; set; }
+        public bool? ETHIRAQI { get; set; }
+        public bool? ETHISRAEL { get; set; }
+        public bool? ETHMENAOTH { get; set; }
         public string ETHMENAOTX { get; set; }
-        public int? RACENHPI { get; set; }
-        public int? ETHHAWAII { get; set; }
-        public int? ETHSAMOAN { get; set; }
-        public int? ETHCHAMOR { get; set; }
-        public int? ETHTONGAN { get; set; }
-        public int? ETHFIJIAN { get; set; }
-        public int? ETHMARSHAL { get; set; }
-        public int? ETHNHPIOTH { get; set; }
+        public bool? RACENHPI { get; set; }
+        public bool? ETHHAWAII { get; set; }
+        public bool? ETHSAMOAN { get; set; }
+        public bool? ETHCHAMOR { get; set; }
+        public bool? ETHTONGAN { get; set; }
+        public bool? ETHFIJIAN { get; set; }
+        public bool? ETHMARSHAL { get; set; }
+        public bool? ETHNHPIOTH { get; set; }
         public string ETHNHPIOTX { get; set; }
-        public int? RACEUNKN { get; set; }
-        public int? GENMAN { get; set; }
-        public int? GENWOMAN { get; set; }
-        public int? GENTRMAN { get; set; }
-        public int? GENTRWOMAN { get; set; }
-        public int? GENNONBI { get; set; }
-        public int? GENTWOSPIR { get; set; }
-        public int? GENOTH { get; set; }
+        public bool? RACEUNKN { get; set; }
+        public bool? GENMAN { get; set; }
+        public bool? GENWOMAN { get; set; }
+        public bool? GENTRMAN { get; set; }
+        public bool? GENTRWOMAN { get; set; }
+        public bool? GENNONBI { get; set; }
+        public bool? GENTWOSPIR { get; set; }
+        public bool? GENOTH { get; set; }
         public string GENOTHX { get; set; }
-        public int? GENDKN { get; set; }
-        public int? GENNOANS { get; set; }
+        public bool? GENDKN { get; set; }
+        public bool? GENNOANS { get; set; }
         public int? BIRTHSEX { get; set; }
         public int? INTERSEX { get; set; }
-        public int? SEXORNGAY { get; set; }
-        public int? SEXORNHET { get; set; }
-        public int? SEXORNBI { get; set; }
-        public int? SEXORNTWOS { get; set; }
-        public int? SEXORNOTH { get; set; }
+        public bool? SEXORNGAY { get; set; }
+        public bool? SEXORNHET { get; set; }
+        public bool? SEXORNBI { get; set; }
+        public bool? SEXORNTWOS { get; set; }
+        public bool? SEXORNOTH { get; set; }
         public string SEXORNOTHX { get; set; }
-        public int? SEXORNDNK { get; set; }
-        public int? SEXORNNOAN { get; set; }
+        public bool? SEXORNDNK { get; set; }
+        public bool? SEXORNNOAN { get; set; }
         public int? PREDOMLAN { get; set; }
         public string PREDOMLANX { get; set; }
         public int? HANDED { get; set; }
@@ -160,83 +159,83 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.BIRTHMO = a1Dto.BIRTHMO;
                 this.BIRTHYR = a1Dto.BIRTHYR;
                 this.CHLDHDCTRY = a1Dto.CHLDHDCTRY;
-                this.RACEWHITE = a1Dto.RACEWHITE;
-                this.ETHGERMAN = a1Dto.ETHGERMAN;
-                this.ETHIRISH = a1Dto.ETHIRISH;
-                this.ETHENGLISH = a1Dto.ETHENGLISH;
-                this.ETHITALIAN = a1Dto.ETHITALIAN;
-                this.ETHPOLISH = a1Dto.ETHPOLISH;
-                this.ETHSCOTT = a1Dto.ETHSCOTT;
-                this.ETHWHIOTH = a1Dto.ETHWHIOTH;
+                this.RACEWHITE = a1Dto.RACEWHITE.Value == 1 ? true : (bool?)null;
+                this.ETHGERMAN = a1Dto.ETHGERMAN.Value == 1 ? true : (bool?)null;
+                this.ETHIRISH = a1Dto.ETHIRISH.Value == 1 ? true : (bool?)null;
+                this.ETHENGLISH = a1Dto.ETHENGLISH.Value == 1 ? true : (bool?)null;
+                this.ETHITALIAN = a1Dto.ETHITALIAN.Value == 1 ? true : (bool?)null;
+                this.ETHPOLISH = a1Dto.ETHPOLISH.Value == 1 ? true : (bool?)null;
+                this.ETHSCOTT = a1Dto.ETHSCOTT.Value == 1 ? true : (bool?)null;
+                this.ETHWHIOTH = a1Dto.ETHWHIOTH.Value == 1 ? true : (bool?)null;
                 this.ETHWHIOTHX = a1Dto.ETHWHIOTHX;
-                this.ETHISPANIC = a1Dto.ETHISPANIC;
-                this.ETHMEXICAN = a1Dto.ETHMEXICAN;
-                this.ETHPUERTO = a1Dto.ETHPUERTO;
-                this.ETHCUBAN = a1Dto.ETHCUBAN;
-                this.ETHSALVA = a1Dto.ETHSALVA;
-                this.ETHDOMIN = a1Dto.ETHDOMIN;
-                this.ETHGUATEM = a1Dto.ETHGUATEM;
-                this.ETHHISOTH = a1Dto.ETHHISOTH;
+                this.ETHISPANIC = a1Dto.ETHISPANIC.Value == 1 ? true : (bool?)null;
+                this.ETHMEXICAN = a1Dto.ETHMEXICAN.Value == 1 ? true : (bool?)null;
+                this.ETHPUERTO = a1Dto.ETHPUERTO.Value == 1 ? true : (bool?)null;
+                this.ETHCUBAN = a1Dto.ETHCUBAN.Value == 1 ? true : (bool?)null;
+                this.ETHSALVA = a1Dto.ETHSALVA.Value == 1 ? true : (bool?)null;
+                this.ETHDOMIN = a1Dto.ETHDOMIN.Value == 1 ? true : (bool?)null;
+                this.ETHGUATEM = a1Dto.ETHGUATEM.Value == 1 ? true : (bool?)null;
+                this.ETHHISOTH = a1Dto.ETHHISOTH.Value == 1 ? true : (bool?)null;
                 this.ETHHISOTHX = a1Dto.ETHHISOTHX;
-                this.RACEBLACK = a1Dto.RACEBLACK;
-                this.ETHAFAMER = a1Dto.ETHAFAMER;
-                this.ETHJAMAICA = a1Dto.ETHJAMAICA;
-                this.ETHHAITIAN = a1Dto.ETHHAITIAN;
-                this.ETHNIGERIA = a1Dto.ETHNIGERIA;
-                this.ETHETHIOP = a1Dto.ETHETHIOP;
-                this.ETHSOMALI = a1Dto.ETHSOMALI;
-                this.ETHBLKOTH = a1Dto.ETHBLKOTH;
+                this.RACEBLACK = a1Dto.RACEBLACK.Value == 1 ? true : (bool?)null;
+                this.ETHAFAMER = a1Dto.ETHAFAMER.Value == 1 ? true : (bool?)null;
+                this.ETHJAMAICA = a1Dto.ETHJAMAICA.Value == 1 ? true : (bool?)null;
+                this.ETHHAITIAN = a1Dto.ETHHAITIAN.Value == 1 ? true : (bool?)null;
+                this.ETHNIGERIA = a1Dto.ETHNIGERIA.Value == 1 ? true : (bool?)null;
+                this.ETHETHIOP = a1Dto.ETHETHIOP.Value == 1 ? true : (bool?)null;
+                this.ETHSOMALI = a1Dto.ETHSOMALI.Value == 1 ? true : (bool?)null;
+                this.ETHBLKOTH = a1Dto.ETHBLKOTH.Value == 1 ? true : (bool?)null;
                 this.ETHBLKOTHX = a1Dto.ETHBLKOTHX;
-                this.RACEASIAN = a1Dto.RACEASIAN;
-                this.ETHCHINESE = a1Dto.ETHCHINESE;
-                this.ETHFILIP = a1Dto.ETHFILIP;
-                this.ETHINDIA = a1Dto.ETHINDIA;
-                this.ETHVIETNAM = a1Dto.ETHVIETNAM;
-                this.ETHKOREAN = a1Dto.ETHKOREAN;
-                this.ETHJAPAN = a1Dto.ETHJAPAN;
-                this.ETHASNOTH = a1Dto.ETHASNOTH;
+                this.RACEASIAN = a1Dto.RACEASIAN.Value == 1 ? true : (bool?)null;
+                this.ETHCHINESE = a1Dto.ETHCHINESE.Value == 1 ? true : (bool?)null;
+                this.ETHFILIP = a1Dto.ETHFILIP.Value == 1 ? true : (bool?)null;
+                this.ETHINDIA = a1Dto.ETHINDIA.Value == 1 ? true : (bool?)null;
+                this.ETHVIETNAM = a1Dto.ETHVIETNAM.Value == 1 ? true : (bool?)null;
+                this.ETHKOREAN = a1Dto.ETHKOREAN.Value == 1 ? true : (bool?)null;
+                this.ETHJAPAN = a1Dto.ETHJAPAN.Value == 1 ? true : (bool?)null;
+                this.ETHASNOTH = a1Dto.ETHASNOTH.Value == 1 ? true : (bool?)null;
                 this.ETHASNOTHX = a1Dto.ETHASNOTHX;
-                this.RACEAIAN = a1Dto.RACEAIAN;
+                this.RACEAIAN = a1Dto.RACEAIAN.Value == 1 ? true : (bool?)null;
                 this.RACEAIANX = a1Dto.RACEAIANX;
-                this.RACEMENA = a1Dto.RACEMENA;
-                this.ETHLEBANON = a1Dto.ETHLEBANON;
-                this.ETHIRAN = a1Dto.ETHIRAN;
-                this.ETHEGYPT = a1Dto.ETHEGYPT;
-                this.ETHSYRIA = a1Dto.ETHSYRIA;
-                this.ETHIRAQI = a1Dto.ETHIRAQI;
-                this.ETHISRAEL = a1Dto.ETHISRAEL;
-                this.ETHMENAOTH = a1Dto.ETHMENAOTH;
+                this.RACEMENA = a1Dto.RACEMENA.Value == 1 ? true : (bool?)null;
+                this.ETHLEBANON = a1Dto.ETHLEBANON.Value == 1 ? true : (bool?)null;
+                this.ETHIRAN = a1Dto.ETHIRAN.Value == 1 ? true : (bool?)null;
+                this.ETHEGYPT = a1Dto.ETHEGYPT.Value == 1 ? true : (bool?)null;
+                this.ETHSYRIA = a1Dto.ETHSYRIA.Value == 1 ? true : (bool?)null;
+                this.ETHIRAQI = a1Dto.ETHIRAQI.Value == 1 ? true : (bool?)null;
+                this.ETHISRAEL = a1Dto.ETHISRAEL.Value == 1 ? true : (bool?)null;
+                this.ETHMENAOTH = a1Dto.ETHMENAOTH.Value == 1 ? true : (bool?)null;
                 this.ETHMENAOTX = a1Dto.ETHMENAOTX;
-                this.RACENHPI = a1Dto.RACENHPI;
-                this.ETHHAWAII = a1Dto.ETHHAWAII;
-                this.ETHSAMOAN = a1Dto.ETHSAMOAN;
-                this.ETHCHAMOR = a1Dto.ETHCHAMOR;
-                this.ETHTONGAN = a1Dto.ETHTONGAN;
-                this.ETHFIJIAN = a1Dto.ETHFIJIAN;
-                this.ETHMARSHAL = a1Dto.ETHMARSHAL;
-                this.ETHNHPIOTH = a1Dto.ETHNHPIOTH;
+                this.RACENHPI = a1Dto.RACENHPI.Value == 1 ? true : (bool?)null;
+                this.ETHHAWAII = a1Dto.ETHHAWAII.Value == 1 ? true : (bool?)null;
+                this.ETHSAMOAN = a1Dto.ETHSAMOAN.Value == 1 ? true : (bool?)null;
+                this.ETHCHAMOR = a1Dto.ETHCHAMOR.Value == 1 ? true : (bool?)null;
+                this.ETHTONGAN = a1Dto.ETHTONGAN.Value == 1 ? true : (bool?)null;
+                this.ETHFIJIAN = a1Dto.ETHFIJIAN.Value == 1 ? true : (bool?)null;
+                this.ETHMARSHAL = a1Dto.ETHMARSHAL.Value == 1 ? true : (bool?)null;
+                this.ETHNHPIOTH = a1Dto.ETHNHPIOTH.Value == 1 ? true : (bool?)null;
                 this.ETHNHPIOTX = a1Dto.ETHNHPIOTX;
-                this.RACEUNKN = a1Dto.RACEUNKN;
-                this.GENMAN = a1Dto.GENMAN;
-                this.GENWOMAN = a1Dto.GENWOMAN;
-                this.GENTRMAN = a1Dto.GENTRMAN;
-                this.GENTRWOMAN = a1Dto.GENTRWOMAN;
-                this.GENNONBI = a1Dto.GENNONBI;
-                this.GENTWOSPIR = a1Dto.GENTWOSPIR;
-                this.GENOTH = a1Dto.GENOTH;
+                this.RACEUNKN = a1Dto.RACEUNKN.Value == 1 ? true : (bool?)null;
+                this.GENMAN = a1Dto.GENMAN.Value == 1 ? true : (bool?)null;
+                this.GENWOMAN = a1Dto.GENWOMAN.Value == 1 ? true : (bool?)null;
+                this.GENTRMAN = a1Dto.GENTRMAN.Value == 1 ? true : (bool?)null;
+                this.GENTRWOMAN = a1Dto.GENTRWOMAN.Value == 1 ? true : (bool?)null;
+                this.GENNONBI = a1Dto.GENNONBI.Value == 1 ? true : (bool?)null;
+                this.GENTWOSPIR = a1Dto.GENTWOSPIR.Value == 1 ? true : (bool?)null;
+                this.GENOTH = a1Dto.GENOTH.Value == 1 ? true : (bool?)null;
                 this.GENOTHX = a1Dto.GENOTHX;
-                this.GENDKN = a1Dto.GENDKN;
-                this.GENNOANS = a1Dto.GENNOANS;
+                this.GENDKN = a1Dto.GENDKN.Value == 1 ? true : (bool?)null;
+                this.GENNOANS = a1Dto.GENNOANS.Value == 1 ? true : (bool?)null;
                 this.BIRTHSEX = a1Dto.BIRTHSEX;
                 this.INTERSEX = a1Dto.INTERSEX;
-                this.SEXORNGAY = a1Dto.SEXORNGAY;
-                this.SEXORNHET = a1Dto.SEXORNHET;
-                this.SEXORNBI = a1Dto.SEXORNBI;
-                this.SEXORNTWOS = a1Dto.SEXORNTWOS;
-                this.SEXORNOTH = a1Dto.SEXORNOTH;
+                this.SEXORNGAY = a1Dto.SEXORNGAY.Value == 1 ? true : (bool?)null;
+                this.SEXORNHET = a1Dto.SEXORNHET.Value == 1 ? true : (bool?)null;
+                this.SEXORNBI = a1Dto.SEXORNBI.Value == 1 ? true : (bool?)null;
+                this.SEXORNTWOS = a1Dto.SEXORNTWOS.Value == 1 ? true : (bool?)null;
+                this.SEXORNOTH = a1Dto.SEXORNOTH.Value == 1 ? true : (bool?)null;
                 this.SEXORNOTHX = a1Dto.SEXORNOTHX;
-                this.SEXORNDNK = a1Dto.SEXORNDNK;
-                this.SEXORNNOAN = a1Dto.SEXORNNOAN;
+                this.SEXORNDNK = a1Dto.SEXORNDNK.Value == 1 ? true : (bool?)null;
+                this.SEXORNNOAN = a1Dto.SEXORNNOAN.Value == 1 ? true : (bool?)null;
                 this.PREDOMLAN = a1Dto.PREDOMLAN;
                 this.PREDOMLANX = a1Dto.PREDOMLANX;
                 this.HANDED = a1Dto.HANDED;

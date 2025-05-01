@@ -38,9 +38,17 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> FindingsListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1"),
-            new RadioListItem("Indeterminate", "9")
+            new RadioListItem("No, inconsistent", "0"),
+            new RadioListItem("Yes, consistent", "1"),
+            new RadioListItem("Indeterminate", "9"),
+            new RadioListItem("Not assessed", "8")
+        };
+
+        // If IMAGWMH yes, choose the severity
+        public List<RadioListItem> IMAGWMHSEVListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Moderate white-matter hyperintensity (CHS score 5-6)", "1"),
+            new RadioListItem("Extensive white-matter hyperintensity (CHS score 7-8+)", "2")
         };
 
         public List<RadioListItem> IMAGINGDXListItems { get; set; } = new List<RadioListItem>
@@ -97,7 +105,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown/Not disclosed", "2")
+            new RadioListItem("Unknown/Not disclosed", "9")
         };
 
         public List<RadioListItem> EtiologyListItems { get; set; } = new List<RadioListItem>
@@ -113,6 +121,13 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("TDP-43 proteinopathy", "2"),
             new RadioListItem("Other", "3"),
             new RadioListItem("Unknown", "9"),
+        };
+
+        public List<RadioListItem> CTECERTListItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("Suggestive CTE", "1"),
+            new RadioListItem("Possible CTE", "2"),
+            new RadioListItem("Probable CTE", "3"),
         };
 
         public Dictionary<string, UIBehavior> BIOMARKDXUIBehavior = new Dictionary<string, UIBehavior>
@@ -236,17 +251,19 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> BLOODOTHXUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BLOODOTHX") } }
 
         };
 
         public Dictionary<string, UIBehavior> CSFOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.CSFOTHX") } }
 
         };
 
@@ -363,9 +380,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> FDGOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FDGOTHX") } }
 
         };
 
@@ -446,8 +464,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGLAC"),
                     new UIDisableAttribute("D1b.IMAGMACH"),
                     new UIDisableAttribute("D1b.IMAGMICH"),
-                    new UIDisableAttribute("D1b.IMAGMWMH"),
-                    new UIDisableAttribute("D1b.IMAGEWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
 
                 }
             } },
@@ -458,22 +475,39 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGLAC"),
                     new UIEnableAttribute("D1b.IMAGMACH"),
                     new UIEnableAttribute("D1b.IMAGMICH"),
-                    new UIEnableAttribute("D1b.IMAGMWMH"),
-                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIEnableAttribute("D1b.IMAGWMH"),
 
                 }
             } },
-             { "2", new UIBehavior {
+             { "8", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1b.IMAGLINF"),
-                    new UIEnableAttribute("D1b.IMAGLAC"),
-                    new UIEnableAttribute("D1b.IMAGMACH"),
-                    new UIEnableAttribute("D1b.IMAGMICH"),
-                    new UIEnableAttribute("D1b.IMAGMWMH"),
-                    new UIEnableAttribute("D1b.IMAGEWMH"),
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
                 }
             } },
+             { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                }
+            } },
+        };
+
+        public Dictionary<string, UIBehavior> IMAGWMHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+
+            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.IMAGWMHSEV") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } }
         };
 
         public Dictionary<string, UIBehavior> OTHBIOM1UIBehavior = new Dictionary<string, UIBehavior>
@@ -596,25 +630,28 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> BIOMOTH1UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
 
         };
 
         public Dictionary<string, UIBehavior> BIOMOTH2UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
 
         };
 
         public Dictionary<string, UIBehavior> BIOMOTH3UIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX3") } }
 
         };
 
@@ -629,9 +666,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> TRACEROTHUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } },
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
 
         };
 

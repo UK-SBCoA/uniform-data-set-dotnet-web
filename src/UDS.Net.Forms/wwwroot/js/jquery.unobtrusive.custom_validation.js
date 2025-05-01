@@ -80,6 +80,15 @@ function compareRange(low, high, targets, value) {
   }
 }
 
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
 $(function () {
   let affects = $("[data-affects]");
   if (affects.length) {
@@ -111,26 +120,29 @@ $(function () {
         compareRange(low, high, targets, $(this).val());
       }
 
-      // watch for changes
-      $(this).on("change", function () {
-        if ($(this).data("affects-targets")) {
-          let targets = $(this).data("affects-targets");
-          setAffects(targets);
-        } 
-        else if ($(this).data("affects-toggle-targets")) {
-          let isSelected = $(this).is(":checked");
-          let toggleTargets = $(this).data("affects-toggle-targets");
-          toggleAffects(toggleTargets, isSelected);
-        } 
-        else if ($(this).data("affects-range-targets")) {
-          // change event fires when input unfocused
-          let low = $(this).data("affects-range-low");
-          let high = $(this).data("affects-range-high");
-          let targets = $(this).data("affects-range-targets");
+        // watch for changes
+        $(this).on("change", function () {
+            if ($(this).data("affects-targets")) {
+                let targets = $(this).data("affects-targets");
+                setAffects(targets);
+            }
+            else if ($(this).data("affects-toggle-targets")) {
+                let isSelected = $(this).is(":checked");
+                let toggleTargets = $(this).data("affects-toggle-targets");
+                toggleAffects(toggleTargets, isSelected);
+            }
+        });
 
-          compareRange(low, high, targets, $(this).val());
+        // if it's a range input, add a debounced input handler
+        if ($(this).data("affects-range-targets")) {
+            let low = $(this).data("affects-range-low");
+            let high = $(this).data("affects-range-high");
+            let targets = $(this).data("affects-range-targets");
+
+            $(this).on("input", debounce(function () {
+                compareRange(low, high, targets, $(this).val());
+            }, 300));
         }
-      });
     });
 
     // after checking each input, check to see if some should have a default state
@@ -293,14 +305,18 @@ $.validator.addMethod("birthyear", function (value, element, params) {
 
   let minimum = parameters.minimum;
   let maximum = parameters.maximum;
+  let parentmaximum = parameters.parentmaximum;
+  let parent = parameters.parent;
   let allowUnknown = parameters.allowUnknown;
 
   if (allowUnknown === "true" && value === "9999") {
     // TODO after parsing as bool, update conditional
     return true;
   }
-
-  if (value >= minimum && value <= maximum) {
+  if (parent === "true" && value >= minimum && value <= parentmaximum) {
+    return true;
+  }
+  if (parent === "false" && value >= minimum && value <= maximum) {
     return true;
   }
   return false;
@@ -308,15 +324,17 @@ $.validator.addMethod("birthyear", function (value, element, params) {
 
 $.validator.unobtrusive.adapters.add(
   "birthyear",
-  ["allowunknown", "maximum", "minimum"],
+  ["allowunknown","parent", "maximum", "minimum","parentmaximum"],
   function (options) {
     let element = $(options.form).find("input[data-val-birthyear]")[0];
 
     let minimum = parseInt(options.params.minimum);
     let maximum = parseInt(options.params.maximum);
+    let parentmaximum = parseInt(options.params.parentmaximum);
+    let parent = options.params.parent;
     let allowUnknown = options.params.allowunknown; // TODO parse bool
 
-    options.rules.birthyear = [element, { allowUnknown, maximum, minimum }]; // rules are required for the onChange event to trigger validation
+    options.rules.birthyear = [element, { allowUnknown, parent, maximum, minimum, parentmaximum }]; // rules are required for the onChange event to trigger validation
     options.messages.birthyear = options.message;
   },
 );
@@ -401,7 +419,7 @@ $.validator.unobtrusive.adapters.add(
           // reset css
           element.removeClass("input-validation-error");
           element.addClass(
-            "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+            "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
           );
           // reset error messages
           let validator = $("#UDSForm").validate();
@@ -462,7 +480,7 @@ $.validator.unobtrusive.adapters.add(
               // reset css
               element.removeClass("input-validation-error");
               element.addClass(
-                "block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
               );
               // reset error messages
               let validator = $("#UDSForm").validate();

@@ -10,7 +10,7 @@
         INSTRUCTIONS: For information on the required online CDR training, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B4. This form is to be completed by the clinician or other trained health professional, based on co-participant report and behavioral and neurological exam of the participant. In the extremely rare instances when no co-participant is available, the clinician or other trained health professional must complete this form using all other available information and his/her best clinical judgment. Score only as decline from previous level due to <span class="underline">cognitive loss</span>, not impairment due to other factors, such as physical disability. For further information, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B4.
     </p>
 </div>
-<div>
+<div data-controller="b4">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <h2>SECTION 1: CDR DEMENTIA STAGING INSTRUMENT<sup>1</sup></h2>
@@ -44,8 +44,8 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                <tr >
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems" data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
                     <td rowspan="2">
@@ -60,7 +60,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Oriented to person only</td>
                 </tr>
                 <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems" data-b4-target="ORIENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
                     <td rowspan="2">
@@ -75,7 +75,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Unable to make judgments or solve problems</td>
                 </tr>
                 <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems" data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
                     <td rowspan="2">
@@ -90,7 +90,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home</td>
                 </tr>
                 <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems" data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
                     <td rowspan="2">
@@ -105,7 +105,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">No significant function in the home</td>
                 </tr>
                 <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems" data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
                     <td rowspan="2">
@@ -118,14 +118,14 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Requires assistance in dressing, hygiene, keeping of personal effects</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
                 </tr>
+
                 <tr>
-                    <!--// Only 4 options for Personal Care (PERSCARE) so the first two cells need to be merged //-->
                     @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
                     {
                         <td @(i == 0 ? "colspan=2" : "")>
                             <div class="relative flex items-start">
                                 <div class="flex items-center">
-                                    <input class="h-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio" value="@Model.ImpairmentSimpleListItems[i].Value">
+                                    <input class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio" value="@Model.ImpairmentSimpleListItems[i].Value" @(Model.B4.PERSCARE != null && Model.B4.PERSCARE.ToString() == Model.ImpairmentSimpleListItems[i].Value ? "checked" : "") data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM">
                                     <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B4_PERSCARE[@i]">
                                         <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ImpairmentSimpleListItems[i].Value</span>
                                     </label>
@@ -141,7 +141,7 @@
             <label asp-for="B4.CDRSUM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRSUM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRSUM"></p>
-                <input asp-for="@Model.B4.CDRSUM" />
+                <input asp-for="@Model.B4.CDRSUM" data-b4-target="CDRSUM" readonly/>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRSUM"></span>
             </div>
         </div>
@@ -150,7 +150,8 @@
             <label asp-for="B4.CDRGLOB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRGLOB)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRGLOB"></p>
-                <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems"></radio-button-group>
+                <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems" data-b4-target="CDRGLOB" data-action="change->b4#updateCDRSUM">
+                </radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRGLOB"></span>
             </div>
         </div>

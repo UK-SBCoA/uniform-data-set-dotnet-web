@@ -56,16 +56,6 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.TRSPLONGER"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRSPLONGER)</label>
-        <div class="mt-4 sm:col-span-2 sm:mt-0">
-            <div class="max-w-lg">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPLONGER"></p>
-                <radio-button-group id="A1_TRSPLONGER" for="A1a.TRSPLONGER" items="Model.OftenToNeverItems"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPLONGER"></span>
-            </div>
-        </div>
-    </div>
-    <div class="@rowCSS">
         <label asp-for="A1a.TRSPMED"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRSPMED)</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
@@ -176,12 +166,12 @@
                 closer you are to the people at the very top and the lower you are, the closer you are to the people at the very bottom.
             </p>
         </div>
-        <div class="sm:grid sm:grid-cols-1 xl:grid-cols-2 sm:items-start sm:gap-4 sm:py-6">
+        <div class="sm:grid sm:grid-cols-1 xl:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
             <div class="subcounterreset sm:grid sm:gap-10">
                 <div>
                     <table class="table-auto w-full">
                         <tr class="align-top">
-                            <td colspan="10">
+                            <td colspan="11">
                                 <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
                                 <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
@@ -191,41 +181,6 @@
                             <table-cell-radio-buttons id="A1a.COMPCOMM" for="@Model.A1a.COMPCOMM" items="Model.LadderItems"></table-cell-radio-buttons>
                         </tr>
                     </table>
-                </div>
-                <div>
-                    <table class="table-auto w-full">
-                        <tr class="align-top">
-                            <td colspan="10">
-                                <label asp-for="A1a.COMPUSA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPUSA)</label>
-                                <p class="text-sm text-gray-500" asp-description-for="A1a.COMPUSA"></p>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPUSA"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <table-cell-radio-buttons id="A1a.COMPUSA" for="@Model.A1a.COMPUSA" items="Model.LadderItems"></table-cell-radio-buttons>
-                        </tr>
-                    </table>
-                </div>
-                <div>
-                    <table class="table-auto w-full">
-                        <tr class="align-top">
-                            <td colspan="10">
-                                <label asp-for="A1a.FAMCOMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.FAMCOMP)</label>
-                                <p class="text-sm text-gray-500" asp-description-for="A1a.FAMCOMP"></p>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.FAMCOMP"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <table-cell-radio-buttons id="A1a.FAMCOMP" for="@Model.A1a.FAMCOMP" items="Model.LadderItems"></table-cell-radio-buttons>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div>
-                <div class="py-8 flex justify-center">
-                    <div class="size-72">
-                        <img src="~/_content/UDS.Net.Forms/ladderscale.png" />
-                    </div>
                 </div>
             </div>
         </div>
@@ -239,50 +194,6 @@
                     <radio-button-group id="A1_GUARDEDU" for="A1a.GUARDEDU" items="Model.GUARDEDUItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDEDU"></span>
                 </div>
-            </div>
-        </div>
-        <div class="@rowCSS pl-10">
-            <label asp-for="A1a.GUARDREL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARDREL)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDREL"></p>
-                <radio-button-group id="A1a.GUARDREL" for="@Model.A1a.GUARDREL" items="Model.RelationshipItems" ui-behaviors="Model.GUARDRELBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDREL"></span>
-            </div>
-            <div class="mt-4 space-y-4">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDRELX"></p>
-                <label asp-for="@Model.A1a.GUARDRELX">@Html.DisplayNameFor(m => m.A1a.GUARDRELX)</label>
-                <div class="mt-2">
-                    <input asp-for="@Model.A1a.GUARDRELX" disabled="disabled" />
-                </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDRELX"></span>
-            </div>
-        </div>
-    </div>
-    <div class="sm:py-6">
-        <div class="@rowCSS">
-            <label asp-for="A1a.GUARD2EDU"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.GUARD2EDU)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <div class="max-w-lg">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2EDU"></p>
-                    <radio-button-group id="A1_GUARD2EDU" for="A1a.GUARD2EDU" items="Model.GUARD2EDUItems" ui-behaviors="Model.GUARD2EDUBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2EDU"></span>
-                </div>
-            </div>
-        </div>
-        <div class="@rowCSS pl-10">
-            <label asp-for="A1a.GUARD2REL" class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.GUARD2REL)</label>
-            <div>
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2REL"></p>
-                <radio-button-group id="A1a.GUARD2REL" for="@Model.A1a.GUARD2REL" items="Model.RelationshipItems" ui-behaviors="Model.GUARD2RELBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2REL"></span>
-            </div>
-            <div class="mt-4 space-y-4">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARD2RELX"></p>
-                <label asp-for="@Model.A1a.GUARD2RELX">@Html.DisplayNameFor(m => m.A1a.GUARD2RELX)</label>
-                <div class="mt-2">
-                    <input asp-for="@Model.A1a.GUARD2RELX" disabled="disabled" />
-                </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARD2RELX"></span>
             </div>
         </div>
     </div>
@@ -569,7 +480,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a1.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                    @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPANCEST"></label>
@@ -580,7 +491,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a2.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPGENDER", Model.A1a.EXPGENDER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPGENDER", Model.A1a.EXPGENDER, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPGENDER"></label>
@@ -591,7 +502,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a3.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPRACE", Model.A1a.EXPRACE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPRACE", Model.A1a.EXPRACE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPRACE"></label>
@@ -602,7 +513,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a4.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPAGE", Model.A1a.EXPAGE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPAGE", Model.A1a.EXPAGE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPAGE"></label>
@@ -613,7 +524,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a5.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPRELIG", Model.A1a.EXPRELIG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPRELIG", Model.A1a.EXPRELIG, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPRELIG"></label>
@@ -624,7 +535,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a6.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPHEIGHT", Model.A1a.EXPHEIGHT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPHEIGHT", Model.A1a.EXPHEIGHT, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPHEIGHT"></label>
@@ -635,7 +546,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a7.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPWEIGHT", Model.A1a.EXPWEIGHT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPWEIGHT", Model.A1a.EXPWEIGHT, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPWEIGHT"></label>
@@ -646,7 +557,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a8.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPAPPEAR", Model.A1a.EXPAPPEAR, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPAPPEAR", Model.A1a.EXPAPPEAR, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPAPPEAR"></label>
@@ -657,7 +568,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a9.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPSEXORN", Model.A1a.EXPSEXORN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPSEXORN", Model.A1a.EXPSEXORN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPSEXORN"></label>
@@ -668,7 +579,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a10.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPEDUCINC", Model.A1a.EXPEDUCINC, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPEDUCINC", Model.A1a.EXPEDUCINC, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPEDUCINC"></label>
@@ -679,7 +590,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a11.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPDISAB", Model.A1a.EXPDISAB, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPDISAB", Model.A1a.EXPDISAB, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPDISAB"></label>
@@ -690,7 +601,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a12.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPSKIN", Model.A1a.EXPSKIN, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPSKIN", Model.A1a.EXPSKIN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPSKIN"></label>
@@ -701,7 +612,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a13.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPOTHER", Model.A1a.EXPOTHER, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                    @Html.CheckBox("A1a.EXPOTHER", Model.A1a.EXPOTHER, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPOTHER"></label>
@@ -712,10 +623,11 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a14.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new 
-                    {   @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600",
-                        data_checkBoxDisable_target="checkboxTrigger",
-                        data_action="input->checkboxDisable#ToggleGroup",
+                    @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new
+                    {
+                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
+                        data_checkBoxDisable_target = "checkboxTrigger",
+                        data_action = "input->checkboxDisable#ToggleGroup",
                         data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
                         data_checkBoxDisable_enableGroup_param = "",
                         data_checkboxDisable_toggleState_param = "true"
@@ -730,7 +642,7 @@
                     <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">39a15.</span>
                 </div>
                 <div>
-                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"})
+                    @Html.CheckBox("A1a.EXPNOANS", Model.A1a.EXPNOANS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOANS"></label>

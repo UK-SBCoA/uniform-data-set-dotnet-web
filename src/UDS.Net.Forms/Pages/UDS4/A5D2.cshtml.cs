@@ -1422,7 +1422,7 @@ public class A5D2Model : FormPageModel
     public UIRangeToggle MENARCHEBehavior = new UIRangeToggle
     {
         Low = 5,
-        High = 99,
+        High = 999,
         UIBehavior = new UIBehavior
         {
             PropertyAttributes = new List<UIPropertyAttributes>

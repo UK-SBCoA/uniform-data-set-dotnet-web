@@ -11,27 +11,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public C2 C2 { get; set; } = default!;
 
-        //public List<SelectListItem> ReasonCodeListItems { get; set; } = new List<SelectListItem>
-        //{
-        //    new SelectListItem("Physical problem", "95"),
-        //    new SelectListItem("Cognitive/behavior problem", "96"),
-        //    new SelectListItem("Other problem", "97"),
-        //    new SelectListItem("Verbal refusal", "98")
-        //};
-
-        //public UIRangeToggle VNTTOTWDBehavior = new UIRangeToggle
-        //{
-        //    Low = 0,
-        //    High = 50,
-        //    UIBehavior = new UIBehavior
-        //    {
-        //        PropertyAttributes = new List<UIPropertyAttributes>
-        //        {
-        //            new UIEnableAttribute("C2.VNTPCNC")
-        //        },
-        //        InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped\nbecause optional, enter 88, and SKIP TO QUESTION 12b."
-        //    }
-        //};
         public UIRangeToggle OTRAILABehavior = new UIRangeToggle
         {
             Low = 0,
@@ -64,6 +43,22 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
         };
 
+        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
+                },
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
+            }
+        };
         public UIRangeToggle REY1RECBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -85,13 +80,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
                     new UIEnableAttribute("C2.REY6INT"),
-                    new UIEnableAttribute("C2.REYDREC"),
                     new UIEnableAttribute("C2.REYDINT"),
                     new UIEnableAttribute("C2.REYDTI"),
                     new UIEnableAttribute("C2.REYMETHOD"),
                     new UIEnableAttribute("C2.REYTCOR"),
                     new UIEnableAttribute("C2.REYFPOS")
-
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
             }
@@ -164,10 +157,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYMETHOD"),
                     new UIEnableAttribute("C2.REYTCOR"),
                     new UIEnableAttribute("C2.REYFPOS")
                 },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98. If test was skipped because optional or\nnot available in Spanish translation, enter 88, and SKIP TO QUESTION 12a."
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a."
             }
         };
 
@@ -226,13 +221,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 },
                 InstructionalMessage = "continue to question 14b"
             } }
-        };
-
-        public List<RadioListItem> ModeOfCommunication { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("Telephone", "1"),
-            new RadioListItem("Video-assisted conference", "2"),
-            new RadioListItem("Some combination of the two", "3")
         };
 
         public List<RadioListItem> SimpleNoYesListItems { get; set; } = new List<RadioListItem>

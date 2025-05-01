@@ -29,7 +29,7 @@ namespace UDS.Net.Services.DomainModels
 
         public string INITIALS { get; set; }
 
-        public PacketStatus Status { get; set; }
+        public PacketStatus Status { get; private set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -46,25 +46,26 @@ namespace UDS.Net.Services.DomainModels
         {
             get
             {
-                return GetValidity("", 0);
+                //return GetValidity("", 0);
+                return TryValidate();
             }
 
         }
 
+        /// <summary>
+        /// This only checks if it could be finalized, not that it follows the rules for status changes
+        /// </summary>
         public bool IsFinalizable
         {
             get
             {
-                // if ti has been submitted and error results are pending
-                if (this.Status == PacketStatus.Submitted)
-                    return false;
+                bool finalizable = false;
 
-                // if it has already been submitted and it has unresolved errors
+                // double check that it does not have unresolved errors
                 if (this.UnresolvedErrorCount.HasValue && this.UnresolvedErrorCount.Value > 0)
                     return false;
 
-                bool finalizable = false;
-
+                // now check that all the forms follow the contract to be finalized
                 if (this.Forms != null && this.Forms.Count() > 0 && _formsContract != null)
                 {
                     var packetKindFormsContract = _formsContract.Where(u => u.Key == this.PACKET.ToString()).FirstOrDefault();
@@ -104,6 +105,31 @@ namespace UDS.Net.Services.DomainModels
                 {
                     {
                         PacketKind.I.ToString(),
+                        new FormContract[]
+                        {
+                            new FormContract("A1", true),
+                            new FormContract("A1a", true),
+                            new FormContract("A2", false),
+                            new FormContract("A3", true),
+                            new FormContract("A4", false),
+                            new FormContract("A4a", false),
+                            new FormContract("A5D2", true),
+                            new FormContract("B1", false),
+                            new FormContract("B3", false),
+                            new FormContract("B4", true),
+                            new FormContract("B5", false),
+                            new FormContract("B6", false),
+                            new FormContract("B7", false),
+                            new FormContract("B8", true),
+                            new FormContract("B9", true),
+                            new FormContract("C2", true), // C2C2T
+                            new FormContract("D1a", true),
+                            new FormContract("D1b", true)
+
+                        }
+                    },
+                    {
+                        PacketKind.I4.ToString(),
                         new FormContract[]
                         {
                             new FormContract("A1", true),
@@ -193,6 +219,57 @@ namespace UDS.Net.Services.DomainModels
 
         //public int Count { get; private set; }
 
+        public bool TryUpdateStatus(PacketStatus status)
+        {
+            bool updatePossible = false;
+            if (this.Status == PacketStatus.Pending)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+                else if (status == PacketStatus.Finalized)
+                {
+                    if (this.IsFinalizable)
+                        updatePossible = true;
+                }
+            }
+            else if (this.Status == PacketStatus.Finalized)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true; // revert
+                else if (status == PacketStatus.Submitted)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.FailedErrorChecks)
+            {
+                // when errors are attempted to be resolved status can be moved back to pending
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.PassedErrorChecks)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+                else if (status == PacketStatus.Frozen)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.Frozen)
+            {
+                if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            return updatePossible;
+        }
+
+        public bool UpdateStatus(PacketStatus status)
+        {
+            if (TryUpdateStatus(status))
+            {
+                this.Status = status;
+                return true;
+            }
+            return false;
+        }
+
         public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms)
         {
             Id = id;
@@ -258,14 +335,87 @@ namespace UDS.Net.Services.DomainModels
         public bool TryValidate()
         {
             // TODO validate the visit against any rules that might have changed due to form fields changing
-            GetModelErrors();
-            return true;
+            var errors = GetModelErrors();
+            if (errors != null && errors.Count() > 0)
+                return false;
+            else
+                return true;
         }
 
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
-            /// TODO For example, in UDS3 FVP, either C1 or C2 is required, but not both
-            yield break;
+            List<VisitValidationResult> results = new List<VisitValidationResult>();
+
+            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+
+            if (a1 != null && a5d2 != null && b5 != null)
+            {
+                // A1 sex and D1a menstruation
+                if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
+                {
+                    results.Add(new VisitValidationResult(
+                        $"A1 sex cannot be male and A5D2 menstration details be provided.",
+                        new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
+                }
+            }
+            if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
+            {
+
+            }
+
+            return results;
+        }
+
+        public IEnumerable<VisitValidationResult> GetModelAlerts()
+        {
+            List<VisitValidationResult> results = new List<VisitValidationResult>();
+
+            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+            var b9 = (B9FormFields)this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault();
+            var d1a = (D1aFormFields)this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault();
+
+            if (a1 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
+            {
+                if (b5.ANX.HasValue)
+                {
+                    if (b5.ANX == 0)
+                    {
+                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 0)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 0 (no), then form a5d2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                    }
+                    else if (b5.ANX == 1)
+                    {
+                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 1)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form a5d2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                        if (b9.BEANX.HasValue && b9.BEANX != 1)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 1 (yes), then form b9, q12c. beanx (anxiety) should equal 1 (yes).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                        if (d1a.ANXIET.HasValue && d1a.ANXIET != true)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 1 (yes), then form d1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                    }
+                }
+            }
+
+            return results;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace UDS.Net.Forms.Pages.Lookup
             if (visitId == null || visitId == 0)
                 return NotFound();
 
-            var visit = await _visitService.GetByIdWithForm("", visitId.Value, _formKind);
+            var visit = await _visitService.GetByIdWithForm(User.Identity.Name, visitId.Value, _formKind);
 
             if (visit == null)
                 return NotFound();
@@ -55,7 +55,7 @@ namespace UDS.Net.Forms.Pages.Lookup
             if (visitId == null || visitId == 0)
                 return NotFound();
 
-            var entity = await _visitService.GetByIdWithForm("", visitId.Value, _formKind);
+            var entity = await _visitService.GetByIdWithForm(User.Identity.Name, visitId.Value, _formKind);
 
             if (entity == null)
                 return NotFound();
