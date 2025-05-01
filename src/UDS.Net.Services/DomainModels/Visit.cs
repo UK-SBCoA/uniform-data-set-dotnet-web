@@ -263,6 +263,12 @@ namespace UDS.Net.Services.DomainModels
                 if (status == PacketStatus.FailedErrorChecks)
                     updatePossible = true;
             }
+            else if (this.Status == PacketStatus.Submitted)
+            {
+                // Forms checked as success change to Passed error checks with an error count of 0
+                if (status == PacketStatus.PassedErrorChecks)
+                    updatePossible = true;
+            }
             return updatePossible;
         }
 

@@ -63,7 +63,11 @@
                                                 }
                                                 else
                                                 {
-                                                    <a asp-page="Edit" asp-route-id="@packetSubmission.Id" asp-route-errorCount="0" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</a>
+                                                    <form asp-page="../PacketSubmissions/Edit" asp-page-handler="Success" method="post">
+                                                        <input type="hidden" name="packetId" value="@Model.Id" />
+                                                        <input type="hidden" name="packetSubmissionId" value="@packetSubmission.Id" />
+                                                        <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
+                                                    </form>
 
                                                     <a data-turbo-frame="PacketSubmissions" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
                                                 }

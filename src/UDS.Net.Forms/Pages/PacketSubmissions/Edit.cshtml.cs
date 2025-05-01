@@ -3,6 +3,7 @@ using System.Data;
 using System.Net.Sockets;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -35,27 +36,55 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission)
         {
-            Packet packetFound = await _packetService.GetById(User.Identity.Name, packetSubmission.PacketId);
-
-            if (packetFound == null)
-                return NotFound("No packet found when submitting a packet submission error count");
+            Packet existingPacket = await GetPacketData(packetSubmission.PacketId);
 
             // Update status to failed error checks when error count is saved
-            if (packetFound.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                packetFound.UpdateStatus(PacketStatus.FailedErrorChecks);
+            if (existingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                existingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+
+            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, (int)packetSubmission.ErrorCount, packetSubmission.Id);
+
+
+            // Create a packetModel to return to the index
+            PacketModel updatedPacketModel = updatedPacket.ToVM();
+            updatedPacket.Participation = existingPacket.Participation;
+
+            return Partial("_Index", updatedPacket);
+        }
+
+        public async Task<IActionResult> OnPostSuccessAsync(int packetId, int packetSubmissionId)
+        {
+            Packet existingPacket = await GetPacketData(packetId);
+
+            // Update status to failed error checks when error count is saved
+            if (existingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                existingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+
+            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, 0, packetSubmisionId);
+
+
+            // Create a packetModel to return to the index
+            PacketModel updatedPacketModel = updatedPacket.ToVM();
+            updatedPacket.Participation = existingPacket.Participation;
+
+            return Partial("_Index", updatedPacket);
+        }
+
+        private async Task<Packet> GetPacketData(int packetId)
+        {
+            Packet packetFound = await _packetService.GetById(User.Identity.Name, packetId);
+
+            if (packetFound == null)
+                return null;
 
             var packetFoundParticipation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
 
             if (packetFoundParticipation == null)
-                return NotFound("No participation found within the packet receiving the submission error count update");
+                return null;
 
-            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, packetFound, (int)packetSubmission.ErrorCount, packetSubmission.Id);
+            packetFound.Participation = packetFoundParticipation;
 
-            // Create a packetModel to return to the index
-            PacketModel packet = updatedPacket.ToVM();
-            packet.Participation = packetFoundParticipation.ToVM();
-
-            return Partial("_Index", packet);
+            return packetFound;
         }
     }
 }
