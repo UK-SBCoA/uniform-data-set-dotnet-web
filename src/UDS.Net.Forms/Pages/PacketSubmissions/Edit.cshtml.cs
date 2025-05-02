@@ -40,16 +40,24 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             // Update status to failed error checks when error count is saved
             if (existingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+            {
                 existingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, (int)packetSubmission.ErrorCount, packetSubmission.Id);
+                Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, (int)packetSubmission.ErrorCount, packetSubmission.Id);
 
+                // Create a packetModel to return to the index
+                PacketModel updatedPacketModel = updatedPacket.ToVM();
+                updatedPacketModel.Participation = existingPacket.Participation.ToVM();
 
-            // Create a packetModel to return to the index
-            PacketModel updatedPacketModel = updatedPacket.ToVM();
-            updatedPacket.Participation = existingPacket.Participation;
+                return Partial("_Index", updatedPacketModel);
+            }
 
-            return Partial("_Index", updatedPacket);
+            // return existing packetModel on failure to update
+            PacketModel existingPacketModel = existingPacket.ToVM();
+            existingPacketModel.Participation = existingPacket.Participation.ToVM();
+
+            return Partial("_Index", existingPacketModel);
+
         }
 
         public async Task<IActionResult> OnPostSuccessAsync(int packetId, int packetSubmissionId)
@@ -57,17 +65,24 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             Packet existingPacket = await GetPacketData(packetId);
 
             // Update status to failed error checks when error count is saved
-            if (existingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                existingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+            if (existingPacket.TryUpdateStatus(PacketStatus.PassedErrorChecks))
+            {
+                existingPacket.UpdateStatus(PacketStatus.PassedErrorChecks);
 
-            Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, 0, packetSubmisionId);
+                Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, 0, packetSubmissionId);
 
+                // Create a packetModel to return to the index
+                PacketModel updatedPacketModel = updatedPacket.ToVM();
+                updatedPacketModel.Participation = existingPacket.Participation.ToVM();
 
-            // Create a packetModel to return to the index
-            PacketModel updatedPacketModel = updatedPacket.ToVM();
-            updatedPacket.Participation = existingPacket.Participation;
+                return Partial("_Index", updatedPacketModel);
+            }
 
-            return Partial("_Index", updatedPacket);
+            // return existing packetModel on failure to update
+            PacketModel existingPacketModel = existingPacket.ToVM();
+            existingPacketModel.Participation = existingPacket.Participation.ToVM();
+
+            return Partial("_Index", existingPacketModel);
         }
 
         private async Task<Packet> GetPacketData(int packetId)

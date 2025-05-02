@@ -23,30 +23,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var packetSubmission in Model.PacketSubmissions)
+                                @for (int i = 0; i < Model.PacketSubmissions.Count - 1; i++)
                                 {
                                     <tr>
                                         <td>
-                                            @packetSubmission.SubmissionDate<br />
-                                            @packetSubmission.CreatedBy
+                                            @Model.PacketSubmissions[i].SubmissionDate<br />
+                                            @Model.PacketSubmissions[i].CreatedBy
                                         </td>
                                         <td>
-                                            @if (!packetSubmission.ErrorCount.HasValue)
+                                            @if (!Model.PacketSubmissions[i].ErrorCount.HasValue)
                                             {
                                                 <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                    @(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                    @(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
                                                 </a>
                                             }
                                             else
                                             {
-                                                <span>@(packetSubmission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
+                                                <span>@(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
                                             }
                                         </td>
                                         <td>
-                                            @if (packetSubmission.ErrorCount.HasValue)
+                                            @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
                                             {
                                                 @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
-                                                <span>@packetSubmission.ErrorCount</span>
+                                                <span>@Model.PacketSubmissions[i].ErrorCount</span>
                                             }
                                             else
                                             {
@@ -55,7 +55,55 @@
                                         </td>
                                         <td>
                                             <div class="grid grid-cols-2 justify-items-center">
-                                                @if (packetSubmission.ErrorCount.HasValue)
+                                                @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
+                                                {
+                                                    <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
+
+                                                    <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Errors returned</a>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <turbo-frame id="EditPacketSubmission">
+                            <table class="full-text text-left">
+                                <tbody>
+                                    <tr>
+                                        @{
+                                            var recentIndex = Model.PacketSubmissions.Count() - 1;
+                                        }
+                                        <td>
+                                            @Model.PacketSubmissions[recentIndex].SubmissionDate<br />
+                                            @Model.PacketSubmissions[recentIndex].CreatedBy
+                                        </td>
+                                        <td>
+                                            @if (!Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                            {
+                                                <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                    @(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span>@(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                            {
+                                                @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
+                                                <span>@Model.PacketSubmissions[recentIndex].ErrorCount</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Pending response from NACC</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="grid grid-cols-2 justify-items-center">
+                                                @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
                                                 {
                                                     <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
 
@@ -65,22 +113,21 @@
                                                 {
                                                     <form asp-page="../PacketSubmissions/Edit" asp-page-handler="Success" method="post">
                                                         <input type="hidden" name="packetId" value="@Model.Id" />
-                                                        <input type="hidden" name="packetSubmissionId" value="@packetSubmission.Id" />
+                                                        <input type="hidden" name="packetSubmissionId" value="@Model.PacketSubmissions[recentIndex].Id" />
                                                         <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
                                                     </form>
 
-                                                    <a data-turbo-frame="PacketSubmissions" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@packetSubmission.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
+                                                    <a data-turbo-frame="PacketSubmissionEdit" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
                                                 }
                                             </div>
                                         </td>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </turbo-frame>
                     </div>
                 </div>
             </div>
         </div>
     }
-
 </turbo-frame>
