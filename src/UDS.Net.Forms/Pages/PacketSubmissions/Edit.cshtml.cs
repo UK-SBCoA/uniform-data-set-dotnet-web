@@ -34,6 +34,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return Partial("_Edit", PacketSubmission);
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission, [FromForm] int packetStatus)
         {
             Packet existingPacket = await GetPacketData(packetSubmission.PacketId);
