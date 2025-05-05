@@ -342,55 +342,77 @@ namespace UDS.Net.Services.DomainModels
                 return true;
         }
 
-        // Iterator method in c# retrieves elements one by one
-        //public virtual IEnumerable<VisitValidationResult> GetModelErrors()
-        //{
-        //    /// TODO For example, in UDS3 FVP, either C1 or C2 is required, but not both
-
-        //    // A1 sex and D1a menstruation
-        //    var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-        //    var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-
-        //    if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
-        //    {
-        //        if (a1.BIRTHSEX == 0 && a5d2.MENARCHE != null)
-        //        {
-        //            yield return new VisitValidationResult(
-        //                $"A1 sex cannot be male and A5D2 menstration details be provi.",
-        //                new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) });
-        //        }
-        //    }
-
-        //    yield break;
-        //}
-
         public IEnumerable<VisitValidationResult> GetModelErrors()
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            // A1 sex and D1a menstruation
             var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
             var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
             var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
 
             if (a1 != null && a5d2 != null && b5 != null)
             {
+                // A1 sex and D1a menstruation
                 if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
                 {
                     results.Add(new VisitValidationResult(
                         $"A1 sex cannot be male and A5D2 menstration details be provided.",
                         new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
                 }
-                if (b5.ANX == 0 && a5d2.ANXIETY == 1)
-                {
-                    results.Add(new VisitValidationResult(
-                        $"B1 anxiety cannot be 0 (no) and A5D2 anxiety be 1 (active).",
-                        new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
-                }
             }
             if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
             {
 
+            }
+
+            return results;
+        }
+
+        public IEnumerable<VisitValidationResult> GetModelAlerts()
+        {
+            List<VisitValidationResult> results = new List<VisitValidationResult>();
+
+            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
+            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+            var b9 = (B9FormFields)this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault();
+            var d1a = (D1aFormFields)this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault();
+
+            if (a1 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
+            {
+                if (b5.ANX.HasValue)
+                {
+                    if (b5.ANX == 0)
+                    {
+                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 0)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 0 (no), then form a5d2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                    }
+                    else if (b5.ANX == 1)
+                    {
+                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 1)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form a5d2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                        if (b9.BEANX.HasValue && b9.BEANX != 1)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 1 (yes), then form b9, q12c. beanx (anxiety) should equal 1 (yes).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                        if (d1a.ANXIET.HasValue && d1a.ANXIET != true)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"if q6a. anx (anxiety) = 1 (yes), then form d1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
+                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                        }
+                    }
+                }
             }
 
             return results;
