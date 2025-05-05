@@ -222,6 +222,8 @@
             <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems" ui-behaviors="Model.IMAGINGDXUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGINGDX"></span>
         </div>
+        <span asp-validation-for="D1b.ImagingModalitiesValidation"
+              class="mt-2 text-sm text-red-600"></span>
     </div>
     <p class="mt-2 text-sm text-gray-900">
         Please use the following questions to indicate the results of the fluid biomarker test(s) used by the clinician (or at consensus) to

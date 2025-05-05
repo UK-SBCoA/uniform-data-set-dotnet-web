@@ -784,6 +784,52 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        //MOCATOTS = sum of 1g-1l, 1n-1t, and 1w-1bb when all these sub questions are < 95
+        [NotMapped]
+        [RequiredIfInPersonVisit(nameof(MOCACOMP), "1", ErrorMessage = "If questions 1g-1l, 1n-1t, and 1w-1bb are all completed, the Total Raw Score - Uncorrected needs to be the sum of these answers.")]
+        public bool? MOCATOTSSumValidation
+        {
+            get
+            {
+                if (MOCATOTS.HasValue && MOCATOTS != 88)
+                {
+                    int questionsSum = 0;
+                    int questionsCount = 0;
+
+                    if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                    {
+                        if (MOCATRAI.HasValue && MOCATRAI.Value < 95) { questionsCount++; questionsSum += MOCATRAI.Value; }
+                        if (MOCACUBE.HasValue && MOCACUBE.Value < 95) { questionsCount++; questionsSum += MOCACUBE.Value; }
+                        if (MOCACLOC.HasValue && MOCACLOC.Value < 95) { questionsCount++; questionsSum += MOCACLOC.Value; }
+                        if (MOCACLON.HasValue && MOCACLON.Value < 95) { questionsCount++; questionsSum += MOCACLON.Value; }
+                        if (MOCACLOH.HasValue && MOCACLOH.Value < 95) { questionsCount++; questionsSum += MOCACLOH.Value; }
+                        if (MOCANAMI.HasValue && MOCANAMI.Value < 95) { questionsCount++; questionsSum += MOCANAMI.Value; }
+                        if (MOCADIGI.HasValue && MOCADIGI.Value < 95) { questionsCount++; questionsSum += MOCADIGI.Value; }
+                        if (MOCALETT.HasValue && MOCALETT.Value < 95) { questionsCount++; questionsSum += MOCALETT.Value; }
+                        if (MOCASER7.HasValue && MOCASER7.Value < 95) { questionsCount++; questionsSum += MOCASER7.Value; }
+                        if (MOCAREPE.HasValue && MOCAREPE.Value < 95) { questionsCount++; questionsSum += MOCAREPE.Value; }
+                        if (MOCAFLUE.HasValue && MOCAFLUE.Value < 95) { questionsCount++; questionsSum += MOCAFLUE.Value; }
+                        if (MOCAABST.HasValue && MOCAABST.Value < 95) { questionsCount++; questionsSum += MOCAABST.Value; }
+                        if (MOCARECN.HasValue && MOCARECN.Value < 95) { questionsCount++; questionsSum += MOCARECN.Value; }
+                        if (MOCAORDT.HasValue && MOCAORDT.Value < 95) { questionsCount++; questionsSum += MOCAORDT.Value; }
+                        if (MOCAORMO.HasValue && MOCAORMO.Value < 95) { questionsCount++; questionsSum += MOCAORMO.Value; }
+                        if (MOCAORYR.HasValue && MOCAORYR.Value < 95) { questionsCount++; questionsSum += MOCAORYR.Value; }
+                        if (MOCAORDY.HasValue && MOCAORDY.Value < 95) { questionsCount++; questionsSum += MOCAORDY.Value; }
+                        if (MOCAORPL.HasValue && MOCAORPL.Value < 95) { questionsCount++; questionsSum += MOCAORPL.Value; }
+                        if (MOCAORCT.HasValue && MOCAORCT.Value < 95) { questionsCount++; questionsSum += MOCAORCT.Value; }
+                    }
+
+                    //number of sub questions
+                    if (questionsCount == 19)
+                    {
+                        return MOCATOTS.Value == questionsSum ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
