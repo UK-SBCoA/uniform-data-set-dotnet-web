@@ -256,7 +256,7 @@ namespace UDS.Net.Services.DomainModels
                 if (status == PacketStatus.Pending)
                     updatePossible = true;
             }
-            else if(this.Status == PacketStatus.Submitted)
+            else if (this.Status == PacketStatus.Submitted)
             {
                 // Submitted forms can change to failed error checks when an error count is submitted
                 if (status == PacketStatus.FailedErrorChecks)
