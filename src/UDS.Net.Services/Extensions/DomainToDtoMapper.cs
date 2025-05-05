@@ -155,7 +155,7 @@ namespace UDS.Net.Services.Extensions
                 ModifiedBy = packetSubmission.ModifiedBy,
                 DeletedBy = packetSubmission.DeletedBy,
                 IsDeleted = packetSubmission.IsDeleted,
-                ErrorCount = packetSubmission.ErrorCount == 0 ? null : packetSubmission.ErrorCount,
+                ErrorCount = packetSubmission.ErrorCount
             };
 
             if (packetSubmission.Errors != null)
