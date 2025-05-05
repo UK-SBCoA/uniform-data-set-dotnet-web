@@ -136,7 +136,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? FDGPETDX { get; set; }
 
         [NotMapped]
-        [Display(Name = "FDG Etiology validation")]
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "At least one etiology must be assessed")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "At least one etiology must be assessed")]
         public bool? FDGEtiologyValidation
         {
             get
@@ -147,7 +148,6 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         return true;
                     }
-                    return false;
                 }
                 return null;
             }
@@ -653,14 +653,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return new ValidationResult(
                     "At least one CSF-based biomarker must not be 8.",
                     new[] { nameof(CSFOTH) }
-                );
-            }
-
-            if (FDGEtiologyValidation == false)
-            {
-                yield return new ValidationResult(
-                    "At least one FDG Etiology must not be 8",
-                    new[] { nameof(FDGOTH) }
                 );
             }
 
