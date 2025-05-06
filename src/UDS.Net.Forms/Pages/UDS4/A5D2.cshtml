@@ -213,7 +213,7 @@
                                                 <label asp-for="A5D2.HRTATTMULT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTMULT)</label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTATTMULT"></p>
-                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.HRTATTMULT)" for="@Model.A5D2.HRTATTMULT" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.HRTATTMULT)" for="@Model.A5D2.HRTATTMULT" items="Model.BasicYesNoListItems" ui-behaviors="Model.HRTATTMULTBehavior"></radio-button-group>
                                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTATTMULT"></span>
                                                 </div>
                                             </div>
