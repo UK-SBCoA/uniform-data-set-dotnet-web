@@ -385,7 +385,7 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.STROKAGE"),
                          new UIDisableAttribute("A5D2.STROKSTAT"),
                          new UIDisableAttribute("A5D2.ANGIOCP"),
-                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"), //HACK Disable grandchild input
                      }
             }
          },
@@ -422,7 +422,7 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.STROKAGE"),
                          new UIDisableAttribute("A5D2.STROKSTAT"),
                          new UIDisableAttribute("A5D2.ANGIOCP"),
-                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"), //HACK Disable grandchild input
                      }
             }
          },
