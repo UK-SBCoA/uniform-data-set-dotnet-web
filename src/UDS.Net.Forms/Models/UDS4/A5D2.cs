@@ -136,7 +136,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? ANGIOCP { get; set; }
         [Display(Name = "Age at most recent carotid artery surgery or stenting")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(ANGIOCP), "1", ErrorMessage = "Please specify.")]
         public int? CAROTIDAGE { get; set; }
         [Display(Name = "Transient ischemic attack (TIA)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]

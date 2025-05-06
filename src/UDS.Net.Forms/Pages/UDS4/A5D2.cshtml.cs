@@ -134,7 +134,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
-                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE") // HACK Disable grandchild inputs
                      }
             }
          },
@@ -144,7 +144,6 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
-                         new UIEnableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -154,7 +153,6 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
-                         new UIEnableAttribute("A5D2.HRTATTAGE"),
                      }
             }
          },
@@ -164,10 +162,18 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
-                         new UIDisableAttribute("A5D2.HRTATTAGE"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE") // HACK Disable grandchild inputs
                      }
             }
          },
+    };
+
+    public Dictionary<string, UIBehavior> HRTATTMULTBehavior = new Dictionary<string, UIBehavior>
+    {
+        { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5D2.HRTATTAGE") } },
+        { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5D2.HRTATTAGE") } },
+        { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5D2.HRTATTAGE") } }
+
     };
 
     public Dictionary<string, UIBehavior> CARDARRESTBehavior = new Dictionary<string, UIBehavior>
@@ -381,7 +387,7 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.STROKAGE"),
                          new UIDisableAttribute("A5D2.STROKSTAT"),
                          new UIDisableAttribute("A5D2.ANGIOCP"),
-                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"), //HACK Disable grandchild input
                      }
             }
          },
@@ -394,7 +400,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.STROKAGE"),
                          new UIEnableAttribute("A5D2.STROKSTAT"),
                          new UIEnableAttribute("A5D2.ANGIOCP"),
-                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
                      }
             }
          },
@@ -407,7 +412,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.STROKAGE"),
                          new UIEnableAttribute("A5D2.STROKSTAT"),
                          new UIEnableAttribute("A5D2.ANGIOCP"),
-                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
                      }
             }
          },
@@ -420,12 +424,44 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.STROKAGE"),
                          new UIDisableAttribute("A5D2.STROKSTAT"),
                          new UIDisableAttribute("A5D2.ANGIOCP"),
-                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"), //HACK Disable grandchild input
                      }
             }
          },
     };
 
+    public Dictionary<string, UIBehavior> ANGIOCPBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                 }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
+
+                 }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+
+                 }
+            }
+         },
+    };
     public Dictionary<string, UIBehavior> CBTIABehavior = new Dictionary<string, UIBehavior>
     {
          {
