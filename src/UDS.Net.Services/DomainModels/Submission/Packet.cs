@@ -8,7 +8,7 @@ namespace UDS.Net.Services.DomainModels.Submission
     {
         protected readonly List<PacketSubmission> _submissions = new List<PacketSubmission>();
 
-        public IReadOnlyList<PacketSubmission> Submissions => _submissions;// new List<PacketSubmission>();
+        public List<PacketSubmission> Submissions => _submissions;// new List<PacketSubmission>();
 
         public void AddSubmission(PacketSubmission submission)
         {
