@@ -394,7 +394,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.STROKAGE"),
                          new UIEnableAttribute("A5D2.STROKSTAT"),
                          new UIEnableAttribute("A5D2.ANGIOCP"),
-                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
                      }
             }
          },
@@ -407,7 +406,6 @@ public class A5D2Model : FormPageModel
                          new UIEnableAttribute("A5D2.STROKAGE"),
                          new UIEnableAttribute("A5D2.STROKSTAT"),
                          new UIEnableAttribute("A5D2.ANGIOCP"),
-                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
                      }
             }
          },
