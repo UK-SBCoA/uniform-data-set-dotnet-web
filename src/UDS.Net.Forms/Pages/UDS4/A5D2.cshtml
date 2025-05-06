@@ -213,7 +213,7 @@
                                                 <label asp-for="A5D2.HRTATTMULT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTMULT)</label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTATTMULT"></p>
-                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.HRTATTMULT)" for="@Model.A5D2.HRTATTMULT" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.HRTATTMULT)" for="@Model.A5D2.HRTATTMULT" items="Model.BasicYesNoListItems" ui-behaviors="Model.HRTATTMULTBehavior"></radio-button-group>
                                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTATTMULT"></span>
                                                 </div>
                                             </div>
@@ -413,16 +413,16 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <tbody>
-                                    <tr class="odd:bg-white even:bg-gray-50 border-b">
-                                        <th class="w-[1000px]"></th>
-                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Never improved</th>
-                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Partially improved</th>
-                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/back to normal</th>
+                            </tbody>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                    <th class="w-[1000px]"></th>
+                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Never improved</th>
+                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Partially improved</th>
+                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/back to normal</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Unknown</th>
-                                    </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">                 
+                                </tr>
+                                <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td>
                                         <div class="ml-6">
                                             <label asp-for="A5D2.STROKSTAT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKSTAT)</label>
@@ -433,15 +433,14 @@
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.STROKSTAT)" for="@Model.A5D2.STROKSTAT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
 
-                                </tbody>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.ANGIOCP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ANGIOCP)</label>
+                                                <label asp-for="A5D2.ANGIOCP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ANGIOCP)</br><span class="font-bold">(If No or Unknown, skip to question 3b)</span></label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ANGIOCP"></p>
-                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.ANGIOCP)" for="@Model.A5D2.ANGIOCP" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.ANGIOCP)" for="@Model.A5D2.ANGIOCP" items="Model.BasicYesNoListItems" ui-behaviors="Model.ANGIOCPBehavior"></radio-button-group>
                                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ANGIOCP"></span>
                                                 </div>
                                             </div>
@@ -455,6 +454,15 @@
                                             </div>
                                         </div>
                                     </td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                    <th class="w-[1000px]"></th>
+                                    @foreach (var item in Model.ConditionsListItems)
+                                    {
+                                        <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
+                                    }
                                 </tr>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td>
@@ -1924,7 +1932,7 @@
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.MENARCHE"></p>
-                        <input asp-for="@Model.A5D2.MENARCHE" ui-range-behavior="Model.MENARCHEBehavior"/>
+                        <input asp-for="@Model.A5D2.MENARCHE" ui-range-behavior="Model.MENARCHEBehavior" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.MENARCHE"></span>
                     </div>
                 </div>
