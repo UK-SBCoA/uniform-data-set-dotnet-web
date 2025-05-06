@@ -134,6 +134,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE") // HACK Disable grandchild inputs
                      }
             }
          },
@@ -161,6 +162,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIDisableAttribute("A5D2.HRTATTMULT"),
+                         new UIDisableAttribute("A5D2.HRTATTAGE") // HACK Disable grandchild inputs
                      }
             }
          },
