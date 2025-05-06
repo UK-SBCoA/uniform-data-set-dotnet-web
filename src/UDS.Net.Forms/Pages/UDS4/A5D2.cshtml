@@ -438,10 +438,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.ANGIOCP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ANGIOCP)</label>
+                                                <label asp-for="A5D2.ANGIOCP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ANGIOCP)</br><span class="font-bold">(If No or Unknown, skip to question 3b)</span></label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.ANGIOCP"></p>
-                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.ANGIOCP)" for="@Model.A5D2.ANGIOCP" items="Model.BasicYesNoListItems"></radio-button-group>
+                                                    <radio-button-group id="@Html.IdFor(m => m.A5D2.ANGIOCP)" for="@Model.A5D2.ANGIOCP" items="Model.BasicYesNoListItems" ui-behaviors="Model.ANGIOCPBehavior"></radio-button-group>
                                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.ANGIOCP"></span>
                                                 </div>
                                             </div>

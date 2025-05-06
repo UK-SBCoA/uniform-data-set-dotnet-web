@@ -426,6 +426,38 @@ public class A5D2Model : FormPageModel
          },
     };
 
+    public Dictionary<string, UIBehavior> ANGIOCPBehavior = new Dictionary<string, UIBehavior>
+    {
+         {
+            "0", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+                 }
+            }
+         },
+         {
+            "1", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIEnableAttribute("A5D2.CAROTIDAGE"),
+
+                 }
+            }
+         },
+         {
+            "9", new UIBehavior
+            {
+                 PropertyAttributes = new List<UIPropertyAttributes>
+                 {
+                         new UIDisableAttribute("A5D2.CAROTIDAGE"),
+
+                 }
+            }
+         },
+    };
     public Dictionary<string, UIBehavior> CBTIABehavior = new Dictionary<string, UIBehavior>
     {
          {
