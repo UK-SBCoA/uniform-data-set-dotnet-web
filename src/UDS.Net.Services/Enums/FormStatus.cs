@@ -10,8 +10,6 @@ namespace UDS.Net.Services.Enums
         InProgress,
         [Description("Finalized")]
         Finalized,
-        [Description("Not Complete")]
-        NotComplete
     }
 }
 
