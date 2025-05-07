@@ -135,6 +135,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "At least one etiology must be assessed")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "At least one etiology must be assessed")]
+        public bool? FDGEtiologyValidation
+        {
+            get
+            {
+                if (FDGAD != null && FDGFTLD != null && FDGLBD != null && FDGOTH != null)
+                {
+                    if (FDGAD != 8 || FDGFTLD != 8 || FDGLBD != 8 || FDGOTH != 8)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
+
         [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
@@ -642,4 +660,3 @@ namespace UDS.Net.Forms.Models.UDS4
         }
     }
 }
-

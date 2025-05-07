@@ -241,7 +241,6 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (this.Status == PacketStatus.FailedErrorChecks)
             {
-                // when errors are attempted to be resolved status can be moved back to pending
                 if (status == PacketStatus.Pending)
                     updatePossible = true;
             }
@@ -255,6 +254,16 @@ namespace UDS.Net.Services.DomainModels
             else if (this.Status == PacketStatus.Frozen)
             {
                 if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.Submitted)
+            {
+                // Submitted forms can change to failed error checks when an error count is submitted
+                if (status == PacketStatus.FailedErrorChecks)
+                    updatePossible = true;
+
+                // Forms checked as success change to Passed error checks with an error count of 0
+                if (status == PacketStatus.PassedErrorChecks)
                     updatePossible = true;
             }
             return updatePossible;
