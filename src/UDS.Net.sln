@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services.Test", "UD
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{C4D641E2-3177-4FFA-9284-4E34E4293A4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC.Services.Test", "UDS.Net.Web.MVC.Services.Test\UDS.Net.Web.MVC.Services.Test.csproj", "{7879003A-AF57-4662-A66B-6A33FA09325C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7879003A-AF57-4662-A66B-6A33FA09325C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7879003A-AF57-4662-A66B-6A33FA09325C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7879003A-AF57-4662-A66B-6A33FA09325C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7879003A-AF57-4662-A66B-6A33FA09325C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
