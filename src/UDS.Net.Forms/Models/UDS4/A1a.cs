@@ -299,7 +299,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == FormStatus.Finalized)
+            if (Status == FormStatus.Finalized && MODE != FormMode.NotCompleted)
             {
                 if (!EXPNOTAPP && EXPSTRS == null)
                 {
