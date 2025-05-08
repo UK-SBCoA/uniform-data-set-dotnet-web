@@ -186,6 +186,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(TRACOTHDX), "1",
+        ErrorMessage = "At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8.")]
+        [RequiredIf(nameof(TRACOTHDX), "2",
+        ErrorMessage = "At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8.")]
+        public bool? TracerModalitiesValidation
+        {
+            get
+            {
+                if (TRACERAD == 8
+                    && TRACERFTLD == 8
+                    && TRACERLBD == 8
+                    && TRACEROTH == 8)
+                {
+                    return null;
+                }
+                return true;
+            }
+        }
+
         [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "(specify)")]
         [MaxLength(60)]
@@ -618,34 +638,6 @@ namespace UDS.Net.Forms.Models.UDS4
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
-            }
-
-            if (TRACEROTH != 1 && !string.IsNullOrWhiteSpace(TRACEROTHX))
-            {
-                yield return new ValidationResult(
-                    "TRACEROTHX should not be provided unless TRACEROTH is marked as '1' (yes).",
-                    new[] { "TRACEROTHX" });
-            }
-
-
-            if ((IMAGINGDX == 1 || IMAGINGDX == 3) && TRACOTHDX == null)
-            {
-                yield return new ValidationResult("TRACOTHDX is required when IMAGINGDX is 1 or 3.",
-                    new[] { "TRACOTHDX" });
-            }
-
-            if (TRACOTHDX == 1 || TRACOTHDX == 2)
-            {
-                int rad = TRACERAD ?? 8;
-                int ftld = TRACERFTLD ?? 8;
-                int lbd = TRACERLBD ?? 8;
-                int oth = TRACEROTH ?? 8;
-
-                if (rad == 8 && ftld == 8 && lbd == 8 && oth == 8)
-                {
-                    yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when TRACOTHDX = 1 or 2.",
-                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
-                }
             }
 
             if (CSFBiomarkersValidation == false)
