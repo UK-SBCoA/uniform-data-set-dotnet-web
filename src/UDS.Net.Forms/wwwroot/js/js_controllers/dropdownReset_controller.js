@@ -20,7 +20,7 @@ export default class extends Controller {
       this.enableTargets(this.remoteTargets)
     }
 
-    if (val === 3) {
+    if (val === 0) {
       this.enableTargets(this.notCompletedTargets)
     }
   }

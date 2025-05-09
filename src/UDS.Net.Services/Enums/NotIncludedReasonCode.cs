@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
+﻿using System.ComponentModel;
 namespace UDS.Net.Services.Enums
 {
     // A2: 94, No co-participant|95, Physical problem|96, Cognitive/behavioral problem|97, Other|98, Verbal refusal
@@ -16,7 +14,9 @@ namespace UDS.Net.Services.Enums
         [Description("Other")]
         Other = 97,
         [Description("Verbal refusal")]
-        VerbalRefusal = 98
+        VerbalRefusal = 98,
+        [Description("Concerns about reliability")]
+        ConcernsAboutReliability = 93
     }
 }
 

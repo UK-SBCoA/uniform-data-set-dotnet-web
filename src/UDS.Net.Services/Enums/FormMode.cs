@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace UDS.Net.Services.Enums
 {
@@ -10,7 +9,7 @@ namespace UDS.Net.Services.Enums
         [Description("Remote")]
         Remote = 2,
         [Description("Not completed")]
-        NotCompleted = 3
+        NotCompleted = 0
     }
 }
 

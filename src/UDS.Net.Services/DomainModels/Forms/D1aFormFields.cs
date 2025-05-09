@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -126,7 +125,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>();
+                return new List<NotIncludedReasonCode>() { };
             }
         }
 
