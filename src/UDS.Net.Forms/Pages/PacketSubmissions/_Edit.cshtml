@@ -5,7 +5,7 @@
 
 <turbo-frame id="EditPacketSubmission">
     <form method="post" asp-page="../PacketSubmissions/Edit">
-        <table class="w-full text-left">
+        @* <table class="w-full text-left">
             <thead>
                 <tr>
                     <th class="w-1/4"></th>
@@ -38,6 +38,19 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+        </table> *@
+        <div>
+            <div>
+                Upload File
+            </div>
+            <div class="grid grid-cols-2 justify-items-center">
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Update Error Count
+                </button>
+                <a data-turbo-frame="PacketSubmissions" asp-page="../Packets/Details" asp-route-id="@Model.PacketId" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                    Cancel
+                </a>
+            </div>
+        </div>
     </form>
 </turbo-frame>
