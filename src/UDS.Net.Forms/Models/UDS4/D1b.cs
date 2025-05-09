@@ -187,24 +187,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? TRACOTHDX { get; set; }
 
         [NotMapped]
-        [RequiredIf(nameof(TRACOTHDX), "1",
-        ErrorMessage = "At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8.")]
-        [RequiredIf(nameof(TRACOTHDX), "2",
-        ErrorMessage = "At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8.")]
-        public bool? TracerModalitiesValidation
-        {
-            get
-            {
-                if (TRACERAD == 8
-                    && TRACERFTLD == 8
-                    && TRACERLBD == 8
-                    && TRACEROTH == 8)
-                {
-                    return null;
-                }
-                return true;
-            }
-        }
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "At least one etiology must be assessed. TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH can not all be 8.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "At least one etiology must be assessed. TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH can not all be 8.")]
+        public bool? TracerModalitiesValidation => (TRACERAD == 8 && TRACERFTLD == 8 && TRACERLBD == 8 && TRACEROTH == 8) ? null : true;
 
         [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "(specify)")]
