@@ -108,7 +108,7 @@ namespace UDS.Net.Forms.Models
                 {
                     yield return new ValidationResult(
                         $"Provide a reason code if form is not completed",
-                        new[] { nameof(NotIncludedReasonCode) });
+                        new[] { nameof(NOT) });
                 }
                 if (string.IsNullOrWhiteSpace(Kind.Trim()))
                 {
