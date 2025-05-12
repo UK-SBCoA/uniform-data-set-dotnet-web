@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.Net.Sockets;
+using CsvHelper;
+using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -35,8 +39,31 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission, [FromForm] int packetStatus)
+        public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission, [FromForm] int packetStatus, [FromForm] IFormFile? errorFileUpload = null) 
         {
+            if(errorFileUpload == null)
+            {
+                return NotFound("Error upload file not found");
+            }
+            //TODO impliment ParseErrorFile as service method. The service file does not have a namespace for the asp.net http? 
+            //Start ParseErrorFile method
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                PrepareHeaderForMatch = args => args.Header.ToLower(),
+            };
+
+            using (var stream = errorFileUpload.OpenReadStream())
+            using (var reader = new StreamReader(stream))
+            using (var csv = new CsvReader(reader, config))
+            {
+                var records = csv.GetRecords<NACCErrorModel>();
+
+                var test = "test";
+            }
+
+            //End ParseErrorFile method
+
+
             Packet existingPacket = await GetPacketData(packetSubmission.PacketId);
 
             if (existingPacket != null)
