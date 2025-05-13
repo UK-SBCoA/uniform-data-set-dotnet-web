@@ -254,7 +254,7 @@
 
 
     <!--// Box B //-->
-    <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm m-4 border border-blue-200">
+    <div data-controller="checkbox-disable" class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm m-4 border border-blue-200">
         <div class="px-4 py-5 sm:px-6 bg-blue-600 text-white">
             <p class="text-base/7 font-semibold">Box B</p>
             <h2 class="mt-2 text-xl font-semibold tracking-tight text-pretty text-white-900 sm:text-2xl">No Further Contact</h2>
@@ -269,7 +269,15 @@
                         <span class="counter invisible"></span><span class="subcounter"></span>
                     </div>
                     <div class="mx-3">
-                        @Html.CheckBox("DECEASED", Model.DECEASED, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"DEATHMO\", \"DEATHDY\", \"DEATHYR\", \"AUTOPSY\" ]", data_fancy_checkboxes_target = "checkbox" })
+                        @Html.CheckBox("DECEASED", Model.DECEASED, new
+                       {
+                           @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                           data_checkbox_disable_target = "trigger",
+                           data_action = "input->checkbox-disable#ToggleGroup",
+                           data_checkbox_disable_enableGroup_param = "DEATHMO, DEATHDY, DEATHYR, AUTOPSY",
+                           data_checkbox_disable_disableGroup_param = "DISCONT",
+                           data_checkbox_disable_toggleState_param = "true"
+                       })
                     </div>
                     <div>
                         <label asp-for="@Model.DECEASED">@Html.DisplayNameFor(model => model.DECEASED) <small class="@labelInstructionCSS normal-case">(Complete DEATH section)</small></label>
@@ -285,7 +293,15 @@
                         <span class="subcounter"></span>
                     </div>
                     <div class="mx-3">
-                        @Html.CheckBox("DISCONT", Model.DISCONT, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"DISCMO\", \"DISCDAY\", \"DISCYR\", \"DROPREAS\" ]", data_fancy_checkboxes_target = "checkbox" })
+                        @Html.CheckBox("DISCONT", Model.DISCONT, new
+                       {
+                           @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                           data_checkbox_disable_target = "trigger",
+                           data_action = "input->checkbox-disable#ToggleGroup",
+                           data_checkbox_disable_enableGroup_param = "DISCMO, DISCDAY, DISCYR, DROPREAS",
+                           data_checkbox_disable_disableGroup_param = "DECEASED",
+                           data_checkbox_disable_toggleState_param = "true"
+                       })
                     </div>
                     <div>
                         <label asp-for="@Model.DISCONT">@Html.DisplayNameFor(model => model.DISCONT) <small class="@labelInstructionCSS normal-case">(Complete DROPPED section)</small></label>
@@ -402,4 +418,4 @@
 <input type="hidden" asp-for="Id" />
 <input type="hidden" asp-for="ModifiedBy" />
 
-<div asp-validation-summary="All" class="text-red-600"></div>
+<div asp-validation-summary="All" class="text-red-600 px-6"></div>
