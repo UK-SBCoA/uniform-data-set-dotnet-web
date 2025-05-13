@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Models;
 namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 {
-    public class Create
+    public class CreateModel : PageModel
     {
-        public Create()
+        List<PacketSubmissionErrorModel> packetSubmissionErrors = new List<PacketSubmissionErrorModel>();
+
+        public IActionResult OnGet()
         {
+            var test = "test";
+
+            return Page();
         }
     }
 }

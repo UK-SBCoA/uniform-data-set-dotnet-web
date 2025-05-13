@@ -47,6 +47,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             //TODO impliment ParseErrorFile as service method. The service file does not have a namespace for the asp.net http? 
             //Start ParseErrorFile method
+
+            List<PacketSubmissionErrorModel> packetSubmissionErrors = new List<PacketSubmissionErrorModel>();
+
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
@@ -56,9 +59,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
             {
-                var records = csv.GetRecords<NACCErrorModel>();
+                csv.Read();
+                csv.ReadHeader();
+                while (csv.Read())
+                {
+                    var record = csv.GetRecord<NACCErrorModel>();
 
-                var test = "test";
+                    //PTID of record needs to match the current PTID or ignore the record
+                    //This could be the legacy ID
+
+                    //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
+                }
+
             }
 
             //End ParseErrorFile method
@@ -78,9 +90,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     return NotFound($"Unable to set packet Id ${existingPacket.Id} status to: {packetStatus}");
                 }
 
-                if (existingPacket != null)
+                //Modify logic to force failure and redirect to partial
+                if (existingPacket == null)
                 {
-                    Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, (int)packetSubmission.ErrorCount, packetSubmission.Id);
+                    Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, 0, packetSubmission.Id);
 
                     // Create a packetModel to return to the index
                     PacketModel updatedPacketModel = updatedPacket.ToVM();
@@ -89,11 +102,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     return Partial("_Index", updatedPacketModel);
                 }
 
-                // return existing packetModel on failure to update
                 PacketModel existingPacketModel = existingPacket.ToVM();
                 existingPacketModel.Participation = existingPacket.Participation.ToVM();
 
-                return Partial("_Index", existingPacketModel);
+                //return Partial("_Index", existingPacketModel);
+                return RedirectToPage("/PacketSubmissionErrors/Create");
             }
 
             return NotFound($"Unable to set packet Id ${packetSubmission.PacketId} status to: {(PacketStatus)packetStatus}");
