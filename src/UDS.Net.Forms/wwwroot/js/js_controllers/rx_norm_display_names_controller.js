@@ -1,5 +1,5 @@
 ﻿
-// wwwroot/js/js_controllers/rxNormDisplayNames_controller.js
+// wwwroot/js/js_controllers/rx_norm_display_names_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
