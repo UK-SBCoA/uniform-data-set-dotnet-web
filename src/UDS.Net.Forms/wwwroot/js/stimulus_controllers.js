@@ -12,7 +12,7 @@ import FancyCheckboxes from "./js_controllers/fancy_checkboxes_controller.js"
 import FormFooterDropdownReset from "./js_controllers/form_footer_dropdown_reset_controller.js"
 import MobileMenu from "./js_controllers/mobile_menu_controller.js"
 import RxNormDisplayNames from "./js_controllers/rx_norm_display_names_controller.js"
-import selectendpoint_controller from "./js_controllers/select_endpoint_controller.js"
+import SelectEndpoint from "./js_controllers/select_endpoint_controller.js"
 
 window.Stimulus = Application.start()
 
