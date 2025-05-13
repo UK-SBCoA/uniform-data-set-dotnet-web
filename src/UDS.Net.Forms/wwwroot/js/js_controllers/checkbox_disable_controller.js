@@ -1,19 +1,20 @@
 ﻿/*
-DESCRIPTION:
-checkboxDisable_controller.js is for custom UI behavior for disabling and enabling inputs by their name attribute when a checkbox is checked, using stimulus.js
+ * js/js_controllers/checkbox_disable_controller.js
+ * DESCRIPTION:
+ * Disabling and enabling child inputs by their name attribute when a checkbox is checked
 
 HTML USAGE:
      <div class="flex h-6 items-center">
-                 @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
-                     {
-                         @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                         data_checkBoxDisable_target = "checkboxTrigger",
-                         data_action = "input->checkboxDisable#ToggleGroup",
-                         data_checkBoxDisable_enableGroup_param = "",
-                         data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
-                         data_checkboxDisable_toggleState_param = "true"
-                     })
-             </div>
+          @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
+              {
+                  @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                  data_checkbox_disable_target = "checkboxTrigger",
+                  data_action = "input->checkbox_disable#ToggleGroup",
+                  data_checkBoxDisable_enableGroup_param = "",
+                  data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
+                  data_checkboxDisable_toggleState_param = "true"
+              })
+      </div>
 
 */
 
