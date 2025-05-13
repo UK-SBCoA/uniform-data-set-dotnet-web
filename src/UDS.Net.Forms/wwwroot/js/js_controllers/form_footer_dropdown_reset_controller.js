@@ -1,10 +1,16 @@
-﻿//Implemenation found at UDS.Net.Forms\Pages\Shared\_FormFooter.cshtml
+﻿/* For form footer partial UDS.Net.Forms\Pages\Shared\_FormFooter.cshtml
+*/
 
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["trigger", "remote", "notCompleted"]
 
+  connect() {
+    if (this.hasTriggerTarget) {
+      this.setDropdowns(this.triggerTarget.value);
+    }
+  }
 
   update(event) {
     this.setDropdowns(event.target.value)
@@ -24,13 +30,14 @@ export default class extends Controller {
       this.enableTargets(this.notCompletedTargets)
     }
   }
-  resetAndDisable(targets) {
 
+  resetAndDisable(targets) {
     targets.forEach((target) => {
       target.selectedIndex = 0
       target.disabled = true
     })
   }
+
   enableTargets(targets) {
     targets.forEach((target) => {
       target.disabled = false

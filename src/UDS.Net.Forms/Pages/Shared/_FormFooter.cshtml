@@ -14,7 +14,7 @@
                 <p></p>
             </div>
         </div>
-        <div data-controller="dropdownReset" class="px-6 pb-20 pt-12 sm:pb-32 lg:px-8 lg:py-12 bg-indigo-100 shadow sm:rounded-lg">
+        <div class="px-6 pb-20 pt-12 sm:pb-32 lg:px-8 lg:py-12 bg-indigo-100 shadow sm:rounded-lg">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
                 <input asp-for="Id" type="hidden" />
@@ -46,16 +46,14 @@
                 }
 
                 <div>
+                    <!--// For the C2, this input is in the top of the form //-->
                     @if (Model.Kind != "C2")
-
                     {
-
                         <div>
                             <label for="@Html.IdFor(m => m.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
-                            <enum-select data-dropdownreset-target="trigger" data-action="change->dropdownReset#update" for="MODE" items="Html.GetEnumSelectList<FormMode>()" enabled-values="@Model.AllowedFormModes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
+                            <enum-select data-form-footer-dropdown-reset-target="trigger" data-action="change->form-footer-dropdown-reset#update" for="MODE" items="Html.GetEnumSelectList<FormMode>()" enabled-values="@Model.AllowedFormModes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="MODE"></span>
                         </div>
-
                     }
                     <div>
                         <label for="@Html.IdFor(m => m.FRMDATE)" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
@@ -74,33 +72,33 @@
 
                         @if (Model.AllowsRemote)
                         {
-                            <select data-dropdownreset-target="remote" asp-for="RMREAS" asp-items="Html.GetEnumSelectList<RemoteReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <select data-form-footer-dropdown-reset-target="remote" asp-for="RMREAS" asp-items="Html.GetEnumSelectList<RemoteReasonCode>()" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option disabled selected class="disabled:opacity-75">--</option>
                             </select>
                         }
                         else
                         {
-                            <select data-dropdownreset-target="remote"  asp-for="RMREAS" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
+                            <select data-form-footer-dropdown-reset-target="remote" asp-for="RMREAS" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
                                 <option disabled selected class="disabled:opacity-75">Remote not allowed</option>
                             </select>
                         }
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="RMREAS"></span>
                     </div>
                     <div>
-                        @if (Model.AllowsRemote && Model.Kind != "C2")
+                        @if (Model.AllowsRemote)
                         {
-                            <label for="@Html.IdFor(m => m.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-                            <enum-select data-dropdownreset-target="remote" for="RMMODE" items="Html.GetEnumSelectList<RemoteModality>()" enabled-values="@Model.AllowedRemoteModalities" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <option disabled selected class="disabled:opacity-75">--</option>
-                            </enum-select>
-                        }
-                        else if (Model.Kind == "C2")
-                        {
-
+                            <!--// For the C2, this input is in the top of the form //-->
+                            if (Model.Kind != "C2")
+                            {
+                                <label for="@Html.IdFor(m => m.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
+                                <enum-select data-form-footer-dropdown-reset-target="remote" for="RMMODE" items="Html.GetEnumSelectList<RemoteModality>()" enabled-values="@Model.AllowedRemoteModalities" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    <option disabled selected class="disabled:opacity-75">--</option>
+                                </enum-select>
+                            }
                         }
                         else
                         {
-                            <select data-dropdownreset-target="remote" asp-for="RMMODE" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
+                            <select data-form-footer-dropdown-reset-target="remote" asp-for="RMMODE" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
                                 <option disabled selected class="disabled:opacity-75">Remote not allowed</option>
                             </select>
                         }
@@ -111,13 +109,13 @@
 
                         @if (Model.IsRequiredForPacketKind)
                         {
-                            <select data-dropdownreset-target="notCompleted" asp-for="NOT" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
+                            <select data-form-footer-dropdown-reset-target="notCompleted" asp-for="NOT" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
                                 <option disabled selected class="disabled:opacity-75">Form is required, MUST complete</option>
                             </select>
                         }
                         else
                         {
-                            <enum-select data-dropdownreset-target="notCompleted" for="NOT" items="Html.GetEnumSelectList<NotIncludedReasonCode>()" enabled-values="@Model.AllowedNotIncludedReasonCodes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <enum-select data-form-footer-dropdown-reset-target="notCompleted" for="NOT" items="Html.GetEnumSelectList<NotIncludedReasonCode>()" enabled-values="@Model.AllowedNotIncludedReasonCodes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 <option disabled selected class="disabled:opacity-75">--</option>
                             </enum-select>
                         }
