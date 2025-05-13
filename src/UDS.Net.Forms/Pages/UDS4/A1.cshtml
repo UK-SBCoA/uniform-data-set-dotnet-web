@@ -653,7 +653,7 @@
         </div>
 
 
-        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6" data-controller="checkboxDisable">
+        <div data-controller="checkbox-disable" class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your current gender identity? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GenderIdentityIndicated"></span>
@@ -723,11 +723,11 @@
                                 <div class="flex h-6 items-center">
                                     <!--// GENOTH is pretty complex because it needs to enable and also disable //-->
                                     @Html.CheckBox("A1.GENOTH", Model.A1.GENOTH, new
-                               {
-                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                   data_affects = "true",
-                                   data_affects_toggle_targets = "[ \"A1.GENOTHX\"]"
-                               })
+                                   {
+                                       @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                       data_affects = "true",
+                                       data_affects_toggle_targets = "[ \"A1.GENOTHX\"]"
+                                   })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.GENOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENOTH)</label>
@@ -746,14 +746,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.GENDKN", Model.A1.GENDKN, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                               {
+                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                   data_checkbox_disable_target = "trigger",
+                                   data_action = "input->checkbox-disable#ToggleGroup",
+                                   data_checkbox_disable_enableGroup_param = "",
+                                   data_checkbox_disable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
+                                   data_checkbox_disable_toggleState_param = "true"
+                               })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.GENDKN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENDKN)</label>
@@ -763,14 +763,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                               {
+                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                   data_checkbox_disable_target = "trigger",
+                                   data_action = "input->checkbox-disable#ToggleGroup",
+                                   data_checkbox_disable_enableGroup_param = "",
+                                   data_checkbox_disable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
+                                   data_checkbox_disable_toggleState_param = "true"
+                               })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.GENNOANS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENNOANS)</label>
@@ -799,7 +799,7 @@
             </div>
         </div>
 
-        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6" data-controller="checkboxDisable">
+        <div data-controller="checkbox-disable" class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your sexual orientation? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SexualOrientstionIndicated"></span>
@@ -849,11 +849,11 @@
                                 <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
                                     @Html.CheckBox("A1.SEXORNOTH", Model.A1.SEXORNOTH, new
-                               {
-                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                   data_affects = "true",
-                                   data_affects_toggle_targets = "[ \"A1.SEXORNOTHX\"]"
-                               })
+                                   {
+                                       @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                       data_affects = "true",
+                                       data_affects_toggle_targets = "[ \"A1.SEXORNOTHX\"]"
+                                   })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.SEXORNOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNOTH)</label>
@@ -872,14 +872,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.SEXORNDNK", Model.A1.SEXORNDNK, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNNOAN",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                               {
+                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                   data_checkbox_disable_target = "trigger",
+                                   data_action = "input->checkbox-disable#ToggleGroup",
+                                   data_checkbox_disable_enableGroup_param = "",
+                                   data_checkbox_disable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNNOAN",
+                                   data_checkbox_disable_toggleState_param = "true"
+                               })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.SEXORNDNK" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNDNK)</label>
@@ -889,14 +889,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.SEXORNNOAN", Model.A1.SEXORNNOAN, new
-                                {
-                                    @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                    data_checkBoxDisable_target = "checkboxTrigger",
-                                    data_action = "input->checkboxDisable#ToggleGroup",
-                                    data_checkBoxDisable_enableGroup_param = "",
-                                    data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK",
-                                    data_checkboxDisable_toggleState_param = "true"
-                                })
+                               {
+                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                   data_checkbox_disable_target = "trigger",
+                                   data_action = "input->checkbox-disable#ToggleGroup",
+                                   data_checkbox_disable_enableGroup_param = "",
+                                   data_checkbox_disable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK",
+                                   data_checkbox_disable_toggleState_param = "true"
+                               })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.SEXORNNOAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNNOAN)</label>
