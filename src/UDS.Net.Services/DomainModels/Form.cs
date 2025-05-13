@@ -60,7 +60,7 @@ namespace UDS.Net.Services.DomainModels
 
         public FormLanguage LANG { get; set; }
 
-        public FormMode MODE { get; set; }
+        public FormMode MODE { get; set; } = FormMode.InPerson;
 
         public RemoteReasonCode? RMREAS { get; set; }
 
