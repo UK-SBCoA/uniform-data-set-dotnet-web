@@ -1,132 +1,47 @@
-﻿using System;
-using System.Data;
-using System.Globalization;
-using System.Net.Sockets;
-using CsvHelper;
-using CsvHelper.Configuration;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Razor.Language.Extensions;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
-using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;
-
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class EditModel : PageModel
     {
-        protected readonly IParticipationService _participationService;
-        protected readonly IPacketService _packetService;
+        //TODO: find out why model binding is not working with this property in the view
+        //[BindProperty]
+        //public PacketSubmissionModel PacketSubmission { get; set; } = new PacketSubmissionModel();
 
-        public EditModel(IParticipationService participationService, IPacketService packetService)
+        [BindProperty]
+        public int PacketSubmissionId { get; set; }
+
+        [BindProperty]
+        public int PacketId { get; set; }
+
+        [BindProperty]
+        public int LegacyId { get; set; }
+
+        [BindProperty]
+        public int PacketStatus { get; set; }
+
+        [BindProperty]
+        public int VisitNum { get; set; }
+
+        [BindProperty]
+        public IFormFile? ErrorFileUpload { get; set; }
+
+        public IActionResult OnGetPartial(int packetSubmissionId, int packetId, int legacyId, int visitNum)
         {
-            _participationService = participationService;
-            _packetService = packetService;
-        }
+            //TODO: Find out why model binding to view does not work with PacketSubmissions
+            //PacketSubmission = new PacketSubmissionModel
+            //{
+            //    Id = packetSubmissionId,
+            //    PacketId = packetId
+            //};
 
-        public IActionResult OnGetPartial(int packetSubmissionId, int packetId)
-        {
-            PacketSubmissionModel PacketSubmission = new PacketSubmissionModel
-            {
-                Id = packetSubmissionId,
-                PacketId = packetId
-            };
+            PacketSubmissionId = packetSubmissionId;
+            PacketId = packetId;
+            LegacyId = legacyId;
+            VisitNum = visitNum;
 
-            return Partial("_Edit", PacketSubmission);
-        }
-
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(PacketSubmissionModel packetSubmission, [FromForm] int packetStatus, [FromForm] IFormFile? errorFileUpload = null) 
-        {
-            if(errorFileUpload == null)
-            {
-                return NotFound("Error upload file not found");
-            }
-            //TODO impliment ParseErrorFile as service method. The service file does not have a namespace for the asp.net http? 
-            //Start ParseErrorFile method
-
-            List<PacketSubmissionErrorModel> packetSubmissionErrors = new List<PacketSubmissionErrorModel>();
-
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                PrepareHeaderForMatch = args => args.Header.ToLower(),
-            };
-
-            using (var stream = errorFileUpload.OpenReadStream())
-            using (var reader = new StreamReader(stream))
-            using (var csv = new CsvReader(reader, config))
-            {
-                csv.Read();
-                csv.ReadHeader();
-                while (csv.Read())
-                {
-                    var record = csv.GetRecord<NACCErrorModel>();
-
-                    //PTID of record needs to match the current PTID or ignore the record
-                    //This could be the legacy ID
-
-                    //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
-                }
-
-            }
-
-            //End ParseErrorFile method
-
-
-            Packet existingPacket = await GetPacketData(packetSubmission.PacketId);
-
-            if (existingPacket != null)
-            {
-                // Update packet status using index of packetStatus enum index
-                if (existingPacket.TryUpdateStatus((PacketStatus)packetStatus))
-                {
-                    existingPacket.UpdateStatus((PacketStatus)packetStatus);
-                }
-                else
-                {
-                    return NotFound($"Unable to set packet Id ${existingPacket.Id} status to: {packetStatus}");
-                }
-
-                //Modify logic to force failure and redirect to partial
-                if (existingPacket == null)
-                {
-                    Packet updatedPacket = await _packetService.UpdatePacketSubmissionErrorCount(User.Identity.Name, existingPacket, 0, packetSubmission.Id);
-
-                    // Create a packetModel to return to the index
-                    PacketModel updatedPacketModel = updatedPacket.ToVM();
-                    updatedPacketModel.Participation = existingPacket.Participation.ToVM();
-
-                    return Partial("_Index", updatedPacketModel);
-                }
-
-                PacketModel existingPacketModel = existingPacket.ToVM();
-                existingPacketModel.Participation = existingPacket.Participation.ToVM();
-
-                //return Partial("_Index", existingPacketModel);
-                return RedirectToPage("/PacketSubmissionErrors/Create");
-            }
-
-            return NotFound($"Unable to set packet Id ${packetSubmission.PacketId} status to: {(PacketStatus)packetStatus}");
-        }
-
-        private async Task<Packet> GetPacketData(int packetId)
-        {
-            Packet packetFound = await _packetService.GetById(User.Identity.Name, packetId);
-
-            if (packetFound == null)
-                return null;
-
-            var packetFoundParticipation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
-
-            if (packetFoundParticipation == null)
-                return null;
-
-            packetFound.Participation = packetFoundParticipation;
-
-            return packetFound;
+            return Partial("_Edit");
         }
     }
 }

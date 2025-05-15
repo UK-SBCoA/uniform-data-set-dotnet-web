@@ -1,22 +1,21 @@
-@model PacketSubmissionModel
-@{
-}
+@model EditModel
+@{}
 
 
 <turbo-frame id="EditPacketSubmission">
-    <form method="post" asp-page="../PacketSubmissions/Edit" enctype="multipart/form-data">
+    <form method="post" asp-page="../PacketSubmissionErrors/Create" enctype="multipart/form-data" asp-page-handler="view">
         <div class="grid grid-cols-4">
             <div class="col-start-2 col-span-2 grid gap-4">
                 <div>
                     <div>
-                        <input name="errorFileUpload" type="file" class="flex justify-center rounded-md w-full min-h-16 bg-gray-200 inline-flex items-center px-3 py-2 text-sm font-semibold text-black shadow-sm" />
+                        <input asp-for="ErrorFileUpload" type="file" class="flex justify-center rounded-md w-full min-h-16 bg-gray-200 inline-flex items-center px-3 py-2 text-sm font-semibold text-black shadow-sm" />
                     </div>
                 </div>
-                <div class="grid grid-cols-2 justify-items-start">
+                <div class="grid grid-cols-2 justify-items-center">
                     <button value="Upload" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Update Error Count
                     </button>
-                    <a data-turbo-frame="PacketSubmissions" asp-page="../Packets/Details" asp-route-id="@Model.PacketId" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                    <a data-turbo-frame="PacketSubmissions" asp-page="../Packets/Details" asp-route-id="PacketSubmission.PacketId" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
                         Cancel
                     </a>
                 </div>
@@ -24,7 +23,9 @@
         </div>
 
         <input type="hidden" asp-for="PacketId" />
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" name="packetStatus" value="3" />
+        <input type="hidden" asp-for="PacketSubmissionId" />
+        <input type="hidden" asp-for="PacketStatus" value="3" />
+        <input type="hidden" asp-for="LegacyId" />
+        <input type="hidden" asp-for="VisitNum" />
     </form>
 </turbo-frame>

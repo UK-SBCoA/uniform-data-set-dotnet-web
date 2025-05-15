@@ -2,48 +2,83 @@
 @model CreateModel
 
 <turbo-frame id="EditPacketSubmission">
-    @* table for displaying upload info *@
-    
+    <form method="post" asp-page="./Create" class="grid grid-cols-1 gap-5 pt-5">
+        <div class="relative overflow-x-auto">
+            <table class="w-full table-auto text-sm text-left">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Code</th>
+                        <th>Location</th>
+                        <th>File</th>
+                        <th>Value</th>
+                        <th>Message</th>
+                        <th>Ptid</th>
+                        <th>Visitnum</th>
+                        <th>Approved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.PacketSubmissionErrors.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Type</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Code</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Location</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].File</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Value</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Message</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Ptid</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
+                            </td>
+                            <td>
+                                <p>@Model.PacketSubmissionErrors[i].Approved</p>
+                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Approved" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="grid grid-cols-3">
+            <div class="grid grid-cols-2 col-start-2 justify-items-center">
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Save
+                </button>
+                <a data-turbo-frame="PacketSubmissions" asp-page="../Packets/Details" asp-route-id="PacketSubmission.PacketId" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                    return to packet submission
+                </a>
+            </div>
+        </div>
 
-    <form>
-        <div class="grid grid-cols-4">
-            <div class="col-start-2 col-span-2 grid gap-4">
-                <div>
-                    <div>
-                        <input name="errorFileUpload" type="file" class="flex justify-center rounded-md w-full min-h-16 bg-gray-200 inline-flex items-center px-3 py-2 text-sm font-semibold text-black shadow-sm" />GREEN CHECKMARK HERE IF SUCCESS
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 justify-items-start">
-                    <button value="Upload" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Update Error Count
-                    </button>
-                    <a class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-                        Cancel
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="grid grid-cols-4">
-            <div class="col-start-2 col-span-2 grid gap-4">
-                <table class="table-auto">
-                    <thead>
-                        <tr>
-                            <th>test</th>
-                            <th>test</th>
-                            <th>test</th>
-                            <th>test</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
-                            <td>test</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <input type="hidden" asp-for="PacketId" />
+        <input type="hidden" asp-for="PacketSubmissionId" />
+        <input type="hidden" asp-for="PacketStatus" value="3" />
+        <input type="hidden" asp-for="LegacyId" />
+        <input type="hidden" asp-for="VisitNum" />
     </form>
 </turbo-frame>
+
