@@ -229,6 +229,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with AD.")]
         public int? STRUCTAD { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, STRUCTCVD.")]
+        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, STRUCTCVD.")]
+        public bool? STRUCTEtiologyValidation
+        {
+            get
+            {
+                if (STRUCTAD.HasValue && STRUCTFTLD.HasValue && STRUCTCVD.HasValue)
+                {
+                    if (STRUCTAD != 8 || STRUCTFTLD != 8 || STRUCTCVD != 8)
+                        return true;
+                }
+                return null;
+            }
+        }
+
+
         [Display(Name = "Atrophy pattern consistent with FTLD")]
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with FTLD.")]
         public int? STRUCTFTLD { get; set; }

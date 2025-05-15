@@ -513,6 +513,7 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
             </tr>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTEtiologyValidation"></span>
         </tbody>
         <tbody class="subsubsubcounterreset">
             <tr>
