@@ -129,6 +129,13 @@ namespace UDS.Net.Web.MVC.Services
 
             return await Update(username, packetToEdit);
         }
+
+        public async Task<Packet> UpdatePacketSubmissionErrors(string username, Packet packetToEdit, List<PacketSubmissionError> errors)
+        {
+            packetToEdit.UnresolvedErrors = errors;
+
+            return await Update(username, packetToEdit);
+        }
     }
 }
 
