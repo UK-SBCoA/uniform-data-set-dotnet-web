@@ -74,7 +74,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                 DateTime createdAt = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.CreatedAt).FirstOrDefault();
 
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, assignedTo, errorLevel, null, createdAt, User.Identity.Name, null, null, false);
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, assignedTo, errorLevel, User.Identity.Name, createdAt, User.Identity.Name, null, null, false);
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
@@ -149,7 +149,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     //This could be the legacy ID
 
                     //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
-                    if (int.Parse(record.Ptid) == LegacyId && int.Parse(record.Visitnum) == VisitNum)
+                    if (int.Parse(record.Ptid) == LegacyId && int.Parse(record.Visitnum) == VisitNum && record.Approved.ToLower() == "false")
                     {
                         NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                         {

@@ -4,64 +4,68 @@
 <turbo-frame id="ActivePacketSubmission">
     <form method="post" asp-page="./Create" class="grid grid-cols-1 gap-5 pt-5">
         <div class="relative overflow-x-auto">
-            <table class="w-full table-auto text-sm text-left">
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Code</th>
-                        <th>Location</th>
-                        <th>File</th>
-                        <th>Value</th>
-                        <th>Message</th>
-                        <th>Ptid</th>
-                        <th>Visitnum</th>
-                        <th>Approved</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.PacketSubmissionErrors.Count; i++)
-                    {
+            @if(Model.PacketSubmissionErrors.Count() > 0)
+            {
+                <table class="w-full table-auto text-sm text-left">
+                    <thead>
                         <tr>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Type</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Code</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Location</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].File</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Value</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Message</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Ptid</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
-                            </td>
-                            <td>
-                                <p>@Model.PacketSubmissionErrors[i].Approved</p>
-                                <input type="hidden" asp-for="PacketSubmissionErrors[i].Approved" />
-                            </td>
+                            <th>Type</th>
+                            <th>Code</th>
+                            <th>Location</th>
+                            <th>File</th>
+                            <th>Value</th>
+                            <th>Message</th>
+                            <th>Ptid</th>
+                            <th>Visitnum</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.PacketSubmissionErrors.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Type</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Code</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Location</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].File</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Value</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Message</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Ptid</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
+                                </td>
+                                <td>
+                                    <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="text-center">
+                    <p>There are no new errors present in this file. Saving will mark packet as Failed error checks and no errors will be recorded.</p>
+                </div>
+            }
         </div>
         <div class="grid grid-cols-3">
             <div class="grid grid-cols-2 col-start-2 justify-items-center">
