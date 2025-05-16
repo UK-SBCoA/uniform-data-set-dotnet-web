@@ -87,7 +87,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
             await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
 
-            return Page();
+             
+            if (currentPacket.TryUpdateStatus((PacketStatus)PacketStatus))
+            {
+                currentPacket.UpdateStatus((PacketStatus)PacketStatus);
+            }
+            else
+            {
+                return NotFound($"Unable to set packet Id ${currentPacket.Id} status to: {PacketStatus}");
+            }
+
+            return RedirectToPage("../Packet/Details", new { id = PacketId });
         }
 
         //TODO could make these methods static methods on the packetsubmissionerror class and accept error
