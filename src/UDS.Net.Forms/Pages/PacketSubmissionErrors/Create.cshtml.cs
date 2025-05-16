@@ -10,6 +10,9 @@ using UDS.Net.Services.DomainModels.Submission;
 using Microsoft.CodeAnalysis;
 using UDS.Net.Services.Enums;
 using UDS.Net.Forms.Extensions;
+using Microsoft.AspNetCore.Routing;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using UDS.Net.Forms.Pages.PacketSubmissions;
 namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 {
     public class CreateModel : PageModel
@@ -139,56 +142,61 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
             {
-                csv.Read();
-                csv.ReadHeader();
-                while (csv.Read())
+                try
                 {
-                    var record = csv.GetRecord<NACCErrorModel>();
-
-                    //PTID of record needs to match the current PTID or ignore the record
-                    //This could be the legacy ID
-
-                    //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
-                    if (int.Parse(record.Ptid) == LegacyId && int.Parse(record.Visitnum) == VisitNum && record.Approved.ToLower() == "false")
+                    csv.Read();
+                    csv.ReadHeader();
+                    while (csv.Read())
                     {
-                        NACCErrorModel newPacketSubmissionError = new NACCErrorModel
-                        {
-                            Type = record.Type,
-                            Code = record.Code,
-                            Location = record.Location,
-                            File = record.File,
-                            Value = record.Value,
-                            Message = record.Message,
-                            Ptid = record.Ptid,
-                            Visitnum = record.Visitnum,
-                            Approved = record.Approved
-                        };
+                        var record = csv.GetRecord<NACCErrorModel>();
 
-                        PacketSubmissionErrors.Add(newPacketSubmissionError);
+                        //PTID of record needs to match the current PTID or ignore the record
+                        //This could be the legacy ID
+
+                        //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
+                        if (int.Parse(record.Ptid) == LegacyId && int.Parse(record.Visitnum) == VisitNum && record.Approved.ToLower() == "false")
+                        {
+                            NACCErrorModel newPacketSubmissionError = new NACCErrorModel
+                            {
+                                Type = record.Type,
+                                Code = record.Code,
+                                Location = record.Location,
+                                File = record.File,
+                                Value = record.Value,
+                                Message = record.Message,
+                                Ptid = record.Ptid,
+                                Visitnum = record.Visitnum,
+                                Approved = record.Approved
+                            };
+
+                            PacketSubmissionErrors.Add(newPacketSubmissionError);
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    //On failure, dispay temp error and empty PacketSubmissionErrors list
+                    TempData["fileError"] = "Uploaded file is invalid, please submit a valid file";
 
+                    PacketSubmissionErrors = new List<NACCErrorModel>();
+
+                    return Page();
+                }
             }
 
             //End ParseErrorFile method
 
             return Page();
         }
-
         private async Task<Packet> GetPacketData(int packetId)
         {
             Packet packetFound = await _packetService.GetById(User.Identity.Name, packetId);
-
             if (packetFound == null)
                 return null;
-
             var packetFoundParticipation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
-
             if (packetFoundParticipation == null)
                 return null;
-
             packetFound.Participation = packetFoundParticipation;
-
             return packetFound;
         }
     }

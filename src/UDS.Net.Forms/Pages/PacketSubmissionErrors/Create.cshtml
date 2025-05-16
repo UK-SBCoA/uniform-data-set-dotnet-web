@@ -63,19 +63,42 @@
             else
             {
                 <div class="text-center">
-                    <p>There are no new errors present in this file. Saving will mark packet as Failed error checks and no errors will be recorded.</p>
+                    @if (TempData.ContainsKey("fileError"))
+                    {
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-bold">File Error</strong>
+                            <span class="block sm:inline">@TempData["fileError"]</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <p>There are no new errors present in this file. Saving will mark packet as Failed error checks and no errors will be recorded.</p>
+                        </div>   
+                    }
                 </div>
             }
         </div>
         <div class="grid grid-cols-3">
-            <div class="grid grid-cols-2 col-start-2 justify-items-center">
-                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Save
-                </button>
-                <a data-turbo-frame="ActivePacketSubmission" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.PacketId" asp-route-packetSubmissionId="@Model.PacketSubmissionId" asp-route-legacyId="@Model.LegacyId" asp-route-visitNum="@Model.VisitNum" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-                    return to packet submission
-                </a>
-            </div>
+            @if (TempData.ContainsKey("fileError"))
+            {
+                <div class="grid justify-items-center col-start-2">
+                    <a data-turbo-frame="ActivePacketSubmission" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.PacketId" asp-route-packetSubmissionId="@Model.PacketSubmissionId" asp-route-legacyId="@Model.LegacyId" asp-route-visitNum="@Model.VisitNum" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                        return to packet submission
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="grid grid-cols-2 col-start-2 justify-items-center">
+                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Save
+                    </button>
+                    <a data-turbo-frame="ActivePacketSubmission" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.PacketId" asp-route-packetSubmissionId="@Model.PacketSubmissionId" asp-route-legacyId="@Model.LegacyId" asp-route-visitNum="@Model.VisitNum" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                        return to packet submission
+                    </a>
+                </div>
+            }
         </div>
 
         <input type="hidden" asp-for="PacketId" />
