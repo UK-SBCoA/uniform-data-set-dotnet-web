@@ -121,11 +121,12 @@
                                                     }
                                                     else
                                                     {
-                                                        <form asp-page="../PacketSubmissions/Edit" asp-page-handler="Success" method="post">
-                                                            <input type="hidden" name="ErrorCount" value="0" />
+                                                        <form asp-page="../PacketSubmissionErrors/Create" method="post">
                                                             <input type="hidden" name="PacketId" value="@Model.Id" />
-                                                            <input type="hidden" name="Id" value="@Model.PacketSubmissions[recentIndex].Id" />
-                                                            <input type="hidden" name="packetStatus" value="4" />
+                                                            <input type="hidden" name="PacketSubmissionId" value="@Model.PacketSubmissions[recentIndex].Id" />
+                                                            <input type="hidden" name="PacketStatus" value="4" />
+                                                            <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
+                                                            <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
                                                             <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
                                                         </form>
 

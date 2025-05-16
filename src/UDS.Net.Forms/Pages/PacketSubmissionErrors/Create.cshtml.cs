@@ -50,6 +50,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             Packet currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
 
             List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
+            
             foreach (var error in PacketSubmissionErrors)
             {
                 PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
@@ -78,9 +79,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
 
-            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
-
-
+            //TODO packet status can be updated on packet for update instead of seperately here? 
             if (currentPacket.TryUpdateStatus((PacketStatus)PacketStatus))
             {
                 currentPacket.UpdateStatus((PacketStatus)PacketStatus);
@@ -89,6 +88,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             {
                 return NotFound($"Unable to set packet Id ${currentPacket.Id} status to: {PacketStatus}");
             }
+
+            //TODO update packet status in this service method? 
+            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
 
             PacketModel currentPacketModel = currentPacket.ToVM();
             currentPacketModel.Participation = currentPacket.Participation.ToVM();
