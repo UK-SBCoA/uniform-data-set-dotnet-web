@@ -103,7 +103,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             return Partial("../PacketSubmissions/_Index", currentPacketModel);
         }
 
-        
+
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
         {
             if (errorType.Trim().ToLower() == "alert")
