@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             Packet currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
 
             List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
-            
+
             foreach (var error in PacketSubmissionErrors)
             {
                 PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
