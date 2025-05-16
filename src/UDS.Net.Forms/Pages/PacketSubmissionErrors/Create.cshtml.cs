@@ -56,33 +56,34 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
             foreach (var error in PacketSubmissionErrors)
             {
+                //Collect PacketSubmissionError data for creating new PacketSubmissionError object
                 PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
 
-                string formKind = GetFormKind(error.Code);
+                string formKind = error.Code.Split("-")[0].ToUpper();
 
-                //TODO can probably pull form from packet and get assignedTo and createdAt info from that local variable
+                var formData = currentPacket.Forms.Where(f => f.Kind == formKind);
 
-                //TODO code clean up here, use a method 
-                //Look at last modified first before using createdBy
-                string formModifiedBy = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.ModifiedBy).FirstOrDefault();
+                string formModifiedBy = formData.Select(a => a.ModifiedBy).FirstOrDefault();
 
-                string formAssignedTo = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.CreatedBy).FirstOrDefault();
+                string formAssignedTo = formData.Select(a => a.CreatedBy).FirstOrDefault();
 
-                string assignedTo = formModifiedBy;
+                //formAsignee will first attempt to be last modified and if null, set it to createdBy
+                string formAssignee = formModifiedBy;
 
                 if (string.IsNullOrEmpty(formModifiedBy))
                 {
-                    assignedTo = formAssignedTo;
+                    formAssignee = formAssignedTo;
                 }
 
-                DateTime createdAt = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.CreatedAt).FirstOrDefault();
+                DateTime createdAt = formData.Select(a => a.CreatedAt).FirstOrDefault();
 
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, assignedTo, errorLevel, User.Identity.Name, createdAt, User.Identity.Name, null, null, false);
+                //Create new PacketSubmissionError object with collected data
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, createdAt, User.Identity.Name, null, null, false);
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
 
-            //TODO packet status can be updated on packet for update instead of seperately here? 
+            //Update currentPacket status
             if (currentPacket.TryUpdateStatus((PacketStatus)PacketStatus))
             {
                 currentPacket.UpdateStatus((PacketStatus)PacketStatus);
@@ -92,16 +93,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 return NotFound($"Unable to set packet Id ${currentPacket.Id} status to: {PacketStatus}");
             }
 
-            //TODO update packet status in this service method? 
+            //Update current packet with newPacketSubmissionError list
             await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
 
+            //Create packetModel for use in packetSubmission/_Index partial
             PacketModel currentPacketModel = currentPacket.ToVM();
             currentPacketModel.Participation = currentPacket.Participation.ToVM();
 
             return Partial("../PacketSubmissions/_Index", currentPacketModel);
         }
 
-        //TODO could make these methods static methods on the packetsubmissionerror class and accept error
+        
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
         {
             if (errorType == "alert")
@@ -113,15 +115,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 return PacketSubmissionErrorLevel.Error;
             }
 
-            //return default information level if non matching
-            //TODO allow null for non matching cases
+            //return information as default
             return PacketSubmissionErrorLevel.Information;
         }
 
-        private static string GetFormKind(string errorCode)
-        {
-            return errorCode.Split("-")[0].ToUpper();
-        }
+        // Form submission from packetSubmissions/_Edit partial is posted here to display file data
 
         [ValidateAntiForgeryToken]
         public IActionResult OnPostView()
@@ -136,8 +134,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
             };
 
-            //TODO: Handle error for when a header is not found, use try / catch to return user to upload with error message regarding previous attempt 
-
             using (var stream = ErrorFileUpload.OpenReadStream())
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
@@ -150,10 +146,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     {
                         var record = csv.GetRecord<NACCErrorModel>();
 
-                        //PTID of record needs to match the current PTID or ignore the record
-                        //This could be the legacy ID
-
-                        //if PTID matches, then create the packetsubmissionError object and add to the packetSubmissionErrors list
+                        //Ptid must == legacyId, visitNum must match, and the alert must not have been previously accepted
                         if (int.Parse(record.Ptid) == LegacyId && int.Parse(record.Visitnum) == VisitNum && record.Approved.ToLower() == "false")
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
@@ -175,7 +168,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 }
                 catch (Exception e)
                 {
-                    //On failure, dispay temp error and empty PacketSubmissionErrors list
+                    //On failure, dispay temp error and empty PacketSubmissionErrors list before returning page
                     TempData["fileError"] = "Uploaded file is invalid, please submit a valid file";
 
                     PacketSubmissionErrors = new List<NACCErrorModel>();
@@ -187,17 +180,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             //End ParseErrorFile method
 
             return Page();
-        }
-        private async Task<Packet> GetPacketData(int packetId)
-        {
-            Packet packetFound = await _packetService.GetById(User.Identity.Name, packetId);
-            if (packetFound == null)
-                return null;
-            var packetFoundParticipation = await _participationService.GetById(User.Identity.Name, packetFound.ParticipationId);
-            if (packetFoundParticipation == null)
-                return null;
-            packetFound.Participation = packetFoundParticipation;
-            return packetFound;
         }
     }
 }

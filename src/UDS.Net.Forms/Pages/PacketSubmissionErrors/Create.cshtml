@@ -15,8 +15,6 @@
                             <th>File</th>
                             <th>Value</th>
                             <th>Message</th>
-                            <th>Ptid</th>
-                            <th>Visitnum</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,14 +44,6 @@
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Message</p>
                                     <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
-                                </td>
-                                <td>
-                                    <p>@Model.PacketSubmissionErrors[i].Ptid</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
-                                </td>
-                                <td>
-                                    <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
                                 </td>
                             </tr>
                         }

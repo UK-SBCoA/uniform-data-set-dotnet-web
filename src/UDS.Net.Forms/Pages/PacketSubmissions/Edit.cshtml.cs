@@ -6,10 +6,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
     public class EditModel : PageModel
     {
-        //TODO: find out why model binding is not working with this property in the view
-        //[BindProperty]
-        //public PacketSubmissionModel PacketSubmission { get; set; } = new PacketSubmissionModel();
-
         [BindProperty]
         public int PacketSubmissionId { get; set; }
 
@@ -30,6 +26,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         public IActionResult OnGetPartial(int packetSubmissionId, int packetId, int legacyId, int visitNum)
         {
+            //Return a model for use in partial
             EditModel editModelData = new EditModel
             {
                 PacketSubmissionId = packetSubmissionId,
