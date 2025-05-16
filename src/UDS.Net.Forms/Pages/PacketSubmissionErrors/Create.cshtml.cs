@@ -106,11 +106,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
         {
-            if (errorType == "alert")
+            if (errorType.Trim().ToLower() == "alert")
             {
                 return PacketSubmissionErrorLevel.Information;
             }
-            else if (errorType == "error")
+            else if (errorType.Trim().ToLower() == "error")
             {
                 return PacketSubmissionErrorLevel.Error;
             }
