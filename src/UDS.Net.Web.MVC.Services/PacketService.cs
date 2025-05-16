@@ -125,7 +125,7 @@ namespace UDS.Net.Web.MVC.Services
             // get index of packet submission to edit
             int submissionEditIndex = packetToEdit.Submissions.IndexOf(submissionToEdit);
 
-            if(errors.Count > 0)
+            if (errors.Count > 0)
             {
                 packetToEdit.Submissions[submissionEditIndex].Errors = errors;
                 packetToEdit.Submissions[submissionEditIndex].ErrorCount = errors.Count();

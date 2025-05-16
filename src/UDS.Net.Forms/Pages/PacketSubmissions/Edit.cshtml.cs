@@ -36,12 +36,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             //    PacketId = packetId
             //};
 
-            PacketSubmissionId = packetSubmissionId;
-            PacketId = packetId;
-            LegacyId = legacyId;
-            VisitNum = visitNum;
+            EditModel editModelData = new EditModel {
+                PacketSubmissionId = packetSubmissionId,
+                PacketId = packetId,
+                LegacyId = legacyId,
+                VisitNum = visitNum,
+            };
 
-            return Partial("_Edit");
+            return Partial("_Edit", editModelData);
         }
 
         //[ValidateAntiForgeryToken]

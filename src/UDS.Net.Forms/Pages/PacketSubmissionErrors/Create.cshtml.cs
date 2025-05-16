@@ -53,7 +53,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             foreach (var error in PacketSubmissionErrors)
             {
                 PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
-                
+
                 string formKind = GetFormKind(error.Code);
 
                 //TODO can probably pull form from packet and get assignedTo and createdAt info from that local variable
@@ -66,7 +66,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                 string assignedTo = formModifiedBy;
 
-                if(string.IsNullOrEmpty(formModifiedBy))
+                if (string.IsNullOrEmpty(formModifiedBy))
                 {
                     assignedTo = formAssignedTo;
                 }
@@ -80,7 +80,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
             await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
 
-             
+
             if (currentPacket.TryUpdateStatus((PacketStatus)PacketStatus))
             {
                 currentPacket.UpdateStatus((PacketStatus)PacketStatus);
@@ -99,11 +99,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         //TODO could make these methods static methods on the packetsubmissionerror class and accept error
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
         {
-            if(errorType == "alert")
+            if (errorType == "alert")
             {
                 return PacketSubmissionErrorLevel.Information;
             }
-            else if(errorType == "error")
+            else if (errorType == "error")
             {
                 return PacketSubmissionErrorLevel.Error;
             }
