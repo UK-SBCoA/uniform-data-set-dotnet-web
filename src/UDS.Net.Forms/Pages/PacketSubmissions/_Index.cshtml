@@ -69,7 +69,7 @@
                                     }
                                 </tbody>
                             </table>
-                            <turbo-frame id="EditPacketSubmission">
+                            <turbo-frame id="ActivePacketSubmission">
                                 <table class="w-full text-left">
                                     <thead>
                                         <tr>
@@ -129,7 +129,7 @@
                                                             <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
                                                         </form>
 
-                                                        <a data-turbo-frame="PacketSubmissionEdit" asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id" asp-route-legacyId="@Model.Participation.LegacyId" asp-route-visitNum="@Model.VISITNUM" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
+                                                        <a asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id" asp-route-legacyId="@Model.Participation.LegacyId" asp-route-visitNum="@Model.VISITNUM" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
                                                     }
                                                 </div>
                                             </td>

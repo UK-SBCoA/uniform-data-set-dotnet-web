@@ -4,19 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
 using Microsoft.AspNetCore.Http;
 using UDS.Net.Services.DomainModels.Submission;
 using Microsoft.CodeAnalysis;
-using Newtonsoft.Json.Linq;
-using UDS.Net.Services.Extensions;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Reflection.Emit;
 using UDS.Net.Services.Enums;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using UDS.Net.Services.DomainModels;
-using System.Net.Sockets;
+using UDS.Net.Forms.Extensions;
 namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 {
     public class CreateModel : PageModel
@@ -54,7 +47,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync()
         {
-            var currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
+            Packet currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
 
             List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
             foreach (var error in PacketSubmissionErrors)
@@ -97,7 +90,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 return NotFound($"Unable to set packet Id ${currentPacket.Id} status to: {PacketStatus}");
             }
 
-            return RedirectToPage("../Packet/Details", new { id = PacketId });
+            PacketModel currentPacketModel = currentPacket.ToVM();
+            currentPacketModel.Participation = currentPacket.Participation.ToVM();
+
+            return Partial("../PacketSubmissions/_Index", currentPacketModel);
         }
 
         //TODO could make these methods static methods on the packetsubmissionerror class and accept error
