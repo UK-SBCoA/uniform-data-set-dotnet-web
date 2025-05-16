@@ -526,20 +526,20 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHCOGX { get; set; }
 
         [NotMapped]
-        [Display(Name = "CSF-based biomarkers validation")]
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "At least one etiology must be assessed. CSFAD, CSFFTLD, CSFLBD, or CSFOTH can not all be 8.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "At least one etiology must be assessed. CSFAD, CSFFTLD, CSFLBD, or CSFOTH can not all be 8.")]
         public bool? CSFBiomarkersValidation
         {
             get
             {
-                if (CSFAD != null && CSFFTLD != null && CSFLBD != null && CSFOTH != null)
+                if (CSFAD == 8 &&
+                    CSFFTLD == 8 &&
+                    CSFLBD == 8 &&
+                    CSFOTH == 8)
                 {
-                    if (CSFAD != 8 || CSFFTLD != 8 || CSFLBD != 8 || CSFOTH != 8)
-                    {
-                        return true;
-                    }
-                    return false;
+                    return null;
                 }
-                return null;
+                return true;
             }
         }
 
@@ -623,14 +623,6 @@ namespace UDS.Net.Forms.Models.UDS4
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
-            }
-
-            if (CSFBiomarkersValidation == false)
-            {
-                yield return new ValidationResult(
-                    "At least one CSF-based biomarker must not be 8.",
-                    new[] { nameof(CSFOTH) }
-                );
             }
 
             yield break;
