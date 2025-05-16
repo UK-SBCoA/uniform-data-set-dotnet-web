@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using System.Reflection.Emit;
 using UDS.Net.Services.Enums;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using UDS.Net.Services.DomainModels;
+using System.Net.Sockets;
 namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 {
     public class CreateModel : PageModel
@@ -57,28 +59,39 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
             foreach (var error in PacketSubmissionErrors)
             {
-                //no id
-                //form kind = error.type
-                //assignedTo = packetId & visitnum & PTID of form to get assigned to - use modified by first and if null then used createdBy
-                //Level = get this using the error.type
-                //null resolved by
-                //createdBy = packetSubmission created by? 
-                //modifiedBy = null
-                //Created at = needs to be datetime type
-
                 PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
                 
                 string formKind = GetFormKind(error.Code);
 
-                
+                //TODO can probably pull form from packet and get assignedTo and createdAt info from that local variable
 
-                //PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, [assignedTo], errorLevel, null, error.Timestamp, User.Identity.Name, null, null, false);
+                //TODO code clean up here, use a method 
+                //Look at last modified first before using createdBy
+                string formModifiedBy = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.ModifiedBy).FirstOrDefault();
+
+                string formAssignedTo = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.CreatedBy).FirstOrDefault();
+
+                string assignedTo = formModifiedBy;
+
+                if(string.IsNullOrEmpty(formModifiedBy))
+                {
+                    assignedTo = formAssignedTo;
+                }
+
+                DateTime createdAt = currentPacket.Forms.Where(f => f.Kind == formKind).Select(a => a.CreatedAt).FirstOrDefault();
+
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, assignedTo, errorLevel, null, createdAt, User.Identity.Name, null, null, false);
+
+                packetSubmissionErrors.Add(newPacketSubmissionError);
             }
+
+            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
+
             return Page();
         }
 
         //TODO could make these methods static methods on the packetsubmissionerror class and accept error
-        private PacketSubmissionErrorLevel GetErrorLevel(string errorType)
+        private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
         {
             if(errorType == "alert")
             {
@@ -94,9 +107,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             return PacketSubmissionErrorLevel.Information;
         }
 
-        private string GetFormKind(string errorCode)
+        private static string GetFormKind(string errorCode)
         {
-            return errorCode.Split("-")[0];
+            return errorCode.Split("-")[0].ToUpper();
         }
 
         [ValidateAntiForgeryToken]
