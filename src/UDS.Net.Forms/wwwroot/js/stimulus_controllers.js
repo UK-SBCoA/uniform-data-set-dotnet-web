@@ -11,6 +11,7 @@ import Dropdown from "./js_controllers/dropdown_controller.js"
 import FancyCheckboxes from "./js_controllers/fancy_checkboxes_controller.js"
 import FormFooterDropdownReset from "./js_controllers/form_footer_dropdown_reset_controller.js"
 import MobileMenu from "./js_controllers/mobile_menu_controller.js"
+import MultiUIBehaviors from "./js_controllers/multi_ui_behaviors_controller.js"
 import RxNormDisplayNames from "./js_controllers/rx_norm_display_names_controller.js"
 import SelectEndpoint from "./js_controllers/select_endpoint_controller.js"
 
@@ -26,5 +27,6 @@ Stimulus.register("dropdown", Dropdown)
 Stimulus.register("fancy-checkboxes", FancyCheckboxes)
 Stimulus.register("form-footer-dropdown-reset", FormFooterDropdownReset)
 Stimulus.register("mobile-menu", MobileMenu)
+Stimulus.register("multi-ui-behaviors", MultiUIBehaviors)
 Stimulus.register("rx-norm-display-names", RxNormDisplayNames)
 Stimulus.register("select-endpoint", SelectEndpoint)

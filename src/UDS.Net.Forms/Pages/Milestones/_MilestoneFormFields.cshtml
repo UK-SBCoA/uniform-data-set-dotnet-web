@@ -254,7 +254,7 @@
 
 
     <!--// Box B //-->
-    <div data-controller="checkbox-disable" class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm m-4 border border-blue-200">
+    <div data-controller="multi-ui-behaviors" class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm m-4 border border-blue-200">
         <div class="px-4 py-5 sm:px-6 bg-blue-600 text-white">
             <p class="text-base/7 font-semibold">Box B</p>
             <h2 class="mt-2 text-xl font-semibold tracking-tight text-pretty text-white-900 sm:text-2xl">No Further Contact</h2>
@@ -272,11 +272,11 @@
                         @Html.CheckBox("DECEASED", Model.DECEASED, new
                        {
                            @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                           data_checkbox_disable_target = "trigger",
-                           data_action = "input->checkbox-disable#ToggleGroup",
-                           data_checkbox_disable_enableGroup_param = "DEATHMO, DEATHDY, DEATHYR, AUTOPSY",
-                           data_checkbox_disable_disableGroup_param = "DISCONT",
-                           data_checkbox_disable_toggleState_param = "true"
+                           data_multi_ui_behaviors_target = "trigger",
+                           data_action = "click->multi-ui-behaviors#updateStates",
+                           data_multi_ui_behaviors_activeState_param = "true",
+                           data_multi_ui_behaviors_activeGroup_param = "DEATHMO,DEATHDY,DEATHYR,AUTOPSY",
+                           data_multi_ui_behaviors_inactiveGroup_param = "DISCONT"
                        })
                     </div>
                     <div>
@@ -296,11 +296,11 @@
                         @Html.CheckBox("DISCONT", Model.DISCONT, new
                        {
                            @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                           data_checkbox_disable_target = "trigger",
-                           data_action = "input->checkbox-disable#ToggleGroup",
-                           data_checkbox_disable_enableGroup_param = "DISCMO, DISCDAY, DISCYR, DROPREAS",
-                           data_checkbox_disable_disableGroup_param = "DECEASED",
-                           data_checkbox_disable_toggleState_param = "true"
+                           data_multi_ui_behaviors_target = "trigger",
+                           data_action = "click->multi-ui-behaviors#updateStates",
+                           data_multi_ui_behaviors_activeState_param = "true",
+                           data_multi_ui_behaviors_activeGroup_param = "DISCMO,DISCDAY,DISCYR,DROPREAS",
+                           data_multi_ui_behaviors_inactiveGroup_param = "DECEASED"
                        })
                     </div>
                     <div>
