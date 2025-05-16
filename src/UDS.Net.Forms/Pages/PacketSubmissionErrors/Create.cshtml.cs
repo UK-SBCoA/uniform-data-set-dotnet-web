@@ -177,8 +177,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 }
             }
 
-            //End ParseErrorFile method
-
             return Page();
         }
     }
