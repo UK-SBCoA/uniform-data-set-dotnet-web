@@ -1,5 +1,17 @@
-﻿
-// wwwroot/js/js_controllers/autocomplete_controller.js
+﻿/*
+ * wwwroot/js/js_controllers/autocomplete_controller.js
+ * Use:
+  <div data-controller="autocomplete">
+      <input data-autocomplete-target="searchBox" />
+      <div data-autocomplete-target="list">
+        <ul>
+            <li data-autocomplete-target="item">Item</li>
+        </ul>
+      </div>
+      <div data-autocomplete-target="noResults">
+      </div>
+  </div>
+*/
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
