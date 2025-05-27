@@ -619,11 +619,11 @@ namespace UDS.Net.Forms.Models.UDS4
         }
         [RequiredOnFinalized(ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
         [NotMapped]
-        public bool? BIOMADValidation
+        public bool? BiomarkerValidation
         {
             get
             {
-                var values = new [] { BIOMAD1, BIOMFTLD1, BIOMLBD1, BIOMOTH1 };
+                var values = new[] { BIOMAD1, BIOMFTLD1, BIOMLBD1, BIOMOTH1 };
 
                 int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
 
@@ -633,7 +633,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [RequiredOnFinalized(ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
         [NotMapped]
-        public bool? BIOMAD2Validation
+        public bool? Biomarker2Validation
         {
             get
             {
@@ -647,7 +647,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [RequiredOnFinalized(ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
         [NotMapped]
-        public bool? BIOMAD3Validation
+        public bool? Biomarker3Validation
         {
             get
             {
