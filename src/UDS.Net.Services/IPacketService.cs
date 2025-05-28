@@ -15,7 +15,7 @@ namespace UDS.Net.Services
 
         Task<int> Count(string username, List<PacketStatus> statuses);
 
-        Task<Packet> UpdatePacketSubmissionErrorCount(string username, Packet packetToEdit, int errorCount, int packetSubmissionId);
+        Task<Packet> UpdatePacketSubmissionErrors(string username, Packet packetToEdit, int packetSubmissionId, List<PacketSubmissionError> errors);
     }
 }
 
