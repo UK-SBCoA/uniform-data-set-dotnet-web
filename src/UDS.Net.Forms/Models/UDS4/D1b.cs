@@ -230,8 +230,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? STRUCTAD { get; set; }
 
         [NotMapped]
-        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, STRUCTCVD.")]
-        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, STRUCTCVD.")]
+        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, or STRUCTCVD.")]
+        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, or STRUCTCVD.")]
         public bool? STRUCTEtiologyValidation
         {
             get
