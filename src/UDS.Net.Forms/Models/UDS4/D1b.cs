@@ -230,8 +230,8 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? STRUCTAD { get; set; }
 
         [NotMapped]
-        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, or STRUCTCVD.")]
-        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "At least one of the following variables must not be 8: STRUCTAD, STRUCTFTLD, or STRUCTCVD.")]
+        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "STRUCTAD, STRUCTFTLD, or STRUCTCVD can not all be 8.")]
+        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "STRUCTAD, STRUCTFTLD, or STRUCTCVD can not all be 8.")]
         public bool? STRUCTEtiologyValidation
         {
             get
@@ -244,7 +244,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 return null;
             }
         }
-
 
         [Display(Name = "Atrophy pattern consistent with FTLD")]
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with FTLD.")]
