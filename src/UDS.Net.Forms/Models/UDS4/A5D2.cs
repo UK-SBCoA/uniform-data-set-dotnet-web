@@ -253,7 +253,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? DIABMEDS { get; set; }
         [Display(Name = "GLP-1 receptor agonist")]
         public bool? DIABGLP1 { get; set; }
-        [Display(Name = "Other non-insulin, non-GLP-1 receptor agonist")]
+        [Display(Name = "Other non-insulin, non-GLP-1 receptor agonist injection medication")]
         public bool? DIABRECACT { get; set; }
         [Display(Name = "Diet")]
         public bool? DIABDIET { get; set; }
