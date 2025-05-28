@@ -617,7 +617,8 @@ namespace UDS.Net.Forms.Models.UDS4
                 return null;
             }
         }
-        [RequiredOnFinalized(ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM1), "1", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM1), "2", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
         [NotMapped]
         public bool? BiomarkerValidation
         {
@@ -631,7 +632,8 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM2), "1", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM2), "2", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
         [NotMapped]
         public bool? Biomarker2Validation
         {
@@ -645,7 +647,8 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM3), "1", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM3), "2", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
         [NotMapped]
         public bool? Biomarker3Validation
         {
