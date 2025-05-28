@@ -247,17 +247,17 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         public int? DIABTYPE { get; set; }
-        [Display(Name = "Diabetes treated with: Insulin")]
+        [Display(Name = "Insulin")]
         public bool? DIABINS { get; set; }
-        [Display(Name = "Diabetes treated with: Oral medications")]
+        [Display(Name = "Oral medications")]
         public bool? DIABMEDS { get; set; }
-        [Display(Name = "Diabetes treated with: GLP-1 receptor activators")]
+        [Display(Name = "GLP-1 receptor agonist")]
         public bool? DIABGLP1 { get; set; }
-        [Display(Name = "Diabetes treated with: Other non-insulin, non-GLP-1 receptor activator injection medication")]
+        [Display(Name = "Other non-insulin, non-GLP-1 receptor agonist")]
         public bool? DIABRECACT { get; set; }
-        [Display(Name = "Diabetes treated with: Diet")]
+        [Display(Name = "Diet")]
         public bool? DIABDIET { get; set; }
-        [Display(Name = "Diabetes treated with: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? DIABUNK { get; set; }
         [Display(Name = "Age at diabetes diagnosis")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
