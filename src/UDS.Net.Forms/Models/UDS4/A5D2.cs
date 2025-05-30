@@ -168,7 +168,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? SEIZURES { get; set; }
         [Display(Name = "How many seizures has the participant had in the past 12 months?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredIfRange(nameof(SEIZURES), 1, 2, ErrorMessage = "Please specify.")]
         public int? SEIZNUM { get; set; }
         [Display(Name = "Age at first seizure (excluding childhood febrile seizures)")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
