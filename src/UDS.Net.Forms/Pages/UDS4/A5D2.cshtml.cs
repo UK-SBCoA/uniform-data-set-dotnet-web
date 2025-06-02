@@ -575,8 +575,8 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIDisableAttribute("A5D2.SEIZNUM"),
-                         new UIDisableAttribute("A5D2.SEIZAGE"),
+                         new UIEnableAttribute("A5D2.SEIZNUM"),
+                         new UIEnableAttribute("A5D2.SEIZAGE"),
                      }
             }
          },
