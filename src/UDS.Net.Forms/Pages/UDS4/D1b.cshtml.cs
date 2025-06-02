@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -177,7 +170,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.FLUIDBIOM"),
-                    new UIEnableAttribute("D1b.STRUCTDX"),
                     new UIEnableAttribute("D1b.OTHBIOM1"),
                     new UIEnableAttribute("D1b.AUTDOMMUT"),
                 },

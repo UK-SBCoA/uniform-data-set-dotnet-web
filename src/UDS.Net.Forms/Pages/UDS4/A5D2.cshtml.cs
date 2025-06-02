@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -591,7 +585,7 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIEnableAttribute("A5D2.SEIZNUM"),
+                         new UIDisableAttribute("A5D2.SEIZNUM"),
                          new UIEnableAttribute("A5D2.SEIZAGE"),
                      }
             }
