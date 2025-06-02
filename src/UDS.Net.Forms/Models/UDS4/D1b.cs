@@ -633,6 +633,50 @@ namespace UDS.Net.Forms.Models.UDS4
                 return null;
             }
         }
+        [RequiredIf(nameof(OTHBIOM1), "1", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM1), "2", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? BiomarkerValidation
+        {
+            get
+            {
+                var values = new[] { BIOMAD1, BIOMFTLD1, BIOMLBD1, BIOMOTH1 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
+
+        [RequiredIf(nameof(OTHBIOM2), "1", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM2), "2", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? Biomarker2Validation
+        {
+            get
+            {
+                var values = new[] { BIOMAD2, BIOMFTLD2, BIOMLBD2, BIOMOTH2 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
+
+        [RequiredIf(nameof(OTHBIOM3), "1", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM3), "2", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? Biomarker3Validation
+        {
+            get
+            {
+                var values = new[] { BIOMAD3, BIOMFTLD3, BIOMLBD3, BIOMOTH3 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
