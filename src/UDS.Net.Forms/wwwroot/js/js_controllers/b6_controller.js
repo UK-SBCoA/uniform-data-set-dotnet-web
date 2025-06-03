@@ -20,26 +20,23 @@ export default class extends Controller {
 
         let skipCalculation = this.NOGDSInputTarget.checked ? true : false
         let GDSScore = 0;
-        let unansweredCount = 0
 
         if (!skipCalculation) {
 
-            let checkedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked')
+            let answeredCheckedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked:not([value="9"])')
+            let unansweredCheckedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked[value="9"]')
 
-            checkedRadios.forEach((radio) => {
-                if (Number(radio.value) != 9) {
-                    GDSScore += Number(radio.value)
-                } else {
-                    unansweredCount++
-                }
+            answeredCheckedRadios.forEach((radio) => {
+                GDSScore += Number(radio.value)
             })
 
-            //display the total only when all questions have been answered
-            if (checkedRadios.length == totalQuestionCount) {
-                if (unansweredCount == 0) {
+            //display the total only when all radios have been checked
+            if (answeredCheckedRadios.length + unansweredCheckedRadios.length == totalQuestionCount) {
+                // all questions are != 9, then do not prorate score
+                if (unansweredCheckedRadios.length < 1) {
                     this.GDSInputTarget.value = GDSScore
                 } else {
-                    this.GDSInputTarget.value = this.ProrateGDSScore(GDSScore, checkedRadios.length, unansweredCount)
+                    this.GDSInputTarget.value = this.ProrateGDSScore(GDSScore, answeredCheckedRadios.length, unansweredCheckedRadios.length)
                 }
             }
         } else {
