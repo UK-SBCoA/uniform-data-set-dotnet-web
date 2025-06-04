@@ -830,6 +830,60 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If q11b. udsverfn (f-words repeated) is between 0 and 15 and q11e. udsverlr (l-words repeated) is between 0 and 15, then q11h. udsverte must be the total of q11b. udsverfn and q11e. Udsverlr")]
+        public bool? UDSVERTEValidation
+        {
+            get
+            {
+                if (UDSVERFN.HasValue && UDSVERLR.HasValue)
+                {
+                    if(UDSVERTE.HasValue && UDSVERTE.Value == UDSVERFN.Value + UDSVERLR.Value)
+                    {
+                        return true;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If q11a. udsverfc not 95-98 and q11d. udsverlc not 95-98, q11g. udsvertn must be the total of udsverfc and udsverlc")]
+        public bool? UDSVERTNValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
+                {
+                    if (UDSVERTN.HasValue && UDSVERTN.Value == UDSVERFC.Value + UDSVERLC.Value)
+                    {
+                        return true;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If q16c. mintscng (mint number semantic cues given) is > 0 then q16d. mintscnc (mint correct with semantic cue) must be less than or equal to q16c. mintscng (mint number semantic cues given)")]
+        public bool? MINTSCNCValidation
+        {
+            get
+            {
+                if (MINTSCNG.HasValue && MINTSCNG.Value > 0)
+                {
+                    if (MINTSCNC.HasValue && MINTSCNC.Value <= MINTSCNG.Value)
+                    {
+                        return true;
+                    }
+                }
+
+                return null;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
