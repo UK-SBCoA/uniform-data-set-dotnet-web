@@ -13,6 +13,11 @@ export default class extends Controller {
     this.listTarget.classList.add("hidden")
   }
 
+  handleOutsideClick = (event) => {
+    if (!this.element.contains(event.target)) {
+      this.hideList();
+    }
+  }
   filterList(event) {
     // we will call the rxNormDisplayNames controller (list is ~30K)
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
@@ -49,5 +54,6 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
+    document.addEventListener("click", this.handleOutsideClick)
   }
 }
