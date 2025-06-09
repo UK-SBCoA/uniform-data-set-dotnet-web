@@ -3,29 +3,27 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
 
     static targets = [
-        "radioTable",
         "GDSInput",
-        "NOGDSInput"
+        "NOGDSInput",
+        "radioInput"
     ]
 
-    connect() { 
-        this.CreateRadioButtonEvents()
+    connect() {
         this.CalculateGDS()
         this.NOGDSBehavior()
     }
 
     CalculateGDS() {
-
         const totalQuestionCount = 15
 
         let skipCalculation = this.NOGDSInputTarget.checked ? true : false
         let GDSScore = 0;
 
         if (!skipCalculation) {
+            let answeredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value != 9)
 
-            let answeredCheckedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked:not([value="9"])')
-            let unansweredCheckedRadios = this.radioTableTarget.querySelectorAll('input[type="radio"]:checked[value="9"]')
-
+            let unansweredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value == 9)
+           
             answeredCheckedRadios.forEach((radio) => {
                 GDSScore += Number(radio.value)
             })
@@ -42,14 +40,6 @@ export default class extends Controller {
         } else {
             this.GDSInputTarget.value = 88
         }
-    }
-
-    CreateRadioButtonEvents() {
-        this.radioTableTarget.querySelectorAll('input[type="radio"]').forEach((radio) => {
-            radio.addEventListener("change", () => {
-                this.CalculateGDS()
-            })
-        })
     }
 
     //GDS must be 88 if NOGDS checkbox is checked. Auto set for user on check
