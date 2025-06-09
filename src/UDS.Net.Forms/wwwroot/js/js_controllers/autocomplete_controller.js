@@ -35,6 +35,7 @@ export default class extends Controller {
           item.classList.add("hidden")
         }
       });
+      this.activeIndex = -1;
     }
     // TODO check if list is empty and if so, display the no results
   }
@@ -55,5 +56,43 @@ export default class extends Controller {
   connect() {
     this.hideList()
     document.addEventListener("click", this.handleOutsideClick)
+    this.searchBoxTarget.addEventListener("keydown", this.onKeyDown.bind(this));
+    this.activeIndex = -1
   }
+
+  onKeyDown(event) {
+    const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+    if (visibleItems === 0) return;
+
+    switch (event.key) {
+      case "ArrowDown":
+        event.preventDefault();
+        this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
+        this.updateActiveItem(visibleItems);
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
+        this.updateActiveItem(visibleItems);
+        break;
+      case "Enter":
+        event.preventDefault();
+        if (this.activeIndex >= 0 && visibleItems[this.activeIndex]) {
+          visibleItems[this.activeIndex].click(); // Triggers setSearchBox
+        }
+        break;
+    }
+  }
+
+  updateActiveItem(items) {
+    items.forEach((item, index) => {
+      if (index === this.activeIndex) {
+        item.classList.add("bg-indigo-600", "text-white");
+        item.scrollIntoView({ block: "nearest" });
+      } else {
+        item.classList.remove("bg-indigo-600", "text-white");
+      }
+    });
+  }
+
 }
