@@ -81,18 +81,6 @@
         toggleInputs(shouldDisable);
     });
 
-    function updateIMPNOMCITargets() {
-        var selectedValue = $("input[name='D1a.IMPNOMCI']:checked").val();
-        var shouldDisable = (selectedValue == '0' || selectedValue == '1');
-        var IMPNOMCITargets = [
-            "D1a.CDOMMEM", "D1a.CDOMLANG", "D1a.CDOMATTN", "D1a.CDOMEXEC", "D1a.CDOMVISU", "D1a.CDOMBEH", "D1a.CDOMAPRAX"
-        ];
-
-        IMPNOMCITargets.forEach(function (inputName) {
-            $('input[name="' + inputName + '"]').prop('disabled', shouldDisable);
-        });
-    }
-
     updateIMPNOMCITargets();
 
     $("input[name='D1a.IMPNOMCI']").change(updateIMPNOMCITargets);

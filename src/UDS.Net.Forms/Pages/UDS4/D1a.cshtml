@@ -254,7 +254,7 @@
     </label>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.IMPNOMCI"></p>
-        <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems"></radio-button-group>
+        <radio-button-group id="@Html.IdFor(m => m.D1a.IMPNOMCI)" for="@Model.D1a.IMPNOMCI" items="Model.IMPNOMCIListItems" ui-behaviors="Model.IMPNOMCIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCI"></span>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.IMPNOMCICriteriaValidation"></span>
     </div>
