@@ -1692,7 +1692,6 @@
                         <br>
                         <br>
                         <b>(Check all that apply)</b>
-                        <span asp-validation-for="C2.RESPVALReasonIndicated" class="mt-2 text-sm text-red-600"></span>
                     </p>
                 </div>
                 <div class="subsubcounterreset">
@@ -1804,13 +1803,15 @@
                             <div>
                                 <span class="subsubcounter inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800"></span>
                             </div>
-
                             <div>
                                 @Html.CheckBox("C2.RESPASST", Model.C2.RESPASST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                             </div>
                             <div>
                                 <label asp-for="C2.RESPASST"></label>
                             </div>
+                        </div>
+                        <div class="mt-4 sm:mt-0 sm:col-span-1">
+                            <span asp-validation-for="C2.RESPVALReasonIndicated" class="mt-2 text-sm text-red-600"></span>
                         </div>
                     </div>
 
