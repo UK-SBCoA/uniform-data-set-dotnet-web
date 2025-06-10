@@ -351,7 +351,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var b8Record = new B8Record(b8);
                         csv.WriteRecord(b8Record);
-                        //B8 formfields set here
                         csv.WriteRecord((B8FormFields)b8.Fields);
                     }
                     if (b9 != null)
