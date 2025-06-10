@@ -399,28 +399,21 @@
                 </div>
             </div>
 
-                <div class="@rowCSS sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                <div class="@rowCSS">
+                    <label asp-for="C2.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYLAN)</label>
                     <div>
-                        <label asp-for="C2.NPSYLAN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.NPSYLAN)</label>
-                    </div>
-                    <div class="flex flex-row space-x-4 items-start">
                         <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLAN"></p>
                         <radio-button-group id="@Html.IdFor(m => m.C2.NPSYLAN)" for="@Model.C2.NPSYLAN" items="Model.LanguageListItems" ui-behaviors="Model.NPSYLANBehavior"></radio-button-group>
                     </div>
-                    <div class="flex items-start">
+                    <div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLAN"></span>
-                    </div>
-                </div>
-                <div class="@rowCSS sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
-                    <div>
-                        <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
-                    </div>
-                    <div>
+
                         <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLANX"></p>
-                    </div>
-                    <div class="flex flex-col space-y-2">
-                        <span class="text-sm text-red-600" asp-validation-for="C2.NPSYLANX"></span>
-                        <input asp-for="C2.NPSYLANX" />
+                        <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
+                        <div class="mt-2">
+                            <input asp-for="C2.NPSYLANX" />
+                        </div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLANX"></span>
                     </div>
                 </div>
 
