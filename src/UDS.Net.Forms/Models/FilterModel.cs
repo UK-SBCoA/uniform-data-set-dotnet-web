@@ -5,8 +5,11 @@
         public List<FilterItemModel> FilterList { get; set; } = new List<FilterItemModel>();
         public List<string> SelectedItems { get; set; } = new List<string>();
 
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
         //Constructor for creating a new filterModel using existing FilterModel data
-        public FilterModel(List<string> items, List<string> selectedItems)
+        public FilterModel(List<string> items, List<string> selectedItems, DateTime? startDate = null, DateTime? endDate = null)
         {
             if (items != null) // it doesn't make sense to have a filter if items aren't given
             {
@@ -38,6 +41,9 @@
                     });
                 }
             }
+
+            StartDate = startDate;
+            EndDate = endDate;
         }
     }
 }
