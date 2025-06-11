@@ -1146,7 +1146,7 @@ namespace UDS.Net.Services.Extensions
             return new B8Dto
             {
                 NEUREXAM = fields.NEUREXAM,
-                NORMNREXAM = ConvertIntToBool(fields.NORMNREXAM),
+                NORMNREXAM = fields.NORMNREXAM.HasValue ? Convert.ToBoolean(fields.NORMNREXAM) : (bool?)null,
                 PARKSIGN = fields.PARKSIGN,
                 SLOWINGFM = fields.SLOWINGFM,
                 TREMREST = fields.TREMREST,
