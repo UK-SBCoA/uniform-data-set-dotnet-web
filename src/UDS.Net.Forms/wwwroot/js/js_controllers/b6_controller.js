@@ -15,30 +15,35 @@ export default class extends Controller {
 
     CalculateGDS() {
         const totalQuestionCount = 15
-
-        let skipCalculation = this.NOGDSInputTarget.checked ? true : false
         let GDSScore = 0;
 
-        if (!skipCalculation) {
-            let answeredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value != 9)
+        let answeredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value != 9)
+        let unansweredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value == 9)
 
-            let unansweredCheckedRadios = this.radioInputTargets.filter(input => input.checked && input.value == 9)
-           
-            answeredCheckedRadios.forEach((radio) => {
-                GDSScore += Number(radio.value)
-            })
+        //if fewer than 12 questions were answered check NOGDS, auto set 88, and end CalculateGDS method
+        if (unansweredCheckedRadios.length > 3) {
+            this.NOGDSInputTarget.checked = true
+            this.NOGDSBehavior()
 
-            //display the total only when all radios have been checked
-            if (answeredCheckedRadios.length + unansweredCheckedRadios.length == totalQuestionCount) {
-                // all questions are != 9, then do not prorate score
-                if (unansweredCheckedRadios.length < 1) {
-                    this.GDSInputTarget.value = GDSScore
-                } else {
-                    this.GDSInputTarget.value = this.ProrateGDSScore(GDSScore, answeredCheckedRadios.length, unansweredCheckedRadios.length)
-                }
+            return
+        }
+        else {
+            //if 12 or more questions are answered, auto uncheck NOGDS and continue with calculations
+            this.NOGDSInputTarget.checked = false
+        }
+
+        answeredCheckedRadios.forEach((radio) => {
+            GDSScore += Number(radio.value)
+        })
+
+        //display the total only when all radios have been checked
+        if (answeredCheckedRadios.length + unansweredCheckedRadios.length == totalQuestionCount) {
+            // all questions are != 9, then do not prorate score
+            if (unansweredCheckedRadios.length < 1) {
+                this.GDSInputTarget.value = GDSScore
+            } else {
+                this.GDSInputTarget.value = this.ProrateGDSScore(GDSScore, answeredCheckedRadios.length, unansweredCheckedRadios.length)
             }
-        } else {
-            this.GDSInputTarget.value = 88
         }
     }
 
