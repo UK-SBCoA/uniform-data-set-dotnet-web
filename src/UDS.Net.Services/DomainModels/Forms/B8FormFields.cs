@@ -87,7 +87,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var b8Dto = ((B8Dto)dto);
                 NEUREXAM = b8Dto.NEUREXAM;
-                NORMNREXAM = b8Dto.NORMNREXAM.HasValue && b8Dto.NORMNREXAM.Value == true ? 1 : 0;
+                NORMNREXAM = b8Dto.NORMNREXAM.HasValue ? Convert.ToInt32(b8Dto.NORMNREXAM) : (int?)null;
                 PARKSIGN = b8Dto.PARKSIGN;
                 SLOWINGFM = b8Dto.SLOWINGFM;
                 TREMREST = b8Dto.TREMREST;
