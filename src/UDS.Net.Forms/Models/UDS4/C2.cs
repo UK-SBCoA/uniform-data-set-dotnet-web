@@ -831,14 +831,14 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If UDSVERFN (f-words repeated) is between 0 and 15 and UDSVERLR (l-words repeated) is between 0 and 15, then UDSVERTE must be the total of UDSVERFN and UDSVERLR")]
+        [RequiredIfRange(nameof(UDSVERTE), 0, 30, ErrorMessage = "If UDSVERFN (f-words repeated) is between 0 and 15 and UDSVERLR (l-words repeated) is between 0 and 15, then UDSVERTE must be the total of UDSVERFN and UDSVERLR")]
         public bool? UDSVERTEValidation
         {
             get
             {
                 if (UDSVERFN.HasValue && UDSVERLR.HasValue)
                 {
-                    if (UDSVERTE.HasValue && UDSVERTE.Value == UDSVERFN.Value + UDSVERLR.Value)
+                    if (UDSVERTE.Value == UDSVERFN.Value + UDSVERLR.Value)
                     {
                         return true;
                     }
@@ -849,14 +849,14 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If UDSVERFC not 95-98 and UDSVERLC not 95-98, UDSVERTN must be the total of UDSVERFC and UDSVERLC")]
+        [RequiredIfRange(nameof(UDSVERTN), 0, 80, ErrorMessage = "If UDSVERFC not 95-98 and UDSVERLC not 95-98, UDSVERTN must be the total of UDSVERFC and UDSVERLC")]
         public bool? UDSVERTNValidation
         {
             get
             {
                 if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
                 {
-                    if (UDSVERTN.HasValue && UDSVERTN.Value == UDSVERFC.Value + UDSVERLC.Value)
+                    if (UDSVERTN.Value == UDSVERFC.Value + UDSVERLC.Value)
                     {
                         return true;
                     }
@@ -867,13 +867,13 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given)")]
+        [RequiredIfRange(nameof(MINTSCNG), 1, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
         public bool? MINTSCNCValidation
         {
             get
             {
 
-                if (MINTSCNG.HasValue && MINTSCNG.Value > 0 && RMMODE != RemoteModality.Telephone)
+                if ((MINTSCNC.HasValue && MINTSCNC.Value != 88) && (RMMODE != RemoteModality.Telephone))
                 {
                     if (MINTSCNC.HasValue && MINTSCNC.Value <= MINTSCNG.Value)
                     {
