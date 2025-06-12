@@ -838,7 +838,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (UDSVERFN.HasValue && UDSVERLR.HasValue)
                 {
-                    if (UDSVERTE.Value == UDSVERFN.Value + UDSVERLR.Value)
+                    if (UDSVERTE.HasValue && UDSVERTE.Value == UDSVERFN.Value + UDSVERLR.Value)
                     {
                         return true;
                     }
@@ -856,7 +856,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
                 {
-                    if (UDSVERTN.Value == UDSVERFC.Value + UDSVERLC.Value)
+                    if (UDSVERTN.HasValue && UDSVERTN.Value == UDSVERFC.Value + UDSVERLC.Value)
                     {
                         return true;
                     }
@@ -873,7 +873,7 @@ namespace UDS.Net.Forms.Models.UDS4
             get
             {
 
-                if ((MINTSCNC.HasValue && MINTSCNC.Value != 88) && (RMMODE != RemoteModality.Telephone))
+                if ((MINTSCNG.HasValue && MINTSCNG.Value > 0) && (MINTSCNC.HasValue && MINTSCNC.Value != 88) && (RMMODE != RemoteModality.Telephone))
                 {
                     if (MINTSCNC.HasValue && MINTSCNC.Value <= MINTSCNG.Value)
                     {
