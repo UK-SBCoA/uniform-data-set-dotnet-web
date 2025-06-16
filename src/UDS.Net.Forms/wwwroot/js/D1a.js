@@ -77,7 +77,7 @@
     $("input[name='D1a.SCDDXCONF'], input[name='D1a.SCD']").change(function () {
         var scddxconfValue = $("input[name='D1a.SCDDXCONF']").val();
         var scdValue = $("input[name='D1a.SCD']").val();
-        var shouldDisable = (scddxconfValue == '0' || scddxconfValue == '1' || scdValue == '0');
+        var shouldDisable = ( scddxconfValue == '1' || scdValue == '0');
         toggleInputs(shouldDisable);
     });
 
