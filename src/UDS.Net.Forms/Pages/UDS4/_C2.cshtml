@@ -1506,7 +1506,7 @@
                         <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a.)</p>
                     </div>
                     <div class="flex flex-row space-x-4">
-                        <div class="w-28">
+                        <div class="min-w-[80px] max-w-[115px]">
                             <input asp-for="@Model.C2.CERADJ7YES" ui-range-behavior="Model.CERADJ7YESBehavior" />
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7YES"></p>
@@ -1519,7 +1519,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
                     <label asp-for="C2.CERADJ7NO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ7NO)</label>
                     <div class="flex flex-row space-x-4">
-                        <div class="w-28">
+                        <div class="min-w-[80px] max-w-[115px]">
                             <input asp-for="@Model.C2.CERADJ7NO" />
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7NO"></p>
