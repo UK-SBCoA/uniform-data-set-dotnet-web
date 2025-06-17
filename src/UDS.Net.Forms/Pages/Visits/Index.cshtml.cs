@@ -29,7 +29,15 @@ namespace UDS.Net.Forms.Pages.Visits
             IEnumerable<Services.DomainModels.Visit> visits;
             int total;
 
-            if (startDate.HasValue && endDate.HasValue)
+            bool invalidDateRange = startDate.HasValue && endDate.HasValue && endDate < startDate;
+            if (invalidDateRange)
+            {
+                ModelState.AddModelError(string.Empty, "End date cannot be before start date.");
+
+                visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
+                total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
+            }
+            else if (startDate.HasValue && endDate.HasValue)
             {
                 visits = await _visitService.ListByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value, pageSize, pageIndex);
                 total = await _visitService.CountByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value);

@@ -45,5 +45,18 @@
             StartDate = startDate;
             EndDate = endDate;
         }
+
+        public bool IsDateRangeValid(out string errorMessage)
+        {
+            errorMessage = string.Empty;
+
+            if (StartDate.HasValue && EndDate.HasValue && EndDate < StartDate)
+            {
+                errorMessage = "End date cannot be before start date.";
+                return false;
+            }
+
+            return true;
+        }
     }
 }

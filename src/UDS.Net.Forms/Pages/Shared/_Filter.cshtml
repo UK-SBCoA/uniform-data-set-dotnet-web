@@ -2,6 +2,19 @@
 
 <div data-controller="dropdown">
     <form method="get">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="w-full text-red-600 font-semibold mb-2 px-2">
+                @foreach (var modelState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                }
+            </div>
+        }
+
         <div class="flex flex-wrap items-center gap-4">
 
             <!-- Start Date -->
