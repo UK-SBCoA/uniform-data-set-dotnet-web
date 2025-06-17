@@ -569,7 +569,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "J7 Word List Recognition: Total YES correct", Description = "(0-10,95-98)")]
         [RegularExpression("^(\\d|10|9[5-8])$", ErrorMessage = "Allowed values are 0-10 or 95-98.")]
-        [RequiredIfRange(nameof(CERADJ6REC),0,10, ErrorMessage = "Response required")]
+        [RequiredIfRange(nameof(CERADJ6REC), 0, 10, ErrorMessage = "Response required")]
         public int? CERADJ7YES { get; set; }
 
         [Display(Name = "J7 Word List Recognition: Total NO correct", Description = "(0-10,95-98)")]
