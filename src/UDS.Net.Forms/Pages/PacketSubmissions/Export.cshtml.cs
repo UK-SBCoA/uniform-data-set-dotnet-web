@@ -238,11 +238,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var recordProp in a1aRecordProps)
                             {
-                                if(recordProp.Name == "Mode")
+                                if (recordProp.Name == "Mode")
                                 {
                                     csv.WriteField(a1aRecord.Mode);
                                 }
-                                else if(recordProp.Name == "Not") 
+                                else if (recordProp.Name == "Not")
                                 {
                                     csv.WriteField(a1aRecord.Not);
                                 }
@@ -263,7 +263,33 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a2 != null)
                     {
                         var a2Record = new A2Record(a2);
-                        csv.WriteRecord(a2Record);
+
+                        if (a2Record.Mode == 0)
+                        {
+                            //call method here
+                            var a2RecordProps = typeof(A1aRecord).GetProperties();
+
+                            foreach (var recordProp in a2RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(a2Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(a2Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a2Record);
+                        }
+
                         csv.WriteRecord((A2FormFields)a2.Fields);
                     }
                     if (a3 != null)
@@ -301,8 +327,30 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4 != null)
                     {
                         var a4Record = new A4Record(a4);
-                        csv.WriteRecord(a4Record);
-                        csv.WriteRecord((A4GFormFields)a4.Fields);
+
+                        if (a4Record.Mode == 0)
+                        {
+                            //call method here
+                            var a4RecordProps = typeof(A4Record).GetProperties();
+
+                            foreach (var recordProp in a4RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(a4Record.Mode);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a4Record);
+                        }
+
+                        csv.WriteRecord((A4Record)a4.Fields);
 
                         var details = ((A4GFormFields)a4.Fields).A4Ds.ToArray(); // we do NOT already have a list of 40, size of this list is dynamic
                         for (int i = 1; i <= 40; i++)
@@ -316,8 +364,30 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4a != null)
                     {
                         var a4aRecord = new A4aRecord(a4a);
-                        csv.WriteRecord(a4aRecord);
-                        csv.WriteRecord((A4aFormFields)a4a.Fields);
+
+                        if (a4aRecord.Mode == 0)
+                        {
+                            //call method here
+                            var a4aRecordProps = typeof(A4aRecord).GetProperties();
+
+                            foreach (var recordProp in a4aRecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(a4aRecord.Mode);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a4aRecord);
+                        }
+
+                        csv.WriteRecord((A4aRecord)a4a.Fields);
 
                         var treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields;
                         foreach (var treatment in treatments)
@@ -341,14 +411,68 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b1 != null)
                     {
                         var b1Record = new B1Record(b1);
-                        csv.WriteRecord(b1Record);
-                        csv.WriteRecord((B1FormFields)b1.Fields);
+
+                        if (b1Record.Mode == 0)
+                        {
+                            //call method here
+                            var b1RecordProps = typeof(B1Record).GetProperties();
+
+                            foreach (var recordProp in b1RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(b1Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(b1Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b1Record);
+                        }
+
+                        csv.WriteRecord((B1Record)b1.Fields);
                     }
                     if (b3 != null)
                     {
                         var b3Record = new B3Record(b3);
-                        csv.WriteRecord(b3Record);
-                        csv.WriteRecord((B3FormFields)b3.Fields);
+
+                        if (b3Record.Mode == 0)
+                        {
+                            //call method here
+                            var b3RecordProps = typeof(B3Record).GetProperties();
+
+                            foreach (var recordProp in b3RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(b3Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(b3Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b3Record);
+                        }
+
+                        csv.WriteRecord((B3Record)b3.Fields);
                     }
                     if (b4 != null)
                     {
@@ -359,19 +483,100 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b5 != null)
                     {
                         var b5Record = new B5Record(b5);
-                        csv.WriteRecord(b5Record);
-                        csv.WriteRecord((B5FormFields)b5.Fields);
+
+                        if (b5Record.Mode == 0)
+                        {
+                            //call method here
+                            var b5RecordProps = typeof(B5Record).GetProperties();
+
+                            foreach (var recordProp in b5RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(b5Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(b5Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b5Record);
+                        }
+
+                        csv.WriteRecord((B5Record)b5.Fields);
                     }
                     if (b6 != null)
                     {
-                        var b6Recrod = new B6Record(b6);
-                        csv.WriteRecord(b6Recrod);
-                        csv.WriteRecord((B6FormFields)b6.Fields);
+                        var b6Record = new B6Record(b6);
+
+                        if (b6Record.Mode == 0)
+                        {
+                            //call method here
+                            var b6RecordProps = typeof(B6Record).GetProperties();
+
+                            foreach (var recordProp in b6RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(b6Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(b6Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b6Record);
+                        }
+
+                        csv.WriteRecord((B6Record)b6.Fields);
                     }
                     if (b7 != null)
                     {
                         var b7Record = new B7Record(b7);
-                        csv.WriteRecord(b7Record);
+
+                        if (b7Record.Mode == 0)
+                        {
+                            //call method here
+                            var b7RecordProps = typeof(B7Record).GetProperties();
+
+                            foreach (var recordProp in b7RecordProps)
+                            {
+                                if (recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(b7Record.Mode);
+                                }
+                                else if (recordProp.Name == "Not")
+                                {
+                                    csv.WriteField(b7Record.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b7Record);
+                        }
+
                         csv.WriteRecord((B7FormFields)b7.Fields);
                     }
                     if (b8 != null)
@@ -416,8 +621,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             return null;
         }
-
-
     }
 }
 
