@@ -6,13 +6,13 @@
 
 }
 
-<div class="px-2 py-5">
+<div data-controller="autocomplete rxNormDisplayNames" data-action="click->autocomplete#handleOutsideClick" class="px-2 py-5">
 
     <turbo-frame id="RxNorm">
         <a asp-page="/UDS4/A4" asp-route-id="@Model.RxNormLookup.Id" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
 
         <div class="bg-white py-16 sm:py-24 lg:py-32">
-            <div data-controller="autocomplete rxNormDisplayNames" data-action="autocomplete:newSearch->rxNormDisplayNames#fetchData" data-rxNormDisplayNames-fetchedLetters-value="" class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div data-action="autocomplete:newSearch->rxNormDisplayNames#fetchData" data-rxNormDisplayNames-fetchedLetters-value="" class="mx-auto max-w-7xl px-6 lg:px-8">
                 <h2 class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">Search RxNorm</h2>
                 <form method="post" class="w-full max-w-md lg:col-span-5 lg:pt-2">
                     <div class="flex gap-x-4">

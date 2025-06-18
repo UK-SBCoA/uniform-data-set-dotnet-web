@@ -13,11 +13,12 @@ export default class extends Controller {
     this.listTarget.classList.add("hidden")
   }
 
-  handleOutsideClick = (event) => {
-    if (!this.element.contains(event.target)) {
+  handleOutsideClick(event) {
+    if (!this.searchBoxTarget.contains(event.target)) {
       this.hideList();
     }
   }
+
   filterList(event) {
     // we will call the rxNormDisplayNames controller (list is ~30K)
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
@@ -55,14 +56,13 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
-    document.addEventListener("click", this.handleOutsideClick)
     this.searchBoxTarget.addEventListener("keydown", this.onKeyDown.bind(this));
     this.activeIndex = -1
   }
 
   onKeyDown(event) {
     const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
-    if (visibleItems === 0) return;
+    if (visibleItems.length === 0) return;
 
     switch (event.key) {
       case "ArrowDown":
