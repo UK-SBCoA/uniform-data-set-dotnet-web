@@ -39,6 +39,8 @@ namespace UDS.Net.Forms.Pages.Visits
             }
             else if (startDate.HasValue && endDate.HasValue)
             {
+                endDate = endDate.Value.Date.AddDays(1).AddTicks(-1);
+
                 visits = await _visitService.ListByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value, pageSize, pageIndex);
                 total = await _visitService.CountByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value);
             }
