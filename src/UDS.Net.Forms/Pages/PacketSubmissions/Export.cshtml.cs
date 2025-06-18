@@ -223,8 +223,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                     if (a1 != null)
                     {
-                        //do converstion here
-
                         var a1Record = new A1Record(a1);
                         csv.WriteRecord(a1Record);
                         csv.WriteRecord((A1FormFields)a1.Fields);
@@ -232,7 +230,34 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1a != null)
                     {
                         var a1aRecord = new A1aRecord(a1a);
-                        csv.WriteRecord(a1aRecord);
+
+                        if (a1aRecord.Mode == 0)
+                        {
+                            //call method here
+                            var a1aRecordProps = typeof(A1aRecord).GetProperties();
+
+                            foreach (var recordProp in a1aRecordProps)
+                            {
+                                if(recordProp.Name == "Mode")
+                                {
+                                    csv.WriteField(a1aRecord.Mode);
+                                }
+                                else if(recordProp.Name == "Not") 
+                                {
+                                    csv.WriteField(a1aRecord.Not);
+                                }
+                                else
+                                {
+                                    csv.WriteField(null);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a1aRecord);
+                        }
+
                         csv.WriteRecord((A1aFormFields)a1a.Fields);
                     }
                     if (a2 != null)
@@ -391,6 +416,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             return null;
         }
+
+
     }
 }
 
