@@ -223,6 +223,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                     if (a1 != null)
                     {
+                        //do converstion here
+
                         var a1Record = new A1Record(a1);
                         csv.WriteRecord(a1Record);
                         csv.WriteRecord((A1FormFields)a1.Fields);
