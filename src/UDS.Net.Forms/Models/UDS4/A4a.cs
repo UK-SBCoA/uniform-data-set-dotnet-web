@@ -157,6 +157,16 @@ namespace UDS.Net.Forms.Models.UDS4
                         yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
 
+                    if (Status == FormStatus.Finalized)
+                    {
+                        if (ADVEVENT == 0 || ADVEVENT == 9 || ADVEVENT == null)
+                        {
+                            if (ADVERSEOTH == true)
+                            {
+                                yield return new ValidationResult("ADVERSEOTH must be blank when ADVEVENT is 0, 9, or blank.", new[] { nameof(ADVERSEOTH) });
+                            }
+                        }
+                    }
                     index++;
                 }
             }
