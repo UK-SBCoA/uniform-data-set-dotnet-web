@@ -302,6 +302,34 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
+        public Dictionary<string, UIBehavior> IMPNOMCIUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX")
+                }
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX")
+                }
+            } }
+        };
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             await base.OnGetAsync(id);
