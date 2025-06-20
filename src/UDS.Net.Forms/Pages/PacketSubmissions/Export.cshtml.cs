@@ -230,35 +230,48 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1a != null)
                     {
                         var a1aRecord = new A1aRecord(a1a);
-
-                        if (a1aRecord.Mode == 0)
+                        // TODO update FormsContract in Visit domain class for all forms in packet types I and I4
+                        // TODO Use the domain object for finding if the form is required
+                        if (!a1a.IsRequiredForPacketKind && a1a.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            //call method here
-                            var a1aRecordProps = typeof(A1aRecord).GetProperties();
+                            // if not required and mode is not completed, then we want null values for everything except
+                            // MODE, NOT
+                            // looping in case something changes with the form base spec
+                            //var a1aRecordProps = typeof(A1aRecord).GetProperties();
 
-                            foreach (var recordProp in a1aRecordProps)
+                            foreach (var propOutput in a1aRecord.GetExportProperties())
                             {
-                                if (recordProp.Name == "Mode")
-                                {
-                                    csv.WriteField(a1aRecord.Mode);
-                                }
-                                else if (recordProp.Name == "Not")
-                                {
-                                    csv.WriteField(a1aRecord.Not);
-                                }
-                                else
-                                {
-                                    csv.WriteField(null);
-                                }
+                                csv.WriteField(propOutput);
                             }
 
+                            //foreach (var recordProp in a1aRecordProps)
+                            //{
+                            //    if (recordProp.Name == "Mode")
+                            //    {
+                            //        csv.WriteField(a1aRecord.Mode);
+                            //    }
+                            //    else if (recordProp.Name == "Not")
+                            //    {
+                            //        csv.WriteField(a1aRecord.Not);
+                            //    }
+                            //    else
+                            //    {
+                            //        csv.WriteField(null);
+                            //    }
+                            //}
+
+                            var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties();
+
+                            foreach (var prop in a1aFormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
                         }
                         else
                         {
                             csv.WriteRecord(a1aRecord);
+                            csv.WriteRecord((A1aFormFields)a1a.Fields);
                         }
-
-                        csv.WriteRecord((A1aFormFields)a1a.Fields);
                     }
                     if (a2 != null)
                     {
