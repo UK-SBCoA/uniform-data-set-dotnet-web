@@ -31,6 +31,27 @@ namespace UDS.Net.Forms.Records
 
         [Name("a1anot")]
         public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
+
+        public IEnumerable<string?> GetExportProperties()
+        {
+            var a1aRecordProps = typeof(A1aRecord).GetProperties();
+
+            foreach (var recordProp in a1aRecordProps)
+            {
+                if (recordProp.Name == "Mode")
+                {
+                    yield return Mode.ToString();
+                }
+                else if (recordProp.Name == "Not")
+                {
+                    yield return Not.ToString();
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+        }
     }
 }
 

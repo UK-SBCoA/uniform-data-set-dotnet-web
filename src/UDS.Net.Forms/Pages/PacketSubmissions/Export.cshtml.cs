@@ -230,14 +230,53 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1a != null)
                     {
                         var a1aRecord = new A1aRecord(a1a);
-                        csv.WriteRecord(a1aRecord);
-                        csv.WriteRecord((A1aFormFields)a1a.Fields);
+                        // TODO Use the domain object for finding if the form is required
+                        if (!a1a.IsRequiredForPacketKind && a1a.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            // if not required and mode is not completed, then we want null values for everything except
+                            // MODE, NOT
+
+                            foreach (var propOutput in a1aRecord.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties();
+
+                            foreach (var prop in a1aFormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a1aRecord);
+                            csv.WriteRecord((A1aFormFields)a1a.Fields);
+                        }
                     }
                     if (a2 != null)
                     {
                         var a2Record = new A2Record(a2);
-                        csv.WriteRecord(a2Record);
-                        csv.WriteRecord((A2FormFields)a2.Fields);
+
+                        if (!a2.IsRequiredForPacketKind && a2.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutput in a2Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var a2FormFieldsProps = typeof(A2FormFields).GetProperties();
+
+                            foreach (var prop in a2FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(a2Record);
+                            csv.WriteRecord((A2FormFields)a2.Fields);
+                        }
                     }
                     if (a3 != null)
                     {
@@ -274,6 +313,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4 != null)
                     {
                         var a4Record = new A4Record(a4);
+
                         csv.WriteRecord(a4Record);
                         csv.WriteRecord((A4GFormFields)a4.Fields);
 
@@ -289,6 +329,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4a != null)
                     {
                         var a4aRecord = new A4aRecord(a4a);
+
                         csv.WriteRecord(a4aRecord);
                         csv.WriteRecord((A4aFormFields)a4a.Fields);
 
@@ -314,14 +355,51 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b1 != null)
                     {
                         var b1Record = new B1Record(b1);
-                        csv.WriteRecord(b1Record);
-                        csv.WriteRecord((B1FormFields)b1.Fields);
+
+                        if (!b1.IsRequiredForPacketKind && b1.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutPut in b1Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutPut);
+                            }
+
+                            var b1FormFieldsProps = typeof(B1FormFields).GetProperties();
+
+                            foreach (var prop in b1FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b1Record);
+                            csv.WriteRecord((B1FormFields)b1.Fields);
+                        }
                     }
                     if (b3 != null)
                     {
                         var b3Record = new B3Record(b3);
-                        csv.WriteRecord(b3Record);
-                        csv.WriteRecord((B3FormFields)b3.Fields);
+
+                        if (!b3.IsRequiredForPacketKind && b3.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutput in b3Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var b3FormFieldsProps = typeof(B3FormFields).GetProperties();
+
+                            foreach (var prop in b3FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b3Record);
+                            csv.WriteRecord((B3FormFields)b3.Fields);
+                        }
                     }
                     if (b4 != null)
                     {
@@ -332,20 +410,74 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b5 != null)
                     {
                         var b5Record = new B5Record(b5);
-                        csv.WriteRecord(b5Record);
-                        csv.WriteRecord((B5FormFields)b5.Fields);
+
+                        if (!b5.IsRequiredForPacketKind && b5.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutput in b5Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var b5FormFieldsProps = typeof(B5FormFields).GetProperties();
+
+                            foreach (var prop in b5FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b5Record);
+                            csv.WriteRecord((B5FormFields)b5.Fields);
+                        }
                     }
                     if (b6 != null)
                     {
-                        var b6Recrod = new B6Record(b6);
-                        csv.WriteRecord(b6Recrod);
-                        csv.WriteRecord((B6FormFields)b6.Fields);
+                        var b6Record = new B6Record(b6);
+
+                        if (!b6.IsRequiredForPacketKind && b6.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutput in b6Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var b6FormFieldsProps = typeof(B6FormFields).GetProperties();
+
+                            foreach (var prop in b6FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b6Record);
+                            csv.WriteRecord((B6FormFields)b6.Fields);
+                        }
                     }
                     if (b7 != null)
                     {
                         var b7Record = new B7Record(b7);
-                        csv.WriteRecord(b7Record);
-                        csv.WriteRecord((B7FormFields)b7.Fields);
+
+                        if (!b7.IsRequiredForPacketKind && b7.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            foreach (var propOutput in b7Record.GetExportProperties())
+                            {
+                                csv.WriteField(propOutput);
+                            }
+
+                            var b7FormFieldsProps = typeof(B5FormFields).GetProperties();
+
+                            foreach (var prop in b7FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            csv.WriteRecord(b7Record);
+                            csv.WriteRecord((B7FormFields)b7.Fields);
+                        }
                     }
                     if (b8 != null)
                     {
