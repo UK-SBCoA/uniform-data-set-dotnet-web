@@ -38,27 +38,15 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                int counter = 0;
-                if (ARIAE == true)
-                {
-                    counter++;
-                }
-                if (ARIAH == true)
-                {
-                    counter++;
-                }
-                if (ADVERSEOTH == true)
-                {
-                    counter++;
-                }
-                if (counter >= 1)
+                if (ADVEVENT != 1 && ADVEVENT != 9)
+                    return true;
+
+                if (ARIAE == true || ARIAH == true || ADVERSEOTH == true)
                 {
                     return true;
                 }
-                return null;
+                return false;
             }
-
-
         }
 
         public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
@@ -161,19 +149,6 @@ namespace UDS.Net.Forms.Models.UDS4
                     index++;
                 }
 
-                if (Status == FormStatus.Finalized)
-                {
-                    if (ADVEVENT == null || ADVEVENT == 0 || ADVEVENT == 9)
-                    {
-                        if (ADVERSEOTH == true)
-                        {
-                            yield return new ValidationResult(
-                                "ADVERSEOTH must be blank when ADVEVENT is 0, 9, or blank."
-                            );
-
-                        }
-                    }
-                }
             }
 
             foreach (var result in base.Validate(validationContext))
