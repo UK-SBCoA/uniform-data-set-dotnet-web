@@ -21,14 +21,34 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = null)
+        public async Task<IActionResult> OnGetAsync(string[] filter, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            //set Filter property to new filter with supplied array items and filter query
-            Filter = new FilterModel(Enum.GetNames(typeof(PacketStatus)).ToList(), filter.ToList());
+            // Initialize filter
+            Filter = new FilterModel(Enum.GetNames(typeof(PacketStatus)).ToList(), filter.ToList(), startDate, endDate);
 
-            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
+            IEnumerable<Services.DomainModels.Visit> visits;
+            int total;
 
-            int total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
+            bool invalidDateRange = startDate.HasValue && endDate.HasValue && endDate < startDate;
+            if (invalidDateRange)
+            {
+                ModelState.AddModelError(string.Empty, "End date cannot be before start date.");
+
+                visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
+                total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
+            }
+            else if (startDate.HasValue && endDate.HasValue)
+            {
+                endDate = endDate.Value.Date.AddDays(1).AddTicks(-1);
+
+                visits = await _visitService.ListByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value, pageSize, pageIndex);
+                total = await _visitService.CountByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate.Value, endDate.Value);
+            }
+            else
+            {
+                visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
+                total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
+            }
 
             Visits = visits.ToVM(pageSize, pageIndex, total, search);
 
