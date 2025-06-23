@@ -9,6 +9,7 @@ using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -245,7 +246,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a1aFormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if (prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
@@ -269,7 +273,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a2FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
@@ -367,7 +374,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b1FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
 
                         }
@@ -392,7 +402,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b3FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
@@ -422,7 +435,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b5FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
@@ -446,7 +462,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b6FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
@@ -470,7 +489,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b7FormFieldsProps)
                             {
-                                csv.WriteField(null);
+                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                {
+                                    csv.WriteField(null);
+                                }
                             }
                         }
                         else
