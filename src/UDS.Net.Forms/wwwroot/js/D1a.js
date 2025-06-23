@@ -80,9 +80,4 @@
         var shouldDisable = (scddxconfValue == '0' || scddxconfValue == '1' || scdValue == '0');
         toggleInputs(shouldDisable);
     });
-
-    updateIMPNOMCITargets();
-
-    $("input[name='D1a.IMPNOMCI']").change(updateIMPNOMCITargets);
-
 });
