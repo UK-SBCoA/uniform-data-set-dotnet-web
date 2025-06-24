@@ -10,6 +10,7 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -246,7 +247,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a1aFormFieldsProps)
                             {
-                                if (prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -273,7 +274,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a2FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -374,7 +375,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b1FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -402,7 +403,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b3FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -435,7 +436,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b5FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -462,7 +463,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b6FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -489,7 +490,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b7FormFieldsProps)
                             {
-                                if(prop.Name != "FormModes" && prop.Name != "NotIncludedReasonCodes" && prop.Name != "RemoteModalities")
+                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
                                 {
                                     csv.WriteField(null);
                                 }
