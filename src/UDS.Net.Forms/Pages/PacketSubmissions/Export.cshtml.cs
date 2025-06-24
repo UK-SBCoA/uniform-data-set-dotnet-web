@@ -247,7 +247,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a1aFormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -274,7 +274,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in a2FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -375,7 +375,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b1FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -403,7 +403,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b3FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -436,7 +436,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b5FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -463,7 +463,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b6FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
@@ -490,7 +490,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                             foreach (var prop in b7FormFieldsProps)
                             {
-                                if (!Enum.IsDefined(typeof(FormFieldEnumerables), prop.Name))
+                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
                                 {
                                     csv.WriteField(null);
                                 }
