@@ -9,7 +9,6 @@ using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
@@ -232,12 +231,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1a != null)
                     {
                         var a1aRecord = new A1aRecord(a1a);
-                        // TODO Use the domain object for finding if the form is required
+
                         if (!a1a.IsRequiredForPacketKind && a1a.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // if not required and mode is not completed, then we want null values for everything except
-                            // MODE, NOT
-
                             foreach (var propOutput in a1aRecord.GetExportProperties())
                             {
                                 csv.WriteField(propOutput);
