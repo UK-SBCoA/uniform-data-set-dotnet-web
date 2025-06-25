@@ -32,7 +32,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ADVERSEOTX { get; set; }
 
         [RequiredIf(nameof(ADVEVENT), "1", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
-        [RequiredIf(nameof(ADVEVENT), "9", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
         [NotMapped]
         public bool? AdverseEventsIndicated
         {
@@ -57,8 +56,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
                 return null;
             }
-
-
         }
 
         public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
@@ -157,8 +154,10 @@ namespace UDS.Net.Forms.Models.UDS4
                         yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
 
+
                     index++;
                 }
+
             }
 
             foreach (var result in base.Validate(validationContext))
