@@ -32,20 +32,29 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ADVERSEOTX { get; set; }
 
         [RequiredIf(nameof(ADVEVENT), "1", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
-        [RequiredIf(nameof(ADVEVENT), "9", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
         [NotMapped]
         public bool? AdverseEventsIndicated
         {
             get
             {
-                if (ADVEVENT != 1 && ADVEVENT != 9)
-                    return true;
-
-                if (ARIAE == true || ARIAH == true || ADVERSEOTH == true)
+                int counter = 0;
+                if (ARIAE == true)
+                {
+                    counter++;
+                }
+                if (ARIAH == true)
+                {
+                    counter++;
+                }
+                if (ADVERSEOTH == true)
+                {
+                    counter++;
+                }
+                if (counter >= 1)
                 {
                     return true;
                 }
-                return false;
+                return null;
             }
         }
 
