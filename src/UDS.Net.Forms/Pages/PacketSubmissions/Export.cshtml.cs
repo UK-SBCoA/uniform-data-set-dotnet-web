@@ -232,26 +232,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var a1aRecord = new A1aRecord(a1a);
 
-                        if (!a1a.IsRequiredForPacketKind && a1a.MODE == Services.Enums.FormMode.NotCompleted)
-                        {
-                            foreach (var propOutput in a1aRecord.GetExportProperties())
-                            {
-                                csv.WriteField(propOutput);
-                            }
+                        // write header values
+                        csv.WriteRecord(a1aRecord);
 
+                        // write remaining form values
+                        if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            // If the form is not completed, everything exported should be null
                             var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties();
 
-                            foreach (var prop in a1aFormFieldsProps)
+                            foreach (var prop in a1aFormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
                             {
-                                if (!Enum.TryParse(prop.Name, true, out FormFieldEnumerables enumerable))
-                                {
-                                    csv.WriteField(null);
-                                }
+                                csv.WriteField(null);
                             }
                         }
                         else
                         {
-                            csv.WriteRecord(a1aRecord);
+                            // if the form is included, export all the values
                             csv.WriteRecord((A1aFormFields)a1a.Fields);
                         }
                     }
