@@ -22,27 +22,6 @@ namespace UDS.Net.Forms.Records
 
         [Name("b3not")]
         public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
-
-        public IEnumerable<string?> GetExportProperties()
-        {
-            var b3RecordProps = typeof(B3Record).GetProperties();
-
-            foreach (var recordProp in b3RecordProps)
-            {
-                if (recordProp.Name == "Mode")
-                {
-                    yield return Mode.ToString();
-                }
-                else if (recordProp.Name == "Not")
-                {
-                    yield return Not.ToString();
-                }
-                else
-                {
-                    yield return null;
-                }
-            }
-        }
     }
 }
 
