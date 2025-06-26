@@ -35,12 +35,13 @@
     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
         <div>
             <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
-            <enum-select data-controller="selectendpoint"
-                         data-selectendpoint-target="dropdown"
-                         data-selectendpoint-visit-id-value="@Model.C2.VisitId"
-                         data-action="change->selectendpoint#modeDropdown"
+            <enum-select data-controller="select-endpoint"
+                         data-select-endpoint-target="dropdown"
+                         data-select-endpoint-visit-id-value="@Model.C2.VisitId"
+                         data-action="change->select-endpoint#modeDropdown"
                          data-turboframe="C2"
                          data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
+                         data-form-footer-dropdown-reset-target="trigger"
                          for="@Model.C2.MODE"
                          items="Html.GetEnumSelectList<FormMode>()"
                          enabled-values="@Model.C2.AllowedFormModes"
@@ -52,13 +53,14 @@
         </div>
         <div>
             <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
-            <enum-select data-controller="selectendpoint"
-                         data-selectendpoint-target="dropdown"
-                         data-selectendpoint-visit-id-value="@Model.C2.VisitId"
-                         data-action="change->selectendpoint#remoteModeDropdown"
+            <enum-select data-controller="select-endpoint"
+                         data-select-endpoint-target="dropdown"
+                         data-select-endpoint-visit-id-value="@Model.C2.VisitId"
+                         data-action="change->select-endpoint#remoteModeDropdown"
                          data-turboframe="C2"
                          data-remote-end-point="../C2/@Model.BaseForm.VisitId?handler=C2T"
                          data-in-person-end-point="../C2/@Model.BaseForm.VisitId?handler=C2"
+                         data-form-footer-dropdown-reset-target="remote"
                          for="@Model.C2.RMMODE"
                          items="Html.GetEnumSelectList<RemoteModality>()"
                          enabled-values="@Model.C2.AllowedRemoteModalities"

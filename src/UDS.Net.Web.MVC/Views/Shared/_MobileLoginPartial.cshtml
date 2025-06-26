@@ -4,7 +4,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div data-mobilemenu-target="menu" class="lg:hidden" id="mobile-menu" style="display: none;">
+    <div data-mobile-menu-target="menu" class="lg:hidden" id="mobile-menu" style="display: none;">
         <div class="space-y-1 px-2 pt-2 pb-3">
             <partial name="_MainMenuItems" model="@(new MenuItemViewModel() { IsMobile = true })" />
         </div>
