@@ -53,7 +53,8 @@ namespace UDS.Net.Web.MVC.Services
         {
             if (Int32.TryParse(rxCUI, out int rxNormId))
             {
-                var dto = await _apiClient.LookupClient.FindDrugCode(rxNormId);
+                var rxNormIds = new int[] { rxNormId };
+                var dto = await _apiClient.LookupClient.FindDrugCodes(rxNormIds);
                 if (dto != null)
                 {
                     if (dto.TotalResultsCount > 0 && dto.Results != null && dto.Results.Count() > 0)
