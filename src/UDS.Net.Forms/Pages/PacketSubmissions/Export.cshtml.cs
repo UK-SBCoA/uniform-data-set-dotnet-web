@@ -10,6 +10,8 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Services.Enums;
+using System.Reflection;
+using Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -256,16 +258,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var a2Record = new A2Record(a2);
 
-                        // write header values
                         csv.WriteRecord(a2Record);
 
-                        // write remaining form values
                         if (a2.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // If the form is not completed, everything exported should be null
-                            var a2FormFieldsProps = typeof(A2FormFields).GetProperties();
+                            var a2FormFieldsProps = typeof(A2FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in a2FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in a2FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
