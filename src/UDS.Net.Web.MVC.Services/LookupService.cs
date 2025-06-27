@@ -23,9 +23,9 @@ namespace UDS.Net.Web.MVC.Services
             _rxNormClient = rxNormClient;
         }
 
-        public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1)
+        public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1, bool? includePopular = null, bool? includeOverTheCounter = null)
         {
-            var dto = await _apiClient.LookupClient.LookupDrugCodes(pageSize, pageIndex);
+            var dto = await _apiClient.LookupClient.LookupDrugCodes(pageSize, pageIndex, includePopular, includeOverTheCounter);
 
             return new DrugCodeLookup
             {
@@ -51,24 +51,46 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<DrugCodeLookup> FindDrugCode(string rxCUI)
         {
-            if (Int32.TryParse(rxCUI, out int rxNormId))
+            if (!String.IsNullOrWhiteSpace(rxCUI))
             {
-                var rxNormIds = new int[] { rxNormId };
-                var dto = await _apiClient.LookupClient.FindDrugCodes(rxNormIds);
+                var rxCUIs = new string[] { rxCUI };
+
+                return await FindDrugCodes(rxCUIs);
+            }
+
+            return new DrugCodeLookup
+            {
+                PageSize = 1,
+                PageIndex = 1,
+                TotalResultsCount = 0,
+                DrugCodes = new List<DrugCode>()
+            };
+        }
+
+        public async Task<DrugCodeLookup> FindDrugCodes(string[] rxCUIs)
+        {
+            if (rxCUIs != null && rxCUIs.Count() > 0)
+            {
+                var search = new List<int>();
+                foreach (var cui in rxCUIs)
+                {
+                    if (Int32.TryParse(cui, out int rxNormId))
+                    {
+                        search.Add(rxNormId);
+                    }
+                }
+
+                var dto = await _apiClient.LookupClient.FindDrugCodes(search.ToArray());
                 if (dto != null)
                 {
                     if (dto.TotalResultsCount > 0 && dto.Results != null && dto.Results.Count() > 0)
                     {
-                        var result = dto.Results.FirstOrDefault();
                         return new DrugCodeLookup
                         {
-                            PageSize = 1,
+                            PageSize = dto.TotalResultsCount,
                             PageIndex = 1,
-                            TotalResultsCount = 1,
-                            DrugCodes = new List<DrugCode>()
-                            {
-                                result.ToDomain()
-                            }
+                            TotalResultsCount = dto.TotalResultsCount,
+                            DrugCodes = dto.Results.Select(d => d.ToDomain()).ToList()
                         };
                     }
                 }
