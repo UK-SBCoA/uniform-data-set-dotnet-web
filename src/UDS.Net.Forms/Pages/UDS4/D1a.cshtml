@@ -483,6 +483,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MBI"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1a.MBI)" for="@Model.D1a.MBI" items="Model.MBIListItems" ui-behaviors="Model.MBIUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MBI"></span>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MBIValidation"></span>
     </div>
 </div>
 
