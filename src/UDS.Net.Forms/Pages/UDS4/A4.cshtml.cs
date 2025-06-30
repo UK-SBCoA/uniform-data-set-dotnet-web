@@ -32,6 +32,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public List<DrugCodeModel> CustomDrugCodes { get; set; } = new List<DrugCodeModel>();
 
+        [BindProperty]
+        public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
@@ -71,13 +73,26 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
         {
-            var lookup = await _lookupService.LookupDrugCodes(200, 1); // returns popular drugs (prescription + otc) and custom
+            // popular checkboxes are always capped at 100
+            var lookup = await _lookupService.LookupDrugCodes(100, 1, true); // returns popular drugs (prescription + otc)
 
             var popular = lookup.DrugCodes.Where(d => d.IsPopular == true && d.IsOverTheCounter == false).ToList();
 
             var otc = lookup.DrugCodes.Where(d => d.IsOverTheCounter == true).ToList();
 
-            var custom = lookup.DrugCodes.Where(d => d.IsPopular == false && d.IsOverTheCounter == false).ToList();
+            if (interactedDrugIds != null)
+            {
+                var lookupIds = lookup.DrugCodes.Select(d => d.RxNormId).ToList();
+                var customDrugIds = interactedDrugIds.Where(d => !lookupIds.Contains(d.RxNormId)).Select(d => d.RxNormId).ToList();
+
+                if (customDrugIds != null && customDrugIds.Count() > 0)
+                {
+                    var custom = await _lookupService.FindDrugCodes(customDrugIds.ToArray());
+
+                    // combine custom with previously interacted checkboxes
+                    PopulateDrugCodeList(CustomDrugCodes, interactedDrugIds, custom.DrugCodes);
+                }
+            }
 
             // combine popular drug list with previously interacted checkboxes
             PopulateDrugCodeList(PopularDrugCodes, interactedDrugIds, popular);
@@ -85,8 +100,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             // combine otc drug list with previously interacted checkboxes
             PopulateDrugCodeList(OTCDrugCodes, interactedDrugIds, otc);
 
-            // combine custom with previously interacted checkboxes
-            PopulateDrugCodeList(CustomDrugCodes, interactedDrugIds, custom);
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -101,6 +114,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
             return Page();
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostRxNormSearchAsync(int id, string rxNormLookup_SearchTerm)
+        {
+            return Partial("_A4", this);
         }
 
         private void AssessDrugId(DrugCodeModel? vm)
@@ -169,10 +188,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
             else
             {
+                await base.OnPostAsync(id);
+
                 if (A4.Id == 0)
                     ModelState.AddModelError("A4.ANYMEDS", "Please save form before searching RxNorm for new custom medications");
-
-                await base.OnPostAsync(id);
 
                 if (ModelState.IsValid)
                     return RedirectToPage("/RxNorm/Search", new { Id = id });

@@ -16,6 +16,7 @@ export default class extends Controller {
   }
 
   async fetchData({ detail: { content } }) {
+    console.log("fetch");
     var search = content;
     if (!this.fetchedLettersValue.includes(search)) {
       this.fetchedLettersValue = this.fetchedLettersValue + search;
@@ -23,7 +24,7 @@ export default class extends Controller {
       try {
         const response = await fetch("https://rxnav.nlm.nih.gov/REST/displaynames.json")
         const data = await response.json()
-
+        console.log(data.displayTermsList.term.length)
         // Update the list with the received data
         data.displayTermsList.term.forEach(item => {
           var startsWithMatcher = new RegExp("^" + search, "i")
