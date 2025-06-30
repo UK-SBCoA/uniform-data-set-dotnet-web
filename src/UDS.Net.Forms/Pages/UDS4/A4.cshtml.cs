@@ -32,6 +32,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public List<DrugCodeModel> CustomDrugCodes { get; set; } = new List<DrugCodeModel>();
 
+        [BindProperty]
+        public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
@@ -114,6 +116,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Page();
         }
 
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostRxNormSearchAsync(int id, string rxNormLookup_SearchTerm)
+        {
+            return Partial("_A4", this);
+        }
+
         private void AssessDrugId(DrugCodeModel? vm)
         {
             if (vm != null)
@@ -180,10 +188,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
             else
             {
+                await base.OnPostAsync(id);
+
                 if (A4.Id == 0)
                     ModelState.AddModelError("A4.ANYMEDS", "Please save form before searching RxNorm for new custom medications");
-
-                await base.OnPostAsync(id);
 
                 if (ModelState.IsValid)
                     return RedirectToPage("/RxNorm/Search", new { Id = id });
