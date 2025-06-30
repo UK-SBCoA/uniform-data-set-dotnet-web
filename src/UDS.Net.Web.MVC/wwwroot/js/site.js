@@ -5,3 +5,16 @@
 document.addEventListener("turbo:load", function () {
   console.log("turbo:load event");
 });
+
+document.addEventListener('turbo:visit', function (e) {
+  console.log('turbo:visit', e);
+});
+
+document.addEventListener('turbo:frame-load', function (e) {
+  console.log('turbo:frame-load', e);
+});
+
+document.addEventListener("turbo:before-cache", function () {
+  // ...
+  console.log('turbo:before-cache');
+});

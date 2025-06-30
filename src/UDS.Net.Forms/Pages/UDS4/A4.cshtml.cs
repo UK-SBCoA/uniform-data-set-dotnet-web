@@ -11,6 +11,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -111,14 +112,90 @@ namespace UDS.Net.Forms.Pages.UDS4
                 A4 = (A4)BaseForm; // class library should always handle new instances
             }
 
+            RxNormLookup = new RxNormLookupModel
+            {
+                VisitId = id.HasValue ? id.Value : 0
+            };
+
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
             return Page();
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostRxNormSearchAsync(int id, string rxNormLookup_SearchTerm)
+        public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
         {
+            if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
+            {
+                var search = await _lookupService.SearchDrugCodes(pageSize, pageIndex, RxNormLookup.SearchTerm);
+
+                if (search.TotalResultsCount > 0 && search.DrugCodes != null && search.DrugCodes.Count > 0)
+                {
+                    foreach (var drugCode in search.DrugCodes)
+                    {
+                        RxNormLookup.SearchResults.Add(drugCode.DrugName, drugCode.RxNormId);
+                    }
+                }
+                else
+                {
+                    var results = await _lookupService.LookupRxNormApproximateMatches(RxNormLookup.SearchTerm);
+
+                    foreach (var result in results)
+                    {
+                        // WORKAROUND simplify results (rx norm has duplicate names)
+                        // Duplicate names with different casing like:
+                        // Azithromycin
+                        // azithromycin
+                        // AZITHROMYCIN
+                        if (!RxNormLookup.SearchResults.Where(s => s.Key.ToLower() == result.Name.ToLower()).Any() && !RxNormLookup.SearchResults.Where(s => s.Value == result.RxCUI).Any())
+                            RxNormLookup.SearchResults.Add(result.Name, result.RxCUI);
+                    }
+                }
+                return Partial("~/Pages/RxNorm/_RxNormSelect.cshtml", this);
+            }
+
+            return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this);
+        }
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName)
+        {
+            // find out if we have it.
+            var lookup = await _lookupService.FindDrugCode(rxCUI);
+            if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)
+            {
+                // Drug code already exists in local lookup
+            }
+            else
+            {
+                // Drug code isn't in local db, so we need to add it before assigning to A4
+                var added = await _lookupService.AddDrugCodeToLookup(new Services.LookupModels.DrugCode
+                {
+                    RxNormId = rxCUI,
+                    DrugName = drugName,
+                    BrandName = "",
+                    IsOverTheCounter = false,
+                    IsPopular = false
+                });
+            }
+
+            await base.OnGetAsync(id);
+
+            if (BaseForm != null)
+            {
+                A4 = (A4)BaseForm; // class library should always handle new instances
+            }
+
+            AssessDrugId(new DrugCodeModel
+            {
+                RxNormId = rxCUI,
+                IsSelected = true,
+                IsDeleted = false // we are selecting and adding NOT removing a drug here
+            });
+
+            await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
+
+            // refresh the list
             return Partial("_A4", this);
         }
 
@@ -157,7 +234,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id, string? addCustomMed, string? goNext = null)
+        public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             // Reassemble the model's A4D state based on the bound properties
             foreach (var p in PopularDrugCodes)
@@ -182,22 +259,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A4); // visit needs updated form as well
 
-            if (string.IsNullOrWhiteSpace(addCustomMed))
-            {
-                return await base.OnPostAsync(id, goNext); // checks for validation, etc.
-            }
-            else
-            {
-                await base.OnPostAsync(id);
-
-                if (A4.Id == 0)
-                    ModelState.AddModelError("A4.ANYMEDS", "Please save form before searching RxNorm for new custom medications");
-
-                if (ModelState.IsValid)
-                    return RedirectToPage("/RxNorm/Search", new { Id = id });
-                else
-                    return Page();
-            }
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

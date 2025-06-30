@@ -1,15 +1,40 @@
 ﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A4Model
 @{
-    Layout = "_LayoutForm";
+    Layout = "_Layout";
 
 }
 
 <p class="mt-1 text-sm text-gray-500">
     INSTRUCTIONS: This form is to be completed by the clinician or ADRC staff. The purpose of this form is to record all prescription medications taken by the participant within the <strong>two weeks before the current visit.</strong> If the participant is receiving any treatments known to significantly impact Alzheimer disease and related dementias (ADRD) biomarkers as part of their clinical care at the time of clinical assessment (e.g., they are receiving aducanumab infusions), the treatment should be included on both this form and the A4a ADRD–Specific Treatments form. For prescription medications not listed here, please follow the instructions at the end of this form. OTC (non-prescription) medications need not be reported; however, a short list of medications that could be either prescription or OTC follows the prescription list. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook> for <strong>Form A4.</strong>
 </p>
-<partial name="_A4" for="@Model" />
-<partial name="_FormFooter" for="@Model.A4" />
+
+<div class="">
+    <partial name="../RxNorm/_RxNormSearch" />
+    <partial name="../RxNorm/_RxNormSelect" />
+</div>
+<form method="post" id="UDSForm" data-turbo="false">
+    <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+    <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
+    <input asp-for="Visit.Id" type="hidden" />
+    <input asp-for="Visit.ParticipationId" type="hidden" />
+    <input asp-for="Visit.VISITNUM" type="hidden" />
+    <input asp-for="Visit.PACKET" type="hidden" />
+    <input asp-for="Visit.FORMVER" type="hidden" />
+    <input asp-for="Visit.VISIT_DATE" type="hidden" />
+    <input asp-for="Visit.INITIALS" type="hidden" />
+    <input asp-for="Visit.Status" type="hidden" />
+    <input asp-for="Visit.CreatedAt" type="hidden" />
+    <input asp-for="Visit.CreatedBy" type="hidden" />
+    <input asp-for="Visit.ModifiedBy" type="hidden" />
+    <input asp-for="Visit.DeletedBy" type="hidden" />
+    <input asp-for="Visit.IsDeleted" type="hidden" />
+
+    <div class="counterreset space-y-12 sm:space-y-16 mt-2">
+        <partial name="_A4" for="@Model" />
+        <partial name="_FormFooter" for="@Model.A4" />
+    </div>
+</form>
 
 @section Scripts {
     <script src="~/_content/UDS.Net.Forms/js/A4.js"></script>

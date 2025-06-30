@@ -10,10 +10,10 @@ export default class extends Controller {
   }
 
   async submit() {
-    console.log(this.inputTargets);
-    console.log(this.urlValue);
+    event.preventDefault();
+
     const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
-    console.log(token);
+
     const formData = new FormData();
     this.inputTargets.forEach(input => {
       formData.append(input.name, input.value);
@@ -22,12 +22,18 @@ export default class extends Controller {
       formData.append("__RequestVerificationToken", token);
     }
 
-    await fetch(this.urlValue, {
+    fetch(this.urlValue, {
       method: "POST",
       body: formData,
       headers: {
-        "X-Requested-With": "XMLHttpRequest"
+        //"Accept": "text/vnd.turbo-stream.html"
       }
     });
+    //.then(response => response.text())
+    //.then(html => {
+    //  Turbo.renderStreamMessage(html)
+    //})
+    //.catch(error => console.error("POST error:", error));
+
   }
 }
