@@ -241,9 +241,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
                         {
                             // If the form is not completed, everything exported should be null
-                            var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties();
+                            var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in a1aFormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in a1aFormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
@@ -359,10 +359,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         // write remaining form values
                         if (b1.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // If the form is not completed, everything exported should be null
-                            var b1FormFieldsProps = typeof(B1FormFields).GetProperties();
+                            var b1FormFieldsProps = typeof(B1FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in b1FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in b1FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
@@ -384,9 +383,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         if (b3.MODE == Services.Enums.FormMode.NotCompleted)
                         {
                             // If the form is not completed, everything exported should be null
-                            var b3FormFieldsProps = typeof(B3FormFields).GetProperties();
+                            var b3FormFieldsProps = typeof(B3FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in b3FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in b3FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
@@ -413,10 +412,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         // write remaining form values
                         if (b5.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // If the form is not completed, everything exported should be null
-                            var b5FormFieldsProps = typeof(B5FormFields).GetProperties();
+                            var b5FormFieldsProps = typeof(B5FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in b5FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in b5FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
@@ -437,10 +435,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         // write remaining form values
                         if (b6.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // If the form is not completed, everything exported should be null
-                            var b6FormFieldsProps = typeof(B6FormFields).GetProperties();
+                            var b6FormFieldsProps = typeof(B6FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in b6FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in b6FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }
@@ -461,10 +458,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         // write remaining form values
                         if (b7.MODE == Services.Enums.FormMode.NotCompleted)
                         {
-                            // If the form is not completed, everything exported should be null
-                            var b7FormFieldsProps = typeof(B7FormFields).GetProperties();
+                            var b7FormFieldsProps = typeof(B7FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
 
-                            foreach (var prop in b7FormFieldsProps.Where(p => !p.PropertyType.GetInterfaces().Contains(typeof(System.Collections.IEnumerable))))
+                            foreach (var prop in b7FormFieldsProps)
                             {
                                 csv.WriteField(null);
                             }

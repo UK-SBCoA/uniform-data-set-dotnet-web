@@ -21,7 +21,7 @@ namespace UDS.Net.Forms.Records
         public int Mode { get; init; } = (int)form.MODE;
 
         [Name("rmreasa2")]
-        public int? RmReas { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null :  form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
+        public int? RmReas { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
 
         [Name("rmmodea2")]
         public int? RmMode { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
