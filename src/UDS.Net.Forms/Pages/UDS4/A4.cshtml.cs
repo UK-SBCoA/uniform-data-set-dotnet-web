@@ -125,6 +125,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
         {
+            var test = A4.DrugIds;
+            var count = PopularDrugCodes.Count();
             if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
             {
                 var search = await _lookupService.SearchDrugCodes(pageSize, pageIndex, RxNormLookup.SearchTerm);
@@ -160,6 +162,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName)
         {
+            var test = A4.DrugIds;
+            var count = PopularDrugCodes.Count();
             // find out if we have it.
             var lookup = await _lookupService.FindDrugCode(rxCUI);
             if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)

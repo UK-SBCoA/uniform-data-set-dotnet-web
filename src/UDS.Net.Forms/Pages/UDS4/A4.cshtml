@@ -13,7 +13,7 @@
     <partial name="../RxNorm/_RxNormSearch" />
     <partial name="../RxNorm/_RxNormSelect" />
 </div>
-<form method="post" id="UDSForm" data-turbo="false">
+<form method="post" id="UDSForm">
     <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
     <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
     <input asp-for="Visit.Id" type="hidden" />

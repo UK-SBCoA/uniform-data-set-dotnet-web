@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models
 
         public Dictionary<string, string> SearchResults { get; set; } = new Dictionary<string, string>();
 
-        public string SearchTerm { get; set; }
+        public string? SearchTerm { get; set; }
 
     }
 }
