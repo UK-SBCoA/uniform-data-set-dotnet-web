@@ -242,8 +242,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
         [RequiredIf(nameof(IMPNOMCI), "1", ErrorMessage = "Please specify.")]
         [RequiredIf(nameof(NORMCOG), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(DEMENTED), "1", ErrorMessage = "Please specify MBI when DEMENTED is 1.")]
-        [RequiredIf(nameof(MCI), "1", ErrorMessage = "Please specify MBI when MCI is 1.")]
 
         public int? MBI { get; set; }
 
