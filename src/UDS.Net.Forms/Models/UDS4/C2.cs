@@ -343,6 +343,57 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number correct with cue.")]
         public int? MINTSCNC { get; set; }
 
+        [NotMapped]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
+        public bool? MINTSCNCValidation
+        {
+            get
+            {
+                if (RMMODE != RemoteModality.Telephone)
+                {
+                    if (MINTSCNG.HasValue && MINTSCNC.HasValue)
+                    {
+                        if (MINTSCNC.Value != 88 && MINTSCNC.Value > MINTSCNG.Value)
+                        {
+                            return null; // MINTSCNC cannot be larger than MINTSCNG
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized]
+        public bool? MINTTOTSValidation
+        {
+            get
+            {
+                if(MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    //If all 3 properties have a valid value
+                    if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
+                    {
+                        //if the calculation properties are not 95 - 98
+                        if (MINTTOTS.Value <= 32 && MINTSCNC.Value <= 32)
+                        {
+                            //main validation when conditions are met 
+                            int total = MINTTOTW.Value + MINTSCNC.Value;
+
+                            if (total != MINTTOTS.Value)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+
         [Display(Name = "Phonemic cues: Number given", Description = "(0-32)")]
         [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide phonemic number given.")]
@@ -866,27 +917,6 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [NotMapped]
-        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
-        public bool? MINTSCNCValidation
-        {
-            get
-            {
-
-                if ((MINTSCNG.HasValue && MINTSCNG.Value > 0) && (MINTSCNC.HasValue && MINTSCNC.Value != 88) && (RMMODE != RemoteModality.Telephone))
-                {
-                    if (MINTSCNC.HasValue && MINTSCNC.Value <= MINTSCNG.Value)
-                    {
-                        return true;
-                    }
-
-                    return null;
-                }
-
-                return true;
-            }
-        }
-
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
@@ -1002,21 +1032,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
                         if (!MINTTOTS.HasValue)
                             yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
-                        else
-                        {
-                            // check MINTTOTS validation
-                            if (MINTSCNC.HasValue && (MINTTOTS.Value >= 0 && MINTTOTS.Value <= 32) && (MINTSCNC.Value >= 0 && MINTSCNC.Value <= 32))
-                            {
-                                if (MINTTOTW.HasValue)
-                                {
-                                    int total = MINTTOTW.Value + MINTSCNC.Value;
-                                    if (total != MINTTOTS.Value)
-                                    {
-                                        yield return new ValidationResult("If semantic cue is provided, MINTTOTS must equal MINTTOTW + MINTSCNC.", new[] { nameof(MINTTOTS) });
-                                    }
-                                }
-                            }
-                        }
                     }
                     else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {
