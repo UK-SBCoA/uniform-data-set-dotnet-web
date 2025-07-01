@@ -5,31 +5,27 @@
 
 
 <turbo-frame id="_RxNorm">
-    @if (Model.RxNormLookup.SearchResults != null)
+    @if (Model.RxNormLookup.SearchResults != null && Model.RxNormLookup.SearchResults.Count() > 0)
     {
-        @foreach (var result in Model.RxNormLookup.SearchResults)
-        {
-            <form method="post" action="~/UDS4/A4/@Model.Visit.Id?handler=RxNormSelect" data-turbo-frame="_A4">
+        <div class="mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
+
+            @foreach (var result in Model.RxNormLookup.SearchResults)
+            {
                 <div class="space-y-3">
                     <div class="md:flex md:items-center md:justify-between gap-x-6 py-5">
                         <div class="min-w-0">
                             <p class="text-sm/6 text-gray-900">
                                 @result.Key
                             </p>
-                            <input type="hidden" name="rxCUI" value="@result.Value" />
-                            <input type="hidden" name="drugName" value="@result.Key" />
-                            <input type="hidden" asp-for="@Model.RxNormLookup.Id" />
-                            <input type="hidden" asp-for="@Model.RxNormLookup.VisitId" />
                         </div>
                         <div class="flex flex-none items-center gap-x-4">
-                            <button type="button" class="text-sm/6 font-semibold text-gray-900" disabled>@result.Value</button>
-                            <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
+                            <div class="text-sm/6 font-semibold text-gray-900">@result.Value</div>
+                            <button value="@result.Value" type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
                         </div>
                     </div>
                 </div>
-            </form>
-        }
-
+            }
+        </div>
     }
 </turbo-frame>
 

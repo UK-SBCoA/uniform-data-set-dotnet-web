@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
+using System.Text.RegularExpressions;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -141,17 +142,27 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20)
         {
-            var matches = await _rxNormClient.GetApproximateMatches(searchTerm, false, pageSize);
-            if (matches != null)
+            try
             {
-                return matches.Select(m => new RxNorm
+                var matches = await _rxNormClient.GetApproximateMatches(searchTerm, false, pageSize);
+                if (matches != null)
                 {
-                    Name = m.Name,
-                    RxCUI = m.RxCUI
-                }).ToList();
+                    return matches.Select(m => new RxNorm
+                    {
+                        Name = m.Name,
+                        RxCUI = m.RxCUI
+                    }).ToList();
+                }
             }
-            else
-                return new List<RxNorm>();
+            catch (Exception ex)
+            {
+                return new List<RxNorm>() {new RxNorm
+                {
+                    Name = "Error with RxNorm Web API",
+                    RxCUI = ex.Message
+                }};
+            }
+            return new List<RxNorm>();
         }
 
 
