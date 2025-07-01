@@ -9,6 +9,9 @@ using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
+using UDS.Net.Services.Enums;
+using System.Reflection;
+using Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -230,14 +233,47 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a1a != null)
                     {
                         var a1aRecord = new A1aRecord(a1a);
+
+                        // write header values
                         csv.WriteRecord(a1aRecord);
-                        csv.WriteRecord((A1aFormFields)a1a.Fields);
+
+                        // write remaining form values
+                        if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            // If the form is not completed, everything exported should be null
+                            var a1aFormFieldsProps = typeof(A1aFormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in a1aFormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((A1aFormFields)a1a.Fields);
+                        }
                     }
                     if (a2 != null)
                     {
                         var a2Record = new A2Record(a2);
+
                         csv.WriteRecord(a2Record);
-                        csv.WriteRecord((A2FormFields)a2.Fields);
+
+                        if (a2.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            var a2FormFieldsProps = typeof(A2FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in a2FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((A2FormFields)a2.Fields);
+                        }
                     }
                     if (a3 != null)
                     {
@@ -274,6 +310,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4 != null)
                     {
                         var a4Record = new A4Record(a4);
+
                         csv.WriteRecord(a4Record);
                         csv.WriteRecord((A4GFormFields)a4.Fields);
 
@@ -289,6 +326,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (a4a != null)
                     {
                         var a4aRecord = new A4aRecord(a4a);
+
                         csv.WriteRecord(a4aRecord);
                         csv.WriteRecord((A4aFormFields)a4a.Fields);
 
@@ -314,14 +352,49 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b1 != null)
                     {
                         var b1Record = new B1Record(b1);
+
+                        // write header values
                         csv.WriteRecord(b1Record);
-                        csv.WriteRecord((B1FormFields)b1.Fields);
+
+                        // write remaining form values
+                        if (b1.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            var b1FormFieldsProps = typeof(B1FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in b1FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((B1FormFields)b1.Fields);
+                        }
                     }
                     if (b3 != null)
                     {
                         var b3Record = new B3Record(b3);
+
+                        // write header values
                         csv.WriteRecord(b3Record);
-                        csv.WriteRecord((B3FormFields)b3.Fields);
+
+                        // write remaining form values
+                        if (b3.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            // If the form is not completed, everything exported should be null
+                            var b3FormFieldsProps = typeof(B3FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in b3FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((B3FormFields)b3.Fields);
+                        }
                     }
                     if (b4 != null)
                     {
@@ -332,20 +405,71 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (b5 != null)
                     {
                         var b5Record = new B5Record(b5);
+
+                        // write header values
                         csv.WriteRecord(b5Record);
-                        csv.WriteRecord((B5FormFields)b5.Fields);
+
+                        // write remaining form values
+                        if (b5.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            var b5FormFieldsProps = typeof(B5FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in b5FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((B5FormFields)b5.Fields);
+                        }
                     }
                     if (b6 != null)
                     {
-                        var b6Recrod = new B6Record(b6);
-                        csv.WriteRecord(b6Recrod);
-                        csv.WriteRecord((B6FormFields)b6.Fields);
+                        var b6Record = new B6Record(b6);
+
+                        // write header values
+                        csv.WriteRecord(b6Record);
+
+                        // write remaining form values
+                        if (b6.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            var b6FormFieldsProps = typeof(B6FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in b6FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((B6FormFields)b6.Fields);
+                        }
                     }
                     if (b7 != null)
                     {
                         var b7Record = new B7Record(b7);
+
+                        // write header values
                         csv.WriteRecord(b7Record);
-                        csv.WriteRecord((B7FormFields)b7.Fields);
+
+                        // write remaining form values
+                        if (b7.MODE == Services.Enums.FormMode.NotCompleted)
+                        {
+                            var b7FormFieldsProps = typeof(B7FormFields).GetProperties().Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+
+                            foreach (var prop in b7FormFieldsProps)
+                            {
+                                csv.WriteField(null);
+                            }
+                        }
+                        else
+                        {
+                            // if the form is included, export all the values
+                            csv.WriteRecord((B7FormFields)b7.Fields);
+                        }
                     }
                     if (b8 != null)
                     {
