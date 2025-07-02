@@ -10,8 +10,6 @@
 <turbo-frame id="_A4">
 
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-
-
         <!-- Checkboxes for popular, otc, and custom drug codes-->
         <div>
             <!-- Popular Drug Codes -->
@@ -32,7 +30,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="PopularDrugCodes[i].Id" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[i].RxNormId" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
@@ -70,7 +68,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="PopularDrugCodes[j].Id" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[j].RxNormId" type="hidden" />
                                                 <input asp-for="PopularDrugCodes[j].DrugName" type="hidden" />
@@ -118,7 +116,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="OTCDrugCodes[i].Id" type="hidden" />
                                                 <input asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
                                                 <input asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
@@ -156,7 +154,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="OTCDrugCodes[j].Id" type="hidden" />
                                                 <input asp-for="OTCDrugCodes[j].RxNormId" type="hidden" />
                                                 <input asp-for="OTCDrugCodes[j].DrugName" type="hidden" />
@@ -201,7 +199,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="CustomDrugCodes[i].Id" type="hidden" />
                                                 <input asp-for="CustomDrugCodes[i].RxNormId" type="hidden" />
                                                 <input asp-for="CustomDrugCodes[i].DrugName" type="hidden" />
@@ -239,7 +237,7 @@
                                     <div class="space-y-5">
                                         <div class="relative flex items-start">
                                             <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                            <div class="flex h-6 items-center">
+                                            <div class="flex h-6 items-center" data-selectAndCheck-target="Checkbox">
                                                 <input asp-for="CustomDrugCodes[j].Id" type="hidden" />
                                                 <input asp-for="CustomDrugCodes[j].RxNormId" type="hidden" />
                                                 <input asp-for="CustomDrugCodes[j].DrugName" type="hidden" />

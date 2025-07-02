@@ -36,6 +36,9 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
+        [BindProperty]
+        public string NewRxCUI { get; set; } = default;
+
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (end form here)", "0"),
