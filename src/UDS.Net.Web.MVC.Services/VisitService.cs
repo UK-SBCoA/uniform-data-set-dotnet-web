@@ -41,7 +41,7 @@ namespace UDS.Net.Web.MVC.Services
             return await _apiClient.VisitClient.GetCountOfVisitsAtStatus(statuses);
         }
 
-        public async Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate)
+        public async Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate)
         {
             return await _apiClient.VisitClient.GetCountOfVisitsAtDateRangeAndStatus(statuses, startDate, endDate);
         }
@@ -96,7 +96,7 @@ namespace UDS.Net.Web.MVC.Services
             return new List<Visit>();
         }
 
-        public async Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate, int pageSize = 10, int pageIndex = 1)
+        public async Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1)
         {
             var visitDtos = await _apiClient.VisitClient.GetVisitsAtDateRangeAndStatus(statuses, startDate, endDate, pageSize, pageIndex);
 

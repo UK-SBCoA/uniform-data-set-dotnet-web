@@ -24,9 +24,9 @@ namespace UDS.Net.Services
 
         Task<int> CountByStatus(string username, string[] statuses = null);
 
-        Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate, int pageSize = 10, int pageIndex = 1);
+        Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1);
 
-        Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate);
+        Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate);
 
         /// <summary>
         /// Only updates the status on the visit
