@@ -18,7 +18,6 @@ export default class extends Controller {
       this.hideList();
     }
   }
-
   filterList(event) {
     // we will call the rxNormDisplayNames controller (list is ~30K)
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
@@ -56,6 +55,7 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
+    document.addEventListener("approvedPersonnelList:updated", this.showList()); //custom event from approverPersonnel stimulus controller 
     this.searchBoxTarget.addEventListener("keydown", this.onKeyDown.bind(this));
     this.activeIndex = -1
   }
