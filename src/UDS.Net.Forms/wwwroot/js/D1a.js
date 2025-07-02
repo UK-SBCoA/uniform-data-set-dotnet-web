@@ -81,20 +81,17 @@
         toggleInputs(shouldDisable);
     });
 
-    function updateIMPNOMCITargets() {
-        var selectedValue = $("input[name='D1a.IMPNOMCI']:checked").val();
-        var shouldDisable = (selectedValue == '0' || selectedValue == '1');
-        var IMPNOMCITargets = [
-            "D1a.CDOMMEM", "D1a.CDOMLANG", "D1a.CDOMATTN", "D1a.CDOMEXEC", "D1a.CDOMVISU", "D1a.CDOMBEH", "D1a.CDOMAPRAX"
-        ];
+    $("input[name='D1a.DEMENTED'], input[name='D1a.MCI']").change(function () {
+        var demented = $("input[name='D1a.DEMENTED']:checked").val();
+        var mci = $("input[name='D1a.MCI']:checked").val();
 
-        IMPNOMCITargets.forEach(function (inputName) {
-            $('input[name="' + inputName + '"]').prop('disabled', shouldDisable);
+        var shouldEnable = (demented == '1' || mci == '1');
+
+        [
+            "CDOMMEM", "CDOMLANG", "CDOMATTN", "CDOMEXEC", "CDOMVISU", "CDOMBEH", "CDOMAPRAX"
+        ].forEach(function (name) {
+            $("input[name='D1a." + name + "']").prop("disabled", !shouldEnable);
         });
-    }
-
-    updateIMPNOMCITargets();
-
-    $("input[name='D1a.IMPNOMCI']").change(updateIMPNOMCITargets);
+    });
 
 });
