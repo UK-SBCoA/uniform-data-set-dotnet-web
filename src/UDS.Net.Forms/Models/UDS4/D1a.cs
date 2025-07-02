@@ -239,9 +239,8 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "Does the participant meet criteria for MBI (If participant meets criteria for dementia an MBI diagnosis is excluded.)")]
-        [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(IMPNOMCI), "1", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(NORMCOG), "0", ErrorMessage = "Please specify.")]
+
+        [RequiredIf(nameof(NORMCOG), "0", ErrorMessage = "Please specify MBI.")]
 
         public int? MBI { get; set; }
 
