@@ -166,8 +166,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
@@ -196,8 +194,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -242,8 +238,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
 
         public int? TRAILA { get; set; }
 
@@ -263,8 +257,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -306,8 +298,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -324,8 +314,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
