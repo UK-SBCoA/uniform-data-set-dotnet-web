@@ -9,13 +9,13 @@ namespace UDS.Net.Forms.Records
         internal Form form { get; init; }
 
         [Name("frmdateb1")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToString(RecordConstants.dateFormatString);
+        public string? FrmDate { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.FRMDATE.ToString(RecordConstants.dateFormatString);
 
         [Name("initialsb1")]
-        public string Initials { get; init; } = form.INITIALS;
+        public string? Initials { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.INITIALS;
 
         [Name("langb1")]
-        public int Lang { get; init; } = (int)form.LANG;
+        public int? Lang { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : (int)form.LANG;
 
         [Name("modeb1")]
         public int Mode { get; init; } = (int)form.MODE;
