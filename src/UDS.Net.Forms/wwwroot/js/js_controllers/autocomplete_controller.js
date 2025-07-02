@@ -55,7 +55,7 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
-    document.addEventListener("approvedPersonnelList:updated", this.showList()); //custom event from approverPersonnel stimulus controller 
+    this.element.addEventListener("approvedPersonnelList:updated", this.showList.bind(this)); //custom event from approverPersonnel stimulus controller 
     this.searchBoxTarget.addEventListener("keydown", this.onKeyDown.bind(this));
     this.activeIndex = -1
   }
