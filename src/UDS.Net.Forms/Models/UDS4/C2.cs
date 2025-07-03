@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json.Linq;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -653,7 +652,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [ProhibitedCharacters]
         public string? RESPOTHX { get; set; }
 
-        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Please select atleast one reason for what makes this participant’s responses less valid?")]
+        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Select at least one reason why the participant's response is less valid.")]
         [NotMapped]
         public bool? RESPVALReasonIndicated
         {
