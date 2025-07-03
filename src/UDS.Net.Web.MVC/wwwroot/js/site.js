@@ -18,3 +18,8 @@ document.addEventListener("turbo:before-cache", function () {
   // ...
   console.log('turbo:before-cache');
 });
+
+document.addEventListener("turbo:before-stream-render", (event) => {
+  console.log("Turbo stream incoming:");
+  console.log(event.target?.outerHTML); // show the whole turbo-stream tag
+});

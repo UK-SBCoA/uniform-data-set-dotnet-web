@@ -13,6 +13,8 @@ namespace UDS.Net.Forms.Models
 
         public string? SearchTerm { get; set; }
 
+        public List<string> AutocompleteResults { get; set; } = new List<string>();
+
     }
 }
 

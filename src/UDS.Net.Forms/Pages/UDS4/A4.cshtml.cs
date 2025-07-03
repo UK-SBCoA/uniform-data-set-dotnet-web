@@ -37,7 +37,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
         [BindProperty]
-        public string NewRxCUI { get; set; } = default;
+        public string? NewRxCUI { get; set; }
 
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
@@ -123,6 +123,19 @@ namespace UDS.Net.Forms.Pages.UDS4
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnGetRxNormSearchAsync(string searchTerm)
+        {
+            var autoCompleteList = await _lookupService.LookupRxNormDisplayTerms(searchTerm, 10, 1);
+
+            RxNormLookup = new RxNormLookupModel
+            {
+                AutocompleteResults = autoCompleteList
+            };
+
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("~/Pages/RxNorm/_RxNormAutocomplete.cshtml", this.RxNormLookup);
         }
 
         [ValidateAntiForgeryToken]

@@ -17,7 +17,9 @@ namespace UDS.Net.Services
 
         Task<LookupCountryCodeDto> LookupCountryCode(string countryCode);
 
-        Task<List<string>> LookupRxNormDisplayTerms();
+        // For autocomplete, NOTE: implement caching for 12-24 hours to avoid calling RxNav web api too frequently
+        // https://lhncbc.nlm.nih.gov/RxNav/TermsofService.html
+        Task<List<string>> LookupRxNormDisplayTerms(string searchTerm, int pageSize = 20, int pageIndex = 1);
 
         Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20);
 

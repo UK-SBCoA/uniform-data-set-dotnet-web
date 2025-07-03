@@ -10,6 +10,7 @@ using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -17,11 +18,13 @@ namespace UDS.Net.Web.MVC.Services
     {
         private readonly IApiClient _apiClient;
         private readonly IRxNormClient _rxNormClient;
+        private readonly IMemoryCache _cache;
 
-        public LookupService(IApiClient apiClient, IRxNormClient rxNormClient)
+        public LookupService(IApiClient apiClient, IRxNormClient rxNormClient, IMemoryCache cache)
         {
-            _apiClient = apiClient;
-            _rxNormClient = rxNormClient;
+            _apiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
+            _rxNormClient = rxNormClient ?? throw new ArgumentNullException(nameof(rxNormClient));
+            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
         }
 
         public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1, bool? includePopular = null, bool? includeOverTheCounter = null)
@@ -130,14 +133,30 @@ namespace UDS.Net.Web.MVC.Services
             };
         }
 
-        public async Task<List<string>> LookupRxNormDisplayTerms()
+        public async Task<List<string>> LookupRxNormDisplayTerms(string searchTerm, int pageSize = 20, int pageIndex = 1)
         {
-            var results = await _rxNormClient.GetDisplayTermsAsync();
+            string[] results = null;
 
-            if (results != null)
-                return results.ToList();
-            else
+            string cacheKey = "RxNormDisplayTerms";
+
+            if (!_cache.TryGetValue(cacheKey, out results))
+            {
+                results = await _rxNormClient.GetDisplayTermsAsync();
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(12));
+
+                _cache.Set(cacheKey, results, cacheEntryOptions);
+            }
+
+            if (results == null)
                 return new List<string>();
+            else
+                return results
+                    .Where(r => !String.IsNullOrWhiteSpace(r) && r.ToLower().StartsWith(searchTerm.ToLower().Trim()))
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         public async Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20)

@@ -3,7 +3,7 @@
     // this works to render route in js, but not in razor page ../A4/@Model.VisitId?handler=RxNormSearch
 }
 <form method="post" action="~/UDS4/A4/@Model.Visit.Id?handler=RxNormSearch" data-turbo-frame="_RxNorm">
-    <div data-controller="autocomplete  rxNormDisplayNames" data-action="autocomplete:newSearch->rxNormDisplayNames#fetchData" data-rxNormDisplayNames-fetchedLetters-value="" data-formlessSubmit-url-value="../A4/@Model.Visit.Id?handler=RxNormSearch">
+    <div data-controller="autocomplete  rxNormDisplayNames" data-action="autocomplete:newSearch->rxNormDisplayNames#fetchData" data-rxNormDisplayNames-fetchedLetters-value="" data-rxNormDisplayNames-url-value="../A4/@Model.Visit.Id?handler=RxNormSearch" data-formlessSubmit-url-value="../A4/@Model.Visit.Id?handler=RxNormSearch">
         <label class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">Search RxNorm</label>
         <div class="w-full max-w-md lg:col-span-5 lg:pt-2">
             <div class="flex gap-x-4">
@@ -15,9 +15,7 @@
             </div>
             <!--// Autocomplete //-->
             <div data-autocomplete-target="list" class="mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
-                <ul data-rxNormDisplayNames-target="list" class="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800" id="options" role="listbox">
-                    <!-- Active: "bg-indigo-600 text-white outline-hidden" -->
-                    <li data-autocomplete-target="item" class="cursor-default text-gray-900 rounded-md px-4 py-2 select-none" id="option-1" role="option" tabindex="-1">Search for medications by drug or brand name</li>
+                <ul class="-mb-2 max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800" id="options" role="listbox">
                 </ul>
             </div>
             <!--// No results //-->
@@ -28,3 +26,5 @@
         </div>
     </div>
 </form>
+
+<turbo-frame id="_RxNormAutocomplete"></turbo-frame>
