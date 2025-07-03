@@ -342,7 +342,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (MINTSCNC.Value != 88 && MINTSCNC.Value > MINTSCNG.Value)
                         {
-                            return null; // MINTSCNC cannot be larger than MINTSCNG
+                            return null;
                         }
                     }
                 }
@@ -359,13 +359,11 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                 {
-                    //If all 3 properties have a valid value
                     if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
                     {
-                        //if the calculation properties are not 95 - 98
+                        //If MINTTOTS is is not 95 - 98 and MINTSCNC is not 88
                         if (MINTTOTS.Value <= 32 && MINTSCNC.Value <= 32)
                         {
-                            //main validation when conditions are met 
                             int total = MINTTOTW.Value + MINTSCNC.Value;
 
                             if (total != MINTTOTS.Value)
