@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -16,16 +18,18 @@ namespace UDS.Net.Web.MVC.Services
     {
         private readonly IApiClient _apiClient;
         private readonly IRxNormClient _rxNormClient;
+        private readonly IMemoryCache _cache;
 
-        public LookupService(IApiClient apiClient, IRxNormClient rxNormClient)
+        public LookupService(IApiClient apiClient, IRxNormClient rxNormClient, IMemoryCache cache)
         {
-            _apiClient = apiClient;
-            _rxNormClient = rxNormClient;
+            _apiClient = apiClient ?? throw new ArgumentNullException(nameof(apiClient));
+            _rxNormClient = rxNormClient ?? throw new ArgumentNullException(nameof(rxNormClient));
+            _cache = cache ?? throw new ArgumentNullException(nameof(cache));
         }
 
-        public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1)
+        public async Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1, bool? includePopular = null, bool? includeOverTheCounter = null)
         {
-            var dto = await _apiClient.LookupClient.LookupDrugCodes(pageSize, pageIndex);
+            var dto = await _apiClient.LookupClient.LookupDrugCodes(pageSize, pageIndex, includePopular, includeOverTheCounter);
 
             return new DrugCodeLookup
             {
@@ -51,23 +55,46 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<DrugCodeLookup> FindDrugCode(string rxCUI)
         {
-            if (Int32.TryParse(rxCUI, out int rxNormId))
+            if (!String.IsNullOrWhiteSpace(rxCUI))
             {
-                var dto = await _apiClient.LookupClient.FindDrugCode(rxNormId);
+                var rxCUIs = new string[] { rxCUI };
+
+                return await FindDrugCodes(rxCUIs);
+            }
+
+            return new DrugCodeLookup
+            {
+                PageSize = 1,
+                PageIndex = 1,
+                TotalResultsCount = 0,
+                DrugCodes = new List<DrugCode>()
+            };
+        }
+
+        public async Task<DrugCodeLookup> FindDrugCodes(string[] rxCUIs)
+        {
+            if (rxCUIs != null && rxCUIs.Count() > 0)
+            {
+                var search = new List<int>();
+                foreach (var cui in rxCUIs)
+                {
+                    if (Int32.TryParse(cui, out int rxNormId))
+                    {
+                        search.Add(rxNormId);
+                    }
+                }
+
+                var dto = await _apiClient.LookupClient.FindDrugCodes(search.ToArray());
                 if (dto != null)
                 {
                     if (dto.TotalResultsCount > 0 && dto.Results != null && dto.Results.Count() > 0)
                     {
-                        var result = dto.Results.FirstOrDefault();
                         return new DrugCodeLookup
                         {
-                            PageSize = 1,
+                            PageSize = dto.TotalResultsCount,
                             PageIndex = 1,
-                            TotalResultsCount = 1,
-                            DrugCodes = new List<DrugCode>()
-                            {
-                                result.ToDomain()
-                            }
+                            TotalResultsCount = dto.TotalResultsCount,
+                            DrugCodes = dto.Results.Select(d => d.ToDomain()).ToList()
                         };
                     }
                 }
@@ -106,29 +133,55 @@ namespace UDS.Net.Web.MVC.Services
             };
         }
 
-        public async Task<List<string>> LookupRxNormDisplayTerms()
+        public async Task<List<string>> LookupRxNormDisplayTerms(string searchTerm, int pageSize = 20, int pageIndex = 1)
         {
-            var results = await _rxNormClient.GetDisplayTermsAsync();
+            string[] results = null;
 
-            if (results != null)
-                return results.ToList();
-            else
+            string cacheKey = "RxNormDisplayTerms";
+
+            if (!_cache.TryGetValue(cacheKey, out results))
+            {
+                results = await _rxNormClient.GetDisplayTermsAsync();
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromHours(12));
+
+                _cache.Set(cacheKey, results, cacheEntryOptions);
+            }
+
+            if (results == null)
                 return new List<string>();
+            else
+                return results
+                    .Where(r => !String.IsNullOrWhiteSpace(r) && r.ToLower().StartsWith(searchTerm.ToLower().Trim()))
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         public async Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20)
         {
-            var matches = await _rxNormClient.GetApproximateMatches(searchTerm, false, pageSize);
-            if (matches != null)
+            try
             {
-                return matches.Select(m => new RxNorm
+                var matches = await _rxNormClient.GetApproximateMatches(searchTerm, false, pageSize);
+                if (matches != null)
                 {
-                    Name = m.Name,
-                    RxCUI = m.RxCUI
-                }).ToList();
+                    return matches.Select(m => new RxNorm
+                    {
+                        Name = m.Name,
+                        RxCUI = m.RxCUI
+                    }).ToList();
+                }
             }
-            else
-                return new List<RxNorm>();
+            catch (Exception ex)
+            {
+                return new List<RxNorm>() {new RxNorm
+                {
+                    Name = "Error with RxNorm Web API",
+                    RxCUI = ex.Message
+                }};
+            }
+            return new List<RxNorm>();
         }
 
 

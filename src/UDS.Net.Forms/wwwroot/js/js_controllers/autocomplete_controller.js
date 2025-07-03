@@ -14,12 +14,12 @@ export default class extends Controller {
   }
 
   filterList(event) {
-    // we will call the rxNormDisplayNames controller (list is ~30K)
+    clearTimeout(this.dispatchTimeout)
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      if (this.searchBoxTarget.value.length == 1) {
-        // this will trigger an event for rxNormDisplayNames to handle and load new entries (instead of all 30K at once)
-        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-      }
+      
+      this.dispatchTimeout = setTimeout(() => {
+          this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+        }, 300)
 
       var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
       this.itemTargets.map((item) => {
@@ -49,5 +49,6 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
+    this.dispatchTimeout = null
   }
 }
