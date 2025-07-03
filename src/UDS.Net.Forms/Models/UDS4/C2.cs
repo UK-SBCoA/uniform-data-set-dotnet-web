@@ -352,12 +352,12 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(ErrorMessage = "If MINTTOTS is between 0 and 32 and MINTSCNC is between 0 and 32, then MINTTOTS must = MINTTOTW + MINTSCNC")]
         public bool? MINTTOTSValidation
         {
             get
             {
-                if(MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
                 {
                     //If all 3 properties have a valid value
                     if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
