@@ -28,7 +28,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
             }
         }
 
@@ -36,7 +36,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+                return new List<NotIncludedReasonCode>() { };
             }
         }
 
