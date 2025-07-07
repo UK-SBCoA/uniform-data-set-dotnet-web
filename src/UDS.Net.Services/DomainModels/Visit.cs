@@ -79,10 +79,19 @@ namespace UDS.Net.Services.DomainModels
                                 var form = this.Forms.Where(f => formContract.Abbreviation == f.Kind).FirstOrDefault();
 
                                 //Start with condition here
-                                if (formContract.IsRequredForVisitKind && form.Status != FormStatus.Finalized)
+                                if (form.Status != FormStatus.Finalized)
                                 {
-                                    finalizable = false;
-                                    break; // we can exit out of the loop because one required form is not yet finalized
+                                    if(formContract.IsRequredForVisitKind)
+                                    {
+                                        finalizable = false;
+                                        break; // we can exit out of the loop because one required form is not yet finalized
+                                    }
+
+                                    if(!formContract.IsRequredForVisitKind && form.MODE != FormMode.NotCompleted)
+                                    {
+                                        finalizable = false;
+                                        break;
+                                    }
                                 }
                             }
                             finalizable = true; // if we loop through all the forms contract and all the required forms are finalized, then the entire visit is finalizable
