@@ -973,6 +973,9 @@ namespace UDS.Net.Forms.Models.UDS4
                         if (!TRAILA.HasValue)
                             yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
 
+                        if (!TRAILB.HasValue)
+                            yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILB) });
+
                         if (!MOCALOC.HasValue && MOCACOMP == 1)
                             yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
 
