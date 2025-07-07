@@ -81,17 +81,4 @@
         toggleInputs(shouldDisable);
     });
 
-    $("input[name='D1a.DEMENTED'], input[name='D1a.MCI']").change(function () {
-        var demented = $("input[name='D1a.DEMENTED']:checked").val();
-        var mci = $("input[name='D1a.MCI']:checked").val();
-
-        var shouldEnable = (demented == '1' || mci == '1');
-
-        [
-            "CDOMMEM", "CDOMLANG", "CDOMATTN", "CDOMEXEC", "CDOMVISU", "CDOMBEH", "CDOMAPRAX"
-        ].forEach(function (name) {
-            $("input[name='D1a." + name + "']").prop("disabled", !shouldEnable);
-        });
-    });
-
 });

@@ -54,6 +54,7 @@ function toggleAffects(targets, isSelected) {
     setAffect(target, "disabled", !isSelected);
   });
 }
+
 function compareRange(low, high, targets, value) {
   if (value === "") {
     $.each(targets, function (index, behavior) {
@@ -169,6 +170,21 @@ $(function () {
           });
         }
       }
+    });
+
+    $("input[name='D1a.DEMENTED'], input[name='D1a.MCI']")
+        .on("change", function () {
+            ["CDOMMEM", "CDOMLANG", "CDOMATTN", "CDOMEXEC", "CDOMVISU", "CDOMBEH", "CDOMAPRAX"]
+                .forEach(field => { 
+                    let $els = $(`[name="D1a.${field}"]`);
+                    $els.filter(":radio, :checkbox").prop("checked", false);
+                    $els.not(":radio, :checkbox").val("");
+                });
+        })
+        .trigger("change");
+
+    $("input[name='D1a.DEMENTED']").on("change", function () {
+        $('input[name="D1a.MCI"]').prop("checked", false).trigger("change");
     });
   }
 });
