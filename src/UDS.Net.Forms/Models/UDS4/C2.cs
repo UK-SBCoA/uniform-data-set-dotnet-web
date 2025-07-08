@@ -337,6 +337,55 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number correct with cue.")]
         public int? MINTSCNC { get; set; }
 
+        [NotMapped]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
+        public bool? MINTSCNCValidation
+        {
+            get
+            {
+                if (RMMODE != RemoteModality.Telephone)
+                {
+                    if (MINTSCNG.HasValue && MINTSCNC.HasValue)
+                    {
+                        if (MINTSCNC.Value != 88 && MINTSCNC.Value > MINTSCNG.Value)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If MINTTOTS is between 0 and 32 and MINTSCNC is between 0 and 32, then MINTTOTS must = MINTTOTW + MINTSCNC")]
+        public bool? MINTTOTSValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
+                    {
+                        //If MINTTOTS is is not 95 - 98 and MINTSCNC is not 88
+                        if (MINTTOTS.Value <= 32 && MINTSCNC.Value <= 32)
+                        {
+                            int total = MINTTOTW.Value + MINTSCNC.Value;
+
+                            if (total != MINTTOTS.Value)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+
         [Display(Name = "Phonemic cues: Number given", Description = "(0-32)")]
         [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide phonemic number given.")]
@@ -819,6 +868,42 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (questionsCount == 19)
                     {
                         return MOCATOTS.Value == questionsSum ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERTE), 0, 30, ErrorMessage = "If UDSVERFN (f-words repeated) is between 0 and 15 and UDSVERLR (l-words repeated) is between 0 and 15, then UDSVERTE must be the total of UDSVERFN and UDSVERLR")]
+        public bool? UDSVERTEValidation
+        {
+            get
+            {
+                if (UDSVERFN.HasValue && UDSVERLR.HasValue)
+                {
+                    if (UDSVERTE.HasValue && UDSVERTE.Value != UDSVERFN.Value + UDSVERLR.Value)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERTN), 0, 80, ErrorMessage = "If UDSVERFC not 95-98 and UDSVERLC not 95-98, UDSVERTN must be the total of UDSVERFC and UDSVERLC")]
+        public bool? UDSVERTNValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
+                {
+                    if (UDSVERTN.HasValue && UDSVERTN.Value != UDSVERFC.Value + UDSVERLC.Value)
+                    {
+                        return null;
                     }
                 }
 
