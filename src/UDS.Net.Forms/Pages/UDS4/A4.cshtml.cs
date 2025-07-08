@@ -71,7 +71,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
         {
-            var lookup = await _lookupService.LookupDrugCodes(200, 1); // returns popular drugs (prescription + otc) and custom
+            var lookup = await _lookupService.LookupDrugCodes(1000, 1); // returns popular drugs (prescription + otc) and custom
 
             var popular = lookup.DrugCodes.Where(d => d.IsPopular == true && d.IsOverTheCounter == false).ToList();
 
