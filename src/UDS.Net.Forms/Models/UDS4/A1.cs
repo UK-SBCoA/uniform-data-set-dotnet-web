@@ -227,18 +227,15 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
-                || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                || RACEAIAN
-                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
-                || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
-                || RACEUNKN)
-                {
-                    return true;
-                }
-                else return null;
+                if ((RACEASIAN) && (ETHCHINESE || ETHINDIA || ETHFILIP || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH)) return true;
+                if ((RACEBLACK) && (ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH)) return true;
+                if ((ETHISPANIC) && (ETHMEXICAN || ETHPUERTO || ETHSALVA || ETHCUBAN || ETHDOMIN || ETHGUATEM || ETHHISOTH)) return true;
+                if ((RACEMENA) && (ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH)) return true;
+                if ((RACENHPI) && (ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH)) return true;
+                if ((RACEWHITE) && (ETHENGLISH || ETHGERMAN || ETHIRISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH)) return true;
+                if (RACEUNKN) return true;
+
+                return null;
             }
         }
 
