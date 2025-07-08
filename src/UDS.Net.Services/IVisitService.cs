@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.Enums;
@@ -22,6 +23,10 @@ namespace UDS.Net.Services
         Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] filterItems = null);
 
         Task<int> CountByStatus(string username, string[] statuses = null);
+
+        Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1);
+
+        Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate);
 
         /// <summary>
         /// Only updates the status on the visit
