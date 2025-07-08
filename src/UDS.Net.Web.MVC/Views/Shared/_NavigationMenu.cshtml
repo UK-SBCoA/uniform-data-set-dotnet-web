@@ -1,7 +1,7 @@
 ﻿@{
 
 }
-<nav class="border-b border-indigo-300 border-opacity-25 bg-indigo-600 lg:border-none" data-controller="mobilemenu">
+<nav class="border-b border-indigo-300 border-opacity-25 bg-indigo-600 lg:border-none" data-controller="mobile-menu">
     <!--// Desktop menu (logo and bar are shown on mobile) //-->
     <div class="mx-auto px-2 sm:px-4 lg:px-8" id="desktop-menu">
         <div class="relative flex h-16 items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25">
@@ -29,16 +29,16 @@
 
             <!--// Mobile hamburger button //-->
             <div class="flex lg:hidden">
-                <button data-mobilemenu-target="button" data-action="click->mobilemenu#toggle" type="button" class="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600" aria-controls="mobile-menu" aria-expanded="false">
+                <button data-mobile-menu-target="button" data-action="click->mobile-menu#toggle" type="button" class="inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600" aria-controls="mobile-menu" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <!--// Hamburger icon //-->
                     <!-- Menu open: "hidden", Menu closed: "block" -->
-                    <svg data-mobilemenu-target="openIcon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <svg data-mobile-menu-target="openIcon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                     <!--// Close icon //-->
                     <!-- Menu open: "block", Menu closed: "hidden" -->
-                    <svg data-mobilemenu-target="closeIcon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <svg data-mobile-menu-target="closeIcon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>

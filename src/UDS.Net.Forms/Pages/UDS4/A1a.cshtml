@@ -465,7 +465,7 @@
             </div>
         </div>
     </div>
-    <div class="@rowCSS" data-controller="checkboxDisable">
+    <div class="@rowCSS" data-controller="checkbox-disable">
         <div>
             <label><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
             <div>
@@ -624,14 +624,14 @@
                 </div>
                 <div>
                     @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new
-                    {
-                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
-                        data_checkBoxDisable_target = "checkboxTrigger",
-                        data_action = "input->checkboxDisable#ToggleGroup",
-                        data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
-                        data_checkBoxDisable_enableGroup_param = "",
-                        data_checkboxDisable_toggleState_param = "true"
-                    })
+                   {
+                       @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
+                       data_checkbox_disable_target = "trigger",
+                       data_action = "input->checkbox-disable#ToggleGroup",
+                       data_checkbox_disable_disableGroup_param = "A1a.EXPSTRS",
+                       data_checkbox_disable_enableGroup_param = "",
+                       data_checkbox_disable_toggleState_param = "true"
+                   })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOTAPP"></label>
