@@ -10,16 +10,23 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.DataAnnotations
 {
+    // RequiredIfInPersonVisit is primarily used in the C2 form. "InPerson" refers to both in-person visits and remote/video visits.
+
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class RequiredIfInPersonVisitAttribute : ValidationAttribute, IClientModelValidator
     {
         private string _watchedField = "";
         private string _watchedFieldValue = "";
+        private readonly bool _inPersonCheckOnly = false;
 
         public RequiredIfInPersonVisitAttribute(string watchedField, string value) : base()
         {
             _watchedField = watchedField;
             _watchedFieldValue = value;
+        }
+        public RequiredIfInPersonVisitAttribute() : base()
+        {
+            _inPersonCheckOnly = true;
         }
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
@@ -30,34 +37,46 @@ namespace UDS.Net.Forms.DataAnnotations
 
                 // only validate if the form is attempting to be completed
                 if (form.Status == FormStatus.Finalized)
-
-                    if (form.MODE == FormMode.InPerson || form.RMMODE == RemoteModality.Video)
+                {
+                    if (_inPersonCheckOnly)
                     {
-                        // get the watched property and compare
-                        var type = validationContext.ObjectType;
-
-                        if (type != null)
+                        if (form.MODE == FormMode.InPerson || form.RMMODE == RemoteModality.Video)
                         {
-                            var watchedProperty = type.GetProperty(_watchedField);
-
-                            if (watchedProperty != null)
+                            if (value == null)
                             {
-                                var currentValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
-                                if (currentValue != null)
+                                return new ValidationResult(this.ErrorMessage);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (form.MODE == FormMode.InPerson || form.RMMODE == RemoteModality.Video)
+                        {
+                            // get the watched property and compare
+                            var type = validationContext.ObjectType;
+
+                            if (type != null)
+                            {
+                                var watchedProperty = type.GetProperty(_watchedField);
+
+                                if (watchedProperty != null)
                                 {
-                                    if (currentValue.ToString() == _watchedFieldValue)
+                                    var currentValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
+                                    if (currentValue != null)
                                     {
-                                        // if the watched field's value matches what we're looking for then this field requires a value
-                                        if (value == null)
-                                            return new ValidationResult(this.ErrorMessage);
+                                        if (currentValue.ToString() == _watchedFieldValue)
+                                        {
+                                            // if the watched field's value matches what we're looking for then this field requires a value
+                                            if (value == null)
+                                                return new ValidationResult(this.ErrorMessage);
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                }
             }
-
-
             return ValidationResult.Success;
         }
 
