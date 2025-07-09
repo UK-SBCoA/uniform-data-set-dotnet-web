@@ -16,10 +16,11 @@ export default class extends Controller {
   }
 
   async fetchData({ detail: { content } }) {
+    console.log("rx norm fetch")
     var search = content;
     if (!this.fetchedLettersValue.includes(search)) {
       this.fetchedLettersValue = this.fetchedLettersValue + search;
-      //console.log("fetching for " + search)
+      console.log("fetching for " + search)
       try {
         const response = await fetch("https://rxnav.nlm.nih.gov/REST/displaynames.json")
         const data = await response.json()

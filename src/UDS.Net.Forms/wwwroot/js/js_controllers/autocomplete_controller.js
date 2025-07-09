@@ -18,12 +18,18 @@ export default class extends Controller {
       this.hideList();
     }
   }
+
   filterList(event) {
-    // we will call the rxNormDisplayNames controller (list is ~30K)
+    clearTimeout(this.dispatchTimeout)
+
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
       if (this.searchBoxTarget.value.length == 1) {
-        // this will trigger an event for rxNormDisplayNames to handle and load new entries (instead of all 30K at once)
-        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+        // debounce input
+        this.dispatchTimeout = setTimeout(() => {
+          this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+          console.log("throw new search")
+        }, 300)
+
       }
 
       var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
@@ -37,7 +43,6 @@ export default class extends Controller {
       });
       this.activeIndex = -1;
     }
-    // TODO check if list is empty and if so, display the no results
   }
 
   showNoResults(event) {
@@ -49,43 +54,43 @@ export default class extends Controller {
   }
 
   setSearchBox(event) {
-    this.searchBoxTarget.value = event.target.innerHTML;
+    event.preventDefault();
+    console.log("set search box")
+    console.log(event.type);
+    if (event.type == "click") {
+      this.searchBoxTarget.value = event.target.innerHTML;
+    }
+    else if (event.type == "keydown" && event.key == "Enter") {
+      console.log(event.key);
+      const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+      this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
+    }
     this.hideList();
   }
 
   connect() {
     this.hideList()
-    this.element.addEventListener("approvedPersonnelList:updated", this.showList.bind(this)); //custom event from approverPersonnel stimulus controller 
-    this.searchBoxTarget.addEventListener("keydown", this.onKeyDown.bind(this));
-    this.activeIndex = -1
+    this.activeIndex = -1;
+    this.dispatchTimeout = null;
   }
 
-  onKeyDown(event) {
+  // Naming conventions => https://stimulus.hotwired.dev/reference/actions#naming-conventions
+  highlightItem(event) {
+    console.log("highlight item");
+    event.preventDefault();
     const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
     if (visibleItems.length === 0) return;
 
     switch (event.key) {
       case "ArrowDown":
-        event.preventDefault();
         this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
-        this.updateActiveItem(visibleItems);
         break;
       case "ArrowUp":
-        event.preventDefault();
         this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
-        this.updateActiveItem(visibleItems);
-        break;
-      case "Enter":
-        event.preventDefault();
-        if (this.activeIndex >= 0 && visibleItems[this.activeIndex]) {
-          visibleItems[this.activeIndex].click(); // Triggers setSearchBox
-        }
         break;
     }
-  }
 
-  updateActiveItem(items) {
-    items.forEach((item, index) => {
+    visibleItems.forEach((item, index) => {
       if (index === this.activeIndex) {
         item.classList.add("bg-indigo-600", "text-white");
         item.scrollIntoView({ block: "nearest" });
