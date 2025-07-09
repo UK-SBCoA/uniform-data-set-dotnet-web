@@ -90,6 +90,23 @@ function debounce(func, wait) {
     };
 }
 
+function clearFields(names) {
+    names.forEach(name => {
+        let $els = $(`[name="${name}"]`);
+        $els.filter(':radio, :checkbox').prop('checked', false);
+        $els.not(':radio, :checkbox').val('');
+    });
+}
+
+function clearDependentFields(targets) {
+    let names = [];
+    $.each(targets, (i, behavior) => {
+        if (typeof behavior === 'string') names.push(behavior);
+        else Object.keys(behavior).forEach(k => names.push(k));
+    });
+    clearFields(names);
+}
+
 $(function () {
   let affects = $("[data-affects]");
   if (affects.length) {
@@ -123,14 +140,24 @@ $(function () {
 
         // watch for changes
         $(this).on("change", function () {
-            if ($(this).data("affects-targets")) {
-                let targets = $(this).data("affects-targets");
+            let $el = $(this);
+
+            if ($el.data("affects-targets")) {
+                let targets = $el.data("affects-targets");
+                clearDependentFields(targets);
                 setAffects(targets);
             }
-            else if ($(this).data("affects-toggle-targets")) {
-                let isSelected = $(this).is(":checked");
-                let toggleTargets = $(this).data("affects-toggle-targets");
-                toggleAffects(toggleTargets, isSelected);
+            else if ($el.data("affects-toggle-targets")) {
+                let targets = $el.data("affects-toggle-targets");
+                clearFields(targets);
+                toggleAffects(targets, $el.is(":checked"));
+            }
+            else if ($el.data("affects-range-targets")) {
+                let low = $el.data("affects-range-low");
+                let high = $el.data("affects-range-high");
+                let targets = $el.data("affects-range-targets");
+                clearDependentFields(targets);
+                compareRange(low, high, targets, $el.val());
             }
         });
 
@@ -170,21 +197,6 @@ $(function () {
           });
         }
       }
-    });
-
-    $("input[name='D1a.DEMENTED'], input[name='D1a.MCI']")
-        .on("change", function () {
-            ["CDOMMEM", "CDOMLANG", "CDOMATTN", "CDOMEXEC", "CDOMVISU", "CDOMBEH", "CDOMAPRAX"]
-                .forEach(field => { 
-                    let $els = $(`[name="D1a.${field}"]`);
-                    $els.filter(":radio, :checkbox").prop("checked", false);
-                    $els.not(":radio, :checkbox").val("");
-                });
-        })
-        .trigger("change");
-
-    $("input[name='D1a.DEMENTED']").on("change", function () {
-        $('input[name="D1a.MCI"]').prop("checked", false).trigger("change");
     });
   }
 });
