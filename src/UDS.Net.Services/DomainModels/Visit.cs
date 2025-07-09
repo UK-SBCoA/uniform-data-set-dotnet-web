@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
@@ -90,7 +89,7 @@ namespace UDS.Net.Services.DomainModels
                                     if (!formContract.IsRequredForVisitKind && form.MODE != FormMode.NotCompleted)
                                     {
                                         finalizable = false;
-                                        break; // we can exit out of the loop because one required form is not yet finalized
+                                        break; // we can exit out of the loop because a non-required form is not yet finalized
                                     }
                                 }
                             }
