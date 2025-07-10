@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -167,7 +168,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 IMPNOMCLCD = d1aDto.IMPNOMCLCD;
                 IMPNOMCIO = d1aDto.IMPNOMCIO;
                 IMPNOMCIOX = d1aDto.IMPNOMCIOX;
-                IMPNOMCI = d1aDto.IMPNOMCI;
+                IMPNOMCI = d1aDto.IMPNOMCI.HasValue ? Convert.ToInt32(d1aDto.IMPNOMCI) : (int?)null;
                 CDOMMEM = d1aDto.CDOMMEM;
                 CDOMLANG = d1aDto.CDOMLANG;
                 CDOMATTN = d1aDto.CDOMATTN;
