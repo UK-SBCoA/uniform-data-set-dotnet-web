@@ -77,7 +77,7 @@ namespace UDS.Net.Services.DomainModels
                                 // if the form contract exists
                                 var form = this.Forms.Where(f => formContract.Abbreviation == f.Kind).FirstOrDefault();
 
-                                if (form.Status != FormStatus.Finalized || form.Status == FormStatus.InProgress)
+                                if (form.Status != FormStatus.Finalized)
                                 {
                                     if (formContract.IsRequredForVisitKind)
                                     {
