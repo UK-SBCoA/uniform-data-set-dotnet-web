@@ -13,13 +13,20 @@ export default class extends Controller {
     this.listTarget.classList.add("hidden")
   }
 
+  handleOutsideClick(event) {
+    if (!this.searchBoxTarget.contains(event.target)) {
+      this.hideList();
+    }
+  }
+
   filterList(event) {
     clearTimeout(this.dispatchTimeout)
+
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      
+      // debounce input
       this.dispatchTimeout = setTimeout(() => {
-          this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-        }, 300)
+        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+      }, 300)
 
       var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
       this.itemTargets.map((item) => {
@@ -30,8 +37,9 @@ export default class extends Controller {
           item.classList.add("hidden")
         }
       });
+
+      this.activeIndex = -1;
     }
-    // TODO check if list is empty and if so, display the no results
   }
 
   showNoResults(event) {
@@ -43,12 +51,47 @@ export default class extends Controller {
   }
 
   setSearchBox(event) {
-    this.searchBoxTarget.value = event.target.innerHTML;
+    event.preventDefault();
+
+    if (event.type == "click") {
+      this.searchBoxTarget.value = event.target.innerHTML;
+    }
+    else if (event.type == "keydown" && event.key == "Enter") {
+      const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+      this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
+    }
     this.hideList();
   }
 
   connect() {
     this.hideList()
-    this.dispatchTimeout = null
+
+    this.activeIndex = -1;
+    this.dispatchTimeout = null;
   }
+
+  highlightItem(event) {
+    event.preventDefault();
+    const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+    if (visibleItems.length === 0) return;
+
+    switch (event.key) {
+      case "ArrowDown":
+        this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
+        break;
+      case "ArrowUp":
+        this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
+        break;
+    }
+
+    visibleItems.forEach((item, index) => {
+      if (index === this.activeIndex) {
+        item.classList.add("bg-indigo-600", "text-white");
+        item.scrollIntoView({ block: "nearest" });
+      } else {
+        item.classList.remove("bg-indigo-600", "text-white");
+      }
+    });
+  }
+
 }

@@ -914,7 +914,10 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValidation"></span>
+                    </div>
                 </div>
 
                 <div class="@rowCSS">
@@ -925,8 +928,10 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
-
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValidation"></span>
+                    </div>
                 </div>
 
                 <div class="@rowCSS">
@@ -1552,6 +1557,7 @@
                     </div>
                     <div class="flex flex-col space-y-1">
                         <span class="text-sm text-red-600 self-start" asp-validation-for="C2.MINTTOTS"></span>
+                        <span class="text-sm text-red-600 self-start" asp-validation-for="C2.MINTTOTSValidation"></span>
                     </div>
                 </div>
 
@@ -1595,8 +1601,9 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MINTSCNC"></p>
                     </div>
-                    <div class="flex flex-col space-y-1">
-                        <span class="text-sm text-red-600 self-start" asp-validation-for="C2.MINTSCNC"></span>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTSCNC"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MINTSCNCValidation"></span>
                     </div>
                 </div>
 
