@@ -23,14 +23,10 @@ export default class extends Controller {
     clearTimeout(this.dispatchTimeout)
 
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      if (this.searchBoxTarget.value.length == 1) {
-        // debounce input
-        this.dispatchTimeout = setTimeout(() => {
-          this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-          console.log("throw new search")
-        }, 300)
-
-      }
+      // debounce input
+      this.dispatchTimeout = setTimeout(() => {
+        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+      }, 300)
 
       var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
       this.itemTargets.map((item) => {
@@ -41,6 +37,7 @@ export default class extends Controller {
           item.classList.add("hidden")
         }
       });
+
       this.activeIndex = -1;
     }
   }
@@ -55,13 +52,11 @@ export default class extends Controller {
 
   setSearchBox(event) {
     event.preventDefault();
-    console.log("set search box")
-    console.log(event.type);
+
     if (event.type == "click") {
       this.searchBoxTarget.value = event.target.innerHTML;
     }
     else if (event.type == "keydown" && event.key == "Enter") {
-      console.log(event.key);
       const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
       this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
     }
@@ -74,9 +69,7 @@ export default class extends Controller {
     this.dispatchTimeout = null;
   }
 
-  // Naming conventions => https://stimulus.hotwired.dev/reference/actions#naming-conventions
   highlightItem(event) {
-    console.log("highlight item");
     event.preventDefault();
     const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
     if (visibleItems.length === 0) return;
