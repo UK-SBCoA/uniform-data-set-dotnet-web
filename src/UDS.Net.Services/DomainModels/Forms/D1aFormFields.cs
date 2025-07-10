@@ -20,7 +20,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? IMPNOMCLCD { get; set; }
         public bool? IMPNOMCIO { get; set; }
         public string IMPNOMCIOX { get; set; }
-        public bool? IMPNOMCI { get; set; }
+        public int? IMPNOMCI { get; set; }
         public bool? CDOMMEM { get; set; }
         public bool? CDOMLANG { get; set; }
         public bool? CDOMATTN { get; set; }
