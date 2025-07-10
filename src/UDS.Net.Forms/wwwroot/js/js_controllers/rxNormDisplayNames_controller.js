@@ -5,8 +5,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["list", "progressIndicator"]
   static values = {
-    fetchedLetters: String,
-    url: String
+    fetchedLetters: String
   }
 
   initialize() {
@@ -57,12 +56,7 @@ export default class extends Controller {
           this.progressIndicatorTarget.classList.add("hidden");
         }
       }
-    })
-      .then(response => response.text())
-      .then(html => {
-        Turbo.renderStreamMessage(html)
-      })
-      .catch(error => console.error("POST error:", error));
+    }
   }
 
 }
