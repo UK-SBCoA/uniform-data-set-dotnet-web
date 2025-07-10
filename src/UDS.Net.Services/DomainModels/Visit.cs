@@ -77,7 +77,7 @@ namespace UDS.Net.Services.DomainModels
                                 // if the form contract exists
                                 var form = this.Forms.Where(f => formContract.Abbreviation == f.Kind).FirstOrDefault();
 
-                                if (form.Status != FormStatus.Finalized)
+                                if (form.Status != FormStatus.Finalized || form.Status == FormStatus.InProgress)
                                 {
                                     if (formContract.IsRequredForVisitKind)
                                     {
@@ -86,7 +86,7 @@ namespace UDS.Net.Services.DomainModels
                                     }
 
                                     // Non required forms need to be finalized with a non complete mode
-                                    if (!formContract.IsRequredForVisitKind && form.MODE != FormMode.NotCompleted)
+                                    if (!formContract.IsRequredForVisitKind && (form.MODE != FormMode.NotCompleted || form.Status == FormStatus.InProgress))
                                     {
                                         finalizable = false;
                                         break; // we can exit out of the loop because a non-required form is not yet finalized
