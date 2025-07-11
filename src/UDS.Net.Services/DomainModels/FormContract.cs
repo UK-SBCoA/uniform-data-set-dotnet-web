@@ -10,12 +10,12 @@ namespace UDS.Net.Services.DomainModels
     {
         public string Abbreviation { get; set; }
 
-        public bool IsRequredForVisitKind { get; set; }
+        public bool IsRequiredForVisitKind { get; set; }
 
         public FormContract(string abbreviation, bool isRequired)
         {
             Abbreviation = abbreviation;
-            IsRequredForVisitKind = isRequired;
+            IsRequiredForVisitKind = isRequired;
         }
     }
 }

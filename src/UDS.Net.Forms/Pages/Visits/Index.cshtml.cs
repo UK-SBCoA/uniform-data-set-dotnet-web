@@ -26,9 +26,9 @@ namespace UDS.Net.Forms.Pages.Visits
             //set Filter property to new filter with supplied array items and filter query
             Filter = new FilterModel(Enum.GetNames(typeof(PacketStatus)).ToList(), filter.ToList());
 
-            var visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
+            var visits = await _visitService.ListByStatus(User?.Identity?.Name ?? "System", pageSize, pageIndex, Filter.SelectedItems.ToArray());
 
-            int total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
+            int total = await _visitService.CountByStatus(User?.Identity?.Name ?? "System", Filter.SelectedItems.ToArray());
 
             Visits = visits.ToVM(pageSize, pageIndex, total, search);
 
