@@ -1063,7 +1063,7 @@ namespace UDS.Net.Forms.Extensions
                 IMPNOMCLCD = vm.IMPNOMCLCD,
                 IMPNOMCIO = vm.IMPNOMCIO,
                 IMPNOMCIOX = vm.IMPNOMCIOX,
-                IMPNOMCI = vm.IMPNOMCI.HasValue ? vm.IMPNOMCI.Value != 0 : false,
+                IMPNOMCI = vm.IMPNOMCI,
                 CDOMMEM = vm.CDOMMEM,
                 CDOMLANG = vm.CDOMLANG,
                 CDOMATTN = vm.CDOMATTN,

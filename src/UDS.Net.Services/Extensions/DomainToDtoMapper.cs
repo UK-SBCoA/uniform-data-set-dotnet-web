@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -1423,7 +1422,7 @@ namespace UDS.Net.Services.Extensions
                 IMPNOMCLCD = fields.IMPNOMCLCD,
                 IMPNOMCIO = fields.IMPNOMCIO,
                 IMPNOMCIOX = fields.IMPNOMCIOX,
-                IMPNOMCI = fields.IMPNOMCI,
+                IMPNOMCI = fields.IMPNOMCI.HasValue ? Convert.ToBoolean(fields.IMPNOMCI) : (bool?)null,
                 CDOMMEM = fields.CDOMMEM,
                 CDOMLANG = fields.CDOMLANG,
                 CDOMATTN = fields.CDOMATTN,
