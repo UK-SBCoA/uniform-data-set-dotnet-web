@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
-using Xunit;
 
 namespace UDS.Net.Services.Test
 {
@@ -110,6 +104,26 @@ namespace UDS.Net.Services.Test
 
             // Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public void IsFinalizable_ReturnsFalse_WhenPacketStatusNotPending()
+        {
+            var visit = CreateVisitWithForms(
+                PacketKind.I,
+                PacketStatus.Submitted,
+                new List<Form>
+                {
+                    new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.InProgress, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields())
+                }
+            );
+
+            //Act
+            var result = visit.IsFinalizable;
+
+            //Asset
+            Assert.False(result);
         }
     }
 }
