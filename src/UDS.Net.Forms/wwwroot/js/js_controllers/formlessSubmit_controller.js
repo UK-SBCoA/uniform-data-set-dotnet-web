@@ -11,7 +11,7 @@ export default class extends Controller {
 
   async submit() {
     event.preventDefault();
-
+    console.log("POST " + url);
     const token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
 
     const formData = new FormData();

@@ -7,8 +7,8 @@
 <turbo-frame id="_RxNorm">
     @if (Model.RxNormLookup.SearchResults != null && Model.RxNormLookup.SearchResults.Count() > 0)
     {
-        <div class="mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
-
+        <div class="absolute z-10 mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
+            <a href="~/UDS4/A4/@Model.Visit.Id?handler=RxNormSearch">Back</a>
             @foreach (var result in Model.RxNormLookup.SearchResults)
             {
                 <div class="space-y-3">
@@ -20,7 +20,7 @@
                         </div>
                         <div class="flex flex-none items-center gap-x-4">
                             <div class="text-sm/6 font-semibold text-gray-900">@result.Value</div>
-                            <button data-selectAndCheck-target="Select" value="@result.Value" type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
+                            <button value="@result.Value" type="button" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
                         </div>
                     </div>
                 </div>
