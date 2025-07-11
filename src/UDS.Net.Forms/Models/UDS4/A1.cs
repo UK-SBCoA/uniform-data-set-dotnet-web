@@ -217,7 +217,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
@@ -232,7 +232,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known ethnicity/race.")]
+        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known race.")]
         [NotMapped]
         public bool? EthnicityRaceUnknownOnly
         {
