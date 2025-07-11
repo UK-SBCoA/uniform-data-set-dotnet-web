@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -67,9 +59,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A4a.ARIAE"),
-                    new UIEnableAttribute("A4a.ARIAH"),
-                    new UIEnableAttribute("A4a.ADVERSEOTH")
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
                 },
                 InstructionalMessage = ""
             } }
