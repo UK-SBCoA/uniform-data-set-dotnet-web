@@ -127,15 +127,16 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public async Task<IActionResult> OnGetRxNormSearchAsync(string searchTerm)
         {
-            var autoCompleteList = await _lookupService.LookupRxNormDisplayTerms(searchTerm, 10, 1);
+            var autoCompleteList = await _lookupService.LookupRxNormDisplayTerms(searchTerm, 100, 1);
 
             RxNormLookup = new RxNormLookupModel
             {
-                AutocompleteResults = autoCompleteList
+                AutocompleteResults = autoCompleteList,
+                ResultsCount = autoCompleteList.Count()
             };
 
             Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("~/Pages/RxNorm/_RxNormAutocomplete.cshtml", this.RxNormLookup);
+            return Partial("~/Pages/RxNorm/_RxNormAutocompleteStream.cshtml", this.RxNormLookup);
         }
 
         [ValidateAntiForgeryToken]
@@ -151,7 +152,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     foreach (var drugCode in search.DrugCodes)
                     {
-                        RxNormLookup.SearchResults.Add(drugCode.DrugName, drugCode.RxNormId);
+                        RxNormLookup.SearchResults.Add($"{drugCode.DrugName} ({drugCode.BrandName})", drugCode.RxNormId);
                     }
                 }
                 else

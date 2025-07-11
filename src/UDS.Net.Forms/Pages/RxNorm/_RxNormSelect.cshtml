@@ -8,7 +8,7 @@
     @if (Model.RxNormLookup.SearchResults != null && Model.RxNormLookup.SearchResults.Count() > 0)
     {
         <div class="absolute z-10 mx-auto max-w-xl transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
-            <a href="~/UDS4/A4/@Model.Visit.Id?handler=RxNormSearch">Back</a>
+            <a href="~/UDS4/A4/@Model.Visit.Id?handler=RxNormSearch&searchTerm=@Model.RxNormLookup.SearchTerm">Back</a>
             @foreach (var result in Model.RxNormLookup.SearchResults)
             {
                 <div class="space-y-3">
