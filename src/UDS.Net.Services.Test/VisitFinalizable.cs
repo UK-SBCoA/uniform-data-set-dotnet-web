@@ -115,7 +115,7 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.InProgress, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields())
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields())
                 }
             );
 
