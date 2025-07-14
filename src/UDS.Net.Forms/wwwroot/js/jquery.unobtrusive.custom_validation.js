@@ -104,7 +104,28 @@ function clearDependentFields(targets) {
         if (typeof behavior === 'string') names.push(behavior);
         else Object.keys(behavior).forEach(k => names.push(k));
     });
+
     clearFields(names);
+
+    names.forEach(name => {
+        let $field = $(`[name="${name}"]`);
+
+        if ($field.data("affects-targets")) {
+            clearDependentFields($field.data("affects-targets"));
+        }
+        if ($field.data("affects-toggle-targets")) {
+            clearFields($field.data("affects-toggle-targets"));
+        }
+        if ($field.data("affects-range-targets")) {
+            clearDependentFields($field.data("affects-range-targets"));
+        }
+    });
+
+    names.forEach(name => {
+        let $field = $(`[name="${name}"]`);
+        $field.trigger('change');
+    });
+
 }
 
 $(function () {
