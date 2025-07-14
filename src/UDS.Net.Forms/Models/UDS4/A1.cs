@@ -238,7 +238,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             get
             {
-                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE )
+                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE)
                 {
                     if (RACEUNKN) return null;
                 }
