@@ -138,6 +138,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
+                         new UIEnableAttribute("A5D2.HRTATTAGE")
                      }
             }
          },
@@ -147,6 +148,7 @@ public class A5D2Model : FormPageModel
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
                          new UIEnableAttribute("A5D2.HRTATTMULT"),
+                         new UIEnableAttribute("A5D2.HRTATTAGE")
                      }
             }
          },
@@ -160,14 +162,6 @@ public class A5D2Model : FormPageModel
                      }
             }
          },
-    };
-
-    public Dictionary<string, UIBehavior> HRTATTMULTBehavior = new Dictionary<string, UIBehavior>
-    {
-        { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5D2.HRTATTAGE") } },
-        { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A5D2.HRTATTAGE") } },
-        { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A5D2.HRTATTAGE") } }
-
     };
 
     public Dictionary<string, UIBehavior> CARDARRESTBehavior = new Dictionary<string, UIBehavior>
