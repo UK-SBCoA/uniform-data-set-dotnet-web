@@ -1406,7 +1406,7 @@ namespace UDS.Net.Forms.Extensions
                 IMPNOMCLCD = fields.IMPNOMCLCD,
                 IMPNOMCIO = fields.IMPNOMCIO,
                 IMPNOMCIOX = fields.IMPNOMCIOX,
-                IMPNOMCI = fields.IMPNOMCI.HasValue ? (fields.IMPNOMCI == true ? 1 : 0) : null,
+                IMPNOMCI = fields.IMPNOMCI,
                 CDOMMEM = fields.CDOMMEM,
                 CDOMLANG = fields.CDOMLANG,
                 CDOMATTN = fields.CDOMATTN,
