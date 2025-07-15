@@ -84,14 +84,14 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
+        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
         {
-            throw new NotImplementedException();
+            return Visits;
         }
 
         public async Task<int> CountByStatus(string username, string[] statuses = null)
         {
-            throw new NotImplementedException();
+            return 5;
         }
 
         public Task<string> GetNextFormKind(string username, int visitId, string currentFormKind)
