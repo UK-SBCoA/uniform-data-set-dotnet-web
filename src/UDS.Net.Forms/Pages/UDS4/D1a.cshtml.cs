@@ -79,11 +79,11 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> PPASyndromeListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("Logopenic PPA", "1"),
-            new RadioListItem("Semantic PPA", "2"),
+            new RadioListItem("Semantic PPA", "1"),
+            new RadioListItem("Logopenic PPA", "2"),
             new RadioListItem("Nonfluent/agrammatic PPA", "3"),
-            new RadioListItem("Primary progressive apraxia of speech", "4"),
-            new RadioListItem("PPA other/not otherwise specified", "5")
+            new RadioListItem("Primary progressive apraxia of speech", "5"),
+            new RadioListItem("PPA other/not otherwise specified", "4")
         };
 
         public List<RadioListItem> LBDSYNTListItems { get; set; } = new List<RadioListItem>
