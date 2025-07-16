@@ -543,13 +543,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Method of recognition test administration")]
         public int? REYMETHOD { get; set; }
 
-        [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Recognition - Total correct", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total correct recognitions.")]
         public int? REYTCOR { get; set; }
 
-        [Display(Name = "Recognition - Total false positives", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Recognition - Total false positives", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
 
