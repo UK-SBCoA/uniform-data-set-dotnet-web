@@ -61,7 +61,7 @@
         <label asp-for="D1a.SCDDXCONF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SCDDXCONF)</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.SCDDXCONF"></p>
-            <radio-button-group id="@Html.IdFor(m => m.D1a.SCDDXCONF)" for="@Model.D1a.SCDDXCONF" items="Model.SCDDXCONFListItems"></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.D1a.SCDDXCONF)" for="@Model.D1a.SCDDXCONF" items="Model.SCDDXCONFListItems" ui-behaviors="Model.SCDDXCONFUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.SCDDXCONF"></span>
         </div>
     </div>
