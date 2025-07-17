@@ -13,7 +13,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
-    let element = $('[name="' + target + '"]');
+    let element = $(`[name="${target}"]`);
     if (element.length) {
         if (attribute === "disabled") {
             if (value === "true" || value === true) {
@@ -21,7 +21,8 @@ function setAffect(target, attribute, value) {
                 // Clear values
                 if (element.is(":radio") || element.is(":checkbox")) {
                     element.prop("checked", false);
-                } else {
+                }
+                else {
                     element.val("");
                 }
             } else {
@@ -147,7 +148,7 @@ $(function () {
 
         let uniqueNames = jQuery.unique(allNames);
         uniqueNames.each(function () {
-            let element = $('input[name="' + this + '"]');
+            let element = $(`input[name="${this}"]`);
 
             if (element.is(":radio")) {
                 if (element.is(":checked")) {
@@ -177,10 +178,10 @@ function setValidationStatus(statusValue, modeValue) {
     let settings = validator.settings;
 
     var formStatusFinalizedValue = $(
-        'input[name="Enum.FormStatus.Finalized"]',
+        `input[name="Enum.FormStatus.Finalized"]`
     ).val();
     var formModeNotCompletedValue = $(
-        'input[name="Enum.FormMode.NotCompleted"]',
+        `input[name="Enum.FormMode.NotCompleted"]`
     ).val();
 
     if (
@@ -213,7 +214,7 @@ function setValidationStatus(statusValue, modeValue) {
 
 /* Initialize state of validation */
 $(function () {
-    let mode = $('select[name$="MODE"]');
+    let mode = $(`select[name$="MODE"]`);
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
