@@ -13,7 +13,7 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
-    let element = $('[name="' + target + '"]');
+    let element = $(`[name="${target}"]`);
     if (element.length) {
         if (attribute === "disabled") {
             if (value === "true" || value === true) {
