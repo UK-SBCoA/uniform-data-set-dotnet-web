@@ -25,7 +25,12 @@ function setAffect(target, attribute, value) {
                     element.val("");
                 }
             }
+            else {
+                element.removeAttr("disabled");
+            }
         }
+    }
+}
 
 function setAffects(targets) {
     $.each(targets, function (index, behavior) {
