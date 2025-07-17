@@ -215,7 +215,7 @@ function setValidationStatus(statusValue, modeValue) {
 
 /* Initialize state of validation */
 $(function () {
-    let mode = $(`select[name$="MODE"]`);
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
@@ -228,7 +228,7 @@ $(function () {
 
 /* If save-status changes */
 $("select[data-val-status]").on("change", function () {
-    let mode = $('select[name$="MODE"]');
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
@@ -240,8 +240,8 @@ $("select[data-val-status]").on("change", function () {
 });
 
 /* If form mode changes */
-$('select[name$="MODE"]').on("change", function () {
-    let mode = $('select[name$="MODE"]');
+$("select[name$='MODE']").on("change", function () {
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
