@@ -25,7 +25,8 @@ function setAffect(target, attribute, value) {
                 else {
                     element.val("");
                 }
-            } else {
+            }
+            else {
                 element.removeAttr("disabled");
             }
         }
@@ -178,10 +179,10 @@ function setValidationStatus(statusValue, modeValue) {
     let settings = validator.settings;
 
     var formStatusFinalizedValue = $(
-        `input[name="Enum.FormStatus.Finalized"]`
+        "input[name=\"Enum.FormStatus.Finalized\"]"
     ).val();
     var formModeNotCompletedValue = $(
-        `input[name="Enum.FormMode.NotCompleted"]`
+        "input[name=\"Enum.FormMode.NotCompleted\"]"
     ).val();
 
     if (
