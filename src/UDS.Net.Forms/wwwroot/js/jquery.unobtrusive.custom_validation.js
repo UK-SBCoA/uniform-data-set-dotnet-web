@@ -18,25 +18,15 @@ function setAffect(target, attribute, value) {
         if (attribute === "disabled") {
             if (value === "true" || value === true) {
                 element.attr("disabled", "disabled");
-                // Disable effect by element type
-                if (
-                    element.is(":radio") ||
-                    element.is(":checked") ||
-                    element.is(":checkbox")
-                ) {
-                    element.removeAttr("checked");
-                }
-                //catch all case for all other input types
-                else {
-                    element.val("");
-                }
-            }
-            else {
-                element.removeAttr("disabled");
+                // Clear values
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    element.prop("checked", false);
+                } else {
+                    element.val("");    
             }
         }
+        }
     }
-}
 function setAffects(targets) {
     $.each(targets, function (index, behavior) {
         $.each(behavior, function (target, affects) {
