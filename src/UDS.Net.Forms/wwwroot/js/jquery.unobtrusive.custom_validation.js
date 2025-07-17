@@ -24,8 +24,7 @@ function setAffect(target, attribute, value) {
                 } else {
                     element.val("");
                 }
-            }
-            else {
+            } else {
                 element.removeAttr("disabled");
             }
         }
