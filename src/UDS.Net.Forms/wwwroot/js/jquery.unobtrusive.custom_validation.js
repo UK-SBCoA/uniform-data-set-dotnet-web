@@ -361,7 +361,7 @@ $.validator.addMethod(
     function (value, element, params) {
         if (
             value.includes("'") ||
-            value.includes('"') ||
+            value.includes("\"") ||
             value.includes("&") ||
             value.includes("%")
         ) {
@@ -386,7 +386,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
 
-    let watched = $('input[name="' + watchedFieldName + '"]:checked');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]:checked");
     if (watched.length) {
         let selected = watched.val();
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
@@ -405,7 +405,7 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "watchedfieldvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
-        let watched = $('input[name="' + watchedFieldName + '"]');
+        let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
                 // clear the validation if the watched field is changed
@@ -433,7 +433,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
 
-    let watched = $('input[name="' + watchedFieldName + '"]');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]");
     if (watched.length) {
         let watchedValue = watched.val();
         if (watchedValue.length) {
@@ -458,7 +458,7 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "lowvalue", "highvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
-        let watched = $('input[name="' + watchedFieldName + '"]');
+        let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
                 // clear the validation if the watched field is changed to outside the range
