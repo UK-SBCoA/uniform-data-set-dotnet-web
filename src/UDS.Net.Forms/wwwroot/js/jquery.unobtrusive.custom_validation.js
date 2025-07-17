@@ -22,11 +22,11 @@ function setAffect(target, attribute, value) {
                 if (element.is(":radio") || element.is(":checkbox")) {
                     element.prop("checked", false);
                 } else {
-                    element.val("");    
+                    element.val("");
+                }
             }
         }
-        }
-    }
+
 function setAffects(targets) {
     $.each(targets, function (index, behavior) {
         $.each(behavior, function (target, affects) {
