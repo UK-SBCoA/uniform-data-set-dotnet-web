@@ -1,5 +1,8 @@
-﻿/*Implemented on questions 6a1 6a2 and 6a3 form A5D2*/
-
+﻿/*
+  Question 6a3 DEPRTREAT UI state is controlled by MAJORDEP and OTHERDEP, two parent inputs.
+  MENARCHE child inputs are enabled/disabled based on range of MENARCHE
+  NOMENSAGE checkboxes are enabled/disabled based on range of NOMENSAGE
+*/
 $(document).ready(function () {
 
   //element selectors
@@ -33,6 +36,13 @@ $(document).ready(function () {
       NOMENSAGEInput.disabled = true
       NOMENSAGEInput.value = "";
       ToggleNOMENSAGECheckboxes();
+      // WORKAROUND for resetting state of grandchildren
+      $('input[name="A5D2.HRTYEARS"]').attr("disabled", "disabled").val("");
+      $('input[name="A5D2.HRTSTRTAGE"]').attr("disabled", "disabled").val("");
+      $('input[name="A5D2.HRTENDAGE"]').attr("disabled", "disabled").val("");
+      $('input[name="A5D2.BCPILLSYR"]').attr("disabled", "disabled").val("");
+      $('input[name="A5D2.BCSTARTAGE"]').attr("disabled", "disabled").val("");
+      $('input[name="A5D2.BCENDAGE"]').attr("disabled", "disabled").val("");
     }
   }
 
@@ -44,7 +54,9 @@ $(document).ready(function () {
     } else {
       NOMENSAGECheckboxes.forEach((checkbox) => {
         checkbox.disabled = true
+        checkbox.checked = false;
       })
+      $('input[name="A5D2.NOMENSOTHX"]').attr("disabled", "disabled").val("");
     }
   }
 

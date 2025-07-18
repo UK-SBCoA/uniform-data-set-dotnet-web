@@ -40,6 +40,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             {"1", new UIBehavior {PropertyAttributes = new List<UIPropertyAttributes>
             {
             new UIDisableAttribute("A2.INCNTMOD"),
+            new UIDisableAttribute("A2.INCNTMDX"),
             new UIDisableAttribute("A2.INCNTFRQ"),
             new UIDisableAttribute("A2.INCNTTIM")
             }

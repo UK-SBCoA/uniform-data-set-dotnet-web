@@ -123,6 +123,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Probable CTE", "3"),
         };
 
+        /****************** Question 1 ******************/
         public Dictionary<string, UIBehavior> BIOMARKDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -133,10 +134,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BLOODFTLD"),
                     new UIDisableAttribute("D1b.BLOODLBD"),
                     new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.BLOODOTHX"),
                     new UIDisableAttribute("D1b.CSFAD"),
                     new UIDisableAttribute("D1b.CSFFTLD"),
                     new UIDisableAttribute("D1b.CSFLBD"),
                     new UIDisableAttribute("D1b.CSFOTH"),
+                    new UIDisableAttribute("D1b.CSFOTHX"),
                     new UIDisableAttribute("D1b.IMAGINGDX"),
                     new UIDisableAttribute("D1b.PETDX"),
                     new UIDisableAttribute("D1b.AMYLPET"),
@@ -146,22 +149,47 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.FDGFTLD"),
                     new UIDisableAttribute("D1b.FDGLBD"),
                     new UIDisableAttribute("D1b.FDGOTH"),
+                    new UIDisableAttribute("D1b.FDGOTHX"),
+                    new UIDisableAttribute("D1b.DATSCANDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDXX"),
                     new UIDisableAttribute("D1b.TRACERAD"),
                     new UIDisableAttribute("D1b.TRACERFTLD"),
                     new UIDisableAttribute("D1b.TRACERLBD"),
                     new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIDisableAttribute("D1b.TRACEROTHX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
                     new UIDisableAttribute("D1b.STRUCTAD"),
                     new UIDisableAttribute("D1b.STRUCTFTLD"),
                     new UIDisableAttribute("D1b.STRUCTCVD"),
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
                     new UIDisableAttribute("D1b.OTHBIOM1"),
+                    new UIDisableAttribute("D1b.OTHBIOMX1"),
+                    new UIDisableAttribute("D1b.BIOMAD1"),
+                    new UIDisableAttribute("D1b.BIOMFTLD1"),
+                    new UIDisableAttribute("D1b.BIOMLBD1"),
+                    new UIDisableAttribute("D1b.BIOMOTH1"),
+                    new UIDisableAttribute("D1b.BIOMOTHX1"),
                     new UIDisableAttribute("D1b.OTHBIOM2"),
+                    new UIDisableAttribute("D1b.OTHBIOMX2"),
+                    new UIDisableAttribute("D1b.BIOMAD2"),
+                    new UIDisableAttribute("D1b.BIOMFTLD2"),
+                    new UIDisableAttribute("D1b.BIOMLBD2"),
+                    new UIDisableAttribute("D1b.BIOMOTH2"),
+                    new UIDisableAttribute("D1b.BIOMOTHX2"),
                     new UIDisableAttribute("D1b.OTHBIOM3"),
+                    new UIDisableAttribute("D1b.OTHBIOMX3"),
+                    new UIDisableAttribute("D1b.BIOMAD3"),
+                    new UIDisableAttribute("D1b.BIOMFTLD3"),
+                    new UIDisableAttribute("D1b.BIOMLBD3"),
+                    new UIDisableAttribute("D1b.BIOMOTH3"),
+                    new UIDisableAttribute("D1b.BIOMOTHX3"),
                     new UIDisableAttribute("D1b.AUTDOMMUT"),
-                    new UIDisableAttribute("D1b.FLUIDBIOM"),
-                    new UIDisableAttribute("D1b.FLUIDBIOM"),
-                    new UIDisableAttribute("D1b.FLUIDBIOM"),
-                    new UIDisableAttribute("D1b.FLUIDBIOM"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 12"
@@ -170,6 +198,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.FLUIDBIOM"),
+                    new UIEnableAttribute("D1b.IMAGINGDX"),
                     new UIEnableAttribute("D1b.OTHBIOM1"),
                     new UIEnableAttribute("D1b.AUTDOMMUT"),
                 },
@@ -177,6 +206,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        /****************** Question 2 ******************/
         public Dictionary<string, UIBehavior> FLUIDBIOMUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -186,11 +216,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BLOODFTLD"),
                     new UIDisableAttribute("D1b.BLOODLBD"),
                     new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.BLOODOTHX"),
                     new UIDisableAttribute("D1b.CSFAD"),
                     new UIDisableAttribute("D1b.CSFFTLD"),
                     new UIDisableAttribute("D1b.CSFLBD"),
                     new UIDisableAttribute("D1b.CSFOTH"),
-                    new UIEnableAttribute("D1b.IMAGINGDX")
+                    new UIDisableAttribute("D1b.CSFOTHX"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 5"
@@ -206,7 +237,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.CSFFTLD"),
                     new UIDisableAttribute("D1b.CSFLBD"),
                     new UIDisableAttribute("D1b.CSFOTH"),
-                    new UIEnableAttribute("D1b.IMAGINGDX")
+                    new UIDisableAttribute("D1b.CSFOTHX"),
                 },
                 InstructionalMessage = "CONTINUE TO QUESTION 3, and SKIP QUESTIONS 4 – 4d"
             } },
@@ -217,11 +248,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BLOODFTLD"),
                     new UIDisableAttribute("D1b.BLOODLBD"),
                     new UIDisableAttribute("D1b.BLOODOTH"),
+                    new UIDisableAttribute("D1b.BLOODOTHX"),
                     new UIEnableAttribute("D1b.CSFAD"),
                     new UIEnableAttribute("D1b.CSFFTLD"),
                     new UIEnableAttribute("D1b.CSFLBD"),
                     new UIEnableAttribute("D1b.CSFOTH"),
-                    new UIEnableAttribute("D1b.IMAGINGDX")
                 },
                 InstructionalMessage = "SKIP TO QUESTION 4"
             } },
@@ -236,11 +267,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.CSFFTLD"),
                     new UIEnableAttribute("D1b.CSFLBD"),
                     new UIEnableAttribute("D1b.CSFOTH"),
-                    new UIEnableAttribute("D1b.IMAGINGDX")
                 }
             } },
         };
 
+        /****************** Question 3d ******************/
         public Dictionary<string, UIBehavior> BLOODOTHXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BLOODOTHX") } },
@@ -250,6 +281,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        /****************** Question 4d ******************/
         public Dictionary<string, UIBehavior> CSFOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.CSFOTHX") } },
@@ -259,16 +291,39 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        /****************** Question 5 ******************/
         public Dictionary<string, UIBehavior> IMAGINGDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIDisableAttribute("D1b.PETDX"),
+                    new UIDisableAttribute("D1b.AMYLPET"),
+                    new UIDisableAttribute("D1b.TAUPET"),
                     new UIDisableAttribute("D1b.FDGPETDX"),
+                    new UIDisableAttribute("D1b.FDGAD"),
+                    new UIDisableAttribute("D1b.FDGFTLD"),
+                    new UIDisableAttribute("D1b.FDGLBD"),
+                    new UIDisableAttribute("D1b.FDGOTH"),
+                    new UIDisableAttribute("D1b.FDGOTHX"),
                     new UIDisableAttribute("D1b.DATSCANDX"),
                     new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDXX"),
+                    new UIDisableAttribute("D1b.TRACERAD"),
+                    new UIDisableAttribute("D1b.TRACERFTLD"),
+                    new UIDisableAttribute("D1b.TRACERLBD"),
+                    new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIDisableAttribute("D1b.TRACEROTHX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
+                    new UIDisableAttribute("D1b.STRUCTAD"),
+                    new UIDisableAttribute("D1b.STRUCTFTLD"),
+                    new UIDisableAttribute("D1b.STRUCTCVD"),
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
                 },
                 InstructionalMessage = "SKIP TO QUESTION 8"
             } },
@@ -276,7 +331,19 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.PETDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX"),
                     new UIDisableAttribute("D1b.STRUCTDX"),
+                    new UIDisableAttribute("D1b.STRUCTAD"),
+                    new UIDisableAttribute("D1b.STRUCTFTLD"),
+                    new UIDisableAttribute("D1b.STRUCTCVD"),
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
 
                 },
                 InstructionalMessage = "CONTINUE TO QUESTION 6, and SKIP QUESTIONS 7 – 7a3f"
@@ -285,9 +352,22 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIDisableAttribute("D1b.PETDX"),
+                    new UIDisableAttribute("D1b.AMYLPET"),
+                    new UIDisableAttribute("D1b.TAUPET"),
                     new UIDisableAttribute("D1b.FDGPETDX"),
+                    new UIDisableAttribute("D1b.FDGAD"),
+                    new UIDisableAttribute("D1b.FDGFTLD"),
+                    new UIDisableAttribute("D1b.FDGLBD"),
+                    new UIDisableAttribute("D1b.FDGOTH"),
+                    new UIDisableAttribute("D1b.FDGOTHX"),
                     new UIDisableAttribute("D1b.DATSCANDX"),
                     new UIDisableAttribute("D1b.TRACOTHDX"),
+                    new UIDisableAttribute("D1b.TRACOTHDXX"),
+                    new UIDisableAttribute("D1b.TRACERAD"),
+                    new UIDisableAttribute("D1b.TRACERFTLD"),
+                    new UIDisableAttribute("D1b.TRACERLBD"),
+                    new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIDisableAttribute("D1b.TRACEROTHX"),
                     new UIEnableAttribute("D1b.STRUCTDX")
                 },
                 InstructionalMessage = "SKIP TO QUESTION 7"
@@ -296,11 +376,15 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.PETDX"),
+                    new UIEnableAttribute("D1b.FDGPETDX"),
+                    new UIEnableAttribute("D1b.DATSCANDX"),
+                    new UIEnableAttribute("D1b.TRACOTHDX"),
                     new UIEnableAttribute("D1b.STRUCTDX")
                 }
             } },
         };
 
+        /****************** Question 6a ******************/
         public Dictionary<string, UIBehavior> PETDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -308,16 +392,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIDisableAttribute("D1b.AMYLPET"),
                     new UIDisableAttribute("D1b.TAUPET"),
-                    new UIEnableAttribute("D1b.FDGPETDX")
                 },
-                InstructionalMessage = ""
+                InstructionalMessage = "SKIP TO QUESTION 6b"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1b.AMYLPET"),
                     new UIEnableAttribute("D1b.TAUPET"),
-                    new UIEnableAttribute("D1b.FDGPETDX")
                 }
             } },
              { "2", new UIBehavior {
@@ -325,11 +407,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("D1b.AMYLPET"),
                     new UIEnableAttribute("D1b.TAUPET"),
-                    new UIEnableAttribute("D1b.FDGPETDX")
                 }
             } },
         };
 
+        /****************** Question 6b ******************/
         public Dictionary<string, UIBehavior> FDGPETDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -339,8 +421,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.FDGFTLD"),
                     new UIDisableAttribute("D1b.FDGLBD"),
                     new UIDisableAttribute("D1b.FDGOTH"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                     new UIEnableAttribute("D1b.TRACOTHDX")
+                    new UIDisableAttribute("D1b.FDGOTHX"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 6c"
@@ -352,8 +433,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.FDGFTLD"),
                     new UIEnableAttribute("D1b.FDGLBD"),
                     new UIEnableAttribute("D1b.FDGOTH"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIEnableAttribute("D1b.TRACOTHDX")
 
                 }
             } },
@@ -364,12 +443,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.FDGFTLD"),
                     new UIEnableAttribute("D1b.FDGLBD"),
                     new UIEnableAttribute("D1b.FDGOTH"),
-                    new UIEnableAttribute("D1b.DATSCANDX"),
-                    new UIEnableAttribute("D1b.TRACOTHDX")
                 }
             } },
         };
 
+        /****************** Question 6b4 ******************/
         public Dictionary<string, UIBehavior> FDGOTHUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FDGOTHX") } },
@@ -379,6 +457,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        /****************** Question 6d ******************/
         public Dictionary<string, UIBehavior> TRACOTHDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -389,6 +468,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.TRACERFTLD"),
                     new UIDisableAttribute("D1b.TRACERLBD"),
                     new UIDisableAttribute("D1b.TRACEROTH"),
+                    new UIDisableAttribute("D1b.TRACEROTHX"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 7a"
@@ -416,6 +496,17 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        /****************** Question 6d4 ******************/
+        public Dictionary<string, UIBehavior> TRACEROTHUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
+
+        };
+
+        /****************** Question 7a ******************/
         public Dictionary<string, UIBehavior> STRUCTDXUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -424,7 +515,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.STRUCTAD"),
                     new UIDisableAttribute("D1b.STRUCTFTLD"),
                     new UIDisableAttribute("D1b.STRUCTCVD"),
-
+                    new UIDisableAttribute("D1b.IMAGLINF"),
+                    new UIDisableAttribute("D1b.IMAGLAC"),
+                    new UIDisableAttribute("D1b.IMAGMACH"),
+                    new UIDisableAttribute("D1b.IMAGMICH"),
+                    new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
                 },
                 InstructionalMessage = "SKIP TO QUESTION 8"
             } },
@@ -447,6 +543,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        /****************** Question 7a3 ******************/
         public Dictionary<string, UIBehavior> STRUCTCVDUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -457,6 +554,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGMACH"),
                     new UIDisableAttribute("D1b.IMAGMICH"),
                     new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
 
                 }
             } },
@@ -468,7 +566,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.IMAGMACH"),
                     new UIEnableAttribute("D1b.IMAGMICH"),
                     new UIEnableAttribute("D1b.IMAGWMH"),
-
                 }
             } },
              { "8", new UIBehavior {
@@ -479,6 +576,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGMACH"),
                     new UIDisableAttribute("D1b.IMAGMICH"),
                     new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
                 }
             } },
              { "9", new UIBehavior {
@@ -489,19 +587,21 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.IMAGMACH"),
                     new UIDisableAttribute("D1b.IMAGMICH"),
                     new UIDisableAttribute("D1b.IMAGWMH"),
+                    new UIDisableAttribute("D1b.IMAGWMHSEV"),
                 }
             } },
         };
 
+        /****************** Question 7a3e ******************/
         public Dictionary<string, UIBehavior> IMAGWMHUIBehavior = new Dictionary<string, UIBehavior>
         {
-
             { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.IMAGWMHSEV") } },
             { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } },
             { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.IMAGWMHSEV") } }
         };
 
+        /****************** Question 8 ******************/
         public Dictionary<string, UIBehavior> OTHBIOM1UIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -512,8 +612,21 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMFTLD1"),
                     new UIDisableAttribute("D1b.BIOMLBD1"),
                     new UIDisableAttribute("D1b.BIOMOTH1"),
+                    new UIDisableAttribute("D1b.BIOMOTHX1"),
                     new UIDisableAttribute("D1b.OTHBIOM2"),
+                    new UIDisableAttribute("D1b.OTHBIOMX2"),
+                    new UIDisableAttribute("D1b.BIOMAD2"),
+                    new UIDisableAttribute("D1b.BIOMFTLD2"),
+                    new UIDisableAttribute("D1b.BIOMLBD2"),
+                    new UIDisableAttribute("D1b.BIOMOTH2"),
+                    new UIDisableAttribute("D1b.BIOMOTHX2"),
                     new UIDisableAttribute("D1b.OTHBIOM3"),
+                    new UIDisableAttribute("D1b.OTHBIOMX3"),
+                    new UIDisableAttribute("D1b.BIOMAD3"),
+                    new UIDisableAttribute("D1b.BIOMFTLD3"),
+                    new UIDisableAttribute("D1b.BIOMLBD3"),
+                    new UIDisableAttribute("D1b.BIOMOTH3"),
+                    new UIDisableAttribute("D1b.BIOMOTHX3"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 11"
@@ -527,7 +640,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.BIOMLBD1"),
                     new UIEnableAttribute("D1b.BIOMOTH1"),
                     new UIEnableAttribute("D1b.OTHBIOM2"),
-
                 }
             } },
              { "2", new UIBehavior {
@@ -543,6 +655,17 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        /****************** Question 8d ******************/
+        public Dictionary<string, UIBehavior> BIOMOTH1UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
+
+        };
+
+        /****************** Question 9 ******************/
         public Dictionary<string, UIBehavior> OTHBIOM2UIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -553,6 +676,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMFTLD2"),
                     new UIDisableAttribute("D1b.BIOMLBD2"),
                     new UIDisableAttribute("D1b.BIOMOTH2"),
+                    new UIDisableAttribute("D1b.BIOMOTHX2"),
                     new UIDisableAttribute("D1b.OTHBIOM3"),
 
                 },
@@ -567,7 +691,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.BIOMLBD2"),
                     new UIEnableAttribute("D1b.BIOMOTH2"),
                     new UIEnableAttribute("D1b.OTHBIOM3"),
-
                 }
             } },
              { "2", new UIBehavior {
@@ -583,6 +706,16 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
+        /****************** Question 9d ******************/
+        public Dictionary<string, UIBehavior> BIOMOTH2UIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
+            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
+
+        };
+        /****************** Question 10 ******************/
         public Dictionary<string, UIBehavior> OTHBIOM3UIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -593,6 +726,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1b.BIOMFTLD3"),
                     new UIDisableAttribute("D1b.BIOMLBD3"),
                     new UIDisableAttribute("D1b.BIOMOTH3"),
+                    new UIDisableAttribute("D1b.BIOMOTHX3"),
 
                 },
                 InstructionalMessage = "SKIP TO QUESTION 11"
@@ -605,7 +739,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1b.BIOMFTLD3"),
                     new UIEnableAttribute("D1b.BIOMLBD3"),
                     new UIEnableAttribute("D1b.BIOMOTH3"),
-
                 }
             } },
              { "2", new UIBehavior {
@@ -620,24 +753,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
-        public Dictionary<string, UIBehavior> BIOMOTH1UIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX1") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX1") } }
-
-        };
-
-        public Dictionary<string, UIBehavior> BIOMOTH2UIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX2") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.BIOMOTHX2") } }
-
-        };
-
+        /****************** Question 10d ******************/
         public Dictionary<string, UIBehavior> BIOMOTH3UIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.BIOMOTHX3") } },
@@ -647,21 +763,13 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         };
 
+        /****************** Question 14e ******************/
         public Dictionary<string, UIBehavior> FTLDSUBTUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } },
             { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } },
             { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.FTLDSUBX") } },
             { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.FTLDSUBX") } }
-
-        };
-
-        public Dictionary<string, UIBehavior> TRACEROTHUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("D1b.TRACEROTHX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("D1b.TRACEROTHX") } }
 
         };
 
