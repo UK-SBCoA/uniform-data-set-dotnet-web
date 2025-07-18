@@ -29,7 +29,18 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> TRTBIOMARKUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A4a.ADVEVENT") } },
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ADVEVENT"),
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+
+                },
+                InstructionalMessage = "END FORM HERE"
+            } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } },
             { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } }
         };
@@ -45,7 +56,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ADVERSEOTX"),
 
                 },
-                InstructionalMessage = ""
+                InstructionalMessage = "END FORM HERE"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -68,7 +79,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 InstructionalMessage = ""
             } }
         };
-
 
         public A4aModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A4a")
         {
