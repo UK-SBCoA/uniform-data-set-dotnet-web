@@ -42,6 +42,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAE"),
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
 
                 },
                 InstructionalMessage = ""
@@ -62,6 +63,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAE"),
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
                 },
                 InstructionalMessage = ""
             } }

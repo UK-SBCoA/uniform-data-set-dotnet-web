@@ -894,7 +894,9 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.CANCCHEMO"),
                          new UIDisableAttribute("A5D2.CANCHORM"),
                          new UIDisableAttribute("A5D2.CANCTROTH"),
-                         new UIDisableAttribute("A5D2.CANCERAGE")
+                         new UIDisableAttribute("A5D2.CANCERAGE"),
+                         new UIDisableAttribute("A5D2.CANCOTHERX"),
+                         new UIDisableAttribute("A5D2.CANCTROTHX")
                      }
             }
          },
@@ -969,7 +971,9 @@ public class A5D2Model : FormPageModel
                          new UIDisableAttribute("A5D2.CANCCHEMO"),
                          new UIDisableAttribute("A5D2.CANCHORM"),
                          new UIDisableAttribute("A5D2.CANCTROTH"),
-                         new UIDisableAttribute("A5D2.CANCERAGE")
+                         new UIDisableAttribute("A5D2.CANCERAGE"),
+                         new UIDisableAttribute("A5D2.CANCOTHERX"),
+                         new UIDisableAttribute("A5D2.CANCTROTHX")
                      }
             }
          },
@@ -1554,7 +1558,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
                         new UIDisableAttribute("A5D2.IMPOTHER"),
-                        new UIDisableAttribute("A5D2.IMPYEARS")
+                        new UIDisableAttribute("A5D2.IMPYEARS"),
+                        new UIDisableAttribute("A5D2.IMPOTHERX"),
                      }
             }
          },
@@ -1590,7 +1595,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.IMPMILIT"),
                         new UIDisableAttribute("A5D2.IMPASSAULT"),
                         new UIDisableAttribute("A5D2.IMPOTHER"),
-                        new UIDisableAttribute("A5D2.IMPYEARS")
+                        new UIDisableAttribute("A5D2.IMPYEARS"),
+                        new UIDisableAttribute("A5D2.IMPOTHERX"),
                      }
             }
          },
@@ -1610,7 +1616,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.ARTHUPEX"),
                         new UIDisableAttribute("A5D2.ARTHLOEX"),
                         new UIDisableAttribute("A5D2.ARTHSPIN"),
-                        new UIDisableAttribute("A5D2.ARTHUNK")
+                        new UIDisableAttribute("A5D2.ARTHUNK"),
+                        new UIDisableAttribute("A5D2.ARTHTYPX"),
                      }
             }
          },
@@ -1658,7 +1665,8 @@ public class A5D2Model : FormPageModel
                         new UIDisableAttribute("A5D2.ARTHUPEX"),
                         new UIDisableAttribute("A5D2.ARTHLOEX"),
                         new UIDisableAttribute("A5D2.ARTHSPIN"),
-                        new UIDisableAttribute("A5D2.ARTHUNK")
+                        new UIDisableAttribute("A5D2.ARTHUNK"),
+                        new UIDisableAttribute("A5D2.ARTHTYPX"),
                      }
             }
          },
