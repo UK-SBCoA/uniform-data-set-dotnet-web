@@ -83,8 +83,7 @@
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A4.ANYMEDS"></span>
                         </div>
                         <div class="">
-                            <partial name="../RxNorm/_RxNormSearch" />
-                            <partial name="../RxNorm/_RxNormSelect" />
+                            <partial name="../RxNorm/_RxNormSearch" model="Model.RxNormLookup" />
                         </div>
                     </div>
                 </div>
@@ -106,7 +105,7 @@
                     <input asp-for="Visit.IsDeleted" type="hidden" />
 
                     <div class="counterreset space-y-12 sm:space-y-16 mt-2">
-                        <partial name="_A4" for="@Model" />
+                        <div id="A4"> </div>
                         <partial name="_FormFooter" for="@Model.A4" />
                     </div>
                 </form>

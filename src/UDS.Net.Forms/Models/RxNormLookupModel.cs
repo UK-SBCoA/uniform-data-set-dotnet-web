@@ -15,6 +15,7 @@ namespace UDS.Net.Forms.Models
 
         public List<string> AutocompleteResults { get; set; } = new List<string>();
 
+        public List<DrugCodeModel> CachedDrugCodes { get; set; } = new List<DrugCodeModel>();
     }
 }
 

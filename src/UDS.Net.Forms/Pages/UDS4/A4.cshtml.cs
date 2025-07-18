@@ -125,7 +125,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Page();
         }
 
-        public async Task<IActionResult> OnGetRxNormSearchAsync(string searchTerm)
+        public async Task<IActionResult> OnGetRxNormStream(string searchTerm)
         {
             var autoCompleteList = await _lookupService.LookupRxNormDisplayTerms(searchTerm, 100, 1);
 
@@ -137,6 +137,17 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Response.ContentType = "text/vnd.turbo-stream.html";
             return Partial("~/Pages/RxNorm/_RxNormAutocompleteStream.cshtml", this.RxNormLookup);
+        }
+
+        // Used by Back button on Select partial
+        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm)
+        {
+            this.RxNormLookup = new RxNormLookupModel
+            {
+                SearchTerm = searchTerm,
+                VisitId = id
+            };
+            return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
         [ValidateAntiForgeryToken]
@@ -170,17 +181,21 @@ namespace UDS.Net.Forms.Pages.UDS4
                             RxNormLookup.SearchResults.Add(result.Name, result.RxCUI);
                     }
                 }
-                return Partial("~/Pages/RxNorm/_RxNormSelect.cshtml", this);
+                return Partial("~/Pages/RxNorm/_RxNormSelect.cshtml", this.RxNormLookup);
             }
 
-            return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this);
+            return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName)
         {
-            var test = A4.DrugIds;
-            var count = PopularDrugCodes.Count();
+            RxNormLookup.CachedDrugCodes.Add(new DrugCodeModel
+            {
+                RxNormId = rxCUI,
+                DrugName = drugName,
+                IsSelected = true
+            });
             // find out if we have it.
             var lookup = await _lookupService.FindDrugCode(rxCUI);
             if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)
@@ -206,18 +221,21 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
                 A4 = (A4)BaseForm; // class library should always handle new instances
             }
-
-            AssessDrugId(new DrugCodeModel
+            foreach (var cachedDrug in RxNormLookup.CachedDrugCodes)
             {
-                RxNormId = rxCUI,
-                IsSelected = true,
-                IsDeleted = false // we are selecting and adding NOT removing a drug here
-            });
+                AssessDrugId(new DrugCodeModel
+                {
+                    RxNormId = cachedDrug.RxNormId,
+                    IsSelected = true,
+                    IsDeleted = false // we are selecting and adding NOT removing a drug here
+                });
+            }
 
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
-            // refresh the list
-            return Partial("_A4", this);
+            // refresh the list by returning a turbo stream
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("_A4Stream", this);
         }
 
         private void AssessDrugId(DrugCodeModel? vm)
