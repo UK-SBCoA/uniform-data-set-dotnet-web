@@ -140,7 +140,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         // Used by Back button on Select partial
-        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm)
+        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm, List<DrugCodeModel> cachedDrugCodes)
         {
             this.RxNormLookup = new RxNormLookupModel
             {
@@ -153,8 +153,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
         {
-            var test = A4.DrugIds;
-            var count = PopularDrugCodes.Count();
             if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
             {
                 var search = await _lookupService.SearchDrugCodes(pageSize, pageIndex, RxNormLookup.SearchTerm);
@@ -188,7 +186,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName)
+        public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName, List<DrugCodeModel> cachedDrugCodes)
         {
             RxNormLookup.CachedDrugCodes.Add(new DrugCodeModel
             {
@@ -232,6 +230,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             }
 
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
+
+            RxNormLookup.VisitId = id;
+            RxNormLookup.SearchTerm = "";
 
             // refresh the list by returning a turbo stream
             Response.ContentType = "text/vnd.turbo-stream.html";

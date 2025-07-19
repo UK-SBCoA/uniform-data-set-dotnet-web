@@ -9,10 +9,10 @@
 
   function toggleRxNorm(value) {
     if (value == '1') {
-      $('input[name="RxNormLookup.SearchTerm"]').prop('disabled', false);
+      $('input[name="SearchTerm"]').prop('disabled', false);
       $('input[name="RxNormSearch"]').prop('disabled', false);
     } else if (value == '0') {
-      $('input[name="RxNormLookup.SearchTerm"]').prop('disabled', true);
+      $('input[name="SearchTerm"]').prop('disabled', true);
       $('input[name="RxNormSearch"]').prop('disabled', true);
     }
   }

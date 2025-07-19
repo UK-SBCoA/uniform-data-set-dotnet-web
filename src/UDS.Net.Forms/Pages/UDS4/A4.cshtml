@@ -105,7 +105,9 @@
                     <input asp-for="Visit.IsDeleted" type="hidden" />
 
                     <div class="counterreset space-y-12 sm:space-y-16 mt-2">
-                        <div id="A4"> </div>
+                        <div id="A4">
+                            <partial name="_A4" />
+                        </div>
                         <partial name="_FormFooter" for="@Model.A4" />
                     </div>
                 </form>
