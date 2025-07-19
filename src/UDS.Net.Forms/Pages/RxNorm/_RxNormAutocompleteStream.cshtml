@@ -1,0 +1,24 @@
+﻿@model RxNormLookupModel
+@{
+}
+
+
+<turbo-stream action="update" target="options">
+    <template>
+        @if (Model != null && Model.AutocompleteResults != null && Model.AutocompleteResults.Count() > 0)
+        {
+            for (int i = 0; i < Model.AutocompleteResults.Count(); i++)
+            {
+                <li data-autocomplete-target="item" data-action="click->autocomplete#setSearchBox" class="cursor-default text-gray-900 hover:bg-indigo-600 hover:text-white rounded-md px-4 py-2 select-none" id="option-@i" role="option" tabindex="@i">@Model.AutocompleteResults[i]</li>
+            }
+            if (Model.ResultsCount == 100)
+            {
+                <li class="text-gray-400 rounded-md px-4 py-2 select-none">More than @Model.ResultsCount results, continue typing</li>
+            }
+        }
+        else
+        {
+            <li>No results</li>
+        }
+    </template>
+</turbo-stream>

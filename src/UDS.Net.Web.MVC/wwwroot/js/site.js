@@ -3,5 +3,22 @@
 
 // Write your JavaScript code.
 document.addEventListener("turbo:load", function () {
-  console.log("turbo:load event");
+  //console.log("turbo:load event");
+});
+
+document.addEventListener('turbo:visit', function (e) {
+  //console.log('turbo:visit', e);
+});
+
+document.addEventListener('turbo:frame-load', function (e) {
+  //console.log('turbo:frame-load', e);
+});
+
+document.addEventListener("turbo:before-cache", function () {
+  //console.log('turbo:before-cache');
+});
+
+document.addEventListener("turbo:before-stream-render", (event) => {
+  //console.log("Turbo stream incoming:");
+  //console.log(event.target?.outerHTML); // show the whole turbo-stream tag
 });

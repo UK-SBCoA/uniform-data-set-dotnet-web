@@ -25,21 +25,16 @@ export default class extends Controller {
     if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
       // debounce input
       this.dispatchTimeout = setTimeout(() => {
+        this.showList();
         this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
       }, 300)
-
-      var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
-      this.itemTargets.map((item) => {
-        if (startsWithMatcher.test(item.innerHTML)) {
-          item.classList.remove("hidden")
-        }
-        else {
-          item.classList.add("hidden")
-        }
-      });
-
-      this.activeIndex = -1;
     }
+    else {
+      this.reset();
+      this.dispatch("resetSearch");
+    }
+
+    this.activeIndex = -1;
   }
 
   showNoResults(event) {
@@ -52,7 +47,6 @@ export default class extends Controller {
 
   setSearchBox(event) {
     event.preventDefault();
-
     if (event.type == "click") {
       this.searchBoxTarget.value = event.target.innerHTML;
     }
@@ -65,6 +59,14 @@ export default class extends Controller {
 
   connect() {
     this.hideList()
+
+    this.activeIndex = -1;
+    this.dispatchTimeout = null;
+  }
+
+  reset() {
+    this.hideList();
+    this.searchBoxTarget.value = "";
     this.activeIndex = -1;
     this.dispatchTimeout = null;
   }
