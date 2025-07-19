@@ -1,11 +1,5 @@
 ﻿@model A4Model
 @{
-    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
-    string checkboxCSS = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
-
-    int popularMedsMedian = (int)Math.Ceiling((double)Model.PopularDrugCodes.Count / 2);
-    int otcMedsMedian = (int)Math.Ceiling((double)Model.OTCDrugCodes.Count / 2);
-    int customMedsMedian = (int)Math.Ceiling((double)Model.CustomDrugCodes.Count / 2);
 }
 <turbo-stream action="update" target="_RxNorm">
     <template>

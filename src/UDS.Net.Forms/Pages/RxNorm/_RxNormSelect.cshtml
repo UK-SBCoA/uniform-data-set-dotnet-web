@@ -2,8 +2,6 @@
 @{
 }
 
-
-
 <turbo-frame id="_RxNorm">
     @if (Model.SearchResults != null && Model.SearchResults.Count() > 0)
     {
@@ -24,7 +22,7 @@
                                 <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSelect">
                                     <input type="hidden" name="rxCUI" value="@result.Value" />
                                     <input type="hidden" name="drugName" value="@result.Key" />
-                                    <input type="hidden" asp-for="Id" />
+
                                     <input type="hidden" asp-for="SearchTerm" />
                                     <input type="hidden" asp-for="VisitId" />
                                     @for (int i = 0; i < Model.CachedDrugCodes.Count(); i++)

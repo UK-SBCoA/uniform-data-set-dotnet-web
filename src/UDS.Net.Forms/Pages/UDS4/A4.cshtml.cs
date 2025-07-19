@@ -139,7 +139,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormAutocompleteStream.cshtml", this.RxNormLookup);
         }
 
-        // Used by Back button on Select partial
+        // Used by Back button on _RxNormSelect partial
         public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm, List<DrugCodeModel> cachedDrugCodes)
         {
             this.RxNormLookup = new RxNormLookupModel
@@ -150,6 +150,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
+        // When Search button is clicked in _RxNormSearch partial
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
         {
@@ -185,6 +186,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
+        // When Select button is clicked in _RxNormSelect partial
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName, List<DrugCodeModel> cachedDrugCodes)
         {
@@ -276,6 +278,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
+            // TODO check to see values of RxNormLookupModel
+            // TODO fix failure after validation errors are returned
             // Reassemble the model's A4D state based on the bound properties
             foreach (var p in PopularDrugCodes)
             {
@@ -298,6 +302,15 @@ namespace UDS.Net.Forms.Pages.UDS4
             BaseForm = A4; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A4); // visit needs updated form as well
+
+            RxNormLookup = new RxNormLookupModel
+            {
+                VisitId = id
+            };
+
+            RxNormLookup.CachedDrugCodes.AddRange(PopularDrugCodes.Where(p => p.IsSelected));
+            RxNormLookup.CachedDrugCodes.AddRange(OTCDrugCodes.Where(p => p.IsSelected));
+            RxNormLookup.CachedDrugCodes.AddRange(CustomDrugCodes.Where(p => p.IsSelected));
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
