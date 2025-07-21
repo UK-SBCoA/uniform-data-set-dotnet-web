@@ -109,12 +109,12 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate, int pageSize = 10, int pageIndex = 1)
+        public Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime startDate, DateTime endDate)
+        public Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate)
         {
             throw new NotImplementedException();
         }

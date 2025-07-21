@@ -28,14 +28,17 @@ namespace UDS.Net.Forms.Pages.Visits
             int total;
 
             bool invalidDateRange = startDate.HasValue && endDate.HasValue && endDate < startDate;
-            if (invalidDateRange)
+            bool hasValidDateRange = (startDate.HasValue || endDate.HasValue) && !invalidDateRange;
+
+            if (!hasValidDateRange)
             {
-                ModelState.AddModelError(string.Empty, "End date cannot be before start date.");
+                if (invalidDateRange)
+                    ModelState.AddModelError(string.Empty, "End date cannot be before start date.");
 
                 visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
                 total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
             }
-            else if (startDate.HasValue || endDate.HasValue)
+            else
             {
                 if (endDate.HasValue)
                 {
@@ -44,11 +47,6 @@ namespace UDS.Net.Forms.Pages.Visits
 
                 visits = await _visitService.ListByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate, endDate, pageSize, pageIndex);
                 total = await _visitService.CountByDateRangeAndStatus(User.Identity.Name, Filter.SelectedItems.ToArray(), startDate, endDate);
-            }
-            else
-            {
-                visits = await _visitService.ListByStatus(User.Identity.Name, pageSize, pageIndex, Filter.SelectedItems.ToArray());
-                total = await _visitService.CountByStatus(User.Identity.Name, Filter.SelectedItems.ToArray());
             }
 
             Visits = visits.ToVM(pageSize, pageIndex, total, search);
