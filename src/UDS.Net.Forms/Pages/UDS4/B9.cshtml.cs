@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -191,7 +184,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIDisableAttribute("B9.BEAPAHTY"),
+                    new UIDisableAttribute("B9.BEAPATHY"),
                     new UIDisableAttribute("B9.BEDEP"),
                     new UIDisableAttribute("B9.BEANX"),
                     new UIDisableAttribute("B9.BEEUPH"),
@@ -219,7 +212,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("B9.BEAPAHTY"),
+                    new UIEnableAttribute("B9.BEAPATHY"),
                     new UIEnableAttribute("B9.BEDEP"),
                     new UIEnableAttribute("B9.BEANX"),
                     new UIEnableAttribute("B9.BEEUPH"),
@@ -442,11 +435,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "0", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
+                    new UIDisableAttribute("B9.DECCLMOT"),
                     new UIDisableAttribute("B9.DECCLCOG"),
                     new UIDisableAttribute("B9.COGMODE"),
                     new UIDisableAttribute("B9.DECCLBE"),
-                    new UIDisableAttribute("B9.DECCLBE"),
-                    new UIDisableAttribute("B9.DECCLMOT"),
                     new UIDisableAttribute("B9.MOMODE"),
                     new UIDisableAttribute("B9.MOMOPARK"),
                     new UIDisableAttribute("B9.MOMOALS"),
