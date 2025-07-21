@@ -1,0 +1,15 @@
+﻿@model A4Model
+@{
+}
+<turbo-stream action="replace" target="_RxNorm">
+    <template>
+        <partial name="../RxNorm/_RxNormSearch" model="Model.RxNormLookup" />
+    </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="A4">
+    <template>
+        <partial name="_A4" />
+    </template>
+</turbo-stream>
+
