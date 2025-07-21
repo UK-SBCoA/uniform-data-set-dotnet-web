@@ -1,6 +1,5 @@
 ﻿@model RxNormLookupModel
 @{
-    // this works to render route in js, but not in razor page ../A4/@Model.VisitId?handler=RxNormSearch
 }
 <turbo-frame id="_RxNorm">
     <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSearch" data-turbo-frame="_RxNorm">
@@ -8,10 +7,10 @@
             <label class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">Search RxNorm</label>
             <div class="w-full max-w-md lg:col-span-5 lg:pt-2">
                 <div class="flex gap-x-4">
-                    <label asp-for="@Model.SearchTerm" class="sr-only">@Html.DisplayNameFor(m => m.SearchTerm)</label>
-                    <input data-autocomplete-target="searchBox" data-action="focus->autocomplete#showList input->autocomplete#filterList keydown.up->autocomplete#highlightItem keydown.down->autocomplete#highlightItem keydown.enter->autocomplete#setSearchBox" asp-for="@Model.SearchTerm" placeholder="Search by drug or brand name" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                    <label asp-for="SearchTerm" class="sr-only">@Html.DisplayNameFor(m => m.SearchTerm)</label>
+                    <input asp-for="SearchTerm" type="search" data-autocomplete-target="searchBox" data-action="focus->autocomplete#showList input->autocomplete#filterList keydown.up->autocomplete#highlightItem keydown.down->autocomplete#highlightItem keydown.enter->autocomplete#setSearchBox" placeholder="Search by drug or brand name" autocomplete="off" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
 
-                    <input type="hidden" asp-for="@Model.VisitId" />
+                    <input type="hidden" asp-for="VisitId" />
                     @for (int i = 0; i < Model.CachedDrugCodes.Count(); i++)
                     {
                         <input asp-for="CachedDrugCodes[i].Id" type="hidden" />

@@ -1,9 +1,9 @@
 ﻿@model A4Model
 @{
 }
-<turbo-stream action="update" target="_RxNorm">
+<turbo-stream action="replace" target="_RxNorm">
     <template>
-        @await Html.PartialAsync("../RxNorm/_RxNormSearch.cshtml", Model.RxNormLookup)
+        <partial name="../RxNorm/_RxNormSearch" model="Model.RxNormLookup" />
     </template>
 </turbo-stream>
 

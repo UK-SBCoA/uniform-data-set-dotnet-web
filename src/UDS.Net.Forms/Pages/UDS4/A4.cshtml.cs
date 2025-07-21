@@ -278,8 +278,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
-            // TODO check to see values of RxNormLookupModel
-            // TODO fix failure after validation errors are returned
             // Reassemble the model's A4D state based on the bound properties
             foreach (var p in PopularDrugCodes)
             {

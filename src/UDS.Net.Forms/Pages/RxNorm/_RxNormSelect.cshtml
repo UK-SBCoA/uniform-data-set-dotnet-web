@@ -6,7 +6,7 @@
     @if (Model.SearchResults != null && Model.SearchResults.Count() > 0)
     {
         <div class="absolute z-10 mx-auto w-96 transform rounded-xl bg-white p-2 shadow transition-all">
-            <a href="~/UDS4/A4/@Model.VisitId?handler=RxNormSearch&searchTerm=@Model.SearchTerm" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
+            <a data-turbo-frame="_RxNorm" href="~/UDS4/A4/@Model.VisitId?handler=RxNormSearch&searchTerm=@Model.SearchTerm" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Back</a>
             <div class="-mb-2 max-h-96 scroll-py-2 overflow-y-auto py-2 text-sm text-gray-800">
                 @foreach (var result in Model.SearchResults)
                 {
@@ -19,10 +19,9 @@
                             </div>
                             <div class="flex flex-none items-center gap-x-4">
                                 <div class="text-sm/6 font-semibold text-gray-900">@result.Value</div>
-                                <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSelect">
+                                <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSelect" data-turbo-frame="_RxNorm">
                                     <input type="hidden" name="rxCUI" value="@result.Value" />
                                     <input type="hidden" name="drugName" value="@result.Key" />
-
                                     <input type="hidden" asp-for="SearchTerm" />
                                     <input type="hidden" asp-for="VisitId" />
                                     @for (int i = 0; i < Model.CachedDrugCodes.Count(); i++)
