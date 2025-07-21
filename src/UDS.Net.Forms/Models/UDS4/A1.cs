@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -221,50 +217,33 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
-                || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                || RACEAIAN
-                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
-                || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
-                || RACEUNKN)
+                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE || RACEUNKN)
                 {
                     return true;
                 }
-                else return null;
+
+                return null;
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known ethnicity/race.")]
+        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known race.")]
         [NotMapped]
         public bool? EthnicityRaceUnknownOnly
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                    || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
-                    || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                    || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                    || RACEAIAN
-                    || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
-                    || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH)
+                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE)
                 {
-                    if (RACEUNKN)
-                        return null;
-                    else
-                        return true;
+                    if (RACEUNKN) return null;
                 }
-                else if (RACEUNKN)
-                    return true;
-                else
-                    return null;
+
+                return true;
             }
         }
 
