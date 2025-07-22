@@ -186,6 +186,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? BEMODEX { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any motor symptoms?")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? DECCLMOT { get; set; }
         [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Gait disorder")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]
