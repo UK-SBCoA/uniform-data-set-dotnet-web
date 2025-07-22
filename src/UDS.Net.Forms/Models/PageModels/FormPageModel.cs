@@ -92,6 +92,8 @@ namespace UDS.Net.Forms.Models.PageModels
         [ValidateAntiForgeryToken]
         protected async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
+            BaseForm.ModifiedBy = User.Identity?.Name;
+
             var visit = Visit.ToEntity();
 
             if (BaseForm.Status == FormStatus.Finalized)
