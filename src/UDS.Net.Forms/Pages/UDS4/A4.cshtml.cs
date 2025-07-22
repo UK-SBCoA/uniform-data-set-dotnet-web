@@ -36,9 +36,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
-        [BindProperty]
-        public string? NewRxCUI { get; set; }
-
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (end form here)", "0"),
@@ -103,7 +100,6 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             // combine otc drug list with previously interacted checkboxes
             PopulateDrugCodeList(OTCDrugCodes, interactedDrugIds, otc);
-
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -139,7 +135,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormAutocompleteStream.cshtml", this.RxNormLookup);
         }
 
-        // Used by Back button on _RxNormSelect partial
+        // Used by Reset and Back button on _RxNormSelect partial
         public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm, List<DrugCodeModel> cachedDrugCodes)
         {
             this.RxNormLookup = new RxNormLookupModel
@@ -152,7 +148,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         // When Search button is clicked in _RxNormSearch partial
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
+        public async Task<IActionResult> OnPostRxNormSearchAsync(int pageSize = 10, int pageIndex = 1)
         {
             if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
             {
@@ -186,7 +182,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
-        // When Select button is clicked in _RxNormSelect partial
+        // When Select button is clicked for a new drug in _RxNormSelect partial
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName, List<DrugCodeModel> cachedDrugCodes)
         {
@@ -306,9 +302,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                 VisitId = id
             };
 
-            RxNormLookup.CachedDrugCodes.AddRange(PopularDrugCodes.Where(p => p.IsSelected));
-            RxNormLookup.CachedDrugCodes.AddRange(OTCDrugCodes.Where(p => p.IsSelected));
-            RxNormLookup.CachedDrugCodes.AddRange(CustomDrugCodes.Where(p => p.IsSelected));
+            //RxNormLookup.CachedDrugCodes.AddRange(PopularDrugCodes.Where(p => p.IsSelected));
+            //RxNormLookup.CachedDrugCodes.AddRange(OTCDrugCodes.Where(p => p.IsSelected));
+            //RxNormLookup.CachedDrugCodes.AddRange(CustomDrugCodes.Where(p => p.IsSelected));
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
