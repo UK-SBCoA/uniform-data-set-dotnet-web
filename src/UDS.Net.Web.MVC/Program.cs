@@ -34,6 +34,7 @@ var adrcId = configuration.GetValue<string>("ADRC:Id");
 builder.Services.AddSingleton<IVisitService, VisitService>();
 builder.Services.AddSingleton<IParticipationService, ParticipationService>();
 builder.Services.AddSingleton<IMilestoneService, MilestoneService>();
+builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ILookupService, LookupService>();
 builder.Services.AddSingleton<IPacketService, PacketService>();
 

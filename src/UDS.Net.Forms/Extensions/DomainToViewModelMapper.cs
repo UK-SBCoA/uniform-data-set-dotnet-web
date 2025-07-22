@@ -329,6 +329,7 @@ namespace UDS.Net.Forms.Extensions
                 }
                 else if (form.Fields is A4GFormFields)
                 {
+                    var isRequired = form.IsRequiredForPacketKind;
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A4aFormFields)
