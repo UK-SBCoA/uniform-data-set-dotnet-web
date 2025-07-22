@@ -480,7 +480,7 @@ $.validator.unobtrusive.adapters.add(
 
                             //Remove child element error messages when watched field is outside of range
                             if (element.data("valRequiredifrangeWatchedfield") == watchedFieldName) {
-                                $(`span[id="${element.attr('aria-describedby')}"]`).empty()
+                                $(`span[id="${element.attr("aria-describedby")}"]`).empty();
                             }
 
                             //Validate will reset styling for input but not remove error messages
