@@ -13,7 +13,6 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public VisitsPaginatedModel Visits { get; set; } = new VisitsPaginatedModel();
 
-        //Create pageModel filter property to apply values to
         public FilterModel Filter;
 
         public IndexModel(IVisitService visitService)
@@ -21,14 +20,34 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
         }
 
-        public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = null)
+        public async Task<IActionResult> OnGetAsync(string[] filter, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1, string search = null)
         {
-            //set Filter property to new filter with supplied array items and filter query
-            Filter = new FilterModel(Enum.GetNames(typeof(PacketStatus)).ToList(), filter.ToList());
+            Filter = new FilterModel(Enum.GetNames(typeof(PacketStatus)).ToList(), filter.ToList(), startDate, endDate);
 
-            var visits = await _visitService.ListByStatus(User?.Identity?.Name ?? "System", pageSize, pageIndex, Filter.SelectedItems.ToArray());
+            IEnumerable<Services.DomainModels.Visit> visits;
+            int total;
 
-            int total = await _visitService.CountByStatus(User?.Identity?.Name ?? "System", Filter.SelectedItems.ToArray());
+            bool invalidDateRange = startDate.HasValue && endDate.HasValue && endDate < startDate;
+            bool hasValidDateRange = (startDate.HasValue || endDate.HasValue) && !invalidDateRange;
+
+            if (!hasValidDateRange)
+            {
+                if (invalidDateRange)
+                    ModelState.AddModelError(string.Empty, "End date cannot be before start date.");
+
+                visits = await _visitService.ListByStatus(User?.Identity?.Name ?? "System", pageSize, pageIndex, Filter.SelectedItems.ToArray());
+                total = await _visitService.CountByStatus(User?.Identity?.Name ?? "System", Filter.SelectedItems.ToArray());
+            }
+            else
+            {
+                if (endDate.HasValue)
+                {
+                    endDate = endDate.Value.Date.AddDays(1).AddTicks(-1);
+                }
+
+                visits = await _visitService.ListByDateRangeAndStatus(User?.Identity?.Name ?? "System", Filter.SelectedItems.ToArray(), startDate, endDate, pageSize, pageIndex);
+                total = await _visitService.CountByDateRangeAndStatus(User?.Identity?.Name ?? "System", Filter.SelectedItems.ToArray(), startDate, endDate);
+            }
 
             Visits = visits.ToVM(pageSize, pageIndex, total, search);
 
