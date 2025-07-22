@@ -13,20 +13,15 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
-    let element = $('[name="' + target + '"]');
+    let element = $(`[name="${target}"]`);
     if (element.length) {
         if (attribute === "disabled") {
             if (value === "true" || value === true) {
                 element.attr("disabled", "disabled");
-                // Disable effect by element type
-                if (
-                    element.is(":radio") ||
-                    element.is(":checked") ||
-                    element.is(":checkbox")
-                ) {
-                    element.removeAttr("checked");
+                // Clear values
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    element.prop("checked", false);
                 }
-                //catch all case for all other input types
                 else {
                     element.val("");
                 }
@@ -154,7 +149,7 @@ $(function () {
 
         let uniqueNames = jQuery.unique(allNames);
         uniqueNames.each(function () {
-            let element = $('input[name="' + this + '"]');
+            let element = $(`input[name="${this}"]`);
 
             if (element.is(":radio")) {
                 if (element.is(":checked")) {
@@ -184,10 +179,10 @@ function setValidationStatus(statusValue, modeValue) {
     let settings = validator.settings;
 
     var formStatusFinalizedValue = $(
-        'input[name="Enum.FormStatus.Finalized"]',
+        "input[name=\"Enum.FormStatus.Finalized\"]"
     ).val();
     var formModeNotCompletedValue = $(
-        'input[name="Enum.FormMode.NotCompleted"]',
+        "input[name=\"Enum.FormMode.NotCompleted\"]"
     ).val();
 
     if (
@@ -220,7 +215,7 @@ function setValidationStatus(statusValue, modeValue) {
 
 /* Initialize state of validation */
 $(function () {
-    let mode = $('select[name$="MODE"]');
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
@@ -233,7 +228,7 @@ $(function () {
 
 /* If save-status changes */
 $("select[data-val-status]").on("change", function () {
-    let mode = $('select[name$="MODE"]');
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
@@ -245,8 +240,8 @@ $("select[data-val-status]").on("change", function () {
 });
 
 /* If form mode changes */
-$('select[name$="MODE"]').on("change", function () {
-    let mode = $('select[name$="MODE"]');
+$("select[name$='MODE']").on("change", function () {
+    let mode = $("select[name$='MODE']");
     let select = $("select[data-val-status]");
     if (mode.length && select.length) {
         let modeOptionSelected = mode.find(":selected");
@@ -366,7 +361,7 @@ $.validator.addMethod(
     function (value, element, params) {
         if (
             value.includes("'") ||
-            value.includes('"') ||
+            value.includes("\"") ||
             value.includes("&") ||
             value.includes("%")
         ) {
@@ -391,7 +386,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
 
-    let watched = $('input[name="' + watchedFieldName + '"]:checked');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]:checked");
     if (watched.length) {
         let selected = watched.val();
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
@@ -410,7 +405,7 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "watchedfieldvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
-        let watched = $('input[name="' + watchedFieldName + '"]');
+        let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
                 // clear the validation if the watched field is changed
@@ -438,7 +433,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
 
-    let watched = $('input[name="' + watchedFieldName + '"]');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]");
     if (watched.length) {
         let watchedValue = watched.val();
         if (watchedValue.length) {
@@ -463,7 +458,7 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "lowvalue", "highvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
-        let watched = $('input[name="' + watchedFieldName + '"]');
+        let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
                 // clear the validation if the watched field is changed to outside the range

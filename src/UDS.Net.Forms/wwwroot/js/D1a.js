@@ -70,31 +70,15 @@
 
     function toggleInputs(disable) {
         endFormInputs.forEach(function (inputName) {
-            $('input[name="' + inputName + '"]').prop('disabled', disable);
+            $(`input[name="${inputName}"]`).prop("disabled", disable);
         });
     }
 
     $("input[name='D1a.SCDDXCONF'], input[name='D1a.SCD']").change(function () {
         var scddxconfValue = $("input[name='D1a.SCDDXCONF']").val();
         var scdValue = $("input[name='D1a.SCD']").val();
-        var shouldDisable = (scddxconfValue == '0' || scddxconfValue == '1' || scdValue == '0');
+        var shouldDisable = (scddxconfValue == "0" || scddxconfValue == "1" || scdValue == "0");
         toggleInputs(shouldDisable);
     });
-
-    function updateIMPNOMCITargets() {
-        var selectedValue = $("input[name='D1a.IMPNOMCI']:checked").val();
-        var shouldDisable = (selectedValue == '0' || selectedValue == '1');
-        var IMPNOMCITargets = [
-            "D1a.CDOMMEM", "D1a.CDOMLANG", "D1a.CDOMATTN", "D1a.CDOMEXEC", "D1a.CDOMVISU", "D1a.CDOMBEH", "D1a.CDOMAPRAX"
-        ];
-
-        IMPNOMCITargets.forEach(function (inputName) {
-            $('input[name="' + inputName + '"]').prop('disabled', shouldDisable);
-        });
-    }
-
-    updateIMPNOMCITargets();
-
-    $("input[name='D1a.IMPNOMCI']").change(updateIMPNOMCITargets);
 
 });
