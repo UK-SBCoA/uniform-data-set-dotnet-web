@@ -117,7 +117,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.MOMOALS"),
                     new UIDisableAttribute("B9.COURSE"),
                     new UIDisableAttribute("B9.FRSTCHG"),
-                    new UIDisableAttribute("B9.BEAPATHY"),
                     new UIDisableAttribute("B9.COGMEM"),
                     new UIDisableAttribute("B9.COGORI"),
                     new UIDisableAttribute("B9.COGJUDG"),
@@ -198,20 +197,16 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("B9.DECCLCOG"),
-                    new UIEnableAttribute("B9.COGMODE"),
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLMOT"),
-                    new UIEnableAttribute("B9.MOMODE"),
-                    new UIEnableAttribute("B9.MOMOPARK"),
-                    new UIEnableAttribute("B9.MOMOALS"),
                     new UIEnableAttribute("B9.COURSE"),
                     new UIEnableAttribute("B9.FRSTCHG"),
-                    new UIEnableAttribute("B9.BEAPATHY")
                 }
              } },
         };
 
+        // Section 2 Questions 8 through 10
         public Dictionary<string, UIBehavior> DECCLCOGUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -325,7 +320,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
-
+        // Section 3 Questions 11 through 13
         public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -353,7 +348,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.BEOTHR"),
                     new UIDisableAttribute("B9.BEMODE"),
                     new UIDisableAttribute("B9.BEHAGE"),
-                    new UIDisableAttribute("B9.BEAPATHY"),
                     new UIDisableAttribute("B9.DECCLMOT"),
                     new UIDisableAttribute("B9.DECCLCOG"),
                     new UIDisableAttribute("B9.COGMODE"),
@@ -363,7 +357,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.MOMOALS"),
                     new UIDisableAttribute("B9.COURSE"),
                     new UIDisableAttribute("B9.FRSTCHG"),
-                    new UIDisableAttribute("B9.BEAPATHY"),
                     new UIDisableAttribute("B9.BEVPATT"),
                     new UIDisableAttribute("B9.BEVWELL"),
                     new UIDisableAttribute("B9.BEAHSIMP"),
@@ -406,7 +399,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.BEOTHR"),
                     new UIEnableAttribute("B9.BEMODE"),
                     new UIEnableAttribute("B9.BEHAGE"),
-                    new UIEnableAttribute("B9.BEAPATHY"),
                     new UIEnableAttribute("B9.DECCLCOG"),
                     new UIEnableAttribute("B9.COGMODE"),
                     new UIEnableAttribute("B9.DECCLBE"),
