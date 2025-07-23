@@ -59,9 +59,9 @@ export default class extends Controller {
     let isExisting = false;
     if (this.hasPopularDrugTarget) {
       this.popularDrugTargets.forEach(drug => {
-        var rxNormId = drug.querySelector("input[name*='RxNormId']");
-        if (rxNormId.value == rxCUI) {
-          var checkbox = drug.querySelector("input[type=checkbox]");
+        var rxNormId = drug.getAttribute('data-rx-norm-id');
+        if (rxNormId == rxCUI) {
+          var checkbox = drug.querySelector("input[type='checkbox']");
           checkbox.checked = true;
           isExisting = true;
         }
@@ -69,9 +69,9 @@ export default class extends Controller {
     }
     if (!isExisting && this.hasOtcDrugTarget) {
       this.otcDrugTargets.forEach(drug => {
-        var rxNormId = drug.querySelector("input[name*='RxNormId']");
-        if (rxNormId.value == rxCUI) {
-          var checkbox = drug.querySelector("input[type=checkbox]");
+        var rxNormId = drug.getAttribute('data-rx-norm-id');
+        if (rxNormId == rxCUI) {
+          var checkbox = drug.querySelector("input[type='checkbox']");
           checkbox.checked = true;
           isExisting = true;
         }
@@ -79,9 +79,9 @@ export default class extends Controller {
     }
     if (!isExisting && this.hasCustomDrugTarget) {
       this.customDrugTargets.forEach(drug => {
-        var rxNormId = drug.querySelector("input[name*='RxNormId']");
-        if (rxNormId.value == rxCUI) {
-          var checkbox = drug.querySelector("input[type=checkbox]");
+        var rxNormId = drug.getAttribute('data-rx-norm-id');
+        if (rxNormId == rxCUI) {
+          var checkbox = drug.querySelector("input[type='checkbox']");
           checkbox.checked = true;
           isExisting = true;
         }
@@ -90,10 +90,15 @@ export default class extends Controller {
     return isExisting;
   }
 
+  customDrugTargetConnected(element) {
+    console.log("connected ", element);
+  }
+
   async selectDrug(event) {
     const selectedResult = event.target.value; // the rxCUI
     // figure out if the rxcui is existing or new
     const existingDrug = this.findDrug(selectedResult);
+    console.log(selectedResult + " is existing = " + existingDrug);
     if (existingDrug == true) {
       // reset _RxNorm turbo frame back to search input
       fetch(this.resetValue, {
@@ -103,7 +108,7 @@ export default class extends Controller {
         }
       }).then(response => response.text())
         .then(html => {
-          document.getElementById("_RxNorm").innerHTML = html.innerHTML;
+          document.getElementById("_RxNorm").innerHTML = html;
         });
     }
     else {

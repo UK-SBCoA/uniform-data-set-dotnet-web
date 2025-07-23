@@ -2,7 +2,7 @@
 @{
 }
 <turbo-frame id="_RxNorm">
-    <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSearch" data-turbo-frame="_RxNorm">
+    <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSearch">
         <div data-controller="autocomplete  rxNormDisplayNames" data-action="autocomplete:newSearch->rxNormDisplayNames#fetchData focusout->autocomplete#handleOutsideClick" data-rxNormDisplayNames-fetchedLetters-value="" data-rxNormDisplayNames-url-value="../A4/@Model.VisitId?handler=RxNormStream">
             <label class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">Search RxNorm</label>
             <div class="w-full max-w-md lg:col-span-5 lg:pt-2">

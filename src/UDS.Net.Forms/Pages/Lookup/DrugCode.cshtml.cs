@@ -66,27 +66,12 @@ namespace UDS.Net.Forms.Pages.Lookup
 
             foreach (var newCode in Lookup.DrugCodes.Where(d => d.IsSelected).ToList())
             {
-                if (fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId))
-                {
-                    var existingA4D = fields.A4Ds.Where(d => d.RxNormId == newCode.RxNormId).FirstOrDefault();
-
-                    if (existingA4D.IsDeleted)
-                    {
-                        // update
-                        existingA4D.IsDeleted = false;
-                        existingA4D.DeletedBy = null;
-                        existingA4D.ModifiedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
-
-                    }
-                }
-                else
+                if (!fields.A4Ds.Any(a => a.RxNormId == newCode.RxNormId))
                 {
                     // add
                     fields.A4Ds.Add(new A4DFormFields
                     {
-                        RxNormId = newCode.RxNormId,
-                        CreatedAt = DateTime.Now,
-                        CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username"
+                        RxNormId = newCode.RxNormId
                     });
                 }
             }

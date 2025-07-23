@@ -32,7 +32,6 @@
                     if (!string.IsNullOrWhiteSpace(Model.Lookup.DrugCodes[i].BrandName))
                         displayName += " (" + Model.Lookup.DrugCodes[i].BrandName + ") ";
                     <div class="@rowCSS">
-                        <input asp-for="Lookup.DrugCodes[i].Id" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].DrugName" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].BrandName" type="hidden" />
                         <input asp-for="Lookup.DrugCodes[i].RxNormId " type="hidden" />

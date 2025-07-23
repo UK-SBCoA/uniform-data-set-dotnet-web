@@ -68,16 +68,6 @@
                     <input asp-for="Visit.IsDeleted" type="hidden" />
                     <!--// in case the form is returned with validation errors, we need to persist the temp cache //-->
                     <input asp-for="RxNormLookup.VisitId" type="hidden" />
-                    @for (int i = 0; i < Model.RxNormLookup.CachedDrugCodes.Count(); i++)
-                    {
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].Id" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].RxNormId" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].DrugName" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].BrandName" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].IsOverTheCounter" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].IsPopular" type="hidden" />
-                        <input asp-for="RxNormLookup.CachedDrugCodes[i].IsSelected" type="hidden" value="true" />
-                    }
                     <div class="counterreset space-y-12 sm:space-y-16 mt-2">
                         <div id="A4">
                             <partial name="_A4" />
