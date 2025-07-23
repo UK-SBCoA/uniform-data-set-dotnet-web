@@ -3,8 +3,6 @@ namespace UDS.Net.Forms.Models
 {
     public class DrugCodeModel
     {
-        public int? Id { get; set; }
-
         public string RxNormId { get; set; }
 
         public string? DrugName { get; set; }
@@ -17,16 +15,6 @@ namespace UDS.Net.Forms.Models
 
         // For a view model to render a checkbox easily, using a regular boolean is best
         public bool IsSelected { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public string? CreatedBy { get; set; }
-
-        public string? ModifiedBy { get; set; }
-
-        public string? DeletedBy { get; set; }
-
-        public bool? IsDeleted { get; set; }
     }
 }
 
