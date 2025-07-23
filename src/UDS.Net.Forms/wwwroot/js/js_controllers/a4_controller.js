@@ -98,7 +98,6 @@ export default class extends Controller {
     const selectedResult = event.target.value; // the rxCUI
     // figure out if the rxcui is existing or new
     const existingDrug = this.findDrug(selectedResult);
-    console.log(selectedResult + " is existing = " + existingDrug);
     if (existingDrug == true) {
       // reset _RxNorm turbo frame back to search input
       fetch(this.resetValue, {

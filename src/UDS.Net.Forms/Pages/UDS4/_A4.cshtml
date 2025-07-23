@@ -5,8 +5,6 @@
 
     int popularMedsMedian = (int)Math.Ceiling((double)Model.PopularDrugCodes.Count / 2);
     int otcMedsMedian = (int)Math.Ceiling((double)Model.OTCDrugCodes.Count / 2);
-
-    Model.CustomDrugCodes = Model.CustomDrugCodes.OrderBy(c => c.DrugName).ToList();
     int customMedsMedian = (int)Math.Ceiling((double)Model.CustomDrugCodes.Count / 2);
 }
 
@@ -37,7 +35,7 @@
                                             <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
+                                            <input id="PopularDrugCodes_@(i)__IsSelected" name="PopularDrugCodes[@i].IsSelected" checked="@Model.PopularDrugCodes[i].IsSelected" value="@(Model.PopularDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
@@ -74,7 +72,7 @@
                                             <input asp-for="PopularDrugCodes[j].BrandName" type="hidden" />
                                             <input asp-for="PopularDrugCodes[j].IsOverTheCounter" type="hidden" />
                                             <input asp-for="PopularDrugCodes[j].IsPopular" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[j].IsSelected" type="checkbox" class="@checkboxCSS" />
+                                            <input id="PopularDrugCodes_@(j)__IsSelected" name="PopularDrugCodes[@j].IsSelected" checked="@Model.PopularDrugCodes[j].IsSelected" value="@(Model.PopularDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.PopularDrugCodes[j].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[j].RxNormId</span></label>
@@ -118,8 +116,7 @@
                                             <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="OTCDrugCodes[i].IsPopular" type="hidden" />
-                                            <input id="OTCDrugCodes_@(i)__IsSelected" name="OTCDrugCodes[@i].IsSelected" checked="@Model.OTCDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
-                                            <input name="OTCDrugCodes[@i].IsSelected" type="hidden" value="@Model.OTCDrugCodes[i].IsSelected" />
+                                            <input id="OTCDrugCodes_@(i)__IsSelected" name="OTCDrugCodes[@i].IsSelected" checked="@Model.OTCDrugCodes[i].IsSelected" value="@(Model.OTCDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
@@ -156,8 +153,7 @@
                                             <input asp-for="OTCDrugCodes[j].BrandName" type="hidden" />
                                             <input asp-for="OTCDrugCodes[j].IsOverTheCounter" type="hidden" />
                                             <input asp-for="OTCDrugCodes[j].IsPopular" type="hidden" />
-                                            <input id="OTCDrugCodes_@(j)__IsSelected" name="OTCDrugCodes[@j].IsSelected" checked="@Model.OTCDrugCodes[j].IsSelected" type="checkbox" class="@checkboxCSS" />
-                                            <input name="OTCDrugCodes[@j].IsSelected" type="hidden" value="@Model.OTCDrugCodes[j].IsSelected" />
+                                            <input id="OTCDrugCodes_@(j)__IsSelected" name="OTCDrugCodes[@j].IsSelected" checked="@Model.OTCDrugCodes[j].IsSelected" value="@(Model.OTCDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             <label for="@Html.IdFor(m => m.OTCDrugCodes[j].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[j].RxNormId</span></label>
@@ -193,9 +189,7 @@
                                             <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
                                             <input asp-for="CustomDrugCodes[i].IsPopular" type="hidden" />
-                                            <input id="CustomDrugCodes_@(i)__IsSelected" name="CustomDrugCodes[@i].IsSelected" checked="@Model.CustomDrugCodes[i].IsSelected" type="checkbox" class="@checkboxCSS" />
-                                            <span>@Model.CustomDrugCodes[i].IsSelected</span>
-                                            <input asp-for="CustomDrugCodes[i].IsSelected" type="hidden" />
+                                            <input id="CustomDrugCodes_@(i)__IsSelected" name="CustomDrugCodes[@i].IsSelected" checked="@Model.CustomDrugCodes[i].IsSelected" value="@(Model.CustomDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             @{
@@ -231,9 +225,7 @@
                                             <input asp-for="CustomDrugCodes[j].BrandName" type="hidden" />
                                             <input asp-for="CustomDrugCodes[j].IsOverTheCounter" type="hidden" />
                                             <input asp-for="CustomDrugCodes[j].IsPopular" type="hidden" />
-                                            <input id="CustomDrugCodes_@(j)__IsSelected" name="CustomDrugCodes[@j].IsSelected" checked="@Model.CustomDrugCodes[j].IsSelected" type="checkbox" class="@checkboxCSS" />
-                                            <span>@Model.CustomDrugCodes[j].IsSelected</span>
-                                            <input asp-for="CustomDrugCodes[j].IsSelected" type="hidden" />
+                                            <input id="CustomDrugCodes_@(j)__IsSelected" name="CustomDrugCodes[@j].IsSelected" checked="@Model.CustomDrugCodes[j].IsSelected" value="@(Model.CustomDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             @{

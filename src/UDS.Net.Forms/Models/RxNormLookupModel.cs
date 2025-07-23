@@ -7,7 +7,7 @@ namespace UDS.Net.Forms.Models
 
         public int ResultsCount { get; set; } = 0;
 
-        public string? SearchTerm { get; set; }
+        public string? SearchTerm { get; set; } = "";
 
         /// <summary>
         /// Used by _RxNormAutocompleteStream

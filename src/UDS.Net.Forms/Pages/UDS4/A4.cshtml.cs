@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -118,6 +119,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
 
+            this.CustomDrugCodes = this.CustomDrugCodes.OrderBy(c => c.DrugName).ToList();
             return Page();
         }
 
@@ -143,6 +145,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 SearchTerm = searchTerm,
                 VisitId = id
             };
+            ModelState.ClearValidationState(nameof(RxNormLookup));
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
@@ -150,6 +153,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostRxNormSearchAsync(int pageSize = 10, int pageIndex = 1)
         {
+            ModelState.ClearValidationState(nameof(RxNormLookup));
             if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
             {
                 var search = await _lookupService.SearchDrugCodes(pageSize, pageIndex, RxNormLookup.SearchTerm);
