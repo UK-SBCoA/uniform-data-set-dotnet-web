@@ -227,7 +227,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("D1a.SCDDXCONF"),                  
+                    new UIEnableAttribute("D1a.SCDDXCONF")
                 }
             } }
         };
