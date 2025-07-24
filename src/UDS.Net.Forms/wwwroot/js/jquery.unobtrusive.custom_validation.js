@@ -479,17 +479,22 @@ $.validator.unobtrusive.adapters.add(
                             );
 
                             //Get possible targets of watched element
-                            let radioTypeTargets = watched.data("affects-targets")
-                            let inputTypeTargets = watched.data("affects-range-targets")
+                            let affectsTargets = watched.data("affects-targets")
+                            let affectsRangeTargets = watched.data("affects-range-targets")
+
+                            console.log(affectsTargets)
+                            console.log(affectsRangeTargets)
 
                             //if watched element is an input type
-                            if (inputTypeTargets) {
+                            if (affectsRangeTargets) {
+                                console.log("running input type target clear")
                                 $(`span[id="${element.attr("aria-describedby")}"]`).empty();
                             }
 
                             //if watched element is a radio type
-                            else if (radioTypeTargets) {
-                                radioTypeTargets.forEach(target => {
+                            else if (affectsTargets) {
+                                console.log("running radio type target clear")
+                                affectsTargets.forEach(target => {
                                     for (key in target) {
                                         $(`[data-valmsg-for="${key}"]`).empty()
                                     }
