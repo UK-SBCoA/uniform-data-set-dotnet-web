@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -34,10 +35,10 @@ namespace UDS.Net.Forms.Pages.UDS4
         public List<DrugCodeModel> CustomDrugCodes { get; set; } = new List<DrugCodeModel>();
 
         [BindProperty]
-        public RxNormLookupModel RxNormLookup { get; set; } = default!;
+        public List<string> SelectedDrugs { get; set; } = new List<string>();
 
         [BindProperty]
-        public string? NewRxCUI { get; set; }
+        public RxNormLookupModel RxNormLookup { get; set; } = default!;
 
         public List<RadioListItem> MedicationsWithinLastTwoWeeksListItems { get; set; } = new List<RadioListItem>
         {
@@ -50,60 +51,27 @@ namespace UDS.Net.Forms.Pages.UDS4
             _lookupService = lookupService;
         }
 
-        private void PopulateDrugCodeList(List<DrugCodeModel> viewModel, List<DrugCodeModel> interactedDrugIds, List<DrugCode> list)
+        private async Task PopulateDrugCodeLists()
         {
-            foreach (var drug in list)
-            {
-                if (drug != null)
-                {
-                    // check if the drug has ever been interacted with (checked/checked then unchecked/etc.)
-                    if (interactedDrugIds.Any(s => s.RxNormId == drug.RxNormId))
-                    {
-                        var interacted = interactedDrugIds.Where(s => s.RxNormId == drug.RxNormId).FirstOrDefault();
-
-                        if (interacted != null)
-                        {
-                            viewModel.Add(drug.ToVM(interacted));
-
-                            interactedDrugIds.Remove(interacted);
-                        }
-                    }
-                    else
-                        viewModel.Add(drug.ToVM()); // checkbox has never been interacted with
-
-                }
-            }
-        }
-
-        private async Task PopulateDrugCodeLists(List<DrugCodeModel> interactedDrugIds)
-        {
-            // popular checkboxes are always capped at 100
             var lookup = await _lookupService.LookupDrugCodes(100, 1, true); // returns popular drugs (prescription + otc)
 
-            var popular = lookup.DrugCodes.Where(d => d.IsPopular == true && d.IsOverTheCounter == false).ToList();
-
-            var otc = lookup.DrugCodes.Where(d => d.IsOverTheCounter == true).ToList();
-
-            if (interactedDrugIds != null)
+            if (lookup != null && lookup.DrugCodes != null)
             {
-                var lookupIds = lookup.DrugCodes.Select(d => d.RxNormId).ToList();
-                var customDrugIds = interactedDrugIds.Where(d => !lookupIds.Contains(d.RxNormId)).Select(d => d.RxNormId).ToList();
+                PopularDrugCodes = lookup.DrugCodes.Where(d => d.IsPopular == true && d.IsOverTheCounter == false).Select(d => d.ToVM()).ToList();
 
-                if (customDrugIds != null && customDrugIds.Count() > 0)
-                {
-                    var custom = await _lookupService.FindDrugCodes(customDrugIds.ToArray());
-
-                    // combine custom with previously interacted checkboxes
-                    PopulateDrugCodeList(CustomDrugCodes, interactedDrugIds, custom.DrugCodes);
-                }
+                OTCDrugCodes = lookup.DrugCodes.Where(d => d.IsOverTheCounter == true).Select(d => d.ToVM()).ToList();
             }
 
-            // combine popular drug list with previously interacted checkboxes
-            PopulateDrugCodeList(PopularDrugCodes, interactedDrugIds, popular);
+            if (SelectedDrugs != null)
+            {
+                // get only the drugs that are custom since we already have popular and otc
+                var drugsToRemove = lookup.DrugCodes.Select(d => d.RxNormId).ToHashSet();
+                var customDrugsToLookup = SelectedDrugs.ToList(); // copy
+                customDrugsToLookup.RemoveAll(d => drugsToRemove.Contains(d));
 
-            // combine otc drug list with previously interacted checkboxes
-            PopulateDrugCodeList(OTCDrugCodes, interactedDrugIds, otc);
-
+                var customList = await _lookupService.FindDrugCodes(customDrugsToLookup.ToArray());
+                CustomDrugCodes = customList.DrugCodes.Select(d => d.ToVM()).OrderBy(d => d.DrugName).ToList();
+            }
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -120,7 +88,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                 VisitId = id.HasValue ? id.Value : 0
             };
 
-            await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
+            SelectedDrugs = A4.DrugIds.Select(d => d.RxNormId).ToList();
+
+            await PopulateDrugCodeLists(); // gather the drug reference lists
 
             return Page();
         }
@@ -140,20 +110,36 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         // Used by Back button on _RxNormSelect partial
-        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm, List<DrugCodeModel> cachedDrugCodes)
+        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm)
         {
             this.RxNormLookup = new RxNormLookupModel
             {
                 SearchTerm = searchTerm,
                 VisitId = id
             };
+            ModelState.ClearValidationState(nameof(RxNormLookup));
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
+        }
+
+        // Used by Reset returns stream
+        public async Task<IActionResult> OnGetRxNormSearchResetAsync(int id, string searchTerm)
+        {
+            this.RxNormLookup = new RxNormLookupModel
+            {
+                VisitId = id
+            };
+            ModelState.ClearValidationState(nameof(RxNormLookup.SearchTerm));
+            //return Partial("~/Pages/RxNorm/_RxNormSearchForm.cshtml", this.RxNormLookup);
+            // refresh the list by returning a turbo stream
+            Response.ContentType = "text/vnd.turbo-stream.html"; // this stream replaces _A4 and _RxNorm
+            return Partial("~/Pages/RxNorm/_RxNormSearchStream.cshtml", this.RxNormLookup);
         }
 
         // When Search button is clicked in _RxNormSearch partial
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostRxNormSearchAsync(int rxNormLookup__VisitId, string rxNormLookupSearchTerm, int pageSize = 10, int pageIndex = 1)
+        public async Task<IActionResult> OnPostRxNormSearchAsync(int pageSize = 10, int pageIndex = 1)
         {
+            ModelState.ClearValidationState(nameof(RxNormLookup));
             if (!String.IsNullOrWhiteSpace(RxNormLookup.SearchTerm))
             {
                 var search = await _lookupService.SearchDrugCodes(pageSize, pageIndex, RxNormLookup.SearchTerm);
@@ -162,7 +148,10 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     foreach (var drugCode in search.DrugCodes)
                     {
-                        RxNormLookup.SearchResults.Add($"{drugCode.DrugName} ({drugCode.BrandName})", drugCode.RxNormId);
+                        if (!String.IsNullOrWhiteSpace(drugCode.BrandName))
+                            drugCode.BrandName = " (" + drugCode.BrandName + ")";
+
+                        RxNormLookup.SearchResults.Add($"{drugCode.DrugName}{drugCode.BrandName}", drugCode.RxNormId);
                     }
                 }
                 else
@@ -186,17 +175,16 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
         }
 
-        // When Select button is clicked in _RxNormSelect partial
+        // When Select button is clicked for a new drug in _RxNormSelect partial
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName, List<DrugCodeModel> cachedDrugCodes)
+        public async Task<IActionResult> OnPostRxNormSelectAsync(int id, string rxCUI, string drugName)
         {
-            RxNormLookup.CachedDrugCodes.Add(new DrugCodeModel
-            {
-                RxNormId = rxCUI,
-                DrugName = drugName,
-                IsSelected = true
-            });
-            // find out if we have it.
+            // TODO check that everything is persisted and we don't need to rebind anything.
+            var popular = this.PopularDrugCodes;
+            var otc = this.OTCDrugCodes;
+            var custom = this.CustomDrugCodes;
+
+            // find out if we have the drug in our local reference
             var lookup = await _lookupService.FindDrugCode(rxCUI);
             if (lookup.TotalResultsCount > 0 && lookup.DrugCodes != null && lookup.DrugCodes.Count() > 0)
             {
@@ -215,81 +203,48 @@ namespace UDS.Net.Forms.Pages.UDS4
                 });
             }
 
-            await base.OnGetAsync(id);
-
-            if (BaseForm != null)
+            if (!this.CustomDrugCodes.Where(d => d.RxNormId.Trim() == rxCUI.Trim()).Any())
             {
-                A4 = (A4)BaseForm; // class library should always handle new instances
-            }
-            foreach (var cachedDrug in RxNormLookup.CachedDrugCodes)
-            {
-                AssessDrugId(new DrugCodeModel
+                // add if it is not a duplicate
+                this.CustomDrugCodes.Add(new DrugCodeModel
                 {
-                    RxNormId = cachedDrug.RxNormId,
-                    IsSelected = true,
-                    IsDeleted = false // we are selecting and adding NOT removing a drug here
+                    RxNormId = rxCUI,
+                    DrugName = drugName,
+                    IsOverTheCounter = false,
+                    IsPopular = false
                 });
             }
 
-            await PopulateDrugCodeLists(A4.DrugIds); // put the model's A4D state into separate lists
+            this.CustomDrugCodes = this.CustomDrugCodes.OrderBy(d => d.DrugName).ToList();
 
+            SelectedDrugs.Add(rxCUI);
+
+            // Reset RxNormLookup
             RxNormLookup.VisitId = id;
             RxNormLookup.SearchTerm = "";
+            ModelState.ClearValidationState(nameof(RxNormLookup));
 
             // refresh the list by returning a turbo stream
-            Response.ContentType = "text/vnd.turbo-stream.html";
+            Response.ContentType = "text/vnd.turbo-stream.html"; // this stream replaces _A4 and _RxNorm
             return Partial("_A4Stream", this);
-        }
-
-        private void AssessDrugId(DrugCodeModel? vm)
-        {
-            if (vm != null)
-            {
-                if (vm.Id > 0 || vm.IsSelected) // if it is persisted from a previous interaction or new
-                {
-                    if (vm.Id == null) // it's new
-                    {
-                        vm.CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
-                        vm.CreatedAt = DateTime.Now;
-                    }
-                    else if (vm.Id > 0)
-                    {
-                        if (vm.IsSelected)
-                        {
-                            vm.IsDeleted = false; // checked = new or re-checked (update)
-                            vm.DeletedBy = null;
-                            vm.ModifiedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
-
-                        }
-                        else
-                        {
-                            vm.DeletedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "username";
-                            vm.IsDeleted = true; // unchecked (soft delete)
-                        }
-                    }
-                    // We now have a scenario where custom drug ids can be manually entered, so there is potential for duplicates
-                    // across popular, OTC, and custom lists. We'll check for duplicates before adding drug to list of DrugIds.
-                    if (!A4.DrugIds.Where(d => d.RxNormId == vm.RxNormId && d.IsDeleted == false).Any())
-                        A4.DrugIds.Add(vm);
-                }
-            }
         }
 
         [ValidateAntiForgeryToken]
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
-            // Reassemble the model's A4D state based on the bound properties
-            foreach (var p in PopularDrugCodes)
+            // Reassemble the model's A4D state based on the selected drugs
+            // Remove
+            A4.DrugIds.RemoveAll(d => !SelectedDrugs.Contains(d.RxNormId));
+            // Add
+            foreach (var selected in SelectedDrugs)
             {
-                AssessDrugId(p);
-            }
-            foreach (var o in OTCDrugCodes)
-            {
-                AssessDrugId(o);
-            }
-            foreach (var c in CustomDrugCodes)
-            {
-                AssessDrugId(c);
+                if (!A4.DrugIds.Where(d => d.RxNormId == selected).Any())
+                {
+                    A4.DrugIds.Add(new DrugCodeModel
+                    {
+                        RxNormId = selected
+                    });
+                }
             }
 
             if (A4.DrugIds.Count() > 40)
@@ -305,10 +260,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
                 VisitId = id
             };
-
-            RxNormLookup.CachedDrugCodes.AddRange(PopularDrugCodes.Where(p => p.IsSelected));
-            RxNormLookup.CachedDrugCodes.AddRange(OTCDrugCodes.Where(p => p.IsSelected));
-            RxNormLookup.CachedDrugCodes.AddRange(CustomDrugCodes.Where(p => p.IsSelected));
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }

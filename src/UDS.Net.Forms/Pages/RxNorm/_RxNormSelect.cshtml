@@ -19,23 +19,13 @@
                             </div>
                             <div class="flex flex-none items-center gap-x-4">
                                 <div class="text-sm/6 font-semibold text-gray-900">@result.Value</div>
-                                <form method="post" action="~/UDS4/A4/@Model.VisitId?handler=RxNormSelect" data-turbo-frame="_RxNorm">
+                                <div data-a4-target="searchResult">
                                     <input type="hidden" name="rxCUI" value="@result.Value" />
                                     <input type="hidden" name="drugName" value="@result.Key" />
                                     <input type="hidden" asp-for="SearchTerm" />
                                     <input type="hidden" asp-for="VisitId" />
-                                    @for (int i = 0; i < Model.CachedDrugCodes.Count(); i++)
-                                    {
-                                        <input asp-for="CachedDrugCodes[i].Id" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].RxNormId" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].DrugName" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].BrandName" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].IsPopular" type="hidden" />
-                                        <input asp-for="CachedDrugCodes[i].IsSelected" type="hidden" value="true" />
-                                    }
-                                    <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
-                                </form>
+                                    <button data-action="a4#selectDrug" type="button" value="@result.Value" class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Select</button>
+                                </div>
                             </div>
                         </div>
                     </div>
