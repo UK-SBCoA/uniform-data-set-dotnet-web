@@ -7,7 +7,7 @@ namespace UDS.Net.Forms.Models
 
         public int ResultsCount { get; set; } = 0;
 
-        public string? SearchTerm { get; set; }
+        public string? SearchTerm { get; set; } = "";
 
         /// <summary>
         /// Used by _RxNormAutocompleteStream
@@ -18,11 +18,6 @@ namespace UDS.Net.Forms.Models
         /// Used by _RxNormSelect
         /// </summary>
         public Dictionary<string, string> SearchResults { get; set; } = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Used for repeated requests without db persistence
-        /// </summary>
-        public List<DrugCodeModel> CachedDrugCodes { get; set; } = new List<DrugCodeModel>();
     }
 }
 
