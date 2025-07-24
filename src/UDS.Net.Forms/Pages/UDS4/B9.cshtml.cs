@@ -204,6 +204,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLMOT"),
+                    new UIEnableAttribute("B9.COURSE"),
+                    new UIEnableAttribute("B9.FRSTCHG"),
                 }
              } },
         };
