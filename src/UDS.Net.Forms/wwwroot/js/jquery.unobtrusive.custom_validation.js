@@ -478,9 +478,22 @@ $.validator.unobtrusive.adapters.add(
                                 "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
                             );
 
-                            //Remove child element error messages when watched field is outside of range
-                            if (element.data("valRequiredifrangeWatchedfield") == watchedFieldName) {
+                            //Get possible targets of watched element
+                            let radioTypeTargets = watched.data("affects-targets")
+                            let inputTypeTargets = watched.data("affects-range-targets")
+
+                            //if watched element is an input type
+                            if (inputTypeTargets) {
                                 $(`span[id="${element.attr("aria-describedby")}"]`).empty();
+                            }
+
+                            //if watched element is a radio type
+                            else if (radioTypeTargets) {
+                                radioTypeTargets.forEach(target => {
+                                    for (key in target) {
+                                        $(`[data-valmsg-for="${key}"]`).empty()
+                                    }
+                                });
                             }
 
                             //Validate will reset styling for input but not remove error messages
