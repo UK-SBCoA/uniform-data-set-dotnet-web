@@ -479,11 +479,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MEMTEN { get; set; }
 
         [Display(Name = "ADI state-only decile")]
-        [Range(1, 10)]
+        [RegularExpression("^([1-9]|10|88[4-7])$", ErrorMessage = "Valid range is 1-10 or 884-887")]
         public int? ADISTATE { get; set; }
 
         [Display(Name = "ADI national percentile")]
-        [Range(1, 100)]
+        [RegularExpression("^([1-9]|10|88[4-7])$", ErrorMessage = "Valid range is 1-10 or 884-887")]
         public int? ADINAT { get; set; }
 
         [Display(Name = "Participant's primary occupation throughout their working life")]
