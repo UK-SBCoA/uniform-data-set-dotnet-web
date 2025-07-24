@@ -17,7 +17,7 @@ public class VisitIndexPageTests
         var pageModel = new IndexModel(visitService);
 
         string[] filters = Enum.GetNames(typeof(PacketStatus));
-        await pageModel.OnGetAsync(filters);
+        await pageModel.OnGetAsync(filters, null, null);
 
         var actualVisits = pageModel.Visits;
 
