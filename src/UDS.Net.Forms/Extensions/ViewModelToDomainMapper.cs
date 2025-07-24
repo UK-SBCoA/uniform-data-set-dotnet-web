@@ -388,18 +388,10 @@ namespace UDS.Net.Forms.Extensions
 
         public static A4DFormFields ToEntity(this DrugCodeModel vm)
         {
-
             return new A4DFormFields
             {
-                Id = vm.Id.HasValue ? vm.Id.Value : 0,
-                RxNormId = vm.RxNormId,
-                CreatedAt = vm.CreatedAt,
-                CreatedBy = vm.CreatedBy,
-                ModifiedBy = vm.ModifiedBy,
-                DeletedBy = vm.DeletedBy,
-                IsDeleted = vm.IsDeleted.HasValue ? vm.IsDeleted.Value : false
+                RxNormId = vm.RxNormId
             };
-
         }
 
         public static IFormFields GetFormFields(this A4a vm)
