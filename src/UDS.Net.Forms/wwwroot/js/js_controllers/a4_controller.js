@@ -1,7 +1,7 @@
 ﻿import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["anyMeds", "search", "searchResult", "popularDrug", "otcDrug", "customDrug"];
+  static targets = ["anyMeds", "search", "searchResult", "popularDrug", "otcDrug", "customDrug", "checkbox"];
 
   static values = {
     url: String,
@@ -18,21 +18,8 @@ export default class extends Controller {
         component.disabled = disable;
       });
     }
-    if (this.hasPopularDrugTarget) {
-      this.popularDrugTargets.forEach(drug => {
-        var checkbox = drug.querySelector("input[type=checkbox]");
-        checkbox.disabled = disable;
-      });
-    }
-    if (this.hasOtcDrugTarget) {
-      this.otcDrugTargets.forEach(drug => {
-        var checkbox = drug.querySelector("input[type=checkbox]");
-        checkbox.disabled = disable;
-      });
-    }
-    if (this.hasCustomDrugTarget) {
-      this.customDrugTargets.forEach(drug => {
-        var checkbox = drug.querySelector("input[type=checkbox]");
+    if (this.hasCheckboxTarget) {
+      this.checkboxTargets.forEach(checkbox => {
         checkbox.disabled = disable;
       });
     }
@@ -57,42 +44,20 @@ export default class extends Controller {
 
   findDrug(rxCUI) {
     let isExisting = false;
-    if (this.hasPopularDrugTarget) {
-      this.popularDrugTargets.forEach(drug => {
-        var rxNormId = drug.getAttribute('data-rx-norm-id');
-        if (rxNormId == rxCUI) {
-          var checkbox = drug.querySelector("input[type='checkbox']");
+    if (this.hasCheckboxTarget) {
+      this.checkboxTargets.forEach(checkbox => {
+        if (checkbox.value == rxCUI) {
           checkbox.checked = true;
           isExisting = true;
         }
-      });
-    }
-    if (!isExisting && this.hasOtcDrugTarget) {
-      this.otcDrugTargets.forEach(drug => {
-        var rxNormId = drug.getAttribute('data-rx-norm-id');
-        if (rxNormId == rxCUI) {
-          var checkbox = drug.querySelector("input[type='checkbox']");
-          checkbox.checked = true;
-          isExisting = true;
-        }
-      });
-    }
-    if (!isExisting && this.hasCustomDrugTarget) {
-      this.customDrugTargets.forEach(drug => {
-        var rxNormId = drug.getAttribute('data-rx-norm-id');
-        if (rxNormId == rxCUI) {
-          var checkbox = drug.querySelector("input[type='checkbox']");
-          checkbox.checked = true;
-          isExisting = true;
-        }
-      });
+      })
     }
     return isExisting;
   }
 
-  customDrugTargetConnected(element) {
-    console.log("connected ", element);
-  }
+  //customDrugTargetConnected(element) {
+  //  console.log("connected ", element);
+  //}
 
   async selectDrug(event) {
     const selectedResult = event.target.value; // the rxCUI
@@ -117,24 +82,22 @@ export default class extends Controller {
       const formData = new FormData();
 
       // add existing checkboxes to form body
-      this.popularDrugTargets.forEach(parent => {
-        let inputs = parent.children;
-        for (const input of inputs) {
-          formData.append(input.name, input.value);
-        }
+      this.popularDrugTargets.forEach(input => {
+        formData.append(input.name, input.value);
       });
-      this.otcDrugTargets.forEach(parent => {
-        let inputs = parent.children;
-        for (const input of inputs) {
-          formData.append(input.name, input.value);
-        }
+      this.otcDrugTargets.forEach(input => {
+        formData.append(input.name, input.value);
       });
-      this.customDrugTargets.forEach(parent => {
-        let inputs = parent.children;
-        for (const input of inputs) {
-          formData.append(input.name, input.value);
-        }
+      this.customDrugTargets.forEach(input => {
+        formData.append(input.name, input.value);
       });
+      if (this.hasCheckboxTarget) {
+        this.checkboxTargets.forEach(checkbox => {
+          if (checkbox.checked) {
+            formData.append(checkbox.name, checkbox.value);
+          }
+        })
+      }
 
       // add new drug to form body
       formData.append("rxCUI", selectedResult);

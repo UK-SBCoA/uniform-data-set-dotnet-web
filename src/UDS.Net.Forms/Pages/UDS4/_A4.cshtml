@@ -29,16 +29,19 @@
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                        <div data-a4-target="popularDrug" id="RxNormId_@Model.PopularDrugCodes[i].RxNormId" data-rx-norm-id="@Model.PopularDrugCodes[i].RxNormId" data-drug-name="@Model.PopularDrugCodes[i].DrugName" class="flex h-6 items-center">
-                                            <input asp-for="PopularDrugCodes[i].RxNormId" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
-                                            <input id="PopularDrugCodes_@(i)__IsSelected" name="PopularDrugCodes[@i].IsSelected" checked="@Model.PopularDrugCodes[i].IsSelected" value="@(Model.PopularDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.PopularDrugCodes[i].RxNormId" data-drug-name="@Model.PopularDrugCodes[i].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[i].RxNormId" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[i].DrugName" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[i].BrandName" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[i].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.PopularDrugCodes[i].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="PopularDrugCodes[@i]" name="SelectedDrugs" checked="@selected" value="@Model.PopularDrugCodes[i].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.PopularDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
+                                            <label for="PopularDrugCodes[@i]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[i].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -66,16 +69,19 @@
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                        <div data-a4-target="popularDrug" id="RxNormId_@Model.PopularDrugCodes[j].RxNormId" data-rx-norm-id="@Model.PopularDrugCodes[j].RxNormId" data-drug-name="@Model.PopularDrugCodes[j].DrugName" class="flex h-6 items-center">
-                                            <input asp-for="PopularDrugCodes[j].RxNormId" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[j].DrugName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[j].BrandName" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[j].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="PopularDrugCodes[j].IsPopular" type="hidden" />
-                                            <input id="PopularDrugCodes_@(j)__IsSelected" name="PopularDrugCodes[@j].IsSelected" checked="@Model.PopularDrugCodes[j].IsSelected" value="@(Model.PopularDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.PopularDrugCodes[j].RxNormId" data-drug-name="@Model.PopularDrugCodes[j].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[j].RxNormId" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[j].DrugName" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[j].BrandName" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[j].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="popularDrug" asp-for="PopularDrugCodes[j].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.PopularDrugCodes[j].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="PopularDrugCodes[@j]" name="SelectedDrugs" checked="@selected" value="@Model.PopularDrugCodes[j].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.PopularDrugCodes[j].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[j].RxNormId</span></label>
+                                            <label for="PopularDrugCodes[@j]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.PopularDrugCodes[j].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -110,16 +116,19 @@
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                        <div data-a4-target="otcDrug" id="RxNormId_@Model.OTCDrugCodes[i].RxNormId" data-rx-norm-id="@Model.OTCDrugCodes[i].RxNormId" data-drug-name="@Model.OTCDrugCodes[i].DrugName" class="flex h-6 items-center">
-                                            <input asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[i].IsPopular" type="hidden" />
-                                            <input id="OTCDrugCodes_@(i)__IsSelected" name="OTCDrugCodes[@i].IsSelected" checked="@Model.OTCDrugCodes[i].IsSelected" value="@(Model.OTCDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.OTCDrugCodes[i].RxNormId" data-drug-name="@Model.OTCDrugCodes[i].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[i].RxNormId" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[i].DrugName" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[i].BrandName" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[i].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.OTCDrugCodes[i].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="OTCDrugCodes[@i]" name="SelectedDrugs" checked="@selected" value="@Model.OTCDrugCodes[i].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.OTCDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
+                                            <label for="OTCDrugCodes[@i]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[i].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -147,16 +156,19 @@
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
                                         <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                                        <div data-a4-target="otcDrug" id="RxNormId_@Model.OTCDrugCodes[j].RxNormId" data-rx-norm-id="@Model.OTCDrugCodes[j].RxNormId" data-drug-name="@Model.OTCDrugCodes[j].DrugName" class="flex h-6 items-center">
-                                            <input asp-for="OTCDrugCodes[j].RxNormId" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[j].DrugName" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[j].BrandName" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[j].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="OTCDrugCodes[j].IsPopular" type="hidden" />
-                                            <input id="OTCDrugCodes_@(j)__IsSelected" name="OTCDrugCodes[@j].IsSelected" checked="@Model.OTCDrugCodes[j].IsSelected" value="@(Model.OTCDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.OTCDrugCodes[j].RxNormId" data-drug-name="@Model.OTCDrugCodes[j].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[j].RxNormId" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[j].DrugName" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[j].BrandName" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[j].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="otcDrug" asp-for="OTCDrugCodes[j].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.OTCDrugCodes[j].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="OTCDrugCodes[@j]" name="SelectedDrugs" checked="@selected" value="@Model.OTCDrugCodes[j].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
-                                            <label for="@Html.IdFor(m => m.OTCDrugCodes[j].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[j].RxNormId</span></label>
+                                            <label for="OTCDrugCodes[@j]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.OTCDrugCodes[j].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -183,13 +195,16 @@
                             <fieldset>
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
-                                        <div data-a4-target="customDrug" id="RxNormId_@Model.CustomDrugCodes[i].RxNormId" data-rx-norm-id="@Model.CustomDrugCodes[i].RxNormId" data-drug-name="@Model.CustomDrugCodes[i].DrugName" class="flex h-6 items-center">
-                                            <input id="CustomDrugCodes_@(i)__RxNormId" name="CustomDrugCodes[@i].RxNormId" value="@Model.CustomDrugCodes[i].RxNormId" type="hidden" />
-                                            <input id="CustomDrugCodes_@(i)__DrugName" name="CustomDrugCodes[@i].DrugName" value="@Model.CustomDrugCodes[i].DrugName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[i].IsPopular" type="hidden" />
-                                            <input id="CustomDrugCodes_@(i)__IsSelected" name="CustomDrugCodes[@i].IsSelected" checked="@Model.CustomDrugCodes[i].IsSelected" value="@(Model.CustomDrugCodes[i].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.CustomDrugCodes[i].RxNormId" data-drug-name="@Model.CustomDrugCodes[i].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="customDrug" id="CustomDrugCodes_@(i)__RxNormId" name="CustomDrugCodes[@i].RxNormId" value="@Model.CustomDrugCodes[i].RxNormId" type="hidden" />
+                                            <input data-a4-target="customDrug" id="CustomDrugCodes_@(i)__DrugName" name="CustomDrugCodes[@i].DrugName" value="@Model.CustomDrugCodes[i].DrugName" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[i].BrandName" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[i].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[i].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.CustomDrugCodes[i].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="CustomDrugCodes[@i]" name="SelectedDrugs" checked="@selected" value="@Model.CustomDrugCodes[i].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             @{
@@ -200,7 +215,7 @@
                                                     displayName += " (" + Model.CustomDrugCodes[i].BrandName + ")";
                                                 }
                                             }
-                                            <label for="@Html.IdFor(m => m.CustomDrugCodes[i].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
+                                            <label for="CustomDrugCodes[@i]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[i].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>
@@ -219,13 +234,16 @@
                             <fieldset>
                                 <div class="space-y-5">
                                     <div class="relative flex items-start">
-                                        <div data-a4-target="customDrug" id="RxNormId_@Model.CustomDrugCodes[j].RxNormId" data-rx-norm-id="@Model.CustomDrugCodes[j].RxNormId" data-drug-name="@Model.CustomDrugCodes[j].DrugName" class="flex h-6 items-center">
-                                            <input id="CustomDrugCodes_@(j)__RxNormId" name="CustomDrugCodes[@j].RxNormId" value="@Model.CustomDrugCodes[j].RxNormId" type="hidden" />
-                                            <input id="CustomDrugCodes_@(j)__DrugName" name="CustomDrugCodes[@j].DrugName" value="@Model.CustomDrugCodes[j].DrugName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[j].BrandName" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[j].IsOverTheCounter" type="hidden" />
-                                            <input asp-for="CustomDrugCodes[j].IsPopular" type="hidden" />
-                                            <input id="CustomDrugCodes_@(j)__IsSelected" name="CustomDrugCodes[@j].IsSelected" checked="@Model.CustomDrugCodes[j].IsSelected" value="@(Model.CustomDrugCodes[j].IsSelected.ToString())" type="checkbox" class="@checkboxCSS" />
+                                        <div data-rx-norm-id="@Model.CustomDrugCodes[j].RxNormId" data-drug-name="@Model.CustomDrugCodes[j].DrugName" class="flex h-6 items-center">
+                                            <input data-a4-target="customDrug" id="@Html.IdFor(m => m.CustomDrugCodes[j].RxNormId)" name="CustomDrugCodes[@j].RxNormId" value="@Model.CustomDrugCodes[j].RxNormId" type="hidden" />
+                                            <input data-a4-target="customDrug" id="@Html.IdFor(m => m.CustomDrugCodes[j].DrugName)" name="CustomDrugCodes[@j].DrugName" value="@Model.CustomDrugCodes[j].DrugName" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[j].BrandName" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[j].IsOverTheCounter" type="hidden" />
+                                            <input data-a4-target="customDrug" asp-for="CustomDrugCodes[j].IsPopular" type="hidden" />
+                                            @{
+                                                var selected = Model.SelectedDrugs.Contains(Model.CustomDrugCodes[j].RxNormId);
+                                            }
+                                            <input data-a4-target="checkbox" id="CustomDrugCodes[@j]" name="SelectedDrugs" checked="@selected" value="@Model.CustomDrugCodes[j].RxNormId" type="checkbox" class="@checkboxCSS" />
                                         </div>
                                         <div class="ml-3 text-sm leading-6">
                                             @{
@@ -236,7 +254,7 @@
                                                     displayName += " (" + Model.CustomDrugCodes[j].BrandName + ")";
                                                 }
                                             }
-                                            <label for="@Html.IdFor(m => m.CustomDrugCodes[j].IsSelected)" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[j].RxNormId</span></label>
+                                            <label for="CustomDrugCodes[@j]" class="font-medium text-gray-900">@displayName <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.CustomDrugCodes[j].RxNormId</span></label>
                                         </div>
                                     </div>
                                 </div>

@@ -12,9 +12,6 @@ namespace UDS.Net.Forms.Models
         public bool IsOverTheCounter { get; set; }
 
         public bool IsPopular { get; set; }
-
-        // For a view model to render a checkbox easily, using a regular boolean is best
-        public bool IsSelected { get; set; }
     }
 }
 

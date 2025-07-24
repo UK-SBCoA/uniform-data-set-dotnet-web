@@ -653,13 +653,12 @@ namespace UDS.Net.Forms.Extensions
                     BrandName = d.DrugCode != null ? d.DrugCode.BrandName : "",
                     IsOverTheCounter = d.DrugCode != null ? d.DrugCode.IsOverTheCounter : false,
                     IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false,
-                    IsSelected = true // there is no concept of isSelected persisted in the database (if the row is there and it's not deleted then it is selected)
                 }).ToList()
             };
         }
 
         // Drug code lookup model to view model
-        public static DrugCodeModel ToVM(this DrugCode drugCode, bool isSelected = false)
+        public static DrugCodeModel ToVM(this DrugCode drugCode)
         {
             return new DrugCodeModel
             {
@@ -667,8 +666,7 @@ namespace UDS.Net.Forms.Extensions
                 DrugName = drugCode.DrugName,
                 BrandName = drugCode.BrandName,
                 IsPopular = drugCode.IsPopular,
-                IsOverTheCounter = drugCode.IsOverTheCounter,
-                IsSelected = isSelected
+                IsOverTheCounter = drugCode.IsOverTheCounter
             };
         }
 
