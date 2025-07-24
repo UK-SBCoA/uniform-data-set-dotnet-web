@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -112,6 +105,8 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Unknown", "9")
         };
 
+        /****************** Question 7 ******************/
+        /****************** Option 0 = END FORM HERE ******************/
         public Dictionary<string, UIBehavior> DECCLINUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -199,26 +194,24 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.MOMODEX"),
                     new UIDisableAttribute("B9.MOMOPARK"),
                     new UIDisableAttribute("B9.MOMOALS"),
-                }
+                },
+                InstructionalMessage = "END FORM HERE"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("B9.DECCLCOG"),
-                    new UIEnableAttribute("B9.COGMODE"),
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLBE"),
                     new UIEnableAttribute("B9.DECCLMOT"),
-                    new UIEnableAttribute("B9.MOMODE"),
-                    new UIEnableAttribute("B9.MOMOPARK"),
-                    new UIEnableAttribute("B9.MOMOALS"),
                     new UIEnableAttribute("B9.COURSE"),
                     new UIEnableAttribute("B9.FRSTCHG"),
-                    new UIEnableAttribute("B9.BEAPATHY")
                 }
              } },
         };
 
+        /****************** Question 8 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 11 ******************/
         public Dictionary<string, UIBehavior> DECCLCOGUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -236,7 +229,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.COGAGE"),
                     new UIDisableAttribute("B9.COGMODE"),
                     new UIDisableAttribute("B9.COGMODEX"),
-                }
+                },
+                InstructionalMessage = "SKIP TO QUESTION 11"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -255,6 +249,8 @@ namespace UDS.Net.Forms.Pages.UDS4
              } },
         };
 
+        /****************** Question 11 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 14 ******************/
         public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -266,6 +262,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.BEEUPH"),
                     new UIDisableAttribute("B9.BEIRRIT"),
                     new UIDisableAttribute("B9.BEAGIT"),
+                    new UIDisableAttribute("B9.BEHAGE"),
                     new UIDisableAttribute("B9.BEVHALL"),
                     new UIDisableAttribute("B9.BEVPATT"),
                     new UIDisableAttribute("B9.BEVWELL"),
@@ -296,8 +293,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.BEOTHRX"),
                     new UIDisableAttribute("B9.BEMODE"),
                     new UIDisableAttribute("B9.BEMODEX"),
-                    new UIDisableAttribute("B9.BEHAGE"),
-                }
+                },
+                InstructionalMessage = "SKIP TO QUESTION 14"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -308,6 +305,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.BEEUPH"),
                     new UIEnableAttribute("B9.BEIRRIT"),
                     new UIEnableAttribute("B9.BEAGIT"),
+                    new UIEnableAttribute("B9.BEHAGE"),
                     new UIEnableAttribute("B9.BEVHALL"),
                     new UIEnableAttribute("B9.BEAHALL"),
                     new UIEnableAttribute("B9.BEDEL"),
@@ -323,11 +321,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("B9.BEREM"),
                     new UIEnableAttribute("B9.BEOTHR"),
                     new UIEnableAttribute("B9.BEMODE"),
-                    new UIEnableAttribute("B9.BEHAGE"),
                 }
              } },
         };
 
+        /****************** Question 11 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 19 ******************/
         public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -345,7 +344,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.MOMODEX"),
                     new UIDisableAttribute("B9.MOMOPARK"),
                     new UIDisableAttribute("B9.MOMOALS"),
-                }
+                },
+                InstructionalMessage = "SKIP TO QUESTION 19"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -404,9 +404,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 }
             } },
         };
-
-
-
 
         public Dictionary<string, UIBehavior> BESUBABUIBehavior = new Dictionary<string, UIBehavior>
         {
