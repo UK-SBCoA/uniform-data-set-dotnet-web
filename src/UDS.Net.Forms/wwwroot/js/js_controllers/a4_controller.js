@@ -68,12 +68,13 @@ export default class extends Controller {
       fetch(this.resetValue, {
         method: "GET",
         headers: {
-          "Accept": "text/html"
+          "Accept": "text/vnd.turbo-stream.html"
         }
       }).then(response => response.text())
         .then(html => {
-          document.getElementById("_RxNorm").innerHTML = html;
-        });
+          Turbo.renderStreamMessage(html)
+        })
+        .catch(error => console.error("POST error:", error));
     }
     else {
       // post with all drug lists

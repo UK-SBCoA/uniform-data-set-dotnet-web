@@ -109,8 +109,8 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Partial("~/Pages/RxNorm/_RxNormAutocompleteStream.cshtml", this.RxNormLookup);
         }
 
-        // Used by Reset and Back button on _RxNormSelect partial
-        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm, List<DrugCodeModel> cachedDrugCodes)
+        // Used by Back button on _RxNormSelect partial
+        public async Task<IActionResult> OnGetRxNormSearchAsync(int id, string searchTerm)
         {
             this.RxNormLookup = new RxNormLookupModel
             {
@@ -119,6 +119,20 @@ namespace UDS.Net.Forms.Pages.UDS4
             };
             ModelState.ClearValidationState(nameof(RxNormLookup));
             return Partial("~/Pages/RxNorm/_RxNormSearch.cshtml", this.RxNormLookup);
+        }
+
+        // Used by Reset returns stream
+        public async Task<IActionResult> OnGetRxNormSearchResetAsync(int id, string searchTerm)
+        {
+            this.RxNormLookup = new RxNormLookupModel
+            {
+                VisitId = id
+            };
+            ModelState.ClearValidationState(nameof(RxNormLookup.SearchTerm));
+            //return Partial("~/Pages/RxNorm/_RxNormSearchForm.cshtml", this.RxNormLookup);
+            // refresh the list by returning a turbo stream
+            Response.ContentType = "text/vnd.turbo-stream.html"; // this stream replaces _A4 and _RxNorm
+            return Partial("~/Pages/RxNorm/_RxNormSearchStream.cshtml", this.RxNormLookup);
         }
 
         // When Search button is clicked in _RxNormSearch partial

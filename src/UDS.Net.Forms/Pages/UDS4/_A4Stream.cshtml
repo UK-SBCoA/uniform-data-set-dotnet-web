@@ -1,9 +1,9 @@
 ﻿@model A4Model
 @{
 }
-<turbo-stream action="replace" target="_RxNorm">
+<turbo-stream action="update" target="_RxNorm">
     <template>
-        <partial name="../RxNorm/_RxNormSearch" model="Model.RxNormLookup" />
+        <partial name="../RxNorm/_RxNormSearchForm.cshtml" model="Model.RxNormLookup" />
     </template>
 </turbo-stream>
 

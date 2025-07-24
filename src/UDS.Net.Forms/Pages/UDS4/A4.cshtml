@@ -36,7 +36,7 @@
                 INSTRUCTIONS: This form is to be completed by the clinician or ADRC staff. The purpose of this form is to record all prescription medications taken by the participant within the <strong>two weeks before the current visit.</strong> If the participant is receiving any treatments known to significantly impact Alzheimer disease and related dementias (ADRD) biomarkers as part of their clinical care at the time of clinical assessment (e.g., they are receiving aducanumab infusions), the treatment should be included on both this form and the A4a ADRD–Specific Treatments form. For prescription medications not listed here, please follow the instructions at the end of this form. OTC (non-prescription) medications need not be reported; however, a short list of medications that could be either prescription or OTC follows the prescription list. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook> for <strong>Form A4.</strong>
             </p>
 
-            <div data-controller="a4" data-a4-url-value="../A4/@Model.Visit.Id?handler=RxNormSelect" data-a4-reset-value="../A4/@Model.Visit.Id?handler=RxNormSearch&searchTerm=">
+            <div data-controller="a4" data-a4-url-value="../A4/@Model.Visit.Id?handler=RxNormSelect" data-a4-reset-value="../A4/@Model.Visit.Id?handler=RxNormSearchReset&searchTerm=">
                 <div class="mt-10 space-y-8 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="A4.ANYMEDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A4.ANYMEDS)</label>
