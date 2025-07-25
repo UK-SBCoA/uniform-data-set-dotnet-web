@@ -48,7 +48,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No (SKIP TO QUESTION 8)", "0"),
             new RadioListItem("Yes, only PET/SPECT imaging was used (CONTINUE TO QUESTION 6, and SKIP QUESTIONS 7 – 7a3f)", "1"),
-            new RadioListItem("Yes, only MR imaging was used (SKIP TO QUESTION 7)", "2"),
+            new RadioListItem("Yes, only MR/CT imaging was used (SKIP TO QUESTION 7)", "2"),
             new RadioListItem("Yes, both PET/SPECT and MR imaging were used", "3")
         };
 
