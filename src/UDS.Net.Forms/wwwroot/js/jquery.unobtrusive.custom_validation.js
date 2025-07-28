@@ -10,6 +10,9 @@
  * Another good blog post here https://bradwilson.typepad.com/blog/2010/10/mvc3-unobtrusive-validation.html
  */
 
+
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
@@ -440,7 +443,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
   let parameters = params[1];
   let watchedFieldName = parameters.watchedfield;
 
-  let watched = $("input[name=\"" + watchedFieldName + "\"]");
+    let watched = $("input[name=\"" + watchedFieldName + "\"]");
   if (watched.length) {
     let watchedValue = watched.val();
     if (watchedValue.length) {
@@ -463,7 +466,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
 $.validator.unobtrusive.adapters.add(
   "requiredifrange",
   ["watchedfield", "lowvalue", "highvalue"],
-  function (options) {
+    function (options) {
     let watchedFieldName = options.params.watchedfield;
     let watched = $("input[name=\"" + watchedFieldName + "\"]");
     if (watched.length) {
@@ -503,7 +506,8 @@ $.validator.unobtrusive.adapters.add(
                       }
 
                       //Validate will reset styling for input but not remove error messages
-                      $("#UDSForm").validate();
+                      let validator = $("#UDSForm").validate();
+                      validator.form();
                   }
                 }
               }
