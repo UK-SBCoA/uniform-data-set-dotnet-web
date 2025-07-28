@@ -502,7 +502,7 @@ $.validator.unobtrusive.adapters.add(
                             else if (affectsTargets) {
                                 affectsTargets.forEach(target => {
                                     for (key in target) {
-                                        $(`[data-valmsg-for="${key}"]`).empty()
+                                        $(`[data-valmsg-for="${key}"]`).empty();
                                     }
                                 });
                             };
