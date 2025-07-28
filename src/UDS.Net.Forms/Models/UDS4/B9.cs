@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
 
@@ -76,6 +74,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGMODE), "4", ErrorMessage = "Value required")]
         public string? COGMODEX { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any kind of behavioral symptoms?")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? DECCLBE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Apathy, withdrawal")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -187,7 +186,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? BEMODEX { get; set; }
         [Display(Name = "Based on the clinician’s judgment, is the participant currently experiencing any motor symptoms?")]
-        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
+        [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? DECCLMOT { get; set; }
         [Display(Name = "Indicate whether the participant currently has meaningful changes in motor function — Gait disorder")]
         [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "Value required")]

@@ -648,55 +648,27 @@ namespace UDS.Net.Forms.Extensions
                 ANYMEDS = fields.ANYMEDS,
                 DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
                 {
-                    Id = d.Id,
                     RxNormId = d.RxNormId,
-                    CreatedAt = d.CreatedAt,
-                    CreatedBy = d.CreatedBy,
-                    ModifiedBy = d.ModifiedBy,
-                    DeletedBy = d.DeletedBy,
-                    IsDeleted = d.IsDeleted,
-                    IsSelected = !d.IsDeleted,
                     DrugName = d.DrugCode != null ? d.DrugCode.DrugName : "",
                     BrandName = d.DrugCode != null ? d.DrugCode.BrandName : "",
                     IsOverTheCounter = d.DrugCode != null ? d.DrugCode.IsOverTheCounter : false,
-                    IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false
+                    IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false,
                 }).ToList()
             };
         }
 
-        public static DrugCodeModel ToVM(this DrugCode drugCode, DrugCodeModel? a4 = null)
+        // Drug code lookup model to view model
+        public static DrugCodeModel ToVM(this DrugCode drugCode)
         {
-            if (a4 == null)
-            {
-                return new DrugCodeModel
-                {
-                    RxNormId = drugCode.RxNormId,
-                    DrugName = drugCode.DrugName,
-                    BrandName = drugCode.BrandName,
-                    IsPopular = drugCode.IsPopular,
-                    IsOverTheCounter = drugCode.IsOverTheCounter,
-                    IsSelected = false
-                };
-            }
-            // combines drug code reference with data from A4D record
             return new DrugCodeModel
             {
-                Id = a4.Id,
                 RxNormId = drugCode.RxNormId,
                 DrugName = drugCode.DrugName,
                 BrandName = drugCode.BrandName,
                 IsPopular = drugCode.IsPopular,
-                IsOverTheCounter = drugCode.IsOverTheCounter,
-                IsSelected = a4.IsDeleted.HasValue ? !a4.IsDeleted.Value : false, // there is no concept of isSelected persisted in the database (if the row is there and it's not deleted then it is selected)
-                CreatedAt = a4.CreatedAt,
-                CreatedBy = a4.CreatedBy,
-                ModifiedBy = a4.ModifiedBy,
-                DeletedBy = a4.DeletedBy,
-                IsDeleted = a4.IsDeleted
+                IsOverTheCounter = drugCode.IsOverTheCounter
             };
         }
-
-
 
         public static A4a ToVM(this A4aFormFields fields, int formId)
         {

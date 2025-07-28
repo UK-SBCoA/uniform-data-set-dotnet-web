@@ -8,8 +8,8 @@ namespace UDS.Net.Forms.TagHelpers
     /// </summary>
     public class GuidebookTagHelper : TagHelper
     {
-        private const string I = "https://files.alz.washington.edu/documentation/uds4-ivp-coding-guidebook.pdf";
-        private const string F = "https://files.alz.washington.edu/documentation/uds4-ivp-coding-guidebook.pdf"; // There is no guidebook specifically for follow-up visits yet
+        private const string I = "https://files.alz.washington.edu/documentation/UDSv4_CodingGuidebook.pdf";
+        private const string F = "https://files.alz.washington.edu/documentation/UDSv4_CodingGuidebook.pdf"; // There is no guidebook specifically for follow-up visits yet
 
         public string Kind { get; set; }
 
