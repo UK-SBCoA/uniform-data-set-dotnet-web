@@ -488,15 +488,17 @@ $.validator.unobtrusive.adapters.add(
                       );
 
                       //Get possible targets of watched element
+                      //Radio button targets are within 'affects-targets' data attribute 
+                      //Input field targets are within 'affects-range-targets' data attribute
                       let affectsTargets = watched.data("affects-targets")
                       let affectsRangeTargets = watched.data("affects-range-targets")
 
-                      //if watched element is an input type
+                      //if watched element is an input type target the nested span element
                       if (affectsRangeTargets) {
                           $(`span[id="${element.attr("aria-describedby")}"]`).empty();
                       }
 
-                      //if watched element is a radio type
+                      //if watched element is a radio type target the single span element
                       else if (affectsTargets) {
                           affectsTargets.forEach(target => {
                               for (key in target) {
