@@ -83,9 +83,10 @@ namespace UDS.Net.Forms.DataAnnotations
         public void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-requiredif", this.ErrorMessage);
             if (!_inPersonCheckOnly)
             {
+                MergeAttribute(context.Attributes, "data-val-requiredif", this.ErrorMessage);
+
                 string watched = _watchedField;
                 var containerName = context.ModelMetadata.ContainerType.Name;
                 if (!String.IsNullOrEmpty(containerName))
@@ -94,6 +95,11 @@ namespace UDS.Net.Forms.DataAnnotations
                 }
                 MergeAttribute(context.Attributes, "data-val-requiredif-watchedfield", watched);
                 MergeAttribute(context.Attributes, "data-val-requiredif-watchedfieldvalue", _watchedFieldValue);
+            }
+            else
+            {
+                MergeAttribute(context.Attributes, "data-val-required", this.ErrorMessage);
+
             }
         }
 
