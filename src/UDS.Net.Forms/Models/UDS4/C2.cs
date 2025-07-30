@@ -315,42 +315,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
         public int? MINTTOTS { get; set; }
 
-        [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
-        [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
-        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide total count without semantic cue.")]
-        public int? MINTTOTW { get; set; }
-
-        [Display(Name = "Semantic cues: Number given", Description = "(0-32)")]
-        [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
-        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number given.")]
-        public int? MINTSCNG { get; set; }
-
-        [Display(Name = "Semantic cues: Number correct with cue", Description = "(0-32, 88 = not applicable)")]
-        [RegularExpression("^(\\d|[12]\\d|3[0-2]|88)$", ErrorMessage = "Allowed values are 0-32 or 88 = not applicable.")]
-        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number correct with cue.")]
-        public int? MINTSCNC { get; set; }
-
-        [NotMapped]
-        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
-        public bool? MINTSCNCValidation
-        {
-            get
-            {
-                if (RMMODE != RemoteModality.Telephone)
-                {
-                    if (MINTSCNG.HasValue && MINTSCNG > 0 && MINTSCNC.HasValue)
-                    {
-                        if (MINTSCNC.Value > MINTSCNG.Value)
-                        {
-                            return null;
-                        }
-                    }
-                }
-
-                return true;
-            }
-        }
-
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "If MINTTOTS is between 0 and 32 and MINTSCNC is between 0 and 32, then MINTTOTS must = MINTTOTW + MINTSCNC")]
         public bool? MINTTOTSValidation
@@ -378,6 +342,11 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
+        [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide total count without semantic cue.")]
+        public int? MINTTOTW { get; set; }
+
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "If MINTTOTS (mint total) is between 0 and 32 and MINTSCNC (mint correct with semantic cue) is 88, then MINTTOTS must equal MINTTOTW")]
         public bool? MINTTOTWValidation
@@ -402,16 +371,109 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [Display(Name = "Semantic cues: Number given", Description = "(0-32)")]
+        [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number given.")]
+        public int? MINTSCNG { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(MINTSCNC), "0", ErrorMessage = "If no semantic cues were given, then number of semantic cues correct with cue must be not applicable")]
+        public bool? MINTSCNCNotApplicableValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTSCNG.HasValue && MINTSCNG.Value == 0 && MINTSCNC.HasValue)
+                    {
+                        if (MINTSCNC.Value != 88)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [Display(Name = "Semantic cues: Number correct with cue", Description = "(0-32, 88 = not applicable)")]
+        [RegularExpression("^(\\d|[12]\\d|3[0-2]|88)$", ErrorMessage = "Allowed values are 0-32 or 88 = not applicable.")]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number correct with cue.")]
+        public int? MINTSCNC { get; set; }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
+        public bool? MINTSCNCValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTSCNG.HasValue && MINTSCNG.Value > 0 && MINTSCNC.HasValue)
+                    {
+                        if (MINTSCNC.Value > MINTSCNG.Value)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
 
         [Display(Name = "Phonemic cues: Number given", Description = "(0-32)")]
         [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide phonemic number given.")]
         public int? MINTPCNG { get; set; }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If MINTPCNG is greater than 0 then MINTPCNC should be less than or equal to MINTPCNG")]
+        public bool? MINTPCNGValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTPCNG.HasValue && MINTPCNG.Value > 0 && MINTPCNC.HasValue)
+                    {
+                        if(MINTPCNC.Value > MINTPCNG.Value)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
         [Display(Name = "Phonemic cues: Number correct with cue", Description = "(0-32, 88 = not applicable)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|88)$", ErrorMessage = "Allowed values are 0-32 or 88 = not applicable.")]
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide phonemic number correct with cue.")]
         public int? MINTPCNC { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(MINTPCNG), "0", ErrorMessage = "If no phonemic cues were given, then number of phonemic cues correct with cue must be not applicable")]
+        public bool? MINTPCNCNotApplicableValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTPCNG.HasValue && MINTPCNG.Value == 0 && MINTPCNC.HasValue)
+                    {
+                        if (MINTPCNC.Value != 88)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
 
         #endregion
 
