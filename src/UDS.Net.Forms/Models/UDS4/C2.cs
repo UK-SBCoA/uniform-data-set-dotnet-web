@@ -338,9 +338,9 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (RMMODE != RemoteModality.Telephone)
                 {
-                    if (MINTSCNG.HasValue && MINTSCNC.HasValue)
+                    if (MINTSCNG.HasValue && MINTSCNG > 0 && MINTSCNC.HasValue)
                     {
-                        if (MINTSCNC.Value != 88 && MINTSCNC.Value > MINTSCNG.Value)
+                        if (MINTSCNC.Value > MINTSCNG.Value)
                         {
                             return null;
                         }
