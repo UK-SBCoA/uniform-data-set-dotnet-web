@@ -438,7 +438,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     if (MINTPCNG.HasValue && MINTPCNG.Value > 0 && MINTPCNC.HasValue)
                     {
-                        if(MINTPCNC.Value > MINTPCNG.Value)
+                        if (MINTPCNC.Value > MINTPCNG.Value)
                         {
                             return null;
                         }
