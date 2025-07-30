@@ -378,6 +378,30 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If MINTTOTS (mint total) is between 0 and 32 and MINTSCNC (mint correct with semantic cue) is 88, then MINTTOTS must equal MINTTOTW")]
+        public bool? MINTTOTWValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
+                    {
+                        if (MINTTOTS.Value <= 32 && MINTSCNC.Value == 88)
+                        {
+                            if (MINTTOTS.Value != MINTTOTW.Value)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
 
         [Display(Name = "Phonemic cues: Number given", Description = "(0-32)")]
         [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
