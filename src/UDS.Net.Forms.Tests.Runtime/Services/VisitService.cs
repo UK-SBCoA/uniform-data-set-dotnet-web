@@ -1,7 +1,7 @@
 ﻿using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 
-namespace UDS.Net.Forms.Tests.Services
+namespace UDS.Net.Forms.Tests.Runtime.Services
 {
     public class VisitService : IVisitService
     {
