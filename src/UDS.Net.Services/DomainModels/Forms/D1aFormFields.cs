@@ -21,7 +21,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? IMPNOMCLCD { get; set; }
         public bool? IMPNOMCIO { get; set; }
         public string IMPNOMCIOX { get; set; }
-        public bool? IMPNOMCI { get; set; }
+        public int? IMPNOMCI { get; set; }
         public bool? CDOMMEM { get; set; }
         public bool? CDOMLANG { get; set; }
         public bool? CDOMATTN { get; set; }
@@ -126,7 +126,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>();
+                return new List<NotIncludedReasonCode>() { };
             }
         }
 
@@ -168,7 +168,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 IMPNOMCLCD = d1aDto.IMPNOMCLCD;
                 IMPNOMCIO = d1aDto.IMPNOMCIO;
                 IMPNOMCIOX = d1aDto.IMPNOMCIOX;
-                IMPNOMCI = d1aDto.IMPNOMCI;
+                IMPNOMCI = d1aDto.IMPNOMCI.HasValue ? Convert.ToInt32(d1aDto.IMPNOMCI) : (int?)null;
                 CDOMMEM = d1aDto.CDOMMEM;
                 CDOMLANG = d1aDto.CDOMLANG;
                 CDOMATTN = d1aDto.CDOMATTN;

@@ -84,14 +84,14 @@ namespace UDS.Net.Forms.Tests.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
+        public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
         {
-            throw new NotImplementedException();
+            return Visits;
         }
 
         public async Task<int> CountByStatus(string username, string[] statuses = null)
         {
-            throw new NotImplementedException();
+            return 5;
         }
 
         public Task<string> GetNextFormKind(string username, int visitId, string currentFormKind)
@@ -105,6 +105,16 @@ namespace UDS.Net.Forms.Tests.Services
         }
 
         public Task<Visit> PatchStatus(string username, Visit entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate)
         {
             throw new NotImplementedException();
         }

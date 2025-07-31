@@ -239,8 +239,9 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "Does the participant meet criteria for MBI (If participant meets criteria for dementia an MBI diagnosis is excluded.)")]
-        [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(IMPNOMCI), "1", ErrorMessage = "Please specify.")]
+
+        [RequiredIf(nameof(NORMCOG), "0", ErrorMessage = "Please specify MBI.")]
+
         public int? MBI { get; set; }
 
         [Display(Name = "Motivation (e.g., apathy symptoms on Form B9)")]
@@ -608,114 +609,114 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "If a predominant clinical syndrome was not present in question 8, a condition must be selected.")]
-        [NotMapped]
-        public bool? PresentSyndromeIndicated
-        {
-            get
-            {
-                int counter = 0;
-                if (MAJDEPDX == true)
-                {
-                    counter++;
-                }
-                if (OTHDEPDX == true)
-                {
-                    counter++;
-                }
-                if (BIPOLDX == true)
-                {
-                    counter++;
-                }
-                if (SCHIZOP == true)
-                {
-                    counter++;
-                }
-                if (ANXIET == true)
-                {
-                    counter++;
-                }
-                if (PTSDDX == true)
-                {
-                    counter++;
-                }
-                if (NDEVDIS == true)
-                {
-                    counter++;
-                }
-                if (DELIR == true)
-                {
-                    counter++;
-                }
-                if (OTHPSY == true)
-                {
-                    counter++;
-                }
-                if (TBIDX == true)
-                {
-                    counter++;
-                }
-                if (EPILEP == true)
-                {
-                    counter++;
-                }
-                if (HYCEPH == true)
-                {
-                    counter++;
-                }
-                if (NEOP == true)
-                {
-                    counter++;
-                }
-                if (HIV == true)
-                {
-                    counter++;
-                }
-                if (POSTC19 == true)
-                {
-                    counter++;
-                }
-                if (APNEADX == true)
-                {
-                    counter++;
-                }
-                if (OTHCOGILL == true)
-                {
-                    counter++;
-                }
-                if (ALCDEM == true)
-                {
-                    counter++;
-                }
-                if (IMPSUB == true)
-                {
-                    counter++;
-                }
-                if (MEDS == true)
-                {
-                    counter++;
-                }
-                if (COGOTH == true)
-                {
-                    counter++;
-                }
-                if (COGOTH2 == true)
-                {
-                    counter++;
-                }
-                if (COGOTH3 == true)
-                {
-                    counter++;
-                }
+        //[RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "If a predominant clinical syndrome was not present in question 8, a condition must be selected.")]
+        //[NotMapped]
+        //public bool? PresentSyndromeIndicated
+        //{
+        //    get
+        //    {
+        //        int counter = 0;
+        //        if (MAJDEPDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHDEPDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (BIPOLDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (SCHIZOP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (ANXIET == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (PTSDDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (NDEVDIS == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (DELIR == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHPSY == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (TBIDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (EPILEP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (HYCEPH == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (NEOP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (HIV == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (POSTC19 == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (APNEADX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHCOGILL == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (ALCDEM == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (IMPSUB == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (MEDS == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH2 == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH3 == true)
+        //        {
+        //            counter++;
+        //        }
 
-                if (counter >= 1)
-                {
-                    return true;
-                }
+        //        if (counter >= 1)
+        //        {
+        //            return true;
+        //        }
 
-                return null;
-            }
-        }
+        //        return null;
+        //    }
+        //}
 
         [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]

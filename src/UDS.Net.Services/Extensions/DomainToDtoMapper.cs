@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -154,7 +153,8 @@ namespace UDS.Net.Services.Extensions
                 CreatedAt = packetSubmission.CreatedAt,
                 ModifiedBy = packetSubmission.ModifiedBy,
                 DeletedBy = packetSubmission.DeletedBy,
-                IsDeleted = packetSubmission.IsDeleted
+                IsDeleted = packetSubmission.IsDeleted,
+                ErrorCount = packetSubmission.ErrorCount
             };
 
             if (packetSubmission.Errors != null)
@@ -1145,7 +1145,7 @@ namespace UDS.Net.Services.Extensions
             return new B8Dto
             {
                 NEUREXAM = fields.NEUREXAM,
-                NORMNREXAM = ConvertIntToBool(fields.NORMNREXAM),
+                NORMNREXAM = fields.NORMNREXAM.HasValue ? Convert.ToBoolean(fields.NORMNREXAM) : (bool?)null,
                 PARKSIGN = fields.PARKSIGN,
                 SLOWINGFM = fields.SLOWINGFM,
                 TREMREST = fields.TREMREST,
@@ -1422,7 +1422,7 @@ namespace UDS.Net.Services.Extensions
                 IMPNOMCLCD = fields.IMPNOMCLCD,
                 IMPNOMCIO = fields.IMPNOMCIO,
                 IMPNOMCIOX = fields.IMPNOMCIOX,
-                IMPNOMCI = fields.IMPNOMCI,
+                IMPNOMCI = fields.IMPNOMCI.HasValue ? Convert.ToBoolean(fields.IMPNOMCI) : (bool?)null,
                 CDOMMEM = fields.CDOMMEM,
                 CDOMLANG = fields.CDOMLANG,
                 CDOMATTN = fields.CDOMATTN,

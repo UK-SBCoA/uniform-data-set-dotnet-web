@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
@@ -63,7 +62,7 @@ namespace UDS.Net.Services.DomainModels
 
                 // double check that it does not have unresolved errors
                 if (this.UnresolvedErrorCount.HasValue && this.UnresolvedErrorCount.Value > 0)
-                    return false;
+                    return finalizable;
 
                 // now check that all the forms follow the contract to be finalized
                 if (this.Forms != null && this.Forms.Count() > 0 && _formsContract != null)
@@ -73,18 +72,25 @@ namespace UDS.Net.Services.DomainModels
                     {
                         foreach (var formContract in packetKindFormsContract.Value)
                         {
+                            // if the form exists in the formscontract
                             if (this.Forms.Where(f => formContract.Abbreviation == f.Kind).Any())
                             {
-                                // if the form contract exists
                                 var form = this.Forms.Where(f => formContract.Abbreviation == f.Kind).FirstOrDefault();
 
-                                if (formContract.IsRequredForVisitKind && form.Status != FormStatus.Finalized)
+                                if (form.Status == FormStatus.Finalized)
+                                    finalizable = true; // when a form in the contract is finalized then we will have a running finalizable = true, if we successfully make it through the list then it should remain true
+                                else
                                 {
                                     finalizable = false;
-                                    break; // we can exit out of the loop because one required form is not yet finalized
+                                    break; // as soon as a form is found that is not finalized we can break out of the loop and immediately return false
                                 }
                             }
-                            finalizable = true; // if we loop through all the forms contract and all the required forms are finalized, then the entire visit is finalizable
+                            else
+                            {
+                                // this shouldn't be reached, but just in case there is an error elsewhere we are returning false if the packet doesn't contain a form in the forms contract
+                                finalizable = false;
+                                break;
+                            }
                         }
                     }
                 }
@@ -108,11 +114,11 @@ namespace UDS.Net.Services.DomainModels
                         new FormContract[]
                         {
                             new FormContract("A1", true),
-                            new FormContract("A1a", true),
+                            new FormContract("A1a", false),
                             new FormContract("A2", false),
                             new FormContract("A3", true),
-                            new FormContract("A4", false),
-                            new FormContract("A4a", false),
+                            new FormContract("A4", true),
+                            new FormContract("A4a", true),
                             new FormContract("A5D2", true),
                             new FormContract("B1", false),
                             new FormContract("B3", false),
@@ -133,11 +139,11 @@ namespace UDS.Net.Services.DomainModels
                         new FormContract[]
                         {
                             new FormContract("A1", true),
-                            new FormContract("A1a", true),
+                            new FormContract("A1a", false),
                             new FormContract("A2", false),
                             new FormContract("A3", true),
-                            new FormContract("A4", false),
-                            new FormContract("A4a", false),
+                            new FormContract("A4", true),
+                            new FormContract("A4a", true),
                             new FormContract("A5D2", true),
                             new FormContract("B1", false),
                             new FormContract("B3", false),
@@ -158,11 +164,11 @@ namespace UDS.Net.Services.DomainModels
                         new FormContract[]
                         {
                             new FormContract("A1", true),
-                            new FormContract("A1a", true),
+                            new FormContract("A1a", false),
                             new FormContract("A2", false),
                             new FormContract("A3", true),
-                            new FormContract("A4", false),
-                            new FormContract("A4a", false),
+                            new FormContract("A4", true),
+                            new FormContract("A4a", true),
                             new FormContract("A5D2", true),
                             new FormContract("B1", false),
                             new FormContract("B3", false),
@@ -194,11 +200,11 @@ namespace UDS.Net.Services.DomainModels
                     {
                         var existing = existingForms.Where(f => f.Kind == formContract.Abbreviation).FirstOrDefault();
 
-                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequredForVisitKind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields, existing.UnresolvedErrors));
+                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequiredForVisitKind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields, existing.UnresolvedErrors));
                     }
                     else
                     {
-                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequredForVisitKind, visitDate, CreatedBy));
+                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequiredForVisitKind, visitDate, CreatedBy));
                     }
                 }
 
@@ -241,7 +247,6 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (this.Status == PacketStatus.FailedErrorChecks)
             {
-                // when errors are attempted to be resolved status can be moved back to pending
                 if (status == PacketStatus.Pending)
                     updatePossible = true;
             }
@@ -255,6 +260,16 @@ namespace UDS.Net.Services.DomainModels
             else if (this.Status == PacketStatus.Frozen)
             {
                 if (status == PacketStatus.Pending)
+                    updatePossible = true;
+            }
+            else if (this.Status == PacketStatus.Submitted)
+            {
+                // Submitted forms can change to failed error checks when an error count is submitted
+                if (status == PacketStatus.FailedErrorChecks)
+                    updatePossible = true;
+
+                // Forms checked as success change to Passed error checks with an error count of 0
+                if (status == PacketStatus.PassedErrorChecks)
                     updatePossible = true;
             }
             return updatePossible;

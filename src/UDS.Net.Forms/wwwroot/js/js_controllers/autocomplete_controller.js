@@ -13,25 +13,28 @@ export default class extends Controller {
     this.listTarget.classList.add("hidden")
   }
 
-  filterList(event) {
-    // we will call the rxNormDisplayNames controller (list is ~30K)
-    if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      if (this.searchBoxTarget.value.length == 1) {
-        // this will trigger an event for rxNormDisplayNames to handle and load new entries (instead of all 30K at once)
-        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-      }
-
-      var startsWithMatcher = new RegExp("^" + this.searchBoxTarget.value, "i")
-      this.itemTargets.map((item) => {
-        if (startsWithMatcher.test(item.innerHTML)) {
-          item.classList.remove("hidden")
-        }
-        else {
-          item.classList.add("hidden")
-        }
-      });
+  handleOutsideClick(event) {
+    if (!this.searchBoxTarget.contains(event.target)) {
+      this.hideList();
     }
-    // TODO check if list is empty and if so, display the no results
+  }
+
+  filterList(event) {
+    clearTimeout(this.dispatchTimeout)
+
+    if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
+      // debounce input
+      this.dispatchTimeout = setTimeout(() => {
+        this.showList();
+        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
+      }, 300)
+    }
+    else {
+      this.reset();
+      this.dispatch("resetSearch");
+    }
+
+    this.activeIndex = -1;
   }
 
   showNoResults(event) {
@@ -43,11 +46,53 @@ export default class extends Controller {
   }
 
   setSearchBox(event) {
-    this.searchBoxTarget.value = event.target.innerHTML;
+    event.preventDefault();
+    if (event.type == "click") {
+      this.searchBoxTarget.value = event.target.innerHTML;
+    }
+    else if (event.type == "keydown" && event.key == "Enter") {
+      const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+      this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
+    }
     this.hideList();
   }
 
   connect() {
     this.hideList()
+
+    this.activeIndex = -1;
+    this.dispatchTimeout = null;
   }
+
+  reset() {
+    this.hideList();
+    this.searchBoxTarget.value = "";
+    this.activeIndex = -1;
+    this.dispatchTimeout = null;
+  }
+
+  highlightItem(event) {
+    event.preventDefault();
+    const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
+    if (visibleItems.length === 0) return;
+
+    switch (event.key) {
+      case "ArrowDown":
+        this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
+        break;
+      case "ArrowUp":
+        this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
+        break;
+    }
+
+    visibleItems.forEach((item, index) => {
+      if (index === this.activeIndex) {
+        item.classList.add("bg-indigo-600", "text-white");
+        item.scrollIntoView({ block: "nearest" });
+      } else {
+        item.classList.remove("bg-indigo-600", "text-white");
+      }
+    });
+  }
+
 }

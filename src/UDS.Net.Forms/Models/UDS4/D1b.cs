@@ -135,6 +135,24 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "FDG PET - Was FDG PET data or information used to support an etiological diagnosis?")]
         public int? FDGPETDX { get; set; }
 
+        [NotMapped]
+        [RequiredIf(nameof(FDGPETDX), "1", ErrorMessage = "At least one etiology must be assessed")]
+        [RequiredIf(nameof(FDGPETDX), "2", ErrorMessage = "At least one etiology must be assessed")]
+        public bool? FDGEtiologyValidation
+        {
+            get
+            {
+                if (FDGAD != null && FDGFTLD != null && FDGLBD != null && FDGOTH != null)
+                {
+                    if (FDGAD != 8 || FDGFTLD != 8 || FDGLBD != 8 || FDGOTH != 8)
+                    {
+                        return true;
+                    }
+                }
+                return null;
+            }
+        }
+
         [RequiredIfRange(nameof(FDGPETDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "Consistent with AD")]
         public int? FDGAD { get; set; }
@@ -167,6 +185,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMAGINGDX), "3", ErrorMessage = "Please specify.")]
         [Display(Name = "Other tracer-based imaging - Were other tracer-based imaging used to support an etiological diagnosis?")]
         public int? TRACOTHDX { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(TRACOTHDX), "1", ErrorMessage = "At least one etiology must be assessed. TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH can not all be 8.")]
+        [RequiredIf(nameof(TRACOTHDX), "2", ErrorMessage = "At least one etiology must be assessed. TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH can not all be 8.")]
+        public bool? TracerModalitiesValidation => (TRACERAD == 8 && TRACERFTLD == 8 && TRACERLBD == 8 && TRACEROTH == 8) ? null : true;
 
         [RequiredIfRange(nameof(TRACOTHDX), 1, 2, ErrorMessage = "Please specify.")]
         [Display(Name = "(specify)")]
@@ -205,6 +228,22 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Atrophy pattern consistent with AD")]
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with AD.")]
         public int? STRUCTAD { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(STRUCTDX), "1", ErrorMessage = "STRUCTAD, STRUCTFTLD, or STRUCTCVD can not all be 8.")]
+        [RequiredIf(nameof(STRUCTDX), "2", ErrorMessage = "STRUCTAD, STRUCTFTLD, or STRUCTCVD can not all be 8.")]
+        public bool? STRUCTEtiologyValidation
+        {
+            get
+            {
+                if (STRUCTAD.HasValue && STRUCTFTLD.HasValue && STRUCTCVD.HasValue)
+                {
+                    if (STRUCTAD != 8 || STRUCTFTLD != 8 || STRUCTCVD != 8)
+                        return true;
+                }
+                return null;
+            }
+        }
 
         [Display(Name = "Atrophy pattern consistent with FTLD")]
         [RequiredIfRange(nameof(STRUCTDX), 1, 2, ErrorMessage = "Please specify if imaging consistent with FTLD.")]
@@ -503,20 +542,20 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHCOGX { get; set; }
 
         [NotMapped]
-        [Display(Name = "CSF-based biomarkers validation")]
+        [RequiredIf(nameof(FLUIDBIOM), "2", ErrorMessage = "At least one etiology must be assessed. CSFAD, CSFFTLD, CSFLBD, or CSFOTH can not all be 8.")]
+        [RequiredIf(nameof(FLUIDBIOM), "3", ErrorMessage = "At least one etiology must be assessed. CSFAD, CSFFTLD, CSFLBD, or CSFOTH can not all be 8.")]
         public bool? CSFBiomarkersValidation
         {
             get
             {
-                if (CSFAD != null && CSFFTLD != null && CSFLBD != null && CSFOTH != null)
+                if (CSFAD == 8 &&
+                    CSFFTLD == 8 &&
+                    CSFLBD == 8 &&
+                    CSFOTH == 8)
                 {
-                    if (CSFAD != 8 || CSFFTLD != 8 || CSFLBD != 8 || CSFOTH != 8)
-                    {
-                        return true;
-                    }
-                    return false;
+                    return null;
                 }
-                return null;
+                return true;
             }
         }
 
@@ -594,6 +633,50 @@ namespace UDS.Net.Forms.Models.UDS4
                 return null;
             }
         }
+        [RequiredIf(nameof(OTHBIOM1), "1", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM1), "2", ErrorMessage = "If BIOMAD1, BIOMIFTLD1, BIOMLBD1, BIOMOTH1 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? BiomarkerValidation
+        {
+            get
+            {
+                var values = new[] { BIOMAD1, BIOMFTLD1, BIOMLBD1, BIOMOTH1 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
+
+        [RequiredIf(nameof(OTHBIOM2), "1", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM2), "2", ErrorMessage = "If BIOMAD2, BIOMIFTLD2, BIOMLBD2, BIOMOTH2 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? Biomarker2Validation
+        {
+            get
+            {
+                var values = new[] { BIOMAD2, BIOMFTLD2, BIOMLBD2, BIOMOTH2 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
+
+        [RequiredIf(nameof(OTHBIOM3), "1", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [RequiredIf(nameof(OTHBIOM3), "2", ErrorMessage = "If BIOMAD3, BIOMIFTLD3, BIOMLBD3, BIOMOTH3 are selected then at least one must not be 8.")]
+        [NotMapped]
+        public bool? Biomarker3Validation
+        {
+            get
+            {
+                var values = new[] { BIOMAD3, BIOMFTLD3, BIOMLBD3, BIOMOTH3 };
+
+                int notAssessedCount = values.Count(v => v.HasValue && v.Value == 8);
+
+                return notAssessedCount == 4 ? null : true;
+            }
+        }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -602,44 +685,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
 
-            if (TRACEROTH != 1 && !string.IsNullOrWhiteSpace(TRACEROTHX))
-            {
-                yield return new ValidationResult(
-                    "TRACEROTHX should not be provided unless TRACEROTH is marked as '1' (yes).",
-                    new[] { "TRACEROTHX" });
-            }
-
-
-            if ((IMAGINGDX == 1 || IMAGINGDX == 3) && TRACOTHDX == null)
-            {
-                yield return new ValidationResult("TRACOTHDX is required when IMAGINGDX is 1 or 3.",
-                    new[] { "TRACOTHDX" });
-            }
-
-            if (TRACOTHDX == 1 || TRACOTHDX == 2)
-            {
-                int rad = TRACERAD ?? 8;
-                int ftld = TRACERFTLD ?? 8;
-                int lbd = TRACERLBD ?? 8;
-                int oth = TRACEROTH ?? 8;
-
-                if (rad == 8 && ftld == 8 && lbd == 8 && oth == 8)
-                {
-                    yield return new ValidationResult("At least one of TRACERAD, TRACERFTLD, TRACERLBD, or TRACEROTH must not be 8 when TRACOTHDX = 1 or 2.",
-                    new[] { "TRACERAD", "TRACERFTLD", "TRACERLBD", "TRACEROTH" });
-                }
-            }
-
-            if (CSFBiomarkersValidation == false)
-            {
-                yield return new ValidationResult(
-                    "At least one CSF-based biomarker must not be 8.",
-                    new[] { nameof(CSFOTH) }
-                );
-            }
-
             yield break;
         }
     }
 }
-

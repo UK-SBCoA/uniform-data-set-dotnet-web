@@ -13,20 +13,17 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
-  let element = $('[name="' + target + '"]');
+  //console.log(target);
+  //console.log(attribute + " to " + value);
+  let element = $(`[name="${target}"]`);
   if (element.length) {
     if (attribute === "disabled") {
       if (value === "true" || value === true) {
         element.attr("disabled", "disabled");
-        // Disable effect by element type
-        if (
-          element.is(":radio") ||
-          element.is(":checked") ||
-          element.is(":checkbox")
-        ) {
-          element.removeAttr("checked");
+        // Clear values
+        if (element.is(":radio") || element.is(":checkbox")) {
+          element.prop("checked", false);
         }
-        //catch all case for all other input types
         else {
           element.val("");
         }
@@ -40,9 +37,7 @@ function setAffect(target, attribute, value) {
 function setAffects(targets) {
   $.each(targets, function (index, behavior) {
     $.each(behavior, function (target, affects) {
-      // console.log(target);
       $.each(affects, function (attribute, value) {
-        // console.log(attribute + " to " + value);
         setAffect(target, attribute, value);
       });
     });
@@ -61,7 +56,7 @@ function compareRange(low, high, targets, value) {
         setAffect(target, "disabled", true);
       });
     });
-  } 
+  }
   else {
     if (value >= low && value <= high) {
       $.each(targets, function (index, behavior) {
@@ -69,7 +64,7 @@ function compareRange(low, high, targets, value) {
           setAffect(target, "disabled", false);
         });
       });
-    } 
+    }
     else {
       $.each(targets, function (index, behavior) {
         $.each(behavior, function (target, affects) {
@@ -81,16 +76,48 @@ function compareRange(low, high, targets, value) {
 }
 
 function debounce(func, wait) {
-    let timeout;
-    return function () {
-        const context = this, args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), wait);
-    };
+  let timeout;
+  return function () {
+    const context = this, args = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
 }
 
 $(function () {
+
   let affects = $("[data-affects]");
+
+  // initialize the form, check to see if some should have a default state
+  // text inputs with ranges defaults are set with compareRange()
+  let allNames = affects.map(function () {
+    let name = $(this).attr("name");
+    return name;
+  });
+
+  let uniqueNames = jQuery.unique(allNames);
+
+  uniqueNames.each(function () {
+    let element = $(`input[name="${this}"]`);
+
+    if (element.is(":radio")) {
+      if (element.is(":checked")) {
+        // console.log(element.attr('name') + " checked");
+      }
+      else {
+        let toggleTargets = element.data("affects-targets");
+        $.each(toggleTargets, function (index, behavior) {
+          $.each(behavior, function (target, affects) {
+            // don't use setAffect() for initialization because it clears the value
+            let element = $(`[name="${target}"]`);
+            element.attr("disabled", "disabled");
+          });
+        });
+      }
+    }
+  });
+
+
   if (affects.length) {
     // for each input with data-affects check to see if it is selected or is a checkbox that should toggle
     affects.each(function () {
@@ -104,13 +131,13 @@ $(function () {
             setAffects(targets);
           }
         }
-      } 
+      }
       else if ($(this).data("affects-toggle-targets")) {
         // checkboxes
         let isSelected = $(this).is(":checked");
         let toggleTargets = $(this).data("affects-toggle-targets");
         toggleAffects(toggleTargets, isSelected);
-      } 
+      }
       else if ($(this).data("affects-range-targets")) {
         // text or number inputs
         let low = $(this).data("affects-range-low");
@@ -120,56 +147,31 @@ $(function () {
         compareRange(low, high, targets, $(this).val());
       }
 
-        // watch for changes
-        $(this).on("change", function () {
-            if ($(this).data("affects-targets")) {
-                let targets = $(this).data("affects-targets");
-                setAffects(targets);
-            }
-            else if ($(this).data("affects-toggle-targets")) {
-                let isSelected = $(this).is(":checked");
-                let toggleTargets = $(this).data("affects-toggle-targets");
-                toggleAffects(toggleTargets, isSelected);
-            }
-        });
-
-        // if it's a range input, add a debounced input handler
-        if ($(this).data("affects-range-targets")) {
-            let low = $(this).data("affects-range-low");
-            let high = $(this).data("affects-range-high");
-            let targets = $(this).data("affects-range-targets");
-
-            $(this).on("input", debounce(function () {
-                compareRange(low, high, targets, $(this).val());
-            }, 300));
+      // watch for changes
+      $(this).on("change", function () {
+        if ($(this).data("affects-targets")) {
+          let targets = $(this).data("affects-targets");
+          setAffects(targets);
         }
-    });
-
-    // after checking each input, check to see if some should have a default state
-    // text inputs with ranges defaults are set with compareRange()
-    let allNames = affects.map(function () {
-      let name = $(this).attr("name");
-      return name;
-    });
-
-    let uniqueNames = jQuery.unique(allNames);
-    uniqueNames.each(function () {
-      let element = $('input[name="' + this + '"]');
-
-      if (element.is(":radio")) {
-        if (element.is(":checked")) {
-          // console.log(element.attr('name') + " checked");
-        } 
-        else {
-          let toggleTargets = element.data("affects-targets");
-          $.each(toggleTargets, function (index, behavior) {
-            $.each(behavior, function (target, affects) {
-              setAffect(target, "disabled", true);
-            });
-          });
+        else if ($(this).data("affects-toggle-targets")) {
+          let isSelected = $(this).is(":checked");
+          let toggleTargets = $(this).data("affects-toggle-targets");
+          toggleAffects(toggleTargets, isSelected);
         }
+      });
+
+      // if it's a range input, add a debounced input handler
+      if ($(this).data("affects-range-targets")) {
+        let low = $(this).data("affects-range-low");
+        let high = $(this).data("affects-range-high");
+        let targets = $(this).data("affects-range-targets");
+
+        $(this).on("input", debounce(function () {
+          compareRange(low, high, targets, $(this).val());
+        }, 300));
       }
     });
+
   }
 });
 
@@ -184,10 +186,10 @@ function setValidationStatus(statusValue, modeValue) {
   let settings = validator.settings;
 
   var formStatusFinalizedValue = $(
-    'input[name="Enum.FormStatus.Finalized"]',
+    "input[name=\"Enum.FormStatus.Finalized\"]"
   ).val();
   var formModeNotCompletedValue = $(
-    'input[name="Enum.FormMode.NotCompleted"]',
+    "input[name=\"Enum.FormMode.NotCompleted\"]"
   ).val();
 
   if (
@@ -197,7 +199,7 @@ function setValidationStatus(statusValue, modeValue) {
     // figure out which fields needs to be required
     // enable client-side validation
     settings.ignore = "";
-  } 
+  }
   else {
     // get errors that were created using jQuery.validate.unobtrusive
     // and remove messages
@@ -220,7 +222,7 @@ function setValidationStatus(statusValue, modeValue) {
 
 /* Initialize state of validation */
 $(function () {
-  let mode = $('select[name$="MODE"]');
+  let mode = $("select[name$='MODE']");
   let select = $("select[data-val-status]");
   if (mode.length && select.length) {
     let modeOptionSelected = mode.find(":selected");
@@ -233,7 +235,7 @@ $(function () {
 
 /* If save-status changes */
 $("select[data-val-status]").on("change", function () {
-  let mode = $('select[name$="MODE"]');
+  let mode = $("select[name$='MODE']");
   let select = $("select[data-val-status]");
   if (mode.length && select.length) {
     let modeOptionSelected = mode.find(":selected");
@@ -245,8 +247,8 @@ $("select[data-val-status]").on("change", function () {
 });
 
 /* If form mode changes */
-$('select[name$="MODE"]').on("change", function () {
-  let mode = $('select[name$="MODE"]');
+$("select[name$='MODE']").on("change", function () {
+  let mode = $("select[name$='MODE']");
   let select = $("select[data-val-status]");
   if (mode.length && select.length) {
     let modeOptionSelected = mode.find(":selected");
@@ -324,7 +326,7 @@ $.validator.addMethod("birthyear", function (value, element, params) {
 
 $.validator.unobtrusive.adapters.add(
   "birthyear",
-  ["allowunknown","parent", "maximum", "minimum","parentmaximum"],
+  ["allowunknown", "parent", "maximum", "minimum", "parentmaximum"],
   function (options) {
     let element = $(options.form).find("input[data-val-birthyear]")[0];
 
@@ -366,7 +368,7 @@ $.validator.addMethod(
   function (value, element, params) {
     if (
       value.includes("'") ||
-      value.includes('"') ||
+      value.includes("\"") ||
       value.includes("&") ||
       value.includes("%")
     ) {
@@ -391,7 +393,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
   let parameters = params[1];
   let watchedFieldName = parameters.watchedfield;
 
-  let watched = $('input[name="' + watchedFieldName + '"]:checked');
+  let watched = $("input[name=\"" + watchedFieldName + "\"]:checked");
   if (watched.length) {
     let selected = watched.val();
     let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
@@ -410,7 +412,7 @@ $.validator.unobtrusive.adapters.add(
   ["watchedfield", "watchedfieldvalue"],
   function (options) {
     let watchedFieldName = options.params.watchedfield;
-    let watched = $('input[name="' + watchedFieldName + '"]');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]");
     if (watched.length) {
       watched.on("change", function () {
         // clear the validation if the watched field is changed
@@ -438,7 +440,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
   let parameters = params[1];
   let watchedFieldName = parameters.watchedfield;
 
-  let watched = $('input[name="' + watchedFieldName + '"]');
+  let watched = $("input[name=\"" + watchedFieldName + "\"]");
   if (watched.length) {
     let watchedValue = watched.val();
     if (watchedValue.length) {
@@ -463,7 +465,7 @@ $.validator.unobtrusive.adapters.add(
   ["watchedfield", "lowvalue", "highvalue"],
   function (options) {
     let watchedFieldName = options.params.watchedfield;
-    let watched = $('input[name="' + watchedFieldName + '"]');
+    let watched = $("input[name=\"" + watchedFieldName + "\"]");
     if (watched.length) {
       watched.on("change", function () {
         // clear the validation if the watched field is changed to outside the range

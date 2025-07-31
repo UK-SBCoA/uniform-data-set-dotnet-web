@@ -64,7 +64,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
             }
         }
 
@@ -72,7 +72,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>();
+                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
             }
         }
 
@@ -80,7 +80,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video }; // form is required for I
+                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video, RemoteModality.Mail, RemoteModality.Electronic }; // form is required for I
             }
         }
 

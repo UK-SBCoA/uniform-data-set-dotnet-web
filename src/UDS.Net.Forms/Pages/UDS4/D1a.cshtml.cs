@@ -80,11 +80,11 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public List<RadioListItem> PPASyndromeListItems { get; set; } = new List<RadioListItem>
         {
-            new RadioListItem("Logopenic PPA", "1"),
-            new RadioListItem("Semantic PPA", "2"),
+            new RadioListItem("Semantic PPA", "1"),
+            new RadioListItem("Logopenic PPA", "2"),
             new RadioListItem("Nonfluent/agrammatic PPA", "3"),
-            new RadioListItem("Primary progressive apraxia of speech", "4"),
-            new RadioListItem("PPA other/not otherwise specified", "5")
+            new RadioListItem("Primary progressive apraxia of speech", "5"),
+            new RadioListItem("PPA other/not otherwise specified", "4")
         };
 
         public List<RadioListItem> LBDSYNTListItems { get; set; } = new List<RadioListItem>
@@ -177,6 +177,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.MCICRITIMP"),
                     new UIEnableAttribute("D1a.MCICRITFUN"),
                     new UIEnableAttribute("D1a.MCI"),
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX"),
 
                 }
             } },
@@ -193,6 +200,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.IMPNOMCLCD"),
                     new UIDisableAttribute("D1a.IMPNOMCIO"),
                     new UIDisableAttribute("D1a.IMPNOMCI"),
+                    new UIEnableAttribute("D1a.CDOMMEM"),
+                    new UIEnableAttribute("D1a.CDOMLANG"),
+                    new UIEnableAttribute("D1a.CDOMATTN"),
+                    new UIEnableAttribute("D1a.CDOMEXEC"),
+                    new UIEnableAttribute("D1a.CDOMVISU"),
+                    new UIEnableAttribute("D1a.CDOMBEH"),
+                    new UIEnableAttribute("D1a.CDOMAPRAX"),
 
                 }
              } }
@@ -208,6 +222,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.IMPNOMCLCD"),
                     new UIEnableAttribute("D1a.IMPNOMCIO"),
                     new UIEnableAttribute("D1a.IMPNOMCI"),
+                    new UIDisableAttribute("D1a.CDOMMEM"),
+                    new UIDisableAttribute("D1a.CDOMLANG"),
+                    new UIDisableAttribute("D1a.CDOMATTN"),
+                    new UIDisableAttribute("D1a.CDOMEXEC"),
+                    new UIDisableAttribute("D1a.CDOMVISU"),
+                    new UIDisableAttribute("D1a.CDOMBEH"),
+                    new UIDisableAttribute("D1a.CDOMAPRAX"),
 
                 },
                 InstructionalMessage =""
@@ -221,6 +242,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.IMPNOMCLCD"),
                     new UIDisableAttribute("D1a.IMPNOMCIO"),
                     new UIDisableAttribute("D1a.IMPNOMCI"),
+                    new UIEnableAttribute("D1a.CDOMMEM"),
+                    new UIEnableAttribute("D1a.CDOMLANG"),
+                    new UIEnableAttribute("D1a.CDOMATTN"),
+                    new UIEnableAttribute("D1a.CDOMEXEC"),
+                    new UIEnableAttribute("D1a.CDOMVISU"),
+                    new UIEnableAttribute("D1a.CDOMBEH"),
+                    new UIEnableAttribute("D1a.CDOMAPRAX"),
 
                 }
              } }

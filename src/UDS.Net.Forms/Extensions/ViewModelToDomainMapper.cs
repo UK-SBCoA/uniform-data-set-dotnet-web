@@ -93,7 +93,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static PacketSubmission ToEntity(this PacketSubmissionModel vm)
         {
-            return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, 0);
+            return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
         public static List<Form> ToEntity(this IList<FormModel> vm)
@@ -388,18 +388,10 @@ namespace UDS.Net.Forms.Extensions
 
         public static A4DFormFields ToEntity(this DrugCodeModel vm)
         {
-
             return new A4DFormFields
             {
-                Id = vm.Id.HasValue ? vm.Id.Value : 0,
-                RxNormId = vm.RxNormId,
-                CreatedAt = vm.CreatedAt,
-                CreatedBy = vm.CreatedBy,
-                ModifiedBy = vm.ModifiedBy,
-                DeletedBy = vm.DeletedBy,
-                IsDeleted = vm.IsDeleted.HasValue ? vm.IsDeleted.Value : false
+                RxNormId = vm.RxNormId
             };
-
         }
 
         public static IFormFields GetFormFields(this A4a vm)
@@ -1063,7 +1055,7 @@ namespace UDS.Net.Forms.Extensions
                 IMPNOMCLCD = vm.IMPNOMCLCD,
                 IMPNOMCIO = vm.IMPNOMCIO,
                 IMPNOMCIOX = vm.IMPNOMCIOX,
-                IMPNOMCI = vm.IMPNOMCI.HasValue ? vm.IMPNOMCI.Value != 0 : false,
+                IMPNOMCI = vm.IMPNOMCI,
                 CDOMMEM = vm.CDOMMEM,
                 CDOMLANG = vm.CDOMLANG,
                 CDOMATTN = vm.CDOMATTN,

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json.Linq;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -166,8 +165,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MOCAORCT { get; set; }
 
         [Display(Name = "The tests following the MoCA were administered")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? NPSYCLOC { get; set; }
 
         [Display(Name = "Language of test administration")]
@@ -196,8 +193,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total Score for copy of Benson figure", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTC { get; set; }
 
         #region if not completed, skip to  6a
@@ -242,8 +237,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-150, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|1[0-4]\\d|150|99[5-8])$", ErrorMessage = "Allowed values are 0-150 or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
 
         public int? TRAILA { get; set; }
 
@@ -263,8 +256,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -306,8 +297,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score for drawing of Benson figure following 10- to 15-minuted delay", Description = "(0-17, 95-98)")]
         [RegularExpression("^(\\d|1[0-7]|9[5-8])$", ErrorMessage = "Allowed values are 0-17 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? UDSBENTD { get; set; }
 
         [Display(Name = "Recognized original stimulus among four options?")]
@@ -324,8 +313,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total score", Description = "(0-32, 95-98)")]
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|9[5-8])$", ErrorMessage = "Allowed values are 0-32 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "In-Person")]
         public int? MINTTOTS { get; set; }
 
         [Display(Name = "Total correct without semantic cue", Description = "(0-32)")]
@@ -342,6 +329,55 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(\\d|[12]\\d|3[0-2]|88)$", ErrorMessage = "Allowed values are 0-32 or 88 = not applicable.")]
         [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "Provide semantic number correct with cue.")]
         public int? MINTSCNC { get; set; }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(MINTTOTS), 0, 32, ErrorMessage = "If MINTSCNG (mint number semantic cues given) is > 0 then MINTSCNC (mint correct with semantic cue) must be less than or equal to MINTSCNG (mint number semantic cues given")]
+        public bool? MINTSCNCValidation
+        {
+            get
+            {
+                if (RMMODE != RemoteModality.Telephone)
+                {
+                    if (MINTSCNG.HasValue && MINTSCNC.HasValue)
+                    {
+                        if (MINTSCNC.Value != 88 && MINTSCNC.Value > MINTSCNG.Value)
+                        {
+                            return null;
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If MINTTOTS is between 0 and 32 and MINTSCNC is between 0 and 32, then MINTTOTS must = MINTTOTW + MINTSCNC")]
+        public bool? MINTTOTSValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || (MODE == FormMode.Remote && RMMODE == RemoteModality.Video))
+                {
+                    if (MINTSCNC.HasValue && MINTTOTS.HasValue && MINTTOTW.HasValue)
+                    {
+                        //If MINTTOTS is is not 95 - 98 and MINTSCNC is not 88
+                        if (MINTTOTS.Value <= 32 && MINTSCNC.Value <= 32)
+                        {
+                            int total = MINTTOTW.Value + MINTSCNC.Value;
+
+                            if (total != MINTTOTS.Value)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                }
+
+                return true;
+            }
+        }
+
 
         [Display(Name = "Phonemic cues: Number given", Description = "(0-32)")]
         [Range(0, 32, ErrorMessage = "Allowed values are 0-32.")]
@@ -500,13 +536,13 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Method of recognition test administration")]
         public int? REYMETHOD { get; set; }
 
-        [Display(Name = "Recognition - Total correct", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Recognition - Total correct", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total correct recognitions.")]
         public int? REYTCOR { get; set; }
 
-        [Display(Name = "Recognition - Total false positives", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Recognition - Total false positives", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total false positives.")]
         public int? REYFPOS { get; set; }
 
@@ -651,7 +687,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [ProhibitedCharacters]
         public string? RESPOTHX { get; set; }
 
-        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Please select atleast one reason for what makes this participant’s responses less valid?")]
+        [RequiredIfRange(nameof(RESPVAL), 2, 3, ErrorMessage = "Select at least one reason why the participant's response is less valid.")]
         [NotMapped]
         public bool? RESPVALReasonIndicated
         {
@@ -830,6 +866,42 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERTE), 0, 30, ErrorMessage = "If UDSVERFN (f-words repeated) is between 0 and 15 and UDSVERLR (l-words repeated) is between 0 and 15, then UDSVERTE must be the total of UDSVERFN and UDSVERLR")]
+        public bool? UDSVERTEValidation
+        {
+            get
+            {
+                if (UDSVERFN.HasValue && UDSVERLR.HasValue)
+                {
+                    if (UDSVERTE.HasValue && UDSVERTE.Value != UDSVERFN.Value + UDSVERLR.Value)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERTN), 0, 80, ErrorMessage = "If UDSVERFC not 95-98 and UDSVERLC not 95-98, UDSVERTN must be the total of UDSVERFC and UDSVERLC")]
+        public bool? UDSVERTNValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
+                {
+                    if (UDSVERTN.HasValue && UDSVERTN.Value != UDSVERFC.Value + UDSVERLC.Value)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
@@ -901,6 +973,9 @@ namespace UDS.Net.Forms.Models.UDS4
                         if (!TRAILA.HasValue)
                             yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILA) });
 
+                        if (!TRAILB.HasValue)
+                            yield return new ValidationResult("Total number of seconds to complete is required.", new[] { nameof(TRAILB) });
+
                         if (!MOCALOC.HasValue && MOCACOMP == 1)
                             yield return new ValidationResult("Which location was the MoCA administered?", new[] { nameof(MOCALOC) });
 
@@ -945,21 +1020,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
                         if (!MINTTOTS.HasValue)
                             yield return new ValidationResult("The Total score field is required.", new[] { nameof(MINTTOTS) });
-                        else
-                        {
-                            // check MINTTOTS validation
-                            if (MINTSCNC.HasValue && (MINTTOTS.Value >= 0 && MINTTOTS.Value <= 32) && (MINTSCNC.Value >= 0 && MINTSCNC.Value <= 32))
-                            {
-                                if (MINTTOTW.HasValue)
-                                {
-                                    int total = MINTTOTW.Value + MINTSCNC.Value;
-                                    if (total != MINTTOTS.Value)
-                                    {
-                                        yield return new ValidationResult("If semantic cue is provided, MINTTOTS must equal MINTTOTW + MINTSCNC.", new[] { nameof(MINTTOTS) });
-                                    }
-                                }
-                            }
-                        }
                     }
                     else if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
                     {

@@ -136,7 +136,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? ANGIOCP { get; set; }
         [Display(Name = "Age at most recent carotid artery surgery or stenting")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
-        [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(ANGIOCP), "1", ErrorMessage = "Please specify.")]
         public int? CAROTIDAGE { get; set; }
         [Display(Name = "Transient ischemic attack (TIA)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -168,7 +168,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? SEIZURES { get; set; }
         [Display(Name = "How many seizures has the participant had in the past 12 months?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredIfRange(nameof(SEIZURES), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(SEIZURES), "1", ErrorMessage = "Please specify.")]
         public int? SEIZNUM { get; set; }
         [Display(Name = "Age at first seizure (excluding childhood febrile seizures)")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
@@ -247,17 +247,17 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         public int? DIABTYPE { get; set; }
-        [Display(Name = "Diabetes treated with: Insulin")]
+        [Display(Name = "Insulin")]
         public bool? DIABINS { get; set; }
-        [Display(Name = "Diabetes treated with: Oral medications")]
+        [Display(Name = "Oral medications")]
         public bool? DIABMEDS { get; set; }
-        [Display(Name = "Diabetes treated with: GLP-1 receptor activators")]
+        [Display(Name = "GLP-1 receptor agonist")]
         public bool? DIABGLP1 { get; set; }
-        [Display(Name = "Diabetes treated with: Other non-insulin, non-GLP-1 receptor activator injection medication")]
+        [Display(Name = "Other non-insulin, non-GLP-1 receptor agonist injection medication")]
         public bool? DIABRECACT { get; set; }
-        [Display(Name = "Diabetes treated with: Diet")]
+        [Display(Name = "Diet")]
         public bool? DIABDIET { get; set; }
-        [Display(Name = "Diabetes treated with: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? DIABUNK { get; set; }
         [Display(Name = "Age at diabetes diagnosis")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
