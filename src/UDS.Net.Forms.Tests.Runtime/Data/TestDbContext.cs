@@ -4,7 +4,7 @@ using UDS.Net.API.Entities;
 
 namespace UDS.Net.Forms.Tests.Runtime.Data;
 
-public class TestContext : DbContext
+public class TestDbContext : DbContext
 {
     /* Load entities from UDS.Net.API.Entities */
     public DbSet<M1> M1s { get; set; }
@@ -32,7 +32,7 @@ public class TestContext : DbContext
     public DbSet<D1a> D1as { get; set; }
     public DbSet<D1b> D1bs { get; set; }
 
-    public TestContext(DbContextOptions<TestContext> options) : base(options)
+    public TestDbContext(DbContextOptions<TestDbContext> options) : base(options)
     {
     }
 

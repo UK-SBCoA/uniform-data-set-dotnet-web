@@ -7,9 +7,9 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 {
     public class VisitService : IVisitService
     {
-        private readonly TestContext _context;
+        private readonly TestDbContext _context;
 
-        public VisitService(TestContext context)
+        public VisitService(TestDbContext context)
         {
             _context = context;
         }

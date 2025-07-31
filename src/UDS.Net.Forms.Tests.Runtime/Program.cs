@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 var database = "test.db";// ":memory:"; // in-memory
 
 // use sqlite with efcore
-builder.Services.AddDbContext<TestContext>(options =>
+builder.Services.AddDbContext<TestDbContext>(options =>
     options.UseSqlite($"Data Source={database}"));
 
 builder.Services.AddScoped<IVisitService, VisitService>();
@@ -33,7 +33,7 @@ var app = builder.Build();
 // Ensure DB is created new at run
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<TestContext>();
+    var db = scope.ServiceProvider.GetRequiredService<TestDbContext>();
     db.Database.EnsureCreated();
 }
 
