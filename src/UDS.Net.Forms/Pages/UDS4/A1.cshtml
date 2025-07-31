@@ -1084,7 +1084,7 @@
                     <input asp-for="@Model.A1.ADISTATE" />
                 </div>
                 <p class="text-gray-400">
-                    <i>(If unknown, leave blank)</i>
+                    <i>(If unknown, leave blank. For special codes, enter 884 for "PH", 885 for "GQ", 886 for "PH-GQ", and 887 for "QDI".)</i>
                 </p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADISTATE"></span>
             </div>
@@ -1097,7 +1097,7 @@
                 <div class="mt-2 w-20">
                     <input asp-for="@Model.A1.ADINAT" />
                 </div>
-                <p class="text-gray-400"><i>(If unknown, leave blank)</i></p>
+                <p class="text-gray-400"><i>(If unknown, leave blank. For special codes, enter 884 for "PH", 885 for "GQ", 886 for "PH-GQ", and 887 for "QDI".)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADINAT"></span>
             </div>
         </div>
