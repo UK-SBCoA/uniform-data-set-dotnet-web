@@ -9,7 +9,7 @@ appsettings.Development.json
 .auth
 
 # Test SQLite database file
-test.db
+test.db*
 
 # User-specific files
 *.rsuser

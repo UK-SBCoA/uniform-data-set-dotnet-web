@@ -1,30 +1,54 @@
-﻿using UDS.Net.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using UDS.Net.Forms.Tests.Runtime.Data;
+using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
     public class VisitService : IVisitService
     {
-        public List<Visit> Visits { get; set; } = new List<Visit>();
+        private readonly TestContext _context;
 
-        public VisitService()
+        public VisitService(TestContext context)
         {
-            Visits = GetSeedingVisits();
+            _context = context;
         }
 
-        public Task<Visit> Add(string username, Visit entity)
+        public async Task<Visit> Add(string username, Visit entity)
         {
-            throw new NotImplementedException();
+            var packet = new API.Entities.Packet
+            {
+                ParticipationId = 1,
+                VISITNUM = entity.VISITNUM,
+                FORMVER = entity.FORMVER,
+                PACKET = "I",
+                VISIT_DATE = entity.VISIT_DATE,
+                INITIALS = entity.INITIALS,
+                Status = API.Entities.PacketStatus.Pending,
+                CreatedAt = entity.CreatedAt,
+                CreatedBy = entity.CreatedBy
+            };
+
+            _context.Packets.Add(packet);
+            await _context.SaveChangesAsync();
+            entity.Id = packet.Id;
+
+            var count = await _context.Packets.CountAsync();
+
+            return entity;
         }
 
-        public Task<int> Count(string username)
+        public async Task<int> Count(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Packets.CountAsync();
         }
 
-        public Task<Visit> GetById(string username, int id)
+        public async Task<Visit> GetById(string username, int id)
         {
-            throw new NotImplementedException();
+            var count = await _context.Packets.CountAsync();
+            var packet = await _context.Packets.FindAsync(id);
+
+            return new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
@@ -39,7 +63,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
-            return Visits;
+            return new List<Visit>();
         }
 
         public Task<Visit> Patch(string username, Visit entity)
@@ -55,18 +79,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public Task<Visit> Update(string username, Visit entity)
         {
             throw new NotImplementedException();
-        }
-
-        public static List<Visit> GetSeedingVisits()
-        {
-            return new List<Visit>()
-            {
-                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null),
-                new Visit(1, 1, 1,"4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null)
-            };
         }
 
         public Task<Visit> UpdateForm(string username, Visit entity, string formId)
@@ -86,12 +98,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<IEnumerable<Visit>> ListByStatus(string username, int pageSize = 10, int pageIndex = 1, string[] statuses = null)
         {
-            return Visits;
+            return new List<Visit>();
         }
 
         public async Task<int> CountByStatus(string username, string[] statuses = null)
         {
-            return 5;
+            return 1;
         }
 
         public Task<string> GetNextFormKind(string username, int visitId, string currentFormKind)
@@ -99,9 +111,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<string>> GetFormOrder(string username, int visitId)
+        public async Task<List<string>> GetFormOrder(string username, int visitId)
         {
-            throw new NotImplementedException();
+            var packet = await GetById(username, visitId);
+            return packet.Forms.OrderBy(f => f.Kind).Select(f => f.Kind).ToList();
         }
 
         public Task<Visit> PatchStatus(string username, Visit entity)

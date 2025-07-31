@@ -4,35 +4,72 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
+    // Mock participations, we don't really need true persistence for these tests
     public class ParticipationService : IParticipationService
     {
         public ParticipationService()
         {
         }
 
-        public Task<Participation> Add(string username, Participation entity)
+        public async Task<Participation> Add(string username, Participation entity)
         {
-            throw new NotImplementedException();
+            return new Participation
+            {
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
         }
 
-        public Task<int> Count(string username)
+        public async Task<int> Count(string username)
         {
-            throw new NotImplementedException();
+            return 1;
         }
 
-        public Task<Participation> GetById(string username, int id, bool includeVisits = false)
+        public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
         {
-            throw new NotImplementedException();
+            return new Participation
+            {
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
         }
 
-        public Task<Participation> GetById(string username, int id)
+        public async Task<Participation> GetById(string username, int id)
         {
-            throw new NotImplementedException();
+            return new Participation
+            {
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
         }
 
-        public Task<Participation> GetByLegacyId(string username, string legacyId)
+        public async Task<Participation> GetByLegacyId(string username, string legacyId)
         {
-            throw new NotImplementedException();
+            return new Participation
+            {
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
         }
 
         public Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)

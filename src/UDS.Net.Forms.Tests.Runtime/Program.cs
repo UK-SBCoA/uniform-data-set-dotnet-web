@@ -7,18 +7,18 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var database = ":memory:"; // in-memory
+var database = "test.db";// ":memory:"; // in-memory
 
 // use sqlite with efcore
 builder.Services.AddDbContext<TestContext>(options =>
     options.UseSqlite($"Data Source={database}"));
 
-builder.Services.AddSingleton<IVisitService, VisitService>();
-builder.Services.AddSingleton<IParticipationService, ParticipationService>();
-builder.Services.AddSingleton<IMilestoneService, MilestoneService>();
+builder.Services.AddScoped<IVisitService, VisitService>();
+builder.Services.AddScoped<IParticipationService, ParticipationService>();
+builder.Services.AddScoped<IMilestoneService, MilestoneService>();
 builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<ILookupService, LookupService>();
-builder.Services.AddSingleton<IPacketService, PacketService>();
+builder.Services.AddScoped<ILookupService, LookupService>();
+builder.Services.AddScoped<IPacketService, PacketService>();
 
 //builder.Services.AddHttpContextAccessor();
 //builder.Services.AddSingleton<IRxNormClient, RxNormClient>();

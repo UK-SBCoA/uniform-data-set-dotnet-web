@@ -6,7 +6,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Data;
 
 public class TestContext : DbContext
 {
-    public DbSet<Participation> Participations { get; set; }
+    /* Load entities from UDS.Net.API.Entities */
     public DbSet<M1> M1s { get; set; }
     public DbSet<Packet> Packets { get; set; }
     public DbSet<PacketSubmission> PacketSubmissions { get; set; }
