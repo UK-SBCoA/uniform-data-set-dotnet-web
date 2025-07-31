@@ -17,7 +17,6 @@ namespace UDS.Net.Forms.DataAnnotations
     {
         private string _watchedField = "";
         private string _watchedFieldValue = "";
-        private readonly bool _inPersonCheckOnly = false;
 
         public RequiredIfInPersonVisitAttribute(string watchedField, string value) : base()
         {
@@ -26,7 +25,6 @@ namespace UDS.Net.Forms.DataAnnotations
         }
         public RequiredIfInPersonVisitAttribute() : base()
         {
-            _inPersonCheckOnly = true;
         }
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
@@ -38,7 +36,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 // only validate if the form is attempting to be completed
                 if (form.Status == FormStatus.Finalized)
                 {
-                    if (_inPersonCheckOnly)
+                    if (string.IsNullOrEmpty(_watchedField))
                     {
                         if (form.MODE == FormMode.InPerson || form.RMMODE == RemoteModality.Video)
                         {
@@ -83,7 +81,7 @@ namespace UDS.Net.Forms.DataAnnotations
         public void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            if (!_inPersonCheckOnly)
+            if (!string.IsNullOrEmpty(_watchedField))
             {
                 MergeAttribute(context.Attributes, "data-val-requiredif", this.ErrorMessage);
 
