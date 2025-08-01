@@ -1,4 +1,5 @@
-﻿using Microsoft.Playwright;
+﻿using System.Diagnostics;
+using Microsoft.Playwright;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 [TestClass]
@@ -6,7 +7,7 @@ public class TestBase
 {
     protected IPage Page;
     protected IBrowserContext Context;
-    protected string BaseUrl = "https://localhost:7109"; // Adjust as needed
+    protected static string BaseUrl = "https://localhost:7109";
 
     [ClassInitialize(InheritanceBehavior.BeforeEachDerivedClass)]
     public static async Task GlobalSetup(TestContext context) =>
@@ -25,4 +26,5 @@ public class TestBase
     [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
     public static async Task GlobalTeardown() =>
         await PlaywrightDriver.StopAsync();
+
 }
