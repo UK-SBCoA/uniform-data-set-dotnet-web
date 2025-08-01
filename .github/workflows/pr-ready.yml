@@ -58,14 +58,14 @@ jobs:
       - name: Install xmllint
         run: sudo apt-get update && sudo apt-get install -y libxml2-utils
 
-      - name: Output test results to summary
+      - name: Output test results to action and PR summary
         if: always()
         run: |
           echo '### Playwright .NET Test Results' >> $GITHUB_STEP_SUMMARY
           if [ -f test-results/test-results.trx ]; then
-            total=$(xmllint --xpath 'string(//ResultSummary/Counters/@total)' test-results/test-results.trx)
-            passed=$(xmllint --xpath 'string(//ResultSummary/Counters/@passed)' test-results/test-results.trx)
-            failed=$(xmllint --xpath 'string(//ResultSummary/Counters/@failed)' test-results/test-results.trx)
+            total=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@total)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
+            passed=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@passed)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
+            failed=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@failed)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
             echo '| Status | Passed | Failed | Total |' >> $GITHUB_STEP_SUMMARY
             echo '|--------|--------|--------|-------|' >> $GITHUB_STEP_SUMMARY
             echo "| ✅     | $passed | $failed | $total |" >> $GITHUB_STEP_SUMMARY
@@ -73,18 +73,13 @@ jobs:
             echo '#### Raw .trx file' >> $GITHUB_STEP_SUMMARY
             echo '```xml' >> $GITHUB_STEP_SUMMARY
             cat test-results/test-results.trx >> $GITHUB_STEP_SUMMARY
+            echo ''
             echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "status=✅ Passed: $passed / $total\n❌ Failed: $failed" >> $GITHUB_OUTPUT
           else
             echo 'No test-results.trx file found.' >> $GITHUB_STEP_SUMMARY
+            echo 'No test-results.trx file found.' >> $GITHUB_OUTPUT
           fi
-
-      - name: Parse test result summary
-        id: parse
-        run: |
-          total=$(xmllint --xpath 'string(//ResultSummary/Counters/@total)' test-results/test-results.trx)
-          passed=$(xmllint --xpath 'string(//ResultSummary/Counters/@passed)' test-results/test-results.trx)
-          failed=$(xmllint --xpath 'string(//ResultSummary/Counters/@failed)' test-results/test-results.trx)
-          echo "status=✅ Passed: $passed / $total\n❌ Failed: $failed" >> $GITHUB_OUTPUT
 
       - name: Comment on PR with test results
         uses: actions/github-script@v7
