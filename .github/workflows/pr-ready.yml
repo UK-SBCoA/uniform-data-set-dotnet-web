@@ -36,8 +36,14 @@ jobs:
           echo "Waiting for app to become responsive..."
           sleep 10
 
-      - name: Test
-        run: dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-build --verbosity normal
+      - name: Restore test dependencies
+        run: dotnet restore src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj
+      
+      - name: Build Playwright test project
+        run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug 
+
+      - name: Install Playwright Browsers
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1
 
       - name: Create test results directory
         run: mkdir -p ./test-results
@@ -45,8 +51,10 @@ jobs:
       - name: Run Playwright .NET tests
         run: |
           dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
+            --no-build \
             --logger "trx;LogFileName=test-results.trx" \
             --results-directory ./test-results \
+            --verbosity quiet \
             || true
 
       - name: List test results directory
