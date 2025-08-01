@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
@@ -22,9 +21,6 @@ FROM base AS final
 WORKDIR /app
 
 COPY --from=build /app/publish .
-COPY aspnetapp.pfx /https/aspnetapp.pfx
 
-ENV ASPNETCORE_URLS="https://+:443;http://+:80"
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password=Password123!
+ENV ASPNETCORE_URLS="http://+:80"
 ENTRYPOINT ["dotnet", "UDS.Net.Forms.Tests.Runtime.dll"]

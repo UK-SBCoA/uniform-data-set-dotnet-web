@@ -48,6 +48,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var count = await _context.Packets.CountAsync();
             var packet = await _context.Packets.FindAsync(id);
 
+            if (packet == null)
+            {
+                return null;
+            }
             return new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
 

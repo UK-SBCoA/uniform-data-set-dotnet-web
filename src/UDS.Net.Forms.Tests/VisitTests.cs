@@ -13,7 +13,8 @@ public class VisitTest : TestBase
     [TestInitialize]
     public async Task TestInitialize()
     {
-        await Page.GotoAsync("https://localhost:7109/");
+        // use the url from the testbase
+        await Page.GotoAsync("http://localhost:7110");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
 
         //await Page.WaitForURLAsync("**/Visits/Details/*"); // this fails in headless mode
@@ -22,7 +23,7 @@ public class VisitTest : TestBase
     [TestMethod]
     public async Task CheckForForms()
     {
-        await Page.GotoAsync($"https://localhost:7109/Visits/Details/{_visitId}");
+        await Page.GotoAsync($"http://localhost:7110/Visits/Details/{_visitId}");
 
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true }).IsVisibleAsync());
@@ -47,7 +48,7 @@ public class VisitTest : TestBase
     [TestMethod]
     public async Task CheckForRequired()
     {
-        await Page.GotoAsync($"https://localhost:7109/Visits/Details/{_visitId}");
+        await Page.GotoAsync($"http://localhost:7110/Visits/Details/{_visitId}");
 
         await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1 Required Participant" }).Locator("span").ClickAsync();
         await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required Participant" }).Locator("span").ClickAsync();

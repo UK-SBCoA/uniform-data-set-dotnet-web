@@ -6,7 +6,7 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.x'
-  APP_PORT: 7109
+  APP_PORT: 7110
 
 jobs:
   test:
@@ -22,17 +22,13 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Generate self-signed HTTPS certificate
-        run: |
-          dotnet dev-certs https -ep ./aspnetapp.pfx -p Password123!
-
       - name: Build app Docker image
         run: |
           docker build -t udsnet-e2e -f src/UDS.Net.Forms.Tests.Runtime/Dockerfile .
 
       - name: Start app container
         run: |
-          docker run -d -p ${{ env.APP_PORT }}:443 --name udsnet-test udsnet-e2e
+          docker run -d -p ${{ env.APP_PORT }}:80 --name udsnet-test udsnet-e2e
           echo "Waiting for app to become responsive..."
           sleep 10
 
@@ -43,7 +39,7 @@ jobs:
         run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug --verbosity quiet
 
       - name: Install Playwright Browsers
-        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install --with-deps
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install
 
       - name: Create test results directory
         run: mkdir -p ./test-results

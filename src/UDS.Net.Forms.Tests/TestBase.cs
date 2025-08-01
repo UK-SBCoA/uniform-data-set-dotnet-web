@@ -7,7 +7,7 @@ public class TestBase
 {
     protected IPage Page;
     protected IBrowserContext Context;
-    protected static string BaseUrl = "https://localhost:7109";
+    protected static string BaseUrl = "http://localhost:7110";
 
     [ClassInitialize(InheritanceBehavior.BeforeEachDerivedClass)]
     public static async Task GlobalSetup(TestContext context) =>
