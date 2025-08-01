@@ -2,11 +2,11 @@ name: Unit Tests
 
 on:
   push:
-    branches: [ "main" ]
-    paths: [ "src/UDS.Net.Forms" ]
   pull_request:
     branches: [ "main" ]
-    paths: [ "src/UDS.Net.Forms" ]
+
+env:
+  DOTNET_VERSION: '8.0.x'
 
 permissions: read-all
 
@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore --configuration Debug 
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test src/UDS.Net.Services.Test/UDS.Net.Services.Test.csproj --no-build --verbosity normal
