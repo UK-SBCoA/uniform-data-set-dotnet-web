@@ -60,6 +60,14 @@ jobs:
         run: |
           echo '### Playwright .NET Test Results' >> $GITHUB_STEP_SUMMARY
           if [ -f test-results/test-results.trx ]; then
+            total=$(xmllint --xpath 'string(//ResultSummary/Counters/@total)' test-results/test-results.trx)
+            passed=$(xmllint --xpath 'string(//ResultSummary/Counters/@passed)' test-results/test-results.trx)
+            failed=$(xmllint --xpath 'string(//ResultSummary/Counters/@failed)' test-results/test-results.trx)
+            echo '| Status | Passed | Failed | Total |' >> $GITHUB_STEP_SUMMARY
+            echo '|--------|--------|--------|-------|' >> $GITHUB_STEP_SUMMARY
+            echo "| ✅     | $passed | $failed | $total |" >> $GITHUB_STEP_SUMMARY
+            echo '' >> $GITHUB_STEP_SUMMARY
+            echo '#### Raw .trx file' >> $GITHUB_STEP_SUMMARY
             echo '```xml' >> $GITHUB_STEP_SUMMARY
             cat test-results/test-results.trx >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
@@ -70,9 +78,10 @@ jobs:
       - name: Parse test result summary
         id: parse
         run: |
-          passed=$(grep -oP 'Total tests: \K\d+' test-results/test-results.trx | head -1)
-          failed=$(grep -oP 'Failed: \K\d+' test-results/test-results.trx | head -1)
-          echo "status=✅ Passed: $((passed - failed)) / $passed\n❌ Failed: $failed" >> $GITHUB_OUTPUT
+          total=$(xmllint --xpath 'string(//ResultSummary/Counters/@total)' test-results/test-results.trx)
+          passed=$(xmllint --xpath 'string(//ResultSummary/Counters/@passed)' test-results/test-results.trx)
+          failed=$(xmllint --xpath 'string(//ResultSummary/Counters/@failed)' test-results/test-results.trx)
+          echo "status=✅ Passed: $passed / $total\n❌ Failed: $failed" >> $GITHUB_OUTPUT
 
       - name: Comment on PR with test results
         uses: actions/github-script@v7
