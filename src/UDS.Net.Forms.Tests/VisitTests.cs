@@ -9,21 +9,20 @@ namespace UDS.Net.Forms.Tests;
 public class VisitTest : TestBase
 {
     private string _visitId = "1";
-    
+
     [TestInitialize]
     public async Task TestInitialize()
     {
         await Page.GotoAsync("https://localhost:7109/");
         await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
 
-       await Page.WaitForURLAsync("**/Visits/Details/*");
+        await Page.WaitForURLAsync("**/Visits/Details/*");
     }
 
     [TestMethod]
     public async Task CheckForForms()
     {
         await Page.GotoAsync($"https://localhost:7109/Visits/Details/{_visitId}");
-
 
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true }).IsVisibleAsync());
