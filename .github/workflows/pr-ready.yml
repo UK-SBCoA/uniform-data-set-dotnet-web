@@ -36,16 +36,19 @@ jobs:
           echo "Waiting for app to become responsive..."
           sleep 10
 
+      - name: Test
+        run: dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-build --verbosity normal
+
       - name: Create test results directory
         run: mkdir -p ./test-results
 
       - name: Run Playwright .NET tests
         run: |
           dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
-            --no-build \
             --logger "trx;LogFileName=test-results.trx" \
-            --results-directory ./test-results
-            
+            --results-directory ./test-results \
+            || true
+
       - name: List test results directory
         run: ls -l ./test-results || echo "No test results directory found"
 
