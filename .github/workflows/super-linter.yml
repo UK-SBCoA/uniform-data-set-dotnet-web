@@ -17,6 +17,7 @@ permissions: read-all
 jobs:
   run-lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     permissions:
       contents: read
