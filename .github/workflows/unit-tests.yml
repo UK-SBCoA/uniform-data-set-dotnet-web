@@ -1,7 +1,6 @@
 name: Unit Tests
 
 on:
-  push:
   pull_request:
     branches: [ "main" ]
 
@@ -21,9 +20,12 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+        
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/UDS.Net.sln
+    
     - name: Build
-      run: dotnet build --no-restore --configuration Debug 
+      run: dotnet build src/UDS.Net.sln --no-restore --configuration Debug 
+    
     - name: Test
       run: dotnet test src/UDS.Net.Services.Test/UDS.Net.Services.Test.csproj --no-build --verbosity normal
