@@ -49,6 +49,8 @@ jobs:
         run: mkdir -p ./test-results
 
       - name: Run Playwright .NET tests
+        env:
+          PLAYWRIGHT_HEADLESS: 1
         run: |
           dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
             --no-build \
