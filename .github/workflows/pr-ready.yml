@@ -43,7 +43,7 @@ jobs:
         run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug 
 
       - name: Install Playwright Browsers
-        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install
 
       - name: Create test results directory
         run: mkdir -p ./test-results
