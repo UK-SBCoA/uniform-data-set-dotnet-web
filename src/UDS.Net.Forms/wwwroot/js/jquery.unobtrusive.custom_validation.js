@@ -477,15 +477,12 @@ $.validator.unobtrusive.adapters.add(
                     let watchedInt = parseInt(watchedValue);
                     let lowInt = parseInt(options.params.lowvalue);
                     let highInt = parseInt(options.params.highvalue);
-                    if (watchedInt <= lowInt || watchedInt >= highInt) {
+                    if (watchedInt < lowInt || watchedInt > highInt) {
                         // outside the range, reset everything
                         let element = $(options.element);
                         if (element.length) {
                             // reset css
                             element.removeClass("input-validation-error");
-                            element.addClass(
-                                "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                            );
 
                             //Get possible targets of watched element
                             //Radio button targets are within 'affects-targets' data attribute 
