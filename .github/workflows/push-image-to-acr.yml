@@ -11,6 +11,7 @@ permissions:
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         steps:
         - name: 'Checkout GitHub Action'
           uses: actions/checkout@v3
