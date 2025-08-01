@@ -29,11 +29,16 @@ public class HomeController : Controller
     {
         var participation = await _participationService.GetByLegacyId("username", legacyId);
 
-        var visit = new Visit(1, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null);
+        var visit = await _visitService.GetById("username", 1);
 
-        var created = await _visitService.Add("username", visit);
+        if (visit == null)
+        {
+            var v = new Visit(1, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null);
 
-        return RedirectToPage("/Visits/Details", new { Id = created.Id });
+            visit = await _visitService.Add("username", v);
+        }
+
+        return RedirectToPage("/Visits/Details", new { Id = visit.Id });
     }
 
     public IActionResult Privacy()
