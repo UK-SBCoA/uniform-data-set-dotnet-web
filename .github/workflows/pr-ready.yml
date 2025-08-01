@@ -40,17 +40,17 @@ jobs:
         run: dotnet restore src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj
       
       - name: Build Playwright test project
-        run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug 
+        run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug --verbosity quiet
 
       - name: Install Playwright Browsers
-        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install --with-deps
 
       - name: Create test results directory
         run: mkdir -p ./test-results
 
       - name: Run Playwright .NET tests
         env:
-          PLAYWRIGHT_HEADLESS: 1
+          HEADED: 0
         run: |
           dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
             --no-build \
