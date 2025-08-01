@@ -63,9 +63,9 @@ jobs:
         run: |
           echo '### Playwright .NET Test Results' >> $GITHUB_STEP_SUMMARY
           if [ -f test-results/test-results.trx ]; then
-            total=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@total)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
-            passed=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@passed)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
-            failed=$(xmllint --xpath 'string(//ns:ResultSummary/ns:Counters/@failed)' --xmlns:ns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" test-results/test-results.trx)
+            total=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@total)' test-results/test-results.trx)
+            passed=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@passed)' test-results/test-results.trx)
+            failed=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@failed)' test-results/test-results.trx)
             echo '| Status | Passed | Failed | Total |' >> $GITHUB_STEP_SUMMARY
             echo '|--------|--------|--------|-------|' >> $GITHUB_STEP_SUMMARY
             echo "| ✅     | $passed | $failed | $total |" >> $GITHUB_STEP_SUMMARY
