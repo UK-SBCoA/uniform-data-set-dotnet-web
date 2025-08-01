@@ -36,14 +36,18 @@ jobs:
           echo "Waiting for app to become responsive..."
           sleep 10
 
+      - name: Create test results directory
+        run: mkdir -p ./test-results
+
       - name: Run Playwright .NET tests
         run: |
-          BASE_URL=http://localhost:${{ env.APP_PORT }}
           dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
             --no-build \
             --logger "trx;LogFileName=test-results.trx" \
-            --results-directory ./test-results \
-            /p:PlaywrightTestBaseUrl=$BASE_URL
+            --results-directory ./test-results
+            
+      - name: List test results directory
+        run: ls -l ./test-results || echo "No test results directory found"
 
       - name: Parse test result summary
         id: parse
