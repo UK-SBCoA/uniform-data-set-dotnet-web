@@ -57,8 +57,17 @@ jobs:
             --verbosity quiet \
             || true
 
-      - name: List test results directory
-        run: ls -l ./test-results || echo "No test results directory found"
+      - name: Output test results to summary
+        if: always()
+        run: |
+          echo '### Playwright .NET Test Results' >> $GITHUB_STEP_SUMMARY
+          if [ -f test-results/test-results.trx ]; then
+            echo '```xml' >> $GITHUB_STEP_SUMMARY
+            cat test-results/test-results.trx >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo 'No test-results.trx file found.' >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Parse test result summary
         id: parse
