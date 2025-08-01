@@ -1,0 +1,118 @@
+name: Playwright
+
+on:
+  pull_request:
+    types: [ready_for_review]
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  APP_PORT: 7110
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build app Docker image
+        run: |
+          docker build -t udsnet-e2e -f src/UDS.Net.Forms.Tests.Runtime/Dockerfile .
+
+      - name: Start app container
+        run: |
+          docker run -d -p ${{ env.APP_PORT }}:80 --name udsnet-test udsnet-e2e
+          echo "Waiting for app to become responsive..."
+          sleep 10
+
+      - name: Restore test dependencies
+        run: dotnet restore src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj
+      
+      - name: Build Playwright test project
+        run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug --verbosity quiet
+
+      - name: Install Playwright Browsers
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install
+
+      - name: Create test results directory
+        run: mkdir -p ./test-results
+
+      - name: Run Playwright .NET tests
+        env:
+          HEADED: 0
+        run: |
+          dotnet test src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj \
+            --no-build \
+            --logger "trx;LogFileName=test-results.trx" \
+            --results-directory ./test-results \
+            --verbosity quiet \
+            || true
+
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
+      - name: Parse test result summary
+        id: parse
+        run: |
+          if [ -f test-results/test-results.trx ]; then
+            total=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@total)' test-results/test-results.trx)
+            passed=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@passed)' test-results/test-results.trx)
+            failed=$(xmllint --xpath 'string(//*[local-name()="ResultSummary"]/*[local-name()="Counters"]/@failed)' test-results/test-results.trx)
+            echo "total=$total" >> $GITHUB_OUTPUT
+            echo "passed=$passed" >> $GITHUB_OUTPUT
+            echo "failed=$failed" >> $GITHUB_OUTPUT
+            echo "status=✅ Passed: $passed / $total\n❌ Failed: $failed" >> $GITHUB_OUTPUT
+          else
+            echo "total=0" >> $GITHUB_OUTPUT
+            echo "passed=0" >> $GITHUB_OUTPUT
+            echo "failed=0" >> $GITHUB_OUTPUT
+            echo "status=No test-results.trx file found." >> $GITHUB_OUTPUT
+          fi
+
+      - name: Output test results to action and PR summary
+        if: always()
+        run: |
+          echo '### Playwright .NET Test Results' >> $GITHUB_STEP_SUMMARY
+          echo '| Status | Passed | Failed | Total |' >> $GITHUB_STEP_SUMMARY
+          echo '|--------|--------|--------|-------|' >> $GITHUB_STEP_SUMMARY
+          echo "| ✅     | ${{ steps.parse.outputs.passed }} | ${{ steps.parse.outputs.failed }} | ${{ steps.parse.outputs.total }} |" >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '#### Raw .trx file' >> $GITHUB_STEP_SUMMARY
+          echo '```xml' >> $GITHUB_STEP_SUMMARY
+          cat test-results/test-results.trx >> $GITHUB_STEP_SUMMARY || echo 'No test-results.trx file found.' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR with test results
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const status = `${{ steps.parse.outputs.status }}`;
+            const pr = context.payload.pull_request;
+            const body = `### 🧪 Playwright (.NET) Test Summary
+
+            ${status}
+            `;
+            if (pr) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body
+              });
+            }
+
+      - name: Stop and remove container
+        if: always()
+        run: |
+          docker stop udsnet-test || true
+          docker rm udsnet-test || true
