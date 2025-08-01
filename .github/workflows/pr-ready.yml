@@ -55,6 +55,9 @@ jobs:
             --verbosity quiet \
             || true
 
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
       - name: Output test results to summary
         if: always()
         run: |
