@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Xml;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
@@ -69,6 +70,13 @@ namespace UDS.Net.Web.MVC.Services
             await _apiClient.MilestoneClient.Put(entity.Id, entity.ToDto());
 
             return entity;
+        }
+
+        public async Task<List<M1Dto>> FindByLegacyId(string legacyId, string[] statuses)
+        {
+            var milestones = await _apiClient.MilestoneClient.GetMilestonesByLegacyIdAndStatus(legacyId, statuses);
+
+            return milestones;
         }
     }
 }
