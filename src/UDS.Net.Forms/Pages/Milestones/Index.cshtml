@@ -7,7 +7,6 @@
 <div class="space-y-16 py-16 xl:space-y-20 px-4 sm:px-6 lg:px-8">
 
     @if (Model.Milestones != null && Model.Milestones.List != null)
-
     {
         <div class="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
             <div class="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-4">
@@ -19,7 +18,7 @@
             <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                 <div class="flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
                     <div class="w-full">
-                        <form method="get">
+                        <form method="get" asp-page-handler="OnGetByLegacyId">
                             <label for="search" class="sr-only">Search</label>
                             <div class="relative flex grow items-stretch focus-within:z-10">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -52,22 +51,17 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <!-- for each milstone in the page model-->
                         @foreach (var milestone in Model.Milestones.List)
-
                         {
                             <tr class="even:bg-gray-50">
                                 <td>
                                     <div class="rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
                                         <a asp-page="/Participations/Details" asp-route-id="@milestone.ParticipationId" class="text-3xl font-medium leading-6 text-indigo-600 hover:text-indigo-500">
                                             @if (milestone.Participation != null)
-
                                             {
                                                 <span>@milestone.Participation.LegacyId</span>
                                             }
-
                                             else
-
                                             {
                                                 @milestone.ParticipationId
                                             }
@@ -80,13 +74,10 @@
                                 </td>
                                 <td>
                                     @if (milestone.DECEASED == true || milestone.DISCONT == true)
-
                                     {
                                         <span>Change followed by NO FURTHER CONTACT</span>
                                     }
-
                                     else
-
                                     {
                                         <span>Change followed by continued contact</span>
                                     }
