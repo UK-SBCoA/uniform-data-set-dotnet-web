@@ -5,6 +5,11 @@
 
 .DS_Store
 appsettings.Development.json
+# Playwright .auth
+.auth
+
+# Test SQLite database file
+test.db*
 
 # User-specific files
 *.rsuser

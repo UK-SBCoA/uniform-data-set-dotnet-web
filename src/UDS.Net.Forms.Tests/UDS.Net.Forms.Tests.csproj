@@ -5,21 +5,22 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
-		<ReleaseVersion>12.1.4</ReleaseVersion>
+		<ReleaseVersion>12.1.5</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-		<PackageReference Include="xunit" Version="2.9.2" />
-		<PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+		<PackageReference Include="coverlet.collector" Version="6.0.4">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="coverlet.collector" Version="6.0.3">
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="3.7.3" />
+		<PackageReference Include="MSTest.TestFramework" Version="3.7.3" />
+		<PackageReference Include="Microsoft.Playwright.MSTest" Version="1.50.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\UDS.Net.Forms\UDS.Net.Forms.csproj" />
+		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj" />
 	</ItemGroup>
 </Project>

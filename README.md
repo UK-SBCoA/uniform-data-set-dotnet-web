@@ -16,6 +16,7 @@ The software is implemented with several .NET tools and includes a development c
 Thank you for interest in contributing to our project! There are many ways you can help:
 * Submit bugs and feature requests [here](Discussions)
 * Submit a fix by forking and submitting a PR Request [here](CONTRIBUTING.md)
+* This solution includes automated tooling for linting, unit testing, and end-to-end testing. Powershell is required. Read more in our [wiki](https://github.com/UK-SBCoA/uniform-data-set-dotnet/wiki)
 
 ## Security
 [Security reports](SECURITY.md)

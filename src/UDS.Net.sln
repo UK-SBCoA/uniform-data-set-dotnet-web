@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms", "UDS.Net.Forms\UDS.Net.Forms.csproj", "{A1A16BC1-B30D-41DE-AD48-471EC278B8C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Forms", "UDS.Net.Forms\UDS.Net.Forms.csproj", "{A1A16BC1-B30D-41DE-AD48-471EC278B8C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services", "UDS.Net.Services\UDS.Net.Services.csproj", "{2859D284-F0ED-47CE-9B1D-70DE32451D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Services", "UDS.Net.Services\UDS.Net.Services.csproj", "{2859D284-F0ED-47CE-9B1D-70DE32451D6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms.Tests", "UDS.Net.Forms.Tests\UDS.Net.Forms.Tests.csproj", "{B1AC7F77-4264-441E-A8C2-847ADFCF8BCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Forms.Tests", "UDS.Net.Forms.Tests\UDS.Net.Forms.Tests.csproj", "{B1AC7F77-4264-441E-A8C2-847ADFCF8BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC.Services", "UDS.Net.Web.MVC.Services\UDS.Net.Web.MVC.Services.csproj", "{5B18B13C-475D-4F58-947B-A80F49CF3F7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC.Services", "UDS.Net.Web.MVC.Services\UDS.Net.Web.MVC.Services.csproj", "{5B18B13C-475D-4F58-947B-A80F49CF3F7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{332BFB18-1431-4572-BE96-757D0221FBCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{332BFB18-1431-4572-BE96-757D0221FBCE}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{06650335-6C31-43D3-99C6-60E2E6AA1FD8}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{F99AEBDD-D7EA-40C9-8DDC-AE13BCCC02DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms.Tests.Runtime", "UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj", "{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +49,14 @@ Global
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{332BFB18-1431-4572-BE96-757D0221FBCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AB3C677-A9BD-42FA-8B60-8613079F887B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AB3C677-A9BD-42FA-8B60-8613079F887B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AB3C677-A9BD-42FA-8B60-8613079F887B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AB3C677-A9BD-42FA-8B60-8613079F887B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D641E2-3177-4FFA-9284-4E34E4293A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
