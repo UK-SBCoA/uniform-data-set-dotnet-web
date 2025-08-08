@@ -423,9 +423,7 @@ $.validator.unobtrusive.adapters.add(
                 if (element.length) {
                     // reset css
                     element.removeClass("input-validation-error");
-                    element.addClass(
-                        "block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                    );
+
                     // reset error messages
                     let validator = $("#UDSForm").validate();
                     validator.form();
@@ -493,6 +491,13 @@ $.validator.unobtrusive.adapters.add(
                             //if watched element is an input type target the nested span element
                             if (affectsRangeTargets) {
                                 $(`span[id="${element.attr("aria-describedby")}"]`).empty();
+
+                                let elementValidationSummary = $(".validation-summary-errors").find(`li.${element.attr("id")}_summary`)
+
+                                //remove validation summary elements that are not removed by unobtrusive validation
+                                if (elementValidationSummary.length) {
+                                    elementValidationSummary.remove()
+                                }
                             }
 
                             //if watched element is a radio type target the single span element
