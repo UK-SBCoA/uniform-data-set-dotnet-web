@@ -4,6 +4,8 @@ using UDS.Net.Forms.Tests.Runtime.Data;
 using rxNorm.Net.Api.Wrapper;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.AspNetCore.Authentication;
+using UDS.Net.Forms.Tests.Runtime.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,11 @@ builder.Services.AddScoped<IPacketService, PacketService>();
 
 //builder.Services.AddHttpContextAccessor();
 //builder.Services.AddSingleton<IRxNormClient, RxNormClient>();
+
+builder.Services.AddAuthentication("Fake")
+    .AddScheme<AuthenticationSchemeOptions, TestAuthenticationHandler>("Fake", options => { });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddRazorPages();
 
@@ -49,6 +56,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
