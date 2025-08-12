@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 
@@ -46,6 +46,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         }
 
         public Task<Milestone> Update(string username, Milestone entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<M1Dto>> IMilestoneService.FindByLegacyId(string legacyId, string[] statuses)
         {
             throw new NotImplementedException();
         }
