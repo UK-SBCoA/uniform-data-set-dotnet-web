@@ -33,7 +33,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                         PageSize = pageSize,
                         PageIndex = pageIndex,
                         List = milestonesById.Select(m => m.ToDomain().ToVM()).ToList(),
-                        Total = await _milestoneService.Count(User.Identity.Name)
+                        Total = milestonesById.Count()
                     };
                     return Page();
                 }
