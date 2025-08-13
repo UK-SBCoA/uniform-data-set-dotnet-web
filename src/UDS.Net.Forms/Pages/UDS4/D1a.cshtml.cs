@@ -416,6 +416,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.CDOMVISU"),
                     new UIEnableAttribute("D1a.CDOMBEH"),
                     new UIEnableAttribute("D1a.CDOMAPRAX"),
+                    new UIEnableAttribute("D1a.MBI")
 
                 }
              } }
@@ -472,7 +473,36 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.BDOMAFREG"),
                     new UIDisableAttribute("D1a.BDOMIMP"),
                     new UIDisableAttribute("D1a.BDOMSOCIAL"),
-                    new UIDisableAttribute("D1a.BDOMTHTS")
+                    new UIDisableAttribute("D1a.BDOMTHTS"),
+                    new UIEnableAttribute("D1a.PREDOMSYN"),
+                    new UIEnableAttribute("D1a.MAJDEPDX"),
+                    new UIEnableAttribute("D1a.OTHDEPDX"),
+                    new UIEnableAttribute("D1a.BIPOLDX"),
+                    new UIEnableAttribute("D1a.SCHIZOP"),
+                    new UIEnableAttribute("D1a.ANXIET"),
+                    new UIEnableAttribute("D1a.GENANX"),
+                    new UIEnableAttribute("D1a.PANICDISDX"),
+                    new UIEnableAttribute("D1a.OCDDX"),
+                    new UIEnableAttribute("D1a.OTHANXD"),
+                    new UIEnableAttribute("D1a.PTSDDX"),
+                    new UIEnableAttribute("D1a.NDEVDIS"),
+                    new UIEnableAttribute("D1a.DELIR"),
+                    new UIEnableAttribute("D1a.OTHPSY"),
+                    new UIEnableAttribute("D1a.TBIDX"),
+                    new UIEnableAttribute("D1a.EPILEP"),
+                    new UIEnableAttribute("D1a.HYCEPH"),
+                    new UIEnableAttribute("D1a.NEOP"),
+                    new UIEnableAttribute("D1a.NEOPSTAT"),
+                    new UIEnableAttribute("D1a.HIV"),
+                    new UIEnableAttribute("D1a.POSTC19"),
+                    new UIEnableAttribute("D1a.APNEADX"),
+                    new UIEnableAttribute("D1a.OTHCOGILL"),
+                    new UIEnableAttribute("D1a.ALCDEM"),
+                    new UIEnableAttribute("D1a.IMPSUB"),
+                    new UIEnableAttribute("D1a.MEDS"),
+                    new UIEnableAttribute("D1a.COGOTH"),
+                    new UIEnableAttribute("D1a.COGOTH2"),
+                    new UIEnableAttribute("D1a.COGOTH3")
                 },
                 InstructionalMessage =""
             } },
@@ -484,7 +514,35 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.BDOMAFREG"),
                     new UIEnableAttribute("D1a.BDOMIMP"),
                     new UIEnableAttribute("D1a.BDOMSOCIAL"),
-                    new UIEnableAttribute("D1a.BDOMTHTS")
+                    new UIEnableAttribute("D1a.BDOMTHTS"),
+                    new UIEnableAttribute("D1a.MAJDEPDX"),
+                    new UIEnableAttribute("D1a.OTHDEPDX"),
+                    new UIEnableAttribute("D1a.BIPOLDX"),
+                    new UIEnableAttribute("D1a.SCHIZOP"),
+                    new UIEnableAttribute("D1a.ANXIET"),
+                    new UIEnableAttribute("D1a.GENANX"),
+                    new UIEnableAttribute("D1a.PANICDISDX"),
+                    new UIEnableAttribute("D1a.OCDDX"),
+                    new UIEnableAttribute("D1a.OTHANXD"),
+                    new UIEnableAttribute("D1a.PTSDDX"),
+                    new UIEnableAttribute("D1a.NDEVDIS"),
+                    new UIEnableAttribute("D1a.DELIR"),
+                    new UIEnableAttribute("D1a.OTHPSY"),
+                    new UIEnableAttribute("D1a.TBIDX"),
+                    new UIEnableAttribute("D1a.EPILEP"),
+                    new UIEnableAttribute("D1a.HYCEPH"),
+                    new UIEnableAttribute("D1a.NEOP"),
+                    new UIEnableAttribute("D1a.NEOPSTAT"),
+                    new UIEnableAttribute("D1a.HIV"),
+                    new UIEnableAttribute("D1a.POSTC19"),
+                    new UIEnableAttribute("D1a.APNEADX"),
+                    new UIEnableAttribute("D1a.OTHCOGILL"),
+                    new UIEnableAttribute("D1a.ALCDEM"),
+                    new UIEnableAttribute("D1a.IMPSUB"),
+                    new UIEnableAttribute("D1a.MEDS"),
+                    new UIEnableAttribute("D1a.COGOTH"),
+                    new UIEnableAttribute("D1a.COGOTH2"),
+                    new UIEnableAttribute("D1a.COGOTH3")
 
                 },
              } }
@@ -538,6 +596,28 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             } }
         };
+
+        public Dictionary<string, UIBehavior> IMPNOMCIUIBehavior = new Dictionary<string, UIBehavior>
+        {
+             { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("D1a.MBI")
+                },
+                InstructionalMessage = ""
+            } },
+
+             { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+
+                    new UIEnableAttribute("D1a.MBI")
+                },
+
+            } }
+        };
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
