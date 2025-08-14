@@ -19,7 +19,7 @@
         </div>
         <div class="lg:col-span-9 px-5 py-6">
             <div class="mx-auto max-w-7xl">
-                <partial name="_VisitDetailsHeaderPartial" model="Model.Visit" />
+                <partial name="_VisitDetailsHeaderPartial" model="Model" />
             </div>
 
             @await Html.PartialAsync("_FormsGridPartial", Model.Visit)
