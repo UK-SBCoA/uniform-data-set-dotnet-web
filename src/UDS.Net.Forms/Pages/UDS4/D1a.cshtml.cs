@@ -439,7 +439,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.CDOMVISU"),
                     new UIDisableAttribute("D1a.CDOMBEH"),
                     new UIDisableAttribute("D1a.CDOMAPRAX"),
-
                 },
                 InstructionalMessage =""
             } },
@@ -459,7 +458,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.CDOMVISU"),
                     new UIEnableAttribute("D1a.CDOMBEH"),
                     new UIEnableAttribute("D1a.CDOMAPRAX"),
-
+                    new UIEnableAttribute("D1a.MBI")
                 }
              } }
         };
@@ -515,6 +514,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.BDOMIMP"),
                     new UIEnableAttribute("D1a.BDOMSOCIAL"),
                     new UIEnableAttribute("D1a.BDOMTHTS"),
+                    new UIEnableAttribute("D1a.PREDOMSYN"),
                     new UIEnableAttribute("D1a.MAJDEPDX"),
                     new UIEnableAttribute("D1a.OTHDEPDX"),
                     new UIEnableAttribute("D1a.BIPOLDX"),
@@ -543,7 +543,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.COGOTH"),
                     new UIEnableAttribute("D1a.COGOTH2"),
                     new UIEnableAttribute("D1a.COGOTH3")
-
                 },
              } }
         };
