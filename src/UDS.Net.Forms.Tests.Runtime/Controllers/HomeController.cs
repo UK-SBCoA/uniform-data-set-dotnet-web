@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -25,20 +26,39 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Index(string legacyId)
+    public async Task<IActionResult> Index(string legacyId, int? existingVisitId = null)
     {
         var participation = await _participationService.GetByLegacyId("username", legacyId);
 
-        var visit = await _visitService.GetById("username", 1);
-
-        if (visit == null)
+        if (existingVisitId.HasValue)
         {
-            var v = new Visit(1, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, "TST", Net.Services.Enums.PacketStatus.Pending, DateTime.Now, "email@uky.edu", "", "", false, null);
+            var visit = await _visitService.GetById("username", existingVisitId.Value);
 
-            visit = await _visitService.Add("username", v);
+            if (visit == null)
+            {
+                // create a new one if it doesn't exist yet (new db instance)
+                var v = new Visit(1, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
+
+                visit = await _visitService.Add("username", v);
+            }
+
+            return RedirectToPage("/Visits/Details", new { Id = visit.Id });
         }
+        else
+        {
+            // create a new visit
+            var visitNumber = await _visitService.GetNextVisitNumber(User.Identity.Name, participation.Id);
 
-        return RedirectToPage("/Visits/Details", new { Id = visit.Id });
+            var packetKind = Net.Services.Enums.PacketKind.I;
+            if (visitNumber > 1)
+                packetKind = Net.Services.Enums.PacketKind.F;
+
+            var v = new Visit(0, visitNumber, participation.Id, "4", packetKind, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
+
+            var visit = await _visitService.Add("username", v);
+
+            return RedirectToPage("/Visits/Details", new { Id = visit.Id });
+        }
     }
 
     public IActionResult Privacy()

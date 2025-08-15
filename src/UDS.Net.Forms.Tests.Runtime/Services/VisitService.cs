@@ -68,6 +68,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 var packet = await _context.Packets
                     .Include(v => v.C2)
+                    .Include(v => v.D1a)
                     .Where(v => v.Id == id)
                     .FirstOrDefaultAsync();
 
@@ -81,6 +82,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         // get the dto then convert to domain with UDS.Net.Services.Extensions
                         var c2 = packet.C2.Convert(packet.Id, username);
                         forms.Add(c2);
+                    }
+                    if (packet.D1a != null)
+                    {
+                        var d1a = packet.D1a.Convert(packet.Id, username);
+                        forms.Add(d1a);
                     }
 
                     var visit = new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
@@ -103,9 +109,18 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             return "B1";
         }
 
-        public Task<int> GetNextVisitNumber(string username, int participationId)
+        public async Task<int> GetNextVisitNumber(string username, int participationId)
         {
-            throw new NotImplementedException();
+            var mostRecent = await _context.Packets
+                .Where(p => p.ParticipationId == participationId)
+                .OrderByDescending(p => p.VISITNUM)
+                .FirstOrDefaultAsync();
+
+            if (mostRecent != null)
+                return mostRecent.VISITNUM;
+            else
+                return 0;
+
         }
 
         public Task<int> GetVisitCountByVersion(string username, int participationId, string version)
@@ -160,30 +175,50 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             if (String.IsNullOrWhiteSpace(formId))
                 return null;
 
-            var packet = await _context.Packets.FindAsync(entity.Id);
-
-            if (formId == "C2")
-            {
-                packet = await _context.Packets
+            var packet = await _context.Packets
                     .Include(p => p.C2)
+                    .Include(p => p.D1a)
                     .Where(p => p.Id == entity.Id)
                     .FirstOrDefaultAsync();
 
-                var form = entity.Forms.Where(f => f.Kind == formId).FirstOrDefault();
+            var form = entity.Forms.Where(f => f.Kind == formId).FirstOrDefault();
 
+            if (formId == "C2")
+            {
                 if (packet.C2 == null)
                 {
                     // TODO if this is a new C2, then C2 in the db == null, so we need to instantiate it
                     packet.C2 = new API.Entities.C2
                     {
-                        PacketId = packet.Id
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
                     };
                 }
                 var c2 = packet.C2;
 
-                entity.UpdateEntityFromDomain(formId, c2);
+                c2.UpdateFromDomain(formId, entity);
 
-                // c2 should be updated here
+                await _context.SaveChangesAsync();
+            }
+
+            if (formId == "D1a")
+            {
+                if (packet.D1a == null)
+                {
+                    packet.D1a = new API.Entities.D1a
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+                var d1a = packet.D1a;
+
+                d1a.UpdateFromDomain(formId, entity);
+
                 await _context.SaveChangesAsync();
             }
 
