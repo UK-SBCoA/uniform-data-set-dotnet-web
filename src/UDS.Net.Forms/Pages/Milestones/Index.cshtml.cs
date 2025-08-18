@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
+using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
@@ -21,8 +18,27 @@ namespace UDS.Net.Forms.Pages.Milestones
             _milestoneService = milestoneService;
         }
 
-        public async Task<IActionResult> OnGet(int pageSize = 20, int pageIndex = 1)
+        public async Task<IActionResult> OnGet(string legacyId, int pageSize = 20, int pageIndex = 1)
         {
+            if (!string.IsNullOrWhiteSpace(legacyId))
+            {
+                string[] statuses = { "Complete" };
+
+                var milestonesById = await _milestoneService.FindByLegacyId(legacyId, statuses);
+
+                if (milestonesById != null)
+                {
+                    Milestones = new MilestonesPaginatedModel
+                    {
+                        PageSize = pageSize,
+                        PageIndex = pageIndex,
+                        List = milestonesById.Select(m => m.ToDomain().ToVM()).ToList(),
+                        Total = milestonesById.Count()
+                    };
+                    return Page();
+                }
+            }
+
             var milestones = await _milestoneService.List(User.Identity.Name, pageSize, pageIndex);
 
             Milestones = new MilestonesPaginatedModel
