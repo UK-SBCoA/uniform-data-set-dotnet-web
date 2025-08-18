@@ -141,8 +141,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
                     new UIEnableAttribute("D1a.SCD"),
-                    new UIDisableAttribute("D1a.DEMENTED")
-
+                    new UIDisableAttribute("D1a.DEMENTED"),
+                    new UIDisableAttribute("D1a.MCICRITCLN"),
+                    new UIDisableAttribute("D1a.MCICRITIMP"),
+                    new UIDisableAttribute("D1a.MCICRITFUN"),
+                    new UIDisableAttribute("D1a.MCI")
                 },
                 InstructionalMessage = "Skip to question 2a"
             } }
