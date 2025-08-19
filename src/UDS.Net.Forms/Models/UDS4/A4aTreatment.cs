@@ -64,5 +64,28 @@ namespace UDS.Net.Forms.Models.UDS4
             new RadioListItem("Placebo", "2"),
             new RadioListItem("Unknown", "9")
         };
+
+        public Dictionary<string, UIBehavior> GetCARETRIALUIBehavior(int index) => new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+        };
+
     }
 }
