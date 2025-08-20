@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             {
                 string[] statuses = { "Complete" };
 
-                var milestonesById = await _milestoneService.FindByLegacyId(legacyId, statuses);
+                var milestonesById = await _milestoneService.FindByLegacyId(User.Identity.Name,legacyId, statuses);
 
                 if (milestonesById != null)
                 {
