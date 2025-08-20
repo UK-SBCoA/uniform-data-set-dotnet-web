@@ -969,7 +969,6 @@
         </div>
 
         <div>
-
             <div class="subcounterreset m-2">
                 <p class="counter mb-3 font-semibold">Total number of words correctly recalled and number of intrusions</p>
 
@@ -986,7 +985,7 @@
                             <td class="@rowCSS text-nowrap">Trial 1</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY1REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY1REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
@@ -996,11 +995,10 @@
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
                                 </div>
                                 <p class="text-sm text-gray-500 text-nowrap">If test was not completed, enter reason code, 95-98. Complete QUESTION 13a and SKIP TO QUESTION 16a.</p>
-
                             </td>
                             <td class="align-top">
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY1INT" show-property-name="false" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY1INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY1INT" />
@@ -1016,7 +1014,7 @@
                             <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 2</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY2REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY2REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY2REC" />
@@ -1025,11 +1023,10 @@
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY2INT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY2INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY2INT" />
@@ -1045,7 +1042,7 @@
                             <td class="@rowCSS text-nowrap">Trial 3</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY3REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY3REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY3REC" />
@@ -1054,16 +1051,14 @@
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY3INT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY3INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY3INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3INT"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3INT"></p>
@@ -1075,26 +1070,23 @@
                             <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 4</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY4REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY4REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY4REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4REC"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4REC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY4INT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY4INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY4INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4INT"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY4INT"></p>
@@ -1106,26 +1098,23 @@
                             <td class="@rowCSS text-nowrap">Trial 5</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY5REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY5REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY5REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5REC"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5REC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY5INT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY5INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY5INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5INT"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY5INT"></p>
@@ -1137,26 +1126,23 @@
                             <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">List B</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REYBREC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REYBREC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REYBREC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBREC"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBREC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REYBINT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REYBINT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REYBINT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBINT"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REYBINT"></p>
@@ -1168,21 +1154,19 @@
                             <td class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-4 sm:py-6 text-nowrap">Trial 6</td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY6REC" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY6REC"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY6REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6REC"></span>
-
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6REC"></p>
                                 </div>
-
                             </td>
                             <td>
                                 <div class="@rowCSS">
-                                    <label asp-for="C2.REY6INT" show-property-name="false"><span class="subcounter"></span></label>
+                                    <label asp-for="C2.REY6INT"><span class="subcounter"></span></label>
                                     <div class="flex flex-row">
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY6INT" />
@@ -1196,6 +1180,7 @@
                     </tbody>
                 </table>
             </div>
+        </div>
         </div>
 
         <div class="@rowCSS shadow-sm border-2 rounded-md border-indigo-200/50 bg-indigo-50">
@@ -1332,7 +1317,7 @@
                         <td class="@rowCSS text-nowrap">Trial 1</td>
                         <td>
                             <div class="@rowCSS">
-                                <label asp-for="C2.CERAD1REC" show-property-name="false"><span class="subcounter"></span></label>
+                                <label asp-for="C2.CERAD1REC"><span class="subcounter"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD1REC" ui-range-behavior="Model.CERAD1RECBehavior" />
@@ -1346,7 +1331,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD1READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD1READ"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-25">
                                         <input asp-for="@Model.C2.CERAD1READ" />
@@ -1358,7 +1343,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD1INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD1INT"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD1INT" />
@@ -1375,7 +1360,7 @@
                         <td class="flex py-6 pr-4 text-nowrap">Trial 2</td>
                         <td>
                             <div class="@rowCSS">
-                                <label asp-for="C2.CERAD2REC" show-property-name="false"><span class="subcounter"></span></label>
+                                <label asp-for="C2.CERAD2REC"><span class="subcounter"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD2REC" />
@@ -1388,7 +1373,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD2READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD2READ"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD2READ" />
@@ -1400,7 +1385,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD2INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD2INT"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD2INT" />
@@ -1416,7 +1401,7 @@
                         <td class="@rowCSS text-nowrap">Trial 3</td>
                         <td>
                             <div class="@rowCSS">
-                                <label asp-for="C2.CERAD3REC" show-property-name="false"><span class="subcounter"></span></label>
+                                <label asp-for="C2.CERAD3REC"><span class="subcounter"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD3REC" />
@@ -1428,7 +1413,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD3READ" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD3READ"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD3READ" />
@@ -1440,7 +1425,7 @@
                         </td>
                         <td>
                             <div class="flex py-6">
-                                <label asp-for="C2.CERAD3INT" show-property-name="false"><span class="subcounter pr-4"></span></label>
+                                <label asp-for="C2.CERAD3INT"><span class="subcounter pr-4"></span></label>
                                 <div class="flex flex-row">
                                     <div class="w-28 sm:w-28">
                                         <input asp-for="@Model.C2.CERAD3INT" />
@@ -1481,7 +1466,7 @@
                         <label asp-for="C2.CERADJ6REC">
                             <span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.CERADJ6REC)
                         </label>
-                        <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a.)</p>
+                        <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 15d.)</p>
                     </div>
                     <div class="flex flex-row space-x-4">
                         <div class="min-w-[80px] max-w-[115px]">
@@ -1490,6 +1475,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ6REC"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ6REC"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CeradJ6RecMustBeBlank"></span>
                 </div>
 
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
@@ -1518,6 +1504,8 @@
                     </div>
                     <div class="flex flex-col space-y-1">
                         <span class="text-sm text-red-600 self-start" asp-validation-for="C2.CERADJ7YES"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CeradJ7YesRequired"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CeradJ7YesMustBeBlank"></span>
                     </div>
                 </div>
 
@@ -1530,6 +1518,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7NO"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7NO"></span>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CeradJ7NoMustBeBlank"></span>
                 </div>
 
             </div>
