@@ -591,7 +591,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15")]
+        [Display(Name = "Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B recall.")]
         public int? REYBREC { get; set; }
