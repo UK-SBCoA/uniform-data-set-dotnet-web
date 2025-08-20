@@ -502,6 +502,7 @@ $.validator.unobtrusive.adapters.add(
 
                             //if watched element is a radio type target the single span element
                             else if (affectsTargets) {
+                                console.log("emptying the validation messages for radio inputs")
                                 affectsTargets.forEach(target => {
                                     for (key in target) {
                                         $(`[data-valmsg-for="${key}"]`).empty();

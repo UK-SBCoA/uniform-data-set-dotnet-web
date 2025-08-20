@@ -118,6 +118,17 @@ namespace UDS.Net.Forms.TagHelpers
             tagBuilder.Attributes["value"] = item.Value;
             tagBuilder.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
+            //if (name == "D1b.CSFAD")
+            //{
+            //    //tagBuilder.Attributes["asp-for"] = "D1b.CSFAD";
+
+            //    tagBuilder.Attributes["data-val"] = "true";
+            //    tagBuilder.Attributes["data-val-requiredifrange"] = "Please specify.";
+            //    tagBuilder.Attributes["data-val-requiredifrange-watchedfield"] = "D1b.FLUIDBIOM";
+            //    //tagBuilder.Attributes["data-val-requiredifrange-highvalue"] = "3";
+            //    //tagBuilder.Attributes["data-val-requiredifrange-lowvalue"] = "2";
+            //}
+
             if (parentAttributes != null)
             {
                 foreach (var attribute in parentAttributes)
