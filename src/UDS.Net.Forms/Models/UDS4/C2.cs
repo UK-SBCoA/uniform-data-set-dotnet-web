@@ -591,7 +591,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15")]
+        [Display(Name = "Total recall", Description = "(0-15)")]
         [Range(0, 15)]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B recall.")]
         public int? REYBREC { get; set; }
@@ -991,6 +991,66 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         return null;
                     }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q14a. CERAD1REC is between 0 and 10, then Q15d. CERADJ7YES cannot be blank")]
+        public bool? CeradJ7YesRequired
+        {
+            get
+            {
+                if (CERAD1REC >= 0 && CERAD1REC <= 10 && !CERADJ7YES.HasValue)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q14a. CERAD1REC is between 95 and 98 or blank, then Q15d. CERADJ7YES must be blank")]
+        public bool? CeradJ7YesMustBeBlank
+        {
+            get
+            {
+                if ((CERAD1REC == null || (CERAD1REC >= 95 && CERAD1REC <= 98)) && CERADJ7YES.HasValue)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q15d. CERADJ7YES is between 95 and 98 or blank, then Q15e. CERADJ7NO must be blank")]
+        public bool? CeradJ7NoMustBeBlank
+        {
+            get
+            {
+                if ((CERADJ7YES == null || (CERADJ7YES >= 95 && CERADJ7YES <= 98)) && CERADJ7NO.HasValue)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q14a. CERAD1REC is between 95 and 98 or blank, then Q15b. CERADJ6REC must be blank")]
+        public bool? CeradJ6RecMustBeBlank
+        {
+            get
+            {
+                if ((CERAD1REC == null || (CERAD1REC >= 95 && CERAD1REC <= 98)) && CERADJ6REC.HasValue)
+                {
+                    return null;
                 }
 
                 return true;

@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        Task<List<M1Dto>> IMilestoneService.FindByLegacyId(string legacyId, string[] statuses)
+        Task<List<M1Dto>> IMilestoneService.FindByLegacyId(string username, string legacyId, string[] statuses)
         {
             throw new NotImplementedException();
         }
