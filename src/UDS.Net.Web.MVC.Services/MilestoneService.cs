@@ -71,7 +71,7 @@ namespace UDS.Net.Web.MVC.Services
             return entity;
         }
 
-        public async Task<List<M1Dto>> FindByLegacyId(string legacyId, string[] statuses)
+        public async Task<List<M1Dto>> FindByLegacyId(string username, string legacyId, string[] statuses)
         {
             var milestones = await _apiClient.MilestoneClient.GetMilestonesByLegacyIdAndStatus(legacyId, statuses);
 
