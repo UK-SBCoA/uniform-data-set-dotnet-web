@@ -146,31 +146,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.MCICRITIMP"),
                     new UIDisableAttribute("D1a.MCICRITFUN"),
                     new UIDisableAttribute("D1a.MCI"),
-                    new UIDisableAttribute("D1a.CDOMMEM"),
-                    new UIDisableAttribute("D1a.CDOMLANG"),
-                    new UIDisableAttribute("D1a.CDOMATTN"),
-                    new UIDisableAttribute("D1a.CDOMEXEC"),
-                    new UIDisableAttribute("D1a.CDOMVISU"),
-                    new UIDisableAttribute("D1a.CDOMBEH"),
-                    new UIDisableAttribute("D1a.CDOMAPRAX"),
-                    new UIDisableAttribute("D1a.MBI")
-                },
-                InstructionalMessage = "Skip to question 2a"
-            } }
-        };
-
-
-        public Dictionary<string, UIBehavior> SCDUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("D1a.SCDDXCONF"),
-                    new UIDisableAttribute("D1a.DEMENTED"),
-                    new UIDisableAttribute("D1a.MCICRITCLN"),
-                    new UIDisableAttribute("D1a.MCICRITIMP"),
-                    new UIDisableAttribute("D1a.MCICRITFUN"),
-                    new UIDisableAttribute("D1a.MCI"),
                     new UIDisableAttribute("D1a.IMPNOMCIFU"),
                     new UIDisableAttribute("D1a.IMPNOMCICG"),
                     new UIDisableAttribute("D1a.IMPNOMCLCD"),
@@ -232,6 +207,18 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("D1a.COGOTH"),
                     new UIDisableAttribute("D1a.COGOTH2"),
                     new UIDisableAttribute("D1a.COGOTH3")
+                },
+                InstructionalMessage = "Skip to question 2a"
+            } }
+        };
+
+
+        public Dictionary<string, UIBehavior> SCDUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("D1a.SCDDXCONF")
 
                 }
             } },
