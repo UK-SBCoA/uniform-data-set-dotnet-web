@@ -468,6 +468,7 @@ $.validator.unobtrusive.adapters.add(
         let watchedFieldName = options.params.watchedfield;
         let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
+            console.log(`test from the requiredifrange adapter: ${watchedFieldName}`)
             watched.on("change", function () {
                 // clear the validation if the watched field is changed to outside the range
                 let watchedValue = watched.val();
