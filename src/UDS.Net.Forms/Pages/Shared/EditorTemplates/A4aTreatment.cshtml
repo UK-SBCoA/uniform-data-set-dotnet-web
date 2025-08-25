@@ -114,7 +114,7 @@
     <td class="px-6 py-3 border-r border-gray-400 min-w-[200px]">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.CARETRIAL"></p>
-            <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems"></radio-button-group>
+            <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems" ui-behaviors="Model.GetCARETRIALUIBehavior(Model.TreatmentIndex-1)"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="CARETRIAL"></span>
         </div>
     </td>
