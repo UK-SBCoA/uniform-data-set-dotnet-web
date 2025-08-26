@@ -20,13 +20,7 @@ namespace UDS.Net.Forms.TagHelpers
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        // DEV NOTE: Added properties for testing
-
         private readonly IHtmlGenerator _generator;
-
-        [HtmlAttributeNotBound]
-        [ViewContext]
-        public ViewContext viewContext { get; set; }
 
         public TableCellRadioButtonsTagHelper(IHtmlGenerator generator)
         {
@@ -128,15 +122,10 @@ namespace UDS.Net.Forms.TagHelpers
                 selected = true;
 
             // DEV NOTE: Generate radio button element with IHtmlGenerator
-            var radio = _generator.GenerateRadioButton(viewContext, For.ModelExplorer, name, item.Value, selected, $"{Id}[{index}]");
+            var radio = _generator.GenerateRadioButton(ViewContext, For.ModelExplorer, name, item.Value, selected, $"{Id}[{index}]");
 
             radio.Attributes["id"] = $"{Id}[{index}]";
             radio.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
-
-            //if (name == "D1b.CSFAD")
-            //{
-            //  var test = "test"
-            //}
 
             if (parentAttributes != null)
             {

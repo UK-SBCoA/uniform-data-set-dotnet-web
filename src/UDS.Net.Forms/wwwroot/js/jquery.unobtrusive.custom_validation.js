@@ -440,25 +440,49 @@ $.validator.unobtrusive.adapters.add(
 $.validator.addMethod("requiredifrange", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
+    let isValid = false;
 
-    let watched = $("input[name=\"" + watchedFieldName + "\"]");
-    if (watched.length) {
-        let watchedValue = watched.val();
-        if (watchedValue.length) {
-            let watchedInt = parseInt(watchedValue);
+    //DEV NOTE: need to do different validation here for different inputs
+    //Radio button
+    let watchedRadio = $("input[name=\"" + watchedFieldName + "\"]:checked");
+    //Input number field
+    let watchedInput = $("input[name=\"" + watchedFieldName + "\"]");
+
+    if (watchedRadio) {
+        let watchedRadioValue = watchedRadio.val();
+        let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val()
+
+        if (watchedRadioValue) {
+            let watchedInt = parseInt(watchedRadioValue);
             let lowInt = parseInt(parameters.lowvalue);
-            let highInt = parseInt(parameters.highvalue);
+            let highInt = parseInt(parameters.highvalue); 
 
-            if (watchedInt >= lowInt && watchedInt <= highInt) {
-                // if within range field is required
-                if (value === "") {
-                    return false;
-                }
+            if (radioElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
+                isValid = true
+            } else {
+                isValid = false
             }
         }
     }
 
-    return true;
+    if (watchedInput) {
+        let watchedInputValue = watchedInput.val();
+        let inputElementValue = $(`input[type="number"][name="${element.name}"]`).val()
+
+        if (watchedInputValue) {
+            let watchedInt = parseInt(watchedInputValue);
+            let lowInt = parseInt(parameters.lowvalue);
+            let highInt = parseInt(parameters.highvalue);
+
+            if (inputElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
+                isValid = true
+            } else {
+                isValid = false
+            }
+        }
+    }
+    
+    return isValid;
 });
 
 $.validator.unobtrusive.adapters.add(
@@ -466,59 +490,75 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "lowvalue", "highvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
+        //DEV NOTE: watched field by name will trigger each type of input validation
         let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
-            console.log(`test from the requiredifrange adapter: ${watchedFieldName}`)
             watched.on("change", function () {
-                // clear the validation if the watched field is changed to outside the range
-                let watchedValue = watched.val();
-                if (watchedValue.length) {
-                    let watchedInt = parseInt(watchedValue);
+                //let watchedValue = watched.val();
+                //Find radio button input
+                let watchedRadioValue = $(`input[type="radio"][name="${watchedFieldName}"]:checked`).val()
+
+                //Find number input field
+                let watchedNumberValue = $(`input[type="number"][name="${watchedFieldName}"]`).val()
+
+                if (watchedRadioValue) {
+                    //let watchedInt = parseInt(watchedValue);
                     let lowInt = parseInt(options.params.lowvalue);
                     let highInt = parseInt(options.params.highvalue);
-                    if (watchedInt < lowInt || watchedInt > highInt) {
-                        // outside the range, reset everything
-                        let element = $(options.element);
-                        if (element.length) {
-                            // reset css
-                            element.removeClass("input-validation-error");
 
-                            //Get possible targets of watched element
-                            //Radio button targets are within 'affects-targets' data attribute 
-                            //Input field targets are within 'affects-range-targets' data attribute
-                            let affectsTargets = watched.data("affects-targets");
-                            let affectsRangeTargets = watched.data("affects-range-targets");
+                    //adds "\" to brackets in element id
+                    let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
 
-                            //if watched element is an input type target the nested span element
-                            if (affectsRangeTargets) {
-                                $(`span[id="${element.attr("aria-describedby")}"]`).empty();
+                    //Radio group validation
+                    if (watchedRadioValue < lowInt || watchedRadioValue > highInt) {
 
-                                let elementValidationSummary = $(".validation-summary-errors").find(`li.${element.attr("id")}_summary`)
+                        //if watched radio value is outside of the range, then clear validation errors
+                        
+                        let affectsTargets = watched.data("affects-targets");
 
-                                //remove validation summary elements that are not removed by unobtrusive validation
-                                if (elementValidationSummary.length) {
-                                    elementValidationSummary.remove()
-                                }
-                            }
-
-                            //if watched element is a radio type target the single span element
-                            else if (affectsTargets) {
-                                console.log("emptying the validation messages for radio inputs")
-                                affectsTargets.forEach(target => {
-                                    for (key in target) {
-                                        $(`[data-valmsg-for="${key}"]`).empty();
-                                    }
-                                });
-                            };
-
-                            //Validate will reset styling for input but not remove error messages
-                            let validator = $("#UDSForm").validate();
-                            validator.form();
-                        }
+                        //if watched element is a radio type target the single span element
+                        if (affectsTargets) {
+                            //clear error styling
+                            $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
+                            //clear error message
+                            $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+                            //clear validation summary message
+                            $(`.${elementId}_summary`).remove()
+                        };
                     }
                 }
+
+                //Number input validation
+                if (watchedNumberValue) {
+                    //let watchedInt = parseInt(watchedValue);
+                    let lowInt = parseInt(options.params.lowvalue);
+                    let highInt = parseInt(options.params.highvalue);
+
+                    //adds "\" to brackets in element id
+                    let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
+
+                    //Radio group validation
+                    if (watchedNumberValue < lowInt || watchedNumberValue > highInt) {
+
+                        //if watched radio value is outside of the range, then clear validation errors
+
+                        let affectsRangeTargets = watched.data("affects-range-targets");
+
+                        //if watched element is a radio type target the single span element
+                        if (affectsRangeTargets) {
+                            //clear error styling
+                            $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
+                            //clear error message
+                            $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+                            //clear validation summary message
+                            $(`.${elementId}_summary`).remove()
+                        };
+                    }
+                }
+
             });
         }
+
         options.rules.requiredifrange = [options.element, options.params]; // rules are required for the onChange event to trigger validation
         options.messages.requiredifrange = options.message;
     },
