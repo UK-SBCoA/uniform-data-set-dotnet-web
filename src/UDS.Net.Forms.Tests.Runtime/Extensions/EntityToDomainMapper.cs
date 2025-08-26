@@ -10,9 +10,18 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
         {
             var dto = entity.ToFullDto();
 
-            var c2 = dto.ToDomain(1, username);
+            var c2 = dto.ToDomain(visitId, username);
 
             return c2;
+        }
+
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.D1a entity, int visitId, string username)
+        {
+            var dto = entity.ToFullDto();
+
+            var d1a = dto.ToDomain(visitId, username);
+
+            return d1a;
         }
     }
 }

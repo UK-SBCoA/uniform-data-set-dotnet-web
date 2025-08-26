@@ -144,6 +144,15 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
 
+                    if (treatment.CARETRIAL == 1 || !treatment.CARETRIAL.HasValue)
+                    {
+                        if (treatment.TRIALGRP.HasValue)
+                        {
+                            yield return new ValidationResult(
+                                "If CARETRIAL is 1 or blank then TRIALGRP must be blank.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRIALGRP)}" });
+                        }
+                    }
+
                     if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
                     {
                         yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
