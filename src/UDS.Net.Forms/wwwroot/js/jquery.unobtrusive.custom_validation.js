@@ -446,17 +446,24 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
     //Radio button
     let watchedRadio = $("input[type='radio'][name=\"" + watchedFieldName + "\"]:checked");
     //Input number field
-    let watchedInput = $("input[type='text'][name=\"" + watchedFieldName + "\"]");
+    let watchedInput = $("input[type='number'][name=\"" + watchedFieldName + "\"]");
 
     if (watchedRadio.length) {
         let watchedRadioValue = watchedRadio.val();
-        let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val();
+        let radioElementRadio = $(`input[type="radio"][name="${element.name}"]:checked`)
+        let radioElementNumber = $(`input[type="number"][name="${element.name}"]`)
+
+        let radioElementValue = null;
+
+        if (radioElementNumber.length > 0) radioElementValue = radioElementNumber.val()
+        if (radioElementRadio.length > 0) radioElementValue = radioElementRadio.val()
 
         if (watchedRadioValue) {
             let watchedInt = parseInt(watchedRadioValue);
             let lowInt = parseInt(parameters.lowvalue);
             let highInt = parseInt(parameters.highvalue);
 
+            //If current element has a value and watched int is within required if range then input is valid
             if (radioElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
                 isValid = true
             } else {
@@ -467,13 +474,22 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
 
     if (watchedInput.length) {
         let watchedInputValue = watchedInput.val();
-        let inputElementValue = $(`input[type="number"][name="${element.name}"]`).val()
+
+        //watched value control a input element or radio element
+        let inputElementNumber = $(`input[type="number"][name="${element.name}"]`)
+        let inputElementRadio = $(`input[type="radio"][name="${element.name}"]:checked`)
+
+        let inputElementValue = null;
+        
+        if (inputElementNumber.length > 0) inputElementValue = inputElementNumber.val()
+        if (inputElementRadio.length > 0) inputElementValue = inputElementRadio.val()
 
         if (watchedInputValue) {
             let watchedInt = parseInt(watchedInputValue);
             let lowInt = parseInt(parameters.lowvalue);
             let highInt = parseInt(parameters.highvalue);
 
+            //If current element has a value and watched int is within required if range then input is valid
             if (inputElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
                 isValid = true
             } else {
