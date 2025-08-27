@@ -135,6 +135,45 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                @if (Model.PacketSubmissions[recentIndex].Errors.Any())
+
+                                                {
+                                                    <table class="w-full text-left border mt-2">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-2">Form</th>
+                                                                <th class="px-2">Message</th>
+                                                                <th class="px-2">Assigned To</th>
+                                                                <th class="px-2">Level</th>
+                                                                <th class="px-2">Resolved By</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var error in Model.PacketSubmissions[recentIndex].Errors)
+
+                                                            {
+                                                                <tr>
+                                                                    <td class="px-2">@error.FormKind</td>
+                                                                    <td class="px-2">@error.Message</td>
+                                                                    <td class="px-2">@error.AssignedTo</td>
+                                                                    <td class="px-2">@error.Level</td>
+                                                                    <td class="px-2">@(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")</td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+
+                                                else
+
+                                                {
+                                                    <span class="text-gray-500">No errors reported.</span>
+                                                }
+                                            </td>
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </turbo-frame>
