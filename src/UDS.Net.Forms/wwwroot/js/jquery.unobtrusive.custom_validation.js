@@ -442,20 +442,20 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
     let watchedFieldName = parameters.watchedfield;
     let isValid = false;
 
-    //DEV NOTE: need to do different validation here for different inputs
+    //DEV NOTE: need to do different validation depending on watched input type
     //Radio button
-    let watchedRadio = $("input[name=\"" + watchedFieldName + "\"]:checked");
+    let watchedRadio = $("input[type='radio'][name=\"" + watchedFieldName + "\"]:checked");
     //Input number field
-    let watchedInput = $("input[name=\"" + watchedFieldName + "\"]");
+    let watchedInput = $("input[type='text'][name=\"" + watchedFieldName + "\"]");
 
-    if (watchedRadio) {
+    if (watchedRadio.length) {
         let watchedRadioValue = watchedRadio.val();
-        let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val()
+        let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val();
 
         if (watchedRadioValue) {
             let watchedInt = parseInt(watchedRadioValue);
             let lowInt = parseInt(parameters.lowvalue);
-            let highInt = parseInt(parameters.highvalue); 
+            let highInt = parseInt(parameters.highvalue);
 
             if (radioElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
                 isValid = true
@@ -465,7 +465,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
         }
     }
 
-    if (watchedInput) {
+    if (watchedInput.length) {
         let watchedInputValue = watchedInput.val();
         let inputElementValue = $(`input[type="number"][name="${element.name}"]`).val()
 
@@ -481,7 +481,7 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
             }
         }
     }
-    
+
     return isValid;
 });
 
@@ -513,7 +513,7 @@ $.validator.unobtrusive.adapters.add(
                     if (watchedRadioValue < lowInt || watchedRadioValue > highInt) {
 
                         //if watched radio value is outside of the range, then clear validation errors
-                        
+
                         let affectsTargets = watched.data("affects-targets");
 
                         //if watched element is a radio type target the single span element
@@ -539,8 +539,6 @@ $.validator.unobtrusive.adapters.add(
 
                     //Radio group validation
                     if (watchedNumberValue < lowInt || watchedNumberValue > highInt) {
-
-                        //if watched radio value is outside of the range, then clear validation errors
 
                         let affectsRangeTargets = watched.data("affects-range-targets");
 
