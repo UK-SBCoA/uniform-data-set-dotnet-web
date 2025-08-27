@@ -15,60 +15,6 @@
                     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                         @if(Model.PacketSubmissions.Count > 0)
                         {
-                            <table class="w-full text-left">
-                                <thead>
-                                    <tr>
-                                        <th class="w-1/4">Submission date</th>
-                                        <th class="w-1/4">Download</th>
-                                        <th class="w-1/4">Error count</th>
-                                        <th class="w-1/4"><span class="sr-only">Edit errors</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-fixed">
-                                    @for (int i = 0; i < Model.PacketSubmissions.Count - 1; i++)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Model.PacketSubmissions[i].SubmissionDate<br />
-                                                @Model.PacketSubmissions[i].CreatedBy
-                                            </td>
-                                            <td>
-                                                @if (!Model.PacketSubmissions[i].ErrorCount.HasValue)
-                                                {
-                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                        @(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
-                                                }
-                                            </td>
-                                            <td>
-                                                @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
-                                                {
-                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
-                                                    <span>@Model.PacketSubmissions[i].ErrorCount</span>
-                                                }
-                                                else
-                                                {
-                                                    <span>Pending response from NACC</span>
-                                                }
-                                            </td>
-                                            <td>
-                                                <div class="grid grid-cols-2 justify-items-center">
-                                                    @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
-                                                    {
-                                                        <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
-
-                                                        <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Errors returned</a>
-                                                    }
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
                             <turbo-frame id="ActivePacketSubmission">
                                 <table class="w-full text-left">
                                     <thead>
@@ -80,100 +26,149 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            @{
-                                                var recentIndex = Model.PacketSubmissions.Count() - 1;
-                                            }
-                                            <td>
-                                                @Model.PacketSubmissions[recentIndex].SubmissionDate<br />
-                                                @Model.PacketSubmissions[recentIndex].CreatedBy
-                                            </td>
-                                            <td>
-                                                @if (!Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
-                                                {
-                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                        @(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
-                                                    </a>
-                                                }
-                                                else
-                                                {
-                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
-                                                }
-                                            </td>
-                                            <td>
-                                                @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
-                                                {
-                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
-                                                    <span>@Model.PacketSubmissions[recentIndex].ErrorCount</span>
-                                                }
-                                                else
-                                                {
-                                                    <span>Pending response from NACC</span>
-                                                }
-                                            </td>
-                                            <td>
-                                                <div class="grid grid-cols-2 justify-items-center">
-                                                    @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
-                                                    {
-                                                        <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
+                                        @foreach (var submission in Model.PacketSubmissions)
 
-                                                        <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Errors returned</a>
+                                        {
+                                            <tr class="hover:bg-gray-50">
+                                                <td class="px-4 py-3 text-sm text-gray-900">
+                                                    <div class="font-medium">@submission.SubmissionDate.ToString("g")</div>
+                                                    <div class="text-gray-500">@submission.CreatedBy</div>
+                                                </td>
+
+                                                <td class="px-4 py-3 text-sm">
+                                                    @if (!submission.ErrorCount.HasValue)
+
+                                                    {
+                                                        <a asp-page="../PacketSubmissions/Export"
+                                                           asp-route-packetId="@Model.Id"
+                                                           class="font-medium text-indigo-600 hover:text-indigo-500"
+                                                           target="_blank">
+                                                            @submission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE)
+                                                        </a>
                                                     }
+
+                                                    else
+
+                                                    {
+                                                        <span class="font-medium text-gray-600">
+                                                            @submission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE)
+                                                        </span>
+                                                    }
+                                                </td>
+
+                                                <td class="px-4 py-3 text-sm">
+                                                    @if (submission.ErrorCount.HasValue && submission.ErrorCount.Value >= 1)
+
+                                                    {
+                                                        <span class="inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
+                                                            @submission.ErrorCount errors
+                                                        </span>
+                                                    }
+
+                                                    else
+
+                                                    {
+                                                        <span class="text-gray-500 italic">Pending response from NACC</span>
+                                                    }
+                                                </td>
+
+                                                <td class="px-4 py-3 text-sm">
+                                                    <div class="flex gap-4">
+                                                        @if (submission.ErrorCount.HasValue)
+
+                                                        {
+                                                            <a class="font-medium text-gray-700 hover:text-gray-500">Success</a>
+                                                            <a class="font-medium text-red-600 hover:text-red-500">Errors returned</a>
+                                                        }
+
+                                                        else
+
+                                                        {
+                                                            <form asp-page="../PacketSubmissionErrors/Create" method="post" class="inline">
+                                                                <input type="hidden" name="PacketId" value="@Model.Id" />
+                                                                <input type="hidden" name="PacketSubmissionId" value="@submission.Id" />
+                                                                <input type="hidden" name="PacketStatus" value="4" />
+                                                                <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
+                                                                <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
+                                                                <button type="submit" class="font-medium text-indigo-600 hover:text-indigo-500">Success</button>
+                                                            </form>
+
+                                                            <a asp-page="../PacketSubmissions/Edit"
+                                                               asp-page-handler="Partial"
+                                                               asp-route-packetId="@Model.Id"
+                                                               asp-route-packetSubmissionId="@submission.Id"
+                                                               asp-route-legacyId="@Model.Participation.LegacyId"
+                                                               asp-route-visitNum="@Model.VISITNUM"
+                                                               class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                Errors returned
+                                                            </a>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="px-4 py-3">
+                                                    @if (submission.Errors.Any())
+                                                    {
+                                                        <div class="mt-2 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+                                                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                                                <thead class="bg-gray-50">
+                                                                    <tr>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Form</th>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Message</th>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Assigned To</th>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Level</th>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Resolved By</th>
+                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">View Form</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="divide-y divide-gray-100">
+                                                                    @foreach (var error in submission.Errors)
+
+                                                                    {
+                                                                        <tr class="hover:bg-gray-50">
+                                                                            <td class="px-2 py-1">@error.FormKind</td>
+                                                                            <td class="px-2 py-1">@error.Message</td>
+                                                                            <td class="px-2 py-1">@error.AssignedTo</td>
+                                                                            <td class="px-2 py-1">
+                                                                                <span class="
+                                                inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
+                                                @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                                    ? "bg-red-100 text-red-800"
+                                                    : "bg-yellow-100 text-yellow-800")
+                                                                ">
+                                                                                    @error.Level
+                                                                                </span>
+                                                                            </td>
+                                                                            <td class="px-2 py-1">
+                                                                                @(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")
+                                                                            </td>
+                                                                            <td class="px-2 py-1">
+                                                                                @{
+                                                                                    var pagePath = $"/UDS4/{error.FormKind}";
+                                                                                }
+                                                                                <a asp-page="@pagePath"
+                                                                                   asp-route-id="@Model.Id"
+                                                                                   asp-route-packetKind="@Model.PACKET.ToString()"
+                                                                                   class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+                                                                                    View Form
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    }
+
                                                     else
                                                     {
-                                                        <form asp-page="../PacketSubmissionErrors/Create" method="post">
-                                                            <input type="hidden" name="PacketId" value="@Model.Id" />
-                                                            <input type="hidden" name="PacketSubmissionId" value="@Model.PacketSubmissions[recentIndex].Id" />
-                                                            <input type="hidden" name="PacketStatus" value="4" />
-                                                            <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
-                                                            <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
-                                                            <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
-                                                        </form>
-
-                                                        <a asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id" asp-route-legacyId="@Model.Participation.LegacyId" asp-route-visitNum="@Model.VISITNUM" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
+                                                        <span class="text-gray-500 italic">No errors reported.</span>
                                                     }
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4">
-                                                @if (Model.PacketSubmissions[recentIndex].Errors.Any())
-
-                                                {
-                                                    <table class="w-full text-left border mt-2">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="px-2">Form</th>
-                                                                <th class="px-2">Message</th>
-                                                                <th class="px-2">Assigned To</th>
-                                                                <th class="px-2">Level</th>
-                                                                <th class="px-2">Resolved By</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach (var error in Model.PacketSubmissions[recentIndex].Errors)
-
-                                                            {
-                                                                <tr>
-                                                                    <td class="px-2">@error.FormKind</td>
-                                                                    <td class="px-2">@error.Message</td>
-                                                                    <td class="px-2">@error.AssignedTo</td>
-                                                                    <td class="px-2">@error.Level</td>
-                                                                    <td class="px-2">@(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")</td>
-                                                                </tr>
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                }
-
-                                                else
-
-                                                {
-                                                    <span class="text-gray-500">No errors reported.</span>
-                                                }
-                                            </td>
-                                        </tr>
-
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </turbo-frame>
