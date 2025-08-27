@@ -41,9 +41,23 @@
                                     <td>@visit.VISIT_DATE.ToShortDateString()</td>
                                     <td>@visit.Status</td>
                                     <td>
-                                        @if (visit.TotalUnresolvedErrorCount.HasValue)
+                                        @if (visit.TotalUnresolvedErrorCount.HasValue && visit.TotalUnresolvedErrorCount != 0)
                                         {
-                                            <span>@visit.TotalUnresolvedErrorCount errors</span>
+                                            <div class="text-red-800 text-sm group relative flex items-center">
+                                                <span class="font-medium cursor-help underline decoration-dotted">
+                                                    @visit.TotalUnresolvedErrorCount errors
+                                                </span>
+
+                                                <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
+                                                    @foreach (var error in visit.UnresolvedErrors)
+                                                    {
+                                                        <div class="break-words">
+                                                            <div class="font-semibold text-gray-900">@error.FormKind</div>
+                                                            <div class="text-gray-700">@error.Message</div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
                                         }
                                     </td>
                                     <td><a asp-page="Details" asp-route-id="@visit.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></td>
