@@ -3,6 +3,8 @@
     var allErrors = Model.PacketSubmissions
         .SelectMany(s => s.Errors)
         .ToList();
+
+    var recentIndex = Model.PacketSubmissions.Count() - 1;
 }
 <turbo-frame id="PacketSubmissions">
     @if (Model.Participation != null && Model.PacketSubmissions != null)
@@ -18,97 +20,91 @@
                         @if(Model.PacketSubmissions.Count > 0)
                         {
                             <turbo-frame id="ActivePacketSubmission">
-                                <table class="w-full text-left">
-                                    <thead>
+                                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                    <thead class="bg-gray-50">
                                         <tr>
-                                            <th class="w-1/4"></th>
-                                            <th class="w-1/4"></th>
-                                            <th class="w-1/4"></th>
-                                            <th class="w-1/4"></th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Submission</th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-900">File</th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Errors</th>
+                                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        @foreach (var submission in Model.PacketSubmissions)
+                                    <tbody class="divide-y divide-gray-100 bg-white">
+                                        <tr class="hover:bg-gray-50 transition">
+                                            <td class="px-4 py-2 text-gray-700">
+                                                @Model.PacketSubmissions[recentIndex].SubmissionDate<br />
+                                                <span class="text-xs text-gray-500">
+                                                    @Model.PacketSubmissions[recentIndex].CreatedBy
+                                                </span>
+                                            </td>
 
-                                        {
-                                            <tr class="hover:bg-gray-50">
-                                                <td class="px-4 py-3 text-sm text-gray-900">
-                                                    <div class="font-medium">@submission.SubmissionDate.ToString("g")</div>
-                                                    <div class="text-gray-500">@submission.CreatedBy</div>
-                                                </td>
+                                            <td class="px-4 py-2">
+                                                @if (!Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                                {
+                                                    <a asp-page="../PacketSubmissions/Export"
+                                                       asp-route-packetId="@Model.Id"
+                                                       class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                                                       target="_blank">
+                                                        @(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                    </a>
+                                                }
 
-                                                <td class="px-4 py-3 text-sm">
-                                                    @if (!submission.ErrorCount.HasValue)
+                                                else
+                                                {
+                                                    <span class="text-sm font-medium text-gray-600">
+                                                        @(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                    </span>
+                                                }
+                                            </td>
+
+                                            <td class="px-4 py-2 text-gray-700">
+                                                @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                                {
+                                                    <span>@Model.PacketSubmissions[recentIndex].ErrorCount</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="italic text-gray-500">Pending response from NACC</span>
+                                                }
+                                            </td>
+
+                                            <td class="px-4 py-2">
+                                                <div class="grid grid-cols-2 gap-2 justify-items-center">
+                                                    @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
 
                                                     {
-                                                        <a asp-page="../PacketSubmissions/Export"
+                                                        <span class="text-sm font-medium text-green-700">Success</span>
+                                                        <span class="text-sm font-medium text-red-700">Errors returned</span>
+                                                    }
+
+                                                    else
+
+                                                    {
+                                                        <form asp-page="../PacketSubmissionErrors/Create" method="post">
+                                                            <input type="hidden" name="PacketId" value="@Model.Id" />
+                                                            <input type="hidden" name="PacketSubmissionId" value="@Model.PacketSubmissions[recentIndex].Id" />
+                                                            <input type="hidden" name="PacketStatus" value="4" />
+                                                            <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
+                                                            <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
+                                                            <button type="submit"
+                                                                    class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                                                Success
+                                                            </button>
+                                                        </form>
+
+                                                        <a asp-page="../PacketSubmissions/Edit"
+                                                           asp-page-handler="Partial"
                                                            asp-route-packetId="@Model.Id"
-                                                           class="font-medium text-indigo-600 hover:text-indigo-500"
-                                                           target="_blank">
-                                                            @submission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE)
+                                                           asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id"
+                                                           asp-route-legacyId="@Model.Participation.LegacyId"
+                                                           asp-route-visitNum="@Model.VISITNUM"
+                                                           class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                                            Errors returned
                                                         </a>
                                                     }
-
-                                                    else
-
-                                                    {
-                                                        <span class="font-medium text-gray-600">
-                                                            @submission.GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE)
-                                                        </span>
-                                                    }
-                                                </td>
-
-                                                <td class="px-4 py-3 text-sm">
-                                                    @if (submission.ErrorCount.HasValue && submission.ErrorCount.Value >= 1)
-
-                                                    {
-                                                        <span class="inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
-                                                            @submission.ErrorCount errors
-                                                        </span>
-                                                    }
-
-                                                    else
-
-                                                    {
-                                                        <span class="text-gray-500 italic">Pending response from NACC</span>
-                                                    }
-                                                </td>
-
-                                                <td class="px-4 py-3 text-sm">
-                                                    <div class="flex gap-4">
-                                                        @if (submission != null && submission.ErrorCount.Value >= 1)
-
-                                                        {
-                                                            <a class="font-medium text-gray-700 hover:text-gray-500">Success</a>
-                                                            <a class="font-medium text-red-600 hover:text-red-500">Errors returned</a>
-                                                        }
-
-                                                        else
-
-                                                        {
-                                                            <form asp-page="../PacketSubmissionErrors/Create" method="post" class="inline">
-                                                                <input type="hidden" name="PacketId" value="@Model.Id" />
-                                                                <input type="hidden" name="PacketSubmissionId" value="@submission.Id" />
-                                                                <input type="hidden" name="PacketStatus" value="4" />
-                                                                <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
-                                                                <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
-                                                                <button type="submit" class="font-medium text-indigo-600 hover:text-indigo-500">Success</button>
-                                                            </form>
-
-                                                            <a asp-page="../PacketSubmissions/Edit"
-                                                               asp-page-handler="Partial"
-                                                               asp-route-packetId="@Model.Id"
-                                                               asp-route-packetSubmissionId="@submission.Id"
-                                                               asp-route-legacyId="@Model.Participation.LegacyId"
-                                                               asp-route-visitNum="@Model.VISITNUM"
-                                                               class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                Edit Submission
-                                                            </a>
-                                                        }
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
+                                                </div>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </turbo-frame>
@@ -125,8 +121,7 @@
                                                      stroke="currentColor"
                                                      class="w-6 h-6 text-red-600">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="M12 9v3.75m0 3.75h.007v.008H12v-.008zM21.75 12a9.75 9.75 0
-                              11-19.5 0 9.75 9.75 0 0119.5 0z" />
+                                                          d="M12 9v3.75m0 3.75h.007v.008H12v-.008zM21.75 12a9.75 9.75 0 11-19.5 0 9.75 9.75 0 0119.5 0z" />
                                                 </svg>
                                                 Errors / Alerts
                                             </h2>
