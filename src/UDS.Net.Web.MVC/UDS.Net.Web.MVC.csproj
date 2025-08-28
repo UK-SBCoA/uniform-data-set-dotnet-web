@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>aspnet-UDS.Net.Web.MVC-F92C0881-61B6-4292-8635-0004DE84CFE6</UserSecretsId>
 		<DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
-		<ReleaseVersion>13.0.7</ReleaseVersion>
+		<ReleaseVersion>13.0.8</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
