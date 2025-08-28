@@ -442,55 +442,24 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
     let watchedFieldName = parameters.watchedfield;
     let isValid = false;
 
-    //DEV NOTE: need to do different validation depending on watched input type
-    //Radio button
-    let watchedRadio = $("input[type='radio'][name=\"" + watchedFieldName + "\"]:checked");
-    //Input number field
-    let watchedInput = $("input[type='number'][name=\"" + watchedFieldName + "\"]");
+    //Search for both radio and input field watched element type, there can only be one at a time
+    let watchedRadioValue = $("input[type='radio'][name=\"" + watchedFieldName + "\"]:checked").val();
+    let watchedInputValue = $("input[type='number'][name=\"" + watchedFieldName + "\"]").val();
 
-    if (watchedRadio.length) {
-        let watchedRadioValue = watchedRadio.val();
-        let radioElementRadio = $(`input[type="radio"][name="${element.name}"]:checked`)
-        let radioElementNumber = $(`input[type="number"][name="${element.name}"]`)
+    //if the watched radio or input field exists. Will either be a radio or a input field
+    if (watchedRadioValue || watchedInputValue) {
+        let watchedValue = watchedRadioValue || watchedInputValue
 
-        let radioElementValue = null;
+        if (watchedValue) {
+            //detect if current element is a radio or input field
+            let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val()
+            let inputElementValue = $(`input[type="number"][name="${element.name}"]`).val()
 
-        if (radioElementNumber.length > 0) radioElementValue = radioElementNumber.val()
-        if (radioElementRadio.length > 0) radioElementValue = radioElementRadio.val()
-
-        if (watchedRadioValue) {
-            let watchedInt = parseInt(watchedRadioValue);
-            let lowInt = parseInt(parameters.lowvalue);
-            let highInt = parseInt(parameters.highvalue);
+            //set element value depending on if current element is radio or input field
+            let elementValue = radioElementValue || inputElementValue
 
             //If current element has a value and watched int is within required if range then input is valid
-            if (radioElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
-                isValid = true
-            } else {
-                isValid = false
-            }
-        }
-    }
-
-    if (watchedInput.length) {
-        let watchedInputValue = watchedInput.val();
-
-        //watched value control a input element or radio element
-        let inputElementNumber = $(`input[type="number"][name="${element.name}"]`)
-        let inputElementRadio = $(`input[type="radio"][name="${element.name}"]:checked`)
-
-        let inputElementValue = null;
-        
-        if (inputElementNumber.length > 0) inputElementValue = inputElementNumber.val()
-        if (inputElementRadio.length > 0) inputElementValue = inputElementRadio.val()
-
-        if (watchedInputValue) {
-            let watchedInt = parseInt(watchedInputValue);
-            let lowInt = parseInt(parameters.lowvalue);
-            let highInt = parseInt(parameters.highvalue);
-
-            //If current element has a value and watched int is within required if range then input is valid
-            if (inputElementValue && (watchedInt >= lowInt && watchedInt <= highInt)) {
+            if (elementValue && (watchedValue >= parameters.lowvalue && watchedValue <= parameters.highvalue)) {
                 isValid = true
             } else {
                 isValid = false
@@ -506,70 +475,39 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "lowvalue", "highvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
-        //DEV NOTE: watched field by name will trigger each type of input validation
         let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
-                //let watchedValue = watched.val();
-                //Find radio button input
+
+                //Search for both radio and input field watched element type, there can only be one at a time
                 let watchedRadioValue = $(`input[type="radio"][name="${watchedFieldName}"]:checked`).val()
+                let watchedInputValue = $(`input[type="number"][name="${watchedFieldName}"]`).val()
 
-                //Find number input field
-                let watchedNumberValue = $(`input[type="number"][name="${watchedFieldName}"]`).val()
+                if (watchedRadioValue || watchedInputValue) {
 
-                if (watchedRadioValue) {
-                    //let watchedInt = parseInt(watchedValue);
-                    let lowInt = parseInt(options.params.lowvalue);
-                    let highInt = parseInt(options.params.highvalue);
+                    //set watched value depending on which type of watched field is found
+                    let watchedValue = watchedRadioValue || watchedInputValue
 
-                    //adds "\" to brackets in element id
+                    //adds "\" to ignore brackets in element id to allow for jquery search
+                    //brackets in jquery search can result in unintended functionality
                     let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
 
                     //Radio group validation
-                    if (watchedRadioValue < lowInt || watchedRadioValue > highInt) {
+                    if (watchedValue < options.params.lowvalue || watchedValue > options.params.highvalue) {
 
-                        //if watched radio value is outside of the range, then clear validation errors
-
+                        //Watched element from radiobutton tag helpers will have "affects-targets" attribute for element targets
                         let affectsTargets = watched.data("affects-targets");
-
-                        //if watched element is a radio type target the single span element
-                        if (affectsTargets) {
-                            //clear error styling
-                            $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
-                            //clear error message
-                            $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-                            //clear validation summary message
-                            $(`.${elementId}_summary`).remove()
-                        };
-                    }
-                }
-
-                //Number input validation
-                if (watchedNumberValue) {
-                    //let watchedInt = parseInt(watchedValue);
-                    let lowInt = parseInt(options.params.lowvalue);
-                    let highInt = parseInt(options.params.highvalue);
-
-                    //adds "\" to brackets in element id
-                    let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
-
-                    //Radio group validation
-                    if (watchedNumberValue < lowInt || watchedNumberValue > highInt) {
-
+                        //watched element from input fields will have "affects-range-targets" attribute for element targets
                         let affectsRangeTargets = watched.data("affects-range-targets");
 
-                        //if watched element is a radio type target the single span element
-                        if (affectsRangeTargets) {
-                            //clear error styling
+                        //if targets on watched element then clear error class, error message, and summary message
+                        if (affectsTargets || affectsRangeTargets) {
                             $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
-                            //clear error message
                             $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-                            //clear validation summary message
                             $(`.${elementId}_summary`).remove()
                         };
                     }
                 }
-
             });
         }
 
