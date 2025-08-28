@@ -1,7 +1,9 @@
 ﻿@model PacketModel
 @{
+    var allErrors = Model.PacketSubmissions
+        .SelectMany(s => s.Errors)
+        .ToList();
 }
-
 <turbo-frame id="PacketSubmissions">
     @if (Model.Participation != null && Model.PacketSubmissions != null)
     {
@@ -74,7 +76,7 @@
 
                                                 <td class="px-4 py-3 text-sm">
                                                     <div class="flex gap-4">
-                                                        @if (submission.ErrorCount.HasValue)
+                                                        @if (submission != null && submission.ErrorCount.Value >= 1)
 
                                                         {
                                                             <a class="font-medium text-gray-700 hover:text-gray-500">Success</a>
@@ -100,78 +102,92 @@
                                                                asp-route-legacyId="@Model.Participation.LegacyId"
                                                                asp-route-visitNum="@Model.VISITNUM"
                                                                class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                Errors returned
+                                                                Edit Submission
                                                             </a>
                                                         }
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="px-4 py-3">
-                                                    @if (submission.Errors.Any())
-                                                    {
-                                                        <div class="mt-2 overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-                                                            <table class="min-w-full divide-y divide-gray-200 text-sm">
-                                                                <thead class="bg-gray-50">
-                                                                    <tr>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Form</th>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Message</th>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Assigned To</th>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Level</th>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">Resolved By</th>
-                                                                        <th class="px-2 py-1 text-left font-semibold text-gray-700">View Form</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="divide-y divide-gray-100">
-                                                                    @foreach (var error in submission.Errors)
-
-                                                                    {
-                                                                        <tr class="hover:bg-gray-50">
-                                                                            <td class="px-2 py-1">@error.FormKind</td>
-                                                                            <td class="px-2 py-1">@error.Message</td>
-                                                                            <td class="px-2 py-1">@error.AssignedTo</td>
-                                                                            <td class="px-2 py-1">
-                                                                                <span class="
-                                                inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                                                @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
-                                                    ? "bg-red-100 text-red-800"
-                                                    : "bg-yellow-100 text-yellow-800")
-                                                                ">
-                                                                                    @error.Level
-                                                                                </span>
-                                                                            </td>
-                                                                            <td class="px-2 py-1">
-                                                                                @(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")
-                                                                            </td>
-                                                                            <td class="px-2 py-1">
-                                                                                @{
-                                                                                    var pagePath = $"/UDS4/{error.FormKind}";
-                                                                                }
-                                                                                <a asp-page="@pagePath"
-                                                                                   asp-route-id="@Model.Id"
-                                                                                   asp-route-packetKind="@Model.PACKET.ToString()"
-                                                                                   class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600">
-                                                                                    View Form
-                                                                                </a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    }
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    }
-
-                                                    else
-                                                    {
-                                                        <span class="text-gray-500 italic">No errors reported.</span>
-                                                    }
                                                 </td>
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
                             </turbo-frame>
+                            @if (allErrors.Any())
+                            {
+                                <div class="mt-12">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div>
+                                            <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24"
+                                                     stroke-width="1.5"
+                                                     stroke="currentColor"
+                                                     class="w-6 h-6 text-red-600">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          d="M12 9v3.75m0 3.75h.007v.008H12v-.008zM21.75 12a9.75 9.75 0
+                              11-19.5 0 9.75 9.75 0 0119.5 0z" />
+                                                </svg>
+                                                Errors / Alerts
+                                            </h2>
+                                            <p class="mt-1 text-sm text-gray-600">
+                                                Review all reported issues across submissions. Resolve them before creating a new submission.
+                                            </p>
+                                        </div>
+
+                                        <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm">
+                                            @allErrors.Count() Issues
+                                        </span>
+                                    </div>
+
+                                    <div class="overflow-x-auto rounded-2xl border border-red-200 bg-white shadow-lg">
+                                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                            <thead class="bg-red-50">
+                                                <tr>
+                                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
+                                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
+                                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Assigned To</th>
+                                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
+                                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Resolved By</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-gray-100 bg-white">
+                                                @foreach (var error in allErrors)
+
+                                                {
+                                                    <tr class="hover:bg-red-50 transition">
+                                                        <td class="px-4 py-2">
+                                                            @{
+                                                                var pagePath = $"/UDS4/{error.FormKind}";
+                                                            }
+                                                            <a asp-page="@pagePath"
+                                                               asp-route-id="@Model.Id"
+                                                               asp-route-packetKind="@Model.PACKET.ToString()"
+                                                               class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                @error.FormKind
+                                                            </a>
+                                                        </td>
+                                                        <td class="px-4 py-2 text-gray-700">@error.Message</td>
+                                                        <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
+                                                        <td class="px-4 py-2">
+                                                            <span class="
+                                    inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
+                                    @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                        ? "bg-red-100 text-red-800"
+                                        : "bg-yellow-100 text-yellow-800")">
+                                                                @error.Level
+                                                            </span>
+                                                        </td>
+                                                        <td class="px-4 py-2 text-gray-700">
+                                                            @(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
