@@ -10,6 +10,57 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public List<PacketSubmission> Submissions => _submissions;// new List<PacketSubmission>();
 
+        private int? _totalUnresolvedErrorsCount = null;
+        public int? TotalUnresolvedErrorCount
+        {
+            get
+            {
+                if (_totalUnresolvedErrorsCount.HasValue)
+                    return _totalUnresolvedErrorsCount;
+                else if (this._submissions != null)
+                {
+                    int unresolvedCount = 0;
+                    foreach (var submisson in this._submissions)
+                    {
+                        foreach (var error in submisson.Errors)
+                            if (String.IsNullOrWhiteSpace(error.ResolvedBy))
+                                unresolvedCount++;
+                    }
+                    return unresolvedCount;
+                }
+                return 0;
+            }
+            set
+            {
+                _totalUnresolvedErrorsCount = value;
+            }
+        }
+
+        public IEnumerable<PacketSubmissionError> UnresolvedErrors
+        {
+            get
+            {
+                if (_submissions == null)
+                    return new List<PacketSubmissionError>();
+
+                var unresolvedErrors = new List<PacketSubmissionError>();
+
+                foreach (var submission in _submissions)
+                {
+                    if (submission.Errors == null)
+                        continue;
+
+                    foreach (var error in submission.Errors)
+                    {
+                        if (string.IsNullOrWhiteSpace(error.ResolvedBy))
+                            unresolvedErrors.Add(error);
+                    }
+                }
+
+                return unresolvedErrors;
+            }
+        }
+
         public void AddSubmission(PacketSubmission submission)
         {
             _submissions.Add(submission);
