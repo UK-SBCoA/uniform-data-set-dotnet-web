@@ -14,6 +14,13 @@
                 <h2 class="mx-auto max-w-2xl text-base font-semibold leading-6 text-gray-900 lg:mx-0 lg:max-w-none">Packet submissions</h2>
                 <p class="mt-2 text-sm text-gray-700">A new submission may only be created after all errors have been resolved from previous submission and packet re-finalized.</p>
             </div>
+            <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8 mb-6 flex justify-end">
+                <a asp-page="/Visits/Details"
+                   asp-route-id="@Model.Participation.Id"
+                   class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-600 transition">
+                    View Visit
+                </a>
+            </div>
             <div class="mt-6 overflow-hidden border-t border-gray-100">
                 <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
