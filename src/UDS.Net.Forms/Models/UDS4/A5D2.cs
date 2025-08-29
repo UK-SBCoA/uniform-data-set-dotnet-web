@@ -515,8 +515,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MENARCHE { get; set; }
         [Display(Name = "How old was the participant when they had their last menstrual period?")]
         [RegularExpression("^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
-        [RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
-        [RequiredIf(nameof(MENARCHE), "999", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        //[RequiredIfRange(nameof(MENARCHE), 5, 25, ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        //[RequiredIf(nameof(MENARCHE), "999", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
+        [RequiredIfRegex(nameof(MENARCHE), "^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         public int? NOMENSAGE { get; set; }
         [Display(Name = "Participant has stopped having menstrual periods due to natural menopause")]
         public bool? NOMENSNAT { get; set; }
