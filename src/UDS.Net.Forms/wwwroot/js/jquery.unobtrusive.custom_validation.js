@@ -44,11 +44,28 @@ function setAffects(targets) {
   });
 }
 function toggleAffects(targets, isSelected) {
-  $.each(targets, function (index, target) {
-    // console.log(target + " disabled to " + !isSelected);
-    setAffect(target, "disabled", !isSelected);
-  });
+    $.each(targets, function (index, target) {
+        let element = $(`[name="${target}"]`);
+
+        if (element.length) {
+            setAffect(target, "disabled", !isSelected);
+
+            if (!isSelected) {
+                if (element.is(":checkbox") || element.is(":radio")) {
+                    element.prop("checked", false);
+                } else {
+                    element.val("");
+                }
+
+                let childTargets = element.data("affectsToggleTargets");
+                if (childTargets) {
+                    toggleAffects(childTargets, false);
+                }
+            }
+        }
+    });
 }
+
 function compareRange(low, high, targets, value) {
   if (value === "") {
     $.each(targets, function (index, behavior) {
