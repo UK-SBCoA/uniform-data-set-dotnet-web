@@ -515,3 +515,95 @@ $.validator.unobtrusive.adapters.add(
         options.messages.requiredifrange = options.message;
     },
 );
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* RequiredIfRegex */
+$.validator.addMethod("requiredifregex", function (value, element, params) {
+    let parameters = params[1];
+    let watchedFieldName = parameters.watchedfield;
+    let isValid = false;
+
+    //Search for watched input field value
+    let watchedInputValue = $("input[type='number'][name=\"" + watchedFieldName + "\"]").val();
+
+    //if the watched input exists
+    if (watchedInputValue) {
+        let watchedValue = watchedInputValue
+
+        //DEV NOTE: watched value doesn't need an additional check here
+        if (watchedValue) {
+
+            //DEV NOTE: doesn't need to have seperate variable for element value here, only checking for inputs in this method
+
+            //DEV NOTE: check if the watched regex requires a value and check if current element has a value
+            //console.log(`The regex param: ${parameters.regex.toString()}`)
+            //console.log(`The watched value: ${watchedInputValue}`)
+
+            if (parameters.regex) {
+                let watchedRegex = new RegExp(parameters.regex.toString())
+
+                let watchedRegexMatched = watchedValue.match(watchedRegex)
+
+                //DEV NOTE: regex match() will return null if no match found
+                if (watchedRegexMatched != null) {
+                    if (element.value) {
+                        //DEV NOTE: if element has a value when watched regex is matched then valid = true
+                        isValid = true
+                    }
+                } else {
+                    isValid = true
+                }
+            }
+        }
+    }
+
+    return isValid;
+});
+
+$.validator.unobtrusive.adapters.add(
+    "requiredifregex",
+    ["watchedfield", "regex"],
+    function (options) {
+        console.log("test requiredifregex adapter")
+
+        let watchedFieldName = options.params.watchedfield;
+        let watched = $("input[name=\"" + watchedFieldName + "\"]");
+        if (watched.length) {
+            watched.on("change", function () {
+
+                //Search for input field watched element
+                let watchedInputValue = $(`input[type="number"][name="${watchedFieldName}"]`).val()
+
+                if (watchedInputValue) {
+
+                    //adds "\" to ignore brackets in element id to allow for jquery search
+                    //brackets in jquery search can result in unintended functionality
+                    let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
+
+                    //DEV NOTE: place new regex here to get match value. This might be able to be refactored
+                    let watchedRegex = new RegExp(options.params.regex.toString())
+                    let watchedRegexMatched = watchedInputValue.match(watchedRegex)
+
+                    //if watched ragex is out of range
+                    if (watchedRegexMatched == null) {
+
+                        //DEV NOTE: checek for affects-range-targets on watched element
+                        let affectsRangeTargets = watched.data("affects-range-targets");
+
+                        if (affectsRangeTargets) {
+                            $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
+                            $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+                            $(`.${elementId}_summary`).remove()
+                        };
+                    }
+                }
+
+                
+            });
+        }
+
+        options.rules.requiredifregex = [options.element, options.params]; // rules are required for the onChange event to trigger validation
+        options.messages.requiredifregex = options.message;
+    },
+);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services.Enums;
@@ -45,17 +46,20 @@ namespace UDS.Net.Forms.DataAnnotations
                         {
                             //TODO: handle the watched property regex validation
 
-                            var currentValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
-                            if (currentValue != null && Int32.TryParse(currentValue.ToString(), out int integerValue))
-                            {
-                                //TODO if value does not match regex return validation error
+                            var watchedValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
 
-                                //if (integerValue >= _watchedFieldLowValue && integerValue <= _watchedFieldHighValue)
-                                //{
-                                //    // if the watched field's value is within the range then this field requires a value
-                                //    if (value == null)
-                                //        return new ValidationResult(this.ErrorMessage);
-                                //}
+                            //TODO if value does not match regex return validation error
+                            if(watchedValue != null)
+                            {
+                                var watchedRegex = new Regex(_watchedFieldRegex);
+
+                                var watchedRegexMatch = watchedRegex.Match(watchedValue.ToString());
+
+                                if (watchedRegexMatch.Success)
+                                {
+                                    if (value == null)
+                                        return new ValidationResult(this.ErrorMessage);
+                                }
                             }
                         }
                     }
