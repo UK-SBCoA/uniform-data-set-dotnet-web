@@ -53,7 +53,8 @@ function toggleAffects(targets, isSelected) {
             if (!isSelected) {
                 if (element.is(":checkbox") || element.is(":radio")) {
                     element.prop("checked", false);
-                } else {
+                }
+                else {
                     element.val("");
                 }
 
