@@ -174,7 +174,6 @@ $(function () {
                 }, 300));
             }
         });
-
     }
 });
 
@@ -488,10 +487,6 @@ $.validator.unobtrusive.adapters.add(
                     //set watched value depending on which type of watched field is found
                     let watchedValue = watchedRadioValue || watchedInputValue
 
-                    //adds "\" to ignore brackets in element id to allow for jquery search
-                    //brackets in jquery search can result in unintended functionality
-                    let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
-
                     //Radio group validation
                     if (watchedValue < options.params.lowvalue || watchedValue > options.params.highvalue) {
 
@@ -504,7 +499,10 @@ $.validator.unobtrusive.adapters.add(
                         if (affectsTargets || affectsRangeTargets) {
                             $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
                             $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-                            $(`.${elementId}_summary`).remove()
+
+                            //remove matching validation summary element
+                            let elementValidationMessage = $(options.element).data("valRequiredifrange")
+                            $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty()
                         };
                     }
                 }
@@ -568,13 +566,12 @@ $.validator.unobtrusive.adapters.add(
                         let affectsRangeTargets = watched.data("affects-range-targets");
 
                         if (affectsRangeTargets) {
-                            //replace method adds "\" to ignore brackets in element id to allow for jquery search
-                            //brackets in jquery search can result in unintended functionality
-                            let elementId = $(options.element).attr("id").replace(/\[/g, "\\[").replace(/\]/g, "\\]");
-
                             $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
                             $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-                            $(`.${elementId}_summary`).remove()
+
+                            //remove matching validation summary element
+                            let elementValidationMessage = $(options.element).data("valRequiredifregex")
+                            $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty()
                         };
                     }
                 }
