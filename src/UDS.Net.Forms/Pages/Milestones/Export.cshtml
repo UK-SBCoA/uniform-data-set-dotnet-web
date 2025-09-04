@@ -1,0 +1,10 @@
+﻿@page
+@model UDS.Net.Forms.Pages.Milestones.ExportModel
+@{
+    ViewData["Title"] = "Export Model";
+}
+
+@if (Model.Processed)
+{
+    <script type="text/javascript">window.close();</script>
+}
