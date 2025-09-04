@@ -127,10 +127,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("C2.CERADJ6INT"),
                     new UIEnableAttribute("C2.CERADJ6INT"),
-                    new UIEnableAttribute("C2.CERADJ7YES"),
 
                 },
-                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 15d."
             }
         };
 

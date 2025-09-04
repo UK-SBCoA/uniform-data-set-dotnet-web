@@ -334,7 +334,7 @@ namespace UDS.Net.Services.DomainModels
         }
 
         public Visit(int id, int number, int participationId, Participation participation, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
-            : this(id, number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms)
+            : this(id, number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms, unresolvedErrorCount, unresolvedErrors)
         {
             if (participation != null)
             {
@@ -362,6 +362,7 @@ namespace UDS.Net.Services.DomainModels
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
             var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
             var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
             var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
 
@@ -371,10 +372,22 @@ namespace UDS.Net.Services.DomainModels
                 if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
                 {
                     results.Add(new VisitValidationResult(
-                        $"A1 sex cannot be male and A5D2 menstration details be provided.",
+                        $"A1 sex cannot be male and A5D2 menstruation details be provided.",
                         new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
                 }
             }
+
+            // A2 INLIVWTH == 1 (yes) and A1 LIVSITUA == 1 (lives alone) is a conflict
+            if (a1 != null && a2 != null)
+            {
+                if (a2.INLIVWTH == 1 && a1.LIVSITUA == 1)
+                {
+                    results.Add(new VisitValidationResult(
+                        $"IF A2 Q3. INLIVWTH (lives with participant?)=1 (yes) then Form A1, Q12. LIVSITUA (participant's living situation) should not equal 1 (lives alone)",
+                        new[] { nameof(a2.INLIVWTH), nameof(a1.LIVSITUA) }));
+                }
+            }
+
             if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
             {
 

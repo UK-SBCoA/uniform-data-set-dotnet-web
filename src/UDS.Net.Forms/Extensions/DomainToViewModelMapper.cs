@@ -112,7 +112,7 @@ namespace UDS.Net.Forms.Extensions
                 PageSize = pageSize,
                 PageIndex = pageIndex,
                 Total = total,
-                Search = search
+                Search = search,
             };
         }
 
@@ -138,7 +138,9 @@ namespace UDS.Net.Forms.Extensions
                 CanBeEdited = packet.TryUpdateStatus(Services.Enums.PacketStatus.Pending),
                 Forms = packet.Forms.ToVM(),
                 PacketSubmissions = packet.Submissions.ToVM(),
-                IsValid = packet.IsValid
+                IsValid = packet.IsValid,
+                TotalUnresolvedErrorCount = packet.TotalUnresolvedErrorCount,
+                UnresolvedErrors = packet.UnresolvedErrors.Select(e => e.ToVM()).ToList()
             };
         }
 
