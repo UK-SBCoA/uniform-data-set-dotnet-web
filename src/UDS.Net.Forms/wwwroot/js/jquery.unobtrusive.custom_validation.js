@@ -16,8 +16,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* UI behavior affects on input fields (supports numerical input, radio button, checkbox) */
 function setAffect(target, attribute, value) {
-    //console.log(target);
-    //console.log(attribute + " to " + value);
     let element = $(`[name="${target}"]`);
     if (element.length) {
         if (attribute === "disabled") {
@@ -400,7 +398,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
         let selected = watched.val();
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
         if (selected === watchedFieldIsRequiredValue) {
-            if (value === "") {
+            if (!value) {
                 return false;
             }
         }
@@ -417,15 +415,17 @@ $.validator.unobtrusive.adapters.add(
         let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
-                // clear the validation if the watched field is changed
                 let element = $(options.element);
                 if (element.length) {
                     // reset css
                     element.removeClass("input-validation-error");
 
-                    // reset error messages
-                    let validator = $("#UDSForm").validate();
-                    validator.form();
+                    //Remove the element input element validation message
+                    $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+
+                    //remove matching validation summary element
+                    let elementValidationMessage = $(element).data("valRequiredif")
+                    $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty()
                 }
             });
         }
@@ -529,13 +529,13 @@ $.validator.addMethod("requiredifregex", function (value, element, params) {
             let watchedRegex = new RegExp(parameters.regex.toString())
             let watchedRegexMatched = watchedInputValue.match(watchedRegex)
 
-            //DEV NOTE: regex match() will return null if no match found
+            //regex match() will return null if no match found
             if (watchedRegexMatched != null) {
                 if (element.value) {
                     isValid = true
                 }
             } else {
-                //DEV NOTE: IF regex is not matched then element does not require a value
+                //if regex is not matched then element does not require a value
                 isValid = true
             }
         }
