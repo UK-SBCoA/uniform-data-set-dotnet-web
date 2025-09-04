@@ -460,7 +460,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Choose if treated or untreated")]
         [RegularExpression("^([0-1])$", ErrorMessage = "Valid range is 0-1")]
         [RequiredIf(nameof(OTHERDEP), "1", ErrorMessage = "Response required")]
-        [RequiredIf(nameof(MAJORDEP), "1", ErrorMessage = "Response required")]
+        [RequiredIfRegex(nameof(MAJORDEP), "1", ErrorMessage = "Response required")]
         public int? DEPRTREAT { get; set; }
         [Display(Name = "Bipolar disorder(DSM - 5 - TR criteria)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]

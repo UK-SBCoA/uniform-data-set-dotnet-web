@@ -458,8 +458,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? SERVED { get; set; }
 
         [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
-        [RequiredIf(nameof(SERVED), "1", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
-        [RequiredIf(nameof(SERVED), "9", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
+        [RequiredIfRegex(nameof(SERVED), "(1|9)", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
         public int? MEDVA { get; set; }
 
         [Display(Name = "How much time each week do you spend performing activities that cause large increases in breathing or heart rate for at least 10 minutes continuously?")]
@@ -505,8 +504,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
-        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
-        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
+        [RequiredIfRange(nameof(REFERSC), 1, 2, ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
         public int? REFLEARNED { get; set; }
 
         [Display(Name = "Center social media - Specify")]

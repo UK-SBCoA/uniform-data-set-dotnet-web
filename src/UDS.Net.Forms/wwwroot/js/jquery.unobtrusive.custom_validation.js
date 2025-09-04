@@ -522,23 +522,40 @@ $.validator.addMethod("requiredifregex", function (value, element, params) {
     let watchedFieldName = parameters.watchedfield;
     let isValid = false;
 
+    let watchedRadioValue = $("input[type='radio'][name=\"" + watchedFieldName + "\"]:checked").val();
     let watchedInputValue = $("input[type='number'][name=\"" + watchedFieldName + "\"]").val();
 
-    if (watchedInputValue) {
+    if (watchedRadioValue || watchedInputValue) {
         if (parameters.regex) {
-            let watchedRegex = new RegExp(parameters.regex.toString())
-            let watchedRegexMatched = watchedInputValue.match(watchedRegex)
+            let watchedValue = watchedRadioValue || watchedInputValue
+            console.log("watched value: " + watchedValue + "on element: " + element.name)
 
-            //regex match() will return null if no match found
-            if (watchedRegexMatched != null) {
-                if (element.value) {
+            if (watchedValue) {
+                let watchedRegex = new RegExp(parameters.regex.toString())
+                let watchedRegexMatched = watchedValue.match(watchedRegex)
+
+                //regex match() will return null if no match found
+                if (watchedRegexMatched != null) {
+
+                    //detect if current element is a radio or input field
+                    let radioElementValue = $(`input[type="radio"][name="${element.name}"]:checked`).val()
+                    let inputElementValue = $(`input[type="number"][name="${element.name}"]`).val()
+
+                    let elementValue = radioElementValue || inputElementValue
+
+                    if (elementValue) {
+                        isValid = true
+                    }
+                } else {
+                    //if regex is not matched then element does not require a value
                     isValid = true
                 }
-            } else {
-                //if regex is not matched then element does not require a value
-                isValid = true
             }
         }
+    } else {
+        //DEV NOTE: found an error for this fix in B8 question 3 and 4. Not having a watched value caused a failed validation
+        //May be able to refactor to make the isValid values set cleaner, maybe initialize as true and return false
+        isValid = true
     }
 
     return isValid;
@@ -555,24 +572,26 @@ $.validator.unobtrusive.adapters.add(
             watched.on("change", function () {
                 //Search for input field watched element
                 let watchedInputValue = $(`input[type="number"][name="${watchedFieldName}"]`).val()
+                let watchedRadioValue = $(`input[type="radio"][name="${watchedFieldName}"]:checked`).val()
+                let watchedTextValue = $(`input[type="text"][name="${watchedFieldName}"]`).val()
 
-                if (watchedInputValue) {
+                let watchedValue = watchedInputValue || watchedRadioValue || watchedTextValue
+
+                if (watchedValue) {
                     let watchedRegex = new RegExp(options.params.regex.toString())
-                    let watchedRegexMatched = watchedInputValue.match(watchedRegex)
+                    let watchedRegexMatched = watchedValue.match(watchedRegex)
 
                     //If watched value does not match the watched value regex to require a value, clear error messages
                     if (watchedRegexMatched == null) {
-                        //check for affects-range-targets attribute on watched element
-                        let affectsRangeTargets = watched.data("affects-range-targets");
+                        //DEV NOTE: disable check for targets data attribute. The A3 does not have these attributes, but do we NEED to check for these attributes?
+                        //removed attribute check for targets on watched element before removing errors. Check requiredifrange for active example
 
-                        if (affectsRangeTargets) {
-                            $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
-                            $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+                        $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
+                        $(`span[data-valmsg-for="${options.element.name}"]`).empty();
 
-                            //remove matching validation summary element
-                            let elementValidationMessage = $(options.element).data("valRequiredifregex")
-                            $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty()
-                        };
+                        //remove matching validation summary element
+                        let elementValidationMessage = $(options.element).data("valRequiredifregex")
+                        $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty()
                     }
                 }
             });
