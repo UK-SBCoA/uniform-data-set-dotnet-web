@@ -49,7 +49,7 @@ namespace UDS.Net.Forms.DataAnnotations
                             var watchedValue = watchedProperty.GetValue(validationContext.ObjectInstance, null);
 
                             //TODO if value does not match regex return validation error
-                            if(watchedValue != null)
+                            if (watchedValue != null)
                             {
                                 var watchedRegex = new Regex(_watchedFieldRegex);
 
