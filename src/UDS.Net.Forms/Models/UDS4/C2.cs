@@ -259,8 +259,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "InPerson")]
+        [RequiredIfInPersonVisit(ErrorMessage = "Provide total seconds to complete.")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
