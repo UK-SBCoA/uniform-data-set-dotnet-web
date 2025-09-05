@@ -461,11 +461,15 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
             //If current element has a value and watched int is within required if range then input is valid
             if (elementValue && (watchedValue >= parameters.lowvalue && watchedValue <= parameters.highvalue)) {
                 isValid = true;
-            } else {
+            }
+            else
+            {
                 isValid = false;
             }
         }
-    } else {
+    }
+    else
+    {
         isValid = true;
     }
 
@@ -549,13 +553,17 @@ $.validator.addMethod("requiredifregex", function (value, element, params) {
                     if (elementValue) {
                         isValid = true;
                     }
-                } else {
+                }
+                else
+                {
                     //if regex is not matched then element does not require a value
                     isValid = true;
                 }
             }
         }
-    } else {
+    }
+    else
+    {
         //DEV NOTE: found an error for this fix in B8 question 3 and 4. Not having a watched value caused a failed validation
         //May be able to refactor to make the isValid values set cleaner, maybe initialize as true and return false
         isValid = true;
