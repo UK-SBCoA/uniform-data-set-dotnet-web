@@ -907,8 +907,8 @@ public class A5D2Model : FormPageModel
             {
                  PropertyAttributes = new List<UIPropertyAttributes>
                      {
-                         new UIEnableAttribute("A5D2.CPAP"),
-                         new UIEnableAttribute("A5D2.APNEAORAL")
+                         new UIDisableAttribute("A5D2.CPAP"),
+                         new UIDisableAttribute("A5D2.APNEAORAL")
                      }
             }
          },
