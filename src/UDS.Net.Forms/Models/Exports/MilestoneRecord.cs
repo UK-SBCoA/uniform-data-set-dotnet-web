@@ -12,7 +12,7 @@ namespace UDS.Net.Forms.Models.Exports
         public string FORMID { get; set; } = "M1";
         public int FORMVER { get; set; } = 3;
 
-        public int ADCID { get; set; }
+        public string ADCID { get; set; }
         public string PTID { get; set; }
 
         public int? VISITMO { get; set; }
@@ -51,11 +51,19 @@ namespace UDS.Net.Forms.Models.Exports
         public int? DISCYR { get; set; }
         public int? DROPREAS { get; set; }
 
-        public MilestoneRecord(UDS.Net.Services.DomainModels.Milestone m, string initials, int adcid)
+        public MilestoneRecord(UDS.Net.Services.DomainModels.Milestone m, string initials, string adcid)
         {
             PTID = m.Participation?.LegacyId ?? "";
             ADCID = adcid;
-            INITIALS = initials;
+
+            if (m.CreatedAt != null)
+            {
+                VISITMO = m.CreatedAt.Month;
+                VISITDAY = m.CreatedAt.Day;
+                VISITYR = m.CreatedAt.Year;
+            }
+
+            INITIALS = m.CreatedBy.Substring(0, Math.Min(m.CreatedBy.Length, 3)).ToUpper(); ;
 
             CHANGEMO = m.CHANGEMO;
             CHANGEDY = m.CHANGEDY;
@@ -86,6 +94,7 @@ namespace UDS.Net.Forms.Models.Exports
             DISCYR = m.DISCYR;
             DROPREAS = m.DROPREAS;
         }
+
     }
 
 }

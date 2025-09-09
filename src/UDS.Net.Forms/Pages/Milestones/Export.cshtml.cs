@@ -40,7 +40,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return NotFound($"Milestone with ID {id} not found.");
             }
 
-            int adcid = 19;
+            string adcid = _configuration["ADRC:Id"];
             string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
 
             var memoryStream = new MemoryStream();
@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             memoryStream.Position = 0;
 
-            string filename = $"Milestone_{milestone.Id}_{DateTime.Now:yyyyMMdd}.csv";
+            string filename = $"milestone_{milestone.Participation.LegacyId}_{milestone.CreatedAt.Year}_EXPORTED_{milestone.CreatedAt.ToFileTime()}-m.csv";
             return File(memoryStream, "text/csv", filename);
         }
     }
