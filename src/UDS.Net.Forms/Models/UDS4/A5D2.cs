@@ -324,11 +324,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? APNEA { get; set; }
         [Display(Name = "Typical use of breathing machine (e.g. CPAP) at night over the past 12 months")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredIfRange(nameof(APNEA), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? CPAP { get; set; }
         [Display(Name = "Typical use of an oral device for sleep apnea at night over the past 12 months?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredIfRange(nameof(APNEA), 1, 2, ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? APNEAORAL { get; set; }
         [Display(Name = "REM sleep behavior disorder")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
