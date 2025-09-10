@@ -402,7 +402,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
 
         //checkbox values are lower case while watchedfieldisrequired are pascal case
         if (watched.attr('type') == 'checkbox') {
-            watchedFieldIsRequiredValue = watchedFieldIsRequiredValue.toLowerCase()
+            watchedFieldIsRequiredValue = watchedFieldIsRequiredValue.toLowerCase();
         }
 
         if (selected == watchedFieldIsRequiredValue) {
@@ -468,10 +468,10 @@ $.validator.addMethod("requiredifrange", function (value, element, params) {
         let watchedValue = watchedRadioValue || watchedInputValue;
 
         //parse as float to handle floating and integer values
-        watchedValue = parseInt(watchedValue)
-        parameters.lowvalue = parseInt(parameters.lowvalue)
-        parameters.highvalue = parseInt(parameters.highvalue)
-        
+        watchedValue = parseInt(watchedValue);
+        parameters.lowvalue = parseInt(parameters.lowvalue);
+        parameters.highvalue = parseInt(parameters.highvalue);
+
         if (watchedValue >= parameters.lowvalue && watchedValue <= parameters.highvalue) {
             if (!elementValue) {
                 return false;
