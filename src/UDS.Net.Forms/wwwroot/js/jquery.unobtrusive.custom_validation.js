@@ -43,7 +43,10 @@ function setAffects(targets) {
     });
   });
 }
-function toggleAffects(targets, isSelected) {
+function toggleAffects(targets, isSelected, depth = 0) {
+    const MAX_DEPTH = 4;
+    if (depth > MAX_DEPTH) return;
+
     $.each(targets, function (index, target) {
         let element = $(`[name="${target}"]`);
 
@@ -60,7 +63,7 @@ function toggleAffects(targets, isSelected) {
 
                 let childTargets = element.data("affectsToggleTargets");
                 if (childTargets) {
-                    toggleAffects(childTargets, false);
+                    toggleAffects(childTargets, false, depth + 1);
                 }
             }
         }
