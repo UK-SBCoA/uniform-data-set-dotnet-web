@@ -59,7 +59,7 @@ namespace UDS.Net.Forms.Pages.Milestones
 
             memoryStream.Position = 0;
 
-            string filename = $"milestone_{milestone.Participation.LegacyId}_{milestone.CreatedAt.Year}_EXPORTED_{milestone.CreatedAt.ToFileTime()}-m.csv";
+            string filename = $"M_{milestone.Participation.LegacyId}_{milestone.CreatedAt:yyMMdd}.csv";
             return File(memoryStream, "text/csv", filename);
         }
     }
