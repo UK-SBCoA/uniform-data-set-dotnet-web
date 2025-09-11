@@ -92,6 +92,12 @@ input[type='radio'].input-validation-error {
     border-radius: 100%;
 }
 
+input[type='radio'].input-validation-error:disabled {
+    --tw-border-opacity: 1;
+    border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));
+    background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
+}
+
 .valid.never-enable {
     color: rgb(156 163 175) !important;
 }
