@@ -421,20 +421,17 @@ $.validator.unobtrusive.adapters.add(
     ["watchedfield", "watchedfieldvalue"],
     function (options) {
         let watchedFieldName = options.params.watchedfield;
+        let watchedFieldIsRequiredValue = options.params.watchedfieldvalue;
         let watched = $("input[name=\"" + watchedFieldName + "\"]");
         if (watched.length) {
             watched.on("change", function () {
-                let element = $(options.element);
-                if (element.length) {
-                    // reset css
-                    element.removeClass("input-validation-error");
+                //Search for both radio and input field watched element type, there can only be one at a time
+                let watchedRadioValue = $(`input[type="radio"][name="${watchedFieldName}"]:checked`).val();
 
-                    //Remove the element input element validation message
-                    $(`span[data-valmsg-for="${options.element.name}"]`).empty();
+                if (watchedRadioValue != watchedFieldIsRequiredValue) {
 
-                    //remove matching validation summary element
-                    let elementValidationMessage = $(element).data("valRequiredif");
-                    $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty();
+                    let elementValidationMessage = $(options.element).data("valRequiredif");
+                    RemoveValidationMessages(options.element.name, elementValidationMessage)
                 }
             });
         }
@@ -503,12 +500,9 @@ $.validator.unobtrusive.adapters.add(
 
                     //Radio group validation
                     if (watchedValue < options.params.lowvalue || watchedValue > options.params.highvalue) {
-                        $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
-                        $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-
-                        //remove matching validation summary element
                         let elementValidationMessage = $(options.element).data("valRequiredifrange");
-                        $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty();
+
+                        RemoveValidationMessages(options.element.name, elementValidationMessage)
                     }
                 }
             });
@@ -583,12 +577,9 @@ $.validator.unobtrusive.adapters.add(
 
                     //If watched value does not match the watched value regex to require a value, clear error messages
                     if (watchedRegexMatched == null) {
-                        $(`input[name='${options.element.name}']`).removeClass("input-validation-error");
-                        $(`span[data-valmsg-for="${options.element.name}"]`).empty();
-
-                        //remove matching validation summary element
                         let elementValidationMessage = $(options.element).data("valRequiredifregex");
-                        $(`.validation-summary-errors li:contains(${elementValidationMessage})`).first().empty();
+
+                        RemoveValidationMessages(options.element.name, elementValidationMessage)
                     }
                 }
             });
