@@ -401,7 +401,7 @@ $.validator.addMethod("requiredif", function (value, element, params) {
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
 
         //checkbox values are lower case while watchedfieldisrequired are pascal case
-        if (watched.attr('type') == 'checkbox') {
+        if (watched.attr("type") == "checkbox") {
             watchedFieldIsRequiredValue = watchedFieldIsRequiredValue.toLowerCase();
         }
 
@@ -431,7 +431,7 @@ $.validator.unobtrusive.adapters.add(
                 if (watchedRadioValue != watchedFieldIsRequiredValue) {
 
                     let elementValidationMessage = $(options.element).data("valRequiredif");
-                    RemoveValidationMessages(options.element.name, elementValidationMessage)
+                    RemoveValidationMessages(options.element.name, elementValidationMessage);
                 }
             });
         }
@@ -502,7 +502,7 @@ $.validator.unobtrusive.adapters.add(
                     if (watchedValue < options.params.lowvalue || watchedValue > options.params.highvalue) {
                         let elementValidationMessage = $(options.element).data("valRequiredifrange");
 
-                        RemoveValidationMessages(options.element.name, elementValidationMessage)
+                        RemoveValidationMessages(options.element.name, elementValidationMessage);
                     }
                 }
             });
@@ -579,7 +579,7 @@ $.validator.unobtrusive.adapters.add(
                     if (watchedRegexMatched == null) {
                         let elementValidationMessage = $(options.element).data("valRequiredifregex");
 
-                        RemoveValidationMessages(options.element.name, elementValidationMessage)
+                        RemoveValidationMessages(options.element.name, elementValidationMessage);
                     }
                 }
             });
