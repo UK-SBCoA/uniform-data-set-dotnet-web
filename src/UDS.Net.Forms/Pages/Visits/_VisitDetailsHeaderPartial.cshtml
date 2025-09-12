@@ -16,7 +16,7 @@
 
             <div class="mt-2 flex items-center text-sm text-gray-500">
                 <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                    .128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                 </svg>
                 @Model.Visit.CreatedBy
             </div>
@@ -39,19 +39,12 @@
                         <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd"></path>
                     </svg>
 
-                    <span class="font-medium cursor-help underline decoration-dotted">
+                    <button type="button"
+                            onclick="toggleErrorModal(true)"
+                            class="font-medium underline text-red-800 hover:text-red-900 focus:outline-none">
                         @Model.Visit.TotalUnresolvedErrorCount.Value errors
-                    </span>
+                    </button>
 
-                    <div class="absolute z-10 hidden group-hover:block w-96 left-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
-                        @foreach (var error in Model.Visit.UnresolvedErrors)
-                        {
-                            <div class="break-words">
-                                <div class="font-semibold text-gray-900">@error.FormKind</div>
-                                <div class="text-gray-700">@error.Message</div>
-                            </div>
-                        }
-                    </div>
                 </div>
             }
         </div>
@@ -80,3 +73,73 @@
         </span>
     </div>
 </div>
+
+<div id="errorModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
+        <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-6">
+            <h3 class="text-xl font-semibold text-gray-900">Unresolved Errors</h3>
+            <button onclick="toggleErrorModal(false)" class="text-gray-400 hover:text-gray-600 text-2xl leading-none focus:outline-none">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+
+        @if (Model.Visit.UnresolvedErrors != null && Model.Visit.UnresolvedErrors.Any())
+        {
+            <ul class="space-y-6">
+                @foreach (var error in Model.Visit.UnresolvedErrors)
+                {
+                    <li class="border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="mb-2">
+                            <h4 class="text-sm font-medium text-indigo-700">@error.FormKind</h4>
+                            <p class="text-sm text-gray-700">@error.Message</p>
+                        </div>
+
+                        <div class="mt-4 flex items-center gap-2">
+                            <form method="post" asp-page-handler="ResolveError">
+                                <input type="hidden" name="errorId" value="@error.Id" />
+                                <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    Resolve
+                                </button>
+                            </form>
+
+                            <form method="post" asp-page-handler="IgnoreError">
+                                <input type="hidden" name="errorId" value="@error.Id" />
+                                <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1">
+                                    Ignore
+                                </button>
+                            </form>
+                        </div>
+
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="text-sm text-gray-500">No unresolved errors found.</p>
+        }
+
+        <div class="mt-8 text-right">
+            <button onclick="toggleErrorModal(false)" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleErrorModal(show) {
+        const modal = document.getElementById("errorModal");
+        if (show) {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        } else {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        }
+    }
+</script>
