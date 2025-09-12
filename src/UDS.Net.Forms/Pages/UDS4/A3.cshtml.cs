@@ -58,7 +58,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 {
                                     ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
                                 }
-
+                                if (sibling.AGD.HasValue && sibling.AGD.Value > DateTime.Now.Year - sibling.YOB.Value)
+                                {
+                                    if (sibling.AGD.Value != 999 && sibling.AGD.Value != 888)
+                                    {
+                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Age of death cannot be greater than the current year minus the birth year");
+                                    }
+                                }
                             }
 
                             if (sibling.YOB.HasValue || sibling.AGD.HasValue)
@@ -88,6 +94,20 @@ namespace UDS.Net.Forms.Pages.UDS4
                                     {
                                         ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGO", "Please provide a value for age of onset.");
 
+                                    }
+                                    if (sibling.AGO.HasValue && sibling.AGD.HasValue && sibling.AGO.Value > sibling.AGD.Value)
+                                    {
+                                        if (sibling.AGO.Value != 999 && sibling.AGO.Value != 888)
+                                        {
+                                            ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGO", "Age of onset cannot be greater than age of death");
+                                        }
+                                    }
+                                    if (sibling.YOB.HasValue && sibling.YOB.HasValue && sibling.AGO.HasValue && sibling.AGO.Value > DateTime.Now.Year - sibling.YOB.Value)
+                                    {
+                                        if (sibling.YOB.Value != 999)
+                                        {
+                                            ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGO", "Age of onset cannot be greater than the current year minus the birth year");
+                                        }
                                     }
                                 }
                             }
