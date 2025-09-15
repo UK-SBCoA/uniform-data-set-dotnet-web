@@ -263,15 +263,18 @@ $("select[name$='MODE']").on("change", function () {
 /* Birth Month */
 $.validator.addMethod("birthmonth", function (value, element, params) {
     let parameters = params[1];
-
     let allowUnknown = parameters.allowUnknown;
+    //get validation message from element
+    let elementValidationMessage = $(element).data("valBirthmonth");
 
     if (allowUnknown === "true" && value === "99") {
+        RemoveValidationMessages(element.name, elementValidationMessage);
         // TODO after parsing as bool, update conditional
         return true;
     }
 
     if (value >= 1 && value <= 12) {
+        RemoveValidationMessages(element.name, elementValidationMessage);
         return true;
     }
 
@@ -310,15 +313,20 @@ $.validator.addMethod("birthyear", function (value, element, params) {
     let parentmaximum = parameters.parentmaximum;
     let parent = parameters.parent;
     let allowUnknown = parameters.allowUnknown;
+    //get validation message from element
+    let elementValidationMessage = $(element).data("valBirthyear");
 
     if (allowUnknown === "true" && value === "9999") {
+        RemoveValidationMessages(element.name, elementValidationMessage);
         // TODO after parsing as bool, update conditional
         return true;
     }
     if (parent === "true" && value >= minimum && value <= parentmaximum) {
+        RemoveValidationMessages(element.name, elementValidationMessage);
         return true;
     }
     if (parent === "false" && value >= minimum && value <= maximum) {
+        RemoveValidationMessages(element.name, elementValidationMessage);
         return true;
     }
     return false;
@@ -366,6 +374,8 @@ $.validator.unobtrusive.adapters.add("diagnosis", [], function (options) {
 $.validator.addMethod(
     "prohibitedcharacters",
     function (value, element, params) {
+        //get validation message from element
+        let elementValidationMessage = $(element).data("valProhibitedcharacters");
         if (
             value.includes("'") ||
             value.includes("\"") ||
@@ -374,6 +384,7 @@ $.validator.addMethod(
         ) {
             return false;
         }
+        RemoveValidationMessages(element.name, elementValidationMessage);
         return true;
     },
 );
