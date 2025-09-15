@@ -38,6 +38,8 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [Display(Name = "What is the primary mode of contact with the participant?")]
+        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to primary mode of contact required")]
         public int? INCNTMOD { get; set; }
         [Display(Name = "Primary mode of contact with the participant - Other (specify)")]
         [MaxLength(60)]
