@@ -24,7 +24,7 @@ namespace UDS.Net.Forms.Pages.Visits
         [BindProperty]
         public int ErrorId { get; set; }
 
-        public async Task<IActionResult> OnPostResolveErrorAsync(int errorId)
+        public async Task<IActionResult> OnPostResolveErrorAsync(int errorId, int Id)
         {
             var username = User.Identity?.Name ?? "unknown";
 
@@ -42,7 +42,9 @@ namespace UDS.Net.Forms.Pages.Visits
 
             await _packetService.UpdatePacketSubmissionErrors(username, packet, submission.Id, submission.Errors.ToList());
 
-            return RedirectToPage();
+            await this.OnGet(Id);
+
+            return Partial("_ErrorDisplayPartial", this);
         }
 
     }

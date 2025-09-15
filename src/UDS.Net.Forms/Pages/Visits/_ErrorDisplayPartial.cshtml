@@ -1,0 +1,55 @@
+<turbo-frame id="ErrorList">
+            <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Unresolved Errors</h3>
+                <button onclick="toggleErrorModal(false)" class="text-gray-400 hover:text-gray-600 text-2xl leading-none focus:outline-none">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+
+            @if (Model.Visit.UnresolvedErrors != null)
+            {
+                <ul class="space-y-6">
+                    @foreach (var error in Model.Visit.UnresolvedErrors)
+                    {
+                        <li class="border border-gray-200 rounded-lg p-4 shadow-sm">
+                            <div class="mb-2">
+                                <h4 class="text-sm font-medium text-indigo-700">@error.FormKind</h4>
+                                <p class="text-sm text-gray-700">@error.Message</p>
+                            </div>
+
+                            <div class="mt-4 flex items-center gap-2">
+                                <form method="post" asp-page-handler="ResolveError">
+                                    <input type="hidden" name="errorId" value="@error.Id" />
+                                    <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                        Resolve
+                                    </button>
+                                </form>
+
+                                <form method="post" asp-page-handler="IgnoreError">
+                                    <input type="hidden" name="errorId" value="@error.Id" />
+                                    <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1">
+                                        Ignore
+                                    </button>
+                                </form>
+                            </div>
+
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-sm text-gray-500">No unresolved errors found.</p>
+            }
+
+            <div class="mt-8 text-right">
+                <button onclick="toggleErrorModal(false)" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
+                    Close
+                </button>
+            </div>
+</turbo-frame">
+
