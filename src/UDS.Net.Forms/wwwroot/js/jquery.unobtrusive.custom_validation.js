@@ -44,12 +44,33 @@ function setAffects(targets) {
         });
     });
 }
-function toggleAffects(targets, isSelected) {
+function toggleAffects(targets, isSelected, depth = 0) {
+    const MAX_DEPTH = 4;
+    if (depth > MAX_DEPTH) return;
+
     $.each(targets, function (index, target) {
-        // console.log(target + " disabled to " + !isSelected);
-        setAffect(target, "disabled", !isSelected);
+        let element = $(`[name="${target}"]`);
+
+        if (element.length) {
+            setAffect(target, "disabled", !isSelected);
+
+            if (!isSelected) {
+                if (element.is(":checkbox") || element.is(":radio")) {
+                    element.prop("checked", false);
+                }
+                else {
+                    element.val("");
+                }
+
+                let childTargets = element.data("affectsToggleTargets");
+                if (childTargets) {
+                    toggleAffects(childTargets, false, depth + 1);
+                }
+            }
+        }
     });
 }
+
 function compareRange(low, high, targets, value) {
     if (value === "") {
         $.each(targets, function (index, behavior) {

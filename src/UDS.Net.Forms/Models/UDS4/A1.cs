@@ -500,7 +500,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
+        [RequiredIf(nameof(REFERSC), "8", ErrorMessage = "Please specify principal referral source")]
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
