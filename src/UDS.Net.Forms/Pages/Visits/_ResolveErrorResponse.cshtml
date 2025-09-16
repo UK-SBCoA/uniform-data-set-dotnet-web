@@ -1,0 +1,13 @@
+@model UDS.Net.Forms.Pages.Visits.DetailsModel
+
+<turbo-stream action="replace" target="ErrorList">
+    <template>
+        @await Html.PartialAsync("Partials/_ErrorListPartial", Model)
+    </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="ErrorCount">
+    <template>
+        @await Html.PartialAsync("Partials/_ErrorCountPartial", Model)
+    </template>
+</turbo-stream>

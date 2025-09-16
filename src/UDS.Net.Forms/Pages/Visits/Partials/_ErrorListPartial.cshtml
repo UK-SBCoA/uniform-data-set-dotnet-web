@@ -1,0 +1,77 @@
+@model UDS.Net.Forms.Pages.Visits.DetailsModel
+
+<div id="ErrorList">
+    <div class="bg-white z-20 flex justify-between items-center border-b border-gray-200 pb-4 mb-4 shadow-sm">
+        <h3 class="text-xl font-semibold text-gray-900">Unresolved Errors</h3>
+
+        <div class="flex items-center gap-2">
+            <form method="post" asp-page-handler="ResolveAllErrors">
+                <input type="hidden" name="Id" value="@Model.Visit.Id" />
+                <button type="submit" class="inline-flex items-center rounded-md bg-green-100 px-3 py-1.5 text-xs font-medium text-green-800 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-400">
+                    Resolve All
+                </button>
+            </form>
+
+            <button onclick="toggleErrorModal(false)" class="text-gray-400 hover:text-gray-600 text-2xl leading-none focus:outline-none">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+    </div>
+
+
+    @if (Model.Visit.UnresolvedErrors != null && Model.Visit.UnresolvedErrors.Any())
+    {
+        <ul class="space-y-6">
+            @foreach (var error in Model.Visit.UnresolvedErrors)
+            {
+                <li class="border border-gray-200 rounded-lg p-4 shadow-sm bg-white">
+                    <div class="mb-2">
+
+                        <div class="flex items-center gap-2 mb-1">
+                            <h4 class="text-sm font-medium text-indigo-700">@error.FormKind</h4>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded
+                                                        @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                                                                                                        ? "bg-red-100 text-red-800"
+                                                                                                                        : "bg-yellow-100 text-yellow-800")">
+                        @error.Level
+                    </span>
+                </div>
+
+                        <p class="text-sm text-gray-700">@error.Message</p>
+                    </div>
+
+                    <div class="mt-4 flex items-center gap-2">
+                        <form method="post" asp-page-handler="ResolveError">
+                            <input type="hidden" name="errorId" value="@error.Id" />
+                            <input type="hidden" name="Id" value="@Model.Visit.Id" />
+                            <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-transparent bg-green-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                                Resolve
+                            </button>
+                        </form>
+
+                        <form method="post" asp-page-handler="IgnoreError">
+                            <input type="hidden" name="errorId" value="@error.Id" />
+                            <button type="submit" class="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1">
+                                Ignore
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                }
+        </ul>
+    }
+    else
+    {
+        <p class="text-sm text-gray-500">No unresolved errors found.</p>
+    }
+
+    <div class="sticky bottom-0 mt-8 text-right">
+        <button onclick="toggleErrorModal(false)" class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
+            Close
+        </button>
+    </div>
+</div>
