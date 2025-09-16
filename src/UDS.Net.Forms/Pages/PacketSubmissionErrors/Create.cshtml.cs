@@ -61,7 +61,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                 string formKind = error.Code.Split("-")[0].ToUpper();
 
-                var formData = currentPacket.Forms.Where(f => f.Kind == formKind);
+                var formData = currentPacket.Forms.Where(f => f.Kind.ToUpper() == formKind);
 
                 string formModifiedBy = formData.Select(a => a.ModifiedBy).FirstOrDefault();
 
