@@ -45,7 +45,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (A3 != null && A3.Status == FormStatus.Finalized)
             {
-                if(A3.MOMYOB.HasValue)
+                if (A3.MOMYOB.HasValue)
                 {
                     if (!A3.MOMDAGE.HasValue)
                     {
@@ -60,7 +60,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     }
 
                 }
-                if(A3.MOMETPR != null)
+                if (A3.MOMETPR != null)
                 {
                     if (A3.MOMAGEO.HasValue && A3.MOMDAGE.HasValue && A3.MOMAGEO.Value > A3.MOMDAGE.Value)
                     {
