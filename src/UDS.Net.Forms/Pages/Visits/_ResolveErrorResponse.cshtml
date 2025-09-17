@@ -2,13 +2,13 @@
 
 <turbo-stream action="replace" target="ErrorList">
     <template>
-        @await Html.PartialAsync("Partials/_ErrorListPartial", Model)
+        @await Html.PartialAsync("Partials/_ErrorListPartial", Model.Visit)
     </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="ErrorCount">
     <template>
-        @await Html.PartialAsync("Partials/_ErrorCountPartial", Model)
+        @await Html.PartialAsync("Partials/_ErrorCountPartial", Model.Visit)
     </template>
 </turbo-stream>
 

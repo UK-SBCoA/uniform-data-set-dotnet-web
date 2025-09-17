@@ -1,6 +1,6 @@
-@model UDS.Net.Forms.Pages.Visits.DetailsModel
+@model UDS.Net.Forms.Models.VisitModel
 
-@if (Model.Visit.TotalUnresolvedErrorCount.HasValue && Model.Visit.TotalUnresolvedErrorCount != 0)
+@if (Model.TotalUnresolvedErrorCount.HasValue && Model.TotalUnresolvedErrorCount != 0)
 {
     <div class="mt-2 flex items-center text-sm text-red-800 group relative">
         <svg class="h-5 w-5 text-red-400 mr-1.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -10,7 +10,7 @@
         <button type="button"
                 data-action="modal#show"
                 class="font-medium underline text-red-800 hover:text-red-900 focus:outline-none">
-            @Model.Visit.TotalUnresolvedErrorCount.Value errors
+            @Model.TotalUnresolvedErrorCount.Value errors
         </button>
     </div>
 }
