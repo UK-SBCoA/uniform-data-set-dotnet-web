@@ -1,19 +1,19 @@
-@model UDS.Net.Forms.Pages.Visits.DetailsModel
+@model UDS.Net.Forms.Models.VisitModel
 
 <turbo-stream action="replace" target="ErrorList">
     <template>
-        @await Html.PartialAsync("Partials/_ErrorListPartial", Model.Visit)
+        @await Html.PartialAsync("Partials/_ErrorListPartial", Model)
     </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="ErrorCount">
     <template>
-        @await Html.PartialAsync("Partials/_ErrorCountPartial", Model.Visit)
+        @await Html.PartialAsync("Partials/_ErrorCountPartial", Model)
     </template>
 </turbo-stream>
 
 <turbo-stream action="replace" target="FormGrid">
     <template>
-        @await Html.PartialAsync("Partials/_FormsGridPartial", Model.Visit)
+        @await Html.PartialAsync("Partials/_FormsGridPartial", Model)
     </template>
 </turbo-stream>

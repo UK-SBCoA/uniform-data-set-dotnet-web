@@ -58,8 +58,14 @@ namespace UDS.Net.Forms.Pages.Visits
             return new PartialViewResult
             {
                 ViewName = "_ResolveErrorResponse",
-                ViewData = ViewData,
-                TempData = TempData
+                ViewData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<VisitModel>(
+                    new Microsoft.AspNetCore.Mvc.ModelBinding.EmptyModelMetadataProvider(),
+                    ModelState)
+                {
+                    Model = this.Visit
+                },
+                TempData = TempData,
+                ContentType = "text/vnd.turbo-stream.html"
             };
         }
 
