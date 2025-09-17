@@ -8,7 +8,7 @@
         </svg>
 
         <button type="button"
-                onclick="toggleErrorModal(true)"
+                data-action="modal#show"
                 class="font-medium underline text-red-800 hover:text-red-900 focus:outline-none">
             @Model.Visit.TotalUnresolvedErrorCount.Value errors
         </button>

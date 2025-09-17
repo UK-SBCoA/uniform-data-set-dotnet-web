@@ -11,3 +11,9 @@
         @await Html.PartialAsync("Partials/_ErrorCountPartial", Model)
     </template>
 </turbo-stream>
+
+<turbo-stream action="replace" target="FormGrid">
+    <template>
+        @await Html.PartialAsync("Partials/_FormsGridPartial", Model.Visit)
+    </template>
+</turbo-stream>
