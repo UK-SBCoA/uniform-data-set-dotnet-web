@@ -54,13 +54,17 @@
                             </button>
                         </form>
 
-                        <form method="post" asp-page-handler="IgnoreError">
-                            <input type="hidden" name="errorId" value="@error.Id" />
-                            <button type="submit"
-                                    class="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1">
-                                Ignore
-                            </button>
-                        </form>
+                @if (error.Level == PacketSubmissionErrorLevel.Information || error.Level == PacketSubmissionErrorLevel.Warning)
+                        {
+                            <form method="post" asp-page-handler="IgnoreError">
+                                <input type="hidden" name="errorId" value="@error.Id" />
+                                <input type="hidden" name="Id" value="@Model.Visit.Id" />
+                                <button type="submit"
+                                        class="inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1">
+                                    Ignore
+                                </button>
+                            </form>
+                        }
                     </div>
                 </li>
                 }
