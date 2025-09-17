@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -29,6 +29,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized]
         public int? WAIST2 { get; set; }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Waist measurements can't  differ by more than 1 inch.")]
+        public bool? WAISTDifferenceValidation
+        {
+            get
+            {
+                if (!WAIST1.HasValue || !WAIST2.HasValue || WAIST1 == 888 || WAIST2 == 888)
+                {
+                    return true;
+                }
+
+                if (Math.Abs(WAIST1.Value - WAIST2.Value) > 1)
+                {
+                    return null;
+                }
+                return true;
+            }
+        }
+
         [Display(Name = "Hip circumference measurements (inches): Measurement 1")]
         [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnFinalized]
@@ -38,6 +57,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnFinalized]
         public int? HIP2 { get; set; }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "Hip measurements can't  differ by more than 1 inch.")]
+        public bool? HIPDifferenceValidation
+        {
+            get
+            {
+                if (!HIP1.HasValue || !HIP2.HasValue || HIP1 == 888 || HIP2 == 888)
+                {
+                    return true;
+                }
+
+                if (Math.Abs(HIP1.Value - HIP2.Value) > 1)
+                {
+                    return null;
+                }
+                return true;
+            }
+        }
 
         [Display(Name = "Reading 1")]
         [RegularExpression("^(7\\d|[89]\\d|1\\d{2}|2[0-2]\\d|230|888)$", ErrorMessage = "(70-230, 888 = Not assessed)")]
