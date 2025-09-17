@@ -56,7 +56,7 @@
 
                 @if (error.Level == PacketSubmissionErrorLevel.Information || error.Level == PacketSubmissionErrorLevel.Warning)
                         {
-                            <form method="post" asp-page-handler="IgnoreError">
+                            <form method="post" asp-page-handler="ResolveError">
                                 <input type="hidden" name="errorId" value="@error.Id" />
                                 <input type="hidden" name="Id" value="@Model.Visit.Id" />
                                 <button type="submit"
