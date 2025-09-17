@@ -75,10 +75,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     formAssignee = formAssignedTo;
                 }
 
-                DateTime createdAt = formData.Select(a => a.CreatedAt).FirstOrDefault();
-
                 //Create new PacketSubmissionError object with collected data
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, createdAt, User.Identity.Name, null, null, false);
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, DateTime.Now, User.Identity.Name, null, null, false);
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
