@@ -401,13 +401,20 @@ namespace UDS.Net.Services.DomainModels
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
             var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
+            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
             var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
             var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
             var b9 = (B9FormFields)this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault();
             var d1a = (D1aFormFields)this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault();
 
-            if (a1 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
+            if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
+                if (a2.INRELTO.HasValue && a2.INRELTO.Value == 1 && a2.INLIVWTH.HasValue && a2.INLIVWTH == 0)
+                {
+                    results.Add(new VisitValidationResult(
+                        $"A2 if q1. INRELTO = 1 (spouse, partner, or companion), then A2 q3. INLIVWTH should not equal 0 (does not live with co-participant).",
+                        new[] { nameof(a2.INRELTO), nameof(a2.INLIVWTH) }));
+                }
                 if (b5.ANX.HasValue)
                 {
                     if (b5.ANX == 0)
@@ -415,7 +422,7 @@ namespace UDS.Net.Services.DomainModels
                         if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 0)
                         {
                             results.Add(new VisitValidationResult(
-                                $"if q6a. anx (anxiety) = 0 (no), then form a5d2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
+                                $"B5 if q6a. anx (anxiety) = 0 (no), then form A5D2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
                                 new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
                         }
                     }
@@ -424,20 +431,20 @@ namespace UDS.Net.Services.DomainModels
                         if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 1)
                         {
                             results.Add(new VisitValidationResult(
-                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form a5d2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
+                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form A5D2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
                                 new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
                         }
                         if (b9.BEANX.HasValue && b9.BEANX != 1)
                         {
                             results.Add(new VisitValidationResult(
-                                $"if q6a. anx (anxiety) = 1 (yes), then form b9, q12c. beanx (anxiety) should equal 1 (yes).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form B9, q12c. beanx (anxiety) should equal 1 (yes).",
+                                new[] { nameof(b5.ANX), nameof(b9.BEANX) }));
                         }
                         if (d1a.ANXIET.HasValue && d1a.ANXIET != true)
                         {
                             results.Add(new VisitValidationResult(
-                                $"if q6a. anx (anxiety) = 1 (yes), then form d1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form D1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
+                                new[] { nameof(b5.ANX), nameof(d1a.ANXIET) }));
                         }
                     }
                 }
