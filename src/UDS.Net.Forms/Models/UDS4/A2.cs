@@ -22,24 +22,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? INLIVWTH { get; set; }
         [Display(Name = "What is the primary mode of contact with the participant?")]
         [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to primary mode of contact required")]
-
-        [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "IF Q1. INRELTO = 1, then Q3. INLIVWTH should not equal 0")]
-        public bool? InlivwthInvalid
-        {
-            get
-            {
-                if (INRELTO == 1 && INLIVWTH == 0)
-                {
-                    return null;
-                }
-
-                return true;
-            }
-        }
-
-        [Display(Name = "What is the primary mode of contact with the participant?")]
-        [RequiredIf(nameof(INLIVWTH), "0", ErrorMessage = "Response to primary mode of contact required")]
         public int? INCNTMOD { get; set; }
         [Display(Name = "Primary mode of contact with the participant - Other (specify)")]
         [MaxLength(60)]

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Web.MVC", "UDS.Net.Web.MVC\UDS.Net.Web.MVC.csproj", "{99F6A944-AD72-42F0-BBB1-887449A2C8E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Forms", "UDS.Net.Forms\UDS.Net.Forms.csproj", "{A1A16BC1-B30D-41DE-AD48-471EC278B8C7}"
 EndProject
@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Web.MVC.Services", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDS.Net.Services.Test", "UDS.Net.Services.Test\UDS.Net.Services.Test.csproj", "{332BFB18-1431-4572-BE96-757D0221FBCE}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{F99AEBDD-D7EA-40C9-8DDC-AE13BCCC02DC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDS.Net.Forms.Tests.Runtime", "UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj", "{35D9C0B3-CE26-47E8-A054-2AB74F0E47FB}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{C017A3F4-7569-4C67-B00A-F6B791972237}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +65,6 @@ Global
 		SolutionGuid = {3268D734-1592-4E39-88A2-3A53468CC430}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 12.1.4
+		version = 13.0.17
 	EndGlobalSection
 EndGlobal
