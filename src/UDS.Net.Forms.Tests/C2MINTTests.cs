@@ -54,11 +54,11 @@ namespace UDS.Net.Forms.Tests
 
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide total count without" })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide semantic number given." })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide semantic number correct with cue." })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide phonemic number given." })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide phonemic number correct with cue." })).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTTOTW-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTSCNG-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTSCNC-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTPCNG-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTPCNC-error")).ToBeVisibleAsync();
 
             // Check for correct failure state
             await Page.Locator("input[name=\"C2.MINTTOTW\"]").FillAsync("0");
@@ -132,9 +132,9 @@ namespace UDS.Net.Forms.Tests
 
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide total count without" })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide semantic number given." })).ToBeVisibleAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Provide semantic number correct with cue." })).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTTOTW-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTSCNG-error")).ToBeVisibleAsync();
+            await Expect(Page.Locator("#C2_MINTSCNC-error")).ToBeVisibleAsync();
 
             await Page.Locator("input[name=\"C2.MINTTOTW\"]").FillAsync("0");
             await Page.Locator("input[name=\"C2.MINTSCNG\"]").FillAsync("0");
