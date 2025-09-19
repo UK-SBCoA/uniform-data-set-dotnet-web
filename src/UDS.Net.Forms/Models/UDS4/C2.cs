@@ -383,7 +383,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MINTSCNG { get; set; }
 
         [NotMapped]
-        [RequiredIf(nameof(MINTSCNC), "0", ErrorMessage = "If no semantic cues were given, then number of semantic cues correct with cue must be not applicable")]
+        [RequiredIf(nameof(MINTSCNG), "0", ErrorMessage = "If no semantic cues were given, then number of semantic cues correct with cue must be not applicable")]
         public bool? MINTSCNCNotApplicableValidation
         {
             get
