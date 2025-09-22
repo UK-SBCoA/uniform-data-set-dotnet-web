@@ -535,6 +535,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Provide count of non-F/L words and rule violation errors.")]
         public int? UDSVERTI { get; set; }
 
+        //If UDSVERNF and UDSVERLN are both valid values, then UDSVERTI must = UDSVERNF + UDSVERLN
+        //Both visit types
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If UDSVERNF and UDSVERLN are both within valid ranges (0-15) then UDSVERTI should equal the sum of UDSVERNF and UDSVERLN.")]
+        public bool? UDSVERTIValidation
+        {
+            get
+            {
+                if ((UDSVERNF.HasValue && UDSVERNF <= 15) && (UDSVERLN.HasValue && UDSVERLN.Value <= 15))
+                {
+                    if (UDSVERNF + UDSVERLN != UDSVERTI)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         #endregion
 
         [Display(Name = "Per the clinician (e.g., neuropsychologist, behavioral neurologist, or other suitably qualified clinician), based on the UDS neuropsychological examination, the participants cognitive status is deemed")]
