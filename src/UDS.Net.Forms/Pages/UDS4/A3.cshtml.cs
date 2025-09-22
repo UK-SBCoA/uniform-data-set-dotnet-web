@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
@@ -22,6 +23,28 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public A3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A3")
         {
+        }
+
+        private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
+        {
+            //onset vs death
+            if (ageOfOnset.HasValue && ageAtDeath.HasValue && ageOfOnset > ageAtDeath && ageOfOnset != 999 && ageOfOnset != 888)
+            {
+                modelState.AddModelError(onsetField, "Age of onset cannot be greater than age of death");
+            }
+
+            //death vs birth year
+            if(birthYear.HasValue && ageAtDeath.HasValue && ageAtDeath.Value > DateTime.Now.Year - birthYear && ageAtDeath.Value != 999 && ageAtDeath.Value != 888)
+            {
+                modelState.AddModelError(deathField, "Age of death cannot be greater than the current year minus the birth year");
+            }
+
+            //onset vs birth year
+            if(birthYear.HasValue && ageOfOnset.HasValue && ageOfOnset > DateTime.Now.Year - ageOfOnset.Value && ageOfOnset != 999)
+            {
+                modelState.AddModelError(onsetField, "Age of onset cannot be greater than the current year minus the birth year");
+            }
+
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -45,69 +68,22 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (A3 != null && A3.Status == FormStatus.Finalized)
             {
-                if (A3.MOMYOB.HasValue)
+                if (A3.MOMYOB.HasValue || A3.MOMETPR != null || A3.MOMAGEO.HasValue || A3.MOMDAGE.HasValue)
                 {
                     if (!A3.MOMDAGE.HasValue)
                     {
                         ModelState.AddModelError("A3.MOMDAGE", "Please provide a value for age at death.");
                     }
-                    if (A3.MOMDAGE.HasValue && A3.MOMDAGE.Value > DateTime.Now.Year - A3.MOMYOB.Value)
-                    {
-                        if (A3.MOMDAGE.Value != 999 && A3.MOMDAGE.Value != 888)
-                        {
-                            ModelState.AddModelError("A3.MOMDAGE", "Age of death cannot be greater than the current year minus the birth year");
-                        }
-                    }
+                    ValidateAgeRange(A3.MOMAGEO, A3.MOMDAGE, A3.MOMYOB, ModelState, "A3.MOMAGEO", "A3.MOMDAGE");
 
                 }
-                if (A3.MOMETPR != null)
-                {
-                    if (A3.MOMAGEO.HasValue && A3.MOMDAGE.HasValue && A3.MOMAGEO.Value > A3.MOMDAGE.Value)
-                    {
-                        if (A3.MOMAGEO.Value != 999 && A3.MOMAGEO.Value != 888)
-                        {
-                            ModelState.AddModelError("A3.MOMAGEO", "Age of onset cannot be greater than age of death");
-                        }
-                    }
-                    if (A3.MOMYOB.HasValue && A3.MOMAGEO.HasValue && A3.MOMAGEO.Value > DateTime.Now.Year - A3.MOMYOB.Value)
-                    {
-                        if (A3.MOMAGEO.Value != 999)
-                        {
-                            ModelState.AddModelError("A3.MOMAGEO", "Age of onset cannot be greater than the current year minus the birth year");
-                        }
-                    }
-                }
-                if (A3.DADYOB.HasValue)
+                if (A3.DADYOB.HasValue || A3.DADETPR != null || A3.DADAGEO.HasValue || A3.DADDAGE.HasValue)
                 {
                     if (!A3.DADDAGE.HasValue)
                     {
                         ModelState.AddModelError("A3.DADDAGE", "Please provide a value for age at death.");
                     }
-                    if (A3.DADDAGE.HasValue && A3.DADDAGE.Value > DateTime.Now.Year - A3.DADYOB.Value)
-                    {
-                        if (A3.DADDAGE.Value != 999 && A3.DADDAGE.Value != 888)
-                        {
-                            ModelState.AddModelError("A3.DADDAGE", "Age of death cannot be greater than the current year minus the birth year");
-                        }
-                    }
-
-                }
-                if (A3.DADETPR != null)
-                {
-                    if (A3.DADAGEO.HasValue && A3.DADDAGE.HasValue && A3.DADAGEO.Value > A3.DADDAGE.Value)
-                    {
-                        if (A3.DADAGEO.Value != 999 && A3.DADAGEO.Value != 888)
-                        {
-                            ModelState.AddModelError("A3.DADAGEO", "Age of onset cannot be greater than age of death");
-                        }
-                    }
-                    if (A3.DADYOB.HasValue && A3.DADAGEO.HasValue && A3.DADAGEO.Value > DateTime.Now.Year - A3.DADYOB.Value)
-                    {
-                        if (A3.DADAGEO.Value != 999)
-                        {
-                            ModelState.AddModelError("A3.DADAGEO", "Age of onset cannot be greater than the current year minus the birth year");
-                        }
-                    }
+                    ValidateAgeRange(A3.DADAGEO, A3.DADDAGE, A3.DADYOB, ModelState, "A3.DADAGEO", "A3.DADDAGE");
                 }
 
                 if (A3.Siblings != null)
