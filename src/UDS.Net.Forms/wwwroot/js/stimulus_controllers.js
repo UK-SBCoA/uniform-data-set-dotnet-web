@@ -13,6 +13,7 @@ import b6 from "./js_controllers/b6_controller.js"
 import dropdownReset from "./js_controllers/dropdownReset_controller.js"
 import FormlessSubmit from "./js_controllers/formlessSubmit_controller.js"
 import a4 from "./js_controllers/a4_controller.js"
+import modal from "./js_controllers/modal_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -30,3 +31,4 @@ Stimulus.register("b6", b6)
 Stimulus.register("dropdownReset", dropdownReset)
 Stimulus.register("formlessSubmit", FormlessSubmit)
 Stimulus.register("a4", a4)
+Stimulus.register("modal", modal)
