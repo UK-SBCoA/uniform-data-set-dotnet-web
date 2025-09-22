@@ -18,14 +18,16 @@ namespace UDS.Net.Forms.Pages.Packets
 
         public PacketsPaginatedModel Packets { get; set; } = new PacketsPaginatedModel();
 
+        public FilterModel Filter;
+
         public IndexModel(IPacketService packetService)
         {
             _packetService = packetService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
+        public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = "")
         {
-            List<PacketStatus> statuses = new List<PacketStatus>
+            var allowedStatuses = new List<PacketStatus>
             {
                 PacketStatus.Finalized,
                 PacketStatus.Submitted,
@@ -33,9 +35,21 @@ namespace UDS.Net.Forms.Pages.Packets
                 PacketStatus.PassedErrorChecks
             };
 
-            var packets = await _packetService.List(User.Identity.Name, statuses, pageSize, pageIndex);
+            var allStatusNames = allowedStatuses.Select(s => s.ToString()).ToList();
+            var selectedStatusNames = filter?.ToList() ?? new List<string>();
 
-            int total = await _packetService.Count(User.Identity.Name, statuses);
+            Filter = new FilterModel(allStatusNames, selectedStatusNames);
+
+            var selectedStatuses = Filter.SelectedItems.Any()
+                ? Filter.SelectedItems
+                    .Select(s => Enum.TryParse<PacketStatus>(s, out var parsed) ? (PacketStatus?)parsed : null)
+                    .Where(s => s.HasValue && allowedStatuses.Contains(s.Value))
+                    .Select(s => s.Value)
+                    .ToList()
+                : allowedStatuses;
+
+            var packets = await _packetService.List(User.Identity.Name, selectedStatuses, pageSize, pageIndex);
+            int total = await _packetService.Count(User.Identity.Name, selectedStatuses);
 
             Packets = packets.ToVM(pageSize, pageIndex, total, search);
 
