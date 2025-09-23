@@ -20,11 +20,14 @@ namespace UDS.Net.Services.DomainModels.Submission
                 else if (this._submissions != null)
                 {
                     int unresolvedCount = 0;
-                    foreach (var submisson in this._submissions)
+                    foreach (var submission in this._submissions)
                     {
-                        foreach (var error in submisson.Errors)
-                            if (String.IsNullOrWhiteSpace(error.ResolvedBy))
-                                unresolvedCount++;
+                        if(submission.Errors != null)
+                        {
+                            foreach (var error in submission.Errors)
+                                if (String.IsNullOrWhiteSpace(error.ResolvedBy))
+                                    unresolvedCount++;
+                        }
                     }
                     return unresolvedCount;
                 }
