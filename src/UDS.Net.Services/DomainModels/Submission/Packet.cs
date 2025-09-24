@@ -22,7 +22,7 @@ namespace UDS.Net.Services.DomainModels.Submission
                     int unresolvedCount = 0;
                     foreach (var submission in this._submissions)
                     {
-                        if(submission.Errors != null)
+                        if (submission.Errors != null)
                         {
                             foreach (var error in submission.Errors)
                                 if (String.IsNullOrWhiteSpace(error.ResolvedBy))
