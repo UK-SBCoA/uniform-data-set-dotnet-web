@@ -23,6 +23,9 @@ namespace UDS.Net.Forms.Pages.Packets
             _packetService = packetService;
         }
 
+        [BindProperty]
+        public List<int> SelectedPackets { get; set; } = new List<int>();
+
         public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
         {
             List<PacketStatus> statuses = new List<PacketStatus>
