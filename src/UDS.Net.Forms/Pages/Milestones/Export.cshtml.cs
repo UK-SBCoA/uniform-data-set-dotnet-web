@@ -62,5 +62,44 @@ namespace UDS.Net.Forms.Pages.Milestones
             string filename = $"M_{milestone.Participation.LegacyId}_{milestone.CreatedAt:yyMMdd}.csv";
             return File(memoryStream, "text/csv", filename);
         }
+
+        public async Task<IActionResult> OnPostExportSelectedAsync(List<int> selectedIds)
+        {
+            if (selectedIds == null || !selectedIds.Any())
+            {
+                return BadRequest("No milestones selected.");
+            }
+
+            string username = User.Identity?.Name ?? "system";
+
+            var memoryStream = new MemoryStream();
+            var writer = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
+            var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+
+            csv.WriteHeader<MilestoneRecord>();
+            await csv.NextRecordAsync();
+
+            foreach (var id in selectedIds)
+            {
+                var milestone = await _milestoneService.GetById(username, id);
+                if (milestone != null)
+                {
+                    string adcid = _configuration["ADRC:Id"];
+                    string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
+
+                    var record = new MilestoneRecord(milestone, initials, adcid);
+                    csv.WriteRecord(record);
+                    await csv.NextRecordAsync();
+                }
+            }
+
+            await csv.FlushAsync();
+            await writer.FlushAsync();
+            memoryStream.Position = 0;
+
+            string filename = $"Milestones_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+            return File(memoryStream, "text/csv", filename);
+        }
+
     }
 }
