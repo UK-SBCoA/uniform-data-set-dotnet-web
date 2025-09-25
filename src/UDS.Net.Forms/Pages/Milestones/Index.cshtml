@@ -37,82 +37,87 @@
             </div>
         </div>
 
-        <form method="post" asp-page="/Milestones/Export" asp-page-handler="ExportSelected" data-turbo="false">
-            <div class="mx-auto max-w-12xl">
-                <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                    <table class="min-w-full divide-y divide-gray-300 text-left">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <span class="sr-only">Select</span>
-                                </th>
-                                <th>Participant</th>
-                                <th>Milestone date</th>
-                                <th>Type</th>
-                                <th>Details</th>
-                                <th>Progress</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white">
-                            @foreach (var milestone in Model.Milestones.List)
-                            {
-                                <tr class="even:bg-gray-50">
-                                    <td class="text-center align-middle">
-                                        <input type="checkbox" name="selectedIds" value="@milestone.Id" class="form-checkbox h-4 w-4 text-indigo-600">
-                                    </td>
-                                    <td>
-                                        <div class="rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
-                                            <a asp-page="/Participations/Details" asp-route-id="@milestone.ParticipationId" class="text-3xl font-medium leading-6 text-indigo-600 hover:text-indigo-500">
-                                                @if (milestone.Participation != null)
-                                                {
-                                                    <span>@milestone.Participation.LegacyId</span>
-                                                }
-                                                else
-                                                {
-                                                    @milestone.ParticipationId
-                                                }
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="whitespace-nowrap py-4 text-sm text-gray-500">
-                                        <div class="truncate text-sm font-medium text-gray-500">Created @milestone.CreatedAt.ToShortDateString()</div>
-                                        <div class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">@milestone.DisplayChangeDate</div>
-                                    </td>
-                                    <td>
-                                        @if (milestone.DECEASED == true || milestone.DISCONT == true)
+        <form data-controller="checkboxSelectAll" method="post" asp-page="/Milestones/Export" asp-page-handler="ExportSelected" data-turbo="false">
+            <table class="min-w-full divide-y divide-gray-300 text-left">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-3">
+                            <input type="checkbox"
+                                   data-checkboxSelectAll-target="toggleAll"
+                                   data-action="click->checkboxSelectAll#ToggleAllCheckboxes"
+                                   class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                        </th>
+                        <th>Participant</th>
+                        <th>Milestone date</th>
+                        <th>Type</th>
+                        <th>Details</th>
+                        <th>Progress</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    @foreach (var milestone in Model.Milestones.List)
+                    {
+                        <tr class="even:bg-gray-50">
+                            <td class="text-center align-middle px-4 py-3">
+                                <input type="checkbox"
+                                       name="selectedIds"
+                                       value="@milestone.Id"
+                                       data-action="click->checkboxSelectAll#ItemSelected"
+                                       data-checkboxSelectAll-target="checkBox"
+                                       class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                            </td>
+                            <td>
+                                <div class="rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
+                                    <a asp-page="/Participations/Details" asp-route-id="@milestone.ParticipationId" class="text-3xl font-medium leading-6 text-indigo-600 hover:text-indigo-500">
+                                        @if (milestone.Participation != null)
                                         {
-                                            <span>Change followed by NO FURTHER CONTACT</span>
+                                            <span>@milestone.Participation.LegacyId</span>
                                         }
                                         else
                                         {
-                                            <span>Change followed by continued contact</span>
+                                            @milestone.ParticipationId
                                         }
-                                    </td>
-                                    <td>
-                                        <partial name="_MilestoneDetails" model="@milestone" />
-                                    </td>
-                                    <td>@milestone.Status</td>
-                                    <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id">Edit</a></td>
-                                    <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a></td>
-                                    <td>
-                                        <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="whitespace-nowrap py-4 text-sm text-gray-500">
+                                <div class="truncate text-sm font-medium text-gray-500">Created @milestone.CreatedAt.ToShortDateString()</div>
+                                <div class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">@milestone.DisplayChangeDate</div>
+                            </td>
+                            <td>
+                                @if (milestone.DECEASED == true || milestone.DISCONT == true)
+                                {
+                                    <span>Change followed by NO FURTHER CONTACT</span>
+                                }
+                                else
+                                {
+                                    <span>Change followed by continued contact</span>
+                                }
+                            </td>
+                            <td>
+                                <partial name="_MilestoneDetails" model="@milestone" />
+                            </td>
+                            <td>@milestone.Status</td>
+                            <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id">Edit</a></td>
+                            <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a></td>
+                            <td>
+                                <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-                    <div class="mt-6">
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Export Selected
-                        </button>
-                    </div>
-                </div>
+            <div class="mt-6 flex justify-end">
+                <button type="submit" class="inline-flex items-center px-5 py-2.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                    Export Selected
+                </button>
             </div>
         </form>
+
     }
 
     <partial name="_PreviousNextButtons" model="Model.Milestones"></partial>
