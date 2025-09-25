@@ -67,7 +67,8 @@ namespace UDS.Net.Forms.Pages.Milestones
         {
             if (selectedIds == null || !selectedIds.Any())
             {
-                return BadRequest("No milestones selected.");
+                TempData["ExportError"] = "Please select at least one milestone to export.";
+                return RedirectToPage("/Milestones/Index");
             }
 
             string username = User.Identity?.Name ?? "system";

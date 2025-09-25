@@ -37,6 +37,23 @@
             </div>
         </div>
 
+        @if (TempData["ExportError"] != null)
+        {
+            <div class="mb-4 rounded-md bg-red-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="red" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">
+                            @TempData["ExportError"]
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        }
         <form data-controller="checkboxSelectAll" method="post" asp-page="/Milestones/Export" asp-page-handler="ExportSelected" data-turbo="false">
             <table class="min-w-full divide-y divide-gray-300 text-left">
                 <thead>
