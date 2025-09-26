@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<IsTestProject>true</IsTestProject>
-		<ReleaseVersion>13.0.23</ReleaseVersion>
+		<ReleaseVersion>13.0.24</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
