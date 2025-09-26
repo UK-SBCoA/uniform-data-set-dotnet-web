@@ -1,39 +1,56 @@
-﻿//Implemenation found at UDS.Net.Forms\Pages\Shared\_FormFooter.cshtml
-
-import { Controller } from "@hotwired/stimulus"
+﻿import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["trigger", "remote", "notCompleted"]
+    static targets = ["trigger", "remote", "notCompleted"]
 
-
-  update(event) {
-    this.setDropdowns(event.target.value)
-  }
-
-  setDropdowns(value) {
-    const val = parseInt(value)
-
-    this.resetAndDisable(this.remoteTargets)
-    this.resetAndDisable(this.notCompletedTargets)
-
-    if (val === 2) {
-      this.enableTargets(this.remoteTargets)
+    connect() {
+        if (this.hasTriggerTarget) {
+            this.setDropdowns(this.triggerTarget.value, { preserveValues: true })
+        }
     }
 
-    if (val === 0) {
-      this.enableTargets(this.notCompletedTargets)
+    update(event) {
+        this.setDropdowns(event.target.value)
     }
-  }
-  resetAndDisable(targets) {
 
-    targets.forEach((target) => {
-      target.selectedIndex = 0
-      target.disabled = true
-    })
-  }
-  enableTargets(targets) {
-    targets.forEach((target) => {
-      target.disabled = false
-    })
-  }
+    setDropdowns(value, options = { preserveValues: false }) {
+        const val = parseInt(value)
+
+        if (options.preserveValues) {
+            this.disableTargets(this.remoteTargets)
+            this.disableTargets(this.notCompletedTargets)
+        } else {
+            this.resetAndDisable(this.remoteTargets)
+            this.resetAndDisable(this.notCompletedTargets)
+        }
+
+        if (val === 2) {
+            this.enableTargets(this.remoteTargets)
+        }
+
+        if (val === 0) {
+            this.enableTargets(this.notCompletedTargets)
+        }
+    }
+
+    resetAndDisable(targets) {
+        targets.forEach((target) => {
+            if (target.tagName === "SELECT") {
+                target.selectedIndex = 0
+            }
+            target.disabled = true
+        })
+    }
+
+    disableTargets(targets) {
+        targets.forEach((target) => {
+            target.disabled = true
+        })
+    }
+
+    enableTargets(targets) {
+        targets.forEach((target) => {
+            target.disabled = false
+        })
+    }
 }
