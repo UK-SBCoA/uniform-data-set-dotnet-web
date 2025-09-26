@@ -202,7 +202,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetDescription()
         {
-            return "Participant Health History";
+            return "Participant Health History/Clinician-assessed Medical Conditions";
         }
 
         public string GetVersion()
