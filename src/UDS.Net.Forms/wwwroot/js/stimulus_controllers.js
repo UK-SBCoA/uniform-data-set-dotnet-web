@@ -14,6 +14,7 @@ import dropdownReset from "./js_controllers/dropdownReset_controller.js"
 import FormlessSubmit from "./js_controllers/formlessSubmit_controller.js"
 import a4 from "./js_controllers/a4_controller.js"
 import modal from "./js_controllers/modal_controller.js"
+import checkboxButton from "./js_controllers/checkboxButton_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -32,3 +33,4 @@ Stimulus.register("dropdownReset", dropdownReset)
 Stimulus.register("formlessSubmit", FormlessSubmit)
 Stimulus.register("a4", a4)
 Stimulus.register("modal", modal)
+Stimulus.register("checkboxButton", checkboxButton)
