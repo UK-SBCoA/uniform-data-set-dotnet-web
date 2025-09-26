@@ -8,6 +8,17 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
 {
     public static class DomainToEntityMapper
     {
+        public static void UpdateFromDomain(this UDS.Net.API.Entities.A3 existing, string formKind, UDS.Net.Services.DomainModels.Visit visit)
+        {
+            var form = visit.Forms.Where(f => f.Kind == formKind).FirstOrDefault();
+
+            var formDto = form.ToDto(formKind);
+
+            var dto = (A3Dto)formDto;
+
+            existing.Update(dto);
+        }
+
         public static void UpdateFromDomain(this UDS.Net.API.Entities.C2 existing, string formKind, UDS.Net.Services.DomainModels.Visit visit)
         {
             // formId should = C2 here
