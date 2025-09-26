@@ -100,6 +100,12 @@ namespace UDS.Net.Forms.Tests
             // Question 4b MCI = 1 Yes
             await Page.Locator("input[type=\"radio\"][name=\"D1a.MCI\"][value=\"1\"]").ClickAsync();
 
+            // Question 7 MBI = 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.MBI\"][value=\"0\"]").ClickAsync();
+
+            // Question 8 PREDOMSYN = 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.PREDOMSYN\"][value=\"0\"]").ClickAsync();
+
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
 

@@ -20,6 +20,13 @@ namespace UDS.Net.Forms.TagHelpers
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
+        private readonly IHtmlGenerator _generator;
+
+        public TableCellRadioButtonsTagHelper(IHtmlGenerator generator)
+        {
+            _generator = generator;
+        }
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var items = Items ?? Enumerable.Empty<RadioListItem>();
@@ -51,6 +58,8 @@ namespace UDS.Net.Forms.TagHelpers
 
             output.Attributes.Clear();
             output.Attributes.SetAttribute("class", "mt-4 space-y-2");
+
+            //base.ProcessAsync(context, output);
         }
 
         private IHtmlContent GenerateTableCellRadioInputs(IEnumerable<RadioListItem> items, string name, TagHelperAttributeList? parentAttributes = null)
@@ -112,39 +121,27 @@ namespace UDS.Net.Forms.TagHelpers
             if (item.Value == modelValue)
                 selected = true;
 
-            var tagBuilder = new TagBuilder("input");
-            tagBuilder.Attributes["type"] = "radio";
-            tagBuilder.Attributes["id"] = $"{Id}[{index}]";
-            tagBuilder.Attributes["value"] = item.Value;
-            tagBuilder.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
+            // DEV NOTE: Generate radio button element with IHtmlGenerator
+            var radio = _generator.GenerateRadioButton(ViewContext, For.ModelExplorer, name, item.Value, selected, $"{Id}[{index}]");
+
+            radio.Attributes["id"] = $"{Id}[{index}]";
+            radio.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
             if (parentAttributes != null)
             {
                 foreach (var attribute in parentAttributes)
                 {
-                    tagBuilder.Attributes.Add(new KeyValuePair<string, string?>(attribute.Name, attribute.Value.ToString()));
+                    radio.Attributes.Add(new KeyValuePair<string, string?>(attribute.Name, attribute.Value.ToString()));
                 }
             }
 
-            if (!String.IsNullOrWhiteSpace(name))
-            {
-                tagBuilder.Attributes["name"] = name;
-            }
-            if (selected)
-            {
-                tagBuilder.Attributes["checked"] = "checked";
-            }
-            if (item.Disabled)
-            {
-                tagBuilder.Attributes["disabled"] = "disabled";
-            }
             if (UIBehaviors != null && UIBehaviors.Count() > 0)
             {
                 foreach (var ui in UIBehaviors)
                 {
                     if (ui.Key == item.Value)
                     {
-                        tagBuilder.Attributes["data-affects"] = "true";
+                        radio.Attributes["data-affects"] = "true";
                         string json = "";
                         if (ui.Value.PropertyAttributes.Count() == 1)
                         {
@@ -160,12 +157,12 @@ namespace UDS.Net.Forms.TagHelpers
                             }
                             json = json.Trim().TrimEnd(',');
                         }
-                        tagBuilder.Attributes["data-affects-targets"] = "[ " + json + " ]"; // js expects an array
+                        radio.Attributes["data-affects-targets"] = "[ " + json + " ]"; // js expects an array
                     }
                 }
             }
 
-            return tagBuilder;
+            return radio;
         }
 
         private TagBuilder GenerateLabel(RadioListItem item, int index)

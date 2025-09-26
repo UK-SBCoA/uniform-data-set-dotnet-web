@@ -73,19 +73,18 @@ namespace UDS.Net.Forms.Tests
 
             // Attempt to save
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-
-            await Expect(Page.Locator("span").Filter(new() { HasText = "The Does the participant have: 1. Unimpaired cognition" })).ToBeVisibleAsync();
+            await Expect(Page.Locator("[id=\"D1a.NORMCOG-error\"]")).ToBeVisibleAsync();
 
             // Select Question 2
             await Page.Locator("input[type=\"radio\"][name=\"D1a.NORMCOG\"][value=\"1\"]").ClickAsync();
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Please specify." })).ToBeVisibleAsync();
+            await Expect(Page.Locator("[id=\"D1a.SCD-error\"]")).ToBeVisibleAsync();
 
             // Select Question 2a SCD == 1 requires SCDXCONF
             await Page.Locator("input[type=\"radio\"][name=\"D1a.SCD\"][value=\"1\"]").ClickAsync();
             //Atempt save
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Please specify." })).ToBeVisibleAsync();
+            await Expect(Page.Locator("[id=\"D1a.SCDDXCONF-error\"]")).ToBeVisibleAsync();
 
             // Select Question 2a SCD == 0 ends form
             await Page.Locator("input[type=\"radio\"][name=\"D1a.SCD\"][value=\"0\"]").ClickAsync();
