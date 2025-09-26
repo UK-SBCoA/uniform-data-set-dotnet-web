@@ -1,0 +1,7 @@
+@model PacketModel
+
+<turbo-stream action="replace" target="PacketSubmissions">
+    <template>
+        @await Html.PartialAsync("../PacketSubmissions/_Index", Model)
+    </template>
+</turbo-stream>
