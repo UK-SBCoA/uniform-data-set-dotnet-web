@@ -11,8 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
-        [RequiredIf(nameof(TRTBIOMARK), "1", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
-        [RequiredIf(nameof(TRTBIOMARK), "9", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
+        [RequiredIfRegex(nameof(TRTBIOMARK), "^(1|9)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
 
