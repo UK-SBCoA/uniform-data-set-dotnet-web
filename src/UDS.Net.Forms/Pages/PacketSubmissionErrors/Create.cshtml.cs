@@ -102,7 +102,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
             return new PartialViewResult
             {
-                ViewName = "_PacketErrorsTurbo",
+                ViewName = "_PacketErrors",
                 ViewData = new ViewDataDictionary<PacketModel>(ViewData, currentPacketModel),
                 ContentType = "text/vnd.turbo-stream.html"
             };
