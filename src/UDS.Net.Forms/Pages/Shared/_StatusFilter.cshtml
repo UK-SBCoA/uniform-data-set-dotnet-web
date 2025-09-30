@@ -1,0 +1,80 @@
+@model FilterModel
+
+<div data-controller="dropdown">
+    <form method="get">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="w-full text-red-600 font-semibold mb-2 px-2">
+                @foreach (var modelState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                }
+            </div>
+        }
+
+        <div class="flex flex-wrap items-center gap-4">
+            <!-- Status Dropdown -->
+            <div class="relative">
+                <button data-dropdown-target="button" data-action="click->dropdown#toggle click@window->dropdown#hide" type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
+                    <div class="flex">
+                        <div class="flex space-x-2">
+                            <span class="font-medium text-gray-900">Status</span>
+                            <div class="rounded-md bg-gray-300 w-6 font-bold text-black">
+                                @Model.FilterList.Where(l => l.Selected == true).Count()
+                            </div>
+                        </div>
+                        <span>
+                            <!-- Collapse icon, show/hide based on section open state. -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </span>
+                    </div>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div data-dropdown-target="menu"
+                     class="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-400 rounded shadow-lg z-10 hidden"
+                     id="filter-section-mobile-0">
+                    <div class="space-y-5 px-4 py-4">
+                        <div data-controller="checkboxSelectAll" class="space-y-3 pt-4 border-t border-gray-200">
+                            <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllCheckboxes">
+                                <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox"
+                                       class="size-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500">
+                                <label for="markAll" class="ml-3 text-gray-900 font-bold">Select All</label>
+                            </div>
+
+                            @for (int i = 0; i < Model.FilterList.Count(); i++)
+                            {
+                                <div class="flex items-center">
+                                    <input data-action="click->checkboxSelectAll#ItemSelected"
+                                           data-checkboxSelectAll-target="checkBox"
+                                           id="FilterList[@i].Text"
+                                           name="filter"
+                                           value="@Model.FilterList[i].Text"
+                                           type="checkbox"
+                                           @(Model.FilterList[i].Selected ? "checked" : null)
+                                           class="size-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="FilterList[@i].Text"
+                                           class="ml-3 text-gray-900">
+                                        @Model.FilterList[i].Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="flex justify-center pt-2">
+                            <button type="submit"
+                                    class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400">
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
