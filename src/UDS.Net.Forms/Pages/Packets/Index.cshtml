@@ -36,7 +36,16 @@
                                         <td class="px-4 py-3">
                                             @if (packet.Status == PacketStatus.Finalized)
                                             {
-                                                <input data-checkboxButton-target="checkbox" data-action="checkboxButton#toggle" type="checkbox" value="@packet.Id" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                                                <input data-checkboxButton-target="checkbox"
+                                                       data-action="checkboxButton#toggle"
+                                                       type="checkbox"
+                                                       data-packet-id="@packet.Id"
+                                                       data-packet-participation="@packet.ParticipationId"
+                                                       data-packet-visitnum="@packet.VISITNUM"
+                                                       data-packet-kind="@packet.PACKET"
+                                                       data-packet-initials="@packet.INITIALS"
+                                                       data-packet-visitdate="@packet.VISIT_DATE.ToShortDateString()"
+                                                       class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
                                             }
                                             else
                                             {
@@ -81,7 +90,10 @@
                     </div>
                     <div class="py-4">
                         <partial name="_PreviousNextButtons" model="Model.Packets" />
-                        <button data-checkboxButton-target="button" data-action="modal#show" type="button" class="ml-4 inline-flex items-center rounded-lg bg-gray-400 px-4 py-2 text-sm font-medium text-white shadow">
+                        <button data-checkboxButton-target="button"
+                                data-action="checkboxButton#populateModal modal#show"
+                                type="button"
+                                class="ml-4 inline-flex items-center rounded-lg bg-gray-400 px-4 py-2 text-sm font-medium text-white shadow">
                             Export Multiple Packets
                         </button>
                     </div>
@@ -90,7 +102,33 @@
             <!-- Modal -->
             <div class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50" data-modal-target="modal">
                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
-                    @await Html.PartialAsync("_ExportPacketsConfirmation", Model)
+                    <h3 class="text-lg font-semibold text-gray-900">Confirm Export</h3>
+                    <p class="mt-2 text-sm text-gray-600">The following packets will be exported:</p>
+
+                    <table class="mt-4 w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border-b py-2">Packet Id</th>
+                                <th class="border-b py-2">Participation</th>
+                                <th class="border-b py-2">Visit #</th>
+                                <th class="border-b py-2">Kind</th>
+                                <th class="border-b py-2">Initials</th>
+                                <th class="border-b py-2">Visit Date</th>
+                            </tr>
+                        </thead>
+                        <tbody data-modal-target="selectedList">
+                            @* Stimulus injects selected packet data here *@
+                        </tbody>
+                    </table>
+
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button data-action="modal#hide" type="button" class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">
+                            Confirm Export
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>

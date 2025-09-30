@@ -24,4 +24,34 @@ export default class extends Controller {
       this.buttonTarget.classList.add('bg-gray-400', 'cursor-not-allowed')
     }
   }
+
+  populateModal() {
+    const tbody = document.querySelector('[data-modal-target="selectedList"]')
+    const form = this.buttonTarget.closest('form') 
+
+    // clear old content
+    tbody.innerHTML = ''
+
+    const checked = this.checkboxTargets.filter(cb => cb.checked)
+
+    checked.forEach(cb => {
+      const tr = document.createElement('tr')
+      tr.innerHTML = `
+      <td class="border-b py-2">${cb.dataset.packetId}</td>
+      <td class="border-b py-2">${cb.dataset.packetParticipation}</td>
+      <td class="border-b py-2">${cb.dataset.packetVisitnum}</td>
+      <td class="border-b py-2">${cb.dataset.packetKind}</td>
+      <td class="border-b py-2">${cb.dataset.packetInitials}</td>
+      <td class="border-b py-2">${cb.dataset.packetVisitdate}</td>
+    `
+      tbody.appendChild(tr)
+
+      // add hidden input so form submits IDs
+      const hidden = document.createElement('input')
+      hidden.type = 'hidden'
+      hidden.name = 'selectedPacketId'
+      hidden.value = cb.dataset.packetId
+      form.appendChild(hidden)
+    })
+  }
 }
