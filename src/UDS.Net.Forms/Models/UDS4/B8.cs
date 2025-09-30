@@ -14,9 +14,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? NEUREXAM { get; set; }
 
         [Display(Name = "Were there abnormal exam findings?")]
-        [RequiredIf(nameof(NEUREXAM), "1", ErrorMessage = "Were there abnormal exam findings?")]
-        [RequiredIf(nameof(NEUREXAM), "2", ErrorMessage = "Were there abnormal exam findings?")]
-        [RequiredIf(nameof(NEUREXAM), "3", ErrorMessage = "Were there abnormal exam findings?")]
+        [RequiredIfRegex(nameof(NEUREXAM), "(1|2|3)", ErrorMessage = "Were there abnormal exam findings?")]
         public int? NORMNREXAM { get; set; }
 
         [Display(Name = "Parkinsonian Signs")]
@@ -80,9 +78,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? STOOPED { get; set; }
 
         [Display(Name = "Cortical/Pyramidal/Other Signs")]
-        [RequiredIf(nameof(PARKSIGN), "0", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
-        [RequiredIf(nameof(PARKSIGN), "1", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
-        [RequiredIf(nameof(PARKSIGN), "8", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
+        [RequiredIfRegex(nameof(PARKSIGN), "(0|1|8)", ErrorMessage = "Please indicate Cortical/Pyramidal/Other Signs.")]
         public int? OTHERSIGN { get; set; }
 
         [Display(Name = "Limb apraxia")]
@@ -154,9 +150,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? APRAXSP { get; set; }
 
         [Display(Name = "Gait")]
-        [RequiredIf(nameof(OTHERSIGN), "0", ErrorMessage = "Please indicate Gait.")]
-        [RequiredIf(nameof(OTHERSIGN), "1", ErrorMessage = "Please indicate Gait.")]
-        [RequiredIf(nameof(OTHERSIGN), "8", ErrorMessage = "Please indicate Gait.")]
+        [RequiredIfRegex(nameof(OTHERSIGN), "(0|1|8)", ErrorMessage = "Please indicate Gait.")]
         public int? GAITABN { get; set; }
 
         [Display(Name = "Finding")]
