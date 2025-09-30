@@ -47,9 +47,6 @@ namespace UDS.Net.Forms.Pages.Milestones
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
             var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture);
 
-            csv.WriteHeader<MilestoneRecord>();
-            csv.NextRecord();
-
             var record = new MilestoneRecord(milestone, initials, adcid);
             csv.WriteRecord(record);
             csv.NextRecord();
@@ -76,9 +73,6 @@ namespace UDS.Net.Forms.Pages.Milestones
             var memoryStream = new MemoryStream();
             var writer = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
             var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-
-            csv.WriteHeader<MilestoneRecord>();
-            await csv.NextRecordAsync();
 
             foreach (var id in selectedIds)
             {
