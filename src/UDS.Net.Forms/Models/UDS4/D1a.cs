@@ -264,8 +264,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
         public int? BDOMTHTS { get; set; }
 
-        [RequiredIf(nameof(MBI), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(MBI), 0, 1, ErrorMessage = "Please specify.")]
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
 
