@@ -538,7 +538,7 @@ namespace UDS.Net.Forms.Models.UDS4
         //If UDSVERNF and UDSVERLN are both valid values, then UDSVERTI must = UDSVERNF + UDSVERLN
         //Both visit types
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If UDSVERNF and UDSVERLN are both within valid ranges (0-15) then UDSVERTI should equal the sum of UDSVERNF and UDSVERLN.")]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "If UDSVERNF and UDSVERLN are both within valid ranges (0-15) then UDSVERTI should equal the sum of UDSVERNF and UDSVERLN.")]
         public bool? UDSVERTIValidation
         {
             get
