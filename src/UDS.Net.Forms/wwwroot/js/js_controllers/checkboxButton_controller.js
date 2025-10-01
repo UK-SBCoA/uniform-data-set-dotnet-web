@@ -31,6 +31,7 @@ export default class extends Controller {
 
     // clear old content
     tbody.innerHTML = ''
+    form.querySelectorAll("input[name='packetId']").forEach(el => el.remove())
 
     const checked = this.checkboxTargets.filter(cb => cb.checked)
 
@@ -49,7 +50,7 @@ export default class extends Controller {
       // add hidden input so form submits IDs
       const hidden = document.createElement('input')
       hidden.type = 'hidden'
-      hidden.name = 'selectedPacketId'
+      hidden.name = 'packetId'
       hidden.value = cb.dataset.packetId
       form.appendChild(hidden)
     })

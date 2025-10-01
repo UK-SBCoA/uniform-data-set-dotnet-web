@@ -513,6 +513,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             return null;
         }
+        public async Task<IActionResult> OnPostExportMultiplePackets(List<int> packetId)
+        {
+            return Page();
+        }
+
     }
 }
 
