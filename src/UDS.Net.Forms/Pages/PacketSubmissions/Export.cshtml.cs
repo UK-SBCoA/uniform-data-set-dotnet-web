@@ -10,9 +10,6 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Services.Enums;
-using System.Reflection;
-using Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes;
-using System.IO;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -54,6 +51,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             Response.Headers["Content-Disposition"] = $"attachment; {filename}";
             return File(memoryStream, "text/csv", filename);
         }
+
         public async Task<IActionResult> OnPostExportMultiplePackets(List<int> packetId)
         {
 
@@ -81,15 +79,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private async Task WritePacketToCsvAsync(CsvWriter csv, int packetId)
         {
-            //gather data we need
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
-            var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
+            var packet = await _packetService.GetPacketWithForms(User.Identity?.Name, packetId);
+            var participant = await _participationService.GetById(User.Identity?.Name, packet.ParticipationId);
 
-            //null check
             if (packet == null || packet.Submissions == null || !packet.Submissions.Any())
                 return;
 
-            //assign our packet submission
             var packetSubmission = packet.Submissions
                 .OrderByDescending(s => s.SubmissionDate)
                 .FirstOrDefault();
@@ -540,8 +535,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 }
 
             } // writer flushed automatically here
-
-
 
         }
 
