@@ -177,6 +177,7 @@
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Assigned To</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Resolved By</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
@@ -209,6 +210,9 @@
                                         <td class="px-4 py-2 text-gray-700">
                                             @(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")
                                         </td>
+                            <td class="px-4 py-2 text-gray-700">
+                                @error.Location
+                            </td>
                                     </tr>
                                 }
                             </tbody>

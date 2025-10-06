@@ -174,6 +174,8 @@ namespace UDS.Net.Services.Extensions
                 Message = error.Message,
                 AssignedTo = error.AssignedTo,
                 ResolvedBy = error.ResolvedBy,
+                Location = error.Location.ToUpper(),
+                Value = error.Value,
                 CreatedAt = error.CreatedAt,
                 CreatedBy = error.CreatedBy,
                 ModifiedBy = error.ModifiedBy,
