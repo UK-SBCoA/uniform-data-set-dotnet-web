@@ -2,6 +2,7 @@
 @{
 }
 
+<div data-controller="modal">
 <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
     <div class="mt-2 flex items-center text-sm text-gray-500">
         <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -38,4 +39,68 @@
         </svg>
         Visit on @Model.Visit.VISIT_DATE.ToShortDateString()
     </div>
+    @if (Model.BaseForm.UnresolvedErrors?.Any() == true)
+    {
+        <div class="mt-2 flex items-center text-sm text-red-800 group relative">
+            <svg class="h-5 w-5 text-red-400 mr-1.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd"></path>
+            </svg>
+
+            <button type="button"
+                    data-action="modal#show"
+                    class="font-medium underline text-red-800 hover:text-red-900 focus:outline-none">
+                @Model.BaseForm.UnresolvedErrorCount error@(Model.BaseForm.UnresolvedErrorCount == 1 ? "" : "s")
+            </button>
+        </div>
+    }
+</div>
+
+<div id="errorModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50" data-modal-target="modal">
+
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
+        <div class="flex justify-between items-center border-b border-gray-200 pb-4 mb-4 shadow-sm">
+            <h3 class="text-xl font-semibold text-gray-900">Unresolved Errors</h3>
+
+            <button class="text-gray-400 hover:text-gray-600 text-2xl leading-none focus:outline-none"
+                        data-action="modal#hide">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+
+        @if (Model.BaseForm.UnresolvedErrors != null && Model.BaseForm.UnresolvedErrors.Any())
+        {
+            <ul class="space-y-6">
+                @foreach (var error in Model.BaseForm.UnresolvedErrors)
+                {
+                    <li class="border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="mb-2">
+                            <div class="flex items-center gap-2 mb-1">
+                                <h4 class="text-sm font-medium text-indigo-700">@error.FormKind</h4>
+                                <span class="text-xs font-semibold px-2 py-0.5 rounded
+                                            @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                                                              ? "bg-red-100 text-red-800"
+                                                                              : "bg-yellow-100 text-yellow-800")">
+                            @error.Level
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-700">@error.Message</p>
+                </div>
+            </li>
+                        }
+            </ul>
+        }
+        else
+        {
+            <p class="text-sm text-gray-500">No unresolved errors found.</p>
+        }
+
+        <div class="sticky bottom-0 mt-8 text-right">
+                <button data-action="modal#hide"
+                    class="inline-flex items-center rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-400">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
 </div>

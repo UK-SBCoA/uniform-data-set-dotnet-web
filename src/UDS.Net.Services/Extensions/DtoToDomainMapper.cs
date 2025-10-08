@@ -406,7 +406,7 @@ namespace UDS.Net.Services.Extensions
                     packetSubmissionErrorLevel = level;
             }
 
-            return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.Location, dto.Value);
+            return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.Location, dto.Value, dto.IgnoreStatus);
         }
 
         public static DrugCode ToDomain(this DrugCodeDto dto)

@@ -99,6 +99,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B5.ANX"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANX"></span>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANXSEV"></span>
+                        <submission-error location="ANX" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ANX)" for="@Model.B5.ANX" items="Model.SymptomPresentListItems" ui-behaviors="Model.ANXUIBehavior"></table-cell-radio-buttons>

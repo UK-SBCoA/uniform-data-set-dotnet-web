@@ -77,7 +77,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 }
 
                 //Create new PacketSubmissionError object with collected data
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, DateTime.Now, User.Identity.Name, null, null, false, error.Location.ToUpper(), error.Value);
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, null, DateTime.Now, User.Identity.Name, null, null, false, error.Location.ToUpper(), error.Value, false);
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }

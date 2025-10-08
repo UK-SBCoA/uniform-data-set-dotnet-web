@@ -180,7 +180,8 @@ namespace UDS.Net.Services.Extensions
                 CreatedBy = error.CreatedBy,
                 ModifiedBy = error.ModifiedBy,
                 DeletedBy = error.DeletedBy,
-                IsDeleted = error.IsDeleted
+                IsDeleted = error.IsDeleted,
+                IgnoreStatus = error.IgnoreStatus,
             };
 
             return dto;

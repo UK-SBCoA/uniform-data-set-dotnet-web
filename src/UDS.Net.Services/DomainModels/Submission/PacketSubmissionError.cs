@@ -22,6 +22,7 @@ namespace UDS.Net.Services.DomainModels.Submission
         public string Location { get; set; }
 
         public string Value { get; set; }
+        public bool IgnoreStatus { get; set; }
 
         public DateTime CreatedAt { get; private set; }
 
@@ -51,7 +52,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             IsDeleted = true;
         }
 
-        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string resolvedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, string location, string value)
+        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string resolvedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, string location, string value, bool ignoreStatus)
         {
             Id = id;
             PacketSubmissionId = packetSubmissionId;
@@ -67,6 +68,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             IsDeleted = isDeleted;
             Value = value;
             Location = location;
+            IgnoreStatus = ignoreStatus;
         }
     }
 }

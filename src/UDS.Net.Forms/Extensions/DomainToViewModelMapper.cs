@@ -208,7 +208,9 @@ namespace UDS.Net.Forms.Extensions
                 DeletedBy = packetSubmissionError.DeletedBy,
                 IsDeleted = packetSubmissionError.IsDeleted,
                 Location = packetSubmissionError.Location,
-                Value = packetSubmissionError.Value
+                Value = packetSubmissionError.Value,
+                IgnoreStatus = packetSubmissionError.IgnoreStatus
+
             };
         }
 

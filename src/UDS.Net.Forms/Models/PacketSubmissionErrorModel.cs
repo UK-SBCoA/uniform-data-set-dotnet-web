@@ -21,6 +21,7 @@ namespace UDS.Net.Forms.Models
         public string ResolvedBy { get; set; } = "";
         public string? Location { get; set; }
         public string? Value { get; set; }
+        public bool IgnoreStatus { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
