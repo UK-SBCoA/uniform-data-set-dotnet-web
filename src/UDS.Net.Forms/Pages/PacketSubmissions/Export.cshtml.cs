@@ -11,6 +11,7 @@ using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Forms.Models;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -75,13 +76,33 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
                     var packetSubmission = packet.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
 
+                    // Create a new submission if none exist
+                    var newPacketSubmission = new PacketSubmissionModel
+                    {
+                        PacketId = packet.Id,
+                        SubmissionDate = DateTime.Now,
+                        CreatedAt = DateTime.UtcNow,
+                        CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
+                    };
+
+                    packet.AddSubmission(newPacketSubmission.ToEntity());
+
+                    await _packetService.Update(User.Identity.Name, packet);
+
+                    var updatedPacket = await _packetService.GetById(User.Identity.Name, packet.Id); // get updated packet
+                    packetSubmission = updatedPacket.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
+                    if (packetSubmission != null)
+                    {
+                        packetSubmission.Forms = updatedPacket.Forms;
+                    }
+
                     if (!headerWritten)
                     {
                         if (packetSubmission != null)
                         {
                             WriteHeader(csv, packetSubmission);
+                            headerWritten = true;
                         }
-                        headerWritten = true;
                     }
                     if (packetSubmission != null)
                     {
