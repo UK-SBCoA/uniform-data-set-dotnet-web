@@ -850,7 +850,6 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFN"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFN"></span>
-
                 </div>
 
                 <div class="@rowCSS">
@@ -942,7 +941,14 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTI"></p>
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                    <div>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                        </div>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTIValidation"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="subcounterreset">
                     <div class="@rowCSS sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
