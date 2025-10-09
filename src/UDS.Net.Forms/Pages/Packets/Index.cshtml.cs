@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.Packets
@@ -22,9 +18,6 @@ namespace UDS.Net.Forms.Pages.Packets
         {
             _packetService = packetService;
         }
-
-        [BindProperty]
-        public List<int> SelectedPackets { get; set; } = new List<int>();
 
         public async Task<IActionResult> OnGetAsync(int pageSize = 10, int pageIndex = 1, string search = "")
         {
@@ -44,5 +37,20 @@ namespace UDS.Net.Forms.Pages.Packets
 
             return Page();
         }
+        public async Task<IActionResult> OnPostRenderExportModalAsync(List<int> packetId)
+        {
+            if (packetId == null || !packetId.Any())
+                return NotFound();
+
+            var selectedPackets = new List<Packet>();
+            foreach (var id in packetId)
+            {
+                var packet = await _packetService.GetPacketWithForms(User.Identity?.Name, id);
+                selectedPackets.Add(packet);
+            }
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("_ExportModal", selectedPackets);
+        }
+
     }
 }

@@ -1,0 +1,18 @@
+﻿@model List<UDS.Net.Services.DomainModels.Submission.Packet>
+
+<turbo-stream action="update" target="exportPacketModal">
+    <template>
+        @foreach (var packet in Model)
+        {
+            <tr>
+                <td class="border-b py-2">@packet.Id</td>
+                <td class="border-b py-2">@packet.ParticipationId</td>
+                <td class="border-b py-2">@packet.VISITNUM</td>
+                <td class="border-b py-2">@packet.PACKET</td>
+                <td class="border-b py-2">@packet.INITIALS</td>
+                <td class="border-b py-2">@packet.VISIT_DATE.ToShortDateString()</td>
+            </tr>
+            <input name="packetId" value="@packet.Id" type="hidden" />
+        }
+    </template>
+</turbo-stream>
