@@ -18,6 +18,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINF"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B5.NPIQINF)" for="@Model.B5.NPIQINF" items="Model.CoparticipantListItems" ui-behaviors="Model.NPIQINFUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINF"></span>
+                <submission-error location="NPQINF" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINFX"></p>
@@ -26,6 +27,7 @@
                     <input asp-for="B5.NPIQINFX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINFX"></span>
+                <submission-error location="NPQINFX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
         <table class="table-auto min-w-full divide-y divide-gray-300">
@@ -50,7 +52,9 @@
                         <label asp-for="B5.DEL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DEL)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.DEL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DEL"></span>
+                        <submission-error location="DEL" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DELSEV"></span>
+                        <submission-error location="DELSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DEL)" for="@Model.B5.DEL" items="Model.SymptomPresentListItems" ui-behaviors="Model.DELUIBehavior"></table-cell-radio-buttons>
@@ -62,7 +66,9 @@
                         <label asp-for="B5.HALL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.HALL)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.HALL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.HALL"></span>
+                        <submission-error location="HALL" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.HALLSEV"></span>
+                        <submission-error location="HALLSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.HALL)" for="@Model.B5.HALL" items="Model.SymptomPresentListItems" ui-behaviors="Model.HALLUIBehavior"></table-cell-radio-buttons>
@@ -74,7 +80,9 @@
                         <label asp-for="B5.AGIT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.AGIT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.AGIT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.AGIT"></span>
+                        <submission-error location="AGIT" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.AGITSEV"></span>
+                        <submission-error location="AGITSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.AGIT)" for="@Model.B5.AGIT" items="Model.SymptomPresentListItems" ui-behaviors="Model.AGITUIBehavior"></table-cell-radio-buttons>
@@ -86,7 +94,9 @@
                         <label asp-for="B5.DEPD"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DEPD)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.DEPD"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DEPD"></span>
+                        <submission-error location="DEPD" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DEPDSEV"></span>
+                        <submission-error location="DEPDSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DEPD)" for="@Model.B5.DEPD" items="Model.SymptomPresentListItems" ui-behaviors="Model.DEPDUIBehavior"></table-cell-radio-buttons>
@@ -98,8 +108,9 @@
                         <label asp-for="B5.ANX"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.ANX)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.ANX"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANX"></span>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANXSEV"></span>
                         <submission-error location="ANX" errors="Model.BaseForm.UnresolvedErrors" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANXSEV"></span>
+                        <submission-error location="ANXSEV" errors="Model.BaseForm.UnresolvedErrors"/>
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ANX)" for="@Model.B5.ANX" items="Model.SymptomPresentListItems" ui-behaviors="Model.ANXUIBehavior"></table-cell-radio-buttons>
@@ -111,7 +122,9 @@
                         <label asp-for="B5.ELAT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.ELAT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.ELAT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ELAT"></span>
+                        <submission-error location="ELAT" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ELATSEV"></span>
+                        <submission-error location="ELATSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ELAT)" for="@Model.B5.ELAT" items="Model.SymptomPresentListItems" ui-behaviors="Model.ELATUIBehavior"></table-cell-radio-buttons>
@@ -123,7 +136,9 @@
                         <label asp-for="B5.APA"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.APA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.APA"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APA"></span>
+                        <submission-error location="APA" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APASEV"></span>
+                        <submission-error location="APASEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APA)" for="@Model.B5.APA" items="Model.SymptomPresentListItems" ui-behaviors="Model.APAUIBehavior"></table-cell-radio-buttons>
@@ -135,7 +150,9 @@
                         <label asp-for="B5.DISN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.DISN)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.DISN"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DISN"></span>
+                        <submission-error location="DISN" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.DISNSEV"></span>
+                        <submission-error location="DISNSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.DISN)" for="@Model.B5.DISN" items="Model.SymptomPresentListItems" ui-behaviors="Model.DISNUIBehavior"></table-cell-radio-buttons>
@@ -147,7 +164,9 @@
                         <label asp-for="B5.IRR"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.IRR)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.IRR"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.IRR"></span>
+                        <submission-error location="IRR" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.IRRSEV"></span>
+                        <submission-error location="IRRSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.IRR)" for="@Model.B5.IRR" items="Model.SymptomPresentListItems" ui-behaviors="Model.IRRUIBehavior"></table-cell-radio-buttons>
@@ -159,7 +178,9 @@
                         <label asp-for="B5.MOT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.MOT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.MOT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.MOT"></span>
+                        <submission-error location="MOT" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.MOTSEV"></span>
+                        <submission-error location="MOTSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.MOT)" for="@Model.B5.MOT" items="Model.SymptomPresentListItems" ui-behaviors="Model.MOTUIBehavior"></table-cell-radio-buttons>
@@ -171,7 +192,9 @@
                         <label asp-for="B5.NITE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.NITE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.NITE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NITE"></span>
+                        <submission-error location="NITE" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NITESEV"></span>
+                        <submission-error location="NITESEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.NITE)" for="@Model.B5.NITE" items="Model.SymptomPresentListItems" ui-behaviors="Model.NITEUIBehavior"></table-cell-radio-buttons>
@@ -183,7 +206,9 @@
                         <label asp-for="B5.APP"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.APP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B5.APP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APP"></span>
+                        <submission-error location="APP" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.APPSEV"></span>
+                        <submission-error location="APPSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.APP)" for="@Model.B5.APP" items="Model.SymptomPresentListItems" ui-behaviors="Model.APPUIBehavior"></table-cell-radio-buttons>

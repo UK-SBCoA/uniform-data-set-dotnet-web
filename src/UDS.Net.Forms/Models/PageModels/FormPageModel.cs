@@ -90,13 +90,13 @@ namespace UDS.Net.Forms.Models.PageModels
             // Set next form kind for better UX between forms
             BaseForm.NextFormKind = await _visitService.GetNextFormKind(User.Identity.Name, id.Value, _formKind);
 
-            if (form.UnresolvedErrors != null && form.UnresolvedErrors.Any())
+            /*if (form.UnresolvedErrors != null && form.UnresolvedErrors.Any())
             {
                 var unresolvedErrors = form.UnresolvedErrors
                     .Where(e => !e.IsDeleted && string.IsNullOrEmpty(e.ResolvedBy));
 
                 AddErrorsToModelState(BaseForm, unresolvedErrors);
-            }
+            }*/
 
             return Page();
         }

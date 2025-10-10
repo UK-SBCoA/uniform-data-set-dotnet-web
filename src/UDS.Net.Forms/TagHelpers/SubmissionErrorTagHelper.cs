@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;  // Import the enum namespace
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.TagHelpers
 {
@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.TagName = null;  // We don't want the wrapping tag
+            output.TagName = null;
 
             if (Errors == null || string.IsNullOrWhiteSpace(Location))
                 return;
