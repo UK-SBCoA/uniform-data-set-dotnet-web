@@ -230,7 +230,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 return;
 
             var unresolvedErrors = mostRecentSubmission.Errors
-                .Where(e => !e.IsDeleted && string.IsNullOrEmpty(e.ResolvedBy) &&
+                .Where(e => !e.IsDeleted && e.Status == PacketSubmissionErrorStatus.Pending &&
                             string.Equals(e.FormKind, updatedForm.Kind, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
@@ -247,7 +247,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
                     if (!string.Equals(currentValue, originalValue, StringComparison.OrdinalIgnoreCase))
                     {
-                        error.Resolve(username, username);
+                        error.Resolve(username);
                         anyResolved = true;
                     }
                 }
@@ -257,7 +257,7 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 await _packetService.UpdatePacketSubmissionErrors(username, packet, mostRecentSubmission.Id, mostRecentSubmission.Errors.ToList());
 
-                bool allResolved = packet.Submissions.All(s => s.Errors.All(e => !string.IsNullOrEmpty(e.ResolvedBy)));
+                bool allResolved = packet.Submissions.All(s => s.Errors.All(e => e.Status != PacketSubmissionErrorStatus.Pending));
 
                 if (allResolved)
                 {

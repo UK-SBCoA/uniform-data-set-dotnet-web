@@ -173,15 +173,15 @@ namespace UDS.Net.Services.Extensions
                 Level = ((int)error.Level).ToString(),
                 Message = error.Message,
                 AssignedTo = error.AssignedTo,
-                ResolvedBy = error.ResolvedBy,
-                Location = error.Location.ToUpper(),
+                StatusChangedBy = error.StatusChangedBy,
+                Status = ((int)error.Status).ToString(),
+                Location = error.Location?.ToUpper(),
                 Value = error.Value,
                 CreatedAt = error.CreatedAt,
                 CreatedBy = error.CreatedBy,
                 ModifiedBy = error.ModifiedBy,
                 DeletedBy = error.DeletedBy,
-                IsDeleted = error.IsDeleted,
-                IgnoreStatus = error.IgnoreStatus,
+                IsDeleted = error.IsDeleted
             };
 
             return dto;

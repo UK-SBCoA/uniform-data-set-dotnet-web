@@ -402,12 +402,34 @@ namespace UDS.Net.Services.Extensions
             PacketSubmissionErrorLevel packetSubmissionErrorLevel = PacketSubmissionErrorLevel.Information;
             if (!string.IsNullOrWhiteSpace(dto.Level))
             {
-                if (Enum.TryParse(dto.Level, true, out PacketSubmissionErrorLevel level))
-                    packetSubmissionErrorLevel = level;
+                Enum.TryParse(dto.Level, true, out packetSubmissionErrorLevel);
             }
 
-            return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.Location, dto.Value, dto.IgnoreStatus);
+            PacketSubmissionErrorStatus packetSubmissionErrorStatus = PacketSubmissionErrorStatus.Pending;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                Enum.TryParse(dto.Status, true, out packetSubmissionErrorStatus);
+            }
+
+            return new PacketSubmissionError(
+                id: dto.Id,
+                packetSubmissionId: dto.PacketSubmissionId,
+                formKind: dto.FormKind,
+                message: dto.Message,
+                assignedTo: dto.AssignedTo,
+                level: packetSubmissionErrorLevel,
+                status: packetSubmissionErrorStatus,
+                statusChangedBy: dto.StatusChangedBy,
+                createdAt: dto.CreatedAt,
+                createdBy: dto.CreatedBy,
+                modifiedBy: dto.ModifiedBy,
+                deletedBy: dto.DeletedBy,
+                isDeleted: dto.IsDeleted,
+                location: dto.Location,
+                value: dto.Value
+            );
         }
+
 
         public static DrugCode ToDomain(this DrugCodeDto dto)
         {

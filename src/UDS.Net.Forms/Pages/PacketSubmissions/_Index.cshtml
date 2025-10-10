@@ -182,37 +182,47 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
                                 @foreach (var error in allErrors)
-
                                 {
                                     <tr class="hover:bg-red-50 transition">
                                         <td class="px-4 py-2">
                                             @{
                                                 var pagePath = $"/UDS4/{error.FormKind}";
                                             }
-                                            <a asp-page="@pagePath"
-                                               asp-route-id="@Model.Id"
-                                               asp-route-packetKind="@Model.PACKET.ToString()"
-                                               class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                @error.FormKind
-                                            </a>
-                                        </td>
-                                        <td class="px-4 py-2 text-gray-700">@error.Message</td>
-                                        <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
-                                        <td class="px-4 py-2">
-                                            <span class="
-                                    inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                                    @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
-                                        ? "bg-red-100 text-red-800"
-                                        : "bg-yellow-100 text-yellow-800")">
-                                                @error.Level
-                                            </span>
+                                        <a asp-page="@pagePath"
+                                           asp-route-id="@Model.Id"
+                                           asp-route-packetKind="@Model.PACKET.ToString()"
+                                           class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            @error.FormKind
+                                        </a>
+                                    </td>
+                                    <td class="px-4 py-2 text-gray-700">@error.Message</td>
+                                    <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
+                                    <td class="px-4 py-2">
+                                        <span class="
+                            inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
+                            @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                                                      ? "bg-red-100 text-red-800"
+                                                                      : "bg-yellow-100 text-yellow-800")">
+                                    @error.Level
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 text-gray-700">
+                                @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            {
+                                                @error.StatusChangedBy
+                                            }
+                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
+                                            {
+                                                <span class="text-yellow-600 font-semibold">Ignored by @error.StatusChangedBy</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Unresolved</span>
+                                            }
                                         </td>
                                         <td class="px-4 py-2 text-gray-700">
-                                            @(!string.IsNullOrEmpty(error.ResolvedBy) ? error.ResolvedBy : "Unresolved")
+                                            @error.Location
                                         </td>
-                            <td class="px-4 py-2 text-gray-700">
-                                @error.Location
-                            </td>
                                     </tr>
                                 }
                             </tbody>

@@ -201,7 +201,7 @@ namespace UDS.Net.Forms.Extensions
                 Message = packetSubmissionError.Message,
                 AssignedTo = packetSubmissionError.AssignedTo,
                 Level = packetSubmissionError.Level,
-                ResolvedBy = packetSubmissionError.ResolvedBy,
+                StatusChangedBy = packetSubmissionError.StatusChangedBy,
                 CreatedBy = packetSubmissionError.CreatedBy,
                 CreatedAt = packetSubmissionError.CreatedAt,
                 ModifiedBy = packetSubmissionError.ModifiedBy,
@@ -209,7 +209,7 @@ namespace UDS.Net.Forms.Extensions
                 IsDeleted = packetSubmissionError.IsDeleted,
                 Location = packetSubmissionError.Location,
                 Value = packetSubmissionError.Value,
-                IgnoreStatus = packetSubmissionError.IgnoreStatus
+                Status = packetSubmissionError.Status
 
             };
         }

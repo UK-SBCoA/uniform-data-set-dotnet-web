@@ -27,7 +27,7 @@ namespace UDS.Net.Forms.TagHelpers
 
             var errorsForField = Errors
                 .Where(e => string.Equals(e.Location, Location, StringComparison.OrdinalIgnoreCase) &&
-                            !e.IsDeleted && string.IsNullOrEmpty(e.ResolvedBy));
+                            !e.IsDeleted && e.Status == PacketSubmissionErrorStatus.Pending);
 
             foreach (var error in errorsForField)
             {
