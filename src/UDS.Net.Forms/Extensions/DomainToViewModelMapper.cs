@@ -201,12 +201,16 @@ namespace UDS.Net.Forms.Extensions
                 Message = packetSubmissionError.Message,
                 AssignedTo = packetSubmissionError.AssignedTo,
                 Level = packetSubmissionError.Level,
-                ResolvedBy = packetSubmissionError.ResolvedBy,
+                StatusChangedBy = packetSubmissionError.StatusChangedBy,
                 CreatedBy = packetSubmissionError.CreatedBy,
                 CreatedAt = packetSubmissionError.CreatedAt,
                 ModifiedBy = packetSubmissionError.ModifiedBy,
                 DeletedBy = packetSubmissionError.DeletedBy,
-                IsDeleted = packetSubmissionError.IsDeleted
+                IsDeleted = packetSubmissionError.IsDeleted,
+                Location = packetSubmissionError.Location,
+                Value = packetSubmissionError.Value,
+                Status = packetSubmissionError.Status
+
             };
         }
 

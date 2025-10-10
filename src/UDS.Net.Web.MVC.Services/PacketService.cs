@@ -122,7 +122,6 @@ namespace UDS.Net.Web.MVC.Services
             if (submissionToEdit == null)
                 throw new Exception("Packet submission not found");
 
-            // get index of packet submission to edit
             int submissionEditIndex = packetToEdit.Submissions.IndexOf(submissionToEdit);
 
             if (errors.Count > 0)
