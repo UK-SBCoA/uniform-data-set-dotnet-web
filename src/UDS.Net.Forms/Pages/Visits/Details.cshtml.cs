@@ -43,7 +43,9 @@ namespace UDS.Net.Forms.Pages.Visits
             error.Resolve(username);
             await _packetService.UpdatePacketSubmissionErrors(username, packet, submission.Id, submission.Errors.ToList());
 
-            bool allResolved = packet.Submissions.All(s => s.Errors.All(e => e.Status == PacketSubmissionErrorStatus.Resolved));
+            bool allResolved = packet.Submissions.All(s =>
+                s.Errors.All(e => e.Status == PacketSubmissionErrorStatus.Resolved || e.Status == PacketSubmissionErrorStatus.Ignored));
+
 
             if (allResolved)
             {
@@ -86,7 +88,9 @@ namespace UDS.Net.Forms.Pages.Visits
 
             await _packetService.UpdatePacketSubmissionErrors(username, packet, submission.Id, submission.Errors.ToList());
 
-            bool allResolved = packet.Submissions.All(s => s.Errors.All(e => e.Status == PacketSubmissionErrorStatus.Resolved));
+            bool allResolved = packet.Submissions.All(s =>
+                s.Errors.All(e => e.Status == PacketSubmissionErrorStatus.Resolved || e.Status == PacketSubmissionErrorStatus.Ignored));
+
 
             if (allResolved)
             {
