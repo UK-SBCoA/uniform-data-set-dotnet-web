@@ -259,8 +259,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 995-998)")]
         [RegularExpression("^(\\d|[1-9]\\d|[12]\\d{2}|300|99[5-8])$", ErrorMessage = "(0-300, 995-998)")]
-        [RequiredIf(nameof(RMMODE), "Video")]
-        [RequiredIf(nameof(MODE), "InPerson")]
+        [RequiredIfInPersonVisit(ErrorMessage = "Provide total seconds to complete.")]
         public int? TRAILB { get; set; }
 
         [Display(Name = "Number of commission errors", Description = "(0-40)")]
@@ -534,6 +533,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [Range(0, 30, ErrorMessage = "Allowed values are 0-30.")]
         [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Provide count of non-F/L words and rule violation errors.")]
         public int? UDSVERTI { get; set; }
+
+        //If UDSVERNF and UDSVERLN are both valid values, then UDSVERTI must = UDSVERNF + UDSVERLN
+        //Both visit types
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "If UDSVERNF and UDSVERLN are both within valid ranges (0-15) then UDSVERTI should equal the sum of UDSVERNF and UDSVERLN.")]
+        public bool? UDSVERTIValidation
+        {
+            get
+            {
+                if ((UDSVERNF.HasValue && UDSVERNF <= 15) && (UDSVERLN.HasValue && UDSVERLN.Value <= 15))
+                {
+                    if (UDSVERNF + UDSVERLN != UDSVERTI)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
 
         #endregion
 

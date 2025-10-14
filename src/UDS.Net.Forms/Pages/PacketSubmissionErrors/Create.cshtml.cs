@@ -1,18 +1,19 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Globalization;
-using UDS.Net.Forms.Models;
-using UDS.Net.Services;
-using Microsoft.AspNetCore.Http;
-using UDS.Net.Services.DomainModels.Submission;
-using Microsoft.CodeAnalysis;
-using UDS.Net.Services.Enums;
-using UDS.Net.Forms.Extensions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.CodeAnalysis;
+using System.Globalization;
+using UDS.Net.Forms.Extensions;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Pages.PacketSubmissions;
+using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 {
     public class CreateModel : PageModel
@@ -61,7 +62,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                 string formKind = error.Code.Split("-")[0].ToUpper();
 
-                var formData = currentPacket.Forms.Where(f => f.Kind == formKind);
+                var formData = currentPacket.Forms.Where(f => f.Kind.ToUpper() == formKind);
 
                 string formModifiedBy = formData.Select(a => a.ModifiedBy).FirstOrDefault();
 
@@ -75,10 +76,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     formAssignee = formAssignedTo;
                 }
 
-                DateTime createdAt = formData.Select(a => a.CreatedAt).FirstOrDefault();
-
                 //Create new PacketSubmissionError object with collected data
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, createdAt, User.Identity.Name, null, null, false);
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, DateTime.Now, User.Identity.Name, null, null, false);
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
@@ -100,7 +99,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
             PacketModel currentPacketModel = currentPacket.ToVM();
             currentPacketModel.Participation = currentPacket.Participation.ToVM();
 
-            return Partial("../PacketSubmissions/_Index", currentPacketModel);
+
+            return new PartialViewResult
+            {
+                ViewName = "_PacketErrors",
+                ViewData = new ViewDataDictionary<PacketModel>(ViewData, currentPacketModel),
+                ContentType = "text/vnd.turbo-stream.html"
+            };
         }
 
 

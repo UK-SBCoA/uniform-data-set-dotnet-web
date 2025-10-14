@@ -1177,7 +1177,14 @@
                         </div>
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTI"></p>
                     </div>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                    <div>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                        </div>
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTIValidation"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1533,5 +1540,4 @@
             <partial name="_FormFooter" for="@Model.C2" />
         </div>
     </div>
-    <script src="~/_content/UDS.Net.Forms/js/jquery.unobtrusive.custom_validation.js" asp-append-version="true"></script>
 </turbo-frame>

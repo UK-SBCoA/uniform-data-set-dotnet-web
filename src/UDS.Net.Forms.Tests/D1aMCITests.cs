@@ -100,6 +100,12 @@ namespace UDS.Net.Forms.Tests
             // Question 4b MCI = 1 Yes
             await Page.Locator("input[type=\"radio\"][name=\"D1a.MCI\"][value=\"1\"]").ClickAsync();
 
+            // Question 7 MBI = 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.MBI\"][value=\"0\"]").ClickAsync();
+
+            // Question 8 PREDOMSYN = 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.PREDOMSYN\"][value=\"0\"]").ClickAsync();
+
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
 
@@ -132,6 +138,51 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("span").Filter(new() { HasText = "Please check one or more Affected Domain." })).ToBeVisibleAsync();
 
 
+        }
+
+        [TestMethod]
+        public async Task D1aMCIDisplaysQuestion6()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            // Question 1
+            await Page.GetByText("Formal consensus panel").ClickAsync();
+
+            // Question 2 NORMCOG == 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.NORMCOG\"][value=\"0\"]").ClickAsync();
+
+            // Question 3 DEMENTED == 0 No
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.DEMENTED\"][value=\"0\"]").ClickAsync();
+
+            // Question 4
+            await Page.Locator("input[name=\"D1a.MCICRITCLN\"][type=\"checkbox\"]").CheckAsync();
+
+            await Page.Locator("input[name=\"D1a.MCICRITIMP\"][type=\"checkbox\"]").CheckAsync();
+
+            await Page.Locator("input[name=\"D1a.MCICRITFUN\"][type=\"checkbox\"]").CheckAsync();
+
+            // Question 4b MCI = 1 Yes
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.MCI\"][value=\"1\"]").ClickAsync();
+
+            // Question 6a-6g
+            await Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMLANG\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMATTN\"][type=\"checkbox\"]").CheckAsync();
+
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync("In progress");
+
+            // Attempt to save
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Re-load
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMLANG\"][type=\"checkbox\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMATTN\"][type=\"checkbox\"]")).ToBeCheckedAsync();
         }
     }
 }
