@@ -90,14 +90,6 @@ namespace UDS.Net.Forms.Models.PageModels
             // Set next form kind for better UX between forms
             BaseForm.NextFormKind = await _visitService.GetNextFormKind(User.Identity.Name, id.Value, _formKind);
 
-            /*if (form.UnresolvedErrors != null && form.UnresolvedErrors.Any())
-            {
-                var unresolvedErrors = form.UnresolvedErrors
-                    .Where(e => !e.IsDeleted && string.IsNullOrEmpty(e.ResolvedBy));
-
-                AddErrorsToModelState(BaseForm, unresolvedErrors);
-            }*/
-
             return Page();
         }
 
@@ -193,23 +185,6 @@ namespace UDS.Net.Forms.Models.PageModels
             }
 
             return Page();
-        }
-
-        protected void AddErrorsToModelState(object model, IEnumerable<PacketSubmissionError> errors)
-        {
-            foreach (var error in errors)
-            {
-                var propertyName = error.Location;
-                if (!string.IsNullOrEmpty(propertyName))
-                {
-                    var key = $"{BaseForm.GetType().Name}.{propertyName}";
-
-                    if (!ModelState.ContainsKey(key))
-                    {
-                        ModelState.AddModelError(key, error.Message);
-                    }
-                }
-            }
         }
 
         protected async Task ResolveCorrectedErrorsAsync(Visit visitEntity, FormModel updatedForm)

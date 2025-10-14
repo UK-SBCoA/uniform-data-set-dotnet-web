@@ -20,6 +20,7 @@
             <label asp-for="A2.INRELTO"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INRELTO)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INRELTO"></span>
+                <submission-error location="INRELTO" errors="Model.BaseForm.UnresolvedErrors" />
                 <radio-button-group id="A2_INRELTO" for="@Model.A2.INRELTO" items="Model.INRELTOListItems"></radio-button-group>
             </div>
 
@@ -33,6 +34,7 @@
                 <input asp-for="@Model.A2.INKNOWN" style="margin-right: 10px" />
                 <p class="text-base font-semibold">Years (999 = Unknown)</p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INKNOWN"></span>
+                <submission-error location="INKNOWN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -43,6 +45,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="A2.INLIVWTH"></p>
                 <radio-button-group id="A2_INLIVWTHOptions" for="@Model.A2.INLIVWTH" items="Model.INLIVWTHListItems" ui-behaviors="Model.INLIVWTHOptionsUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INLIVWTH"></span>
+                <submission-error location="INLIVWTH" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -55,6 +58,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="A2.INCNTMOD"></p>
                         <radio-button-group id="INCNTMOD" for="@Model.A2.INCNTMOD" items="Model.INCNTMODListItems" ui-behaviors="Model.INCNTMODUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTMOD"></span>
+                        <submission-error location="INCNTMOD" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A2.INCNTMDX"></p>
@@ -62,6 +66,7 @@
                         <div class="mt-2">
                             <input asp-for="A2.INCNTMDX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTMDX"></span>
+                            <submission-error location="INCNTMDX" errors="Model.BaseForm.UnresolvedErrors" />
 
                         </div>
                     </div>
@@ -75,6 +80,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A2.INCNTFRQ"></p>
                             <radio-button-group id="INCNTFRQ" for="@Model.A2.INCNTFRQ" items="Model.INCNTFRQListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTFRQ"></span>
+                            <submission-error location="INCNTFRQ" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -84,6 +90,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="A2.INCNTTIM"></p>
                             <radio-button-group id="INCNTTIM" for="@Model.A2.INCNTTIM" items="Model.INCNTTIMListItems"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.INCNTTIM"></span>
+                            <submission-error location="INCNTTIM" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -96,6 +103,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="A2.INRELY"></p>
                 <radio-button-group id="INRELY" for="@Model.A2.INRELY" items="Model.INRELYListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INRELY"></span>
+                <submission-error location="INRELY" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -107,6 +115,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="A2.INMEMWORS"></p>
                 <radio-button-group id="INMEMWORS" for="@Model.A2.INMEMWORS" items="Model.INMEMWORSListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMWORS"></span>
+                <submission-error location="INMEMWORS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -117,6 +126,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="A2.INMEMTROUB"></p>
                 <radio-button-group id="INMEMTROUB" for="@Model.A2.INMEMTROUB" items="Model.INMEMTROUBListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMTROUB"></span>
+                <submission-error location="INMEMTROUB" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -127,6 +137,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="A2.INMEMTEN"></p>
                 <radio-button-group id="INMEMTEN" for="@Model.A2.INMEMTEN" items="Model.INMEMTENListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A2.INMEMTEN"></span>
+                <submission-error location="INMEMTEN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>

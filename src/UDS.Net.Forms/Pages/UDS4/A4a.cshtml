@@ -18,6 +18,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.TRTBIOMARK"></p>
         <radio-button-group id="@Html.IdFor(m => m.A4a.TRTBIOMARK)" for="@Model.A4a.TRTBIOMARK" items="Model.TRTBIOMARKListItems" ui-behaviors="Model.TRTBIOMARKUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.TRTBIOMARK"></span>
+        <submission-error location="TRTBIOMARK" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
 </div>
 
@@ -76,6 +77,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.ADVEVENT"></p>
         <radio-button-group id="@Html.IdFor(m => m.A4a.ADVEVENT)" for="@Model.A4a.ADVEVENT" items="Model.ADVEVENTListItems" ui-behaviors="Model.ADVEVENTUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVEVENT"></span>
+        <submission-error location="ADVEVENT" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
 </div>
 
@@ -85,6 +87,7 @@
             <span class="subcounter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
         </label><br />
         <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.AdverseEventsIndicated"></span>
+        <submission-error location="AdverseEventsIndicated" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
         <fieldset class="">
@@ -119,11 +122,13 @@
                     </div>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                <submission-error location="ADVERSEOTH" errors="Model.BaseForm.UnresolvedErrors" />
 
                 <div class="ml-6">
                     <label asp-for="A4a.ADVERSEOTX">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTX)</label>
                     <input asp-for="A4a.ADVERSEOTX" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
+                    <submission-error location="ADVERSEOTX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </fieldset>

@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.B5Model
 @{
     Layout = "_LayoutForm";
@@ -18,7 +18,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINF"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B5.NPIQINF)" for="@Model.B5.NPIQINF" items="Model.CoparticipantListItems" ui-behaviors="Model.NPIQINFUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINF"></span>
-                <submission-error location="NPQINF" errors="Model.BaseForm.UnresolvedErrors" />
+                <submission-error location="NPIQINF" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div>
                 <p class="text-sm text-gray-500" asp-description-for="B5.NPIQINFX"></p>
@@ -27,7 +27,7 @@
                     <input asp-for="B5.NPIQINFX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.NPIQINFX"></span>
-                <submission-error location="NPQINFX" errors="Model.BaseForm.UnresolvedErrors" />
+                <submission-error location="NPIQINFX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
         <table class="table-auto min-w-full divide-y divide-gray-300">
@@ -110,7 +110,7 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANX"></span>
                         <submission-error location="ANX" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B5.ANXSEV"></span>
-                        <submission-error location="ANXSEV" errors="Model.BaseForm.UnresolvedErrors"/>
+                        <submission-error location="ANXSEV" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="text-right"><span class="subcounter"></span></td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B5.ANX)" for="@Model.B5.ANX" items="Model.SymptomPresentListItems" ui-behaviors="Model.ANXUIBehavior"></table-cell-radio-buttons>

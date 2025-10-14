@@ -36,7 +36,7 @@ namespace UDS.Net.Forms.TagHelpers
                     PacketSubmissionErrorLevel.Critical => "text-red-600",
                     PacketSubmissionErrorLevel.Error => "text-red-600",
                     PacketSubmissionErrorLevel.Warning => "text-yellow-600",
-                    PacketSubmissionErrorLevel.Information => "text-blue-600",
+                    PacketSubmissionErrorLevel.Information => "text-yellow-600",
                     _ => "text-gray-600"
                 };
 

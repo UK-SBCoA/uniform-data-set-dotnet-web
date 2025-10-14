@@ -36,6 +36,6 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="uds.net.dto" Version="8.1.1-preview.5" />
+		<PackageReference Include="uds.net.dto" Version="9.0.0" />
 	</ItemGroup>
 </Project>
