@@ -111,11 +111,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     csv.NextRecord();
                 }
             }
-
             memoryStream.Position = 0;
 
-            string filename = $"MultiplePackets_{DateTime.UtcNow:yyyyMMddHHmmss}.csv";
-            Response.Headers["Content-Disposition"] = $"attachment; {filename}";
+            string packetIdsExported = string.Join("-", packetId);
+            string filename = $"Packets_{packetIdsExported}_{DateTime.UtcNow:yyyyMMddHHmmss}.csv";
+
+            Response.Headers["Content-Disposition"] = $"attachment; filename=\"{filename}\"";
 
             return File(memoryStream, "text/csv", filename);
         }
