@@ -28,6 +28,8 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "Status")]
         public FormStatus Status { get; set; }
 
+        public string? NextFormKind { get; set; }
+
         public bool IsRequiredForPacketKind { get; set; }
 
         public bool AllowsRemote
@@ -49,7 +51,7 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedFormModes { get; set; } = new List<int>();
 
-        [RequiredIf(nameof(MODE), "3", ErrorMessage = "Specify reason not completed")]
+        [RequiredIf(nameof(MODE), "0", ErrorMessage = "Specify reason not completed")]
         [Display(Name = "If not completed, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
 
@@ -106,7 +108,7 @@ namespace UDS.Net.Forms.Models
                 {
                     yield return new ValidationResult(
                         $"Provide a reason code if form is not completed",
-                        new[] { nameof(NotIncludedReasonCode) });
+                        new[] { nameof(NOT) });
                 }
                 if (string.IsNullOrWhiteSpace(Kind.Trim()))
                 {

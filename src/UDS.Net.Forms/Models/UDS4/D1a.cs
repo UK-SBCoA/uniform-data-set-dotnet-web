@@ -1,12 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
-using System.Security.Claims;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -41,21 +35,41 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Largely preserved functional independence OR functional dependence that is not related to cognitive decline")]
         public bool? MCICRITFUN { get; set; }
 
-        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please check one or more MCI core clinical criteria.")]
         [NotMapped]
-        public bool? MCIClinicalCriteriaIndicated
+        [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "If all three criteria in question 4 are checked, choose 1=MCI. If less than 3 criteria are met, choose 0=No.")]
+        public bool? MCICriteriaValidation
         {
             get
             {
-                if ((MCICRITCLN.HasValue && MCICRITCLN.Value == true) ||
-                    (MCICRITIMP.HasValue && MCICRITIMP.Value == true) ||
-                    (MCICRITFUN.HasValue && MCICRITFUN.Value == true))
+                if (MCI.HasValue)
                 {
-                    return true;
+                    //  If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled.
+                    if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
+                    {
+                        return MCI == 1 ? true : null;
+                    }
+
+                    var criteriaCount = 0;
+
+                    criteriaCount += MCICRITCLN.HasValue && MCICRITCLN.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITIMP.HasValue && MCICRITIMP.Value == true ? 1 : 0;
+                    criteriaCount += MCICRITFUN.HasValue && MCICRITFUN.Value == true ? 1 : 0;
+
+                    if (criteriaCount == 3)
+                    {
+                        return MCI.Value == 1 ? true : null;
+                    }
+
+                    if (criteriaCount < 3)
+                    {
+                        return MCI.Value == 0 ? true : null;
+                    }
                 }
-                else return null;
+
+                return true;
             }
         }
+
 
         [RequiredIf(nameof(DEMENTED), "0", ErrorMessage = "Please specify.")]
         [Display(Name = "Does the participant meet all three of the above criteria for MCI (amnestic or non-amnestic)?")]
@@ -78,20 +92,103 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(IMPNOMCIO), "True", ErrorMessage = "Please specify.")]
         public string? IMPNOMCIOX { get; set; }
 
-        [RequiredIf(nameof(MCI), "0", ErrorMessage = "Please  check all applicable criteria for cognitively impaired, not MCI/dementia in")]
+        [RequiredIf(nameof(MCI), "0", ErrorMessage = "If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if only the third MCI criteria is met in Q4, select 0=No for Q5b.")]
         [NotMapped]
-        public bool? CognitivelyImpairedIndicated
+        public bool? IMPNOMCICriteriaValidation
         {
             get
             {
-                if ((IMPNOMCIFU.HasValue && IMPNOMCIFU.Value == true) ||
-                    (IMPNOMCICG.HasValue && IMPNOMCICG.Value == true) ||
-                    (IMPNOMCLCD.HasValue && IMPNOMCLCD.Value == true) ||
-                    (IMPNOMCIO.HasValue && IMPNOMCIO.Value == true))
+                // If (MCICRITFUN=1 and MCICRITCLN = 1 and MCICRITIMP = 1) then Q5 is disabled
+                if (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN == true)
                 {
                     return true;
                 }
-                else return null;
+                // If (MCICRITFUN=1 and MCICRITCLN != 1 and MCICRITIMP != 1) then IMPNOMCI must equal 0
+                if (MCICRITFUN == true && MCICRITCLN != true && MCICRITIMP != true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 0)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN == true && MCICRITIMP == true && MCICRITFUN != true) ||
+                    (MCICRITCLN != true && MCICRITIMP == true && MCICRITFUN == true) ||
+                    (MCICRITCLN == true && MCICRITIMP != true && MCICRITFUN == true)
+)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if ((MCICRITCLN != true && MCICRITIMP != true && MCICRITFUN != true) &&
+                   ((IMPNOMCIFU == true) || (IMPNOMCICG == true) || (IMPNOMCLCD == true) || (IMPNOMCIO == true)))
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value != 1)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+                if (MCICRITCLN == true || MCICRITIMP == true || MCICRITFUN == true)
+                {
+                    if (!IMPNOMCI.HasValue || IMPNOMCI.Value == 0)
+                    {
+                        return null;
+                    }
+                }
+
+                if (IMPNOMCI.HasValue)
+                {
+                    var IMPNOMCICriteriaCount = 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIFU == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCICG == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCLCD == true) ? 1 : 0;
+                    IMPNOMCICriteriaCount += (IMPNOMCIO == true) ? 1 : 0;
+
+                    if (IMPNOMCICriteriaCount > 0)
+                    {
+                        return IMPNOMCI.Value == 1 ? true : null;
+                    }
+                    else
+                    {
+                        var MCICriteriaCount = 0;
+                        MCICriteriaCount += (MCICRITCLN == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITIMP == true) ? 1 : 0;
+                        MCICriteriaCount += (MCICRITFUN == true) ? 1 : 0;
+
+                        if (MCICriteriaCount == 1 && MCICRITFUN == true)
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+                        else if (MCICriteriaCount > 0)
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+                        else
+                        {
+                            return IMPNOMCI.Value == 0 ? true : null;
+                        }
+                    }
+                }
+                return null;
             }
         }
 
@@ -142,8 +239,9 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "Does the participant meet criteria for MBI (If participant meets criteria for dementia an MBI diagnosis is excluded.)")]
-        [RequiredIf(nameof(IMPNOMCI), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(IMPNOMCI), "1", ErrorMessage = "Please specify.")]
+
+        [RequiredIf(nameof(NORMCOG), "0", ErrorMessage = "Please specify MBI.")]
+
         public int? MBI { get; set; }
 
         [Display(Name = "Motivation (e.g., apathy symptoms on Form B9)")]
@@ -166,10 +264,43 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
         public int? BDOMTHTS { get; set; }
 
-        [RequiredIf(nameof(MBI), "0", ErrorMessage = "Please specify.")]
-        [RequiredIf(nameof(MBI), "1", ErrorMessage = "Please specify.")]
+        [RequiredIfRange(nameof(MBI), 0, 1, ErrorMessage = "Please specify.")]
         [Display(Name = "Is there a predominant clinical syndrome?")]
         public int? PREDOMSYN { get; set; }
+
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, only a single dementia syndrome must be marked as present")]
+        [NotMapped]
+        public bool? PREDOMSYNSyndromePresent
+        {
+            get
+            {
+                if (PREDOMSYN == 1)
+                {
+                    //only one of the 8 sub qustions can and must be marked as present
+                    var PREDOMSYNSyndromeCount = 0;
+
+                    if (AMNDEM.HasValue && AMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (DYEXECSYN.HasValue && DYEXECSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PCA.HasValue && PCA.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PPASYN.HasValue && PPASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (FTDSYN.HasValue && FTDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (LBDSYN.HasValue && LBDSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (NAMNDEM.HasValue && NAMNDEM.Value == true) PREDOMSYNSyndromeCount++;
+                    if (PSPSYN.HasValue && PSPSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CTESYN.HasValue && CTESYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (CBSSYN.HasValue && CBSSYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (MSASYN.HasValue && MSASYN.Value == true) PREDOMSYNSyndromeCount++;
+                    if (OTHSYN.HasValue && OTHSYN.Value == true) PREDOMSYNSyndromeCount++;
+
+                    if (PREDOMSYNSyndromeCount == 0 || PREDOMSYNSyndromeCount > 1)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
 
         [Display(Name = "Amnestic predominant syndrome")]
         public bool? AMNDEM { get; set; }
@@ -237,7 +368,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Biomarkers (MRI, PET, CSF, plasma)")]
         public bool? SYNINFBIOM { get; set; }
 
-        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "Please select one or more source as Yes.")]
+        [RequiredIf(nameof(PREDOMSYN), "1", ErrorMessage = "If a predominant clinical syndrome was present in question 8, a source must be selected.")]
         [NotMapped]
         public bool? SourceIndicated
         {
@@ -301,6 +432,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? OTHANXD { get; set; }
 
         [Display(Name = "Other (specify)")]
+        [RequiredIf(nameof(OTHANXD), "true", ErrorMessage = "Please provide other anxiety disorder.")]
         [MaxLength(60)]
         public string? OTHANXDX { get; set; }
 
@@ -476,112 +608,114 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTH3), "True", ErrorMessage = "Please indicate")]
         public string? COGOTH3X { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Select one or more syndrome(s) as Present.")]
-        [NotMapped]
-        public bool? PresentSyndromeIndicated
-        {
-            get
-            {
-                int counter = 0;
-                if (MAJDEPDX == true)
-                {
-                    counter++;
-                }
-                if (OTHDEPDX == true)
-                {
-                    counter++;
-                }
-                if (BIPOLDX == true)
-                {
-                    counter++;
-                }
-                if (SCHIZOP == true)
-                {
-                    counter++;
-                }
-                if (ANXIET == true)
-                {
-                    counter++;
-                }
-                if (PTSDDX == true)
-                {
-                    counter++;
-                }
-                if (NDEVDIS == true)
-                {
-                    counter++;
-                }
-                if (DELIR == true)
-                {
-                    counter++;
-                }
-                if (OTHPSY == true)
-                {
-                    counter++;
-                }
-                if (TBIDX == true)
-                {
-                    counter++;
-                }
-                if (EPILEP == true)
-                {
-                    counter++;
-                }
-                if (HYCEPH == true)
-                {
-                    counter++;
-                }
-                if (NEOP == true)
-                {
-                    counter++;
-                }
-                if (HIV == true)
-                {
-                    counter++;
-                }
-                if (POSTC19 == true)
-                {
-                    counter++;
-                }
-                if (APNEADX == true)
-                {
-                    counter++;
-                }
-                if (OTHCOGILL == true)
-                {
-                    counter++;
-                }
-                if (ALCDEM == true)
-                {
-                    counter++;
-                }
-                if (IMPSUB == true)
-                {
-                    counter++;
-                }
-                if (MEDS == true)
-                {
-                    counter++;
-                }
-                if (COGOTH == true)
-                {
-                    counter++;
-                }
-                if (COGOTH2 == true)
-                {
-                    counter++;
-                }
-                if (COGOTH3 == true)
-                {
-                    counter++;
-                }
-                if (counter >= 1)
-                {
-                    return true;
-                }
-                return null;
-            }
-        }
+        //[RequiredIf(nameof(PREDOMSYN), "0", ErrorMessage = "If a predominant clinical syndrome was not present in question 8, a condition must be selected.")]
+        //[NotMapped]
+        //public bool? PresentSyndromeIndicated
+        //{
+        //    get
+        //    {
+        //        int counter = 0;
+        //        if (MAJDEPDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHDEPDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (BIPOLDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (SCHIZOP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (ANXIET == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (PTSDDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (NDEVDIS == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (DELIR == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHPSY == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (TBIDX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (EPILEP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (HYCEPH == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (NEOP == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (HIV == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (POSTC19 == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (APNEADX == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (OTHCOGILL == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (ALCDEM == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (IMPSUB == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (MEDS == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH2 == true)
+        //        {
+        //            counter++;
+        //        }
+        //        if (COGOTH3 == true)
+        //        {
+        //            counter++;
+        //        }
+
+        //        if (counter >= 1)
+        //        {
+        //            return true;
+        //        }
+
+        //        return null;
+        //    }
+        //}
 
         [RequiredOnFinalized(ErrorMessage = "Only one diagnosis should be selected as Primary.")]
         [NotMapped]

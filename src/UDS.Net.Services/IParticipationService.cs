@@ -9,11 +9,7 @@ namespace UDS.Net.Services
     public interface IParticipationService : IService<Participation>
     {
         Task<Participation> GetByLegacyId(string username, string legacyId);
-
-        Task<Milestone> AddMilestone(int participationId, Milestone milestone);
-        Task<Milestone> UpdateMilestone(int id, int formId, Milestone milestone);
-        Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId);
-        Task<Milestone> GetMilestoneById(int id, int formId);
+        Task<Participation> GetById(string username, int id, bool includeVisits = false);
     }
 }
 

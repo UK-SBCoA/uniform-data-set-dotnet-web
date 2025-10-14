@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using CsvHelper.Configuration.Attributes;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -10,7 +11,7 @@ namespace UDS.Net.Forms.Records
         internal Form form { get; init; }
 
         [Name("frmdatea1")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToShortDateString();
+        public string FrmDate { get; init; } = form.FRMDATE.ToString(RecordConstants.dateFormatString);
 
         [Name("initialsa1")]
         public string Initials { get; init; } = form.INITIALS;
@@ -26,6 +27,9 @@ namespace UDS.Net.Forms.Records
 
         [Name("rmmodea1")]
         public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+
+        [Name("admina1")]
+        public int? Admin { get; set; } = 2;
     }
 }
 

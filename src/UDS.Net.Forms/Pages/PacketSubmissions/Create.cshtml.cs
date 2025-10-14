@@ -41,12 +41,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (packetId == null || packetId == 0)
                 return NotFound();
 
-            var packet = await _packetService.GetById("", packetId.Value);
+            var packet = await _packetService.GetById(User.Identity.Name, packetId.Value);
 
             if (packet == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", packet.ParticipationId);
+            var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
@@ -68,12 +68,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         public async Task<IActionResult> OnPostAsync(int packetId, PacketSubmissionModel newPacketSubmission)
         {
-            var packet = await _packetService.GetById("", packetId);
+            var packet = await _packetService.GetById(User.Identity.Name, packetId);
 
             if (packet == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById("", packet.ParticipationId);
+            var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();

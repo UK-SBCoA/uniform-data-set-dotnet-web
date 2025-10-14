@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -99,7 +92,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Static", "3"),
             new RadioListItem("Fluctuating", "4"),
             new RadioListItem("Improved", "5"),
-            new RadioListItem("Not applicable", "6"),
+            new RadioListItem("Not applicable", "8"),
             new RadioListItem("Unknown", "9"),
         };
 
@@ -110,6 +103,266 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Motor function", "3"),
             new RadioListItem("Not applicable", "8"),
             new RadioListItem("Unknown", "9")
+        };
+
+        /****************** Question 7 ******************/
+        /****************** Option 0 = END FORM HERE ******************/
+        public Dictionary<string, UIBehavior> DECCLINUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.DECCLCOG"),
+                    new UIDisableAttribute("B9.COGMODE"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                    new UIDisableAttribute("B9.COURSE"),
+                    new UIDisableAttribute("B9.FRSTCHG"),
+                    new UIDisableAttribute("B9.BEAPATHY"),
+                    new UIDisableAttribute("B9.COGMEM"),
+                    new UIDisableAttribute("B9.COGORI"),
+                    new UIDisableAttribute("B9.COGJUDG"),
+                    new UIDisableAttribute("B9.COGLANG"),
+                    new UIDisableAttribute("B9.COGVIS"),
+                    new UIDisableAttribute("B9.COGATTN"),
+                    new UIDisableAttribute("B9.COGFLUC"),
+                    new UIDisableAttribute("B9.COGOTHR"),
+                    new UIDisableAttribute("B9.COGOTHRX"),
+                    new UIDisableAttribute("B9.COGAGE"),
+                    new UIDisableAttribute("B9.COGMODE"),
+                    new UIDisableAttribute("B9.COGMODEX"),
+                    new UIDisableAttribute("B9.DECCLBE"),
+                    new UIDisableAttribute("B9.MOGAIT"),
+                    new UIDisableAttribute("B9.MOFALLS"),
+                    new UIDisableAttribute("B9.MOSLOW"),
+                    new UIDisableAttribute("B9.MOTREM"),
+                    new UIDisableAttribute("B9.MOLIMB"),
+                    new UIDisableAttribute("B9.MOFACE"),
+                    new UIDisableAttribute("B9.MOSPEECH"),
+                    new UIDisableAttribute("B9.MOTORAGE"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                    new UIDisableAttribute("B9.BEAPATHY"),
+                    new UIDisableAttribute("B9.BEDEP"),
+                    new UIDisableAttribute("B9.BEANX"),
+                    new UIDisableAttribute("B9.BEEUPH"),
+                    new UIDisableAttribute("B9.BEIRRIT"),
+                    new UIDisableAttribute("B9.BEAGIT"),
+                    new UIDisableAttribute("B9.BEHAGE"),
+                    new UIDisableAttribute("B9.BEVHALL"),
+                    new UIDisableAttribute("B9.BEVPATT"),
+                    new UIDisableAttribute("B9.BEVWELL"),
+                    new UIDisableAttribute("B9.BEAHALL"),
+                    new UIDisableAttribute("B9.BEAHSIMP"),
+                    new UIDisableAttribute("B9.BEAHCOMP"),
+                    new UIDisableAttribute("B9.BEDEL"),
+                    new UIDisableAttribute("B9.BEAGGRS"),
+                    new UIDisableAttribute("B9.PSYCHAGE"),
+                    new UIDisableAttribute("B9.BEDISIN"),
+                    new UIDisableAttribute("B9.BEPERCH"),
+                    new UIDisableAttribute("B9.BEEMPATH"),
+                    new UIDisableAttribute("B9.BEOBCOM"),
+                    new UIDisableAttribute("B9.BEANGER"),
+                    new UIDisableAttribute("B9.BESUBAB"),
+                    new UIDisableAttribute("B9.ALCUSE"),
+                    new UIDisableAttribute("B9.SEDUSE"),
+                    new UIDisableAttribute("B9.OPIATEUSE"),
+                    new UIDisableAttribute("B9.COCAINEUSE"),
+                    new UIDisableAttribute("B9.CANNABUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSEX"),
+                    new UIDisableAttribute("B9.PERCHAGE"),
+                    new UIDisableAttribute("B9.BEREM"),
+                    new UIDisableAttribute("B9.BEREMAGO"),
+                    new UIDisableAttribute("B9.BEREMCONF"),
+                    new UIDisableAttribute("B9.BEOTHR"),
+                    new UIDisableAttribute("B9.BEOTHRX"),
+                    new UIDisableAttribute("B9.BEMODE"),
+                    new UIDisableAttribute("B9.BEMODEX"),
+                    new UIDisableAttribute("B9.DECCLMOT"),
+                    new UIDisableAttribute("B9.MOGAIT"),
+                    new UIDisableAttribute("B9.MOFALLS"),
+                    new UIDisableAttribute("B9.MOSLOW"),
+                    new UIDisableAttribute("B9.MOTREM"),
+                    new UIDisableAttribute("B9.MOLIMB"),
+                    new UIDisableAttribute("B9.MOFACE"),
+                    new UIDisableAttribute("B9.MOSPEECH"),
+                    new UIDisableAttribute("B9.MOTORAGE"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMODEX"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                },
+                InstructionalMessage = "END FORM HERE"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.DECCLCOG"),
+                    new UIEnableAttribute("B9.DECCLBE"),
+                    new UIEnableAttribute("B9.DECCLBE"),
+                    new UIEnableAttribute("B9.DECCLMOT"),
+                    new UIEnableAttribute("B9.COURSE"),
+                    new UIEnableAttribute("B9.FRSTCHG"),
+                }
+             } },
+        };
+
+        /****************** Question 8 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 11 ******************/
+        public Dictionary<string, UIBehavior> DECCLCOGUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.COGMEM"),
+                    new UIDisableAttribute("B9.COGORI"),
+                    new UIDisableAttribute("B9.COGJUDG"),
+                    new UIDisableAttribute("B9.COGLANG"),
+                    new UIDisableAttribute("B9.COGVIS"),
+                    new UIDisableAttribute("B9.COGATTN"),
+                    new UIDisableAttribute("B9.COGFLUC"),
+                    new UIDisableAttribute("B9.COGOTHR"),
+                    new UIDisableAttribute("B9.COGOTHRX"),
+                    new UIDisableAttribute("B9.COGAGE"),
+                    new UIDisableAttribute("B9.COGMODE"),
+                    new UIDisableAttribute("B9.COGMODEX"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 11"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.COGMEM"),
+                    new UIEnableAttribute("B9.COGORI"),
+                    new UIEnableAttribute("B9.COGJUDG"),
+                    new UIEnableAttribute("B9.COGLANG"),
+                    new UIEnableAttribute("B9.COGVIS"),
+                    new UIEnableAttribute("B9.COGATTN"),
+                    new UIEnableAttribute("B9.COGFLUC"),
+                    new UIEnableAttribute("B9.COGOTHR"),
+                    new UIEnableAttribute("B9.COGAGE"),
+                    new UIEnableAttribute("B9.COGMODE"),
+                }
+             } },
+        };
+
+        /****************** Question 11 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 14 ******************/
+        public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.BEAPATHY"),
+                    new UIDisableAttribute("B9.BEDEP"),
+                    new UIDisableAttribute("B9.BEANX"),
+                    new UIDisableAttribute("B9.BEEUPH"),
+                    new UIDisableAttribute("B9.BEIRRIT"),
+                    new UIDisableAttribute("B9.BEAGIT"),
+                    new UIDisableAttribute("B9.BEHAGE"),
+                    new UIDisableAttribute("B9.BEVHALL"),
+                    new UIDisableAttribute("B9.BEVPATT"),
+                    new UIDisableAttribute("B9.BEVWELL"),
+                    new UIDisableAttribute("B9.BEAHALL"),
+                    new UIDisableAttribute("B9.BEAHSIMP"),
+                    new UIDisableAttribute("B9.BEAHCOMP"),
+                    new UIDisableAttribute("B9.BEDEL"),
+                    new UIDisableAttribute("B9.BEAGGRS"),
+                    new UIDisableAttribute("B9.PSYCHAGE"),
+                    new UIDisableAttribute("B9.BEDISIN"),
+                    new UIDisableAttribute("B9.BEPERCH"),
+                    new UIDisableAttribute("B9.BEEMPATH"),
+                    new UIDisableAttribute("B9.BEOBCOM"),
+                    new UIDisableAttribute("B9.BEANGER"),
+                    new UIDisableAttribute("B9.BESUBAB"),
+                    new UIDisableAttribute("B9.ALCUSE"),
+                    new UIDisableAttribute("B9.SEDUSE"),
+                    new UIDisableAttribute("B9.OPIATEUSE"),
+                    new UIDisableAttribute("B9.COCAINEUSE"),
+                    new UIDisableAttribute("B9.CANNABUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSEX"),
+                    new UIDisableAttribute("B9.PERCHAGE"),
+                    new UIDisableAttribute("B9.BEREM"),
+                    new UIDisableAttribute("B9.BEREMAGO"),
+                    new UIDisableAttribute("B9.BEREMCONF"),
+                    new UIDisableAttribute("B9.BEOTHR"),
+                    new UIDisableAttribute("B9.BEOTHRX"),
+                    new UIDisableAttribute("B9.BEMODE"),
+                    new UIDisableAttribute("B9.BEMODEX"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 14"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.BEAPATHY"),
+                    new UIEnableAttribute("B9.BEDEP"),
+                    new UIEnableAttribute("B9.BEANX"),
+                    new UIEnableAttribute("B9.BEEUPH"),
+                    new UIEnableAttribute("B9.BEIRRIT"),
+                    new UIEnableAttribute("B9.BEAGIT"),
+                    new UIEnableAttribute("B9.BEHAGE"),
+                    new UIEnableAttribute("B9.BEVHALL"),
+                    new UIEnableAttribute("B9.BEAHALL"),
+                    new UIEnableAttribute("B9.BEDEL"),
+                    new UIEnableAttribute("B9.BEAGGRS"),
+                    new UIEnableAttribute("B9.PSYCHAGE"),
+                    new UIEnableAttribute("B9.BEDISIN"),
+                    new UIEnableAttribute("B9.BEPERCH"),
+                    new UIEnableAttribute("B9.BEEMPATH"),
+                    new UIEnableAttribute("B9.BEOBCOM"),
+                    new UIEnableAttribute("B9.BEANGER"),
+                    new UIEnableAttribute("B9.BESUBAB"),
+                    new UIEnableAttribute("B9.PERCHAGE"),
+                    new UIEnableAttribute("B9.BEREM"),
+                    new UIEnableAttribute("B9.BEOTHR"),
+                    new UIEnableAttribute("B9.BEMODE"),
+                }
+             } },
+        };
+
+        /****************** Question 11 ******************/
+        /****************** Option 0 = SKIP TO QUESTION 19 ******************/
+        public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("B9.MOGAIT"),
+                    new UIDisableAttribute("B9.MOFALLS"),
+                    new UIDisableAttribute("B9.MOSLOW"),
+                    new UIDisableAttribute("B9.MOTREM"),
+                    new UIDisableAttribute("B9.MOLIMB"),
+                    new UIDisableAttribute("B9.MOFACE"),
+                    new UIDisableAttribute("B9.MOSPEECH"),
+                    new UIDisableAttribute("B9.MOTORAGE"),
+                    new UIDisableAttribute("B9.MOMODE"),
+                    new UIDisableAttribute("B9.MOMODEX"),
+                    new UIDisableAttribute("B9.MOMOPARK"),
+                    new UIDisableAttribute("B9.MOMOALS"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 19"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("B9.MOGAIT"),
+                    new UIEnableAttribute("B9.MOFALLS"),
+                    new UIEnableAttribute("B9.MOSLOW"),
+                    new UIEnableAttribute("B9.MOTREM"),
+                    new UIEnableAttribute("B9.MOLIMB"),
+                    new UIEnableAttribute("B9.MOFACE"),
+                    new UIEnableAttribute("B9.MOSPEECH"),
+                    new UIEnableAttribute("B9.MOTORAGE"),
+                    new UIEnableAttribute("B9.MOMODE"),
+                    new UIEnableAttribute("B9.MOMOPARK"),
+                    new UIEnableAttribute("B9.MOMOALS"),
+                }
+             } },
         };
 
         public Dictionary<string, UIBehavior> COGOTHRUIBehavior = new Dictionary<string, UIBehavior>
@@ -152,100 +405,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
-        public Dictionary<string, UIBehavior> DECCLCOGUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("B9.COGMEM"),
-                    new UIDisableAttribute("B9.COGORI"),
-                    new UIDisableAttribute("B9.COGJUDG"),
-                    new UIDisableAttribute("B9.COGLANG"),
-                    new UIDisableAttribute("B9.COGVIS"),
-                    new UIDisableAttribute("B9.COGATTN"),
-                    new UIDisableAttribute("B9.COGFLUC"),
-                    new UIDisableAttribute("B9.COGOTHR"),
-                    new UIDisableAttribute("B9.COGAGE"),
-                    new UIDisableAttribute("B9.COGMODE"),
-                }
-            } },
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("B9.COGMEM"),
-                    new UIEnableAttribute("B9.COGORI"),
-                    new UIEnableAttribute("B9.COGJUDG"),
-                    new UIEnableAttribute("B9.COGLANG"),
-                    new UIEnableAttribute("B9.COGVIS"),
-                    new UIEnableAttribute("B9.COGATTN"),
-                    new UIEnableAttribute("B9.COGFLUC"),
-                    new UIEnableAttribute("B9.COGOTHR"),
-                    new UIEnableAttribute("B9.COGAGE"),
-                    new UIEnableAttribute("B9.COGMODE"),
-                }
-             } },
-        };
-
-        public Dictionary<string, UIBehavior> DECCLBEUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("B9.BEAPAHTY"),
-                    new UIDisableAttribute("B9.BEDEP"),
-                    new UIDisableAttribute("B9.BEANX"),
-                    new UIDisableAttribute("B9.BEEUPH"),
-                    new UIDisableAttribute("B9.BEIRRIT"),
-                    new UIDisableAttribute("B9.BEAGIT"),
-                    new UIDisableAttribute("B9.BEVHALL"),
-                    new UIDisableAttribute("B9.BEAHALL"),
-                    new UIDisableAttribute("B9.BEDEL"),
-                    new UIDisableAttribute("B9.BEAGGRS"),
-                    new UIDisableAttribute("B9.PSYCHAGE"),
-                    new UIDisableAttribute("B9.BEDISIN"),
-                    new UIDisableAttribute("B9.BEPERCH"),
-                    new UIDisableAttribute("B9.BEEMPATH"),
-                    new UIDisableAttribute("B9.BEOBCOM"),
-                    new UIDisableAttribute("B9.BEANGER"),
-                    new UIDisableAttribute("B9.BESUBAB"),
-                    new UIDisableAttribute("B9.PERCHAGE"),
-                    new UIDisableAttribute("B9.BEREM"),
-                    new UIDisableAttribute("B9.BEOTHR"),
-                    new UIDisableAttribute("B9.BEMODE"),
-                    new UIDisableAttribute("B9.BEHAGE"),
-                    new UIDisableAttribute("B9.BEAPATHY")
-                }
-            } },
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("B9.BEAPAHTY"),
-                    new UIEnableAttribute("B9.BEDEP"),
-                    new UIEnableAttribute("B9.BEANX"),
-                    new UIEnableAttribute("B9.BEEUPH"),
-                    new UIEnableAttribute("B9.BEIRRIT"),
-                    new UIEnableAttribute("B9.BEAGIT"),
-                    new UIEnableAttribute("B9.BEVHALL"),
-                    new UIEnableAttribute("B9.BEAHALL"),
-                    new UIEnableAttribute("B9.BEDEL"),
-                    new UIEnableAttribute("B9.BEAGGRS"),
-                    new UIEnableAttribute("B9.PSYCHAGE"),
-                    new UIEnableAttribute("B9.BEDISIN"),
-                    new UIEnableAttribute("B9.BEPERCH"),
-                    new UIEnableAttribute("B9.BEEMPATH"),
-                    new UIEnableAttribute("B9.BEOBCOM"),
-                    new UIEnableAttribute("B9.BEANGER"),
-                    new UIEnableAttribute("B9.BESUBAB"),
-                    new UIEnableAttribute("B9.PERCHAGE"),
-                    new UIEnableAttribute("B9.BEREM"),
-                    new UIEnableAttribute("B9.BEOTHR"),
-                    new UIEnableAttribute("B9.BEMODE"),
-                    new UIEnableAttribute("B9.BEHAGE"),
-                    new UIEnableAttribute("B9.BEAPATHY")
-                }
-             } },
-        };
-
         public Dictionary<string, UIBehavior> BESUBABUIBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -255,8 +414,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("B9.SEDUSE"),
                     new UIDisableAttribute("B9.OPIATEUSE"),
                     new UIDisableAttribute("B9.COCAINEUSE"),
-                    new UIDisableAttribute("B9.OTHSUBUSE"),
                     new UIDisableAttribute("B9.CANNABUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSE"),
+                    new UIDisableAttribute("B9.OTHSUBUSEX"),
                 }
             } },
             { "1", new UIBehavior {
@@ -437,79 +597,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
-        public Dictionary<string, UIBehavior> DECCLINUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("B9.DECCLCOG"),
-                    new UIDisableAttribute("B9.COGMODE"),
-                    new UIDisableAttribute("B9.DECCLBE"),
-                    new UIDisableAttribute("B9.DECCLBE"),
-                    new UIDisableAttribute("B9.DECCLMOT"),
-                    new UIDisableAttribute("B9.MOMODE"),
-                    new UIDisableAttribute("B9.MOMOPARK"),
-                    new UIDisableAttribute("B9.MOMOALS"),
-                    new UIDisableAttribute("B9.COURSE"),
-                    new UIDisableAttribute("B9.FRSTCHG"),
-                    new UIDisableAttribute("B9.BEAPATHY")
-                }
-            } },
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("B9.DECCLCOG"),
-                    new UIEnableAttribute("B9.COGMODE"),
-                    new UIEnableAttribute("B9.DECCLBE"),
-                    new UIEnableAttribute("B9.DECCLBE"),
-                    new UIEnableAttribute("B9.DECCLMOT"),
-                    new UIEnableAttribute("B9.MOMODE"),
-                    new UIEnableAttribute("B9.MOMOPARK"),
-                    new UIEnableAttribute("B9.MOMOALS"),
-                    new UIEnableAttribute("B9.COURSE"),
-                    new UIEnableAttribute("B9.FRSTCHG"),
-                    new UIEnableAttribute("B9.BEAPATHY")
-                }
-             } },
-        };
-
-        public Dictionary<string, UIBehavior> DECCLMOTUIBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("B9.MOGAIT"),
-                    new UIDisableAttribute("B9.MOFALLS"),
-                    new UIDisableAttribute("B9.MOSLOW"),
-                    new UIDisableAttribute("B9.MOTREM"),
-                    new UIDisableAttribute("B9.MOLIMB"),
-                    new UIDisableAttribute("B9.MOFACE"),
-                    new UIDisableAttribute("B9.MOSPEECH"),
-                    new UIDisableAttribute("B9.MOTORAGE"),
-                    new UIDisableAttribute("B9.MOMODE"),
-                    new UIDisableAttribute("B9.MOMOPARK"),
-                    new UIDisableAttribute("B9.MOMOALS"),
-                }
-            } },
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("B9.MOGAIT"),
-                    new UIEnableAttribute("B9.MOFALLS"),
-                    new UIEnableAttribute("B9.MOSLOW"),
-                    new UIEnableAttribute("B9.MOTREM"),
-                    new UIEnableAttribute("B9.MOLIMB"),
-                    new UIEnableAttribute("B9.MOFACE"),
-                    new UIEnableAttribute("B9.MOSPEECH"),
-                    new UIEnableAttribute("B9.MOTORAGE"),
-                    new UIEnableAttribute("B9.MOMODE"),
-                    new UIEnableAttribute("B9.MOMOPARK"),
-                    new UIEnableAttribute("B9.MOMOALS"),
-                }
-             } },
-        };
-
-        public B9Model(IVisitService visitService) : base(visitService, "B9")
+        public B9Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B9")
         {
         }
 
@@ -526,13 +614,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = B9; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(B9); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

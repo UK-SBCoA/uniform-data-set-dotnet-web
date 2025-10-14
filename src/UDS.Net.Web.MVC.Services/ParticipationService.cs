@@ -21,16 +21,9 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Participation> Add(string username, Participation entity)
         {
-            await _apiClient.ParticipationClient.Post(entity.ToDto());
+            var dto = await _apiClient.ParticipationClient.Post(entity.ToDto());
 
-            return entity; // TODO update client to return new object or id
-        }
-
-        public async Task<Milestone> AddMilestone(int participationId, Milestone milestone)
-        {
-            await _apiClient.ParticipationClient.PostMilestone(participationId, milestone.ToDto());
-
-            return milestone;
+            return dto.ToDomain(username);
         }
 
         public async Task<int> Count(string username)
@@ -63,6 +56,20 @@ namespace UDS.Net.Web.MVC.Services
             }
         }
 
+        public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
+        {
+            if (includeVisits)
+                return await GetById(username, id);
+
+            var participationDto = await _apiClient.ParticipationClient.Get(id); // Other services can use includeVisits to determine whether the underlying service should include visits or not
+
+            if (participationDto != null)
+            {
+                return participationDto.ToDomain(username);
+            }
+            throw new Exception("Participation not found.");
+        }
+
         public async Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
             var participationDtos = await _apiClient.ParticipationClient.Get(pageSize, pageIndex);
@@ -73,27 +80,6 @@ namespace UDS.Net.Web.MVC.Services
             }
 
             return new List<Participation>();
-        }
-
-        public async Task<Milestone> UpdateMilestone(int id, int formId, Milestone milestone)
-        {
-            await _apiClient.ParticipationClient.PutMilestone(id, formId, milestone.ToDto());
-
-            return milestone;
-        }
-
-        public async Task<IEnumerable<Milestone>> GetMilestonesByParticipationId(int participationId)
-        {
-            IEnumerable<M1Dto> milestones = await _apiClient.ParticipationClient.GetMilestones(participationId);
-
-            return milestones.ToDomain();
-        }
-
-        public async Task<Milestone> GetMilestoneById(int id, int formId)
-        {
-            M1Dto milestone = await _apiClient.ParticipationClient.GetMilestone(id, formId);
-
-            return milestone.ToDomain();
         }
 
         public async Task<Participation> Patch(string username, Participation entity)

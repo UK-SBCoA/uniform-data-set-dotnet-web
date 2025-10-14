@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Services.Extensions
 {
@@ -72,7 +69,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new M1Dto
             {
-                FormId = milestone.FormId,
+                Id = milestone.Id,
                 ParticipationId = milestone.ParticipationId,
                 Status = milestone.Status,
                 CHANGEMO = milestone.CHANGEMO,
@@ -156,7 +153,8 @@ namespace UDS.Net.Services.Extensions
                 CreatedAt = packetSubmission.CreatedAt,
                 ModifiedBy = packetSubmission.ModifiedBy,
                 DeletedBy = packetSubmission.DeletedBy,
-                IsDeleted = packetSubmission.IsDeleted
+                IsDeleted = packetSubmission.IsDeleted,
+                ErrorCount = packetSubmission.ErrorCount
             };
 
             if (packetSubmission.Errors != null)
@@ -409,7 +407,6 @@ namespace UDS.Net.Services.Extensions
                 TRSPACCESS = fields.TRSPACCESS,
                 TRANSPROB = fields.TRANSPROB,
                 TRANSWORRY = fields.TRANSWORRY,
-                TRSPLONGER = fields.TRSPLONGER,
                 TRSPMED = fields.TRSPMED,
                 INCOMEYR = fields.INCOMEYR,
                 FINSATIS = fields.FINSATIS,
@@ -420,14 +417,7 @@ namespace UDS.Net.Services.Extensions
                 LESSMEDS = fields.LESSMEDS,
                 LESSMEDSYR = fields.LESSMEDSYR,
                 COMPCOMM = fields.COMPCOMM,
-                COMPUSA = fields.COMPUSA,
-                FAMCOMP = fields.FAMCOMP,
                 GUARDEDU = fields.GUARDEDU,
-                GUARDREL = fields.GUARDREL,
-                GUARDRELX = fields.GUARDRELX,
-                GUARD2EDU = fields.GUARD2EDU,
-                GUARD2REL = fields.GUARD2REL,
-                GUARD2RELX = fields.GUARD2RELX,
                 EMPTINESS = fields.EMPTINESS,
                 MISSPEOPLE = fields.MISSPEOPLE,
                 FRIENDS = fields.FRIENDS,
@@ -476,83 +466,83 @@ namespace UDS.Net.Services.Extensions
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,
-                RACEWHITE = fields.RACEWHITE,
-                ETHGERMAN = fields.ETHGERMAN,
-                ETHIRISH = fields.ETHIRISH,
-                ETHENGLISH = fields.ETHENGLISH,
-                ETHITALIAN = fields.ETHITALIAN,
-                ETHPOLISH = fields.ETHPOLISH,
-                ETHSCOTT = fields.ETHSCOTT,
-                ETHWHIOTH = fields.ETHWHIOTH,
+                RACEWHITE = fields.RACEWHITE.HasValue ? 1 : 0,
+                ETHGERMAN = fields.ETHGERMAN.HasValue ? 1 : 0,
+                ETHIRISH = fields.ETHIRISH.HasValue ? 1 : 0,
+                ETHENGLISH = fields.ETHENGLISH.HasValue ? 1 : 0,
+                ETHITALIAN = fields.ETHITALIAN.HasValue ? 1 : 0,
+                ETHPOLISH = fields.ETHPOLISH.HasValue ? 1 : 0,
+                ETHSCOTT = fields.ETHSCOTT.HasValue ? 1 : 0,
+                ETHWHIOTH = fields.ETHWHIOTH.HasValue ? 1 : 0,
                 ETHWHIOTHX = fields.ETHWHIOTHX,
-                ETHISPANIC = fields.ETHISPANIC,
-                ETHMEXICAN = fields.ETHMEXICAN,
-                ETHPUERTO = fields.ETHPUERTO,
-                ETHCUBAN = fields.ETHCUBAN,
-                ETHSALVA = fields.ETHSALVA,
-                ETHDOMIN = fields.ETHDOMIN,
-                ETHGUATEM = fields.ETHGUATEM,
-                ETHHISOTH = fields.ETHHISOTH,
+                ETHISPANIC = fields.ETHISPANIC.HasValue ? 1 : 0,
+                ETHMEXICAN = fields.ETHMEXICAN.HasValue ? 1 : 0,
+                ETHPUERTO = fields.ETHPUERTO.HasValue ? 1 : 0,
+                ETHCUBAN = fields.ETHCUBAN.HasValue ? 1 : 0,
+                ETHSALVA = fields.ETHSALVA.HasValue ? 1 : 0,
+                ETHDOMIN = fields.ETHDOMIN.HasValue ? 1 : 0,
+                ETHGUATEM = fields.ETHGUATEM.HasValue ? 1 : 0,
+                ETHHISOTH = fields.ETHHISOTH.HasValue ? 1 : 0,
                 ETHHISOTHX = fields.ETHHISOTHX,
-                RACEBLACK = fields.RACEBLACK,
-                ETHAFAMER = fields.ETHAFAMER,
-                ETHJAMAICA = fields.ETHJAMAICA,
-                ETHHAITIAN = fields.ETHHAITIAN,
-                ETHNIGERIA = fields.ETHNIGERIA,
-                ETHETHIOP = fields.ETHETHIOP,
-                ETHSOMALI = fields.ETHSOMALI,
-                ETHBLKOTH = fields.ETHBLKOTH,
+                RACEBLACK = fields.RACEBLACK.HasValue ? 1 : 0,
+                ETHAFAMER = fields.ETHAFAMER.HasValue ? 1 : 0,
+                ETHJAMAICA = fields.ETHJAMAICA.HasValue ? 1 : 0,
+                ETHHAITIAN = fields.ETHHAITIAN.HasValue ? 1 : 0,
+                ETHNIGERIA = fields.ETHNIGERIA.HasValue ? 1 : 0,
+                ETHETHIOP = fields.ETHETHIOP.HasValue ? 1 : 0,
+                ETHSOMALI = fields.ETHSOMALI.HasValue ? 1 : 0,
+                ETHBLKOTH = fields.ETHBLKOTH.HasValue ? 1 : 0,
                 ETHBLKOTHX = fields.ETHBLKOTHX,
-                RACEASIAN = fields.RACEASIAN,
-                ETHCHINESE = fields.ETHCHINESE,
-                ETHFILIP = fields.ETHFILIP,
-                ETHINDIA = fields.ETHINDIA,
-                ETHVIETNAM = fields.ETHVIETNAM,
-                ETHKOREAN = fields.ETHKOREAN,
-                ETHJAPAN = fields.ETHJAPAN,
-                ETHASNOTH = fields.ETHASNOTH,
+                RACEASIAN = fields.RACEASIAN.HasValue ? 1 : 0,
+                ETHCHINESE = fields.ETHCHINESE.HasValue ? 1 : 0,
+                ETHFILIP = fields.ETHFILIP.HasValue ? 1 : 0,
+                ETHINDIA = fields.ETHINDIA.HasValue ? 1 : 0,
+                ETHVIETNAM = fields.ETHVIETNAM.HasValue ? 1 : 0,
+                ETHKOREAN = fields.ETHKOREAN.HasValue ? 1 : 0,
+                ETHJAPAN = fields.ETHJAPAN.HasValue ? 1 : 0,
+                ETHASNOTH = fields.ETHASNOTH.HasValue ? 1 : 0,
                 ETHASNOTHX = fields.ETHASNOTHX,
-                RACEAIAN = fields.RACEAIAN,
+                RACEAIAN = fields.RACEAIAN.HasValue ? 1 : 0,
                 RACEAIANX = fields.RACEAIANX,
-                RACEMENA = fields.RACEMENA,
-                ETHLEBANON = fields.ETHLEBANON,
-                ETHIRAN = fields.ETHIRAN,
-                ETHEGYPT = fields.ETHEGYPT,
-                ETHSYRIA = fields.ETHSYRIA,
-                ETHIRAQI = fields.ETHIRAQI,
-                ETHISRAEL = fields.ETHISRAEL,
-                ETHMENAOTH = fields.ETHMENAOTH,
+                RACEMENA = fields.RACEMENA.HasValue ? 1 : 0,
+                ETHLEBANON = fields.ETHLEBANON.HasValue ? 1 : 0,
+                ETHIRAN = fields.ETHIRAN.HasValue ? 1 : 0,
+                ETHEGYPT = fields.ETHEGYPT.HasValue ? 1 : 0,
+                ETHSYRIA = fields.ETHSYRIA.HasValue ? 1 : 0,
+                ETHIRAQI = fields.ETHIRAQI.HasValue ? 1 : 0,
+                ETHISRAEL = fields.ETHISRAEL.HasValue ? 1 : 0,
+                ETHMENAOTH = fields.ETHMENAOTH.HasValue ? 1 : 0,
                 ETHMENAOTX = fields.ETHMENAOTX,
-                RACENHPI = fields.RACENHPI,
-                ETHHAWAII = fields.ETHHAWAII,
-                ETHSAMOAN = fields.ETHSAMOAN,
-                ETHCHAMOR = fields.ETHCHAMOR,
-                ETHTONGAN = fields.ETHTONGAN,
-                ETHFIJIAN = fields.ETHFIJIAN,
-                ETHMARSHAL = fields.ETHMARSHAL,
-                ETHNHPIOTH = fields.ETHNHPIOTH,
+                RACENHPI = fields.RACENHPI.HasValue ? 1 : 0,
+                ETHHAWAII = fields.ETHHAWAII.HasValue ? 1 : 0,
+                ETHSAMOAN = fields.ETHSAMOAN.HasValue ? 1 : 0,
+                ETHCHAMOR = fields.ETHCHAMOR.HasValue ? 1 : 0,
+                ETHTONGAN = fields.ETHTONGAN.HasValue ? 1 : 0,
+                ETHFIJIAN = fields.ETHFIJIAN.HasValue ? 1 : 0,
+                ETHMARSHAL = fields.ETHMARSHAL.HasValue ? 1 : 0,
+                ETHNHPIOTH = fields.ETHNHPIOTH.HasValue ? 1 : 0,
                 ETHNHPIOTX = fields.ETHNHPIOTX,
-                RACEUNKN = fields.RACEUNKN,
-                GENMAN = fields.GENMAN,
-                GENWOMAN = fields.GENWOMAN,
-                GENTRMAN = fields.GENTRMAN,
-                GENTRWOMAN = fields.GENTRWOMAN,
-                GENNONBI = fields.GENNONBI,
-                GENTWOSPIR = fields.GENTWOSPIR,
-                GENOTH = fields.GENOTH,
+                RACEUNKN = fields.RACEUNKN.HasValue ? 1 : 0,
+                GENMAN = fields.GENMAN.HasValue ? 1 : 0,
+                GENWOMAN = fields.GENWOMAN.HasValue ? 1 : 0,
+                GENTRMAN = fields.GENTRMAN.HasValue ? 1 : 0,
+                GENTRWOMAN = fields.GENTRWOMAN.HasValue ? 1 : 0,
+                GENNONBI = fields.GENNONBI.HasValue ? 1 : 0,
+                GENTWOSPIR = fields.GENTWOSPIR.HasValue ? 1 : 0,
+                GENOTH = fields.GENOTH.HasValue ? 1 : 0,
                 GENOTHX = fields.GENOTHX,
-                GENDKN = fields.GENDKN,
-                GENNOANS = fields.GENNOANS,
+                GENDKN = fields.GENDKN.HasValue ? 1 : 0,
+                GENNOANS = fields.GENNOANS.HasValue ? 1 : 0,
                 BIRTHSEX = fields.BIRTHSEX,
                 INTERSEX = fields.INTERSEX,
-                SEXORNGAY = fields.SEXORNGAY,
-                SEXORNHET = fields.SEXORNHET,
-                SEXORNBI = fields.SEXORNBI,
-                SEXORNTWOS = fields.SEXORNTWOS,
-                SEXORNOTH = fields.SEXORNOTH,
+                SEXORNGAY = fields.SEXORNGAY.HasValue ? 1 : 0,
+                SEXORNHET = fields.SEXORNHET.HasValue ? 1 : 0,
+                SEXORNBI = fields.SEXORNBI.HasValue ? 1 : 0,
+                SEXORNTWOS = fields.SEXORNTWOS.HasValue ? 1 : 0,
+                SEXORNOTH = fields.SEXORNOTH.HasValue ? 1 : 0,
                 SEXORNOTHX = fields.SEXORNOTHX,
-                SEXORNDNK = fields.SEXORNDNK,
-                SEXORNNOAN = fields.SEXORNNOAN,
+                SEXORNDNK = fields.SEXORNDNK.HasValue ? 1 : 0,
+                SEXORNNOAN = fields.SEXORNNOAN.HasValue ? 1 : 0,
                 PREDOMLAN = fields.PREDOMLAN,
                 PREDOMLANX = fields.PREDOMLANX,
                 HANDED = fields.HANDED,
@@ -588,7 +578,6 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
-                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -607,8 +596,6 @@ namespace UDS.Net.Services.Extensions
         {
             var dto = new A3Dto()
             {
-                AFFFAMM = fields.AFFFAMM,
-                NWINFMUT = fields.NWINFMUT,
                 MOMYOB = fields.MOMYOB,
                 MOMDAGE = fields.MOMDAGE,
                 MOMETPR = fields.MOMETPR,
@@ -1116,7 +1103,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new B6Dto
             {
-                NOGDS = fields.NOGDS,
+                NOGDS = fields.NOGDS.HasValue ? 1 : 0,
                 SATIS = fields.SATIS,
                 DROPACT = fields.DROPACT,
                 EMPTY = fields.EMPTY,
@@ -1158,7 +1145,7 @@ namespace UDS.Net.Services.Extensions
             return new B8Dto
             {
                 NEUREXAM = fields.NEUREXAM,
-                NORMNREXAM = fields.NORMNREXAM,
+                NORMNREXAM = fields.NORMNREXAM.HasValue ? Convert.ToBoolean(fields.NORMNREXAM) : (bool?)null,
                 PARKSIGN = fields.PARKSIGN,
                 SLOWINGFM = fields.SLOWINGFM,
                 TREMREST = fields.TREMREST,
@@ -1404,14 +1391,14 @@ namespace UDS.Net.Services.Extensions
                 OTRLBRR = fields.OTRLBRR,
                 OTRLBLI = fields.OTRLBLI,
                 RESPVAL = fields.RESPVAL,
-                RESPHEAR = fields.RESPHEAR,
-                RESPDIST = fields.RESPDIST,
-                RESPINTR = fields.RESPINTR,
-                RESPDISN = fields.RESPDISN,
-                RESPFATG = fields.RESPFATG,
-                RESPEMOT = fields.RESPEMOT,
-                RESPASST = fields.RESPASST,
-                RESPOTH = fields.RESPOTH,
+                RESPHEAR = fields.RESPHEAR.HasValue ? 1 : 0,
+                RESPDIST = fields.RESPDIST.HasValue ? 1 : 0,
+                RESPINTR = fields.RESPINTR.HasValue ? 1 : 0,
+                RESPDISN = fields.RESPDISN.HasValue ? 1 : 0,
+                RESPFATG = fields.RESPFATG.HasValue ? 1 : 0,
+                RESPEMOT = fields.RESPEMOT.HasValue ? 1 : 0,
+                RESPASST = fields.RESPASST.HasValue ? 1 : 0,
+                RESPOTH = fields.RESPOTH.HasValue ? 1 : 0,
                 RESPOTHX = fields.RESPOTHX
             };
         }
@@ -1435,7 +1422,7 @@ namespace UDS.Net.Services.Extensions
                 IMPNOMCLCD = fields.IMPNOMCLCD,
                 IMPNOMCIO = fields.IMPNOMCIO,
                 IMPNOMCIOX = fields.IMPNOMCIOX,
-                IMPNOMCI = fields.IMPNOMCI,
+                IMPNOMCI = fields.IMPNOMCI.HasValue ? Convert.ToBoolean(fields.IMPNOMCI) : (bool?)null,
                 CDOMMEM = fields.CDOMMEM,
                 CDOMLANG = fields.CDOMLANG,
                 CDOMATTN = fields.CDOMATTN,
@@ -1573,8 +1560,8 @@ namespace UDS.Net.Services.Extensions
                 IMAGLAC = fields.IMAGLAC,
                 IMAGMACH = fields.IMAGMACH,
                 IMAGMICH = fields.IMAGMICH,
-                IMAGMWMH = fields.IMAGMWMH,
-                IMAGEWMH = fields.IMAGEWMH,
+                IMAGWMH = fields.IMAGWMH,
+                IMAGWMHSEV = fields.IMAGWMHSEV,
                 OTHBIOM1 = fields.OTHBIOM1,
                 OTHBIOMX1 = fields.OTHBIOMX1,
                 BIOMAD1 = fields.BIOMAD1,
@@ -1602,7 +1589,6 @@ namespace UDS.Net.Services.Extensions
                 LBDIS = fields.LBDIS,
                 LBDIF = fields.LBDIF,
                 FTLD = fields.FTLD,
-                FTLDIF = fields.FTLDIF,
                 PSP = fields.PSP,
                 PSPIF = fields.PSPIF,
                 CORT = fields.CORT,
@@ -1619,6 +1605,7 @@ namespace UDS.Net.Services.Extensions
                 MSAIF = fields.MSAIF,
                 CTE = fields.CTE,
                 CTEIF = fields.CTEIF,
+                CTECERT = fields.CTECERT,
                 DOWNS = fields.DOWNS,
                 DOWNSIF = fields.DOWNSIF,
                 HUNT = fields.HUNT,
@@ -1632,6 +1619,18 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
+            };
+        }
+
+        public static DrugCodeDto ToDto(this DrugCode drugCode)
+        {
+            return new DrugCodeDto
+            {
+                RxNormId = Int32.Parse(drugCode.RxNormId),
+                DrugName = drugCode.DrugName,
+                BrandName = drugCode.BrandName,
+                IsOverTheCounter = drugCode.IsOverTheCounter,
+                IsPopular = drugCode.IsPopular
             };
         }
     }

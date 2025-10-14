@@ -214,7 +214,6 @@
                             <div>
                                 <label asp-for="B9.COGAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.COGAGE)</label>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGAGE"></span>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.COGAGESymptomsPresent"></span>
                             </div>
                             <div>
                                 <input asp-for="B9.COGAGE" />
@@ -440,9 +439,14 @@
                         <div>
                             <label asp-for="B9.PSYCHAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PSYCHAGE)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHAGE"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PSYCHAGESymptomsPresent"></span>
                         </div>
                     </td>
-                    <table-cell-radio-buttons id="B9.PSYCHAGE" for="@Model.B9.PSYCHAGE" items="Model.BasicYesNoListItems"></table-cell-radio-buttons>
+                    <td colspan="2">
+                        <div>
+                            <input asp-for="B9.PSYCHAGE" />
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -513,7 +517,7 @@
                             <div class="grid gap-y-5 subsubsubcounterreset">
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.ALCUSE", Model.B9.ALCUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                        @Html.CheckBox("B9.ALCUSE", Model.B9.ALCUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.ALCUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.ALCUSE)</label>
@@ -521,7 +525,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.SEDUSE", Model.B9.SEDUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                        @Html.CheckBox("B9.SEDUSE", Model.B9.SEDUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.SEDUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.SEDUSE)</label>
@@ -529,7 +533,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.OPIATEUSE", Model.B9.OPIATEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                        @Html.CheckBox("B9.OPIATEUSE", Model.B9.OPIATEUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.OPIATEUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.OPIATEUSE)</label>
@@ -537,7 +541,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.COCAINEUSE", Model.B9.COCAINEUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                        @Html.CheckBox("B9.COCAINEUSE", Model.B9.COCAINEUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.COCAINEUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.COCAINEUSE)</label>
@@ -545,7 +549,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.CANNABUSE", Model.B9.CANNABUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                        @Html.CheckBox("B9.CANNABUSE", Model.B9.CANNABUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
                                     </div>
                                     <div>
                                         <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" asp-for="B9.CANNABUSE"><span class="@pillNumberCSS subsubsubcounter"></span> @Html.DisplayNameFor(Model => Model.B9.CANNABUSE)</label>
@@ -553,7 +557,7 @@
                                 </div>
                                 <div class="flex">
                                     <div>
-                                        @Html.CheckBox("B9.OTHSUBUSE", Model.B9.OTHSUBUSE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"B9.OTHSUBUSEX\"]" })
+                                        @Html.CheckBox("B9.OTHSUBUSE", Model.B9.OTHSUBUSE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"B9.OTHSUBUSEX\"]" })
                                     </div>
                                     <div class="grid grid-cols-2">
                                         <div>
@@ -572,7 +576,7 @@
                 <tr>
                     <td colspan="5">
                         <div class="grid grid-cols-3">
-                        <div>
+                            <div>
                                 <label asp-for="B9.PERCHAGE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B9.PERCHAGE)</label>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGE"></span>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.PERCHAGESymptomsPresent"></span>
@@ -640,7 +644,7 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.BEOTHR"></span>
                     </div>
                 </td>
-                <table-cell-radio-buttons id="B9.BEOTHR" for="@Model.B9.BEOTHR" items="Model.BasicYesNoListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="B9.BEOTHR" for="@Model.B9.BEOTHR" items="Model.BasicYesNoOtherListItems" ui-behaviors="Model.BEOTHRUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr class="subsubcounterreset">
                 <td colspan="5">
@@ -682,8 +686,7 @@
     </div>
     <div>
         <p class="mt-2">
-            Consider if the participant currently has meaningful change in motor function <span class="underline font-bold">that represents a change
-            relative to a stable baseline prior to the current syndrome and is potentially due to a disorder affecting the central nervous system:</span>
+            Consider if the participant currently has meaningful change in motor function <span class="underline font-bold">that represents a change relative to a stable baseline prior to the current syndrome and is potentially due to a disorder affecting the central nervous system:</span>
         </p>
     </div>
 </div>

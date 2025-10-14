@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -18,12 +10,6 @@ namespace UDS.Net.Forms.Pages.UDS4
     {
         [BindProperty]
         public A2 A2 { get; set; } = default!;
-
-        public List<RadioListItem> NEWINFListItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("No", "0"),
-            new RadioListItem("Yes", "1")
-        };
 
         public List<RadioListItem> INRELTOListItems { get; } = new List<RadioListItem>
         {
@@ -48,15 +34,14 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
             new UIEnableAttribute("A2.INCNTMOD"),
             new UIEnableAttribute("A2.INCNTFRQ"),
-            new UIDisableAttribute("A2.INCNTMDX"),
             new UIEnableAttribute("A2.INCNTTIM")}
             } },
 
             {"1", new UIBehavior {PropertyAttributes = new List<UIPropertyAttributes>
             {
             new UIDisableAttribute("A2.INCNTMOD"),
-            new UIDisableAttribute("A2.INCNTFRQ"),
             new UIDisableAttribute("A2.INCNTMDX"),
+            new UIDisableAttribute("A2.INCNTFRQ"),
             new UIDisableAttribute("A2.INCNTTIM")
             }
             } }
@@ -139,7 +124,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
 
 
-        public A2Model(IVisitService visitService) : base(visitService, "A2")
+        public A2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A2")
         {
         }
 
@@ -157,13 +142,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A2; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A2); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

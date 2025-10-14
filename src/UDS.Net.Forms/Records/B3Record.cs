@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Records
         internal Form form { get; init; }
 
         [Name("frmdateb3")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToShortDateString();
+        public string FrmDate { get; init; } = form.FRMDATE.ToString(RecordConstants.dateFormatString);
 
         [Name("initialsb3")]
         public string Initials { get; init; } = form.INITIALS;
@@ -20,11 +20,8 @@ namespace UDS.Net.Forms.Records
         [Name("modeb3")]
         public int Mode { get; init; } = (int)form.MODE;
 
-        [Name("rmreasb3")]
-        public int? RmReas { get; init; } = form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
-
-        [Name("rmmodeb3")]
-        public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+        [Name("b3not")]
+        public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
     }
 }
 

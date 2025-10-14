@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -129,7 +128,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Rarely", "2"),
             new RadioListItem("Sometimes", "3"),
             new RadioListItem("Often", "4"),
-            new RadioListItem("Much worse", "5"),
+            new RadioListItem("Very often", "5"),
             new RadioListItem("Don't know / Prefer not to answer", "9")
         };
 
@@ -139,7 +138,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("A little better", "2"),
             new RadioListItem("The same", "3"),
             new RadioListItem("A little worse", "4"),
-            new RadioListItem("Very often ", "5"),
+            new RadioListItem("Much worse", "5"),
             new RadioListItem("Don't know / Prefer not to answer", "9")
         };
 
@@ -411,12 +410,10 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A1Model(IVisitService visitService, ILookupService lookupService) : base(visitService, "A1")
+        public A1Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService) : base(visitService, participationService, "A1")
         {
             _lookupService = lookupService;
         }
-
-
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -431,7 +428,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A1; // reassign bounded and derived form to base form for base method
 
@@ -450,7 +447,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A1); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

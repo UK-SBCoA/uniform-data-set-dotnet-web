@@ -2,9 +2,41 @@
 
 <div data-controller="dropdown">
     <form method="get">
-        <div class="border-t border-gray-200 px-4 py-6">
-            <h3 class="-mx-2 -my-3 flow-root">
-                <!-- Expand/collapse section button -->
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="w-full text-red-600 font-semibold mb-2 px-2">
+                @foreach (var modelState in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelState.Errors)
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                }
+            </div>
+        }
+
+        <div class="flex flex-wrap items-center gap-4">
+
+            <!-- Start Date -->
+            <div class="flex items-center border border-gray-300 rounded-md px-3 py-3 space-x-2 h-[48px]">
+                <label for="StartDate" class="text-sm font-medium text-gray-700 whitespace-nowrap">Start:</label>
+                <input type="date" id="StartDate" name="StartDate"
+                       class="block w-40 border-gray-300 rounded-md shadow-sm text-sm h-[30px]"
+                       value="@(Model.StartDate?.ToString("yyyy-MM-dd") ?? "")"
+                       onchange="this.form.submit()" />
+            </div>
+
+            <!-- End Date -->
+            <div class="flex items-center border border-gray-300 rounded-md px-3 py-3 space-x-2 h-[48px]">
+                <label for="EndDate" class="text-sm font-medium text-gray-700 whitespace-nowrap">End:</label>
+                <input type="date" id="EndDate" name="EndDate"
+                       class="block w-40 border-gray-300 rounded-md shadow-sm text-sm h-[30px]"
+                       value="@(Model.EndDate?.ToString("yyyy-MM-dd") ?? "")"
+                       onchange="this.form.submit()" />
+            </div>
+
+            <!-- Status Dropdown -->
+            <div class="relative">
                 <button data-dropdown-target="button" data-action="click->dropdown#toggle click@window->dropdown#hide" type="button" class="grid w-full justify-items-end bg-white px-2 py-3 text-gray-400 hover:text-gray-500" aria-controls="filter-section-mobile-0" aria-expanded="false">
                     <div class="flex">
                         <div class="flex space-x-2">
@@ -21,32 +53,44 @@
                         </span>
                     </div>
                 </button>
-            </h3>
-            <!-- Filter section, show/hide based on section state. -->
-            <div data-dropdown-target="menu" class="pt-6 right-24 w-52 absolute bg-white z-10" id="filter-section-mobile-0">
-                <div class="space-y-5 border border-gray-300 rounded pl-3 py-3">
-                    <div data-controller="checkboxSelectAll" class="space-y-3">
-                        <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllCheckboxes">
-                            <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                            <label for="markAll" class="ml-3 min-w-0 flex-1 text-gray-900 font-bold">Select All</label>
-                        </div>
-                        @for (int i = 0; i < Model.FilterList.Count(); i++)
-                        {
-                            <div class="flex items-center">
-                                @if (Model.FilterList[i].Selected)
-                                {
-                                    <input data-action="click->checkboxSelectAll#ItemSelected" data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filter" value="@Model.FilterList[i].Text" type="checkbox" checked class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                }
-                                else
-                                {
-                                    <input data-action="click->checkboxSelectAll#ItemSelected" data-checkboxSelectAll-target="checkBox" id="FilterList[@i].Text" name="filter" value="@Model.FilterList[i].Text" type="checkbox" class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                }
-                                <label for="FilterList[@i].Text" class="ml-3 min-w-0 flex-1 text-gray-900">@Model.FilterList[i].Text</label>
+
+                <!-- Dropdown Menu -->
+                <div data-dropdown-target="menu"
+                     class="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-400 rounded shadow-lg z-10 hidden"
+                     id="filter-section-mobile-0">
+                    <div class="space-y-5 px-4 py-4">
+                        <div data-controller="checkboxSelectAll" class="space-y-3 pt-4 border-t border-gray-200">
+                            <div class="flex items-center" data-action="click->checkboxSelectAll#ToggleAllCheckboxes">
+                                <input data-checkboxSelectAll-target="toggleAll" id="markAll" type="checkbox"
+                                       class="size-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500">
+                                <label for="markAll" class="ml-3 text-gray-900 font-bold">Select All</label>
                             </div>
-                        }
-                    </div>
-                    <div class="flex justify-center">
-                        <button type="submit" class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400">Apply</button>
+
+                            @for (int i = 0; i < Model.FilterList.Count(); i++)
+                            {
+                                <div class="flex items-center">
+                                    <input data-action="click->checkboxSelectAll#ItemSelected"
+                                           data-checkboxSelectAll-target="checkBox"
+                                           id="FilterList[@i].Text"
+                                           name="filter"
+                                           value="@Model.FilterList[i].Text"
+                                           type="checkbox"
+                                    @(Model.FilterList[i].Selected ? "checked" : null)
+                                           class="size-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="FilterList[@i].Text"
+                                           class="ml-3 text-gray-900">
+                                        @Model.FilterList[i].Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="flex justify-center pt-2">
+                            <button type="submit"
+                                    class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-gray-400">
+                                Apply
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

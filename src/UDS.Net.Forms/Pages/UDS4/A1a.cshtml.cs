@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -12,7 +11,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A1a A1a { get; set; } = default!;
 
-        public A1aModel(IVisitService visitService) : base(visitService, "A1a")
+        public A1aModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A1a")
         {
         }
 
@@ -82,6 +81,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("3", "3"),
             new RadioListItem("2", "2"),
             new RadioListItem("1", "1"),
+            new RadioListItem("Prefer not to answer", "88")
         };
 
         public List<RadioListItem> GUARDEDUItems { get; } = new List<RadioListItem>
@@ -104,52 +104,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Other relative", "5"),
             new RadioListItem("Legal guardian", "6"),
             new RadioListItem("Other (SPECIFY)", "8")
-        };
-
-        public Dictionary<string, UIBehavior> GUARDRELBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARDRELX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARDRELX") } }
-        };
-
-        public List<RadioListItem> GUARD2EDUItems { get; } = new List<RadioListItem>
-        {
-            new RadioListItem("Never attended school or only attended kindergarten", "1"),
-            new RadioListItem("Grades 1 through 8 (elementary)", "2"),
-            new RadioListItem("Grades 9 through 11 (some high school)", "3"),
-            new RadioListItem("Grade 12 or GED (high school graduate)", "4"),
-            new RadioListItem("College 1 year to 3 years (some college)", "5"),
-            new RadioListItem("College 4 years or more (college graduate)", "6"),
-            new RadioListItem("No second person (SKIP TO QUESTION 18)", "8"),
-            new RadioListItem("Do not know", "9")
-        };
-
-        public Dictionary<string, UIBehavior> GUARD2EDUBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2REL") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2REL") } }
-        };
-
-        public Dictionary<string, UIBehavior> GUARD2RELBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "1", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "2", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "3", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "4", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "5", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "6", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A1a.GUARD2RELX") } },
-            { "8", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A1a.GUARD2RELX") } }
         };
 
         public List<RadioListItem> DisagreeToAgreeItems { get; } = new List<RadioListItem>
@@ -267,13 +221,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A1a; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A1a); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

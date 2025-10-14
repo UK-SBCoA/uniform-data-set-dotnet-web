@@ -36,6 +36,8 @@ namespace UDS.Net.Forms.Models
         public PacketStatus Status { get; set; }
 
         public bool CanBeFinalized { get; set; } = false;
+        public bool IsValid { get; set; } = false;
+        public bool CanBeEdited { get; set; } = true;
 
         public int? TotalUnresolvedErrorCount { get; set; }
 

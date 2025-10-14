@@ -1,0 +1,100 @@
+@model UDS.Net.Forms.Models.VisitModel
+
+<div id="FormGrid">
+<ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 p-6 py-12 overflow-hidden">
+    @foreach (var form in Model.Forms)
+    {
+        <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+            <div class="flex w-full items-center justify-between space-x-6 p-6">
+                <div class="flex-1 truncate">
+                    <div class="flex items-center space-x-3">
+                        <h3 class="truncate text-sm font-medium text-gray-900">@form.Kind</h3>
+
+                        @if (form.IsRequiredForPacketKind)
+                        {
+                            <span class="inline-flex flex-shrink-0 items-center rounded-full bg-indigo-50 px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">Required</span>
+                        }
+
+                        @{
+                            var cssClassFormLanguage = form.LANG switch
+                            {
+                                FormLanguage.English => "bg-green-75",
+                                FormLanguage.Spanish => "bg-green-100",
+                                _ => "bg-green-50"
+                            };
+                        }
+
+                        @if (form.LANG == FormLanguage.English || form.LANG == FormLanguage.Spanish)
+                        {
+                            <span class="@cssClassFormLanguage inline-flex flex-shrink-0 items-center rounded-full px-1.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                @form.LANG
+                            </span>
+                        }
+                    </div>
+
+                    <p class="mt-1 truncate text-sm text-gray-500">@form.Title</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="-mt-px flex divide-x divide-gray-200">
+                    <div class="flex w-0 flex-1">
+                        @if (Model.CanBeEdited)
+                        {
+                            <a asp-page="/UDS@(Model.FORMVER)/@form.Kind"
+                               asp-route-id="@form.VisitId"
+                               asp-route-packetKind="@Model.PACKET"
+                               class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                                Edit
+                            </a>
+                        }
+                        else
+                        {
+                            <button type="button" disabled
+                                    class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-300">
+                                Edit
+                            </button>
+                        }
+                    </div>
+
+                    <div class="flex flex-1 items-center justify-between truncate">
+                        @{
+                            var cssClassFormState = form.Status switch
+                            {
+                                FormStatus.NotStarted => "text-red-500",
+                                FormStatus.InProgress => "text-indigo-500",
+                                FormStatus.Finalized => "text-teal-500",
+                                _ => "text-gray-900"
+                            };
+
+                            if (form.UnresolvedErrorCount.HasValue && form.UnresolvedErrorCount != 0)
+                            {
+                                cssClassFormState = "text-red-500";
+                            }
+                        }
+
+                        <div class="flex-1 truncate px-4 py-2 text-sm text-center">
+                            <p class="@cssClassFormState font-medium" enum-description-for="@form.Status"></p>
+
+                            @if (form.NOT.HasValue)
+                            {
+                                <p class="text-gray-500">
+                                    <span enum-description-for="@form.MODE"></span>
+                                    <span enum-description-for="@form.NOT"></span>
+                                </p>
+                            }
+
+                            @if (form.UnresolvedErrorCount.HasValue && form.UnresolvedErrorCount != 0)
+                            {
+                                <span class="cursor-pointer text-red-500">
+                                    @form.UnresolvedErrorCount.Value errors
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+</div>

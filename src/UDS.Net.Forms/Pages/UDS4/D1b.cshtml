@@ -56,9 +56,7 @@
         determine the etiological diagnosis at this visit.
     </p>
     <p class="mt-2 text-sm text-gray-900">
-        If a fluid biomarker was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If a fluid biomarker was found to be consistent with
-        a diagnosis, select <strong>1=Yes</strong>. If a fluid biomarker was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
-        listed were not assessed using fluid biomarkers, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+        If a fluid biomarker was used to exclude an etiological diagnosis, select <strong>0=No, inconsistent</strong>. If a fluid biomarker was found to be consistent with a diagnosis, select <strong>1=Yes, consistent</strong>. If a fluid biomarker was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies listed were not assessed using fluid biomarkers, select <strong>8</strong>.
     </p>
 </div>
 
@@ -82,6 +80,9 @@
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
             <tr>
+                <span asp-validation-for="D1b.BloodBiomarkersValidation"
+                      class="mt-2 text-sm text-red-600">
+                </span>
                 <td>
                     <label asp-for="D1b.BLOODAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODAD"></p>
@@ -203,6 +204,9 @@
                     </div>
                 </td>
             </tr>
+            <span asp-validation-for="D1b.CSFBiomarkersValidation"
+                  class="mt-2 text-sm text-red-600">
+            </span>
         </tbody>
     </table>
 </div>
@@ -221,15 +225,15 @@
             <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems" ui-behaviors="Model.IMAGINGDXUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGINGDX"></span>
         </div>
+        <span asp-validation-for="D1b.ImagingModalitiesValidation"
+              class="mt-2 text-sm text-red-600"></span>
     </div>
     <p class="mt-2 text-sm text-gray-900">
         Please use the following questions to indicate the results of the fluid biomarker test(s) used by the clinician (or at consensus) to
         determine the etiological diagnosis at this visit.
     </p>
     <p class="mt-2 text-sm text-gray-900">
-        If imaging was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If imaging was found to be consistent with
-        a diagnosis, select <strong>1=Yes</strong>. If imaging was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
-        listed were not assessed using imaging, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+        If imaging was used to exclude an etiological diagnosis, select <strong>0=No, inconsistent</strong>. If imaging was found to be consistent with a diagnosis, select <strong>1=Yes, consistent</strong>. If imaging was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies listed were not assessed using imaging, select <strong>8</strong>.
     </p>
 </div>
 
@@ -254,7 +258,10 @@
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
             <tr>
-                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">If used in diagnosis, indicate the results:</th>
+                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    If used in diagnosis, indicate the results:<br />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.SPECTValidation"></span>
+                </th>
                 @foreach (var item in Model.FindingsListItems)
                 {
                     <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
@@ -295,6 +302,9 @@
         <thead>
             <tr>
                 <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
+                <span asp-validation-for="D1b.FDGEtiologyValidation"
+                      class="mt-2 text-sm text-red-600">
+                </span>
                 @foreach (var item in Model.FindingsListItems)
                 {
                     <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
@@ -447,6 +457,8 @@
             </tr>
         </tbody>
     </table>
+    <span asp-validation-for="D1b.TracerModalitiesValidation"
+          class="mt-2 text-sm text-red-600"></span>
 </div>
 
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -456,16 +468,15 @@
             Structural Imaging
         </p>
     </div>
-    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
-            <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
-                <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
-            </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1b.STRUCTDX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTDX)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
+            <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
         </div>
-    </table>
+    </div>
 
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
@@ -502,10 +513,18 @@
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
             </tr>
-            <tr class="subsubsubcounterreset">
-                <td>
-                    <p class="pl-5 text-sm text-gray-500">If there is evidence for CVD on imaging, indicate the findings:</p>
-                </td>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTEtiologyValidation"></span>
+        </tbody>
+        <tbody class="subsubsubcounterreset">
+            <tr>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                    <p>If there is evidence for CVD on imaging, indicate the findings:</p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTCVDFindingsValidation"></span>
+                </th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">No</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Yes</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Indeterminate</th>
+                <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Not assessed</th>
             </tr>
             <tr>
                 <td class="pl-5">
@@ -541,19 +560,21 @@
             </tr>
             <tr>
                 <td class="pl-5">
-                    <label asp-for="D1b.IMAGMWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMWMH"></span>
+                    <label asp-for="D1b.IMAGWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGWMH)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMH"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMH"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMWMH)" for="@Model.D1b.IMAGMWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGWMH)" for="@Model.D1b.IMAGWMH" items="Model.FindingsListItems" ui-behaviors="Model.IMAGWMHUIBehavior"></table-cell-radio-buttons>
             </tr>
             <tr>
-                <td class="pl-5">
-                    <label asp-for="D1b.IMAGEWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGEWMH)</label>
-                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGEWMH"></p>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGEWMH"></span>
+                <td class="pl-10">
+                    <label asp-for="D1b.IMAGWMHSEV">7a3e1. If <strong>Yes</strong> choose the severity</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMHSEV"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMHSEV"></span>
                 </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGEWMH)" for="@Model.D1b.IMAGEWMH" items="Model.FindingsListItems"></table-cell-radio-buttons>
+                <td colspan="4">
+                    <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGWMHSEV)" for="@Model.D1b.IMAGWMHSEV" items="Model.IMAGWMHSEVListItems"></radio-button-group>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -571,9 +592,7 @@
         consensus) to support the etiological diagnosis at this visit.
     </p>
     <p class="mt-2 text-sm text-gray-900">
-        If a biomarker modality was used to exclude an etiological diagnosis, select <strong>0=No</strong>. If a biomarker modality was found to be consistent with
-        a diagnosis, select <strong>1=Yes</strong>. If a biomarker modality was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies
-        listed were not assessed using a biomarker modality, leave the row blank and this will default to <strong>Not Applicable</strong> in the NACC database.
+        If a biomarker modality was used to exclude an etiological diagnosis, select <strong>0=No, inconsistent</strong>. If a biomarker modality was found to be consistent with a diagnosis, select <strong>1=Yes, consistent</strong>. If a biomarker modality was found to be indeterminate, select <strong>9</strong>. In cases where one or more of the etiologies listed were not assessed using a biomarker modality, select <strong>8</strong>.
     </p>
 
     <table class="table-auto min-w-full divide-y divide-gray-300">
@@ -612,6 +631,7 @@
             </tr>
         </thead>
         <tbody class="subsubcounterreset divide-y divide-gray-200">
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BiomarkerValidation"></span>
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD1)</label>
@@ -697,6 +717,7 @@
             </tr>
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.Biomarker2Validation"></span>
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD2)</label>
@@ -784,6 +805,7 @@
             </tr>
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.Biomarker3Validation"></span>
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD3)</label>
@@ -904,7 +926,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.ALZDIS", Model.D1b.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.ALZDISIF\"]" })
+                                    @Html.CheckBox("D1b.ALZDIS", Model.D1b.ALZDIS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.ALZDISIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.ALZDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -931,7 +953,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.LBDIS", Model.D1b.LBDIS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LBDIF\"]" })
+                                    @Html.CheckBox("D1b.LBDIS", Model.D1b.LBDIS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LBDIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.LBDIS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -950,7 +972,6 @@
                     <div>
                         <label asp-for="D1b.FTLD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.FTLD)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.FTLD"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDIF"></span>
                     </div>
                 </td>
                 <td>
@@ -958,7 +979,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.FTLD", Model.D1b.FTLD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDIF\",\"D1b.PSP\",\"D1b.CORT\",\"D1b.FTLDMO\",\"D1b.FTLDNOS\",\"D1b.FTLDSUBT\"]" })
+                                    @Html.CheckBox("D1b.FTLD", Model.D1b.FTLD, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PSP\",\"D1b.CORT\",\"D1b.FTLDMO\",\"D1b.FTLDNOS\",\"D1b.FTLDSUBT\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.FTLD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -967,11 +988,6 @@
                         </div>
                     </fieldset>
                 </td>
-                <td>
-                    <span class="subcounter"></span>
-                    <span class="subcounter invisible"></span>
-                </td>
-                <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDIF)" for="@Model.D1b.FTLDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td>
@@ -982,7 +998,7 @@
             <tr class=" odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
-                        <label asp-for="D1b.PSP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.PSP)</label>
+                        <label asp-for="D1b.PSP"><span class="subcounter subcounterreset"></span> @Html.DisplayNameFor(m => m.D1b.PSP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.PSP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PSPIF"></span>
                     </div>
@@ -992,7 +1008,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.PSP", Model.D1b.PSP, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PSPIF\"]" })
+                                    @Html.CheckBox("D1b.PSP", Model.D1b.PSP, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PSPIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.PSP)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1002,14 +1018,14 @@
                     </fieldset>
                 </td>
                 <td>
-                    <span class="subsubsubcounter"></span>
+                    <span class="subsubcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.PSPIF)" for="@Model.D1b.PSPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
-                        <label asp-for="D1b.CORT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.CORT)</label>
+                        <label asp-for="D1b.CORT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CORT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CORT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CORTIF"></span>
                     </div>
@@ -1019,7 +1035,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.CORT", Model.D1b.CORT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CORTIF\"]" })
+                                    @Html.CheckBox("D1b.CORT", Model.D1b.CORT, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CORTIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.CORT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1029,14 +1045,14 @@
                     </fieldset>
                 </td>
                 <td>
-                    <span class="subsubsubcounter"></span>
+                    <span class="subsubcounterreset subsubcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CORTIF)" for="@Model.D1b.CORTIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
-                        <label asp-for="D1b.FTLDMO"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDMO)</label>
+                        <label asp-for="D1b.FTLDMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDMO)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDMO"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDMOIF"></span>
                     </div>
@@ -1046,7 +1062,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.FTLDMO", Model.D1b.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDMOIF\"]" })
+                                    @Html.CheckBox("D1b.FTLDMO", Model.D1b.FTLDMO, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDMOIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.FTLDMO)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1056,14 +1072,14 @@
                     </fieldset>
                 </td>
                 <td>
-                    <span class="subsubsubcounter"></span>
+                    <span class="subsubcounterreset subsubcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDMOIF)" for="@Model.D1b.FTLDMOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr class="odd:bg-white even:bg-gray-50 border-b">
                 <td class="pl-5">
                     <div>
-                        <label asp-for="D1b.FTLDNOS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDNOS)</label>
+                        <label asp-for="D1b.FTLDNOS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDNOS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDNOS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDNOIF"></span>
                     </div>
@@ -1073,7 +1089,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.FTLDNOS", Model.D1b.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDNOIF\"]" })
+                                    @Html.CheckBox("D1b.FTLDNOS", Model.D1b.FTLDNOS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.FTLDNOIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.FTLDNOS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1083,14 +1099,14 @@
                     </fieldset>
                 </td>
                 <td>
-                    <span class="subsubsubcounter"></span>
+                    <span class="subsubcounterreset subsubcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FTLDNOIF)" for="@Model.D1b.FTLDNOIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
             </tr>
             <tr>
                 <td class="pl-5">
                     <div colspan="6">
-                        <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                             <label asp-for="D1b.FTLDSUBT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDSUBT)</label>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBT"></p>
@@ -1122,7 +1138,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.CVD", Model.D1b.CVD, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CVDIF\"]" })
+                                    @Html.CheckBox("D1b.CVD", Model.D1b.CVD, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CVDIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.CVD)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1149,7 +1165,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.MSA", Model.D1b.MSA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.MSAIF\"]" })
+                                    @Html.CheckBox("D1b.MSA", Model.D1b.MSA, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.MSAIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.MSA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1176,7 +1192,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.CTE", Model.D1b.CTE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CTEIF\"]" })
+                                    @Html.CheckBox("D1b.CTE", Model.D1b.CTE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CTEIF\", \"D1b.CTECERT\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.CTE)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1189,6 +1205,19 @@
                     <span class="subcounter"></span>
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CTEIF)" for="@Model.D1b.CTEIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
+            </tr>
+            <tr class="subcounterreset">
+                <td class="pl-5">
+                    <div colspan="6">
+                        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                            <label asp-for="D1b.CTECERT"><span class="subcounter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CTECERT)</label>
+                            <div>
+                                <radio-button-group id="@Html.IdFor(m => m.D1b.CTECERT)" for="@Model.D1b.CTECERT" items="Model.CTECERTListItems"></radio-button-group>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTECERT"></span>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
             <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
                 <td>
@@ -1203,7 +1232,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.DOWNS", Model.D1b.DOWNS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.DOWNSIF\"]" })
+                                    @Html.CheckBox("D1b.DOWNS", Model.D1b.DOWNS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.DOWNSIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.DOWNS)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1230,7 +1259,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.HUNT", Model.D1b.HUNT, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.HUNTIF\"]" })
+                                    @Html.CheckBox("D1b.HUNT", Model.D1b.HUNT, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.HUNTIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.HUNT)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1257,7 +1286,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.PRION", Model.D1b.PRION, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PRIONIF\"]" })
+                                    @Html.CheckBox("D1b.PRION", Model.D1b.PRION, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.PRIONIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.PRION)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1284,7 +1313,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.CAA", Model.D1b.CAA, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CAAIF\"]" })
+                                    @Html.CheckBox("D1b.CAA", Model.D1b.CAA, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.CAAIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.CAA)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1311,7 +1340,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.LATE", Model.D1b.LATE, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LATEIF\"]" })
+                                    @Html.CheckBox("D1b.LATE", Model.D1b.LATE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.LATEIF\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.LATE)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
@@ -1338,7 +1367,7 @@
                         <div class="space-y-5">
                             <div class="relative flex items-start">
                                 <div class="flex h-6 items-center">
-                                    @Html.CheckBox("D1b.OTHCOG", Model.D1b.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.OTHCOGIF\",\"D1b.OTHCOGX\"]" })
+                                    @Html.CheckBox("D1b.OTHCOG", Model.D1b.OTHCOG, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1b.OTHCOGIF\",\"D1b.OTHCOGX\"]" })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label for="@Html.IdFor(m => m.D1b.OTHCOG)" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>

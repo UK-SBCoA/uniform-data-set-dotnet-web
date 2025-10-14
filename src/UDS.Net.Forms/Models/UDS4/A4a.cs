@@ -1,11 +1,6 @@
-﻿
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-using Microsoft.Extensions.DependencyModel;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -16,8 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
-        [RequiredIf(nameof(TRTBIOMARK), "1", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
-        [RequiredIf(nameof(TRTBIOMARK), "9", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
+        [RequiredIfRegex(nameof(TRTBIOMARK), "^(1|9)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
 
@@ -37,7 +31,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ADVERSEOTX { get; set; }
 
         [RequiredIf(nameof(ADVEVENT), "1", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
-        [RequiredIf(nameof(ADVEVENT), "9", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
         [NotMapped]
         public bool? AdverseEventsIndicated
         {
@@ -62,8 +55,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
                 return null;
             }
-
-
         }
 
         public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
@@ -152,18 +143,29 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
 
+                    if (treatment.CARETRIAL == 1 || !treatment.CARETRIAL.HasValue)
+                    {
+                        if (treatment.TRIALGRP.HasValue)
+                        {
+                            yield return new ValidationResult(
+                                "If CARETRIAL is 1 or blank then TRIALGRP must be blank.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRIALGRP)}" });
+                        }
+                    }
+
                     if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
                     {
                         yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
                     }
 
-                    if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year))
+                    if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year) && (treatment.ENDYEAR.Value != 9999) && (treatment.ENDYEAR.Value != 8888))
                     {
-                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
+                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
+
 
                     index++;
                 }
+
             }
 
             foreach (var result in base.Validate(validationContext))

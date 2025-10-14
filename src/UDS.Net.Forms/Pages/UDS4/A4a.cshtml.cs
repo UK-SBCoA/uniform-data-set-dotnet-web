@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -37,7 +29,18 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public Dictionary<string, UIBehavior> TRTBIOMARKUIBehavior = new Dictionary<string, UIBehavior>
         {
-            { "0", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A4a.ADVEVENT") } },
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ADVEVENT"),
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+
+                },
+                InstructionalMessage = "END FORM HERE"
+            } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } },
             { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } }
         };
@@ -50,9 +53,10 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAE"),
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
 
                 },
-                InstructionalMessage = ""
+                InstructionalMessage = "END FORM HERE"
             } },
             { "1", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
@@ -67,16 +71,16 @@ namespace UDS.Net.Forms.Pages.UDS4
             { "9", new UIBehavior {
                 PropertyAttributes = new List<UIPropertyAttributes>
                 {
-                    new UIEnableAttribute("A4a.ARIAE"),
-                    new UIEnableAttribute("A4a.ARIAH"),
-                    new UIEnableAttribute("A4a.ADVERSEOTH")
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
                 },
                 InstructionalMessage = ""
             } }
         };
 
-
-        public A4aModel(IVisitService visitService) : base(visitService, "A4a")
+        public A4aModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A4a")
         {
         }
 
@@ -93,13 +97,13 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A4a; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A4a); // visit needs updated form as well
 
-            return await base.OnPostAsync(id); // checks for validation, etc.
+            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
 }

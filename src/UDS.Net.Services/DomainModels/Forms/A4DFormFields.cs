@@ -8,27 +8,15 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A4DFormFields : IFormFields
     {
-        public int Id { get; set; }
-
         public string RxNormId { get; set; }
 
-        public DrugCode? DrugCode { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public string ModifiedBy { get; set; }
-
-        public string DeletedBy { get; set; }
-
-        public bool IsDeleted { get; set; }
+        public DrugCode? DrugCode { get; set; } // Leave the option to return the full drug information from the data source
 
         public IEnumerable<FormMode> FormModes
         {
             get
             {
-                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
+                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote };
             }
         }
 
@@ -36,7 +24,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
+                return new List<NotIncludedReasonCode>() { };
             }
         }
 

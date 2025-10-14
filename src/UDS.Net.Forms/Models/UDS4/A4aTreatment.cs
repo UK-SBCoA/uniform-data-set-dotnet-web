@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -45,8 +41,9 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public int? STARTYEAR { get; set; }
 
-        [Range(1, 12)]
+        [RegularExpression("^([1-9]|1[0-2]|88|99)$", ErrorMessage = "Valid range is 1 - 12 or 88 or 99")]
         public int? ENDMO { get; set; }
+
 
         public int? ENDYEAR { get; set; }
 
@@ -67,5 +64,28 @@ namespace UDS.Net.Forms.Models.UDS4
             new RadioListItem("Placebo", "2"),
             new RadioListItem("Unknown", "9")
         };
+
+        public Dictionary<string, UIBehavior> GetCARETRIALUIBehavior(int index) => new Dictionary<string, UIBehavior>
+        {
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+            { "2", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+            { "3", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute($"A4a.Treatments[{index}].TRIALGRP"),
+                },
+            }},
+        };
+
     }
 }

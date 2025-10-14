@@ -10,7 +10,7 @@
         INSTRUCTIONS: This form is to be completed by the clinician or other trained health professional, based on participant response. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form B6. Check only <span class="underline">one</span> box per question.
     </p>
 </div>
-<div>
+<div data-controller="b6">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 
         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -18,11 +18,14 @@
                 <div class="space-y-5">
                     <div class="relative flex items-start">
                         <div class="flex h-6 items-center">
-                            @Html.CheckBox("B6.NOGDS", Model.B6.NOGDS, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" })
+                            @Html.CheckBox("B6.NOGDS", Model.B6.NOGDS, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600", @data_b6_target="NOGDSInput", @data_action="change->b6#NOGDSBehavior" })
                         </div>
                         <div class="ml-3 text-sm leading-6">
                             <label asp-for="B6.NOGDS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B6.NOGDS)</label>
                         </div>
+                    </div>
+                    <div>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSCheckedValidation"></span>
                     </div>
                 </div>
             </fieldset>
@@ -48,7 +51,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.SATIS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.SATIS"></span>
                     </td>
-                    <table-cell-radio-buttons id="B6_SATIS" for="@Model.B6.SATIS" items="Model.DisagreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.SATIS)" for="@Model.B6.SATIS" items="Model.DisagreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -56,7 +59,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.DROPACT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.DROPACT"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.DROPACT)" for="@Model.B6.DROPACT" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.DROPACT)" for="@Model.B6.DROPACT" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -64,7 +67,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.EMPTY"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.EMPTY"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.EMPTY)" for="@Model.B6.EMPTY" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.EMPTY)" for="@Model.B6.EMPTY" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -72,7 +75,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.BORED"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.BORED"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.BORED)" for="@Model.B6.BORED" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.BORED)" for="@Model.B6.BORED" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -80,7 +83,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.SPIRITS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.SPIRITS"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.SPIRITS)" for="@Model.B6.SPIRITS" items="Model.DisagreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.SPIRITS)" for="@Model.B6.SPIRITS" items="Model.DisagreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -88,7 +91,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.AFRAID"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.AFRAID"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.AFRAID)" for="@Model.B6.AFRAID" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.AFRAID)" for="@Model.B6.AFRAID" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -96,7 +99,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.HAPPY"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.HAPPY"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HAPPY)" for="@Model.B6.HAPPY" items="Model.DisagreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HAPPY)" for="@Model.B6.HAPPY" items="Model.DisagreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -104,7 +107,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.HELPLESS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.HELPLESS"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HELPLESS)" for="@Model.B6.HELPLESS" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HELPLESS)" for="@Model.B6.HELPLESS" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -112,7 +115,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.STAYHOME"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.STAYHOME"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.STAYHOME)" for="@Model.B6.STAYHOME" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.STAYHOME)" for="@Model.B6.STAYHOME" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -120,7 +123,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.MEMPROB"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.MEMPROB"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.MEMPROB)" for="@Model.B6.MEMPROB" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.MEMPROB)" for="@Model.B6.MEMPROB" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -128,7 +131,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.WONDRFUL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.WONDRFUL"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.WONDRFUL)" for="@Model.B6.WONDRFUL" items="Model.DisagreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.WONDRFUL)" for="@Model.B6.WONDRFUL" items="Model.DisagreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -136,7 +139,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.WRTHLESS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.WRTHLESS"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.WRTHLESS)" for="@Model.B6.WRTHLESS" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.WRTHLESS)" for="@Model.B6.WRTHLESS" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -144,7 +147,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.ENERGY"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.ENERGY"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.ENERGY)" for="@Model.B6.ENERGY" items="Model.DisagreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.ENERGY)" for="@Model.B6.ENERGY" items="Model.DisagreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -152,7 +155,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.HOPELESS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.HOPELESS"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HOPELESS)" for="@Model.B6.HOPELESS" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.HOPELESS)" for="@Model.B6.HOPELESS" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
                 <tr>
                     <td>
@@ -160,7 +163,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="B6.BETTER"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.BETTER"></span>
                     </td>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.BETTER)" for="@Model.B6.BETTER" items="Model.AgreeIncreasesListItems"></table-cell-radio-buttons>
+                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B6.BETTER)" for="@Model.B6.BETTER" items="Model.AgreeIncreasesListItems" data-b6-target="radioInput" data-action="change->b6#CalculateGDS"></table-cell-radio-buttons>
                 </tr>
             </tbody>
         </table>
@@ -169,9 +172,17 @@
             <label asp-for="B6.GDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B6.GDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B6.GDS"></p>
-                <input asp-for="@Model.B6.GDS" />
+                <input readonly asp-for="@Model.B6.GDS" data-b6-target="GDSInput"/>
                 <span class="italic text-gray-500">(max score =15; did not complete = 88)</span>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDS"></span>
+                </div>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.GDSNotCompleteChecked"></span>
+                </div>
+                <div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="B6.NOGDSCheckedValidation"></span>
+                </div>
             </div>
         </div>
     </div>

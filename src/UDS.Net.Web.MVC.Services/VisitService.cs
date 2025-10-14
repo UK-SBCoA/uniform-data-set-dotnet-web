@@ -6,6 +6,7 @@ using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
@@ -38,6 +39,11 @@ namespace UDS.Net.Web.MVC.Services
         public async Task<int> CountByStatus(string username, string[] statuses = null)
         {
             return await _apiClient.VisitClient.GetCountOfVisitsAtStatus(statuses);
+        }
+
+        public async Task<int> CountByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate)
+        {
+            return await _apiClient.VisitClient.GetCountOfVisitsAtDateRangeAndStatus(statuses, startDate, endDate);
         }
 
         public async Task<Visit> GetById(string username, int id)
@@ -85,6 +91,18 @@ namespace UDS.Net.Web.MVC.Services
                 {
                     return visitDtos.Select(d => d.ToDomain(username)).ToList();
                 }
+            }
+
+            return new List<Visit>();
+        }
+
+        public async Task<List<Visit>> ListByDateRangeAndStatus(string username, string[] statuses, DateTime? startDate, DateTime? endDate, int pageSize = 10, int pageIndex = 1)
+        {
+            var visitDtos = await _apiClient.VisitClient.GetVisitsAtDateRangeAndStatus(statuses, startDate, endDate, pageSize, pageIndex);
+
+            if (visitDtos != null)
+            {
+                return visitDtos.Select(d => d.ToDomain(username)).ToList();
             }
 
             return new List<Visit>();
@@ -145,6 +163,46 @@ namespace UDS.Net.Web.MVC.Services
             }
             else
                 throw new NotImplementedException("The developer must update with functionality to support pre-UDS version 4.");
+        }
+
+        public async Task<string> GetNextFormKind(string username, int visitId, string currentFormKind)
+        {
+            var ordering = await GetFormOrder(username, visitId);
+
+            string nextFormId = "";
+
+            for (int i = 0; i < ordering.Count(); i++)
+            {
+                if (ordering[i] == currentFormKind)
+                {
+                    // check if there is a next form
+                    if (i + 1 < ordering.Count())
+                    {
+                        nextFormId = ordering[i + 1];
+                        break;
+                    }
+                }
+
+            }
+
+            return nextFormId;
+        }
+
+        public async Task<List<string>> GetFormOrder(string username, int visitId)
+        {
+            // In this implementation we are sorting by kind alphabetically, but other organizations may want the flexibilty to order forms by another parameter.
+            var visit = await GetById(username, visitId);
+            return visit.Forms.OrderBy(f => f.Kind).Select(f => f.Kind).ToList();
+        }
+
+        public async Task<Visit> PatchStatus(string username, Visit entity)
+        {
+            if (entity == null)
+                return null;
+
+            var dto = await _apiClient.VisitClient.Put(entity.Id, entity.ToDto());
+
+            return dto.ToDomain(username);
         }
     }
 }

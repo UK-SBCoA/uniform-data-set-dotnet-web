@@ -1,10 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-using Microsoft.AspNetCore.Mvc;
 using UDS.Net.Forms.DataAnnotations;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -221,50 +217,33 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Please indicate ethnicity/race or don't know.")]
+        [RequiredOnFinalized(ErrorMessage = "Please indicate race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
-                || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                || RACEAIAN
-                || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
-                || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH
-                || RACEUNKN)
+                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE || RACEUNKN)
                 {
                     return true;
                 }
-                else return null;
+
+                return null;
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known ethnicity/race.")]
+        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known race.")]
         [NotMapped]
         public bool? EthnicityRaceUnknownOnly
         {
             get
             {
-                if (RACEWHITE || ETHGERMAN || ETHIRISH || ETHENGLISH || ETHITALIAN || ETHPOLISH || ETHSCOTT || ETHWHIOTH
-                    || ETHISPANIC || ETHMEXICAN || ETHPUERTO || ETHCUBAN || ETHSALVA || ETHDOMIN || ETHGUATEM || ETHHISOTH
-                    || RACEBLACK || ETHAFAMER || ETHJAMAICA || ETHHAITIAN || ETHNIGERIA || ETHETHIOP || ETHSOMALI || ETHBLKOTH
-                    || RACEASIAN || ETHCHINESE || ETHFILIP || ETHINDIA || ETHVIETNAM || ETHKOREAN || ETHJAPAN || ETHASNOTH
-                    || RACEAIAN
-                    || RACEMENA || ETHLEBANON || ETHIRAN || ETHEGYPT || ETHSYRIA || ETHIRAQI || ETHISRAEL || ETHMENAOTH
-                    || RACENHPI || ETHHAWAII || ETHSAMOAN || ETHCHAMOR || ETHTONGAN || ETHFIJIAN || ETHMARSHAL || ETHNHPIOTH)
+                if (RACEAIAN || RACEASIAN || RACEBLACK || ETHISPANIC || RACEMENA || RACENHPI || RACEWHITE)
                 {
-                    if (RACEUNKN)
-                        return null;
-                    else
-                        return true;
+                    if (RACEUNKN) return null;
                 }
-                else if (RACEUNKN)
-                    return true;
-                else
-                    return null;
+
+                return true;
             }
         }
 
@@ -364,6 +343,77 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [RequiredOnFinalized(ErrorMessage = "If Q16. MEDVA (VA medical care) = 1 (Yes) then Q15. SERVED (served in armed forces) should not equal 9 (Don't know),it should be equal to 1 (Yes)")]
+        [NotMapped]
+        public bool? ServedAndVaCare
+        {
+            get
+            {
+                if (SERVED == 9)
+                {
+                    if (MEDVA == 1)
+                    {
+                        return null;
+                    }
+                }
+                return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "If response 4f is checked then responses 4h and 4i must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritGender
+        {
+            get
+            {
+                if (GENTWOSPIR == true && (GENDKN == true || GENNOANS == true))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+        [RequiredOnFinalized(ErrorMessage = "If response 7d is checked then responses 7f and 7g must be blank")]
+        [NotMapped]
+        public bool? TwoSpiritSexOrientation
+        {
+            get
+            {
+                if (SEXORNTWOS == true && (SEXORNDNK == true || SEXORNNOAN == true))
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+
+        [RequiredOnFinalized(ErrorMessage = "GENOTHX must be blank when response 4g. is unchecked")]
+        [NotMapped]
+        public bool? GenderSpecify
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(GENOTHX) && GENOTH == false)
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+        [RequiredOnFinalized(ErrorMessage = "SEXORNOTHX must be blank when response 7e. is unchecked")]
+        [NotMapped]
+        public bool? SexOrientationSpecify
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(SEXORNOTHX) && SEXORNOTH == false)
+                {
+                    return null;
+                }
+                else return true;
+            }
+        }
+
         [Display(Name = "What is your primary language?")]
         [RequiredOnFinalized]
         public int? PREDOMLAN { get; set; }
@@ -408,8 +458,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? SERVED { get; set; }
 
         [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
-        [RequiredIf(nameof(SERVED), "1", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
-        [RequiredIf(nameof(SERVED), "9", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
+        [RequiredIfRegex(nameof(SERVED), "(1|9)", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
         public int? MEDVA { get; set; }
 
         [Display(Name = "How much time each week do you spend performing activities that cause large increases in breathing or heart rate for at least 10 minutes continuously?")]
@@ -429,11 +478,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? MEMTEN { get; set; }
 
         [Display(Name = "ADI state-only decile")]
-        [Range(1, 10)]
+        [RegularExpression("^([1-9]|10|88[4-7])$", ErrorMessage = "Valid range is 1-10 or 884-887")]
         public int? ADISTATE { get; set; }
 
         [Display(Name = "ADI national percentile")]
-        [Range(1, 100)]
+        [RegularExpression("^(100|[1-9][0-9]?|88[4-7])$", ErrorMessage = "Valid range is 1-100 or 884-887")]
         public int? ADINAT { get; set; }
 
         [Display(Name = "Participant's primary occupation throughout their working life")]
@@ -451,12 +500,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]
         [MaxLength(60)]
         [ProhibitedCharacters]
-        [RequiredIf(nameof(REFLEARNED), "8", ErrorMessage = "Please specify principal referral source")]
+        [RequiredIf(nameof(REFERSC), "8", ErrorMessage = "Please specify principal referral source")]
         public string? REFERSCX { get; set; }
 
         [Display(Name = "If the referral source was a self-referral or a nonprofessional contact, how did the referral source learn of the ADRC?")]
-        [RequiredIf(nameof(REFERSC), "1", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
-        [RequiredIf(nameof(REFERSC), "2", ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
+        [RequiredIfRange(nameof(REFERSC), 1, 2, ErrorMessage = "Please indicate how did referral source learn of the ADRC")]
         public int? REFLEARNED { get; set; }
 
         [Display(Name = "Center social media - Specify")]

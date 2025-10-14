@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
-using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
 
@@ -20,8 +12,27 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public A3 A3 { get; set; } = default!;
 
-        public A3Model(IVisitService visitService) : base(visitService, "A3")
+        public A3Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A3")
         {
+        }
+
+        private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
+        {
+            if (ageOfOnset.HasValue && ageAtDeath.HasValue && ageOfOnset > ageAtDeath && ageOfOnset != 999 && ageOfOnset != 888)
+            {
+                modelState.AddModelError(onsetField, "Age of onset cannot be greater than age of death");
+            }
+
+            if (birthYear.HasValue && ageAtDeath.HasValue && ageAtDeath.Value > DateTime.Now.Year - birthYear && ageAtDeath.Value != 999 && ageAtDeath.Value != 888)
+            {
+                modelState.AddModelError(deathField, "Age of death cannot be greater than the current year minus the birth year");
+            }
+
+            if (birthYear.HasValue && ageOfOnset.HasValue && ageOfOnset > DateTime.Now.Year - birthYear && ageOfOnset != 999)
+            {
+                modelState.AddModelError(onsetField, "Age of onset cannot be greater than the current year minus the birth year");
+            }
+
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -37,7 +48,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         }
 
         [ValidateAntiForgeryToken]
-        public new async Task<IActionResult> OnPostAsync(int id)
+        public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
 
@@ -45,106 +56,27 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (A3 != null && A3.Status == FormStatus.Finalized)
             {
-                if (A3.Siblings != null)
+                if (A3.MOMYOB.HasValue || A3.MOMETPR != null || A3.MOMAGEO.HasValue || A3.MOMDAGE.HasValue)
                 {
-                    foreach (var sibling in A3.Siblings)
+                    if (!A3.MOMDAGE.HasValue)
                     {
-                        if (sibling != null)
-                        {
-
-                            if (sibling.YOB.HasValue)
-                            {
-                                if (!sibling.AGD.HasValue)
-                                {
-                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGD", "Please provide a value for age at death.");
-                                }
-
-                            }
-
-                            if (sibling.YOB.HasValue || sibling.AGD.HasValue)
-
-                            {
-                                if (sibling.ETPR == null)
-                                {
-
-                                    ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETPR", "Please provide a value for primary dx.");
-
-                                }
-                            }
-
-                            if (sibling.ETPR != null)
-                            {
-                                if (sibling.ETPR != "00" && sibling.ETPR != "99")
-                                {
-                                    if (sibling.ETSEC == null)
-                                    {
-                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].ETSEC", "Please provide a value for secondary dx.");
-                                    }
-                                    if (!sibling.MEVAL.HasValue)
-                                    {
-                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].MEVAL", "Please provide a value for method of evaluation.");
-                                    }
-                                    if (!sibling.AGO.HasValue)
-                                    {
-                                        ModelState.AddModelError($"A3.Siblings[{A3.Siblings.IndexOf(sibling)}].AGO", "Please provide a value for age of onset.");
-
-                                    }
-                                }
-                            }
-
-                        }
+                        ModelState.AddModelError("A3.MOMDAGE", "Please provide a value for age at death.");
                     }
-                }
+                    ValidateAgeRange(A3.MOMAGEO, A3.MOMDAGE, A3.MOMYOB, ModelState, "A3.MOMAGEO", "A3.MOMDAGE");
 
-                if (A3.Children != null)
+                }
+                if (A3.DADYOB.HasValue || A3.DADETPR != null || A3.DADAGEO.HasValue || A3.DADDAGE.HasValue)
                 {
-                    foreach (var child in A3.Children)
+                    if (!A3.DADDAGE.HasValue)
                     {
-                        if (child != null)
-                        {
-                            if (child.YOB.HasValue)
-                            {
-                                if (!child.AGD.HasValue)
-                                {
-                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGD", "Please provide a value for age at death.");
-                                }
-
-                            }
-
-                            if (child.YOB.HasValue || child.AGD.HasValue)
-
-                            {
-                                if (child.ETPR == null)
-                                {
-                                    ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETPR", "Please provide a value for primary dx.");
-                                }
-                            }
-                            if (child.ETPR != null)
-                            {
-                                if (child.ETPR != "00" && child.ETPR != "99")
-                                {
-                                    if (child.ETSEC == null)
-                                    {
-                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].ETSEC", "Please provide a value for secondary dx.");
-                                    }
-                                    if (!child.MEVAL.HasValue)
-                                    {
-                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].MEVAL", "Please provide a value for method of evaluation.");
-                                    }
-                                    if (!child.AGO.HasValue)
-                                    {
-                                        ModelState.AddModelError($"A3.Children[{A3.Children.IndexOf(child)}].AGO", "Please provide a value for age of onset.");
-                                    }
-                                }
-                            }
-
-                        }
+                        ModelState.AddModelError("A3.DADDAGE", "Please provide a value for age at death.");
                     }
+                    ValidateAgeRange(A3.DADAGEO, A3.DADDAGE, A3.DADYOB, ModelState, "A3.DADAGEO", "A3.DADDAGE");
                 }
-                return await base.OnPostAsync(id); // checks for validation, etc.
+                return await base.OnPostAsync(id, goNext); // checks for validation, etc.
 
             }
-            return await base.OnPostAsync(id);
+            return await base.OnPostAsync(id, goNext);
         }
     }
 }

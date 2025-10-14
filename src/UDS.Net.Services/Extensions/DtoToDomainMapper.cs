@@ -6,12 +6,13 @@ using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Services.Extensions
 {
     public static class DtoToDomainMapper
     {
-        public static Participation ToDomain(this ParticipationDto dto, string username)
+        public static Participation ToDomain(this ParticipationDto dto, string username = "")
         {
             var participation = new Participation()
             {
@@ -74,13 +75,55 @@ namespace UDS.Net.Services.Extensions
             return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
         }
 
+        public static Visit ToDomain(this VisitDto dto, string username, ParticipationDto participationDto)
+        {
+            IList<Form> existingForms = new List<Form>();
+
+            if (dto.Forms != null)
+                existingForms = dto.Forms.ToDomain(dto.Id, username);
+
+            IList<PacketSubmissionError> errors = new List<PacketSubmissionError>();
+
+            if (dto.UnresolvedErrors != null)
+            {
+                errors = dto.UnresolvedErrors.Select(e => e.ToDomain()).ToList();
+
+                if (existingForms != null)
+                {
+                    foreach (var form in existingForms)
+                    {
+                        form.UnresolvedErrors = errors.Where(e => e.FormKind == form.Kind).ToList();
+                    }
+                }
+            }
+
+            PacketKind packetKind = PacketKind.I;
+
+            if (!string.IsNullOrWhiteSpace(dto.PACKET))
+            {
+                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
+                    packetKind = kind;
+            }
+
+            PacketStatus packetStatus = PacketStatus.Pending;
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+            {
+                if (Enum.TryParse(dto.Status, true, out PacketStatus status))
+                    packetStatus = status;
+            }
+
+            Participation participation = participationDto.ToDomain(username);
+
+            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, participation, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
+
+        }
+
 
         public static Milestone ToDomain(this M1Dto dto)
         {
-            return new Milestone()
+            var milestone = new Milestone()
             {
                 Id = dto.Id,
-                FormId = dto.FormId,
                 ParticipationId = dto.ParticipationId,
                 Status = dto.Status,
                 CHANGEMO = dto.CHANGEMO,
@@ -117,6 +160,11 @@ namespace UDS.Net.Services.Extensions
                 IsDeleted = dto.IsDeleted,
                 MILESTONETYPE = dto.MILESTONETYPE
             };
+
+            if (dto.Participation != null)
+                milestone.Participation = dto.Participation.ToDomain(dto.CreatedBy);
+
+            return milestone;
         }
 
         public static IEnumerable<Milestone> ToDomain(this IEnumerable<M1Dto> m1Dtos)
@@ -359,6 +407,18 @@ namespace UDS.Net.Services.Extensions
             }
 
             return new PacketSubmissionError(dto.Id, dto.PacketSubmissionId, dto.FormKind, dto.Message, dto.AssignedTo, packetSubmissionErrorLevel, dto.ResolvedBy, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted);
+        }
+
+        public static DrugCode ToDomain(this DrugCodeDto dto)
+        {
+            return new DrugCode
+            {
+                RxNormId = dto.RxNormId.ToString(),
+                DrugName = dto.DrugName,
+                BrandName = dto.BrandName,
+                IsOverTheCounter = dto.IsOverTheCounter,
+                IsPopular = dto.IsPopular
+            };
         }
     }
 }

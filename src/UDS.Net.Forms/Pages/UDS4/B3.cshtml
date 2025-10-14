@@ -13,7 +13,7 @@
         determine the degree of parkinsonism on any visit, and 2) track the degree of parkinsonism over time. The UPDRS is not intended to
         establish the presence or absence of parkinsonism. For additional clarification and scoring instructions, see <guidebook kind="@Model.Visit.PACKET"></guidebook>
         for <b>Form B3</b>. For video-recorded examples of administration, see Perlmutter JS. Assessment of Parkinson disease manifestations. Curr
-        Protoc Neurosci. 2009 Oct; Chapter 10: Unit10.1. <a href="https://pubmed.ncbi.nlm.nih.gov/19802812/" target="_blank">doi:10.1002/0471142301.ns1001s49</a>
+        Protoc Neurosci. 2009 Oct; Chapter 10: Unit10.1. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2897716/" target="_blank">doi:10.1002/0471142301.ns1001s49</a>
         . Check only <u>one</u> box per question.
     </p>
 </div>
@@ -21,7 +21,7 @@
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         <div style="border: 2px solid lightgrey; display: flex; align-items:center;">
             <div>
-                @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 mr-4 ml-4", id = "pdNormalCheckbox" })
+                @Html.CheckBox("B3.PDNORMAL", Model.B3.PDNORMAL, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 mr-4 ml-4", id = "pdNormalCheckbox" })
             </div>
             <div class="text-sm leading-6 pt-2">
                 <label asp-for="B3.PDNORMAL" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.B3.PDNORMAL)</label>
