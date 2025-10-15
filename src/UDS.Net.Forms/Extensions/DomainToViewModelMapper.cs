@@ -201,7 +201,7 @@ namespace UDS.Net.Forms.Extensions
                 Message = packetSubmissionError.Message,
                 AssignedTo = packetSubmissionError.AssignedTo,
                 Level = packetSubmissionError.Level,
-                ResolvedBy = packetSubmissionError.ResolvedBy,
+                StatusChangedBy = packetSubmissionError.StatusChangedBy,
                 CreatedBy = packetSubmissionError.CreatedBy,
                 CreatedAt = packetSubmissionError.CreatedAt,
                 ModifiedBy = packetSubmissionError.ModifiedBy,

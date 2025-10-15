@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Models
 
         public PacketSubmissionErrorLevel Level { get; set; }
 
-        public string ResolvedBy { get; set; } = "";
+        public string StatusChangedBy { get; set; } = "";
 
         [Required]
         public DateTime CreatedAt { get; set; }
