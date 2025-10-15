@@ -25,7 +25,7 @@ namespace UDS.Net.Services.DomainModels.Submission
                         if (submission.Errors != null)
                         {
                             foreach (var error in submission.Errors)
-                                if (String.IsNullOrWhiteSpace(error.ResolvedBy))
+                                if (String.IsNullOrWhiteSpace(error.StatusChangedBy))
                                     unresolvedCount++;
                         }
                     }
@@ -55,7 +55,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
                     foreach (var error in submission.Errors)
                     {
-                        if (string.IsNullOrWhiteSpace(error.ResolvedBy))
+                        if (string.IsNullOrWhiteSpace(error.StatusChangedBy))
                             unresolvedErrors.Add(error);
                     }
                 }
@@ -86,10 +86,10 @@ namespace UDS.Net.Services.DomainModels.Submission
 
                     if (error.Id == resolvedError.Id)
                     {
-                        error.Resolve(resolvedError.ResolvedBy, resolvedError.ModifiedBy);
+                        error.Resolve(resolvedError.StatusChangedBy, resolvedError.ModifiedBy);
                     }
 
-                    if (!String.IsNullOrWhiteSpace(error.ResolvedBy))
+                    if (!String.IsNullOrWhiteSpace(error.StatusChangedBy))
                         resolvedErrorCount += 1;
                 }
             }

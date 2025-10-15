@@ -17,7 +17,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public PacketSubmissionErrorLevel Level { get; set; }
 
-        public string ResolvedBy { get; private set; } // null means the error has not been resolved
+        public string StatusChangedBy { get; private set; }
 
         public DateTime CreatedAt { get; private set; }
 
@@ -35,9 +35,9 @@ namespace UDS.Net.Services.DomainModels.Submission
             ModifiedBy = modifiedBy;
         }
 
-        public void Resolve(string resolvedBy, string modifiedBy)
+        public void Resolve(string statusChangedBy, string modifiedBy)
         {
-            ResolvedBy = resolvedBy;
+            StatusChangedBy = statusChangedBy;
             ModifiedBy = modifiedBy;
         }
 
@@ -47,7 +47,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             IsDeleted = true;
         }
 
-        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string resolvedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted)
+        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string statusChangedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted)
         {
             Id = id;
             PacketSubmissionId = packetSubmissionId;
@@ -55,7 +55,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             Message = message;
             AssignedTo = assignedTo;
             Level = level;
-            ResolvedBy = resolvedBy;
+            StatusChangedBy = statusChangedBy;
             CreatedAt = createdAt;
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
