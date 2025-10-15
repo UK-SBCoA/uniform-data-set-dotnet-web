@@ -46,7 +46,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Yes", "1")
         };
 
-        public A4Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService) : base(visitService, participationService, "A4")
+        public A4Model(IVisitService visitService, IParticipationService participationService, ILookupService lookupService, IPacketService packetService) : base(visitService, participationService, packetService, "A4")
         {
             _lookupService = lookupService;
         }

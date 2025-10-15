@@ -106,6 +106,7 @@
                                 <div class="grid grid-cols-2 sm:grid-cols-1">
                                     <div class="sm:col-span-1">
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMYOB"></span>
+                                        <submission-error location="MOMYOB" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </fieldset>
@@ -113,26 +114,31 @@
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMDAGE"></span>
+                                <submission-error location="MOMDAGE" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETPR"></span>
+                                <submission-error location="MOMETPR" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMETSEC"></span>
+                                <submission-error location="MOMETSEC" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMMEVAL"></span>
+                                <submission-error location="MOMMEVAL" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.MOMAGEO"></span>
+                                <submission-error location="MOMAGEO" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
 
                         </td>
@@ -145,6 +151,7 @@
                                     <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" />
                                 </div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB"></span>
+                                <submission-error location="DADYOB" errors="Model.BaseForm.UnresolvedErrors" />
                             </fieldset>
                         </td>
                         <td>
@@ -153,6 +160,7 @@
                                     <input asp-for="@Model.A3.DADDAGE" />
                                 </div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADDAGE"></span>
+                                <submission-error location="DADDAGE" errors="Model.BaseForm.UnresolvedErrors" />
                             </fieldset>
 
                         </td>
@@ -161,12 +169,14 @@
                                 <input asp-for="@Model.A3.DADETPR" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR"></span>
+                            <submission-error location="DADETPR" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <input asp-for="@Model.A3.DADETSEC" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETSEC"></span>
+                            <submission-error location="DADETSEC" errors="Model.BaseForm.UnresolvedErrors" />
 
                         </td>
                         <td>
@@ -174,6 +184,7 @@
                                 <input asp-for="@Model.A3.DADMEVAL" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMEVAL"></span>
+                            <submission-error location="DADMEVAL" errors="Model.BaseForm.UnresolvedErrors" />
 
                         </td>
                         <td>
@@ -181,6 +192,7 @@
                                 <input asp-for="@Model.A3.DADAGEO" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO"></span>
+                            <submission-error location="DADAGEO" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                     </tr>
                 </tbody>
@@ -283,7 +295,7 @@
 
     <div>
         <p class="mt-16 text-base leading-7 text-gray-900">
-          <span class="italic"> Example:</span> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943; the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
+            <span class="italic"> Example:</span> A participant is the oldest of three children. The participant was born in 1940 and the middle sibling in 1943; the youngest sibling’s birth year is unknown. An approximate birth year of 1944 or later should be assigned to the youngest sibling.
         </p>
     </div>
 
@@ -303,6 +315,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
                 <input asp-for="@Model.A3.SIBS" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
+                <submission-error location="SIBS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -362,6 +375,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
                 <input asp-for="@Model.A3.KIDS" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
+                <submission-error location="KIDS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 

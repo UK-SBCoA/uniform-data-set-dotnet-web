@@ -1,17 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.Pages.UDS4;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.PageModels
 {
@@ -19,6 +21,7 @@ namespace UDS.Net.Forms.Models.PageModels
     {
         protected readonly IVisitService _visitService;
         protected readonly IParticipationService _participationService;
+        protected readonly IPacketService _packetService;
 
         protected string _formKind { get; set; }
 
@@ -42,11 +45,12 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
-        public FormPageModel(IVisitService visitService, IParticipationService participationService, string formKind) : base()
+        public FormPageModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService, string formKind) : base()
         {
             _visitService = visitService;
             _participationService = participationService;
             _formKind = formKind;
+            _packetService = packetService;
         }
 
         protected async Task<IActionResult> OnGetAsync(int? id)
@@ -132,6 +136,8 @@ namespace UDS.Net.Forms.Models.PageModels
 
                     await _visitService.UpdateForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", visit, _formKind);
 
+                    await ResolveCorrectedErrorsAsync(visit, BaseForm);
+
                     if (!String.IsNullOrWhiteSpace(goNext) && !String.IsNullOrWhiteSpace(BaseForm.NextFormKind))
                         return RedirectToPage(BaseForm.NextFormKind, new { Id = Visit.Id, PacketKind = Visit.PACKET });
                     else
@@ -162,7 +168,7 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 if (BaseForm != null)
                 {
-                    var C2 = new C2Model(_visitService, _participationService);
+                    var C2 = new C2Model(_visitService, _participationService, _packetService);
 
                     C2.Visit = Visit;
                     C2.BaseForm = BaseForm;
@@ -179,6 +185,61 @@ namespace UDS.Net.Forms.Models.PageModels
             }
 
             return Page();
+        }
+
+        protected async Task ResolveCorrectedErrorsAsync(Visit visitEntity, FormModel updatedForm)
+        {
+            var username = User.Identity?.Name ?? "unknown";
+            var packet = await _packetService.GetById(username, visitEntity.Id);
+
+            if (packet == null || packet.Submissions == null || !packet.Submissions.Any())
+                return;
+
+            var mostRecentSubmission = packet.Submissions
+                .Where(s => !s.IsDeleted)
+                .OrderByDescending(s => s.SubmissionDate)
+                .ThenByDescending(s => s.Id)
+                .FirstOrDefault();
+
+            if (mostRecentSubmission == null)
+                return;
+
+            var unresolvedErrors = mostRecentSubmission.Errors
+                .Where(e => !e.IsDeleted && e.Status == PacketSubmissionErrorStatus.Pending &&
+                            string.Equals(e.FormKind, updatedForm.Kind, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            bool anyResolved = false;
+
+            foreach (var error in unresolvedErrors)
+            {
+                var propertyInfo = updatedForm.GetType().GetProperty(error.Location);
+
+                if (propertyInfo != null)
+                {
+                    var currentValue = propertyInfo.GetValue(updatedForm)?.ToString()?.Trim();
+                    var originalValue = error.Value?.Trim();
+
+                    if (!string.Equals(currentValue, originalValue, StringComparison.OrdinalIgnoreCase))
+                    {
+                        error.Resolve(username);
+                        anyResolved = true;
+                    }
+                }
+            }
+
+            if (anyResolved)
+            {
+                await _packetService.UpdatePacketSubmissionErrors(username, packet, mostRecentSubmission.Id, mostRecentSubmission.Errors.ToList());
+
+                bool allResolved = packet.Submissions.All(s => s.Errors.All(e => e.Status != PacketSubmissionErrorStatus.Pending));
+
+                if (allResolved)
+                {
+                    packet.UpdateStatus(Services.Enums.PacketStatus.Pending);
+                    await _packetService.Update(username, packet);
+                }
+            }
         }
 
     }

@@ -17,7 +17,13 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public PacketSubmissionErrorLevel Level { get; set; }
 
+        public PacketSubmissionErrorStatus Status { get; set; }
+
         public string StatusChangedBy { get; private set; }
+
+        public string Location { get; set; }
+
+        public string Value { get; set; }
 
         public DateTime CreatedAt { get; private set; }
 
@@ -35,19 +41,44 @@ namespace UDS.Net.Services.DomainModels.Submission
             ModifiedBy = modifiedBy;
         }
 
-        public void Resolve(string statusChangedBy, string modifiedBy)
+        public void SetStatus(PacketSubmissionErrorStatus status, string changedBy)
         {
-            StatusChangedBy = statusChangedBy;
-            ModifiedBy = modifiedBy;
+            Status = status;
+            StatusChangedBy = changedBy;
         }
 
-        public void Delete(string deletedby)
+        public void Resolve(string resolvedBy)
         {
-            DeletedBy = deletedby;
+            SetStatus(PacketSubmissionErrorStatus.Resolved, resolvedBy);
+        }
+
+        public void Ignore(string ignoredBy)
+        {
+            SetStatus(PacketSubmissionErrorStatus.Ignored, ignoredBy);
+        }
+
+        public void Delete(string deletedBy)
+        {
+            DeletedBy = deletedBy;
             IsDeleted = true;
         }
 
-        public PacketSubmissionError(int id, int packetSubmissionId, string formKind, string message, string assignedTo, PacketSubmissionErrorLevel level, string statusChangedBy, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted)
+        public PacketSubmissionError(
+            int id,
+            int packetSubmissionId,
+            string formKind,
+            string message,
+            string assignedTo,
+            PacketSubmissionErrorLevel level,
+            PacketSubmissionErrorStatus status,
+            string statusChangedBy,
+            DateTime createdAt,
+            string createdBy,
+            string modifiedBy,
+            string deletedBy,
+            bool isDeleted,
+            string location,
+            string value)
         {
             Id = id;
             PacketSubmissionId = packetSubmissionId;
@@ -55,13 +86,15 @@ namespace UDS.Net.Services.DomainModels.Submission
             Message = message;
             AssignedTo = assignedTo;
             Level = level;
+            Status = status;
             StatusChangedBy = statusChangedBy;
             CreatedAt = createdAt;
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
             DeletedBy = deletedBy;
             IsDeleted = isDeleted;
+            Location = location;
+            Value = value;
         }
     }
 }
-

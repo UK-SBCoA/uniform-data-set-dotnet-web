@@ -33,6 +33,7 @@
                     <input asp-for="@Model.A1.BIRTHMO" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHMO"></span>
+                <submission-error location="BIRTHMO" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div class="mt-2">
                 <label asp-for="@Model.A1.BIRTHYR">Year</label>
@@ -40,6 +41,7 @@
                     <input asp-for="@Model.A1.BIRTHYR" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.BIRTHYR"></span>
+                <submission-error location="BIRTHYR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -55,6 +57,7 @@
                 </div>
                 <p class="text-gray-400">(If unknown, enter AX1)</p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.CHLDHDCTRY"></span>
+                <submission-error location="CHLDHDCTRY" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <p class="text-gray-400">
                 <i>
@@ -67,7 +70,9 @@
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>What is your ethnicity and race? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.EthnicityRaceIndicated"></span>
+                <submission-error location="EthnicityRaceIndicated" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.EthnicityRaceUnknownOnly"></span>
+                <submission-error location="EthnicityRaceUnknownOnly" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <fieldset class="subcounterreset">
@@ -92,6 +97,7 @@
                                     </div>
                                     <input asp-for="A1.RACEAIANX" />
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.RACEAIANX"></span>
+                                    <submission-error location="RACEAIANX" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>
@@ -179,6 +185,7 @@
                                         </div>
                                         <input asp-for="A1.ETHASNOTHX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHASNOTHX"></span>
+                                        <submission-error location="ETHASNOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -267,6 +274,7 @@
                                         </div>
                                         <input asp-for="A1.ETHBLKOTHX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHBLKOTHX"></span>
+                                        <submission-error location="ETHBLKOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -355,6 +363,7 @@
                                         </div>
                                         <input asp-for="A1.ETHHISOTHX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHHISOTHX"></span>
+                                        <submission-error location="ETHHISOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -443,6 +452,7 @@
                                         </div>
                                         <input asp-for="A1.ETHMENAOTX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHMENAOTX"></span>
+                                        <submission-error location="ETHMENAOTX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -531,6 +541,7 @@
                                         </div>
                                         <input asp-for="A1.ETHNHPIOTX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHNHPIOTX"></span>
+                                        <submission-error location="ETHNHPIOTX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -619,6 +630,7 @@
                                         </div>
                                         <input asp-for="A1.ETHWHIOTHX" />
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ETHWHIOTHX"></span>
+                                        <submission-error location="ETHWHIOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                     </div>
                                 </div>
                             </div>
@@ -657,8 +669,11 @@
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your current gender identity? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GenderIdentityIndicated"></span>
+                <submission-error location="GenderIdentityIndicated" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritGender"></span>
+                <submission-error location="TwoSpiritGender" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritSexOrientation"></span>
+                <submission-error location="TwoSpiritSexOrientation" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <fieldset class="subcounterreset">
@@ -723,11 +738,11 @@
                                 <div class="flex h-6 items-center">
                                     <!--// GENOTH is pretty complex because it needs to enable and also disable //-->
                                     @Html.CheckBox("A1.GENOTH", Model.A1.GENOTH, new
-                               {
-                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                   data_affects = "true",
-                                   data_affects_toggle_targets = "[ \"A1.GENOTHX\"]"
-                               })
+                                    {
+                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                                                        data_affects = "true",
+                                                                        data_affects_toggle_targets = "[ \"A1.GENOTHX\"]"
+                                                                        })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.GENOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENOTH)</label>
@@ -739,6 +754,7 @@
                                     <label asp-for="A1.GENOTHX">@Html.DisplayNameFor(m => m.A1.GENOTHX)</label>
                                     <input asp-for="A1.GENOTHX" />
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.GENOTHX"></span>
+                                    <submission-error location="GENOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>
@@ -746,14 +762,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.GENDKN", Model.A1.GENDKN, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                                                                {
+                                    @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                                                data_checkBoxDisable_target = "checkboxTrigger",
+                                                                data_action = "input->checkboxDisable#ToggleGroup",
+                                                                data_checkBoxDisable_enableGroup_param = "",
+                                                                data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENNOANS",
+                                                                data_checkboxDisable_toggleState_param = "true"
+                                                                })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.GENDKN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENDKN)</label>
@@ -763,14 +779,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.GENNOANS", Model.A1.GENNOANS, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                                                                {
+                                    @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                                                data_checkBoxDisable_target = "checkboxTrigger",
+                                                                data_action = "input->checkboxDisable#ToggleGroup",
+                                                                data_checkBoxDisable_enableGroup_param = "",
+                                                                data_checkBoxDisable_disableGroup_param = "A1.GENMAN,A1.GENWOMAN,A1.GENTRMAN,A1.GENTRWOMAN,A1.GENNONBI,A1.GENOTH,A1.GENDKN,A1.GENOTH",
+                                                                data_checkboxDisable_toggleState_param = "true"
+                                                                })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.GENNOANS" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.GENNOANS)</label>
@@ -787,6 +803,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.BIRTHSEX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.BIRTHSEX)" for="@Model.A1.BIRTHSEX" items="Model.BIRTHSEXListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.BIRTHSEX"></span>
+                <submission-error location="BIRTHSEX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -796,6 +813,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.INTERSEX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.INTERSEX)" for="@Model.A1.INTERSEX" items="Model.INTERSEXListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.INTERSEX"></span>
+                <submission-error location="INTERSEX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -803,7 +821,9 @@
             <div>
                 <label class="text-base font-semibold text-gray-900"><span class="counter"></span>Which term(s) best describes your sexual orientation? (Check all that apply)</label><br />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SexualOrientstionIndicated"></span>
+                <submission-error location="SexualOrientstionIndicated" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.TwoSpiritSexOrientation"></span>
+                <submission-error location="TwoSpiritSexOrientation" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <fieldset class="subcounterreset">
@@ -849,11 +869,11 @@
                                 <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                                 <div class="flex h-6 items-center">
                                     @Html.CheckBox("A1.SEXORNOTH", Model.A1.SEXORNOTH, new
-                               {
-                                   @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                   data_affects = "true",
-                                   data_affects_toggle_targets = "[ \"A1.SEXORNOTHX\"]"
-                               })
+                                                                        {
+                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                                                        data_affects = "true",
+                                                                        data_affects_toggle_targets = "[ \"A1.SEXORNOTHX\"]"
+                                                                        })
                                 </div>
                                 <div class="ml-3 text-sm leading-6">
                                     <label asp-for="A1.SEXORNOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNOTH)</label>
@@ -865,6 +885,7 @@
                                     <label asp-for="A1.SEXORNOTHX">@Html.DisplayNameFor(m => m.A1.SEXORNOTHX)</label>
                                     <input asp-for="A1.SEXORNOTHX" />
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SEXORNOTHX"></span>
+                                    <submission-error location="SEXORNOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>
@@ -872,14 +893,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.SEXORNDNK", Model.A1.SEXORNDNK, new
-                                    {
-                                        @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                        data_checkBoxDisable_target = "checkboxTrigger",
-                                        data_action = "input->checkboxDisable#ToggleGroup",
-                                        data_checkBoxDisable_enableGroup_param = "",
-                                        data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNNOAN",
-                                        data_checkboxDisable_toggleState_param = "true"
-                                    })
+                                                                {
+                                    @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
+                                                                data_checkBoxDisable_target = "checkboxTrigger",
+                                                                data_action = "input->checkboxDisable#ToggleGroup",
+                                                                data_checkBoxDisable_enableGroup_param = "",
+                                                                data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNNOAN",
+                                                                data_checkboxDisable_toggleState_param = "true"
+                                                                })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.SEXORNDNK" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNDNK)</label>
@@ -889,14 +910,14 @@
                             <span class="subcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
                             <div class="flex h-6 items-center">
                                 @Html.CheckBox("A1.SEXORNNOAN", Model.A1.SEXORNNOAN, new
-                                {
+                                                                {
                                     @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none",
-                                    data_checkBoxDisable_target = "checkboxTrigger",
-                                    data_action = "input->checkboxDisable#ToggleGroup",
-                                    data_checkBoxDisable_enableGroup_param = "",
-                                    data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK",
-                                    data_checkboxDisable_toggleState_param = "true"
-                                })
+                                                                data_checkBoxDisable_target = "checkboxTrigger",
+                                                                data_action = "input->checkboxDisable#ToggleGroup",
+                                                                data_checkBoxDisable_enableGroup_param = "",
+                                                                data_checkBoxDisable_disableGroup_param = "A1.SEXORNGAY,A1.SEXORNHET,A1.SEXORNBI,A1.SEXORNOTH,A1.SEXORNDNK",
+                                                                data_checkboxDisable_toggleState_param = "true"
+                                                                })
                             </div>
                             <div class="ml-3 text-sm leading-6">
                                 <label asp-for="A1.SEXORNNOAN" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A1.SEXORNNOAN)</label>
@@ -914,12 +935,14 @@
                 <p class="text-sm text-gray-500" asp-description-for="A1.PREDOMLAN"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.PREDOMLAN)" for="@Model.A1.PREDOMLAN" items="Model.PREDOMLANListItems" ui-behaviors="Model.LanguageUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.PREDOMLAN"></span>
+                <submission-error location="PREDOMLAN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div>
                 <div class="mt-2">
                     <label asp-for="A1.PREDOMLANX">@Html.DisplayNameFor(m => m.A1.PREDOMLANX)</label>
                     <input asp-for="A1.PREDOMLANX" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.PREDOMLANX"></span>
+                    <submission-error location="PREDOMLANX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
                 <p class="text-sm text-gray-500" asp-description-for="A1.PREDOMLANX"></p>
             </div>
@@ -931,6 +954,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.HANDED"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.HANDED)" for="@Model.A1.HANDED" items="Model.HANDEDListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.HANDED"></span>
+                <submission-error location="HANDED" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -946,6 +970,7 @@
                     </div>
                     <p class="text-gray-400"><i>(99 = Unknown)</i></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.EDUC"></span>
+                    <submission-error location="EDUC" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -954,6 +979,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1.LVLEDUC"></p>
                     <radio-button-group id="@Html.IdFor(m => m.A1.LVLEDUC)" for="@Model.A1.LVLEDUC" items="Model.LVLEDUCListItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.LVLEDUC"></span>
+                    <submission-error location="LVLEDUC" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -964,6 +990,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MARISTAT"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MARISTAT)" for="@Model.A1.MARISTAT" items="Model.MARISTATListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MARISTAT"></span>
+                <submission-error location="MARISTAT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -973,6 +1000,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.LIVSITUA"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.LIVSITUA)" for="@Model.A1.LIVSITUA" items="Model.LIVSITUAListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.LIVSITUA"></span>
+                <submission-error location="LIVSITUA" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -982,6 +1010,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.RESIDENC"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.RESIDENC)" for="@Model.A1.RESIDENC" items="Model.RESIDENCListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.RESIDENC"></span>
+                <submission-error location="RESIDENC" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -994,6 +1023,7 @@
                 </div>
                 <p class="text-gray-400"><i>(If unknown, leave blank)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ZIP"></span>
+                <submission-error location="ZIP" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1003,7 +1033,9 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SERVED"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.SERVED)" for="@Model.A1.SERVED" items="Model.SERVEDListItems" ui-behaviors="Model.SERVEDUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.SERVED"></span>
+                <submission-error location="SERVED" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ServedAndVaCare"></span>
+                <submission-error location="ServedAndVaCare" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1013,7 +1045,9 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEDVA"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MEDVA)" for="@Model.A1.MEDVA" items="Model.MEDVAListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEDVA"></span>
+                <submission-error location="MEDVA" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.ServedAndVaCare"></span>
+                <submission-error location="ServedAndVaCare" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1023,6 +1057,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.EXRTIME"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.EXRTIME)" for="@Model.A1.EXRTIME" items="Model.EXRTIMEListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.EXRTIME"></span>
+                <submission-error location="EXRTIME" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1040,6 +1075,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEMWORS"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MEMWORS)" for="@Model.A1.MEMWORS" items="Model.MEMWORSListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEMWORS"></span>
+                <submission-error location="MEMWORS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1049,6 +1085,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEMTROUB"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MEMTROUB)" for="@Model.A1.MEMTROUB" items="Model.MEMTROUBListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEMTROUB"></span>
+                <submission-error location="MEMTROUB" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1058,6 +1095,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.MEMTEN"></p>
                 <radio-button-group id="@Html.IdFor(m => m.A1.MEMTEN)" for="@Model.A1.MEMTEN" items="Model.MEMTENListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.MEMTEN"></span>
+                <submission-error location="MEMTEN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1087,6 +1125,7 @@
                     <i>(If unknown, leave blank. For special codes, enter 884 for "PH", 885 for "GQ", 886 for "PH-GQ", and 887 for "QDI".)</i>
                 </p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADISTATE"></span>
+                <submission-error location="ADISTATE" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1099,6 +1138,7 @@
                 </div>
                 <p class="text-gray-400"><i>(If unknown, leave blank. For special codes, enter 884 for "PH", 885 for "GQ", 886 for "PH-GQ", and 887 for "QDI".)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.ADINAT"></span>
+                <submission-error location="ADINAT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1111,6 +1151,7 @@
                 </div>
                 <p class="text-gray-400"><i>(If unknown, leave blank)</i></p>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIOCC"></span>
+                <submission-error location="PRIOCC" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1120,6 +1161,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1.SOURCENW"></p>
                 <radio-button-group id="A1_SOURCENW" for="@Model.A1.SOURCENW" items="Model.EnrollmentTypesListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.SOURCENW"></span>
+                <submission-error location="SOURCENW" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -1131,6 +1173,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFERSC"></p>
                         <radio-button-group id="@Html.IdFor(m => m.A1.REFERSC)" for="@Model.A1.REFERSC" items="Model.ReferralSourcesListItems" ui-behaviors="Model.REFERSCUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFERSC"></span>
+                        <submission-error location="REFERSC" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFERSCX"></p>
@@ -1138,6 +1181,7 @@
                         <div class="mt-2">
                             <input asp-for="A1.REFERSCX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFERSCX"></span>
+                            <submission-error location="REFERSCX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </div>
@@ -1153,6 +1197,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFLEARNED"></p>
                         <radio-button-group id="@Html.IdFor(m => m.A1.REFLEARNED)" for="@Model.A1.REFLEARNED" items="Model.REFLEARNEDListItems" ui-behaviors="Model.REFLEARNEDUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFLEARNED"></span>
+                        <submission-error location="REFLEARNED" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                     <div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFCTRSOCX"></p>
@@ -1160,36 +1205,42 @@
                         <div class="mt-2">
                             <input asp-for="A1.REFCTRSOCX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFCTRSOCX"></span>
+                            <submission-error location="REFCTRSOCX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFCTRREGX"></p>
                         <label asp-for="A1.REFCTRREGX">@Html.DisplayNameFor(m => m.A1.REFCTRREGX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFCTRREGX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFCTRREGX"></span>
+                            <submission-error location="REFCTRREGX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHWEBX"></p>
                         <label asp-for="A1.REFOTHWEBX">@Html.DisplayNameFor(m => m.A1.REFOTHWEBX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHWEBX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHWEBX"></span>
+                            <submission-error location="REFOTHWEBX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHMEDX"></p>
                         <label asp-for="A1.REFOTHMEDX">@Html.DisplayNameFor(m => m.A1.REFOTHMEDX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHMEDX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHMEDX"></span>
+                            <submission-error location="REFOTHMEDX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHREGX"></p>
                         <label asp-for="A1.REFOTHREGX">@Html.DisplayNameFor(m => m.A1.REFOTHREGX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHREGX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHREGX"></span>
+                            <submission-error location="REFOTHREGX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <p class="text-sm text-gray-500" asp-description-for="A1.REFOTHX"></p>
                         <label asp-for="A1.REFOTHX">@Html.DisplayNameFor(m => m.A1.REFOTHX)</label>
                         <div class="mt-2">
                             <input asp-for="A1.REFOTHX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A1.REFOTHX"></span>
+                            <submission-error location="REFOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </div>

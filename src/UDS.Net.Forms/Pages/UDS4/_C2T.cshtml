@@ -20,6 +20,7 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCACOMP"></span>
+                    <submission-error location="MOCACOMP" errors="Model.BaseForm.UnresolvedErrors" />
 
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCAREAS"></p>
                     <label asp-for="C2.MOCAREAS">@Html.DisplayNameFor(m => m.C2.MOCAREAS)</label>
@@ -27,6 +28,7 @@
                         <input asp-for="C2.MOCAREAS" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREAS"></span>
+                    <submission-error location="MOCAREAS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -38,6 +40,7 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALAN"></span>
+                    <submission-error location="MOCALAN" errors="Model.BaseForm.UnresolvedErrors" />
 
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="C2.MOCALANX"></p>
                     <label asp-for="C2.MOCALANX">@Html.DisplayNameFor(m => m.C2.MOCALANX)</label>
@@ -45,6 +48,7 @@
                         <input asp-for="C2.MOCALANX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALANX"></span>
+                    <submission-error location="MOCALANX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -58,6 +62,7 @@
                 </div>
                 <div class="flex items-start">
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAHEAR"></span>
+                    <submission-error location="MOCAHEAR" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
             <div class="@rowCSS">
@@ -75,6 +80,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCBTOTS"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCBTOTS"></span>
+                <submission-error location="MOCBTOTS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -87,6 +93,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCADIGI"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCADIGI"></span>
+                <submission-error location="MOCADIGI" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -99,6 +106,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCALETT"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCALETT"></span>
+                <submission-error location="MOCALETT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -110,6 +118,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCASER7"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCASER7"></span>
+                <submission-error location="MOCASER7" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -122,6 +131,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAREPE"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAREPE"></span>
+                <submission-error location="MOCAREPE" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -134,6 +144,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAFLUE"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAFLUE"></span>
+                <submission-error location="MOCAFLUE" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -146,6 +157,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAABST"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAABST"></span>
+                <submission-error location="MOCAABST" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -159,7 +171,9 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECN"></span>
+                    <submission-error location="MOCARECN" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DelayedRecallValidSum"></span>
+                    <submission-error location="DelayedRecallValidSum" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -174,7 +188,9 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECC"></span>
+                    <submission-error location="MOCARECC" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRAndMOCARECCValidValues"></span>
+                    <submission-error location="MOCARECRAndMOCARECCValidValues" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -189,7 +205,9 @@
                 </div>
                 <div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECR"></span>
+                    <submission-error location="MOCARECR" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCARECRValidValue"></span>
+                    <submission-error location="MOCARECRValidValue" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -203,6 +221,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDT"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDT"></span>
+                <submission-error location="MOCAORDT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
             <div class="@rowCSS">
                 <label asp-for="C2.MOCAORMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.MOCAORMO)</label>
@@ -214,6 +233,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORMO"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORMO"></span>
+                <submission-error location="MOCAORMO" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -226,6 +246,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORYR"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORYR"></span>
+                <submission-error location="MOCAORYR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -238,6 +259,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORDY"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORDY"></span>
+                <submission-error location="MOCAORDY" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -249,6 +271,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORPL"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORPL"></span>
+                <submission-error location="MOCAORPL" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
             <div class="@rowCSS">
@@ -261,6 +284,7 @@
                     <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.MOCAORCT"></p>
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.MOCAORCT"></span>
+                <submission-error location="MOCAORCT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
         <div class="@rowCSS shadow-sm border-2 rounded-md border-indigo-200/50 bg-indigo-50">
@@ -280,6 +304,7 @@
                     </div>
                     <div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLAN"></span>
+                        <submission-error location="NPSYLAN" errors="Model.BaseForm.UnresolvedErrors" />
 
                         <p class="text-sm text-gray-500" asp-description-for="C2.NPSYLANX"></p>
                         <label asp-for="C2.NPSYLANX">@Html.DisplayNameFor(m => m.C2.NPSYLANX)</label>
@@ -287,6 +312,7 @@
                             <input asp-for="C2.NPSYLANX" />
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.NPSYLANX"></span>
+                        <submission-error location="NPSYLANX" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -315,6 +341,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTVRS"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTVRS"></span>
+                    <submission-error location="CRAFTVRS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -326,6 +353,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTURS"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTURS"></span>
+                    <submission-error location="CRAFTURS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -353,6 +381,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGFORCT"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORCT"></span>
+                    <submission-error location="DIGFORCT" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
                 <div class="@rowCSS">
                     <label asp-for="C2.DIGFORSL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.DIGFORSL)</label>
@@ -363,6 +392,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGFORSL"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGFORSL"></span>
+                    <submission-error location="DIGFORSL" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -390,6 +420,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACCT"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACCT"></span>
+                    <submission-error location="DIGBACCT" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -401,6 +432,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.DIGBACLS"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.DIGBACLS"></span>
+                    <submission-error location="DIGBACLS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="subcounterreset">
@@ -414,6 +446,7 @@
                         </div>
                         <div class="flex items-start">
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VERBALTEST"></span>
+                            <submission-error location="VERBALTEST" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -450,6 +483,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY1REC" ui-range-behavior="Model.REY1RECBehavior" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1REC"></span>
+                                            <submission-error location="REY1REC" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
@@ -464,6 +498,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY1INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY1INT"></span>
+                                            <submission-error location="REY1INT" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1INT"></p>
@@ -480,6 +515,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY2REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2REC"></span>
+                                            <submission-error location="REY2REC" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2REC"></p>
@@ -493,6 +529,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY2INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2INT"></span>
+                                            <submission-error location="REY2INT" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY2INT"></p>
@@ -509,6 +546,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY3REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3REC"></span>
+                                            <submission-error location="REY3REC" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY3REC"></p>
@@ -522,6 +560,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY3INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3INT"></span>
+                                            <submission-error location="REY3INT" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -539,6 +578,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY4REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4REC"></span>
+                                            <submission-error location="REY4REC" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -553,6 +593,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY4INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4INT"></span>
+                                            <submission-error location="REY4INT" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -570,6 +611,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY5REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5REC"></span>
+                                            <submission-error location="REY5REC" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -584,6 +626,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY5INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5INT"></span>
+                                            <submission-error location="REY5INT" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -601,6 +644,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REYBREC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBREC"></span>
+                                            <submission-error location="REYBREC" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -615,6 +659,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REYBINT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBINT"></span>
+                                            <submission-error location="REYBINT" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -632,6 +677,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY6REC" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6REC"></span>
+                                            <submission-error location="REY6REC" errors="Model.BaseForm.UnresolvedErrors" />
 
                                         </div>
                                     </div>
@@ -646,6 +692,7 @@
                                         <div class="min-w-[80px] max-w-[115px]">
                                             <input asp-for="@Model.C2.REY6INT" />
                                             <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6INT"></span>
+                                            <submission-error location="REY6INT" errors="Model.BaseForm.UnresolvedErrors" />
                                         </div>
                                     </div>
                                     <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY6INT"></p>
@@ -687,6 +734,7 @@
                                 <span class="pl-4 pr-2 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1REC"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD1REC"></span>
+                            <submission-error location="CERAD1REC" errors="Model.BaseForm.UnresolvedErrors" />
                             <p class="text-sm text-gray-500 text-nowrap text-nowrap">(If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 8a.)</p>
 
                         </td>
@@ -701,6 +749,7 @@
                                 <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD1INT"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD1INT"></span>
+                            <submission-error location="CERAD1INT" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
 
                     </tr>
@@ -718,6 +767,7 @@
                                 <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD2REC"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD2REC"></span>
+                            <submission-error location="CERAD2REC" errors="Model.BaseForm.UnresolvedErrors" />
 
                         </td>
                         <td>
@@ -731,6 +781,7 @@
                                 <span class="pl-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD2INT"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD2INT"></span>
+                            <submission-error location="CERAD2INT" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                     </tr>
 
@@ -747,6 +798,7 @@
                                 <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD3REC"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600 sm:grid sm:grid-cols-1" asp-validation-for="C2.CERAD3REC"></span>
+                            <submission-error location="CERAD3REC" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                         <td>
                             <div class="flex py-6">
@@ -759,6 +811,7 @@
                                 <span class="pl-4 pr-4 text-nowrap"><p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERAD3INT"></p></span>
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERAD3INT"></span>
+                            <submission-error location="CERAD3INT" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                     </tr>
                 </tbody>
@@ -790,6 +843,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.ANIMALS"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.ANIMALS"></span>
+                    <submission-error location="ANIMALS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
                 <div class="@rowCSS">
                     <div class="sm:grid-cols-3">
@@ -805,6 +859,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.VEG"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VEG"></span>
+                    <submission-error location="VEG" errors="Model.BaseForm.UnresolvedErrors" />
 
                 </div>
             </div>
@@ -828,6 +883,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADDTI"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADDTI"></span>
+                    <submission-error location="CERADDTI" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
@@ -844,6 +900,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ6REC"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ6REC"></span>
+                    <submission-error location="CERADJ6REC" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
@@ -855,6 +912,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ6INT"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ6INT"></span>
+                    <submission-error location="CERADJ6INT" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
@@ -871,6 +929,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7YES"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7YES"></span>
+                    <submission-error location="CERADJ7YES" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-3">
@@ -882,6 +941,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CERADJ7NO"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CERADJ7NO"></span>
+                    <submission-error location="CERADJ7NO" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -913,6 +973,7 @@
                             <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILA"></p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILA"></span>
+                        <submission-error location="OTRAILA" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
 
                     <div class="@rowCSS">
@@ -928,6 +989,7 @@
                             <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLARR"></p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLARR"></span>
+                        <submission-error location="OTRLARR" errors="Model.BaseForm.UnresolvedErrors" />
 
                     </div>
                     <div class="@rowCSS">
@@ -943,6 +1005,7 @@
                             <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLALI"></p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLALI"></span>
+                        <submission-error location="OTRLALI" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -965,6 +1028,7 @@
                         <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRAILB"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRAILB"></span>
+                    <submission-error location="OTRAILB" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -980,6 +1044,7 @@
                         <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLBRR"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLBRR"></span>
+                    <submission-error location="OTRLBRR" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -995,6 +1060,7 @@
                         <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.OTRLBLI"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.OTRLBLI"></span>
+                    <submission-error location="OTRLBLI" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -1022,6 +1088,7 @@
                         <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.CRAFTDVR"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDVR"></span>
+                    <submission-error location="CRAFTDVR" errors="Model.BaseForm.UnresolvedErrors" />
 
                 </div>
 
@@ -1034,6 +1101,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDRE"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDRE"></span>
+                    <submission-error location="CRAFTDRE" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1045,6 +1113,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.CRAFTDTI"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTDTI"></span>
+                    <submission-error location="CRAFTDTI" errors="Model.BaseForm.UnresolvedErrors" />
 
                 </div>
 
@@ -1055,6 +1124,7 @@
                         <radio-button-group id="@Html.IdFor(m => m.C2.CRAFTCUE)" for="@Model.C2.CRAFTCUE" items="Model.SimpleNoYesListItems"></radio-button-group>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.CRAFTCUE"></span>
+                    <submission-error location="CRAFTCUE" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -1083,6 +1153,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFC"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFC"></span>
+                    <submission-error location="UDSVERFC" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1094,6 +1165,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERFN"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFN"></span>
+                    <submission-error location="UDSVERFN" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1105,6 +1177,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERNF"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERNF"></span>
+                    <submission-error location="UDSVERNF" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1121,6 +1194,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLC"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLC"></span>
+                    <submission-error location="UDSVERLC" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1132,6 +1206,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLR"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLR"></span>
+                    <submission-error location="UDSVERLR" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1143,6 +1218,7 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERLN"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERLN"></span>
+                    <submission-error location="UDSVERLN" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1154,7 +1230,9 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
+                    <submission-error location="UDSVERTN" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValidation"></span>
+                    <submission-error location="UDSVERTNValidation" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1166,7 +1244,9 @@
                         <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
+                    <submission-error location="UDSVERTE" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValidation"></span>
+                    <submission-error location="UDSVERTEValidation" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
                 <div class="@rowCSS">
@@ -1180,9 +1260,11 @@
                     <div>
                         <div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                            <submission-error location="UDSVERTI" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTIValidation"></span>
+                            <submission-error location="UDSVERTIValidation" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </div>
@@ -1211,6 +1293,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
+                        <submission-error location="REYDREC" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1227,6 +1310,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDINT"></span>
+                        <submission-error location="REYDINT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1243,6 +1327,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDTI"></span>
+                        <submission-error location="REYDTI" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1259,6 +1344,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYTCOR"></span>
+                        <submission-error location="REYTCOR" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1275,6 +1361,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYFPOS"></span>
+                        <submission-error location="REYFPOS" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1303,6 +1390,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VNTTOTW"></span>
+                        <submission-error location="VNTTOTW" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1319,6 +1407,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.VNTPCNC"></span>
+                        <submission-error location="VNTPCNC" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1344,6 +1433,7 @@
                     </div>
                     <div class="flex items-start">
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.COGSTAT"></span>
+                        <submission-error location="COGSTAT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -1376,6 +1466,7 @@
                             </div>
                             <div class="flex items-start">
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPVAL"></span>
+                                <submission-error location="RESPVAL" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </div>
 
@@ -1387,6 +1478,7 @@
                                 <br>
                                 <b>(Check all that apply)</b>
                                 <span asp-validation-for="C2.RESPVALReasonIndicated" class="mt-2 text-sm text-red-600"></span>
+                                <submission-error location="RESPVALReasonIndicated" errors="Model.BaseForm.UnresolvedErrors" />
                             </p>
                         </div>
                         <div class="subsubcounterreset">
@@ -1530,6 +1622,7 @@
                                         <input asp-for="C2.RESPOTHX" />
                                     </div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.RESPOTHX"></span>
+                                    <submission-error location="RESPOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>

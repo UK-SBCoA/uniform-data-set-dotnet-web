@@ -44,6 +44,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.A4.ANYMEDS"></p>
                             <radio-button-group form="UDSForm" id="@Html.IdFor(m => m.A4.ANYMEDS)" for="@Model.A4.ANYMEDS" items="Model.MedicationsWithinLastTwoWeeksListItems" data-a4-target="anyMeds" data-action="a4#setEnabledDisabledState"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A4.ANYMEDS"></span>
+                            <submission-error location="ANYMEDS" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <partial name="../RxNorm/_RxNormSearch" model="Model.RxNormLookup" />

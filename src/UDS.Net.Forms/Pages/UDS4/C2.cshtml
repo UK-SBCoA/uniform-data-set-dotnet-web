@@ -49,6 +49,7 @@
                 <option disabled selected class="opacity-75">--</option>
             </enum-select>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+            <submission-error location="MODE" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
         <div>
             <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
@@ -69,6 +70,7 @@
         </div>
 
         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
+        <submission-error location="RMMODE" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
     <turbo-frame id="C2">
         <div role="status" id="loadingSpinner" style="display: none;">

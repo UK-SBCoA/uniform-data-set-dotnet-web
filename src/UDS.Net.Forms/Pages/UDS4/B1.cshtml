@@ -23,6 +23,7 @@
                 <p class="text-base font-semibold ml-2">(88.8 = not assessed)</p>
             </div>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HEIGHT"></span>
+            <submission-error location="HEIGHT" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
     <div class="@rowCSS">
@@ -34,6 +35,7 @@
                 <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
             </div>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WEIGHT"></span>
+            <submission-error location="WEIGHT" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
 
@@ -82,6 +84,7 @@
                             <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST1"></span>
+                        <submission-error location="WAIST1" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -94,7 +97,9 @@
                         <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAIST2"></span>
+                    <submission-error location="WAIST2" errors="Model.BaseForm.UnresolvedErrors" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.WAISTDifferenceValidation"></span>
+                    <submission-error location="WAISTDifferenceValidation" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -118,6 +123,7 @@
                             <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HIP1"></span>
+                        <submission-error location="HIP1" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
                 <div class="@rowCSS">
@@ -129,7 +135,9 @@
                             <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HIP2"></span>
+                        <submission-error location="HIP2" errors="Model.BaseForm.UnresolvedErrors" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HIPDifferenceValidation"></span>
+                        <submission-error location="HIPDifferenceValidation" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -168,9 +176,11 @@
                             </div>
                             <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSL1"></span>
+                                <submission-error location="BPSYSL1" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                             <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASL1"></span>
+                                <submission-error location="BPDIASL1" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </div>
                     </div>
@@ -186,9 +196,11 @@
                             </div>
                             <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSL2"></span>
+                                <submission-error location="BPSYSL2" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                             <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASL2"></span>
+                                <submission-error location="BPDIASL2" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </div>
                     </div>
@@ -215,9 +227,11 @@
                                 </div>
                                 <div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSR1"></span>
+                                    <submission-error location="BPSYSR1" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                                 <div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASR1"></span>
+                                    <submission-error location="BPDIASR1" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>
@@ -234,9 +248,11 @@
                                 </div>
                                 <div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPSYSR2"></span>
+                                    <submission-error location="BPSYSR2" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                                 <div>
                                     <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.BPDIASR2"></span>
+                                    <submission-error location="BPDIASR2" errors="Model.BaseForm.UnresolvedErrors" />
                                 </div>
                             </div>
                         </div>
@@ -256,6 +272,7 @@
                 <p class="text-base font-semibold ml-2">(888 = not assessed)</p>
             </div>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B1.HRATE"></span>
+            <submission-error location="HRATE" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
     <ul role="list" class="divide-y divide-white/5 pb-2">

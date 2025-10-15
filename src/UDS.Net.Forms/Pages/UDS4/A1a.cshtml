@@ -22,6 +22,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.OWNSCAR"></p>
                 <radio-button-group id="A1_OWNSCAR" for="A1a.OWNSCAR" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.OWNSCAR"></span>
+                <submission-error location="OWNSCAR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -32,6 +33,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPACCESS"></p>
                 <radio-button-group id="A1_TRSPACCESS" for="A1a.TRSPACCESS" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPACCESS"></span>
+                <submission-error location="TRSPACCESS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -42,6 +44,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRANSPROB"></p>
                 <radio-button-group id="A1_TRANSPROB" for="A1a.TRANSPROB" items="Model.OftenToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRANSPROB"></span>
+                <submission-error location="TRANSPROB" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -52,6 +55,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRANSWORRY"></p>
                 <radio-button-group id="A1_TRANSWORRY" for="A1a.TRANSWORRY" items="Model.OftenToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRANSWORRY"></span>
+                <submission-error location="TRANSWORRY" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -62,6 +66,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRSPMED"></p>
                 <radio-button-group id="A1_TRSPMED" for="A1a.TRSPMED" items="Model.OftenToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.TRSPMED"></span>
+                <submission-error location="TRSPMED" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -84,6 +89,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.INCOMEYR"></p>
                 <radio-button-group id="A1_INCOMEYR" for="A1a.INCOMEYR" items="Model.INCOMEYRItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.INCOMEYR"></span>
+                <submission-error location="INCOMEYR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -94,6 +100,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FINSATIS"></p>
                 <radio-button-group id="A1_FINSATIS" for="A1a.FINSATIS" items="Model.FINSATISItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FINSATIS"></span>
+                <submission-error location="FINSATIS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -104,6 +111,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.BILLPAY"></p>
                 <radio-button-group id="A1_BILLPAY" for="A1a.BILLPAY" items="Model.BILLPAYItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.BILLPAY"></span>
+                <submission-error location="BILLPAY" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -114,6 +122,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FINUPSET"></p>
                 <radio-button-group id="A1_FINUPSET" for="A1a.FINUPSET" items="Model.FINUPSETItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FINUPSET"></span>
+                <submission-error location="FINUPSET" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -124,6 +133,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EATLESS"></p>
                 <radio-button-group id="A1_EATLESS" for="A1a.EATLESS" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EATLESS"></span>
+                <submission-error location="EATLESS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -134,6 +144,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EATLESSYR"></p>
                 <radio-button-group id="A1_EATLESSYR" for="A1a.EATLESSYR" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EATLESSYR"></span>
+                <submission-error location="EATLESSYR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -144,6 +155,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSMEDS"></p>
                 <radio-button-group id="A1_LESSMEDS" for="A1a.LESSMEDS" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.LESSMEDS"></span>
+                <submission-error location="LESSMEDS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -154,6 +166,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSMEDSYR"></p>
                 <radio-button-group id="A1_LESSMEDSYR" for="A1a.LESSMEDSYR" items="Model.NoToYesItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.LESSMEDSYR"></span>
+                <submission-error location="LESSMEDSYR" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -175,6 +188,7 @@
                                 <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
                                 <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
+                                <submission-error location="COMPCOMM" errors="Model.BaseForm.UnresolvedErrors" />
                             </td>
                         </tr>
                         <tr>
@@ -193,6 +207,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDEDU"></p>
                     <radio-button-group id="A1_GUARDEDU" for="A1a.GUARDEDU" items="Model.GUARDEDUItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.GUARDEDU"></span>
+                    <submission-error location="GUARDEDU" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -215,6 +230,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EMPTINESS"></p>
                     <radio-button-group id="A1_EMPTINESS" for="A1a.EMPTINESS" items="Model.DisagreeToAgreeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EMPTINESS"></span>
+                    <submission-error location="EMPTINESS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -225,6 +241,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.MISSPEOPLE"></p>
                     <radio-button-group id="A1_MISSPEOPLE" for="A1a.MISSPEOPLE" items="Model.DisagreeToAgreeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.MISSPEOPLE"></span>
+                    <submission-error location="MISSPEOPLE" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -235,6 +252,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FRIENDS"></p>
                     <radio-button-group id="A1_FRIENDS" for="A1a.FRIENDS" items="Model.DisagreeToAgreeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FRIENDS"></span>
+                    <submission-error location="FRIENDS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -245,6 +263,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.ABANDONED"></p>
                     <radio-button-group id="A1_ABANDONED" for="A1a.ABANDONED" items="Model.DisagreeToAgreeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.ABANDONED"></span>
+                    <submission-error location="ABANDONED" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -255,6 +274,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.CLOSEFRND"></p>
                     <radio-button-group id="A1_CLOSEFRND" for="A1a.CLOSEFRND" items="Model.DisagreeToAgreeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.CLOSEFRND"></span>
+                    <submission-error location="CLOSEFRND" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -272,6 +292,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.PARENTCOMM"></p>
                     <radio-button-group id="A1_PARENTCOMM" for="A1a.PARENTCOMM" items="Model.SpendTimeParentsItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.PARENTCOMM"></span>
+                    <submission-error location="PARENTCOMM" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -282,6 +303,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.CHILDCOMM"></p>
                     <radio-button-group id="A1_CHILDCOMM" for="A1a.CHILDCOMM" items="Model.SpendTimeChildrenItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.CHILDCOMM"></span>
+                    <submission-error location="CHILDCOMM" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -292,6 +314,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.FRIENDCOMM"></p>
                     <radio-button-group id="A1_FRIENDCOMM" for="A1a.FRIENDCOMM" items="Model.SpendTimeFriendsItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.FRIENDCOMM"></span>
+                    <submission-error location="FRIENDCOMM" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -302,6 +325,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.PARTICIPATE"></p>
                     <radio-button-group id="A1_PARTICIPATE" for="A1a.PARTICIPATE" items="Model.SpendTimeActivitiesItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.PARTICIPATE"></span>
+                    <submission-error location="PARTICIPATE" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -324,6 +348,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.SAFEHOME"></p>
                     <radio-button-group id="A1_SAFEHOME" for="A1a.SAFEHOME" items="Model.SafeToUnsafeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.SAFEHOME"></span>
+                    <submission-error location="SAFEHOME" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -334,6 +359,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.SAFECOMM"></p>
                     <radio-button-group id="A1_SAFECOMM" for="A1a.SAFECOMM" items="Model.SafeToUnsafeItems"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.SAFECOMM"></span>
+                    <submission-error location="SAFECOMM" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -354,6 +380,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.DELAYMED"></p>
                 <radio-button-group id="A1_DELAYMED" for="A1a.DELAYMED" items="Model.AllTheTimeToNoneOfTheTimeItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.DELAYMED"></span>
+                <submission-error location="DELAYMED" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -364,6 +391,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.SCRIPTPROB"></p>
                 <radio-button-group id="A1_SCRIPTPROB" for="A1a.SCRIPTPROB" items="Model.AllTheTimeToNoneOfTheTimeItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.SCRIPTPROB"></span>
+                <submission-error location="SCRIPTPROB" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -374,6 +402,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.MISSEDFUP"></p>
                 <radio-button-group id="A1_MISSEDFUP" for="A1a.MISSEDFUP" items="Model.AllTheTimeToNoneOfTheTimeItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.MISSEDFUP"></span>
+                <submission-error location="MISSEDFUP" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -384,6 +413,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.DOCADVICE"></p>
                 <radio-button-group id="A1_DOCADVICE" for="A1a.DOCADVICE" items="Model.AllTheTimeToNoneOfTheTimeItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.DOCADVICE"></span>
+                <submission-error location="DOCADVICE" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -394,6 +424,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.HEALTHACC"></p>
                 <radio-button-group id="A1_HEALTHACC" for="A1a.HEALTHACC" items="Model.HEALTHACCItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.HEALTHACC"></span>
+                <submission-error location="HEALTHACC" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -412,6 +443,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSCOURT"></p>
                 <radio-button-group id="A1_LESSCOURT" for="A1a.LESSCOURT" items="Model.EverydayToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.LESSCOURT"></span>
+                <submission-error location="LESSCOURT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -422,6 +454,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.POORSERV"></p>
                 <radio-button-group id="A1_POORSERV" for="A1a.POORSERV" items="Model.EverydayToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORSERV"></span>
+                <submission-error location="POORSERV" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -432,6 +465,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.NOTSMART"></p>
                 <radio-button-group id="A1_NOTSMART" for="A1a.NOTSMART" items="Model.EverydayToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.NOTSMART"></span>
+                <submission-error location="NOTSMART" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -442,6 +476,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.ACTAFRAID"></p>
                 <radio-button-group id="A1_ACTAFRAID" for="A1a.ACTAFRAID" items="Model.EverydayToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.ACTAFRAID"></span>
+                <submission-error location="ACTAFRAID" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -452,6 +487,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.THREATENED"></p>
                 <radio-button-group id="A1_THREATENED" for="A1a.THREATENED" items="Model.EverydayToNeverItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.THREATENED"></span>
+                <submission-error location="THREATENED" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -462,6 +498,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.POORMEDTRT"></p>
                 <radio-button-group id="A1_POORMEDTRT" for="A1a.POORMEDTRT" items="Model.AllTheTimeToNoneOfTheTimeItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRT"></span>
+                <submission-error location="POORMEDTRT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>
@@ -470,8 +507,11 @@
             <label><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
             <div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidNoResponse"></span>
+                <submission-error location="POORMEDTRTInvalidNoResponse" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidExtra"></span>
+                <submission-error location="POORMEDTRTInvalidExtra" errors="Model.BaseForm.UnresolvedErrors" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidNAAndPreferNot"></span>
+                <submission-error location="POORMEDTRTInvalidNAAndPreferNot" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
         <div class="mt-4 sm:col-span-2 sm:mt-0" id="discriminationReasonSection">
@@ -626,12 +666,12 @@
                     @Html.CheckBox("A1a.EXPNOTAPP", Model.A1a.EXPNOTAPP, new
                     {
                         @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600",
-                        data_checkBoxDisable_target = "checkboxTrigger",
-                        data_action = "input->checkboxDisable#ToggleGroup",
-                        data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
-                        data_checkBoxDisable_enableGroup_param = "",
-                        data_checkboxDisable_toggleState_param = "true"
-                    })
+                                        data_checkBoxDisable_target = "checkboxTrigger",
+                                        data_action = "input->checkboxDisable#ToggleGroup",
+                                        data_checkBoxDisable_disableGroup_param = "A1a.EXPSTRS",
+                                        data_checkBoxDisable_enableGroup_param = "",
+                                        data_checkboxDisable_toggleState_param = "true"
+                                        })
                 </div>
                 <div>
                     <label asp-for="A1a.EXPNOTAPP"></label>
@@ -657,6 +697,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EXPSTRS"></p>
                 <radio-button-group id="A1_EXPSTRS" for="A1a.EXPSTRS" items="Model.StressfulToNotStressfulItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.EXPSTRS"></span>
+                <submission-error location="EXPSTRS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>

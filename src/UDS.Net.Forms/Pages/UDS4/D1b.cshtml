@@ -16,6 +16,7 @@
         <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMARKDX"></p>
         <radio-button-group id="@Html.IdFor(m => m.D1b.BIOMARKDX)" for="@Model.D1b.BIOMARKDX" items="Model.BIOMARKDXListItems" ui-behaviors="Model.BIOMARKDXUIBehavior"></radio-button-group>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMARKDX"></span>
+        <submission-error location="BIOMARKDX" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
 </div>
 
@@ -49,6 +50,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FLUIDBIOM"></p>
             <radio-button-group id="@Html.IdFor(m => m.D1b.FLUIDBIOM)" for="@Model.D1b.FLUIDBIOM" items="Model.FLUIDBIOMListItems" ui-behaviors="Model.FLUIDBIOMUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FLUIDBIOM"></span>
+            <submission-error location="FLUIDBIOM" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
     <p class="mt-2 text-sm text-gray-900">
@@ -87,6 +89,7 @@
                     <label asp-for="D1b.BLOODAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODAD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODAD"></span>
+                    <submission-error location="BLOODAD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODAD)" for="@Model.D1b.BLOODAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -95,6 +98,7 @@
                     <label asp-for="D1b.BLOODFTLD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODFTLD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODFTLD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODFTLD"></span>
+                    <submission-error location="BLOODFTLD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODFTLD)" for="@Model.D1b.BLOODFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -103,6 +107,7 @@
                     <label asp-for="D1b.BLOODLBD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODLBD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODLBD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODLBD"></span>
+                    <submission-error location="BLOODLBD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODLBD)" for="@Model.D1b.BLOODLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -111,6 +116,7 @@
                     <label asp-for="D1b.BLOODOTH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BLOODOTH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BLOODOTH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODOTH"></span>
+                    <submission-error location="BLOODOTH" errors="Model.BaseForm.UnresolvedErrors" />
 
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BLOODOTH)" for="@Model.D1b.BLOODOTH" items="Model.FindingsListItems" ui-behaviors="Model.BLOODOTHXUIBehavior"></table-cell-radio-buttons>
@@ -127,6 +133,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BLOODOTHX"></p>
                             <input asp-for="@Model.D1b.BLOODOTHX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BLOODOTHX"></span>
+                            <submission-error location="BLOODOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -160,6 +167,7 @@
                     <label asp-for="D1b.CSFAD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.CSFAD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFAD"></span>
+                    <submission-error location="CSFAD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFAD)" for="@Model.D1b.CSFAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -168,6 +176,7 @@
                     <label asp-for="D1b.CSFFTLD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFFTLD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.CSFFTLD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFFTLD"></span>
+                    <submission-error location="CSFFTLD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFFTLD)" for="@Model.D1b.CSFFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -176,6 +185,7 @@
                     <label asp-for="D1b.CSFLBD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFLBD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.CSFLBD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFLBD"></span>
+                    <submission-error location="CSFLBD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFLBD)" for="@Model.D1b.CSFLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -184,6 +194,7 @@
                     <label asp-for="D1b.CSFOTH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CSFOTH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.CSFOTH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFOTH"></span>
+                    <submission-error location="CSFOTH" errors="Model.BaseForm.UnresolvedErrors" />
 
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.CSFOTH)" for="@Model.D1b.CSFOTH" items="Model.FindingsListItems" ui-behaviors="Model.CSFOTHUIBehavior"></table-cell-radio-buttons>
@@ -200,6 +211,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.CSFOTHX"></p>
                             <input asp-for="@Model.D1b.CSFOTHX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CSFOTHX"></span>
+                            <submission-error location="CSFOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -224,6 +236,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.IMAGINGDX"></p>
             <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGINGDX)" for="@Model.D1b.IMAGINGDX" items="Model.IMAGINGDXListItems" ui-behaviors="Model.IMAGINGDXUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGINGDX"></span>
+            <submission-error location="IMAGINGDX" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
         <span asp-validation-for="D1b.ImagingModalitiesValidation"
               class="mt-2 text-sm text-red-600"></span>
@@ -251,6 +264,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.PETDX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.D1b.PETDX)" for="@Model.D1b.PETDX" items="Model.PETDXListItems" ui-behaviors="Model.PETDXUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PETDX"></span>
+                <submission-error location="PETDX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </table>
@@ -261,6 +275,7 @@
                 <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                     If used in diagnosis, indicate the results:<br />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.SPECTValidation"></span>
+                    <submission-error location="SPECTValidation" errors="Model.BaseForm.UnresolvedErrors" />
                 </th>
                 @foreach (var item in Model.FindingsListItems)
                 {
@@ -274,6 +289,7 @@
                     <label asp-for="D1b.AMYLPET"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.AMYLPET)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.AMYLPET"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.AMYLPET"></span>
+                    <submission-error location="AMYLPET" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.AMYLPET)" for="@Model.D1b.AMYLPET" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -282,6 +298,7 @@
                     <label asp-for="D1b.TAUPET"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TAUPET)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TAUPET"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TAUPET"></span>
+                    <submission-error location="TAUPET" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TAUPET)" for="@Model.D1b.TAUPET" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -294,6 +311,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGPETDX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.D1b.FDGPETDX)" for="@Model.D1b.FDGPETDX" items="Model.FDGPETDXListItems" ui-behaviors="Model.FDGPETDXUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGPETDX"></span>
+                <submission-error location="FDGPETDX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </table>
@@ -317,6 +335,7 @@
                     <label asp-for="D1b.FDGAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGAD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGAD"></span>
+                    <submission-error location="FDGAD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGAD)" for="@Model.D1b.FDGAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -325,6 +344,7 @@
                     <label asp-for="D1b.FDGFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGFTLD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGFTLD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGFTLD"></span>
+                    <submission-error location="FDGFTLD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGFTLD)" for="@Model.D1b.FDGFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -333,6 +353,7 @@
                     <label asp-for="D1b.FDGLBD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGLBD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGLBD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGLBD"></span>
+                    <submission-error location="FDGLBD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGLBD)" for="@Model.D1b.FDGLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -341,6 +362,7 @@
                     <label asp-for="D1b.FDGOTH"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.FDGOTH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.FDGOTH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTH"></span>
+                    <submission-error location="FDGOTH" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.FDGOTH)" for="@Model.D1b.FDGOTH" items="Model.FindingsListItems" ui-behaviors="Model.FDGOTHUIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -355,6 +377,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.FDGOTHX"></p>
                             <input asp-for="@Model.D1b.FDGOTHX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FDGOTHX"></span>
+                            <submission-error location="FDGOTHX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -368,6 +391,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.DATSCANDX"></p>
                 <radio-button-group id="@Html.IdFor(m => m.D1b.DATSCANDX)" for="@Model.D1b.DATSCANDX" items="Model.DATSCANDXListItems"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DATSCANDX"></span>
+                <submission-error location="DATSCANDX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </table>
@@ -382,11 +406,13 @@
                             <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDX"></p>
                             <radio-button-group id="@Html.IdFor(m => m.D1b.TRACOTHDX)" for="@Model.D1b.TRACOTHDX" items="Model.TRACOTHDXListItems" ui-behaviors="Model.TRACOTHDXUIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDX"></span>
+                            <submission-error location="TRACOTHDX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="D1b.TRACOTHDXX"></p>
                             <label asp-for="D1b.TRACOTHDXX">@Html.DisplayNameFor(m => m.D1b.TRACOTHDXX)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACOTHDXX"></span>
+                            <submission-error location="TRACOTHDXX" errors="Model.BaseForm.UnresolvedErrors" />
                             <div class="mt-2">
                                 <input asp-for="D1b.TRACOTHDXX" />
                             </div>
@@ -413,6 +439,7 @@
                     <label asp-for="D1b.TRACERAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERAD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERAD"></span>
+                    <submission-error location="TRACERAD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERAD)" for="@Model.D1b.TRACERAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -421,6 +448,7 @@
                     <label asp-for="D1b.TRACERFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERFTLD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERFTLD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERFTLD"></span>
+                    <submission-error location="TRACERFTLD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERFTLD)" for="@Model.D1b.TRACERFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -429,6 +457,7 @@
                     <label asp-for="D1b.TRACERLBD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACERLBD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TRACERLBD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACERLBD"></span>
+                    <submission-error location="TRACERLBD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACERLBD)" for="@Model.D1b.TRACERLBD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -437,6 +466,7 @@
                     <label asp-for="D1b.TRACEROTH"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.TRACEROTH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.TRACEROTH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACEROTH"></span>
+                    <submission-error location="TRACEROTH" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.TRACEROTH)" for="@Model.D1b.TRACEROTH" items="Model.FindingsListItems" ui-behaviors="Model.TRACEROTHUIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -451,6 +481,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.TRACEROTHX"></p>
                             <input asp-for="@Model.D1b.TRACEROTHX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.TRACEROTHX"></span>
+                            <submission-error location="TRACEROTHX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -475,6 +506,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.STRUCTDX"></p>
             <radio-button-group id="@Html.IdFor(m => m.D1b.STRUCTDX)" for="@Model.D1b.STRUCTDX" items="Model.STRUCTDXListItems" ui-behaviors="Model.STRUCTDXUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTDX"></span>
+            <submission-error location="STRUCTDX" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
 
@@ -494,6 +526,7 @@
                     <label asp-for="D1b.STRUCTAD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTAD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTAD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTAD"></span>
+                    <submission-error location="STRUCTAD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTAD)" for="@Model.D1b.STRUCTAD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -502,6 +535,7 @@
                     <label asp-for="D1b.STRUCTFTLD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTFTLD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTFTLD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTFTLD"></span>
+                    <submission-error location="STRUCTFTLD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTFTLD)" for="@Model.D1b.STRUCTFTLD" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -510,16 +544,19 @@
                     <label asp-for="D1b.STRUCTCVD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.STRUCTCVD)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.STRUCTCVD"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTCVD"></span>
+                    <submission-error location="STRUCTCVD" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.STRUCTCVD)" for="@Model.D1b.STRUCTCVD" items="Model.FindingsListItems" ui-behaviors="Model.STRUCTCVDUIBehavior"></table-cell-radio-buttons>
             </tr>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTEtiologyValidation"></span>
+            <submission-error location="STRUCTEtiologyValidation" errors="Model.BaseForm.UnresolvedErrors" />
         </tbody>
         <tbody class="subsubsubcounterreset">
             <tr>
                 <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                     <p>If there is evidence for CVD on imaging, indicate the findings:</p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.STRUCTCVDFindingsValidation"></span>
+                    <submission-error location="STRUCTCVDFindingsValidation" errors="Model.BaseForm.UnresolvedErrors" />
                 </th>
                 <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">No</th>
                 <th class="w-16 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Yes</th>
@@ -531,6 +568,7 @@
                     <label asp-for="D1b.IMAGLINF"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGLINF)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGLINF"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGLINF"></span>
+                    <submission-error location="IMAGLINF" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGLINF)" for="@Model.D1b.IMAGLINF" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -539,6 +577,7 @@
                     <label asp-for="D1b.IMAGLAC"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGLAC)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGLAC"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGLAC"></span>
+                    <submission-error location="IMAGLAC" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGLAC)" for="@Model.D1b.IMAGLAC" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -547,6 +586,7 @@
                     <label asp-for="D1b.IMAGMACH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMACH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMACH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMACH"></span>
+                    <submission-error location="IMAGMACH" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMACH)" for="@Model.D1b.IMAGMACH" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -555,6 +595,7 @@
                     <label asp-for="D1b.IMAGMICH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGMICH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGMICH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGMICH"></span>
+                    <submission-error location="IMAGMICH" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGMICH)" for="@Model.D1b.IMAGMICH" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -563,6 +604,7 @@
                     <label asp-for="D1b.IMAGWMH"><span class="subsubsubcounter"></span> @Html.DisplayNameFor(m => m.D1b.IMAGWMH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMH"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMH"></span>
+                    <submission-error location="IMAGWMH" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.IMAGWMH)" for="@Model.D1b.IMAGWMH" items="Model.FindingsListItems" ui-behaviors="Model.IMAGWMHUIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -571,6 +613,7 @@
                     <label asp-for="D1b.IMAGWMHSEV">7a3e1. If <strong>Yes</strong> choose the severity</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.IMAGWMHSEV"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.IMAGWMHSEV"></span>
+                    <submission-error location="IMAGWMHSEV" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <td colspan="4">
                     <radio-button-group id="@Html.IdFor(m => m.D1b.IMAGWMHSEV)" for="@Model.D1b.IMAGWMHSEV" items="Model.IMAGWMHSEVListItems"></radio-button-group>
@@ -605,11 +648,13 @@
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM1"></p>
                             <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM1)" for="@Model.D1b.OTHBIOM1" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM1UIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM1"></span>
+                            <submission-error location="OTHBIOM1" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX1"></p>
                             <label asp-for="D1b.OTHBIOMX1">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX1)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX1"></span>
+                            <submission-error location="OTHBIOMX1" errors="Model.BaseForm.UnresolvedErrors" />
                             <div class="mt-2">
                                 <input asp-for="D1b.OTHBIOMX1" />
                             </div>
@@ -632,11 +677,13 @@
         </thead>
         <tbody class="subsubcounterreset divide-y divide-gray-200">
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BiomarkerValidation"></span>
+            <submission-error location="BiomarkerValidation" errors="Model.BaseForm.UnresolvedErrors" />
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD1)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD1"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD1"></span>
+                    <submission-error location="BIOMAD1" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD1)" for="@Model.D1b.BIOMAD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -645,6 +692,7 @@
                     <label asp-for="D1b.BIOMFTLD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD1)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD1"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD1"></span>
+                    <submission-error location="BIOMFTLD1" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD1)" for="@Model.D1b.BIOMFTLD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -654,6 +702,7 @@
                     <label asp-for="D1b.BIOMLBD1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD1)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD1"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD1"></span>
+                    <submission-error location="BIOMLBD1" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD1)" for="@Model.D1b.BIOMLBD1" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -662,6 +711,7 @@
                     <label asp-for="D1b.BIOMOTH1"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH1)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH1"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH1"></span>
+                    <submission-error location="BIOMOTH1" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH1)" for="@Model.D1b.BIOMOTH1" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH1UIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -676,6 +726,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX1"></p>
                             <input asp-for="@Model.D1b.BIOMOTHX1" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX1"></span>
+                            <submission-error location="BIOMOTHX1" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -692,11 +743,13 @@
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM2"></p>
                             <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM2)" for="@Model.D1b.OTHBIOM2" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM2UIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM2"></span>
+                            <submission-error location="OTHBIOM2" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX2"></p>
                             <label asp-for="D1b.OTHBIOMX2">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX2)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX2"></span>
+                            <submission-error location="OTHBIOMX2" errors="Model.BaseForm.UnresolvedErrors" />
                             <div class="mt-2">
                                 <input asp-for="D1b.OTHBIOMX2" />
                             </div>
@@ -718,11 +771,13 @@
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.Biomarker2Validation"></span>
+            <submission-error location="Biomarker2Validation" errors="Model.BaseForm.UnresolvedErrors" />
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD2)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD2"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD2"></span>
+                    <submission-error location="BIOMAD2" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD2)" for="@Model.D1b.BIOMAD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -731,6 +786,7 @@
                     <label asp-for="D1b.BIOMFTLD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD2)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD2"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD2"></span>
+                    <submission-error location="BIOMFTLD2" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD2)" for="@Model.D1b.BIOMFTLD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -739,6 +795,7 @@
                     <label asp-for="D1b.BIOMLBD2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD2)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD2"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD2"></span>
+                    <submission-error location="BIOMLBD2" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD2)" for="@Model.D1b.BIOMLBD2" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -747,6 +804,7 @@
                     <label asp-for="D1b.BIOMOTH2"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH2)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH2"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH2"></span>
+                    <submission-error location="BIOMOTH2" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH2)" for="@Model.D1b.BIOMOTH2" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH2UIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -761,6 +819,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX2"></p>
                             <input asp-for="@Model.D1b.BIOMOTHX2" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX2"></span>
+                            <submission-error location="BIOMOTHX2" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -779,11 +838,13 @@
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOM3"></p>
                             <radio-button-group id="@Html.IdFor(m => m.D1b.OTHBIOM3)" for="@Model.D1b.OTHBIOM3" items="Model.OTHBIOMListItems" ui-behaviors="Model.OTHBIOM3UIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOM3"></span>
+                            <submission-error location="OTHBIOM3" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                         <div>
                             <p class="text-sm text-gray-500" asp-description-for="D1b.OTHBIOMX3"></p>
                             <label asp-for="D1b.OTHBIOMX3">@Html.DisplayNameFor(m => m.D1b.OTHBIOMX3)</label>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHBIOMX3"></span>
+                            <submission-error location="OTHBIOMX3" errors="Model.BaseForm.UnresolvedErrors" />
                             <div class="mt-2">
                                 <input asp-for="D1b.OTHBIOMX3" />
                             </div>
@@ -806,11 +867,13 @@
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.Biomarker3Validation"></span>
+            <submission-error location="Biomarker3Validation" errors="Model.BaseForm.UnresolvedErrors" />
             <tr>
                 <td>
                     <label asp-for="D1b.BIOMAD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMAD3)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMAD3"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMAD3"></span>
+                    <submission-error location="BIOMAD3" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMAD3)" for="@Model.D1b.BIOMAD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -819,6 +882,7 @@
                     <label asp-for="D1b.BIOMFTLD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMFTLD3)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMFTLD3"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMFTLD3"></span>
+                    <submission-error location="BIOMFTLD3" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMFTLD3)" for="@Model.D1b.BIOMFTLD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -827,6 +891,7 @@
                     <label asp-for="D1b.BIOMLBD3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMLBD3)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMLBD3"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMLBD3"></span>
+                    <submission-error location="BIOMLBD3" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMLBD3)" for="@Model.D1b.BIOMLBD3" items="Model.FindingsListItems"></table-cell-radio-buttons>
             </tr>
@@ -835,6 +900,7 @@
                     <label asp-for="D1b.BIOMOTH3"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.BIOMOTH3)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1b.BIOMOTH3"></p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTH3"></span>
+                    <submission-error location="BIOMOTH3" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
                 <table-cell-radio-buttons id="@Html.IdFor(m => m.D1b.BIOMOTH3)" for="@Model.D1b.BIOMOTH3" items="Model.FindingsListItems" ui-behaviors="Model.BIOMOTH3UIBehavior"></table-cell-radio-buttons>
             </tr>
@@ -849,6 +915,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.BIOMOTHX3"></p>
                             <input asp-for="@Model.D1b.BIOMOTHX3" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.BIOMOTHX3"></span>
+                            <submission-error location="BIOMOTHX3" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>
@@ -871,6 +938,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.AUTDOMMUT"></p>
             <radio-button-group id="@Html.IdFor(m => m.D1b.AUTDOMMUT)" for="@Model.D1b.AUTDOMMUT" items="Model.AUTDOMMUTListItems"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.AUTDOMMUT"></span>
+            <submission-error location="AUTDOMMUT" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
 </div>
@@ -899,6 +967,7 @@
         on whether the diagnosis was primary, contributing, or non-contributing blank.
     </p>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PrimaryDiagnosesIndicated"></span>
+    <submission-error location="PrimaryDiagnosesIndicated" errors="Model.BaseForm.UnresolvedErrors" />
 
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
@@ -919,6 +988,7 @@
                         <label asp-for="D1b.ALZDIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.ALZDIS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.ALZDIS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.ALZDISIF"></span>
+                        <submission-error location="ALZDISIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -946,6 +1016,7 @@
                         <label asp-for="D1b.LBDIS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.LBDIS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.LBDIS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LBDIF"></span>
+                        <submission-error location="LBDIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -993,6 +1064,7 @@
                 <td>
                     <p>If <strong>present</strong>, select one:</p>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDIndicated"></span>
+                    <submission-error location="FTLDIndicated" errors="Model.BaseForm.UnresolvedErrors" />
                 </td>
             </tr>
             <tr class=" odd:bg-white even:bg-gray-50 border-b">
@@ -1001,6 +1073,7 @@
                         <label asp-for="D1b.PSP"><span class="subcounter subcounterreset"></span> @Html.DisplayNameFor(m => m.D1b.PSP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.PSP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PSPIF"></span>
+                        <submission-error location="PSPIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1028,6 +1101,7 @@
                         <label asp-for="D1b.CORT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.CORT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CORT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CORTIF"></span>
+                        <submission-error location="CORTIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1055,6 +1129,7 @@
                         <label asp-for="D1b.FTLDMO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDMO)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDMO"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDMOIF"></span>
+                        <submission-error location="FTLDMOIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1082,6 +1157,7 @@
                         <label asp-for="D1b.FTLDNOS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1b.FTLDNOS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDNOS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDNOIF"></span>
+                        <submission-error location="FTLDNOIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1112,11 +1188,13 @@
                                 <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBT"></p>
                                 <radio-button-group id="@Html.IdFor(m => m.D1b.FTLDSUBT)" for="@Model.D1b.FTLDSUBT" items="Model.FTLDSUBTListItems" ui-behaviors="Model.FTLDSUBTUIBehavior"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBT"></span>
+                                <submission-error location="FTLDSUBT" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500" asp-description-for="D1b.FTLDSUBX"></p>
                                 <label asp-for="D1b.FTLDSUBX">@Html.DisplayNameFor(m => m.D1b.FTLDSUBX)</label>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.FTLDSUBX"></span>
+                                <submission-error location="FTLDSUBX" errors="Model.BaseForm.UnresolvedErrors" />
                                 <div class="mt-2">
                                     <input asp-for="D1b.FTLDSUBX" />
                                 </div>
@@ -1131,6 +1209,7 @@
                         <label asp-for="D1b.CVD"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CVD)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CVD"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CVDIF"></span>
+                        <submission-error location="CVDIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1158,6 +1237,7 @@
                         <label asp-for="D1b.MSA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.MSA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.MSA"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.MSAIF"></span>
+                        <submission-error location="MSAIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1185,6 +1265,7 @@
                         <label asp-for="D1b.CTE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CTE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CTE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTEIF"></span>
+                        <submission-error location="CTEIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1214,6 +1295,7 @@
                             <div>
                                 <radio-button-group id="@Html.IdFor(m => m.D1b.CTECERT)" for="@Model.D1b.CTECERT" items="Model.CTECERTListItems"></radio-button-group>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CTECERT"></span>
+                                <submission-error location="CTECERT" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                         </div>
                     </div>
@@ -1225,6 +1307,7 @@
                         <label asp-for="D1b.DOWNS"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.DOWNS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.DOWNS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.DOWNSIF"></span>
+                        <submission-error location="DOWNSIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1252,6 +1335,7 @@
                         <label asp-for="D1b.HUNT"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.HUNT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.HUNT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.HUNTIF"></span>
+                        <submission-error location="HUNTIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1279,6 +1363,7 @@
                         <label asp-for="D1b.PRION"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.PRION)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.PRION"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.PRIONIF"></span>
+                        <submission-error location="PRIONIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1306,6 +1391,7 @@
                         <label asp-for="D1b.CAA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.CAA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.CAA"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.CAAIF"></span>
+                        <submission-error location="CAAIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1333,6 +1419,7 @@
                         <label asp-for="D1b.LATE"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.LATE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.LATE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.LATEIF"></span>
+                        <submission-error location="LATEIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1360,6 +1447,7 @@
                         <label asp-for="D1b.OTHCOG"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1b.OTHCOG)</label>
                         <p class="text-sm text-gray-500" asp-description-for="D1b.OTHCOG"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHCOGIF"></span>
+                        <submission-error location="OTHCOGIF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </td>
                 <td>
@@ -1392,6 +1480,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1b.OTHCOGX"></p>
                             <input asp-for="@Model.D1b.OTHCOGX" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="D1b.OTHCOGX"></span>
+                            <submission-error location="OTHCOGX" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
                 </td>

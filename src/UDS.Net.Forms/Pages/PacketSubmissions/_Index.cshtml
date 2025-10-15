@@ -49,7 +49,7 @@
                                             <td>
                                                 @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
                                                 {
-                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "statusChangedBy" value *@
+                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
                                                     <span>@Model.PacketSubmissions[i].ErrorCount</span>
                                                 }
                                                 else
@@ -104,7 +104,7 @@
                                             <td>
                                                 @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
                                                 {
-                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "statusChangedBy" value *@
+                                                    @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
                                                     <span>@Model.PacketSubmissions[recentIndex].ErrorCount</span>
                                                 }
                                                 else
@@ -177,37 +177,51 @@
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Assigned To</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Resolved By</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
                                 @foreach (var error in allErrors)
-
                                 {
                                     <tr class="hover:bg-red-50 transition">
                                         <td class="px-4 py-2">
                                             @{
                                                 var pagePath = $"/UDS4/{error.FormKind}";
                                             }
-                                            <a asp-page="@pagePath"
-                                               asp-route-id="@Model.Id"
-                                               asp-route-packetKind="@Model.PACKET.ToString()"
-                                               class="font-medium text-indigo-600 hover:text-indigo-500">
-                                                @error.FormKind
-                                            </a>
-                                        </td>
-                                        <td class="px-4 py-2 text-gray-700">@error.Message</td>
-                                        <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
-                                        <td class="px-4 py-2">
-                                            <span class="
-                                    inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                                    @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
-                                        ? "bg-red-100 text-red-800"
-                                        : "bg-yellow-100 text-yellow-800")">
-                                                @error.Level
-                                            </span>
+                                        <a asp-page="@pagePath"
+                                           asp-route-id="@Model.Id"
+                                           asp-route-packetKind="@Model.PACKET.ToString()"
+                                           class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            @error.FormKind
+                                        </a>
+                                    </td>
+                                    <td class="px-4 py-2 text-gray-700">@error.Message</td>
+                                    <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
+                                    <td class="px-4 py-2">
+                                        <span class="
+                            inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
+                            @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
+                                                                      ? "bg-red-100 text-red-800"
+                                                                      : "bg-yellow-100 text-yellow-800")">
+                                    @error.Level
+                                </span>
+                            </td>
+                            <td class="px-4 py-2 text-gray-700">
+                                @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            {
+                                                @error.StatusChangedBy
+                                            }
+                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
+                                            {
+                                                <span class="text-yellow-600 font-semibold">Ignored by @error.StatusChangedBy</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Unresolved</span>
+                                            }
                                         </td>
                                         <td class="px-4 py-2 text-gray-700">
-                                            @(!string.IsNullOrEmpty(error.StatusChangedBy) ? error.StatusChangedBy : "Unresolved")
+                                            @error.Location
                                         </td>
                                     </tr>
                                 }

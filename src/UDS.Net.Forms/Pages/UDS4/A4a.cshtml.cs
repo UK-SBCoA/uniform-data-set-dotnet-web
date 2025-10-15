@@ -80,7 +80,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public A4aModel(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A4a")
+        public A4aModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A4a")
         {
         }
 
