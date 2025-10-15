@@ -21,6 +21,6 @@
 		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj" />
+		<ProjectReference Include="..\UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj" />
 	</ItemGroup>
 </Project>
