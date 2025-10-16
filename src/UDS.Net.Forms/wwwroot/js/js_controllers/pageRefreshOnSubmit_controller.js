@@ -2,9 +2,9 @@
 
 export default class extends Controller {
   static targets = ["button"]
-  static values = { delay: Number }
 
-  submit(event) {
+  async submit(event) {
+
     if (this.hasButtonTarget) {
       this.buttonTarget.disabled = true
       this.buttonTarget.classList.remove('bg-indigo-600', 'hover:bg-indigo-700')
@@ -12,10 +12,33 @@ export default class extends Controller {
       this.buttonTarget.textContent = "Exporting..."
     }
 
-    const delay = this.delayValue || 5000
+    // Get form and endpoint URL
+    const form = event.target.closest('form')
+    const url = form.action
+    const formData = new FormData(form)
 
-    setTimeout(() => {
-      window.location.reload()
-    }, delay)
+    // Reset existing cookie
+    document.cookie = "downloadComplete=false"
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        const downloadCompleteChecker = setInterval(() => {
+          if (document.cookie.includes("downloadComplete=true")) {
+            clearInterval(downloadCompleteChecker);
+            alert("Packet export complete!");
+            window.location.reload();
+          }
+        }, 500)
+      } else {
+        alert("Export failed. Please try again.")
+      }
+    } catch (error) {
+      alert("An error occurred. Please try again.")
+    }
   }
 }
