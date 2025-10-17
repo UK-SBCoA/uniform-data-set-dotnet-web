@@ -42,7 +42,7 @@ namespace UDS.Net.Forms.Pages.Visits
             error.Resolve(username, username);
             await _packetService.UpdatePacketSubmissionErrors(username, packet, submission.Id, submission.Errors.ToList());
 
-            bool allResolved = packet.Submissions.All(s => s.Errors.All(e => !string.IsNullOrEmpty(e.ResolvedBy)));
+            bool allResolved = packet.Submissions.All(s => s.Errors.All(e => !string.IsNullOrEmpty(e.StatusChangedBy)));
 
             if (allResolved)
             {
@@ -79,7 +79,7 @@ namespace UDS.Net.Forms.Pages.Visits
 
             foreach (var submission in packet.Submissions)
             {
-                var errorsToResolve = submission.Errors.Where(e => string.IsNullOrEmpty(e.ResolvedBy)).ToList();
+                var errorsToResolve = submission.Errors.Where(e => string.IsNullOrEmpty(e.StatusChangedBy)).ToList();
                 foreach (var error in errorsToResolve)
                 {
                     error.Resolve(username, username);

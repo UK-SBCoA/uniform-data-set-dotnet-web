@@ -173,7 +173,7 @@ namespace UDS.Net.Services.Extensions
                 Level = ((int)error.Level).ToString(),
                 Message = error.Message,
                 AssignedTo = error.AssignedTo,
-                ResolvedBy = error.ResolvedBy,
+                StatusChangedBy = error.StatusChangedBy,
                 CreatedAt = error.CreatedAt,
                 CreatedBy = error.CreatedBy,
                 ModifiedBy = error.ModifiedBy,
