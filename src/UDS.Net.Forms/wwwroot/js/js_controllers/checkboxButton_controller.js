@@ -21,7 +21,7 @@ export default class extends Controller {
       selected = selected.filter(x => x !== id)
     }
 
-    localStorage.setItem('selectedPackets', JSON.stringify(selected))
+    sessionStorage.setItem('selectedPackets', JSON.stringify(selected))
 
     this.updateButtonState()
   }
@@ -48,11 +48,11 @@ export default class extends Controller {
   }
 
   getSelectedPackets() {
-    return JSON.parse(localStorage.getItem('selectedPackets') || '[]')
+    return JSON.parse(sessionStorage.getItem('selectedPackets') || '[]')
   }
 
   clearSelected() {
-    localStorage.removeItem('selectedPackets')
+    sessionStorage.removeItem('selectedPackets')
     this.checkboxTargets.forEach(cb => cb.checked = false)
     this.updateButtonState()
   }
