@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.B7Model
 @{
     Layout = "_LayoutForm";
@@ -28,6 +28,7 @@
                         <label asp-for="B7.BILLS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.BILLS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.BILLS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.BILLS"></span>
+                        <submission-error location="BILLS" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.BILLS)" for="@Model.B7.BILLS" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -36,6 +37,7 @@
                         <label asp-for="B7.TAXES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.TAXES)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.TAXES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TAXES"></span>
+                        <submission-error location="TAXES" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TAXES)" for="@Model.B7.TAXES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -44,6 +46,7 @@
                         <label asp-for="B7.SHOPPING"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.SHOPPING)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.SHOPPING"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.SHOPPING"></span>
+                        <submission-error location="SHOPPING" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.SHOPPING)" for="@Model.B7.SHOPPING" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -52,6 +55,7 @@
                         <label asp-for="B7.GAMES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.GAMES)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.GAMES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.GAMES"></span>
+                        <submission-error location="GAMES" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.GAMES)" for="@Model.B7.GAMES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -60,6 +64,7 @@
                         <label asp-for="B7.STOVE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.STOVE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.STOVE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.STOVE"></span>
+                        <submission-error location="STOVE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.STOVE)" for="@Model.B7.STOVE" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -68,6 +73,7 @@
                         <label asp-for="B7.MEALPREP"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.MEALPREP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.MEALPREP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.MEALPREP"></span>
+                        <submission-error location="MEALPREP" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.MEALPREP)" for="@Model.B7.MEALPREP" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -76,6 +82,7 @@
                         <label asp-for="B7.EVENTS"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.EVENTS)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.EVENTS"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.EVENTS"></span>
+                        <submission-error location="EVENTS" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.EVENTS)" for="@Model.B7.EVENTS" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -84,6 +91,7 @@
                         <label asp-for="B7.PAYATTN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.PAYATTN)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.PAYATTN"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.PAYATTN"></span>
+                        <submission-error location="PAYATTN" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.PAYATTN)" for="@Model.B7.PAYATTN" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -92,6 +100,7 @@
                         <label asp-for="B7.REMDATES"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.REMDATES)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.REMDATES"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.REMDATES"></span>
+                        <submission-error location="REMDATES" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.REMDATES)" for="@Model.B7.REMDATES" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>
@@ -100,6 +109,7 @@
                         <label asp-for="B7.TRAVEL"><span class="counter"></span> @Html.DisplayNameFor(m => m.B7.TRAVEL)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B7.TRAVEL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B7.TRAVEL"></span>
+                        <submission-error location="TRAVEL" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B7.TRAVEL)" for="@Model.B7.TRAVEL" items="Model.ListItems"></table-cell-radio-buttons>
                 </tr>

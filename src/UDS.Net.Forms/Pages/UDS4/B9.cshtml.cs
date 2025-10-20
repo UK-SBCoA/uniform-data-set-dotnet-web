@@ -597,7 +597,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } },
         };
 
-        public B9Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B9")
+        public B9Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "B9")
         {
         }
 

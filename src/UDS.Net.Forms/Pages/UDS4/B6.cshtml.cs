@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Did not answer", "9")
         };
 
-        public B6Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "B6")
+        public B6Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "B6")
         {
         }
 

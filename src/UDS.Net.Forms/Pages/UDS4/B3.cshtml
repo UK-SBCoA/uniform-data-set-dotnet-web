@@ -35,6 +35,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.SPEECH"></p>
                     <radio-button-group id="B3_SPEECH" for="B3.SPEECH" items="Model.SpeechListItems" ui-behaviors="Model.SpeechUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECH"></span>
+                    <submission-error location="SPEECH" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -45,6 +46,7 @@
                     <input asp-for="@Model.B3.SPEECHX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.SPEECHX"></span>
+                <submission-error location="SPEECHX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -55,6 +57,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.FACEXP"></p>
                     <radio-button-group id="B3_FACEXP" for="B3.FACEXP" items="Model.FACEXPListItems" ui-behaviors="Model.FACEXPUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.FACEXP"></span>
+                    <submission-error location="FACEXP" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -65,6 +68,7 @@
                     <input asp-for="@Model.B3.FACEXPX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.FACEXPX"></span>
+                <submission-error location="FACEXPX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -78,6 +82,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTFAC"></p>
                         <radio-button-group id="B3_TRESTFAC" for="B3.TRESTFAC" items="Model.TremorListItems" ui-behaviors="Model.TRESTFACUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTFAC"></span>
+                        <submission-error location="TRESTFAC" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -88,6 +93,7 @@
                         <input asp-for="@Model.B3.TRESTFAX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTFAX"></span>
+                    <submission-error location="TRESTFAX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -98,6 +104,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRHD"></p>
                         <radio-button-group id="B3_TRESTRHD" for="B3.TRESTRHD" items="Model.TremorListItems" ui-behaviors="Model.TRESTRHDUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRHD"></span>
+                        <submission-error location="TRESTRHD" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -108,6 +115,7 @@
                         <input asp-for="@Model.B3.TRESTRHX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRHX"></span>
+                    <submission-error location="TRESTRHX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -119,6 +127,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLHD"></p>
                         <radio-button-group id="B3_TRESTLHD" for="B3.TRESTLHD" items="Model.TremorListItems" ui-behaviors="Model.TRESTLHDUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLHD"></span>
+                        <submission-error location="TRESTLHD" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -129,6 +138,7 @@
                         <input asp-for="@Model.B3.TRESTLHX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLHX"></span>
+                    <submission-error location="TRESTLHX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -139,6 +149,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTRFT"></p>
                         <radio-button-group id="B3_TRESTRFT" for="B3.TRESTRFT" items="Model.TremorListItems" ui-behaviors="Model.TRESTRFTUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRFT"></span>
+                        <submission-error location="TRESTRFT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -149,6 +160,7 @@
                         <input asp-for="@Model.B3.TRESTRFX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTRFX"></span>
+                    <submission-error location="TRESTRFX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
             <div class="@rowCSS">
@@ -158,6 +170,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRESTLFT"></p>
                         <radio-button-group id="B3_TRESTLFT" for="B3.TRESTLFT" items="Model.TremorListItems" ui-behaviors="Model.TRESTLFTUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLFT"></span>
+                        <submission-error location="TRESTLFT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -168,6 +181,7 @@
                         <input asp-for="@Model.B3.TRESTLFX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRESTLFX"></span>
+                    <submission-error location="TRESTLFX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
         </div>
@@ -180,6 +194,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTRHD"></p>
                         <radio-button-group id="B3_TRACTRHD" for="B3.TRACTRHD" items="Model.HandListItems" ui-behaviors="Model.TRACTRHDUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTRHD"></span>
+                        <submission-error location="TRACTRHD" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -190,6 +205,7 @@
                         <input asp-for="@Model.B3.TRACTRHX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTRHX"></span>
+                    <submission-error location="TRACTRHX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -201,6 +217,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TRACTLHD"></p>
                         <radio-button-group id="B3_TRACTLHD" for="B3.TRACTLHD" items="Model.HandListItems" ui-behaviors="Model.TRACTLHDUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTLHD"></span>
+                        <submission-error location="TRACTLHD" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -211,6 +228,7 @@
                         <input asp-for="@Model.B3.TRACTLHX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TRACTLHX"></span>
+                    <submission-error location="TRACTLHX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -228,6 +246,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDNECK"></p>
                         <radio-button-group id="B3_RIGDNECK" for="B3.RIGDNECK" items="Model.RigidityListItems" ui-behaviors="Model.RIGDNECKUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDNECK"></span>
+                        <submission-error location="RIGDNECK" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -238,6 +257,7 @@
                         <input asp-for="@Model.B3.RIGDNEX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDNEX"></span>
+                    <submission-error location="RIGDNEX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
             <div>
@@ -248,6 +268,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPRT"></p>
                             <radio-button-group id="B3_RIGDUPRT" for="B3.RIGDUPRT" items="Model.RigidityListItems" ui-behaviors="Model.RIGDUPRTUIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPRT"></span>
+                            <submission-error location="RIGDUPRT" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -258,6 +279,7 @@
                             <input asp-for="@Model.B3.RIGDUPRX" />
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPRX"></span>
+                        <submission-error location="RIGDUPRX" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -269,6 +291,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDUPLF"></p>
                             <radio-button-group id="B3_RIGDUPLF" for="B3.RIGDUPLF" items="Model.RigidityListItems" ui-behaviors="Model.RIGDUPLFUIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPLF"></span>
+                            <submission-error location="RIGDUPLF" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -279,6 +302,7 @@
                             <input asp-for="@Model.B3.RIGDUPLX" />
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDUPLX"></span>
+                        <submission-error location="RIGDUPLX" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -291,6 +315,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLORT"></p>
                             <radio-button-group id="B3_RIGDLORT" for="B3.RIGDLORT" items="Model.RigidityListItems" ui-behaviors="Model.RIGDLORTUIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLORT"></span>
+                            <submission-error location="RIGDLORT" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -301,6 +326,7 @@
                             <input asp-for="@Model.B3.RIGDLORX" />
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLORX"></span>
+                        <submission-error location="RIGDLORX" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -313,6 +339,7 @@
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B3.RIGDLOLF"></p>
                             <radio-button-group id="B3_RIGDLOLF" for="B3.RIGDLOLF" items="Model.RigidityListItems" ui-behaviors="Model.RIGDLOLFUIBehavior"></radio-button-group>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLOLF"></span>
+                            <submission-error location="RIGDLOLF" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
 
@@ -323,6 +350,7 @@
                             <input asp-for="@Model.B3.RIGDLOLX" />
                         </div>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.RIGDLOLX"></span>
+                        <submission-error location="RIGDLOLX" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
             </div>
@@ -338,6 +366,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSRT"></p>
                         <radio-button-group id="B3_TAPSRT" for="B3.TAPSRT" items="Model.FingerListItems" ui-behaviors="Model.TAPSRTUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSRT"></span>
+                        <submission-error location="TAPSRT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -348,6 +377,7 @@
                         <input asp-for="@Model.B3.TAPSRTX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSRTX"></span>
+                    <submission-error location="TAPSRTX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -359,6 +389,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.TAPSLF"></p>
                         <radio-button-group id="B3_TAPSLF" for="B3.TAPSLF" items="Model.FingerListItems" ui-behaviors="Model.TAPSLFUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSLF"></span>
+                        <submission-error location="TAPSLF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -369,6 +400,7 @@
                         <input asp-for="@Model.B3.TAPSLFX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TAPSLFX"></span>
+                    <submission-error location="TAPSLFX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -386,6 +418,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMOVR"></p>
                         <radio-button-group id="B3_HANDMOVR" for="B3.HANDMOVR" items="Model.HandMovementsListItems" ui-behaviors="Model.HANDMOVRUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMOVR"></span>
+                        <submission-error location="HANDMOVR" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -396,6 +429,7 @@
                         <input asp-for="@Model.B3.HANDMVRX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMVRX"></span>
+                    <submission-error location="HANDMVRX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -407,6 +441,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDMOVL"></p>
                         <radio-button-group id="B3_HANDMOVL" for="B3.HANDMOVL" items="Model.HandMovementsListItems" ui-behaviors="Model.HANDMOVLUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMOVL"></span>
+                        <submission-error location="HANDMOVL" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -417,6 +452,7 @@
                         <input asp-for="@Model.B3.HANDMVLX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDMVLX"></span>
+                    <submission-error location="HANDMVLX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -433,6 +469,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDALTR"></p>
                         <radio-button-group id="HANDALTR" for="B3.HANDALTR" items="Model.RapidHandsListItems" ui-behaviors="Model.HANDALTRUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDALTR"></span>
+                        <submission-error location="HANDALTR" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -443,6 +480,7 @@
                         <input asp-for="@Model.B3.HANDATRX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDATRX"></span>
+                    <submission-error location="HANDATRX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -453,6 +491,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.HANDALTL"></p>
                         <radio-button-group id="HANDALTL" for="B3.HANDALTL" items="Model.RapidHandsListItems" ui-behaviors="Model.HANDALTLUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDALTL"></span>
+                        <submission-error location="HANDALTL" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -463,6 +502,7 @@
                         <input asp-for="@Model.B3.HANDATLX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.HANDATLX"></span>
+                    <submission-error location="HANDATLX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -478,6 +518,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGRT"></p>
                         <radio-button-group id="LEGRT" for="B3.LEGRT" items="Model.LegListItems" ui-behaviors="Model.LEGRTUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGRT"></span>
+                        <submission-error location="LEGRT" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -488,6 +529,7 @@
                         <input asp-for="@Model.B3.LEGRTX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGRTX"></span>
+                    <submission-error location="LEGRTX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -499,6 +541,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B3.LEGLF"></p>
                         <radio-button-group id="LEGLF" for="B3.LEGLF" items="Model.LegListItems" ui-behaviors="Model.LEGLFUIBehavior"></radio-button-group>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGLF"></span>
+                        <submission-error location="LEGLF" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
 
@@ -509,6 +552,7 @@
                         <input asp-for="@Model.B3.LEGLFX" />
                     </div>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.LEGLFX"></span>
+                    <submission-error location="LEGLFX" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
 
             </div>
@@ -520,6 +564,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.ARISING"></p>
                     <radio-button-group id="ARISING" for="B3.ARISING" items="Model.ArisingListItems" ui-behaviors="Model.ARISINGUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.ARISING"></span>
+                    <submission-error location="ARISING" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -530,6 +575,7 @@
                     <input asp-for="@Model.B3.ARISINGX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.ARISINGX"></span>
+                <submission-error location="ARISINGX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -541,6 +587,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSTURE"></p>
                     <radio-button-group id="POSTURE" for="B3.POSTURE" items="Model.PostureListItems" ui-behaviors="Model.POSTUREUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSTURE"></span>
+                    <submission-error location="POSTURE" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -551,6 +598,7 @@
                     <input asp-for="@Model.B3.POSTUREX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSTUREX"></span>
+                <submission-error location="POSTUREX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -562,6 +610,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.GAIT"></p>
                     <radio-button-group id="GAIT" for="B3.GAIT" items="Model.GaitListItems" ui-behaviors="Model.GAITUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.GAIT"></span>
+                    <submission-error location="GAIT" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -572,6 +621,7 @@
                     <input asp-for="@Model.B3.GAITX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.GAITX"></span>
+                <submission-error location="GAITX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -583,6 +633,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.POSSTAB"></p>
                     <radio-button-group id="POSSTAB" for="B3.POSSTAB" items="Model.PostureStabilityListItems" ui-behaviors="Model.POSSTABUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSSTAB"></span>
+                    <submission-error location="POSSTAB" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -593,6 +644,7 @@
                     <input asp-for="@Model.B3.POSSTABX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.POSSTABX"></span>
+                <submission-error location="POSSTABX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -604,6 +656,7 @@
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B3.BRADYKIN"></p>
                     <radio-button-group id="BRADYKIN" for="B3.BRADYKIN" items="Model.BodyListItems" ui-behaviors="Model.BRADYKINUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.BRADYKIN"></span>
+                    <submission-error location="BRADYKIN" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
             </div>
 
@@ -614,6 +667,7 @@
                     <input asp-for="@Model.B3.BRADYKIX" />
                 </div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.BRADYKIX"></span>
+                <submission-error location="BRADYKIX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
 
         </div>
@@ -627,6 +681,7 @@
             <div class="mt-2 pt-2">
                 <input asp-for="@Model.B3.TOTALUPDRS" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B3.TOTALUPDRS"></span>
+                <submission-error location="TOTALUPDRS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
     </div>

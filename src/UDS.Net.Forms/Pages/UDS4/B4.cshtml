@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.B4Model
 @{
     Layout = "_LayoutForm";
@@ -37,6 +37,7 @@
                         <label asp-for="B4.MEMORY"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.MEMORY)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.MEMORY"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.MEMORY"></span>
+                        <submission-error location="MEMORY" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">No memory loss, or slight inconsistent forgetfulness</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Consistent slight forgetfulness; partial recollection of events; "benign" forgetfulness</td>
@@ -44,7 +45,7 @@
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
                 </tr>
-                <tr >
+                <tr>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems" data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
                 </tr>
                 <tr class="divide-y divide-gray-200">
@@ -52,6 +53,7 @@
                         <label asp-for="B4.ORIENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.ORIENT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.ORIENT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.ORIENT"></span>
+                        <submission-error location="ORIENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented except for slight difficulty with time relationships</td>
@@ -67,6 +69,7 @@
                         <label asp-for="B4.JUDGMENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.JUDGMENT)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.JUDGMENT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.JUDGMENT"></span>
+                        <submission-error location="JUDGMENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Solves everyday problems, handles business and financial affairs well; judgment good in relation to past performance</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in solving problems, similarities, and differences</td>
@@ -82,6 +85,7 @@
                         <label asp-for="B4.COMMUN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMMUN)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.COMMUN"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMMUN"></span>
+                        <submission-error location="COMMUN" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Independent function at usual level in job, shopping, volunteer and social groups</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in these activities</td>
@@ -97,6 +101,7 @@
                         <label asp-for="B4.HOMEHOBB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.HOMEHOBB)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.HOMEHOBB"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.HOMEHOBB"></span>
+                        <submission-error location="HOMEHOBB" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests well maintained</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests slightly impaired</td>
@@ -112,6 +117,7 @@
                         <label asp-for="B4.PERSCARE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.PERSCARE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.PERSCARE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.PERSCARE"></span>
+                        <submission-error location="PERSCARE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td colspan="2" class="mt-1 p-2 text-sm text-gray-500">Fully capable of self-care</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Needs prompting</td>
@@ -141,8 +147,9 @@
             <label asp-for="B4.CDRSUM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRSUM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRSUM"></p>
-                <input asp-for="@Model.B4.CDRSUM" data-b4-target="CDRSUM" readonly/>
+                <input asp-for="@Model.B4.CDRSUM" data-b4-target="CDRSUM" readonly />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRSUM"></span>
+                <submission-error location="CDRSUM" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -153,6 +160,7 @@
                 <radio-button-group id="@Html.IdFor(m => m.B4.CDRGLOB)" for="@Model.B4.CDRGLOB" items="Model.ImpairmentListItems" data-b4-target="CDRGLOB" data-action="change->b4#updateCDRSUM">
                 </radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRGLOB"></span>
+                <submission-error location="CDRGLOB" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -185,6 +193,7 @@
                         <label asp-for="B4.COMPORT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMPORT)<sup>2</sup></label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.COMPORT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMPORT"></span>
+                        <submission-error location="COMPORT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Socially appropriate behavior</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Questionable changes in comportment, empathy, appropriateness of actions</td>
@@ -200,6 +209,7 @@
                         <label asp-for="B4.CDRLANG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRLANG)<sup>3</sup></label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.CDRLANG"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRLANG"></span>
+                        <submission-error location="CDRLANG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <td class="mt-1 p-2 text-sm text-gray-500">No language difficulties, or occasional mild slip of the tongue</td>
                     <td class="mt-1 p-2 text-sm text-gray-500">Consistent mild word-finding difficulties; simplification of word choice; circumlocution; decreased phrase length; and/or mild comprehension difficulties</td>

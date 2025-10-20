@@ -11,7 +11,7 @@ public class A5D2Model : FormPageModel
     [BindProperty]
     public A5D2 A5D2 { get; set; } = default!;
 
-    public A5D2Model(IVisitService visitService, IParticipationService participationService) : base(visitService, participationService, "A5D2")
+    public A5D2Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A5D2")
     {
     }
 

@@ -76,8 +76,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     formAssignee = formAssignedTo;
                 }
 
-                //Create new PacketSubmissionError object with collected data
-                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(0, PacketSubmissionId, formKind, error.Message, formAssignee, errorLevel, User.Identity.Name, DateTime.Now, User.Identity.Name, null, null, false);
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
+                    id: 0,
+                    packetSubmissionId: PacketSubmissionId,
+                    formKind: formKind,
+                    message: error.Message,
+                    assignedTo: formAssignee,
+                    level: errorLevel,
+                    status: PacketSubmissionErrorStatus.Pending,
+                    statusChangedBy: null,
+                    createdAt: DateTime.Now,
+                    createdBy: User.Identity.Name,
+                    modifiedBy: null,
+                    deletedBy: null,
+                    isDeleted: false,
+                    location: error.Location?.ToUpper(),
+                    value: error.Value
+                );
 
                 packetSubmissionErrors.Add(newPacketSubmissionError);
             }
@@ -139,6 +154,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
             };
 
+            int rowIndex = 0;
             using (var stream = ErrorFileUpload.OpenReadStream())
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
@@ -169,7 +185,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
                         }
+                        rowIndex++;
                     }
+                }
+                catch (FormatException e)
+                {
+                    TempData["fileError"] = "Row " + rowIndex.ToString() + " format contains invalid characters " + e.Message;
+
+                    PacketSubmissionErrors = new List<NACCErrorModel>();
+
+                    return Page();
                 }
                 catch (Exception e)
                 {
