@@ -154,6 +154,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
             };
 
+            int rowIndex = 0;
             using (var stream = ErrorFileUpload.OpenReadStream())
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
@@ -184,7 +185,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
 
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
                         }
+                        rowIndex++;
                     }
+                }
+                catch (FormatException e)
+                {
+                    TempData["fileError"] = "Row " + rowIndex.ToString() + " format contains invalid characters " + e.Message;
+
+                    PacketSubmissionErrors = new List<NACCErrorModel>();
+
+                    return Page();
                 }
                 catch (Exception e)
                 {
