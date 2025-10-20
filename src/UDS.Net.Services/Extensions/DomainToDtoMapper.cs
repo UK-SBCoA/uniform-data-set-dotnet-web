@@ -1394,14 +1394,14 @@ namespace UDS.Net.Services.Extensions
                 OTRLBRR = fields.OTRLBRR,
                 OTRLBLI = fields.OTRLBLI,
                 RESPVAL = fields.RESPVAL,
-                RESPHEAR = fields.RESPHEAR.HasValue ? 1 : 0,
-                RESPDIST = fields.RESPDIST.HasValue ? 1 : 0,
-                RESPINTR = fields.RESPINTR.HasValue ? 1 : 0,
-                RESPDISN = fields.RESPDISN.HasValue ? 1 : 0,
-                RESPFATG = fields.RESPFATG.HasValue ? 1 : 0,
-                RESPEMOT = fields.RESPEMOT.HasValue ? 1 : 0,
-                RESPASST = fields.RESPASST.HasValue ? 1 : 0,
-                RESPOTH = fields.RESPOTH.HasValue ? 1 : 0,
+                RESPHEAR = fields.RESPHEAR,
+                RESPDIST = fields.RESPDIST,
+                RESPINTR = fields.RESPINTR,
+                RESPDISN = fields.RESPDISN,
+                RESPFATG = fields.RESPFATG,
+                RESPEMOT = fields.RESPEMOT,
+                RESPASST = fields.RESPASST,
+                RESPOTH = fields.RESPOTH,
                 RESPOTHX = fields.RESPOTHX
             };
         }

@@ -1,5 +1,9 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
+using UDS.Net.API.Extensions;
+using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Services;
+using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -7,8 +11,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 {
     public class PacketService : IPacketService
     {
-        public PacketService()
+        private readonly TestDbContext _context;
+
+        public PacketService(TestDbContext context)
         {
+            _context = context;
         }
 
         public Task<Packet> Add(string username, Packet entity)
@@ -26,9 +33,19 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<Packet> GetById(string username, int id)
+        public async Task<Packet> GetById(string username, int id)
         {
-            throw new NotImplementedException();
+            var count = await _context.Packets.CountAsync();
+            var packet = await _context.Packets.FindAsync(id);
+
+            if (packet == null)
+            {
+                return null;
+            }
+
+            var dto = packet.ToPacketDto();
+
+            return dto.ToDomain(username);
         }
 
         public Task<Packet> GetPacketWithForms(string username, int id)

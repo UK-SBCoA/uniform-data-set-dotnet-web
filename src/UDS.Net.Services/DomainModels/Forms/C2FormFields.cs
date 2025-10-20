@@ -287,27 +287,18 @@ namespace UDS.Net.Services.DomainModels.Forms
                 OTRLBRR = c2Dto.OTRLBRR;
                 OTRLBLI = c2Dto.OTRLBLI;
                 RESPVAL = c2Dto.RESPVAL;
-                RESPHEAR = c2Dto.RESPHEAR.Value == 1 ? true : (bool?)null;
-                RESPDIST = c2Dto.RESPDIST.Value == 1 ? true : (bool?)null;
-                RESPINTR = c2Dto.RESPINTR.Value == 1 ? true : (bool?)null;
-                RESPDISN = c2Dto.RESPDISN.Value == 1 ? true : (bool?)null;
-                RESPFATG = c2Dto.RESPFATG.Value == 1 ? true : (bool?)null;
-                RESPEMOT = c2Dto.RESPEMOT.Value == 1 ? true : (bool?)null;
-                RESPASST = c2Dto.RESPASST.Value == 1 ? true : (bool?)null;
-                RESPOTH = c2Dto.RESPOTH.Value == 1 ? true : (bool?)null;
+                RESPHEAR = c2Dto.RESPHEAR;
+                RESPDIST = c2Dto.RESPDIST;
+                RESPINTR = c2Dto.RESPINTR;
+                RESPDISN = c2Dto.RESPDISN;
+                RESPFATG = c2Dto.RESPFATG;
+                RESPEMOT = c2Dto.RESPEMOT;
+                RESPASST = c2Dto.RESPASST;
+                RESPOTH = c2Dto.RESPOTH;
                 RESPOTHX = c2Dto.RESPOTHX;
-
             }
         }
-        //public string GetDescription()
-        //{
-        //    return "Neuropsychological Battery Scores";
-        //}
 
-        //public string GetVersion()
-        //{
-        //    return "4.0";
-        //}
     }
 }
 
