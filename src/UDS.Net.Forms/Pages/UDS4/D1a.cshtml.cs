@@ -421,13 +421,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.MCICRITIMP"),
                     new UIEnableAttribute("D1a.MCICRITFUN"),
                     new UIEnableAttribute("D1a.MCI"),
-                    new UIDisableAttribute("D1a.CDOMMEM"),
-                    new UIDisableAttribute("D1a.CDOMLANG"),
-                    new UIDisableAttribute("D1a.CDOMATTN"),
-                    new UIDisableAttribute("D1a.CDOMEXEC"),
-                    new UIDisableAttribute("D1a.CDOMVISU"),
-                    new UIDisableAttribute("D1a.CDOMBEH"),
-                    new UIDisableAttribute("D1a.CDOMAPRAX"),
 
                 }
             } },
