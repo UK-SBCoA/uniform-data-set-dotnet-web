@@ -85,7 +85,7 @@ namespace UDS.Net.Forms.Tests
         public async Task D1aMCIValidatesRequiredFields()
         {
             await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
 
             // Question 1
@@ -134,10 +134,15 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[name=\"D1a.MCICRITFUN\"][type=\"checkbox\"]").CheckAsync();
 
-            // Question 6a must have a checkbox
-            await Expect(Page.Locator("span").Filter(new() { HasText = "Please check one or more Affected Domain." })).ToBeVisibleAsync();
+            // Attempt to save
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
+            // Question 6a must have a checkbox selected
 
+            // The issue with the locator is that PlayWright is finding several elements, so let's filter it. Previous error message:
+            // 9 × locator resolved to <span data-valmsg-replace="true" data-valmsg-for="D1a.AffectedDomainsIndicated" class="mt-2 text-sm text-red-600 field-validation-valid"></span
+
+            await Expect(Page.Locator("span[data-valmsg-for=\"D1a.AffectedDomainsIndicated\"]").Filter(new LocatorFilterOptions { HasText = "Please check one or more Affected Domain." })).ToBeVisibleAsync();
         }
 
         [TestMethod]
