@@ -12,6 +12,7 @@ using UDS.Net.Services.Enums;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Overrides.CsvHelper;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -70,6 +71,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 bool headerWritten = false;
 
+                // Register custom converters globally.
+                // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
+                csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
+                csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
                 foreach (var id in packetId)
                 {
                     var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
@@ -89,7 +94,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                     await _packetService.Update(User.Identity.Name, packet);
 
-                    var updatedPacket = await _packetService.GetById(User.Identity.Name, packet.Id); // get updated packet
+                    var updatedPacket = await _packetService.GetPacketWithForms(User.Identity.Name, packet.Id); // get updated packet
                     packetSubmission = updatedPacket.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
                     if (packetSubmission != null)
                     {
