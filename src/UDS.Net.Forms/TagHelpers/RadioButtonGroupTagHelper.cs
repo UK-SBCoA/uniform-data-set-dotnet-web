@@ -51,13 +51,7 @@ namespace UDS.Net.Forms.TagHelpers
             }
 
             // get full name from for model property
-            var expression = For.Name;
-            var prefix = ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
-            if (!String.IsNullOrWhiteSpace(prefix))
-            {
-                prefix = prefix + ".";
-                expression = prefix + expression;
-            }
+            var expression = ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(For.Name);
 
             // if the radio button group has Stimulus data attributes, render them on the child inputs
             var radiosWithName = GenerateRadioInputs(items, expression, output.Attributes);
@@ -120,6 +114,7 @@ namespace UDS.Net.Forms.TagHelpers
             var radio = _generator.GenerateRadioButton(ViewContext, For.ModelExplorer, name, item.Value, selected, $"{Id}[{index}]");
 
             radio.Attributes["id"] = $"{Id}[{index}]";
+            radio.Attributes["name"] = name;
             radio.Attributes["class"] = "h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none";
 
             if (parentAttributes != null)
