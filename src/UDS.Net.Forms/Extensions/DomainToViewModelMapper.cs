@@ -206,7 +206,11 @@ namespace UDS.Net.Forms.Extensions
                 CreatedAt = packetSubmissionError.CreatedAt,
                 ModifiedBy = packetSubmissionError.ModifiedBy,
                 DeletedBy = packetSubmissionError.DeletedBy,
-                IsDeleted = packetSubmissionError.IsDeleted
+                IsDeleted = packetSubmissionError.IsDeleted,
+                Location = packetSubmissionError.Location,
+                Value = packetSubmissionError.Value,
+                Status = packetSubmissionError.Status
+
             };
         }
 

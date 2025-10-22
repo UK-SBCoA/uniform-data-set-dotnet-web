@@ -1,4 +1,4 @@
-﻿@page  "{id:int?}"
+﻿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.B8Model
 @{
     Layout = "_LayoutForm";
@@ -26,6 +26,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.NEUREXAM"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.NEUREXAM)" for="@Model.B8.NEUREXAM" items="Model.NEUREXAMListItems" ui-behaviors="Model.NEUREXAMUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.NEUREXAM"></span>
+                <submission-error location="NEUREXAM" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -35,6 +36,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.NORMNREXAM"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.NORMNREXAM)" for="@Model.B8.NORMNREXAM" items="Model.NORMNREXAMListItems" ui-behaviors="Model.NORMNREXAMUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.NORMNREXAM"></span>
+                <submission-error location="NORMNREXAM" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -58,6 +60,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.PARKSIGN"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.PARKSIGN)" for="@Model.B8.PARKSIGN" items="Model.PARKSIGNListItems" ui-behaviors="Model.PARKSIGNUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.PARKSIGN"></span>
+                <submission-error location="PARKSIGN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -81,6 +84,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.SLOWINGFM)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.SLOWINGFM</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.SLOWINGFM"></span>
+                        <submission-error location="SLOWINGFM" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.SLOWINGFM)" for="@Model.B8.SLOWINGFM" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -89,6 +93,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.TREMREST)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.TREMREST</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.TREMREST"></span>
+                        <submission-error location="TREMREST" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.TREMREST)" for="@Model.B8.TREMREST" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -97,6 +102,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.TREMPOST)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.TREMPOST</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.TREMPOST"></span>
+                        <submission-error location="TREMPOST" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.TREMPOST)" for="@Model.B8.TREMPOST" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -105,6 +111,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.TREMKINE)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.TREMKINE</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.TREMKINE"></span>
+                        <submission-error location="TREMKINE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.TREMKINE)" for="@Model.B8.TREMKINE" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -113,6 +120,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.RIGIDARM)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.RIGIDARM</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.RIGIDARM"></span>
+                        <submission-error location="RIGIDARM" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.RIGIDARM)" for="@Model.B8.RIGIDARM" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -121,6 +129,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.RIGIDLEG)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.RIGIDLEG</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.RIGIDLEG"></span>
+                        <submission-error location="RIGIDLEG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.RIGIDLEG)" for="@Model.B8.RIGIDLEG" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -129,6 +138,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.DYSTARM)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.DYSTARM</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.DYSTARM"></span>
+                        <submission-error location="DYSTARM" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.DYSTARM)" for="@Model.B8.DYSTARM" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -137,6 +147,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.DYSTLEG)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.DYSTLEG</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.DYSTLEG"></span>
+                        <submission-error location="DYSTLEG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.DYSTLEG)" for="@Model.B8.DYSTLEG" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -145,6 +156,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.CHOREA)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.CHOREA</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.CHOREA"></span>
+                        <submission-error location="CHOREA" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.CHOREA)" for="@Model.B8.CHOREA" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -162,6 +174,7 @@
                     <td colspan="4">
                         <label asp-for="B8.AMPMOTOR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.AMPMOTOR)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.AMPMOTOR"></span>
+                        <submission-error location="AMPMOTOR" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.AMPMOTOR)" for="@Model.B8.AMPMOTOR" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -169,6 +182,7 @@
                     <td colspan="4">
                         <label asp-for="B8.AXIALRIG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.AXIALRIG)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.AXIALRIG"></span>
+                        <submission-error location="AXIALRIG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.AXIALRIG)" for="@Model.B8.AXIALRIG" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -176,6 +190,7 @@
                     <td colspan="4">
                         <label asp-for="B8.POSTINST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.POSTINST)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.POSTINST"></span>
+                        <submission-error location="POSTINST" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.POSTINST)" for="@Model.B8.POSTINST" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -183,6 +198,7 @@
                     <td colspan="4">
                         <label asp-for="B8.MASKING"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.MASKING)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.MASKING"></span>
+                        <submission-error location="MASKING" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.MASKING)" for="@Model.B8.MASKING" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -190,6 +206,7 @@
                     <td colspan="4">
                         <label asp-for="B8.STOOPED"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.STOOPED)</label>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.STOOPED"></span>
+                        <submission-error location="STOOPED" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.STOOPED)" for="@Model.B8.STOOPED" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -210,6 +227,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.OTHERSIGN"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.OTHERSIGN)" for="@Model.B8.OTHERSIGN" items="Model.OTHERSIGNListItems" ui-behaviors="Model.OTHERSIGNUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.OTHERSIGN"></span>
+                <submission-error location="OTHERSIGN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -232,6 +250,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.LIMBAPRAX)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.LIMBAPRAX</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.LIMBAPRAX"></span>
+                        <submission-error location="LIMBAPRAX" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.LIMBAPRAX)" for="@Model.B8.LIMBAPRAX" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -240,6 +259,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.UMNDIST)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.STOOPED</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.UMNDIST"></span>
+                        <submission-error location="UMNDIST" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.UMNDIST)" for="@Model.B8.UMNDIST" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -248,6 +268,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.LMNDIST)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.LMNDIST</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.LMNDIST"></span>
+                        <submission-error location="LMNDIST" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.LMNDIST)" for="@Model.B8.LMNDIST" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -256,6 +277,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.VFIELDCUT)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.VFIELDCUT</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.VFIELDCUT"></span>
+                        <submission-error location="VFIELDCUT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.VFIELDCUT)" for="@Model.B8.VFIELDCUT" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -264,6 +286,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.LIMBATAX)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.LIMBATAX</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.LIMBATAX"></span>
+                        <submission-error location="LIMBATAX" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.LIMBATAX)" for="@Model.B8.LIMBATAX" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -272,6 +295,7 @@
                         <label class="text-base font-semibold text-gray-900"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.MYOCLON)</label>
                         <p class="mt-1 text-sm leading-6 text-gray-400">BB8.MYOCLON</p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.MYOCLON"></span>
+                        <submission-error location="MYOCLON" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.MYOCLON)" for="@Model.B8.MYOCLON" items="Model.SignsListItems"></table-cell-radio-buttons>
                 </tr>
@@ -288,6 +312,7 @@
                         <label asp-for="B8.UNISOMATO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.UNISOMATO)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.UNISOMATO"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.UNISOMATO"></span>
+                        <submission-error location="UNISOMATO" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.UNISOMATO)" for="@Model.B8.UNISOMATO" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -296,6 +321,7 @@
                         <label asp-for="B8.APHASIA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.APHASIA)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.APHASIA"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.APHASIA"></span>
+                        <submission-error location="APHASIA" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.APHASIA)" for="@Model.B8.APHASIA" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -304,6 +330,7 @@
                         <label asp-for="B8.ALIENLIMB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.ALIENLIMB)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.ALIENLIMB"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.ALIENLIMB"></span>
+                        <submission-error location="ALIENLIMB" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.ALIENLIMB)" for="@Model.B8.ALIENLIMB" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -312,6 +339,7 @@
                         <label asp-for="B8.HSPATNEG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.HSPATNEG)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.HSPATNEG"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.HSPATNEG"></span>
+                        <submission-error location="HSPATNEG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.HSPATNEG)" for="@Model.B8.HSPATNEG" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -320,6 +348,7 @@
                         <label asp-for="B8.PSPOAGNO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.PSPOAGNO)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.PSPOAGNO"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.PSPOAGNO"></span>
+                        <submission-error location="PSPOAGNO" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.PSPOAGNO)" for="@Model.B8.PSPOAGNO" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -328,6 +357,7 @@
                         <label asp-for="B8.SMTAGNO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.SMTAGNO)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.SMTAGNO"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.SMTAGNO"></span>
+                        <submission-error location="SMTAGNO" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.SMTAGNO)" for="@Model.B8.SMTAGNO" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -336,6 +366,7 @@
                         <label asp-for="B8.OPTICATAX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.OPTICATAX)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.OPTICATAX"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.OPTICATAX"></span>
+                        <submission-error location="OPTICATAX" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.OPTICATAX)" for="@Model.B8.OPTICATAX" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -344,6 +375,7 @@
                         <label asp-for="B8.APRAXGAZE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.APRAXGAZE)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.APRAXGAZE"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.APRAXGAZE"></span>
+                        <submission-error location="APRAXGAZE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.APRAXGAZE)" for="@Model.B8.APRAXGAZE" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -352,6 +384,7 @@
                         <label asp-for="B8.VHGAZEPAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.VHGAZEPAL)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.VHGAZEPAL"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.VHGAZEPAL"></span>
+                        <submission-error location="VHGAZEPAL" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.VHGAZEPAL)" for="@Model.B8.VHGAZEPAL" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -360,6 +393,7 @@
                         <label asp-for="B8.DYSARTH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.DYSARTH)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.DYSARTH"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.DYSARTH"></span>
+                        <submission-error location="DYSARTH" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.DYSARTH)" for="@Model.B8.DYSARTH" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -368,6 +402,7 @@
                         <label asp-for="B8.APRAXSP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.B8.APRAXSP)</label>
                         <p class="text-sm text-gray-500" asp-description-for="B8.APRAXSP"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.APRAXSP"></span>
+                        <submission-error location="APRAXSP" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
                     <table-cell-radio-buttons id="@Html.IdFor(m => m.B8.APRAXSP)" for="@Model.B8.APRAXSP" items="Model.AssessmentListItems"></table-cell-radio-buttons>
                 </tr>
@@ -388,6 +423,7 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.GAITABN"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.GAITABN)" for="@Model.B8.GAITABN" items="Model.GaitListItems" ui-behaviors="Model.GaitUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.GAITABN"></span>
+                <submission-error location="GAITABN" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 
@@ -397,9 +433,11 @@
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B8.GAITFIND"></p>
                 <radio-button-group id="@Html.IdFor(m => m.B8.GAITFIND)" for="@Model.B8.GAITFIND" items="Model.GaitFindingListItems" ui-behaviors="Model.GaitFindUIBehavior"></radio-button-group>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="B8.GAITFIND"></span>
+                <submission-error location="GAITFIND" errors="Model.BaseForm.UnresolvedErrors" />
                 <input asp-for="@Model.B8.GAITOTHRX" />
                 <label asp-for="@Model.B8.GAITOTHRX"></label>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.B8.GAITOTHRX"></span>
+                <submission-error location="@Model.B8.GAITOTHRX" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
 

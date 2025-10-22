@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
-		<ReleaseVersion>14.0.8</ReleaseVersion>
+		<ReleaseVersion>15.0.1</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector" Version="6.0.4">
@@ -21,6 +21,6 @@
 		<Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj" />
+		<ProjectReference Include="..\UDS.Net.Forms.Tests.Runtime\UDS.Net.Forms.Tests.Runtime.csproj" />
 	</ItemGroup>
 </Project>

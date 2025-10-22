@@ -25,7 +25,7 @@ namespace UDS.Net.Services.DomainModels.Submission
                         if (submission.Errors != null)
                         {
                             foreach (var error in submission.Errors)
-                                if (String.IsNullOrWhiteSpace(error.StatusChangedBy))
+                                if (error.Status == PacketSubmissionErrorStatus.Pending)
                                     unresolvedCount++;
                         }
                     }
@@ -55,7 +55,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
                     foreach (var error in submission.Errors)
                     {
-                        if (string.IsNullOrWhiteSpace(error.StatusChangedBy))
+                        if (error.Status == PacketSubmissionErrorStatus.Pending)
                             unresolvedErrors.Add(error);
                     }
                 }
@@ -86,15 +86,15 @@ namespace UDS.Net.Services.DomainModels.Submission
 
                     if (error.Id == resolvedError.Id)
                     {
-                        error.Resolve(resolvedError.StatusChangedBy, resolvedError.ModifiedBy);
+                        error.Resolve(resolvedError.StatusChangedBy);
                     }
 
-                    if (!String.IsNullOrWhiteSpace(error.StatusChangedBy))
+                    // Updated here:
+                    if (error.Status != PacketSubmissionErrorStatus.Pending)
                         resolvedErrorCount += 1;
                 }
             }
 
-            // after all errors are resolved, state can be moved back to pending and finalization attempted again
             if (errorCount == resolvedErrorCount)
             {
                 if (TryUpdateStatus(PacketStatus.Pending))
