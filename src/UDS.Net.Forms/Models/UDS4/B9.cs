@@ -357,7 +357,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If DECCLBE = 1, at least one of 12a-12u must be marked 1 ('Yes').")]
+        [RequiredOnFinalized(ErrorMessage = "If DECCLBE = 1, at least one of 12a–12u must be '1' (Yes). They cannot all be '0' or '9'")]
         public bool? DECCLBESymptomsPresent
         {
             get
