@@ -282,6 +282,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLBE"></p>
             <radio-button-group id="@Html.IdFor(m => m.B9.DECCLBE)" for="@Model.B9.DECCLBE" items="Model.DECCLBEListItems" ui-behaviors="Model.DECCLBEUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLBE"></span>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLBESymptomsPresent"></span>
             <submission-error location="DECCLBE" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>

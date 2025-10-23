@@ -356,6 +356,35 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If DECCLBE = 1, at least one of 12a-12u must be marked 1 ('Yes').")]
+        public bool? DECCLBESymptomsPresent
+        {
+            get
+            {
+                if (DECCLBE == 1)
+                {
+                    var symptoms = new int?[]
+                    {
+                        BEAPATHY, BEDEP, BEANX, BEEUPH, BEIRRIT, BEAGIT,
+                        BEVHALL, BEAHALL, BEDEL, BEAGGRS, BEDISIN,
+                        BEPERCH, BEEMPATH, BEOBCOM, BEANGER,
+                        BESUBAB, BEREM, BEOTHR
+                    };
+
+                    bool anyYes = symptoms.Any(x => x == 1);
+
+                    if (anyYes)
+                        return true;
+
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
