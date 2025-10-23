@@ -20,7 +20,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             bool birthYearKnown = birthYear.HasValue && birthYear != 9999;
             bool ageOfDeathKnown = ageAtDeath.HasValue && ageAtDeath != 999 && ageAtDeath != 888;
-            bool ageOfOnsetKnown = ageOfOnset.HasValue && ageOfOnset != 999 && ageOfOnset != 888;
+            bool ageOfOnsetKnown = ageOfOnset.HasValue && ageOfOnset != 999;
 
             if (ageOfOnsetKnown && ageOfDeathKnown && ageOfOnset > ageAtDeath)
             {

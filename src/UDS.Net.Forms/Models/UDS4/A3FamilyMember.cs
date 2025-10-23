@@ -40,7 +40,7 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             bool YOBKnown = YOB.HasValue && YOB != 9999;
             bool AGDKnown = AGD.HasValue && AGD != 999 && AGD != 888;
-            bool AGOKnown = AGO.HasValue && AGO != 999 && AGO != 888;
+            bool AGOKnown = AGO.HasValue && AGO != 999;
 
             if (YOB.HasValue && !AGD.HasValue)
             {
