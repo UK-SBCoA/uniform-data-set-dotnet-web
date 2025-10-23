@@ -73,6 +73,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 // TODO Include related forms as tests are added
                 var packet = await _context.Packets
                     .Include(v => v.A3)
+                    .Include(v => v.A4a)
                     .Include(v => v.C2)
                     .Include(v => v.D1a)
                     .Where(v => v.Id == id)
@@ -87,6 +88,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     {
                         var a3 = packet.A3.Convert(packet.Id, username);
                         forms.Add(a3);
+                    }
+                    if (packet.A4a != null)
+                    {
+                        var a4a = packet.A4a.Convert(packet.Id, username);
+                        forms.Add(a4a);
                     }
                     if (packet.C2 != null)
                     {
