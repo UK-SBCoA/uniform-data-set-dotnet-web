@@ -18,23 +18,24 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {
-            if (ageOfOnset.HasValue && ageAtDeath.HasValue && ageOfOnset > ageAtDeath && ageOfOnset != 999 && ageOfOnset != 888)
+            bool birthYearKnown = birthYear.HasValue && birthYear != 9999;
+            bool ageOfDeathKnown = ageAtDeath.HasValue && ageAtDeath != 999 && ageAtDeath != 888;
+            bool ageOfOnsetKnown = ageOfOnset.HasValue && ageOfOnset != 999 && ageOfOnset != 888;
+
+            if (ageOfOnsetKnown && ageOfDeathKnown && ageOfOnset > ageAtDeath)
             {
                 modelState.AddModelError(onsetField, "Age of onset cannot be greater than age of death");
             }
 
-            bool birthYearKnown = birthYear.HasValue && birthYear != 9999;
-
-            if (birthYearKnown && ageAtDeath.HasValue && ageAtDeath.Value > DateTime.Now.Year - birthYear && ageAtDeath.Value != 999 && ageAtDeath.Value != 888)
+            if (birthYearKnown && ageOfDeathKnown && ageAtDeath.Value > DateTime.Now.Year - birthYear)
             {
                 modelState.AddModelError(deathField, "Age of death cannot be greater than the current year minus the birth year");
             }
 
-            if (birthYearKnown && ageOfOnset.HasValue && ageOfOnset > DateTime.Now.Year - birthYear && ageOfOnset != 999)
+            if (birthYearKnown && ageOfOnsetKnown && ageOfOnset > DateTime.Now.Year - birthYear)
             {
                 modelState.AddModelError(onsetField, "Age of onset cannot be greater than the current year minus the birth year");
             }
-
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
