@@ -375,26 +375,28 @@ namespace UDS.Net.Services.Extensions
 
         public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId)
         {
-            // packet inherits from visits, so packet id == visit id
-            if (dto.Forms != null && dto.Forms.Count() > 0)
-            {
-                IList<Form> forms = new List<Form>();
+            IList<Form> forms = dto.Forms?
+                .Select(form => form.ToDomain(dto.PacketId, form.CreatedBy))
+                .ToList() ?? new List<Form>();
 
-                foreach (var form in dto.Forms)
-                {
-                    forms.Add(form.ToDomain(dto.PacketId, form.CreatedBy));
-                }
+            IList<PacketSubmissionError> errors = dto.PacketSubmissionErrors?
+                .Select(e => e.ToDomain())
+                .ToList() ?? new List<PacketSubmissionError>();
 
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, forms);
-            }
-            else if (dto.PacketSubmissionErrors != null && dto.PacketSubmissionErrors.Count() > 0)
-            {
-                var errors = dto.PacketSubmissionErrors.Select(e => e.ToDomain()).ToList();
-
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount, errors);
-            }
-            else
-                return new PacketSubmission(dto.Id, adrcId, dto.SubmissionDate, dto.PacketId, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, dto.ErrorCount);
+            return new PacketSubmission(
+                id: dto.Id,
+                adrcId: adrcId,
+                submissionDate: dto.SubmissionDate,
+                packetId: dto.PacketId,
+                createdAt: dto.CreatedAt,
+                createdBy: dto.CreatedBy,
+                modifiedBy: dto.ModifiedBy,
+                deletedBy: dto.DeletedBy,
+                isDeleted: dto.IsDeleted,
+                errorCount: dto.ErrorCount,
+                forms: forms,
+                errors: errors
+            );
         }
 
         public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)

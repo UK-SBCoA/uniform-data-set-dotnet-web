@@ -14,9 +14,9 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public int PacketId { get; set; }
 
-        public IList<Form> Forms { get; set; }
+        public IList<Form> Forms { get; set; } = new List<Form>();
 
-        public int? ErrorCount { get; set; } // if error count is null then no response was received from submission
+        public int? ErrorCount { get; set; } // If null, no response was received from submission
 
         public List<PacketSubmissionError> Errors { get; set; } = new List<PacketSubmissionError>();
 
@@ -30,7 +30,17 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public bool IsDeleted { get; set; }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int packetId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount)
+        public PacketSubmission(
+            int id,
+            string adrcId,
+            DateTime submissionDate,
+            int packetId,
+            DateTime createdAt,
+            string createdBy,
+            string modifiedBy,
+            string deletedBy,
+            bool isDeleted,
+            int? errorCount)
         {
             Id = id;
             ADRCId = adrcId;
@@ -40,22 +50,61 @@ namespace UDS.Net.Services.DomainModels.Submission
             CreatedBy = createdBy;
             ModifiedBy = modifiedBy;
             DeletedBy = deletedBy;
-            IsDeleted = IsDeleted;
+            IsDeleted = isDeleted;
             ErrorCount = errorCount;
         }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int packetId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount, IList<Form> forms) : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
+        public PacketSubmission(
+            int id,
+            string adrcId,
+            DateTime submissionDate,
+            int packetId,
+            DateTime createdAt,
+            string createdBy,
+            string modifiedBy,
+            string deletedBy,
+            bool isDeleted,
+            int? errorCount,
+            IList<Form> forms)
+            : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
-            Forms = forms;
+            Forms = forms ?? new List<Form>();
         }
 
-        public PacketSubmission(int id, string adrcId, DateTime submissionDate, int packetId, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, int? errorCount, IList<PacketSubmissionError> errors) : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
+        public PacketSubmission(
+            int id,
+            string adrcId,
+            DateTime submissionDate,
+            int packetId,
+            DateTime createdAt,
+            string createdBy,
+            string modifiedBy,
+            string deletedBy,
+            bool isDeleted,
+            int? errorCount,
+            IList<PacketSubmissionError> errors)
+            : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
-            if (errors != null)
-            {
-                Errors = errors.ToList();
-            }
+            Errors = errors?.ToList() ?? new List<PacketSubmissionError>();
+        }
+
+        public PacketSubmission(
+            int id,
+            string adrcId,
+            DateTime submissionDate,
+            int packetId,
+            DateTime createdAt,
+            string createdBy,
+            string modifiedBy,
+            string deletedBy,
+            bool isDeleted,
+            int? errorCount,
+            IList<Form> forms,
+            IList<PacketSubmissionError> errors)
+            : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
+        {
+            Forms = forms ?? new List<Form>();
+            Errors = errors?.ToList() ?? new List<PacketSubmissionError>();
         }
     }
 }
-
