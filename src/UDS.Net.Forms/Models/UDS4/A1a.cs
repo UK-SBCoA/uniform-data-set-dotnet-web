@@ -79,7 +79,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
 
         [Display(Name = "Thinking of the person who raised you, what was their highest level of education completed?")]
-        [RegularExpression("^([1-6]|9)$", ErrorMessage = "Valid range is 1-6 or 9")]
+        [RegularExpression("^([1-6]|8|9)$", ErrorMessage = "Valid range is 1-6 or 8 - 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? GUARDEDU { get; set; }
 
