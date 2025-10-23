@@ -84,14 +84,16 @@ namespace UDS.Net.Forms.Models.UDS4
                     new[] { nameof(AGO) });
             }
 
-            if (YOB.HasValue && AGD.HasValue && AGD.Value > DateTime.Now.Year - YOB.Value && AGD.Value != 999 && AGD.Value != 888)
+            bool YOBKnown = YOB.HasValue && YOB != 9999;
+
+            if (YOBKnown && AGD.HasValue && AGD.Value > DateTime.Now.Year - YOB.Value && AGD.Value != 999 && AGD.Value != 888)
             {
                 yield return new ValidationResult(
                     "Age of death cannot be greater than the current year minus the birth year",
                     new[] { nameof(AGD) });
             }
 
-            if (YOB.HasValue && AGO.HasValue && AGO > DateTime.Now.Year - YOB.Value && AGO != 999)
+            if (YOBKnown && AGO.HasValue && AGO > DateTime.Now.Year - YOB.Value && AGO != 999)
             {
                 yield return new ValidationResult(
                     "Age of onset cannot be greater than the current year minus the birth year",
