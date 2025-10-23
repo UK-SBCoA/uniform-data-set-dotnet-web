@@ -23,12 +23,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                 modelState.AddModelError(onsetField, "Age of onset cannot be greater than age of death");
             }
 
-            if (birthYear.HasValue && ageAtDeath.HasValue && ageAtDeath.Value > DateTime.Now.Year - birthYear && ageAtDeath.Value != 999 && ageAtDeath.Value != 888)
+            bool birthYearKnown = birthYear.HasValue && birthYear != 9999;
+
+            if (birthYearKnown && ageAtDeath.HasValue && ageAtDeath.Value > DateTime.Now.Year - birthYear && ageAtDeath.Value != 999 && ageAtDeath.Value != 888)
             {
                 modelState.AddModelError(deathField, "Age of death cannot be greater than the current year minus the birth year");
             }
 
-            if (birthYear.HasValue && ageOfOnset.HasValue && ageOfOnset > DateTime.Now.Year - birthYear && ageOfOnset != 999)
+            if (birthYearKnown && ageOfOnset.HasValue && ageOfOnset > DateTime.Now.Year - birthYear && ageOfOnset != 999)
             {
                 modelState.AddModelError(onsetField, "Age of onset cannot be greater than the current year minus the birth year");
             }
