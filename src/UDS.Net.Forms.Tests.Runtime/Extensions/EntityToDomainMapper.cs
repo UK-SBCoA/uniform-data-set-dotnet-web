@@ -15,6 +15,15 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
             return a3;
         }
 
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A4a entity, int visitId, string username)
+        {
+            var dto = entity.ToFullDto();
+
+            var a4a = dto.ToDomain(visitId, username);
+
+            return a4a;
+        }
+
         public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.C2 entity, int visitId, string username)
         {
             var dto = entity.ToFullDto();

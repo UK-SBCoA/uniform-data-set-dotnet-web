@@ -114,7 +114,21 @@
     <td class="px-6 py-3 border-r border-gray-400 min-w-[200px]">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.CARETRIAL"></p>
-            <radio-button-group id="@Html.IdFor(m => m.CARETRIAL)" for="@Model.CARETRIAL" items="Model.CARETRIALListItems" ui-behaviors="Model.GetCARETRIALUIBehavior(Model.TreatmentIndex-1)"></radio-button-group>
+            <fieldset class="mt-4 space-y-2">
+                @foreach (var item in Model.CARETRIALListItems)
+                {
+                    var radioId = $"CARETRIAL_{Model.TreatmentIndex}_{item.Value}";
+                    <div class="relative flex items-start">
+                        <div class="flex items-center">
+                            <input type="radio" asp-for="CARETRIAL" value="@item.Value" id="@radioId" class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                        </div>
+                        <label for="@radioId" class="ml-3 block text-sm font-medium leading-6 text-gray-900">
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@item.Value</span>
+                            @item.Text
+                        </label>
+                    </div>
+                }
+            </fieldset>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="CARETRIAL"></span>
         </div>
     </td>
@@ -122,7 +136,21 @@
     <td class="px-6 py-3 border-r border-gray-400 min-w-[200px]">
         <div class="mt-4 sm:col-span-2 sm:mt-0 space-y-1">
             <p class="text-sm text-gray-500" asp-description-for="@Model.TRIALGRP"></p>
-            <radio-button-group id="@Html.IdFor(m => m.TRIALGRP)" for="@Model.TRIALGRP" items="Model.TRIALGRPistItems"></radio-button-group>
+            <fieldset class="mt-4 space-y-2">
+                @foreach (var item in Model.TRIALGRPistItems)
+                {
+                    var radioId = $"TRIALGRP_{Model.TreatmentIndex}_{item.Value}";
+                    <div class="relative flex items-start">
+                        <div class="flex items-center">
+                            <input type="radio" asp-for="TRIALGRP" value="@item.Value" id="@radioId" class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                        </div>
+                        <label for="@radioId" class="ml-3 block text-sm font-medium leading-6 text-gray-900">
+                            <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@item.Value</span>
+                            @item.Text
+                        </label>
+                    </div>
+                }
+            </fieldset>            
             <span class="mt-2 text-sm text-red-600" asp-validation-for="TRIALGRP"></span>
         </div>
     </td>

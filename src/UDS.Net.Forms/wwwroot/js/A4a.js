@@ -6,8 +6,7 @@ $(document).ready(function () {
 
     function toggleTreatmentTable(value) {
         var enable = (value == '1' || value == '9');
-        var fields = $('.treatmentTable, input[type=radio][name*="CARETRIAL"], input[type=radio][name*="TRIALGRP"]');
-
+        var fields = $('.treatmentTable, input[type=radio][name*="CARETRIAL"], input[type=radio][name*="TARGETOTX"], input[name *= "ADVERSEOTX"]');
         fields.prop('disabled', !enable);
         if (!enable) {
             fields.each(function () {
@@ -18,8 +17,7 @@ $(document).ready(function () {
                 }
             });
 
-            var otherFields = $('input[name *= "TARGETOTX"], input[name *= "ADVERSEOTX"]');
-            otherFields.prop('disabled', 'disabled').val("");
+            $('input[type=radio][name*="TRIALGRP"]').prop('disabled', true).prop('checked', false);
         }
     }
 
@@ -39,10 +37,10 @@ $(document).ready(function () {
         var careTrialValue = row.find('input[type=radio][name*="CARETRIAL"]:checked').val();
         var trialGroupRadios = row.find('input[type=radio][name*="TRIALGRP"]');
 
-        if (careTrialValue === '1') {
-            trialGroupRadios.prop('disabled', true).prop('checked', false);
-        } else {
+        if (careTrialValue === '2' || careTrialValue === '3') {
             trialGroupRadios.prop('disabled', false);
+        } else {
+            trialGroupRadios.prop('disabled', true).prop('checked', false);
         }
     }
 
