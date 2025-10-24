@@ -136,6 +136,36 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
         }
+
+        [TestMethod]
+        public async Task UnknownYearOfBirthAndKnownAgeAtDeathAllowed()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.MOMDAGE\"]").FillAsync("85");
+            await Page.Locator("input[name=\"A3.MOMETPR\"]").FillAsync("00");
+
+            await Page.Locator("input[name=\"A3.DADYOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.DADDAGE\"]").FillAsync("85");
+            await Page.Locator("input[name=\"A3.DADETPR\"]").FillAsync("00");
+
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("1");
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
+
+            await Page.Locator("input[name=\"A3.Siblings[0].YOB\"]").FillAsync("9999");
+
+            await Page.Locator("input[name=\"A3.Siblings[0].AGD\"]").FillAsync("85");
+
+            await Page.Locator("input[name=\"A3.Siblings[0].ETPR\"]").FillAsync("00");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+        }
     }
 }
 

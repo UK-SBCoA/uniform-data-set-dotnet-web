@@ -92,6 +92,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Grade 12 or GED (high school graduate)", "4"),
             new RadioListItem("College 1 year to 3 years (some college)", "5"),
             new RadioListItem("College 4 years or more (college graduate)", "6"),
+            new RadioListItem("Prefer not to answer/Not applicable", "8"),
             new RadioListItem("Do not know", "9")
         };
 
