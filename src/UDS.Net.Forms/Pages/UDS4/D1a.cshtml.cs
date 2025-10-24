@@ -486,7 +486,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("D1a.CDOMATTN"),
                     new UIEnableAttribute("D1a.CDOMEXEC"),
                     new UIEnableAttribute("D1a.CDOMVISU"),
-                    new UIEnableAttribute("D1a.CDOMBEH"),
                     new UIEnableAttribute("D1a.CDOMAPRAX"),
                     new UIEnableAttribute("D1a.MBI"),
                     new UIDisableAttribute("D1a.CDOMBEH")
