@@ -17,7 +17,7 @@ namespace UDS.Net.Forms.Tests
         public async Task D1aDementiaUIBehaviors()
         {
             await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
 
             // Question 1
@@ -29,9 +29,14 @@ namespace UDS.Net.Forms.Tests
             // Question 3 DEMENTED == 1 Yes
             await Page.Locator("input[type=\"radio\"][name=\"D1a.DEMENTED\"][value=\"1\"]").ClickAsync();
 
-            // Question 6a must have a checkbox enabled
+            // Question 6a must have checkboxes enabled except for Question 6f CDOMBEH
             await Expect(Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]")).ToBeEnabledAsync();
-
+            await Expect(Page.Locator("input[name=\"D1a.CDOMLANG\"][type=\"checkbox\"]")).ToBeEnabledAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMATTN\"][type=\"checkbox\"]")).ToBeEnabledAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMEXEC\"][type=\"checkbox\"]")).ToBeEnabledAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMVISU\"][type=\"checkbox\"]")).ToBeEnabledAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMBEH\"][type=\"checkbox\"]")).ToBeEnabledAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMAPRAX\"][type=\"checkbox\"]")).ToBeEnabledAsync();
         }
 
         [TestMethod]
