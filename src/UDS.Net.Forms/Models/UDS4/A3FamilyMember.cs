@@ -38,6 +38,10 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            bool YOBKnown = YOB.HasValue && YOB != 9999;
+            bool AGDKnown = AGD.HasValue && AGD != 999 && AGD != 888;
+            bool AGOKnown = AGO.HasValue && AGO != 999;
+
             if (YOB.HasValue && !AGD.HasValue)
             {
                 yield return new ValidationResult(
@@ -77,21 +81,21 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
             }
 
-            if (AGO.HasValue && AGD.HasValue && AGO > AGD && AGO != 999 && AGO != 888)
+            if (AGOKnown && AGDKnown && AGO > AGD)
             {
                 yield return new ValidationResult(
                     "Age of onset cannot be greater than age of death",
                     new[] { nameof(AGO) });
             }
 
-            if (YOB.HasValue && AGD.HasValue && AGD.Value > DateTime.Now.Year - YOB.Value && AGD.Value != 999 && AGD.Value != 888)
+            if (YOBKnown && AGDKnown && AGD.Value > DateTime.Now.Year - YOB.Value)
             {
                 yield return new ValidationResult(
                     "Age of death cannot be greater than the current year minus the birth year",
                     new[] { nameof(AGD) });
             }
 
-            if (YOB.HasValue && AGO.HasValue && AGO > DateTime.Now.Year - YOB.Value && AGO != 999)
+            if (YOBKnown && AGOKnown && AGO > DateTime.Now.Year - YOB.Value)
             {
                 yield return new ValidationResult(
                     "Age of onset cannot be greater than the current year minus the birth year",
