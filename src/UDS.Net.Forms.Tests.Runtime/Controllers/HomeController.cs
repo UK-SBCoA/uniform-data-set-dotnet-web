@@ -61,6 +61,12 @@ public class HomeController : Controller
         }
     }
 
+    [HttpPost]
+    public IActionResult Packets(string legacyId, int? existingVisitId = null)
+    {
+        return RedirectToAction("Index", "Packets");
+    }
+
     public IActionResult Privacy()
     {
         return View();
