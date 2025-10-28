@@ -20,9 +20,9 @@
     });
 
     // Reconstruct multiple filter params manually
-    var filterQuery = string.Join("&", filters.Select(f => $"filter={Uri.EscapeDataString(f)}"));
-    var nextUrl = $"{baseUrl}{(baseUrl.Contains("?") ? "&" : "?")}{filterQuery}";
-    var prevUrl = $"{prevBaseUrl}{(prevBaseUrl.Contains("?") ? "&" : "?")}{filterQuery}";
+    var filterQuery = string.Join("&", filters.Select(f => $"filter={f}"));
+    var nextUrl = $"{baseUrl}&{filterQuery}";
+    var prevUrl = $"{prevBaseUrl}&{filterQuery}";
 }
 
 <nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
@@ -40,14 +40,7 @@
     <div class="flex flex-1 justify-between sm:justify-end">
         @if (Model.HasPreviousPage)
         {
-            @if (Model.Id.HasValue)
-            {
                 <a href="@prevUrl" class="@buttonCSS">Previous</a>
-            }
-            else
-            {
-                <a href="@prevUrl" class="@buttonCSS">Previous</a>
-            }
         }
         else
         {
@@ -55,14 +48,7 @@
         }
         @if (Model.HasNextPage)
         {
-            @if (Model.Id.HasValue)
-            {
                 <a href="@nextUrl" class="ml-3 @buttonCSS">Next</a>
-            }
-            else
-            {
-                <a href="@nextUrl" class="ml-3 @buttonCSS">Next</a>
-            }
         }
         else
         {
