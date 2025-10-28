@@ -62,9 +62,10 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Packets(string legacyId, int? existingVisitId = null)
+    public async Task<IActionResult> Packets(string legacyId, int visitId)
     {
-        return RedirectToAction("Index", "Packets");
+
+        return RedirectToAction("Details", "Packets", new { Id = visitId });
     }
 
     public IActionResult Privacy()
