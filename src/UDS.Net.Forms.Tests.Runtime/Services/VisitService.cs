@@ -195,6 +195,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             // TODO Include related forms as tests are added
             var packet = await _context.Packets
                 .Include(p => p.A3)
+                .Include(p => p.A4a)
                 .Include(p => p.C2)
                 .Include(p => p.D1a)
                 .Where(p => p.Id == entity.Id)
@@ -289,6 +290,41 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 var a3 = packet.A3;
 
                 a3.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+            }
+
+            if (formId == "A4a")
+            {
+                if (packet.A4a == null)
+                {
+                    packet.A4a = new API.Entities.A4a
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                    if (packet.A4a.Treatment1 == null)
+                        packet.A4a.Treatment1 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment2 == null)
+                        packet.A4a.Treatment2 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment3 == null)
+                        packet.A4a.Treatment3 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment4 == null)
+                        packet.A4a.Treatment4 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment5 == null)
+                        packet.A4a.Treatment5 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment6 == null)
+                        packet.A4a.Treatment6 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment7 == null)
+                        packet.A4a.Treatment7 = new API.Entities.A4aTreatment();
+                    if (packet.A4a.Treatment8 == null)
+                        packet.A4a.Treatment8 = new API.Entities.A4aTreatment();
+                }
+                var a4a = packet.A4a;
+
+                a4a.UpdateFromDomain(formId, entity);
 
                 await _context.SaveChangesAsync();
             }
