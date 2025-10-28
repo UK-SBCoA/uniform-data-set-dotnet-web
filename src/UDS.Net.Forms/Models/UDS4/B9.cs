@@ -356,6 +356,28 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "If DECCLBE = 1, at least one of 12a–12u must be '1' (Yes). They cannot all be '0' or '9'")]
+        public bool? DECCLBESymptomsPresent
+        {
+            get
+            {
+                var anySymptomsPresent =
+                    BEAPATHY == 1 || BEDEP == 1 || BEANX == 1 || BEEUPH == 1 ||
+                    BEIRRIT == 1 || BEAGIT == 1 || BEVHALL == 1 || BEAHALL == 1 ||
+                    BEDEL == 1 || BEAGGRS == 1 || BEDISIN == 1 || BEPERCH == 1 ||
+                    BEEMPATH == 1 || BEOBCOM == 1 || BEANGER == 1 || BESUBAB == 1 ||
+                    BEREM == 1 || BEOTHR == 1;
+
+                if (anySymptomsPresent)
+                {
+                    return true;
+                }
+
+                return null;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext))
