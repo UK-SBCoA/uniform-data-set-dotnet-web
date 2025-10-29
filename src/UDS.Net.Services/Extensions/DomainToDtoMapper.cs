@@ -1007,7 +1007,7 @@ namespace UDS.Net.Services.Extensions
                 TRESTRFT = fields.TRESTRFT,
                 TRESTRFX = fields.TRESTRFX,
                 TRESTLFT = fields.TRESTLFT,
-                TRESTLFX = fields.TRESTRFX,
+                TRESTLFX = fields.TRESTLFX,
                 TRACTRHD = fields.TRACTRHD,
                 TRACTRHX = fields.TRACTRHX,
                 TRACTLHD = fields.TRACTLHD,
