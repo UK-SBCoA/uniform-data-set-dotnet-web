@@ -56,11 +56,11 @@ namespace UDS.Net.Forms.Pages.Packets
             if (packetId == null || !packetId.Any())
                 return NotFound();
 
-            var selectedPackets = new List<Packet>();
+            var selectedPackets = new List<PacketModel>();
             foreach (var id in packetId)
             {
                 var packet = await _packetService.GetPacketWithForms(User.Identity?.Name, id);
-                selectedPackets.Add(packet);
+                selectedPackets.Add(packet.ToVM());
             }
             Response.ContentType = "text/vnd.turbo-stream.html";
             return Partial("_ExportModal", selectedPackets);

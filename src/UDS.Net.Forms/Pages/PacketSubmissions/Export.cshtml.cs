@@ -38,9 +38,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
-            var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
-            var packetSubmission = packet.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
+
+            var packet = await _packetService.GetPacketWithForms(User.Identity?.Name, packetId);
+            if (packet == null)
+                return NotFound();
+
+            var participant = await _participationService.GetById(User.Identity?.Name, packet.ParticipationId);
+            if (participant == null)
+                return NotFound();
+
+            var packetSubmission = packet.Submissions.FirstOrDefault();
+            if (packetSubmission == null)
+                return NotFound();
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
@@ -56,8 +65,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             memoryStream.Position = 0;
 
-            var vm = packet.Submissions.OrderByDescending(s => s.SubmissionDate).First().ToVM();
-            string filename = vm.GetFileName(participant.LegacyId, packet.VISIT_DATE);
+            string filename = packetSubmission.ToVM().GetFileName(participant.LegacyId, packet.VISIT_DATE);
 
             Response.Headers["Content-Disposition"] = $"attachment; {filename}";
             return File(memoryStream, "text/csv", filename);
@@ -76,15 +84,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 bool headerWritten = false;
 
-                // Register custom converters globally.
-                // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
-                csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
-                csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
                 foreach (var id in packetId)
                 {
                     var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
                     var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
-                    var packetSubmission = packet.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
 
                     // Create a new submission if none exist
                     var newPacketSubmission = new PacketSubmissionModel
@@ -100,24 +103,25 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     await _packetService.Update(User.Identity.Name, packet);
 
                     var updatedPacket = await _packetService.GetPacketWithForms(User.Identity.Name, packet.Id); // get updated packet
-                    packetSubmission = updatedPacket.Submissions.OrderByDescending(s => s.SubmissionDate).FirstOrDefault();
-                    if (packetSubmission != null)
-                    {
-                        packetSubmission.Forms = updatedPacket.Forms;
-                    }
+
+                    if (updatedPacket.Submissions == null)
+                        continue;
+
+                    var packetSubmission = updatedPacket.Submissions
+                        .OrderByDescending(s => s.SubmissionDate)
+                        .FirstOrDefault();
+
+                    if (packetSubmission == null)
+                        continue;
+
+                    packetSubmission.Forms = updatedPacket.Forms;
 
                     if (!headerWritten)
                     {
-                        if (packetSubmission != null)
-                        {
-                            WriteHeader(csv, packetSubmission);
-                            headerWritten = true;
-                        }
+                        WriteHeader(csv, packetSubmission);
+                        headerWritten = true;
                     }
-                    if (packetSubmission != null)
-                    {
-                        WritePacketData(csv, packetSubmission, participant, packet);
-                    }
+                    WritePacketData(csv, packetSubmission, participant, packet);
                     csv.NextRecord();
                 }
             }
@@ -297,6 +301,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
+            // Register custom converters globally.
+            // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
+            csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
+            csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
+
             var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
             var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
             var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
