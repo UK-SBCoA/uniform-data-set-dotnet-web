@@ -20,9 +20,12 @@
     <div class="lg:col-span-9 px-5 py-6">
         <div class="pb-4 pt-6 sm:pb-6">
             <div class="mx-auto flex flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
+                <div class="ml-auto text-sm font-semibold">
+                    @Model.Packet.Status
+                </div>
                 <a asp-page="/Visits/Details"
                    asp-route-id="@Model.Packet.Id"
-                   class="ml-auto inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-600 transition">
+                   class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-600 transition">
                     View Visit
                 </a>
                 @if (Model.Packet.Status == PacketStatus.Finalized)
