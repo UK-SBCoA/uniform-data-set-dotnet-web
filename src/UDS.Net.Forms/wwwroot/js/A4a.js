@@ -5,8 +5,8 @@ This custom js is for handling the repeating child rows in the A4a. Other enabli
 $(document).ready(function () {
 
     function toggleTreatmentTable(value) {
-        var enable = (value == '1' || value == '9');
-        var fields = $('.treatmentTable, input[type=radio][name*="CARETRIAL"], input[type=radio][name*="TARGETOTX"], input[name *= "ADVERSEOTX"]');
+        var enable = (value == '1');
+        var fields = $('.treatmentTable, input[type=radio][name*="CARETRIAL"], input[type=radio][name*="TARGETOTX"]');
         fields.prop('disabled', !enable);
         if (!enable) {
             fields.each(function () {

@@ -11,7 +11,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
-        [RequiredIfRegex(nameof(TRTBIOMARK), "^(1|9)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
+        [RequiredIfRegex(nameof(TRTBIOMARK), "^(1)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
 
@@ -63,22 +63,33 @@ namespace UDS.Net.Forms.Models.UDS4
         {
             if (Status == FormStatus.Finalized)
             {
+                if (TRTBIOMARK == 1)
+                {
+                    bool isAnyTargetSet = false;
+                    foreach (var t in Treatments)
+                    {
+                        if (t.TARGETAB == true || t.TARGETTAU == true ||
+                            t.TARGETINF == true || t.TARGETSYN == true ||
+                            t.TARGETOTH == true)
+                        {
+                            isAnyTargetSet = true;
+                            break;
+                        }
+                    }
+
+                    if (!isAnyTargetSet)
+                    {
+                        yield return new ValidationResult(
+                            "At least one primary drug target must be specified.",
+                            new[] { "Treatments" }
+                        );
+                    }
+                }
+
                 int index = 0;
                 foreach (var treatment in Treatments)
                 {
                     var treatmentIdentifier = $"Treatments[{index}]";
-
-                    if (index == 0 && (TRTBIOMARK == 1 || TRTBIOMARK == 9))
-                    {
-                        bool isAnyTargetSet = (treatment.TARGETAB == true || treatment.TARGETTAU == true ||
-                                               treatment.TARGETINF == true || treatment.TARGETSYN == true ||
-                                               treatment.TARGETOTH == true);
-
-                        if (!isAnyTargetSet)
-                        {
-                            yield return new ValidationResult("At least one primary drug target must be specified.", new[] { treatmentIdentifier });
-                        }
-                    }
 
                     if (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value)
                     {
