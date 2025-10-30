@@ -82,42 +82,43 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 foreach (var id in packetId)
                 {
                     var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
-                    var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
-                    // Create a new submission if none exist
-                    var newPacketSubmission = new PacketSubmissionModel
+                    if (packet != null)
                     {
-                        PacketId = packet.Id,
-                        SubmissionDate = DateTime.Now,
-                        CreatedAt = DateTime.UtcNow,
-                        CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
-                    };
+                        var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
-                    packet.AddSubmission(newPacketSubmission.ToEntity());
+                        var newPacketSubmission = new PacketSubmissionModel
+                        {
+                            PacketId = packet.Id,
+                            SubmissionDate = DateTime.Now,
+                            CreatedAt = DateTime.UtcNow,
+                            CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
+                        };
 
-                    await _packetService.Update(User.Identity.Name, packet);
+                        packet.AddSubmission(newPacketSubmission.ToEntity());
+                        await _packetService.Update(User.Identity.Name, packet);
 
-                    var updatedPacket = await _packetService.GetPacketWithForms(User.Identity.Name, packet.Id); // get updated packet
+                        if (packet.Submissions != null && packet.Submissions.Count > 0)
+                        {
+                            var packetSubmission = packet.Submissions
+                                .OrderByDescending(s => s.SubmissionDate)
+                                .FirstOrDefault();
 
-                    if (updatedPacket.Submissions == null)
-                        continue;
+                            if (packetSubmission != null)
+                            {
+                                packetSubmission.Forms = packet.Forms;
 
-                    var packetSubmission = updatedPacket.Submissions
-                        .OrderByDescending(s => s.SubmissionDate)
-                        .FirstOrDefault();
+                                if (!headerWritten)
+                                {
+                                    WriteHeader(csv, packetSubmission);
+                                    headerWritten = true;
+                                }
 
-                    if (packetSubmission == null)
-                        continue;
-
-                    packetSubmission.Forms = updatedPacket.Forms;
-
-                    if (!headerWritten)
-                    {
-                        WriteHeader(csv, packetSubmission);
-                        headerWritten = true;
+                                WritePacketData(csv, packetSubmission, participant, packet);
+                                csv.NextRecord();
+                            }
+                        }
                     }
-                    WritePacketData(csv, packetSubmission, participant, packet);
-                    csv.NextRecord();
                 }
             }
             memoryStream.Position = 0;
