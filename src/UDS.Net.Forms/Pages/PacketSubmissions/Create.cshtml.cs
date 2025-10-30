@@ -1,12 +1,13 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -46,13 +47,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (packet == null)
                 return NotFound();
 
+            if (packet.Status != PacketStatus.Finalized)
+            {
+                return BadRequest("New packet submissions can only be created when the packet is finalized.");
+            }
+
             var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
 
             Packet = packet.ToVM();
-
             Packet.Participation = participation.ToVM();
 
             Packet.NewPacketSubmission = new PacketSubmissionModel
@@ -73,17 +78,20 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (packet == null)
                 return NotFound();
 
+            if (packet.Status != PacketStatus.Finalized)
+            {
+                return BadRequest("New packet submissions can only be created when the packet is finalized.");
+            }
+
             var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
 
             Packet = packet.ToVM();
-
             Packet.Participation = participation.ToVM();
 
             ModelState.Clear();
-
             TryValidateModel(newPacketSubmission);
 
             if (!ModelState.IsValid)
@@ -92,11 +100,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return Partial("_Create", Packet);
             }
 
-            packet.AddSubmission(newPacketSubmission.ToEntity()); // this ensures the packet's state is set according to business rules
+            packet.AddSubmission(newPacketSubmission.ToEntity()); // applies business rules
 
             await _packetService.Update(User.Identity.Name, packet);
 
-            var updatedPacket = await _packetService.GetById(User.Identity.Name, packetId); // get updated packet
+            var updatedPacket = await _packetService.GetById(User.Identity.Name, packetId); // refresh updated packet
 
             Packet = updatedPacket.ToVM();
             Packet.Participation = participation.ToVM();
@@ -105,4 +113,3 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         }
     }
 }
-
