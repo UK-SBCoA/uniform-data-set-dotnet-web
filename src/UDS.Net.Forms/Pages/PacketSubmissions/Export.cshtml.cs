@@ -127,7 +127,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             string filename = $"UDS_Packets_{packetIdsExported}_{DateTime.UtcNow:yyyyMMdd}-uds.csv";
 
             // Sets a flag cookie so the Stimulus controller knows when the download is complete and can refresh the page.
-            Response.Cookies.Append("downloadComplete", "true");
+            Response.Cookies.Append("udsPacketExportComplete", "true");
             Response.Headers["Content-Disposition"] = $"attachment; filename=\"{filename}\"";
 
             return File(memoryStream, "text/csv", filename);

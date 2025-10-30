@@ -11,10 +11,10 @@ export default class extends Controller {
       this.buttonTarget.textContent = "Exporting..."
     }
 
-    document.cookie = "downloadComplete=false"
+    document.cookie = "udsPacketExportComplete=false"
 
     const downloadChecker = setInterval(() => {
-      if (document.cookie.includes("downloadComplete=true")) {
+      if (document.cookie.includes("udsPacketExportComplete=true")) {
         clearInterval(downloadChecker)
         alert("Packet export complete!")
         window.location.reload()
