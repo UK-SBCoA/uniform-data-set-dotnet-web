@@ -53,11 +53,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                // Register custom converters globally.
-                // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
-                csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
-                csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
-
                 WriteHeader(csv, packetSubmission);
 
                 WritePacketData(csv, packetSubmission, participant, packet);
