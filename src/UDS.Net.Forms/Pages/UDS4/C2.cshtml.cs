@@ -37,28 +37,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("C2.OTRLBRR"),
                     new UIEnableAttribute("C2.OTRLBLI")
-
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because\noptional, enter 888, and SKIP TO QUESTION 8a."
             }
         };
 
-        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
-        {
-            Low = 0,
-            High = 15,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.REYDINT"),
-                    new UIEnableAttribute("C2.REYDTI"),
-                    new UIEnableAttribute("C2.REYTCOR"),
-                    new UIEnableAttribute("C2.REYFPOS")
-                },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
-            }
-        };
         public UIRangeToggle REY1RECBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -162,6 +145,23 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYFPOS")
                 },
                 InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a."
+            }
+        };
+
+        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
+                },
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
             }
         };
 
