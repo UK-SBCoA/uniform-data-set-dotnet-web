@@ -91,6 +91,25 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     var treatmentIdentifier = $"Treatments[{index}]";
 
+                    bool hasAnyTreatmentDate = treatment.TRTTRIAL != null || treatment.STARTMO.HasValue ||
+                                               treatment.STARTYEAR.HasValue || treatment.ENDMO.HasValue ||
+                                               treatment.ENDYEAR.HasValue || treatment.CARETRIAL.HasValue ||
+                                               treatment.TRIALGRP.HasValue;
+
+                    if (hasAnyTreatmentDate)
+                    {
+                        bool hasAnyTarget = (treatment.TARGETAB.HasValue && treatment.TARGETAB.Value) ||
+                                           (treatment.TARGETTAU.HasValue && treatment.TARGETTAU.Value) ||
+                                           (treatment.TARGETINF.HasValue && treatment.TARGETINF.Value) ||
+                                           (treatment.TARGETSYN.HasValue && treatment.TARGETSYN.Value) ||
+                                           (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value);
+
+                        if (!hasAnyTarget)
+                        {
+                            yield return new ValidationResult("Please specify the primary drug target for the provided date.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TARGETAB)}" });
+                        }
+                    }
+
                     if (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value)
                     {
                         if (treatment.TARGETOTX == null)
@@ -173,6 +192,18 @@ namespace UDS.Net.Forms.Models.UDS4
                         yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
                     }
 
+                    if (treatment.STARTYEAR.HasValue && treatment.STARTMO.HasValue &&
+                        treatment.ENDYEAR.HasValue && treatment.ENDMO.HasValue &&
+                        treatment.ENDYEAR != 8888 && treatment.ENDYEAR != 9999)
+                    {
+                        var startDate = new DateTime(treatment.STARTYEAR.Value, treatment.STARTMO.Value, 1);
+                        var endDate = new DateTime(treatment.ENDYEAR.Value, treatment.ENDMO.Value, 1);
+
+                        if (endDate < startDate)
+                        {
+                            yield return new ValidationResult("End date must be later than or equal to start date.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
+                        }
+                    }
 
                     index++;
                 }
