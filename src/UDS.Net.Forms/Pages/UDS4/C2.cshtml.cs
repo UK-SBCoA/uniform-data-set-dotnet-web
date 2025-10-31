@@ -62,12 +62,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYBREC"),
                     new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
-                    new UIEnableAttribute("C2.REY6INT"),
-                    new UIEnableAttribute("C2.REYDINT"),
-                    new UIEnableAttribute("C2.REYDTI"),
-                    new UIEnableAttribute("C2.REYMETHOD"),
-                    new UIEnableAttribute("C2.REYTCOR"),
-                    new UIEnableAttribute("C2.REYFPOS")
+                    new UIEnableAttribute("C2.REY6INT")
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
             }

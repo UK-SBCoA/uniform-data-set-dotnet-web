@@ -635,6 +635,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
+        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
+        public bool? REYDRECValidation
+        {
+            get
+            {
+                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                {
+                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
+                    {
+                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
@@ -908,25 +927,6 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (REYDREC >= 0 && REYDREC <= 15)
                     {
                         return REYMETHOD.HasValue ? true : null;
-                    }
-                }
-
-                return true;
-            }
-        }
-
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
-        [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
-        public bool? REYDRECValidation
-        {
-            get
-            {
-                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
-                {
-                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
-                    {
-                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
                     }
                 }
 
