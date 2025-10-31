@@ -605,7 +605,6 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            //DEV NOTE: The C2T is clearing the values in the C2T on load
             await base.OnGetAsync(id);
 
             if (BaseForm != null)
