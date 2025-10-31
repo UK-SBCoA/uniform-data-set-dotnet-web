@@ -63,7 +63,7 @@
         </thead>
 
         <tbody class="divide-y divide-gray-200">
-            @for (int i = 0; i < 2; i++)
+            @for (int i = 0; i < 8; i++)
             {
                 @Html.EditorFor(m => m.A4a.Treatments[i])
             }
@@ -133,53 +133,6 @@
             </div>
         </fieldset>
     </div>
-</div>
-
-
-<div class="overflow-x-auto">
-    <table class="min-w-full divide-y border border-grey divide-gray-100">
-        <span class="text-base font-semibold text-gray-900">
-            2. Please provide information about the clinical treatment(s) and/or trial(s)
-        </span>
-        <thead class="bg-gray-200 border-b border-black divide-gray-100">
-            <tr>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900 ">
-                    <p>Primary Drug Target </p>
-                    <p><span class="text-gray-400 italic">(check all that apply)</span></p>
-                </th>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    Specific treatment and/or trial
-                </th>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    Start date <span class="text-gray-400 italic">(month/year)</span>
-                </th>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    <div>
-                        End date <span class="text-gray-400 italic">(month/year)</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-400 italic">(88/8888 = ongoing)</span>
-                    </div>
-                    <div>
-                        <span class="text-gray-400 italic">(99/9999 = unknown)</span>
-                    </div>
-                </th>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    How was the treatment provided?
-                </th>
-                <th class="px-6 py-3 text-left text-base font-semibold text-gray-900">
-                    If clinical trial, in which group was the participant?
-                </th>
-            </tr>
-        </thead>
-
-        <tbody class="divide-y divide-gray-200">
-            @for (int i = 2; i < Model.A4a.Treatments.Count(); i++)
-            {
-                @Html.EditorFor(model => model.A4a.Treatments[i])
-            }
-        </tbody>
-    </table>
 </div>
 
 <partial name="_FormFooter" for="@Model.A4a" />
