@@ -101,7 +101,13 @@
                 </div>
             </div>
         </div>
-        <form asp-page="/PacketSubmissions/Export" data-action="submit->pageRefreshOnSubmit#submit" method="post" id="ExportMultiplePackets" asp-page-handler="ExportMultiplePackets" data-turbo="false">
+        <form asp-page="/PacketSubmissions/Export"
+              data-action="submit->pageRefreshOnSubmit#submit"
+              method="post"
+              id="ExportMultiplePackets"
+              asp-page-handler="ExportMultiplePackets"
+              data-turbo="false">
+
             <!-- Modal -->
             <div class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50" data-modal-target="modal">
                 <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
@@ -120,15 +126,25 @@
                             </tr>
                         </thead>
                         <tbody id="exportPacketModal">
-                            <!-- will be updated by Turbo Stream -->
+                           <!-- Turbo stream will update table with selected packets -->
+                            <tr>
+                                <td colspan="6" class="py-6 text-center text-gray-500">
+                                    Loading packets...
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
-                    <div class="mt-6 flex justify-end space-x-3">
-                        <button data-action="modal#hide" type="button" class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800">
+                    <!-- Initial state of button will be hidden to prevent form submission before the server has had a chance to respond-->
+                    <div id="exportModalButtons" class="mt-6 flex justify-end space-x-3 hidden">
+                        <button data-action="modal#hide" type="button"
+                                class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800">
                             Cancel
                         </button>
-                        <button type="submit" data-pageRefreshOnSubmit-target="button" data-action="checkboxButton#clearSelected" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">
+                        <button type="submit"
+                                data-pageRefreshOnSubmit-target="button"
+                                data-action="checkboxButton#clearSelected"
+                                class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">
                             Confirm Export
                         </button>
                     </div>
