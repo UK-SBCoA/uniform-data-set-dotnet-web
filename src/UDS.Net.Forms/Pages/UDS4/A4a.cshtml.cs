@@ -17,14 +17,14 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("No (end form here)", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown", "9")
+            new RadioListItem("Unknown (end form here)", "9")
         };
 
         public List<RadioListItem> ADVEVENTListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No (end form here)", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown", "9")
+            new RadioListItem("Unknown (end form here)", "9")
         };
 
         public Dictionary<string, UIBehavior> TRTBIOMARKUIBehavior = new Dictionary<string, UIBehavior>
@@ -42,7 +42,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 InstructionalMessage = "END FORM HERE"
             } },
             { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } }
+            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A4a.ADVEVENT") } }
         };
 
         public Dictionary<string, UIBehavior> ADVEVENTUIBehavior = new Dictionary<string, UIBehavior>
