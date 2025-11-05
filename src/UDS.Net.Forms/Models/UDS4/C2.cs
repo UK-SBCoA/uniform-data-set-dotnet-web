@@ -635,7 +635,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
+        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value (_C2 view)
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
         public bool? REYDRECC2Validation
@@ -654,7 +654,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
+        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value (C2T view)
         [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 6a. is 95 - 98")]
         public bool? REYDRECC2TValidation
