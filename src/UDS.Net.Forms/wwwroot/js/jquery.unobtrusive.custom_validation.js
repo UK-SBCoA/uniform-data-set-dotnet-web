@@ -107,9 +107,9 @@ function debounce(func, wait) {
 }
 
 $(function () {
-    setInputStates()
-    //Create global javascript method for applying disable states to inputs
-    window.setInputStates = setInputStates
+    setInputStates();
+    //Create global javascript method for for access from other javascript files
+    window.setInputStates = setInputStates;
 });
 
 function setInputStates() {
