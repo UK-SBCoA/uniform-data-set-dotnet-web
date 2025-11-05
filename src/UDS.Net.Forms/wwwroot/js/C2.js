@@ -34,5 +34,8 @@ document.addEventListener('turbo:frame-load', function (event) {
         if (spinner) {
             spinner.style.display = 'none';  
         }
+
+        //call global javascript method from unobtrusive_custom to reapply disable states
+        setInputStates()
     }
 });

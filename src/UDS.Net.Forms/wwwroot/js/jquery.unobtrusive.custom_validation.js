@@ -107,7 +107,12 @@ function debounce(func, wait) {
 }
 
 $(function () {
+    setInputStates()
+    //Create global javascript method for applying disable states to inputs
+    window.setInputStates = setInputStates
+});
 
+function setInputStates() {
     let affects = $("[data-affects]");
 
     // initialize the form, check to see if some should have a default state
@@ -194,7 +199,7 @@ $(function () {
             }
         });
     }
-});
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Save Status and Form Mode */
