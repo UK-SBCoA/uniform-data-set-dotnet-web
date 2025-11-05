@@ -1,13 +1,8 @@
-ï»¿@page "{id:int?}"
 @model UDS.Net.Forms.Pages.UDS4.A1Model
 @{
-    Layout = "_LayoutForm";
-
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
-@if (Model.Visit.PACKET.ToString() == "I")
-{
 <div>
     <p class="mt-1 text-sm text-gray-500">
         INSTRUCTIONS: This form may be completed by intake interviewer based on ADRC scheduling records, participant interview, medical records, and proxy co-participant report (according to what is deemed to be the most reliable source of information, except as indicated for specific questions that may be based on the participants perceptions and experience which only they can provide accurate information for). This information can be collected by mail-in survey, electronic capture (web-based), phone or video interview, or during the in-person visit to accommodate and lessen participant visit burden. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, Form A1. Check only <span class="underline">one</span> box per question unless otherwise specified.
@@ -63,7 +58,7 @@
             </div>
             <p class="text-gray-400">
                 <i>
-                    Common codes: USA â€“ United States; CAN â€“ Canada; MEX â€“ Mexico
+                    Common codes: USA – United States; CAN – Canada; MEX – Mexico
                 </i>
             </p>
         </div>
@@ -1252,15 +1247,3 @@
 
     </div>
 </div>
-}
-else if (Model.Visit.PACKET.ToString() == "F")
-{
-    <partial name="Partials/A1_FVP" model="Model" />
-}
-
-
-<input type="hidden" asp-for="A1.Id" />
-<partial name="_FormFooter" for="@Model.A1" />
-
-
-
