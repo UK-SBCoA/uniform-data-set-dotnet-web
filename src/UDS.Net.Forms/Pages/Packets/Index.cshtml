@@ -4,7 +4,7 @@
     ViewData["Title"] = "Packets";
 }
 
-<div class="space-y-16 py-16 xl:space-y-20">
+<div data-controller="modal checkboxButton pageRefreshOnSubmit" class="space-y-16 py-16 xl:space-y-20">
     <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
         <h2 class="text-xl font-semibold text-gray-900">All packets</h2>
         <p class="mt-2 text-sm text-gray-700">A list of finalized, submitted, and passed/failed.</p>
@@ -14,62 +14,142 @@
         <div class="mt-6 border-t border-gray-100">
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                    <div class="justify-items-end">
+                    <div class="justify-items-end mb-4">
                         <partial name="_StatusFilter" model="Model.Filter" />
                     </div>
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr>
-                                <th scope="col">Participation Id</th>
-                                <th scope="col">Visit number</th>
-                                <th scope="col">Packet kind</th>
-                                <th scope="col">Initials</th>
-                                <th scope="col">Visit date</th>
-                                <th>Status</th>
-                                <th></th>
-                                <th scope="col"><span class="sr-only">View details</span></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var packet in Model.Packets.List)
-                            {
+                    <form asp-page-handler="RenderExportModal" data-action="submit->checkboxButton#prepareSubmission">
+                        <table class="w-full text-left">
+                            <thead>
                                 <tr>
-                                    <td><a asp-page="/Participations/Details" asp-route-id="@packet.ParticipationId">@(packet.Participation != null ? packet.Participation.LegacyId : packet.ParticipationId)</a></td>
-                                    <td>@packet.VISITNUM</td>
-                                    <td>@packet.PACKET</td>
-                                    <td>@packet.INITIALS</td>
-                                    <td>@packet.VISIT_DATE.ToShortDateString()</td>
-                                    <td>@packet.Status</td>
-                                    <td>
-                                        @if (packet.TotalUnresolvedErrorCount.HasValue && packet.TotalUnresolvedErrorCount != 0)
-                                        {
-                                            <div class="text-red-800 text-sm group relative flex items-center">
-                                                <span class="font-medium cursor-help underline decoration-dotted">
-                                                    @packet.TotalUnresolvedErrorCount errors
-                                                </span>
-
-                                                <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
-                                                    @foreach (var error in packet.UnresolvedErrors)
-                                                    {
-                                                        <div class="break-words">
-                                                            <div class="font-semibold text-gray-900">@error.FormKind</div>
-                                                            <div class="text-gray-700">@error.Message</div>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>
-                                        }
-                                    </td>
-                                    <td><a asp-page="Details" asp-route-id="@packet.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a></td>
+                                    <th scope="col">Export Packet</th>
+                                    <th scope="col">Participation Id</th>
+                                    <th scope="col">Visit number</th>
+                                    <th scope="col">Packet kind</th>
+                                    <th scope="col">Initials</th>
+                                    <th scope="col">Visit date</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                    <th scope="col"><span class="sr-only">View details</span></th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <div class="py-4">
-                    <partial name="_PreviousNextButtons" model="Model.Packets" />
+                            </thead>
+                            <tbody>
+                                @foreach (var packet in Model.Packets.List)
+                                {
+                                    <tr>
+                                        <td class="px-4 py-3">
+                                            @if (packet.Status == PacketStatus.Finalized)
+                                            {
+                                                <input data-checkboxButton-target="checkbox"
+                                                       name="packetId"
+                                                       value="@packet.Id"
+                                                       data-action="checkboxButton#toggle"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                                            }
+                                            else
+                                            {
+                                                <span class="text-gray-400">—</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-page="/Participations/Details" asp-route-id="@packet.ParticipationId" class="text-indigo-600 hover:underline">
+                                                @(packet.Participation != null ? packet.Participation.LegacyId : packet.ParticipationId)
+                                            </a>
+                                        </td>
+                                        <td>@packet.VISITNUM</td>
+                                        <td>@packet.PACKET</td>
+                                        <td>@packet.INITIALS</td>
+                                        <td>@packet.VISIT_DATE.ToShortDateString()</td>
+                                        <td>@packet.Status</td>
+                                        <td>
+                                            @if (packet.TotalUnresolvedErrorCount.HasValue && packet.TotalUnresolvedErrorCount != 0)
+                                            {
+                                                <div class="text-red-800 text-sm group relative flex items-center">
+                                                    <span class="font-medium cursor-help underline decoration-dotted">
+                                                        @packet.TotalUnresolvedErrorCount errors
+                                                    </span>
+                                                    <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
+                                                        @foreach (var error in packet.UnresolvedErrors)
+                                                        {
+                                                            <div class="break-words">
+                                                                <div class="font-semibold text-gray-900">@error.FormKind</div>
+                                                                <div class="text-gray-700">@error.Message</div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-page="Details" asp-route-id="@packet.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-900">View</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="py-4">
+                            <partial name="_PreviousNextButtons" model="Model.Packets" />
+                            <button data-checkboxButton-target="button"
+                                    data-action="modal#show"
+                                    type="submit"
+                                    class="ml-4 inline-flex items-center rounded-lg bg-gray-400 px-4 py-2 text-sm font-medium text-white shadow">
+                                Export Multiple Packets
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+        <form asp-page="/PacketSubmissions/Export"
+              data-action="submit->pageRefreshOnSubmit#submit"
+              method="post"
+              id="ExportMultiplePackets"
+              asp-page-handler="ExportMultiplePackets"
+              data-turbo="false">
+
+            <!-- Modal -->
+            <div class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50" data-modal-target="modal">
+                <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Confirm Export</h3>
+                    <p class="mt-2 text-sm text-gray-600">The following packets will be exported:</p>
+
+                    <table class="mt-4 w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border-b py-2">Packet Id</th>
+                                <th class="border-b py-2">Participation</th>
+                                <th class="border-b py-2">Visit #</th>
+                                <th class="border-b py-2">Kind</th>
+                                <th class="border-b py-2">Initials</th>
+                                <th class="border-b py-2">Visit Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="exportPacketModal">
+                           <!-- Turbo stream will update table with selected packets -->
+                            <tr>
+                                <td colspan="6" class="py-6 text-center text-gray-500">
+                                    Loading packets...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Initial state of button will be hidden to prevent form submission before the server has had a chance to respond-->
+                    <div id="exportModalButtons" class="mt-6 flex justify-end space-x-3 hidden">
+                        <button data-action="modal#hide" type="button"
+                                class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                                data-pageRefreshOnSubmit-target="button"
+                                data-action="checkboxButton#clearSelected"
+                                class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">
+                            Confirm Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
     }
 </div>
