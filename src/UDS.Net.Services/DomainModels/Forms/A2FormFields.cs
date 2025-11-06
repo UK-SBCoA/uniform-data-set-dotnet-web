@@ -18,6 +18,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? INMEMTROUB { get; set; }
         public int? INMEMTEN { get; set; }
 
+        public int? NEWINF { get; set; }
         public IEnumerable<FormMode> FormModes
         {
             get
@@ -69,6 +70,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INMEMWORS = a2Dto.INMEMWORS;
                 this.INMEMTROUB = a2Dto.INMEMTROUB;
                 this.INMEMTEN = a2Dto.INMEMTEN;
+                this.NEWINF = a2Dto.NEWINF == true ? 1 : 0;
             }
         }
     }
