@@ -27,6 +27,7 @@ public class VisitTest : TestBase
         //await Page.WaitForRequestFinishedAsync();
 
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true }).IsVisibleAsync());
+        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1a", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A3", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A4", Exact = true }).IsVisibleAsync());
