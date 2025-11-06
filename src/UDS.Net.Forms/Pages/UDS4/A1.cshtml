@@ -6,7 +6,7 @@
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
-@if (Model.Visit.PACKET.ToString() == "I")
+@if (Model.Visit.PACKET.ToString() == "I" || Model.Visit.PACKET.ToString() == "I4")
 {
 <div>
     <p class="mt-1 text-sm text-gray-500">
@@ -1249,6 +1249,7 @@
             </div>
         </div>
 
+        <input type="hidden" asp-for="A1.packetKind" />
 
     </div>
 </div>
