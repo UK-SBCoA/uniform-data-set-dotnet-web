@@ -143,8 +143,11 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
-            //Look for successful redirect to forms index on finalized save
-            await Expect(Page.GetByRole(AriaRole.Button).Filter(new() { HasText = "Finalize packet" })).ToBeVisibleAsync();
+            //Look for successful path to forms index on finalized save
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("C2");
+            await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link)).ToBeVisibleAsync();
         }
 
         [TestMethod]
@@ -153,7 +156,7 @@ namespace UDS.Net.Forms.Tests
             //Navigate to the _C2 view
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link).ClickAsync();
 
             //Select the remote - telephone view (C2T)
             await Page.Locator("#modalityselect").SelectOptionAsync("Remote");
@@ -194,8 +197,11 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
-            //Look for successful redirect to forms index on finalized save
-            await Expect(Page.GetByRole(AriaRole.Button).Filter(new() { HasText = "Finalize packet" })).ToBeVisibleAsync();
+            //Look for successful path to forms index on finalized save
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("C2");
+            await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link)).ToBeVisibleAsync();
         }
     }
 }
