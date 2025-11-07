@@ -1,4 +1,4 @@
-﻿class RelationshipTable {
+﻿window.RelationshipTable = window.RelationshipTable || class RelationshipTable {
   constructor(tableId, inputId, maxRows) {
     this.tableId = tableId;
     this.inputId = inputId;
