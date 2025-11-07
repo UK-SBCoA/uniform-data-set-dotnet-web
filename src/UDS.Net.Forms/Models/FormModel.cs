@@ -1,6 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -15,6 +16,9 @@ namespace UDS.Net.Forms.Models
 
         [Required]
         public string Kind { get; set; } = "";
+
+        [BindProperty]
+        public PacketKind PacketKind { get; set; }
 
         [Required]
         public string FORMVER { get; set; } = "";
