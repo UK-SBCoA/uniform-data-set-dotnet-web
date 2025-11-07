@@ -76,7 +76,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
             BaseForm = form.ToVM(); // this will have the subclass
 
-            BaseForm.packetKind = Visit.PACKET;
+            BaseForm.PacketKind = Visit.PACKET;
 
             if (String.IsNullOrWhiteSpace(BaseForm.INITIALS))
             {

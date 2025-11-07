@@ -1249,14 +1249,14 @@
             </div>
         </div>
 
-        <input type="hidden" asp-for="A1.packetKind" />
+        <input type="hidden" asp-for="A1.PacketKind" />
 
     </div>
 </div>
 }
 else if (Model.Visit.PACKET.ToString() == "F")
 {
-    <partial name="Partials/A1_FVP" model="Model" />
+    <partial name="Partials/_A1_FVP" model="Model" />
 }
 
 

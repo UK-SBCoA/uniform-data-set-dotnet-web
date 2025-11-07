@@ -26,7 +26,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 {
                     if (_packetKinds != null)
                     {
-                        var packetKindProperty = validationContext.ObjectType.GetProperty("packetKind");
+                        var packetKindProperty = validationContext.ObjectType.GetProperty("PacketKind");
                         if (packetKindProperty != null)
                         {
                             var valueObj = packetKindProperty.GetValue(form);

@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Models
         public string Kind { get; set; } = "";
 
         [BindProperty]
-        public PacketKind packetKind { get; set; }
+        public PacketKind PacketKind { get; set; }
 
         [Required]
         public string FORMVER { get; set; } = "";
