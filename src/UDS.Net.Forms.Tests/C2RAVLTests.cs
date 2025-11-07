@@ -186,6 +186,7 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when 6a. is 95 - 98" })).ToBeVisibleAsync();
 
             //Change 13a value to valid value
+            await Expect(Page.Locator("input[name=\"C2.REYDREC\"]")).ToHaveCountAsync(1);
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
 
             //check for the rest of section 13 to be disabled when REYDREC = 95
