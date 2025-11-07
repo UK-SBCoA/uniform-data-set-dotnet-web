@@ -45,6 +45,11 @@ namespace UDS.Net.Forms.DataAnnotations
 
                 if (form.Status == FormStatus.Finalized)
                 {
+                    if (value == null)
+                    {
+                        return ValidationResult.Success;
+                    }
+
                     // Only validate on the server if form is attempting to be completed
                     var year = (int)value;
 
