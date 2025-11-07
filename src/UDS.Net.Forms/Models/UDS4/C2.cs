@@ -1076,6 +1076,66 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q8a. TRAILA (Part A: Total number of seconds to complete) completed within the allotted time (0-149 seconds), then Q8a2. TRAILALI (number of correct lines) must equal 24.")]
+        public bool? TrailAValidation
+        {
+            get
+            {
+                if (TRAILA >= 0 && TRAILA <= 149 && TRAILALI != 24)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q8b. TRAILB (Part B: Total number of seconds to complete) completed within the allotted time (0-299 seconds), then Q8b2. TRAILBLI (number of correct lines) must equal 24.")]
+        public bool? TrailBValidation
+        {
+            get
+            {
+                if (TRAILB >= 0 && TRAILB <= 299 && TRAILBLI != 24)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q10a. OTRAILA (Part A: Total number of seconds to complete) is completed within the allotted time (0–99 seconds), then Q10a2. OTRLALI (number of correct lines) must equal 25.")]
+        public bool? OTrailAValidation
+        {
+            get
+            {
+                if (OTRAILA >= 0 && OTRAILA <= 99 && OTRLALI != 25)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "If Q10b. OTRAILB (Part B: Total number of seconds to complete) is completed within the allotted time (0–299 seconds), then Q10a2. OTRLBLI (number of correct lines) must equal 25.")]
+        public bool? OTrailBValidation
+        {
+            get
+            {
+                if (OTRAILB >= 0 && OTRAILB <= 299 && OTRLBLI != 25)
+                {
+                    return null;
+                }
+
+                return true;
+            }
+        }
+
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Status == Services.Enums.FormStatus.Finalized)
