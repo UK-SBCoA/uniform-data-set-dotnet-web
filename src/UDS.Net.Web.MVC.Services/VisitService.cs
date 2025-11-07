@@ -69,6 +69,18 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Visit with form not found");
         }
 
+        public async Task<Visit> GetByVisitNumberWithForm(string username, int participationId, int visitNumber, string formKind)
+        {
+            var visitDto = await _apiClient.VisitClient.GetByVisitNumber(participationId, visitNumber, formKind);
+
+            if (visitDto != null)
+            {
+                return visitDto.ToDomain(username);
+            }
+
+            throw new Exception("Visit with form not found");
+        }
+
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
         {
             var visitDtos = await _apiClient.VisitClient.Get(pageSize, pageIndex);
