@@ -83,8 +83,6 @@ namespace UDS.Net.Forms.Tests
             //section 12
             await Page.Locator("input[name=\"C2.UDSVERFC\"]").FillAsync("95");
             await Page.Locator("input[name=\"C2.UDSVERLC\"]").FillAsync("95");
-            // section 13
-            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("");
             //section 14
             await Page.Locator("input[name=\"C2.VNTTOTW\"]").FillAsync("95");
             await Page.Locator("input[name=\"C2.VNTPCNC\"]").FillAsync("95");
@@ -178,6 +176,9 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"C2.REYBINT\"]")).ToBeDisabledAsync();
             await Expect(Page.Locator("input[name=\"C2.REY6REC\"]")).ToBeDisabledAsync();
             await Expect(Page.Locator("input[name=\"C2.REY6INT\"]")).ToBeDisabledAsync();
+
+            // section 13
+            await Page.GetByRole(AriaRole.Spinbutton, new() { Name = "Total delayed recall C2." }).FillAsync("");
 
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
