@@ -115,6 +115,53 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             return null;
         }
 
+        public async Task<Visit> GetByVisitNumberWithForm(string username, int participationId, int visitNumber, string formKind)
+        {
+            if (!String.IsNullOrWhiteSpace(formKind))
+            {
+                // TODO Include related forms as tests are added
+                var packet = await _context.Packets
+                    .Include(v => v.A3)
+                    .Include(v => v.A4a)
+                    .Include(v => v.C2)
+                    .Include(v => v.D1a)
+                    .Where(v => v.VISITNUM == visitNumber && v.ParticipationId == participationId)
+                    .FirstOrDefaultAsync();
+
+                if (packet != null)
+                {
+                    List<Form> forms = new List<Form>();
+
+                    // TODO add more forms here as tests are added
+                    if (packet.A3 != null)
+                    {
+                        var a3 = packet.A3.Convert(packet.Id, username);
+                        forms.Add(a3);
+                    }
+                    if (packet.A4a != null)
+                    {
+                        var a4a = packet.A4a.Convert(packet.Id, username);
+                        forms.Add(a4a);
+                    }
+                    if (packet.C2 != null)
+                    {
+                        // get the dto then convert to domain with UDS.Net.Services.Extensions
+                        var c2 = packet.C2.Convert(packet.Id, username);
+                        forms.Add(c2);
+                    }
+                    if (packet.D1a != null)
+                    {
+                        var d1a = packet.D1a.Convert(packet.Id, username);
+                        forms.Add(d1a);
+                    }
+
+                    var visit = new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
+
+                    return visit;
+                }
+            }
+            return null;
+        }
         public async Task<List<string>> GetFormOrder(string username, int visitId)
         {
             var packet = await GetById(username, visitId);
