@@ -70,7 +70,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.INMEMWORS = a2Dto.INMEMWORS;
                 this.INMEMTROUB = a2Dto.INMEMTROUB;
                 this.INMEMTEN = a2Dto.INMEMTEN;
-                this.NEWINF = a2Dto.NEWINF == true ? 1 : 0;
+                this.NEWINF = a2Dto.NEWINF == true ? 1 : a2Dto.NEWINF == false ? 0 : (int?)null;
             }
         }
     }
