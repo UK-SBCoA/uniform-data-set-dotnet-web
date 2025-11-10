@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Playwright;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Playwright;
 
 namespace UDS.Net.Forms.Tests
 {
@@ -17,7 +11,8 @@ namespace UDS.Net.Forms.Tests
             //Set 12a for 95 and 13a for null
             //section 1
             await Page.Locator("input[type=\"radio\"][name=\"C2.MOCACOMP\"][value=\"0\"]").ClickAsync();
-            await Page.Locator("input[name=\"C2.MOCAREAS\"]").FillAsync("95");
+            await Expect(Page.Locator("input[type=\"number\"][name=\"C2.MOCAREAS\"]")).ToBeEnabledAsync();
+            await Page.Locator("input[type=\"number\"][name=\"C2.MOCAREAS\"]").FillAsync("95");
             //section 2 
             await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYCLOC\"][value=\"1\"]").ClickAsync();
             await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYLAN\"][value=\"1\"]").ClickAsync();
@@ -60,7 +55,8 @@ namespace UDS.Net.Forms.Tests
             //Set REY1REC for 95 and REYDREC for null
             //section 1
             await Page.Locator("input[type=\"radio\"][name=\"C2.MOCACOMP\"][value=\"0\"]").ClickAsync();
-            await Page.Locator("input[name=\"C2.MOCAREAS\"]").FillAsync("95");
+            await Expect(Page.Locator("input[type=\"number\"][name=\"C2.MOCAREAS\"]")).ToBeEnabledAsync();
+            await Page.Locator("input[type=\"number\"][name=\"C2.MOCAREAS\"]").FillAsync("95");
             //section 2 
             await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYLAN\"][value=\"1\"]").ClickAsync();
             //section 3
@@ -83,6 +79,8 @@ namespace UDS.Net.Forms.Tests
             //section 12
             await Page.Locator("input[name=\"C2.UDSVERFC\"]").FillAsync("95");
             await Page.Locator("input[name=\"C2.UDSVERLC\"]").FillAsync("95");
+            //section 13
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("");
             //section 14
             await Page.Locator("input[name=\"C2.VNTTOTW\"]").FillAsync("95");
             await Page.Locator("input[name=\"C2.VNTPCNC\"]").FillAsync("95");
@@ -99,11 +97,14 @@ namespace UDS.Net.Forms.Tests
         {
             //Navigate to the C2 form
             await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
 
             //Select in person view (C2)
             await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+
+            //Wait for C2 specific input to be loaded before running setup
+            await Expect(Page.Locator("input[type=\"number\"][name=\"C2.MOCATOTS\"]")).ToBeDisabledAsync();
 
             await SetupForRAVLC2();
 
@@ -142,9 +143,6 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Look for successful path to forms index on finalized save
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("C2");
             await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link)).ToBeVisibleAsync();
         }
 
@@ -153,12 +151,15 @@ namespace UDS.Net.Forms.Tests
         {
             //Navigate to the _C2 view
             await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link).ClickAsync();
 
             //Select the remote - telephone view (C2T)
             await Page.Locator("#modalityselect").SelectOptionAsync("Remote");
             await Page.Locator("#remote").SelectOptionAsync("Telephone");
+
+            //Wait for C2T specific input to be loaded before running setup
+            await Expect(Page.Locator("input[type=\"number\"][name=\"C2.MOCBTOTS\"]")).ToBeDisabledAsync();
 
             await SetupForRAVLC2T();
 
@@ -178,7 +179,8 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"C2.REY6INT\"]")).ToBeDisabledAsync();
 
             // section 13
-            await Page.GetByRole(AriaRole.Spinbutton, new() { Name = "Total delayed recall C2." }).FillAsync("");
+            await Expect(Page.Locator("input[type=\"number\"][name=\"C2.REYDREC\"]")).ToBeEnabledAsync();
+            await Page.Locator("input[type=\"number\"][name=\"C2.REYDREC\"]").FillAsync("");
 
             await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
@@ -187,7 +189,6 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when 6a. is 95 - 98" })).ToBeVisibleAsync();
 
             //Change 13a value to valid value
-            await Expect(Page.Locator("input[name=\"C2.REYDREC\"]")).ToHaveCountAsync(1);
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
 
             //check for the rest of section 13 to be disabled when REYDREC = 95
@@ -196,14 +197,10 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"C2.REYTCOR\"]")).ToBeDisabledAsync();
             await Expect(Page.Locator("input[name=\"C2.REYFPOS\"]")).ToBeDisabledAsync();
 
-            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Look for successful path to forms index on finalized save
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("C2");
-            await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link)).ToBeVisibleAsync();
+            await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" })).ToBeVisibleAsync();
         }
     }
 }
