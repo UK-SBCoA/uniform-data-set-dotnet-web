@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -9,20 +11,21 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A1 : FormModel
     {
+
         [Display(Name = "Participant's month of birth")]
         [BirthMonth]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? BIRTHMO { get; set; }
 
         [Display(Name = "Participant's year of birth")]
         [BirthYear]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? BIRTHYR { get; set; }
 
         [Display(Name = "In which country or region did you spend most of your childhood?")]
         [MaxLength(3)]
         [ProhibitedCharacters]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public string? CHLDHDCTRY { get; set; }
 
         [Display(Name = "White")]
@@ -217,7 +220,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Don't know")]
         public bool RACEUNKN { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Please indicate race or don't know.")]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4, ErrorMessage = "Please indicate race or don't know.")]
         [NotMapped]
         public bool? EthnicityRaceIndicated
         {
@@ -232,7 +235,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "Don't know cannot be selected along with a known race.")]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4, ErrorMessage = "Don't know cannot be selected along with a known race.")]
         [NotMapped]
         public bool? EthnicityRaceUnknownOnly
         {
@@ -295,11 +298,11 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "What sex were you assigned at birth, on your original birth certificate?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? BIRTHSEX { get; set; }
 
         [Display(Name = "Have you ever been diagnosed by a medical doctor or other health professional with an intersex condition or a \"Difference of Sex Development (DSD)\" or were you born with (or developed naturally in puberty) genitals, reproductive organs, and/or chromosomal patterns that do not fit standard definitions of male or female?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? INTERSEX { get; set; }
 
         [Display(Name = "Lesbian or gay")]
@@ -343,7 +346,7 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredOnFinalized(ErrorMessage = "If Q16. MEDVA (VA medical care) = 1 (Yes) then Q15. SERVED (served in armed forces) should not equal 9 (Don't know),it should be equal to 1 (Yes)")]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4, ErrorMessage = "If Q16. MEDVA (VA medical care) = 1 (Yes) then Q15. SERVED (served in armed forces) should not equal 9 (Don't know),it should be equal to 1 (Yes)")]
         [NotMapped]
         public bool? ServedAndVaCare
         {
@@ -415,7 +418,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [Display(Name = "What is your primary language?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? PREDOMLAN { get; set; }
 
         [Display(Name = "Primary Language - Other (Specify)")]
@@ -425,16 +428,16 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? PREDOMLANX { get; set; }
 
         [Display(Name = "Are you left- or right-handed?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? HANDED { get; set; }
 
         [Display(Name = "How many years of education have you completed?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         [RegularExpression("^(\\d|[12]\\d|3[0-6]|99)$", ErrorMessage = "Valid range is 0-36 or 99")]
         public int? EDUC { get; set; }
 
         [Display(Name = "What is the highest level of education you have achieved?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? LVLEDUC { get; set; }
 
         [Display(Name = "What is your current marital status?")]
@@ -454,11 +457,12 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? ZIP { get; set; }
 
         [Display(Name = "Have you ever served in the U.S. Armed Forces, military Reserves, or National Guard?")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? SERVED { get; set; }
 
         [Display(Name = "Have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility?")]
         [RequiredIfRegex(nameof(SERVED), "(1|9)", ErrorMessage = "Please indicate if have you ever obtained medical care or prescription drugs from a Veterans Affairs (VA) facility.")]
+        [RequiredOnFinalized(PacketKind.F)]
         public int? MEDVA { get; set; }
 
         [Display(Name = "How much time each week do you spend performing activities that cause large increases in breathing or heart rate for at least 10 minutes continuously?")]
@@ -490,11 +494,11 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? PRIOCC { get; set; }
 
         [Display(Name = "ADRC enrollment type")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? SOURCENW { get; set; }
 
         [Display(Name = "Principal referral source")]
-        [RequiredOnFinalized]
+        [RequiredOnFinalized(PacketKind.I, PacketKind.I4)]
         public int? REFERSC { get; set; }
 
         [Display(Name = "Principal referral source - Other (Specify) (END FORM HERE)")]
