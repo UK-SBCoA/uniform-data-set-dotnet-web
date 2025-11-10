@@ -187,7 +187,7 @@ namespace UDS.Net.Services.Extensions
 
             if (dto is A1Dto)
             {
-                formFields = new A1FormFields(dto);
+                formFields = new A1FormFields(dto, false);
             }
             else if (dto is A1aDto)
             {
