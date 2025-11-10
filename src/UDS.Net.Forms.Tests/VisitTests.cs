@@ -22,36 +22,35 @@ public class VisitTest : TestBase
     public async Task CheckForForms()
     {
         await Page.GotoAsync(BaseUrl);
-        await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-        await Page.WaitForURLAsync("**/Visits/Details/*");
-        //await Page.WaitForRequestFinishedAsync();
+        await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+        await Page.WaitForRequestFinishedAsync();
 
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1a", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A3", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A4", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A4a", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A5D2", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B1", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B3", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B4", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B5", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B6", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B7", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B8", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "B9", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "C2", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "D1a", Exact = true }).IsVisibleAsync());
-        Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "D1b", Exact = true }).IsVisibleAsync());
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A1a", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A3", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A4", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A4a", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "A5D2", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B1", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B3", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B4", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B5", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B6", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B7", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B8", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "B9", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "C2", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "D1a", Exact = true })).ToBeVisibleAsync();
+        await Expect(Page.GetByRole(AriaRole.Heading, new() { Name = "D1b", Exact = true })).ToBeVisibleAsync();
 
     }
 
     [TestMethod]
     public async Task CheckForRequired()
     {
-        await Page.GotoAsync("http://localhost:7110");
-        await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+        await Page.GotoAsync(BaseUrl);
+        await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
         await Page.WaitForRequestFinishedAsync();
 
         await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1 Required Participant" }).Locator("span").ClickAsync();
