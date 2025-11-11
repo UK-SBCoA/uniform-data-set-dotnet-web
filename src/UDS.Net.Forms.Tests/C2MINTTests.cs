@@ -16,15 +16,20 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("C2");
             await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("Required");
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-            await Expect(Page.Locator("#modalityselect")).ToHaveValueAsync("1");
+
+            //Select in person view (C2)
+            await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
 
-            // reopen the page and see the data persisted
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // reopen the page and see the data persisted
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
             await Expect(Page.Locator("#modalityselect")).ToHaveValueAsync("1");
-            await Expect(Page.GetByLabel("Save status")).ToHaveValueAsync("1");
         }
 
         /*

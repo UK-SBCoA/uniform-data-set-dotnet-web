@@ -3,6 +3,8 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -37,28 +39,11 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("C2.OTRLBRR"),
                     new UIEnableAttribute("C2.OTRLBLI")
-
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because\noptional, enter 888, and SKIP TO QUESTION 8a."
             }
         };
 
-        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
-        {
-            Low = 0,
-            High = 15,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.REYDINT"),
-                    new UIEnableAttribute("C2.REYDTI"),
-                    new UIEnableAttribute("C2.REYTCOR"),
-                    new UIEnableAttribute("C2.REYFPOS")
-                },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
-            }
-        };
         public UIRangeToggle REY1RECBehavior = new UIRangeToggle
         {
             Low = 0,
@@ -79,6 +64,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYBREC"),
                     new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
+                    new UIEnableAttribute("C2.REY6INT"),
                     new UIEnableAttribute("C2.REY6INT"),
                     new UIEnableAttribute("C2.REYDINT"),
                     new UIEnableAttribute("C2.REYDTI"),
@@ -162,6 +148,23 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYFPOS")
                 },
                 InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a."
+            }
+        };
+
+        public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYDINT"),
+                    new UIEnableAttribute("C2.REYDTI"),
+                    new UIEnableAttribute("C2.REYTCOR"),
+                    new UIEnableAttribute("C2.REYFPOS")
+                },
+                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
             }
         };
 
@@ -617,9 +620,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
+            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
+
             return Page();
         }
-        public async Task<IActionResult> OnGetC2Async(int? id)
+
+        public async Task<IActionResult> OnPostChangeMode(int? id)
         {
             await base.OnGetAsync(id);
 
@@ -628,20 +634,36 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            return Partial("_C2", this);
+            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
+
+            C2.MODE = FormMode.InPerson;
+
+            return Page();
         }
 
-        public async Task<IActionResult> OnGetC2TAsync(int? id)
-        {
-            await base.OnGetAsync(id);
+        //public async Task<IActionResult> OnGetC2Async(int? id)
+        //{
+        //    await base.OnGetAsync(id);
 
-            if (BaseForm != null)
-            {
-                C2 = (C2)BaseForm; // class library should always handle new instances
-            }
+        //    if (BaseForm != null)
+        //    {
+        //        C2 = (C2)BaseForm; // class library should always handle new instances
+        //    }
 
-            return Partial("_C2T", this);
-        }
+        //    return Partial("_C2", this);
+        //}
+
+        //public async Task<IActionResult> OnGetC2TAsync(int? id)
+        //{
+        //    await base.OnGetAsync(id);
+
+        //    if (BaseForm != null)
+        //    {
+        //        C2 = (C2)BaseForm; // class library should always handle new instances
+        //    }
+
+        //    return Partial("_C2T", this);
+        //}
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
