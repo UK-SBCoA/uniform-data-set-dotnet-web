@@ -3,6 +3,8 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -618,9 +620,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
+            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
+
             return Page();
         }
-        public async Task<IActionResult> OnGetC2Async(int? id)
+
+        public async Task<IActionResult> OnPostChangeMode(int? id)
         {
             await base.OnGetAsync(id);
 
@@ -629,20 +634,36 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            return Partial("_C2", this);
+            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
+
+            C2.MODE = FormMode.InPerson;
+
+            return Page();
         }
 
-        public async Task<IActionResult> OnGetC2TAsync(int? id)
-        {
-            await base.OnGetAsync(id);
+        //public async Task<IActionResult> OnGetC2Async(int? id)
+        //{
+        //    await base.OnGetAsync(id);
 
-            if (BaseForm != null)
-            {
-                C2 = (C2)BaseForm; // class library should always handle new instances
-            }
+        //    if (BaseForm != null)
+        //    {
+        //        C2 = (C2)BaseForm; // class library should always handle new instances
+        //    }
 
-            return Partial("_C2T", this);
-        }
+        //    return Partial("_C2", this);
+        //}
+
+        //public async Task<IActionResult> OnGetC2TAsync(int? id)
+        //{
+        //    await base.OnGetAsync(id);
+
+        //    if (BaseForm != null)
+        //    {
+        //        C2 = (C2)BaseForm; // class library should always handle new instances
+        //    }
+
+        //    return Partial("_C2T", this);
+        //}
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)

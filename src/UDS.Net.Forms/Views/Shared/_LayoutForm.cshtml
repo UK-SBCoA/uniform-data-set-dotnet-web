@@ -32,55 +32,27 @@
             </div>
 
             <div class="divide-y divide-gray-200">
-                @if (Model.BaseForm.Kind == "C2" || Model.BaseForm.Kind == "C2T")
-                {
-                    <form method="post" id="UDSForm">
-                        <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
-                        <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
-                        <input asp-for="Visit.Id" type="hidden" />
-                        <input asp-for="Visit.ParticipationId" type="hidden" />
-                        <input asp-for="Visit.VISITNUM" type="hidden" />
-                        <input asp-for="Visit.PACKET" type="hidden" />
-                        <input asp-for="Visit.FORMVER" type="hidden" />
-                        <input asp-for="Visit.VISIT_DATE" type="hidden" />
-                        <input asp-for="Visit.INITIALS" type="hidden" />
-                        <input asp-for="Visit.Status" type="hidden" />
-                        <input asp-for="Visit.CreatedAt" type="hidden" />
-                        <input asp-for="Visit.CreatedBy" type="hidden" />
-                        <input asp-for="Visit.ModifiedBy" type="hidden" />
-                        <input asp-for="Visit.DeletedBy" type="hidden" />
-                        <input asp-for="Visit.IsDeleted" type="hidden" />
+                <form method="post" id="UDSForm" data-turbo="false">
+                    <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+                    <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
+                    <input asp-for="Visit.Id" type="hidden" />
+                    <input asp-for="Visit.ParticipationId" type="hidden" />
+                    <input asp-for="Visit.VISITNUM" type="hidden" />
+                    <input asp-for="Visit.PACKET" type="hidden" />
+                    <input asp-for="Visit.FORMVER" type="hidden" />
+                    <input asp-for="Visit.VISIT_DATE" type="hidden" />
+                    <input asp-for="Visit.INITIALS" type="hidden" />
+                    <input asp-for="Visit.Status" type="hidden" />
+                    <input asp-for="Visit.CreatedAt" type="hidden" />
+                    <input asp-for="Visit.CreatedBy" type="hidden" />
+                    <input asp-for="Visit.ModifiedBy" type="hidden" />
+                    <input asp-for="Visit.DeletedBy" type="hidden" />
+                    <input asp-for="Visit.IsDeleted" type="hidden" />
 
-                        <div class="counterreset space-y-12 sm:space-y-16 mt-2">
-                            @RenderBody()
-                        </div>
-                    </form>
-                }
-                else
-                {
-                    <!--// Turn off turbo for all other forms //-->
-                    <form method="post" id="UDSForm" data-turbo="false">
-                        <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
-                        <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
-                        <input asp-for="Visit.Id" type="hidden" />
-                        <input asp-for="Visit.ParticipationId" type="hidden" />
-                        <input asp-for="Visit.VISITNUM" type="hidden" />
-                        <input asp-for="Visit.PACKET" type="hidden" />
-                        <input asp-for="Visit.FORMVER" type="hidden" />
-                        <input asp-for="Visit.VISIT_DATE" type="hidden" />
-                        <input asp-for="Visit.INITIALS" type="hidden" />
-                        <input asp-for="Visit.Status" type="hidden" />
-                        <input asp-for="Visit.CreatedAt" type="hidden" />
-                        <input asp-for="Visit.CreatedBy" type="hidden" />
-                        <input asp-for="Visit.ModifiedBy" type="hidden" />
-                        <input asp-for="Visit.DeletedBy" type="hidden" />
-                        <input asp-for="Visit.IsDeleted" type="hidden" />
-
-                        <div class="counterreset space-y-12 sm:space-y-16 mt-2">
-                            @RenderBody()
-                        </div>
-                    </form>
-                }
+                    <div class="counterreset space-y-12 sm:space-y-16 mt-2">
+                        @RenderBody()
+                    </div>
+                </form>
             </div>
         </main>
 
