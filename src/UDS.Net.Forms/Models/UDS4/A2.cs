@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -10,6 +9,8 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A2 : FormModel
     {
+        [Display(Name = "Is this a new co-participant (i.e., one who was not a co-participant at any past UDS visit)?")]
+        public int? NEWINF { get; set; }
         [Display(Name = "What is the co-participant’s relationship to the participant?")]
         [RequiredOnFinalized(ErrorMessage = "Response to co-participant's relationship to participant required")]
         public int? INRELTO { get; set; }
@@ -54,6 +55,14 @@ namespace UDS.Net.Forms.Models.UDS4
                 if (visitValue is VisitModel)
                 {
                     VisitModel visit = (VisitModel)visitValue;
+
+                    if (visit.PACKET == PacketKind.F && NEWINF == null)
+                    {
+                        yield return new ValidationResult(
+                            "Response to whether this is a new co-participant is required",
+                            new[] { nameof(NEWINF) }
+                        );
+                    }
                 }
             }
             foreach (var result in base.Validate(validationContext))
