@@ -1,18 +1,19 @@
-﻿using System.Globalization;
-using System.Text;
-using CsvHelper;
+﻿using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using System.Globalization;
+using System.Text;
 using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Records;
-using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.Enums;
-using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.DomainModels;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Overrides.CsvHelper;
+using UDS.Net.Forms.Records;
+using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
+using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -40,6 +41,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
             var packet = await _packetService.GetPacketWithForms(User.Identity?.Name, packetId);
+
             if (packet == null)
                 return NotFound();
 
@@ -163,7 +165,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a1 != null)
             {
                 csv.WriteHeader<A1Record>();
-                csv.WriteHeaderLowercase<A1FormFields>();
+                if (a1.Fields is A1FormFields normalA1)
+                {
+                    csv.WriteHeaderLowercase<A1FormFields>();
+                }
+                else if (a1.Fields is A1FollowUpFormFields followUpA1)
+                {
+                    csv.WriteHeaderLowercase<A1FollowUpFormFields>();
+                }
             }
             if (a1a != null)
             {
@@ -330,9 +339,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             if (a1 != null)
             {
-                var a1Record = new A1Record(a1);
-                csv.WriteRecord(a1Record);
-                csv.WriteRecord((A1FormFields)a1.Fields);
+                csv.WriteRecord(new A1Record(a1));
+                if (a1.Fields is A1FormFields normalA1)
+                {
+                    csv.WriteRecord(normalA1);
+                }
+                else if (a1.Fields is A1FollowUpFormFields followUpA1)
+                {
+                    csv.WriteRecord(followUpA1);
+                }
             }
             if (a1a != null)
             {

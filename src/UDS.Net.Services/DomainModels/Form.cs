@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -82,10 +83,14 @@ namespace UDS.Net.Services.DomainModels
 
         public List<PacketSubmissionError> UnresolvedErrors = new List<PacketSubmissionError>();
 
-        private void SetFieldsBasedOnKind()
+        private void SetFieldsBasedOnKind(PacketKind packetKind)
         {
             if (Kind == "A1")
-                Fields = new A1FormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A1FollowUpFormFields()
+                    : new A1FormFields();
+            }
             else if (Kind == "A1a")
                 Fields = new A1aFormFields();
             else if (Kind == "A2")
@@ -123,7 +128,7 @@ namespace UDS.Net.Services.DomainModels
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
-        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy)
+        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy, PacketKind packetKind)
         {
             VisitId = visitId;
 
@@ -139,8 +144,7 @@ namespace UDS.Net.Services.DomainModels
 
             CreatedAt = DateTime.Now;
 
-            // there is no existing form, but we need to fields initialized for brand new forms
-            SetFieldsBasedOnKind();
+            SetFieldsBasedOnKind(packetKind);
         }
 
         public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
