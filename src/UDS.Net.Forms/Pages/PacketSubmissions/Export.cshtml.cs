@@ -484,10 +484,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (a2.Fields is A2FormFields)
-                        csv.WriteRecord((A2FormFields)a2.Fields);
-                    else if (a2.Fields is A2FollowUpFormFields)
-                        csv.WriteRecord((A2FollowUpFormFields)a2.Fields);
+                    if (a2.Fields is A2FormFields normalA2)
+                        csv.WriteRecord((normalA2));
+                    else if (a2.Fields is A2FollowUpFormFields followUpA2)
+                        csv.WriteRecord((followUpA2));
                 }
             }
             if (a3 != null)
