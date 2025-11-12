@@ -6,7 +6,7 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
 {
     public class A2FollowUpFormFields : IFormFields
     {
-        public int? NEWINF {  get; set; }
+        public int? NEWINF { get; set; }
         public int? INRELTO { get; set; }
         public int? INKNOWN { get; set; }
         public int? INLIVWTH { get; set; }
