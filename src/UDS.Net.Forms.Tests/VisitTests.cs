@@ -23,8 +23,8 @@ public class VisitTest : TestBase
     {
         await Page.GotoAsync(BaseUrl);
         await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-        await Page.WaitForURLAsync("**/Visits/Details/*");
-        //await Page.WaitForRequestFinishedAsync();
+        //await Page.WaitForURLAsync("**/Visits/Details/*");
+        await Page.WaitForRequestFinishedAsync();
 
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A1", Exact = true }).IsVisibleAsync());
         Assert.IsTrue(await Page.GetByRole(AriaRole.Heading, new() { Name = "A2", Exact = true }).IsVisibleAsync());
