@@ -13,7 +13,7 @@
     </div>
 
     <!--// Biological parents //-->
-    <div class="">
+    <div data-controller="enableIntraRow">
         <h3 class="text-base font-semibold leading-7 text-gray-900">
             Section <span class="counter"></span> Biological parents
         </h3>
@@ -306,14 +306,14 @@
     </div>
 
     <!--// Siblings //-->
-    <div>
+    <div data-controller="enableRows enableIntraRow" data-enablerows-count-input-id-value="A3_SIBS" data-enablerows-table-id-value="A3_Siblings" data-enablerows-max-rows-value="20" data-enable-intra-row-table-id-value="A3_Siblings" data-enable-intra-row-max-rows-value="20">
         <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 2. Full siblings</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
-                <input asp-for="@Model.A3.SIBS" />
+                <input id="A3_SIBS" asp-for="@Model.A3.SIBS" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
                 <submission-error location="SIBS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
@@ -358,7 +358,9 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
                     {
-                        @Html.EditorFor(m => m.A3.Siblings[i])
+                        <tr data-enable-rows-target="row">
+                            @Html.EditorFor(m => m.A3.Siblings[i])
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -366,14 +368,14 @@
     </div>
 
     <!--// Children //-->
-    <div>
+    <div data-controller="enableRows enableIntraRow" data-enablerows-count-input-id-value="A3_KIDS" data-enablerows-table-id-value="A3_Children" data-enablerows-max-rows-value="20" data-enable-intra-row-table-id-value="A3_Children" data-enable-intra-row-max-rows-value="20">
         <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 3. Biological children</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
-                <input asp-for="@Model.A3.KIDS" />
+                <input id="A3_KIDS" asp-for="@Model.A3.KIDS" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
                 <submission-error location="KIDS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
@@ -421,7 +423,9 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
                     {
-                        @Html.EditorFor(m => m.A3.Children[i])
+                        <tr data-enable-rows-target="row">
+                            @Html.EditorFor(m => m.A3.Children[i])
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -429,7 +433,3 @@
     </div>
 </div>
 <partial name="_FormFooter" for="@Model.A3" />
-
-@section Scripts {
-    <script src="~/_content/UDS.Net.Forms/js/A3.js"></script>
-}
