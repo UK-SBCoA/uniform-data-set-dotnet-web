@@ -422,19 +422,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             if (a1a != null)
             {
-                var a1aRecord = new A1aRecord(a1a);
+                csv.WriteRecord(new A1aRecord(a1a));
 
-                // write header values
-                if (a1a.Fields is A1aFormFields normalA1a)
-                {
-                    csv.WriteRecord(normalA1a);
-                }
-                else if (a1a.Fields is A1aFollowUpFormFields followUpA1a)
-                {
-                    csv.WriteRecord(followUpA1a);
-                }
-
-                // write remaining form values
                 if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
                 {
                     IEnumerable<PropertyInfo> a1aFormFieldsProps;
@@ -454,16 +443,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (a1a.Fields is A1aFormFields)
-                        csv.WriteRecord((A1aFormFields)a1a.Fields);
-                    else if (a1a.Fields is A1aFollowUpFormFields)
-                        csv.WriteRecord((A1aFollowUpFormFields)a1a.Fields);
+                    if (a1a.Fields is A1aFormFields normalA1a)
+                        csv.WriteRecord(normalA1a);
+                    else if (a1a.Fields is A1aFollowUpFormFields followUpA1a)
+                        csv.WriteRecord(followUpA1a);
                 }
             }
             if (a2 != null)
             {
-                var a2Record = new A2Record(a2);
-                csv.WriteRecord(a2Record);
+                csv.WriteRecord(new A2Record(a2));
 
                 if (a2.MODE == Services.Enums.FormMode.NotCompleted)
                 {
@@ -485,32 +473,32 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 {
                     // if the form is included, export all the values
                     if (a2.Fields is A2FormFields normalA2)
-                        csv.WriteRecord((normalA2));
+                        csv.WriteRecord(normalA2);
                     else if (a2.Fields is A2FollowUpFormFields followUpA2)
-                        csv.WriteRecord((followUpA2));
+                        csv.WriteRecord(followUpA2);
                 }
             }
             if (a3 != null)
             {
-                var a3Record = new A3Record(a3);
-                csv.WriteRecord(a3Record);
-                if (a3.Fields is A3FormFields)
-                    csv.WriteRecord((A3FormFields)a3.Fields);
-                else if (a3.Fields is A3FollowUpFormFields)
-                    csv.WriteRecord((A3FollowUpFormFields)a3.Fields);
+                csv.WriteRecord(new A3Record(a3));
+
+                if (a3.Fields is A3FormFields normalA3)
+                    csv.WriteRecord(normalA3);
+                else if (a3.Fields is A3FollowUpFormFields followUpA3)
+                    csv.WriteRecord(followUpA3);
 
                 List<A3FamilyMemberFormFields> siblings;
                 List<A3FamilyMemberFormFields> kids;
 
-                if (a3.Fields is A3FollowUpFormFields followUpA3)
+                if (a3.Fields is A3FollowUpFormFields followUpKids)
                 {
-                    siblings = followUpA3.SiblingFormFields;
-                    kids = followUpA3.KidsFormFields;
+                    siblings = followUpKids.SiblingFormFields;
+                    kids = followUpKids.KidsFormFields;
                 }
-                else if (a3.Fields is A3FormFields normalA3)
+                else if (a3.Fields is A3FormFields normalKids)
                 {
-                    siblings = normalA3.SiblingFormFields;
-                    kids = normalA3.KidsFormFields;
+                    siblings = normalKids.SiblingFormFields;
+                    kids = normalKids.KidsFormFields;
                 }
                 else
                 {
@@ -546,8 +534,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             if (a4 != null)
             {
-                var a4Record = new A4Record(a4);
-                csv.WriteRecord(a4Record);
+                csv.WriteRecord(new A4Record(a4));
                 List<A4DFormFields> details;
                 if (a4.Fields is A4GFormFields normalA4)
                 {
@@ -575,8 +562,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             if (a4a != null)
             {
-                var a4aRecord = new A4aRecord(a4a);
-                csv.WriteRecord(a4aRecord);
+                csv.WriteRecord(new A4aRecord(a4a));
 
                 List<A4aTreatmentFormFields> treatments;
 
@@ -609,19 +595,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             if (a5d2 != null)
             {
-                var a5d2Record = new A5D2Record(a5d2);
-                csv.WriteRecord(a5d2Record);
-                if (a5d2.Fields is A5D2FormFields)
-                    csv.WriteRecord((A5D2FormFields)a5d2.Fields);
-                else if (a5d2.Fields is A5D2FollowUpFormFields)
-                    csv.WriteRecord((A5D2FollowUpFormFields)a5d2.Fields);
+                csv.WriteRecord(new A5D2Record(a5d2));
+                if (a5d2.Fields is A5D2FormFields normalA5D2)
+                    csv.WriteRecord(normalA5D2);
+                else if (a5d2.Fields is A5D2FollowUpFormFields followUpA5D2)
+                    csv.WriteRecord(followUpA5D2);
             }
             if (b1 != null)
             {
-                var b1Record = new B1Record(b1);
-
-                // write header values
-                csv.WriteRecord(b1Record);
+                csv.WriteRecord(new B1Record(b1));
 
                 // write remaining form values
                 if (b1.MODE == Services.Enums.FormMode.NotCompleted)
@@ -643,18 +625,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (b1.Fields is B1FormFields)
-                        csv.WriteRecord((B1FormFields)b1.Fields);
-                    else if (b1.Fields is B1FollowUpFormFields)
-                        csv.WriteRecord((B1FollowUpFormFields)b1.Fields);
+                    if (b1.Fields is B1FormFields normalB1)
+                        csv.WriteRecord(normalB1);
+                    else if (b1.Fields is B1FollowUpFormFields followUpB1)
+                        csv.WriteRecord(followUpB1);
                 }
             }
             if (b3 != null)
             {
-                var b3Record = new B3Record(b3);
-
-                // write header values
-                csv.WriteRecord(b3Record);
+                csv.WriteRecord(new B3Record(b3));
 
                 // write remaining form values
                 if (b3.MODE == Services.Enums.FormMode.NotCompleted)
@@ -676,29 +655,24 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (b3.Fields is B3FormFields)
-                        csv.WriteRecord((B3FormFields)b3.Fields);
-                    else if (b3.Fields is B3FollowUpFormFields)
-                        csv.WriteRecord((B3FollowUpFormFields)b3.Fields);
+                    if (b3.Fields is B3FormFields normalB3)
+                        csv.WriteRecord(normalB3);
+                    else if (b3.Fields is B3FollowUpFormFields followUpB3)
+                        csv.WriteRecord(followUpB3);
                 }
             }
             if (b4 != null)
             {
-                var b4Record = new B4Record(b4);
-                csv.WriteRecord(b4Record);
-                if (b4.Fields is B4FormFields)
-                    csv.WriteRecord((B4FormFields)b4.Fields);
-                else if (b4.Fields is B4FollowUpFormFields)
-                    csv.WriteRecord((B4FollowUpFormFields)b4.Fields);
+                csv.WriteRecord(new B4Record(b4));
+                if (b4.Fields is B4FormFields normalB4)
+                    csv.WriteRecord(normalB4);
+                else if (b4.Fields is B4FollowUpFormFields followUpB4)
+                    csv.WriteRecord(followUpB4);
             }
             if (b5 != null)
             {
-                var b5Record = new B5Record(b5);
+                csv.WriteRecord(new B5Record(b5));
 
-                // write header values
-                csv.WriteRecord(b5Record);
-
-                // write remaining form values
                 if (b5.MODE == Services.Enums.FormMode.NotCompleted)
                 {
                     IEnumerable<PropertyInfo> b5FormFieldsProps;
@@ -718,18 +692,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (b5.Fields is B5FormFields)
-                        csv.WriteRecord((B5FormFields)b5.Fields);
-                    else if (b5.Fields is B5FollowUpFormFields)
-                        csv.WriteRecord((B5FollowUpFormFields)b5.Fields);
+                    if (b5.Fields is B5FormFields normalB5)
+                        csv.WriteRecord(normalB5);
+                    else if (b5.Fields is B5FollowUpFormFields followUpB5)
+                        csv.WriteRecord(followUpB5);
                 }
             }
             if (b6 != null)
             {
-                var b6Record = new B6Record(b6);
-
-                // write header values
-                csv.WriteRecord(b6Record);
+                csv.WriteRecord(new B6Record(b6));
 
                 // write remaining form values
                 if (b6.MODE == Services.Enums.FormMode.NotCompleted)
@@ -750,18 +721,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (b6.Fields is B6FormFields)
-                        csv.WriteRecord((B6FormFields)b6.Fields);
-                    else if (b6.Fields is B6FollowUpFormFields)
-                        csv.WriteRecord((B6FollowUpFormFields)b6.Fields);
+                    if (b6.Fields is B6FormFields normalB6)
+                        csv.WriteRecord(normalB6);
+                    else if (b6.Fields is B6FollowUpFormFields followUpB6)
+                        csv.WriteRecord(followUpB6);
                 }
             }
             if (b7 != null)
             {
-                var b7Record = new B7Record(b7);
-
                 // write header values
-                csv.WriteRecord(b7Record);
+                csv.WriteRecord(new B7Record(b7));
 
                 // write remaining form values
                 if (b7.MODE == Services.Enums.FormMode.NotCompleted)
@@ -782,56 +751,51 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 else
                 {
                     // if the form is included, export all the values
-                    if (b7.Fields is B7FormFields)
-                        csv.WriteRecord((B7FormFields)b7.Fields);
-                    else if (b7.Fields is B7FollowUpFormFields)
-                        csv.WriteRecord((B7FollowUpFormFields)b7.Fields);
+                    if (b7.Fields is B7FormFields normalB7)
+                        csv.WriteRecord(normalB7);
+                    else if (b7.Fields is B7FollowUpFormFields followUpB7)
+                        csv.WriteRecord(followUpB7);
                 }
             }
             if (b8 != null)
             {
-                var b8Record = new B8Record(b8);
-                csv.WriteRecord(b8Record);
-                if (b8.Fields is B8FormFields)
-                    csv.WriteRecord((B8FormFields)b8.Fields);
-                else if (b8.Fields is B8FollowUpFormFields)
-                    csv.WriteRecord((B8FollowUpFormFields)b8.Fields);
+                csv.WriteRecord(new B8Record(b8));
+                if (b8.Fields is B8FormFields normalB8)
+                    csv.WriteRecord(normalB8);
+                else if (b8.Fields is B8FollowUpFormFields followUpB8)
+                    csv.WriteRecord(followUpB8);
             }
             if (b9 != null)
             {
-                var b9Record = new B9Record(b9);
-                csv.WriteRecord(b9Record);
-                if (b9.Fields is B9FormFields)
-                    csv.WriteRecord((B9FormFields)b9.Fields);
-                else if (b9.Fields is B9FollowUpFormFields)
-                    csv.WriteRecord((B9FollowUpFormFields)b9.Fields);
+                csv.WriteRecord(new B9Record(b9));
+                if (b9.Fields is B9FormFields normalB9)
+                    csv.WriteRecord(normalB9);
+                else if (b9.Fields is B9FollowUpFormFields followUpB9)
+                    csv.WriteRecord(followUpB9);
             }
             if (c2 != null)
             {
-                var c2Record = new C2Record(c2);
-                csv.WriteRecord(c2Record);
-                if (c2.Fields is C2FormFields)
-                    csv.WriteRecord((C2FormFields)c2.Fields);
-                else if (c2.Fields is C2FollowUpFormFields)
-                    csv.WriteRecord((C2FollowUpFormFields)c2.Fields);
+                csv.WriteRecord(new C2Record(c2));
+                if (c2.Fields is C2FormFields normalC2)
+                    csv.WriteRecord(normalC2);
+                else if (c2.Fields is C2FollowUpFormFields followUpC2)
+                    csv.WriteRecord(followUpC2);
             }
             if (d1a != null)
             {
-                var d1aRecord = new D1aRecord(d1a);
-                csv.WriteRecord(d1aRecord);
-                if (d1a.Fields is D1aFormFields)
-                    csv.WriteRecord((D1aFormFields)d1a.Fields);
-                else if (d1a.Fields is D1aFollowUpFormFields)
-                    csv.WriteRecord((D1aFollowUpFormFields)d1a.Fields);
+                csv.WriteRecord(new D1aRecord(d1a));
+                if (d1a.Fields is D1aFormFields normalD1a)
+                    csv.WriteRecord(normalD1a);
+                else if (d1a.Fields is D1aFollowUpFormFields followUpD1a)
+                    csv.WriteRecord(followUpD1a);
             }
             if (d1b != null)
             {
-                var d1bRecord = new D1bRecord(d1b);
-                csv.WriteRecord(d1bRecord);
-                if (d1b.Fields is D1bFormFields)
-                    csv.WriteRecord((D1bFormFields)d1b.Fields);
-                else if (d1b.Fields is D1bFollowUpFormFields)
-                    csv.WriteRecord((D1bFollowUpFormFields)d1b.Fields);
+                csv.WriteRecord(new D1bRecord(d1b));
+                if (d1b.Fields is D1bFormFields normalD1b)
+                    csv.WriteRecord(normalD1b);
+                else if (d1b.Fields is D1bFollowUpFormFields followUpD1b)
+                    csv.WriteRecord(followUpD1b);
             }
 
         } // writer flushed automatically here    
