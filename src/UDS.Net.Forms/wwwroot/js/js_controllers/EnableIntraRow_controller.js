@@ -61,8 +61,6 @@ export default class extends Controller {
             const input = document.querySelector(`#${id}`);
             if (input) {
                 input.disabled = shouldDisable;
-                input.classList.toggle("opacity-50", shouldDisable);
-                input.classList.toggle("cursor-not-allowed", shouldDisable);
                 if (shouldDisable) input.value = '';
             }
         });

@@ -49,25 +49,9 @@ export default class extends Controller {
                 el.disabled = !enabled;
 
                 if (!enabled) {
-                    el.classList.add("opacity-50", "cursor-not-allowed");
                     el.value = '';
-                } else {
-                    el.classList.remove("opacity-50", "cursor-not-allowed");
                 }
             });
-
-            if (rowInputs.length > 0) {
-                const row = rowInputs[0].closest('tr');
-                if (row) {
-                    if (!enabled) {
-                        row.classList.add("bg-gray-100");
-                        row.style.opacity = "0.6";
-                    } else {
-                        row.classList.remove("bg-gray-100");
-                        row.style.opacity = "1";
-                    }
-                }
-            }
         }
     }
 }
