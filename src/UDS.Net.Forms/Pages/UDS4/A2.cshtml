@@ -16,6 +16,19 @@
 
     </div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+        @if (Model.Visit.PACKET == PacketKind.F)
+        {        
+        <div class="@rowCSS">
+                <label asp-for="A2.NEWINF"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.NEWINF)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A2.NEWINF"></span>
+                    <submission-error location="NEWINF" errors="Model.BaseForm.UnresolvedErrors" />
+                    <radio-button-group id="A2_NEWINF" for="@Model.A2.NEWINF" items="Model.NEWINFListItems"></radio-button-group>
+            </div>
+
+        </div>
+        }
         <div class="@rowCSS">
             <label asp-for="A2.INRELTO"><span class="counter"></span>@Html.DisplayNameFor(m => m.A2.INRELTO)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
