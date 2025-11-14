@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -204,7 +205,7 @@ namespace UDS.Net.Services.DomainModels
                     }
                     else
                     {
-                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequiredForVisitKind, visitDate, CreatedBy));
+                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequiredForVisitKind, visitDate, CreatedBy, kind));
                     }
                 }
 
@@ -361,36 +362,75 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
-            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+            object a1 = null;
+            object a2 = null;
+            object a5d2 = null;
+            object b5 = null;
 
-            if (a1 != null && a5d2 != null && b5 != null)
+            if (PACKET == PacketKind.F)
             {
-                // A1 sex and D1a menstruation
-                if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
-                {
-                    results.Add(new VisitValidationResult(
-                        $"A1 sex cannot be male and A5D2 menstruation details be provided.",
-                        new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
-                }
+                a1 = this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault() as A1FollowUpFormFields;
+                a2 = this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault() as A2FollowUpFormFields;
+                a5d2 = this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault() as A5D2FollowUpFormFields;
+                b5 = this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault() as B5FollowUpFormFields;
+            }
+            else
+            {
+                a1 = this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault() as A1FormFields;
+                a2 = this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault() as A2FormFields;
+                a5d2 = this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault() as A5D2FormFields;
+                b5 = this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault() as B5FormFields;
             }
 
             // A2 INLIVWTH == 1 (yes) and A1 LIVSITUA == 1 (lives alone) is a conflict
             if (a1 != null && a2 != null)
             {
-                if (a2.INLIVWTH == 1 && a1.LIVSITUA == 1)
+                int? livSitua = a1 switch
+                {
+                    A1FormFields f => f.LIVSITUA,
+                    A1FollowUpFormFields f => f.LIVSITUA,
+                    _ => null
+                };
+
+                int? inLivWth = a2 switch
+                {
+                    A2FormFields f => f.INLIVWTH,
+                    A2FollowUpFormFields f => f.INLIVWTH,
+                    _ => null
+                };
+
+                if (inLivWth == 1 && livSitua == 1)
                 {
                     results.Add(new VisitValidationResult(
                         $"IF A2 Q3. INLIVWTH (lives with participant?)=1 (yes) then Form A1, Q12. LIVSITUA (participant's living situation) should not equal 1 (lives alone)",
-                        new[] { nameof(a2.INLIVWTH), nameof(a1.LIVSITUA) }));
+                        new[] { nameof(inLivWth), "LIVSITUA" }));
                 }
             }
 
             if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
             {
+                if (a1 != null && a5d2 != null && b5 != null)
+                {
+                    int? birthSex = a1 switch
+                    {
+                        A1FormFields f => f.BIRTHSEX,
+                        _ => null
+                    };
 
+                    int? menarche = a5d2 switch
+                    {
+                        A5D2FormFields f => f.MENARCHE,
+                        _ => null
+                    };
+
+                    // A1 sex and D1a menstruation
+                    if (birthSex == 1 && menarche != null)
+                    {
+                        results.Add(new VisitValidationResult(
+                            $"A1 sex cannot be male and A5D2 menstruation details be provided.",
+                            new[] { nameof(birthSex), nameof(menarche) }));
+                    }
+                }
             }
 
             return results;
@@ -400,51 +440,113 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
-            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
-            var b9 = (B9FormFields)this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault();
-            var d1a = (D1aFormFields)this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault();
+            object a1 = null;
+            object a2 = null;
+            object a5d2 = null;
+            object b5 = null;
+            object b9 = null;
+            object d1a = null;
+
+            if (PACKET == PacketKind.F)
+            {
+                a1 = this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault() as A1FollowUpFormFields;
+                a2 = this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault() as A2FollowUpFormFields;
+                a5d2 = this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault() as A5D2FollowUpFormFields;
+                b5 = this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault() as B5FollowUpFormFields;
+                b9 = this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault() as B9FollowUpFormFields;
+                d1a = this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault() as D1aFollowUpFormFields;
+            }
+            else
+            {
+                a1 = this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault() as A1FormFields;
+                a2 = this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault() as A2FormFields;
+                a5d2 = this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault() as A5D2FormFields;
+                b5 = this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault() as B5FormFields;
+                b9 = this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault() as B9FormFields;
+                d1a = this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault() as D1aFormFields;
+            }
 
             if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
-                if (a2.INRELTO.HasValue && a2.INRELTO.Value == 1 && a2.INLIVWTH.HasValue && a2.INLIVWTH == 0)
+                int? inRelTo = a2 switch
+                {
+                    A2FormFields f => f.INRELTO,
+                    A2FollowUpFormFields f => f.INRELTO,
+                    _ => null
+                };
+
+                int? inLivWth = a2 switch
+                {
+                    A2FormFields f => f.INLIVWTH,
+                    A2FollowUpFormFields f => f.INLIVWTH,
+                    _ => null
+                };
+
+                int? anx = b5 switch
+                {
+                    B5FormFields f => f.ANX,
+                    B5FollowUpFormFields f => f.ANX,
+                    _ => null
+                };
+
+                int? anxiety = a5d2 switch
+                {
+                    A5D2FormFields f => f.ANXIETY,
+                    A5D2FollowUpFormFields f => f.ANXIETY,
+                    _ => null
+                };
+
+                int? beAnx = b9 switch
+                {
+                    B9FormFields f => f.BEANX,
+                    B9FollowUpFormFields f => f.BEANX,
+                    _ => null
+                };
+
+                bool? anxiet = d1a switch
+                {
+                    D1aFormFields f => f.ANXIET,
+                    D1aFollowUpFormFields f => f.ANXIET,
+                    _ => null
+                };
+
+                if (inRelTo == 1 && inLivWth == 0)
                 {
                     results.Add(new VisitValidationResult(
                         $"A2 if q1. INRELTO = 1 (spouse, partner, or companion), then A2 q3. INLIVWTH should not equal 0 (does not live with co-participant).",
-                        new[] { nameof(a2.INRELTO), nameof(a2.INLIVWTH) }));
+                        new[] { nameof(inRelTo), nameof(inLivWth) }));
                 }
-                if (b5.ANX.HasValue)
+
+                if (anx.HasValue)
                 {
-                    if (b5.ANX == 0)
+                    if (anx == 0)
                     {
-                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 0)
+                        if (anxiety.HasValue && anxiety != 0)
                         {
                             results.Add(new VisitValidationResult(
                                 $"B5 if q6a. anx (anxiety) = 0 (no), then form A5D2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                new[] { nameof(anx), nameof(anxiety) }));
                         }
                     }
-                    else if (b5.ANX == 1)
+                    else if (anx == 1)
                     {
-                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 1)
+                        if (anxiety.HasValue && anxiety != 1)
                         {
                             results.Add(new VisitValidationResult(
                                 $"B5 if q6a. anx (anxiety) = 1 (yes), then form A5D2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                new[] { nameof(anx), nameof(anxiety) }));
                         }
-                        if (b9.BEANX.HasValue && b9.BEANX != 1)
+                        if (beAnx.HasValue && beAnx != 1)
                         {
                             results.Add(new VisitValidationResult(
                                 $"B5 if q6a. anx (anxiety) = 1 (yes), then form B9, q12c. beanx (anxiety) should equal 1 (yes).",
-                                new[] { nameof(b5.ANX), nameof(b9.BEANX) }));
+                                new[] { nameof(anx), nameof(beAnx) }));
                         }
-                        if (d1a.ANXIET.HasValue && d1a.ANXIET != true)
+                        if (anxiet.HasValue && anxiet != true)
                         {
                             results.Add(new VisitValidationResult(
                                 $"B5 if q6a. anx (anxiety) = 1 (yes), then form D1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
-                                new[] { nameof(b5.ANX), nameof(d1a.ANXIET) }));
+                                new[] { nameof(anx), nameof(anxiet) }));
                         }
                     }
                 }

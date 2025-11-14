@@ -4,6 +4,7 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
@@ -172,90 +173,216 @@ namespace UDS.Net.Services.Extensions
             return m1Dtos.Select(m => m.ToDomain()).ToList();
         }
 
-        public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username)
+        public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username, PacketKind? packetKind = PacketKind.I)
         {
             if (dto != null)
-                return dto.Select(f => f.ToDomain(visitId, f.CreatedBy)).ToList();
+                return dto.Select(f => f.ToDomain(visitId, f.CreatedBy, packetKind)).ToList();
 
             return new List<Form>();
         }
 
-        public static Form ToDomain(this FormDto dto, int visitId, string username)
+        public static Form ToDomain(this FormDto dto, int visitId, string username, PacketKind? packetKind = PacketKind.I)
         {
             IFormFields formFields = null;
             string title = "";
 
             if (dto is A1Dto)
             {
-                formFields = new A1FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A1FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A1FormFields(dto);
+                }
             }
             else if (dto is A1aDto)
             {
-                formFields = new A1aFormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A1aFollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A1aFormFields(dto);
+                }
             }
             else if (dto is A2Dto)
             {
-                formFields = new A2FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A2FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A2FormFields(dto);
+                }
             }
             else if (dto is A3Dto)
             {
-                formFields = new A3FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A3FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A3FormFields(dto);
+                }
             }
             else if (dto is A4Dto)
             {
-                formFields = new A4GFormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A4GFollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A4GFormFields(dto);
+                }
             }
             else if (dto is A4aDto)
             {
-                formFields = new A4aFormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A4aFollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A4aFormFields(dto);
+                }
             }
             else if (dto is A5D2Dto)
             {
-                formFields = new A5D2FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new A5D2FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new A5D2FormFields(dto);
+                }
             }
             else if (dto is B1Dto)
             {
-                formFields = new B1FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B1FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B1FormFields(dto);
+                }
             }
             else if (dto is B3Dto)
             {
-                formFields = new B3FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B3FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B3FormFields(dto);
+                }
             }
             else if (dto is B4Dto)
             {
-                formFields = new B4FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B4FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B4FormFields(dto);
+                }
             }
             else if (dto is B5Dto)
             {
-                formFields = new B5FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B5FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B5FormFields(dto);
+                }
             }
             else if (dto is B6Dto)
             {
-                formFields = new B6FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B6FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B6FormFields(dto);
+                }
             }
             else if (dto is B7Dto)
             {
-                formFields = new B7FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B7FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B7FormFields(dto);
+                }
             }
             else if (dto is B8Dto)
             {
-                formFields = new B8FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B8FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B8FormFields(dto);
+                }
             }
             else if (dto is B9Dto)
             {
-                formFields = new B9FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new B9FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new B9FormFields(dto);
+                }
             }
             else if (dto is C2Dto)
             {
-                formFields = new C2FormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new C2FollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new C2FormFields(dto);
+                }
             }
             else if (dto is D1aDto)
             {
-                formFields = new D1aFormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new D1aFollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new D1aFormFields(dto);
+                }
             }
             else if (dto is D1bDto)
             {
-                formFields = new D1bFormFields(dto);
+                if (packetKind == PacketKind.F)
+                {
+                    formFields = new D1bFollowUpFormFields(dto);
+                }
+                else
+                {
+                    formFields = new D1bFormFields(dto);
+                }
             }
             else
             {
@@ -334,11 +461,6 @@ namespace UDS.Net.Services.Extensions
 
         public static Packet ToDomain(this PacketDto dto, string username)
         {
-            IList<Form> existingForms = new List<Form>();
-
-            if (dto.Forms != null)
-                existingForms = dto.Forms.ToDomain(dto.Id, username);
-
             PacketKind packetKind = PacketKind.I;
 
             if (!string.IsNullOrWhiteSpace(dto.PACKET))
@@ -346,6 +468,11 @@ namespace UDS.Net.Services.Extensions
                 if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
                     packetKind = kind;
             }
+
+            IList<Form> existingForms = new List<Form>();
+
+            if (dto.Forms != null)
+                existingForms = dto.Forms.ToDomain(dto.Id, username, packetKind);
 
             PacketStatus packetStatus = PacketStatus.Pending;
             if (!string.IsNullOrWhiteSpace(dto.Status))
@@ -357,26 +484,26 @@ namespace UDS.Net.Services.Extensions
             IList<PacketSubmission> packetSubmissions = new List<PacketSubmission>();
 
             if (dto.PacketSubmissions != null)
-                packetSubmissions = dto.PacketSubmissions.ToDomain("", dto.Id, username); // we do not need the adrcid until packet submission/export
+                packetSubmissions = dto.PacketSubmissions.ToDomain("", dto.Id, username, packetKind); // we do not need the adrcid until packet submission/export
 
             return new Packet(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
 
         }
 
-        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username)
+        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username, PacketKind? packetKind = PacketKind.I)
         {
             if (dto == null)
                 return new List<PacketSubmission>();
             else
             {
-                return dto.Select(p => p.ToDomain(adrcId)).ToList();
+                return dto.Select(p => p.ToDomain(adrcId, packetKind)).ToList();
             }
         }
 
-        public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId)
+        public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId, PacketKind? packetKind = PacketKind.I)
         {
             IList<Form> forms = dto.Forms?
-                .Select(form => form.ToDomain(dto.PacketId, form.CreatedBy))
+                .Select(form => form.ToDomain(dto.PacketId, form.CreatedBy, packetKind))
                 .ToList() ?? new List<Form>();
 
             IList<PacketSubmissionError> errors = dto.PacketSubmissionErrors?
