@@ -299,9 +299,9 @@ namespace UDS.Net.Forms.Extensions
             }
         }
 
-        public static IFormFields GetFormFields(this A1a vm ,PacketKind packetKind)
+        public static IFormFields GetFormFields(this A1a vm, PacketKind packetKind)
         {
-            if(packetKind == PacketKind.F)
+            if (packetKind == PacketKind.F)
             {
                 return new A1aFollowUpFormFields
                 {
@@ -423,7 +423,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static IFormFields GetFormFields(this A2 vm, PacketKind packetKind)
         {
-            if(packetKind == PacketKind.F)
+            if (packetKind == PacketKind.F)
             {
                 return new A2FollowUpFormFields
                 {
@@ -463,7 +463,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static IFormFields GetFormFields(this A3 vm, PacketKind packetKind)
         {
-            if(packetKind == PacketKind.F)
+            if (packetKind == PacketKind.F)
             {
                 return new A3FollowUpFormFields
                 {
