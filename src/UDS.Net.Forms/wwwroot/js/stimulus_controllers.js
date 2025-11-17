@@ -16,8 +16,8 @@ import a4 from "./js_controllers/a4_controller.js"
 import modal from "./js_controllers/modal_controller.js"
 import checkboxButton from "./js_controllers/checkboxButton_controller.js"
 import pageRefreshOnSubmit from "./js_controllers/pageRefreshOnSubmit_controller.js"
-import EnableRows from "./js_controllers/EnableRows_controller.js"
-import EnableIntraRow from "./js_controllers/EnableIntraRow_controller.js"
+import A3EnableRows from "./js_controllers/a3_enable_rows_controller.js"
+import A3EnableIntraRow from "./js_controllers/a3_enable_intra_row_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -35,8 +35,8 @@ Stimulus.register("b6", b6)
 Stimulus.register("dropdownReset", dropdownReset)
 Stimulus.register("formlessSubmit", FormlessSubmit)
 Stimulus.register("a4", a4)
-Stimulus.register("enableRows", EnableRows)
-Stimulus.register("enableIntraRow", EnableIntraRow)
+Stimulus.register("a3-enable-rows", A3EnableRows)
+Stimulus.register("a3-enable-intra-row", A3EnableIntraRow)
 Stimulus.register("modal", modal)
 Stimulus.register("checkboxButton", checkboxButton)
 Stimulus.register("pageRefreshOnSubmit", pageRefreshOnSubmit)
