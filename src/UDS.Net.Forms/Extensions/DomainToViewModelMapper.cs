@@ -775,7 +775,6 @@ namespace UDS.Net.Forms.Extensions
                 INMEMWORS = fields.INMEMWORS,
                 INMEMTROUB = fields.INMEMTROUB,
                 INMEMTEN = fields.INMEMTEN,
-                NEWINF = fields.NEWINF,
             };
         }
 

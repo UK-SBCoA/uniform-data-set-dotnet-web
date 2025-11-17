@@ -38,10 +38,19 @@ namespace UDS.Net.Services.Extensions
 
         public static Visit ToDomain(this VisitDto dto, string username)
         {
+
+            PacketKind packetKind = PacketKind.I;
+
+            if (!string.IsNullOrWhiteSpace(dto.PACKET))
+            {
+                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
+                    packetKind = kind;
+            }
+
             IList<Form> existingForms = new List<Form>();
 
             if (dto.Forms != null)
-                existingForms = dto.Forms.ToDomain(dto.Id, username);
+                existingForms = dto.Forms.ToDomain(dto.Id, username, packetKind);
 
             IList<PacketSubmissionError> errors = new List<PacketSubmissionError>();
 
@@ -56,14 +65,6 @@ namespace UDS.Net.Services.Extensions
                         form.UnresolvedErrors = errors.Where(e => e.FormKind == form.Kind).ToList();
                     }
                 }
-            }
-
-            PacketKind packetKind = PacketKind.I;
-
-            if (!string.IsNullOrWhiteSpace(dto.PACKET))
-            {
-                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
-                    packetKind = kind;
             }
 
             PacketStatus packetStatus = PacketStatus.Pending;
