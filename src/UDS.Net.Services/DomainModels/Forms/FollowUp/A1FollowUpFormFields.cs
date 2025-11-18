@@ -63,7 +63,7 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
 
         public string GetDescription()
         {
-            return "Social Determinants of Health";
+            return "Participant Demographics";
         }
 
         public string GetVersion()
