@@ -1,0 +1,13 @@
+{
+  "name": "uniform-data-set-dotnet-web",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "tailwindcss -i ./wwwroot/lib/tailwindcss/tailwindv3.css -o ./wwwroot/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./wwwroot/lib/tailwindcss/tailwindv3.css -o ./wwwroot/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17"
+  }
+}
