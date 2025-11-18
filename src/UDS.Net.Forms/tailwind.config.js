@@ -7,6 +7,9 @@ module.exports = {
     './Pages/**/*.cshtml',
     './Views/**/*.cshtml'
   ],
+  safelist: [
+    'lg:grid-cols-2'
+  ],
   theme: {
     extend: {
       colors: {
