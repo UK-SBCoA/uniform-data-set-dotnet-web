@@ -2,7 +2,7 @@
 @{
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
-<turbo-frame id="C2">
+<turbo-frame id="C2" action="replace">
 
     <form method="POST" asp-page-handler="ChangeMode">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
@@ -35,8 +35,6 @@
         <div>
             <button type="submit" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">[TEST C2] switch partial</button>
         </div>
-
-        <input asp-for="@Model.C2.Id" />
     </form>
 
     <form id="UDSForm">

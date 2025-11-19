@@ -180,8 +180,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
                     if (!ModelState.IsValid)
                     {
-                        Response.ContentType = "text/vnd.turbo-stream.html";
-                        return Partial("_C2Validation", C2);
+                        return Partial("_C2T", C2);
                     }
                 };
             }

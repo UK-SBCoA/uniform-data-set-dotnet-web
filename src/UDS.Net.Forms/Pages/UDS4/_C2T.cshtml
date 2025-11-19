@@ -3,7 +3,7 @@
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
-<turbo-frame id="C2">
+<turbo-frame id="C2" action="replace">
 
     <form method="POST" asp-page-handler="ChangeMode">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
@@ -36,12 +36,62 @@
         <div>
             <button type="submit" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">[TEST C2T] switch partial</button>
         </div>
-
-        <input asp-for="@Model.C2.Id" />
     </form>
     
-    <form id="UDSForm">
+    <form id="UDSForm" asp-page-handler="Post">
         <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+
+            <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+            <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
+            <input asp-for="@Model.Visit.Id" type="hidden" />
+            <input asp-for="@Model.Visit.ParticipationId" type="hidden" />
+            <input asp-for="@Model.Visit.VISITNUM" type="hidden" />
+            <input asp-for="@Model.Visit.PACKET" type="hidden" />
+            <input asp-for="@Model.Visit.FORMVER" type="hidden" />
+            <input asp-for="@Model.Visit.VISIT_DATE" type="hidden" />
+            <input asp-for="@Model.Visit.INITIALS" type="hidden" />
+            <input asp-for="@Model.Visit.Status" type="hidden" />
+            <input asp-for="@Model.Visit.CreatedAt" type="hidden" />
+            <input asp-for="@Model.Visit.CreatedBy" type="hidden" />
+            <input asp-for="@Model.Visit.ModifiedBy" type="hidden" />
+            <input asp-for="@Model.Visit.DeletedBy" type="hidden" />
+            <input asp-for="@Model.Visit.IsDeleted" type="hidden" />
+
+            @* begin dropdown input for testing *@
+
+            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
+                <div>
+                    <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
+                    <enum-select for="@Model.C2.MODE"
+                                 items="Html.GetEnumSelectList<FormMode>()"
+                                 enabled-values="@Model.C2.AllowedFormModes"
+                                 id="modalityselect"
+                                 class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option disabled selected class="opacity-75">--</option>
+                    </enum-select>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+                    <submission-error location="MODE" errors="Model.BaseForm.UnresolvedErrors" />
+                </div>
+                <div>
+                    <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
+                    <enum-select for="@Model.C2.RMMODE"
+                                 items="Html.GetEnumSelectList<RemoteModality>()"
+                                 enabled-values="@Model.C2.AllowedRemoteModalities"
+                                 id="remote"
+                                 class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option disabled selected class="disabled:opacity-75">--</option>
+                    </enum-select>
+                </div>
+
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
+                <submission-error location="RMMODE" errors="Model.BaseForm.UnresolvedErrors" />
+            </div>
+            <div>
+                <button type="submit" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">[TEST C2T] switch partial</button>
+            </div>
+
+            @* dropdown input for testing *@
+
             <div class="@rowCSS shadow-sm border-2 rounded-md border-indigo-200/50 bg-indigo-50">
                 <h3 class="font-semibold leading-7 text-gray-900">
                     <span class="counter invisible"></span>
