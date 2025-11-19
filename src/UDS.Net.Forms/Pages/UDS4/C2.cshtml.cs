@@ -634,11 +634,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
-
-            C2.MODE = FormMode.InPerson;
-
-            return Page();
+            return Partial("_C2", this);
         }
 
         //public async Task<IActionResult> OnGetC2Async(int? id)
