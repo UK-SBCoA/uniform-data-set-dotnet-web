@@ -13,11 +13,14 @@ export default class extends Controller {
         });
     }
 
-    updateFields(primaryXd) {
-        const primaryValue = parseInt(primaryXd.value, 10);
-        const shouldDisable = (primaryValue === 0 || primaryValue === 99);
+    updateFields(primaryDx) {
+        const value = primaryDx.value.trim();
+        const primaryValue = parseInt(value, 10);
 
-        const row = primaryXd.closest('tr');
+        const shouldDisable = value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;
+
+        const row = primaryDx.closest('tr');
+        if (!row) return;
 
         const dependentInputs = this.dependentTargets.filter(input =>
             row.contains(input)

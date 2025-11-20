@@ -357,25 +357,9 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
                     {
-                        <tr data-a3-enable-rows-target="row">
-                            <td><span class="subcounter"></span> Sibling @(i + 1)</td>
+                          <tr data-enable-rows-target="row">
                             <td>
-                                <input asp-for="@Model.A3.Siblings[i].YOB" data-a3-enable-rows-target="input" placeholder="YYYY" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Siblings[i].AGD" data-a3-enable-rows-target="input" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Siblings[i].ETPR" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="primaryDx" data-action="input->a3-enable-intra-row#handlePrimaryChange change->a3-enable-intra-row#handlePrimaryChange" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Siblings[i].ETSEC" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="dependent" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Siblings[i].MEVAL" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="dependent" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Siblings[i].AGO" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="dependent" />
+                                @Html.EditorFor(m => m.A3.Siblings[i])
                             </td>
                         </tr>
                     }
@@ -440,25 +424,9 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
                     {
-                        <tr data-a3-enable-rows-target="row" data-a3-enable-intra-row-target="dependent">
-                            <td><span class="subcounter"></span> Child @(i + 1)</td>
+                        <tr data-enable-rows-target="row">
                             <td>
-                                <input asp-for="@Model.A3.Children[i].YOB" data-a3-enable-rows-target="input" placeholder="YYYY" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Children[i].AGD" data-a3-enable-rows-target="input" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Children[i].ETPR" data-a3-enable-rows-target="input"  data-a3-enable-intra-row-target="primaryDx" data-action="input->a3-enable-intra-row#handlePrimaryChange change->a3-enable-intra-row#handlePrimaryChange" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Children[i].ETSEC" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="dependent" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Children[i].MEVAL" data-a3-enable-rows-target="input"  data-a3-enable-intra-row-target="dependent" />
-                            </td>
-                            <td>
-                                <input asp-for="@Model.A3.Children[i].AGO" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="dependent" />
+                                @Html.EditorFor(m => m.A3.Children[i])
                             </td>
                         </tr>
                     }
