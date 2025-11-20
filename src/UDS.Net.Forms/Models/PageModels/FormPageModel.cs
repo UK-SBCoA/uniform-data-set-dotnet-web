@@ -180,7 +180,14 @@ namespace UDS.Net.Forms.Models.PageModels
 
                     if (!ModelState.IsValid)
                     {
-                        return Partial("_C2T", C2);
+                        if (C2.BaseForm.MODE == FormMode.Remote || C2.BaseForm.RMMODE == RemoteModality.Telephone)
+                        {
+                            return Partial("_C2T", this);
+                        }
+                        else
+                        {
+                            return Partial("_C2", this);
+                        }
                     }
                 };
             }

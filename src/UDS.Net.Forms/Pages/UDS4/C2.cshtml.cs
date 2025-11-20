@@ -625,16 +625,29 @@ namespace UDS.Net.Forms.Pages.UDS4
             return Page();
         }
 
-        public async Task<IActionResult> OnPostChangeMode(int? id)
+        public async Task<IActionResult> OnPostChangeMode()
         {
-            await base.OnGetAsync(id);
+            FormMode modeSwitch = C2.MODE;
+            RemoteModality? modalitySwitch = C2.RMMODE;
 
+            await base.OnGetAsync(Visit.Id);
+
+            //DEV NOTE: Assuming I will need to regrab properties with base form. Verify this later
             if (BaseForm != null)
             {
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            return Partial("_C2", this);
+            C2.MODE = modeSwitch;
+            C2.RMMODE = modalitySwitch;
+
+            if(C2.MODE == FormMode.Remote || C2.RMMODE ==  RemoteModality.Telephone)
+            {
+                return Partial("_C2T", this);
+            } else
+            {
+                return Partial("_C2", this);
+            }
         }
 
         //public async Task<IActionResult> OnGetC2Async(int? id)

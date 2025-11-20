@@ -37,7 +37,7 @@
         </div>
     </form>
 
-    <form id="UDSForm">
+    <form id="UDSForm" asp-page-handler="Post">
         <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
             <input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
             <input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
@@ -56,6 +56,13 @@
             <input asp-for="@Model.Visit.IsDeleted" type="hidden" />
 
             @* Dev Note: form meta is included in the c2 view *@
+
+            @* begin dropdown input for testing *@
+
+            <input asp-for="C2.MODE" type="hidden"/>
+            <input asp-for="C2.RMMODE" type="hidden"/>
+
+            @* dropdown input for testing *@
         
 
             <div class="@rowCSS shadow-sm border-2 rounded-md border-indigo-200/50 bg-indigo-50">
