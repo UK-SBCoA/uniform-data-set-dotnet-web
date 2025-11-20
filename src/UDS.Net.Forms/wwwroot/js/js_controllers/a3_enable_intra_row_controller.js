@@ -5,6 +5,7 @@ export default class extends Controller {
 
     connect() {
         this.updateAllFields();
+        this.PrimaryDxDisabled();
     }
 
     updateAllFields() {
@@ -17,7 +18,7 @@ export default class extends Controller {
         const value = primaryDx.value.trim();
         const primaryValue = parseInt(value, 10);
 
-        const shouldDisable = value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;
+        const shouldDisable = primaryDx.disabled || value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;
 
         const row = primaryDx.closest('tr');
         if (!row) return;
@@ -36,5 +37,18 @@ export default class extends Controller {
 
     handlePrimaryChange(event) {
         this.updateFields(event.target);
+    }
+
+    PrimaryDxDisabled() {
+        this.primaryDxTargets.forEach(primaryDx => {
+            const observer = new MutationObserver(() => {
+                this.updateFields(primaryDx);
+            });
+
+            observer.observe(primaryDx, {
+                attributes: true,
+                attributeFilter: ['disabled']
+            });
+        });
     }
 }
