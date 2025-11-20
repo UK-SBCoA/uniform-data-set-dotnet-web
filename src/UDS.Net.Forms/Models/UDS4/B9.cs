@@ -233,36 +233,30 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? FRSTCHG { get; set; }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If question 8 (DECCLCOG) = 1 then at least one response from questions 9a - 9h must be marked as Yes")]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "If question 8 (DECCLCOG) = 1 then at least one response from questions 9a - 9h must be marked as Yes")]
         public bool? DECCLCOGImpaired
         {
             get
             {
-                if (DECCLCOG.HasValue && DECCLCOG.Value == 1)
+                var cognitiveQuestions = new[] { COGMEM, COGORI, COGJUDG, COGLANG, COGVIS, COGATTN, COGFLUC, COGOTHR };
+                if (!cognitiveQuestions.Contains(1))
                 {
-                    var cognitiveQuestions = new[] { COGMEM, COGORI, COGJUDG, COGLANG, COGVIS, COGATTN, COGFLUC, COGOTHR };
-                    if (!cognitiveQuestions.Contains(1))
-                    {
-                        return null;
-                    }
+                    return null;
                 }
                 return true;
             }
         }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "If question 14 (DECCLMOT) = 1 then at least one response from questions 15a - 15g must be marked as Yes")]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "If question 14 (DECCLMOT) = 1 then at least one response from questions 15a - 15g must be marked as Yes")]
         public bool? DECCLMOTSymptoms
         {
             get
             {
-                if (DECCLMOT.HasValue && DECCLMOT.Value == 1)
+                var cognitiveQuestions = new[] { MOGAIT, MOFALLS, MOSLOW, MOTREM, MOLIMB, MOFACE, MOSPEECH };
+                if (!cognitiveQuestions.Contains(1))
                 {
-                    var cognitiveQuestions = new[] { MOGAIT, MOFALLS, MOSLOW, MOTREM, MOLIMB, MOFACE, MOSPEECH };
-                    if (!cognitiveQuestions.Contains(1))
-                    {
-                        return null;
-                    }
+                    return null;
                 }
                 return true;
             }
