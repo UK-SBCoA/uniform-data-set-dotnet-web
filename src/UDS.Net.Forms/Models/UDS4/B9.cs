@@ -231,6 +231,37 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Indicate the predominant domain that was first recognized as changed in the participant")]
         [RequiredIf(nameof(DECCLIN), "1", ErrorMessage = "Value required")]
         public int? FRSTCHG { get; set; }
+
+        [NotMapped]
+        [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "If question 8 (DECCLCOG) = 1 then at least one response from questions 9a - 9h must be marked as Yes")]
+        public bool? DECCLCOGImpaired
+        {
+            get
+            {
+                var cognitiveQuestions = new[] { COGMEM, COGORI, COGJUDG, COGLANG, COGVIS, COGATTN, COGFLUC, COGOTHR };
+                if (!cognitiveQuestions.Contains(1))
+                {
+                    return null;
+                }
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIf(nameof(DECCLMOT), "1", ErrorMessage = "If question 14 (DECCLMOT) = 1 then at least one response from questions 15a - 15g must be marked as Yes")]
+        public bool? DECCLMOTSymptoms
+        {
+            get
+            {
+                var cognitiveQuestions = new[] { MOGAIT, MOFALLS, MOSLOW, MOTREM, MOLIMB, MOFACE, MOSPEECH };
+                if (!cognitiveQuestions.Contains(1))
+                {
+                    return null;
+                }
+                return true;
+            }
+        }
+
         [NotMapped]
         [RequiredIf(nameof(BESUBAB), "1", ErrorMessage = "Please select at least one substance")]
         public bool? BESUBABCheckboxValidation
