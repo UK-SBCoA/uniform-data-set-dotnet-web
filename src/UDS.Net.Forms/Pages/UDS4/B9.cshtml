@@ -112,6 +112,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLCOG"></p>
             <radio-button-group id="@Html.IdFor(m => m.B9.DECCLCOG)" for="@Model.B9.DECCLCOG" items="Model.DECCLCOGListItems" ui-behaviors="Model.DECCLCOGUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLCOG"></span>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLCOGImpaired"></span>
             <submission-error location="DECCLCOG" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
@@ -754,6 +755,7 @@
             <p class="text-sm text-gray-500" asp-description-for="@Model.B9.DECCLMOT"></p>
             <radio-button-group id="@Html.IdFor(m => m.B9.DECCLMOT)" for="@Model.B9.DECCLMOT" items="Model.DECCLMOTListItems" ui-behaviors="Model.DECCLMOTUIBehavior"></radio-button-group>
             <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLMOT"></span>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="B9.DECCLMOTSymptoms"></span>
             <submission-error location="DECCLMOT" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
