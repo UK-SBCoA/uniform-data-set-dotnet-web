@@ -1,43 +1,43 @@
 ﻿@model UDS.Net.Forms.Models.UDS4.A3FamilyMember
 
-<tr class="border-b border-gray-100">
+<tr class="border-b border-gray-100" data-a3-enable-rows-target="row" data-controller="a3-enable-intra-row">
     <td class="w-20">
         <span class="subcounter"></span> @Model.FamilyMemberIndex
         <input type="hidden" asp-for="@Model.FamilyMemberIndex" />
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.YOB" placeholder="YYYY" />
+            <input asp-for="@Model.YOB" placeholder="YYYY" data-a3-enable-rows-target="input" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="YOB"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.AGD" />
+            <input asp-for="@Model.AGD" data-a3-enable-rows-target="input" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGD"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.ETPR" />
+            <input asp-for="@Model.ETPR" data-a3-enable-rows-target="input" data-a3-enable-intra-row-target="primaryDx" data-action="input->a3-enable-intra-row#handlePrimaryChange change->a3-enable-intra-row#handlePrimaryChange" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="ETPR"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.ETSEC" />
+            <input asp-for="@Model.ETSEC" data-a3-enable-intra-row-target="dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="ETSEC"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.MEVAL" />
+            <input asp-for="@Model.MEVAL" data-a3-enable-intra-row-target="dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="MEVAL"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.AGO" />
+            <input asp-for="@Model.AGO"  data-a3-enable-intra-row-target="dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGO"></span>
     </td>
