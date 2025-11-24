@@ -2,17 +2,20 @@
 @{
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
-<turbo-frame id="C2" action="replace">
+<turbo-frame id="C2" action="replace" data-controller="c2 dropdownReset">
 
-    <form method="POST" asp-page-handler="ChangeMode">
+    <form method="POST" asp-page-handler="ChangeMode" data-c2-target="UDSForm">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4">
             <div>
                 <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
                 <enum-select for="@Model.C2.MODE"
-                                items="Html.GetEnumSelectList<FormMode>()"
-                                enabled-values="@Model.C2.AllowedFormModes"
-                                id="modalityselect"
-                                class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                             items="Html.GetEnumSelectList<FormMode>()"
+                             enabled-values="@Model.C2.AllowedFormModes"
+                             data-dropdownreset-target="trigger"
+                             data-c2-target="modeSelect"
+                             data-action="change->dropdownReset#update change->c2#ChangeView change->c2#UpdateModalityValues"
+                             id="modalityselect"
+                             class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <option disabled selected class="opacity-75">--</option>
                 </enum-select>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
@@ -21,10 +24,13 @@
             <div>
                 <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
                 <enum-select for="@Model.C2.RMMODE"
-                                items="Html.GetEnumSelectList<RemoteModality>()"
-                                enabled-values="@Model.C2.AllowedRemoteModalities"
-                                id="remote"
-                                class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                             items="Html.GetEnumSelectList<RemoteModality>()"
+                             enabled-values="@Model.C2.AllowedRemoteModalities"
+                             data-dropdownreset-target="remote"
+                             data-c2-target="modalitySelect"
+                             data-action="change->c2#ChangeView change->c2#UpdateModalityValues"
+                             id="remote"
+                             class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <option disabled selected class="disabled:opacity-75">--</option>
                 </enum-select>
             </div>
@@ -33,7 +39,7 @@
             <submission-error location="RMMODE" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
         <div>
-            <button type="submit" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">[TEST C2] switch partial</button>
+            <button data-c2-target="UDSFormSubmit" id="UDSFormSubmit" type="submit" class="hidden"></button>
         </div>
     </form>
 
@@ -59,8 +65,8 @@
 
             @* begin dropdown input for testing *@
 
-            <input asp-for="C2.MODE" type="hidden"/>
-            <input asp-for="C2.RMMODE" type="hidden"/>
+            <input data-c2-target="formMode" asp-for="C2.MODE" class="hidden"/>
+            <input data-c2-target="formModality" asp-for="C2.RMMODE" class="hidden"/>
 
             @* dropdown input for testing *@
         

@@ -641,7 +641,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             C2.MODE = modeSwitch;
             C2.RMMODE = modalitySwitch;
 
-            if(C2.MODE == FormMode.Remote || C2.RMMODE ==  RemoteModality.Telephone)
+            if(C2.MODE == FormMode.Remote && C2.RMMODE ==  RemoteModality.Telephone)
             {
                 return Partial("_C2T", this);
             } else

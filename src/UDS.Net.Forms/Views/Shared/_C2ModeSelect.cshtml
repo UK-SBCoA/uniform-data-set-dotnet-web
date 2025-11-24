@@ -1,0 +1,39 @@
+@* @model UDS.Net.Forms.Pages.UDS4.C2Model
+
+<form method="POST" asp-page-handler="ChangeMode">
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pb-4" data-controller="dropdownReset">
+        <div>
+            <label for="@Html.IdFor(m => m.C2.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
+            <enum-select for="@Model.C2.MODE"
+                         items="Html.GetEnumSelectList<FormMode>()"
+                         enabled-values="@Model.C2.AllowedFormModes"
+                         data-dropdownreset-target="trigger"
+                         data-action="change->dropdownReset#update"
+                         id="modalityselect"
+                         class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option disabled selected class="opacity-75">--</option>
+            </enum-select>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.MODE"></span>
+            <submission-error location="MODE" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+        <div>
+            <label for="@Html.IdFor(m => m.C2.RMMODE)" class="block text-sm font-semibold leading-6 text-gray-900">If remote, specify modality</label>
+            <enum-select for="@Model.C2.RMMODE"
+                         items="Html.GetEnumSelectList<RemoteModality>()"
+                         enabled-values="@Model.C2.AllowedRemoteModalities"
+                         data-dropdownreset-target="remote"
+                         id="remote"
+                         class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <option disabled selected class="disabled:opacity-75">--</option>
+            </enum-select>
+        </div>
+
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.C2.RMMODE"></span>
+        <submission-error location="RMMODE" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+    <div>
+        <button type="submit" class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">switch partial</button>
+        <input asp-for="@Model.C2.MODE" />
+        <input asp-for="@Model.C2.RMMODE" />
+    </div>
+</form> *@
