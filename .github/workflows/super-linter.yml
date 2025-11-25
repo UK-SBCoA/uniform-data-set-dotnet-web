@@ -45,4 +45,5 @@ jobs:
           VALIDATE_CHECKOV: false
           VALIDATE_JSON: false
           FILTER_REGEX_INCLUDE: .*src/.*
-          FILTER_REGEX_EXCLUDE: .*wwwroot/css/tailwindoutput\.css
+          FILTER_REGEX_EXCLUDE: .*wwwroot/(css/tailwindoutput\.css|lib/tailwindcss/site\.css)
+
