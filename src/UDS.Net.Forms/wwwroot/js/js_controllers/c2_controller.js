@@ -16,6 +16,9 @@ export default class extends Controller {
 
         //set modality values for hidden fields when new view loads a partial
         this.UpdateModalityValues()
+
+        //handle dropdown state on load
+        this.HandleDropdowns()
     }
 
     UpdateModalityValues() {
@@ -24,14 +27,17 @@ export default class extends Controller {
     }
 
     ChangeView() {
-        if (this.modeSelectTarget.value == 2 && this.modalitySelectTarget.value == "--") {
-            console.log("not changing view yet")
-        } else {
+        if ((this.modeSelectTarget.value == 1 || this.modeSelectTarget.value == 2) && this.modalitySelectTarget.value != "") {
             this.UDSFormSubmitTarget.click()
         }
     }
 
-    SubmitUDSForm() {
-        // will need to run action when either 1. InPerson mode is selected or 2. mode is remote & modality is selected
+    HandleDropdowns() {
+        if (this.modeSelectTarget.value == 1) {
+            this.modalitySelectTarget.value = ""
+            this.modalitySelectTarget.disabled = true;
+        } else {
+            this.modalitySelectTarget.disabled = false;
+        }
     }
 }

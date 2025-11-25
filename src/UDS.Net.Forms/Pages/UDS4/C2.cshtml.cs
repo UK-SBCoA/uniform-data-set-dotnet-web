@@ -641,6 +641,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             C2.MODE = modeSwitch;
             C2.RMMODE = modalitySwitch;
 
+            //DEV NOTE: Form is returning with model state errors. Unsure why
+            ModelState.Clear();
+
             if(C2.MODE == FormMode.Remote && C2.RMMODE ==  RemoteModality.Telephone)
             {
                 return Partial("_C2T", this);
