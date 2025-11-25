@@ -1,8 +1,2 @@
-﻿@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    .input-validation-error {
-    }
-}
+﻿@import "tailwindcss";
+@plugin "@tailwindcss/forms";
