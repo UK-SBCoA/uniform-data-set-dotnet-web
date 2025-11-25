@@ -1,0 +1,43 @@
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+    static targets = [
+        "modeSelect",
+        "modalitySelect",
+        "formMode",
+        "formModality",
+        "UDSFormSubmit"
+    ]
+
+    //look for UDSForm connection instad of target because stimulus does not reinitialize for the c2.cshtml
+    UDSFormSubmitTargetConnected() {
+        //call global javascript method from unobtrusive_custom to reapply disable states
+        setInputStates()
+
+        //set modality values for hidden fields when new view loads a partial
+        this.UpdateModalityValues()
+
+        //handle dropdown state on load
+        this.HandleDropdowns()
+    }
+
+    UpdateModalityValues() {
+        this.formModeTarget.value = this.modeSelectTarget.value
+        this.formModalityTarget.value = this.modalitySelectTarget.value
+    }
+
+    ChangeView() {
+        if ((this.modeSelectTarget.value == 1 || this.modeSelectTarget.value == 2) && this.modalitySelectTarget.value != "") {
+            this.UDSFormSubmitTarget.click()
+        }
+    }
+
+    HandleDropdowns() {
+        if (this.modeSelectTarget.value == 1) {
+            this.modalitySelectTarget.value = ""
+            this.modalitySelectTarget.disabled = true;
+        } else {
+            this.modalitySelectTarget.disabled = false;
+        }
+    }
+}
