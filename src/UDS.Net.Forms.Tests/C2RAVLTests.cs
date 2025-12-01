@@ -126,7 +126,7 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Expect error from 13a value
-            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98" })).ToBeVisibleAsync();
+            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98" })).ToBeVisibleAsync();
 
             //Change 13a value to valid value
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
@@ -186,7 +186,7 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Expect error from 13a value
-            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when 6a. is 95 - 98" })).ToBeVisibleAsync();
+            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98" })).ToBeVisibleAsync();
 
             //Change 13a value to valid value
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
