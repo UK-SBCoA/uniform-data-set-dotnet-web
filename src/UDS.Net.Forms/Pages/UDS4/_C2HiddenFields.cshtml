@@ -1,0 +1,20 @@
+@model UDS.Net.Forms.Pages.UDS4.C2Model
+
+<input name="Enum.FormMode.NotCompleted" value="@(((int)FormMode.NotCompleted).ToString())" type="hidden" />
+<input name="Enum.FormStatus.Finalized" value="@(((int)FormStatus.Finalized).ToString())" type="hidden" />
+<input asp-for="@Model.Visit.Id" type="hidden" />
+<input asp-for="@Model.Visit.ParticipationId" type="hidden" />
+<input asp-for="@Model.Visit.VISITNUM" type="hidden" />
+<input asp-for="@Model.Visit.PACKET" type="hidden" />
+<input asp-for="@Model.Visit.FORMVER" type="hidden" />
+<input asp-for="@Model.Visit.VISIT_DATE" type="hidden" />
+<input asp-for="@Model.Visit.INITIALS" type="hidden" />
+<input asp-for="@Model.Visit.Status" type="hidden" />
+<input asp-for="@Model.Visit.CreatedAt" type="hidden" />
+<input asp-for="@Model.Visit.CreatedBy" type="hidden" />
+<input asp-for="@Model.Visit.ModifiedBy" type="hidden" />
+<input asp-for="@Model.Visit.DeletedBy" type="hidden" />
+<input asp-for="@Model.Visit.IsDeleted" type="hidden" />
+
+<input data-c2-target="formMode" asp-for="C2.MODE" class="hidden" />
+<input data-c2-target="formModality" asp-for="C2.RMMODE" class="hidden" />

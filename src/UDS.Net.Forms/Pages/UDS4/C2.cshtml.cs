@@ -628,18 +628,19 @@ namespace UDS.Net.Forms.Pages.UDS4
             FormMode modeSwitch = C2.MODE;
             RemoteModality? modalitySwitch = C2.RMMODE;
 
+            //Get relevant base form data
             await base.OnGetAsync(Visit.Id);
 
-            //DEV NOTE: Assuming I will need to regrab properties with base form. Verify this later
             if (BaseForm != null)
             {
-                C2 = (C2)BaseForm; // class library should always handle new instances
+                C2 = (C2)BaseForm;
             }
 
+            //Apply change to mode and modality based on form switch data
             C2.MODE = modeSwitch;
             C2.RMMODE = modalitySwitch;
 
-            //DEV NOTE: Form returns model errors on switch, clearing them before load
+            //Form returns model errors on switch, clearing them before load
             ModelState.Clear();
 
             if (C2.MODE == FormMode.Remote && C2.RMMODE == RemoteModality.Telephone)
