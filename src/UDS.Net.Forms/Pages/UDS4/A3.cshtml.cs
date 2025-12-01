@@ -56,44 +56,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             BaseForm = A3; // reassign bounded and derived form to base form for base method
 
             Visit.Forms.Add(A3); // visit needs updated form as well
-            var existingSiblings = new List<A3FamilyMember>();
-            if (A3.Siblings != null)
-            {
-                existingSiblings = A3.Siblings.ToList();
-            }
-
-            A3.Siblings = new List<A3FamilyMember>();
-            for (int i = 0; i < 20; i++)
-            {
-                if (i < existingSiblings.Count && existingSiblings[i] != null)
-                {
-                    A3.Siblings.Add(existingSiblings[i]);
-                }
-                else
-                {
-                    A3.Siblings.Add(new A3FamilyMember());
-                }
-            }
-
-
-            var existingChildren = new List<A3FamilyMember>();
-            if (A3.Children != null)
-            {
-                existingChildren = A3.Children.ToList();
-            }
-
-            A3.Children = new List<A3FamilyMember>();
-            for (int i = 0; i < 15; i++)
-            {
-                if (i < existingChildren.Count && existingChildren[i] != null)
-                {
-                    A3.Children.Add(existingChildren[i]);
-                }
-                else
-                {
-                    A3.Children.Add(new A3FamilyMember());
-                }
-            }
 
             if (A3 != null && A3.Status == FormStatus.Finalized)
             {
