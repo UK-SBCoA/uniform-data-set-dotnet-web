@@ -65,7 +65,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REYBINT"),
                     new UIEnableAttribute("C2.REY6REC"),
                     new UIEnableAttribute("C2.REY6INT"),
-                    new UIEnableAttribute("C2.REY6INT"),
                     new UIEnableAttribute("C2.REYDINT"),
                     new UIEnableAttribute("C2.REYDTI"),
                     new UIEnableAttribute("C2.REYMETHOD"),

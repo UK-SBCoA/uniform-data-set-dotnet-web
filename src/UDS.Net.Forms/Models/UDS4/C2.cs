@@ -635,38 +635,15 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value (_C2 view)
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
-        public bool? REYDRECC2Validation
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98")]
+        public bool? REYDRECValidation
         {
             get
             {
-                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
+                if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
                 {
-                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
-                    {
-                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
-                    }
-                }
-
-                return true;
-            }
-        }
-
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value (C2T view)
-        [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 6a. is 95 - 98")]
-        public bool? REYDRECC2TValidation
-        {
-            get
-            {
-                if (MODE == FormMode.Remote && RMMODE == RemoteModality.Telephone)
-                {
-                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
-                    {
-                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
-                    }
+                    return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
                 }
 
                 return true;
