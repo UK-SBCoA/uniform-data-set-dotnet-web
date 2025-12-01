@@ -21,6 +21,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Paid caregiver, health care provider, or clinician", "6")
         };
 
+        public List<RadioListItem> NEWINFListItems { get; } = new List<RadioListItem>
+        {
+            new RadioListItem("No", "0"),
+            new RadioListItem("Yes", "1"),
+        };
+
         public List<RadioListItem> INLIVWTHListItems { get; } = new List<RadioListItem>
         {
             new RadioListItem("No", "0"),
