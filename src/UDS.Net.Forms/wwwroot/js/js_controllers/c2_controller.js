@@ -9,7 +9,7 @@ export default class extends Controller {
         "UDSFormSubmit"
     ]
 
-    //look for UDSForm connection instad of target because stimulus does not reinitialize for the c2.cshtml
+    //look for UDSForm connection, stimulus not reinitialized on form switch
     UDSFormSubmitTargetConnected() {
         //call global javascript method from unobtrusive_custom to reapply disable states
         setInputStates()

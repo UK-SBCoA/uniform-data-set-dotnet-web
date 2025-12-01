@@ -620,8 +620,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 C2 = (C2)BaseForm; // class library should always handle new instances
             }
 
-            //Dev Note: C2 has visit id that I can use for Visit data to lift it from the layout and into the form
-
             return Page();
         }
 
@@ -641,41 +639,18 @@ namespace UDS.Net.Forms.Pages.UDS4
             C2.MODE = modeSwitch;
             C2.RMMODE = modalitySwitch;
 
-            //DEV NOTE: Form is returning with model state errors. Unsure why
+            //DEV NOTE: Form returns model errors on switch, clearing them before load
             ModelState.Clear();
 
-            if(C2.MODE == FormMode.Remote && C2.RMMODE ==  RemoteModality.Telephone)
+            if (C2.MODE == FormMode.Remote && C2.RMMODE == RemoteModality.Telephone)
             {
                 return Partial("_C2T", this);
-            } else
+            }
+            else
             {
                 return Partial("_C2", this);
             }
         }
-
-        //public async Task<IActionResult> OnGetC2Async(int? id)
-        //{
-        //    await base.OnGetAsync(id);
-
-        //    if (BaseForm != null)
-        //    {
-        //        C2 = (C2)BaseForm; // class library should always handle new instances
-        //    }
-
-        //    return Partial("_C2", this);
-        //}
-
-        //public async Task<IActionResult> OnGetC2TAsync(int? id)
-        //{
-        //    await base.OnGetAsync(id);
-
-        //    if (BaseForm != null)
-        //    {
-        //        C2 = (C2)BaseForm; // class library should always handle new instances
-        //    }
-
-        //    return Partial("_C2T", this);
-        //}
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
