@@ -1,7 +1,8 @@
 ﻿import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["row", "countInput", "input"]
+    static targets = ["row", "countInput", "input", "validationSpan"]
+    static classes = ["invalid", "disabled"]
     static values = {
         maxRows: Number
     }
@@ -32,8 +33,22 @@ export default class extends Controller {
                 input.disabled = !enabled;
                 if (!enabled) {
                     input.value = '';
+                    this.invalidClasses.forEach(cls => input.classList.remove(cls));
+                    this.disabledClasses.forEach(cls => input.classList.add(cls));
+
+                } else {
+                    this.disabledClasses.forEach(cls => input.classList.remove(cls));
                 }
             });
+
+            if (!enabled) {
+                const rowValidationSpans = this.validationSpanTargets.filter(span =>
+                    row.contains(span)
+                );
+                rowValidationSpans.forEach(span => {
+                    span.textContent = '';
+                });
+            }
         });
     }
 }

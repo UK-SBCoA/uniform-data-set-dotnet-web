@@ -1,54 +1,40 @@
 ﻿import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    static targets = ["primaryDx", "dependent"]
+
+    static targets = ["primaryDx", "dependent", "validationSpan"]
+    static classes = ["invalid", "disabled"]
 
     connect() {
-        this.updateAllFields();
-        this.PrimaryDxDisabled();
+        this.updateFields();
     }
 
-    updateAllFields() {
-        this.primaryDxTargets.forEach(element => {
-            this.updateFields(element);
-        });
-    }
-
-    updateFields(primaryDx) {
-        const value = primaryDx.value.trim();
+    updateFields() {
+        const value = this.primaryDxTarget.value.trim();
         const primaryValue = parseInt(value, 10);
-
-        const shouldDisable = primaryDx.disabled || value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;
-
-        const row = primaryDx.closest('tr');
-        if (!row) return;
-
-        const dependentInputs = this.dependentTargets.filter(input =>
-            row.contains(input)
-        );
-
-        dependentInputs.forEach(input => {
+        const shouldDisable = this.primaryDxTarget.disabled || value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;
+        this.dependentTargets.forEach(input => {
             input.disabled = shouldDisable;
             if (shouldDisable) {
                 input.value = '';
+                this.invalidClasses.forEach(cls => input.classList.remove(cls));
+                this.disabledClasses.forEach(cls => input.classList.add(cls));
+            } else {
+                this.disabledClasses.forEach(cls => input.classList.remove(cls));
             }
+
         });
+
+        if (shouldDisable) {
+            this.validationSpanTargets.forEach(span => span.textContent = '');
+        }
     }
 
-    handlePrimaryChange(event) {
-        this.updateFields(event.target);
-    }
-
-    PrimaryDxDisabled() {
-        this.primaryDxTargets.forEach(primaryDx => {
-            const observer = new MutationObserver(() => {
-                this.updateFields(primaryDx);
-            });
-
-            observer.observe(primaryDx, {
-                attributes: true,
-                attributeFilter: ['disabled']
-            });
+    primaryDxTargetConnected(element) {
+        const observer = new MutationObserver(() => this.updateFields());
+        observer.observe(element, {
+            attributes: true,
+            attributeFilter: ['disabled']
         });
     }
 }
