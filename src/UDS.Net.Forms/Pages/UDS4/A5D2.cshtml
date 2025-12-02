@@ -32,7 +32,18 @@
                             </div>
                         </div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS) <span class="font-bold">(99 = Unknown)</span></label>
+                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS)
+                                @if (Model.BaseForm.PacketKind == PacketKind.I)
+                                {
+                                    <span class="font-bold">(99 = Unknown)</span>
+                                }
+                                else
+                                {
+                                    <span class="font-bold">
+                                        (777 = years provided at previous UDS visit, 999 = Unknown)
+                                    </span>
+                                }
+                            </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SMOKYRS"></p>
                                 <input asp-for="@Model.A5D2.SMOKYRS" />
@@ -59,7 +70,19 @@
                             </div>
                         </div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.QUITSMOK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)<span class="font-bold">(888 = N/A, 999 = unknown)</span></label>
+                            <label asp-for="A5D2.QUITSMOK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)
+                                @if (Model.BaseForm.PacketKind == PacketKind.I)
+                                {
+                                    <span class="font-bold">(888 = N/A, 999 = unknown)</span>
+                                }
+
+                                else
+                                {
+                                    <span class="font-bold">
+                                        (777 = age provided at previous UDS visit, 888 = N/A, 999 = unknown)
+                                    </span>
+                                }
+                            </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.QUITSMOK"></p>
                                 <input asp-for="@Model.A5D2.QUITSMOK" />
