@@ -38,11 +38,9 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Remove="wwwroot/css/tailwind.css" />
 		<Content Remove="wwwroot/lib/tailwindcss/tailwind.css" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="wwwroot/css/tailwind.css" CopyToPublishDirectory="Never" />
 		<None Include="wwwroot/lib/tailwindcss/tailwind.css" CopyToPublishDirectory="Never" />
 	</ItemGroup>
 </Project>
