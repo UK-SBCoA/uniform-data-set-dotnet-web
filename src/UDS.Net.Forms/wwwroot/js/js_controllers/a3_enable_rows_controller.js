@@ -23,32 +23,34 @@ export default class extends Controller {
 
         this.rowTargets.forEach((row, index) => {
             const enabled = count > 0 && index < count;
+            row.classList.toggle('row-disabled', !enabled);
+            this.toggleRowInputs(row, enabled);
+        });
+    }
 
-            const rowInputs = this.inputTargets.filter(input =>
-                row.contains(input)
-            );
-
-            rowInputs.forEach(input => {
-
-                input.disabled = !enabled;
-                if (!enabled) {
-                    input.value = '';
-                    this.invalidClasses.forEach(cls => input.classList.remove(cls));
-                    this.disabledClasses.forEach(cls => input.classList.add(cls));
-
-                } else {
-                    this.disabledClasses.forEach(cls => input.classList.remove(cls));
-                }
-            });
-
-            if (!enabled) {
-                const rowValidationSpans = this.validationSpanTargets.filter(span =>
-                    row.contains(span)
-                );
-                rowValidationSpans.forEach(span => {
-                    span.textContent = '';
-                });
+    toggleRowInputs(row, enabled) {
+        this.inputTargets.forEach(input => {
+            if (row.contains(input)) {
+                this.updateInput(input, enabled);
             }
         });
+
+        this.validationSpanTargets.forEach(span => {
+            if (row.contains(span) && !enabled) {
+                span.textContent = '';
+            }
+        });
+    }
+
+    updateInput(input, enabled) {
+        input.disabled = !enabled;
+        if (!enabled) {
+            input.value = '';
+            this.invalidClasses.forEach(cls => input.classList.remove(cls));
+            this.disabledClasses.forEach(cls => input.classList.add(cls));
+
+        } else {
+            this.disabledClasses.forEach(cls => input.classList.remove(cls));
+        }
     }
 }
