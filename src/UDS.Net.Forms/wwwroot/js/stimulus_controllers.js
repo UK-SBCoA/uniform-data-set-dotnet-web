@@ -16,6 +16,7 @@ import a4 from "./js_controllers/a4_controller.js"
 import modal from "./js_controllers/modal_controller.js"
 import checkboxButton from "./js_controllers/checkboxButton_controller.js"
 import pageRefreshOnSubmit from "./js_controllers/pageRefreshOnSubmit_controller.js"
+import packetSubmission from "./js_controllers/packetSubmission_controller.js"
 
 window.Stimulus = Application.start()
 
@@ -36,3 +37,4 @@ Stimulus.register("a4", a4)
 Stimulus.register("modal", modal)
 Stimulus.register("checkboxButton", checkboxButton)
 Stimulus.register("pageRefreshOnSubmit", pageRefreshOnSubmit)
+Stimulus.register("packetSubmission", packetSubmission)
