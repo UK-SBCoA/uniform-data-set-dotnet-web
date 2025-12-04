@@ -6,7 +6,8 @@ export default class extends Controller {
         "modalitySelect",
         "formMode",
         "formModality",
-        "UDSFormSubmit"
+        "UDSFormSubmit",
+        "formRemoteReason"
     ]
 
     //look for UDSForm connection, stimulus not reinitialized on form switch
@@ -35,9 +36,12 @@ export default class extends Controller {
     HandleDropdowns() {
         if (this.modeSelectTarget.value == 1) {
             this.modalitySelectTarget.value = ""
+            this.formRemoteReasonTarget.value = ""
             this.modalitySelectTarget.disabled = true;
+            this.formRemoteReasonTarget.disabled = true;
         } else {
             this.modalitySelectTarget.disabled = false;
+            this.formRemoteReasonTarget.disabled = false;
         }
     }
 }

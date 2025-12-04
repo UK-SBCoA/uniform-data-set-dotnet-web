@@ -637,7 +637,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             //Apply change to mode and modality based on form switch data
             C2.MODE = modeSwitch;
-            C2.RMMODE = modalitySwitch;
+            C2.RMMODE = C2.MODE == FormMode.InPerson ? null : modalitySwitch;
 
             //Form returns model errors on switch, clearing them before load
             ModelState.Clear();
