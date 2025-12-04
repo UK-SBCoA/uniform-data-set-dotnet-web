@@ -6,13 +6,13 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 		<PackageId>UDS.Net.Forms</PackageId>
-		<Version>15.1.6</Version>
+		<Version>15.1.7</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>UDS Forms razor class library</Description>
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Razor class library for rendering UDS forms</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>15.1.6</ReleaseVersion>
+		<ReleaseVersion>15.1.7</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
@@ -36,5 +36,11 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Remove="wwwroot/lib/tailwindcss/tailwind.css" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot/lib/tailwindcss/tailwind.css" CopyToPublishDirectory="Never" />
 	</ItemGroup>
 </Project>
