@@ -23,6 +23,7 @@ export default class extends Controller {
     }
 
     UpdateModalityValues() {
+        //update hidden fields on form when mode select dropdowns are adjusted
         this.formModeTarget.value = this.modeSelectTarget.value
         this.formModalityTarget.value = this.modalitySelectTarget.value
     }
