@@ -366,7 +366,7 @@ namespace UDS.Net.Services.DomainModels
             object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
             object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
-            object b5 = PACKET == PacketKind.F ? (object)GetFields<B5FollowUpFormFields>("B5") : GetFields<B5FormFields>("B5");
+            object b5 = GetFields<B5FormFields>("B5");
 
             if (a1 != null && a2 != null)
             {
@@ -405,18 +405,18 @@ namespace UDS.Net.Services.DomainModels
             object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
             object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
-            object b5 = PACKET == PacketKind.F ? (object)GetFields<B5FollowUpFormFields>("B5") : GetFields<B5FormFields>("B5");
-            object b9 = PACKET == PacketKind.F ? (object)GetFields<B9FollowUpFormFields>("B9") : GetFields<B9FormFields>("B9");
-            object d1a = PACKET == PacketKind.F ? (object)GetFields<D1aFollowUpFormFields>("D1a") : GetFields<D1aFormFields>("D1a");
+            object b5 = GetFields<B5FormFields>("B5");
+            object b9 = GetFields<B9FormFields>("B9");
+            object d1a = GetFields<D1aFormFields>("D1a");
 
             if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
                 var inRelTo = GetInt<A2FormFields>(a2, f => f.INRELTO) ?? GetInt<A2FollowUpFormFields>(a2, f => f.INRELTO);
                 var inLivWth = GetInt<A2FormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH);
-                var anx = GetInt<B5FormFields>(b5, f => f.ANX) ?? GetInt<B5FollowUpFormFields>(b5, f => f.ANX);
+                var anx = GetInt<B5FormFields>(b5, f => f.ANX);
                 var anxiety = GetInt<A5D2FormFields>(a5d2, f => f.ANXIETY) ?? GetInt<A5D2FollowUpFormFields>(a5d2, f => f.ANXIETY);
-                var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX) ?? GetInt<B9FollowUpFormFields>(b9, f => f.BEANX);
-                var anxiet = GetBool<D1aFormFields>(d1a, f => f.ANXIET) ?? GetBool<D1aFollowUpFormFields>(d1a, f => f.ANXIET);
+                var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX);
+                var anxiet = GetBool<D1aFormFields>(d1a, f => f.ANXIET);
 
                 if (inRelTo == 1 && inLivWth == 0)
                 {

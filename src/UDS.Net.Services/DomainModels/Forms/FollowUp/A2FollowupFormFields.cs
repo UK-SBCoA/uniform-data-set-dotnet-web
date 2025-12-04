@@ -4,72 +4,17 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Forms.FollowUp
 {
-    public class A2FollowUpFormFields : IFormFields
+    public class A2FollowUpFormFields : A2FormFields
     {
         public int? NEWINF { get; set; }
-        public int? INRELTO { get; set; }
-        public int? INKNOWN { get; set; }
-        public int? INLIVWTH { get; set; }
-        public int? INCNTMOD { get; set; }
-        public string INCNTMDX { get; set; }
-        public int? INCNTFRQ { get; set; }
-        public int? INCNTTIM { get; set; }
-        public int? INRELY { get; set; }
-        public int? INMEMWORS { get; set; }
-        public int? INMEMTROUB { get; set; }
-        public int? INMEMTEN { get; set; }
-        public IEnumerable<FormMode> FormModes
-        {
-            get
-            {
-                return new List<FormMode>() { FormMode.InPerson, FormMode.Remote, FormMode.NotCompleted };
-            }
-        }
 
-        public IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes
-        {
-            get
-            {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.NoCoParticipant, NotIncludedReasonCode.PhysicalProblem, NotIncludedReasonCode.CognitiveBehavioralProblem, NotIncludedReasonCode.Other, NotIncludedReasonCode.VerbalRefusal };
-            }
-        }
-
-        public IEnumerable<RemoteModality> RemoteModalities
-        {
-            get
-            {
-                return new List<RemoteModality>() { RemoteModality.Telephone, RemoteModality.Video };
-            }
-        }
-
-        public string GetDescription()
-        {
-            return "Co-Participant Demographics";
-        }
-
-        public string GetVersion()
-        {
-            return "4";
-        }
-
-        public A2FollowUpFormFields() { }
-        public A2FollowUpFormFields(FormDto dto) : this()
+        public A2FollowUpFormFields() : base() { }
+        public A2FollowUpFormFields(FormDto dto) : base(dto)
         {
             if (dto is A2Dto)
             {
                 var a2Dto = ((A2Dto)dto);
                 this.NEWINF = a2Dto.NEWINF == true ? 1 : a2Dto.NEWINF == false ? 0 : (int?)null;
-                this.INRELTO = a2Dto.INRELTO;
-                this.INKNOWN = a2Dto.INKNOWN;
-                this.INLIVWTH = a2Dto.INLIVWTH;
-                this.INCNTMOD = a2Dto.INCNTMOD;
-                this.INCNTMDX = a2Dto.INCNTMDX;
-                this.INCNTFRQ = a2Dto.INCNTFRQ;
-                this.INCNTTIM = a2Dto.INCNTTIM;
-                this.INRELY = a2Dto.INRELY;
-                this.INMEMWORS = a2Dto.INMEMWORS;
-                this.INMEMTROUB = a2Dto.INMEMTROUB;
-                this.INMEMTEN = a2Dto.INMEMTEN;
             }
         }
     }

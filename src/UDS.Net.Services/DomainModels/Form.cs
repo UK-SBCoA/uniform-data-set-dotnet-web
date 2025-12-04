@@ -93,9 +93,7 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A1a")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A1aFollowUpFormFields()
-                    : new A1aFormFields();
+                Fields = new A1aFormFields();
             }
             else if (Kind == "A2")
             {
@@ -111,9 +109,7 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A4")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A4GFollowUpFormFields()
-                    : new A4GFormFields();
+                Fields = new A4GFormFields();
             }
             else if (Kind == "A4a")
             {
@@ -129,69 +125,47 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "B1")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B1FollowUpFormFields()
-                    : new B1FormFields();
+                Fields = new B1FormFields();
             }
             else if (Kind == "B3")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B3FollowUpFormFields()
-                    : new B3FormFields();
+                Fields = new B3FormFields();
             }
             else if (Kind == "B4")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B4FollowUpFormFields()
-                    : new B4FormFields();
+                Fields = new B4FormFields();
             }
             else if (Kind == "B5")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B5FollowUpFormFields()
-                    : new B5FormFields();
+                Fields = new B5FormFields();
             }
             else if (Kind == "B6")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B6FollowUpFormFields()
-                    : new B6FormFields();
+                Fields = new B6FormFields();
             }
             else if (Kind == "B7")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B7FollowUpFormFields()
-                    : new B7FormFields();
+                Fields = new B7FormFields();
             }
             else if (Kind == "B8")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B8FollowUpFormFields()
-                    : new B8FormFields();
+                Fields = new B8FormFields();
             }
             else if (Kind == "B9")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new B9FollowUpFormFields()
-                    : new B9FormFields();
+                Fields = new B9FormFields();
             }
             else if (Kind == "C2")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new C2FollowUpFormFields()
-                    : new C2FormFields();
+                Fields = new C2FormFields();
             }
             else if (Kind == "D1a")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new D1aFollowUpFormFields()
-                    : new D1aFormFields();
+                Fields = new D1aFormFields();
             }
             else if (Kind == "D1b")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new D1bFollowUpFormFields()
-                    : new D1bFormFields();
+                Fields = new D1bFormFields();
             }
         }
 

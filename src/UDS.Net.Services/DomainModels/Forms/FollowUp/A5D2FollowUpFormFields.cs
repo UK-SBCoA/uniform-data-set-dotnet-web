@@ -155,7 +155,6 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
         public int? NPSYDEV { get; set; }
         public int? PSYCDIS { get; set; }
         public string? PSYCDISX { get; set; }
-        public int? MENARCHE { get; set; }
         public int? NOMENSAGE { get; set; }
         public bool? NOMENSNAT { get; set; }
         public bool? NOMENSHYST { get; set; }
@@ -363,7 +362,6 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
                 this.NPSYDEV = a5D2Dto.NPSYDEV;
                 this.PSYCDIS = a5D2Dto.PSYCDIS;
                 this.PSYCDISX = a5D2Dto.PSYCDISX;
-                this.MENARCHE = a5D2Dto.MENARCHE;
                 this.NOMENSAGE = a5D2Dto.NOMENSAGE;
                 this.NOMENSNAT = a5D2Dto.NOMENSNAT;
                 this.NOMENSHYST = a5D2Dto.NOMENSHYST;

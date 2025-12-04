@@ -200,14 +200,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A1aDto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new A1aFollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new A1aFormFields(dto);
-                }
             }
             else if (dto is A2Dto)
             {
@@ -233,14 +226,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A4Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new A4GFollowUpFormFields(dto);
-                }
-                else
-                {
-                    formFields = new A4GFormFields(dto);
-                }
+                formFields = new A4GFormFields(dto);
             }
             else if (dto is A4aDto)
             {
@@ -266,124 +252,47 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is B1Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B1FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B1FormFields(dto);
-                }
             }
             else if (dto is B3Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B3FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B3FormFields(dto);
-                }
             }
             else if (dto is B4Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B4FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B4FormFields(dto);
-                }
             }
             else if (dto is B5Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B5FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B5FormFields(dto);
-                }
             }
             else if (dto is B6Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B6FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B6FormFields(dto);
-                }
             }
             else if (dto is B7Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B7FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B7FormFields(dto);
-                }
             }
             else if (dto is B8Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B8FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B8FormFields(dto);
-                }
             }
             else if (dto is B9Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new B9FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new B9FormFields(dto);
-                }
             }
             else if (dto is C2Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new C2FollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new C2FormFields(dto);
-                }
             }
             else if (dto is D1aDto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new D1aFollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new D1aFormFields(dto);
-                }
             }
             else if (dto is D1bDto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new D1bFollowUpFormFields(dto);
-                }
-                else
-                {
                     formFields = new D1bFormFields(dto);
-                }
             }
             else
             {
