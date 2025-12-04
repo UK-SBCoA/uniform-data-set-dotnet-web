@@ -326,11 +326,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? CPAP { get; set; }
-        [Display(Name = "Typical use of an oral device for sleep apnea at night over the past 12 months?")]
+        [Display(Name = "Typical use of an oral device or implanted breathing pacemaker for sleep apnea at night over the past 12 months?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? APNEAORAL { get; set; }
-        [Display(Name = "REM sleep behavior disorder")]
+        [Display(Name = "REM sleep behavior disorder (RBD)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? RBD { get; set; }
@@ -346,7 +346,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIfRange(nameof(OTHSLEEP), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHSLEEX { get; set; }
-        [Display(Name = "Cancer, primary or metastatic (Report all known diagnoses. Exclude non-melanoma skin cancer.)")]
+        [Display(Name = "Cancer, primary or metastatic")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CANCERACTV { get; set; }

@@ -132,7 +132,7 @@ public class A5D2Model : FormPageModel
     {
         new RadioListItem("Type 1", "1"),
         new RadioListItem("Type 2", "2"),
-        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes", "3"),
+        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes, prediabetes)", "3"),
         new RadioListItem("Unknown", "9")
     };
 
