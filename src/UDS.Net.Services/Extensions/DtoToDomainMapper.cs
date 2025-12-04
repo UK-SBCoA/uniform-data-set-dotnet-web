@@ -200,7 +200,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A1aDto)
             {
-                    formFields = new A1aFormFields(dto);
+                formFields = new A1aFormFields(dto);
             }
             else if (dto is A2Dto)
             {
@@ -252,47 +252,47 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is B1Dto)
             {
-                    formFields = new B1FormFields(dto);
+                formFields = new B1FormFields(dto);
             }
             else if (dto is B3Dto)
             {
-                    formFields = new B3FormFields(dto);
+                formFields = new B3FormFields(dto);
             }
             else if (dto is B4Dto)
             {
-                    formFields = new B4FormFields(dto);
+                formFields = new B4FormFields(dto);
             }
             else if (dto is B5Dto)
             {
-                    formFields = new B5FormFields(dto);
+                formFields = new B5FormFields(dto);
             }
             else if (dto is B6Dto)
             {
-                    formFields = new B6FormFields(dto);
+                formFields = new B6FormFields(dto);
             }
             else if (dto is B7Dto)
             {
-                    formFields = new B7FormFields(dto);
+                formFields = new B7FormFields(dto);
             }
             else if (dto is B8Dto)
             {
-                    formFields = new B8FormFields(dto);
+                formFields = new B8FormFields(dto);
             }
             else if (dto is B9Dto)
             {
-                    formFields = new B9FormFields(dto);
+                formFields = new B9FormFields(dto);
             }
             else if (dto is C2Dto)
             {
-                    formFields = new C2FormFields(dto);
+                formFields = new C2FormFields(dto);
             }
             else if (dto is D1aDto)
             {
-                    formFields = new D1aFormFields(dto);
+                formFields = new D1aFormFields(dto);
             }
             else if (dto is D1bDto)
             {
-                    formFields = new D1bFormFields(dto);
+                formFields = new D1bFormFields(dto);
             }
             else
             {
