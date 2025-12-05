@@ -17,10 +17,11 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
 
         public A4aFollowUpFormFields(FormDto dto) : base(dto)
         {
-            if (dto is A3Dto)
+            if (dto is A4aDto)
             {
-                //NEWTREAT = dto.NEWTREAT;
-                //NEWADEVENT = dto.NEWADEVENT;
+                var a4aDto = ((A4aDto)dto);
+                NEWTREAT = a4aDto.NEWTREAT;
+                NEWADEVENT = a4aDto.NEWADEVENT;
             }
         }
     }

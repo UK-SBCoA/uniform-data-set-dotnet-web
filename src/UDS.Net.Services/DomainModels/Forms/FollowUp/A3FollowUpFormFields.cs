@@ -16,9 +16,10 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
         {
             if (dto is A3Dto)
             {
-                //NWINFPAR = dto.NWINFPAR == true ? 1 : dto.NWINFPAR == false ? 0 : (int?)null;
-                //NWINFSIB = dto.NWINFSIB == true ? 1 : dto.NWINFSIB == false ? 0 : (int?)null;
-                //NWINFKID = dto.NWINFKID == true ? 1 : dto.NWINFKID == false ? 0 : (int?)null;
+                var a3Dto = ((A3Dto)dto);
+                NWINFPAR = a3Dto.NWINFPAR;
+                NWINFSIB = a3Dto.NWINFSIB;
+                NWINFKID = a3Dto.NWINFKID;
             }
         }
     }

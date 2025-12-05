@@ -166,18 +166,20 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a1 != null)
             {
                 csv.WriteHeader<A1Record>();
-                if (a1.Fields is A1FormFields)
-                {
-                    csv.WriteHeaderLowercase<A1FormFields>();
-                }
-                else if (a1.Fields is A1FollowUpFormFields)
+
+                if (a1.Fields is A1FollowUpFormFields)
                 {
                     csv.WriteHeaderLowercase<A1FollowUpFormFields>();
+                }
+                else if (a1.Fields is A1FormFields)
+                {
+                    csv.WriteHeaderLowercase<A1FormFields>();
                 }
             }
             if (a1a != null)
             {
                 csv.WriteHeader<A1aRecord>();
+
                 if (a1a.Fields is A1aFormFields)
                 {
                     csv.WriteHeaderLowercase<A1aFormFields>();
@@ -186,6 +188,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a2 != null)
             {
                 csv.WriteHeader<A2Record>();
+
                 if (a2.Fields is A2FollowUpFormFields)
                     csv.WriteHeaderLowercase<A2FollowUpFormFields>();
                 else
@@ -197,6 +200,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A3FamilyMemberFormFields> siblingFields;
                 List<A3FamilyMemberFormFields> kidFields;
+
                 if (a3.Fields is A3FollowUpFormFields)
                 {
                     csv.WriteHeaderLowercase<A3FollowUpFormFields>();
@@ -244,7 +248,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a4a != null)
             {
                 csv.WriteHeader<A4aRecord>();
+
                 List<A4aTreatmentFormFields> treatments;
+
                 if (a4a.Fields is A4aFollowUpFormFields)
                 {
                     csv.WriteHeaderLowercase<A4aFollowUpFormFields>();
@@ -270,6 +276,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a5d2 != null)
             {
                 csv.WriteHeader<A5D2Record>();
+
                 if (a5d2.Fields is A5D2FollowUpFormFields)
                     csv.WriteHeaderLowercase<A5D2FollowUpFormFields>();
                 else
@@ -371,13 +378,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a1 != null)
             {
                 csv.WriteRecord(new A1Record(a1));
-                if (a1.Fields is A1FormFields normalA1)
-                {
-                    csv.WriteRecord(normalA1);
-                }
-                else if (a1.Fields is A1FollowUpFormFields followUpA1)
+
+                if (a1.Fields is A1FollowUpFormFields followUpA1)
                 {
                     csv.WriteRecord(followUpA1);
+                }
+                else if (a1.Fields is A1FormFields normalA1)
+                {
+                    csv.WriteRecord(normalA1);
                 }
             }
             if (a1a != null)
@@ -412,36 +420,36 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 if (a2.MODE == Services.Enums.FormMode.NotCompleted)
                 {
                     IEnumerable<PropertyInfo> a2FormFieldsProps;
-                    // If the form is not completed, everything exported should be null
-                    if (a2.Fields is A2FormFields)
-                        a2FormFieldsProps = typeof(A2FormFields).GetProperties();
-                    else if (a2.Fields is A2FollowUpFormFields)
+
+                    if (a2.Fields is A2FollowUpFormFields)
                         a2FormFieldsProps = typeof(A2FollowUpFormFields).GetProperties();
+                    else if (a2.Fields is A2FormFields)
+                        a2FormFieldsProps = typeof(A2FormFields).GetProperties();
                     else
                         a2FormFieldsProps = Enumerable.Empty<PropertyInfo>();
 
-                    a2FormFieldsProps = a2FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
+                    a2FormFieldsProps = a2FormFieldsProps
+                        .Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignored));
 
                     foreach (var prop in a2FormFieldsProps)
                         csv.WriteField(null);
                 }
                 else
                 {
-                    // if the form is included, export all the values
-                    if (a2.Fields is A2FormFields normalA2)
-                        csv.WriteRecord(normalA2);
-                    else if (a2.Fields is A2FollowUpFormFields followUpA2)
+                    if (a2.Fields is A2FollowUpFormFields followUpA2)
                         csv.WriteRecord(followUpA2);
+                    else if (a2.Fields is A2FormFields normalA2)
+                        csv.WriteRecord(normalA2);
                 }
             }
             if (a3 != null)
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FormFields normalA3)
-                    csv.WriteRecord(normalA3);
-                else if (a3.Fields is A3FollowUpFormFields followUpA3)
+                if (a3.Fields is A3FollowUpFormFields followUpA3)
                     csv.WriteRecord(followUpA3);
+                else if (a3.Fields is A3FormFields normalA3)
+                    csv.WriteRecord(normalA3);
 
                 List<A3FamilyMemberFormFields> siblings;
                 List<A3FamilyMemberFormFields> kids;
@@ -469,8 +477,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            var v = prop.GetValue(sibling, null);
-                            csv.WriteField(v);
+                            csv.WriteField(prop.GetValue(sibling));
                         }
                     }
                 }
@@ -482,8 +489,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            var v = prop.GetValue(kid, null);
-                            csv.WriteField(v);
+                            csv.WriteField(prop.GetValue(kid));
                         }
                     }
                 }
@@ -517,15 +523,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A4aTreatmentFormFields> treatments;
 
-                if (a4a.Fields is A4aFormFields normalA4a)
-                {
-                    csv.WriteRecord(normalA4a);
-                    treatments = normalA4a.TreatmentFormFields.ToList();
-                }
-                else if (a4a.Fields is A4aFollowUpFormFields followUpA4a)
+                if (a4a.Fields is A4aFollowUpFormFields followUpA4a)
                 {
                     csv.WriteRecord(followUpA4a);
                     treatments = followUpA4a.TreatmentFormFields.ToList();
+                }
+                else if (a4a.Fields is A4aFormFields normalA4a)
+                {
+                    csv.WriteRecord(normalA4a);
+                    treatments = normalA4a.TreatmentFormFields.ToList();
                 }
                 else
                 {
@@ -537,20 +543,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     foreach (var prop in a4aProps)
                     {
                         if (prop.Name != "TreatmentIndex")
-                        {
-                            var v = prop.GetValue(treatment, null);
-                            csv.WriteField(v);
-                        }
+                            csv.WriteField(prop.GetValue(treatment));
                     }
                 }
             }
             if (a5d2 != null)
             {
                 csv.WriteRecord(new A5D2Record(a5d2));
-                if (a5d2.Fields is A5D2FormFields normalA5D2)
-                    csv.WriteRecord(normalA5D2);
-                else if (a5d2.Fields is A5D2FollowUpFormFields followUpA5D2)
+
+                if (a5d2.Fields is A5D2FollowUpFormFields followUpA5D2)
                     csv.WriteRecord(followUpA5D2);
+                else if (a5d2.Fields is A5D2FormFields normalA5D2)
+                    csv.WriteRecord(normalA5D2);
             }
             if (b1 != null)
             {

@@ -419,6 +419,9 @@ namespace UDS.Net.Forms.Extensions
                     DADAGEO = vm.DADAGEO,
                     SIBS = vm.SIBS,
                     KIDS = vm.KIDS,
+                    NWINFPAR = vm.NWINFPAR,
+                    NWINFSIB = vm.NWINFSIB,
+                    NWINFKID = vm.NWINFKID,
                     SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                     KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
                 };
@@ -490,6 +493,8 @@ namespace UDS.Net.Forms.Extensions
                     ADVERSEOTH = vm.ADVERSEOTH,
                     ADVERSEOTX = vm.ADVERSEOTX,
                     TRTBIOMARK = vm.TRTBIOMARK,
+                    NEWTREAT = vm.NEWTREAT,
+                    NEWADEVENT = vm.NEWADEVENT,
                     TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
                 };
             }

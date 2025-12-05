@@ -244,49 +244,49 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A1aFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A1FormFields)
-            {
-                dto = ((A1FormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A1FollowUpFormFields)
             {
                 dto = ((A1FollowUpFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A2FormFields)
+            else if (form.Fields is A1FormFields)
             {
-                dto = ((A2FormFields)form.Fields).ToDto();
+                dto = ((A1FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is A2FollowUpFormFields)
             {
                 dto = ((A2FollowUpFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A3FormFields)
+            else if (form.Fields is A2FormFields)
             {
-                dto = ((A3FormFields)form.Fields).ToDto(form.Id);
+                dto = ((A2FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is A3FollowUpFormFields)
             {
                 dto = ((A3FollowUpFormFields)form.Fields).ToDto(form.Id);
             }
+            else if (form.Fields is A3FormFields)
+            {
+                dto = ((A3FormFields)form.Fields).ToDto(form.Id);
+            }
             else if (form.Fields is A4GFormFields)
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
-            }
-            else if (form.Fields is A5D2FormFields)
-            {
-                dto = ((A5D2FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is A5D2FollowUpFormFields)
             {
                 dto = ((A5D2FollowUpFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A4aFormFields)
+            else if (form.Fields is A5D2FormFields)
             {
-                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
+                dto = ((A5D2FormFields)form.Fields).ToDto();
             }
             else if (form.Fields is A4aFollowUpFormFields)
             {
                 dto = ((A4aFollowUpFormFields)form.Fields).ToDto(form.Id);
+            }
+            else if (form.Fields is A4aFormFields)
+            {
+                dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is B1FormFields)
             {
@@ -352,24 +352,24 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A1")
             {
-                if (form.Fields is A1FormFields initial)
-                    dto = initial.ToDto();
-                else if (form.Fields is A1FollowUpFormFields followup)
+                if (form.Fields is A1FollowUpFormFields followup)
                     dto = followup.ToDto();
+                else if (form.Fields is A1FormFields initial)
+                    dto = initial.ToDto();
             }
             else if (formKind == "A2")
             {
-                if (form.Fields is A2FormFields initial)
-                    dto = initial.ToDto();
-                else if (form.Fields is A2FollowUpFormFields followup)
+                if (form.Fields is A2FollowUpFormFields followup)
                     dto = followup.ToDto();
+                else if (form.Fields is A2FormFields initial)
+                    dto = initial.ToDto();
             }
             else if (formKind == "A3")
             {
-                if (form.Fields is A3FormFields initial)
-                    dto = initial.ToDto(form.Id);
-                else if (form.Fields is A3FollowUpFormFields followup)
+                if (form.Fields is A3FollowUpFormFields followup)
                     dto = followup.ToDto(form.Id);
+                else if (form.Fields is A3FormFields initial)
+                    dto = initial.ToDto(form.Id);
             }
             else if (formKind == "A4")
             {
@@ -378,17 +378,17 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A5D2")
             {
-                if (form.Fields is A5D2FormFields initial)
-                    dto = initial.ToDto();
-                else if (form.Fields is A5D2FollowUpFormFields followup)
+                if (form.Fields is A5D2FollowUpFormFields followup)
                     dto = followup.ToDto();
+                else if (form.Fields is A5D2FormFields initial)
+                    dto = initial.ToDto();
             }
             else if (formKind == "A4a")
             {
-                if (form.Fields is A4aFormFields initial)
-                    dto = initial.ToDto(form.Id);
-                else if (form.Fields is A4aFollowUpFormFields followup)
+                if (form.Fields is A4aFollowUpFormFields followup)
                     dto = followup.ToDto(form.Id);
+                else if (form.Fields is A4aFormFields initial)
+                    dto = initial.ToDto(form.Id);
             }
             else if (formKind == "B1")
             {
@@ -819,7 +819,10 @@ namespace UDS.Net.Services.Extensions
                 DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
-                KIDS = fields.KIDS
+                KIDS = fields.KIDS,
+                NWINFPAR = fields.NWINFPAR,
+                NWINFSIB = fields.NWINFSIB,
+                NWINFKID = fields.NWINFKID,
             };
 
             foreach (var sib in fields.SiblingFormFields)
@@ -1334,7 +1337,9 @@ namespace UDS.Net.Services.Extensions
                 ARIAH = fields.ARIAH,
                 ADVERSEOTH = fields.ADVERSEOTH,
                 ADVERSEOTX = fields.ADVERSEOTX,
-                TRTBIOMARK = fields.TRTBIOMARK
+                TRTBIOMARK = fields.TRTBIOMARK,
+                NEWTREAT = fields.NEWTREAT,
+                NEWADEVENT = fields.NEWADEVENT
             };
 
             foreach (var treatment in fields.TreatmentFormFields)

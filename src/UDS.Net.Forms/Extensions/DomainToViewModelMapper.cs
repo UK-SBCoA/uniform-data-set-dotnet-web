@@ -318,53 +318,53 @@ namespace UDS.Net.Forms.Extensions
 
             if (form.Fields != null)
             {
-                if (form.Fields is A1FormFields)
-                {
-                    vm = ((A1FormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A1FollowUpFormFields)
+                if (form.Fields is A1FollowUpFormFields)
                 {
                     vm = ((A1FollowUpFormFields)form.Fields).ToVM(form.Id);
+                }
+                else if (form.Fields is A1FormFields)
+                {
+                    vm = ((A1FormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A1aFormFields)
                 {
                     vm = ((A1aFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A2FormFields)
-                {
-                    vm = ((A2FormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A2FollowUpFormFields)
                 {
                     vm = ((A2FollowUpFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A3FormFields)
+                else if (form.Fields is A2FormFields)
                 {
-                    vm = ((A3FormFields)form.Fields).ToVM(form.Id);
+                    vm = ((A2FormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A3FollowUpFormFields)
                 {
                     vm = ((A3FollowUpFormFields)form.Fields).ToVM(form.Id);
                 }
+                else if (form.Fields is A3FormFields)
+                {
+                    vm = ((A3FormFields)form.Fields).ToVM(form.Id);
+                }
                 else if (form.Fields is A4GFormFields)
                 {
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A4aFormFields)
-                {
-                    vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A4aFollowUpFormFields)
                 {
                     vm = ((A4aFollowUpFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A5D2FormFields)
+                else if (form.Fields is A4aFormFields)
                 {
-                    vm = ((A5D2FormFields)form.Fields).ToVM(form.Id);
+                    vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A5D2FollowUpFormFields)
                 {
                     vm = ((A5D2FollowUpFormFields)form.Fields).ToVM(form.Id);
+                }
+                else if (form.Fields is A5D2FormFields)
+                {
+                    vm = ((A5D2FormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is B1FormFields)
                 {
@@ -411,6 +411,7 @@ namespace UDS.Net.Forms.Extensions
                     vm = ((D1bFormFields)form.Fields).ToVM(form.Id);
                 }
             }
+
 
             SetFormBaseProperties(form, vm);
 
@@ -734,6 +735,9 @@ namespace UDS.Net.Forms.Extensions
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS,
+                NWINFPAR = fields.NWINFPAR,
+                NWINFSIB = fields.NWINFSIB,
+                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };
@@ -818,6 +822,8 @@ namespace UDS.Net.Forms.Extensions
                 ADVERSEOTH = fields.ADVERSEOTH,
                 ADVERSEOTX = fields.ADVERSEOTX,
                 TRTBIOMARK = fields.TRTBIOMARK,
+                NEWTREAT = fields.NEWTREAT,
+                NEWADEVENT = fields.NEWADEVENT,
                 Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
 
             };
