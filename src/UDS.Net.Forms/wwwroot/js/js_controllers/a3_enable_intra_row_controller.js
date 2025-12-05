@@ -30,11 +30,4 @@ export default class extends Controller {
         }
     }
 
-    primaryDxTargetConnected(element) {
-        const observer = new MutationObserver(() => this.updateFields());
-        observer.observe(element, {
-            attributes: true,
-            attributeFilter: ['disabled']
-        });
-    }
 }
