@@ -8,6 +8,10 @@ namespace UDS.Net.Forms.Models.UDS4
     /// </summary>
     public class A3 : FormModel
     {
+        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
+        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
+        public int? NWINFPAR { get; set; }
+
         [Display(Name = "Mother — birth year")]
         [BirthYear(AllowUnknown = true, Parent = true)]
         [RequiredOnFinalized]
@@ -69,10 +73,18 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRegex(nameof(DADETPR), "^(0[1-9]|1[0-2])$", ErrorMessage = "Age of onset required")]
         public int? DADAGEO { get; set; }
 
+        [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's full siblings?")]
+        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
+        public int? NWINFSIB { get; set; }
+
         [Display(Name = "How many full siblings does the participant have? (77 = adopted, unknown)")]
         [RegularExpression("^(\\d|[1]\\d|20|77)$", ErrorMessage = "Number of siblings must be 0-20, or 77 = adopted, unknown")]
         [RequiredOnFinalized]
         public int? SIBS { get; set; }
+
+        [Display(Name = "Since the last UDS visit, is new information available concerning the stauts of the participant's biological children?")]
+        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
+        public int? NWINFKID { get; set; }
 
         [Display(Name = "How many known biological children does the participant have?")]
         [Range(0, 15, ErrorMessage = "Number of children must be 0-15")]

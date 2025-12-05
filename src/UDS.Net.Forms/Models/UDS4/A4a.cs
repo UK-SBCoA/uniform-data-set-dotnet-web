@@ -11,9 +11,15 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Has the participant ever been prescribed a treatment or been enrolled in a clinical trial of a treatment expected to modify ADRD biomarkers?")]
         public int? TRTBIOMARK { get; set; }
 
+        [Display(Name = "Since the last UDS visit, is new information available concerning any of the participant's prescribed treatments or clinical trial(s) of a treatment expected to modify ADRD biomarkers?")]
+        public int? NEWTREAT { get; set; }
+
         [RequiredIfRegex(nameof(TRTBIOMARK), "^(1)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
+
+        [Display(Name = "Since the last UDS visit, is new information available concerning the participant's experience of amyloid related imaging abnormalities-edema (ARIA-E), amyloid related imaging abnormalities-hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
+        public int? NEWADEVENT { get; set; }
 
         [Display(Name = "Amyloid related imaging abnormalities–edema (ARIA-E) 3a2. 1 Amyloid related")]
         public bool? ARIAE { get; set; }
