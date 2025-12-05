@@ -73,12 +73,12 @@ namespace UDS.Net.Forms.Extensions
 
         public static Visit ToEntity(this VisitModel vm)
         {
-            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
+            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(vm.PACKET));
         }
 
         public static Packet ToEntity(this PacketModel vm)
         {
-            return new Packet(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(), vm.PacketSubmissions.ToEntity());
+            return new Packet(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(vm.PACKET), vm.PacketSubmissions.ToEntity());
         }
 
         public static List<PacketSubmission> ToEntity(this IList<PacketSubmissionModel> vm)
@@ -98,9 +98,13 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
-        public static List<Form> ToEntity(this IList<FormModel> vm)
+        public static List<Form> ToEntity(this IList<FormModel> vm, PacketKind visitPacket)
         {
-            return vm.Select(v => v.ToEntity()).ToList();
+            return vm.Select(v =>
+            {
+                v.PacketKind = visitPacket;
+                return v.ToEntity();
+            }).ToList();
         }
 
         public static Form ToEntity(this FormModel vm)
