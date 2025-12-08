@@ -33,11 +33,11 @@
         </div>
     </div>
 
-    @if (Model.Visit != null && (Model.C2.RMMODE == RemoteModality.Telephone))
+    @if (Model.Visit != null && (Model.C2.MODE == FormMode.Remote && Model.C2.RMMODE == RemoteModality.Telephone))
     {
         <partial name="_C2T" model="@Model" />
     }
-    else if (Model.Visit != null && (Model.C2.MODE == FormMode.InPerson) || (Model.C2.RMMODE == RemoteModality.Video))
+    else
     {
         <partial name="_C2" model="@Model" />
     }
