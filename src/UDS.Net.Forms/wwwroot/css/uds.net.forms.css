@@ -44,3 +44,59 @@
     width: 0;
     max-width: 0;
 }
+/* stylelint-disable -- Tailwind CSS styling */
+/* TODO These styles are a quick fix for form validation */
+input[type="number"].input-validation-error, input[type="text"].input-validation-error {
+    line-height: 1.25rem !important;
+    font-size: 0.875rem !important;
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(252 165 165 / 1);
+    --tw-ring-inset: inset;
+    border-radius: 0.375rem !important;
+    border-color: rgb(220, 38, 38) !important;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-color: rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    --tw-ring-offset-shadow: 1;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-text-opacity: 1;
+    color: rgb(127 29 29 / var(--tw-text-opacity)) !important;
+    width: 100%;
+    max-width: 20rem;
+}
+
+input[type='number'].valid, input[type='text'].valid {
+    line-height: 1.25rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.375rem !important;
+    border-color: rgb(209, 213, 219) !important;
+    --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-color: rgb(0 0 0 / 0.05);
+    --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+    --tw-ring-offset-shadow: 1;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-text-opacity: 1;
+    color: inherit !important;
+    width: 100%;
+    max-width: 20rem;
+}
+
+input[type='radio'].valid:checked {
+    background-color: rgb(79, 70, 229);
+    border-radius: 100%;
+}
+
+input[type='radio'].input-validation-error {
+    border-color: rgb(156 163 175);
+    border-radius: 100%;
+}
+
+    input[type='radio'].input-validation-error:disabled {
+        --tw-border-opacity: 1;
+        border-color: rgb(226 232 240 / var(--tw-border-opacity, 1));
+        background-color: rgb(248 250 252 / var(--tw-bg-opacity, 1));
+    }
+
+.valid.never-enable {
+    color: rgb(156 163 175) !important;
+}
