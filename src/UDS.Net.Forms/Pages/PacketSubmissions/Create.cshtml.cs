@@ -104,7 +104,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             await _packetService.Update(User.Identity.Name, packet);
 
-            var updatedPacket = await _packetService.GetById(User.Identity.Name, packetId); // refresh updated packet
+            var updatedPacket = await _packetService.GetPacketWithForms(User.Identity.Name, packetId); // refresh updated packet
 
             Packet = updatedPacket.ToVM();
             Packet.Participation = participation.ToVM();

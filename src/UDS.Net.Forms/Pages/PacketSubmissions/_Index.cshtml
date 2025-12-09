@@ -221,17 +221,24 @@
                                         <td>
                                             <span>
                                                 @{
-                                                    var formFound = Model.Forms.Where(f => f.Kind == error.FormKind).FirstOrDefault();
-                                                    var propertyFound = formFound.GetType().GetProperty(error.Location).GetValue(formFound);
+                                                    var formFound = Model.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
+                                                    string currentValueString = string.Empty;
 
-                                                    var currentValueString = formFound != null && propertyFound != null ? propertyFound.ToString() : string.Empty;
+                                                    if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
+                                                        var propertyFound = formFound.GetType().GetProperty(error.Location);
+
+                                                        if(propertyFound != null)
+                                                        {
+                                                            currentValueString = propertyFound.GetValue(formFound).ToString();
+                                                        }
+                                                    }
                                                 }
                                                 
                                                 @currentValueString
                                             </span>
                                         </td>
                                         <td class="px-4 py-2">
-                                            @{ string errorLevelStyle = "test"; }
+                                            @{ string errorLevelStyle = string.Empty; }
 
                                             @if(error.Level == PacketSubmissionErrorLevel.Error || error.Level == PacketSubmissionErrorLevel.Critical)
                                             {
