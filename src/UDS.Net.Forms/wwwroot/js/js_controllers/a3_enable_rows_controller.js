@@ -3,12 +3,13 @@
 export default class extends Controller {
     static targets = ["row", "countInput", "input", "validationSpan"]
     static classes = ["invalid", "disabled"]
+    static outlets = ["a3-enable-intra-row"]
     static values = {
         maxRows: Number
     }
 
     connect() {
-        this.updateRows();
+        setTimeout(() => this.updateRows(), 0);
     }
 
     updateRows() {
@@ -40,6 +41,16 @@ export default class extends Controller {
                 span.textContent = '';
             }
         });
+
+        setTimeout(() => {
+            const intraRowOutlet = this.a3EnableIntraRowOutlets.find(outlet =>
+                row.contains(outlet.element)
+            );
+
+            if (intraRowOutlet) {
+                intraRowOutlet.updateFields();
+            }
+        }, 0);
     }
 
     updateInput(input, enabled) {
