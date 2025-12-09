@@ -184,9 +184,9 @@
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-lg">
+                    <div class="overflow-x-auto rounded-2xl border border-red-200 bg-white shadow-lg">
                         <table class="min-w-full divide-y divide-gray-200 text-sm">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-red-50">
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
@@ -200,7 +200,7 @@
                             <tbody class="divide-y divide-gray-100 bg-white">
                                 @foreach (var error in allErrors)
                                 {
-                                    <tr class="hover:bg-gray-50 transition hidden" data-packetSubmission-target="row" data-status="@error.Status.ToString().ToLower()">
+                                    <tr class="hover:bg-red-50 transition hidden" data-packetSubmission-target="row" data-status="@error.Status.ToString().ToLower()">
                                         <td class="px-4 py-2">
                                             @{
                                                 var pagePath = $"/UDS4/{error.FormKind}";
@@ -208,6 +208,7 @@
                                             <a asp-page="@pagePath"
                                                asp-route-id="@Model.Id"
                                                asp-route-packetKind="@Model.PACKET.ToString()"
+                                               target="_blank"
                                                class="font-medium text-indigo-600 hover:text-indigo-500">
                                                 @error.FormKind - @error.Location
                                             </a>
