@@ -17,6 +17,7 @@ Thank you for interest in contributing to our project! There are many ways you c
 * Submit bugs and feature requests [here](Discussions)
 * Submit a fix by forking and submitting a PR Request [here](CONTRIBUTING.md)
 * This solution includes automated tooling for linting, unit testing, and end-to-end testing. Powershell is required. Read more in our [wiki](https://github.com/UK-SBCoA/uniform-data-set-dotnet/wiki)
+* Our project's Tailwind CSS is generated using the Tailwind CLI tool. Instructions can be found [here](https://github.com/UK-SBCoA/uniform-data-set-dotnet-web/wiki/Tailwind-CSS-CLI-Instructions)
 
 ## Security
 [Security reports](SECURITY.md)
