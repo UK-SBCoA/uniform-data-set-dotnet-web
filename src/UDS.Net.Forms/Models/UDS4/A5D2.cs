@@ -13,6 +13,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Total years smoked")]
         [RegularExpression("^([1-7]?[0-9]|8[0-7]|99|777)$", ErrorMessage = "Valid range is 0-87 or 99")]
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
+        [AllowCode777]
         public int? SMOKYRS { get; set; }
         [Display(Name = "Average number of packs smoked per day")]
         [RegularExpression("^([1-5]|9)$", ErrorMessage = "Valid range is 1-5 or 9")]
