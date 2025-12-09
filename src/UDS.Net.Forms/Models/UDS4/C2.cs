@@ -742,7 +742,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
         [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage="Response Required")]
         public int? OTRAILA { get; set; }
 
         [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
@@ -757,7 +757,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
         [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage="Response Required")]
         public int? OTRAILB { get; set; }
 
         [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
@@ -773,12 +773,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage="Response Required")]
         public int? VNTTOTW { get; set; }
 
         [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage="Response Required")]
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]

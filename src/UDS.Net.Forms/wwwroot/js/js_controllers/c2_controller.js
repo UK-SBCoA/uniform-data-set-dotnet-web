@@ -8,13 +8,15 @@ export default class extends Controller {
         "formRemoteReason"
     ]
 
-    //look for UDSForm connection, stimulus not reinitialized on form switch
+    //look for UDSForm connection, stimulus not reloaded on turbo partial switch
     UDSFormSubmitTargetConnected() {
         //call global javascript method from unobtrusive_custom to reapply disable states
         setInputStates()
 
         //handle dropdown state on load
         this.HandleDropdowns()
+
+        this.ParseUnobtrusiveValidation();
     }
 
     ChangeView() {
@@ -35,5 +37,12 @@ export default class extends Controller {
             this.modalitySelectTarget.disabled = false;
             this.formRemoteReasonTarget.disabled = false;
         }
+    }
+
+    //Manually parse form views
+    //DEV NOTE: When form partial in C2 is changed, unobtrusive validation does not parse the new form automatically
+    ParseUnobtrusiveValidation() {
+        $('#UDSForm').removeData("validator").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse('#UDSForm');
     }
 }
