@@ -167,7 +167,7 @@
                     Participant blood pressure - Left arm:
                 </span>
                 <div>
-                    <div class="@rowCSS">
+                    <div class="@rowCSS ml-12">
                         <label asp-for="B1.BPSYSL1"> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL1"></p>
@@ -187,7 +187,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="@rowCSS">
+                    <div class="@rowCSS ml-12">
                         <label asp-for="B1.BPSYSL2"> @Html.DisplayNameFor(m => m.B1.BPSYSL2)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL2"></p>
@@ -212,11 +212,6 @@
                         Participant blood pressure - Right arm:
 
                     </div>
-
-                </div>
-            </div>
-            <div>
-                <div>
                     <div>
                         <div class="@rowCSS ml-12">
                             <label asp-for="B1.BPSYSR1"> @Html.DisplayNameFor(m => m.B1.BPSYSR1)</label>
@@ -282,7 +277,14 @@
     <ul role="list" class="divide-y divide-white/5 pb-2">
         <li class="text-lg"><b>STEP 1</b> - Properly prepare the participant:</li>
         <li class="relative flex items-center space-x-2 py-2">
-
+            <div class="min-w-0 flex-auto flex items-center gap-x-1">
+                <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                    <div class="h-2 w-2 rounded-full bg-current"></div>
+                </div>
+                <p class="ml-4">Have the participant relax, sitting in a chair <i>(feet on floor, back supported)</i> for >5 minutes </p>
+            </div>
+        </li>
+        <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
