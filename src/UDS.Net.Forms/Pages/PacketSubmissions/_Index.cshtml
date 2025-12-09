@@ -190,6 +190,7 @@
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Previous Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Current Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
@@ -215,6 +216,18 @@
                                         <td>
                                             <span>
                                                 @error.Value
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @{
+                                                    var formFound = Model.Forms.Where(f => f.Kind == error.FormKind).FirstOrDefault();
+                                                    var propertyFound = formFound.GetType().GetProperty(error.Location).GetValue(formFound);
+
+                                                    var currentValueString = formFound != null && propertyFound != null ? propertyFound.ToString() : string.Empty;
+                                                }
+                                                
+                                                @currentValueString
                                             </span>
                                         </td>
                                         <td class="px-4 py-2">
