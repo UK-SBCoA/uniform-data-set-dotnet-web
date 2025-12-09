@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -204,7 +205,7 @@ namespace UDS.Net.Services.DomainModels
                     }
                     else
                     {
-                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequiredForVisitKind, visitDate, CreatedBy));
+                        Forms.Add(new Form(Id, formContract.Abbreviation, formContract.IsRequiredForVisitKind, visitDate, CreatedBy, kind));
                     }
                 }
 
@@ -361,36 +362,36 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
-            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
+            object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
+            object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
+            object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
+            object b5 = GetFields<B5FormFields>("B5");
 
-            if (a1 != null && a5d2 != null && b5 != null)
-            {
-                // A1 sex and D1a menstruation
-                if (a1.BIRTHSEX == 1 && a5d2.MENARCHE != null)
-                {
-                    results.Add(new VisitValidationResult(
-                        $"A1 sex cannot be male and A5D2 menstruation details be provided.",
-                        new[] { nameof(a1.BIRTHSEX), nameof(a5d2.MENARCHE) }));
-                }
-            }
-
-            // A2 INLIVWTH == 1 (yes) and A1 LIVSITUA == 1 (lives alone) is a conflict
             if (a1 != null && a2 != null)
             {
-                if (a2.INLIVWTH == 1 && a1.LIVSITUA == 1)
+                var livSitua = GetInt<A1FollowUpFormFields>(a1, f => f.LIVSITUA) ?? GetInt<A1FormFields>(a1, f => f.LIVSITUA);
+                var inLivWth = GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FormFields>(a2, f => f.INLIVWTH);
+
+                if (inLivWth == 1 && livSitua == 1)
                 {
                     results.Add(new VisitValidationResult(
-                        $"IF A2 Q3. INLIVWTH (lives with participant?)=1 (yes) then Form A1, Q12. LIVSITUA (participant's living situation) should not equal 1 (lives alone)",
-                        new[] { nameof(a2.INLIVWTH), nameof(a1.LIVSITUA) }));
+                        "IF A2 Q3. INLIVWTH (lives with participant?)=1 (yes) then Form A1, Q12. LIVSITUA (participant's living situation) should not equal 1 (lives alone)",
+                        new[] { "INLIVWTH", "LIVSITUA" }));
                 }
             }
 
-            if (PACKET == PacketKind.I || PACKET == PacketKind.I4)
+            if ((PACKET == PacketKind.I || PACKET == PacketKind.I4)
+                && a1 != null && a5d2 != null && b5 != null)
             {
+                var birthSex = GetInt<A1FormFields>(a1, f => f.BIRTHSEX);
+                var menarche = GetInt<A5D2FormFields>(a5d2, f => f.MENARCHE);
 
+                if (birthSex == 1 && menarche != null)
+                {
+                    results.Add(new VisitValidationResult(
+                        "A1 sex cannot be male and A5D2 menstruation details be provided.",
+                        new[] { "BIRTHSEX", "MENARCHE" }));
+                }
             }
 
             return results;
@@ -400,57 +401,84 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            var a1 = (A1FormFields)this.Forms.Where(f => f.Kind == "A1").Select(f => f.Fields).FirstOrDefault();
-            var a2 = (A2FormFields)this.Forms.Where(f => f.Kind == "A2").Select(f => f.Fields).FirstOrDefault();
-            var a5d2 = (A5D2FormFields)this.Forms.Where(f => f.Kind == "A5D2").Select(f => f.Fields).FirstOrDefault();
-            var b5 = (B5FormFields)this.Forms.Where(f => f.Kind == "B5").Select(f => f.Fields).FirstOrDefault();
-            var b9 = (B9FormFields)this.Forms.Where(f => f.Kind == "B9").Select(f => f.Fields).FirstOrDefault();
-            var d1a = (D1aFormFields)this.Forms.Where(f => f.Kind == "D1a").Select(f => f.Fields).FirstOrDefault();
+            object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
+            object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
+            object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
+            object b5 = GetFields<B5FormFields>("B5");
+            object b9 = GetFields<B9FormFields>("B9");
+            object d1a = GetFields<D1aFormFields>("D1a");
 
             if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
-                if (a2.INRELTO.HasValue && a2.INRELTO.Value == 1 && a2.INLIVWTH.HasValue && a2.INLIVWTH == 0)
+                var inRelTo = GetInt<A2FollowUpFormFields>(a2, f => f.INRELTO) ?? GetInt<A2FormFields>(a2, f => f.INRELTO);
+                var inLivWth = GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FormFields>(a2, f => f.INLIVWTH);
+                var anx = GetInt<B5FormFields>(b5, f => f.ANX);
+                var anxiety = GetInt<A5D2FollowUpFormFields>(a5d2, f => f.ANXIETY) ?? GetInt<A5D2FormFields>(a5d2, f => f.ANXIETY);
+                var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX);
+                var anxiet = GetBool<D1aFormFields>(d1a, f => f.ANXIET);
+
+                if (inRelTo == 1 && inLivWth == 0)
                 {
                     results.Add(new VisitValidationResult(
-                        $"A2 if q1. INRELTO = 1 (spouse, partner, or companion), then A2 q3. INLIVWTH should not equal 0 (does not live with co-participant).",
-                        new[] { nameof(a2.INRELTO), nameof(a2.INLIVWTH) }));
+                        "A2 if q1. INRELTO = 1 (spouse, partner, or companion), then A2 q3. INLIVWTH should not equal 0 (does not live with co-participant).",
+                        new[] { "INRELTO", "INLIVWTH" }));
                 }
-                if (b5.ANX.HasValue)
+
+                if (anx.HasValue)
                 {
-                    if (b5.ANX == 0)
+                    if (anx == 0)
                     {
-                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 0)
+                        if (anxiety.HasValue && anxiety != 0)
                         {
                             results.Add(new VisitValidationResult(
-                                $"B5 if q6a. anx (anxiety) = 0 (no), then form A5D2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                "B5 if q6a. anx (anxiety) = 0 (no), then form A5D2, q6d. anxiety (anxiety disorder) should not equal 1 (active).",
+                                new[] { "ANX", "ANXIETY" }));
                         }
                     }
-                    else if (b5.ANX == 1)
+                    else if (anx == 1)
                     {
-                        if (a5d2.ANXIETY.HasValue && a5d2.ANXIETY != 1)
+                        if (anxiety.HasValue && anxiety != 1)
                         {
                             results.Add(new VisitValidationResult(
-                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form A5D2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
-                                new[] { nameof(b5.ANX), nameof(a5d2.ANXIETY) }));
+                                "B5 if q6a. anx (anxiety) = 1 (yes), then form A5D2, q6d. anxiety (anxiety disorder) should equal 1 (recent/active).",
+                                new[] { "ANX", "ANXIETY" }));
                         }
-                        if (b9.BEANX.HasValue && b9.BEANX != 1)
+                        if (beAnx.HasValue && beAnx != 1)
                         {
                             results.Add(new VisitValidationResult(
-                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form B9, q12c. beanx (anxiety) should equal 1 (yes).",
-                                new[] { nameof(b5.ANX), nameof(b9.BEANX) }));
+                                "B5 if q6a. anx (anxiety) = 1 (yes), then form B9, q12c. beanx (anxiety) should equal 1 (yes).",
+                                new[] { "ANX", "BEANX" }));
                         }
-                        if (d1a.ANXIET.HasValue && d1a.ANXIET != true)
+                        if (anxiet.HasValue && anxiet != true)
                         {
                             results.Add(new VisitValidationResult(
-                                $"B5 if q6a. anx (anxiety) = 1 (yes), then form D1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
-                                new[] { nameof(b5.ANX), nameof(d1a.ANXIET) }));
+                                "B5 if q6a. anx (anxiety) = 1 (yes), then form D1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
+                                new[] { "ANX", "ANXIET" }));
                         }
                     }
                 }
             }
 
             return results;
+        }
+
+        private T GetFields<T>(string kind)
+        {
+            return Forms
+                .Where(f => f.Kind == kind)
+                .Select(f => f.Fields)
+                .OfType<T>()
+                .FirstOrDefault();
+        }
+
+        private int? GetInt<T>(object obj, Func<T, int?> getter)
+        {
+            return obj is T t ? getter(t) : null;
+        }
+
+        private bool? GetBool<T>(object obj, Func<T, bool?> getter)
+        {
+            return obj is T t ? getter(t) : null;
         }
     }
 }

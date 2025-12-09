@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -82,48 +83,94 @@ namespace UDS.Net.Services.DomainModels
 
         public List<PacketSubmissionError> UnresolvedErrors = new List<PacketSubmissionError>();
 
-        private void SetFieldsBasedOnKind()
+        private void SetFieldsBasedOnKind(PacketKind packetKind)
         {
             if (Kind == "A1")
-                Fields = new A1FormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A1FollowUpFormFields()
+                    : new A1FormFields();
+            }
             else if (Kind == "A1a")
+            {
                 Fields = new A1aFormFields();
+            }
             else if (Kind == "A2")
-                Fields = new A2FormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A2FollowUpFormFields()
+                    : new A2FormFields();
+            }
             else if (Kind == "A3")
-                Fields = new A3FormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A3FollowUpFormFields()
+                    : new A3FormFields();
+            }
             else if (Kind == "A4")
+            {
                 Fields = new A4GFormFields();
+            }
             else if (Kind == "A4a")
-                Fields = new A4aFormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A4aFollowUpFormFields()
+                    : new A4aFormFields();
+            }
             else if (Kind == "A5D2")
-                Fields = new A5D2FormFields();
+            {
+                Fields = packetKind == PacketKind.F
+                    ? (IFormFields)new A5D2FollowUpFormFields()
+                    : new A5D2FormFields();
+            }
             else if (Kind == "B1")
+            {
                 Fields = new B1FormFields();
+            }
             else if (Kind == "B3")
+            {
                 Fields = new B3FormFields();
+            }
             else if (Kind == "B4")
+            {
                 Fields = new B4FormFields();
+            }
             else if (Kind == "B5")
+            {
                 Fields = new B5FormFields();
+            }
             else if (Kind == "B6")
+            {
                 Fields = new B6FormFields();
+            }
             else if (Kind == "B7")
+            {
                 Fields = new B7FormFields();
+            }
             else if (Kind == "B8")
+            {
                 Fields = new B8FormFields();
+            }
             else if (Kind == "B9")
+            {
                 Fields = new B9FormFields();
+            }
             else if (Kind == "C2")
+            {
                 Fields = new C2FormFields();
+            }
             else if (Kind == "D1a")
+            {
                 Fields = new D1aFormFields();
+            }
             else if (Kind == "D1b")
+            {
                 Fields = new D1bFormFields();
+            }
         }
 
         // TODO field versions so comparison can be made between existing data version and version that should be used
-        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy)
+        public Form(int visitId, string kind, bool isRequired, DateTime visitDate, string createdBy, PacketKind packetKind)
         {
             VisitId = visitId;
 
@@ -139,8 +186,7 @@ namespace UDS.Net.Services.DomainModels
 
             CreatedAt = DateTime.Now;
 
-            // there is no existing form, but we need to fields initialized for brand new forms
-            SetFieldsBasedOnKind();
+            SetFieldsBasedOnKind(packetKind);
         }
 
         public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)

@@ -2,7 +2,9 @@
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Extensions
 {
@@ -71,12 +73,12 @@ namespace UDS.Net.Forms.Extensions
 
         public static Visit ToEntity(this VisitModel vm)
         {
-            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity());
+            return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(vm.PACKET));
         }
 
         public static Packet ToEntity(this PacketModel vm)
         {
-            return new Packet(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(), vm.PacketSubmissions.ToEntity());
+            return new Packet(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(vm.PACKET), vm.PacketSubmissions.ToEntity());
         }
 
         public static List<PacketSubmission> ToEntity(this IList<PacketSubmissionModel> vm)
@@ -96,172 +98,212 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
-        public static List<Form> ToEntity(this IList<FormModel> vm)
+        public static List<Form> ToEntity(this IList<FormModel> vm, PacketKind visitPacket)
         {
-            return vm.Select(v => v.ToEntity()).ToList();
+            return vm.Select(v =>
+            {
+                v.PacketKind = visitPacket;
+                return v.ToEntity();
+            }).ToList();
         }
 
         public static Form ToEntity(this FormModel vm)
         {
             IFormFields fields = null;
-
             if (vm is A1)
-                fields = ((A1)vm).GetFormFields();
+                fields = ((A1)vm).GetFormFields(vm.PacketKind);
             else if (vm is A1a)
-                fields = ((A1a)vm).GetFormFields();
+                fields = ((A1a)vm).GetFormFields(vm.PacketKind);
             else if (vm is A2)
-                fields = ((A2)vm).GetFormFields();
+                fields = ((A2)vm).GetFormFields(vm.PacketKind);
             else if (vm is A3)
-                fields = ((A3)vm).GetFormFields();
+                fields = ((A3)vm).GetFormFields(vm.PacketKind);
             else if (vm is A4)
-                fields = ((A4)vm).GetFormFields();
+                fields = ((A4)vm).GetFormFields(vm.PacketKind);
             else if (vm is A4a)
-                fields = ((A4a)vm).GetFormFields();
+                fields = ((A4a)vm).GetFormFields(vm.PacketKind);
             else if (vm is A5D2)
-                fields = ((A5D2)vm).GetFormFields();
+                fields = ((A5D2)vm).GetFormFields(vm.PacketKind);
             else if (vm is B1)
-                fields = ((B1)vm).GetFormFields();
+                fields = ((B1)vm).GetFormFields(vm.PacketKind);
             else if (vm is B3)
-                fields = ((B3)vm).GetFormFields();
+                fields = ((B3)vm).GetFormFields(vm.PacketKind);
             else if (vm is B4)
-                fields = ((B4)vm).GetFormFields();
+                fields = ((B4)vm).GetFormFields(vm.PacketKind);
             else if (vm is B5)
-                fields = ((B5)vm).GetFormFields();
+                fields = ((B5)vm).GetFormFields(vm.PacketKind);
             else if (vm is B6)
-                fields = ((B6)vm).GetFormFields();
+                fields = ((B6)vm).GetFormFields(vm.PacketKind);
             else if (vm is B7)
-                fields = ((B7)vm).GetFormFields();
+                fields = ((B7)vm).GetFormFields(vm.PacketKind);
             else if (vm is B8)
-                fields = ((B8)vm).GetFormFields();
+                fields = ((B8)vm).GetFormFields(vm.PacketKind);
             else if (vm is B9)
-                fields = ((B9)vm).GetFormFields();
+                fields = ((B9)vm).GetFormFields(vm.PacketKind);
             else if (vm is C2)
-                fields = ((C2)vm).GetFormFields();
+                fields = ((C2)vm).GetFormFields(vm.PacketKind);
             else if (vm is D1a)
-                fields = ((D1a)vm).GetFormFields();
+                fields = ((D1a)vm).GetFormFields(vm.PacketKind);
             else if (vm is D1b)
-                fields = ((D1b)vm).GetFormFields();
+                fields = ((D1b)vm).GetFormFields(vm.PacketKind);
 
             return new Form(vm.VisitId, vm.Id, vm.Title, vm.Kind, vm.Status, vm.FRMDATE, vm.INITIALS, vm.LANG, vm.MODE, vm.RMREAS, vm.RMMODE, vm.NOT, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, fields);
         }
 
-        public static IFormFields GetFormFields(this A1 vm)
+        public static IFormFields GetFormFields(this A1 vm, PacketKind packetKind)
         {
-            return new A1FormFields
+            if (packetKind == PacketKind.F)
             {
-                BIRTHMO = vm.BIRTHMO,
-                BIRTHYR = vm.BIRTHYR,
-                MARISTAT = vm.MARISTAT,
-                LIVSITUA = vm.LIVSITUA,
-                RESIDENC = vm.RESIDENC,
-                EDUC = vm.EDUC,
-                ZIP = vm.ZIP,
-                HANDED = vm.HANDED,
-                CHLDHDCTRY = vm.CHLDHDCTRY,
-                RACEWHITE = vm.RACEWHITE ? true : null,
-                ETHGERMAN = vm.ETHGERMAN ? true : null,
-                ETHIRISH = vm.ETHIRISH ? true : null,
-                ETHENGLISH = vm.ETHENGLISH ? true : null,
-                ETHITALIAN = vm.ETHITALIAN ? true : null,
-                ETHPOLISH = vm.ETHPOLISH ? true : null,
-                ETHSCOTT = vm.ETHSCOTT ? true : null,
-                ETHWHIOTH = vm.ETHWHIOTH ? true : null,
-                ETHWHIOTHX = vm.ETHWHIOTHX,
-                ETHISPANIC = vm.ETHISPANIC ? true : null,
-                ETHMEXICAN = vm.ETHMEXICAN ? true : null,
-                ETHPUERTO = vm.ETHPUERTO ? true : null,
-                ETHCUBAN = vm.ETHCUBAN ? true : null,
-                ETHSALVA = vm.ETHSALVA ? true : null,
-                ETHDOMIN = vm.ETHDOMIN ? true : null,
-                ETHGUATEM = vm.ETHGUATEM ? true : null,
-                ETHHISOTH = vm.ETHHISOTH ? true : null,
-                ETHHISOTHX = vm.ETHHISOTHX,
-                RACEBLACK = vm.RACEBLACK ? true : null,
-                ETHAFAMER = vm.ETHAFAMER ? true : null,
-                ETHJAMAICA = vm.ETHJAMAICA ? true : null,
-                ETHHAITIAN = vm.ETHHAITIAN ? true : null,
-                ETHNIGERIA = vm.ETHNIGERIA ? true : null,
-                ETHETHIOP = vm.ETHETHIOP ? true : null,
-                ETHSOMALI = vm.ETHSOMALI ? true : null,
-                ETHBLKOTH = vm.ETHBLKOTH ? true : null,
-                ETHBLKOTHX = vm.ETHBLKOTHX,
-                RACEASIAN = vm.RACEASIAN ? true : null,
-                ETHCHINESE = vm.ETHCHINESE ? true : null,
-                ETHFILIP = vm.ETHFILIP ? true : null,
-                ETHINDIA = vm.ETHINDIA ? true : null,
-                ETHVIETNAM = vm.ETHVIETNAM ? true : null,
-                ETHKOREAN = vm.ETHKOREAN ? true : null,
-                ETHJAPAN = vm.ETHJAPAN ? true : null,
-                ETHASNOTH = vm.ETHASNOTH ? true : null,
-                ETHASNOTHX = vm.ETHASNOTHX,
-                RACEAIAN = vm.RACEAIAN ? true : null,
-                RACEAIANX = vm.RACEAIANX,
-                RACEMENA = vm.RACEMENA ? true : null,
-                ETHLEBANON = vm.ETHLEBANON ? true : null,
-                ETHIRAN = vm.ETHIRAN ? true : null,
-                ETHEGYPT = vm.ETHEGYPT ? true : null,
-                ETHSYRIA = vm.ETHSYRIA ? true : null,
-                ETHIRAQI = vm.ETHIRAQI ? true : null,
-                ETHISRAEL = vm.ETHISRAEL ? true : null,
-                ETHMENAOTH = vm.ETHMENAOTH ? true : null,
-                ETHMENAOTX = vm.ETHMENAOTX,
-                RACENHPI = vm.RACENHPI ? true : null,
-                ETHHAWAII = vm.ETHHAWAII ? true : null,
-                ETHSAMOAN = vm.ETHSAMOAN ? true : null,
-                ETHCHAMOR = vm.ETHCHAMOR ? true : null,
-                ETHTONGAN = vm.ETHTONGAN ? true : null,
-                ETHFIJIAN = vm.ETHFIJIAN ? true : null,
-                ETHMARSHAL = vm.ETHMARSHAL ? true : null,
-                ETHNHPIOTH = vm.ETHNHPIOTH ? true : null,
-                ETHNHPIOTX = vm.ETHNHPIOTX,
-                RACEUNKN = vm.RACEUNKN ? true : null,
-                GENMAN = vm.GENMAN ? true : null,
-                GENWOMAN = vm.GENWOMAN ? true : null,
-                GENTRMAN = vm.GENTRMAN ? true : null,
-                GENTRWOMAN = vm.GENTRWOMAN ? true : null,
-                GENNONBI = vm.GENNONBI ? true : null,
-                GENTWOSPIR = vm.GENTWOSPIR ? true : null,
-                GENOTH = vm.GENOTH ? true : null,
-                GENOTHX = vm.GENOTHX,
-                GENDKN = vm.GENDKN ? true : null,
-                GENNOANS = vm.GENNOANS ? true : null,
-                BIRTHSEX = vm.BIRTHSEX,
-                INTERSEX = vm.INTERSEX,
-                SEXORNGAY = vm.SEXORNGAY ? true : null,
-                SEXORNHET = vm.SEXORNHET ? true : null,
-                SEXORNBI = vm.SEXORNBI ? true : null,
-                SEXORNTWOS = vm.SEXORNTWOS ? true : null,
-                SEXORNOTH = vm.SEXORNOTH ? true : null,
-                SEXORNOTHX = vm.SEXORNOTHX,
-                SEXORNDNK = vm.SEXORNDNK ? true : null,
-                SEXORNNOAN = vm.SEXORNNOAN ? true : null,
-                PREDOMLAN = vm.PREDOMLAN,
-                PREDOMLANX = vm.PREDOMLANX,
-                LVLEDUC = vm.LVLEDUC,
-                SERVED = vm.SERVED,
-                MEDVA = vm.MEDVA,
-                EXRTIME = vm.EXRTIME,
-                MEMWORS = vm.MEMWORS,
-                MEMTROUB = vm.MEMTROUB,
-                MEMTEN = vm.MEMTEN,
-                ADISTATE = vm.ADISTATE,
-                ADINAT = vm.ADINAT,
-                PRIOCC = vm.PRIOCC,
-                SOURCENW = vm.SOURCENW,
-                REFERSC = vm.REFERSC,
-                REFERSCX = vm.REFERSCX,
-                REFLEARNED = vm.REFLEARNED,
-                REFCTRSOCX = vm.REFCTRSOCX,
-                REFCTRREGX = vm.REFCTRREGX,
-                REFOTHWEBX = vm.REFOTHWEBX,
-                REFOTHMEDX = vm.REFOTHMEDX,
-                REFOTHREGX = vm.REFOTHREGX,
-                REFOTHX = vm.REFOTHX
-
-            };
+                return new A1FollowUpFormFields
+                {
+                    MARISTAT = vm.MARISTAT,
+                    LIVSITUA = vm.LIVSITUA,
+                    RESIDENC = vm.RESIDENC,
+                    ZIP = vm.ZIP,
+                    GENMAN = vm.GENMAN ? true : null,
+                    GENWOMAN = vm.GENWOMAN ? true : null,
+                    GENTRMAN = vm.GENTRMAN ? true : null,
+                    GENTRWOMAN = vm.GENTRWOMAN ? true : null,
+                    GENNONBI = vm.GENNONBI ? true : null,
+                    GENTWOSPIR = vm.GENTWOSPIR ? true : null,
+                    GENOTH = vm.GENOTH ? true : null,
+                    GENOTHX = vm.GENOTHX,
+                    GENDKN = vm.GENDKN ? true : null,
+                    GENNOANS = vm.GENNOANS ? true : null,
+                    SEXORNGAY = vm.SEXORNGAY ? true : null,
+                    SEXORNHET = vm.SEXORNHET ? true : null,
+                    SEXORNBI = vm.SEXORNBI ? true : null,
+                    SEXORNTWOS = vm.SEXORNTWOS ? true : null,
+                    SEXORNOTH = vm.SEXORNOTH ? true : null,
+                    SEXORNOTHX = vm.SEXORNOTHX,
+                    SEXORNDNK = vm.SEXORNDNK ? true : null,
+                    SEXORNNOAN = vm.SEXORNNOAN ? true : null,
+                    MEDVA = vm.MEDVA,
+                    EXRTIME = vm.EXRTIME,
+                    MEMWORS = vm.MEMWORS,
+                    MEMTROUB = vm.MEMTROUB,
+                    MEMTEN = vm.MEMTEN,
+                    ADISTATE = vm.ADISTATE,
+                    ADINAT = vm.ADINAT,
+                };
+            }
+            else
+            {
+                return new A1FormFields
+                {
+                    BIRTHMO = vm.BIRTHMO,
+                    BIRTHYR = vm.BIRTHYR,
+                    MARISTAT = vm.MARISTAT,
+                    LIVSITUA = vm.LIVSITUA,
+                    RESIDENC = vm.RESIDENC,
+                    EDUC = vm.EDUC,
+                    ZIP = vm.ZIP,
+                    HANDED = vm.HANDED,
+                    CHLDHDCTRY = vm.CHLDHDCTRY,
+                    RACEWHITE = vm.RACEWHITE ? true : null,
+                    ETHGERMAN = vm.ETHGERMAN ? true : null,
+                    ETHIRISH = vm.ETHIRISH ? true : null,
+                    ETHENGLISH = vm.ETHENGLISH ? true : null,
+                    ETHITALIAN = vm.ETHITALIAN ? true : null,
+                    ETHPOLISH = vm.ETHPOLISH ? true : null,
+                    ETHSCOTT = vm.ETHSCOTT ? true : null,
+                    ETHWHIOTH = vm.ETHWHIOTH ? true : null,
+                    ETHWHIOTHX = vm.ETHWHIOTHX,
+                    ETHISPANIC = vm.ETHISPANIC ? true : null,
+                    ETHMEXICAN = vm.ETHMEXICAN ? true : null,
+                    ETHPUERTO = vm.ETHPUERTO ? true : null,
+                    ETHCUBAN = vm.ETHCUBAN ? true : null,
+                    ETHSALVA = vm.ETHSALVA ? true : null,
+                    ETHDOMIN = vm.ETHDOMIN ? true : null,
+                    ETHGUATEM = vm.ETHGUATEM ? true : null,
+                    ETHHISOTH = vm.ETHHISOTH ? true : null,
+                    ETHHISOTHX = vm.ETHHISOTHX,
+                    RACEBLACK = vm.RACEBLACK ? true : null,
+                    ETHAFAMER = vm.ETHAFAMER ? true : null,
+                    ETHJAMAICA = vm.ETHJAMAICA ? true : null,
+                    ETHHAITIAN = vm.ETHHAITIAN ? true : null,
+                    ETHNIGERIA = vm.ETHNIGERIA ? true : null,
+                    ETHETHIOP = vm.ETHETHIOP ? true : null,
+                    ETHSOMALI = vm.ETHSOMALI ? true : null,
+                    ETHBLKOTH = vm.ETHBLKOTH ? true : null,
+                    ETHBLKOTHX = vm.ETHBLKOTHX,
+                    RACEASIAN = vm.RACEASIAN ? true : null,
+                    ETHCHINESE = vm.ETHCHINESE ? true : null,
+                    ETHFILIP = vm.ETHFILIP ? true : null,
+                    ETHINDIA = vm.ETHINDIA ? true : null,
+                    ETHVIETNAM = vm.ETHVIETNAM ? true : null,
+                    ETHKOREAN = vm.ETHKOREAN ? true : null,
+                    ETHJAPAN = vm.ETHJAPAN ? true : null,
+                    ETHASNOTH = vm.ETHASNOTH ? true : null,
+                    ETHASNOTHX = vm.ETHASNOTHX,
+                    RACEAIAN = vm.RACEAIAN ? true : null,
+                    RACEAIANX = vm.RACEAIANX,
+                    RACEMENA = vm.RACEMENA ? true : null,
+                    ETHLEBANON = vm.ETHLEBANON ? true : null,
+                    ETHIRAN = vm.ETHIRAN ? true : null,
+                    ETHEGYPT = vm.ETHEGYPT ? true : null,
+                    ETHSYRIA = vm.ETHSYRIA ? true : null,
+                    ETHIRAQI = vm.ETHIRAQI ? true : null,
+                    ETHISRAEL = vm.ETHISRAEL ? true : null,
+                    ETHMENAOTH = vm.ETHMENAOTH ? true : null,
+                    ETHMENAOTX = vm.ETHMENAOTX,
+                    RACENHPI = vm.RACENHPI ? true : null,
+                    ETHHAWAII = vm.ETHHAWAII ? true : null,
+                    ETHSAMOAN = vm.ETHSAMOAN ? true : null,
+                    ETHCHAMOR = vm.ETHCHAMOR ? true : null,
+                    ETHTONGAN = vm.ETHTONGAN ? true : null,
+                    ETHFIJIAN = vm.ETHFIJIAN ? true : null,
+                    ETHMARSHAL = vm.ETHMARSHAL ? true : null,
+                    ETHNHPIOTH = vm.ETHNHPIOTH ? true : null,
+                    ETHNHPIOTX = vm.ETHNHPIOTX,
+                    RACEUNKN = vm.RACEUNKN ? true : null,
+                    GENMAN = vm.GENMAN ? true : null,
+                    GENWOMAN = vm.GENWOMAN ? true : null,
+                    GENTRMAN = vm.GENTRMAN ? true : null,
+                    GENTRWOMAN = vm.GENTRWOMAN ? true : null,
+                    GENNONBI = vm.GENNONBI ? true : null,
+                    GENTWOSPIR = vm.GENTWOSPIR ? true : null,
+                    GENOTH = vm.GENOTH ? true : null,
+                    GENOTHX = vm.GENOTHX,
+                    GENDKN = vm.GENDKN ? true : null,
+                    GENNOANS = vm.GENNOANS ? true : null,
+                    BIRTHSEX = vm.BIRTHSEX,
+                    INTERSEX = vm.INTERSEX,
+                    SEXORNGAY = vm.SEXORNGAY ? true : null,
+                    SEXORNHET = vm.SEXORNHET ? true : null,
+                    SEXORNBI = vm.SEXORNBI ? true : null,
+                    SEXORNTWOS = vm.SEXORNTWOS ? true : null,
+                    SEXORNOTH = vm.SEXORNOTH ? true : null,
+                    SEXORNOTHX = vm.SEXORNOTHX,
+                    SEXORNDNK = vm.SEXORNDNK ? true : null,
+                    SEXORNNOAN = vm.SEXORNNOAN ? true : null,
+                    PREDOMLAN = vm.PREDOMLAN,
+                    PREDOMLANX = vm.PREDOMLANX,
+                    LVLEDUC = vm.LVLEDUC,
+                    SERVED = vm.SERVED,
+                    MEDVA = vm.MEDVA,
+                    EXRTIME = vm.EXRTIME,
+                    MEMWORS = vm.MEMWORS,
+                    MEMTROUB = vm.MEMTROUB,
+                    MEMTEN = vm.MEMTEN,
+                    ADISTATE = vm.ADISTATE,
+                    ADINAT = vm.ADINAT,
+                    PRIOCC = vm.PRIOCC,
+                    SOURCENW = vm.SOURCENW,
+                    REFERSC = vm.REFERSC,
+                    REFERSCX = vm.REFERSCX,
+                    REFLEARNED = vm.REFLEARNED,
+                    REFCTRSOCX = vm.REFCTRSOCX,
+                    REFCTRREGX = vm.REFCTRREGX,
+                    REFOTHWEBX = vm.REFOTHWEBX,
+                    REFOTHMEDX = vm.REFOTHMEDX,
+                    REFOTHREGX = vm.REFOTHREGX,
+                    REFOTHX = vm.REFOTHX
+                };
+            }
         }
 
-        public static IFormFields GetFormFields(this A1a vm)
+        public static IFormFields GetFormFields(this A1a vm, PacketKind packetKind)
         {
             return new A1aFormFields
             {
@@ -321,46 +363,95 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this A2 vm)
+        public static IFormFields GetFormFields(this A2 vm, PacketKind packetKind)
         {
-            return new A2FormFields
+            if (packetKind == PacketKind.F)
             {
-                INRELTO = vm.INRELTO,
-                INKNOWN = vm.INKNOWN,
-                INLIVWTH = vm.INLIVWTH,
-                INCNTMOD = vm.INCNTMOD,
-                INCNTMDX = vm.INCNTMDX,
-                INCNTFRQ = vm.INCNTFRQ,
-                INCNTTIM = vm.INCNTTIM,
-                INRELY = vm.INRELY,
-                INMEMWORS = vm.INMEMWORS,
-                INMEMTROUB = vm.INMEMTROUB,
-                INMEMTEN = vm.INMEMTEN,
-                NEWINF = vm.NEWINF,
-            };
+                return new A2FollowUpFormFields
+                {
+                    INRELTO = vm.INRELTO,
+                    INKNOWN = vm.INKNOWN,
+                    INLIVWTH = vm.INLIVWTH,
+                    INCNTMOD = vm.INCNTMOD,
+                    INCNTMDX = vm.INCNTMDX,
+                    INCNTFRQ = vm.INCNTFRQ,
+                    INCNTTIM = vm.INCNTTIM,
+                    INRELY = vm.INRELY,
+                    INMEMWORS = vm.INMEMWORS,
+                    INMEMTROUB = vm.INMEMTROUB,
+                    INMEMTEN = vm.INMEMTEN,
+                    NEWINF = vm.NEWINF,
+                };
+            }
+            else
+            {
+                return new A2FormFields
+                {
+                    INRELTO = vm.INRELTO,
+                    INKNOWN = vm.INKNOWN,
+                    INLIVWTH = vm.INLIVWTH,
+                    INCNTMOD = vm.INCNTMOD,
+                    INCNTMDX = vm.INCNTMDX,
+                    INCNTFRQ = vm.INCNTFRQ,
+                    INCNTTIM = vm.INCNTTIM,
+                    INRELY = vm.INRELY,
+                    INMEMWORS = vm.INMEMWORS,
+                    INMEMTROUB = vm.INMEMTROUB,
+                    INMEMTEN = vm.INMEMTEN,
+                };
+            }
+
         }
 
-        public static IFormFields GetFormFields(this A3 vm)
+        public static IFormFields GetFormFields(this A3 vm, PacketKind packetKind)
         {
-            return new A3FormFields
+            if (packetKind == PacketKind.F)
             {
-                MOMYOB = vm.MOMYOB,
-                MOMDAGE = vm.MOMDAGE,
-                MOMETPR = vm.MOMETPR,
-                MOMETSEC = vm.MOMETSEC,
-                MOMMEVAL = vm.MOMMEVAL,
-                MOMAGEO = vm.MOMAGEO,
-                DADYOB = vm.DADYOB,
-                DADDAGE = vm.DADDAGE,
-                DADETPR = vm.DADETPR,
-                DADETSEC = vm.DADETSEC,
-                DADMEVAL = vm.DADMEVAL,
-                DADAGEO = vm.DADAGEO,
-                SIBS = vm.SIBS,
-                KIDS = vm.KIDS,
-                SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
-                KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
-            };
+                return new A3FollowUpFormFields
+                {
+                    MOMYOB = vm.MOMYOB,
+                    MOMDAGE = vm.MOMDAGE,
+                    MOMETPR = vm.MOMETPR,
+                    MOMETSEC = vm.MOMETSEC,
+                    MOMMEVAL = vm.MOMMEVAL,
+                    MOMAGEO = vm.MOMAGEO,
+                    DADYOB = vm.DADYOB,
+                    DADDAGE = vm.DADDAGE,
+                    DADETPR = vm.DADETPR,
+                    DADETSEC = vm.DADETSEC,
+                    DADMEVAL = vm.DADMEVAL,
+                    DADAGEO = vm.DADAGEO,
+                    SIBS = vm.SIBS,
+                    KIDS = vm.KIDS,
+                    NWINFPAR = vm.NWINFPAR,
+                    NWINFSIB = vm.NWINFSIB,
+                    NWINFKID = vm.NWINFKID,
+                    SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
+                    KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
+                };
+            }
+            else
+            {
+                return new A3FormFields
+                {
+                    MOMYOB = vm.MOMYOB,
+                    MOMDAGE = vm.MOMDAGE,
+                    MOMETPR = vm.MOMETPR,
+                    MOMETSEC = vm.MOMETSEC,
+                    MOMMEVAL = vm.MOMMEVAL,
+                    MOMAGEO = vm.MOMAGEO,
+                    DADYOB = vm.DADYOB,
+                    DADDAGE = vm.DADDAGE,
+                    DADETPR = vm.DADETPR,
+                    DADETSEC = vm.DADETSEC,
+                    DADMEVAL = vm.DADMEVAL,
+                    DADAGEO = vm.DADAGEO,
+                    SIBS = vm.SIBS,
+                    KIDS = vm.KIDS,
+                    SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
+                    KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
+                };
+            }
         }
 
         public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)
@@ -377,7 +468,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this A4 vm)
+        public static IFormFields GetFormFields(this A4 vm, PacketKind packetKind)
         {
             return new A4GFormFields
             {
@@ -394,18 +485,36 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this A4a vm)
+        public static IFormFields GetFormFields(this A4a vm, PacketKind packetKind)
         {
-            return new A4aFormFields
+            if (packetKind == PacketKind.F)
             {
-                ADVEVENT = vm.ADVEVENT,
-                ARIAE = vm.ARIAE,
-                ARIAH = vm.ARIAH,
-                ADVERSEOTH = vm.ADVERSEOTH,
-                ADVERSEOTX = vm.ADVERSEOTX,
-                TRTBIOMARK = vm.TRTBIOMARK,
-                TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
-            };
+                return new A4aFollowUpFormFields
+                {
+                    ADVEVENT = vm.ADVEVENT,
+                    ARIAE = vm.ARIAE,
+                    ARIAH = vm.ARIAH,
+                    ADVERSEOTH = vm.ADVERSEOTH,
+                    ADVERSEOTX = vm.ADVERSEOTX,
+                    TRTBIOMARK = vm.TRTBIOMARK,
+                    NEWTREAT = vm.NEWTREAT,
+                    NEWADEVENT = vm.NEWADEVENT,
+                    TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
+                };
+            }
+            else
+            {
+                return new A4aFormFields
+                {
+                    ADVEVENT = vm.ADVEVENT,
+                    ARIAE = vm.ARIAE,
+                    ARIAH = vm.ARIAH,
+                    ADVERSEOTH = vm.ADVERSEOTH,
+                    ADVERSEOTX = vm.ADVERSEOTX,
+                    TRTBIOMARK = vm.TRTBIOMARK,
+                    TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
+                };
+            }
         }
 
         public static A4aTreatmentFormFields ToEntity(this A4aTreatment vm)
@@ -431,181 +540,356 @@ namespace UDS.Net.Forms.Extensions
         }
 
 
-        public static IFormFields GetFormFields(this A5D2 vm)
+        public static IFormFields GetFormFields(this A5D2 vm, PacketKind packetKind)
         {
-            return new A5D2FormFields
+            if (packetKind == PacketKind.F)
             {
-                TOBAC100 = vm.TOBAC100,
-                SMOKYRS = vm.SMOKYRS,
-                PACKSPER = vm.PACKSPER,
-                TOBAC30 = vm.TOBAC30,
-                QUITSMOK = vm.QUITSMOK,
-                ALCFREQYR = vm.ALCFREQYR,
-                ALCDRINKS = vm.ALCDRINKS,
-                ALCBINGE = vm.ALCBINGE,
-                SUBSTYEAR = vm.SUBSTYEAR,
-                SUBSTPAST = vm.SUBSTPAST,
-                CANNABIS = vm.CANNABIS,
-                HRTATTACK = vm.HRTATTACK,
-                HRTATTMULT = vm.HRTATTMULT,
-                HRTATTAGE = vm.HRTATTAGE,
-                CARDARREST = vm.CARDARREST,
-                CARDARRAGE = vm.CARDARRAGE,
-                CVAFIB = vm.CVAFIB,
-                CVANGIO = vm.CVANGIO,
-                CVBYPASS = vm.CVBYPASS,
-                BYPASSAGE = vm.BYPASSAGE,
-                CVPACDEF = vm.CVPACDEF,
-                PACDEFAGE = vm.PACDEFAGE,
-                CVCHF = vm.CVCHF,
-                CVHVALVE = vm.CVHVALVE,
-                VALVEAGE = vm.VALVEAGE,
-                CVOTHR = vm.CVOTHR,
-                CVOTHRX = vm.CVOTHRX,
-                CBSTROKE = vm.CBSTROKE,
-                STROKMUL = vm.STROKMUL,
-                STROKAGE = vm.STROKAGE,
-                STROKSTAT = vm.STROKSTAT,
-                ANGIOCP = vm.ANGIOCP,
-                CAROTIDAGE = vm.CAROTIDAGE,
-                CBTIA = vm.CBTIA,
-                TIAAGE = vm.TIAAGE,
-                PD = vm.PD,
-                PDAGE = vm.PDAGE,
-                PDOTHR = vm.PDOTHR,
-                PDOTHRAGE = vm.PDOTHRAGE,
-                SEIZURES = vm.SEIZURES,
-                SEIZNUM = vm.SEIZNUM,
-                SEIZAGE = vm.SEIZAGE,
-                HEADACHE = vm.HEADACHE,
-                MS = vm.MS,
-                HYDROCEPH = vm.HYDROCEPH,
-                HEADIMP = vm.HEADIMP,
-                IMPAMFOOT = vm.IMPAMFOOT,
-                IMPSOCCER = vm.IMPSOCCER,
-                IMPHOCKEY = vm.IMPHOCKEY,
-                IMPBOXING = vm.IMPBOXING,
-                IMPSPORT = vm.IMPSPORT,
-                IMPIPV = vm.IMPIPV,
-                IMPMILIT = vm.IMPMILIT,
-                IMPASSAULT = vm.IMPASSAULT,
-                IMPOTHER = vm.IMPOTHER,
-                IMPOTHERX = vm.IMPOTHERX,
-                IMPYEARS = vm.IMPYEARS,
-                HEADINJURY = vm.HEADINJURY,
-                HEADINJUNC = vm.HEADINJUNC,
-                HEADINJCON = vm.HEADINJCON,
-                HEADINJNUM = vm.HEADINJNUM,
-                FIRSTTBI = vm.FIRSTTBI,
-                LASTTBI = vm.LASTTBI,
-                DIABETES = vm.DIABETES,
-                DIABTYPE = vm.DIABTYPE,
-                DIABINS = vm.DIABINS,
-                DIABMEDS = vm.DIABMEDS,
-                DIABGLP1 = vm.DIABGLP1,
-                DIABRECACT = vm.DIABRECACT,
-                DIABDIET = vm.DIABDIET,
-                DIABUNK = vm.DIABUNK,
-                DIABAGE = vm.DIABAGE,
-                HYPERTEN = vm.HYPERTEN,
-                HYPERTAGE = vm.HYPERTAGE,
-                HYPERCHO = vm.HYPERCHO,
-                HYPERCHAGE = vm.HYPERCHAGE,
-                B12DEF = vm.B12DEF,
-                THYROID = vm.THYROID,
-                ARTHRIT = vm.ARTHRIT,
-                ARTHRRHEUM = vm.ARTHRRHEUM,
-                ARTHROSTEO = vm.ARTHROSTEO,
-                ARTHROTHR = vm.ARTHROTHR,
-                ARTHTYPX = vm.ARTHTYPX,
-                ARTHTYPUNK = vm.ARTHTYPUNK,
-                ARTHUPEX = vm.ARTHUPEX,
-                ARTHLOEX = vm.ARTHLOEX,
-                ARTHSPIN = vm.ARTHSPIN,
-                ARTHUNK = vm.ARTHUNK,
-                INCONTU = vm.INCONTU,
-                INCONTF = vm.INCONTF,
-                APNEA = vm.APNEA,
-                CPAP = vm.CPAP,
-                APNEAORAL = vm.APNEAORAL,
-                RBD = vm.RBD,
-                INSOMN = vm.INSOMN,
-                OTHSLEEP = vm.OTHSLEEP,
-                OTHSLEEX = vm.OTHSLEEX,
-                CANCERACTV = vm.CANCERACTV,
-                CANCERPRIM = vm.CANCERPRIM,
-                CANCERMETA = vm.CANCERMETA,
-                CANCMETBR = vm.CANCMETBR,
-                CANCMETOTH = vm.CANCMETOTH,
-                CANCERUNK = vm.CANCERUNK,
-                CANCBLOOD = vm.CANCBLOOD,
-                CANCBREAST = vm.CANCBREAST,
-                CANCCOLON = vm.CANCCOLON,
-                CANCLUNG = vm.CANCLUNG,
-                CANCPROST = vm.CANCPROST,
-                CANCOTHER = vm.CANCOTHER,
-                CANCOTHERX = vm.CANCOTHERX,
-                CANCRAD = vm.CANCRAD,
-                CANCRESECT = vm.CANCRESECT,
-                CANCIMMUNO = vm.CANCIMMUNO,
-                CANCBONE = vm.CANCBONE,
-                CANCCHEMO = vm.CANCCHEMO,
-                CANCHORM = vm.CANCHORM,
-                CANCTROTH = vm.CANCTROTH,
-                CANCTROTHX = vm.CANCTROTHX,
-                CANCERAGE = vm.CANCERAGE,
-                COVID19 = vm.COVID19,
-                COVIDHOSP = vm.COVIDHOSP,
-                PULMONARY = vm.PULMONARY,
-                KIDNEY = vm.KIDNEY,
-                KIDNEYAGE = vm.KIDNEYAGE,
-                LIVER = vm.LIVER,
-                LIVERAGE = vm.LIVERAGE,
-                PVD = vm.PVD,
-                PVDAGE = vm.PVDAGE,
-                HIVDIAG = vm.HIVDIAG,
-                HIVAGE = vm.HIVAGE,
-                OTHERCOND = vm.OTHERCOND,
-                OTHCONDX = vm.OTHCONDX,
-                MAJORDEP = vm.MAJORDEP,
-                OTHERDEP = vm.OTHERDEP,
-                DEPRTREAT = vm.DEPRTREAT,
-                BIPOLAR = vm.BIPOLAR,
-                SCHIZ = vm.SCHIZ,
-                ANXIETY = vm.ANXIETY,
-                GENERALANX = vm.GENERALANX,
-                PANICDIS = vm.PANICDIS,
-                OCD = vm.OCD,
-                OTHANXDIS = vm.OTHANXDIS,
-                OTHANXDISX = vm.OTHANXDISX,
-                PTSD = vm.PTSD,
-                NPSYDEV = vm.NPSYDEV,
-                PSYCDIS = vm.PSYCDIS,
-                PSYCDISX = vm.PSYCDISX,
-                MENARCHE = vm.MENARCHE,
-                NOMENSAGE = vm.NOMENSAGE,
-                NOMENSNAT = vm.NOMENSNAT,
-                NOMENSHYST = vm.NOMENSHYST,
-                NOMENSSURG = vm.NOMENSSURG,
-                NOMENSCHEM = vm.NOMENSCHEM,
-                NOMENSRAD = vm.NOMENSRAD,
-                NOMENSHORM = vm.NOMENSHORM,
-                NOMENSESTR = vm.NOMENSESTR,
-                NOMENSUNK = vm.NOMENSUNK,
-                NOMENSOTH = vm.NOMENSOTH,
-                NOMENSOTHX = vm.NOMENSOTHX,
-                HRT = vm.HRT,
-                HRTYEARS = vm.HRTYEARS,
-                HRTSTRTAGE = vm.HRTSTRTAGE,
-                HRTENDAGE = vm.HRTENDAGE,
-                BCPILLS = vm.BCPILLS,
-                BCPILLSYR = vm.BCPILLSYR,
-                BCSTARTAGE = vm.BCSTARTAGE,
-                BCENDAGE = vm.BCENDAGE
-            };
+                return new A5D2FollowUpFormFields
+                {
+                    TOBAC100 = vm.TOBAC100,
+                    SMOKYRS = vm.SMOKYRS,
+                    PACKSPER = vm.PACKSPER,
+                    TOBAC30 = vm.TOBAC30,
+                    QUITSMOK = vm.QUITSMOK,
+                    ALCFREQYR = vm.ALCFREQYR,
+                    ALCDRINKS = vm.ALCDRINKS,
+                    ALCBINGE = vm.ALCBINGE,
+                    SUBSTYEAR = vm.SUBSTYEAR,
+                    SUBSTPAST = vm.SUBSTPAST,
+                    CANNABIS = vm.CANNABIS,
+                    HRTATTACK = vm.HRTATTACK,
+                    HRTATTMULT = vm.HRTATTMULT,
+                    HRTATTAGE = vm.HRTATTAGE,
+                    CARDARREST = vm.CARDARREST,
+                    CARDARRAGE = vm.CARDARRAGE,
+                    CVAFIB = vm.CVAFIB,
+                    CVANGIO = vm.CVANGIO,
+                    CVBYPASS = vm.CVBYPASS,
+                    BYPASSAGE = vm.BYPASSAGE,
+                    CVPACDEF = vm.CVPACDEF,
+                    PACDEFAGE = vm.PACDEFAGE,
+                    CVCHF = vm.CVCHF,
+                    CVHVALVE = vm.CVHVALVE,
+                    VALVEAGE = vm.VALVEAGE,
+                    CVOTHR = vm.CVOTHR,
+                    CVOTHRX = vm.CVOTHRX,
+                    CBSTROKE = vm.CBSTROKE,
+                    STROKMUL = vm.STROKMUL,
+                    STROKAGE = vm.STROKAGE,
+                    STROKSTAT = vm.STROKSTAT,
+                    ANGIOCP = vm.ANGIOCP,
+                    CAROTIDAGE = vm.CAROTIDAGE,
+                    CBTIA = vm.CBTIA,
+                    TIAAGE = vm.TIAAGE,
+                    PD = vm.PD,
+                    PDAGE = vm.PDAGE,
+                    PDOTHR = vm.PDOTHR,
+                    PDOTHRAGE = vm.PDOTHRAGE,
+                    SEIZURES = vm.SEIZURES,
+                    SEIZNUM = vm.SEIZNUM,
+                    SEIZAGE = vm.SEIZAGE,
+                    HEADACHE = vm.HEADACHE,
+                    MS = vm.MS,
+                    HYDROCEPH = vm.HYDROCEPH,
+                    HEADIMP = vm.HEADIMP,
+                    IMPAMFOOT = vm.IMPAMFOOT,
+                    IMPSOCCER = vm.IMPSOCCER,
+                    IMPHOCKEY = vm.IMPHOCKEY,
+                    IMPBOXING = vm.IMPBOXING,
+                    IMPSPORT = vm.IMPSPORT,
+                    IMPIPV = vm.IMPIPV,
+                    IMPMILIT = vm.IMPMILIT,
+                    IMPASSAULT = vm.IMPASSAULT,
+                    IMPOTHER = vm.IMPOTHER,
+                    IMPOTHERX = vm.IMPOTHERX,
+                    IMPYEARS = vm.IMPYEARS,
+                    HEADINJURY = vm.HEADINJURY,
+                    HEADINJUNC = vm.HEADINJUNC,
+                    HEADINJCON = vm.HEADINJCON,
+                    HEADINJNUM = vm.HEADINJNUM,
+                    FIRSTTBI = vm.FIRSTTBI,
+                    LASTTBI = vm.LASTTBI,
+                    DIABETES = vm.DIABETES,
+                    DIABTYPE = vm.DIABTYPE,
+                    DIABINS = vm.DIABINS,
+                    DIABMEDS = vm.DIABMEDS,
+                    DIABGLP1 = vm.DIABGLP1,
+                    DIABRECACT = vm.DIABRECACT,
+                    DIABDIET = vm.DIABDIET,
+                    DIABUNK = vm.DIABUNK,
+                    DIABAGE = vm.DIABAGE,
+                    HYPERTEN = vm.HYPERTEN,
+                    HYPERTAGE = vm.HYPERTAGE,
+                    HYPERCHO = vm.HYPERCHO,
+                    HYPERCHAGE = vm.HYPERCHAGE,
+                    B12DEF = vm.B12DEF,
+                    THYROID = vm.THYROID,
+                    ARTHRIT = vm.ARTHRIT,
+                    ARTHRRHEUM = vm.ARTHRRHEUM,
+                    ARTHROSTEO = vm.ARTHROSTEO,
+                    ARTHROTHR = vm.ARTHROTHR,
+                    ARTHTYPX = vm.ARTHTYPX,
+                    ARTHTYPUNK = vm.ARTHTYPUNK,
+                    ARTHUPEX = vm.ARTHUPEX,
+                    ARTHLOEX = vm.ARTHLOEX,
+                    ARTHSPIN = vm.ARTHSPIN,
+                    ARTHUNK = vm.ARTHUNK,
+                    INCONTU = vm.INCONTU,
+                    INCONTF = vm.INCONTF,
+                    APNEA = vm.APNEA,
+                    CPAP = vm.CPAP,
+                    APNEAORAL = vm.APNEAORAL,
+                    RBD = vm.RBD,
+                    INSOMN = vm.INSOMN,
+                    OTHSLEEP = vm.OTHSLEEP,
+                    OTHSLEEX = vm.OTHSLEEX,
+                    CANCERACTV = vm.CANCERACTV,
+                    CANCERPRIM = vm.CANCERPRIM,
+                    CANCERMETA = vm.CANCERMETA,
+                    CANCMETBR = vm.CANCMETBR,
+                    CANCMETOTH = vm.CANCMETOTH,
+                    CANCERUNK = vm.CANCERUNK,
+                    CANCBLOOD = vm.CANCBLOOD,
+                    CANCBREAST = vm.CANCBREAST,
+                    CANCCOLON = vm.CANCCOLON,
+                    CANCLUNG = vm.CANCLUNG,
+                    CANCPROST = vm.CANCPROST,
+                    CANCOTHER = vm.CANCOTHER,
+                    CANCOTHERX = vm.CANCOTHERX,
+                    CANCRAD = vm.CANCRAD,
+                    CANCRESECT = vm.CANCRESECT,
+                    CANCIMMUNO = vm.CANCIMMUNO,
+                    CANCBONE = vm.CANCBONE,
+                    CANCCHEMO = vm.CANCCHEMO,
+                    CANCHORM = vm.CANCHORM,
+                    CANCTROTH = vm.CANCTROTH,
+                    CANCTROTHX = vm.CANCTROTHX,
+                    CANCERAGE = vm.CANCERAGE,
+                    COVID19 = vm.COVID19,
+                    COVIDHOSP = vm.COVIDHOSP,
+                    PULMONARY = vm.PULMONARY,
+                    KIDNEY = vm.KIDNEY,
+                    KIDNEYAGE = vm.KIDNEYAGE,
+                    LIVER = vm.LIVER,
+                    LIVERAGE = vm.LIVERAGE,
+                    PVD = vm.PVD,
+                    PVDAGE = vm.PVDAGE,
+                    HIVDIAG = vm.HIVDIAG,
+                    HIVAGE = vm.HIVAGE,
+                    OTHERCOND = vm.OTHERCOND,
+                    OTHCONDX = vm.OTHCONDX,
+                    MAJORDEP = vm.MAJORDEP,
+                    OTHERDEP = vm.OTHERDEP,
+                    DEPRTREAT = vm.DEPRTREAT,
+                    BIPOLAR = vm.BIPOLAR,
+                    SCHIZ = vm.SCHIZ,
+                    ANXIETY = vm.ANXIETY,
+                    GENERALANX = vm.GENERALANX,
+                    PANICDIS = vm.PANICDIS,
+                    OCD = vm.OCD,
+                    OTHANXDIS = vm.OTHANXDIS,
+                    OTHANXDISX = vm.OTHANXDISX,
+                    PTSD = vm.PTSD,
+                    NPSYDEV = vm.NPSYDEV,
+                    PSYCDIS = vm.PSYCDIS,
+                    PSYCDISX = vm.PSYCDISX,
+                    NOMENSAGE = vm.NOMENSAGE,
+                    NOMENSNAT = vm.NOMENSNAT,
+                    NOMENSHYST = vm.NOMENSHYST,
+                    NOMENSSURG = vm.NOMENSSURG,
+                    NOMENSCHEM = vm.NOMENSCHEM,
+                    NOMENSRAD = vm.NOMENSRAD,
+                    NOMENSHORM = vm.NOMENSHORM,
+                    NOMENSESTR = vm.NOMENSESTR,
+                    NOMENSUNK = vm.NOMENSUNK,
+                    NOMENSOTH = vm.NOMENSOTH,
+                    NOMENSOTHX = vm.NOMENSOTHX,
+                    HRT = vm.HRT,
+                    HRTYEARS = vm.HRTYEARS,
+                    HRTSTRTAGE = vm.HRTSTRTAGE,
+                    HRTENDAGE = vm.HRTENDAGE,
+                    BCPILLS = vm.BCPILLS,
+                    BCPILLSYR = vm.BCPILLSYR,
+                    BCSTARTAGE = vm.BCSTARTAGE,
+                    BCENDAGE = vm.BCENDAGE
+                };
+            }
+            else
+            {
+                return new A5D2FormFields
+                {
+                    TOBAC100 = vm.TOBAC100,
+                    SMOKYRS = vm.SMOKYRS,
+                    PACKSPER = vm.PACKSPER,
+                    TOBAC30 = vm.TOBAC30,
+                    QUITSMOK = vm.QUITSMOK,
+                    ALCFREQYR = vm.ALCFREQYR,
+                    ALCDRINKS = vm.ALCDRINKS,
+                    ALCBINGE = vm.ALCBINGE,
+                    SUBSTYEAR = vm.SUBSTYEAR,
+                    SUBSTPAST = vm.SUBSTPAST,
+                    CANNABIS = vm.CANNABIS,
+                    HRTATTACK = vm.HRTATTACK,
+                    HRTATTMULT = vm.HRTATTMULT,
+                    HRTATTAGE = vm.HRTATTAGE,
+                    CARDARREST = vm.CARDARREST,
+                    CARDARRAGE = vm.CARDARRAGE,
+                    CVAFIB = vm.CVAFIB,
+                    CVANGIO = vm.CVANGIO,
+                    CVBYPASS = vm.CVBYPASS,
+                    BYPASSAGE = vm.BYPASSAGE,
+                    CVPACDEF = vm.CVPACDEF,
+                    PACDEFAGE = vm.PACDEFAGE,
+                    CVCHF = vm.CVCHF,
+                    CVHVALVE = vm.CVHVALVE,
+                    VALVEAGE = vm.VALVEAGE,
+                    CVOTHR = vm.CVOTHR,
+                    CVOTHRX = vm.CVOTHRX,
+                    CBSTROKE = vm.CBSTROKE,
+                    STROKMUL = vm.STROKMUL,
+                    STROKAGE = vm.STROKAGE,
+                    STROKSTAT = vm.STROKSTAT,
+                    ANGIOCP = vm.ANGIOCP,
+                    CAROTIDAGE = vm.CAROTIDAGE,
+                    CBTIA = vm.CBTIA,
+                    TIAAGE = vm.TIAAGE,
+                    PD = vm.PD,
+                    PDAGE = vm.PDAGE,
+                    PDOTHR = vm.PDOTHR,
+                    PDOTHRAGE = vm.PDOTHRAGE,
+                    SEIZURES = vm.SEIZURES,
+                    SEIZNUM = vm.SEIZNUM,
+                    SEIZAGE = vm.SEIZAGE,
+                    HEADACHE = vm.HEADACHE,
+                    MS = vm.MS,
+                    HYDROCEPH = vm.HYDROCEPH,
+                    HEADIMP = vm.HEADIMP,
+                    IMPAMFOOT = vm.IMPAMFOOT,
+                    IMPSOCCER = vm.IMPSOCCER,
+                    IMPHOCKEY = vm.IMPHOCKEY,
+                    IMPBOXING = vm.IMPBOXING,
+                    IMPSPORT = vm.IMPSPORT,
+                    IMPIPV = vm.IMPIPV,
+                    IMPMILIT = vm.IMPMILIT,
+                    IMPASSAULT = vm.IMPASSAULT,
+                    IMPOTHER = vm.IMPOTHER,
+                    IMPOTHERX = vm.IMPOTHERX,
+                    IMPYEARS = vm.IMPYEARS,
+                    HEADINJURY = vm.HEADINJURY,
+                    HEADINJUNC = vm.HEADINJUNC,
+                    HEADINJCON = vm.HEADINJCON,
+                    HEADINJNUM = vm.HEADINJNUM,
+                    FIRSTTBI = vm.FIRSTTBI,
+                    LASTTBI = vm.LASTTBI,
+                    DIABETES = vm.DIABETES,
+                    DIABTYPE = vm.DIABTYPE,
+                    DIABINS = vm.DIABINS,
+                    DIABMEDS = vm.DIABMEDS,
+                    DIABGLP1 = vm.DIABGLP1,
+                    DIABRECACT = vm.DIABRECACT,
+                    DIABDIET = vm.DIABDIET,
+                    DIABUNK = vm.DIABUNK,
+                    DIABAGE = vm.DIABAGE,
+                    HYPERTEN = vm.HYPERTEN,
+                    HYPERTAGE = vm.HYPERTAGE,
+                    HYPERCHO = vm.HYPERCHO,
+                    HYPERCHAGE = vm.HYPERCHAGE,
+                    B12DEF = vm.B12DEF,
+                    THYROID = vm.THYROID,
+                    ARTHRIT = vm.ARTHRIT,
+                    ARTHRRHEUM = vm.ARTHRRHEUM,
+                    ARTHROSTEO = vm.ARTHROSTEO,
+                    ARTHROTHR = vm.ARTHROTHR,
+                    ARTHTYPX = vm.ARTHTYPX,
+                    ARTHTYPUNK = vm.ARTHTYPUNK,
+                    ARTHUPEX = vm.ARTHUPEX,
+                    ARTHLOEX = vm.ARTHLOEX,
+                    ARTHSPIN = vm.ARTHSPIN,
+                    ARTHUNK = vm.ARTHUNK,
+                    INCONTU = vm.INCONTU,
+                    INCONTF = vm.INCONTF,
+                    APNEA = vm.APNEA,
+                    CPAP = vm.CPAP,
+                    APNEAORAL = vm.APNEAORAL,
+                    RBD = vm.RBD,
+                    INSOMN = vm.INSOMN,
+                    OTHSLEEP = vm.OTHSLEEP,
+                    OTHSLEEX = vm.OTHSLEEX,
+                    CANCERACTV = vm.CANCERACTV,
+                    CANCERPRIM = vm.CANCERPRIM,
+                    CANCERMETA = vm.CANCERMETA,
+                    CANCMETBR = vm.CANCMETBR,
+                    CANCMETOTH = vm.CANCMETOTH,
+                    CANCERUNK = vm.CANCERUNK,
+                    CANCBLOOD = vm.CANCBLOOD,
+                    CANCBREAST = vm.CANCBREAST,
+                    CANCCOLON = vm.CANCCOLON,
+                    CANCLUNG = vm.CANCLUNG,
+                    CANCPROST = vm.CANCPROST,
+                    CANCOTHER = vm.CANCOTHER,
+                    CANCOTHERX = vm.CANCOTHERX,
+                    CANCRAD = vm.CANCRAD,
+                    CANCRESECT = vm.CANCRESECT,
+                    CANCIMMUNO = vm.CANCIMMUNO,
+                    CANCBONE = vm.CANCBONE,
+                    CANCCHEMO = vm.CANCCHEMO,
+                    CANCHORM = vm.CANCHORM,
+                    CANCTROTH = vm.CANCTROTH,
+                    CANCTROTHX = vm.CANCTROTHX,
+                    CANCERAGE = vm.CANCERAGE,
+                    COVID19 = vm.COVID19,
+                    COVIDHOSP = vm.COVIDHOSP,
+                    PULMONARY = vm.PULMONARY,
+                    KIDNEY = vm.KIDNEY,
+                    KIDNEYAGE = vm.KIDNEYAGE,
+                    LIVER = vm.LIVER,
+                    LIVERAGE = vm.LIVERAGE,
+                    PVD = vm.PVD,
+                    PVDAGE = vm.PVDAGE,
+                    HIVDIAG = vm.HIVDIAG,
+                    HIVAGE = vm.HIVAGE,
+                    OTHERCOND = vm.OTHERCOND,
+                    OTHCONDX = vm.OTHCONDX,
+                    MAJORDEP = vm.MAJORDEP,
+                    OTHERDEP = vm.OTHERDEP,
+                    DEPRTREAT = vm.DEPRTREAT,
+                    BIPOLAR = vm.BIPOLAR,
+                    SCHIZ = vm.SCHIZ,
+                    ANXIETY = vm.ANXIETY,
+                    GENERALANX = vm.GENERALANX,
+                    PANICDIS = vm.PANICDIS,
+                    OCD = vm.OCD,
+                    OTHANXDIS = vm.OTHANXDIS,
+                    OTHANXDISX = vm.OTHANXDISX,
+                    PTSD = vm.PTSD,
+                    NPSYDEV = vm.NPSYDEV,
+                    PSYCDIS = vm.PSYCDIS,
+                    PSYCDISX = vm.PSYCDISX,
+                    MENARCHE = vm.MENARCHE,
+                    NOMENSAGE = vm.NOMENSAGE,
+                    NOMENSNAT = vm.NOMENSNAT,
+                    NOMENSHYST = vm.NOMENSHYST,
+                    NOMENSSURG = vm.NOMENSSURG,
+                    NOMENSCHEM = vm.NOMENSCHEM,
+                    NOMENSRAD = vm.NOMENSRAD,
+                    NOMENSHORM = vm.NOMENSHORM,
+                    NOMENSESTR = vm.NOMENSESTR,
+                    NOMENSUNK = vm.NOMENSUNK,
+                    NOMENSOTH = vm.NOMENSOTH,
+                    NOMENSOTHX = vm.NOMENSOTHX,
+                    HRT = vm.HRT,
+                    HRTYEARS = vm.HRTYEARS,
+                    HRTSTRTAGE = vm.HRTSTRTAGE,
+                    HRTENDAGE = vm.HRTENDAGE,
+                    BCPILLS = vm.BCPILLS,
+                    BCPILLSYR = vm.BCPILLSYR,
+                    BCSTARTAGE = vm.BCSTARTAGE,
+                    BCENDAGE = vm.BCENDAGE
+                };
+            }
         }
 
-        public static IFormFields GetFormFields(this B1 vm)
+        public static IFormFields GetFormFields(this B1 vm, PacketKind packetKind)
         {
             return new B1FormFields
             {
@@ -627,7 +911,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B3 vm)
+        public static IFormFields GetFormFields(this B3 vm, PacketKind packetKind)
         {
             return new B3FormFields
             {
@@ -688,9 +972,8 @@ namespace UDS.Net.Forms.Extensions
                 BRADYKIX = vm.BRADYKIX,
                 TOTALUPDRS = vm.TOTALUPDRS
             };
-
         }
-        public static IFormFields GetFormFields(this B4 vm)
+        public static IFormFields GetFormFields(this B4 vm, PacketKind packetKind)
         {
             return new B4FormFields
             {
@@ -707,7 +990,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B5 vm)
+        public static IFormFields GetFormFields(this B5 vm, PacketKind packetKind)
         {
             return new B5FormFields
             {
@@ -740,7 +1023,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B6 vm)
+        public static IFormFields GetFormFields(this B6 vm, PacketKind packetKind)
         {
             return new B6FormFields
             {
@@ -764,7 +1047,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B7 vm)
+        public static IFormFields GetFormFields(this B7 vm, PacketKind packetKind)
         {
             return new B7FormFields
             {
@@ -781,7 +1064,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B8 vm)
+        public static IFormFields GetFormFields(this B8 vm, PacketKind packetKind)
         {
             return new B8FormFields
             {
@@ -827,7 +1110,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this B9 vm)
+        public static IFormFields GetFormFields(this B9 vm, PacketKind packetKind)
         {
             return new B9FormFields
             {
@@ -906,7 +1189,7 @@ namespace UDS.Net.Forms.Extensions
                 FRSTCHG = vm.FRSTCHG,
             };
         }
-        public static IFormFields GetFormFields(this C2 vm)
+        public static IFormFields GetFormFields(this C2 vm, PacketKind packetKind)
         {
             return new C2FormFields
             {
@@ -1037,7 +1320,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this D1a vm)
+        public static IFormFields GetFormFields(this D1a vm, PacketKind packetKind)
         {
             return new D1aFormFields
             {
@@ -1150,7 +1433,7 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static IFormFields GetFormFields(this D1b vm)
+        public static IFormFields GetFormFields(this D1b vm, PacketKind packetKind)
         {
             return new D1bFormFields
             {
