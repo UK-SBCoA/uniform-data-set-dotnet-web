@@ -94,7 +94,7 @@ function compareRange(low, high, targets, value) {
                 });
             });
         }
-    }
+    };
 }
 
 function debounce(func, wait) {
@@ -435,12 +435,12 @@ $.validator.addMethod("requiredif", function (value, element, params) {
 
     //find potential watched element. Only one type can be true per element.
     let watchedCheckedElement = $("input[name=\"" + watchedFieldName + "\"]:checked");
-    let watchedSelectedElement = $("select[name=\"" + watchedFieldName + "\"] option:selected")
+    let watchedSelectedElement = $("select[name=\"" + watchedFieldName + "\"] option:selected");
 
     if (watchedCheckedElement.val() || watchedSelectedElement.text().length > 0) {
 
         //set value for watched element
-        let watchedElementValue = watchedCheckedElement.val() || watchedSelectedElement.text()
+        let watchedElementValue = watchedCheckedElement.val() || watchedSelectedElement.text();
 
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
 
