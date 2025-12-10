@@ -28,9 +28,17 @@ namespace UDS.Net.Forms.DataAnnotations
                     if (value is int)
                     {
                         int code = (int)value;
-                        if (code == 777 && form.PacketKind != PacketKind.F)
+                        if (code == 777)
                         {
-                            return new ValidationResult(GetErrorMessage());
+                            if (form.PacketKind != PacketKind.F)
+                            {
+                                return new ValidationResult(GetErrorMessage()); 
+                            }
+                            else
+                            {
+                                return ValidationResult.Success;
+
+                            }
                         }
                     }
                 }
