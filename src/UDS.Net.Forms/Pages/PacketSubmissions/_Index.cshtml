@@ -215,9 +215,14 @@
                                         </td>
                                         <td class="px-4 py-2 text-gray-700">@error.Message</td>
                                         <td>
-                                            <span>
-                                                @error.Value
-                                            </span>
+                                            @if (error.Value != null)
+                                            {
+                                                <span>@error.Value</span>
+                                            }
+                                            else
+                                            {
+                                                <span>--</span>
+                                            }
                                         </td>
                                         <td>
                                             <span>
