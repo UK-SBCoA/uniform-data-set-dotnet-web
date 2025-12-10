@@ -94,7 +94,7 @@ function compareRange(low, high, targets, value) {
                 });
             });
         }
-    }
+    };
 }
 
 function debounce(func, wait) {
@@ -107,7 +107,12 @@ function debounce(func, wait) {
 }
 
 $(function () {
+    setInputStates();
+    //Create global javascript method for for access from other javascript files
+    window.setInputStates = setInputStates;
+});
 
+function setInputStates() {
     let affects = $("[data-affects]");
 
     // initialize the form, check to see if some should have a default state
@@ -194,7 +199,7 @@ $(function () {
             }
         });
     }
-});
+}
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* Save Status and Form Mode */
@@ -424,20 +429,22 @@ $.validator.unobtrusive.adapters.add(
 $.validator.addMethod("requiredif", function (value, element, params) {
     let parameters = params[1];
     let watchedFieldName = parameters.watchedfield;
-    let watched = $("input[name=\"" + watchedFieldName + "\"]:checked");
+
     //get validation message from element
     let elementValidationMessage = $(element).data("valRequiredif");
 
-    if (watched.length) {
-        let selected = watched.val();
+    //find potential watched element. Only one type can be true per element.
+    let watchedCheckedElement = $("input[name=\"" + watchedFieldName + "\"]:checked");
+    let watchedSelectedElement = $("select[name=\"" + watchedFieldName + "\"] option:selected");
+
+    if (watchedCheckedElement.val() || watchedSelectedElement.text().length > 0) {
+
+        //set value for watched element
+        let watchedElementValue = watchedCheckedElement.val() || watchedSelectedElement.text();
+
         let watchedFieldIsRequiredValue = parameters.watchedfieldvalue;
 
-        //checkbox values are lower case while watchedfieldisrequired are pascal case
-        if (watched.attr("type") == "checkbox") {
-            watchedFieldIsRequiredValue = watchedFieldIsRequiredValue.toLowerCase();
-        }
-
-        if (selected == watchedFieldIsRequiredValue) {
+        if (watchedFieldIsRequiredValue.toLowerCase() == watchedElementValue.toLowerCase()) {
             if (!value) {
                 return false;
             }
