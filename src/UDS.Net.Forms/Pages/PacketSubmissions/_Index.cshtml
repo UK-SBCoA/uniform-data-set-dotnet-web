@@ -4,7 +4,6 @@
         .SelectMany(s => s.Errors)
         .ToList();
 
-    // DEV NOTE: simple grab of the counts for now
     var pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).ToList();
     var resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).ToList();
     var ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).ToList();

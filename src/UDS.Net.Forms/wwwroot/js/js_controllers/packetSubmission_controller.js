@@ -29,11 +29,11 @@ export default class extends Controller {
         this.showUnresolvedValue = !this.showUnresolvedValue;
 
         if (this.showUnresolvedValue) {
-            this.unresolvedButtonTarget.classList.add("border", "border-2", "border-blue-800")
+            this.unresolvedButtonTarget.classList.add("border", "border-2")
 
             this.ShowRowsByStatus("pending")
         } else {
-            this.unresolvedButtonTarget.classList.remove("border", "border-2", "border-blue-800")
+            this.unresolvedButtonTarget.classList.remove("border", "border-2")
 
             this.HideRowsByStatus("pending")
         }
@@ -43,11 +43,11 @@ export default class extends Controller {
         this.showResolvedValue = !this.showResolvedValue;
 
         if (this.showResolvedValue) {
-            this.resolvedButtonTarget.classList.add("border", "border-2", "border-blue-800")
+            this.resolvedButtonTarget.classList.add("border", "border-2")
 
             this.ShowRowsByStatus("resolved")
         } else {
-            this.resolvedButtonTarget.classList.remove("border", "border-2", "border-blue-800")
+            this.resolvedButtonTarget.classList.remove("border", "border-2")
 
             this.HideRowsByStatus("resolved")
         }
@@ -57,11 +57,11 @@ export default class extends Controller {
         this.showIgnoredValue = !this.showIgnoredValue;
 
         if (this.showIgnoredValue) {
-            this.ignoredButtonTarget.classList.add("border", "border-2", "border-blue-800")
+            this.ignoredButtonTarget.classList.add("border", "border-2")
 
             this.ShowRowsByStatus("ignored")
         } else {
-            this.ignoredButtonTarget.classList.remove("border", "border-2", "border-blue-800")
+            this.ignoredButtonTarget.classList.remove("border", "border-2")
 
             this.HideRowsByStatus("ignored")
         }
