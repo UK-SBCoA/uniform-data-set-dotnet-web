@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -366,7 +365,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             new RadioListItem("Normal ", "0"),
             new RadioListItem("Walks slowly; may shuffle with short steps, but no festination (hastening steps) or propulsion", "1"),
-            new RadioListItem("Walks with difficulty, but requires little or no assistance; may have some festination, short steps, nor propulsion", "2"),
+            new RadioListItem("Walks with difficulty, but requires little or no assistance; may have some festination, short steps, or propulsion", "2"),
             new RadioListItem("Severe disturbance of gait requiring assistance", "3"),
             new RadioListItem("Cannot walk at all, even with assistance", "4"),
             new RadioListItem("Untestable (SPECIFY)", "8"),
