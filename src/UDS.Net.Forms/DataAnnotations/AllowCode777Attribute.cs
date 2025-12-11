@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.DataAnnotations
                         {
                             if (form.PacketKind != PacketKind.F)
                             {
-                                return new ValidationResult(GetErrorMessage()); 
+                                return new ValidationResult(GetErrorMessage());
                             }
                             else
                             {
