@@ -2,7 +2,7 @@
 @model UDS.Net.Forms.Pages.UDS4.B1Model
 @{
     Layout = "_LayoutForm";
-    string rowCSS = "grid grid-cols-1 gap-2 py-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
 
 <div>
@@ -72,10 +72,10 @@
         </p>
 
 
-        <div class="subsubcounterreset sm:ml-16 ml-4">
+        <div class="subsubcounterreset sm:ml-16">
             <div class="subcounterreset">
                 <span class="subcounter invisible"></span>
-                <div class="@rowCSS ml-4 sm:ml-12">
+                <div class="@rowCSS sm:ml-12">
                     <label asp-for="B1.WAIST1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST1)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST1"></p>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="@rowCSS ml-4 sm:ml-12">
+            <div class="@rowCSS sm:ml-12">
                 <label asp-for="B1.WAIST2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST2)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST2"></p>
@@ -111,10 +111,10 @@
             <strong>Enter two hip circumference measurements (inches):</strong>
         </p>
 
-        <div class="subsubcounterreset sm:ml-16 ml-4">
+        <div class="subsubcounterreset sm:ml-16">
             <div class="subcounterreset">
                 <span class="subcounter invisible"></span>
-                <div class="@rowCSS ml-4 sm:ml-12">
+                <div class="@rowCSS sm:ml-12">
                     <label asp-for="B1.HIP1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP1)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP1"></p>
@@ -126,7 +126,7 @@
                         <submission-error location="HIP1" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
-                <div class="@rowCSS ml-4 sm:ml-12">
+                <div class="@rowCSS sm:ml-12">
                     <label asp-for="B1.HIP2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP2)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP2"></p>
@@ -153,7 +153,7 @@
                 </strong>
             </span>
             <br />
-            <span class="ml-12">
+            <span class="sm:ml-12">
                 <i>
                     See detailed instructions below.
                 </i>
@@ -162,12 +162,12 @@
         <br />
 
         <div>
-            <div class="subcounter ml-0 sm:ml-12">
+            <div class="subcounter sm:ml-12">
                 <span class="text-base font-semibold text-gray-900">
                     Participant blood pressure - Left arm:
                 </span>
                 <div>
-                    <div class="@rowCSS ml-4 sm:ml-12">
+                    <div class="@rowCSS sm:ml-12">
                         <label asp-for="B1.BPSYSL1"> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL1"></p>
@@ -187,7 +187,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="@rowCSS ml-4 sm:ml-12">
+                    <div class="@rowCSS sm:ml-12">
                         <label asp-for="B1.BPSYSL2"> @Html.DisplayNameFor(m => m.B1.BPSYSL2)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL2"></p>
@@ -213,7 +213,7 @@
 
                     </div>
                     <div>
-                        <div class="@rowCSS ml-4 sm:ml-12">
+                        <div class="@rowCSS sm:ml-12">
                             <label asp-for="B1.BPSYSR1"> @Html.DisplayNameFor(m => m.B1.BPSYSR1)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR1"></p>
@@ -234,7 +234,7 @@
                             </div>
                         </div>
 
-                        <div class="@rowCSS ml-4 sm:ml-12">
+                        <div class="@rowCSS sm:ml-12">
                             <label asp-for="B1.BPSYSR2"> @Html.DisplayNameFor(m => m.B1.BPSYSR2)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR2"></p>
