@@ -134,7 +134,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         [AllowCode777]
         public int? STROKAGE { get; set; }
-        [Display(Name = "What is status of stroke symptoms?")]
+        [Display(Name = "What is the status of stroke symptoms?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKSTAT { get; set; }
@@ -203,23 +203,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? HEADIMP { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: American football")]
+        [Display(Name = "American football")]
         public bool? IMPAMFOOT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Soccer")]
+        [Display(Name = "Soccer")]
         public bool? IMPSOCCER { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Ice hockey")]
+        [Display(Name = "Ice hockey")]
         public bool? IMPHOCKEY { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Boxing or mixed martial arts")]
+        [Display(Name = "Boxing or mixed martial arts")]
         public bool? IMPBOXING { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Other contact sport")]
+        [Display(Name = "Other contact sport")]
         public bool? IMPSPORT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Intimate partner violence")]
+        [Display(Name = "Intimate partner violence")]
         public bool? IMPIPV { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Military service")]
+        [Display(Name = "Military service")]
         public bool? IMPMILIT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Physical assault")]
+        [Display(Name = "Physical assault")]
         public bool? IMPASSAULT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Other cause (SPECIFY)")]
+        [Display(Name = "Other cause (SPECIFY)")]
         public bool? IMPOTHER { get; set; }
         [MaxLength(60)]
         [RequiredIf(nameof(IMPOTHER), "true", ErrorMessage = "Please specify.")]
@@ -370,45 +370,45 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CANCERACTV { get; set; }
-        [Display(Name = "Type of cancer: Primary/non-metastatic")]
+        [Display(Name = "Primary/non-metastatic")]
         public bool? CANCERPRIM { get; set; }
-        [Display(Name = "Type of cancer: Metastatic (CHECK ALL THAT APPLY)")]
+        [Display(Name = "Metastatic (CHECK ALL THAT APPLY)")]
         public bool? CANCERMETA { get; set; }
-        [Display(Name = "Type of metastatic cancer: Metatstic to brain")]
+        [Display(Name = "Metatstic to brain")]
         public bool? CANCMETBR { get; set; }
-        [Display(Name = "Type of metastatic cancer: Metastatic to sites other than brain")]
+        [Display(Name = "Metastatic to sites other than brain")]
         public bool? CANCMETOTH { get; set; }
-        [Display(Name = "Type of cancer: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? CANCERUNK { get; set; }
-        [Display(Name = "Primary site of cancer: Blood")]
+        [Display(Name = "Blood")]
         public bool? CANCBLOOD { get; set; }
-        [Display(Name = "Primary site of cancer: Breast")]
+        [Display(Name = "Breast")]
         public bool? CANCBREAST { get; set; }
-        [Display(Name = "Primary site of cancer: Colon")]
+        [Display(Name = "Colon")]
         public bool? CANCCOLON { get; set; }
-        [Display(Name = "Primary site of cancer: Lung")]
+        [Display(Name = "Lung")]
         public bool? CANCLUNG { get; set; }
-        [Display(Name = "Primary site of cancer: Prostate")]
+        [Display(Name = "Prostate")]
         public bool? CANCPROST { get; set; }
-        [Display(Name = "Primary site of cancer: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? CANCOTHER { get; set; }
         [Display(Name = "Specify other primary site of cancer")]
         [MaxLength(60)]
         [RequiredIf(nameof(CANCOTHER), "true", ErrorMessage = "Please specify.")]
         public string? CANCOTHERX { get; set; }
-        [Display(Name = "Type of cancer treatment: Radiation")]
+        [Display(Name = "Radiation")]
         public bool? CANCRAD { get; set; }
-        [Display(Name = "Type of cancer treatment: Surgical resection")]
+        [Display(Name = "Surgical resection")]
         public bool? CANCRESECT { get; set; }
-        [Display(Name = "Type of cancer treatment: Immunotherapy")]
+        [Display(Name = "Immunotherapy")]
         public bool? CANCIMMUNO { get; set; }
-        [Display(Name = "Type of cancer treatment: Bone marrow transplant")]
+        [Display(Name = "Bone marrow transplant")]
         public bool? CANCBONE { get; set; }
-        [Display(Name = "Type of cancer treatment: Chemotherapy")]
+        [Display(Name = "Chemotherapy")]
         public bool? CANCCHEMO { get; set; }
-        [Display(Name = "Type of cancer treatment: Hormone therapy")]
+        [Display(Name = "Hormone therapy")]
         public bool? CANCHORM { get; set; }
-        [Display(Name = "Type of cancer treatment: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? CANCTROTH { get; set; }
         [Display(Name = "Specify other type of cancer treatment")]
         [MaxLength(60)]
@@ -458,11 +458,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(PVD), 1, 2, ErrorMessage = "Please specify.")]
         [AllowCode777]
         public int? PVDAGE { get; set; }
-        [Display(Name = "Human Immunodeficiency Virus")]
+        [Display(Name = "Human Immunodeficiency Virus (HIV)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? HIVDIAG { get; set; }
-        [Display(Name = "Age at HIV diagnosis")]
+        [Display(Name = "Age at HIV diagnosis (HIV)")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|777|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(HIVDIAG), 1, 2, ErrorMessage = "Please specify.")]
         [AllowCode777]
@@ -476,11 +476,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(OTHERCOND), 1, 2, ErrorMessage = "Please specify.")]
         [AllowCode777]
         public string? OTHCONDX { get; set; }
-        [Display(Name = "Major depressive disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Major depressive disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? MAJORDEP { get; set; }
-        [Display(Name = "Other specified depressive disorder (DSm-5-TR criteria)")]
+        [Display(Name = "Other specified depressive disorder (DSm-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? OTHERDEP { get; set; }
@@ -493,11 +493,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? BIPOLAR { get; set; }
-        [Display(Name = "Schizophrenia or other psychosis disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Schizophrenia or other psychosis disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SCHIZ { get; set; }
-        [Display(Name = "Anxiety disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Anxiety disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? ANXIETY { get; set; }
@@ -521,7 +521,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIfRange(nameof(OTHANXDIS), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHANXDISX { get; set; }
-        [Display(Name = "Post-traumatic stress disorder (PTSD) (DSM-5-TR criteria)")]
+        [Display(Name = "Post-traumatic stress disorder (PTSD) (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PTSD { get; set; }

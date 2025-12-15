@@ -2194,7 +2194,7 @@
                                             <label asp-for="A5D2.DEPRTREAT"><span class="subsubcounter"></span> <span class="font-bold">If Recent/Active depressive disorder (Q6a1 or Q6a2), </span>@Html.DisplayNameFor(m => m.A5D2.DEPRTREAT)</label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.DEPRTREAT"></p>
-                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.UntreadedTreatedItems"></radio-button-group>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.UntreatedTreatedItems"></radio-button-group>
                                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DEPRTREAT"></span>
                                                 <submission-error location="DEPRTREAT" errors="Model.BaseForm.UnresolvedErrors" />
                                             </div>

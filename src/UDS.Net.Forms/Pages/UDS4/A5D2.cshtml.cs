@@ -144,9 +144,9 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> UntreadedTreatedItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> UntreatedTreatedItems { get; set; } = new List<RadioListItem>
     {
-        new RadioListItem("Untreaded", "0"),
+        new RadioListItem("Untreated", "0"),
         new RadioListItem("Treated with medication and/or counseling", "1")
     };
 
