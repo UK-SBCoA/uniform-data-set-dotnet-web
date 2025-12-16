@@ -1,6 +1,11 @@
 ﻿@model UDS.Net.Forms.Models.UDS4.A3FamilyMember
 
-<tr class="border-b border-gray-100 a3-intra-row-outlet" data-a3-enable-rows-target="row" data-controller="a3-enable-intra-row" data-a3-enable-intra-row-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60">
+<tr data-controller="a3-enable-intra-row"
+    data-a3-enable-rows-outlet="a3-enable-intra-row"
+    data-a3-enable-rows-target="row"
+    data-a3-enable-intra-row-invalid-class="input-validation-error border-red-500 border-red-600"
+    data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60">
+
     <td class="w-20">
         <span class="subcounter"></span> @Model.FamilyMemberIndex
         <input type="hidden" asp-for="@Model.FamilyMemberIndex" />
@@ -19,7 +24,7 @@
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.ETPR" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-rows-target="input" data-row-index="@Model.FamilyMemberIndex" data-a3-enable-intra-row-target="primaryDx" data-action="a3-enable-intra-row#updateFields change->a3-enable-intra-row#updateFields" />
+            <input asp-for="@Model.ETPR" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-rows-target="input" data-row-index="@Model.FamilyMemberIndex" data-a3-enable-intra-row-target="primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="ETPR" data-a3-enable-rows-target="validationSpan" data-row-index="@Model.FamilyMemberIndex"></span>
     </td>

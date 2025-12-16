@@ -9,12 +9,10 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("controller connected");
     this.updateRows();
   }
 
   a3EnableIntraRowOutletConnected(outlet, element) {
-    console.log("outlet connected");
   };
 
   updateRows() {
@@ -35,7 +33,6 @@ export default class extends Controller {
   }
 
   toggleRowInputs(row, enabled) {
-    console.log("toggle row");
     this.inputTargets.forEach(input => {
       if (row.contains(input)) {
         this.updateInput(input, enabled);
@@ -48,7 +45,7 @@ export default class extends Controller {
       }
     });
 
-    this.a3EnableIntraRowOutlets.forEach(row => {
+      this.a3EnableIntraRowOutlets.forEach(row => {
       console.log("outlet within row");
       row.updateFields();
     });

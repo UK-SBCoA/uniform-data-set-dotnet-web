@@ -10,6 +10,8 @@ export default class extends Controller {
     }
 
     updateFields() {
+        console.log("Intra row outlet");
+
         const value = this.primaryDxTarget.value.trim();
         const primaryValue = parseInt(value, 10);
         const shouldDisable = this.primaryDxTarget.disabled || value === '' || isNaN(primaryValue) || primaryValue === 0 || primaryValue === 99;

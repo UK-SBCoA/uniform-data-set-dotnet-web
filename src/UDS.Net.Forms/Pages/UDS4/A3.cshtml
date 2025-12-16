@@ -76,7 +76,7 @@
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
-                                <input asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="primaryDx" data-action="a3-enable-intra-row#updateFields change->a3-enable-intra-row#updateFields" />
+                                <input asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
                             </div>
                         </td>
                         <td>
@@ -165,7 +165,7 @@
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="primaryDx" data-action="a3-enable-intra-row#updateFields change->a3-enable-intra-row#updateFields" />
+                                <input asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR"></span>
                             <submission-error location="DADETPR" errors="Model.BaseForm.UnresolvedErrors" />
@@ -312,7 +312,7 @@
             <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
-                <input id="A3_SIBS" asp-for="@Model.A3.SIBS" data-a3-enable-rows-target="countInput" data-action="a3-enable-rows#updateRows change->a3-enable-rows#updateRows" />
+                <input id="A3_SIBS" asp-for="@Model.A3.SIBS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
                 <submission-error location="SIBS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
@@ -357,11 +357,7 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
                     {
-                          <tr data-enable-rows-target="row">
-                            <td>
                                 @Html.EditorFor(m => m.A3.Siblings[i])
-                            </td>
-                        </tr>
                     }
                 </tbody>
             </table>
@@ -376,7 +372,8 @@
             <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
-                <input id="A3_KIDS" asp-for="@Model.A3.KIDS" data-a3-enable-rows-target="countInput" data-action="a3-enable-rows#updateRows change->a3-enable-rows#updateRows" />                
+                <input id="A3_KIDS" asp-for="@Model.A3.KIDS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
+
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
                 <submission-error location="KIDS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
@@ -395,7 +392,7 @@
         </p>
 
         <div class="subcounterreset m-2">
-            <table class="mt-8 w-full text-left text-sm leading-6">
+            <table class="mt-8 w-full text-left text-sm leading-6" data-controller="a3-enable-rows">
                 <thead class="bg-blue-200 text-gray-900 text-center">
                     <tr class="text-center">
                         <th rowspan="2"></th>
@@ -424,11 +421,7 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
                     {
-                        <tr data-enable-rows-target="row">
-                            <td>
                                 @Html.EditorFor(m => m.A3.Children[i])
-                            </td>
-                        </tr>
                     }
                 </tbody>
             </table>
