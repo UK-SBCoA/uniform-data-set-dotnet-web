@@ -1081,7 +1081,7 @@
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PrimaryDiagnosesIndicated"></span>
     <submission-error location="PrimaryDiagnosesIndicated" errors="Model.BaseForm.UnresolvedErrors" />
     @*     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PresentSyndromeIndicated"></span>
-<submission-error location="PresentSyndromeIndicated" errors="Model.BaseForm.UnresolvedErrors" /> *@
+    <submission-error location="PresentSyndromeIndicated" errors="Model.BaseForm.UnresolvedErrors" /> *@
 </div>
 
 <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
@@ -1407,11 +1407,14 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.OTHPSYIF)" for="@Model.D1a.OTHPSYIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.OTHPSYX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHPSYX)</label>
+                    <label asp-for="D1a.OTHPSYX">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.OTHPSYX)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHPSYX"></p>
                         <input asp-for="@Model.D1a.OTHPSYX" />
@@ -1530,10 +1533,14 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.NEOPIF)" for="@Model.D1a.NEOPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="2">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.NEOPSTAT"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.NEOPSTAT)</label>
+                    <label asp-for="D1a.NEOPSTAT">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.NEOPSTAT)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.NEOPSTAT"></p>
                         <radio-button-group id="@Html.IdFor(m => m.D1a.NEOPSTAT)" for="@Model.D1a.NEOPSTAT" items="Model.NEOPSTATListItems"></radio-button-group>
@@ -1652,10 +1659,14 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.OTHCILLIF)" for="@Model.D1a.OTHCILLIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.OTHCOGILLX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHCOGILLX)</label>
+                    <label asp-for="D1a.OTHCOGILLX">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.OTHCOGILLX)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHCOGILLX"></p>
                         <input asp-for="@Model.D1a.OTHCOGILLX" />
@@ -1774,11 +1785,15 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTHIF)" for="@Model.D1a.COGOTHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTHX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.COGOTHX)</label>
+                        <label asp-for="D1a.COGOTHX">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTHX)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTHX"></p>
                             <input asp-for="@Model.D1a.COGOTHX" />
@@ -1816,11 +1831,15 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTH2F)" for="@Model.D1a.COGOTH2F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTH2X"><span class="subcounter"></span@Html.DisplayNameFor(m => m.D1a.COGOTH2X)</label>
+                        <label asp-for="D1a.COGOTH2X">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTH2X)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTH2X"></p>
                             <input asp-for="@Model.D1a.COGOTH2X" />
@@ -1857,11 +1876,15 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTH3F)" for="@Model.D1a.COGOTH3F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTH3X"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.COGOTH3X)</label>
+                        <label asp-for="D1a.COGOTH3X">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTH3X)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTH3X"></p>
                             <input asp-for="@Model.D1a.COGOTH3X" />
