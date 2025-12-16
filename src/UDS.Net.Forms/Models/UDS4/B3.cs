@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
 
 namespace UDS.Net.Forms.Models.UDS4
@@ -175,16 +170,16 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(HANDMOVL), "8", ErrorMessage = "Please specify")]
         public string? HANDMVLX { get; set; }
 
-        [Display(Name = "Rapid alternating movement of hands - right hand")]
+        [Display(Name = "Rapid alternating movements of hands - right hand")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
         public int? HANDALTR { get; set; }
 
-        [Display(Name = "Rapid alternating movement of hands - right hand untestable (specify)")]
+        [Display(Name = "Rapid alternating movements of hands - right hand untestable (specify)")]
         [MaxLength(60)]
         [RequiredIf(nameof(HANDALTR), "8", ErrorMessage = "Please specify")]
         public string? HANDATRX { get; set; }
 
-        [Display(Name = "Rapid alternating movement of hands - left hand")]
+        [Display(Name = "Rapid alternating movements of hands - left hand")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
         public int? HANDALTL { get; set; }
 
@@ -247,7 +242,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(POSSTAB), "8", ErrorMessage = "Please specify")]
         public string? POSSTABX { get; set; }
 
-        [Display(Name = "Body bradykinesia and hypokinesia (combining slowness, hesitancy,decreased arm swing, small amplitude, and poverty of movement in general)")]
+        [Display(Name = "Body bradykinesia and hypokinesia (combining slowness, hesitancy, decreased arm swing, small amplitude, and poverty of movement in general)")]
         [RequiredIf(nameof(PDNORMAL), "False", ErrorMessage = "Response required if question 1 (PDNORMAL) is unchecked")]
         public int? BRADYKIN { get; set; }
 
