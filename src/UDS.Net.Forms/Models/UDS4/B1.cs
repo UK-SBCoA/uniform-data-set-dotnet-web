@@ -19,12 +19,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized]
         public int? WEIGHT { get; set; }
 
-        [Display(Name = "Waist circumference measurements (inches): Measurement 1")]
+        [Display(Name = "Measurement 1:")]
         [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
         [RequiredOnFinalized]
         public int? WAIST1 { get; set; }
 
-        [Display(Name = "Waist circumference measurements (inches): Measurement 2")]
+        [Display(Name = "Measurement 2:")]
         [RegularExpression("^(20|2[1-9]|[3-5]\\d|60|888)$", ErrorMessage = "(20-60, 888 = Not assessed)")]
         [RequiredOnFinalized]
         public int? WAIST2 { get; set; }
@@ -48,12 +48,12 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [Display(Name = "Hip circumference measurements (inches): Measurement 1")]
+        [Display(Name = "Measurement 1:")]
         [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnFinalized]
         public int? HIP1 { get; set; }
 
-        [Display(Name = "Hip circumference measurements (inches): Measurement 2")]
+        [Display(Name = "Measurement 2:")]
         [RegularExpression("^(2[5-9]|[3-6][0-9]|70|888)$", ErrorMessage = "(25-70, 888 = Not assessed)")]
         [RequiredOnFinalized]
         public int? HIP2 { get; set; }
