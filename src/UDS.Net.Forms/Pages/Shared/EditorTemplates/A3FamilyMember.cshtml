@@ -1,10 +1,10 @@
 ﻿@model UDS.Net.Forms.Models.UDS4.A3FamilyMember
 
-<tr data-controller="a3-enable-intra-row"
-    data-a3-enable-rows-outlet="a3-enable-intra-row"
-    data-a3-enable-rows-target="row"
+<tr class="a3-intra-row-outlet"
+    data-controller="a3-enable-intra-row"
     data-a3-enable-intra-row-invalid-class="input-validation-error border-red-500 border-red-600"
-    data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60">
+    data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60"
+    data-a3-enable-rows-target="row">
 
     <td class="w-20">
         <span class="subcounter"></span> @Model.FamilyMemberIndex
@@ -12,7 +12,7 @@
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.YOB" placeholder="YYYY" data-a3-enable-rows-target="input" data-row-index="@Model.FamilyMemberIndex" />
+            <input asp-for="@Model.YOB" placeholder="YYYY" data-a3-enable-rows-target="input" data-row-index="@Model.FamilyMemberIndex"/>
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="YOB" data-a3-enable-rows-target="validationSpan" data-row-index="@Model.FamilyMemberIndex"></span>
     </td>

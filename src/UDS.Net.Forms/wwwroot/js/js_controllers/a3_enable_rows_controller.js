@@ -5,70 +5,61 @@ export default class extends Controller {
   static classes = ["invalid", "disabled"]
   static outlets = ["a3-enable-intra-row"]
   static values = {
-    maxRows: Number
+    maxRows: Number 
   }
 
-  connect() {
-    this.updateRows();
-  }
-
-  a3EnableIntraRowOutletConnected(outlet, element) {
-  };
-
-  updateRows() {
-    if (!this.hasCountInputTarget) return;
-
-    const value = this.countInputTarget.value;
-    let count = parseInt(value, 10) || 0;
-
-    if (count === 77) {
-      count = 0;
+    connect() {
+        setTimeout(() => this.updateRows(), 0);
     }
 
-    this.rowTargets.forEach((row, index) => {
-      const enabled = count > 0 && index < count;
-      row.classList.toggle('row-disabled', !enabled);
-      this.toggleRowInputs(row, enabled);
-    });
-  }
+    updateRows() {
+        if (!this.hasCountInputTarget) return;
 
-  toggleRowInputs(row, enabled) {
-    this.inputTargets.forEach(input => {
-      if (row.contains(input)) {
-        this.updateInput(input, enabled);
-      }
-    });
+        const value = this.countInputTarget.value;
+        let count = parseInt(value, 10) || 0;
 
-    this.validationSpanTargets.forEach(span => {
-      if (row.contains(span) && !enabled) {
-        span.textContent = '';
-      }
-    });
+        if (count === 77) {
+            count = 0;
+        }
 
-      this.a3EnableIntraRowOutlets.forEach(row => {
-      console.log("outlet within row");
-      row.updateFields();
-    });
-    //setTimeout(() => {
-    //  const intraRowOutlet = this.a3EnableIntraRowOutlets.find(outlet =>
-    //    row.contains(outlet.element)
-    //  );
+        this.rowTargets.forEach((row, index) => {
+            const enabled = count > 0 && index < count;
+            row.classList.toggle('row-disabled', !enabled);
+            this.toggleRowInputs(row, enabled);
+        });
+        }
 
-    //  if (intraRowOutlet) {
-    //    intraRowOutlet.updateFields();
-    //  }
-    //}, 0);
-  }
+        toggleRowInputs(row, enabled) {
+        this.inputTargets.forEach(input => {
+            if (row.contains(input)) {
+            this.updateInput(input, enabled);
+            }
+        });
 
-  updateInput(input, enabled) {
+        this.validationSpanTargets.forEach(span => {
+            if (row.contains(span) && !enabled) {
+            span.textContent = '';
+            }
+        });
+
+        this.a3EnableIntraRowOutlets.forEach(outlet => {
+            const rowElement = outlet.element;
+            const enabled = !rowElement.classList.contains('row-disabled');
+            if (enabled) {
+                outlet.updateFields();
+            }
+        });
+    }
+
+    updateInput(input, enabled) {
     input.disabled = !enabled;
     if (!enabled) {
-      input.value = '';
-      this.invalidClasses.forEach(cls => input.classList.remove(cls));
-      this.disabledClasses.forEach(cls => input.classList.add(cls));
+        input.value = '';
+        this.invalidClasses.forEach(cls => input.classList.remove(cls));
+        this.disabledClasses.forEach(cls => input.classList.add(cls));
 
     } else {
-      this.disabledClasses.forEach(cls => input.classList.remove(cls));
+        this.disabledClasses.forEach(cls => input.classList.remove(cls));
     }
   }
 }
