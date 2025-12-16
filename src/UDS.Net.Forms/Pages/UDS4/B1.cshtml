@@ -12,7 +12,7 @@
 </div>
 
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-    <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3">Section 1 --- Participant vital signs and anthropometrics </h3>
+    <h3 class="text-base font-semibold text-m text-gray-900 italic py-3">Section 1 - Participant vital signs and anthropometrics </h3>
 
     <div class="@rowCSS">
         <label asp-for="B1.HEIGHT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B1.HEIGHT)</label>
@@ -39,14 +39,14 @@
         </div>
     </div>
 
-    <h3 class="text-base font-semibold text-sm text-gray-900 italic py-3"><b>Instructions for measuring waist and hip circumference in adults</b> </h3>
+    <h3 class="text-base font-semibold text-m text-gray-900 py-3"><b>Instructions for measuring waist and hip circumference in adults</b> </h3>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-        <div>
-            <img src="~/_content/UDS.Net.Forms/B1waist_circumference.png" />
-            <p><b>Source: </b>NHLBI Obesity Education Initiative, <a class="text-indigo-700 underline hover:text-indigo-400" href="https://www.nhlbi.nih.gov/" target="_blank">nhlbi.nih.gov</a></p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-6">
+        <div class="mt-4">
+            <img src="~/_content/UDS.Net.Forms/B1waist_circumference.png" alt="Waist circumference measurement diagram" class="w-full h-auto" />
+            <p class="text-center mt-2"><b>Source: </b>NHLBI Obesity Education Initiative, <a class="text-indigo-700 underline hover:text-indigo-400" href="https://www.nhlbi.nih.gov/" target="_blank">nhlbi.nih.gov</a></p>
         </div>
-        <div class="text-left">
+        <div class="text-left mt-4">
             <b>Waist circumference</b> should be measured at the midpoint between the
             lower margin of the last palpable rib and the top of the iliac crest, using
             a stretch resistant tape. <b>Hip circumference</b> should be measured around
@@ -66,16 +66,16 @@
             consultation, Geneva, 8–11 December 2008
         </div>
     </div>
-    <div>
+    <div class="mt-6">
         <p class="counter">
-            <strong><u>Enter two waist circumference measurements (inches):</u></strong>
+            <strong>Enter two waist circumference measurements (inches):</strong>
         </p>
 
 
-        <div class="subsubcounterreset">
+        <div class="subsubcounterreset sm:ml-16">
             <div class="subcounterreset">
                 <span class="subcounter invisible"></span>
-                <div class="@rowCSS">
+                <div class="@rowCSS sm:ml-16">
                     <label asp-for="B1.WAIST1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST1)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST1"></p>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="@rowCSS">
+            <div class="@rowCSS sm:ml-16">
                 <label asp-for="B1.WAIST2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.WAIST2)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.B1.WAIST2"></p>
@@ -106,15 +106,15 @@
     </div>
 
 
-    <div>
+    <div class="mt-6">
         <p class="counter">
-            <strong><u>Enter two hip circumference measurements (inches):</u></strong>
+            <strong>Enter two hip circumference measurements (inches):</strong>
         </p>
 
-        <div class="subsubcounterreset">
+        <div class="subsubcounterreset sm:ml-16">
             <div class="subcounterreset">
                 <span class="subcounter invisible"></span>
-                <div class="@rowCSS">
+                <div class="@rowCSS sm:ml-16">
                     <label asp-for="B1.HIP1"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP1)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP1"></p>
@@ -126,7 +126,7 @@
                         <submission-error location="HIP1" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
-                <div class="@rowCSS">
+                <div class="@rowCSS sm:ml-16">
                     <label asp-for="B1.HIP2"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.B1.HIP2)</label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.B1.HIP2"></p>
@@ -146,25 +146,28 @@
         </div>
     </div>
     <div>
-        <div>
+        <div class="mt-6">
             <span class="counter">
                 <strong>
-                    <u>
                         Enter two readings spaced at least one minute apart for each arm.
-                        See detailed instructions below
-                    </u>
                 </strong>
+            </span>
+            <br />
+            <span class="sm:ml-12">
+                <i>
+                    See detailed instructions below.
+                </i>
             </span>
         </div>
         <br />
 
         <div>
-            <div class="subcounter">
+            <div class="subcounter lg:ml-8">
                 <span class="text-base font-semibold text-gray-900">
                     Participant blood pressure - Left arm:
                 </span>
                 <div>
-                    <div class="@rowCSS">
+                    <div class="@rowCSS sm:ml-16">
                         <label asp-for="B1.BPSYSL1"> @Html.DisplayNameFor(m => m.B1.BPSYSL1)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL1"></p>
@@ -184,7 +187,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="@rowCSS">
+                    <div class="@rowCSS sm:ml-16">
                         <label asp-for="B1.BPSYSL2"> @Html.DisplayNameFor(m => m.B1.BPSYSL2)</label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSL2"></p>
@@ -209,13 +212,8 @@
                         Participant blood pressure - Right arm:
 
                     </div>
-
-                </div>
-            </div>
-            <div>
-                <div>
                     <div>
-                        <div class="@rowCSS">
+                        <div class="@rowCSS sm:ml-16">
                             <label asp-for="B1.BPSYSR1"> @Html.DisplayNameFor(m => m.B1.BPSYSR1)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR1"></p>
@@ -236,7 +234,7 @@
                             </div>
                         </div>
 
-                        <div class="@rowCSS">
+                        <div class="@rowCSS sm:ml-16">
                             <label asp-for="B1.BPSYSR2"> @Html.DisplayNameFor(m => m.B1.BPSYSR2)</label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.B1.BPSYSR2"></p>
@@ -275,14 +273,15 @@
             <submission-error location="HRATE" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
     </div>
+    <h3 class="text-base font-semibold text-m text-gray-900 italic py-3">Steps for proper blood pressure measurement</h3>
     <ul role="list" class="divide-y divide-white/5 pb-2">
-        <li class="font-bold">STEP 1 - Properly prepare the participant:</li>
+        <li class="text-lg"><b>STEP 1</b> - Properly prepare the participant:</li>
         <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>The participant should avoid caffeine, exercise, and smoking for at least 30 minutes before measurement.</p>
+                <p class="ml-4">Have the participant relax, sitting in a chair <i>(feet on floor, back supported)</i> for >5 minutes </p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -290,7 +289,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Ensure that participant has emptied his/her bladder.</p>
+                <p class="ml-4">The participant should avoid caffeine, exercise, and smoking for at least 30 minutes before measurement.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -298,7 +297,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Neither the participant nor the observer should talk during the rest period or during the measurement.</p>
+                <p class="ml-4">Ensure that participant has emptied his/her bladder.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -306,7 +305,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Remove all clothing covering the location of cuff placement.</p>
+                <p class="ml-4">Neither the participant nor the observer should talk during the rest period or during the measurement.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -314,17 +313,25 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Measurements made while the participant is sitting or lying on an examining table do not fulfill these criteria.</p>
+                <p class="ml-4">Remove all clothing covering the location of cuff placement.</p>
+            </div>
+        </li>
+        <li class="relative flex items-center space-x-2 py-2">
+            <div class="min-w-0 flex-auto flex items-center gap-x-1">
+                <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
+                    <div class="h-2 w-2 rounded-full bg-current"></div>
+                </div>
+                <p class="ml-4">Measurements made while the participant is sitting or lying on an examining table do not fulfill these criteria.</p>
             </div>
         </li>
 
-        <li class="font-bold">STEP 2 - Use proper technique for BP measurements</li>
+        <li class="text-lg"><b>STEP 2</b> - Use proper technique for BP measurements</li>
         <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Use a BP measurement device that has been validated and ensure that the device is calibrated periodically</p>
+                <p class="ml-4">Use a BP measurement device that has been validated and ensure that the device is calibrated periodically.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -332,7 +339,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Support the participant's arm (e.g., have it resting on a desk ).</p>
+                <p class="ml-4">Support the participant's arm <i>(e.g., have it resting on a desk )</i>.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -340,7 +347,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Position the middle of the cuff on the participant's upper arm at the level of the right atrium (midpoint of the sternum)</p>
+                <p class="ml-4">Position the middle of the cuff on the participant's upper arm at the level of the right atrium <i>(midpoint of the sternum).</i></p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -348,7 +355,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>
+                <p class="ml-4">
                     Use the correct cuff size, such that the bladder encircles 80% of the arm, and note if a larger- or smaller-than-normal cuff size is
                     used.
                 </p>
@@ -359,17 +366,17 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Either the stethoscope diaphragm or bell may be used for auscultatory readings.</p>
+                <p class="ml-4">Either the stethoscope diaphragm or bell may be used for auscultatory readings.</p>
             </div>
         </li>
 
-        <li class="font-bold">STEP 3 - Take proper measurements</li>
+        <li class="text-lg"><b>STEP 3</b> - Take proper measurements</li>
         <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Take two BP readings in both arms</p>
+                <p class="ml-4">Take two BP readings in both arms.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -377,7 +384,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Separate the second set of measurements from the first by one minute</p>
+                <p class="ml-4">Separate the second set of measurements from the first by one minute.</p>
             </div>
         </li>
         <li class="relative flex items-center space-x-2 py-2">
@@ -385,7 +392,7 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>
+                <p class="ml-4">
                     For auscultatory determinations, use a palpated estimate of radial pulse obliteration pressure to estimate SBP. Inflate the cuff
                     20-30 mm Hg above this level for an auscultatory determination of the BP level.
                 </p>
@@ -396,19 +403,19 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>
+                <p class="ml-4">
                     For auscultatory readings, deflate the cuff pressure 2 mm Hg per second, and listen for Korotkoff sounds.
                 </p>
             </div>
         </li>
 
-        <li class="font-bold">STEP 4 - Properly document accurate BP readings</li>
+        <li class="text-lg"><b>STEP 4</b> - Properly document accurate BP readings</li>
         <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>
+                <p class="ml-4">
                     Record SBP and DBP. If using the auscultatory technique, record SBP and DBP as onset of the first Korotkoff sound and
                     disappearance of all Korotkoff sounds, respectively, using the nearest even number.
                 </p>
@@ -419,16 +426,16 @@
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>Record the two readings of SBP and DBP in the left arm, and the two readings of SBP and DBP in the right arm.</p>
+                <p class="ml-4">Record the two readings of SBP and DBP in the left arm, and the two readings of SBP and DBP in the right arm.</p>
             </div>
         </li>
-        <li class="font-bold">STEP 5 - Give BP readings and interpretation to the participants</li>
+        <li class="text-lg"><b>STEP 5</b> - Give BP readings and interpretation to the participants</li>
         <li class="relative flex items-center space-x-2 py-2">
             <div class="min-w-0 flex-auto flex items-center gap-x-1">
                 <div class="flex-none rounded-full p-1 text-gray-500 bg-gray-100/10">
                     <div class="h-2 w-2 rounded-full bg-current"></div>
                 </div>
-                <p>
+                <p class="ml-4">
                     It is recommended to provide participants with the SBP/DBP readings both orally, and in writing.
                 </p>
             </div>
@@ -437,7 +444,7 @@
     </ul>
     <br />
     <br />
-    <p><b>Source:</b> Checklist for accurate measurement of BP adapted from AHA Guidelines, Whelton PK et al., Hypertension. 2018; 71: e13-e11.</p>
+    <p class="text-center"><b>Source:</b> Checklist for accurate measurement of BP adapted from AHA Guidelines, Whelton PK et al., Hypertension. 2018; 71: e13-e11.</p>
 
 </div>
 <partial name="_FormFooter" for="@Model.B1" />
