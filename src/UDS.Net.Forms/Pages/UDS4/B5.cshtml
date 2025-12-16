@@ -11,6 +11,18 @@
     </p>
 </div>
 <div>
+    <div class="border-2 border-indigo-300 p-4">
+        <p class="mt-1 text-sm text-gray-500">
+            Please answer the following questions based on <u>changes</u> that have occurred since the participant first began to experience
+            memory (i.e., cognitive) problems.
+            <strong>Select 1=Yes <u>only</u> if the symptom(s) has been present <u>in the last month</u>. Otherwise, select 0=No.</strong>
+            (NOTE: for the UDS, please administer the NPI-Q to all participants.)<br>
+            For each item marked <strong>1=Yes</strong>, rate the SEVERITY of the symptom (how it affects the participant):<br>
+            <strong>1=Mild</strong> (noticeable, but not a significant change)
+            <strong>2=Moderate</strong> (significant, but not a dramatic change)
+            <strong>3=Severe</strong> (very marked or prominent; a dramatic change)
+        </p>
+    </div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="B5.NPIQINF"><span class="counter"></span> @Html.DisplayNameFor(m => m.B5.NPIQINF)</label>
