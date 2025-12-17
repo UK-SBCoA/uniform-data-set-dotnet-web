@@ -5,7 +5,7 @@
 
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
-<div >
+<div>
     <div>
         <p class="mt-1 text-sm text-gray-500">
             INSTRUCTIONS: <span class="italic">This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the</span> <guidebook kind="@Model.Visit.PACKET"></guidebook> <span class="italic">for</span> Form A3.
@@ -319,7 +319,7 @@
         </div>
 
         <p class="mt-1 text-sm text-gray-500">
-            <span class="font-bold">If participant has no full sibilings, SKIP TO QUESTION 3; <span class="italic">otherwise, provide information on all full siblings.</span></span>For any full sibling with a neurological or psychiatric diagnosis, the entire row <span class="underline">must be filled out.  </span>
+            <span class="font-bold">If participant has no full siblings, SKIP TO QUESTION 3; <span class="italic">otherwise, provide information on all full siblings.</span></span>For any full sibling with a neurological or psychiatric diagnosis, the entire row <span class="underline">must be filled out.  </span>
         </p>
 
         <p class="mt-1 text-sm text-gray-500">
@@ -357,7 +357,7 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
                     {
-                                @Html.EditorFor(m => m.A3.Siblings[i])
+                        @Html.EditorFor(m => m.A3.Siblings[i])
                     }
                 </tbody>
             </table>
@@ -421,7 +421,7 @@
                 <tbody>
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
                     {
-                                @Html.EditorFor(m => m.A3.Children[i])
+                        @Html.EditorFor(m => m.A3.Children[i])
                     }
                 </tbody>
             </table>
