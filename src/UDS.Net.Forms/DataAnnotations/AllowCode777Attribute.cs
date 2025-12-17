@@ -11,6 +11,8 @@ namespace UDS.Net.Forms.DataAnnotations
         {
             MergeAttribute(context.Attributes, "data-val", "true");
             MergeAttribute(context.Attributes, "data-val-allowcode777", GetErrorMessage());
+            var containerName = context.ModelMetadata.ContainerType?.Name;
+            MergeAttribute(context.Attributes, "data-val-allowcode777-packetkind",$"{containerName}.PacketKind");
         }
         public static string GetErrorMessage()
         {
