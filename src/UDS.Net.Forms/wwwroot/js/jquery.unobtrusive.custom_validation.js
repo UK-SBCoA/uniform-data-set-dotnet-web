@@ -636,7 +636,7 @@ $.validator.addMethod("allowcode777", function (value, element, params) {
   let packetKind = $("[name='" + params.packetkind + "']").val();
 
   if (value === "777" && packetKind !== "F") {
-    return false
+    return false;
   }
 
   return true;
