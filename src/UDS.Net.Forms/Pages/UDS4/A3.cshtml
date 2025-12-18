@@ -18,6 +18,19 @@
             Section <span class="counter"></span> Biological parents
         </h3>
 
+        @if (Model.A3.PacketKind == PacketKind.F)
+        {
+            <div class="counterreset sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                <label asp-for="A3.NWINFPAR"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFPAR)</label>
+                <div class="mt-4 sm:col-span-2 sm:mt-0">
+                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFPAR"></p>
+                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFPAR)" for="@Model.A3.NWINFPAR" items="Model.NWINFPARItems" ui-behaviors="Model.NWINFPARBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFPAR"></span>
+                    <submission-error location="NWINFPAR" errors="Model.BaseForm.UnresolvedErrors" />
+                </div>
+            </div>
+        }
+
         <p class="mt-1 text-sm text-gray-500">
             For any parent with a neurological or psychiatric diagnosis, the entire row <span class="underline">must be filled out.</span>
         </p>

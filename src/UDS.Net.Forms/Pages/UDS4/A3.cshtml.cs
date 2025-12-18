@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
 
@@ -15,6 +16,45 @@ namespace UDS.Net.Forms.Pages.UDS4
         public A3Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A3")
         {
         }
+
+        public List<RadioListItem> NWINFPARItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (Skip to question 2)", "0"),
+            new RadioListItem("Yes (Complete questions 1A - 1B", "1")
+        };
+
+        public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.MOMYOB"),
+                    new UIDisableAttribute("A3.MOMDAGE"),
+                    new UIDisableAttribute("A3.MOMETPR"),
+                    new UIDisableAttribute("A3.MOMETSEC"),
+                    new UIDisableAttribute("A3.MOMMEVAL"),
+                    new UIDisableAttribute("A3.MOMAGEO"),
+                    new UIDisableAttribute("A3.DADYOB"),
+                    new UIDisableAttribute("A3.DADDAGE"),
+                    new UIDisableAttribute("A3.DADETPR"),
+                    new UIDisableAttribute("A3.DADETSEC"),
+                    new UIDisableAttribute("A3.DADMEVAL"),
+                    new UIDisableAttribute("A3.DADAGEO")
+                },
+                InstructionalMessage = "SKIP TO QUESTION 2"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.MOMYOB"),
+                    new UIEnableAttribute("A3.MOMDAGE"),
+                    new UIEnableAttribute("A3.MOMETPR"),
+                    new UIEnableAttribute("A3.DADYOB"),
+                    new UIEnableAttribute("A3.DADDAGE"),
+                    new UIEnableAttribute("A3.DADETPR"),
+                }
+            } }
+        };
 
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {

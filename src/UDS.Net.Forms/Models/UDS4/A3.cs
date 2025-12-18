@@ -10,12 +10,11 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A3 : FormModel
     {
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
+        [Range(0,1)]
         [RequiredOnFinalized(Services.Enums.PacketKind.F)]
         public int? NWINFPAR { get; set; }
 
         [Display(Name = "Mother — birth year")]
-        [BirthYear(AllowUnknown = true, Parent = true)]
-        [RequiredOnFinalized]
         public int? MOMYOB { get; set; }
 
         [Display(Name = "Mother — age at death")]
@@ -101,6 +100,24 @@ namespace UDS.Net.Forms.Models.UDS4
         // - differences in validation across visit types for instance, IVP vs FVP
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (Status == Services.Enums.FormStatus.Finalized && PacketKind == Services.Enums.PacketKind.F)
+            {
+                if (NWINFPAR.Value == 1)
+                {
+                    var minimumBirthYear = 1850;
+                    var maximunBirthYear = DateTime.Now.Year - 20;
+                    int[] allowedValues = { 9999, 6666 };
+
+                    if (MOMYOB != null)
+                    {
+                        if ((MOMYOB.Value < 1850 || MOMYOB > DateTime.Now.Year - 20) && (!allowedValues.Contains(MOMYOB.Value)))
+                        {
+                            yield return new ValidationResult($"Birth year must be between {minimumBirthYear} and {maximunBirthYear}, 9999 (unknown), or 6666 (provided at previous visit).", new[] { nameof(MOMYOB) });
+                        }
+                    }
+                }
+            }
+
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
