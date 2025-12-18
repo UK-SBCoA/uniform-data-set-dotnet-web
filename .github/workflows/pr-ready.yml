@@ -5,7 +5,7 @@ on:
     types: [ready_for_review]
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   APP_PORT: 7110
 
 jobs:
