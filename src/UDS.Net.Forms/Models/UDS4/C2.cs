@@ -635,6 +635,21 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
+        [NotMapped]
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98")]
+        public bool? REYDRECValidation
+        {
+            get
+            {
+                if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
+                {
+                    return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                }
+
+                return true;
+            }
+        }
+
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
         [RequiredIfRange(nameof(REYDREC), 0, 15, ErrorMessage = "Provide total intrusions.")]
@@ -727,7 +742,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part A: Total number of seconds to complete", Description = "(0-100, 888, 995-998)")]
         [RegularExpression("^(\\d{1,2}|100|888|99[5-8])$", ErrorMessage = "Allowed values are 0-100, 888, or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage = "Response Required")]
         public int? OTRAILA { get; set; }
 
         [Display(Name = "Part A - Number of commission errors", Description = "(0-99)")]
@@ -742,7 +757,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Part B: Total number of seconds to complete", Description = "(0-300, 888, 995-998)")]
         [RegularExpression("^([0-9]|[1-9][0-9]|[12][0-9][0-9]|300|888|99[5-8])$", ErrorMessage = "Allowed values are 0-300, 888, or 995-998.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage = "Response Required")]
         public int? OTRAILB { get; set; }
 
         [Display(Name = "Part B - Number of commission errors", Description = "(0-99)")]
@@ -758,12 +773,12 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total correct without a cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage = "Response Required")]
         public int? VNTTOTW { get; set; }
 
         [Display(Name = "Total correct with a phonemic cue", Description = "(0-50, 88, 95-98)")]
         [RegularExpression("^(\\d|[1-4]\\d|50|88|9[5-8])$", ErrorMessage = "Allowed values are 0-50, 88 or 95-98.")]
-        [RequiredIf(nameof(RMMODE), "Telephone")]
+        [RequiredIf(nameof(RMMODE), "Telephone", ErrorMessage = "Response Required")]
         public int? VNTPCNC { get; set; }
 
         [Display(Name = "How valid do you think the participant’s responses are?")]
@@ -908,25 +923,6 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (REYDREC >= 0 && REYDREC <= 15)
                     {
                         return REYMETHOD.HasValue ? true : null;
-                    }
-                }
-
-                return true;
-            }
-        }
-
-        // If REY1REC is 95 - 98 for in person and video modalities, then REYDREC must have a value
-        [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when 12a. is 95 - 98")]
-        public bool? REYDRECValidation
-        {
-            get
-            {
-                if (MODE == FormMode.InPerson || RMMODE == RemoteModality.Video)
-                {
-                    if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
-                    {
-                        return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
                     }
                 }
 

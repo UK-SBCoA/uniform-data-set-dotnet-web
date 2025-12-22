@@ -44,6 +44,7 @@
     width: 0;
     max-width: 0;
 }
+
 /* stylelint-disable -- Tailwind CSS styling */
 /* TODO These styles are a quick fix for form validation */
 input[type="number"].input-validation-error, input[type="text"].input-validation-error {
