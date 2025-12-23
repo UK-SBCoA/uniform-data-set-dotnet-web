@@ -224,27 +224,32 @@
                                             }
                                         </td>
                                         <td>
-                                            <span>
+                                            <trubo-frame src="@Model?handler=CurrentValue" id="currentValue">
+                                                @* <a asp-page-handler="CurrentValue" class="btn btn-primary">Load Content</a> *@
+                                                Load content
+                                            </trubo-frame>
+
+                                            @* <span>
                                                 @{
-                                                    var formFound = Model.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
-                                                    string currentValueString = "--";
+                                                    // var formFound = Model.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
+                                                    // string currentValueString = "--";
 
-                                                    if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
-                                                        var propertyFound = formFound.GetType().GetProperty(error.Location);
+                                                    // if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
+                                                    //     var propertyFound = formFound.GetType().GetProperty(error.Location);
 
-                                                        if(propertyFound != null)
-                                                        {
-                                                            var currentValue = propertyFound.GetValue(formFound);
-                                                            if(currentValue != null)
-                                                            {
-                                                                currentValueString = currentValue.ToString();
-                                                            }
-                                                        }
-                                                    }
+                                                    //     if(propertyFound != null)
+                                                    //     {
+                                                    //         var currentValue = propertyFound.GetValue(formFound);
+                                                    //         if(currentValue != null)
+                                                    //         {
+                                                    //             currentValueString = currentValue.ToString();
+                                                    //         }
+                                                    //     }
+                                                    // }
                                                 }
                                                 
                                                 @currentValueString
-                                            </span>
+                                            </span> *@
                                         </td>
                                         <td class="px-4 py-2">
                                             @{ string errorLevelStyle = string.Empty; }

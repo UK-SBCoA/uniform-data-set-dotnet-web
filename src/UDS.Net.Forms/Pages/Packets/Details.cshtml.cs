@@ -15,5 +15,10 @@ namespace UDS.Net.Forms.Pages.Packets
         public DetailsModel(IParticipationService participationService, IPacketService packetService) : base(participationService, packetService)
         {
         }
+
+        public async Task<IActionResult> OnGetCurrentValue()
+        {
+            return Partial("_SubmissionErrorCell", "99");
+        }
     }
 }
