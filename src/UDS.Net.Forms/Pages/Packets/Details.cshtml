@@ -49,14 +49,6 @@
             </div>
         </div>
 
-        @* <turbo-frame id="currentValue" src="/Packets/Details/1?handler=CurrentValue">
-            <span>Loading value</span>
-        </turbo-frame> *@
-
-        <turbo-frame id="currentValue" src="@Model.Packet.Id?handler=CurrentValue">
-            <span>Loading value</span>
-        </turbo-frame>
-
-        @* <partial name="../PacketSubmissions/_Index" model="@Model" /> *@
+        <partial name="../PacketSubmissions/_Index" model="@Model" />
     </div>
 </div>

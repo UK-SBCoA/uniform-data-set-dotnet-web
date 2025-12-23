@@ -51,7 +51,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync()
         {
-            Packet currentPacket = await _packetService.GetPacketWithForms(User.Identity.Name, PacketId);
+            Packet currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
 
             List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
 

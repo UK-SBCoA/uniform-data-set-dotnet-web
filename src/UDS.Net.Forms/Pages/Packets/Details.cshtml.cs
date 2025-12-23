@@ -16,9 +16,28 @@ namespace UDS.Net.Forms.Pages.Packets
         {
         }
 
-        public async Task<IActionResult> OnGetCurrentValue()
+        public async Task<IActionResult> OnGetCurrentValue(int id)
         {
-            return Partial("_SubmissionErrorCell", "99");
+            // TODO: Create a service method that can grab the current value of a property in a form
+            //       Update the arguments to accept relevant data for grabbing current form data from specific form
+
+            // var formFound = Model.Packet.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
+            // string currentValueString = "--";
+
+            // if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
+            //     var propertyFound = formFound.GetType().GetProperty(error.Location);
+
+            //     if(propertyFound != null)
+            //     {
+            //         var currentValue = propertyFound.GetValue(formFound);
+            //         if(currentValue != null)
+            //         {
+            //             currentValueString = currentValue.ToString();
+            //         }
+            //     }
+            // }
+
+            return Partial("_SubmissionErrorCell", id.ToString());
         }
     }
 }
