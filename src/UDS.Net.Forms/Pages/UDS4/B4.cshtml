@@ -32,113 +32,511 @@
                 </tr>
             </thead>
             <tbody class="subcounterreset">
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.MEMORY"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.MEMORY)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.MEMORY"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.MEMORY"></span>
-                        <submission-error location="MEMORY" errors="Model.BaseForm.UnresolvedErrors" />
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                   
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Memory
+                            <p class="mt-1 text-sm text-gray-400">B4.MEMORY</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="MEMORY-description"></p>
+                        <span class="mt-2 text-sm text-red-600 field-validation-valid block"
+                              data-valmsg-for="B4.MEMORY"></span>
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No memory loss, or slight inconsistent forgetfulness</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Consistent slight forgetfulness; partial recollection of events; "benign" forgetfulness</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate memory loss, more marked for recent events; defect interferes with everyday activities</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
-                </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems" data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
-                </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.ORIENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.ORIENT)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.ORIENT"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.ORIENT"></span>
-                        <submission-error location="ORIENT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented except for slight difficulty with time relationships</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty with time relationships; oriented for place at examination; may have geographic disorientation elsewhere</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe difficulty with time relationships; usually disoriented to time, often to place</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Oriented to person only</td>
-                </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems" data-b4-target="ORIENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
-                </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.JUDGMENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.JUDGMENT)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.JUDGMENT"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.JUDGMENT"></span>
-                        <submission-error location="JUDGMENT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Solves everyday problems, handles business and financial affairs well; judgment good in relation to past performance</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in solving problems, similarities, and differences</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty in handling problems, similarities, and differences; social judgment usually maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severely impaired in handling problems, similarities, and differences; social judgment usually impaired</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to make judgments or solve problems</td>
-                </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems" data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
-                </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.COMMUN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMMUN)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.COMMUN"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMMUN"></span>
-                        <submission-error location="COMMUN" errors="Model.BaseForm.UnresolvedErrors" />
-                    </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Independent function at usual level in job, shopping, volunteer and social groups</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in these activities</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to function independently at these activities, although may still be engaged in some; appears normal to casual inspection</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears well enough to be taken to functions outside the family home</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home</td>
-                </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems" data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
-                </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.HOMEHOBB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.HOMEHOBB)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.HOMEHOBB"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.HOMEHOBB"></span>
-                        <submission-error location="HOMEHOBB" errors="Model.BaseForm.UnresolvedErrors" />
-                    </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests well maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests slightly impaired</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Mild but definite impairment of function at home; more difficult chores abandoned; more complicated hobbies and interests abandoned</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Only simple chores preserved; very restricted interests, poorly maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No significant function in the home</td>
-                </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems" data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
-                </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.PERSCARE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.PERSCARE)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.PERSCARE"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.PERSCARE"></span>
-                        <submission-error location="PERSCARE" errors="Model.BaseForm.UnresolvedErrors" />
-                    </td>
-                    <td colspan="2" class="mt-1 p-2 text-sm text-gray-500">Fully capable of self-care</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Needs prompting</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Requires assistance in dressing, hygiene, keeping of personal effects</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
-                </tr>
 
-                <tr>
-                    @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
-                    {
-                        <td @(i == 0 ? "colspan=2" : "")>
-                            <div class="relative flex items-start">
-                                <div class="flex items-center">
-                                    <input class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600" id="B4_PERSCARE[@i]" name="B4.PERSCARE" type="radio" value="@Model.ImpairmentSimpleListItems[i].Value" @(Model.B4.PERSCARE != null && Model.B4.PERSCARE.ToString() == Model.ImpairmentSimpleListItems[i].Value ? "checked" : "") data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM">
-                                    <label class="ml-3 block text-sm font-medium leading-6 text-gray-900" for="B4_PERSCARE[@i]">
-                                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">@Model.ImpairmentSimpleListItems[i].Value</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </td>
-                    }
+                    
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500 mb-3">
+                            No memory loss, or slight inconsistent forgetfulness
+                        </p>
+                        <div class="flex justify-center items-center mt-auto">
+                            <input type="radio"
+                                   name="B4.MEMORY"
+                                   value="0"
+                                   id="B4_MEMORY_0"
+                                   data-b4-target="MEMORY"
+                                   data-action="change->b4#updateCDRSUM"
+                                   class="h-4 border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" />
+                            <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                0
+                            </span>
+
+                        </div>
+                    </td>
+
+                    
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500 mb-3">
+                            Consistent slight forgetfulness; partial recollection of events
+                        </p>
+                        <div class="flex justify-center items-center mt-auto">
+                            <input type="radio"
+                                   name="B4.MEMORY"
+                                   value="0.5"
+                                   id="B4_MEMORY_05"
+                                   data-b4-target="MEMORY"
+                                   data-action="change->b4#updateCDRSUM"
+                                   class="h-4 text-indigo-600 border-gray-400 focus:ring-indigo-600" />
+                            <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                0.5
+                            </span>
+
+                        </div>
+                    </td>
+
+                    
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500 mb-3">
+                            Moderate memory loss, more marked for recent events
+                        </p>
+                        <div class="flex justify-center items-center mt-auto">
+                            <input type="radio"
+                                   name="B4.MEMORY"
+                                   value="1"
+                                   id="B4_MEMORY_1"
+                                   data-b4-target="MEMORY"
+                                   data-action="change->b4#updateCDRSUM"
+                                   class="h-4 text-indigo-600 border-gray-400 focus:ring-indigo-600" />
+                            <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                1
+                            </span>
+
+                        </div>
+                    </td>
+
+                    
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500 mb-3">
+                            Severe memory loss; only highly learned material retained
+                        </p>
+                        <div class="flex justify-center items-center mt-auto">
+                            <input type="radio"
+                                   name="B4.MEMORY"
+                                   value="2"
+                                   id="B4_MEMORY_2"
+                                   data-b4-target="MEMORY"
+                                   data-action="change->b4#updateCDRSUM"
+                                   class="h-4 text-indigo-600 border-gray-400 focus:ring-indigo-600" />
+                            <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                2
+                            </span>
+
+                        </div>
+                    </td>
+
+                    
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500 mb-3">
+                            Severe memory loss; only fragments remain
+                        </p>
+                        <div class="flex justify-center items-center mt-auto">
+                            <input type="radio"
+                                   name="B4.MEMORY"
+                                   value="3"
+                                   id="B4_MEMORY_3"
+                                   data-b4-target="MEMORY"
+                                   data-action="change->b4#updateCDRSUM"
+                                   class="h-4 text-indigo-600 border-gray-400 focus:ring-indigo-600" />
+                            <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                3
+                            </span>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                   
+                    <td class="w-48 p-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Orientation
+                            <p class="mt-1 text-sm text-gray-400">B4.ORIENT</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="ORIENT-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              data-valmsg-for="B4.ORIENT"
+                              data-valmsg-replace="true"></span>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Fully oriented</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
+                                       data-action="change->b4#updateCDRSUM"
+                                       data-b4-target="ORIENT"
+                                       data-val="true"
+                                       data-val-number="The field Orientation must be a number."
+                                       data-val-required="The Orientation field is required."
+                                       id="B4_ORIENT[0]"
+                                       name="B4.ORIENT"
+                                       type="radio"
+                                       value="0" />
+                                <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                    0
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Fully oriented except for slight difficulty with time relationships
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
+                                       data-action="change->b4#updateCDRSUM"
+                                       data-b4-target="ORIENT"
+                                       id="B4_ORIENT[1]"
+                                       name="B4.ORIENT"
+                                       type="radio"
+                                       value="0.5" />
+                                <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                    0.5
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Moderate difficulty with time relationships; oriented for place at examination
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
+                                       data-action="change->b4#updateCDRSUM"
+                                       data-b4-target="ORIENT"
+                                       id="B4_ORIENT[2]"
+                                       name="B4.ORIENT"
+                                       type="radio"
+                                       value="1" />
+                                <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                    1
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Severe difficulty with time relationships; usually disoriented to time
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
+                                       data-action="change->b4#updateCDRSUM"
+                                       data-b4-target="ORIENT"
+                                       id="B4_ORIENT[3]"
+                                       name="B4.ORIENT"
+                                       type="radio"
+                                       value="2" />
+                                <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                    2
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Oriented to person only</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
+                                       data-action="change->b4#updateCDRSUM"
+                                       data-b4-target="ORIENT"
+                                       id="B4_ORIENT[4]"
+                                       name="B4.ORIENT"
+                                       type="radio"
+                                       value="3" />
+                                <span class="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
+                                    3
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                    <td class="w-48 p-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Judgment and problem solving
+                            <p class="mt-1 text-sm text-gray-400">B4.JUDGMENT</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="JUDGMENT-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              data-valmsg-for="B4.JUDGMENT"></span>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Solves everyday problems, handles business and financial affairs well
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.JUDGMENT" value="0" id="B4_JUDGMENT[0]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Slight impairment in solving problems, similarities, and differences
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.JUDGMENT" value="0.5" id="B4_JUDGMENT[1]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0.5</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Moderate difficulty in handling problems
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.JUDGMENT" value="1" id="B4_JUDGMENT[2]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">1</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Severely impaired judgment
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.JUDGMENT" value="2" id="B4_JUDGMENT[3]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">2</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">
+                            Unable to make judgments or solve problems
+                        </p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.JUDGMENT" value="3" id="B4_JUDGMENT[4]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">3</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                    <td class="w-48 p-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Community affairs
+                            <p class="mt-1 text-sm text-gray-400">B4.COMMUN</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="COMMUN-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              data-valmsg-for="B4.COMMUN"></span>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Independent function at usual level</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.COMMUN" value="0" id="B4_COMMUN[0]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Slight impairment</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.COMMUN" value="0.5" id="B4_COMMUN[1]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0.5</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Unable to function independently</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.COMMUN" value="1" id="B4_COMMUN[2]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">1</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">No independent function outside home</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.COMMUN" value="2" id="B4_COMMUN[3]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">2</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Too ill for outside activities</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.COMMUN" value="3" id="B4_COMMUN[4]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">3</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                    <td class="w-48 p-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Homes and hobbies
+                            <p class="mt-1 text-sm text-gray-400">B4.HOMEHOBB</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="HOMEHOBB-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              data-valmsg-for="B4.HOMEHOBB"></span>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Well maintained</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.HOMEHOBB" value="0" id="B4_HOMEHOBB[0]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Slight impairment</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.HOMEHOBB" value="0.5" id="B4_HOMEHOBB[1]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0.5</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Mild but definite impairment</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.HOMEHOBB" value="1" id="B4_HOMEHOBB[2]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">1</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Only simple chores preserved</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.HOMEHOBB" value="2" id="B4_HOMEHOBB[3]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">2</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">No significant function</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.HOMEHOBB" value="3" id="B4_HOMEHOBB[4]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">3</span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="[&_td]:align-top divide-y divide-gray-200">
+                    <td class="w-48 p-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Personal care
+                            <p class="mt-1 text-sm text-gray-400">B4.PERSCARE</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="PERSCARE-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              data-valmsg-for="B4.PERSCARE"></span>
+                    </td>
+
+                    <td colspan="2" class="p-4">
+                        <p class="text-sm text-gray-500">Fully capable of self-care</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.PERSCARE" value="0" id="B4_PERSCARE[0]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">0</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Needs prompting</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.PERSCARE" value="1" id="B4_PERSCARE[1]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">1</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Requires assistance</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.PERSCARE" value="2" id="B4_PERSCARE[2]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">2</span>
+                            </label>
+                        </div>
+                    </td>
+
+                    <td class="p-4">
+                        <p class="text-sm text-gray-500">Requires much help</p>
+                        <div class="mt-3 flex justify-center items-center mt-auto">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="B4.PERSCARE" value="3" id="B4_PERSCARE[3]"
+                                       class="h-4 w-4 text-indigo-600 border-gray-400"
+                                       data-b4-target="PERSCARE" data-action="change->b4#updateCDRSUM" />
+                                <span class="badge">3</span>
+                            </label>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
