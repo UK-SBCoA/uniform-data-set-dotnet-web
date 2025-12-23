@@ -9,6 +9,7 @@ namespace UDS.Net.Services.DomainModels
         IEnumerable<FormMode> FormModes { get; } // does the form support remote collection
         IEnumerable<NotIncludedReasonCode> NotIncludedReasonCodes { get; } // some forms allow 94, but most don't
         IEnumerable<RemoteModality> RemoteModalities { get; }
+        IEnumerable<AdministrationFormat> AdministrationFormats { get; }
         string GetDescription();
         string GetVersion();
     }

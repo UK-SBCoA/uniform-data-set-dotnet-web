@@ -52,6 +52,11 @@
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="MODE"></span>
                     </div>
                     <div>
+                        <label for="@Html.IdFor(m => m.ADMIN)" class="block text-sm font-semibold leading-6 text-gray-900">Administration</label>
+                        <enum-select data-dropdownreset-target="trigger" data-action="change->dropdownReset#update" for="ADMIN" items="Html.GetEnumSelectList<AdministrationFormat>()" enabled-values="@Model.AllowedAdministrationCodes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="ADMIN"></span>
+                    </div>
+                    <div>
                         <label for="@Html.IdFor(m => m.FRMDATE)" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
                         <input asp-for="FRMDATE" type="date" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="FRMDATE"></span>

@@ -366,7 +366,13 @@ namespace UDS.Net.Services.Extensions
                 remoteReasonCode = (RemoteReasonCode)remoteReasonCodeValue;
             }
 
-            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
+            AdministrationFormat? administrationFormat = null;
+            if (!string.IsNullOrWhiteSpace(dto.ADMIN) && Int32.TryParse(dto.ADMIN, out int administrationFormatValue))
+            {
+                administrationFormat = (AdministrationFormat)administrationFormatValue;
+            }
+
+            return new Form(visitId, dto.Id, title, dto.Kind, formStatus, dto.FRMDATE, dto.INITIALS, formLanguage, formMode, remoteReasonCode, remoteModality, notIncludedReasonCode, administrationFormat, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, formFields);
         }
 
         public static Packet ToDomain(this PacketDto dto, string username)

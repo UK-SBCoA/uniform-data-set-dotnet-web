@@ -59,6 +59,12 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "If not completed, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
 
+        public List<int> AllowedAdministrationCodes { get; set; } = new List<int>();
+
+        [Required]
+        [Display(Name = "Administration")]
+        public AdministrationFormat? ADMIN { get; set; }
+
         public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
 
         [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify reason for remote visit")]
