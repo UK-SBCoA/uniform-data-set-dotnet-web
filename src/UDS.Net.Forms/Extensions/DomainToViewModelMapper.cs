@@ -291,6 +291,7 @@ namespace UDS.Net.Forms.Extensions
             vm.IsRequiredForPacketKind = form.IsRequiredForPacketKind;
             vm.LANG = form.LANG;
             vm.NOT = form.NOT;
+            vm.ADMIN = form.ADMIN;
             vm.MODE = form.MODE;
             vm.RMREAS = form.RMREAS;
             vm.RMMODE = form.RMMODE;
@@ -426,6 +427,7 @@ namespace UDS.Net.Forms.Extensions
                 AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
+                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
                 BIRTHMO = fields.BIRTHMO,
                 BIRTHYR = fields.BIRTHYR,
                 CHLDHDCTRY = fields.CHLDHDCTRY,

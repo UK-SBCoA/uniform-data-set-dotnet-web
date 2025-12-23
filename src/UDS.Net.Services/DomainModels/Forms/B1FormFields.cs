@@ -47,6 +47,14 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
+        public IEnumerable<AdministrationFormat> AdministrationFormats
+        {
+            get
+            {
+                return new List<AdministrationFormat>() { };
+            }
+        }
+
         public string GetDescription()
         {
             return "Evaluation Form - Vital Signs and Anthropometrics";

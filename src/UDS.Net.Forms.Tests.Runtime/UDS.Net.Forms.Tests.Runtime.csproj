@@ -21,8 +21,8 @@
 	<ItemGroup>
 		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
-		<PackageReference Include="UDS.Net.API.Entities" Version="10.1.0" />
-		<PackageReference Include="UDS.Net.API.Extensions" Version="10.1.0" />
-		<PackageReference Include="UDS.Net.Dto" Version="10.1.0" />
+		<PackageReference Include="UDS.Net.API.Entities" Version="11.0.1-preview.2" />
+		<PackageReference Include="UDS.Net.API.Extensions" Version="11.0.1-preview.2" />
+		<PackageReference Include="UDS.Net.Dto" Version="11.0.1-preview.2" />
 	</ItemGroup>
 </Project>
