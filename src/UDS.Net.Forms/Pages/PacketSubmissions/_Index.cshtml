@@ -4,9 +4,9 @@
         .SelectMany(s => s.Errors)
         .ToList();
 
-    var pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).ToList();
-    var resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).ToList();
-    var ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).ToList();
+    int pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).ToList().Count();
+    int resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).ToList().Count();
+    int ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).ToList().Count();
 }
 <turbo-frame id="PacketSubmissions">
     @if (Model.Packet.Participation != null && Model.Packet.PacketSubmissions != null)
@@ -170,15 +170,15 @@
                         <div>
                             <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
                                 data-packetSubmission-status-param="unresolved" data-packetSubmission-target="unresolvedButton">
-                                @pendingCount.Count() Unresolved
+                                @pendingCount Unresolved
                             </span>
                             <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
                                 data-packetSubmission-status-param="resolved" data-packetSubmission-target="resolvedButton">
-                                @resolvedCount.Count() Resolved
+                                @resolvedCount Resolved
                             </span>
                             <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
                                 data-packetSubmission-status-param="ignored" data-packetSubmission-target="ignoredButton">
-                                @ignoredCount.Count() Ignored
+                                @ignoredCount Ignored
                             </span>
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-2 text-gray-700">@error.Message</td>
-                                        <td>
+                                        <td class="px-4 py-2">
                                             @if (error.Value != null)
                                             {
                                                 <span>@error.Value</span>
@@ -223,35 +223,10 @@
                                                 <span>--</span>
                                             }
                                         </td>
-                                        <td>
-
-                                            @* TODO: Update handler to accept relevant props for retreiving ONLY the specific error data *@
-
-                                            <turbo-frame id="currentValue" loading="lazy" src="@Url.Page("Details", "CurrentValue", new { id = 1 })">
+                                        <td class="px-4 py-2">
+                                            <turbo-frame id="currentValue" loading="lazy" src="@Url.Page("Details", "CurrentValue", new { packetId = Model.Packet.Id, formKind = error.FormKind, location = error.Location })">
                                                 <span>Loading value</span>
                                             </turbo-frame>
-
-                                            @* <span>
-                                                @{
-                                                    // var formFound = Model.Packet.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
-                                                    // string currentValueString = "--";
-
-                                                    // if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
-                                                    //     var propertyFound = formFound.GetType().GetProperty(error.Location);
-
-                                                    //     if(propertyFound != null)
-                                                    //     {
-                                                    //         var currentValue = propertyFound.GetValue(formFound);
-                                                    //         if(currentValue != null)
-                                                    //         {
-                                                    //             currentValueString = currentValue.ToString();
-                                                    //         }
-                                                    //     }
-                                                    // }
-                                                }
-                                                
-                                                @currentValueString
-                                            </span> *@
                                         </td>
                                         <td class="px-4 py-2">
                                             @{ string errorLevelStyle = string.Empty; }

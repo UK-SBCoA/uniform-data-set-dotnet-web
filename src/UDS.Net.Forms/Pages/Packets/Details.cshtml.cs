@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
 
@@ -16,28 +14,32 @@ namespace UDS.Net.Forms.Pages.Packets
         {
         }
 
-        public async Task<IActionResult> OnGetCurrentValue(int id)
+        public async Task<IActionResult> OnGetCurrentValue(int packetId, string formKind, string location)
         {
-            // TODO: Create a service method that can grab the current value of a property in a form
-            //       Update the arguments to accept relevant data for grabbing current form data from specific form
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
-            // var formFound = Model.Packet.Forms.Where(f => f.Kind.ToLower() == error.FormKind.ToLower()).FirstOrDefault();
-            // string currentValueString = "--";
+            string? currentValue = "--";
 
-            // if (formFound != null && !String.IsNullOrEmpty(error.Location)) {
-            //     var propertyFound = formFound.GetType().GetProperty(error.Location);
+            if (packet != null)
+            {
+                var packetForm = packet.Forms.Where(f => f.Kind.ToLower() == formKind.ToLower()).FirstOrDefault();
 
-            //     if(propertyFound != null)
-            //     {
-            //         var currentValue = propertyFound.GetValue(formFound);
-            //         if(currentValue != null)
-            //         {
-            //             currentValueString = currentValue.ToString();
-            //         }
-            //     }
-            // }
+                if (packetForm != null)
+                {
+                    var propertyFound = packetForm.Fields.GetType().GetProperty(location);
 
-            return Partial("_SubmissionErrorCell", id.ToString());
+                    try
+                    {
+                        currentValue = propertyFound != null ? propertyFound.GetValue(packetForm.Fields).ToString() : "--";
+                    }
+                    catch(Exception e)
+                    {
+                        //log error
+                    }
+                }
+            }
+
+            return Partial("_SubmissionErrorCurrentValue", currentValue);
         }
     }
 }
