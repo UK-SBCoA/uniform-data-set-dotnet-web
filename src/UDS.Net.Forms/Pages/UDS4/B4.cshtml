@@ -33,7 +33,7 @@
             </thead>
             <tbody class="subcounterreset">
                 <tr class="[&_td]:align-top divide-y divide-gray-200">
-                   
+
                     <td class="w-48 py-4 pr-4">
                         <label class="text-base font-semibold text-gray-900">
                             <span class="counter"></span> Memory
@@ -42,9 +42,10 @@
                         <p class="mt-2 text-sm text-gray-500" id="MEMORY-description"></p>
                         <span class="mt-2 text-sm text-red-600 field-validation-valid block"
                               asp-validation-for="B4.MEMORY"></span>
+                        <submission-error location="MEMORY" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
-                    
+
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500 mb-3">
                             No memory loss, or slight inconsistent forgetfulness
@@ -64,7 +65,7 @@
                         </div>
                     </td>
 
-                    
+
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500 mb-3">
                             Consistent slight forgetfulness; partial recollection of events
@@ -84,7 +85,7 @@
                         </div>
                     </td>
 
-                    
+
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500 mb-3">
                             Moderate memory loss, more marked for recent events
@@ -104,7 +105,7 @@
                         </div>
                     </td>
 
-                    
+
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500 mb-3">
                             Severe memory loss; only highly learned material retained
@@ -124,7 +125,7 @@
                         </div>
                     </td>
 
-                    
+
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500 mb-3">
                             Severe memory loss; only fragments remain
@@ -145,7 +146,7 @@
                     </td>
                 </tr>
                 <tr class="[&_td]:align-top divide-y divide-gray-200">
-                   
+
                     <td class="w-48 py-4 pr-4">
                         <label class="text-base font-semibold text-gray-900">
                             <span class="counter"></span> Orientation
@@ -155,6 +156,7 @@
                         <span class="mt-2 block text-sm text-red-600 field-validation-valid"
                               asp-validation-for="B4.ORIENT"
                               data-valmsg-replace="true"></span>
+                        <submission-error location="ORIENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
                     <td class="w-48 py-4 pr-4">
@@ -265,6 +267,7 @@
                         <p class="mt-2 text-sm text-gray-500" id="JUDGMENT-description"></p>
                         <span class="mt-2 block text-sm text-red-600 field-validation-valid"
                               asp-validation-for="B4.JUDGMENT"></span>
+                        <submission-error location="JUDGMENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
                     <td class="w-48 py-4 pr-4">
@@ -346,6 +349,7 @@
                         <p class="mt-2 text-sm text-gray-500" id="COMMUN-description"></p>
                         <span class="mt-2 block text-sm text-red-600 field-validation-valid"
                               asp-validation-for="B4.COMMUN"></span>
+                        <submission-error location="COMMUN" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
                     <td class="w-48 py-4 pr-4">
@@ -417,6 +421,7 @@
                         <p class="mt-2 text-sm text-gray-500" id="HOMEHOBB-description"></p>
                         <span class="mt-2 block text-sm text-red-600 field-validation-valid"
                               asp-validation-for="B4.HOMEHOBB"></span>
+                        <submission-error location="HOMEHOBB" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
                     <td class="w-48 py-4 pr-4">
@@ -488,6 +493,7 @@
                         <p class="mt-2 text-sm text-gray-500" id="PERSCARE-description"></p>
                         <span class="mt-2 block text-sm text-red-600 field-validation-valid"
                               asp-validation-for="B4.PERSCARE"></span>
+                        <submission-error location="PERSCARE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
 
                     <td colspan="2" class="p-4">
