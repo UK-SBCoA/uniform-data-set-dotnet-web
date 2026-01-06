@@ -14,7 +14,7 @@ namespace UDS.Net.Forms.Pages.Packets
         {
         }
 
-        public async Task<IActionResult> OnGetCurrentValue(int packetId, string formKind, string location)
+        public async Task<IActionResult> OnGetCurrentValueAsync(int packetId, string formKind, string location)
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
