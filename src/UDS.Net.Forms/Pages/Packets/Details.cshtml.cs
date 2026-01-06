@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.Pages.Packets
                     {
                         currentValue = propertyFound != null ? propertyFound.GetValue(packetForm.Fields).ToString() : "--";
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         //log error
                     }
