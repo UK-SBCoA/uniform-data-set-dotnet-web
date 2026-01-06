@@ -61,7 +61,6 @@ namespace UDS.Net.Forms.Models
 
         public List<int> AllowedAdministrationCodes { get; set; } = new List<int>();
 
-        [Required]
         [Display(Name = "Administration")]
         public AdministrationFormat? ADMIN { get; set; }
 
@@ -114,6 +113,13 @@ namespace UDS.Net.Forms.Models
             }
             else if (Status == FormStatus.Finalized)
             {
+                // ADMIN required only for A1 or A1a
+                if ((Kind == "A1" || Kind == "A1a") && !ADMIN.HasValue)
+                {
+                    yield return new ValidationResult(
+                        "Administration is required field",
+                        new[] { nameof(ADMIN) });
+                }
                 if (MODE == FormMode.NotCompleted && !NOT.HasValue)
                 {
                     yield return new ValidationResult(
