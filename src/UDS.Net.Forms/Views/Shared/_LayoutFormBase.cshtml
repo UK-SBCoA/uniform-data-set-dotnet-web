@@ -1,0 +1,46 @@
+﻿@model UDS.Net.Forms.Models.PageModels.FormPageModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="">
+    <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+
+        <aside class="py-6 lg:col-span-3">
+            <nav class="space-y-1">
+
+                @if (Model.Visit != null && Model.Visit.Forms != null)
+                {
+                    <partial name="_NavSidebarForms" model="@Model.Visit" />
+                }
+
+            </nav>
+        </aside>
+
+        <main class="lg:col-span-9 px-5 py-6">
+            <partial name="_FormBreadcrumb" />
+
+            <div class="mx-auto max-w-12xl">
+                <div class="lg:flex lg:items-center lg:justify-between">
+
+                    <div class="min-w-0 flex-1">
+                        <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">@(Model.BaseForm.GetType().Name): @Model.BaseForm.Description</h2>
+                        <partial name="_FormMeta" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="divide-y divide-gray-200">
+                <div class="counterreset space-y-12 sm:space-y-16 mt-2">
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", false)
+}
+

@@ -166,26 +166,6 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Visit.Participation = participation.ToVM();
 
-            if (BaseForm.Kind == "C2")
-            {
-                if (BaseForm != null)
-                {
-                    var C2 = new C2Model(_visitService, _participationService, _packetService);
-
-                    C2.Visit = Visit;
-                    C2.BaseForm = BaseForm;
-                    C2.C2 = (C2)BaseForm;
-
-                    var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
-
-                    if (!ModelState.IsValid)
-                    {
-                        Response.ContentType = "text/vnd.turbo-stream.html";
-                        return Partial("_C2Validation", C2);
-                    }
-                };
-            }
-
             return Page();
         }
 

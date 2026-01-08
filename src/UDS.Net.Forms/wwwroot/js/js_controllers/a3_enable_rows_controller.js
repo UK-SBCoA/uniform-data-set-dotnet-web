@@ -1,4 +1,4 @@
-﻿import { Controller } from "@hotwired/stimulus"
+﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
   static targets = ["row", "countInput", "input", "validationSpan"]
@@ -9,7 +9,7 @@ export default class extends Controller {
   }
 
     connect() {
-        setTimeout(() => this.updateRows(), 0);
+        this.updateRows();
     }
 
     updateRows() {
