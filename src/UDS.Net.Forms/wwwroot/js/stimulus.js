@@ -16,6 +16,7 @@ import a4 from "./js_controllers/a4_controller.js"
 import modal from "./js_controllers/modal_controller.js"
 import checkboxButton from "./js_controllers/checkboxButton_controller.js"
 import pageRefreshOnSubmit from "./js_controllers/pageRefreshOnSubmit_controller.js"
+import packetSubmission from "./js_controllers/packetSubmission_controller.js"
 import c2 from "./js_controllers/c2_controller.js"
 
 const application = Application.start()
@@ -37,3 +38,4 @@ application.register("modal", modal)
 application.register("checkboxButton", checkboxButton)
 application.register("pageRefreshOnSubmit", pageRefreshOnSubmit)
 application.register("c2", c2)
+application.register("packetSubmission", packetSubmission)

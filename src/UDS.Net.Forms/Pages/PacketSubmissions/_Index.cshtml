@@ -1,11 +1,15 @@
-﻿@model PacketModel
+﻿@model UDS.Net.Forms.Pages.Packets.DetailsModel
 @{
-    var allErrors = Model.PacketSubmissions
+    var allErrors = Model.Packet.PacketSubmissions
         .SelectMany(s => s.Errors)
         .ToList();
+
+    int pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).ToList().Count();
+    int resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).ToList().Count();
+    int ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).ToList().Count();
 }
 <turbo-frame id="PacketSubmissions">
-    @if (Model.Participation != null && Model.PacketSubmissions != null)
+    @if (Model.Packet.Participation != null && Model.Packet.PacketSubmissions != null)
     {
         <div class="space-y-16 py-16 xl:space-y-20">
             <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
@@ -15,7 +19,7 @@
             <div class="mt-6 overflow-hidden border-t border-gray-100">
                 <div class="mx-auto max-w-12xl px-4 sm:px-6 lg:px-8">
                     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-                        @if (Model.PacketSubmissions.Count > 0)
+                        @if (Model.Packet.PacketSubmissions.Count > 0)
                         {
                             <table class="w-full text-left">
                                 <thead>
@@ -27,30 +31,30 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-fixed">
-                                    @for (int i = 0; i < Model.PacketSubmissions.Count - 1; i++)
+                                    @for (int i = 0; i < Model.Packet.PacketSubmissions.Count - 1; i++)
                                     {
                                         <tr>
                                             <td>
-                                                @Model.PacketSubmissions[i].SubmissionDate<br />
-                                                @Model.PacketSubmissions[i].CreatedBy
+                                                @Model.Packet.PacketSubmissions[i].SubmissionDate<br />
+                                                @Model.Packet.PacketSubmissions[i].CreatedBy
                                             </td>
                                             <td>
-                                                @if (!Model.PacketSubmissions[i].ErrorCount.HasValue)
+                                                @if (!Model.Packet.PacketSubmissions[i].ErrorCount.HasValue)
                                                 {
-                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                        @(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Packet.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                        @(Model.Packet.PacketSubmissions[i].GetFileName(Model.Packet.Participation.LegacyId, Model.Packet.VISIT_DATE))
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.PacketSubmissions[i].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
+                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.Packet.PacketSubmissions[i].GetFileName(Model.Packet.Participation.LegacyId, Model.Packet.VISIT_DATE))</span>
                                                 }
                                             </td>
                                             <td>
-                                                @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
+                                                @if (Model.Packet.PacketSubmissions[i].ErrorCount.HasValue)
                                                 {
                                                     @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
-                                                    <span>@Model.PacketSubmissions[i].ErrorCount</span>
+                                                    <span>@Model.Packet.PacketSubmissions[i].ErrorCount</span>
                                                 }
                                                 else
                                                 {
@@ -59,7 +63,7 @@
                                             </td>
                                             <td>
                                                 <div class="grid grid-cols-2 justify-items-center">
-                                                    @if (Model.PacketSubmissions[i].ErrorCount.HasValue)
+                                                    @if (Model.Packet.PacketSubmissions[i].ErrorCount.HasValue)
                                                     {
                                                         <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
                                                         <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Errors returned</a>
@@ -83,29 +87,29 @@
                                     <tbody>
                                         <tr>
                                             @{
-                                                var recentIndex = Model.PacketSubmissions.Count() - 1;
+                                                var recentIndex = Model.Packet.PacketSubmissions.Count() - 1;
                                             }
                                             <td>
-                                                @Model.PacketSubmissions[recentIndex].SubmissionDate<br />
-                                                @Model.PacketSubmissions[recentIndex].CreatedBy
+                                                @Model.Packet.PacketSubmissions[recentIndex].SubmissionDate<br />
+                                                @Model.Packet.PacketSubmissions[recentIndex].CreatedBy
                                             </td>
                                             <td>
-                                                @if (!Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                                @if (!Model.Packet.PacketSubmissions[recentIndex].ErrorCount.HasValue)
                                                 {
-                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
-                                                        @(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))
+                                                    <a asp-page="../PacketSubmissions/Export" asp-route-packetId="@Model.Packet.Id" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500" target="_blank">
+                                                        @(Model.Packet.PacketSubmissions[recentIndex].GetFileName(Model.Packet.Participation.LegacyId, Model.Packet.VISIT_DATE))
                                                     </a>
                                                 }
                                                 else
                                                 {
-                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.PacketSubmissions[recentIndex].GetFileName(Model.Participation.LegacyId, Model.VISIT_DATE))</span>
+                                                    <span class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">@(Model.Packet.PacketSubmissions[recentIndex].GetFileName(Model.Packet.Participation.LegacyId, Model.Packet.VISIT_DATE))</span>
                                                 }
                                             </td>
                                             <td>
-                                                @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                                @if (Model.Packet.PacketSubmissions[recentIndex].ErrorCount.HasValue)
                                                 {
                                                     @* TODO: Dispay ration of unresolved errors / errorCount. Unresolved errors are errors with a null "resolvedBy" value *@
-                                                    <span>@Model.PacketSubmissions[recentIndex].ErrorCount</span>
+                                                    <span>@Model.Packet.PacketSubmissions[recentIndex].ErrorCount</span>
                                                 }
                                                 else
                                                 {
@@ -114,7 +118,7 @@
                                             </td>
                                             <td>
                                                 <div class="grid grid-cols-2 justify-items-center">
-                                                    @if (Model.PacketSubmissions[recentIndex].ErrorCount.HasValue)
+                                                    @if (Model.Packet.PacketSubmissions[recentIndex].ErrorCount.HasValue)
                                                     {
                                                         <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Success</a>
                                                         <a class="text-sm font-medium leading-6 text-gray-600 hover:text-gray-500">Errors returned</a>
@@ -122,14 +126,14 @@
                                                     else
                                                     {
                                                         <form asp-page="../PacketSubmissionErrors/Create" method="post">
-                                                            <input type="hidden" name="PacketId" value="@Model.Id" />
-                                                            <input type="hidden" name="PacketSubmissionId" value="@Model.PacketSubmissions[recentIndex].Id" />
+                                                            <input type="hidden" name="PacketId" value="@Model.Packet.Id" />
+                                                            <input type="hidden" name="PacketSubmissionId" value="@Model.Packet.PacketSubmissions[recentIndex].Id" />
                                                             <input type="hidden" name="PacketStatus" value="4" />
-                                                            <input type="hidden" name="LegacyId" value="@Model.Participation.LegacyId" />
-                                                            <input type="hidden" name="VisitNum" value="@Model.VISITNUM" />
+                                                            <input type="hidden" name="LegacyId" value="@Model.Packet.Participation.LegacyId" />
+                                                            <input type="hidden" name="VisitNum" value="@Model.Packet.VISITNUM" />
                                                             <button type="submit" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Success</button>
                                                         </form>
-                                                        <a asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Id" asp-route-packetSubmissionId="@Model.PacketSubmissions[recentIndex].Id" asp-route-legacyId="@Model.Participation.LegacyId" asp-route-visitNum="@Model.VISITNUM" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
+                                                        <a asp-page="../PacketSubmissions/Edit" asp-page-handler="Partial" asp-route-packetId="@Model.Packet.Id" asp-route-packetSubmissionId="@Model.Packet.PacketSubmissions[recentIndex].Id" asp-route-legacyId="@Model.Packet.Participation.LegacyId" asp-route-visitNum="@Model.Packet.VISITNUM" class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500">Errors returned</a>
                                                     }
                                                 </div>
                                             </td>
@@ -143,7 +147,7 @@
             </div>
             @if (allErrors.Any())
             {
-                <div class="mt-12">
+                <div class="mt-12" data-controller="packetSubmission">
                     <div class="flex items-center justify-between mb-6">
                         <div>
                             <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
@@ -163,9 +167,20 @@
                             </p>
                         </div>
 
-                        <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm">
-                            @allErrors.Count() Issues
-                        </span>
+                        <div>
+                            <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="unresolved" data-packetSubmission-target="unresolvedButton">
+                                @pendingCount Unresolved
+                            </span>
+                            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="resolved" data-packetSubmission-target="resolvedButton">
+                                @resolvedCount Resolved
+                            </span>
+                            <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="ignored" data-packetSubmission-target="ignoredButton">
+                                @ignoredCount Ignored
+                            </span>
+                        </div>
                     </div>
 
                     <div class="overflow-x-auto rounded-2xl border border-red-200 bg-white shadow-lg">
@@ -174,54 +189,88 @@
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Assigned To</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Previous Value</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Current Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Resolved By</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
                                 @foreach (var error in allErrors)
                                 {
-                                    <tr class="hover:bg-red-50 transition">
+                                    <tr class="hover:bg-red-50 transition hidden" data-packetSubmission-target="row" data-status="@error.Status.ToString().ToLower()">
                                         <td class="px-4 py-2">
                                             @{
                                                 var pagePath = $"/UDS4/{error.FormKind}";
                                             }
-                                        <a asp-page="@pagePath"
-                                           asp-route-id="@Model.Id"
-                                           asp-route-packetKind="@Model.PACKET.ToString()"
-                                           class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            @error.FormKind
-                                        </a>
-                                    </td>
-                                    <td class="px-4 py-2 text-gray-700">@error.Message</td>
-                                    <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
-                                    <td class="px-4 py-2">
-                                        <span class="
-                            inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                            @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
-                                                                      ? "bg-red-100 text-red-800"
-                                                                      : "bg-yellow-100 text-yellow-800")">
-                                    @error.Level
-                                </span>
-                            </td>
-                            <td class="px-4 py-2 text-gray-700">
-                                @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            <a asp-page="@pagePath"
+                                               asp-route-id="@Model.Packet.Id"
+                                               asp-route-packetKind="@Model.Packet.PACKET.ToString()"
+                                               target="_blank"
+                                               class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                @error.FormKind - @error.Location
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-2 text-gray-700">@error.Message</td>
+                                        <td class="px-4 py-2">
+                                            @if (error.Value != null)
                                             {
-                                                @error.StatusChangedBy
-                                            }
-                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
-                                            {
-                                                <span class="text-yellow-600 font-semibold">Ignored by @error.StatusChangedBy</span>
+                                                <span>@error.Value</span>
                                             }
                                             else
                                             {
-                                                <span>Unresolved</span>
+                                                <span>--</span>
                                             }
                                         </td>
-                                        <td class="px-4 py-2 text-gray-700">
-                                            @error.Location
+                                        <td class="px-4 py-2">
+                                            <turbo-frame id="currentValue" loading="lazy" src="@Url.Page("Details", "CurrentValue", new { packetId = Model.Packet.Id, formKind = error.FormKind, location = error.Location })">
+                                                <span>Loading value</span>
+                                            </turbo-frame>
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            @{ string errorLevelStyle = string.Empty; }
+
+                                            @if(error.Level == PacketSubmissionErrorLevel.Error)
+                                            {
+                                                errorLevelStyle = "bg-red-100 text-red-800";
+                                            }
+                                            else if (error.Level == PacketSubmissionErrorLevel.Information)
+                                            {
+                                                errorLevelStyle = "bg-yellow-100 text-yellow-800";
+                                            }
+
+                                            <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium @errorLevelStyle">
+                                                @error.Level
+                                            </span>
+                                        </td>
+                                        <td class="flex flex-col px-4 py-2">
+                                            @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-green-800">
+                                                    Resolved
+                                                </span>
+                                                <span>Resolved By: @error.StatusChangedBy</span>
+                                            }
+                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-yellow-800">
+                                                    Ignored
+                                                </span>
+                                                <span>Ignored By: @error.StatusChangedBy</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-red-800">
+                                                    Unresolved
+                                                </span>
+                                                <span>Assigned To: @error.AssignedTo</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @error.CreatedAt
+                                            </span>
                                         </td>
                                     </tr>
                                 }
