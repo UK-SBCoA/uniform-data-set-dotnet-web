@@ -1,18 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using UDS.Net.Forms.Extensions;
-using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS4;
-using UDS.Net.Forms.Pages.UDS4;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models.PageModels
@@ -73,6 +64,13 @@ namespace UDS.Net.Forms.Models.PageModels
             Visit.Participation = participation.ToVM();
 
             var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
+
+            if (form == null)
+                return NotFound();
+
+            form.UnresolvedErrors = visit.UnresolvedErrors?
+                .Where(v => string.Equals(v.FormKind, form.Kind, StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
             BaseForm = form.ToVM(); // this will have the subclass
 
