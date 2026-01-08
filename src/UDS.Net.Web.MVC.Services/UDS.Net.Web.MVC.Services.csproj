@@ -15,10 +15,10 @@
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="10.0.1" />
-		<PackageReference Include="UDS.Net.Dto" Version="11.0.1-preview.2" />
-		<PackageReference Include="UDS.Net.API.Client" Version="11.0.1-preview.2" />
+		<PackageReference Include="UDS.Net.Dto" Version="11.0.0" />
+		<PackageReference Include="UDS.Net.API.Client" Version="11.0.0" />
 		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.6" />
-		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Services\UDS.Net.Services.csproj" />

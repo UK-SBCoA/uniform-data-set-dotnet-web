@@ -5,7 +5,7 @@ on:
     types: [ready_for_review]
 
 env:
-  DOTNET_VERSION: '8.0.x'
+  DOTNET_VERSION: '10.0.x'
   APP_PORT: 7110
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
         run: dotnet build src/UDS.Net.Forms.Tests/UDS.Net.Forms.Tests.csproj --no-restore --configuration Debug --verbosity quiet
 
       - name: Install Playwright Browsers
-        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net8.0/playwright.ps1 install
+        run: pwsh src/UDS.Net.Forms.Tests/bin/Debug/net10.0/playwright.ps1 install
 
       - name: Create test results directory
         run: mkdir -p ./test-results
