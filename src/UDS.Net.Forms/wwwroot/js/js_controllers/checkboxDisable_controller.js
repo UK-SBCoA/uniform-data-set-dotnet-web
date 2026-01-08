@@ -22,7 +22,7 @@ HTML USAGE:
  We should be able to refactor this so that it uses the stimulus targets instead of the the group params that are currently used.
 */
 
-import { Controller } from '@hotwired/stimulus';
+import { Controller } from 'https://unpkg.com/@hotwired/stimulus/dist/stimulus.js';
 
 export default class extends Controller {
   static targets = ["checkboxTrigger"]
