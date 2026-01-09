@@ -42,7 +42,6 @@ namespace UDS.Net.Forms.Models
             if (visit == null)
                 return NotFound();
 
-            var visitErrors = (visit.UnresolvedErrors ?? new List<PacketSubmissionError>()).ToList();
             var participation = await _participationService.GetById(User.Identity.Name, visit.ParticipationId);
 
             if (participation == null)
