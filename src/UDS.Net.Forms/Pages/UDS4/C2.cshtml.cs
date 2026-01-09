@@ -3,7 +3,6 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -67,6 +66,85 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("C2.REY6INT")
                 },
                 InstructionalMessage = "If test was not completed, enter reason code, 95-98. If test was skipped because optional or not available in Spanish translation, enter 88, and SKIP TO QUESTION 5a."
+            }
+        };
+
+
+        public UIRangeToggle REY2RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                    {
+                        new UIEnableAttribute("C2.REY2INT")
+                    }
+            }
+        };
+
+        public UIRangeToggle REY3RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY3INT")
+                }
+            }
+        };
+
+        public UIRangeToggle REY4RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY4INT")
+                }
+            }
+        };
+
+        public UIRangeToggle REY5RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY5INT")
+                }
+            }
+        };
+
+        public UIRangeToggle REYBRECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REYBINT")
+                }
+            }
+        };
+
+        public UIRangeToggle REY6RECBehavior = new UIRangeToggle
+        {
+            Low = 0,
+            High = 15,
+            UIBehavior = new UIBehavior
+            {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("C2.REY6INT")
+                }
             }
         };
 
