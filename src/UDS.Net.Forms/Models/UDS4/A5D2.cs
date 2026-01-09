@@ -276,6 +276,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Unknown")]
         public bool? DIABUNK { get; set; }
         [Display(Name = "Age at diabetes diagnosis")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|777|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         [AllowCode777]
         public int? DIABAGE { get; set; }
@@ -309,25 +310,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? ARTHRIT { get; set; }
-        [Display(Name = "Type of arthritis: Rheumatoid")]
+        [Display(Name = "Rheumatoid")]
         public bool? ARTHRRHEUM { get; set; }
-        [Display(Name = "Type of arthritis: Osteoarthritis")]
+        [Display(Name = "Osteoarthritis")]
         public bool? ARTHROSTEO { get; set; }
-        [Display(Name = "Type of arthritis: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? ARTHROTHR { get; set; }
         [Display(Name = "Specify other type of arthritis")]
         [MaxLength(60)]
         [RequiredIf(nameof(ARTHROTHR), "true", ErrorMessage = "Please specify.")]
         public string? ARTHTYPX { get; set; }
-        [Display(Name = "Type of arthritis: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? ARTHTYPUNK { get; set; }
-        [Display(Name = "Upper extremity affected by arthritis")]
+        [Display(Name = "Upper extremity")]
         public bool? ARTHUPEX { get; set; }
-        [Display(Name = "Lower extremity affected by arthritis")]
+        [Display(Name = "Lower extremity")]
         public bool? ARTHLOEX { get; set; }
-        [Display(Name = "Spine affected by arthritis")]
+        [Display(Name = "Spine")]
         public bool? ARTHSPIN { get; set; }
-        [Display(Name = "Region affected by arthritis unknown")]
+        [Display(Name = "Unknown")]
         public bool? ARTHUNK { get; set; }
         [Display(Name = "Incontinence—urinary (occurring at least weekly)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -374,7 +375,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? CANCERPRIM { get; set; }
         [Display(Name = "Metastatic (CHECK ALL THAT APPLY)")]
         public bool? CANCERMETA { get; set; }
-        [Display(Name = "Metatstic to brain")]
+        [Display(Name = "Metastatic to brain")]
         public bool? CANCMETBR { get; set; }
         [Display(Name = "Metastatic to sites other than brain")]
         public bool? CANCMETOTH { get; set; }
@@ -546,23 +547,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRegex(nameof(MENARCHE), "^([5-9]|1\\d|2[0-5]|999)$", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         [AllowCode777]
         public int? NOMENSAGE { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to natural menopause")]
+        [Display(Name = "Natural menopause")]
         public bool? NOMENSNAT { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to hysterectomy (surgical removal of uterus)")]
+        [Display(Name = "Hysterectomy (surgical removal of uterus)")]
         public bool? NOMENSHYST { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to surgical removal of both ovaries")]
+        [Display(Name = "Surgical removal of both ovaries")]
         public bool? NOMENSSURG { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to chemotherapy for cancer or another condition")]
+        [Display(Name = "Chemotherapy for cancer or another condition")]
         public bool? NOMENSCHEM { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to radiation treatment or other damage/injury to reproductive organs")]
+        [Display(Name = "Radiation treatment or other damage/injury to reproductive organs")]
         public bool? NOMENSRAD { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to hormonal supplements (e.g. the Pill, injections, Mirena, HRT)")]
+        [Display(Name = "Hormonal supplements (e.g. the Pill, injections, Mirena, HRT)")]
         public bool? NOMENSHORM { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to anti-estrogen medication")]
+        [Display(Name = "Anti-estrogen medication such as Tamoxifen, anostrozole (Arimidex),\r\nexemestane (Aromasin), or letrozole (Femara)")]
         public bool? NOMENSESTR { get; set; }
-        [Display(Name = "Unsure of reason participant has stopped having menstrual periods")]
+        [Display(Name = "Unsure")]
         public bool? NOMENSUNK { get; set; }
-        [Display(Name = "Other reason participant has stopped having menstrual periods (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? NOMENSOTH { get; set; }
         [Display(Name = "Specify other reason participant has stopped having menstrual periods")]
         [MaxLength(60)]
@@ -575,8 +576,9 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? HRT { get; set; }
 
         [Display(Name = "Total number of years participant has taken female hormone replacement pills")]
-        [RegularExpression("^(\\d|[1-8]\\d|90|999)$", ErrorMessage = "Valid range is 0-90 or 999")]
+        [RegularExpression("^(\\d|[1-8]\\d|90|777|999)$", ErrorMessage = "Valid range is 0-90 or 999")]
         [RequiredIf(nameof(HRT), "1", ErrorMessage = "Required if HRT = Yes")]
+        [AllowCode777]
         public int? HRTYEARS { get; set; }
 
         [Display(Name = "Age at first use of female hormone replacement pills")]
