@@ -37,8 +37,6 @@ namespace UDS.Net.Forms.Models
             if (id == null || id == 0)
                 return NotFound();
 
-            // TODO: Visit-level UnresolvedErrors should all map to a FormKind.
-            // Currently the mapping is unreliable, visit.UnresolvedErrors are not all present on all forms of the visit.
             var visit = await _visitService.GetById(User.Identity.Name, id.Value);
 
             if (visit == null)
@@ -61,19 +59,9 @@ namespace UDS.Net.Forms.Models
                 List<FormModel> forms = new List<FormModel>();
                 foreach (var kind in ordering)
                 {
-                    var form = Visit.Forms.FirstOrDefault(f => string.Equals(f.Kind?.Trim(), kind?.Trim(), StringComparison.OrdinalIgnoreCase));
-                    if (form == null)
-                        continue;
-
-                    forms.Add(form);
-
-                    var matchingErrors = visitErrors.Where(e => string.Equals(e.FormKind?.Trim(), form.Kind?.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
-
-                    if (matchingErrors.Count > 0)
-                    {
-                        form.UnresolvedErrorCount = matchingErrors.Count;
-                        form.UnresolvedErrors = matchingErrors.Select(e => e.ToVM()).ToList();
-                    }
+                    var form = Visit.Forms.Where(f => f.Kind == kind).FirstOrDefault();
+                    if (form != null)
+                        forms.Add(form);
                 }
                 Visit.Forms = forms;
             }

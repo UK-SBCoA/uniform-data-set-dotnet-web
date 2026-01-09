@@ -65,13 +65,6 @@ namespace UDS.Net.Forms.Models.PageModels
 
             var form = visit.Forms.Where(f => f.Kind == _formKind).FirstOrDefault();
 
-            if (form == null)
-                return NotFound();
-
-            form.UnresolvedErrors = visit.UnresolvedErrors?
-                .Where(v => string.Equals(v.FormKind, form.Kind, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-
             BaseForm = form.ToVM(); // this will have the subclass
 
             BaseForm.PacketKind = Visit.PACKET;
