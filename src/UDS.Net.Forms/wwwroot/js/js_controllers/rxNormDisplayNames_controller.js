@@ -1,6 +1,6 @@
 ﻿
 // wwwroot/js/js_controllers/rxNormDisplayNames_controller.js
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
   static targets = ["list"]
