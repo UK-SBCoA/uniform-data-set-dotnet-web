@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Models
 {
