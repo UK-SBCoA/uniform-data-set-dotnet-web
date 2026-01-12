@@ -62,7 +62,7 @@ namespace UDS.Net.Services.Extensions
                 {
                     foreach (var form in existingForms)
                     {
-                        form.UnresolvedErrors = errors.Where(e => e.FormKind == form.Kind).ToList();
+                        form.UnresolvedErrors = errors.Where(e => string.Equals(e.FormKind, form.Kind, StringComparison.OrdinalIgnoreCase)).ToList();
                     }
                 }
             }
