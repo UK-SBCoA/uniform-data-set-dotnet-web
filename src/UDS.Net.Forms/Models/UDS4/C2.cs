@@ -587,7 +587,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
+        [RequiredIfRange(nameof(REY3REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
         public int? REY3INT { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
@@ -597,7 +597,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
+        [RequiredIfRange(nameof(REY4REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
         public int? REY4INT { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
@@ -607,7 +607,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
+        [RequiredIfRange(nameof(REY5REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
@@ -617,7 +617,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
+        [RequiredIfRange(nameof(REYBREC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
         public int? REYBINT { get; set; }
 
         [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
@@ -627,7 +627,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
+        [RequiredIfRange(nameof(REY6REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 95-98)")]
