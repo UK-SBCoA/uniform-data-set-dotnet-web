@@ -50,7 +50,7 @@
                         <p class="text-sm text-gray-500 mb-3">
                             No memory loss, or slight inconsistent forgetfulness
                         </p>
-                        <div class="flex justify-center items-center mt-auto">
+                        <div class="mt-auto">
                             <input type="radio"
                                    asp-for="B4.MEMORY"
                                    value="0"
@@ -70,7 +70,7 @@
                         <p class="text-sm text-gray-500 mb-3">
                             Consistent slight forgetfulness; partial recollection of events
                         </p>
-                        <div class="flex justify-center items-center mt-auto">
+                        <div class="mt-auto">
                             <input type="radio"
                                    asp-for="B4.MEMORY"
                                    value="0.5"
@@ -90,7 +90,7 @@
                         <p class="text-sm text-gray-500 mb-3">
                             Moderate memory loss, more marked for recent events
                         </p>
-                        <div class="flex justify-center items-center mt-auto">
+                        <div class="mt-auto">
                             <input type="radio"
                                    asp-for="B4.MEMORY"
                                    value="1"
@@ -110,7 +110,7 @@
                         <p class="text-sm text-gray-500 mb-3">
                             Severe memory loss; only highly learned material retained
                         </p>
-                        <div class="flex justify-center items-center mt-auto">
+                        <div class="mt-auto">
                             <input type="radio"
                                    asp-for="B4.MEMORY"
                                    value="2"
@@ -130,7 +130,7 @@
                         <p class="text-sm text-gray-500 mb-3">
                             Severe memory loss; only fragments remain
                         </p>
-                        <div class="flex justify-center items-center mt-auto">
+                        <div class="mt-auto">
                             <input type="radio"
                                    asp-for="B4.MEMORY"
                                    value="3"
@@ -161,7 +161,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Fully oriented</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
                                        data-action="change->b4#updateCDRSUM"
@@ -184,7 +184,7 @@
                         <p class="text-sm text-gray-500">
                             Fully oriented except for slight difficulty with time relationships
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
                                        data-action="change->b4#updateCDRSUM"
@@ -204,7 +204,7 @@
                         <p class="text-sm text-gray-500">
                             Moderate difficulty with time relationships; oriented for place at examination
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
                                        data-action="change->b4#updateCDRSUM"
@@ -224,7 +224,7 @@
                         <p class="text-sm text-gray-500">
                             Severe difficulty with time relationships; usually disoriented to time
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
                                        data-action="change->b4#updateCDRSUM"
@@ -242,7 +242,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Oriented to person only</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input class="h-4 w-4 border-gray-400 text-indigo-600 focus:ring-indigo-600"
                                        data-action="change->b4#updateCDRSUM"
@@ -274,7 +274,7 @@
                         <p class="text-sm text-gray-500">
                             Solves everyday problems, handles business and financial affairs well
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.JUDGMENT" value="0" id="B4_JUDGMENT[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -288,7 +288,7 @@
                         <p class="text-sm text-gray-500">
                             Slight impairment in solving problems, similarities, and differences
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.JUDGMENT" value="0.5" id="B4_JUDGMENT[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -302,7 +302,7 @@
                         <p class="text-sm text-gray-500">
                             Moderate difficulty in handling problems
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.JUDGMENT" value="1" id="B4_JUDGMENT[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -316,7 +316,7 @@
                         <p class="text-sm text-gray-500">
                             Severely impaired judgment
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.JUDGMENT" value="2" id="B4_JUDGMENT[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -330,7 +330,7 @@
                         <p class="text-sm text-gray-500">
                             Unable to make judgments or solve problems
                         </p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.JUDGMENT" value="3" id="B4_JUDGMENT[4]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -354,7 +354,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Independent function at usual level</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMMUN" value="0" id="B4_COMMUN[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -366,7 +366,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Slight impairment</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMMUN" value="0.5" id="B4_COMMUN[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -378,7 +378,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Unable to function independently</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMMUN" value="1" id="B4_COMMUN[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -390,7 +390,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">No independent function outside home</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMMUN" value="2" id="B4_COMMUN[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -402,7 +402,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Too ill for outside activities</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMMUN" value="3" id="B4_COMMUN[4]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -426,7 +426,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Well maintained</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.HOMEHOBB" value="0" id="B4_HOMEHOBB[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -438,7 +438,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Slight impairment</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.HOMEHOBB" value="0.5" id="B4_HOMEHOBB[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -450,7 +450,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Mild but definite impairment</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.HOMEHOBB" value="1" id="B4_HOMEHOBB[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -462,7 +462,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Only simple chores preserved</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.HOMEHOBB" value="2" id="B4_HOMEHOBB[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -474,7 +474,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">No significant function</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.HOMEHOBB" value="3" id="B4_HOMEHOBB[4]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -498,7 +498,7 @@
 
                     <td colspan="2" class="p-4">
                         <p class="text-sm text-gray-500">Fully capable of self-care</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.PERSCARE" value="0" id="B4_PERSCARE[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -510,7 +510,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Needs prompting</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.PERSCARE" value="1" id="B4_PERSCARE[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -522,7 +522,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Requires assistance</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.PERSCARE" value="2" id="B4_PERSCARE[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -534,7 +534,7 @@
 
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Requires much help</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.PERSCARE" value="3" id="B4_PERSCARE[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400"
@@ -601,7 +601,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Socially appropriate behavior</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMPORT" value="0" id="COMPORT[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -611,7 +611,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Questionable changes in comportment, empathy, appropriateness of actions</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMPORT" value="0.5" id="COMPORT[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -621,7 +621,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Mild but definite changes in behavior</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMPORT" value="1" id="COMPORT[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -631,7 +631,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Moderate behavioral changes, affecting interpersonal relationships and interactions in a significant manner</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMPORT" value="2" id="COMPORT[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -641,7 +641,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Severe behavioral changes, making interpersonal interactions all unidirectional</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.COMPORT" value="3" id="COMPORT[4]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -660,7 +660,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">No language difficulties, or occasional mild slip of the tongue</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.CDRLANG" value="0" id="CDRLANG[0]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -670,7 +670,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Consistent mild word-finding difficulties; simplification of word choice; circumlocution; decreased phrase length; and/or mild comprehension difficulties</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.CDRLANG" value="0.5" id="CDRLANG[1]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -680,7 +680,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Moderate word-finding difficulty in speech; cannot name objects in environment; reduced phrase length and/or agrammatical speech and/or reduced comprehension in conversation and reading</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.CDRLANG" value="1" id="CDRLANG[2]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -690,7 +690,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Moderate to severe impairment in either speech or comprehension; has difficulty communicating thoughts; writing may be slightly more effective</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.CDRLANG" value="2" id="CDRLANG[3]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
@@ -700,7 +700,7 @@
                     </td>
                     <td class="w-48 py-4 pr-4">
                         <p class="text-sm text-gray-500">Severe comprehension deficits; no intelligible speech</p>
-                        <div class="mt-3 flex justify-center items-center mt-auto">
+                        <div class="mt-3 mt-auto">
                             <label class="flex items-center gap-2">
                                 <input type="radio" asp-for="B4.CDRLANG" value="3" id="CDRLANG[4]"
                                        class="h-4 w-4 text-indigo-600 border-gray-400" />
