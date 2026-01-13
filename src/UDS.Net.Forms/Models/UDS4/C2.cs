@@ -636,14 +636,14 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? REYDREC { get; set; }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98")]
+        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 or 88 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98")]
         public bool? REYDRECValidation
         {
             get
             {
                 if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
                 {
-                    return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                    return REYDREC.HasValue && ((REYDREC.Value >= 95 && REYDREC.Value <= 98) || REYDREC.Value == 88) ? true : null;
                 }
 
                 return true;
