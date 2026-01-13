@@ -14,11 +14,11 @@ namespace UDS.Net.Forms.Pages.Packets
         {
         }
 
-        public async Task<IActionResult> OnGetCurrentValueAsync(int packetId, string formKind, string location)
+        public async Task<IActionResult> OnGetFormPropValueAsync(int packetId, string formKind, string location)
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
-            string? currentValue = "--";
+            string? propValue = "--";
 
             if (packet != null)
             {
@@ -30,7 +30,7 @@ namespace UDS.Net.Forms.Pages.Packets
 
                     try
                     {
-                        currentValue = propertyFound != null ? propertyFound.GetValue(packetForm.Fields).ToString() : "--";
+                        propValue = propertyFound != null ? propertyFound.GetValue(packetForm.Fields).ToString() : "--";
                     }
                     catch (Exception e)
                     {
@@ -39,7 +39,7 @@ namespace UDS.Net.Forms.Pages.Packets
                 }
             }
 
-            return Partial("_SubmissionErrorCurrentValue", currentValue);
+            return Partial("_FormPropValue", propValue);
         }
     }
 }
