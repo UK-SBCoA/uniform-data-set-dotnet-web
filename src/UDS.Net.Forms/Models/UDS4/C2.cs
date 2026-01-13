@@ -630,8 +630,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
-        [Display(Name = "Total delayed recall", Description = "(0-15, 95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
+        [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
+        [RegularExpression(@"^(\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88, or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
         public int? REYDREC { get; set; }
 
