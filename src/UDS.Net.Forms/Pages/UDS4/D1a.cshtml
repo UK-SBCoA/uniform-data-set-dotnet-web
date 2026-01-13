@@ -564,13 +564,13 @@
 
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <a name="section-2"></a>
-    <div class="flex flex-wrap items-baseline bg-indigo-100">
-        <h3 class="font-semibold text-sm text-gray-500 uppercase">Section 2</h3>
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <h3 class="ml-2 mt-2 font-semibold text-sm text-gray-500 uppercase">Section 2</h3>
         <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
             Clinical syndrome
         </p>
     </div>
-    <p class="text-sm text-gray-900">
+    <p class="mt-2 text-sm text-gray-900">
         <strong>The purpose of Section 2 is to assign a clinical syndrome</strong> to participants with dementia and, when appropriate MCI or MBI, using all available clinical, exam, and neuropsychiatric data. This should be done using clinical information and cognitive/ neuropsychological testing, <strong>ideally without reference to biomarker data</strong> (which is incorporated into the Etiological Diagnoses section in Form D1b). This is not always possible and thus Q9 allows centers to record when biomarker data is known and may have influenced the clinical diagnosis.
     </p>
 </div>
@@ -587,363 +587,365 @@
         <submission-error location="PREDOMSYN" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
 </div>
-<div>
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYNSyndromePresent"></span>
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <p class="mt-2 text-sm text-gray-900">
+        Select the predominant syndrome as present; all others will default to Absent in the NACC database.
+    </p>
+    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYNSyndromePresent"></span>
     <submission-error location="PREDOMSYNSyndromePresent" errors="Model.BaseForm.UnresolvedErrors" />
 
+    <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <th></th>
+                <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
+            </tr>
+        </thead>
+        <tbody class="subcounterreset divide-y divide-gray-200">
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.AMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.AMNDEM)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.AMNDEM"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AMNDEM"></span>
+                    <submission-error location="AMNDEM" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.AMNDEM", Model.D1a.AMNDEM, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_AMNDEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.DYEXECSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.DYEXECSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.DYEXECSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DYEXECSYN"></span>
+                    <submission-error location="DYEXECSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.DYEXECSYN", Model.D1a.DYEXECSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_DYEXECSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.PCA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PCA)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.PCA"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PCA"></span>
+                    <submission-error location="PCA" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.PCA", Model.D1a.PCA, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_PCA" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.PPASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.PPASYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PPASYN"></span>
+                    <submission-error location="PPASYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.PPASYN", Model.D1a.PPASYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.PPASYNT\" ]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_PPASYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td colspan="2">
+                    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1a.PPASYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYNT)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PPASYNT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1a.PPASYNT)" for="@Model.D1a.PPASYNT" items="Model.PPASyndromeListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PPASYNT"></span>
+                            <submission-error location="PPASYNT" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.FTDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.FTDSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.FTDSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.FTDSYN"></span>
+                    <submission-error location="FTDSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.FTDSYN", Model.D1a.FTDSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_FTDSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.LBDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.LBDSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.LBDSYN"></span>
+                    <submission-error location="LBDSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.LBDSYN", Model.D1a.LBDSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.LBDSYNT\" ]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_LBDSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td colspan="2">
+                    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1a.LBDSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYNT)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.LBDSYNT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1a.LBDSYNT)" for="@Model.D1a.LBDSYNT" items="Model.LBDSYNTListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.LBDSYNT"></span>
+                            <submission-error location="LBDSYNT" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.NAMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.NAMNDEM)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.NAMNDEM"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.NAMNDEM"></span>
+                    <submission-error location="NAMNDEM" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.NAMNDEM", Model.D1a.NAMNDEM, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_NAMNDEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.PSPSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.PSPSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PSPSYN"></span>
+                    <submission-error location="PSPSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.PSPSYN", Model.D1a.PSPSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.PSPSYNT\" ]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_PSPSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td colspan="2">
+                    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1a.PSPSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYNT)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PSPSYNT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1a.PSPSYNT)" for="@Model.D1a.PSPSYNT" items="Model.PSPSYNTListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PSPSYNT"></span>
+                            <submission-error location="PSPSYNT" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.CTESYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CTESYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.CTESYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CTESYN"></span>
+                    <submission-error location="CTESYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.CTESYN", Model.D1a.CTESYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_CTESYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.CBSSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CBSSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.CBSSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CBSSYN"></span>
+                    <submission-error location="CBSSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.CBSSYN", Model.D1a.CBSSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_CBSSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.MSASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.MSASYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.MSASYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MSASYN"></span>
+                    <submission-error location="MSASYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.MSASYN", Model.D1a.MSASYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.MSASYNT\" ]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_MSASYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td colspan="2">
+                    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1a.MSASYNT"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.MSASYNT)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MSASYNT"></p>
+                            <radio-button-group id="@Html.IdFor(m => m.D1a.MSASYNT)" for="@Model.D1a.MSASYNT" items="Model.MSASYNTListItems"></radio-button-group>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MSASYNT"></span>
+                            <submission-error location="MSASYNT" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td>
+                    <label asp-for="D1a.OTHSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.OTHSYN)</label>
+                    <p class="text-sm text-gray-500" asp-description-for="D1a.OTHSYN"></p>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.OTHSYN"></span>
+                    <submission-error location="OTHSYN" errors="Model.BaseForm.UnresolvedErrors" />
+                </td>
+                <td>
+                    <fieldset>
+                        <div class="space-y-5">
+                            <div class="relative flex items-start">
+                                <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                                <div class="flex h-6 items-center">
+                                    @Html.CheckBox("D1a.OTHSYN", Model.D1a.OTHSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.OTHSYNX\" ]" })
+                                </div>
+                                <div class="ml-3 text-sm leading-6">
+                                    <label for="D1a_OTHSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <td colspan="6">
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label asp-for="D1a.OTHSYNX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHSYNX)</label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHSYNX"></p>
+                            <input asp-for="@Model.D1a.OTHSYNX" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.OTHSYNX"></span>
+                            <submission-error location="OTHSYNX" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-<table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
-    <thead>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Select the predominant syndrome as present; all others will default to Absent in the NACC database.</th>
-            <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
-        </tr>
-    </thead>
-    <tbody class="subcounterreset divide-y divide-gray-200">
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.AMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.AMNDEM)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.AMNDEM"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AMNDEM"></span>
-                <submission-error location="AMNDEM" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.AMNDEM", Model.D1a.AMNDEM, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_AMNDEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.DYEXECSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.DYEXECSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.DYEXECSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.DYEXECSYN"></span>
-                <submission-error location="DYEXECSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.DYEXECSYN", Model.D1a.DYEXECSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_DYEXECSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.PCA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PCA)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.PCA"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PCA"></span>
-                <submission-error location="PCA" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.PCA", Model.D1a.PCA, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_PCA" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.PPASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.PPASYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PPASYN"></span>
-                <submission-error location="PPASYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.PPASYN", Model.D1a.PPASYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.PPASYNT\" ]" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_PPASYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td colspan="2">
-                <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.PPASYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYNT)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PPASYNT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1a.PPASYNT)" for="@Model.D1a.PPASYNT" items="Model.PPASyndromeListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PPASYNT"></span>
-                        <submission-error location="PPASYNT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.FTDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.FTDSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.FTDSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.FTDSYN"></span>
-                <submission-error location="FTDSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.FTDSYN", Model.D1a.FTDSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_FTDSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.LBDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.LBDSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.LBDSYN"></span>
-                <submission-error location="LBDSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.LBDSYN", Model.D1a.LBDSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.LBDSYNT\" ]" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_LBDSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td colspan="2">
-                <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.LBDSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYNT)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.LBDSYNT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1a.LBDSYNT)" for="@Model.D1a.LBDSYNT" items="Model.LBDSYNTListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.LBDSYNT"></span>
-                        <submission-error location="LBDSYNT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.NAMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.NAMNDEM)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.NAMNDEM"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.NAMNDEM"></span>
-                <submission-error location="NAMNDEM" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.NAMNDEM", Model.D1a.NAMNDEM, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_NAMNDEM" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.PSPSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.PSPSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PSPSYN"></span>
-                <submission-error location="PSPSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.PSPSYN", Model.D1a.PSPSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.PSPSYNT\" ]" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_PSPSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td colspan="2">
-                <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.PSPSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYNT)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.PSPSYNT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1a.PSPSYNT)" for="@Model.D1a.PSPSYNT" items="Model.PSPSYNTListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PSPSYNT"></span>
-                        <submission-error location="PSPSYNT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.CTESYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CTESYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.CTESYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CTESYN"></span>
-                <submission-error location="CTESYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.CTESYN", Model.D1a.CTESYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_CTESYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.CBSSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CBSSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.CBSSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.CBSSYN"></span>
-                <submission-error location="CBSSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.CBSSYN", Model.D1a.CBSSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_CBSSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.MSASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.MSASYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.MSASYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MSASYN"></span>
-                <submission-error location="MSASYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.MSASYN", Model.D1a.MSASYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.MSASYNT\" ]" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_MSASYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td colspan="2">
-                <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.MSASYNT"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.MSASYNT)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.MSASYNT"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.D1a.MSASYNT)" for="@Model.D1a.MSASYNT" items="Model.MSASYNTListItems"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.MSASYNT"></span>
-                        <submission-error location="MSASYNT" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td>
-                <label asp-for="D1a.OTHSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.OTHSYN)</label>
-                <p class="text-sm text-gray-500" asp-description-for="D1a.OTHSYN"></p>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.OTHSYN"></span>
-                <submission-error location="OTHSYN" errors="Model.BaseForm.UnresolvedErrors" />
-            </td>
-            <td>
-                <fieldset>
-                    <div class="space-y-5">
-                        <div class="relative flex items-start">
-                            <span class="mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                            <div class="flex h-6 items-center">
-                                @Html.CheckBox("D1a.OTHSYN", Model.D1a.OTHSYN, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"D1a.OTHSYNX\" ]" })
-                            </div>
-                            <div class="ml-3 text-sm leading-6">
-                                <label for="D1a_OTHSYN" class="font-medium text-gray-900"><span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">1</span></label>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50">
-            <td colspan="6">
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.OTHSYNX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHSYNX)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHSYNX"></p>
-                        <input asp-for="@Model.D1a.OTHSYNX" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.OTHSYNX"></span>
-                        <submission-error location="OTHSYNX" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
