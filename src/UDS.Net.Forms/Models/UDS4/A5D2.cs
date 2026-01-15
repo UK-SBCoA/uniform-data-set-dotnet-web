@@ -243,7 +243,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? DIABETES { get; set; }
-        [Display(Name = "Diabetes type")]
+        [Display(Name = "Which type?")]
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         public int? DIABTYPE { get; set; }
@@ -403,7 +403,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? COVID19 { get; set; }
-        [Display(Name = "COVID-19 infection requiring hospitalization?")]
+        [Display(Name = "Requiring hospitalization?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredIfRange(nameof(COVID19), 1, 2, ErrorMessage = "Please specify.")]
         public int? COVIDHOSP { get; set; }
@@ -415,7 +415,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? KIDNEY { get; set; }
-        [Display(Name = "Age at chronic kidney disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(KIDNEY), 1, 2, ErrorMessage = "Please specify.")]
         public int? KIDNEYAGE { get; set; }
@@ -423,7 +423,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? LIVER { get; set; }
-        [Display(Name = "Age at liver disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(LIVER), 1, 2, ErrorMessage = "Please specify.")]
         public int? LIVERAGE { get; set; }
@@ -431,7 +431,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PVD { get; set; }
-        [Display(Name = "Age at peripheral vascular disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(PVD), 1, 2, ErrorMessage = "Please specify.")]
         public int? PVDAGE { get; set; }

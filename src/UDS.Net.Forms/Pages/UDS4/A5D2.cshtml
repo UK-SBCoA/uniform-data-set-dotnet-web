@@ -34,16 +34,7 @@
                         <div class="@rowCSS">
                             <label asp-for="A5D2.SMOKYRS">
                                 <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS)
-                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                {
                                     <span class="font-bold">(99 = Unknown)</span>
-                                }
-                                else
-                                {
-                                    <span class="font-bold">
-                                        (777 = years provided at previous UDS visit, 99 = Unknown)
-                                    </span>
-                                }
                             </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SMOKYRS"></p>
@@ -73,17 +64,10 @@
                         <div class="@rowCSS">
                             <label asp-for="A5D2.QUITSMOK">
                                 <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)
-                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                {
-                                    <span class="font-bold">(888 = N/A, 999 = unknown)</span>
-                                }
 
-                                else
-                                {
-                                    <span class="font-bold">
-                                        (777 = age provided at previous UDS visit, 888 = N/A, 999 = unknown)
-                                    </span>
-                                }
+                                    <span class="font-bold">(888 = N/A, 999 = unknown)</span>
+                                
+
                             </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.QUITSMOK"></p>
@@ -257,17 +241,8 @@
                                             </div>
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.HRTATTAGE">
-                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                    <san class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTAGE)
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTATTAGE"></p>
@@ -294,16 +269,9 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.CARDARRAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CARDARRAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                  
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CARDARRAGE"></p>
@@ -348,16 +316,9 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.BYPASSAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BYPASSAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                  
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BYPASSAGE"></p>
@@ -384,16 +345,11 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.PACDEFAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PACDEFAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                   
+                                                    
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+                                                    
+
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PACDEFAGE"></p>
@@ -429,16 +385,11 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.VALVEAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.VALVEAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                   
+                                                    
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+                                                    
+
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.VALVEAGE"></p>
@@ -519,16 +470,11 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.STROKAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
+                                                   
+                                                    
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+                                                    
+
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.STROKAGE"></p>
@@ -576,16 +522,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.CAROTIDAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CAROTIDAGE)</br>
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CAROTIDAGE"></p>
@@ -621,16 +558,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.TIAAGE">
                                                     <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.TIAAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.TIAAGE"></p>
@@ -677,17 +605,8 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.PDAGE">
                                                     <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
+                                                    
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PDAGE"></p>
@@ -714,16 +633,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.PDOTHRAGE">
                                                     <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDOTHRAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PDOTHRAGE"></p>
@@ -777,16 +687,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.SEIZAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SEIZAGE"></p>
@@ -971,16 +872,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.IMPYEARS">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.IMPYEARS)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.IMPYEARS"></p>
@@ -1049,16 +941,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.FIRSTTBI">
                                                 <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.FIRSTTBI)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.FIRSTTBI"></p>
@@ -1074,16 +957,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.LASTTBI">
                                                 <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LASTTBI)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.LASTTBI"></p>
@@ -1237,16 +1111,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.DIABAGE">
                                                 <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.DIABAGE"></p>
@@ -1271,16 +1136,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HYPERTAGE">
                                                 <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERTAGE"></p>
@@ -1305,16 +1161,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HYPERCHAGE">
                                                 <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERCHAGE"></p>
@@ -1580,16 +1427,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.OTHSLEEX">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEX)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHSLEEX"></p>
@@ -1904,16 +1742,7 @@
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                                 <label asp-for="A5D2.CANCERAGE">
                                                     <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERAGE)
-                                                    @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                    {
                                                         <span class="font-bold">(999 = unknown)</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="font-bold">
-                                                            (777 = age provided at previous UDS visit, 999 = unknown)
-                                                        </span>
-                                                    }
                                                 </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CANCERAGE"></p>
@@ -1972,16 +1801,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.KIDNEYAGE">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.KIDNEYAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.KIDNEYAGE"></p>
@@ -2006,16 +1826,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.LIVERAGE">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVERAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.LIVERAGE"></p>
@@ -2040,16 +1851,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.PVDAGE">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PVDAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PVDAGE"></p>
@@ -2074,16 +1876,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HIVAGE">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HIVAGE)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HIVAGE"></p>
@@ -2108,16 +1901,7 @@
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.OTHCONDX">
                                                 <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCONDX)
-                                                @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                                {
                                                     <span class="font-bold">(999 = unknown)</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="font-bold">
-                                                        (777 = age provided at previous UDS visit, 999 = unknown)
-                                                    </span>
-                                                }
                                             </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHCONDX"></p>
@@ -2376,7 +2160,7 @@
                             }
                             else
                             {
-                                <p class="font-bold">(777 = age provided at previous UDS visit, 888 = Never had a menstrual period, 999 = Unknown)</p>
+                                <p class="font-bold">(888 = Never had a menstrual period, 999 = Unknown)</p>
                                 <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7c)</p>
                             }
                         </label>
@@ -2397,7 +2181,7 @@
                             <span class="counter invisible"></span>
 
                             <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
-                            <p class="font-bold">(777= age provided at previous UDS visit, 888 = Still menstrauting, 999 = Unknown)</p>
+                            <p class="font-bold">(888 = Still menstrauting, 999 = Unknown)</p>
                             <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7c)</p>
                         </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -2554,7 +2338,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.HRT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRT)</br>
                         @if(Model.BaseForm.PacketKind == PacketKind.F)
-                        {                        
+                        {
                             <span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 7d)</span>
                         }
                         else
@@ -2574,16 +2358,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.HRTYEARS">
                         <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTYEARS)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.I)
-                        {
                             <span class="font-bold">(999 = unknown)</span>
-                        }
-                        else
-                        {
-                            <span class="font-bold">
-                                (777 = age provided at previous UDS visit, 999 = unknown)
-                            </span>
-                        }
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTYEARS"></p>
@@ -2595,16 +2370,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.HRTSTRTAGE">
                         <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTSTRTAGE)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.I)
-                        {
                             <span class="font-bold">(999 = unknown)</span>
-                        }
-                        else
-                        {
-                            <span class="font-bold">
-                                (777 = age provided at previous UDS visit, 999 = unknown)
-                            </span>
-                        }
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTSTRTAGE"></p>
@@ -2615,14 +2381,7 @@
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.HRTENDAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTENDAGE)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.F)
-                        {
-                            <span class="font-bold">(777 = age provided at previous UDS visit, 888 = Still presently using, 999 = Unknown)</span>
-                        }
-                        else
-                        {
-                        <span class="font-bold">(888 = Still presently using, 999 = Unknown)</span>
-                        }
+                            <span class="font-bold">(888 = Still presently using, 999 = Unknown)</span>
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTENDAGE"></p>
@@ -2647,16 +2406,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.BCPILLSYR">
                         <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCPILLSYR)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.I)
-                        {
                             <span class="font-bold">(999 = unknown)</span>
-                        }
-                        else
-                        {
-                            <span class="font-bold">
-                                (777 = age provided at previous UDS visit, 999 = unknown)
-                            </span>
-                        }
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCPILLSYR"></p>
@@ -2668,16 +2418,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.BCSTARTAGE">
                         <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCSTARTAGE)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.I)
-                        {
                             <span class="font-bold">(999 = unknown)</span>
-                        }
-                        else
-                        {
-                            <span class="font-bold">
-                                (777 = age provided at previous UDS visit, 999 = unknown)
-                            </span>
-                        }
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCSTARTAGE"></p>
@@ -2689,16 +2430,7 @@
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                     <label asp-for="A5D2.BCENDAGE">
                         <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCENDAGE)</br>
-                        @if (Model.BaseForm.PacketKind == PacketKind.I)
-                        {
                             <span class="font-bold">(999 = unknown)</span>
-                        }
-                        else
-                        {
-                            <span class="font-bold">
-                                (777 = age provided at previous UDS visit, 999 = unknown)
-                            </span>
-                        }
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCENDAGE"></p>
