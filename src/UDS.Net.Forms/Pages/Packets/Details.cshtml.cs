@@ -14,12 +14,12 @@ namespace UDS.Net.Forms.Pages.Packets
         {
         }
 
-        public async Task<IActionResult> OnGetFormPropValueAsync(int packetId, string formKind, string location)
+        public async Task<IActionResult> OnGetFormPropValueAsync(int packetId, string formKind = "Form", string location = "Question")
         {
             //Set failure route message as default value
-            string? propValueString = $"Unable to get current value from: {(string.IsNullOrEmpty(location) ? "Property" : location)} in {(string.IsNullOrEmpty(formKind) ? "Form" : formKind)}";
+            string? propValueString = $"Unable to get current value from: {location} in {formKind}";
 
-            if (packetId > 0 && !string.IsNullOrEmpty(formKind) && !string.IsNullOrEmpty(location))
+            if (packetId > 0)
             {
                 var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
