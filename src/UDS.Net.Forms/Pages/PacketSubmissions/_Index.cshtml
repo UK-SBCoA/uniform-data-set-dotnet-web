@@ -3,6 +3,10 @@
     var allErrors = Model.PacketSubmissions
         .SelectMany(s => s.Errors)
         .ToList();
+
+    int pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).Count();
+    int resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).Count();
+    int ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).Count();
 }
 <turbo-frame id="PacketSubmissions">
     @if (Model.Participation != null && Model.PacketSubmissions != null)
@@ -143,7 +147,7 @@
             </div>
             @if (allErrors.Any())
             {
-                <div class="mt-12">
+                <div class="mt-12" data-controller="packetSubmission">
                     <div class="flex items-center justify-between mb-6">
                         <div>
                             <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
@@ -163,9 +167,20 @@
                             </p>
                         </div>
 
-                        <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm">
-                            @allErrors.Count() Issues
-                        </span>
+                        <div>
+                            <span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="unresolved" data-packetSubmission-target="unresolvedButton">
+                                @pendingCount Unresolved
+                            </span>
+                            <span class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="resolved" data-packetSubmission-target="resolvedButton">
+                                @resolvedCount Resolved
+                            </span>
+                            <span class="inline-flex items-center rounded-full bg-yellow-100 px-3 py-1 text-sm font-medium text-yellow-800 shadow-sm" data-action="click->packetSubmission#FilterError" 
+                                data-packetSubmission-status-param="ignored" data-packetSubmission-target="ignoredButton">
+                                @ignoredCount Ignored
+                            </span>
+                        </div>
                     </div>
 
                     <div class="overflow-x-auto rounded-2xl border border-red-200 bg-white shadow-lg">
@@ -174,54 +189,88 @@
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Assigned To</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Previous Value</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Current Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Resolved By</th>
-                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
                                 @foreach (var error in allErrors)
                                 {
-                                    <tr class="hover:bg-red-50 transition">
+                                    <tr class="hover:bg-red-50 transition hidden" data-packetSubmission-target="row" data-status="@error.Status.ToString().ToLower()">
                                         <td class="px-4 py-2">
                                             @{
                                                 var pagePath = $"/UDS4/{error.FormKind}";
                                             }
-                                        <a asp-page="@pagePath"
-                                           asp-route-id="@Model.Id"
-                                           asp-route-packetKind="@Model.PACKET.ToString()"
-                                           class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            @error.FormKind
-                                        </a>
-                                    </td>
-                                    <td class="px-4 py-2 text-gray-700">@error.Message</td>
-                                    <td class="px-4 py-2 text-gray-700">@error.AssignedTo</td>
-                                    <td class="px-4 py-2">
-                                        <span class="
-                            inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                            @(error.Level == PacketSubmissionErrorLevel.Critical || error.Level == PacketSubmissionErrorLevel.Error
-                                                                      ? "bg-red-100 text-red-800"
-                                                                      : "bg-yellow-100 text-yellow-800")">
-                                    @error.Level
-                                </span>
-                            </td>
-                            <td class="px-4 py-2 text-gray-700">
-                                @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            <a asp-page="@pagePath"
+                                               asp-route-id="@Model.Id"
+                                               asp-route-packetKind="@Model.PACKET.ToString()"
+                                               target="_blank"
+                                               class="font-medium text-indigo-600 hover:text-indigo-500">
+                                                @error.FormKind - @error.Location
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-2 text-gray-700">@error.Message</td>
+                                        <td class="px-4 py-2">
+                                            @if (error.Value != null)
                                             {
-                                                @error.StatusChangedBy
-                                            }
-                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
-                                            {
-                                                <span class="text-yellow-600 font-semibold">Ignored by @error.StatusChangedBy</span>
+                                                <span>@error.Value</span>
                                             }
                                             else
                                             {
-                                                <span>Unresolved</span>
+                                                <span>--</span>
                                             }
                                         </td>
-                                        <td class="px-4 py-2 text-gray-700">
-                                            @error.Location
+                                        <td class="px-4 py-2">
+                                            <turbo-frame id="formPropValue" loading="lazy" src="@Url.Page("/Packets/Details", "FormPropValue", new { packetId = Model.Id, formKind = error.FormKind, location = error.Location })">
+                                                <span>Loading value</span>
+                                            </turbo-frame>
+                                        </td>
+                                        <td class="px-4 py-2">
+                                            @{ string errorLevelStyle = string.Empty; }
+
+                                            @if(error.Level == PacketSubmissionErrorLevel.Error)
+                                            {
+                                                errorLevelStyle = "bg-red-100 text-red-800";
+                                            }
+                                            else if (error.Level == PacketSubmissionErrorLevel.Information)
+                                            {
+                                                errorLevelStyle = "bg-yellow-100 text-yellow-800";
+                                            }
+
+                                            <span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium @errorLevelStyle">
+                                                @error.Level
+                                            </span>
+                                        </td>
+                                        <td class="flex flex-col px-4 py-2">
+                                            @if (error.Status == PacketSubmissionErrorStatus.Resolved)
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-green-800">
+                                                    Resolved
+                                                </span>
+                                                <span>Resolved By: @error.StatusChangedBy</span>
+                                            }
+                                            else if (error.Status == PacketSubmissionErrorStatus.Ignored)
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-yellow-800">
+                                                    Ignored
+                                                </span>
+                                                <span>Ignored By: @error.StatusChangedBy</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="inline-flex items-center text-sm font-medium text-red-800">
+                                                    Unresolved
+                                                </span>
+                                                <span>Assigned To: @error.AssignedTo</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <span>
+                                                @error.CreatedAt
+                                            </span>
                                         </td>
                                     </tr>
                                 }

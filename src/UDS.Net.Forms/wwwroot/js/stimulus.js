@@ -18,6 +18,7 @@ import checkboxButton from "./js_controllers/checkboxButton_controller.js"
 import pageRefreshOnSubmit from "./js_controllers/pageRefreshOnSubmit_controller.js"
 import A3EnableRows from "./js_controllers/a3_enable_rows_controller.js"
 import A3EnableIntraRow from "./js_controllers/a3_enable_intra_row_controller.js"
+import packetSubmission from "./js_controllers/packetSubmission_controller.js"
 import c2 from "./js_controllers/c2_controller.js"
 
 const application = Application.start()
@@ -41,3 +42,4 @@ application.register("pageRefreshOnSubmit", pageRefreshOnSubmit)
 application.register("a3-enable-rows", A3EnableRows)
 application.register("a3-enable-intra-row", A3EnableIntraRow)
 application.register("c2", c2)
+application.register("packetSubmission", packetSubmission)
