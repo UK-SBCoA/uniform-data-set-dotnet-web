@@ -12,7 +12,7 @@
 </div>
 <div data-controller="b4">
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div class="@rowCSS">
             <h2>SECTION 1: CDR DEMENTIA STAGING INSTRUMENT<sup>1</sup></h2>
         </div>
 
@@ -32,101 +32,333 @@
                 </tr>
             </thead>
             <tbody class="subcounterreset">
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.MEMORY"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.MEMORY)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.MEMORY"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.MEMORY"></span>
+                <tr class="[&_td]:align-top">
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Memory
+                            <p class="mt-1 text-sm text-gray-400">B4.MEMORY</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="MEMORY-description"></p>
+                        <span class="mt-2 text-sm text-red-600 field-validation-valid block"
+                              asp-validation-for="B4.MEMORY"></span>
                         <submission-error location="MEMORY" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No memory loss, or slight inconsistent forgetfulness</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Consistent slight forgetfulness; partial recollection of events; "benign" forgetfulness</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate memory loss, more marked for recent events; defect interferes with everyday activities</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only highly learned material retained; new material rapidly lost</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe memory loss; only fragments remain</td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500 mb-3">
+                                No memory loss, or slight inconsistent forgetfulness
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500 mb-3">
+                                Consistent slight forgetfulness; partial recollection of events; "benign" forgetfulness
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+
+                            <p class="text-sm text-gray-500 mb-3">
+                                Moderate memory loss, more marked for recent events; defect interferes with everyday activities
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500 mb-3">
+                                Severe memory loss; only highly learned material retained; new material rapidly lost
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500 mb-3">
+                                Severe memory loss; only fragments remain
+                            </p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems" data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+       <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.MEMORY)" for="@Model.B4.MEMORY" items="Model.ImpairmentListItems" data-b4-target="MEMORY" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>                    
+       </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.ORIENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.ORIENT)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.ORIENT"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.ORIENT"></span>
+                <tr class="[&_td]:align-top">
+
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Orientation
+                            <p class="mt-1 text-sm text-gray-400">B4.ORIENT</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="ORIENT-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              asp-validation-for="B4.ORIENT"
+                              data-valmsg-replace="true"></span>
                         <submission-error location="ORIENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Fully oriented except for slight difficulty with time relationships</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty with time relationships; oriented for place at examination; may have geographic disorientation elsewhere</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe difficulty with time relationships; usually disoriented to time, often to place</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Oriented to person only</td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Fully oriented</p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Fully oriented except for slight difficulty with time relationships
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+
+                            <p class="text-sm text-gray-500">
+                                Moderate difficulty with time relationships; oriented for place at examination; may have geographic disorientation
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+
+                            <p class="text-sm text-gray-500">
+                                Severe difficulty with time relationships; usually disoriented to time, often to place
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Oriented to person only</p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems" data-b4-target="ORIENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+                         <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.ORIENT)" for="@Model.B4.ORIENT" items="Model.ImpairmentListItems" data-b4-target="ORIENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                    </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.JUDGMENT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.JUDGMENT)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.JUDGMENT"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.JUDGMENT"></span>
+                <tr class="[&_td]:align-top">
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Judgment and problem solving
+                            <p class="mt-1 text-sm text-gray-400">B4.JUDGMENT</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="JUDGMENT-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              asp-validation-for="B4.JUDGMENT"></span>
                         <submission-error location="JUDGMENT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Solves everyday problems, handles business and financial affairs well; judgment good in relation to past performance</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in solving problems, similarities, and differences</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate difficulty in handling problems, similarities, and differences; social judgment usually maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severely impaired in handling problems, similarities, and differences; social judgment usually impaired</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to make judgments or solve problems</td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Solves everyday problems, handles business and financial affairs well; judgment good in relation to past performance
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Slight impairment in solving problems, similarities, and differences
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Moderate difficulty in handling problems, similarities, and differences; social judgment usually maintained
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Severely impaired in handling problems, similarities, and differences; social judgment usually impaired
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Unable to make judgments or solve problems
+                            </p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems" data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.JUDGMENT)" for="@Model.B4.JUDGMENT" items="Model.ImpairmentListItems" data-b4-target="JUDGMENT" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                    </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.COMMUN"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMMUN)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.COMMUN"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMMUN"></span>
+                <tr class="[&_td]:align-top">
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Community affairs
+                            <p class="mt-1 text-sm text-gray-400">B4.COMMUN</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="COMMUN-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              asp-validation-for="B4.COMMUN"></span>
                         <submission-error location="COMMUN" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Independent function at usual level in job, shopping, volunteer and social groups</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Slight impairment in these activities</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Unable to function independently at these activities, although may still be engaged in some; appears normal to casual inspection</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears well enough to be taken to functions outside the family home</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home</td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Independent function at usual level in job, shopping, volunteer and social groups</p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Slight impairment in these activities</p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Unable to function independently at these activities, although may still be engaged in some; appears normal to casual inspection</p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                No pretense of independent function outside the home; appears well enough to be taken to functions outside the family home
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                No pretense of independent function outside the home; appears too ill to be taken to functions outside the family home
+                            </p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems" data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+                          <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMMUN)" for="@Model.B4.COMMUN" items="Model.ImpairmentListItems" data-b4-target="COMMUN" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                    </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.HOMEHOBB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.HOMEHOBB)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.HOMEHOBB"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.HOMEHOBB"></span>
+                <tr class="[&_td]:align-top">
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Homes and hobbies
+                            <p class="mt-1 text-sm text-gray-400">B4.HOMEHOBB</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="HOMEHOBB-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              asp-validation-for="B4.HOMEHOBB"></span>
                         <submission-error location="HOMEHOBB" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests well maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Life at home, hobbies, and intellectual interests slightly impaired</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Mild but definite impairment of function at home; more difficult chores abandoned; more complicated hobbies and interests abandoned</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Only simple chores preserved; very restricted interests, poorly maintained</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No significant function in the home</td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Life at home, hobbies, and intellectual interests well maintained
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Life at home, hobbies, and intellectual interests slightly impaired
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Mild but definite impairment of function at home; more difficult chores abandoned; more complicated hobbies and interests abandoned
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Only simple chores preserved; very restricted interests, poorly maintained
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                No significant function in the home
+                            </p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems" data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.HOMEHOBB)" for="@Model.B4.HOMEHOBB" items="Model.ImpairmentListItems" data-b4-target="HOMEHOBB" data-action="change->b4#updateCDRSUM"></table-cell-radio-buttons>
+                    </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
-                        <label asp-for="B4.PERSCARE"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.PERSCARE)</label>
-                        <p class="text-sm text-gray-500" asp-description-for="B4.PERSCARE"></p>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.PERSCARE"></span>
+                <tr class="[&_td]:align-top">
+                    <td class="w-48 py-4 pr-4">
+                        <label class="text-base font-semibold text-gray-900">
+                            <span class="counter"></span> Personal care
+                            <p class="mt-1 text-sm text-gray-400">B4.PERSCARE</p>
+                        </label>
+                        <p class="mt-2 text-sm text-gray-500" id="PERSCARE-description"></p>
+                        <span class="mt-2 block text-sm text-red-600 field-validation-valid"
+                              asp-validation-for="B4.PERSCARE"></span>
                         <submission-error location="PERSCARE" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td colspan="2" class="mt-1 p-2 text-sm text-gray-500">Fully capable of self-care</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Needs prompting</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Requires assistance in dressing, hygiene, keeping of personal effects</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Requires much help with personal care; frequent incontinence</td>
-                </tr>
 
-                <tr>
-                    @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
+                    <td colspan="2" class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Fully capable of self-care
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Needs prompting
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Requires assistance in dressing, hygiene, keeping of personal effects
+                            </p>
+                        </div>
+                    </td>
+
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">
+                                Requires much help with personal care; frequent incontinence
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                    <td></td>
+                                        @for (int i = 0; i < Model.ImpairmentSimpleListItems.Count; i++)
                     {
                         <td @(i == 0 ? "colspan=2" : "")>
                             <div class="relative flex items-start">
@@ -143,7 +375,7 @@
             </tbody>
         </table>
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div class="@rowCSS">
             <label asp-for="B4.CDRSUM"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRSUM)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRSUM"></p>
@@ -153,7 +385,7 @@
             </div>
         </div>
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div class="@rowCSS">
             <label asp-for="B4.CDRGLOB"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRGLOB)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.B4.CDRGLOB"></p>
@@ -168,7 +400,7 @@
             <p class="mt-1 p-2 text-sm text-gray-500 italic"><sup>1</sup>Morris, JC. The Clinical Dementia Rating (CDR): Current version and scoring rules. Neurology 43(11):2412–4, 1993. Copyright© Lippincott, Williams &amp; Wilkins. Reproduced by permission.</p>
         </div>
 
-        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div class="@rowCSS">
             <h2>SECTION 2: NACC FTLD BEHAVIOR & LANGUAGE DOMAINS</h2>
         </div>
 
@@ -187,38 +419,85 @@
                     }
                 </tr>
             </thead>
-            <tbody class="subcounterreset">
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
+            <tbody class=" subcounterreset">
+                <tr class="[&_td]:align-top">
+                    <td>
                         <label asp-for="B4.COMPORT"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.COMPORT)<sup>2</sup></label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.COMPORT"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.COMPORT"></span>
                         <submission-error location="COMPORT" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Socially appropriate behavior</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Questionable changes in comportment, empathy, appropriateness of actions</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Mild but definite changes in behavior</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate behavioral changes, affecting interpersonal relationships and interactions in a significant manner</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe behavioral changes, making interpersonal interactions all unidirectional</td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Socially appropriate behavior</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Questionable changes in comportment, empathy, appropriateness of actions</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Mild but definite changes in behavior</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Moderate behavioral changes, affecting interpersonal relationships and interactions in a significant manner</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Severe behavioral changes, making interpersonal interactions all unidirectional</p>
+                        </div>
+                    </td>
                 </tr>
-                <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMPORT)" for="@Model.B4.COMPORT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                <tr class="border-b border-gray-200">
+                    <td>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.COMPORT)" for="@Model.B4.COMPORT" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    </td>
                 </tr>
-                <tr class="divide-y divide-gray-200">
-                    <td rowspan="2">
+
+                <tr class="[&_td]:align-top">
+                    <td>
                         <label asp-for="B4.CDRLANG"><span class="counter"></span> @Html.DisplayNameFor(m => m.B4.CDRLANG)<sup>3</sup></label>
                         <p class="text-sm text-gray-500" asp-description-for="B4.CDRLANG"></p>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="B4.CDRLANG"></span>
                         <submission-error location="CDRLANG" errors="Model.BaseForm.UnresolvedErrors" />
                     </td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">No language difficulties, or occasional mild slip of the tongue</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Consistent mild word-finding difficulties; simplification of word choice; circumlocution; decreased phrase length; and/or mild comprehension difficulties</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate word-finding difficulty in speech; cannot name objects in environment; reduced phrase length and/or agrammatical speech and/or reduced comprehension in conversation and reading</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Moderate to severe impairment in either speech or comprehension; has difficulty communicating thoughts; writing may be slightly more effective</td>
-                    <td class="mt-1 p-2 text-sm text-gray-500">Severe comprehension deficits; no intelligible speech</td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">No language difficulties, or occasional mild slip of the tongue</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500 mb-3">
+                                Consistent mild word-finding difficulties; simplification of word choice; circumlocution; decreased phrase length; and/or mild comprehension difficulties
+                            </p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Moderate word-finding difficulty in speech; cannot name objects in environment; reduced phrase length and/or agrammatical speech and/or reduced comprehension in conversation and reading</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Moderate to severe impairment in either speech or comprehension; has difficulty communicating thoughts; writing may be slightly more effective</p>
+                        </div>
+                    </td>
+                    <td class="w-48 py-4 pr-4">
+                        <div class="flex flex-col h-full min-h-[8rem]">
+                            <p class="text-sm text-gray-500">Severe comprehension deficits; no intelligible speech</p>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.CDRLANG)" for="@Model.B4.CDRLANG" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    <td>
+                        <table-cell-radio-buttons id="@Html.IdFor(m => m.B4.CDRLANG)" for="@Model.B4.CDRLANG" items="Model.ImpairmentListItems"></table-cell-radio-buttons>
+                    </td>
                 </tr>
             </tbody>
         </table>
