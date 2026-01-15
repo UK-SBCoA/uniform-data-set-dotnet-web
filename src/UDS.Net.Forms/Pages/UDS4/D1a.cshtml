@@ -39,8 +39,7 @@
             <submission-error location="NORMCOG" errors="Model.BaseForm.UnresolvedErrors" />
         </div>
         <span class="italic text-gray-500">
-            Note: For those with longstanding cognitive impairment that does not represent a decline from their usual functioning, consider
-            checking <strong>Question 5b</strong> for a diagnosis of <strong>“Cognitively Impaired, Not MCI/dementia”</strong> .
+            Note: For those with longstanding cognitive impairment that does not represent a decline from their usual functioning, consider checking <strong>Question 5b</strong> for a diagnosis of <strong>“Cognitively Impaired, Not MCI/dementia”</strong> .
         </span>
     </div>
 </div>
@@ -184,12 +183,10 @@
         </p>
     </div>
     <p class="mt-2 text-sm text-gray-900">
-        The purpose of the “Cognitively impaired, not MCI/dementia” category is to capture those individuals with evidence of cognitive
-        impairment or decline who do not meet formal MCI criteria.
+        The purpose of the “Cognitively impaired, not MCI/dementia” category is to capture those individuals with evidence of cognitive impairment or decline who do not meet formal MCI criteria.
     </p>
     <p class="mt-2 text-sm text-gray-900">
-        <strong>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5</strong>, <i>using any relevant data</i>. Any conditions
-        contributing to impairment <i>(e.g., substance abuse or medications)</i> should be identified in Section 3.
+        <strong>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5</strong>, <i>using any relevant data</i>. Any conditions contributing to impairment <i>(e.g., substance abuse or medications)</i> should be identified in Section 3.
     </p>
     <i>(Note: If recent onset (not longstanding impairment), indicate the cognitive symptom(s) in Form B9 – Clinician Judgment of Symptoms.)</i>
 </div>
@@ -197,8 +194,7 @@
 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
         <label class="text-base font-semibold text-gray-900">
-            <span class="counter"></span>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5, using any relevant data. Any conditions
-            contributing to impairment (e.g., substance abuse or medications) should be identified in Section 3.
+            <span class="counter"></span>Check all applicable criteria for cognitively impaired, not MCI/dementia in Q5, using any relevant data. Any conditions contributing to impairment (e.g., substance abuse or medications) should be identified in Section 3.
         </label><br />
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -269,8 +265,7 @@
         <submission-error location="IMPNOMCICriteriaValidation" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
     <span class="text-gray-500 italic">
-        If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if <strong><u>only</u></strong> the third
-        MCI criteria is met in Q4, select 0=No for Q5b.
+        If any of the criteria in Q5 are met, or if only some of the MCI criteria from Q4 are met, choose 1=Yes for Q5b. Note, if <strong><u>only</u></strong> the third MCI criteria is met in Q4, select 0=No for Q5b.
     </span>
 </div>
 
@@ -283,27 +278,25 @@
                 Affected Domains – Dementia and MCI
             </p>
         </div>
+        <span class="counter invisible"></span>
         <p class="mt-2 text-sm text-gray-900">
-            <span class="counter invisible"></span>Choose domains that are impaired at the current visit. <u>Select one or more</u> as <strong>Impaired</strong>; all others will default to <strong>unimpaired</strong> in the
-            NACC database.
+            Choose domains that are impaired at the current visit based on clinical judgment informed by clinical history and neuropsychological testing. <u>Select one or more</u> as <strong>Impaired</strong>; all others will default to <strong>unimpaired</strong> in the NACC database.
         </p>
         <p class="mt-2 text-sm text-gray-900">
-            Note on <strong>behavior changes</strong>: For patients with <i>dementia</i> who have behavior changes, record the presence of behavioral changes here
-            (not in the following MBI section) by marking Q6f as <strong>Impaired</strong> and skipping the MBI section <strong>(SKIP TO Q8a)</strong>. For behavioral changes in
-            the context of an MCI (or as an isolated) symptom, consider a diagnosis of MBI in the next section.
+            Note on <strong>behavior changes:</strong> For patients with <i>dementia</i> who have behavior changes, record the presence of behavioral changes here (not in the following MBI section) by marking Q6f as <strong>Impaired</strong> and Q7 as <strong>0 = No.</strong> For behavioral changes in the context of an MCI (or as an isolated) symptom, consider a diagnosis of MBI in the next section.
         </p>
     </div>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.AffectedDomainsIndicated"></span>
     <submission-error location="AffectedDomainsIndicated" errors="Model.BaseForm.UnresolvedErrors" />
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
                 <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Impaired</th>
             </tr>
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMMEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMMEM)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMMEM"></p>
@@ -326,7 +319,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMLANG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMLANG)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMLANG"></p>
@@ -349,7 +342,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMATTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMATTN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMATTN"></p>
@@ -372,7 +365,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMEXEC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMEXEC)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMEXEC"></p>
@@ -395,7 +388,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMVISU"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMVISU)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMVISU"></p>
@@ -418,7 +411,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMBEH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMBEH)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMBEH"></p>
@@ -441,7 +434,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CDOMAPRAX"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CDOMAPRAX)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CDOMAPRAX"></p>
@@ -477,19 +470,16 @@
     <div class="p-4 bg-white rounded-lg">
         <ul class="list-disc pl-4">
             <li>
-                Participant, co-participant, or clinician identifies a change in the participant’s affect, motivation, thought content, behavior, or
-                personality that is clearly different from their usual affect, motivation, thought content, behavior, or personality
+                Participant, co-participant, or clinician identifies a change in the participant’s affect, motivation, thought content, behavior, or personality that is clearly different from their usual affect, motivation, thought content, behavior, or personality
             </li>
             <li>Symptoms have been present at least intermittently for the last six months or longer</li>
             <li>Late onset (i.e., age > ~50, unless early onset neurodegenerative syndrome is suspected)</li>
             <li>
-                Not explained by delirium, other psychiatric disorder by DSM criteria (including recent onset, longstanding or recurrence of
-                longstanding disorder).
+                Not explained by delirium, other psychiatric disorder by DSM criteria (including recent onset, longstanding or recurrence of longstanding disorder).
             </li>
             <li>Symptoms interfere with at least one of these: work, interpersonal relationships, social activities</li>
             <li>
-                Largely preserved independence in other functional abilities (no change from prior manner/level of functioning, or uses
-                minimal aids or assistance)
+                Largely preserved independence in other functional abilities (no change from prior manner/level of functioning, or uses minimal aids or assistance)
             </li>
         </ul>
     </div>
@@ -507,7 +497,7 @@
 
 <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
     <thead>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
             @foreach (var item in Model.SimpleNoYesListItems)
             {
@@ -516,16 +506,15 @@
         </tr>
     </thead>
     <tbody class="subcounterreset divide-y divide-gray-200">
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <span>
                 <strong>MBI affected domains</strong> — Select one or more affected domains
             </span>
             <span class="italic text-gray-500">
-                (Note: If “Yes” is indicated in any domain below, the participant should have a corresponding symptom checked on Form B9 — Clinician Judgment
-                of Symptoms, either from among the specific symptoms denoted there, or in “other”)
+                (Note: If “Yes” is indicated in any domain below, the participant should have a corresponding symptom checked on Form B9 — Clinician Judgment of Symptoms, either from among the specific symptoms denoted there, or in “other”)
             </span>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BDOMMOT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.BDOMMOT)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BDOMMOT"></p>
@@ -534,7 +523,7 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.BDOMMOT)" for="@Model.D1a.BDOMMOT" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BDOMAFREG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.BDOMAFREG)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BDOMAFREG"></p>
@@ -543,7 +532,7 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.BDOMAFREG)" for="@Model.D1a.BDOMAFREG" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BDOMIMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.BDOMIMP)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BDOMIMP"></p>
@@ -552,7 +541,7 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.BDOMIMP)" for="@Model.D1a.BDOMIMP" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BDOMSOCIAL"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.BDOMSOCIAL)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BDOMSOCIAL"></p>
@@ -561,7 +550,7 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.BDOMSOCIAL)" for="@Model.D1a.BDOMSOCIAL" items="Model.SimpleNoYesListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BDOMTHTS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.BDOMTHTS)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BDOMTHTS"></p>
@@ -582,19 +571,14 @@
         </p>
     </div>
     <p class="mt-2 text-sm text-gray-900">
-        <strong>The purpose of Section 2 is to assign a clinical syndrome</strong> to participants with dementia and, when appropriate MCI or MBI,
-        using all available clinical, exam, and neuropsychiatric data. This should be done using clinical information and cognitive/
-        neuropsychological testing, <strong>ideally without reference to biomarker data</strong> (which is incorporated into the Etiological Diagnoses
-        section in Form D1b). This is not always possible and thus Q9 allows centers to record when biomarker data is known and may have
-        influenced the clinical diagnosis.
+        <strong>The purpose of Section 2 is to assign a clinical syndrome</strong> to participants with dementia and, when appropriate MCI or MBI, using all available clinical, exam, and neuropsychiatric data. This should be done using clinical information and cognitive/ neuropsychological testing, <strong>ideally without reference to biomarker data</strong> (which is incorporated into the Etiological Diagnoses section in Form D1b). This is not always possible and thus Q9 allows centers to record when biomarker data is known and may have influenced the clinical diagnosis.
     </p>
 </div>
 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
         <label asp-for="D1a.PREDOMSYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.PREDOMSYN)</label>
         <p class="text-sm italic text-gray-500">
-            Note that the participant may not meet any clinical criteria or may not have a predominant syndrome
-            (for instance, this is common for MCI and “impaired, not MCI”). In this case, select “No.”
+            Note that the participant may not meet any clinical criteria or may not have a predominant syndrome (for instance, this is common for MCI and “impaired, not MCI”). In this case, select “No.”
         </p>
     </div>
     <div class="mt-4 sm:col-span-2 sm:mt-0">
@@ -609,15 +593,16 @@
     </p>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PREDOMSYNSyndromePresent"></span>
     <submission-error location="PREDOMSYNSyndromePresent" errors="Model.BaseForm.UnresolvedErrors" />
+
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
-                <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Dementia syndrome</th>
+            <tr class="odd:bg-white even:bg-gray-50">
+                <th></th>
                 <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
             </tr>
         </thead>
         <tbody class="subcounterreset divide-y divide-gray-200">
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.AMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.AMNDEM)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.AMNDEM"></p>
@@ -640,7 +625,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.DYEXECSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.DYEXECSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.DYEXECSYN"></p>
@@ -663,7 +648,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.PCA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PCA)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.PCA"></p>
@@ -686,7 +671,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.PPASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.PPASYN"></p>
@@ -709,7 +694,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td colspan="2">
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="D1a.PPASYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PPASYNT)</label>
@@ -722,7 +707,7 @@
                     </div>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.FTDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.FTDSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.FTDSYN"></p>
@@ -745,7 +730,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.LBDSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.LBDSYN"></p>
@@ -768,7 +753,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td colspan="2">
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="D1a.LBDSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.LBDSYNT)</label>
@@ -781,7 +766,7 @@
                     </div>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.NAMNDEM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.NAMNDEM)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.NAMNDEM"></p>
@@ -804,7 +789,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.PSPSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.PSPSYN"></p>
@@ -827,7 +812,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td colspan="2">
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="D1a.PSPSYNT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.D1a.PSPSYNT)</label>
@@ -840,7 +825,7 @@
                     </div>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CTESYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CTESYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CTESYN"></p>
@@ -863,7 +848,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.CBSSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.CBSSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.CBSSYN"></p>
@@ -886,7 +871,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.MSASYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.MSASYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.MSASYN"></p>
@@ -909,7 +894,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td colspan="2">
                     <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="D1a.MSASYNT"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.MSASYNT)</label>
@@ -922,7 +907,7 @@
                     </div>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.OTHSYN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.OTHSYN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.OTHSYN"></p>
@@ -945,7 +930,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td colspan="6">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label asp-for="D1a.OTHSYNX"><span class="subsubcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHSYNX)</label>
@@ -961,11 +946,10 @@
         </tbody>
     </table>
 </div>
-
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
         <thead>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label>
                         <span class="counter"></span>Indicate the source(s) of information used to assign the clinical syndrome:
@@ -977,13 +961,13 @@
                     </div>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
                 <th class="w-8 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Yes</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.SYNINFCLIN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCLIN)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCLIN"></p>
@@ -1006,7 +990,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.SYNINFCTST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFCTST)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFCTST"></p>
@@ -1029,7 +1013,7 @@
                     </fieldset>
                 </td>
             </tr>
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
+            <tr class="odd:bg-white even:bg-gray-50">
                 <td>
                     <label asp-for="D1a.SYNINFBIOM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.D1a.SYNINFBIOM)</label>
                     <p class="text-sm text-gray-500" asp-description-for="D1a.SYNINFBIOM"></p>
@@ -1066,26 +1050,23 @@
         </p>
     </div>
     <p class="mt-2 text-sm text-gray-900">
-        The purpose of Section 3 is to identify conditions or disorders that are present and potentially contributing to the clinical syndrome.
-        This must be filled out for those with cognitive or behavioral impairment (i.e., MCI, MBI, dementia, etc.) Indicate whether a given
-        condition is a primary, contributing, or non-contributing cause of the observed impairment, based on the clinician’s best judgment.
+        The purpose of Section 3 is to identify conditions or disorders that are present and potentially contributing to the clinical syndrome. This must be filled out for those with cognitive or behavioral impairment (i.e., MCI, MBI, dementia, etc.) Indicate whether a given condition is a primary, contributing, or non-contributing cause of the observed impairment, based on the clinician’s best judgment.
     </p>
     <p class="mt-2 text-sm text-gray-900">
         Select one or more syndrome(s) as <strong>Present</strong>; all others will default to <strong>Absent</strong> in the NACC database. <i>Only one diagnosis should be selected as </i> <strong>1 = Primary</strong>.
     </p>
     <p class="mt-2 text-sm text-gray-900">
-        *In order to diagnose a disorder, <strong>DSM-5-TR criteria require</strong> that symptoms cause clinically significant distress or impairment in
-        social, occupational, or other important areas of functioning. For more guidance see the <strong>UDS Coding Guidebook, Form D1a.</strong>
+        *In order to diagnose a disorder, <strong>DSM-5-TR criteria require</strong> that symptoms cause clinically significant distress or impairment in social, occupational, or other important areas of functioning. For more guidance see the <strong>UDS Coding Guidebook, Form D1a.</strong>
     </p>
     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PrimaryDiagnosesIndicated"></span>
     <submission-error location="PrimaryDiagnosesIndicated" errors="Model.BaseForm.UnresolvedErrors" />
     @*     <span class="mt-2 text-sm text-red-600" asp-validation-for="D1a.PresentSyndromeIndicated"></span>
-<submission-error location="PresentSyndromeIndicated" errors="Model.BaseForm.UnresolvedErrors" /> *@
+    <submission-error location="PresentSyndromeIndicated" errors="Model.BaseForm.UnresolvedErrors" /> *@
 </div>
 
 <table class="ml-2 table-auto min-w-full divide-y divide-gray-300">
     <thead>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="odd:bg-white even:bg-gray-50">
             <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Condition</th>
             <th class="w-24 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Present</th>
             <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"></th>
@@ -1096,7 +1077,7 @@
         </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
-        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.MAJDEPDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.MAJDEPDX)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.MAJDEPDX"></p>
@@ -1148,7 +1129,7 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.OTHDEPDIF)" for="@Model.D1a.OTHDEPDIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.BIPOLDX"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.BIPOLDX)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.BIPOLDX"></p>
@@ -1406,11 +1387,14 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.OTHPSYIF)" for="@Model.D1a.OTHPSYIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.OTHPSYX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHPSYX)</label>
+                    <label asp-for="D1a.OTHPSYX">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.OTHPSYX)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHPSYX"></p>
                         <input asp-for="@Model.D1a.OTHPSYX" />
@@ -1529,10 +1513,14 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.NEOPIF)" for="@Model.D1a.NEOPIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="2">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.NEOPSTAT"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.NEOPSTAT)</label>
+                    <label asp-for="D1a.NEOPSTAT">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.NEOPSTAT)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.NEOPSTAT"></p>
                         <radio-button-group id="@Html.IdFor(m => m.D1a.NEOPSTAT)" for="@Model.D1a.NEOPSTAT" items="Model.NEOPSTATListItems"></radio-button-group>
@@ -1651,10 +1639,14 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.OTHCILLIF)" for="@Model.D1a.OTHCILLIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="D1a.OTHCOGILLX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.OTHCOGILLX)</label>
+                    <label asp-for="D1a.OTHCOGILLX">
+                        <span class="subcounter invisible"></span>
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.D1a.OTHCOGILLX)
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.OTHCOGILLX"></p>
                         <input asp-for="@Model.D1a.OTHCOGILLX" />
@@ -1773,11 +1765,15 @@
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTHIF)" for="@Model.D1a.COGOTHIF" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
 
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTHX"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.COGOTHX)</label>
+                        <label asp-for="D1a.COGOTHX">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTHX)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTHX"></p>
                             <input asp-for="@Model.D1a.COGOTHX" />
@@ -1815,11 +1811,15 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTH2F)" for="@Model.D1a.COGOTH2F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTH2X"><span class="subcounter"></span@Html.DisplayNameFor(m => m.D1a.COGOTH2X)</label>
+                        <label asp-for="D1a.COGOTH2X">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTH2X)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTH2X"></p>
                             <input asp-for="@Model.D1a.COGOTH2X" />
@@ -1830,7 +1830,7 @@
                 </div>
             </td>
         </tr>
-        <tr class="subcounterreset odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50">
             <td>
                 <label asp-for="D1a.COGOTH3"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1a.COGOTH3)</label>
                 <p class="text-sm text-gray-500" asp-description-for="D1a.COGOTH3"></p>
@@ -1856,11 +1856,15 @@
             </td>
             <table-cell-radio-buttons id="@Html.IdFor(m => m.D1a.COGOTH3F)" for="@Model.D1a.COGOTH3F" items="Model.EtiologyListItems"></table-cell-radio-buttons>
         </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b">
+        <tr class="subcounterreset odd:bg-white even:bg-gray-50">
             <td colspan="6">
                 <div class="ml-2">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label asp-for="D1a.COGOTH3X"><span class="subcounter"></span>@Html.DisplayNameFor(m => m.D1a.COGOTH3X)</label>
+                        <label asp-for="D1a.COGOTH3X">
+                            <span class="subcounter invisible"></span>
+                            <span class="subcounter"></span>
+                            @Html.DisplayNameFor(m => m.D1a.COGOTH3X)
+                        </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.D1a.COGOTH3X"></p>
                             <input asp-for="@Model.D1a.COGOTH3X" />
