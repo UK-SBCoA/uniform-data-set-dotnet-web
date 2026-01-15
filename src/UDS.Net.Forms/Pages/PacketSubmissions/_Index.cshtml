@@ -224,7 +224,7 @@
                                             }
                                         </td>
                                         <td class="px-4 py-2">
-                                            <turbo-frame id="formPropValue" loading="lazy" src="@Url.Page("Details", "FormPropValue", new { packetId = Model.Id, formKind = error.FormKind, location = error.Location })">
+                                            <turbo-frame id="formPropValue" loading="lazy" src="@Url.Page("/Packets/Details", "FormPropValue", new { packetId = Model.Id, formKind = error.FormKind, location = error.Location })">
                                                 <span>Loading value</span>
                                             </turbo-frame>
                                         </td>
