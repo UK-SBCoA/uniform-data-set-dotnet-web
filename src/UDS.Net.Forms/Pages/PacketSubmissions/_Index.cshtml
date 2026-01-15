@@ -4,9 +4,9 @@
         .SelectMany(s => s.Errors)
         .ToList();
 
-    int pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).ToList().Count();
-    int resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).ToList().Count();
-    int ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).ToList().Count();
+    int pendingCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Pending).Count();
+    int resolvedCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Resolved).Count();
+    int ignoredCount = allErrors.Where(s => s.Status == PacketSubmissionErrorStatus.Ignored).Count();
 }
 <turbo-frame id="PacketSubmissions">
     @if (Model.Participation != null && Model.PacketSubmissions != null)

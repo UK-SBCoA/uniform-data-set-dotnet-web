@@ -16,30 +16,33 @@ namespace UDS.Net.Forms.Pages.Packets
 
         public async Task<IActionResult> OnGetFormPropValueAsync(int packetId, string formKind, string location)
         {
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
+            //Set failure route message as default value
+            string? propValueString = $"Unable to get current value from: {(string.IsNullOrEmpty(location) ? "Property" : location)} in {(string.IsNullOrEmpty(formKind) ? "Form" : formKind)}";
 
-            string? propValue = "--";
-
-            if (packet != null)
+            if (packetId > 0 && !string.IsNullOrEmpty(formKind) && !string.IsNullOrEmpty(location))
             {
-                var packetForm = packet.Forms.Where(f => f.Kind.ToLower() == formKind.ToLower()).FirstOrDefault();
+                var packet = await _packetService.GetPacketWithForms(User.Identity.Name, packetId);
 
-                if (packetForm != null)
+                if (packet != null)
                 {
-                    var propertyFound = packetForm.Fields.GetType().GetProperty(location);
+                    var packetForm = packet.Forms.Where(f => f.Kind.ToLower() == formKind.ToLower()).FirstOrDefault();
 
-                    try
+                    if (packetForm != null)
                     {
-                        propValue = propertyFound != null ? propertyFound.GetValue(packetForm.Fields).ToString() : "--";
-                    }
-                    catch (Exception e)
-                    {
-                        //log error
+                        var propertyFound = packetForm.Fields.GetType().GetProperty(location);
+
+                        if (propertyFound != null)
+                        {
+                            //All required values have been confirmed to be found, valueFound == NULL means no value provided in form
+                            var valueFound = propertyFound.GetValue(packetForm.Fields);
+
+                            propValueString = valueFound != null ? valueFound.ToString() : "--";
+                        }
                     }
                 }
             }
 
-            return Partial("_FormPropValue", propValue);
+            return Partial("_FormPropValue", propValueString);
         }
     }
 }
