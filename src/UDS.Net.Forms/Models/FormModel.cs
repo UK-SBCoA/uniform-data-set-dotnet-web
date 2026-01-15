@@ -59,6 +59,11 @@ namespace UDS.Net.Forms.Models
         [Display(Name = "If not completed, specify reason")]
         public NotIncludedReasonCode? NOT { get; set; }
 
+        public List<int> AllowedAdministrationCodes { get; set; } = new List<int>();
+
+        [Display(Name = "Administration")]
+        public AdministrationFormat? ADMIN { get; set; }
+
         public List<int> AllowedNotIncludedReasonCodes { get; set; } = new List<int>();
 
         [RequiredIf(nameof(MODE), "2", ErrorMessage = "Specify reason for remote visit")]
@@ -108,6 +113,13 @@ namespace UDS.Net.Forms.Models
             }
             else if (Status == FormStatus.Finalized)
             {
+                // ADMIN required only for A1 or A1a
+                if ((Kind == "A1" || Kind == "A1a") && !ADMIN.HasValue)
+                {
+                    yield return new ValidationResult(
+                        "Administration is required field",
+                        new[] { nameof(ADMIN) });
+                }
                 if (MODE == FormMode.NotCompleted && !NOT.HasValue)
                 {
                     yield return new ValidationResult(

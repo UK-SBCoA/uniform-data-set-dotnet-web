@@ -61,6 +61,14 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
             }
         }
 
+        public IEnumerable<AdministrationFormat> AdministrationFormats
+        {
+            get
+            {
+                return new List<AdministrationFormat>() { AdministrationFormat.Self, AdministrationFormat.Staff };
+            }
+        }
+
         public string GetDescription()
         {
             return "Participant Demographics";
