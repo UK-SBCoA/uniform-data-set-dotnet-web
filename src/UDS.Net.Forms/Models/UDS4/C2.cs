@@ -570,64 +570,64 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 1 intrusions.")]
         public int? REY1INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 total recall.")]
         public int? REY2REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 2 intrusions.")]
+        [RequiredIfRange(nameof(REY2REC), 0, 15, ErrorMessage = "Provide trial 2 intrusions.")]
         public int? REY2INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 total recall.")]
         public int? REY3REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
+        [RequiredIfRange(nameof(REY3REC), 0, 15, ErrorMessage = "Provide trial 3 instrusions.")]
         public int? REY3INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 total recall.")]
         public int? REY4REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
+        [RequiredIfRange(nameof(REY4REC), 0, 15, ErrorMessage = "Provide trial 4 intrusions.")]
         public int? REY4INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 total recall.")]
         public int? REY5REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
+        [RequiredIfRange(nameof(REY5REC), 0, 15, ErrorMessage = "Provide trial 5 intrusions.")]
         public int? REY5INT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B recall.")]
         public int? REYBREC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
+        [RequiredIfRange(nameof(REYBREC), 0, 15, ErrorMessage = "Provide list B intrusions.")]
         public int? REYBINT { get; set; }
 
-        [Display(Name = "Total recall", Description = "(0-15)")]
-        [Range(0, 15)]
+        [Display(Name = "Total recall", Description = "(0-15, 95-98)")]
+        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
         [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 total recall.")]
         public int? REY6REC { get; set; }
 
         [Display(Name = "Intrusions", Description = "(No limit)")]
         [Range(0, 99)]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
+        [RequiredIfRange(nameof(REY6REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]

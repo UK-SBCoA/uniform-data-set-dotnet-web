@@ -470,6 +470,7 @@
                 <div class="subcounterreset m-2">
 
                     <p class="counter mb-3 font-semibold">Total number of words correctly recalled and number of intrusions</p>
+                    <p class="text-sm text-gray-500 text-nowrap font-semibold">(If test was not completed, enter reason code, 95-98, SKIP TO QUESTION 8a, and Complete QUESTION 13a in the form)</p>
 
                     <table class="mt-16 w-full text-left leading-6 border-b border-gray-100">
                         <thead>
@@ -494,7 +495,6 @@
                                         </div>
                                         <p class="text-sm text-gray-500 text-nowrap text-nowrap" asp-description-for="@Model.C2.REY1REC"></p>
                                     </div>
-                                    <p class="text-sm text-gray-500 text-nowrap">(If test was not completed, enter reason code, 95-98, SKIP TO QUESTION 8a, and Complete QUESTION 13a in the form)</p>
 
                                 </td>
                                 <td class="align-top">
@@ -519,7 +519,7 @@
                                         <label asp-for="C2.REY2REC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REY2REC" />
+                                                <input asp-for="@Model.C2.REY2REC" ui-range-behavior="Model.REY2RECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY2REC"></span>
                                                 <submission-error location="REY2REC" errors="Model.BaseForm.UnresolvedErrors" />
                                             </div>
@@ -550,7 +550,7 @@
                                         <label asp-for="C2.REY3REC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REY3REC" />
+                                                <input asp-for="@Model.C2.REY3REC" ui-range-behavior="Model.REY3RECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY3REC"></span>
                                                 <submission-error location="REY3REC" errors="Model.BaseForm.UnresolvedErrors" />
                                             </div>
@@ -582,7 +582,7 @@
                                         <label asp-for="C2.REY4REC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REY4REC" />
+                                                <input asp-for="@Model.C2.REY4REC" ui-range-behavior="Model.REY4RECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY4REC"></span>
                                                 <submission-error location="REY4REC" errors="Model.BaseForm.UnresolvedErrors" />
 
@@ -615,7 +615,7 @@
                                         <label asp-for="C2.REY5REC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REY5REC" />
+                                                <input asp-for="@Model.C2.REY5REC" ui-range-behavior="Model.REY5RECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY5REC"></span>
                                                 <submission-error location="REY5REC" errors="Model.BaseForm.UnresolvedErrors" />
 
@@ -648,7 +648,7 @@
                                         <label asp-for="C2.REYBREC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REYBREC" />
+                                                <input asp-for="@Model.C2.REYBREC" ui-range-behavior="Model.REYBRECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REYBREC"></span>
                                                 <submission-error location="REYBREC" errors="Model.BaseForm.UnresolvedErrors" />
 
@@ -681,7 +681,7 @@
                                         <label asp-for="C2.REY6REC"><span class="subcounter"></span></label>
                                         <div class="flex flex-row">
                                             <div class="min-w-[80px] max-w-[115px]">
-                                                <input asp-for="@Model.C2.REY6REC" />
+                                                <input asp-for="@Model.C2.REY6REC" ui-range-behavior="Model.REY6RECBehavior" />
                                                 <span class="mt-2 text-sm text-red-600 text-nowrap" asp-validation-for="C2.REY6REC"></span>
                                                 <submission-error location="REY6REC" errors="Model.BaseForm.UnresolvedErrors" />
 
