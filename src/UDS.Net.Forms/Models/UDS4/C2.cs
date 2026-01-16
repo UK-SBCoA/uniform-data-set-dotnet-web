@@ -632,10 +632,11 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
         [RegularExpression(@"^(\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88, or 95-98.")]
+        [RequiredIfRange(nameof(REY1REC), 95, 98, ErrorMessage = "REYDREC is required.")]
         public int? REYDREC { get; set; }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "Cannot be blank or 88.")]
+        [RequiredOnFinalized(ErrorMessage = "REYDREC cannot be blank or 88 when REY1REC is 0-15.")]
         public bool? REYDRECValidation
         {
             get
