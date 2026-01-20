@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services
 {
@@ -35,6 +34,8 @@ namespace UDS.Net.Services
         /// <param name="entity">Visit with the new status</param>
         /// <returns>Updated visit</returns>
         Task<Visit> PatchStatus(string username, Visit entity);
+
+        Task<Visit> GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind);
     }
 }
 
