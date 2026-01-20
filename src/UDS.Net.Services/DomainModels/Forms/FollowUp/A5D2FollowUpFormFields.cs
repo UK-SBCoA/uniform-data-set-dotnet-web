@@ -199,6 +199,14 @@ namespace UDS.Net.Services.DomainModels.Forms.FollowUp
             }
         }
 
+        public IEnumerable<AdministrationFormat> AdministrationFormats
+        {
+            get
+            {
+                return new List<AdministrationFormat>() { };
+            }
+        }
+
         public string GetDescription()
         {
             return "Participant Health History/Clinician-assessed Medical Conditions";
