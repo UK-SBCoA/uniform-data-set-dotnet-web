@@ -3,7 +3,6 @@ using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Extensions;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.DomainModels.Forms;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -376,6 +375,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
+        public Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
+        {
+            return null;
+        }
     }
 }
 
