@@ -201,7 +201,7 @@ namespace UDS.Net.Services.DomainModels
                     {
                         var existing = existingForms.Where(f => f.Kind == formContract.Abbreviation).FirstOrDefault();
 
-                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequiredForVisitKind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields, existing.UnresolvedErrors));
+                        Forms.Add(new Form(Id, existing.Id, existing.Title, existing.Kind, formContract.IsRequiredForVisitKind, existing.Status, existing.FRMDATE, existing.INITIALS, existing.LANG, existing.MODE, existing.RMREAS, existing.RMMODE, existing.NOT, existing.ADMIN, existing.CreatedAt, existing.CreatedBy, existing.ModifiedBy, existing.DeletedBy, existing.IsDeleted, existing.Fields, existing.UnresolvedErrors));
                     }
                     else
                     {
