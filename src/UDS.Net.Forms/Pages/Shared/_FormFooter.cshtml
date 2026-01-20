@@ -14,7 +14,7 @@
                 <p></p>
             </div>
         </div>
-        <div data-controller="dropdownReset" class="px-6 pb-20 pt-12 sm:pb-32 lg:px-8 lg:py-12 bg-indigo-100 shadow sm:rounded-lg">
+        <div data-controller="dropdownReset" data-dropdownreset-a1a-value="@(ViewData["IsA1a"] ?? "false")" class="px-6 pb-20 pt-12 sm:pb-32 lg:px-8 lg:py-12 bg-indigo-100 shadow sm:rounded-lg">
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
                 <input asp-for="Id" type="hidden" />
@@ -44,12 +44,36 @@
                 {
                     <input asp-for="AllowedRemoteModalities[i]" type="hidden" />
                 }
+                @for (int i = 0; i < Model.AllowedAdministrationCodes.Count(); i++)
+                {
+                    <input asp-for="AllowedAdministrationCodes[i]" type="hidden" />
+                }
 
                 <div>
                     <div>
                         <label for="@Html.IdFor(m => m.MODE)" class="block text-sm font-semibold leading-6 text-gray-900">Mode</label>
                         <enum-select data-dropdownreset-target="trigger" data-action="change->dropdownReset#update" for="MODE" items="Html.GetEnumSelectList<FormMode>()" enabled-values="@Model.AllowedFormModes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"></enum-select>
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="MODE"></span>
+                    </div>
+                    <div>
+                        <label for="@Html.IdFor(m => m.ADMIN)"
+                               class="block text-sm font-semibold leading-6 text-gray-900">
+                            Administration
+                        </label>
+                        @if (Model.AllowedAdministrationCodes?.Any() == true)
+                        {
+                            <enum-select data-dropdownreset-target="admin" for="ADMIN" items="Html.GetEnumSelectList<AdministrationFormat>()" enabled-values="@Model.AllowedAdministrationCodes" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option disabled selected class="disabled:opacity-75">--</option>
+                            </enum-select>
+                        }
+                        else
+                        {
+                            <select data-dropdownreset-target="admin" asp-for="ADMIN" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
+                                <option disabled selected class="disabled:opacity-75">--</option>
+                            </select>
+                        }
+
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="ADMIN"></span>
                     </div>
                     <div>
                         <label for="@Html.IdFor(m => m.FRMDATE)" class="block text-sm font-semibold leading-6 text-gray-900">Date</label>
