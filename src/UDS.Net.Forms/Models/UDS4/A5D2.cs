@@ -82,7 +82,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CVBYPASS { get; set; }
-        [Display(Name = "Age at most recent coronary artery bypass surgery")]
+        [Display(Name = "Age at most recent surgery")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVBYPASS), 1, 2, ErrorMessage = "Please specify.")]
         public int? BYPASSAGE { get; set; }
@@ -90,7 +90,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CVPACDEF { get; set; }
-        [Display(Name = "Age at first pacemaker and/or defibrillator implantation")]
+        [Display(Name = "Age at first implantation")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
         public int? PACDEFAGE { get; set; }
@@ -439,7 +439,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? HIVDIAG { get; set; }
-        [Display(Name = "Age at HIV diagnosis (HIV)")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(HIVDIAG), 1, 2, ErrorMessage = "Please specify.")]
         public int? HIVAGE { get; set; }

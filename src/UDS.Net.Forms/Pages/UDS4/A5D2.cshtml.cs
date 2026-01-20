@@ -75,8 +75,8 @@ public class A5D2Model : FormPageModel
     public List<RadioListItem> ConditionsListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("Absent", "0"),
-        new RadioListItem("Recent/active", "1"),
-        new RadioListItem("Remote/inactive", "2"),
+        new RadioListItem("Recent/Active", "1"),
+        new RadioListItem("Remote/Inactive", "2"),
         new RadioListItem("Unknown", "9")
     };
 
