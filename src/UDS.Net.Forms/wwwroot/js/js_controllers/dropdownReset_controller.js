@@ -1,7 +1,8 @@
 ﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-    static targets = ["trigger", "remote", "notCompleted"]
+    static targets = ["trigger", "remote", "notCompleted", "admin"]
+    static values = { a1a: Boolean }
 
     connect() {
         if (this.hasTriggerTarget) {
@@ -30,6 +31,19 @@ export default class extends Controller {
 
         if (val === 0) {
             this.enableTargets(this.notCompletedTargets)
+
+            if (this.a1aValue && this.hasAdminTarget) {
+                this.adminTarget.value = "2"
+                this.adminTarget.disabled = true
+            }
+        } else {
+            if (this.a1aValue && this.hasAdminTarget) {
+                this.adminTarget.disabled = false
+
+                if (!options.preserveValues) {
+                    this.adminTarget.selectedIndex = 0
+                }
+            }
         }
     }
 

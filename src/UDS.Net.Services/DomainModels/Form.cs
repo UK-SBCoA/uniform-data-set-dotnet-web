@@ -69,6 +69,8 @@ namespace UDS.Net.Services.DomainModels
 
         public NotIncludedReasonCode? NOT { get; set; }
 
+        public AdministrationFormat? ADMIN { get; set; }
+
         public DateTime CreatedAt { get; set; }
 
         public string CreatedBy { get; set; }
@@ -189,7 +191,7 @@ namespace UDS.Net.Services.DomainModels
             SetFieldsBasedOnKind(packetKind);
         }
 
-        public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
+        public Form(int visitId, int id, string title, string kind, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, AdministrationFormat? administrationFormat, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields)
         {
             Id = id;
             VisitId = visitId;
@@ -204,6 +206,7 @@ namespace UDS.Net.Services.DomainModels
             RMREAS = remoteReasonCode;
             RMMODE = remoteModality;
             NOT = notIncludedReasonCode;
+            ADMIN = administrationFormat;
 
             CreatedAt = createdAt;
             CreatedBy = createdBy;
@@ -219,13 +222,13 @@ namespace UDS.Net.Services.DomainModels
             // TODO if form fields MODE does not include NotCompleted then it is required
         }
 
-        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
-            this(visitId, id, title, kind, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, AdministrationFormat? administrationFormat, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields) :
+            this(visitId, id, title, kind, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, administrationFormat, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
         {
             IsRequiredForPacketKind = isRequired;
         }
 
-        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields, List<PacketSubmissionError> unresolvedErrors) : this(visitId, id, title, kind, isRequired, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
+        public Form(int visitId, int id, string title, string kind, bool isRequired, FormStatus status, DateTime formDate, string initials, FormLanguage language, FormMode mode, RemoteReasonCode? remoteReasonCode, RemoteModality? remoteModality, NotIncludedReasonCode? notIncludedReasonCode, AdministrationFormat? administrationFormat, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IFormFields fields, List<PacketSubmissionError> unresolvedErrors) : this(visitId, id, title, kind, isRequired, status, formDate, initials, language, mode, remoteReasonCode, remoteModality, notIncludedReasonCode, administrationFormat, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, fields)
         {
             UnresolvedErrors = unresolvedErrors;
         }
