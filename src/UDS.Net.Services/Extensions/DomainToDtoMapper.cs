@@ -26,6 +26,7 @@ namespace UDS.Net.Services.Extensions
             dto.RMREAS = form.RMREAS.HasValue ? ((int)form.RMREAS).ToString() : "";
             dto.RMMODE = form.RMMODE.HasValue ? ((int)form.RMMODE).ToString() : "";
             dto.NOT = form.NOT.HasValue ? ((int)form.NOT).ToString() : "";
+            dto.ADMIN = form.ADMIN.HasValue ? ((int)form.ADMIN).ToString() : "";
             dto.CreatedAt = form.CreatedAt;
             dto.CreatedBy = form.CreatedBy;
             dto.ModifiedBy = form.ModifiedBy;

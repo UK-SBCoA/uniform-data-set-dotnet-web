@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.Records
         public int? RmMode { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
 
         [Name("admina1a")]
-        public int? Admin { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : 2; // TODO add support for different administration types
+        public int? Admin { get; init; } = form.ADMIN.HasValue ? (int)form.ADMIN.Value : null; // TODO add support for different administration types
 
         // If not completed, then NOT should be included in export
         [Name("a1anot")]

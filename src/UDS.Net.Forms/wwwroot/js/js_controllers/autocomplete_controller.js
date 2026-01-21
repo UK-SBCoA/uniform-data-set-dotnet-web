@@ -1,6 +1,6 @@
 ﻿
 // wwwroot/js/js_controllers/autocomplete_controller.js
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
   static targets = ["searchBox", "list", "item", "noResults"]

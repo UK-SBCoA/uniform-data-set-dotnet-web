@@ -29,7 +29,7 @@ namespace UDS.Net.Forms.Records
         public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
 
         [Name("admina1")]
-        public int? Admin { get; set; } = 2;
+        public int? Admin { get; init; } = form.ADMIN.HasValue ? (int)form.ADMIN.Value : null;
     }
 }
 
