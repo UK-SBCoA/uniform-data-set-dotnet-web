@@ -23,6 +23,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             new RadioListItem("Yes (Complete questions 1A - 1B", "1")
         };
 
+        public List<RadioListItem> NWINFSIBItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (Skip to question 3)", "0"),
+            new RadioListItem("Yes (Complete questions 2a - 2t", "1")
+        };
+
         public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -52,6 +58,23 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIEnableAttribute("A3.DADYOB"),
                     new UIEnableAttribute("A3.DADDAGE"),
                     new UIEnableAttribute("A3.DADETPR"),
+                }
+            } }
+        };
+
+        public Dictionary<string, UIBehavior> NWINFSIBBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.SIBS"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 2"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.SIBS")
                 }
             } }
         };
