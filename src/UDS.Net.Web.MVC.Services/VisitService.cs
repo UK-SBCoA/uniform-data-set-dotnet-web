@@ -6,7 +6,6 @@ using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
@@ -67,6 +66,18 @@ namespace UDS.Net.Web.MVC.Services
             }
 
             throw new Exception("Visit with form not found");
+        }
+
+        public async Task<Visit> GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
+        {
+            var visitDto = await _apiClient.VisitClient.GetByVisitNumber(participationId, visitNumber, formKind);
+
+            if (visitDto != null)
+            {
+                return visitDto.ToDomain(username);
+            }
+
+            return null;
         }
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
