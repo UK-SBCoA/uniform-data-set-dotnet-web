@@ -649,16 +649,9 @@
                                     <td>
                                         <label asp-for="A5D2.SEIZURES">
                                             <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br>
-                                            @if (Model.BaseForm.PacketKind == PacketKind.I)
-                                            {
-                                                <span class="font-bold">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4d)</span>
-                                            }
-                                            else
-                                            {
                                                 <span class="font-bold">
                                                     (IF REMOTE/INACTIVE, SKIP TO QUESTION 4c2, IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4d)
                                                 </span>
-                                            }
                                         </label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.SEIZURES"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SEIZURES"></span>
