@@ -17,18 +17,28 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
         }
 
+        //TODO: Double check question label count for complete
         public List<RadioListItem> NWINFPARItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (Skip to question 2)", "0"),
             new RadioListItem("Yes (Complete questions 1A - 1B", "1")
         };
 
+        //TODO: Double check question label count for complete
         public List<RadioListItem> NWINFSIBItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (Skip to question 3)", "0"),
             new RadioListItem("Yes (Complete questions 2a - 2t", "1")
         };
 
+        //TODO: Double check question label count for complete
+        public List<RadioListItem> NWINFKIDItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (End Form Here)", "0"),
+            new RadioListItem("Yes (Complete questions 3b - 3p)", "1")
+        };
+
+        //TODO: Add instructional message for 1
         public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -62,6 +72,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
+        //TODO: Add instructional message for option 1
         public Dictionary<string, UIBehavior> NWINFSIBBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -78,6 +89,28 @@ namespace UDS.Net.Forms.Pages.UDS4
                 }
             } }
         };
+
+        //TODO: Doule check the question label count (3b - 3p)
+        public Dictionary<string, UIBehavior> NWINFKIDBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.KIDS"),
+                },
+                InstructionalMessage = "End Form Here"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.KIDS")
+                },
+                InstructionalMessage = "Complete questions 3b - 3p"
+            }}
+        };
+
+        //TODO: Add validation for NWINFSIB
+        //TODO: Add validation for NWINFKID
 
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {
