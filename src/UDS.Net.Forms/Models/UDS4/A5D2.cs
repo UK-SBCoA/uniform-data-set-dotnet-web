@@ -530,7 +530,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public bool? NOMENSRAD { get; set; }
         [Display(Name = "Hormonal supplements (e.g. the Pill, injections, Mirena, HRT)")]
         public bool? NOMENSHORM { get; set; }
-        [Display(Name = "Anti-estrogen medication such as Tamoxifen, anostrozole (Arimidex),\r\nexemestane (Aromasin), or letrozole (Femara)")]
+        [Display(Name = "Anti-estrogen medication such as Tamoxifen, anostrozole (Arimidex), exemestane (Aromasin), or letrozole (Femara)")]
         public bool? NOMENSESTR { get; set; }
         [Display(Name = "Unsure")]
         public bool? NOMENSUNK { get; set; }
