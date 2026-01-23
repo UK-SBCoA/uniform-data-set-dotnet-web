@@ -2166,44 +2166,30 @@
                     </div>
                 </div>
             }
-            @if (Model.BaseForm.PacketKind == PacketKind.F)
-            {
-                <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subcounterreset">
-                    <div class="@rowCSS">
-                        <label asp-for="A5D2.NOMENSAGE">
-                            <span class="counter invisible"></span>
 
-                            <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
-                            <p class="font-bold">(888 = Still menstrauting, 999 = Unknown)</p>
-                            <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7c)</p>
-                        </label>
-                        <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.NOMENSAGE"></p>
-                            <input asp-for="@Model.A5D2.NOMENSAGE" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
-                            <submission-error location="NOMENSAGE" errors="Model.BaseForm.UnresolvedErrors" />
-                        </div>
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 @(Model.BaseForm.PacketKind == PacketKind.F ? "subcounterreset" : "")">
+                <div class="@rowCSS">
+                    <label asp-for="A5D2.NOMENSAGE">
+                        @if (Model.BaseForm.PacketKind == PacketKind.F)
+                        {
+                            <span class="counter invisible"></span>
+                        }
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
+                        <p class="font-bold">(888 = Still menstrauting, 999 = Unknown)</p>
+                        <p class="font-bold">
+                            @(Model.BaseForm.PacketKind == PacketKind.F ? "(IF STILL MENSTRUATING, SKIP TO 7c)" : "(IF STILL MENSTRUATING, SKIP TO 7d)")
+                        </p>
+                    </label>
+                    <div class="mt-4 sm:col-span-2 sm:mt-0">
+                        <p class="text-sm text-gray-500"
+                           asp-description-for="@Model.A5D2.NOMENSAGE"></p>
+                        <input asp-for="@Model.A5D2.NOMENSAGE" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
+                        <submission-error location="NOMENSAGE" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
-            }
-            else
-            {
-                <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
-                    <div class="@rowCSS">
-                        <label asp-for="A5D2.NOMENSAGE">
-                            <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
-                            <p class="font-bold">(888 = Still menstrauting, 999 = Unknown)</p>
-                            <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7d)</p>
-                        </label>
-                        <div class="mt-4 sm:col-span-2 sm:mt-0">
-                            <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.NOMENSAGE"></p>
-                            <input asp-for="@Model.A5D2.NOMENSAGE" />
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
-                            <submission-error location="NOMENSAGE" errors="Model.BaseForm.UnresolvedErrors" />
-                        </div>
-                    </div>
-                </div>
-            }
+            </div>
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                 <div>
                     <div>
