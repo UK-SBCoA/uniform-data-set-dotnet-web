@@ -2140,22 +2140,14 @@
                     <span class="italic">If questions about menstrual and reproductive health are relevant to this participant, continue to question 7a. Otherwise, </span><span class="font-bold">END FORM HERE.</span>
                 </p>
             </div>
-            @if (Model.BaseForm.PacketKind == PacketKind.I)
+            @if (Model.BaseForm.PacketKind == PacketKind.I || Model.BaseForm.PacketKind == PacketKind.I4)
             {
                 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subcounterreset">
                     <div class="@rowCSS">
                         <label asp-for="A5D2.MENARCHE">
                             <span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MENARCHE)
-                            @if (Model.BaseForm.PacketKind == PacketKind.I)
-                            {
                                 <p class="font-bold">(888 = Never had a menstrual period, 999 = Unknown)</p>
                                 <p class="font-bold">(IF NEVER HAD A MENSTRUAL PERIOD, SKIP TO 7d)</p>
-                            }
-                            else
-                            {
-                                <p class="font-bold">(888 = Never had a menstrual period, 999 = Unknown)</p>
-                                <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7c)</p>
-                            }
                         </label>
                         <div class="mt-4 sm:col-span-2 sm:mt-0">
                             <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.MENARCHE"></p>
