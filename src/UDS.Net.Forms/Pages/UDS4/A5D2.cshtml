@@ -32,7 +32,10 @@
                             </div>
                         </div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.SMOKYRS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS) <span class="font-bold">(99 = Unknown)</span></label>
+                            <label asp-for="A5D2.SMOKYRS">
+                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SMOKYRS)
+                                    <span class="font-bold">(99 = Unknown)</span>
+                            </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SMOKYRS"></p>
                                 <input asp-for="@Model.A5D2.SMOKYRS" />
@@ -59,7 +62,13 @@
                             </div>
                         </div>
                         <div class="@rowCSS">
-                            <label asp-for="A5D2.QUITSMOK"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)<span class="font-bold">(888 = N/A, 999 = unknown)</span></label>
+                            <label asp-for="A5D2.QUITSMOK">
+                                <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.QUITSMOK)
+
+                                    <span class="font-bold">(888 = N/A, 999 = unknown)</span>
+                                
+
+                            </label>
                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.QUITSMOK"></p>
                                 <input asp-for="@Model.A5D2.QUITSMOK" />
@@ -105,7 +114,7 @@
                 </div>
                 <div>
                     <div class="text-2xl text-indigo-300">
-                        Substance abuse
+                        Substance use
                     </div>
                     <div>
                         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
@@ -180,12 +189,12 @@
                                 </td>
                                 <td>
                                     <div class="p-4">
-                                        It existed or occurred in the past <span class="italic">(more than one year ago)</span>but was resolved or there is no treatment currently under
+                                        It existed or occurred in the past <span class="italic">(more than one year ago)</span> but was resolved or there is no treatment currently under way
                                     </div>
                                 </td>
                                 <td>
                                     <div class="p-4">
-                                        There is insufficient information available to assess this
+                                        There is insufficient information available to assess this condition
                                     </div>
                                 </td>
                             </tr>
@@ -231,7 +240,10 @@
                                                 </div>
                                             </div>
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.HRTATTAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.HRTATTAGE">
+                                                    <san class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTATTAGE"></p>
                                                     <input asp-for="@Model.A5D2.HRTATTAGE" />
@@ -255,7 +267,12 @@
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.CARDARRAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CARDARRAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.CARDARRAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CARDARRAGE)
+                                                  
+                                                        <span class="font-bold">(999 = unknown)</span>
+
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CARDARRAGE"></p>
                                                     <input asp-for="@Model.A5D2.CARDARRAGE" />
@@ -297,7 +314,12 @@
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.BYPASSAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BYPASSAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.BYPASSAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BYPASSAGE)
+                                                  
+                                                        <span class="font-bold">(999 = unknown)</span>
+
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BYPASSAGE"></p>
                                                     <input asp-for="@Model.A5D2.BYPASSAGE" />
@@ -321,7 +343,14 @@
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.PACDEFAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PACDEFAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.PACDEFAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PACDEFAGE)
+                                                   
+                                                    
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                    
+
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PACDEFAGE"></p>
                                                     <input asp-for="@Model.A5D2.PACDEFAGE" />
@@ -354,7 +383,14 @@
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.VALVEAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.VALVEAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.VALVEAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.VALVEAGE)
+                                                   
+                                                    
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                    
+
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.VALVEAGE"></p>
                                                     <input asp-for="@Model.A5D2.VALVEAGE" />
@@ -432,7 +468,14 @@
                                                 </div>
                                             </div>
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.STROKAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.STROKAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKAGE)
+                                                   
+                                                    
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                    
+
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.STROKAGE"></p>
                                                     <input asp-for="@Model.A5D2.STROKAGE" />
@@ -449,7 +492,7 @@
                                     <th class="w-[1000px]"></th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Never improved</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Partially improved</th>
-                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/back to normal</th>
+                                    <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/Back to normal</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Unknown</th>
                                 </tr>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
@@ -477,7 +520,10 @@
                                                 </div>
                                             </div>
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.CAROTIDAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CAROTIDAGE)</br><span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.CAROTIDAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CAROTIDAGE)</br>
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CAROTIDAGE"></p>
                                                     <input asp-for="@Model.A5D2.CAROTIDAGE" />
@@ -510,7 +556,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.TIAAGE"><span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.TIAAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.TIAAGE">
+                                                    <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.TIAAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.TIAAGE"></p>
                                                     <input asp-for="@Model.A5D2.TIAAGE" />
@@ -554,7 +603,11 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.PDAGE"><span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.PDAGE">
+                                                    <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                    
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PDAGE"></p>
                                                     <input asp-for="@Model.A5D2.PDAGE" />
@@ -578,7 +631,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.PDOTHRAGE"><span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDOTHRAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.PDOTHRAGE">
+                                                    <span class="subsubcounter subsubcounterreset"></span> @Html.DisplayNameFor(m => m.A5D2.PDOTHRAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PDOTHRAGE"></p>
                                                     <input asp-for="@Model.A5D2.PDOTHRAGE" />
@@ -591,7 +647,12 @@
                                 </tr>
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td>
-                                        <label asp-for="A5D2.SEIZURES"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4d)</span></label>
+                                        <label asp-for="A5D2.SEIZURES">
+                                            <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br>
+                                                <span class="font-bold">
+                                                    (IF REMOTE/INACTIVE, SKIP TO QUESTION 4c2, IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4d)
+                                                </span>
+                                        </label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.SEIZURES"></p>
                                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.SEIZURES"></span>
                                         <submission-error location="SEIZURES" errors="Model.BaseForm.UnresolvedErrors" />
@@ -617,7 +678,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.SEIZAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.SEIZAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.SEIZAGE"></p>
                                                     <input asp-for="@Model.A5D2.SEIZAGE" />
@@ -799,7 +863,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.IMPYEARS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.IMPYEARS) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.IMPYEARS">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.IMPYEARS)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.IMPYEARS"></p>
                                                     <input asp-for="@Model.A5D2.IMPYEARS" />
@@ -865,7 +932,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.FIRSTTBI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.FIRSTTBI) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.FIRSTTBI">
+                                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.FIRSTTBI)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.FIRSTTBI"></p>
                                                 <input asp-for="@Model.A5D2.FIRSTTBI" />
@@ -878,7 +948,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.LASTTBI"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LASTTBI) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.LASTTBI">
+                                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LASTTBI)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.LASTTBI"></p>
                                                 <input asp-for="@Model.A5D2.LASTTBI" />
@@ -1029,7 +1102,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.DIABAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.DIABAGE">
+                                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.DIABAGE"></p>
                                                 <input asp-for="@Model.A5D2.DIABAGE" />
@@ -1051,7 +1127,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.HYPERTAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.HYPERTAGE">
+                                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERTAGE"></p>
                                                 <input asp-for="@Model.A5D2.HYPERTAGE" />
@@ -1073,7 +1152,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.HYPERCHAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.HYPERCHAGE">
+                                                <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HYPERCHAGE"></p>
                                                 <input asp-for="@Model.A5D2.HYPERCHAGE" />
@@ -1336,7 +1418,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.OTHSLEEX"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEX) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.OTHSLEEX">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEX)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHSLEEX"></p>
                                                 <input asp-for="@Model.A5D2.OTHSLEEX" />
@@ -1648,7 +1733,10 @@
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                                                <label asp-for="A5D2.CANCERAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                                <label asp-for="A5D2.CANCERAGE">
+                                                    <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERAGE)
+                                                        <span class="font-bold">(999 = unknown)</span>
+                                                </label>
                                                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                     <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.CANCERAGE"></p>
                                                     <input asp-for="@Model.A5D2.CANCERAGE" />
@@ -1704,7 +1792,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.KIDNEYAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.KIDNEYAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.KIDNEYAGE">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.KIDNEYAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.KIDNEYAGE"></p>
                                                 <input asp-for="@Model.A5D2.KIDNEYAGE" />
@@ -1726,7 +1817,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.LIVERAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVERAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.LIVERAGE">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVERAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.LIVERAGE"></p>
                                                 <input asp-for="@Model.A5D2.LIVERAGE" />
@@ -1748,7 +1842,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.PVDAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PVDAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.PVDAGE">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PVDAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.PVDAGE"></p>
                                                 <input asp-for="@Model.A5D2.PVDAGE" />
@@ -1770,7 +1867,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.HIVAGE"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HIVAGE) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.HIVAGE">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HIVAGE)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HIVAGE"></p>
                                                 <input asp-for="@Model.A5D2.HIVAGE" />
@@ -1792,7 +1892,10 @@
                                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
-                                            <label asp-for="@Model.A5D2.OTHCONDX"><span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCONDX) <span class="font-bold">(999 = Unknown)</span></label>
+                                            <label asp-for="@Model.A5D2.OTHCONDX">
+                                                <span class="subsubcounterreset subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHCONDX)
+                                                    <span class="font-bold">(999 = unknown)</span>
+                                            </label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.OTHCONDX"></p>
                                                 <input asp-for="@Model.A5D2.OTHCONDX" />
@@ -1868,7 +1971,7 @@
                                             <label asp-for="A5D2.DEPRTREAT"><span class="subsubcounter"></span> <span class="font-bold">If Recent/Active depressive disorder (Q6a1 or Q6a2), </span>@Html.DisplayNameFor(m => m.A5D2.DEPRTREAT)</label>
                                             <div class="mt-4 sm:col-span-2 sm:mt-0">
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.DEPRTREAT"></p>
-                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.UntreadedTreatedItems"></radio-button-group>
+                                                <radio-button-group id="@Html.IdFor(m => m.A5D2.DEPRTREAT)" for="@Model.A5D2.DEPRTREAT" items="Model.UntreatedTreatedItems"></radio-button-group>
                                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.DEPRTREAT"></span>
                                                 <submission-error location="DEPRTREAT" errors="Model.BaseForm.UnresolvedErrors" />
                                             </div>
@@ -2037,30 +2140,42 @@
                     <span class="italic">If questions about menstrual and reproductive health are relevant to this participant, continue to question 7a. Otherwise, </span><span class="font-bold">END FORM HERE.</span>
                 </p>
             </div>
-            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subcounterreset">
-                <div class="@rowCSS">
-                    <label asp-for="A5D2.MENARCHE">
-                        <span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MENARCHE)
-                        <p class="font-bold">(888 = Never had a menstrual period, 999 = Unknown)</p>
-                        <p class="font-bold">(IF NEVER HAD A MENSTRUAL PERIOD, SKIP TO 7d)</p>
-                    </label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.MENARCHE"></p>
-                        <input asp-for="@Model.A5D2.MENARCHE" ui-range-behavior="Model.MENARCHEBehavior" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.MENARCHE"></span>
-                        <submission-error location="MENARCHE" errors="Model.BaseForm.UnresolvedErrors" />
+            @if (Model.BaseForm.PacketKind == PacketKind.I || Model.BaseForm.PacketKind == PacketKind.I4)
+            {
+                <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 subcounterreset">
+                    <div class="@rowCSS">
+                        <label asp-for="A5D2.MENARCHE">
+                            <span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MENARCHE)
+                                <p class="font-bold">(888 = Never had a menstrual period, 999 = Unknown)</p>
+                                <p class="font-bold">(IF NEVER HAD A MENSTRUAL PERIOD, SKIP TO 7d)</p>
+                        </label>
+                        <div class="mt-4 sm:col-span-2 sm:mt-0">
+                            <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.MENARCHE"></p>
+                            <input asp-for="@Model.A5D2.MENARCHE" ui-range-behavior="Model.MENARCHEBehavior" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.MENARCHE"></span>
+                            <submission-error location="MENARCHE" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4">
+            }
+
+            <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 @(Model.BaseForm.PacketKind == PacketKind.F ? "subcounterreset" : "")">
                 <div class="@rowCSS">
                     <label asp-for="A5D2.NOMENSAGE">
-                        <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
+                        @if (Model.BaseForm.PacketKind == PacketKind.F)
+                        {
+                            <span class="counter invisible"></span>
+                        }
+                        <span class="subcounter"></span>
+                        @Html.DisplayNameFor(m => m.A5D2.NOMENSAGE)
                         <p class="font-bold">(888 = Still menstrauting, 999 = Unknown)</p>
-                        <p class="font-bold">(IF STILL MENSTRUATING, SKIP TO 7d)</p>
+                        <p class="font-bold">
+                            @(Model.BaseForm.PacketKind == PacketKind.F ? "(IF STILL MENSTRUATING, SKIP TO 7c)" : "(IF STILL MENSTRUATING, SKIP TO 7d)")
+                        </p>
                     </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.NOMENSAGE"></p>
+                        <p class="text-sm text-gray-500"
+                           asp-description-for="@Model.A5D2.NOMENSAGE"></p>
                         <input asp-for="@Model.A5D2.NOMENSAGE" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
                         <submission-error location="NOMENSAGE" errors="Model.BaseForm.UnresolvedErrors" />
@@ -2192,7 +2307,16 @@
             </div>
             <div class="subsubcounterreset">
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.HRT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRT)</br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 7e)</span></label>
+                    <label asp-for="A5D2.HRT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRT)</br>
+                        @if(Model.BaseForm.PacketKind == PacketKind.F)
+                        {
+                            <span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 7d)</span>
+                        }
+                        else
+                        {
+                            <span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 7e)</span>
+                        }
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRT"></p>
                         <radio-button-group id="@Html.IdFor(m => m.A5D2.HRT)" for="@Model.A5D2.HRT" items="Model.BasicYesNoListItems" ui-behaviors="Model.HRTBehavior"></radio-button-group>
@@ -2203,7 +2327,10 @@
             </div>
             <div class="ml-5">
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.HRTYEARS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTYEARS)</br><span class="font-bold">(999 = Unknown)</span></label>
+                    <label asp-for="A5D2.HRTYEARS">
+                        <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTYEARS)</br>
+                            <span class="font-bold">(999 = unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTYEARS"></p>
                         <input asp-for="@Model.A5D2.HRTYEARS" />
@@ -2212,7 +2339,10 @@
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.HRTSTRTAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTSTRTAGE)</br><span class="font-bold">(999 = Unknown)</span></label>
+                    <label asp-for="A5D2.HRTSTRTAGE">
+                        <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTSTRTAGE)</br>
+                            <span class="font-bold">(999 = unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTSTRTAGE"></p>
                         <input asp-for="@Model.A5D2.HRTSTRTAGE" />
@@ -2221,7 +2351,9 @@
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.HRTENDAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTENDAGE)</br><span class="font-bold">(888 = Still presently using, 999 = Unknown)</span></label>
+                    <label asp-for="A5D2.HRTENDAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTENDAGE)</br>
+                            <span class="font-bold">(888 = Still presently using, 999 = Unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTENDAGE"></p>
                         <input asp-for="@Model.A5D2.HRTENDAGE" />
@@ -2243,7 +2375,10 @@
             </div>
             <div class="ml-5">
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.BCPILLSYR"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCPILLSYR)</br><span class="font-bold">(999 = Unknown)</span></label>
+                    <label asp-for="A5D2.BCPILLSYR">
+                        <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCPILLSYR)</br>
+                            <span class="font-bold">(999 = unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCPILLSYR"></p>
                         <input asp-for="@Model.A5D2.BCPILLSYR" />
@@ -2252,7 +2387,10 @@
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.BCSTARTAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCSTARTAGE)</br><span class="font-bold">(999 = Unknown)</span></label>
+                    <label asp-for="A5D2.BCSTARTAGE">
+                        <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCSTARTAGE)</br>
+                            <span class="font-bold">(999 = unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCSTARTAGE"></p>
                         <input asp-for="@Model.A5D2.BCSTARTAGE" />
@@ -2261,7 +2399,10 @@
                     </div>
                 </div>
                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A5D2.BCENDAGE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCENDAGE)</br><span class="font-bold">(888 = Still presently using, 999 = Unknown)</span></label>
+                    <label asp-for="A5D2.BCENDAGE">
+                        <span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.BCENDAGE)</br>
+                            <span class="font-bold">(999 = unknown)</span>
+                    </label>
                     <div class="mt-4 sm:col-span-2 sm:mt-0">
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCENDAGE"></p>
                         <input asp-for="@Model.A5D2.BCENDAGE" />
@@ -2273,6 +2414,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" asp-for="@Model.A5D2.PacketKind" />
 @section Scripts {
     <script src="~/_content/UDS.Net.Forms/js/A5D2.js"></script>
 }
