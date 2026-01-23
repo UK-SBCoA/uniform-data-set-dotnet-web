@@ -18,19 +18,6 @@
             Section <span class="counter"></span> Biological parents
         </h3>
 
-        @if (Model.A3.PacketKind == PacketKind.F)
-        {
-            <div class="counterreset sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.NWINFPAR"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.NWINFPAR)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFPAR"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFPAR)" for="@Model.A3.NWINFPAR" items="Model.NWINFPARItems" ui-behaviors="Model.NWINFPARBehavior"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFPAR"></span>
-                    <submission-error location="NWINFPAR" errors="Model.BaseForm.UnresolvedErrors" />
-                </div>
-            </div>
-        }
-
         <p class="mt-1 text-sm text-gray-500">
             For any parent with a neurological or psychiatric diagnosis, the entire row <span class="underline">must be filled out.</span>
         </p>
@@ -67,7 +54,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
+                <tbody data-controller="a3" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFPAR">
                     <tr class="border-b border-gray-100" data-controller="a3-enable-intra-row" data-a3-enable-intra-row-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60">
                         <td><span class="subcounter"></span> Mother</td>
                         <td>
@@ -315,24 +302,12 @@
 
     <!--// Siblings //-->
     <div>
+        <!-- TODO: make sure the counters for sections are correct and using coutner class -->
         <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-sibling-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="20" data-a3-enable-rows-followup-parent-value="A3.NWINFSIB">
             <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section <span class="counter"></span>. Full siblings</h3>
-
-            @if (Model.A3.PacketKind == PacketKind.F)
-            {
-                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                    <label asp-for="A3.NWINFSIB"><span>2</span> @Html.DisplayNameFor(m => m.A3.NWINFSIB)</label>
-                    <div class="mt-4 sm:col-span-2 sm:mt-0">
-                        <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFSIB"></p>
-                        <radio-button-group id="@Html.IdFor(m => m.A3.NWINFSIB)" for="@Model.A3.NWINFSIB" items="Model.NWINFSIBItems" ui-behaviors="Model.NWINFSIBBehavior" data-action="change->a3-enable-rows#updateRows"></radio-button-group>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFSIB"></span>
-                        <submission-error location="NWINFSIB" errors="Model.BaseForm.UnresolvedErrors" />
-                    </div>
-                </div>
-            } 
             
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.SIBS"><span>@(Model.A3.PacketKind == PacketKind.F ? "2.1" : "2")</span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
+                <label asp-for="A3.SIBS"><span>2.</span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
                     <input id="A3_SIBS" asp-for="@Model.A3.SIBS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
@@ -393,21 +368,8 @@
     <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-child-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="15" data-a3-enable-rows-followup-parent-value="A3.NWINFKID">
         <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 3. Biological children</h3>
 
-        @if (Model.A3.PacketKind == PacketKind.F)
-        {
-            <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                <label asp-for="A3.NWINFKID">3.@Html.DisplayNameFor(m => m.A3.NWINFKID)</label>
-                <div class="mt-4 sm:col-span-2 sm:mt-0">
-                    <p class="text-sm text-gray-500" asp-description-for="@Model.A3.NWINFKID"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A3.NWINFKID)" for="@Model.A3.NWINFKID" items="Model.NWINFKIDItems" ui-behaviors="Model.NWINFKIDBehavior" data-action="change->a3-enable-rows#updateRows"></radio-button-group>
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.NWINFKID"></span>
-                    <submission-error location="NWINFKID" errors="Model.BaseForm.UnresolvedErrors" />
-                </div>
-            </div>
-        }
-
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-            <label asp-for="A3.KIDS"><span>@(Model.A3.PacketKind == PacketKind.F ? "3.1" : "3")</span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
+            <label asp-for="A3.KIDS"><span>3.</span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
                 <input id="A3_KIDS" asp-for="@Model.A3.KIDS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
@@ -467,4 +429,11 @@
         </div>
     </div> 
 </div>
+
+@* TODO: Hidden fields for additional properties *@
+<span>Hidden properties</span>
+<input asp-for="A3.NWINFPAR" />
+<input asp-for="A3.NWINFSIB" />
+<input asp-for="A3.NWINFKID" />
+
 <partial name="_FormFooter" for="@Model.A3" />

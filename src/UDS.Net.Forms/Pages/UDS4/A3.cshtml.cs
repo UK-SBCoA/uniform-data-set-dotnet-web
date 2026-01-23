@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
@@ -17,28 +18,24 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
         }
 
-        //TODO: Double check question label count for complete
         public List<RadioListItem> NWINFPARItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (Skip to question 2)", "0"),
             new RadioListItem("Yes (Complete questions 1A - 1B", "1")
         };
 
-        //TODO: Double check question label count for complete
         public List<RadioListItem> NWINFSIBItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (Skip to question 3)", "0"),
             new RadioListItem("Yes (Complete questions 2a - 2t", "1")
         };
 
-        //TODO: Double check question label count for complete
         public List<RadioListItem> NWINFKIDItems { get; set; } = new List<RadioListItem>
         {
             new RadioListItem("No (End Form Here)", "0"),
             new RadioListItem("Yes (Complete questions 3b - 3p)", "1")
         };
 
-        //TODO: Add instructional message for 1
         public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -72,7 +69,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        //TODO: Add instructional message for option 1
         public Dictionary<string, UIBehavior> NWINFSIBBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -90,7 +86,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        //TODO: Doule check the question label count (3b - 3p)
         public Dictionary<string, UIBehavior> NWINFKIDBehavior = new Dictionary<string, UIBehavior>
         {
             { "0", new UIBehavior {
@@ -108,9 +103,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 InstructionalMessage = "Complete questions 3b - 3p"
             }}
         };
-
-        //TODO: Add validation for NWINFSIB
-        //TODO: Add validation for NWINFKID
 
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {
@@ -141,6 +133,32 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (BaseForm != null)
             {
                 A3 = (A3)BaseForm; // class library should always handle new instances
+
+                //TODO: handle previous data based on form type
+                //If packet type is follow-up and id = 0 (loading a new form), then load previous form data
+                if(A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                {
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+                    
+                    if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A3");
+
+                        if(previousVisit != null)
+                        {
+                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+
+                            if(previousA3Form != null)
+                            {
+                                //DEVNOTE: Set the created at for the form with previous data
+                                previousA3Form.CreatedAt = A3.CreatedAt;
+                                A3 = (A3)previousA3Form.ToVM();
+                            }
+                        }
+                    }
+
+                }
+
             }
 
             return Page();
