@@ -152,6 +152,16 @@ namespace UDS.Net.Forms.Pages.UDS4
                             {
                                 //DEVNOTE: Set the created at for the form with previous data
                                 previousA3Form.CreatedAt = A3.CreatedAt;
+                                previousA3Form.INITIALS = A3.INITIALS;
+                                previousA3Form.MODE = A3.MODE;
+                                previousA3Form.ADMIN = A3.ADMIN;
+                                previousA3Form.FRMDATE = A3.FRMDATE;
+                                previousA3Form.RMREAS = A3.RMREAS;
+                                previousA3Form.RMMODE = A3.RMMODE;
+                                previousA3Form.NOT = A3.NOT;
+                                previousA3Form.LANG = A3.LANG;
+                                previousA3Form.Status = A3.Status;
+
                                 A3 = (A3)previousA3Form.ToVM();
                             }
                         }

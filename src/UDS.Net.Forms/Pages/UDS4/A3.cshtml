@@ -301,9 +301,9 @@
     </div>
 
     <!--// Siblings //-->
-    <div>
+    <div data-controller="a3" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFSIB">
         <!-- TODO: make sure the counters for sections are correct and using coutner class -->
-        <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-sibling-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="20" data-a3-enable-rows-followup-parent-value="A3.NWINFSIB">
+        <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-sibling-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="20">
             <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section <span class="counter"></span>. Full siblings</h3>
             
             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -365,7 +365,7 @@
     </div>
 
     <!--// Children //-->
-    <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-child-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="15" data-a3-enable-rows-followup-parent-value="A3.NWINFKID">
+    <div data-controller="a3-enable-rows a3" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-child-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="15" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFKID"> 
         <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 3. Biological children</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
