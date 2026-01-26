@@ -136,19 +136,19 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                 //TODO: handle previous data based on form type
                 //If packet type is follow-up and id = 0 (loading a new form), then load previous form data
-                if(A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                if (A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
                 {
                     int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
-                    
+
                     if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
                     {
                         var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A3");
 
-                        if(previousVisit != null)
+                        if (previousVisit != null)
                         {
                             var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
 
-                            if(previousA3Form != null)
+                            if (previousA3Form != null)
                             {
                                 //DEVNOTE: Set the created at for the form with previous data
                                 previousA3Form.CreatedAt = A3.CreatedAt;
