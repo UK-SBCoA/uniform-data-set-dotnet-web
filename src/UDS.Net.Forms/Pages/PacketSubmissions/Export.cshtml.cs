@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
@@ -23,14 +24,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
         private readonly IConfiguration _configuration;
+        private readonly IVisitService _visitService;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
             _packetService = packetService;
             _participationService = participationService;
             _configuration = configuration;
+            _visitService = visitService;
+
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -58,7 +62,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketData(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -342,7 +346,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+        private async Task WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -447,7 +451,40 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 csv.WriteRecord(new A3Record(a3));
 
                 if (a3.Fields is A3FollowUpFormFields followUpA3)
+                {
+                    //DEVNOTE: The replacement codes logic may be able to be moved to a seperate method
+
+                    //DEVNOTE: If the a3 fields are followup form fields check for previous form
+
+                    //DEVNOTE: check if previous form exists
+
+                    //DEVNOTE: If MOMYOB is different than the previous a3 MOMYOB, then set value to "6666"
+
+                    //DEVNOTE: Had to get current visit 
+                    var currentVisit = await _visitService.GetById(User.Identity!.Name!, packetSubmission.PacketId);
+
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, currentVisit.ParticipationId, "4.0.0");
+
+                    if (currentVisit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, currentVisit.ParticipationId, currentVisit.VISITNUM - 1, "A3");
+
+                        if (previousVisit != null && currentVisit != null)
+                        {
+                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+                            var currentA3Form = currentVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+
+                            if (previousA3Form != null)
+                            {
+                                //DEVNOTE properties of previous and current forms
+                                var a3PreviousProps = typeof(Form).GetProperties();
+                                var a3CurrentProps = typeof(A3FollowUpFormFields).GetProperties();
+                            }
+                        }
+                    }
+
                     csv.WriteRecord(followUpA3);
+                }
                 else if (a3.Fields is A3FormFields normalA3)
                     csv.WriteRecord(normalA3);
 

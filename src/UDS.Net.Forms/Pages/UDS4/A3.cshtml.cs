@@ -150,19 +150,24 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                             if (previousA3Form != null)
                             {
-                                //DEVNOTE: Set the created at for the form with previous data
-                                previousA3Form.CreatedAt = A3.CreatedAt;
-                                previousA3Form.INITIALS = A3.INITIALS;
-                                previousA3Form.MODE = A3.MODE;
-                                previousA3Form.ADMIN = A3.ADMIN;
-                                previousA3Form.FRMDATE = A3.FRMDATE;
-                                previousA3Form.RMREAS = A3.RMREAS;
-                                previousA3Form.RMMODE = A3.RMMODE;
-                                previousA3Form.NOT = A3.NOT;
-                                previousA3Form.LANG = A3.LANG;
-                                previousA3Form.Status = A3.Status;
+                                var previousFormModel = previousA3Form.ToVM();
 
-                                A3 = (A3)previousA3Form.ToVM();
+                                //DEVNOTE: For now convert previous visit return (Form?) to form model and then cast it to A3
+                                A3 = (A3)previousFormModel;
+
+                                //DEVNOTE: Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
+                                A3.Id = BaseForm.Id;
+                                A3.CreatedAt = BaseForm.CreatedAt;
+                                A3.INITIALS = BaseForm.INITIALS;
+                                A3.MODE = BaseForm.MODE;
+                                A3.ADMIN = BaseForm.ADMIN;
+                                //DEVNOTE: FRMDATE is showing up differently than the createdAt, maybe its the creation of the visit? I may have a misunderstanding of this property
+                                A3.FRMDATE = BaseForm.FRMDATE;
+                                A3.RMREAS = BaseForm.RMREAS;
+                                A3.RMMODE = BaseForm.RMMODE;
+                                A3.NOT = BaseForm.NOT;
+                                A3.LANG = BaseForm.LANG;
+                                A3.Status = BaseForm.Status;
                             }
                         }
                     }
