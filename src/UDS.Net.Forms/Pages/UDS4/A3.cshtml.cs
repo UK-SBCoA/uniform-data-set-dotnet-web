@@ -168,6 +168,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 A3.NOT = BaseForm.NOT;
                                 A3.LANG = BaseForm.LANG;
                                 A3.Status = BaseForm.Status;
+                                A3.NWINFPAR = 0;
+                                A3.NWINFKID = 0;
+                                A3.NWINFSIB = 0;
                             }
                         }
                     }

@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
@@ -450,7 +449,26 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FollowUpFormFields followUpA3)
+                //DEVNOTE: Initialize previousA3Form for SIB and KID later in the method
+                Form? previousA3Form = null;
+
+                //DEVNOTE declare  a3.fields to A3FollowupFormFields earlier in scope for later use
+                A3FollowUpFormFields followUpA3 = a3.Fields as A3FollowUpFormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+
+                    if (previousVisit != null)
+                    {
+                        //DEVNOTE: Get necessary data before comparison
+                        previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+                    }
+                }
+
+                if (followUpA3 != null)
                 {
                     //DEVNOTE: The replacement codes logic may be able to be moved to a seperate method
 
@@ -461,25 +479,29 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     //DEVNOTE: If MOMYOB is different than the previous a3 MOMYOB, then set value to "6666"
 
                     //DEVNOTE: Had to get current visit 
-                    var currentVisit = await _visitService.GetById(User.Identity!.Name!, packetSubmission.PacketId);
 
-                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, currentVisit.ParticipationId, "4.0.0");
-
-                    if (currentVisit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    //DEVNOTE: null check previousA3Form
+                    //DEVNOTE: If previous form fields can be set to A3FollowupFormFields begin comparing and replacing 
+                    if (previousA3Form?.Fields is A3FollowUpFormFields previousFollowUpA3)
                     {
-                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, currentVisit.ParticipationId, currentVisit.VISITNUM - 1, "A3");
-
-                        if (previousVisit != null && currentVisit != null)
+                        if(followUpA3.NWINFPAR == 1)
                         {
-                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
-                            var currentA3Form = currentVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+                            //Section parents
+                            //Mom
+                            followUpA3.MOMYOB = followUpA3.MOMYOB == previousFollowUpA3.MOMYOB ? 6666 : followUpA3.MOMYOB;
+                            followUpA3.MOMDAGE = followUpA3.MOMDAGE == previousFollowUpA3.MOMDAGE ? 666 : followUpA3.MOMDAGE;
+                            followUpA3.MOMETPR = followUpA3.MOMETPR == previousFollowUpA3.MOMETPR ? "66" : followUpA3.MOMETPR;
+                            followUpA3.MOMETSEC = followUpA3.MOMETSEC == previousFollowUpA3.MOMETSEC ? "66" : followUpA3.MOMETSEC;
+                            followUpA3.MOMMEVAL = followUpA3.MOMMEVAL == previousFollowUpA3.MOMMEVAL ? 6 : followUpA3.MOMMEVAL;
+                            followUpA3.MOMAGEO = followUpA3.MOMAGEO == previousFollowUpA3.MOMAGEO ? 666 : followUpA3.MOMAGEO;
 
-                            if (previousA3Form != null)
-                            {
-                                //DEVNOTE properties of previous and current forms
-                                var a3PreviousProps = typeof(Form).GetProperties();
-                                var a3CurrentProps = typeof(A3FollowUpFormFields).GetProperties();
-                            }
+                            //Dad
+                            followUpA3.DADYOB = followUpA3.DADYOB == previousFollowUpA3.DADYOB ? 6666 : followUpA3.DADYOB;
+                            followUpA3.DADDAGE = followUpA3.DADDAGE == previousFollowUpA3.DADDAGE ? 666 : followUpA3.DADDAGE;
+                            followUpA3.DADETPR = followUpA3.DADETPR == previousFollowUpA3.DADETPR ? "66" : followUpA3.DADETPR;
+                            followUpA3.DADETSEC = followUpA3.DADETSEC == previousFollowUpA3.DADETSEC ? "66" : followUpA3.DADETSEC;
+                            followUpA3.DADMEVAL = followUpA3.DADMEVAL == previousFollowUpA3.DADMEVAL ? 6 : followUpA3.DADMEVAL;
+                            followUpA3.DADAGEO = followUpA3.DADAGEO == previousFollowUpA3.DADAGEO ? 666 : followUpA3.DADAGEO;
                         }
                     }
 
@@ -507,14 +529,50 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     kids = new List<A3FamilyMemberFormFields>();
                 }
 
-                // siblings
-                foreach (var sibling in siblings)
+                //DEVNOTE: If no changes were marked as made, write to field as normal
+                if (followUpA3?.NWINFSIB == 0)
                 {
-                    foreach (var prop in a3FamilyProps)
+                    // siblings 
+                    foreach (var sibling in siblings)
                     {
-                        if (prop.Name != "FamilyMemberIndex")
+                        foreach (var prop in a3FamilyProps)
                         {
-                            csv.WriteField(prop.GetValue(sibling));
+                            if (prop.Name != "FamilyMemberIndex")
+                            {
+                                csv.WriteField(prop.GetValue(sibling));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //if changes are marked, compare values and set previous visit codes
+
+                    //YOB
+                    //AGD
+                    //ETPR
+                    //ETSEC
+                    //MEVAL
+                    //AGO
+
+                    if (previousA3Form?.Fields is A3FollowUpFormFields previousFollowUpA3)
+                    {
+                        for (var i = 0; i < siblings.Count; i++)
+                        {
+                            siblings[i].YOB = siblings[i].YOB == previousFollowUpA3.SiblingFormFields[i].YOB ? 6666 : siblings[i].YOB;
+                            siblings[i].AGD = siblings[i].AGD == previousFollowUpA3.SiblingFormFields[i].AGD ? 666 : siblings[i].AGD;
+                            siblings[i].ETPR = siblings[i].ETPR == previousFollowUpA3.SiblingFormFields[i].ETPR ? "66" : siblings[i].ETPR;
+                            siblings[i].MEVAL = siblings[i].MEVAL == previousFollowUpA3.SiblingFormFields[i].MEVAL ? 6 : siblings[i].MEVAL;
+                            siblings[i].AGO = siblings[i].AGO == previousFollowUpA3.SiblingFormFields[i].AGO ? 666 : siblings[i].AGO;
+
+                            //DEVNOTE: Loop through props and write field
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(siblings[i]));
+                                }
+                            }
                         }
                     }
                 }
