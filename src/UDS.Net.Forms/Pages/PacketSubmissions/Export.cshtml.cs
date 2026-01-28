@@ -452,6 +452,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //DEVNOTE: Initialize previousA3Form for SIB and KID later in the method
                 Form? previousA3Form = null;
 
+                //DEVNOTE: Initalize previousFollowUpA3 and set after getting previousA3Form value
+                A3FollowUpFormFields previousFollowUpA3 = null;
+
                 //DEVNOTE declare  a3.fields to A3FollowupFormFields earlier in scope for later use
                 A3FollowUpFormFields followUpA3 = a3.Fields as A3FollowUpFormFields;
 
@@ -465,6 +468,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         //DEVNOTE: Get necessary data before comparison
                         previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+                        //DEVNOTE: Set previousFollowUpA3 after getting previous form value
+                        previousFollowUpA3 = previousA3Form.Fields as A3FollowUpFormFields;
                     }
                 }
 
@@ -482,7 +487,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                     //DEVNOTE: null check previousA3Form
                     //DEVNOTE: If previous form fields can be set to A3FollowupFormFields begin comparing and replacing 
-                    if (previousA3Form?.Fields is A3FollowUpFormFields previousFollowUpA3)
+                    if (previousFollowUpA3 != null)
                     {
                         if(followUpA3.NWINFPAR == 1)
                         {
@@ -530,7 +535,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 }
 
                 //DEVNOTE: If no changes were marked as made, write to field as normal
-                if (followUpA3?.NWINFSIB == 0)
+                //DENVOTE: Some forms could have null for NWINFSIB and other followup variables
+                if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
                     // siblings 
                     foreach (var sibling in siblings)
@@ -555,15 +561,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     //MEVAL
                     //AGO
 
-                    if (previousA3Form?.Fields is A3FollowUpFormFields previousFollowUpA3)
+                    if (previousFollowUpA3 != null)
                     {
                         for (var i = 0; i < siblings.Count; i++)
                         {
-                            siblings[i].YOB = siblings[i].YOB == previousFollowUpA3.SiblingFormFields[i].YOB ? 6666 : siblings[i].YOB;
-                            siblings[i].AGD = siblings[i].AGD == previousFollowUpA3.SiblingFormFields[i].AGD ? 666 : siblings[i].AGD;
-                            siblings[i].ETPR = siblings[i].ETPR == previousFollowUpA3.SiblingFormFields[i].ETPR ? "66" : siblings[i].ETPR;
-                            siblings[i].MEVAL = siblings[i].MEVAL == previousFollowUpA3.SiblingFormFields[i].MEVAL ? 6 : siblings[i].MEVAL;
-                            siblings[i].AGO = siblings[i].AGO == previousFollowUpA3.SiblingFormFields[i].AGO ? 666 : siblings[i].AGO;
+                            siblings[i].YOB = siblings[i].YOB == previousFollowUpA3.SiblingFormFields[i].YOB && !string.IsNullOrEmpty(siblings[i].YOB.ToString()) ? 6666 : siblings[i].YOB;
+                            siblings[i].AGD = siblings[i].AGD == previousFollowUpA3.SiblingFormFields[i].AGD && !string.IsNullOrEmpty(siblings[i].AGD.ToString()) ? 666 : siblings[i].AGD;
+                            siblings[i].ETPR = siblings[i].ETPR == previousFollowUpA3.SiblingFormFields[i].ETPR && !string.IsNullOrEmpty(siblings[i].ETPR) ? "66" : siblings[i].ETPR;
+                            siblings[i].MEVAL = siblings[i].MEVAL == previousFollowUpA3.SiblingFormFields[i].MEVAL && !string.IsNullOrEmpty(siblings[i].MEVAL.ToString()) ? 6 : siblings[i].MEVAL;
+                            siblings[i].AGO = siblings[i].AGO == previousFollowUpA3.SiblingFormFields[i].AGO && !string.IsNullOrEmpty(siblings[i].AGO.ToString()) ? 666 : siblings[i].AGO;
 
                             //DEVNOTE: Loop through props and write field
                             foreach (var prop in a3FamilyProps)
@@ -578,13 +584,50 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 }
 
                 // kids
-                foreach (var kid in kids)
+                //DEVNOTE: If no changes were marked as made, write to field as normal
+                if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
-                    foreach (var prop in a3FamilyProps)
+                    // siblings 
+                    foreach (var kid in kids)
                     {
-                        if (prop.Name != "FamilyMemberIndex")
+                        foreach (var prop in a3FamilyProps)
                         {
-                            csv.WriteField(prop.GetValue(kid));
+                            if (prop.Name != "FamilyMemberIndex")
+                            {
+                                csv.WriteField(prop.GetValue(kid));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //if changes are marked, compare values and set previous visit codes
+
+                    //YOB
+                    //AGD
+                    //ETPR
+                    //ETSEC
+                    //MEVAL
+                    //AGO
+
+                    if (previousFollowUpA3 != null)
+                    {
+                        for (var i = 0; i < kids.Count; i++)
+                        {
+                            kids[i].YOB = kids[i].YOB == previousFollowUpA3.KidsFormFields[i].YOB && !string.IsNullOrEmpty(kids[i].YOB.ToString()) ? 6666 : kids[i].YOB;
+                            kids[i].AGD = kids[i].AGD == previousFollowUpA3.KidsFormFields[i].AGD && !string.IsNullOrEmpty(kids[i].AGD.ToString()) ? 666 : kids[i].AGD;
+                            kids[i].ETPR = kids[i].ETPR == previousFollowUpA3.KidsFormFields[i].ETPR && !string.IsNullOrEmpty(kids[i].ETPR) ? "66" : kids[i].ETPR;
+                            kids[i].MEVAL = kids[i].MEVAL == previousFollowUpA3.KidsFormFields[i].MEVAL && !string.IsNullOrEmpty(kids[i].MEVAL.ToString()) ? 6 : kids[i].MEVAL;
+                            kids[i].AGO = kids[i].AGO == previousFollowUpA3.KidsFormFields[i].AGO && !string.IsNullOrEmpty(kids[i].AGO.ToString()) ? 666 : kids[i].AGO;
+
+                            //DEVNOTE: Loop through props and write field
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(kids[i]));
+                                }
+                            }
                         }
                     }
                 }
