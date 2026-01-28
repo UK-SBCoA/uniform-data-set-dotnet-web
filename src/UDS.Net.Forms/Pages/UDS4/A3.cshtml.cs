@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
+using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
 
@@ -15,6 +17,92 @@ namespace UDS.Net.Forms.Pages.UDS4
         public A3Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A3")
         {
         }
+
+        public List<RadioListItem> NWINFPARItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (Skip to question 2)", "0"),
+            new RadioListItem("Yes (Complete questions 1A - 1B", "1")
+        };
+
+        public List<RadioListItem> NWINFSIBItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (Skip to question 3)", "0"),
+            new RadioListItem("Yes (Complete questions 2a - 2t", "1")
+        };
+
+        public List<RadioListItem> NWINFKIDItems { get; set; } = new List<RadioListItem>
+        {
+            new RadioListItem("No (End Form Here)", "0"),
+            new RadioListItem("Yes (Complete questions 3b - 3p)", "1")
+        };
+
+        public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.MOMYOB"),
+                    new UIDisableAttribute("A3.MOMDAGE"),
+                    new UIDisableAttribute("A3.MOMETPR"),
+                    new UIDisableAttribute("A3.MOMETSEC"),
+                    new UIDisableAttribute("A3.MOMMEVAL"),
+                    new UIDisableAttribute("A3.MOMAGEO"),
+                    new UIDisableAttribute("A3.DADYOB"),
+                    new UIDisableAttribute("A3.DADDAGE"),
+                    new UIDisableAttribute("A3.DADETPR"),
+                    new UIDisableAttribute("A3.DADETSEC"),
+                    new UIDisableAttribute("A3.DADMEVAL"),
+                    new UIDisableAttribute("A3.DADAGEO")
+                },
+                InstructionalMessage = "SKIP TO QUESTION 2"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.MOMYOB"),
+                    new UIEnableAttribute("A3.MOMDAGE"),
+                    new UIEnableAttribute("A3.MOMETPR"),
+                    new UIEnableAttribute("A3.DADYOB"),
+                    new UIEnableAttribute("A3.DADDAGE"),
+                    new UIEnableAttribute("A3.DADETPR"),
+                }
+            } }
+        };
+
+        public Dictionary<string, UIBehavior> NWINFSIBBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.SIBS"),
+                },
+                InstructionalMessage = "SKIP TO QUESTION 2"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.SIBS")
+                }
+            } }
+        };
+
+        public Dictionary<string, UIBehavior> NWINFKIDBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A3.KIDS"),
+                },
+                InstructionalMessage = "End Form Here"
+            }},
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A3.KIDS")
+                },
+                InstructionalMessage = "Complete questions 3b - 3p"
+            }}
+        };
 
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {
@@ -45,6 +133,50 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (BaseForm != null)
             {
                 A3 = (A3)BaseForm; // class library should always handle new instances
+
+                //TODO: handle previous data based on form type
+                //If packet type is follow-up and id = 0 (loading a new form), then load previous form data
+                if (A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                {
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+
+                    if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A3");
+
+                        if (previousVisit != null)
+                        {
+                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+
+                            if (previousA3Form != null)
+                            {
+                                var previousFormModel = previousA3Form.ToVM();
+
+                                //DEVNOTE: For now convert previous visit return (Form?) to form model and then cast it to A3
+                                A3 = (A3)previousFormModel;
+
+                                //DEVNOTE: Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
+                                A3.Id = BaseForm.Id;
+                                A3.CreatedAt = BaseForm.CreatedAt;
+                                A3.INITIALS = BaseForm.INITIALS;
+                                A3.MODE = BaseForm.MODE;
+                                A3.ADMIN = BaseForm.ADMIN;
+                                //DEVNOTE: FRMDATE is showing up differently than the createdAt, maybe its the creation of the visit? I may have a misunderstanding of this property
+                                A3.FRMDATE = BaseForm.FRMDATE;
+                                A3.RMREAS = BaseForm.RMREAS;
+                                A3.RMMODE = BaseForm.RMMODE;
+                                A3.NOT = BaseForm.NOT;
+                                A3.LANG = BaseForm.LANG;
+                                A3.Status = BaseForm.Status;
+                                A3.NWINFPAR = 0;
+                                A3.NWINFKID = 0;
+                                A3.NWINFSIB = 0;
+                            }
+                        }
+                    }
+
+                }
+
             }
 
             return Page();

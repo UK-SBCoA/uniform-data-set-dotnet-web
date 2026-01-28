@@ -6,9 +6,11 @@ namespace UDS.Net.Forms.Models.UDS4
     /// <summary>
     /// ViewModel for form with front-end validation
     /// </summary>
+    /// DEVNOTE: A3 will be modified for this PR
     public class A3 : FormModel
     {
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
+        [Range(0, 1)]
         [RequiredOnFinalized(Services.Enums.PacketKind.F)]
         public int? NWINFPAR { get; set; }
 

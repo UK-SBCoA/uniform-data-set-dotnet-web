@@ -5,7 +5,8 @@ export default class extends Controller {
   static classes = ["invalid", "disabled"]
   static outlets = ["a3-enable-intra-row"]
   static values = {
-    maxRows: Number 
+    maxRows: Number,
+    followupParent: String
   }
 
     connect() {
@@ -18,7 +19,13 @@ export default class extends Controller {
         const value = this.countInputTarget.value;
         let count = parseInt(value, 10) || 0;
 
-        if (count === 77) {
+        //A follow-up Parent element will disable rows in FVP type visits when followupParent = 0
+        let followupParent = $(`input[name="${this.followupParentValue}"]:checked`)
+
+        if (followupParent.val() == 0) {
+            count = 0;
+        }
+        else if (count === 77) {
             count = 0;
         }
 

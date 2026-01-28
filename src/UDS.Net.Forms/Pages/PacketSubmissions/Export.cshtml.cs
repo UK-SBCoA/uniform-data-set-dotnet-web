@@ -23,14 +23,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
         private readonly IConfiguration _configuration;
+        private readonly IVisitService _visitService;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
             _packetService = packetService;
             _participationService = participationService;
             _configuration = configuration;
+            _visitService = visitService;
+
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -58,7 +61,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketData(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -342,7 +345,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+        private async Task WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -446,8 +449,69 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FollowUpFormFields followUpA3)
+                //DEVNOTE: Initialize previousA3Form for SIB and KID later in the method
+                Form? previousA3Form = null;
+
+                //DEVNOTE: Initalize previousFollowUpA3 and set after getting previousA3Form value
+                A3FollowUpFormFields previousFollowUpA3 = null;
+
+                //DEVNOTE declare  a3.fields to A3FollowupFormFields earlier in scope for later use
+                A3FollowUpFormFields followUpA3 = a3.Fields as A3FollowUpFormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+
+                    if (previousVisit != null)
+                    {
+                        //DEVNOTE: Get necessary data before comparison
+                        previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+                        //DEVNOTE: Set previousFollowUpA3 after getting previous form value
+                        previousFollowUpA3 = previousA3Form.Fields as A3FollowUpFormFields;
+                    }
+                }
+
+                if (followUpA3 != null)
+                {
+                    //DEVNOTE: The replacement codes logic may be able to be moved to a seperate method
+
+                    //DEVNOTE: If the a3 fields are followup form fields check for previous form
+
+                    //DEVNOTE: check if previous form exists
+
+                    //DEVNOTE: If MOMYOB is different than the previous a3 MOMYOB, then set value to "6666"
+
+                    //DEVNOTE: Had to get current visit 
+
+                    //DEVNOTE: null check previousA3Form
+                    //DEVNOTE: If previous form fields can be set to A3FollowupFormFields begin comparing and replacing 
+                    if (previousFollowUpA3 != null)
+                    {
+                        if(followUpA3.NWINFPAR == 1)
+                        {
+                            //Section parents
+                            //Mom
+                            followUpA3.MOMYOB = followUpA3.MOMYOB == previousFollowUpA3.MOMYOB ? 6666 : followUpA3.MOMYOB;
+                            followUpA3.MOMDAGE = followUpA3.MOMDAGE == previousFollowUpA3.MOMDAGE ? 666 : followUpA3.MOMDAGE;
+                            followUpA3.MOMETPR = followUpA3.MOMETPR == previousFollowUpA3.MOMETPR ? "66" : followUpA3.MOMETPR;
+                            followUpA3.MOMETSEC = followUpA3.MOMETSEC == previousFollowUpA3.MOMETSEC ? "66" : followUpA3.MOMETSEC;
+                            followUpA3.MOMMEVAL = followUpA3.MOMMEVAL == previousFollowUpA3.MOMMEVAL ? 6 : followUpA3.MOMMEVAL;
+                            followUpA3.MOMAGEO = followUpA3.MOMAGEO == previousFollowUpA3.MOMAGEO ? 666 : followUpA3.MOMAGEO;
+
+                            //Dad
+                            followUpA3.DADYOB = followUpA3.DADYOB == previousFollowUpA3.DADYOB ? 6666 : followUpA3.DADYOB;
+                            followUpA3.DADDAGE = followUpA3.DADDAGE == previousFollowUpA3.DADDAGE ? 666 : followUpA3.DADDAGE;
+                            followUpA3.DADETPR = followUpA3.DADETPR == previousFollowUpA3.DADETPR ? "66" : followUpA3.DADETPR;
+                            followUpA3.DADETSEC = followUpA3.DADETSEC == previousFollowUpA3.DADETSEC ? "66" : followUpA3.DADETSEC;
+                            followUpA3.DADMEVAL = followUpA3.DADMEVAL == previousFollowUpA3.DADMEVAL ? 6 : followUpA3.DADMEVAL;
+                            followUpA3.DADAGEO = followUpA3.DADAGEO == previousFollowUpA3.DADAGEO ? 666 : followUpA3.DADAGEO;
+                        }
+                    }
+
                     csv.WriteRecord(followUpA3);
+                }
                 else if (a3.Fields is A3FormFields normalA3)
                     csv.WriteRecord(normalA3);
 
@@ -470,26 +534,100 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     kids = new List<A3FamilyMemberFormFields>();
                 }
 
-                // siblings
-                foreach (var sibling in siblings)
+                //DEVNOTE: If no changes were marked as made, write to field as normal
+                //DENVOTE: Some forms could have null for NWINFSIB and other followup variables
+                if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
-                    foreach (var prop in a3FamilyProps)
+                    // siblings 
+                    foreach (var sibling in siblings)
                     {
-                        if (prop.Name != "FamilyMemberIndex")
+                        foreach (var prop in a3FamilyProps)
                         {
-                            csv.WriteField(prop.GetValue(sibling));
+                            if (prop.Name != "FamilyMemberIndex")
+                            {
+                                csv.WriteField(prop.GetValue(sibling));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //if changes are marked, compare values and set previous visit codes
+
+                    //YOB
+                    //AGD
+                    //ETPR
+                    //ETSEC
+                    //MEVAL
+                    //AGO
+
+                    if (previousFollowUpA3 != null)
+                    {
+                        for (var i = 0; i < siblings.Count; i++)
+                        {
+                            siblings[i].YOB = siblings[i].YOB == previousFollowUpA3.SiblingFormFields[i].YOB && !string.IsNullOrEmpty(siblings[i].YOB.ToString()) ? 6666 : siblings[i].YOB;
+                            siblings[i].AGD = siblings[i].AGD == previousFollowUpA3.SiblingFormFields[i].AGD && !string.IsNullOrEmpty(siblings[i].AGD.ToString()) ? 666 : siblings[i].AGD;
+                            siblings[i].ETPR = siblings[i].ETPR == previousFollowUpA3.SiblingFormFields[i].ETPR && !string.IsNullOrEmpty(siblings[i].ETPR) ? "66" : siblings[i].ETPR;
+                            siblings[i].MEVAL = siblings[i].MEVAL == previousFollowUpA3.SiblingFormFields[i].MEVAL && !string.IsNullOrEmpty(siblings[i].MEVAL.ToString()) ? 6 : siblings[i].MEVAL;
+                            siblings[i].AGO = siblings[i].AGO == previousFollowUpA3.SiblingFormFields[i].AGO && !string.IsNullOrEmpty(siblings[i].AGO.ToString()) ? 666 : siblings[i].AGO;
+
+                            //DEVNOTE: Loop through props and write field
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(siblings[i]));
+                                }
+                            }
                         }
                     }
                 }
 
                 // kids
-                foreach (var kid in kids)
+                //DEVNOTE: If no changes were marked as made, write to field as normal
+                if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
-                    foreach (var prop in a3FamilyProps)
+                    // siblings 
+                    foreach (var kid in kids)
                     {
-                        if (prop.Name != "FamilyMemberIndex")
+                        foreach (var prop in a3FamilyProps)
                         {
-                            csv.WriteField(prop.GetValue(kid));
+                            if (prop.Name != "FamilyMemberIndex")
+                            {
+                                csv.WriteField(prop.GetValue(kid));
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //if changes are marked, compare values and set previous visit codes
+
+                    //YOB
+                    //AGD
+                    //ETPR
+                    //ETSEC
+                    //MEVAL
+                    //AGO
+
+                    if (previousFollowUpA3 != null)
+                    {
+                        for (var i = 0; i < kids.Count; i++)
+                        {
+                            kids[i].YOB = kids[i].YOB == previousFollowUpA3.KidsFormFields[i].YOB && !string.IsNullOrEmpty(kids[i].YOB.ToString()) ? 6666 : kids[i].YOB;
+                            kids[i].AGD = kids[i].AGD == previousFollowUpA3.KidsFormFields[i].AGD && !string.IsNullOrEmpty(kids[i].AGD.ToString()) ? 666 : kids[i].AGD;
+                            kids[i].ETPR = kids[i].ETPR == previousFollowUpA3.KidsFormFields[i].ETPR && !string.IsNullOrEmpty(kids[i].ETPR) ? "66" : kids[i].ETPR;
+                            kids[i].MEVAL = kids[i].MEVAL == previousFollowUpA3.KidsFormFields[i].MEVAL && !string.IsNullOrEmpty(kids[i].MEVAL.ToString()) ? 6 : kids[i].MEVAL;
+                            kids[i].AGO = kids[i].AGO == previousFollowUpA3.KidsFormFields[i].AGO && !string.IsNullOrEmpty(kids[i].AGO.ToString()) ? 666 : kids[i].AGO;
+
+                            //DEVNOTE: Loop through props and write field
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(kids[i]));
+                                }
+                            }
                         }
                     }
                 }
