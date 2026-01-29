@@ -61,7 +61,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                await WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -120,7 +120,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketData(csv, packetSubmission, participant, packet);
+                                WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -345,7 +345,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private async Task WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+
+        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -475,18 +476,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (followUpA3 != null)
                 {
-                    //DEVNOTE: The replacement codes logic may be able to be moved to a seperate method
-
-                    //DEVNOTE: If the a3 fields are followup form fields check for previous form
-
-                    //DEVNOTE: check if previous form exists
-
-                    //DEVNOTE: If MOMYOB is different than the previous a3 MOMYOB, then set value to "6666"
-
-                    //DEVNOTE: Had to get current visit 
-
-                    //DEVNOTE: null check previousA3Form
-                    //DEVNOTE: If previous form fields can be set to A3FollowupFormFields begin comparing and replacing 
+                    //DEVNOTE: the if block may be able to be moved to a private method to clean up code
                     if (previousFollowUpA3 != null)
                     {
                         if(followUpA3.NWINFPAR == 1)
@@ -536,6 +526,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 //DEVNOTE: If no changes were marked as made, write to field as normal
                 //DENVOTE: Some forms could have null for NWINFSIB and other followup variables
+
+                //DEVNOTE The if block code here could be moved to a private method for use in the siblings and kids data write
                 if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
                     // siblings 
@@ -585,6 +577,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 // kids
                 //DEVNOTE: If no changes were marked as made, write to field as normal
+
+                //DEVNOTE The if block code here could be moved to a private method for use in the siblings and kids data write
                 if (followUpA3?.NWINFSIB == 0 || followUpA3.NWINFSIB == null)
                 {
                     // siblings 
