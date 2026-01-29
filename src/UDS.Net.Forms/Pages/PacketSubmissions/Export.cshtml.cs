@@ -136,6 +136,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return File(memoryStream, "text/csv", filename);
         }
 
+        //DEVNOTE: My initial thought is that a header for a followup form is not being included for a follow-up, but is being included for a initial
         private void WriteHeader(CsvWriter csv, PacketSubmission packetSubmission)
         {
             // ptid, adcid, visitnum, packet, formver, dssub, visit_date m/d/yyyy, initials, frmdatea1, initialsa1, langa1, modea1, rmreasa1
