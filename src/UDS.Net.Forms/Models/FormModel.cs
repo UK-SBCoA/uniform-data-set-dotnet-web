@@ -163,19 +163,19 @@ namespace UDS.Net.Forms.Models
 
         public A3 SetBaseProperties(A3 a3, FormModel formBase)
         {
-            if(formBase != null)
+            if (formBase != null)
                 a3.Id = formBase.Id;
-                a3.PacketKind = formBase.PacketKind;
-                a3.CreatedAt = formBase.CreatedAt;
-                a3.INITIALS = formBase.INITIALS;
-                a3.MODE = formBase.MODE;
-                a3.ADMIN = formBase.ADMIN;
-                a3.FRMDATE = formBase.FRMDATE;
-                a3.RMREAS = formBase.RMREAS;
-                a3.RMMODE = formBase.RMMODE;
-                a3.NOT = formBase.NOT;
-                a3.LANG = formBase.LANG;
-                a3.Status = formBase.Status;
+            a3.PacketKind = formBase.PacketKind;
+            a3.CreatedAt = formBase.CreatedAt;
+            a3.INITIALS = formBase.INITIALS;
+            a3.MODE = formBase.MODE;
+            a3.ADMIN = formBase.ADMIN;
+            a3.FRMDATE = formBase.FRMDATE;
+            a3.RMREAS = formBase.RMREAS;
+            a3.RMMODE = formBase.RMMODE;
+            a3.NOT = formBase.NOT;
+            a3.LANG = formBase.LANG;
+            a3.Status = formBase.Status;
 
             return a3;
         }
