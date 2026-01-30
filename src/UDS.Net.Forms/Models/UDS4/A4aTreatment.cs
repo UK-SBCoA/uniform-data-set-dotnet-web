@@ -36,7 +36,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [ProhibitedCharacters]
         public string? NCTNUM { get; set; }
 
-        [Range(1, 12)]
+        [RegularExpression("^([1-9]|1[0-2]|99)$", ErrorMessage = "Valid range is 1 - 12 or 99")]
         public int? STARTMO { get; set; }
 
         public int? STARTYEAR { get; set; }
