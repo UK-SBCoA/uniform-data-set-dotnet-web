@@ -206,7 +206,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 // DEVNOTE:
                 // Export for A3 will include both form fields and follow-up field properties.
-                // A3FormFields holds the additional follow-up properties NWINFPAR, NWINFSIB, and NWINFKID
+                // A3FormFields have been given the additional follow-up properties NWINFPAR, NWINFSIB, and NWINFKID
                 csv.WriteHeaderLowercase<A3FormFields>();
                 siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields;
                 kidFields = ((A3FormFields)a3.Fields).KidsFormFields;
@@ -442,16 +442,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
             if (a3 != null)
             {
-                //DEVNOTE: If initial visit, then the NWINFPAR, NWINFSIB, and NWINFKID variables will be null
-
-
                 csv.WriteRecord(new A3Record(a3));
 
-                Form? previousA3Base;
+                Form? previousA3Base = null;
 
                 //DEVNOTE:
                 //All packets submitted will include followUp variables, even the initial visits.
-                //this means we will need to use A3FormFields instead of A3FormFields for the A3 export.
+                //A3FormFields holds follow-up properties 
                 A3FormFields? previousA3Fields = null;
 
                 A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
@@ -534,8 +531,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
 
                     siblingsIndex++;
-                }
-                ;
+                };
 
                 // kids 
 
@@ -564,8 +560,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
 
                     kidsIndex++;
-                }
-                ;
+                };
             }
             if (a4 != null)
             {

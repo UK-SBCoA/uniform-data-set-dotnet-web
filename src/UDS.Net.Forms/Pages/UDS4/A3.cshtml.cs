@@ -18,92 +18,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
         }
 
-        public List<RadioListItem> NWINFPARItems { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (Skip to question 2)", "0"),
-            new RadioListItem("Yes (Complete questions 1A - 1B", "1")
-        };
-
-        public List<RadioListItem> NWINFSIBItems { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (Skip to question 3)", "0"),
-            new RadioListItem("Yes (Complete questions 2a - 2t", "1")
-        };
-
-        public List<RadioListItem> NWINFKIDItems { get; set; } = new List<RadioListItem>
-        {
-            new RadioListItem("No (End Form Here)", "0"),
-            new RadioListItem("Yes (Complete questions 3b - 3p)", "1")
-        };
-
-        public Dictionary<string, UIBehavior> NWINFPARBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("A3.MOMYOB"),
-                    new UIDisableAttribute("A3.MOMDAGE"),
-                    new UIDisableAttribute("A3.MOMETPR"),
-                    new UIDisableAttribute("A3.MOMETSEC"),
-                    new UIDisableAttribute("A3.MOMMEVAL"),
-                    new UIDisableAttribute("A3.MOMAGEO"),
-                    new UIDisableAttribute("A3.DADYOB"),
-                    new UIDisableAttribute("A3.DADDAGE"),
-                    new UIDisableAttribute("A3.DADETPR"),
-                    new UIDisableAttribute("A3.DADETSEC"),
-                    new UIDisableAttribute("A3.DADMEVAL"),
-                    new UIDisableAttribute("A3.DADAGEO")
-                },
-                InstructionalMessage = "SKIP TO QUESTION 2"
-            }},
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("A3.MOMYOB"),
-                    new UIEnableAttribute("A3.MOMDAGE"),
-                    new UIEnableAttribute("A3.MOMETPR"),
-                    new UIEnableAttribute("A3.DADYOB"),
-                    new UIEnableAttribute("A3.DADDAGE"),
-                    new UIEnableAttribute("A3.DADETPR"),
-                }
-            } }
-        };
-
-        public Dictionary<string, UIBehavior> NWINFSIBBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("A3.SIBS"),
-                },
-                InstructionalMessage = "SKIP TO QUESTION 2"
-            }},
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("A3.SIBS")
-                }
-            } }
-        };
-
-        public Dictionary<string, UIBehavior> NWINFKIDBehavior = new Dictionary<string, UIBehavior>
-        {
-            { "0", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIDisableAttribute("A3.KIDS"),
-                },
-                InstructionalMessage = "End Form Here"
-            }},
-            { "1", new UIBehavior {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("A3.KIDS")
-                },
-                InstructionalMessage = "Complete questions 3b - 3p"
-            }}
-        };
-
         private void ValidateAgeRange(int? ageOfOnset, int? ageAtDeath, int? birthYear, ModelStateDictionary modelState, string onsetField, string deathField)
         {
             bool birthYearKnown = birthYear.HasValue && birthYear != 9999;
@@ -153,8 +67,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                                 A3 = (A3)previousFormModel;
 
-                                // Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
-                                // Some properties need to be applied to the new follow-up form from the base form
+                                // Change previous form properties properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
                                 A3.Id = BaseForm.Id;
                                 A3.PacketKind = BaseForm.PacketKind;
                                 A3.CreatedAt = BaseForm.CreatedAt;
@@ -167,7 +80,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 A3.NOT = BaseForm.NOT;
                                 A3.LANG = BaseForm.LANG;
                                 A3.Status = BaseForm.Status;
-                                //Set previous data provided values to "no change" by default for new follow-up forms
+                                //Set previous data provided questions to "no change" by default for new follow-up forms
                                 A3.NWINFPAR = 0;
                                 A3.NWINFKID = 0;
                                 A3.NWINFSIB = 0;
@@ -185,7 +98,8 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
 
-            // If initial or initial for existing, set follow-up properties to null
+            // DEVNOTE: adjusting follow-up properties here so the A3 Javascript can continue to run without knowing packetKind
+            // If initial or initial for existing, follow-up properties will be null
             if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
             {
                 A3.NWINFPAR = null;
