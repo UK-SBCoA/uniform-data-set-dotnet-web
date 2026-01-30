@@ -84,7 +84,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "Since the last UDS visit, is new information available concerning the stauts of the participant's biological children?")]
         [RequiredOnFinalized(Services.Enums.PacketKind.F)]
-
         public int? NWINFKID { get; set; }
 
         [Display(Name = "How many known biological children does the participant have?")]
