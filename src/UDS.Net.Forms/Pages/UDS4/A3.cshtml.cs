@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
-using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
 
@@ -67,19 +66,8 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                                 A3 = (A3)previousFormModel;
 
-                                // Change previous form properties properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
-                                A3.Id = BaseForm.Id;
-                                A3.PacketKind = BaseForm.PacketKind;
-                                A3.CreatedAt = BaseForm.CreatedAt;
-                                A3.INITIALS = BaseForm.INITIALS;
-                                A3.MODE = BaseForm.MODE;
-                                A3.ADMIN = BaseForm.ADMIN;
-                                A3.FRMDATE = BaseForm.FRMDATE;
-                                A3.RMREAS = BaseForm.RMREAS;
-                                A3.RMMODE = BaseForm.RMMODE;
-                                A3.NOT = BaseForm.NOT;
-                                A3.LANG = BaseForm.LANG;
-                                A3.Status = BaseForm.Status;
+                                A3 = A3.SetBaseProperties(A3, BaseForm);
+
                                 //Set previous data provided questions to "no change" by default for new follow-up forms
                                 A3.NWINFPAR = 0;
                                 A3.NWINFKID = 0;
