@@ -156,6 +156,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 // Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
                                 // Some properties need to be applied to the new follow-up form from the base form
                                 A3.Id = BaseForm.Id;
+                                A3.PacketKind = BaseForm.PacketKind;
                                 A3.CreatedAt = BaseForm.CreatedAt;
                                 A3.INITIALS = BaseForm.INITIALS;
                                 A3.MODE = BaseForm.MODE;
@@ -183,6 +184,14 @@ namespace UDS.Net.Forms.Pages.UDS4
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
+
+            // If initial or initial for existing, set follow-up properties to null
+            if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
+            {
+                A3.NWINFPAR = null;
+                A3.NWINFSIB = null;
+                A3.NWINFKID = null;
+            }
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 

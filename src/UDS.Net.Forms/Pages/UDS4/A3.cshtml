@@ -430,10 +430,9 @@
     </div> 
 </div>
 
-@* TODO: Hidden fields for additional properties *@
-<span>Hidden properties</span>
-<input asp-for="A3.NWINFPAR" />
-<input asp-for="A3.NWINFSIB" />
-<input asp-for="A3.NWINFKID" />
+@* TODO: Hidden fields for follow-up properties *@
+<input hidden asp-for="A3.NWINFPAR" />
+<input hidden asp-for="A3.NWINFSIB" />
+<input hidden asp-for="A3.NWINFKID" />
 
 <partial name="_FormFooter" for="@Model.A3" />

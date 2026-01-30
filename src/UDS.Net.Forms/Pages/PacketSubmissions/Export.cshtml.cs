@@ -520,6 +520,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         siblings[siblingsIndex].YOB = siblings[siblingsIndex].YOB == previousA3Fields.SiblingFormFields[siblingsIndex].YOB && !string.IsNullOrEmpty(siblings[siblingsIndex].YOB.ToString()) ? 6666 : siblings[siblingsIndex].YOB;
                         siblings[siblingsIndex].AGD = siblings[siblingsIndex].AGD == previousA3Fields.SiblingFormFields[siblingsIndex].AGD && !string.IsNullOrEmpty(siblings[siblingsIndex].AGD.ToString()) ? 666 : siblings[siblingsIndex].AGD;
                         siblings[siblingsIndex].ETPR = siblings[siblingsIndex].ETPR == previousA3Fields.SiblingFormFields[siblingsIndex].ETPR && !string.IsNullOrEmpty(siblings[siblingsIndex].ETPR) ? "66" : siblings[siblingsIndex].ETPR;
+                        siblings[siblingsIndex].ETSEC = siblings[siblingsIndex].ETSEC == previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC && !string.IsNullOrEmpty(siblings[siblingsIndex].ETSEC) ? "66" : siblings[siblingsIndex].ETSEC;
                         siblings[siblingsIndex].MEVAL = siblings[siblingsIndex].MEVAL == previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL && !string.IsNullOrEmpty(siblings[siblingsIndex].MEVAL.ToString()) ? 6 : siblings[siblingsIndex].MEVAL;
                         siblings[siblingsIndex].AGO = siblings[siblingsIndex].AGO == previousA3Fields.SiblingFormFields[siblingsIndex].AGO && !string.IsNullOrEmpty(siblings[siblingsIndex].AGO.ToString()) ? 666 : siblings[siblingsIndex].AGO;
                     }
@@ -546,11 +547,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     //DEVNOTE: If form is marked as changed, apply previous value codes to kids array item
                     if (currentA3Fields?.NWINFKID == 1 && previousA3Fields != null)
                     {
-                        kids[kidsIndex].YOB = kids[kidsIndex].YOB == previousA3Fields.SiblingFormFields[kidsIndex].YOB && !string.IsNullOrEmpty(kids[kidsIndex].YOB.ToString()) ? 6666 : kids[kidsIndex].YOB;
-                        kids[kidsIndex].AGD = kids[kidsIndex].AGD == previousA3Fields.SiblingFormFields[kidsIndex].AGD && !string.IsNullOrEmpty(kids[kidsIndex].AGD.ToString()) ? 666 : kids[kidsIndex].AGD;
-                        kids[kidsIndex].ETPR = kids[kidsIndex].ETPR == previousA3Fields.SiblingFormFields[kidsIndex].ETPR && !string.IsNullOrEmpty(kids[kidsIndex].ETPR) ? "66" : kids[kidsIndex].ETPR;
-                        kids[kidsIndex].MEVAL = kids[kidsIndex].MEVAL == previousA3Fields.SiblingFormFields[kidsIndex].MEVAL && !string.IsNullOrEmpty(kids[kidsIndex].MEVAL.ToString()) ? 6 : kids[kidsIndex].MEVAL;
-                        kids[kidsIndex].AGO = kids[kidsIndex].AGO == previousA3Fields.SiblingFormFields[kidsIndex].AGO && !string.IsNullOrEmpty(kids[kidsIndex].AGO.ToString()) ? 666 : kids[kidsIndex].AGO;
+                        kids[kidsIndex].YOB = kids[kidsIndex].YOB == previousA3Fields.KidsFormFields[kidsIndex].YOB && !string.IsNullOrEmpty(kids[kidsIndex].YOB.ToString()) ? 6666 : kids[kidsIndex].YOB;
+                        kids[kidsIndex].AGD = kids[kidsIndex].AGD == previousA3Fields.KidsFormFields[kidsIndex].AGD && !string.IsNullOrEmpty(kids[kidsIndex].AGD.ToString()) ? 666 : kids[kidsIndex].AGD;
+                        kids[kidsIndex].ETPR = kids[kidsIndex].ETPR == previousA3Fields.KidsFormFields[kidsIndex].ETPR && !string.IsNullOrEmpty(kids[kidsIndex].ETPR) ? "66" : kids[kidsIndex].ETPR;
+                        kids[kidsIndex].ETSEC = kids[kidsIndex].ETSEC == previousA3Fields.KidsFormFields[kidsIndex].ETSEC && !string.IsNullOrEmpty(kids[kidsIndex].ETSEC) ? "66" : kids[kidsIndex].ETSEC;
+                        kids[kidsIndex].MEVAL = kids[kidsIndex].MEVAL == previousA3Fields.KidsFormFields[kidsIndex].MEVAL && !string.IsNullOrEmpty(kids[kidsIndex].MEVAL.ToString()) ? 6 : kids[kidsIndex].MEVAL;
+                        kids[kidsIndex].AGO = kids[kidsIndex].AGO == previousA3Fields.KidsFormFields[kidsIndex].AGO && !string.IsNullOrEmpty(kids[kidsIndex].AGO.ToString()) ? 666 : kids[kidsIndex].AGO;
                     }
 
                     foreach (var prop in a3FamilyProps)
