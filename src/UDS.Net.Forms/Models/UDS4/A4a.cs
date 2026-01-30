@@ -188,10 +188,11 @@ namespace UDS.Net.Forms.Models.UDS4
                         }
                     }
 
-                    if (treatment.STARTYEAR.HasValue && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
+                    if (treatment.STARTYEAR.HasValue && treatment.STARTYEAR != 9999 && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
                     {
-                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year}.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
+                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year} or 9999.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
                     }
+
 
                     if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year) && (treatment.ENDYEAR.Value != 9999) && (treatment.ENDYEAR.Value != 8888))
                     {
@@ -200,7 +201,8 @@ namespace UDS.Net.Forms.Models.UDS4
 
                     if (treatment.STARTYEAR.HasValue && treatment.STARTMO.HasValue &&
                         treatment.ENDYEAR.HasValue && treatment.ENDMO.HasValue &&
-                        treatment.ENDYEAR != 8888 && treatment.ENDYEAR != 9999)
+                        treatment.STARTMO != 99 && treatment.ENDMO != 88 && treatment.ENDMO != 99 &&
+                        treatment.STARTYEAR != 9999 && treatment.ENDYEAR != 8888 && treatment.ENDYEAR != 9999)
                     {
                         var startDate = new DateTime(treatment.STARTYEAR.Value, treatment.STARTMO.Value, 1);
                         var endDate = new DateTime(treatment.ENDYEAR.Value, treatment.ENDMO.Value, 1);
