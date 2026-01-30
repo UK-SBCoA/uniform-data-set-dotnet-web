@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services;
@@ -45,6 +46,36 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (BaseForm != null)
             {
                 A3 = (A3)BaseForm; // class library should always handle new instances
+
+                // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+                if (A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                {
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+
+                    if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A3");
+
+                        if (previousVisit != null)
+                        {
+                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+
+                            if (previousA3Form != null)
+                            {
+                                var previousFormModel = previousA3Form.ToVM();
+
+                                A3 = (A3)previousFormModel;
+
+                                A3 = A3.SetBaseProperties(A3, BaseForm);
+
+                                //Set previous data provided questions to "no change" by default for new follow-up forms
+                                A3.NWINFPAR = 0;
+                                A3.NWINFKID = 0;
+                                A3.NWINFSIB = 0;
+                            }
+                        }
+                    }
+                }
             }
 
             return Page();
@@ -54,6 +85,15 @@ namespace UDS.Net.Forms.Pages.UDS4
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
+
+            // DEVNOTE: adjusting follow-up properties here so the A3 Javascript can continue to run without knowing packetKind
+            // If initial or initial for existing, follow-up properties will be null
+            if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
+            {
+                A3.NWINFPAR = null;
+                A3.NWINFSIB = null;
+                A3.NWINFKID = null;
+            }
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 
