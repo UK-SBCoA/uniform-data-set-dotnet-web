@@ -134,8 +134,7 @@ namespace UDS.Net.Forms.Pages.UDS4
             {
                 A3 = (A3)BaseForm; // class library should always handle new instances
 
-                //TODO: handle previous data based on form type
-                //If packet type is follow-up and id = 0 (loading a new form), then load previous form data
+                // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
                 if (A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
                 {
                     int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
@@ -152,31 +151,29 @@ namespace UDS.Net.Forms.Pages.UDS4
                             {
                                 var previousFormModel = previousA3Form.ToVM();
 
-                                //DEVNOTE: For now convert previous visit return (Form?) to form model and then cast it to A3
                                 A3 = (A3)previousFormModel;
 
-                                //DEVNOTE: Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
+                                // Set baseform properties so it does not copy ALL of the previous form data (Date, Initials, id, etc.)
+                                // Some properties need to be applied to the new follow-up form from the base form
                                 A3.Id = BaseForm.Id;
                                 A3.CreatedAt = BaseForm.CreatedAt;
                                 A3.INITIALS = BaseForm.INITIALS;
                                 A3.MODE = BaseForm.MODE;
                                 A3.ADMIN = BaseForm.ADMIN;
-                                //DEVNOTE: FRMDATE is showing up differently than the createdAt, maybe its the creation of the visit? I may have a misunderstanding of this property
                                 A3.FRMDATE = BaseForm.FRMDATE;
                                 A3.RMREAS = BaseForm.RMREAS;
                                 A3.RMMODE = BaseForm.RMMODE;
                                 A3.NOT = BaseForm.NOT;
                                 A3.LANG = BaseForm.LANG;
                                 A3.Status = BaseForm.Status;
+                                //Set previous data provided values to "no change" by default for new follow-up forms
                                 A3.NWINFPAR = 0;
                                 A3.NWINFKID = 0;
                                 A3.NWINFSIB = 0;
                             }
                         }
                     }
-
                 }
-
             }
 
             return Page();

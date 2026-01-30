@@ -10,8 +10,6 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A3 : FormModel
     {
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's biological mother or father?")]
-        [Range(0, 1)]
-        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
         public int? NWINFPAR { get; set; }
 
         [Display(Name = "Mother — birth year")]
@@ -76,7 +74,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? DADAGEO { get; set; }
 
         [Display(Name = "Since the last UDS visit, is new information available concerning the status of the participant's full siblings?")]
-        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
         public int? NWINFSIB { get; set; }
 
         [Display(Name = "How many full siblings does the participant have? (77 = adopted, unknown)")]
@@ -85,7 +82,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? SIBS { get; set; }
 
         [Display(Name = "Since the last UDS visit, is new information available concerning the stauts of the participant's biological children?")]
-        [RequiredOnFinalized(Services.Enums.PacketKind.F)]
         public int? NWINFKID { get; set; }
 
         [Display(Name = "How many known biological children does the participant have?")]
