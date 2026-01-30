@@ -208,7 +208,7 @@
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
                             <thead>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
@@ -217,7 +217,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.HRTATTACK"><span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HRTATTACK)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2b)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HRTATTACK"></p>
@@ -227,7 +227,7 @@
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HRTATTACK)" for="@Model.A5D2.HRTATTACK" items="Model.ConditionsListItems" ui-behaviors="Model.HRTATTACKBehavior"></table-cell-radio-buttons>
 
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -254,7 +254,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CARDARREST"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CARDARREST)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2c)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CARDARREST"></p>
@@ -263,7 +263,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CARDARREST)" for="@Model.A5D2.CARDARREST" items="Model.ConditionsListItems" ui-behaviors="Model.CARDARRESTBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -283,7 +283,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVAFIB"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVAFIB)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVAFIB"></p>
@@ -292,7 +292,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVAFIB)" for="@Model.A5D2.CVAFIB" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVANGIO"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVANGIO)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVANGIO"></p>
@@ -301,7 +301,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVANGIO)" for="@Model.A5D2.CVANGIO" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVBYPASS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVBYPASS)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2f)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVBYPASS"></p>
@@ -310,7 +310,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVBYPASS)" for="@Model.A5D2.CVBYPASS" items="Model.ConditionsListItems" ui-behaviors="Model.CVBYPASSBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -330,7 +330,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVPACDEF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVPACDEF)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2g)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVPACDEF"></p>
@@ -339,7 +339,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVPACDEF)" for="@Model.A5D2.CVPACDEF" items="Model.ConditionsListItems" ui-behaviors="Model.CVPACDEFBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -361,7 +361,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVCHF"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVCHF)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVCHF"></p>
@@ -370,7 +370,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVCHF)" for="@Model.A5D2.CVCHF" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVHVALVE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVHVALVE) </br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 2i)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVHVALVE"></p>
@@ -379,7 +379,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVHVALVE)" for="@Model.A5D2.CVHVALVE" items="Model.ConditionsListItems" ui-behaviors="Model.CVHVALVEBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -401,7 +401,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CVOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CVOTHR)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CVOTHR"></p>
@@ -410,7 +410,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CVOTHR)" for="@Model.A5D2.CVOTHR" items="Model.ConditionsListItems" ui-behaviors="Model.CVOTHRBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div></div>
@@ -437,7 +437,7 @@
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
                             <thead>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
@@ -446,7 +446,7 @@
                                 </tr>
                             </thead>
                             <tbody class="subsubcounterreset">
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CBSTROKE"><span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CBSTROKE)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 3b)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CBSTROKE"></p>
@@ -455,7 +455,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBSTROKE)" for="@Model.A5D2.CBSTROKE" items="Model.ConditionsListItems" ui-behaviors="Model.CBSTROKEBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -488,14 +488,14 @@
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Never improved</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Partially improved</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Improved/Back to normal</th>
                                     <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">Unknown</th>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="ml-6">
                                             <label asp-for="A5D2.STROKSTAT"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.STROKSTAT)</label>
@@ -507,7 +507,7 @@
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.STROKSTAT)" for="@Model.A5D2.STROKSTAT" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
 
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -536,14 +536,14 @@
                                 </tr>
                             </tbody>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
                                         <th class="py-3.5 pl-4 pr-3 text-start text-sm font-semibold text-gray-900 sm:pl-0">@item.Text</th>
                                     }
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CBTIA"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CBTIA)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4a)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.CBTIA"></p>
@@ -552,7 +552,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CBTIA)" for="@Model.A5D2.CBTIA" items="Model.ConditionsListItems" ui-behaviors="Model.CBTIABehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -581,7 +581,7 @@
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
                             <thead>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
@@ -590,7 +590,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.PD"><span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PD)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4b)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.PD"></p>
@@ -599,7 +599,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PD)" for="@Model.A5D2.PD" items="Model.ConditionsListNoRemoteItems" ui-behaviors="Model.PDbehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -618,7 +618,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.PDOTHR"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PDOTHR)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 4c)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.PDOTHR"></p>
@@ -627,7 +627,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PDOTHR)" for="@Model.A5D2.PDOTHR" items="Model.ConditionsListNoRemoteItems" ui-behaviors="Model.PDOTHRBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -645,7 +645,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.SEIZURES">
                                             <span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SEIZURES)</br>
@@ -659,7 +659,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.SEIZURES)" for="@Model.A5D2.SEIZURES" items="Model.ConditionsListItems" ui-behaviors="Model.SEIZURESBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -674,7 +674,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -692,7 +692,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.HEADACHE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADACHE)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HEADACHE"></p>
@@ -701,7 +701,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HEADACHE)" for="@Model.A5D2.HEADACHE" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.MS"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MS)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.MS"></p>
@@ -710,7 +710,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.MS)" for="@Model.A5D2.MS" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.HYDROCEPH"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYDROCEPH)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HYDROCEPH"></p>
@@ -719,7 +719,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYDROCEPH)" for="@Model.A5D2.HYDROCEPH" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                                             <label asp-for="A5D2.HEADIMP"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADIMP)</br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 4h)</span></label>
@@ -732,7 +732,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -859,7 +859,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -877,7 +877,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="@rowCSS">
                                             <label asp-for="@Model.A5D2.HEADINJURY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJURY)<br><span class="font-bold">(IF NO OR UNKNOWN, SKIP TO QUESTION 5a)</span></label>
@@ -890,7 +890,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HEADINJUNC"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJUNC)</label>
@@ -903,7 +903,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HEADINJCON"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJCON)</label>
@@ -916,7 +916,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HEADINJNUM"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HEADINJNUM)</label>
@@ -929,7 +929,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.FIRSTTBI">
@@ -945,7 +945,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.LASTTBI">
@@ -977,7 +977,7 @@
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
                             <thead>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
@@ -986,7 +986,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.DIABETES"><span class="counter invisible"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABETES)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5b)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.DIABETES"></p>
@@ -995,7 +995,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.DIABETES)" for="@Model.A5D2.DIABETES" items="Model.ConditionsListItems" ui-behaviors="Model.DIABETESBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.DIABTYPE"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.DIABTYPE)</label>
@@ -1008,7 +1008,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1099,7 +1099,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.DIABAGE">
@@ -1115,7 +1115,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.HYPERTEN"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERTEN)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5c)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HYPERTEN"></p>
@@ -1124,7 +1124,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERTEN)" for="@Model.A5D2.HYPERTEN" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERTENBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HYPERTAGE">
@@ -1140,7 +1140,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td>
                                         <label asp-for="A5D2.HYPERCHO"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HYPERCHO)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5d)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HYPERCHO"></p>
@@ -1149,7 +1149,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HYPERCHO)" for="@Model.A5D2.HYPERCHO" items="Model.ConditionsListItems" ui-behaviors="Model.HYPERCHOBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HYPERCHAGE">
@@ -1165,7 +1165,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.B12DEF"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.B12DEF)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.B12DEF"></p>
@@ -1174,7 +1174,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.B12DEF)" for="@Model.A5D2.B12DEF" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.THYROID"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.THYROID)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.THYROID"></p>
@@ -1183,7 +1183,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.THYROID)" for="@Model.A5D2.THYROID" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.ARTHRIT"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ARTHRIT)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5g)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.ARTHRIT"></p>
@@ -1192,7 +1192,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ARTHRIT)" for="@Model.A5D2.ARTHRIT" items="Model.ConditionsListItems" ui-behaviors="Model.ARTHRITCheckboxBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1266,7 +1266,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1335,7 +1335,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.INCONTU"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.INCONTU)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.INCONTU"></p>
@@ -1344,7 +1344,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.INCONTU)" for="@Model.A5D2.INCONTU" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.INCONTF"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.INCONTF)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.INCONTF"></p>
@@ -1353,7 +1353,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.INCONTF)" for="@Model.A5D2.INCONTF" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.APNEA"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.APNEA)</br><span class="font-bold text-sm">(IF ABSENT, REMOTE/INACTIVE, OR UNKNOWN, SKIP TO QUESTION 5j)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.APNEA"></p>
@@ -1362,7 +1362,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.APNEA)" for="@Model.A5D2.APNEA" items="Model.ConditionsListItems" ui-behaviors="Model.APNEABehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.CPAP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CPAP)</label>
@@ -1375,7 +1375,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.APNEAORAL"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.APNEAORAL)</label>
@@ -1388,7 +1388,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.RBD"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.RBD)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.RBD"></p>
@@ -1397,7 +1397,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.RBD)" for="@Model.A5D2.RBD" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.INSOMN"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.INSOMN)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.INSOMN"></p>
@@ -1406,7 +1406,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.INSOMN)" for="@Model.A5D2.INSOMN" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.OTHSLEEP"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHSLEEP)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.OTHSLEEP"></p>
@@ -1415,7 +1415,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHSLEEP)" for="@Model.A5D2.OTHSLEEP" items="Model.ConditionsListItems" ui-behaviors="Model.OTHSLEEPBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.OTHSLEEX">
@@ -1431,7 +1431,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.CANCERACTV">
                                             </span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.CANCERACTV)</br>
@@ -1444,7 +1444,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.CANCERACTV)" for="@Model.A5D2.CANCERACTV" items="Model.ConditionsListItems" ui-behaviors="Model.CANCERACTVBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1526,7 +1526,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1622,7 +1622,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1729,7 +1729,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1747,7 +1747,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.COVID19"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.COVID19)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5o)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.COVID19"></p>
@@ -1756,7 +1756,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.COVID19)" for="@Model.A5D2.COVID19" items="Model.ConditionsListItems" ui-behaviors="Model.COVID19Behavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 subsubcounterreset">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -1771,7 +1771,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.PULMONARY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PULMONARY)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.PULMONARY"></p>
@@ -1780,7 +1780,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PULMONARY)" for="@Model.A5D2.PULMONARY" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.KIDNEY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.KIDNEY)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5q)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.KIDNEY"></p>
@@ -1789,7 +1789,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.KIDNEY)" for="@Model.A5D2.KIDNEY" items="Model.ConditionsListItems" ui-behaviors="Model.KIDNEYBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.KIDNEYAGE">
@@ -1805,7 +1805,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.LIVER"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.LIVER)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5r)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.LIVER"></p>
@@ -1814,7 +1814,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.LIVER)" for="@Model.A5D2.LIVER" items="Model.ConditionsListItems" ui-behaviors="Model.LIVERBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.LIVERAGE">
@@ -1830,7 +1830,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.PVD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PVD)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5s)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.PVD"></p>
@@ -1839,7 +1839,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PVD)" for="@Model.A5D2.PVD" items="Model.ConditionsListItems" ui-behaviors="Model.PVDBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.PVDAGE">
@@ -1855,7 +1855,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.HIVDIAG"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.HIVDIAG)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 5t)</span></label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HIVDIAG"></p>
@@ -1864,7 +1864,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.HIVDIAG)" for="@Model.A5D2.HIVDIAG" items="Model.ConditionsListItems" ui-behaviors="Model.HIVDIAGBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.HIVAGE">
@@ -1880,7 +1880,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <label asp-for="A5D2.OTHERCOND"></span><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHERCOND)</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.OTHERCOND"></p>
@@ -1889,7 +1889,7 @@
                                     </td>
                                     <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHERCOND)" for="@Model.A5D2.OTHERCOND" items="Model.ConditionsListItems" ui-behaviors="Model.OTHCONDBehavior"></table-cell-radio-buttons>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-5 @rowCSS">
                                             <label asp-for="@Model.A5D2.OTHCONDX">
@@ -1922,7 +1922,7 @@
                     <div class="subcounterreset">
                         <table class="table-fixed min-w-full">
                             <thead>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <th class="w-[1000px]"></th>
                                     @foreach (var item in Model.ConditionsListItems)
                                     {
@@ -1931,7 +1931,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="4">
                                         <label class="text-base font-semibold text-gray-900"><span class="counter invisible"></span><span class="subcounter"></span> Depressive disorder</label>
                                         <p class="text-sm text-gray-500" asp-description-for="A5D2.HRTATTACK"></p>
@@ -1943,7 +1943,7 @@
                                     <td></td>
                                     <td></td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.MAJORDEP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.MAJORDEP)</label>
@@ -1954,7 +1954,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.MAJORDEP)" for="@Model.A5D2.MAJORDEP" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.OTHERDEP"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OTHERDEP)</label>
@@ -1965,7 +1965,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OTHERDEP)" for="@Model.A5D2.OTHERDEP" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 ml-5">
                                             <label asp-for="A5D2.DEPRTREAT"><span class="subsubcounter"></span> <span class="font-bold">If Recent/Active depressive disorder (Q6a1 or Q6a2), </span>@Html.DisplayNameFor(m => m.A5D2.DEPRTREAT)</label>
@@ -1989,7 +1989,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.BIPOLAR)" for="@Model.A5D2.BIPOLAR" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.SCHIZ"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.SCHIZ)</label>
@@ -2000,7 +2000,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.SCHIZ)" for="@Model.A5D2.SCHIZ" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.ANXIETY"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.ANXIETY)</br><span class="font-bold text-sm">(IF ABSENT OR UNKNOWN, SKIP TO QUESTION 6e)</span></label>
@@ -2011,7 +2011,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.ANXIETY)" for="@Model.A5D2.ANXIETY" items="Model.ConditionsListItems" ui-behaviors="Model.ANXIETYBehavior"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b subsubcounterreset">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200 subsubcounterreset">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.GENERALANX"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.GENERALANX)</label>
@@ -2022,7 +2022,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.GENERALANX)" for="@Model.A5D2.GENERALANX" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.PANICDIS"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PANICDIS)</label>
@@ -2033,7 +2033,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PANICDIS)" for="@Model.A5D2.PANICDIS" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="ml-5">
                                             <label asp-for="@Model.A5D2.OCD"><span class="subsubcounter"></span> @Html.DisplayNameFor(m => m.A5D2.OCD)</label>
@@ -2044,7 +2044,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.OCD)" for="@Model.A5D2.OCD" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div class="ml-6">
                                             <div>
@@ -2059,7 +2059,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-12">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -2074,7 +2074,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.PTSD"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A5D2.PTSD)</label>
@@ -2085,7 +2085,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PTSD)" for="@Model.A5D2.PTSD" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.NPSYDEV">
@@ -2101,7 +2101,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.NPSYDEV)" for="@Model.A5D2.NPSYDEV" items="Model.ConditionsListItems"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td>
                                         <div>
                                             <label asp-for="@Model.A5D2.PSYCDIS">
@@ -2114,7 +2114,7 @@
                                         <table-cell-radio-buttons id="@Html.IdFor(m => m.A5D2.PSYCDIS)" for="@Model.A5D2.PSYCDIS" items="Model.ConditionsListItems" ui-behaviors="Model.PSYCDISBehavior"></table-cell-radio-buttons>
                                     </td>
                                 </tr>
-                                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
                                     <td colspan="8">
                                         <div class="ml-6">
                                             <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
