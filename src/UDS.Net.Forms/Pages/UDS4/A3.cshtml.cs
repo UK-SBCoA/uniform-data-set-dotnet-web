@@ -64,11 +64,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                             {
                                 var previousFormModel = previousA3Form.ToVM();
 
+                                // On first creation, set all parent, sibling, and children properties 
                                 A3 = (A3)previousFormModel;
 
-                                A3 = A3.SetBaseProperties(A3, BaseForm);
+                                // Reset base properties to match the current form
+                                A3.SetBaseProperties(BaseForm);
 
-                                //Set previous data provided questions to "no change" by default for new follow-up forms
+                                // Set previous data provided questions to "no change" by default for new follow-up forms
                                 A3.NWINFPAR = 0;
                                 A3.NWINFKID = 0;
                                 A3.NWINFSIB = 0;
