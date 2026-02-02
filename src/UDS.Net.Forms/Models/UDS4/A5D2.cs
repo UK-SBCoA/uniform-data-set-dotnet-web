@@ -23,7 +23,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
         public int? TOBAC30 { get; set; }
         [Display(Name = "If the participant quit smoking, specify the age at which they last smoked (i.e., quit)")]
-        [RegularExpression("^([89]|[1-9]\\d|10\\d|110||888|999)$", ErrorMessage = "Valid range is 8-110 or 888 or 999")]
+        [RegularExpression("^([89]|[1-9]\\d|10\\d|110|888|999)$", ErrorMessage = "Valid range is 8-110 or 888 or 999")]
         [RequiredIf(nameof(TOBAC100), "1", ErrorMessage = "Please specify.")]
         public int? QUITSMOK { get; set; }
         [Display(Name = "In the past 12 months, how often has the participant had a drink containing alcohol?")]
@@ -82,7 +82,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CVBYPASS { get; set; }
-        [Display(Name = "Age at most recent coronary artery bypass surgery")]
+        [Display(Name = "Age at most recent surgery")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVBYPASS), 1, 2, ErrorMessage = "Please specify.")]
         public int? BYPASSAGE { get; set; }
@@ -90,7 +90,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CVPACDEF { get; set; }
-        [Display(Name = "Age at first pacemaker and/or defibrillator implantation")]
+        [Display(Name = "Age at first implantation")]
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CVPACDEF), 1, 2, ErrorMessage = "Please specify.")]
         public int? PACDEFAGE { get; set; }
@@ -126,7 +126,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKAGE { get; set; }
-        [Display(Name = "What is status of stroke symptoms?")]
+        [Display(Name = "What is the status of stroke symptoms?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKSTAT { get; set; }
@@ -190,23 +190,23 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? HEADIMP { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: American football")]
+        [Display(Name = "American football")]
         public bool? IMPAMFOOT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Soccer")]
+        [Display(Name = "Soccer")]
         public bool? IMPSOCCER { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Ice hockey")]
+        [Display(Name = "Ice hockey")]
         public bool? IMPHOCKEY { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Boxing or mixed martial arts")]
+        [Display(Name = "Boxing or mixed martial arts")]
         public bool? IMPBOXING { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Other contact sport")]
+        [Display(Name = "Other contact sport")]
         public bool? IMPSPORT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Intimate partner violence")]
+        [Display(Name = "Intimate partner violence")]
         public bool? IMPIPV { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Military service")]
+        [Display(Name = "Military service")]
         public bool? IMPMILIT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Physical assault")]
+        [Display(Name = "Physical assault")]
         public bool? IMPASSAULT { get; set; }
-        [Display(Name = "Source of exposure for repeated hits to the head: Other cause (SPECIFY)")]
+        [Display(Name = "Other cause (SPECIFY)")]
         public bool? IMPOTHER { get; set; }
         [MaxLength(60)]
         [RequiredIf(nameof(IMPOTHER), "true", ErrorMessage = "Please specify.")]
@@ -243,7 +243,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? DIABETES { get; set; }
-        [Display(Name = "Diabetes type")]
+        [Display(Name = "Which type?")]
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         public int? DIABTYPE { get; set; }
@@ -260,6 +260,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Unknown")]
         public bool? DIABUNK { get; set; }
         [Display(Name = "Age at diabetes diagnosis")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please specify.")]
         public int? DIABAGE { get; set; }
         [Display(Name = "Hypertension (or taking medication for hypertension)")]
@@ -290,25 +291,25 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? ARTHRIT { get; set; }
-        [Display(Name = "Type of arthritis: Rheumatoid")]
+        [Display(Name = "Rheumatoid")]
         public bool? ARTHRRHEUM { get; set; }
-        [Display(Name = "Type of arthritis: Osteoarthritis")]
+        [Display(Name = "Osteoarthritis")]
         public bool? ARTHROSTEO { get; set; }
-        [Display(Name = "Type of arthritis: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? ARTHROTHR { get; set; }
         [Display(Name = "Specify other type of arthritis")]
         [MaxLength(60)]
         [RequiredIf(nameof(ARTHROTHR), "true", ErrorMessage = "Please specify.")]
         public string? ARTHTYPX { get; set; }
-        [Display(Name = "Type of arthritis: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? ARTHTYPUNK { get; set; }
-        [Display(Name = "Upper extremity affected by arthritis")]
+        [Display(Name = "Upper extremity")]
         public bool? ARTHUPEX { get; set; }
-        [Display(Name = "Lower extremity affected by arthritis")]
+        [Display(Name = "Lower extremity")]
         public bool? ARTHLOEX { get; set; }
-        [Display(Name = "Spine affected by arthritis")]
+        [Display(Name = "Spine")]
         public bool? ARTHSPIN { get; set; }
-        [Display(Name = "Region affected by arthritis unknown")]
+        [Display(Name = "Unknown")]
         public bool? ARTHUNK { get; set; }
         [Display(Name = "Incontinence—urinary (occurring at least weekly)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
@@ -326,11 +327,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? CPAP { get; set; }
-        [Display(Name = "Typical use of an oral device for sleep apnea at night over the past 12 months?")]
+        [Display(Name = "Typical use of an oral device or implanted breathing pacemaker for sleep apnea at night over the past 12 months?")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredIf(nameof(APNEA), "1", ErrorMessage = "Response required")]
         public int? APNEAORAL { get; set; }
-        [Display(Name = "REM sleep behavior disorder")]
+        [Display(Name = "REM sleep behavior disorder (RBD)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? RBD { get; set; }
@@ -346,49 +347,49 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIfRange(nameof(OTHSLEEP), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHSLEEX { get; set; }
-        [Display(Name = "Cancer, primary or metastatic (Report all known diagnoses. Exclude non-melanoma skin cancer.)")]
+        [Display(Name = "Cancer, primary or metastatic")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CANCERACTV { get; set; }
-        [Display(Name = "Type of cancer: Primary/non-metastatic")]
+        [Display(Name = "Primary/non-metastatic")]
         public bool? CANCERPRIM { get; set; }
-        [Display(Name = "Type of cancer: Metastatic (CHECK ALL THAT APPLY)")]
+        [Display(Name = "Metastatic (CHECK ALL THAT APPLY)")]
         public bool? CANCERMETA { get; set; }
-        [Display(Name = "Type of metastatic cancer: Metatstic to brain")]
+        [Display(Name = "Metastatic to brain")]
         public bool? CANCMETBR { get; set; }
-        [Display(Name = "Type of metastatic cancer: Metastatic to sites other than brain")]
+        [Display(Name = "Metastatic to sites other than brain")]
         public bool? CANCMETOTH { get; set; }
-        [Display(Name = "Type of cancer: Unknown")]
+        [Display(Name = "Unknown")]
         public bool? CANCERUNK { get; set; }
-        [Display(Name = "Primary site of cancer: Blood")]
+        [Display(Name = "Blood")]
         public bool? CANCBLOOD { get; set; }
-        [Display(Name = "Primary site of cancer: Breast")]
+        [Display(Name = "Breast")]
         public bool? CANCBREAST { get; set; }
-        [Display(Name = "Primary site of cancer: Colon")]
+        [Display(Name = "Colon")]
         public bool? CANCCOLON { get; set; }
-        [Display(Name = "Primary site of cancer: Lung")]
+        [Display(Name = "Lung")]
         public bool? CANCLUNG { get; set; }
-        [Display(Name = "Primary site of cancer: Prostate")]
+        [Display(Name = "Prostate")]
         public bool? CANCPROST { get; set; }
-        [Display(Name = "Primary site of cancer: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? CANCOTHER { get; set; }
         [Display(Name = "Specify other primary site of cancer")]
         [MaxLength(60)]
         [RequiredIf(nameof(CANCOTHER), "true", ErrorMessage = "Please specify.")]
         public string? CANCOTHERX { get; set; }
-        [Display(Name = "Type of cancer treatment: Radiation")]
+        [Display(Name = "Radiation")]
         public bool? CANCRAD { get; set; }
-        [Display(Name = "Type of cancer treatment: Surgical resection")]
+        [Display(Name = "Surgical resection")]
         public bool? CANCRESECT { get; set; }
-        [Display(Name = "Type of cancer treatment: Immunotherapy")]
+        [Display(Name = "Immunotherapy")]
         public bool? CANCIMMUNO { get; set; }
-        [Display(Name = "Type of cancer treatment: Bone marrow transplant")]
+        [Display(Name = "Bone marrow transplant")]
         public bool? CANCBONE { get; set; }
-        [Display(Name = "Type of cancer treatment: Chemotherapy")]
+        [Display(Name = "Chemotherapy")]
         public bool? CANCCHEMO { get; set; }
-        [Display(Name = "Type of cancer treatment: Hormone therapy")]
+        [Display(Name = "Hormone therapy")]
         public bool? CANCHORM { get; set; }
-        [Display(Name = "Type of cancer treatment: Other (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? CANCTROTH { get; set; }
         [Display(Name = "Specify other type of cancer treatment")]
         [MaxLength(60)]
@@ -402,7 +403,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? COVID19 { get; set; }
-        [Display(Name = "COVID-19 infection requiring hospitalization?")]
+        [Display(Name = "Requiring hospitalization?")]
         [RegularExpression("^(0|1|9)$", ErrorMessage = "Valid range is 0, 1, or 9")]
         [RequiredIfRange(nameof(COVID19), 1, 2, ErrorMessage = "Please specify.")]
         public int? COVIDHOSP { get; set; }
@@ -414,7 +415,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? KIDNEY { get; set; }
-        [Display(Name = "Age at chronic kidney disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(KIDNEY), 1, 2, ErrorMessage = "Please specify.")]
         public int? KIDNEYAGE { get; set; }
@@ -422,7 +423,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? LIVER { get; set; }
-        [Display(Name = "Age at liver disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(LIVER), 1, 2, ErrorMessage = "Please specify.")]
         public int? LIVERAGE { get; set; }
@@ -430,15 +431,15 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PVD { get; set; }
-        [Display(Name = "Age at peripheral vascular disease diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(PVD), 1, 2, ErrorMessage = "Please specify.")]
         public int? PVDAGE { get; set; }
-        [Display(Name = "Human Immunodeficiency Virus")]
+        [Display(Name = "Human Immunodeficiency Virus (HIV)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? HIVDIAG { get; set; }
-        [Display(Name = "Age at HIV diagnosis")]
+        [Display(Name = "Age at diagnosis")]
         [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(HIVDIAG), 1, 2, ErrorMessage = "Please specify.")]
         public int? HIVAGE { get; set; }
@@ -449,11 +450,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Specify other medical conditions or procedures")]
         [RequiredIfRange(nameof(OTHERCOND), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHCONDX { get; set; }
-        [Display(Name = "Major depressive disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Major depressive disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? MAJORDEP { get; set; }
-        [Display(Name = "Other specified depressive disorder (DSm-5-TR criteria)")]
+        [Display(Name = "Other specified depressive disorder (DSm-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? OTHERDEP { get; set; }
@@ -466,11 +467,11 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? BIPOLAR { get; set; }
-        [Display(Name = "Schizophrenia or other psychosis disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Schizophrenia or other psychosis disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SCHIZ { get; set; }
-        [Display(Name = "Anxiety disorder (DSM-5-TR criteria)")]
+        [Display(Name = "Anxiety disorder (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? ANXIETY { get; set; }
@@ -494,7 +495,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         [RequiredIfRange(nameof(OTHANXDIS), 1, 2, ErrorMessage = "Please specify.")]
         public string? OTHANXDISX { get; set; }
-        [Display(Name = "Post-traumatic stress disorder (PTSD) (DSM-5-TR criteria)")]
+        [Display(Name = "Post-traumatic stress disorder (PTSD) (DSM-5-TR criteria*)")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PTSD { get; set; }
@@ -514,26 +515,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [RegularExpression("^([5-9]|1\\d|2[0-5]|888|999)$", ErrorMessage = "Valid range is 5-25 or 888 or 999")]
         public int? MENARCHE { get; set; }
         [Display(Name = "How old was the participant when they had their last menstrual period?")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
+        [RegularExpression("^(1\\d|[2-6]\\d|70|888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
         [RequiredIfRegex(nameof(MENARCHE), "^([5-9]|1\\d|2[0-5]|999)$", ErrorMessage = "Required if MENARCHE is 5 - 25 or 999")]
         public int? NOMENSAGE { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to natural menopause")]
+        [Display(Name = "Natural menopause")]
         public bool? NOMENSNAT { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to hysterectomy (surgical removal of uterus)")]
+        [Display(Name = "Hysterectomy (surgical removal of uterus)")]
         public bool? NOMENSHYST { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to surgical removal of both ovaries")]
+        [Display(Name = "Surgical removal of both ovaries")]
         public bool? NOMENSSURG { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to chemotherapy for cancer or another condition")]
+        [Display(Name = "Chemotherapy for cancer or another condition")]
         public bool? NOMENSCHEM { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to radiation treatment or other damage/injury to reproductive organs")]
+        [Display(Name = "Radiation treatment or other damage/injury to reproductive organs")]
         public bool? NOMENSRAD { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to hormonal supplements (e.g. the Pill, injections, Mirena, HRT)")]
+        [Display(Name = "Hormonal supplements (e.g. the Pill, injections, Mirena, HRT)")]
         public bool? NOMENSHORM { get; set; }
-        [Display(Name = "Participant has stopped having menstrual periods due to anti-estrogen medication")]
+        [Display(Name = "Anti-estrogen medication such as Tamoxifen, anostrozole (Arimidex), exemestane (Aromasin), or letrozole (Femara)")]
         public bool? NOMENSESTR { get; set; }
-        [Display(Name = "Unsure of reason participant has stopped having menstrual periods")]
+        [Display(Name = "Unsure")]
         public bool? NOMENSUNK { get; set; }
-        [Display(Name = "Other reason participant has stopped having menstrual periods (SPECIFY)")]
+        [Display(Name = "Other (SPECIFY)")]
         public bool? NOMENSOTH { get; set; }
         [Display(Name = "Specify other reason participant has stopped having menstrual periods")]
         [MaxLength(60)]
@@ -576,7 +577,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? BCSTARTAGE { get; set; }
 
         [Display(Name = "Age at last use of birth control pills")]
-        [RegularExpression("^(1\\d|[2-6]\\d|70||888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
+        [RegularExpression("^(1\\d|[2-6]\\d|70|888|999)$", ErrorMessage = "Valid range is 10-70 or 888 or 999")]
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Required if BCPILLS = Yes")]
         public int? BCENDAGE { get; set; }
 
