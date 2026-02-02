@@ -21,6 +21,7 @@ namespace UDS.Net.Forms.Pages.Packets
             _packetService = packetService;
         }
 
+        //DEVNOTE: Feature will allow user to upload NACC error csv in the index view
         public async Task<IActionResult> OnGetAsync(string[] filter, int pageSize = 10, int pageIndex = 1, string search = "")
         {
             var allowedStatuses = new List<PacketStatus>
