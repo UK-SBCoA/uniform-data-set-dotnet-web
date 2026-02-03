@@ -9,7 +9,7 @@
         <h2 class="text-xl font-semibold text-gray-900">All packets</h2>
         <p class="mt-2 text-sm text-gray-700">A list of finalized, submitted, and passed/failed.</p>
     </div>
-    <a asp-page="/Packets/BulkSubmission" class="ml-4 inline-flex items-center rounded-lg bg-blue-400 px-4 py-2 text-sm font-medium text-white shadow">
+    <a asp-page="../PacketSubmissions/BulkPacketSubmission/Index" class="ml-4 inline-flex items-center rounded-lg bg-blue-400 px-4 py-2 text-sm font-medium text-white shadow">
         Bulk packet submission
     </a>
     @if (Model.Packets != null)
