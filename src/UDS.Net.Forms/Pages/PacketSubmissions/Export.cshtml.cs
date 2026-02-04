@@ -166,33 +166,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a1 != null)
             {
                 csv.WriteHeader<A1Record>();
-
-                if (a1.Fields is A1FollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A1FollowUpFormFields>();
-                }
-                else if (a1.Fields is A1FormFields)
-                {
-                    csv.WriteHeaderLowercase<A1FormFields>();
-                }
+                csv.WriteHeaderLowercase<A1FormFields>();
             }
             if (a1a != null)
             {
                 csv.WriteHeader<A1aRecord>();
-
-                if (a1a.Fields is A1aFormFields)
-                {
-                    csv.WriteHeaderLowercase<A1aFormFields>();
-                }
+                csv.WriteHeaderLowercase<A1aFormFields>();
             }
             if (a2 != null)
             {
                 csv.WriteHeader<A2Record>();
-
-                if (a2.Fields is A2FollowUpFormFields)
-                    csv.WriteHeaderLowercase<A2FollowUpFormFields>();
-                else
-                    csv.WriteHeaderLowercase<A2FormFields>();
+                csv.WriteHeaderLowercase<A2FormFields>();
             }
             if (a3 != null)
             {
@@ -201,18 +185,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 List<A3FamilyMemberFormFields> siblingFields;
                 List<A3FamilyMemberFormFields> kidFields;
 
-                if (a3.Fields is A3FollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A3FollowUpFormFields>();
-                    siblingFields = ((A3FollowUpFormFields)a3.Fields).SiblingFormFields;
-                    kidFields = ((A3FollowUpFormFields)a3.Fields).KidsFormFields;
-                }
-                else
-                {
-                    csv.WriteHeaderLowercase<A3FormFields>();
-                    siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields;
-                    kidFields = ((A3FormFields)a3.Fields).KidsFormFields;
-                }
+                csv.WriteHeaderLowercase<A3FormFields>();
+                siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields;
+                kidFields = ((A3FormFields)a3.Fields).KidsFormFields;
 
                 // Siblings
                 foreach (var siblingField in siblingFields)
@@ -251,17 +226,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A4aTreatmentFormFields> treatments;
 
-                if (a4a.Fields is A4aFollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A4aFollowUpFormFields>();
-                    treatments = ((A4aFollowUpFormFields)a4a.Fields).TreatmentFormFields;
-                }
-                else
-                {
-                    csv.WriteHeaderLowercase<A4aFormFields>();
-                    treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields;
-                }
-
+                csv.WriteHeaderLowercase<A4aFormFields>();
+                treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields;
                 foreach (var treatment in treatments)
                 {
                     foreach (var prop in a4aProps)
@@ -276,11 +242,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a5d2 != null)
             {
                 csv.WriteHeader<A5D2Record>();
-
-                if (a5d2.Fields is A5D2FollowUpFormFields)
-                    csv.WriteHeaderLowercase<A5D2FollowUpFormFields>();
-                else
-                    csv.WriteHeaderLowercase<A5D2FormFields>();
+                csv.WriteHeaderLowercase<A5D2FormFields>();
             }
             if (b1 != null)
             {
