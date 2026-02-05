@@ -15,7 +15,4 @@
 	<ItemGroup>
 		<PackageReference Include="UDS.Net.Dto" Version="11.0.1" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="DomainModels\Forms\FollowUp\" />
-	</ItemGroup>
 </Project>
