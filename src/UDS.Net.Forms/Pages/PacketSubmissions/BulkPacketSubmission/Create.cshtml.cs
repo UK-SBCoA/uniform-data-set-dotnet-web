@@ -38,7 +38,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
         {
             if (ErrorFileUpload == null)
             {
-                return NotFound("Error upload file not found");
+                ModelState.AddModelError("ErrorFileUpload", "File not found");
+
+                return Page();
             }
 
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -48,29 +50,21 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
 
             int rowIndex = 0;
 
-            //DEVNOTE: variables for submitted packets to filter the CSV data
-            //Ptid must == legacyId, visitNum must match, and the alert must not have been previously accepted
+            //Setting page size to 999 to retrieve all packets by status
+            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
-            //DEVNOTE: We only want to get errors for packets that are in the submitted status as well
-            //1. Get all packets with status = 2 (submitted)
-            //2. Create list of participation ids of packets returned
-            //3. in the if, check if the PTID is in the list of participation Ids
-
-            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 10, 1, [PacketStatus.Submitted.ToString()]);
-
-            //DEVNOTE: can get legacyId (PTID) from participation
-            //ParticipationId and legacyId are NOT always equal
+            //NACC PTID from error file will be the same as the legacy ID for a participation
             var legacyIdsFromPackets = new List<string>();
 
             foreach (var submittedPacket in submittedPackets)
             {
-                //legacyIdsFromPackets.Add(await _participationService.GetById(User.Identity.Name, submittedPacket.ParticipationId, false));
-                //DEVNOTE: getById allows "include visit" as a boolean argument. This could help?
                 var participation = await _participationService.GetById(User.Identity.Name, submittedPacket.ParticipationId);
-                var legacyId = participation.LegacyId;
+                var legacyId = participation?.LegacyId;
 
-                //DEVNOTE: legacyId is a string
-                legacyIdsFromPackets.Add(legacyId);
+                if (legacyId != null)
+                {
+                    legacyIdsFromPackets.Add(legacyId);
+                }
             }
 
             using (var stream = ErrorFileUpload.OpenReadStream())
@@ -85,6 +79,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
                     {
                         var record = csv.GetRecord<NACCErrorModel>();
 
+                        //NACC PTID from error file must have a matching legacy ID in participation tbl or the participation does not exist
                         if (record.Approved.ToLower() == "false" && legacyIdsFromPackets.Contains(record.Ptid))
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
@@ -103,26 +98,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
                         }
 
-                        //Update current packet with newPacketSubmissionError list
-                        //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
-
                         rowIndex++;
                     }
                 }
-                catch (FormatException e)
-                {
-                    //TempData["fileError"] = "Row " + rowIndex.ToString() + " format contains invalid characters " + e.Message;
-
-                    //PacketSubmissionErrors = new List<NACCErrorModel>();
-
-                    return Page();
-                }
                 catch (Exception e)
                 {
-                    //On failure, dispay temp error and empty PacketSubmissionErrors list before returning page
-                    //TempData["fileError"] = "Uploaded file is invalid, please submit a valid file";
-
-                    //PacketSubmissionErrors = new List<NACCErrorModel>();
+                    ModelState.AddModelError("ErrorFileUpload", "An error reading the file has occured");
 
                     return Page();
                 }
@@ -134,73 +115,72 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkSubmission()
         {
-            //DEVNOTE: dirty approach here, reget the submitted packets for use with updating packet submission
-            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 10, 1, [PacketStatus.Submitted.ToString()]);
+            //Setting page size to 999 to retrieve all packets by status
+            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
             var submittedParticipationList = new List<Participation>();
 
             foreach (var packet in submittedPackets)
             {
-                //legacyIdsFromPackets.Add(await _participationService.GetById(User.Identity.Name, packet.ParticipationId, false));
-                //DEVNOTE: getById allows "include visit" as a boolean argument. This could help?
                 var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
-                submittedParticipationList.Add(participation);
+                if (participation != null)
+                {
+                    submittedParticipationList.Add(participation);
+                }
             }
 
-            //DEVNOTE: Group packet submission errors by PTID
             var packetSubmissionErrorsGrouped = PacketSubmissionErrors.GroupBy(p => p.Ptid);
 
-            //DEVNOTE: For each group of ptids update packet submissions
             foreach (var errorGroup in packetSubmissionErrorsGrouped)
             {
                 var groupPtid = errorGroup.ElementAt(0).Ptid;
-                var groupVisitnum = errorGroup.ElementAt(0).Visitnum;
 
                 var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
 
                 var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id).FirstOrDefault();
 
-                var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
-
-                var groupSubmissionId = groupPacket.Submissions.Where(s => s.ErrorCount == null).Select(i => i.Id).FirstOrDefault();
-
-                List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
-
-                foreach (var error in errorGroup)
+                if (groupVisit != null)
                 {
-                    PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
-                        id: 0,
-                        packetSubmissionId: groupSubmissionId,
-                        formKind: error.Code.Split("-")[0].ToUpper(),
-                        message: error.Message,
-                        assignedTo: groupPacket.CreatedBy,
-                        level: GetErrorLevel(error.Type),
-                        status: PacketSubmissionErrorStatus.Pending,
-                        statusChangedBy: null,
-                        createdAt: DateTime.Now,
-                        createdBy: User.Identity.Name,
-                        modifiedBy: null,
-                        deletedBy: null,
-                        isDeleted: false,
-                        location: error.Location?.ToUpper(),
-                        value: error.Value
-                    );
+                    var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
 
-                    groupPacketSubmissionErrors.Add(newPacketSubmissionError);
-                }
+                    var groupSubmission = groupPacket?.Submissions.Where(s => s.ErrorCount == null).FirstOrDefault();
 
-                //Update currentPacket status
-                if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                {
-                    groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
-                }
-                else
-                {
-                    return NotFound($"Unable to set packet Id ${groupPacket.Id} status to: {PacketStatus.FailedErrorChecks}");
-                }
+                    List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
 
-                await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmissionId, groupPacketSubmissionErrors);
+                    if (groupPacket != null && groupSubmission != null)
+                    {
+                        foreach (var error in errorGroup)
+                        {
+                            PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
+                                id: 0,
+                                packetSubmissionId: groupSubmission.Id,
+                                formKind: error.Code.Split("-")[0].ToUpper(),
+                                message: error.Message,
+                                assignedTo: groupPacket.CreatedBy,
+                                level: GetErrorLevel(error.Type),
+                                status: PacketSubmissionErrorStatus.Pending,
+                                statusChangedBy: null,
+                                createdAt: DateTime.Now,
+                                createdBy: User.Identity.Name,
+                                modifiedBy: null,
+                                deletedBy: null,
+                                isDeleted: false,
+                                location: error.Location?.ToUpper(),
+                                value: error.Value
+                            );
+
+                            groupPacketSubmissionErrors.Add(newPacketSubmissionError);
+                        }
+
+                        if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                        {
+                            groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+
+                            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
+                        }
+                    }
+                }
             }
 
             return RedirectToPage("/Packets/Index");
