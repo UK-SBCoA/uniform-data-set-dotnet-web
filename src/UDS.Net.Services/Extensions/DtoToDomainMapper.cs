@@ -4,7 +4,6 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
@@ -215,14 +214,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A5D2Dto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new A5D2FollowUpFormFields(dto);
-                }
-                else
-                {
-                    formFields = new A5D2FormFields(dto);
-                }
+                formFields = new A5D2FormFields(dto);
             }
             else if (dto is B1Dto)
             {

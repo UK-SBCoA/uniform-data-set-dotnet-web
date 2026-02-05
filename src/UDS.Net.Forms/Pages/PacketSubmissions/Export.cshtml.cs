@@ -12,7 +12,6 @@ using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -492,9 +491,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A5D2Record(a5d2));
 
-                if (a5d2.Fields is A5D2FollowUpFormFields followUpA5D2)
-                    csv.WriteRecord(followUpA5D2);
-                else if (a5d2.Fields is A5D2FormFields normalA5D2)
+                if (a5d2.Fields is A5D2FormFields normalA5D2)
                     csv.WriteRecord(normalA5D2);
             }
             if (b1 != null)

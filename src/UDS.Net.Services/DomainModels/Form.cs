@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -97,7 +95,7 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A2")
             {
-               Fields = new A2FormFields();
+                Fields = new A2FormFields();
             }
             else if (Kind == "A3")
             {
@@ -113,9 +111,7 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A5D2")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A5D2FollowUpFormFields()
-                    : new A5D2FormFields();
+                Fields = new A5D2FormFields();
             }
             else if (Kind == "B1")
             {
