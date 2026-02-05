@@ -398,23 +398,6 @@ namespace UDS.Net.Forms.Extensions
 
         public static IFormFields GetFormFields(this A4a vm, PacketKind packetKind)
         {
-            if (packetKind == PacketKind.F)
-            {
-                return new A4aFollowUpFormFields
-                {
-                    ADVEVENT = vm.ADVEVENT,
-                    ARIAE = vm.ARIAE,
-                    ARIAH = vm.ARIAH,
-                    ADVERSEOTH = vm.ADVERSEOTH,
-                    ADVERSEOTX = vm.ADVERSEOTX,
-                    TRTBIOMARK = vm.TRTBIOMARK,
-                    NEWTREAT = vm.NEWTREAT,
-                    NEWADEVENT = vm.NEWADEVENT,
-                    TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
-                };
-            }
-            else
-            {
                 return new A4aFormFields
                 {
                     ADVEVENT = vm.ADVEVENT,
@@ -425,7 +408,6 @@ namespace UDS.Net.Forms.Extensions
                     TRTBIOMARK = vm.TRTBIOMARK,
                     TreatmentFormFields = vm.Treatments.Select(s => s.ToEntity()).ToList()
                 };
-            }
         }
 
         public static A4aTreatmentFormFields ToEntity(this A4aTreatment vm)

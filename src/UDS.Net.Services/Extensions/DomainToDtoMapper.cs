@@ -269,10 +269,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A5D2FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A4aFollowUpFormFields)
-            {
-                dto = ((A4aFollowUpFormFields)form.Fields).ToDto(form.Id);
-            }
             else if (form.Fields is A4aFormFields)
             {
                 dto = ((A4aFormFields)form.Fields).ToDto(form.Id);
@@ -368,9 +364,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A4a")
             {
-                if (form.Fields is A4aFollowUpFormFields followup)
-                    dto = followup.ToDto(form.Id);
-                else if (form.Fields is A4aFormFields initial)
+                if (form.Fields is A4aFormFields initial)
                     dto = initial.ToDto(form.Id);
             }
             else if (formKind == "B1")
@@ -1122,45 +1116,6 @@ namespace UDS.Net.Services.Extensions
                 ADVERSEOTH = fields.ADVERSEOTH,
                 ADVERSEOTX = fields.ADVERSEOTX,
                 TRTBIOMARK = fields.TRTBIOMARK
-            };
-
-            foreach (var treatment in fields.TreatmentFormFields)
-            {
-                var treatmentDto = treatment.ToDto(formId);
-                if (treatment.TreatmentIndex == 1)
-                    dto.Treatment1 = treatmentDto;
-                else if (treatment.TreatmentIndex == 2)
-                    dto.Treatment2 = treatmentDto;
-                else if (treatment.TreatmentIndex == 3)
-                    dto.Treatment3 = treatmentDto;
-                else if (treatment.TreatmentIndex == 4)
-                    dto.Treatment4 = treatmentDto;
-                else if (treatment.TreatmentIndex == 5)
-                    dto.Treatment5 = treatmentDto;
-                else if (treatment.TreatmentIndex == 6)
-                    dto.Treatment6 = treatmentDto;
-                else if (treatment.TreatmentIndex == 7)
-                    dto.Treatment7 = treatmentDto;
-                else if (treatment.TreatmentIndex == 8)
-                    dto.Treatment8 = treatmentDto;
-
-            }
-
-            return dto;
-        }
-
-        public static A4aDto ToDto(this A4aFollowUpFormFields fields, int formId)
-        {
-            var dto = new A4aDto()
-            {
-                ADVEVENT = fields.ADVEVENT,
-                ARIAE = fields.ARIAE,
-                ARIAH = fields.ARIAH,
-                ADVERSEOTH = fields.ADVERSEOTH,
-                ADVERSEOTX = fields.ADVERSEOTX,
-                TRTBIOMARK = fields.TRTBIOMARK,
-                NEWTREAT = fields.NEWTREAT,
-                NEWADEVENT = fields.NEWADEVENT
             };
 
             foreach (var treatment in fields.TreatmentFormFields)

@@ -469,12 +469,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A4aTreatmentFormFields> treatments;
 
-                if (a4a.Fields is A4aFollowUpFormFields followUpA4a)
-                {
-                    csv.WriteRecord(followUpA4a);
-                    treatments = followUpA4a.TreatmentFormFields.ToList();
-                }
-                else if (a4a.Fields is A4aFormFields normalA4a)
+                if (a4a.Fields is A4aFormFields normalA4a)
                 {
                     csv.WriteRecord(normalA4a);
                     treatments = normalA4a.TreatmentFormFields.ToList();

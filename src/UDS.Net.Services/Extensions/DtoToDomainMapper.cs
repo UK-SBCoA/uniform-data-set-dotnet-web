@@ -211,14 +211,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A4aDto)
             {
-                if (packetKind == PacketKind.F)
-                {
-                    formFields = new A4aFollowUpFormFields(dto);
-                }
-                else
-                {
-                    formFields = new A4aFormFields(dto);
-                }
+                formFields = new A4aFormFields(dto);
             }
             else if (dto is A5D2Dto)
             {

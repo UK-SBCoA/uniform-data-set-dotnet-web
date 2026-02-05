@@ -339,10 +339,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A4aFollowUpFormFields)
-                {
-                    vm = ((A4aFollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A4aFormFields)
                 {
                     vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
@@ -711,29 +707,6 @@ namespace UDS.Net.Forms.Extensions
 
             };
         }
-        public static A4a ToVM(this A4aFollowUpFormFields fields, int formId)
-        {
-            return new A4a()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                ADVEVENT = fields.ADVEVENT,
-                ARIAE = fields.ARIAE,
-                ARIAH = fields.ARIAH,
-                ADVERSEOTH = fields.ADVERSEOTH,
-                ADVERSEOTX = fields.ADVERSEOTX,
-                TRTBIOMARK = fields.TRTBIOMARK,
-                NEWTREAT = fields.NEWTREAT,
-                NEWADEVENT = fields.NEWADEVENT,
-                Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
-
-            };
-        }
-
-
         public static A4aTreatment ToVM(this A4aTreatmentFormFields fields, int formId)
         {
             return new A4aTreatment()
