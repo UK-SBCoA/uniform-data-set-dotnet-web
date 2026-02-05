@@ -331,10 +331,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A2FormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A3FollowUpFormFields)
-                {
-                    vm = ((A3FollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A3FormFields)
                 {
                     vm = ((A3FormFields)form.Fields).ToVM(form.Id);
@@ -643,37 +639,6 @@ namespace UDS.Net.Forms.Extensions
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS,
-                Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
-                Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
-            };
-        }
-
-        public static A3 ToVM(this A3FollowUpFormFields fields, int formId)
-        {
-            return new A3()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                MOMYOB = fields.MOMYOB,
-                MOMDAGE = fields.MOMDAGE,
-                MOMETPR = fields.MOMETPR,
-                MOMETSEC = fields.MOMETSEC,
-                MOMMEVAL = fields.MOMMEVAL,
-                MOMAGEO = fields.MOMAGEO,
-                DADYOB = fields.DADYOB,
-                DADDAGE = fields.DADDAGE,
-                DADETPR = fields.DADETPR,
-                DADETSEC = fields.DADETSEC,
-                DADMEVAL = fields.DADMEVAL,
-                DADAGEO = fields.DADAGEO,
-                SIBS = fields.SIBS,
-                KIDS = fields.KIDS,
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
             };

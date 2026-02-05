@@ -344,53 +344,25 @@ namespace UDS.Net.Forms.Extensions
         }
         public static IFormFields GetFormFields(this A3 vm, PacketKind packetKind)
         {
-            if (packetKind == PacketKind.F)
+            return new A3FormFields
             {
-                return new A3FollowUpFormFields
-                {
-                    MOMYOB = vm.MOMYOB,
-                    MOMDAGE = vm.MOMDAGE,
-                    MOMETPR = vm.MOMETPR,
-                    MOMETSEC = vm.MOMETSEC,
-                    MOMMEVAL = vm.MOMMEVAL,
-                    MOMAGEO = vm.MOMAGEO,
-                    DADYOB = vm.DADYOB,
-                    DADDAGE = vm.DADDAGE,
-                    DADETPR = vm.DADETPR,
-                    DADETSEC = vm.DADETSEC,
-                    DADMEVAL = vm.DADMEVAL,
-                    DADAGEO = vm.DADAGEO,
-                    SIBS = vm.SIBS,
-                    KIDS = vm.KIDS,
-                    NWINFPAR = vm.NWINFPAR,
-                    NWINFSIB = vm.NWINFSIB,
-                    NWINFKID = vm.NWINFKID,
-                    SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
-                    KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
-                };
-            }
-            else
-            {
-                return new A3FormFields
-                {
-                    MOMYOB = vm.MOMYOB,
-                    MOMDAGE = vm.MOMDAGE,
-                    MOMETPR = vm.MOMETPR,
-                    MOMETSEC = vm.MOMETSEC,
-                    MOMMEVAL = vm.MOMMEVAL,
-                    MOMAGEO = vm.MOMAGEO,
-                    DADYOB = vm.DADYOB,
-                    DADDAGE = vm.DADDAGE,
-                    DADETPR = vm.DADETPR,
-                    DADETSEC = vm.DADETSEC,
-                    DADMEVAL = vm.DADMEVAL,
-                    DADAGEO = vm.DADAGEO,
-                    SIBS = vm.SIBS,
-                    KIDS = vm.KIDS,
-                    SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
-                    KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
-                };
-            }
+                MOMYOB = vm.MOMYOB,
+                MOMDAGE = vm.MOMDAGE,
+                MOMETPR = vm.MOMETPR,
+                MOMETSEC = vm.MOMETSEC,
+                MOMMEVAL = vm.MOMMEVAL,
+                MOMAGEO = vm.MOMAGEO,
+                DADYOB = vm.DADYOB,
+                DADDAGE = vm.DADDAGE,
+                DADETPR = vm.DADETPR,
+                DADETSEC = vm.DADETSEC,
+                DADMEVAL = vm.DADMEVAL,
+                DADAGEO = vm.DADAGEO,
+                SIBS = vm.SIBS,
+                KIDS = vm.KIDS,
+                SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
+                KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList()
+            };
         }
 
         public static A3FamilyMemberFormFields ToEntity(this A3FamilyMember vm)

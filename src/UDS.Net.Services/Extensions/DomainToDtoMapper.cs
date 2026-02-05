@@ -253,10 +253,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A2FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A3FollowUpFormFields)
-            {
-                dto = ((A3FollowUpFormFields)form.Fields).ToDto(form.Id);
-            }
             else if (form.Fields is A3FormFields)
             {
                 dto = ((A3FormFields)form.Fields).ToDto(form.Id);
@@ -355,9 +351,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A3")
             {
-                if (form.Fields is A3FollowUpFormFields followup)
-                    dto = followup.ToDto(form.Id);
-                else if (form.Fields is A3FormFields initial)
+                if (form.Fields is A3FormFields initial)
                     dto = initial.ToDto(form.Id);
             }
             else if (formKind == "A4")
@@ -735,113 +729,6 @@ namespace UDS.Net.Services.Extensions
 
             return dto;
         }
-
-        public static A3Dto ToDto(this A3FollowUpFormFields fields, int formId)
-        {
-            var dto = new A3Dto()
-            {
-                MOMYOB = fields.MOMYOB,
-                MOMDAGE = fields.MOMDAGE,
-                MOMETPR = fields.MOMETPR,
-                MOMETSEC = fields.MOMETSEC,
-                MOMMEVAL = fields.MOMMEVAL,
-                MOMAGEO = fields.MOMAGEO,
-                DADYOB = fields.DADYOB,
-                DADDAGE = fields.DADDAGE,
-                DADETPR = fields.DADETPR,
-                DADETSEC = fields.DADETSEC,
-                DADMEVAL = fields.DADMEVAL,
-                DADAGEO = fields.DADAGEO,
-                SIBS = fields.SIBS,
-                KIDS = fields.KIDS,
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID,
-            };
-
-            foreach (var sib in fields.SiblingFormFields)
-            {
-                var sibDto = sib.ToDto(formId);
-                if (sib.FamilyMemberIndex == 1)
-                    dto.SIB1 = sibDto;
-                else if (sib.FamilyMemberIndex == 2)
-                    dto.SIB2 = sibDto;
-                else if (sib.FamilyMemberIndex == 3)
-                    dto.SIB3 = sibDto;
-                else if (sib.FamilyMemberIndex == 4)
-                    dto.SIB4 = sibDto;
-                else if (sib.FamilyMemberIndex == 5)
-                    dto.SIB5 = sibDto;
-                else if (sib.FamilyMemberIndex == 6)
-                    dto.SIB6 = sibDto;
-                else if (sib.FamilyMemberIndex == 7)
-                    dto.SIB7 = sibDto;
-                else if (sib.FamilyMemberIndex == 8)
-                    dto.SIB8 = sibDto;
-                else if (sib.FamilyMemberIndex == 9)
-                    dto.SIB9 = sibDto;
-                else if (sib.FamilyMemberIndex == 10)
-                    dto.SIB10 = sibDto;
-                else if (sib.FamilyMemberIndex == 11)
-                    dto.SIB11 = sibDto;
-                else if (sib.FamilyMemberIndex == 12)
-                    dto.SIB12 = sibDto;
-                else if (sib.FamilyMemberIndex == 13)
-                    dto.SIB13 = sibDto;
-                else if (sib.FamilyMemberIndex == 14)
-                    dto.SIB14 = sibDto;
-                else if (sib.FamilyMemberIndex == 15)
-                    dto.SIB15 = sibDto;
-                else if (sib.FamilyMemberIndex == 16)
-                    dto.SIB16 = sibDto;
-                else if (sib.FamilyMemberIndex == 17)
-                    dto.SIB17 = sibDto;
-                else if (sib.FamilyMemberIndex == 18)
-                    dto.SIB18 = sibDto;
-                else if (sib.FamilyMemberIndex == 19)
-                    dto.SIB19 = sibDto;
-                else if (sib.FamilyMemberIndex == 20)
-                    dto.SIB20 = sibDto;
-            }
-
-            foreach (var kid in fields.KidsFormFields)
-            {
-                var kidDto = kid.ToDto(formId);
-                if (kid.FamilyMemberIndex == 1)
-                    dto.KID1 = kidDto;
-                else if (kid.FamilyMemberIndex == 2)
-                    dto.KID2 = kidDto;
-                else if (kid.FamilyMemberIndex == 3)
-                    dto.KID3 = kidDto;
-                else if (kid.FamilyMemberIndex == 4)
-                    dto.KID4 = kidDto;
-                else if (kid.FamilyMemberIndex == 5)
-                    dto.KID5 = kidDto;
-                else if (kid.FamilyMemberIndex == 6)
-                    dto.KID6 = kidDto;
-                else if (kid.FamilyMemberIndex == 7)
-                    dto.KID7 = kidDto;
-                else if (kid.FamilyMemberIndex == 8)
-                    dto.KID8 = kidDto;
-                else if (kid.FamilyMemberIndex == 9)
-                    dto.KID9 = kidDto;
-                else if (kid.FamilyMemberIndex == 10)
-                    dto.KID10 = kidDto;
-                else if (kid.FamilyMemberIndex == 11)
-                    dto.KID11 = kidDto;
-                else if (kid.FamilyMemberIndex == 12)
-                    dto.KID12 = kidDto;
-                else if (kid.FamilyMemberIndex == 13)
-                    dto.KID13 = kidDto;
-                else if (kid.FamilyMemberIndex == 14)
-                    dto.KID14 = kidDto;
-                else if (kid.FamilyMemberIndex == 15)
-                    dto.KID15 = kidDto;
-            }
-
-            return dto;
-        }
-
         public static A3FamilyMemberDto ToDto(this A3FamilyMemberFormFields fields, int formId)
         {
             return new A3FamilyMemberDto

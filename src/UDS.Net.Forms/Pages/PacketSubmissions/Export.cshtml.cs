@@ -399,20 +399,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FollowUpFormFields followUpA3)
-                    csv.WriteRecord(followUpA3);
-                else if (a3.Fields is A3FormFields normalA3)
+                if (a3.Fields is A3FormFields normalA3)
                     csv.WriteRecord(normalA3);
 
                 List<A3FamilyMemberFormFields> siblings;
                 List<A3FamilyMemberFormFields> kids;
 
-                if (a3.Fields is A3FollowUpFormFields followUpKids)
-                {
-                    siblings = followUpKids.SiblingFormFields;
-                    kids = followUpKids.KidsFormFields;
-                }
-                else if (a3.Fields is A3FormFields normalKids)
+                if (a3.Fields is A3FormFields normalKids)
                 {
                     siblings = normalKids.SiblingFormFields;
                     kids = normalKids.KidsFormFields;
