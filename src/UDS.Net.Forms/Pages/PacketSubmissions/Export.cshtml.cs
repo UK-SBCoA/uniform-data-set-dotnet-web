@@ -341,9 +341,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A1Record(a1));
 
-                if(a1.Fields is  A1FormFields a1Fields)
-                csv.WriteRecord(a1Fields);
-                
+                if (a1.Fields is A1FormFields a1Fields)
+                    csv.WriteRecord(a1Fields);
+
             }
             if (a1a != null)
             {
@@ -378,9 +378,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 {
                     IEnumerable<PropertyInfo> a2FormFieldsProps;
 
-                    if (a2.Fields is A2FollowUpFormFields)
-                        a2FormFieldsProps = typeof(A2FollowUpFormFields).GetProperties();
-                    else if (a2.Fields is A2FormFields)
+                    if (a2.Fields is A2FormFields)
                         a2FormFieldsProps = typeof(A2FormFields).GetProperties();
                     else
                         a2FormFieldsProps = Enumerable.Empty<PropertyInfo>();
@@ -393,9 +391,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 }
                 else
                 {
-                    if (a2.Fields is A2FollowUpFormFields followUpA2)
-                        csv.WriteRecord(followUpA2);
-                    else if (a2.Fields is A2FormFields normalA2)
+                    if (a2.Fields is A2FormFields normalA2)
                         csv.WriteRecord(normalA2);
                 }
             }

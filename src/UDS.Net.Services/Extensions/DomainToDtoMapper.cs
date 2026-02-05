@@ -249,10 +249,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A2FollowUpFormFields)
-            {
-                dto = ((A2FollowUpFormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A2FormFields)
             {
                 dto = ((A2FormFields)form.Fields).ToDto();
@@ -354,9 +350,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A2")
             {
-                if (form.Fields is A2FollowUpFormFields followup)
-                    dto = followup.ToDto();
-                else if (form.Fields is A2FormFields initial)
+                if (form.Fields is A2FormFields initial)
                     dto = initial.ToDto();
             }
             else if (formKind == "A3")
@@ -638,25 +632,6 @@ namespace UDS.Net.Services.Extensions
                 INMEMTEN = fields.INMEMTEN,
             };
         }
-        public static A2Dto ToDto(this A2FollowUpFormFields fields)
-        {
-            return new A2Dto()
-            {
-                INRELTO = fields.INRELTO,
-                INKNOWN = fields.INKNOWN,
-                INLIVWTH = fields.INLIVWTH,
-                INCNTMOD = fields.INCNTMOD,
-                INCNTMDX = fields.INCNTMDX,
-                INCNTFRQ = fields.INCNTFRQ,
-                INCNTTIM = fields.INCNTTIM,
-                INRELY = fields.INRELY,
-                INMEMWORS = fields.INMEMWORS,
-                INMEMTROUB = fields.INMEMTROUB,
-                INMEMTEN = fields.INMEMTEN,
-                NEWINF = fields.NEWINF == 1 ? true : (fields.NEWINF == null ? (bool?)null : false),
-            };
-        }
-
 
         public static A3Dto ToDto(this A3FormFields fields, int formId)
         {

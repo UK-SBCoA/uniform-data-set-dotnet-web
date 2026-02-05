@@ -327,10 +327,6 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A1aFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A2FollowUpFormFields)
-                {
-                    vm = ((A2FollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A2FormFields)
                 {
                     vm = ((A2FormFields)form.Fields).ToVM(form.Id);
@@ -621,30 +617,6 @@ namespace UDS.Net.Forms.Extensions
                 INMEMWORS = fields.INMEMWORS,
                 INMEMTROUB = fields.INMEMTROUB,
                 INMEMTEN = fields.INMEMTEN,
-            };
-        }
-
-        public static A2 ToVM(this A2FollowUpFormFields fields, int formId)
-        {
-            return new A2()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                INRELTO = fields.INRELTO,
-                INKNOWN = fields.INKNOWN,
-                INLIVWTH = fields.INLIVWTH,
-                INCNTMOD = fields.INCNTMOD,
-                INCNTMDX = fields.INCNTMDX,
-                INCNTFRQ = fields.INCNTFRQ,
-                INCNTTIM = fields.INCNTTIM,
-                INRELY = fields.INRELY,
-                INMEMWORS = fields.INMEMWORS,
-                INMEMTROUB = fields.INMEMTROUB,
-                INMEMTEN = fields.INMEMTEN,
-                NEWINF = fields.NEWINF,
             };
         }
 

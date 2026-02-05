@@ -363,14 +363,14 @@ namespace UDS.Net.Services.DomainModels
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
             object a1 = GetFields<A1FormFields>("A1");
-            object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
+            object a2 = GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
 
             if (a1 != null && a2 != null)
             {
                 var livSitua = GetInt<A1FormFields>(a1, f => f.LIVSITUA);
-                var inLivWth = GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FormFields>(a2, f => f.INLIVWTH);
+                var inLivWth = GetInt<A2FormFields>(a2, f => f.INLIVWTH);
 
                 if (inLivWth == 1 && livSitua == 1)
                 {
@@ -401,8 +401,8 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            object a1 =  GetFields<A1FormFields>("A1");
-            object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
+            object a1 = GetFields<A1FormFields>("A1");
+            object a2 = GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
             object b9 = GetFields<B9FormFields>("B9");
@@ -410,8 +410,8 @@ namespace UDS.Net.Services.DomainModels
 
             if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
-                var inRelTo = GetInt<A2FollowUpFormFields>(a2, f => f.INRELTO) ?? GetInt<A2FormFields>(a2, f => f.INRELTO);
-                var inLivWth = GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FormFields>(a2, f => f.INLIVWTH);
+                var inRelTo = GetInt<A2FormFields>(a2, f => f.INRELTO);
+                var inLivWth = GetInt<A2FormFields>(a2, f => f.INLIVWTH);
                 var anx = GetInt<B5FormFields>(b5, f => f.ANX);
                 var anxiety = GetInt<A5D2FollowUpFormFields>(a5d2, f => f.ANXIETY) ?? GetInt<A5D2FormFields>(a5d2, f => f.ANXIETY);
                 var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX);
