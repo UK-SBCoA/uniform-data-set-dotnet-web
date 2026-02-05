@@ -152,7 +152,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
             var packetSubmissionErrorsGrouped = PacketSubmissionErrors.GroupBy(p => p.Ptid);
 
             //DEVNOTE: For each group of ptids update packet submissions
-            foreach(var errorGroup in packetSubmissionErrorsGrouped)
+            foreach (var errorGroup in packetSubmissionErrorsGrouped)
             {
                 var groupPtid = errorGroup.ElementAt(0).Ptid;
                 var groupVisitnum = errorGroup.ElementAt(0).Visitnum;
@@ -167,7 +167,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
 
                 List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
 
-                foreach(var error in errorGroup)
+                foreach (var error in errorGroup)
                 {
                     PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
                         id: 0,
@@ -190,20 +190,20 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
                     groupPacketSubmissionErrors.Add(newPacketSubmissionError);
                 }
 
+                //Update currentPacket status
+                if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                {
+                    groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+                }
+                else
+                {
+                    return NotFound($"Unable to set packet Id ${groupPacket.Id} status to: {PacketStatus.FailedErrorChecks}");
+                }
+
                 await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmissionId, groupPacketSubmissionErrors);
             }
 
-
-            //DEVNOTE: need to get the packetSubmissionId from the item from _packetService.GetById with submission.ErrorCount == null
-
-            //DEVNOTE: Things I need
-            //current packet (Packet type) - 
-            //Packet Submission Id (int)
-            //Packet submission errors (List<PacketSubmissionErrors>)
-
-            //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
-
-            return Page();
+            return RedirectToPage("/Packets/Index");
         }
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs
