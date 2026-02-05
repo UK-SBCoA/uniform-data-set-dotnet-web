@@ -245,10 +245,6 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A1aFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A1FollowUpFormFields)
-            {
-                dto = ((A1FollowUpFormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A1FormFields)
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
@@ -353,9 +349,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A1")
             {
-                if (form.Fields is A1FollowUpFormFields followup)
-                    dto = followup.ToDto();
-                else if (form.Fields is A1FormFields initial)
+                if (form.Fields is A1FormFields initial)
                     dto = initial.ToDto();
             }
             else if (formKind == "A2")
@@ -624,42 +618,6 @@ namespace UDS.Net.Services.Extensions
                 REFOTHMEDX = fields.REFOTHMEDX,
                 REFOTHREGX = fields.REFOTHREGX,
                 REFOTHX = fields.REFOTHX
-            };
-        }
-
-        public static A1Dto ToDto(this A1FollowUpFormFields fields)
-        {
-            return new A1Dto()
-            {
-                GENMAN = fields.GENMAN.HasValue ? 1 : 0,
-                GENWOMAN = fields.GENWOMAN.HasValue ? 1 : 0,
-                GENTRMAN = fields.GENTRMAN.HasValue ? 1 : 0,
-                GENTRWOMAN = fields.GENTRWOMAN.HasValue ? 1 : 0,
-                GENNONBI = fields.GENNONBI.HasValue ? 1 : 0,
-                GENTWOSPIR = fields.GENTWOSPIR.HasValue ? 1 : 0,
-                GENOTH = fields.GENOTH.HasValue ? 1 : 0,
-                GENOTHX = fields.GENOTHX,
-                GENDKN = fields.GENDKN.HasValue ? 1 : 0,
-                GENNOANS = fields.GENNOANS.HasValue ? 1 : 0,
-                SEXORNGAY = fields.SEXORNGAY.HasValue ? 1 : 0,
-                SEXORNHET = fields.SEXORNHET.HasValue ? 1 : 0,
-                SEXORNBI = fields.SEXORNBI.HasValue ? 1 : 0,
-                SEXORNTWOS = fields.SEXORNTWOS.HasValue ? 1 : 0,
-                SEXORNOTH = fields.SEXORNOTH.HasValue ? 1 : 0,
-                SEXORNOTHX = fields.SEXORNOTHX,
-                SEXORNDNK = fields.SEXORNDNK.HasValue ? 1 : 0,
-                SEXORNNOAN = fields.SEXORNNOAN.HasValue ? 1 : 0,
-                MARISTAT = fields.MARISTAT,
-                LIVSITUA = fields.LIVSITUA,
-                RESIDENC = fields.RESIDENC,
-                ZIP = fields.ZIP,
-                MEDVA = fields.MEDVA,
-                EXRTIME = fields.EXRTIME,
-                MEMWORS = fields.MEMWORS,
-                MEMTROUB = fields.MEMTROUB,
-                MEMTEN = fields.MEMTEN,
-                ADISTATE = fields.ADISTATE,
-                ADINAT = fields.ADINAT,
             };
         }
 

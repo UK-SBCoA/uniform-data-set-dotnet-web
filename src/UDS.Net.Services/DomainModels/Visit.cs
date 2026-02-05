@@ -362,14 +362,14 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
+            object a1 = GetFields<A1FormFields>("A1");
             object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
 
             if (a1 != null && a2 != null)
             {
-                var livSitua = GetInt<A1FollowUpFormFields>(a1, f => f.LIVSITUA) ?? GetInt<A1FormFields>(a1, f => f.LIVSITUA);
+                var livSitua = GetInt<A1FormFields>(a1, f => f.LIVSITUA);
                 var inLivWth = GetInt<A2FollowUpFormFields>(a2, f => f.INLIVWTH) ?? GetInt<A2FormFields>(a2, f => f.INLIVWTH);
 
                 if (inLivWth == 1 && livSitua == 1)
@@ -401,7 +401,7 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            object a1 = PACKET == PacketKind.F ? (object)GetFields<A1FollowUpFormFields>("A1") : GetFields<A1FormFields>("A1");
+            object a1 =  GetFields<A1FormFields>("A1");
             object a2 = PACKET == PacketKind.F ? (object)GetFields<A2FollowUpFormFields>("A2") : GetFields<A2FormFields>("A2");
             object a5d2 = PACKET == PacketKind.F ? (object)GetFields<A5D2FollowUpFormFields>("A5D2") : GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");

@@ -341,14 +341,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A1Record(a1));
 
-                if (a1.Fields is A1FollowUpFormFields followUpA1)
-                {
-                    csv.WriteRecord(followUpA1);
-                }
-                else if (a1.Fields is A1FormFields normalA1)
-                {
-                    csv.WriteRecord(normalA1);
-                }
+                if(a1.Fields is  A1FormFields a1Fields)
+                csv.WriteRecord(a1Fields);
+                
             }
             if (a1a != null)
             {

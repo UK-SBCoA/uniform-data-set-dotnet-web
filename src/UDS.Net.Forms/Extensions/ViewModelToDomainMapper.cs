@@ -152,43 +152,6 @@ namespace UDS.Net.Forms.Extensions
 
         public static IFormFields GetFormFields(this A1 vm, PacketKind packetKind)
         {
-            if (packetKind == PacketKind.F)
-            {
-                return new A1FollowUpFormFields
-                {
-                    MARISTAT = vm.MARISTAT,
-                    LIVSITUA = vm.LIVSITUA,
-                    RESIDENC = vm.RESIDENC,
-                    ZIP = vm.ZIP,
-                    GENMAN = vm.GENMAN ? true : null,
-                    GENWOMAN = vm.GENWOMAN ? true : null,
-                    GENTRMAN = vm.GENTRMAN ? true : null,
-                    GENTRWOMAN = vm.GENTRWOMAN ? true : null,
-                    GENNONBI = vm.GENNONBI ? true : null,
-                    GENTWOSPIR = vm.GENTWOSPIR ? true : null,
-                    GENOTH = vm.GENOTH ? true : null,
-                    GENOTHX = vm.GENOTHX,
-                    GENDKN = vm.GENDKN ? true : null,
-                    GENNOANS = vm.GENNOANS ? true : null,
-                    SEXORNGAY = vm.SEXORNGAY ? true : null,
-                    SEXORNHET = vm.SEXORNHET ? true : null,
-                    SEXORNBI = vm.SEXORNBI ? true : null,
-                    SEXORNTWOS = vm.SEXORNTWOS ? true : null,
-                    SEXORNOTH = vm.SEXORNOTH ? true : null,
-                    SEXORNOTHX = vm.SEXORNOTHX,
-                    SEXORNDNK = vm.SEXORNDNK ? true : null,
-                    SEXORNNOAN = vm.SEXORNNOAN ? true : null,
-                    MEDVA = vm.MEDVA,
-                    EXRTIME = vm.EXRTIME,
-                    MEMWORS = vm.MEMWORS,
-                    MEMTROUB = vm.MEMTROUB,
-                    MEMTEN = vm.MEMTEN,
-                    ADISTATE = vm.ADISTATE,
-                    ADINAT = vm.ADINAT,
-                };
-            }
-            else
-            {
                 return new A1FormFields
                 {
                     BIRTHMO = vm.BIRTHMO,
@@ -301,7 +264,6 @@ namespace UDS.Net.Forms.Extensions
                     REFOTHX = vm.REFOTHX
                 };
             }
-        }
 
         public static IFormFields GetFormFields(this A1a vm, PacketKind packetKind)
         {

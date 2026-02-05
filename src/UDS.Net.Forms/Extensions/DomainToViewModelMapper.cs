@@ -319,11 +319,7 @@ namespace UDS.Net.Forms.Extensions
 
             if (form.Fields != null)
             {
-                if (form.Fields is A1FollowUpFormFields)
-                {
-                    vm = ((A1FollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A1FormFields)
+                if (form.Fields is A1FormFields)
                 {
                     vm = ((A1FormFields)form.Fields).ToVM(form.Id);
                 }
@@ -539,46 +535,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static A1 ToVM(this A1FollowUpFormFields fields, int formId)
-        {
-            return new A1()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                GENMAN = fields.GENMAN.HasValue && fields.GENMAN.Value == true ? true : false,
-                GENWOMAN = fields.GENWOMAN.HasValue && fields.GENWOMAN.Value == true ? true : false,
-                GENTRMAN = fields.GENTRMAN.HasValue && fields.GENTRMAN.Value == true ? true : false,
-                GENTRWOMAN = fields.GENTRWOMAN.HasValue && fields.GENTRWOMAN.Value == true ? true : false,
-                GENNONBI = fields.GENNONBI.HasValue && fields.GENNONBI.Value == true ? true : false,
-                GENTWOSPIR = fields.GENTWOSPIR.HasValue && fields.GENTWOSPIR.Value == true ? true : false,
-                GENOTH = fields.GENOTH.HasValue && fields.GENOTH.Value == true ? true : false,
-                GENOTHX = fields.GENOTHX,
-                GENDKN = fields.GENDKN.HasValue && fields.GENDKN.Value == true ? true : false,
-                GENNOANS = fields.GENNOANS.HasValue && fields.GENNOANS.Value == true ? true : false,
-                SEXORNGAY = fields.SEXORNGAY.HasValue && fields.SEXORNGAY.Value == true ? true : false,
-                SEXORNHET = fields.SEXORNHET.HasValue && fields.SEXORNHET.Value == true ? true : false,
-                SEXORNBI = fields.SEXORNBI.HasValue && fields.SEXORNBI.Value == true ? true : false,
-                SEXORNTWOS = fields.SEXORNTWOS.HasValue && fields.SEXORNTWOS.Value == true ? true : false,
-                SEXORNOTH = fields.SEXORNOTH.HasValue && fields.SEXORNOTH.Value == true ? true : false,
-                SEXORNOTHX = fields.SEXORNOTHX,
-                SEXORNDNK = fields.SEXORNDNK.HasValue && fields.SEXORNDNK.Value == true ? true : false,
-                SEXORNNOAN = fields.SEXORNNOAN.HasValue && fields.SEXORNNOAN.Value == true ? true : false,
-                MARISTAT = fields.MARISTAT,
-                LIVSITUA = fields.LIVSITUA,
-                RESIDENC = fields.RESIDENC,
-                ZIP = fields.ZIP,
-                MEDVA = fields.MEDVA,
-                EXRTIME = fields.EXRTIME,
-                MEMWORS = fields.MEMWORS,
-                MEMTROUB = fields.MEMTROUB,
-                MEMTEN = fields.MEMTEN,
-                ADISTATE = fields.ADISTATE,
-                ADINAT = fields.ADINAT,
-            };
-        }
 
         public static A1a ToVM(this A1aFormFields fields, int formId)
         {

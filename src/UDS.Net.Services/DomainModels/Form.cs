@@ -89,9 +89,7 @@ namespace UDS.Net.Services.DomainModels
         {
             if (Kind == "A1")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A1FollowUpFormFields()
-                    : new A1FormFields();
+                Fields = new A1FormFields();
             }
             else if (Kind == "A1a")
             {
