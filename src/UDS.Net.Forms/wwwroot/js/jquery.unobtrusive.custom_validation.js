@@ -628,7 +628,28 @@ $.validator.unobtrusive.adapters.add(
         options.messages.requiredifregex = options.message;
     },
 );
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/* AllowCode777*/
 
+$.validator.addMethod("allowcode777", function (value, element, params) {
+
+  let packetKind = $("[name='" + params.packetkind + "']").val();
+
+  if (value === "777" && packetKind !== "F") {
+    return false;
+  }
+
+  return true;
+});
+
+$.validator.unobtrusive.adapters.add("allowcode777", ["packetkind"],
+  function (options) {
+    options.rules.allowcode777 = {
+      packetkind: options.params.packetkind
+    };
+    options.messages.allowcode777 = options.message;
+  }
+);
 function RemoveValidationMessages(elementName, validationMessage) {
     $(`input[name='${elementName}']`).removeClass("input-validation-error");
     $(`span[data-valmsg-for="${elementName}"]`).empty();

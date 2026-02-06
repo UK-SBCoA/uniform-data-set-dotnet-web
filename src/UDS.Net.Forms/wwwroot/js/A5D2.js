@@ -71,10 +71,15 @@ $(document).ready(function () {
 
   NOMENSAGEInput.addEventListener("change", ToggleNOMENSAGECheckboxes)
 
-  MENARCHEInput.addEventListener("change", MENARCHEBehavior)
+  //MENARCHE only exists on IVP visit
+  if (MENARCHEInput != null) {
+    MENARCHEInput.addEventListener("change", MENARCHEBehavior)
+  }
 
   //On load methods
   toggleDeprTreat();
-  MENARCHEBehavior();
+  if (MENARCHEInput != null) {
+    MENARCHEBehavior();
+  }
   ToggleNOMENSAGECheckboxes()
 });
