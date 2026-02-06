@@ -1,5 +1,5 @@
 ﻿@page
-@model UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission.IndexModel
+@model UDS.Net.Forms.Pages.BulkErrorSubmission.IndexModel
 @{
     ViewData["Title"] = "Bulk Packet Submission";
 }
@@ -9,7 +9,7 @@
         <h2 class="text-xl font-semibold text-gray-900">Bulk packet submission</h2>
         <p class="mt-2 text-sm text-gray-700">Upload the full error CSV returned from NACC</p>
     </div>
-    <turbo-frame id="BulkPacketSubmission">
+    <turbo-frame id="BulkErrorSubmission">
         <form method="post" asp-page="Create" asp-page-handler="DisplayBulkSubmission" enctype="multipart/form-data">
             <div class="grid grid-cols-4">
                 <div class="col-start-2 col-span-2 grid gap-4">

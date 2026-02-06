@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
 using UDS.Net.Forms.Models;
 
-namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
+namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 {
     public class IndexModel : PageModel
     {

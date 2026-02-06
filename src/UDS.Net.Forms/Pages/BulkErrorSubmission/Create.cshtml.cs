@@ -11,7 +11,7 @@ using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
-namespace UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission
+namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 {
     public class CreateModel : PageModel
     {

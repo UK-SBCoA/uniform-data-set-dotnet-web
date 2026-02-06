@@ -1,10 +1,10 @@
 ﻿@page
-@model UDS.Net.Forms.Pages.PacketSubmissions.BulkPacketSubmission.CreateModel
+@model UDS.Net.Forms.Pages.BulkErrorSubmission.CreateModel
 @{
     var previousPTID = 0;
 }
 
-<turbo-frame id="BulkPacketSubmission">
+<turbo-frame id="BulkErrorSubmission">
     <form method="post" asp-page-handler="ConfirmBulkSubmission">
         <div class="flex justify-center py-3">
             <div asp-validation-summary="All" class="mt-2 text-sm text-red-600"></div>
