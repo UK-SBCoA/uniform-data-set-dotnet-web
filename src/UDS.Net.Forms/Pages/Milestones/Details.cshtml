@@ -1,4 +1,6 @@
 ﻿@page
+@using UDS.Net.API.Entities
+@using UDS.Net.Services.DomainModels.Submission
 @model UDS.Net.Forms.Pages.Milestones.DetailsModel
 
 @{
@@ -284,6 +286,48 @@
                     <input type="text" readonly asp-for="Milestone.IsDeleted" />
                 </td>
             </tr>
+        </tbody>
+    </table>
+</div>
+<div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">M1 Submissions</h2>
+    <p>Count: @Model.Milestone.M1Submissions.Count</p>
+
+    <table class="w-full text-left border border-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="w-1/4 px-4 py-2">Submission date</th>
+                <th class="w-1/4 px-4 py-2">Download</th>
+                <th class="w-1/4 px-4 py-2">Error count</th>
+                <th class="w-1/4 px-4 py-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var submission in Model.Milestone.M1Submissions)
+            {
+                <tr class="border-t border-gray-100" id="m1_submission_@submission.Id">
+                    <td class="px-4 py-2">
+                        @submission.SubmissionDate
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <a asp-route-id="@submission.Id">
+                            Download
+                        </a>
+                    </td>
+
+                    <td class="px-4 py-2">
+                        @(submission.ErrorCount)
+                    </td>
+
+                    <td class="px-4 py-2">
+                        <div class="grid grid-cols-2 justify-items-center">
+                            <span class="text-sm text-gray-600">Success</span>
+                            <span class="text-sm text-gray-600">Errors returned</span>
+                        </div>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

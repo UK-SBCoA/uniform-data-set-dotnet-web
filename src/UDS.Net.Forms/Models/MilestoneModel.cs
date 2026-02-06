@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using UDS.Net.Dto;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.DomainModels;
@@ -13,6 +14,8 @@ namespace UDS.Net.Forms.Models
     public class MilestoneModel
     {
         public int Id { get; set; }
+
+        public List<M1SubmissionDto> M1Submissions { get; set; } = new();
 
         [Required]
         public int ParticipationId { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Dto;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
@@ -17,6 +18,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
         public string PageTitle { get; set; }
 
+        public List<M1Dto> M1Submissions { get; set; } = new List<M1Dto>();
         public MilestonePageModel(IMilestoneService milestoneService, IParticipationService participationService)
         {
             _milestoneService = milestoneService;
@@ -177,6 +179,12 @@ namespace UDS.Net.Forms.Models.PageModels
 
             Milestone.Participation = participation.ToVM();
             PageTitle += "Participant " + Milestone.Participation.LegacyId;
+
+            M1Submissions = await _milestoneService.FindByLegacyId(
+                User.Identity.Name,
+                Milestone.Participation.LegacyId,
+                new string[] { }
+            );
 
             return Page();
         }

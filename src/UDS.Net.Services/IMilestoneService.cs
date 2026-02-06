@@ -10,6 +10,7 @@ namespace UDS.Net.Services
     {
         Task<IEnumerable<Milestone>> Find(string username, int participationId, int pageSize = 10, int pageIndex = 1);
         Task<List<M1Dto>> FindByLegacyId(string username, string legacyId, string[] statuses);
+        Task<Milestone> GetByIdAsync(string name, int id);
     }
 }
 

@@ -177,6 +177,23 @@ namespace UDS.Net.Forms.Extensions
             return vm;
         }
 
+        public static M1SubmissionModel ToVM(this M1Submission m1Submission)
+        {
+            M1SubmissionModel vm = new M1SubmissionModel();
+            if (m1Submission != null)
+            {
+                vm.Id = m1Submission.Id;
+                vm.M1Id = m1Submission.M1Id;
+                vm.SubmissionDate = m1Submission.SubmissionDate;
+                vm.CreatedAt = m1Submission.CreatedAt;
+                vm.CreatedBy = m1Submission.CreatedBy;
+                vm.ModifiedBy = m1Submission.ModifiedBy;
+                vm.ErrorCount = m1Submission.ErrorCount;
+                //vm.Errors = m1Submission.Errors;
+            }
+            return vm;
+        }
+
         public static List<PacketSubmissionErrorModel> ToVM(this IList<PacketSubmissionError> packetSubmissionErrors)
         {
             List<PacketSubmissionErrorModel> vm = new List<PacketSubmissionErrorModel>();
