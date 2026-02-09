@@ -4,7 +4,6 @@ using System.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
@@ -245,25 +244,13 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A1aFormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A1FollowUpFormFields)
-            {
-                dto = ((A1FollowUpFormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A1FormFields)
             {
                 dto = ((A1FormFields)form.Fields).ToDto();
             }
-            else if (form.Fields is A2FollowUpFormFields)
-            {
-                dto = ((A2FollowUpFormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A2FormFields)
             {
                 dto = ((A2FormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is A3FollowUpFormFields)
-            {
-                dto = ((A3FollowUpFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is A3FormFields)
             {
@@ -273,17 +260,9 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((A4GFormFields)form.Fields).ToDto(form);
             }
-            else if (form.Fields is A5D2FollowUpFormFields)
-            {
-                dto = ((A5D2FollowUpFormFields)form.Fields).ToDto();
-            }
             else if (form.Fields is A5D2FormFields)
             {
                 dto = ((A5D2FormFields)form.Fields).ToDto();
-            }
-            else if (form.Fields is A4aFollowUpFormFields)
-            {
-                dto = ((A4aFollowUpFormFields)form.Fields).ToDto(form.Id);
             }
             else if (form.Fields is A4aFormFields)
             {
@@ -353,23 +332,17 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A1")
             {
-                if (form.Fields is A1FollowUpFormFields followup)
-                    dto = followup.ToDto();
-                else if (form.Fields is A1FormFields initial)
+                if (form.Fields is A1FormFields initial)
                     dto = initial.ToDto();
             }
             else if (formKind == "A2")
             {
-                if (form.Fields is A2FollowUpFormFields followup)
-                    dto = followup.ToDto();
-                else if (form.Fields is A2FormFields initial)
+                if (form.Fields is A2FormFields initial)
                     dto = initial.ToDto();
             }
             else if (formKind == "A3")
             {
-                if (form.Fields is A3FollowUpFormFields followup)
-                    dto = followup.ToDto(form.Id);
-                else if (form.Fields is A3FormFields initial)
+                if (form.Fields is A3FormFields initial)
                     dto = initial.ToDto(form.Id);
             }
             else if (formKind == "A4")
@@ -379,16 +352,12 @@ namespace UDS.Net.Services.Extensions
             }
             else if (formKind == "A5D2")
             {
-                if (form.Fields is A5D2FollowUpFormFields followup)
-                    dto = followup.ToDto();
-                else if (form.Fields is A5D2FormFields initial)
+                if (form.Fields is A5D2FormFields initial)
                     dto = initial.ToDto();
             }
             else if (formKind == "A4a")
             {
-                if (form.Fields is A4aFollowUpFormFields followup)
-                    dto = followup.ToDto(form.Id);
-                else if (form.Fields is A4aFormFields initial)
+                if (form.Fields is A4aFormFields initial)
                     dto = initial.ToDto(form.Id);
             }
             else if (formKind == "B1")
@@ -627,42 +596,6 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
-        public static A1Dto ToDto(this A1FollowUpFormFields fields)
-        {
-            return new A1Dto()
-            {
-                GENMAN = fields.GENMAN.HasValue ? 1 : 0,
-                GENWOMAN = fields.GENWOMAN.HasValue ? 1 : 0,
-                GENTRMAN = fields.GENTRMAN.HasValue ? 1 : 0,
-                GENTRWOMAN = fields.GENTRWOMAN.HasValue ? 1 : 0,
-                GENNONBI = fields.GENNONBI.HasValue ? 1 : 0,
-                GENTWOSPIR = fields.GENTWOSPIR.HasValue ? 1 : 0,
-                GENOTH = fields.GENOTH.HasValue ? 1 : 0,
-                GENOTHX = fields.GENOTHX,
-                GENDKN = fields.GENDKN.HasValue ? 1 : 0,
-                GENNOANS = fields.GENNOANS.HasValue ? 1 : 0,
-                SEXORNGAY = fields.SEXORNGAY.HasValue ? 1 : 0,
-                SEXORNHET = fields.SEXORNHET.HasValue ? 1 : 0,
-                SEXORNBI = fields.SEXORNBI.HasValue ? 1 : 0,
-                SEXORNTWOS = fields.SEXORNTWOS.HasValue ? 1 : 0,
-                SEXORNOTH = fields.SEXORNOTH.HasValue ? 1 : 0,
-                SEXORNOTHX = fields.SEXORNOTHX,
-                SEXORNDNK = fields.SEXORNDNK.HasValue ? 1 : 0,
-                SEXORNNOAN = fields.SEXORNNOAN.HasValue ? 1 : 0,
-                MARISTAT = fields.MARISTAT,
-                LIVSITUA = fields.LIVSITUA,
-                RESIDENC = fields.RESIDENC,
-                ZIP = fields.ZIP,
-                MEDVA = fields.MEDVA,
-                EXRTIME = fields.EXRTIME,
-                MEMWORS = fields.MEMWORS,
-                MEMTROUB = fields.MEMTROUB,
-                MEMTEN = fields.MEMTEN,
-                ADISTATE = fields.ADISTATE,
-                ADINAT = fields.ADINAT,
-            };
-        }
-
         public static A2Dto ToDto(this A2FormFields fields)
         {
             return new A2Dto()
@@ -680,25 +613,6 @@ namespace UDS.Net.Services.Extensions
                 INMEMTEN = fields.INMEMTEN,
             };
         }
-        public static A2Dto ToDto(this A2FollowUpFormFields fields)
-        {
-            return new A2Dto()
-            {
-                INRELTO = fields.INRELTO,
-                INKNOWN = fields.INKNOWN,
-                INLIVWTH = fields.INLIVWTH,
-                INCNTMOD = fields.INCNTMOD,
-                INCNTMDX = fields.INCNTMDX,
-                INCNTFRQ = fields.INCNTFRQ,
-                INCNTTIM = fields.INCNTTIM,
-                INRELY = fields.INRELY,
-                INMEMWORS = fields.INMEMWORS,
-                INMEMTROUB = fields.INMEMTROUB,
-                INMEMTEN = fields.INMEMTEN,
-                NEWINF = fields.NEWINF == 1 ? true : (fields.NEWINF == null ? (bool?)null : false),
-            };
-        }
-
 
         public static A3Dto ToDto(this A3FormFields fields, int formId)
         {
@@ -802,113 +716,6 @@ namespace UDS.Net.Services.Extensions
 
             return dto;
         }
-
-        public static A3Dto ToDto(this A3FollowUpFormFields fields, int formId)
-        {
-            var dto = new A3Dto()
-            {
-                MOMYOB = fields.MOMYOB,
-                MOMDAGE = fields.MOMDAGE,
-                MOMETPR = fields.MOMETPR,
-                MOMETSEC = fields.MOMETSEC,
-                MOMMEVAL = fields.MOMMEVAL,
-                MOMAGEO = fields.MOMAGEO,
-                DADYOB = fields.DADYOB,
-                DADDAGE = fields.DADDAGE,
-                DADETPR = fields.DADETPR,
-                DADETSEC = fields.DADETSEC,
-                DADMEVAL = fields.DADMEVAL,
-                DADAGEO = fields.DADAGEO,
-                SIBS = fields.SIBS,
-                KIDS = fields.KIDS,
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID,
-            };
-
-            foreach (var sib in fields.SiblingFormFields)
-            {
-                var sibDto = sib.ToDto(formId);
-                if (sib.FamilyMemberIndex == 1)
-                    dto.SIB1 = sibDto;
-                else if (sib.FamilyMemberIndex == 2)
-                    dto.SIB2 = sibDto;
-                else if (sib.FamilyMemberIndex == 3)
-                    dto.SIB3 = sibDto;
-                else if (sib.FamilyMemberIndex == 4)
-                    dto.SIB4 = sibDto;
-                else if (sib.FamilyMemberIndex == 5)
-                    dto.SIB5 = sibDto;
-                else if (sib.FamilyMemberIndex == 6)
-                    dto.SIB6 = sibDto;
-                else if (sib.FamilyMemberIndex == 7)
-                    dto.SIB7 = sibDto;
-                else if (sib.FamilyMemberIndex == 8)
-                    dto.SIB8 = sibDto;
-                else if (sib.FamilyMemberIndex == 9)
-                    dto.SIB9 = sibDto;
-                else if (sib.FamilyMemberIndex == 10)
-                    dto.SIB10 = sibDto;
-                else if (sib.FamilyMemberIndex == 11)
-                    dto.SIB11 = sibDto;
-                else if (sib.FamilyMemberIndex == 12)
-                    dto.SIB12 = sibDto;
-                else if (sib.FamilyMemberIndex == 13)
-                    dto.SIB13 = sibDto;
-                else if (sib.FamilyMemberIndex == 14)
-                    dto.SIB14 = sibDto;
-                else if (sib.FamilyMemberIndex == 15)
-                    dto.SIB15 = sibDto;
-                else if (sib.FamilyMemberIndex == 16)
-                    dto.SIB16 = sibDto;
-                else if (sib.FamilyMemberIndex == 17)
-                    dto.SIB17 = sibDto;
-                else if (sib.FamilyMemberIndex == 18)
-                    dto.SIB18 = sibDto;
-                else if (sib.FamilyMemberIndex == 19)
-                    dto.SIB19 = sibDto;
-                else if (sib.FamilyMemberIndex == 20)
-                    dto.SIB20 = sibDto;
-            }
-
-            foreach (var kid in fields.KidsFormFields)
-            {
-                var kidDto = kid.ToDto(formId);
-                if (kid.FamilyMemberIndex == 1)
-                    dto.KID1 = kidDto;
-                else if (kid.FamilyMemberIndex == 2)
-                    dto.KID2 = kidDto;
-                else if (kid.FamilyMemberIndex == 3)
-                    dto.KID3 = kidDto;
-                else if (kid.FamilyMemberIndex == 4)
-                    dto.KID4 = kidDto;
-                else if (kid.FamilyMemberIndex == 5)
-                    dto.KID5 = kidDto;
-                else if (kid.FamilyMemberIndex == 6)
-                    dto.KID6 = kidDto;
-                else if (kid.FamilyMemberIndex == 7)
-                    dto.KID7 = kidDto;
-                else if (kid.FamilyMemberIndex == 8)
-                    dto.KID8 = kidDto;
-                else if (kid.FamilyMemberIndex == 9)
-                    dto.KID9 = kidDto;
-                else if (kid.FamilyMemberIndex == 10)
-                    dto.KID10 = kidDto;
-                else if (kid.FamilyMemberIndex == 11)
-                    dto.KID11 = kidDto;
-                else if (kid.FamilyMemberIndex == 12)
-                    dto.KID12 = kidDto;
-                else if (kid.FamilyMemberIndex == 13)
-                    dto.KID13 = kidDto;
-                else if (kid.FamilyMemberIndex == 14)
-                    dto.KID14 = kidDto;
-                else if (kid.FamilyMemberIndex == 15)
-                    dto.KID15 = kidDto;
-            }
-
-            return dto;
-        }
-
         public static A3FamilyMemberDto ToDto(this A3FamilyMemberFormFields fields, int formId)
         {
             return new A3FamilyMemberDto
@@ -1119,179 +926,6 @@ namespace UDS.Net.Services.Extensions
             };
         }
 
-        public static A5D2Dto ToDto(this A5D2FollowUpFormFields fields)
-        {
-            return new A5D2Dto
-            {
-                TOBAC100 = fields.TOBAC100,
-                SMOKYRS = fields.SMOKYRS,
-                PACKSPER = fields.PACKSPER,
-                TOBAC30 = fields.TOBAC30,
-                QUITSMOK = fields.QUITSMOK,
-                ALCFREQYR = fields.ALCFREQYR,
-                ALCDRINKS = fields.ALCDRINKS,
-                ALCBINGE = fields.ALCBINGE,
-                SUBSTYEAR = fields.SUBSTYEAR,
-                SUBSTPAST = fields.SUBSTPAST,
-                CANNABIS = fields.CANNABIS,
-                HRTATTACK = fields.HRTATTACK,
-                HRTATTMULT = fields.HRTATTMULT,
-                HRTATTAGE = fields.HRTATTAGE,
-                CARDARREST = fields.CARDARREST,
-                CARDARRAGE = fields.CARDARRAGE,
-                CVAFIB = fields.CVAFIB,
-                CVANGIO = fields.CVANGIO,
-                CVBYPASS = fields.CVBYPASS,
-                BYPASSAGE = fields.BYPASSAGE,
-                CVPACDEF = fields.CVPACDEF,
-                PACDEFAGE = fields.PACDEFAGE,
-                CVCHF = fields.CVCHF,
-                CVHVALVE = fields.CVHVALVE,
-                VALVEAGE = fields.VALVEAGE,
-                CVOTHR = fields.CVOTHR,
-                CVOTHRX = fields.CVOTHRX,
-                CBSTROKE = fields.CBSTROKE,
-                STROKMUL = fields.STROKMUL,
-                STROKAGE = fields.STROKAGE,
-                STROKSTAT = fields.STROKSTAT,
-                ANGIOCP = fields.ANGIOCP,
-                CAROTIDAGE = fields.CAROTIDAGE,
-                CBTIA = fields.CBTIA,
-                TIAAGE = fields.TIAAGE,
-                PD = fields.PD,
-                PDAGE = fields.PDAGE,
-                PDOTHR = fields.PDOTHR,
-                PDOTHRAGE = fields.PDOTHRAGE,
-                SEIZURES = fields.SEIZURES,
-                SEIZNUM = fields.SEIZNUM,
-                SEIZAGE = fields.SEIZAGE,
-                HEADACHE = fields.HEADACHE,
-                MS = fields.MS,
-                HYDROCEPH = fields.HYDROCEPH,
-                HEADIMP = fields.HEADIMP,
-                IMPAMFOOT = fields.IMPAMFOOT,
-                IMPSOCCER = fields.IMPSOCCER,
-                IMPHOCKEY = fields.IMPHOCKEY,
-                IMPBOXING = fields.IMPBOXING,
-                IMPSPORT = fields.IMPSPORT,
-                IMPIPV = fields.IMPIPV,
-                IMPMILIT = fields.IMPMILIT,
-                IMPASSAULT = fields.IMPASSAULT,
-                IMPOTHER = fields.IMPOTHER,
-                IMPOTHERX = fields.IMPOTHERX,
-                IMPYEARS = fields.IMPYEARS,
-                HEADINJURY = fields.HEADINJURY,
-                HEADINJUNC = fields.HEADINJUNC,
-                HEADINJCON = fields.HEADINJCON,
-                HEADINJNUM = fields.HEADINJNUM,
-                FIRSTTBI = fields.FIRSTTBI,
-                LASTTBI = fields.LASTTBI,
-                DIABETES = fields.DIABETES,
-                DIABTYPE = fields.DIABTYPE,
-                DIABINS = fields.DIABINS,
-                DIABMEDS = fields.DIABMEDS,
-                DIABGLP1 = fields.DIABGLP1,
-                DIABRECACT = fields.DIABRECACT,
-                DIABDIET = fields.DIABDIET,
-                DIABUNK = fields.DIABUNK,
-                DIABAGE = fields.DIABAGE,
-                HYPERTEN = fields.HYPERTEN,
-                HYPERTAGE = fields.HYPERTAGE,
-                HYPERCHO = fields.HYPERCHO,
-                HYPERCHAGE = fields.HYPERCHAGE,
-                B12DEF = fields.B12DEF,
-                THYROID = fields.THYROID,
-                ARTHRIT = fields.ARTHRIT,
-                ARTHRRHEUM = fields.ARTHRRHEUM,
-                ARTHROSTEO = fields.ARTHROSTEO,
-                ARTHROTHR = fields.ARTHROTHR,
-                ARTHTYPX = fields.ARTHTYPX,
-                ARTHTYPUNK = fields.ARTHTYPUNK,
-                ARTHUPEX = fields.ARTHUPEX,
-                ARTHLOEX = fields.ARTHLOEX,
-                ARTHSPIN = fields.ARTHSPIN,
-                ARTHUNK = fields.ARTHUNK,
-                INCONTU = fields.INCONTU,
-                INCONTF = fields.INCONTF,
-                APNEA = fields.APNEA,
-                CPAP = fields.CPAP,
-                APNEAORAL = fields.APNEAORAL,
-                RBD = fields.RBD,
-                INSOMN = fields.INSOMN,
-                OTHSLEEP = fields.OTHSLEEP,
-                OTHSLEEX = fields.OTHSLEEX,
-                CANCERACTV = fields.CANCERACTV,
-                CANCERPRIM = fields.CANCERPRIM,
-                CANCERMETA = fields.CANCERMETA,
-                CANCMETBR = fields.CANCMETBR,
-                CANCMETOTH = fields.CANCMETOTH,
-                CANCERUNK = fields.CANCERUNK,
-                CANCBLOOD = fields.CANCBLOOD,
-                CANCBREAST = fields.CANCBREAST,
-                CANCCOLON = fields.CANCCOLON,
-                CANCLUNG = fields.CANCLUNG,
-                CANCPROST = fields.CANCPROST,
-                CANCOTHER = fields.CANCOTHER,
-                CANCOTHERX = fields.CANCOTHERX,
-                CANCRAD = fields.CANCRAD,
-                CANCRESECT = fields.CANCRESECT,
-                CANCIMMUNO = fields.CANCIMMUNO,
-                CANCBONE = fields.CANCBONE,
-                CANCCHEMO = fields.CANCCHEMO,
-                CANCHORM = fields.CANCHORM,
-                CANCTROTH = fields.CANCTROTH,
-                CANCTROTHX = fields.CANCTROTHX,
-                CANCERAGE = fields.CANCERAGE,
-                COVID19 = fields.COVID19,
-                COVIDHOSP = fields.COVIDHOSP,
-                PULMONARY = fields.PULMONARY,
-                KIDNEY = fields.KIDNEY,
-                KIDNEYAGE = fields.KIDNEYAGE,
-                LIVER = fields.LIVER,
-                LIVERAGE = fields.LIVERAGE,
-                PVD = fields.PVD,
-                PVDAGE = fields.PVDAGE,
-                HIVDIAG = fields.HIVDIAG,
-                HIVAGE = fields.HIVAGE,
-                OTHERCOND = fields.OTHERCOND,
-                OTHCONDX = fields.OTHCONDX,
-                MAJORDEP = fields.MAJORDEP,
-                OTHERDEP = fields.OTHERDEP,
-                DEPRTREAT = ConvertIntToBool(fields.DEPRTREAT),
-                BIPOLAR = fields.BIPOLAR,
-                SCHIZ = fields.SCHIZ,
-                ANXIETY = fields.ANXIETY,
-                GENERALANX = fields.GENERALANX,
-                PANICDIS = fields.PANICDIS,
-                OCD = fields.OCD,
-                OTHANXDIS = fields.OTHANXDIS,
-                OTHANXDISX = fields.OTHANXDISX,
-                PTSD = fields.PTSD,
-                NPSYDEV = fields.NPSYDEV,
-                PSYCDIS = fields.PSYCDIS,
-                PSYCDISX = fields.PSYCDISX,
-                NOMENSAGE = fields.NOMENSAGE,
-                NOMENSNAT = fields.NOMENSNAT,
-                NOMENSHYST = fields.NOMENSHYST,
-                NOMENSSURG = fields.NOMENSSURG,
-                NOMENSCHEM = fields.NOMENSCHEM,
-                NOMENSRAD = fields.NOMENSRAD,
-                NOMENSHORM = fields.NOMENSHORM,
-                NOMENSESTR = fields.NOMENSESTR,
-                NOMENSUNK = fields.NOMENSUNK,
-                NOMENSOTH = fields.NOMENSOTH,
-                NOMENSOTHX = fields.NOMENSOTHX,
-                HRT = fields.HRT,
-                HRTYEARS = fields.HRTYEARS,
-                HRTSTRTAGE = fields.HRTSTRTAGE,
-                HRTENDAGE = fields.HRTENDAGE,
-                BCPILLS = fields.BCPILLS,
-                BCPILLSYR = fields.BCPILLSYR,
-                BCSTARTAGE = fields.BCSTARTAGE,
-                BCENDAGE = fields.BCENDAGE
-            };
-        }
-
         public static A4aDto ToDto(this A4aFormFields fields, int formId)
         {
             var dto = new A4aDto()
@@ -1302,45 +936,6 @@ namespace UDS.Net.Services.Extensions
                 ADVERSEOTH = fields.ADVERSEOTH,
                 ADVERSEOTX = fields.ADVERSEOTX,
                 TRTBIOMARK = fields.TRTBIOMARK
-            };
-
-            foreach (var treatment in fields.TreatmentFormFields)
-            {
-                var treatmentDto = treatment.ToDto(formId);
-                if (treatment.TreatmentIndex == 1)
-                    dto.Treatment1 = treatmentDto;
-                else if (treatment.TreatmentIndex == 2)
-                    dto.Treatment2 = treatmentDto;
-                else if (treatment.TreatmentIndex == 3)
-                    dto.Treatment3 = treatmentDto;
-                else if (treatment.TreatmentIndex == 4)
-                    dto.Treatment4 = treatmentDto;
-                else if (treatment.TreatmentIndex == 5)
-                    dto.Treatment5 = treatmentDto;
-                else if (treatment.TreatmentIndex == 6)
-                    dto.Treatment6 = treatmentDto;
-                else if (treatment.TreatmentIndex == 7)
-                    dto.Treatment7 = treatmentDto;
-                else if (treatment.TreatmentIndex == 8)
-                    dto.Treatment8 = treatmentDto;
-
-            }
-
-            return dto;
-        }
-
-        public static A4aDto ToDto(this A4aFollowUpFormFields fields, int formId)
-        {
-            var dto = new A4aDto()
-            {
-                ADVEVENT = fields.ADVEVENT,
-                ARIAE = fields.ARIAE,
-                ARIAH = fields.ARIAH,
-                ADVERSEOTH = fields.ADVERSEOTH,
-                ADVERSEOTX = fields.ADVERSEOTX,
-                TRTBIOMARK = fields.TRTBIOMARK,
-                NEWTREAT = fields.NEWTREAT,
-                NEWADEVENT = fields.NEWADEVENT
             };
 
             foreach (var treatment in fields.TreatmentFormFields)
