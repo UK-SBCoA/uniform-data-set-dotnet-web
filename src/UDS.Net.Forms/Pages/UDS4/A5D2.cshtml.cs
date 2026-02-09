@@ -75,8 +75,8 @@ public class A5D2Model : FormPageModel
     public List<RadioListItem> ConditionsListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("Absent", "0"),
-        new RadioListItem("Recent/active", "1"),
-        new RadioListItem("Remote/inactive", "2"),
+        new RadioListItem("Recent/Active", "1"),
+        new RadioListItem("Remote/Inactive", "2"),
         new RadioListItem("Unknown", "9")
     };
 
@@ -132,7 +132,7 @@ public class A5D2Model : FormPageModel
     {
         new RadioListItem("Type 1", "1"),
         new RadioListItem("Type 2", "2"),
-        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes", "3"),
+        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes, prediabetes)", "3"),
         new RadioListItem("Unknown", "9")
     };
 
@@ -144,9 +144,9 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> UntreadedTreatedItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> UntreatedTreatedItems { get; set; } = new List<RadioListItem>
     {
-        new RadioListItem("Untreaded", "0"),
+        new RadioListItem("Untreated", "0"),
         new RadioListItem("Treated with medication and/or counseling", "1")
     };
 

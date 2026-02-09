@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -89,9 +87,7 @@ namespace UDS.Net.Services.DomainModels
         {
             if (Kind == "A1")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A1FollowUpFormFields()
-                    : new A1FormFields();
+                Fields = new A1FormFields();
             }
             else if (Kind == "A1a")
             {
@@ -99,15 +95,11 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A2")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A2FollowUpFormFields()
-                    : new A2FormFields();
+                Fields = new A2FormFields();
             }
             else if (Kind == "A3")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A3FollowUpFormFields()
-                    : new A3FormFields();
+                Fields = new A3FormFields();
             }
             else if (Kind == "A4")
             {
@@ -115,15 +107,11 @@ namespace UDS.Net.Services.DomainModels
             }
             else if (Kind == "A4a")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A4aFollowUpFormFields()
-                    : new A4aFormFields();
+                Fields = new A4aFormFields();
             }
             else if (Kind == "A5D2")
             {
-                Fields = packetKind == PacketKind.F
-                    ? (IFormFields)new A5D2FollowUpFormFields()
-                    : new A5D2FormFields();
+                Fields = new A5D2FormFields();
             }
             else if (Kind == "B1")
             {
