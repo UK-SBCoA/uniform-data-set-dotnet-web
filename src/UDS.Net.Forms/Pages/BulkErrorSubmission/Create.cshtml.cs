@@ -3,7 +3,6 @@ using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Immutable;
 using System.Globalization;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -89,7 +88,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 Location = record.Location,
                                 File = record.File,
                                 Value = record.Value,
-                                Message = record.Message,
+                                //DEVNOTE: Trim message to avoid 500+ character truncade error
+                                Message = record.Message.Length > 500 ? record.Message[..497] + "..." : record.Message,
                                 Ptid = record.Ptid,
                                 Visitnum = record.Visitnum,
                                 Approved = record.Approved
