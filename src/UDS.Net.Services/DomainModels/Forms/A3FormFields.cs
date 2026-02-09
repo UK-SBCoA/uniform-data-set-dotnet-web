@@ -24,9 +24,6 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? DADMEVAL { get; set; }
         public int? DADAGEO { get; set; }
         public int? SIBS { get; set; }
-        public int? NWINFPAR { get; set; }
-        public int? NWINFSIB { get; set; }
-        public int? NWINFKID { get; set; }
 
         public List<A3FamilyMemberFormFields> SiblingFormFields { get; set; } = new List<A3FamilyMemberFormFields>();
 
