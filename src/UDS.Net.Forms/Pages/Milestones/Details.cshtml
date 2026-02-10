@@ -290,6 +290,13 @@
         </tbody>
     </table>
 </div>
+
+<div>
+    <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" asp-page="/MilestonesSubmissionErrors/Index">
+        Export Error File
+    </a>
+</div>
+
 <div class="mt-8">
     <h2 class="text-xl font-bold mb-4">M1 Submissions</h2>
     @* <p>Count: @Model.Milestone.M1Submissions.Count</p> *@
@@ -337,7 +344,7 @@
 
 @if (Model.Milestone.M1Submissions.Any(s => s.Errors != null && s.Errors.Any()))
 {
-    <div class="mt-12" data-controller="packetSubmission">
+    <div class="mt-12">
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
