@@ -18,7 +18,7 @@ namespace UDS.Net.Forms.Models.PageModels
 
         public string PageTitle { get; set; }
 
-        public List<M1Dto> M1Submissions { get; set; } = new List<M1Dto>();
+        public List<MilestoneModel> M1Submissions { get; set; } = new List<MilestoneModel>();
         public MilestonePageModel(IMilestoneService milestoneService, IParticipationService participationService)
         {
             _milestoneService = milestoneService;
@@ -180,11 +180,15 @@ namespace UDS.Net.Forms.Models.PageModels
             Milestone.Participation = participation.ToVM();
             PageTitle += "Participant " + Milestone.Participation.LegacyId;
 
-            M1Submissions = await _milestoneService.FindByLegacyId(
+            var submissions = await _milestoneService.FindByLegacyId(
                 User.Identity.Name,
                 Milestone.Participation.LegacyId,
-                new string[] { }
+                Array.Empty<string>()
             );
+
+            M1Submissions = submissions
+                .Select(m => m.ToVM())
+                .ToList();
 
             return Page();
         }

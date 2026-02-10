@@ -170,6 +170,15 @@ namespace UDS.Net.Services.Extensions
 
             if (dto.M1Submissions != null)
             {
+                var debug = dto.M1Submissions
+                    .Select(s => new {
+                        s.Id,
+                        ErrorCount = s.M1SubmissionErrors?.Count,
+                        HasErrors = s.M1SubmissionErrors != null
+                    })
+                    .ToList();
+
+
                 milestone.M1Submissions = dto.M1Submissions
                     .Select(s => new M1Submission(
                         id: s.Id,
@@ -184,7 +193,8 @@ namespace UDS.Net.Services.Extensions
                         errorCount: s.ErrorCount,
                         forms: s.Forms?.Select(f => f.ToDomain(s.Id, f.CreatedBy)).ToList()
                                ?? new List<Form>(),
-                        errors: new List<M1SubmissionError>() 
+                        errors: s.M1SubmissionErrors?.Select(e => e.ToDomain(s.Id)).ToList()
+                               ?? new List<M1SubmissionError>()
                     ))
                     .ToList();
             }
@@ -466,22 +476,19 @@ namespace UDS.Net.Services.Extensions
             );
         }
 
-        public static M1SubmissionError ToDomain(this M1SubmissionError dto)
+        public static M1SubmissionError ToDomain(this M1SubmissionErrorDto dto, int submissionId)
         {
-            M1SubmissionErrorLevel m1SubmissionErrorLevel = M1SubmissionErrorLevel.Information;
-
-
-            M1SubmissionErrorStatus m1SubmissionErrorStatus = M1SubmissionErrorStatus.Pending;
-
+            var level = M1SubmissionErrorLevel.Information;
+            var status = M1SubmissionErrorStatus.Pending;
 
             return new M1SubmissionError(
                 id: dto.Id,
-                m1SubmissionId: dto.M1SubmissionId,
+                m1SubmissionId: submissionId,
                 formKind: dto.FormKind,
                 message: dto.Message,
                 assignedTo: dto.AssignedTo,
-                level: m1SubmissionErrorLevel,
-                status: m1SubmissionErrorStatus,
+                level: level,
+                status: status,
                 statusChangedBy: dto.StatusChangedBy,
                 createdAt: dto.CreatedAt,
                 createdBy: dto.CreatedBy,
@@ -492,7 +499,6 @@ namespace UDS.Net.Services.Extensions
                 value: dto.Value
             );
         }
-
 
 
         public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)

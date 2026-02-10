@@ -5,11 +5,14 @@ using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.LookupModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace UDS.Net.Forms.Extensions
 {
     public static class DomainToViewModelMapper
     {
+        public static List<M1SubmissionErrorModel>? Errors { get; private set; }
+
         public static ParticipationsPaginatedModel ToVM(this IEnumerable<Participation> participations, int pageSize, int pageIndex, int total, string search)
         {
             return new ParticipationsPaginatedModel
@@ -189,7 +192,27 @@ namespace UDS.Net.Forms.Extensions
                 vm.CreatedBy = m1Submission.CreatedBy;
                 vm.ModifiedBy = m1Submission.ModifiedBy;
                 vm.ErrorCount = m1Submission.ErrorCount;
-                //vm.Errors = m1Submission.Errors;
+
+                vm.Errors = m1Submission.Errors != null
+                    ? m1Submission.Errors.Select(e => new M1SubmissionErrorModel
+                    {
+                        Id = e.Id,
+                        PacketSubmissionId = e.M1SubmissionId,
+                        FormKind = e.FormKind,
+                        Message = e.Message,
+                        AssignedTo = e.AssignedTo,
+                        Level = e.Level,
+                        Status = e.Status,
+                        CreatedAt = e.CreatedAt,
+                        CreatedBy = e.CreatedBy,
+                        ModifiedBy = e.ModifiedBy,
+                        DeletedBy = e.DeletedBy,
+                        IsDeleted = e.IsDeleted,
+                        StatusChangedBy = e.StatusChangedBy,
+                        Location = e.Location,
+                        Value = e.Value
+                    }).ToList()
+                    : new List<M1SubmissionErrorModel>();
             }
             return vm;
         }
@@ -271,7 +294,11 @@ namespace UDS.Net.Forms.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
-                MILESTONETYPE = milestone.MILESTONETYPE
+                MILESTONETYPE = milestone.MILESTONETYPE,
+
+                M1Submissions = milestone.M1Submissions?
+                    .Select(s => s.ToVM())
+                    .ToList() ?? new List<M1SubmissionModel>()
             };
 
             if (milestone.Participation != null)

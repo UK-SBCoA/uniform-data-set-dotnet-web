@@ -15,7 +15,7 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
-        public List<M1SubmissionDto> M1Submissions { get; set; } = new();
+        public List<M1SubmissionModel> M1Submissions { get; set; } = new();
 
         [Required]
         public int ParticipationId { get; set; }

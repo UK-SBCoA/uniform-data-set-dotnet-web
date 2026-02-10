@@ -70,7 +70,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             : this(id, adrcId, submissionDate, m1Id, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
             Forms = forms ?? new List<Form>();
-            //Errors = errors?.ToList() ?? new List<M1SubmissionError>();
+            Errors = errors?.ToList() ?? new List<M1SubmissionError>();
         }
 
 

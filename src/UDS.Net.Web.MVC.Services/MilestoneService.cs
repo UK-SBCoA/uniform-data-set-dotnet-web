@@ -50,7 +50,7 @@ namespace UDS.Net.Web.MVC.Services
         {
             IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.Get(pageSize, pageIndex);
 
-            return milestones.ToDomain();
+                return milestones.ToDomain();
         }
 
         public Task<Milestone> Patch(string username, Milestone entity)
@@ -71,11 +71,12 @@ namespace UDS.Net.Web.MVC.Services
             return entity;
         }
 
-        public async Task<List<M1Dto>> FindByLegacyId(string username, string legacyId, string[] statuses)
+        public async Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
         {
-         var milestones = await _apiClient.MilestoneClient.GetMilestonesByLegacyIdAndStatus(legacyId, statuses);
+            var dtos = await _apiClient.MilestoneClient
+                .GetMilestonesByLegacyIdAndStatus(legacyId, statuses);
 
-            return milestones;
+            return dtos.ToDomain();
         }
 
         public Task<Milestone> GetByIdAsync(string username, int id)
