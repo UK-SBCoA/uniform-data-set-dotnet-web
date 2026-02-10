@@ -14,6 +14,8 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool? ADVERSEOTH { get; set; }
         public string? ADVERSEOTX { get; set; }
         public int? TRTBIOMARK { get; set; }
+        public int? NEWTREAT { get; set; }
+        public int? NEWADEVENT { get; set; }
         public List<A4aTreatmentFormFields> TreatmentFormFields { get; set; } = new List<A4aTreatmentFormFields>();
 
         public IEnumerable<FormMode> FormModes
@@ -114,6 +116,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 ADVERSEOTH = a4aDto.ADVERSEOTH;
                 ADVERSEOTX = a4aDto.ADVERSEOTX;
                 TRTBIOMARK = a4aDto.TRTBIOMARK;
+                NEWTREAT = a4aDto.NEWTREAT;
+                NEWADEVENT = a4aDto.NEWADEVENT;
 
                 for (int i = 1; i <= 8; i++)
                 {
