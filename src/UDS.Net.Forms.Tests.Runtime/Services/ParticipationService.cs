@@ -32,36 +32,16 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
         {
-            Participation newParticipation = new Participation();
-
-            //DEVNOTE: Cannot add arguments, use the legacy id to identify which participation to return
-            //DEVNOTE: If legacy id = 2000 then force participation of id 2 and legacy id 2000 to return
-            if (id == 2)
+            Participation newParticipation = new Participation
             {
-                newParticipation = new Participation
-                {
-                    Id = 2,
-                    LegacyId = "2000",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "username",
-                    IsDeleted = false,
-                    Status = "Enrolled",
-                    VisitCount = 0,
-                };
-            }
-            else
-            {
-                newParticipation = new Participation
-                {
-                    Id = 1,
-                    LegacyId = "1000",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "username",
-                    IsDeleted = false,
-                    Status = "Enrolled",
-                    VisitCount = 0
-                };
-            }
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
 
             return newParticipation;
         }
@@ -82,36 +62,16 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Participation> GetByLegacyId(string username, string legacyId)
         {
-            Participation newParticipation = new Participation();
-
-            //DEVNOTE: Cannot add arguments, use the legacy id to identify which participation to return
-            //DEVNOTE: If legacy id = 2000 then force participation of id 2 and legacy id 2000 to return
-            if (legacyId == "2000")
+            Participation newParticipation = new Participation
             {
-                newParticipation = new Participation
-                {
-                    Id = 2,
-                    LegacyId = "2000",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "username",
-                    IsDeleted = false,
-                    Status = "Enrolled",
-                    VisitCount = 0,
-                };
-            }
-            else
-            {
-                newParticipation = new Participation
-                {
-                    Id = 1,
-                    LegacyId = "1000",
-                    CreatedAt = DateTime.Now,
-                    CreatedBy = "username",
-                    IsDeleted = false,
-                    Status = "Enrolled",
-                    VisitCount = 0
-                };
-            }
+                Id = 1,
+                LegacyId = "1000",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "username",
+                IsDeleted = false,
+                Status = "Enrolled",
+                VisitCount = 0
+            };
 
             return newParticipation;
         }
