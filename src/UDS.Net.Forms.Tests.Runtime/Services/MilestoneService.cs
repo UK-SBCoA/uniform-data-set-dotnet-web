@@ -25,6 +25,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
+        public Task<Milestone> GetByIdAsync(string name, int id)
+        {
+            throw new NotImplementedException();
+        }
         public Task<Milestone> GetById(string username, int id)
         {
             throw new NotImplementedException();
@@ -50,7 +54,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        Task<List<M1Dto>> IMilestoneService.FindByLegacyId(string username, string legacyId, string[] statuses)
+        public Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
         {
             throw new NotImplementedException();
         }
