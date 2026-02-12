@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Playwright;
+﻿using Microsoft.Playwright;
 
 namespace UDS.Net.Forms.Tests
 {
@@ -165,6 +164,185 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+        }
+
+        [TestMethod]
+        public async Task FollowUpFieldsSaveNULLOnInitialVisit()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Follow-up fields load as null
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("");
+
+            //Change values of each section to set follow-up fields to 1
+            //change each field twice in case previous data exists
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
+            //tab between each input to trigger JS change
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
+            
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("0");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
+
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("1");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
+
+            //Check to see follow-up fields have changed to 1
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Check to see follow-up fields have saved and reloads as null
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("");
+        }
+
+        [TestMethod]
+        public async Task LoadPreviousData()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Write data to form
+            await WriteFormData();
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            //Go back to root and create another follow-up A3
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Check that data loaded into form
+            //1a. Mother
+            await Expect(Page.Locator("input[name=\"A3.MOMYOB\"]")).ToHaveValueAsync("9999");
+            await Expect(Page.Locator("input[name=\"A3.MOMDAGE\"]")).ToHaveValueAsync("888");
+            await Expect(Page.Locator("input[name=\"A3.MOMETPR\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.MOMETSEC\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.MOMMEVAL\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.MOMAGEO\"]")).ToHaveValueAsync("999");
+
+            //1b.Father
+            await Expect(Page.Locator("input[name=\"A3.DADYOB\"]")).ToHaveValueAsync("9999");
+            await Expect(Page.Locator("input[name=\"A3.DADDAGE\"]")).ToHaveValueAsync("888");
+            await Expect(Page.Locator("input[name=\"A3.DADETPR\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.DADETSEC\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.DADMEVAL\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.DADAGEO\"]")).ToHaveValueAsync("999");
+
+            //section 2. SIBS
+            await Expect(Page.Locator("input[name=\"A3.SIBS\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].YOB\"]")).ToHaveValueAsync("9999");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].AGD\"]")).ToHaveValueAsync("888");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].ETPR\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].ETSEC\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].MEVAL\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].AGO\"]")).ToHaveValueAsync("999");
+
+            //section 3. KIDS
+            await Expect(Page.Locator("input[name=\"A3.KIDS\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].YOB\"]")).ToHaveValueAsync("9999");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].AGD\"]")).ToHaveValueAsync("888");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].ETPR\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].ETSEC\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].MEVAL\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].AGO\"]")).ToHaveValueAsync("999");
+        }
+
+        [TestMethod]
+        public async Task FollowUpFieldsCorrectlySetAndChange()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Write data to form
+            await WriteFormData();
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            //Go back to root and create another follow-up A3 to check follow-up fields
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Follow-up fields load as null
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("0");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("0");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("0");
+
+            //Adjust sections
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
+            await Page.Keyboard.PressAsync("Tab");
+
+            //Check for hidden field values to be 1 (changed)
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
+        }
+
+        private async Task WriteFormData()
+        {
+            //Setup field values for next visit
+            //1a. Mother
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.MOMDAGE\"]").FillAsync("888");
+            await Page.Locator("input[name=\"A3.MOMETPR\"]").FillAsync("01");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.MOMETSEC\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A3.MOMMEVAL\"]").FillAsync("1");
+            await Page.Locator("input[name=\"A3.MOMAGEO\"]").FillAsync("999");
+
+            //1b.Father
+            await Page.Locator("input[name=\"A3.DADYOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.DADDAGE\"]").FillAsync("888");
+            await Page.Locator("input[name=\"A3.DADETPR\"]").FillAsync("01");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.DADETSEC\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A3.DADMEVAL\"]").FillAsync("1");
+            await Page.Locator("input[name=\"A3.DADAGEO\"]").FillAsync("999");
+
+            //section 2. SIBS
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("1");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.Siblings[0].YOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.Siblings[0].AGD\"]").FillAsync("888");
+            await Page.Locator("input[name=\"A3.Siblings[0].ETPR\"]").FillAsync("01");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.Siblings[0].ETSEC\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A3.Siblings[0].MEVAL\"]").FillAsync("1");
+            await Page.Locator("input[name=\"A3.Siblings[0].AGO\"]").FillAsync("999");
+
+            //section 3. KIDS
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("1");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.Children[0].YOB\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A3.Children[0].AGD\"]").FillAsync("888");
+            await Page.Locator("input[name=\"A3.Children[0].ETPR\"]").FillAsync("01");
+            await Page.Keyboard.PressAsync("Tab");
+            await Page.Locator("input[name=\"A3.Children[0].ETSEC\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A3.Children[0].MEVAL\"]").FillAsync("1");
+            await Page.Locator("input[name=\"A3.Children[0].AGO\"]").FillAsync("999");
         }
     }
 }
