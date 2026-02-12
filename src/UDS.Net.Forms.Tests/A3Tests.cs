@@ -301,6 +301,42 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
         }
 
+        [TestMethod]
+        public async Task FollowUpFieldsSaveWhenPreviousDataLoads()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Write data to form
+            await WriteFormData();
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            //Go back to root and create another follow-up A3 to check follow-up fields
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            //Adjust sections to trigger change values in hidden fields
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
+            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
+            await Page.Keyboard.PressAsync("Tab");
+
+            //Save form with previously loaded data and sections 1 and 3 marked as changed
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            //Go back into form and check for sections 1 and 3 to remain marked as changed
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
+            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("0");
+            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
+        }
+
         private async Task WriteFormData()
         {
             //Setup field values for next visit
