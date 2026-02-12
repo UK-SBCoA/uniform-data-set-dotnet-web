@@ -18,6 +18,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
         private readonly IParticipationService _participationService;
         private readonly IMilestoneService _milestoneService;
 
+
         public List<NACCM1ErrorModel> M1SubmissionErrors { get; set; } = new();
 
         [BindProperty]
@@ -43,6 +44,8 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                 ? M1SubmissionErrorLevel.Error
                 : M1SubmissionErrorLevel.Information;
         }
+
+
 
         List<M1SubmissionError> errorsToSave = new();
 
@@ -110,7 +113,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         : record.Message;
 
                     var error = new UDS.Net.Services.DomainModels.Submission.M1SubmissionError(
-                        id: 0, 
+                        id: 0,
                         m1SubmissionId: submission.Id,
                         formKind: record.Value ?? "",
                         message: record.Message ?? "",
@@ -126,8 +129,8 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         location: record.Location ?? "",
                         value: record.Value ?? ""
                     );
-
-                    submission.Errors.Add(error);
+                
+                submission.Errors.Add(error);
                 }
 
                 await _milestoneService.Update(username, milestone);

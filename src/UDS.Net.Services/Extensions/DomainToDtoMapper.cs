@@ -121,8 +121,7 @@ namespace UDS.Net.Services.Extensions
                 ModifiedBy = submission.ModifiedBy,
                 DeletedBy = submission.DeletedBy,
                 IsDeleted = submission.IsDeleted,
-                ErrorCount  = submission.ErrorCount,
-
+                ErrorCount = submission.ErrorCount,
                 M1SubmissionErrors = submission.Errors?
                     .Select(e => e.ToDto())
                     .ToList() ?? new List<M1SubmissionErrorDto>()
