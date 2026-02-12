@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UDS.Net.API.Entities;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 
@@ -13,6 +14,7 @@ namespace UDS.Net.Services
         Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses);
 
         Task<Milestone> GetByIdAsync(string name, int id);
+        Task<Milestone> GetMostRecentSubmission(string username);
     }
 }
 

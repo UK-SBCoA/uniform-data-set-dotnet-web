@@ -49,12 +49,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<Milestone> Update(string username, Milestone entity)
+        public Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
+        Task<Milestone> IMilestoneService.GetMostRecentSubmission(string username)
         {
             throw new NotImplementedException();
         }

@@ -16,6 +16,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
     {
         private readonly IVisitService _visitService;
         private readonly IParticipationService _participationService;
+        private readonly IMilestoneService _milestoneService;
 
         public List<NACCM1ErrorModel> M1SubmissionErrors { get; set; } = new();
 
@@ -24,31 +25,52 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
         public CreateModel(
             IVisitService visitService,
-            IParticipationService participationService)
+            IParticipationService participationService,
+            IMilestoneService milestoneService)
         {
             _visitService = visitService;
             _participationService = participationService;
+            _milestoneService = milestoneService;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
 
-        private static M1SubmissionErrorLevel GetErrorLevel(string errorType)
+        private static M1SubmissionErrorLevel GetErrorLevel(string? errorType)
         {
+            if (string.IsNullOrWhiteSpace(errorType))
+                return M1SubmissionErrorLevel.Information;
+
             return errorType.Trim().ToLower() == "error"
                 ? M1SubmissionErrorLevel.Error
                 : M1SubmissionErrorLevel.Information;
         }
 
-        int submissionId = 123;
         List<M1SubmissionError> errorsToSave = new();
 
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostDisplayErrorSubmission()
         {
+
+            var username = User.Identity?.Name ?? "";
+
+            var milestone = await _milestoneService.GetMostRecentSubmission(username);
+
+            {
+                ModelState.AddModelError("", "No submission found.");
+                return Page();
+            }
+
+            var submission = milestone.M1Submissions
+                .OrderByDescending(s => s.SubmissionDate)
+                .FirstOrDefault();
+
+
+            if (submission == null)
+            {
+                ModelState.AddModelError("", "No submission found.");
+                return Page();
+            }
+
             if (ErrorFileUpload == null || ErrorFileUpload.Length == 0)
             {
                 ModelState.AddModelError("ErrorFileUpload", "File not found.");
@@ -79,18 +101,35 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
                 foreach (var record in records)
                 {
-                    if (record.Visitnum?.ToLower() == "null")
+                    if (string.Equals(record.Visitnum, "null", StringComparison.OrdinalIgnoreCase))
                         record.Visitnum = null;
-
-                    if (!string.Equals(record.Type, "error", StringComparison.OrdinalIgnoreCase))
-                        continue;
 
                     record.Message = record.Message?.Length > 500
                         ? record.Message[..497] + "..."
                         : record.Message;
 
-                    M1SubmissionErrors.Add(record);
+                    var error = new UDS.Net.Services.DomainModels.Submission.M1SubmissionError(
+                        id: 0, 
+                        m1SubmissionId: submission.Id,
+                        formKind: record.Value ?? "",
+                        message: record.Message ?? "",
+                        assignedTo: "",
+                        level: Services.Enums.M1SubmissionErrorLevel.Error,
+                        status: Services.Enums.M1SubmissionErrorStatus.Pending,
+                        statusChangedBy: "",
+                        createdAt: record.Timestamp ?? DateTime.UtcNow,
+                        createdBy: username,
+                        modifiedBy: "",
+                        deletedBy: "",
+                        isDeleted: false,
+                        location: record.Location ?? "",
+                        value: record.Value ?? ""
+                    );
+
+                    submission.Errors.Add(error);
                 }
+
+                await _milestoneService.Update(username, milestone);
             }
             catch (Exception)
             {

@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
-        public int PacketSubmissionId { get; set; }
+        public int M1SubmissionId { get; set; }
 
         public string FormKind { get; set; } = "";
 

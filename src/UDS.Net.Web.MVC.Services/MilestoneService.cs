@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
@@ -83,6 +84,28 @@ namespace UDS.Net.Web.MVC.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Milestone?> GetMostRecentSubmission(string username)
+        {
+            var milestoneDtos = await _apiClient.MilestoneClient.Get(1000, 1);
+
+            var milestones = milestoneDtos.ToDomain();
+
+            var milestoneWithLatestSubmission = milestones
+                .Where(m => m.M1Submissions != null && m.M1Submissions.Any())
+                .Select(m => new
+                {
+                    Milestone = m,
+                    LatestSubmission = m.M1Submissions
+                        .OrderByDescending(s => s.SubmissionDate)
+                        .First()
+                })
+                .OrderByDescending(x => x.LatestSubmission.SubmissionDate)
+                .FirstOrDefault();
+
+            return milestoneWithLatestSubmission?.Milestone;
+        }
+
     }
 }
 

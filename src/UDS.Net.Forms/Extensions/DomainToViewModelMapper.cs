@@ -196,7 +196,7 @@ namespace UDS.Net.Forms.Extensions
                     ? m1Submission.Errors.Select(e => new M1SubmissionErrorModel
                     {
                         Id = e.Id,
-                        PacketSubmissionId = e.M1SubmissionId,
+                        M1SubmissionId = e.M1SubmissionId,
                         FormKind = e.FormKind,
                         Message = e.Message,
                         AssignedTo = e.AssignedTo,
