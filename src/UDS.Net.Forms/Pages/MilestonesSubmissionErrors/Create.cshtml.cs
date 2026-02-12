@@ -55,6 +55,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
             var milestone = await _milestoneService.GetMostRecentSubmission(username);
 
+            if (milestone == null)
             {
                 ModelState.AddModelError("", "No submission found.");
                 return Page();

@@ -58,6 +58,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<Milestone> Update(string username, Milestone entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
