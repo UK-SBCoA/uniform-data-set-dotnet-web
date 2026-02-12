@@ -71,6 +71,8 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A3.DADDAGE\"]").FillAsync("888");
             await Page.Locator("input[name=\"A3.DADETPR\"]").FillAsync("00");
 
+            //In case previous data is loaded, change twice to clear previous sib row
+            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("0");
             await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("1");
             await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
 
