@@ -127,8 +127,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         deletedBy: "",
                         isDeleted: false,
                         location: record.Location ?? "",
-                        value: record.Value ?? ""
-                    );      
+                        value: record.Value ?? "");
                     submission.Errors.Add(error);
                 }
 
