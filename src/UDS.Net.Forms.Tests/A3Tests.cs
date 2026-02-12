@@ -184,7 +184,7 @@ namespace UDS.Net.Forms.Tests
             //tab between each input to trigger JS change
             await Page.Keyboard.PressAsync("Tab");
             await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
-            
+
             await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("0");
             await Page.Keyboard.PressAsync("Tab");
             await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
