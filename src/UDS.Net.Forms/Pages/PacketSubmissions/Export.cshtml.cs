@@ -366,7 +366,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (a2.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                        csv.WriteRecord(new A2FormFields()); 
+                    csv.WriteRecord(new A2FormFields());
                 }
                 else
                 {
