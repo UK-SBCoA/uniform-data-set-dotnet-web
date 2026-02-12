@@ -88,7 +88,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
 
-            // DEVNOTE: adjusting follow-up properties here so the A3 Javascript can continue to run without knowing packetKind
             // If initial or initial for existing, follow-up properties will be null
             if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
             {

@@ -179,7 +179,7 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("");
 
             //Change values of each section to set follow-up fields to 1
-            //change each field twice in case previous data exists
+            //change each field twice in case data already exists in previous form
             await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
             //tab between each input to trigger JS change
             await Page.Keyboard.PressAsync("Tab");
@@ -224,7 +224,7 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
-            //Go back to root and create another follow-up A3
+            //Go back to base url and create another follow-up A3
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
@@ -289,7 +289,7 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("0");
             await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("0");
 
-            //Adjust sections
+            //Adjust sections to trigger change values in hidden fields
             await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
             await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
             await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
@@ -308,6 +308,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
             await Page.Locator("input[name=\"A3.MOMDAGE\"]").FillAsync("888");
             await Page.Locator("input[name=\"A3.MOMETPR\"]").FillAsync("01");
+            //DEVNOTE: Using tab key presses to unfocus input and trigger JS field enables
             await Page.Keyboard.PressAsync("Tab");
             await Page.Locator("input[name=\"A3.MOMETSEC\"]").FillAsync("01");
             await Page.Locator("input[name=\"A3.MOMMEVAL\"]").FillAsync("1");

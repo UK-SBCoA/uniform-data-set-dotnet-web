@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UDS.Net.API.Entities;
-using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Extensions;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -161,6 +158,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
         {
+            //DEVNOTE: Manually entering FORMVER 4 here, the MVC pagemodel calls this method with version 4.0.0
             var packetsOfVersion = await _context.Packets
                     .Where(p => p.ParticipationId == participationId && p.FORMVER == "4")
                     .ToListAsync();
