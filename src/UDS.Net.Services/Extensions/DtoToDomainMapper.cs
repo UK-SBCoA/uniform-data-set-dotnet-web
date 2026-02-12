@@ -170,9 +170,8 @@ namespace UDS.Net.Services.Extensions
             if (dto.M1Submissions != null)
             {
                 var debug = dto.M1Submissions
-                    .Select(s => new { s.Id, ErrorCount = s.M1SubmissionErrors?.Count, HasErrors = s.M1SubmissionErrors != null
-                    })
-                    .ToList();
+                .Select(s => new { s.Id, ErrorCount = s.M1SubmissionErrors?.Count, HasErrors = s.M1SubmissionErrors != null})
+                .ToList();
 
                 milestone.M1Submissions = dto.M1Submissions
                     .Select(s => new M1Submission(

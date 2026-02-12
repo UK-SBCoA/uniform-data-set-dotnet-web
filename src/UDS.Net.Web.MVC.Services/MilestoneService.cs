@@ -51,7 +51,7 @@ namespace UDS.Net.Web.MVC.Services
         {
             IEnumerable<M1Dto> milestones = await _apiClient.MilestoneClient.Get(pageSize, pageIndex);
 
-                return milestones.ToDomain();
+            return milestones.ToDomain();
         }
 
         public Task<Milestone> Patch(string username, Milestone entity)
