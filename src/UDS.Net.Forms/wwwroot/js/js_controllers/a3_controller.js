@@ -2,7 +2,22 @@
 
 export default class extends Controller {
 
-    inputModified({ params: { target } }) {
-        $(`input[name="${target}"]`).val(1)
+    static targets = [
+        "parentsModified",
+        "siblingsModified",
+        "kidsModified"
+    ]
+
+    ParentsModified() {
+        this.parentsModifiedTarget.value = 1
+    }
+
+    SiblingsModified() {
+        console.log("siblings changed")
+        this.siblingsModifiedTarget.value = 1
+    }
+
+    KidsModified() {
+        this.kidsModifiedTarget.value = 1
     }
 }

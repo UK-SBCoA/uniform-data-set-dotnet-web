@@ -32,7 +32,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Participation> GetById(string username, int id, bool includeVisits = false)
         {
-            Participation newParticipation = new Participation
+            return new Participation
             {
                 Id = 1,
                 LegacyId = "1000",
@@ -42,8 +42,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 Status = "Enrolled",
                 VisitCount = 0
             };
-
-            return newParticipation;
         }
 
         public async Task<Participation> GetById(string username, int id)
@@ -62,7 +60,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Participation> GetByLegacyId(string username, string legacyId)
         {
-            Participation newParticipation = new Participation
+            return new Participation
             {
                 Id = 1,
                 LegacyId = "1000",
@@ -72,8 +70,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 Status = "Enrolled",
                 VisitCount = 0
             };
-
-            return newParticipation;
         }
 
         public Task<IEnumerable<Participation>> List(string username, int pageSize = 10, int pageIndex = 1)

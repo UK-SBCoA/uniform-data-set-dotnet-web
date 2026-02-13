@@ -213,7 +213,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task LoadPreviousData()
+        public async Task FollowUpVisitAutofillsDataFromPreviousVisit()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
@@ -304,7 +304,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task FollowUpFieldsSaveWhenPreviousDataLoads()
+        public async Task NWINFFieldsIndicateModificationAfterDataChanged()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();

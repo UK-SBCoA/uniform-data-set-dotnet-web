@@ -3,6 +3,7 @@ using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Extensions;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -59,14 +60,14 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             }
 
             //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
-            var packetKind = Net.Services.Enums.PacketKind.I;
+            var packetKind = PacketKind.I;
 
             if (packet.PACKET.ToString() == "F")
             {
-                packetKind = Net.Services.Enums.PacketKind.F;
+                packetKind = PacketKind.F;
             }
 
-            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Net.Services.DomainModels.Form>());
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
@@ -89,7 +90,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
                 if (packet != null)
                 {
-                    List<Net.Services.DomainModels.Form> forms = new List<Net.Services.DomainModels.Form>();
+                    List<Form> forms = new List<Form>();
 
                     // TODO add more forms here as tests are added
                     if (packet.A3 != null)
@@ -115,14 +116,14 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     }
 
                     //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
-                    var packetKind = Net.Services.Enums.PacketKind.I;
+                    var packetKind = PacketKind.I;
 
                     if (packet.PACKET.ToString() == "F")
                     {
-                        packetKind = Net.Services.Enums.PacketKind.F;
+                        packetKind = PacketKind.F;
                     }
 
-                    var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
+                    var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
 
                     return visit;
                 }
@@ -406,7 +407,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
             if (packet == null) return null;
 
-            List<Net.Services.DomainModels.Form> forms = new List<Net.Services.DomainModels.Form>();
+            List<Form> forms = new List<Form>();
 
             // TODO add more forms here as tests are added
             if (packet.A3 != null)
@@ -416,14 +417,14 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             }
 
             //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
-            var packetKind = Net.Services.Enums.PacketKind.I;
+            var packetKind = PacketKind.I;
 
             if (packet.PACKET.ToString() == "F")
             {
-                packetKind = Net.Services.Enums.PacketKind.F;
+                packetKind = PacketKind.F;
             }
 
-            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
         }
     }
 }

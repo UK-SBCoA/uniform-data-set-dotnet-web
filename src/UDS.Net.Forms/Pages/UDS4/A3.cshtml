@@ -5,7 +5,7 @@
 
     string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
 }
-<div>
+<div data-controller="a3">
     <div>
         <p class="mt-1 text-sm text-gray-500">
             INSTRUCTIONS: <span class="italic">This form is to be completed by a clinician with experience in evaluating participants with neurological and psychiatric diagnoses. Estimates are allowed if exact birth year or age at death is unknown. For additional clarification and examples, see the</span> <guidebook kind="@Model.Visit.PACKET"></guidebook> <span class="italic">for</span> Form A3.
@@ -54,7 +54,7 @@
                     </tr>
                 </thead>
 
-                <tbody data-controller="a3" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFPAR">
+                <tbody>
                     <tr class="border-b border-gray-100" data-controller="a3-enable-intra-row" data-a3-enable-intra-row-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-intra-row-disabled-class="bg-gray-100 cursor-not-allowed opacity-60">
                         <td><span class="subcounter"></span> Mother</td>
                         <td>
@@ -62,7 +62,7 @@
                                 <div class="grid grid-cols-2 sm:grid-cols-1">
                                     <div class="sm:col-span-1">
                                         <p class="mt-1 text-sm leading-6 text-gray-400">MOMYOB</p>
-                                        <input asp-for="@Model.A3.MOMYOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
+                                        <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMYOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
                                     </div>
                                 </div>
                             </fieldset>
@@ -70,32 +70,32 @@
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMDAGE</p>
-                                <input asp-for="@Model.A3.MOMDAGE" data-a3-enable-intra-row-target="input" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMDAGE" data-a3-enable-intra-row-target="input" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
-                                <input asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMETSEC</p>
-                                <input asp-for="@Model.A3.MOMETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                             </div>
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMMEVAL</p>
                             </div>
-                            <input asp-for="@Model.A3.MOMMEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                            <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMMEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMAGEO</p>
                             </div>
-                            <input asp-for="@Model.A3.MOMAGEO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                            <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMAGEO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                         </td>
                     </tr>
                     <tr>
@@ -146,7 +146,7 @@
                         <td>
                             <fieldset>
                                 <div class="grid grid-cols-2 sm:grid-cols-1">
-                                    <input asp-for="@Model.A3.DADYOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
+                                    <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADYOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
                                 </div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADYOB" data-a3-enable-intra-row-target="validationSpan"></span>
                                 <submission-error location="DADYOB" errors="Model.BaseForm.UnresolvedErrors" />
@@ -155,7 +155,7 @@
                         <td>
                             <fieldset>
                                 <div class="grid grid-cols-2 sm:grid-cols-1">
-                                    <input asp-for="@Model.A3.DADDAGE" data-a3-enable-intra-row-target="input" />
+                                    <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADDAGE" data-a3-enable-intra-row-target="input" />
                                 </div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADDAGE" data-a3-enable-intra-row-target="validationSpan"></span>
                                 <submission-error location="DADDAGE" errors="Model.BaseForm.UnresolvedErrors" />
@@ -163,28 +163,28 @@
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR" data-a3-enable-intra-row-target="validationSpan"></span>
                             <submission-error location="DADETPR" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETSEC" data-a3-enable-intra-row-target="validationSpan"></span>
                             <submission-error location="DADETSEC" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADMEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADMEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADMEVAL" data-a3-enable-intra-row-target="validationSpan"></span>
                             <submission-error location="DADMEVAL" errors="Model.BaseForm.UnresolvedErrors" />
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input asp-for="@Model.A3.DADAGEO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADAGEO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADAGEO" data-a3-enable-intra-row-target="validationSpan"></span>
                             <submission-error location="DADAGEO" errors="Model.BaseForm.UnresolvedErrors" />
@@ -301,7 +301,7 @@
     </div>
 
     <!--// Siblings //-->
-    <div data-controller="a3" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFSIB">
+    <div>
         <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-sibling-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="20">
             <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 2. Full siblings</h3>
             
@@ -309,7 +309,7 @@
                 <label asp-for="A3.SIBS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.SIBS)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A3.SIBS"></p>
-                    <input id="A3_SIBS" asp-for="@Model.A3.SIBS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
+                    <input id="A3_SIBS" asp-for="@Model.A3.SIBS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows change->a3#SiblingsModified" />
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.SIBS"></span>
                     <submission-error location="SIBS" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
@@ -356,6 +356,7 @@
                     @for (var i = 0; i < Model.A3.Siblings.Count(); i++)
                     {
                         ViewData["RowCssClass"] = "a3-sibling-row";
+                        ViewData["a3-change-method"] = "SiblingsModified";
                         @Html.EditorFor(m => m.A3.Siblings[i])
                     }
                 </tbody>
@@ -364,14 +365,14 @@
     </div>
 
     <!--// Children //-->
-    <div data-controller="a3-enable-rows a3" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-child-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="15" data-action="change->a3#inputModified" data-a3-target-param="A3.NWINFKID"> 
+    <div data-controller="a3-enable-rows" data-a3-enable-rows-a3-enable-intra-row-outlet=".a3-child-row" data-a3-enable-rows-invalid-class="input-validation-error border-red-500 border-red-600" data-a3-enable-rows-disabled-class="bg-gray-100 cursor-not-allowed opacity-60" data-a3-enable-rows-max-rows-value="15"> 
         <h3 class="mt-16 text-base font-semibold leading-7 text-gray-900">Section 3. Biological children</h3>
 
         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label asp-for="A3.KIDS"><span class="counter"></span> @Html.DisplayNameFor(m => m.A3.KIDS)</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A3.KIDS"></p>
-                <input id="A3_KIDS" asp-for="@Model.A3.KIDS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows" />
+                <input id="A3_KIDS" asp-for="@Model.A3.KIDS" data-a3-enable-rows-target="countInput" data-action="change->a3-enable-rows#updateRows change->a3#KidsModified" />
 
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.KIDS"></span>
                 <submission-error location="KIDS" errors="Model.BaseForm.UnresolvedErrors" />
@@ -421,17 +422,18 @@
                     @for (var i = 0; i < Model.A3.Children.Count(); i++)
                     {
                         ViewData["RowCssClass"] = "a3-child-row";
+                        ViewData["a3-change-method"] = "KidsModified";
                         @Html.EditorFor(m => m.A3.Children[i])
                     }
                 </tbody>
             </table>
         </div>
     </div> 
-</div>
 
-@* TODO: Hidden fields for follow-up properties *@
-<input hidden asp-for="A3.NWINFPAR" />
-<input hidden asp-for="A3.NWINFSIB" />
-<input hidden asp-for="A3.NWINFKID" />
+    @* TODO: Hidden fields for follow-up properties *@
+    <input data-a3-target="parentsModified" asp-for="A3.NWINFPAR" />
+    <input data-a3-target="siblingsModified" asp-for="A3.NWINFSIB" />
+    <input data-a3-target="kidsModified" asp-for="A3.NWINFKID" />
+</div>
 
 <partial name="_FormFooter" for="@Model.A3" />
