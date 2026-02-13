@@ -90,8 +90,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                     {
                         familyMember.YOB = value.YOB;
                         familyMember.AGD = value.AGD;
-                        familyMember.ETPR = value.ETPR;
-                        familyMember.ETSEC = value.ETSEC;
+                        familyMember.ETPR = $"=\"{value.ETPR}\"";
+                        familyMember.ETSEC = $"=\"{value.ETSEC}\"";
                         familyMember.MEVAL = value.MEVAL;
                         familyMember.AGO = value.AGO;
 
@@ -130,13 +130,13 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.NWINFKID = a3Dto.NWINFKID;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
-                this.MOMETPR = a3Dto.MOMETPR;
-                this.MOMETSEC = a3Dto.MOMETSEC;
+                this.MOMETPR = $"=\"{a3Dto.MOMETPR}\"";
+                this.MOMETSEC = $"=\"{a3Dto.MOMETSEC}\"";
                 this.MOMMEVAL = a3Dto.MOMMEVAL;
                 this.MOMAGEO = a3Dto.MOMAGEO;
                 this.DADYOB = a3Dto.DADYOB;
-                this.DADETPR = a3Dto.DADETPR;
-                this.DADETSEC = a3Dto.DADETSEC;
+                this.DADETPR = $"=\"{a3Dto.DADETPR}\"";
+                this.DADETSEC = $"=\"{a3Dto.DADETSEC}\"";
                 this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
