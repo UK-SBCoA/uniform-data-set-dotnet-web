@@ -63,6 +63,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task CreateSubmissionAsync(string username, int milestoneId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

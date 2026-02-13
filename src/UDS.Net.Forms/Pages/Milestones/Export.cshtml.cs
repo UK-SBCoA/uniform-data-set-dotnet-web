@@ -40,6 +40,8 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return NotFound($"Milestone with ID {id} not found.");
             }
 
+            await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
+
             string adcid = _configuration["ADRC:Id"];
             string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
 
@@ -85,6 +87,7 @@ namespace UDS.Net.Forms.Pages.Milestones
                     var record = new MilestoneRecord(milestone, initials, adcid);
                     csv.WriteRecord(record);
                     await csv.NextRecordAsync();
+                    await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
                 }
             }
 

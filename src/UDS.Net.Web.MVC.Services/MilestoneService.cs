@@ -6,6 +6,7 @@ using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
@@ -85,7 +86,7 @@ namespace UDS.Net.Web.MVC.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Milestone?> GetMostRecentSubmission(string username)
+        public async Task<Milestone> GetMostRecentSubmission(string username)
         {
             var milestoneDtos = await _apiClient.MilestoneClient.Get(1000, 1);
 
@@ -106,6 +107,41 @@ namespace UDS.Net.Web.MVC.Services
             return milestoneWithLatestSubmission?.Milestone;
         }
 
+        public async Task<M1Submission> CreateSubmissionAsync(string username, int milestoneId)
+        {
+            var milestone = await GetById(username, milestoneId);
+
+            if (milestone == null)
+                throw new Exception("Milestone not found.");
+
+            string adrcId = milestone.Id.ToString();
+            var now = DateTime.UtcNow;
+
+            var submission = new M1Submission(
+                id: 0,
+                adrcId: adrcId,
+                submissionDate: now,
+                m1Id: milestone.Id,
+                createdAt: now,
+                createdBy: username,
+                modifiedBy: "",
+                deletedBy: "",
+                isDeleted: false,
+                errorCount: null
+            );
+
+            milestone.M1Submissions ??= new List<M1Submission>();
+            milestone.M1Submissions.Add(submission);
+
+            await Update(username, milestone);
+
+            return submission;
+        }
+
+        Task IMilestoneService.CreateSubmissionAsync(string username, int milestoneId)
+        {
+            return CreateSubmissionAsync(username, milestoneId);
+        }
     }
 }
 

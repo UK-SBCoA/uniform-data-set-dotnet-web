@@ -15,6 +15,7 @@ namespace UDS.Net.Services
 
         Task<Milestone> GetByIdAsync(string name, int id);
         Task<Milestone> GetMostRecentSubmission(string username);
+        Task CreateSubmissionAsync(string username, int milestoneId);
     }
 }
 
