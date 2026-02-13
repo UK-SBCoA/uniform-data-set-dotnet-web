@@ -631,7 +631,10 @@ namespace UDS.Net.Services.Extensions
                 DADMEVAL = fields.DADMEVAL,
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
-                KIDS = fields.KIDS
+                KIDS = fields.KIDS,
+                NWINFPAR = fields.NWINFPAR,
+                NWINFSIB = fields.NWINFSIB,
+                NWINFKID = fields.NWINFKID
             };
 
             foreach (var sib in fields.SiblingFormFields)

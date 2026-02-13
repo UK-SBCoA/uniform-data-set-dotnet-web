@@ -37,7 +37,7 @@ public class HomeController : Controller
             if (visit == null)
             {
                 // create a new one if it doesn't exist yet (new db instance)
-                var v = new Visit(1, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
+                var v = new Visit(existingVisitId.Value, 1, participation.Id, "4", Net.Services.Enums.PacketKind.I, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
 
                 visit = await _visitService.Add("username", v);
             }

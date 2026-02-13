@@ -3,6 +3,7 @@ using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Extensions;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -23,10 +24,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = new API.Entities.Packet
             {
-                ParticipationId = 1,
+                ParticipationId = entity.ParticipationId,
                 VISITNUM = entity.VISITNUM,
                 FORMVER = entity.FORMVER,
-                PACKET = "I",
+                PACKET = entity.PACKET.ToString(),
                 VISIT_DATE = entity.VISIT_DATE,
                 INITIALS = entity.INITIALS,
                 Status = API.Entities.PacketStatus.Pending,
@@ -57,7 +58,16 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 return null;
             }
-            return new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
+
+            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+            var packetKind = PacketKind.I;
+
+            if (packet.PACKET.ToString() == "F")
+            {
+                packetKind = PacketKind.F;
+            }
+
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
@@ -105,7 +115,15 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         forms.Add(d1a);
                     }
 
-                    var visit = new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
+                    //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+                    var packetKind = PacketKind.I;
+
+                    if (packet.PACKET.ToString() == "F")
+                    {
+                        packetKind = PacketKind.F;
+                    }
+
+                    var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
 
                     return visit;
                 }
@@ -133,15 +151,20 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 .FirstOrDefaultAsync();
 
             if (mostRecent != null)
-                return mostRecent.VISITNUM;
+                return mostRecent.VISITNUM + 1;
             else
-                return 0;
+                return 1;
 
         }
 
-        public Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
         {
-            throw new NotImplementedException();
+            //DEVNOTE: Manually entering FORMVER 4 here, the MVC pagemodel calls this method with version 4.0.0
+            var packetsOfVersion = await _context.Packets
+                    .Where(p => p.ParticipationId == participationId && p.FORMVER == "4")
+                    .ToListAsync();
+
+            return packetsOfVersion.Count;
         }
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
@@ -375,9 +398,33 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
+        public async Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
         {
-            return null;
+            var packet = await _context.Packets
+                .Include(v => v.A3)
+                .Where(v => v.ParticipationId == participationId && v.VISITNUM == visitNumber)
+                .FirstOrDefaultAsync();
+
+            if (packet == null) return null;
+
+            List<Form> forms = new List<Form>();
+
+            // TODO add more forms here as tests are added
+            if (packet.A3 != null)
+            {
+                var a3 = packet.A3.Convert(packet.Id, username);
+                forms.Add(a3);
+            }
+
+            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+            var packetKind = PacketKind.I;
+
+            if (packet.PACKET.ToString() == "F")
+            {
+                packetKind = PacketKind.F;
+            }
+
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
         }
     }
 }

@@ -22,14 +22,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
         private readonly IConfiguration _configuration;
+        private readonly IVisitService _visitService;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
             _packetService = packetService;
             _participationService = participationService;
             _configuration = configuration;
+            _visitService = visitService;
+
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -57,7 +60,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -116,7 +119,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketData(csv, packetSubmission, participant, packet);
+                                WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -303,7 +306,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+
+        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -378,8 +382,51 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FormFields normalA3)
-                    csv.WriteRecord(normalA3);
+                Form? previousA3Base = null;
+
+                //DEVNOTE:
+                //All packets submitted will include followUp variables, even the initial visits.
+                //A3FormFields holds follow-up properties 
+                A3FormFields? previousA3Fields = null;
+
+                A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+
+                    //Set previousA3Base
+                    previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
+
+                    //Set previousA3Fields
+                    previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
+                }
+
+                //Mother & Father vlaues
+                if (currentA3Fields != null && previousA3Fields != null)
+                {
+                    //If currentA3Fields marks NWINFPAR as changed, then apply previous value codes
+                    if (currentA3Fields.NWINFPAR == 1)
+                    {
+                        currentA3Fields.MOMYOB = currentA3Fields.MOMYOB == previousA3Fields.MOMYOB ? 6666 : currentA3Fields.MOMYOB;
+                        currentA3Fields.MOMDAGE = currentA3Fields.MOMDAGE == previousA3Fields.MOMDAGE ? 666 : currentA3Fields.MOMDAGE;
+                        currentA3Fields.MOMETPR = currentA3Fields.MOMETPR == previousA3Fields.MOMETPR ? "66" : currentA3Fields.MOMETPR;
+                        currentA3Fields.MOMETSEC = currentA3Fields.MOMETSEC == previousA3Fields.MOMETSEC ? "66" : currentA3Fields.MOMETSEC;
+                        currentA3Fields.MOMMEVAL = currentA3Fields.MOMMEVAL == previousA3Fields.MOMMEVAL ? 6 : currentA3Fields.MOMMEVAL;
+                        currentA3Fields.MOMAGEO = currentA3Fields.MOMAGEO == previousA3Fields.MOMAGEO ? 666 : currentA3Fields.MOMAGEO;
+
+                        currentA3Fields.DADYOB = currentA3Fields.DADYOB == previousA3Fields.DADYOB ? 6666 : currentA3Fields.DADYOB;
+                        currentA3Fields.DADDAGE = currentA3Fields.DADDAGE == previousA3Fields.DADDAGE ? 666 : currentA3Fields.DADDAGE;
+                        currentA3Fields.DADETPR = currentA3Fields.DADETPR == previousA3Fields.DADETPR ? "66" : currentA3Fields.DADETPR;
+                        currentA3Fields.DADETSEC = currentA3Fields.DADETSEC == previousA3Fields.DADETSEC ? "66" : currentA3Fields.DADETSEC;
+                        currentA3Fields.DADMEVAL = currentA3Fields.DADMEVAL == previousA3Fields.DADMEVAL ? 6 : currentA3Fields.DADMEVAL;
+                        currentA3Fields.DADAGEO = currentA3Fields.DADAGEO == previousA3Fields.DADAGEO ? 666 : currentA3Fields.DADAGEO;
+                    }
+                }
+
+                csv.WriteRecord(currentA3Fields);
 
                 List<A3FamilyMemberFormFields> siblings;
                 List<A3FamilyMemberFormFields> kids;
@@ -395,29 +442,65 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     kids = new List<A3FamilyMemberFormFields>();
                 }
 
-                // siblings
+                // siblings 
+
+                //DEVNOTE: Initialize siblings index for targeting items of siblings array
+                var siblingsIndex = 0;
+
                 foreach (var sibling in siblings)
                 {
+                    //DEVNOTE: If form is marked as changed, apply previous value codes to siblings array item
+                    if (currentA3Fields?.NWINFSIB == 1 && previousA3Fields != null)
+                    {
+                        siblings[siblingsIndex].YOB = siblings[siblingsIndex].YOB == previousA3Fields.SiblingFormFields[siblingsIndex].YOB && !string.IsNullOrEmpty(siblings[siblingsIndex].YOB.ToString()) ? 6666 : siblings[siblingsIndex].YOB;
+                        siblings[siblingsIndex].AGD = siblings[siblingsIndex].AGD == previousA3Fields.SiblingFormFields[siblingsIndex].AGD && !string.IsNullOrEmpty(siblings[siblingsIndex].AGD.ToString()) ? 666 : siblings[siblingsIndex].AGD;
+                        siblings[siblingsIndex].ETPR = siblings[siblingsIndex].ETPR == previousA3Fields.SiblingFormFields[siblingsIndex].ETPR && !string.IsNullOrEmpty(siblings[siblingsIndex].ETPR) ? "66" : siblings[siblingsIndex].ETPR;
+                        siblings[siblingsIndex].ETSEC = siblings[siblingsIndex].ETSEC == previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC && !string.IsNullOrEmpty(siblings[siblingsIndex].ETSEC) ? "66" : siblings[siblingsIndex].ETSEC;
+                        siblings[siblingsIndex].MEVAL = siblings[siblingsIndex].MEVAL == previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL && !string.IsNullOrEmpty(siblings[siblingsIndex].MEVAL.ToString()) ? 6 : siblings[siblingsIndex].MEVAL;
+                        siblings[siblingsIndex].AGO = siblings[siblingsIndex].AGO == previousA3Fields.SiblingFormFields[siblingsIndex].AGO && !string.IsNullOrEmpty(siblings[siblingsIndex].AGO.ToString()) ? 666 : siblings[siblingsIndex].AGO;
+                    }
+
                     foreach (var prop in a3FamilyProps)
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            csv.WriteField(prop.GetValue(sibling));
+                            csv.WriteField(prop.GetValue(siblings[siblingsIndex]));
                         }
                     }
-                }
 
-                // kids
+                    siblingsIndex++;
+                }
+                ;
+
+                // kids 
+
+                //DEVNOTE: Initialize kids index for targeting items of kids array
+                var kidsIndex = 0;
+
                 foreach (var kid in kids)
                 {
+                    //DEVNOTE: If form is marked as changed, apply previous value codes to kids array item
+                    if (currentA3Fields?.NWINFKID == 1 && previousA3Fields != null)
+                    {
+                        kids[kidsIndex].YOB = kids[kidsIndex].YOB == previousA3Fields.KidsFormFields[kidsIndex].YOB && !string.IsNullOrEmpty(kids[kidsIndex].YOB.ToString()) ? 6666 : kids[kidsIndex].YOB;
+                        kids[kidsIndex].AGD = kids[kidsIndex].AGD == previousA3Fields.KidsFormFields[kidsIndex].AGD && !string.IsNullOrEmpty(kids[kidsIndex].AGD.ToString()) ? 666 : kids[kidsIndex].AGD;
+                        kids[kidsIndex].ETPR = kids[kidsIndex].ETPR == previousA3Fields.KidsFormFields[kidsIndex].ETPR && !string.IsNullOrEmpty(kids[kidsIndex].ETPR) ? "66" : kids[kidsIndex].ETPR;
+                        kids[kidsIndex].ETSEC = kids[kidsIndex].ETSEC == previousA3Fields.KidsFormFields[kidsIndex].ETSEC && !string.IsNullOrEmpty(kids[kidsIndex].ETSEC) ? "66" : kids[kidsIndex].ETSEC;
+                        kids[kidsIndex].MEVAL = kids[kidsIndex].MEVAL == previousA3Fields.KidsFormFields[kidsIndex].MEVAL && !string.IsNullOrEmpty(kids[kidsIndex].MEVAL.ToString()) ? 6 : kids[kidsIndex].MEVAL;
+                        kids[kidsIndex].AGO = kids[kidsIndex].AGO == previousA3Fields.KidsFormFields[kidsIndex].AGO && !string.IsNullOrEmpty(kids[kidsIndex].AGO.ToString()) ? 666 : kids[kidsIndex].AGO;
+                    }
+
                     foreach (var prop in a3FamilyProps)
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            csv.WriteField(prop.GetValue(kid));
+                            csv.WriteField(prop.GetValue(kids[kidsIndex]));
                         }
                     }
+
+                    kidsIndex++;
                 }
+                ;
             }
             if (a4 != null)
             {
