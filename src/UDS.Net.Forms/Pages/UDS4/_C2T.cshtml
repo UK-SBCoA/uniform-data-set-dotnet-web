@@ -1291,7 +1291,7 @@
                     <div class="@rowCSS sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
                         <div>
                             <label asp-for="C2.REYDREC"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.REYDREC)</label>
-                            <p class="text-nowrap text-xs">(If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a.)</p>
+                            <p class="text-nowrap text-xs">(If test not completed, enter reason code, 88 or 95-98, and SKIP TO QUESTION 14a.)</p>
                         </div>
                         <div class="flex flex-row space-x-4 items-start">
                             <div class="min-w-[80px] max-w-[115px]">
@@ -1300,7 +1300,7 @@
                             <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.REYDREC"></p>
                         </div>
                         <div class="flex items-start">
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
+                            <span class="text-sm text-red-600" asp-validation-for="C2.REYDREC"></span>
                             <submission-error location="REYDREC" errors="Model.BaseForm.UnresolvedErrors" />
                             <span class="text-sm text-red-600 self-start" asp-validation-for="C2.REYDRECValidation"></span>
                             <submission-error location="REYDRECValidation" errors="Model.BaseForm.UnresolvedErrors" />
