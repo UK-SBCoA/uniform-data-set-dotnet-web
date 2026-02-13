@@ -13,7 +13,6 @@ export default class extends Controller {
     }
 
     SiblingsModified() {
-        console.log("siblings changed")
         this.siblingsModifiedTarget.value = 1
     }
 

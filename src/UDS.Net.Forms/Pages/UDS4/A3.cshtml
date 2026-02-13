@@ -431,9 +431,9 @@
     </div> 
 
     @* TODO: Hidden fields for follow-up properties *@
-    <input data-a3-target="parentsModified" asp-for="A3.NWINFPAR" />
-    <input data-a3-target="siblingsModified" asp-for="A3.NWINFSIB" />
-    <input data-a3-target="kidsModified" asp-for="A3.NWINFKID" />
+    <input type="hidden" data-a3-target="parentsModified" asp-for="A3.NWINFPAR" />
+    <input type="hidden" data-a3-target="siblingsModified" asp-for="A3.NWINFSIB" />
+    <input type="hidden" data-a3-target="kidsModified" asp-for="A3.NWINFKID" />
 </div>
 
 <partial name="_FormFooter" for="@Model.A3" />
