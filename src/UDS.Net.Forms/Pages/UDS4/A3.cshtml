@@ -76,7 +76,7 @@
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
                                 <p class="mt-1 text-sm leading-6 text-gray-400">MOMETPR</p>
-                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
+                                <input asp-for="@Model.A3.MOMETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields change->a3#ParentsModified" />
                             </div>
                         </td>
                         <td>
@@ -163,7 +163,7 @@
                         </td>
                         <td>
                             <div class="grid grid-cols-2 sm:grid-cols-1">
-                                <input data-action="change->a3#ParentsModified" asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
+                                <input asp-for="@Model.A3.DADETPR" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields change->a3#ParentsModified" />
                             </div>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="A3.DADETPR" data-a3-enable-intra-row-target="validationSpan"></span>
                             <submission-error location="DADETPR" errors="Model.BaseForm.UnresolvedErrors" />
