@@ -24,6 +24,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         private readonly IConfiguration _configuration;
         private readonly IVisitService _visitService;
 
+        private enum A3Section
+        {
+            Parent = 1,
+            Sibling = 2,
+            Kid = 3
+        }
+        private int A3ParentChangeCount = 0;
+        private int A3SiblingChangeCount = 0;
+        private int A3KidsChangeCount = 0;
+
         public bool Processed { get; set; } = false;
 
         public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
@@ -407,23 +417,21 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //Mother & Father vlaues
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
-                    //If currentA3Fields marks NWINFPAR as changed, then apply previous value codes
-                    if (currentA3Fields.NWINFPAR == 1)
-                    {
-                        currentA3Fields.MOMYOB = currentA3Fields.MOMYOB == previousA3Fields.MOMYOB ? 6666 : currentA3Fields.MOMYOB;
-                        currentA3Fields.MOMDAGE = currentA3Fields.MOMDAGE == previousA3Fields.MOMDAGE ? 666 : currentA3Fields.MOMDAGE;
-                        currentA3Fields.MOMETPR = currentA3Fields.MOMETPR == previousA3Fields.MOMETPR ? "66" : currentA3Fields.MOMETPR;
-                        currentA3Fields.MOMETSEC = currentA3Fields.MOMETSEC == previousA3Fields.MOMETSEC ? "66" : currentA3Fields.MOMETSEC;
-                        currentA3Fields.MOMMEVAL = currentA3Fields.MOMMEVAL == previousA3Fields.MOMMEVAL ? 6 : currentA3Fields.MOMMEVAL;
-                        currentA3Fields.MOMAGEO = currentA3Fields.MOMAGEO == previousA3Fields.MOMAGEO ? 666 : currentA3Fields.MOMAGEO;
+                    currentA3Fields.MOMYOB = CompareA3Values(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666, A3Section.Parent);
+                    currentA3Fields.MOMDAGE = CompareA3Values(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666, A3Section.Parent);
+                    currentA3Fields.MOMETPR = CompareA3Values(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66", A3Section.Parent);
+                    currentA3Fields.MOMETSEC = CompareA3Values(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66", A3Section.Parent);
+                    currentA3Fields.MOMMEVAL = CompareA3Values(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.MOMAGEO = CompareA3Values(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6, A3Section.Parent);
 
-                        currentA3Fields.DADYOB = currentA3Fields.DADYOB == previousA3Fields.DADYOB ? 6666 : currentA3Fields.DADYOB;
-                        currentA3Fields.DADDAGE = currentA3Fields.DADDAGE == previousA3Fields.DADDAGE ? 666 : currentA3Fields.DADDAGE;
-                        currentA3Fields.DADETPR = currentA3Fields.DADETPR == previousA3Fields.DADETPR ? "66" : currentA3Fields.DADETPR;
-                        currentA3Fields.DADETSEC = currentA3Fields.DADETSEC == previousA3Fields.DADETSEC ? "66" : currentA3Fields.DADETSEC;
-                        currentA3Fields.DADMEVAL = currentA3Fields.DADMEVAL == previousA3Fields.DADMEVAL ? 6 : currentA3Fields.DADMEVAL;
-                        currentA3Fields.DADAGEO = currentA3Fields.DADAGEO == previousA3Fields.DADAGEO ? 666 : currentA3Fields.DADAGEO;
-                    }
+                    currentA3Fields.DADYOB = CompareA3Values(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666, A3Section.Parent);
+                    currentA3Fields.DADDAGE = CompareA3Values(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666, A3Section.Parent);
+                    currentA3Fields.DADETPR = CompareA3Values(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66", A3Section.Parent);
+                    currentA3Fields.DADETSEC = CompareA3Values(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66", A3Section.Parent);
+                    currentA3Fields.DADMEVAL = CompareA3Values(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.DADAGEO = CompareA3Values(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6, A3Section.Parent);
+
+                    currentA3Fields.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
                 }
 
                 csv.WriteRecord(currentA3Fields);
@@ -442,7 +450,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     kids = new List<A3FamilyMemberFormFields>();
                 }
 
-                // siblings 
+                // siblings
 
                 //DEVNOTE: Initialize siblings index for targeting items of siblings array
                 var siblingsIndex = 0;
@@ -450,14 +458,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 foreach (var sibling in siblings)
                 {
                     //DEVNOTE: If form is marked as changed, apply previous value codes to siblings array item
-                    if (currentA3Fields?.NWINFSIB == 1 && previousA3Fields != null)
+                    if (previousA3Fields != null)
                     {
-                        siblings[siblingsIndex].YOB = siblings[siblingsIndex].YOB == previousA3Fields.SiblingFormFields[siblingsIndex].YOB && !string.IsNullOrEmpty(siblings[siblingsIndex].YOB.ToString()) ? 6666 : siblings[siblingsIndex].YOB;
-                        siblings[siblingsIndex].AGD = siblings[siblingsIndex].AGD == previousA3Fields.SiblingFormFields[siblingsIndex].AGD && !string.IsNullOrEmpty(siblings[siblingsIndex].AGD.ToString()) ? 666 : siblings[siblingsIndex].AGD;
-                        siblings[siblingsIndex].ETPR = siblings[siblingsIndex].ETPR == previousA3Fields.SiblingFormFields[siblingsIndex].ETPR && !string.IsNullOrEmpty(siblings[siblingsIndex].ETPR) ? "66" : siblings[siblingsIndex].ETPR;
-                        siblings[siblingsIndex].ETSEC = siblings[siblingsIndex].ETSEC == previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC && !string.IsNullOrEmpty(siblings[siblingsIndex].ETSEC) ? "66" : siblings[siblingsIndex].ETSEC;
-                        siblings[siblingsIndex].MEVAL = siblings[siblingsIndex].MEVAL == previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL && !string.IsNullOrEmpty(siblings[siblingsIndex].MEVAL.ToString()) ? 6 : siblings[siblingsIndex].MEVAL;
-                        siblings[siblingsIndex].AGO = siblings[siblingsIndex].AGO == previousA3Fields.SiblingFormFields[siblingsIndex].AGO && !string.IsNullOrEmpty(siblings[siblingsIndex].AGO.ToString()) ? 666 : siblings[siblingsIndex].AGO;
+                        siblings[siblingsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666, A3Section.Sibling);
+                        siblings[siblingsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666, A3Section.Sibling);
+                        siblings[siblingsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, siblings[siblingsIndex].ETPR, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, siblings[siblingsIndex].ETSEC, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6, A3Section.Sibling);
+                        siblings[siblingsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666, A3Section.Sibling);
+
+                        currentA3Fields?.NWINFSIB = A3SiblingChangeCount > 0 ? 1 : 0;
                     }
 
                     foreach (var prop in a3FamilyProps)
@@ -480,14 +490,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 foreach (var kid in kids)
                 {
                     //DEVNOTE: If form is marked as changed, apply previous value codes to kids array item
-                    if (currentA3Fields?.NWINFKID == 1 && previousA3Fields != null)
+                    if (previousA3Fields != null)
                     {
-                        kids[kidsIndex].YOB = kids[kidsIndex].YOB == previousA3Fields.KidsFormFields[kidsIndex].YOB && !string.IsNullOrEmpty(kids[kidsIndex].YOB.ToString()) ? 6666 : kids[kidsIndex].YOB;
-                        kids[kidsIndex].AGD = kids[kidsIndex].AGD == previousA3Fields.KidsFormFields[kidsIndex].AGD && !string.IsNullOrEmpty(kids[kidsIndex].AGD.ToString()) ? 666 : kids[kidsIndex].AGD;
-                        kids[kidsIndex].ETPR = kids[kidsIndex].ETPR == previousA3Fields.KidsFormFields[kidsIndex].ETPR && !string.IsNullOrEmpty(kids[kidsIndex].ETPR) ? "66" : kids[kidsIndex].ETPR;
-                        kids[kidsIndex].ETSEC = kids[kidsIndex].ETSEC == previousA3Fields.KidsFormFields[kidsIndex].ETSEC && !string.IsNullOrEmpty(kids[kidsIndex].ETSEC) ? "66" : kids[kidsIndex].ETSEC;
-                        kids[kidsIndex].MEVAL = kids[kidsIndex].MEVAL == previousA3Fields.KidsFormFields[kidsIndex].MEVAL && !string.IsNullOrEmpty(kids[kidsIndex].MEVAL.ToString()) ? 6 : kids[kidsIndex].MEVAL;
-                        kids[kidsIndex].AGO = kids[kidsIndex].AGO == previousA3Fields.KidsFormFields[kidsIndex].AGO && !string.IsNullOrEmpty(kids[kidsIndex].AGO.ToString()) ? 666 : kids[kidsIndex].AGO;
+                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
+                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
+                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
+                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
+                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
+                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
+
+                        currentA3Fields?.NWINFKID = A3KidsChangeCount > 0 ? 1 : 0;
                     }
 
                     foreach (var prop in a3FamilyProps)
@@ -675,8 +687,42 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     csv.WriteRecord(normalD1b);
             }
 
-        } // writer flushed automatically here    
+        } // writer flushed automatically here
 
+        private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
+        {
+            if (string.IsNullOrEmpty(previousValue) && string.IsNullOrEmpty(currentValue)) return null;
+
+            if(previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+
+        private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
+        {
+            if(previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+
+        private void DetectA3Change(Enum section)
+        {
+            if (section is A3Section.Parent) A3ParentChangeCount++;
+            if (section is A3Section.Sibling) A3SiblingChangeCount++;
+            if (section is A3Section.Kid) A3KidsChangeCount++;
+        }
     }
 }
 
