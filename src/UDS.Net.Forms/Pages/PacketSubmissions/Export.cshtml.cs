@@ -693,7 +693,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         {
             if (string.IsNullOrEmpty(previousValue) && string.IsNullOrEmpty(currentValue)) return null;
 
-            if(previousValue == currentValue)
+            if (previousValue == currentValue)
             {
                 return code;
             }
@@ -705,7 +705,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
         {
-            if(previousValue == null && currentValue == null) return null;
+            if (previousValue == null && currentValue == null) return null;
 
             if (previousValue == currentValue)
             {

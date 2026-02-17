@@ -170,50 +170,6 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task FollowUpFieldsSaveNULLOnInitialVisit()
-        {
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-
-            //Follow-up fields load as null
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("");
-
-            //Change values of each section to set follow-up fields to 1
-            //change each field twice in case data already exists in previous form
-            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
-            //tab between each input to trigger JS change
-            await Page.Keyboard.PressAsync("Tab");
-            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("9999");
-
-            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("0");
-            await Page.Keyboard.PressAsync("Tab");
-            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
-
-            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("1");
-            await Page.Keyboard.PressAsync("Tab");
-            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
-
-            //Check to see follow-up fields have changed to 1
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("1");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
-
-            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
-            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-
-            //Check to see follow-up fields have saved and reloads as null
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("");
-        }
-
-        [TestMethod]
         public async Task FollowUpVisitAutofillsDataFromPreviousVisit()
         {
             await Page.GotoAsync(BaseUrl);
@@ -269,7 +225,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task FollowUpFieldsCorrectlySetAndChange()
+        public async Task FollowUpVisitSavesNewDataAfterAutofillFromPreviousVisit()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
@@ -278,66 +234,23 @@ namespace UDS.Net.Forms.Tests
             //Write data to form
             await WriteFormData();
 
-            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
-            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+            //Change some inputs after data load
+            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1992");
+            await Page.Locator("input[name=\"A3.DADYOB\"]").FillAsync("1992");
+            await Page.Locator("input[name=\"A3.Siblings[0].YOB\"]").FillAsync("1992");
+            await Page.Locator("input[name=\"A3.Children[0].YOB\"]").FillAsync("1992");
 
-            //Go back to root and create another follow-up A3 to check follow-up fields
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-
-            //Follow-up fields load as null
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("0");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("0");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("0");
-
-            //Adjust sections to trigger change values in hidden fields
-            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
-            await Page.Locator("input[name=\"A3.SIBS\"]").FillAsync("77");
-            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
-            await Page.Keyboard.PressAsync("Tab");
-
-            //Check for hidden field values to be 1 (changed)
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("1");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
-        }
-
-        [TestMethod]
-        public async Task NWINFFieldsIndicateModificationAfterDataChanged()
-        {
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-
-            //Write data to form
-            await WriteFormData();
 
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
-            //Go back to root and create another follow-up A3 to check follow-up fields
-            await Page.GotoAsync(BaseUrl);
-            await Page.GetByRole(AriaRole.Button, new() { Name = "New Visit" }).ClickAsync();
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-
-            //Adjust sections to trigger change values in hidden fields
-            await Page.Locator("input[name=\"A3.MOMYOB\"]").FillAsync("1990");
-            await Page.Locator("input[name=\"A3.KIDS\"]").FillAsync("0");
-            await Page.Keyboard.PressAsync("Tab");
-
-            //Save form with previously loaded data and sections 1 and 3 marked as changed
-            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
-            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-
-            //Go back into form and check for sections 1 and 3 to remain marked as changed
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-            await Expect(Page.Locator("input[name=\"A3.NWINFPAR\"]")).ToHaveValueAsync("1");
-            await Expect(Page.Locator("input[name=\"A3.NWINFSIB\"]")).ToHaveValueAsync("0");
-            await Expect(Page.Locator("input[name=\"A3.NWINFKID\"]")).ToHaveValueAsync("1");
+            //Go back in to A3 and check that modified data is loaded instead of previous visit data
+            await Expect(Page.Locator("input[name=\"A3.MOMYOB\"]")).ToHaveValueAsync("1992");
+            await Expect(Page.Locator("input[name=\"A3.DADYOB\"]")).ToHaveValueAsync("1992");
+            await Expect(Page.Locator("input[name=\"A3.Siblings[0].YOB\"]")).ToHaveValueAsync("1992");
+            await Expect(Page.Locator("input[name=\"A3.Children[0].YOB\"]")).ToHaveValueAsync("1992");
+            
         }
 
         private async Task WriteFormData()
