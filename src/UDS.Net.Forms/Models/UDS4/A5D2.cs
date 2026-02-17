@@ -241,7 +241,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? LASTTBI { get; set; }
         [Display(Name = "Diabetes")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? DIABETES { get; set; }
         [Display(Name = "Which type?")]
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
@@ -349,7 +348,6 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHSLEEX { get; set; }
         [Display(Name = "Cancer, primary or metastatic")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
-        [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CANCERACTV { get; set; }
         [Display(Name = "Primary/non-metastatic")]
         public bool? CANCERPRIM { get; set; }
