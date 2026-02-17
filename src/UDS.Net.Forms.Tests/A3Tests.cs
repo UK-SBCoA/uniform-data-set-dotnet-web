@@ -246,6 +246,8 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Go back in to A3 and check that modified data is loaded instead of previous visit data
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
             await Expect(Page.Locator("input[name=\"A3.MOMYOB\"]")).ToHaveValueAsync("1992");
             await Expect(Page.Locator("input[name=\"A3.DADYOB\"]")).ToHaveValueAsync("1992");
             await Expect(Page.Locator("input[name=\"A3.Siblings[0].YOB\"]")).ToHaveValueAsync("1992");
