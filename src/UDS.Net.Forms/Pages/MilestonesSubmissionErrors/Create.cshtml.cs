@@ -141,7 +141,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
             }
 
-            return Page();
+            return RedirectToPage("/Milestones/Index");
         }
 
     }

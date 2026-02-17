@@ -68,6 +68,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

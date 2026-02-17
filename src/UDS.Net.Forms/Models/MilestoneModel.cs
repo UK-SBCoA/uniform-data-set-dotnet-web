@@ -23,7 +23,7 @@ namespace UDS.Net.Forms.Models
         public virtual ParticipationModel? Participation { get; set; }
 
         [Display(Name = "Status")]
-        public string Status { get; set; } = "Complete";
+        public string Status { get; set; } = PacketStatus.Pending.ToString();
 
         [Display(Name = "Month")]
         public int? CHANGEMO { get; set; }

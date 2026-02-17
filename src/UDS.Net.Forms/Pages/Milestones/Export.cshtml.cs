@@ -49,9 +49,37 @@ namespace UDS.Net.Forms.Pages.Milestones
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
             var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture);
 
-            var record = new MilestoneRecord(milestone, initials, adcid);
-            csv.WriteRecord(record);
+            csv.WriteField("PACKET");
+            csv.WriteField("FORMID");
+            csv.WriteField("FORMVER");
+            csv.WriteField("ADCID");
+            csv.WriteField("PTID");
+            csv.WriteField("VISITMO");
+            csv.WriteField("VISITDAY");
+            csv.WriteField("VISITYR");
+            csv.WriteField("VISITNUM");
+            csv.WriteField("INITIALS");
             csv.NextRecord();
+
+            var record = new MilestoneRecord(milestone, initials, adcid);
+
+            csv.WriteField(record.PACKET);
+            csv.WriteField(record.FORMID);
+            csv.WriteField(record.FORMVER);
+            csv.WriteField(record.ADCID);
+            csv.WriteField(record.PTID);
+            csv.WriteField(record.VISITMO);
+            csv.WriteField(record.VISITDAY);
+            csv.WriteField(record.VISITYR);
+            csv.WriteField(record.VISITNUM);
+            csv.WriteField(record.INITIALS);
+            csv.NextRecord();
+
+            //csv.WriteHeader<MilestoneRecord>();
+            //csv.NextRecord();
+            //var record = new MilestoneRecord(milestone, initials, adcid);
+            //csv.WriteRecord(record);
+            //csv.NextRecord();
 
             await csv.FlushAsync();
             await streamWriter.FlushAsync();
@@ -76,6 +104,19 @@ namespace UDS.Net.Forms.Pages.Milestones
             var writer = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
             var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
 
+            csv.WriteField("PACKET");
+            csv.WriteField("FORMID");
+            csv.WriteField("FORMVER");
+            csv.WriteField("ADCID");
+            csv.WriteField("PTID");
+            csv.WriteField("VISITMO");
+            csv.WriteField("VISITDAY");
+            csv.WriteField("VISITYR");
+            csv.WriteField("VISITNUM");
+            csv.WriteField("INITIALS");
+            await csv.NextRecordAsync();
+
+
             foreach (var id in selectedIds)
             {
                 var milestone = await _milestoneService.GetById(username, id);
@@ -85,7 +126,16 @@ namespace UDS.Net.Forms.Pages.Milestones
                     string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
 
                     var record = new MilestoneRecord(milestone, initials, adcid);
-                    csv.WriteRecord(record);
+                    csv.WriteField(record.PACKET);
+                    csv.WriteField(record.FORMID);
+                    csv.WriteField(record.FORMVER);
+                    csv.WriteField(record.ADCID);
+                    csv.WriteField(record.PTID);
+                    csv.WriteField(record.VISITMO);
+                    csv.WriteField(record.VISITDAY);
+                    csv.WriteField(record.VISITYR);
+                    csv.WriteField(record.VISITNUM);
+                    csv.WriteField(record.INITIALS);
                     await csv.NextRecordAsync();
                     await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
                 }

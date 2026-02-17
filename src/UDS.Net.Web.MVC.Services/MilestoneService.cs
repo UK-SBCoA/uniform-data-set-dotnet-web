@@ -127,7 +127,7 @@ namespace UDS.Net.Web.MVC.Services
                 modifiedBy: "",
                 deletedBy: "",
                 isDeleted: false,
-                errorCount: null
+                errorCount: 0
             );
 
             milestone.M1Submissions ??= new List<M1Submission>();
@@ -141,6 +141,11 @@ namespace UDS.Net.Web.MVC.Services
         Task IMilestoneService.CreateSubmissionAsync(string username, int milestoneId)
         {
             return CreateSubmissionAsync(username, milestoneId);
+        }
+
+        public Task GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
