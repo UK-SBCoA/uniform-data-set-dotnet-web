@@ -7,37 +7,37 @@
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input data-action="change->a3#@ViewData["a3-change-method"]" asp-for="@Model.YOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
+            <input asp-for="@Model.YOB" placeholder="YYYY" data-a3-enable-intra-row-target="input" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="YOB" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input data-action="change->a3#@ViewData["a3-change-method"]" asp-for="@Model.AGD" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input" />
+            <input asp-for="@Model.AGD" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGD" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input asp-for="@Model.ETPR" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields change->a3#@ViewData["a3-change-method"]" />
+            <input asp-for="@Model.ETPR" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input primaryDx" data-action="change->a3-enable-intra-row#updateFields" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="ETPR" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input data-action="change->a3#@ViewData["a3-change-method"]" asp-for="@Model.ETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+            <input asp-for="@Model.ETSEC" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="ETSEC" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input data-action="change->a3#@ViewData["a3-change-method"]" asp-for="@Model.MEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+            <input asp-for="@Model.MEVAL" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="MEVAL" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>
     <td>
         <div class="grid grid-cols-1 sm:grid-cols-1">
-            <input data-action="change->a3#@ViewData["a3-change-method"]" asp-for="AGO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
+            <input asp-for="AGO" class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" data-a3-enable-intra-row-target="input dependent" />
         </div>
         <span class="mt-2 text-sm text-red-600" asp-validation-for="AGO" data-a3-enable-intra-row-target="validationSpan"></span>
     </td>

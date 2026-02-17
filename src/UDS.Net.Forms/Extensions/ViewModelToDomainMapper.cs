@@ -361,9 +361,9 @@ namespace UDS.Net.Forms.Extensions
                 KIDS = vm.KIDS,
                 SiblingFormFields = vm.Siblings.Select(s => s.ToEntity()).ToList(),
                 KidsFormFields = vm.Children.Select(c => c.ToEntity()).ToList(),
-                NWINFPAR = vm.NWINFPAR,
-                NWINFSIB = vm.NWINFSIB,
-                NWINFKID = vm.NWINFKID
+                NWINFPAR = null,
+                NWINFSIB = null,
+                NWINFKID = null
             };
         }
 

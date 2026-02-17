@@ -69,11 +69,6 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                                 // Reset base properties to match the current form
                                 A3.SetBaseProperties(BaseForm);
-
-                                // Set previous data provided questions to "no change" by default for new follow-up forms
-                                A3.NWINFPAR = 0;
-                                A3.NWINFKID = 0;
-                                A3.NWINFSIB = 0;
                             }
                         }
                     }
@@ -87,14 +82,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         public new async Task<IActionResult> OnPostAsync(int id, string? goNext = null)
         {
             BaseForm = A3; // reassign bounded and derived form to base form for base method
-
-            // If initial or initial for existing, follow-up properties will be null
-            if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
-            {
-                A3.NWINFPAR = null;
-                A3.NWINFSIB = null;
-                A3.NWINFKID = null;
-            }
 
             Visit.Forms.Add(A3); // visit needs updated form as well
 

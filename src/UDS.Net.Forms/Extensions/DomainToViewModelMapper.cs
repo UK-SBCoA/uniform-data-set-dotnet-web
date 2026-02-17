@@ -632,9 +632,9 @@ namespace UDS.Net.Forms.Extensions
                 KIDS = fields.KIDS,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
                 Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList(),
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID
+                NWINFPAR = null,
+                NWINFSIB = null,
+                NWINFKID = null
             };
         }
 

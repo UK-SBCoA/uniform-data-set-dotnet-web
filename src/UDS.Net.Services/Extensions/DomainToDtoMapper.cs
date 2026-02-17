@@ -632,9 +632,9 @@ namespace UDS.Net.Services.Extensions
                 DADAGEO = fields.DADAGEO,
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS,
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID
+                NWINFPAR = null,
+                NWINFSIB = null,
+                NWINFKID = null
             };
 
             foreach (var sib in fields.SiblingFormFields)
