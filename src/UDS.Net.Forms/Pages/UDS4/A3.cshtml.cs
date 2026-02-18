@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services;
@@ -45,6 +46,33 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (BaseForm != null)
             {
                 A3 = (A3)BaseForm; // class library should always handle new instances
+
+                // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+                if (A3.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                {
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+
+                    if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A3");
+
+                        if (previousVisit != null)
+                        {
+                            var previousA3Form = previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+
+                            if (previousA3Form != null)
+                            {
+                                var previousFormModel = previousA3Form.ToVM();
+
+                                // On first creation, set all parent, sibling, and children properties 
+                                A3 = (A3)previousFormModel;
+
+                                // Reset base properties to match the current form
+                                A3.SetBaseProperties(BaseForm);
+                            }
+                        }
+                    }
+                }
             }
 
             return Page();
