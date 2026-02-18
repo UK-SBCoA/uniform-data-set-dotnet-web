@@ -241,6 +241,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? LASTTBI { get; set; }
         [Display(Name = "Diabetes")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? DIABETES { get; set; }
         [Display(Name = "Which type?")]
         [RegularExpression("^([1-3]|9)$", ErrorMessage = "Valid range is 1-3 or 9")]
@@ -348,6 +349,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public string? OTHSLEEX { get; set; }
         [Display(Name = "Cancer, primary or metastatic")]
         [RegularExpression("^([0-2]|9)$", ErrorMessage = "Valid range is 0-2 or 9")]
+        [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CANCERACTV { get; set; }
         [Display(Name = "Primary/non-metastatic")]
         public bool? CANCERPRIM { get; set; }
@@ -593,19 +595,6 @@ namespace UDS.Net.Forms.Models.UDS4
             }
         }
 
-        [RequiredIfRange(nameof(DIABETES), 1, 2, ErrorMessage = "Please indicate at least one type of diabetes treatment")]
-        [NotMapped]
-        public bool? DIABETESTreatmentCheckboxes
-        {
-            get
-            {
-                if (DIABINS == true || DIABMEDS == true || DIABGLP1 == true || DIABRECACT == true || DIABDIET == true || DIABUNK == true)
-                    return true;
-                else
-                    return null;
-            }
-        }
-
         [RequiredIfRange(nameof(ARTHRIT), 1, 2, ErrorMessage = "Please indicate at least one type of arthritis.")]
         [NotMapped]
         public bool? ARTHRITTypeCheckboxes
@@ -663,20 +652,6 @@ namespace UDS.Net.Forms.Models.UDS4
             get
             {
                 if (CANCBLOOD == true || CANCBREAST == true || CANCCOLON == true || CANCLUNG == true || CANCPROST == true || CANCOTHER == true)
-                {
-                    return true;
-                }
-                else return null;
-            }
-        }
-
-        [RequiredIfRange(nameof(CANCERACTV), 1, 2, ErrorMessage = "Please indicate at least one treatment.")]
-        [NotMapped]
-        public bool? CANCERACTVTreatmentCheckboxes
-        {
-            get
-            {
-                if (CANCRAD == true || CANCRESECT == true || CANCIMMUNO == true || CANCBONE == true || CANCCHEMO == true || CANCHORM == true || CANCTROTH == true)
                 {
                     return true;
                 }
