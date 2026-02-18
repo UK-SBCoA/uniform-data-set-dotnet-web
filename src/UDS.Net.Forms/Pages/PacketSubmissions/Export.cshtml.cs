@@ -394,9 +394,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 Form? previousA3Base = null;
 
-                //DEVNOTE:
-                //All packets submitted will include followUp variables, even the initial visits.
-                //A3FormFields holds follow-up properties 
                 A3FormFields? previousA3Fields = null;
 
                 A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
@@ -465,7 +462,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
                 }
 
-                //DEVNOTE:
                 //Write record of currentA3Fields after completing comparison checks
                 csv.WriteRecord(currentA3Fields);
 
@@ -672,8 +668,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
         {
-            if (string.IsNullOrEmpty(previousValue) && string.IsNullOrEmpty(currentValue)) return null;
-
             if (previousValue == currentValue)
             {
                 return code;
@@ -686,8 +680,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
         {
-            if (previousValue == null && currentValue == null) return null;
-
             if (previousValue == currentValue)
             {
                 return code;
