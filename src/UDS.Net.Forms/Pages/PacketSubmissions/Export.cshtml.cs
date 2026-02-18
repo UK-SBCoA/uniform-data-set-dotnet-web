@@ -446,20 +446,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         siblings[siblingsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, siblings[siblingsIndex].ETSEC, "66", A3Section.Sibling);
                         siblings[siblingsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6, A3Section.Sibling);
                         siblings[siblingsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666, A3Section.Sibling);
-                    }
-                    ;
+                    };
 
                     //Kids
                     for (var kidsIndex = 0; kidsIndex < kids.Count(); kidsIndex++)
                     {
-                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
-                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
-                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
-                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
-                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
-                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
-                    }
-                    ;
+                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
+                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
+                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
+                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
+                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
+                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
+                    };
 
                     //Set follow-up properties in currentA3Fields
                     currentA3Fields?.NWINFSIB = A3SiblingChangeCount > 0 ? 1 : 0; //follow-up values will be NULL for forms with no previous visit
