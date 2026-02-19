@@ -63,7 +63,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(COGOTHR), "1", ErrorMessage = "Value required")]
         public string? COGOTHRX { get; set; }
         [Display(Name = "If any of the cognitive-related behavioral symptoms in 9a-9h are present, at what age did they begin?")]
-        [RegularExpression("^(1[5-9]|[2-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 15 - 110")]
+        [RegularExpression("^(?:[9]|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
         [RequiredIf(nameof(DECCLCOG), "1", ErrorMessage = "Value Required")]
         public int? COGAGE { get; set; }
         [Display(Name = "Indicate the mode of onset for the most prominent cognitive problem that is causing the participant's complaints and/or affecting the participant's function.")]
