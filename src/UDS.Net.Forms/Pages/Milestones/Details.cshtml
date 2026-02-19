@@ -1,4 +1,7 @@
 ﻿@page
+@using UDS.Net.API.Entities
+@using UDS.Net.Services.DomainModels.Submission
+@using UDS.Net.Services.Enums 
 @model UDS.Net.Forms.Pages.Milestones.DetailsModel
 
 @{
@@ -287,3 +290,97 @@
         </tbody>
     </table>
 </div>
+
+<div>
+    <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" asp-page="/MilestonesSubmissionErrors/Index">
+        Import Error File
+    </a>
+</div>
+
+<div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">M1 Submissions</h2>
+
+    <table class="w-full text-left border border-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-4 py-2">Id</th>
+                <th class="px-4 py-2">Submission date</th>
+                <th class="px-4 py-2">Created at</th>
+                <th class="px-4 py-2">Created by</th>
+                <th class="px-4 py-2">Modified by</th>
+                <th class="px-4 py-2">Error count</th>
+                <th class="px-4 py-2">Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var submission in Model.Milestone.M1Submissions)
+            {
+                <tr class="border-t border-gray-100" id="m1_submission_@submission.Id">
+                    <td class="px-4 py-2">@submission.Id</td>
+                    <td class="px-4 py-2">@submission.SubmissionDate</td>
+                    <td class="px-4 py-2">@submission.CreatedAt</td>
+                    <td class="px-4 py-2">@submission.CreatedBy</td>
+                    <td class="px-4 py-2">@submission.ModifiedBy</td>
+                    <td class="px-4 py-2">@submission.ErrorCount</td>
+                    <td class="px-4 py-2">
+                        <a asp-route-id="@submission.Id">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@{
+    var totalErrors = Model.Milestone.M1Submissions
+        .Where(s => s.Errors != null && s.Errors.Any())
+        .Sum(s => s.Errors.Count);
+}
+
+
+@if (Model.Milestone.M1Submissions.Any(s => s.Errors != null && s.Errors.Any()))
+{
+    <div class="mt-12">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h2 class="text-xl font-bold text-red-700 flex items-center gap-2">
+                    Errors / Alert
+                </h2>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-red-200 bg-white shadow-lg">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-red-50">
+                    <tr>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Submission Id</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Value</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
+                        <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+                    @foreach (var submission in Model.Milestone.M1Submissions.Where(s => s.Errors != null && s.Errors.Any()))
+                    {
+                        @foreach (var error in submission.Errors)
+                        {
+                            <tr class="bg-white">
+                                <td class="px-4 py-2">@submission.Id</td>
+                                <td class="px-4 py-2">@error.Message</td>
+                                <td class="px-4 py-2">@error.Location</td>
+                                <td class="px-4 py-2">@error.Value</td>
+                                <td class="px-4 py-2">@error.Level</td>
+                                <td class="px-4 py-2">@error.Status</td>
+                                <td class="px-4 py-2">@error.CreatedAt</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
