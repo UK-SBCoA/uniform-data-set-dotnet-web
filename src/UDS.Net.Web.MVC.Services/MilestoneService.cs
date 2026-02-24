@@ -133,6 +133,9 @@ namespace UDS.Net.Web.MVC.Services
             milestone.M1Submissions ??= new List<M1Submission>();
             milestone.M1Submissions.Add(submission);
 
+            milestone.Status = "Submitted";
+            milestone.ModifiedBy = username;
+
             await Update(username, milestone);
 
             return submission;

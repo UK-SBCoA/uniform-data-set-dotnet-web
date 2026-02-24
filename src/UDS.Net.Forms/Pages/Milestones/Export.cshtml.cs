@@ -40,6 +40,11 @@ namespace UDS.Net.Forms.Pages.Milestones
                 return NotFound($"Milestone with ID {id} not found.");
             }
 
+            if (milestone.Status != "Finalized")
+            {
+                return BadRequest("Only finalized milestones can be exported.");
+            }
+
             await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
 
             string adcid = _configuration["ADRC:Id"];
@@ -122,6 +127,12 @@ namespace UDS.Net.Forms.Pages.Milestones
                 var milestone = await _milestoneService.GetById(username, id);
                 if (milestone != null)
                 {
+
+                    if (milestone.Status != "Finalized")
+                    {
+                        continue;
+                    }
+
                     string adcid = _configuration["ADRC:Id"];
                     string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
 

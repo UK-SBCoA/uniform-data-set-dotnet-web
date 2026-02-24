@@ -68,7 +68,7 @@
                         <th>Milestone date</th>
                         <th>Type</th>
                         <th>Details</th>
-                        <th>Progress</th>
+                        <th>Status</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -118,23 +118,53 @@
                                 <partial name="_MilestoneDetails" model="@milestone" />
                             </td>
                             <td>
-                                <select class="rounded-md border-gray-300 text-sm"
-                                        onchange="updateStatus(@milestone.Id, this.value)">
+                                @if (milestone.Status == "Submitted")
+                                {
+                                    <span class="text-green-600 font-semibold cursor-pointer hover:text-green-800" onclick="updateStatus(@milestone.Id, 'PassedErrorChecks')">
+                                          PassedErrorChecks
+                                    </span>
+                                    <span class="ml-2 text-gray-500">Current: Submitted</span>
+                                }
+                                else
+                                {
+                                    var statusClass = "text-gray-700";
 
-                                    @foreach (PacketStatus status in Enum.GetValues(typeof(PacketStatus)))
+                                    if (milestone.Status == "FailedErrorChecks")
                                     {
-                                        <option value="@status"
-                                                selected="@(milestone.Status == status.ToString())">
-                                            @status
-                                        </option>
+                                        statusClass = "text-red-600 font-semibold";
                                     }
-                                </select>
-                            </td>
+                                    else if (milestone.Status == "PassedErrorChecks")
+                                    {
+                                        statusClass = "text-green-600 font-semibold";
+                                    }
 
-                            <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id">Edit</a></td>
+                                    <span class="@statusClass">
+                                        @milestone.Status
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                @if (milestone.Status == "Submitted")
+                                {
+                                    <span class="text-gray-400 cursor-not-allowed" title="Cannot edit while submitted">Edit</span>
+                                }
+                                else
+                                {
+                                    <a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-500">Edit</a>
+                                }
+                            </td>
                             <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a></td>
                             <td>
-                                <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                                @if (milestone.Status == "Finalized")
+                                {
+                                    <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                                }
+                                else
+                                {
+                                    <span class="text-gray-400 cursor-not-allowed" title="Export available only for finalized milestones">
+                                        Export
+                                    </span>
+                                }
                             </td>
                         </tr>
                     }

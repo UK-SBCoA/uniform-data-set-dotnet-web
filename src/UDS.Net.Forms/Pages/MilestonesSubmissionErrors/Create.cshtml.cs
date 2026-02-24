@@ -131,6 +131,8 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                     submission.Errors.Add(error);
                 }
 
+                milestone.Status = "FailedErrorChecks";
+
                 await _milestoneService.Update(username, milestone);
             }
             catch (Exception)

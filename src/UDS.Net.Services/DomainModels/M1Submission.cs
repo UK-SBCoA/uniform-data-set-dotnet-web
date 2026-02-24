@@ -72,42 +72,5 @@ namespace UDS.Net.Services.DomainModels.Submission
             Forms = forms ?? new List<Form>();
             Errors = errors?.ToList() ?? new List<M1SubmissionError>();
         }
-
-
-        //public M1Submission(
-        //    int id,
-        //    string adrcId,
-        //    DateTime submissionDate,
-        //    int packetId,
-        //    DateTime createdAt,
-        //    string createdBy,
-        //    string modifiedBy,
-        //    string deletedBy,
-        //    bool isDeleted,
-        //    int? errorCount,
-        //    IList<M1SubmissionError> errors)
-        //    : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
-        //{
-        //    Errors = errors?.ToList() ?? new List<M1SubmissionError>();
-        //}
-
-        //public M1Submission(
-        //    int id,
-        //    string adrcId,
-        //    DateTime submissionDate,
-        //    int packetId,
-        //    DateTime createdAt,
-        //    string createdBy,
-        //    string modifiedBy,
-        //    string deletedBy,
-        //    bool isDeleted,
-        //    int? errorCount,
-        //    IList<Form> forms,
-        //    IList<M1SubmissionError> errors)
-        //    : this(id, adrcId, submissionDate, packetId, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
-        //{
-        //    Forms = forms ?? new List<Form>();
-        //    Errors = errors?.ToList() ?? new List<M1SubmissionError>();
-        //}
     }
 }
