@@ -6,13 +6,13 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 		<PackageId>UDS.Net.Forms</PackageId>
-		<Version>16.1.3</Version>
+		<Version>16.1.5</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>UDS Forms razor class library</Description>
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Razor class library for rendering UDS forms</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>16.1.3</ReleaseVersion>
+		<ReleaseVersion>16.1.5</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
