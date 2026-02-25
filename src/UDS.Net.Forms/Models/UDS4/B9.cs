@@ -95,7 +95,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAGIT { get; set; }
         [Display(Name = "If any of the mood-related behavioral symptoms in 12a-12f are present, at what age did they begin?")]
-        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
+        [Range(5, 110, ErrorMessage = "Valid range is 5 - 110.")]
         public int? BEHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Psychosis — Visual hallucinations")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -122,7 +122,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEAGGRS { get; set; }
         [Display(Name = "If any of the psychosis and impulse control–related behavioral changes in 12h–12k are present, at what age did they begin? (The clinician must use their best judgment to estimate an age of onset. If multiple symptoms are identified, denote the age of the earliest symptom.)")]
-        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
+        [Range(5, 110, ErrorMessage = "Valid range is 5 - 110.")]
         public int? PSYCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — Disinhibition")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
@@ -159,14 +159,14 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(OTHSUBUSE), "true", ErrorMessage = "Value required")]
         public string? OTHSUBUSEX { get; set; }
         [Display(Name = "If any of the personality-related behavioral symptoms in 12m-12r are present, at what age did they begin?")]
-        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
+        [Range(5, 110, ErrorMessage = "Valid range is 5 - 110.")]
         public int? PERCHAGE { get; set; }
         [Display(Name = "Participant currently manifests meaningful change in behavior — REM sleep behavior disorder")]
         [RequiredIf(nameof(DECCLBE), "1", ErrorMessage = "Value required")]
         public int? BEREM { get; set; }
         [Display(Name = "IF YES, at what age did the dream enactment behavior begin?")]
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
-        [RegularExpression("^(9|[1-9]\\d|10\\d|110)$", ErrorMessage = "Valid range is 9 - 110")]
+        [Range(5, 110, ErrorMessage = "Valid range is 5 - 110.")]
         public int? BEREMAGO { get; set; }
         [Display(Name = "Was REM sleep behavior disorder confirmed by polysomnography?")]
         [RequiredIf(nameof(BEREM), "1", ErrorMessage = "Value Required")]
