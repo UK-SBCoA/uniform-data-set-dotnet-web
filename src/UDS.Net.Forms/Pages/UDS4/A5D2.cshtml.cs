@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4;
 
@@ -1586,8 +1588,34 @@ public class A5D2Model : FormPageModel
         if (BaseForm != null)
         {
             A5D2 = (A5D2)BaseForm;
-        }
 
+            // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+            if (A5D2.PacketKind == PacketKind.F && BaseForm.Id == 0)
+            {
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+
+                if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A5D2");
+
+                    if (previousVisit != null)
+                    {
+                        var previousA5D2Form = previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
+
+                        if (previousA5D2Form != null)
+                        {
+                            var previousFormModel = previousA5D2Form.ToVM();
+
+                            // On first creation, set all parent, sibling, and children properties 
+                            A5D2 = (A5D2)previousFormModel;
+
+                            // Reset base properties to match the current form
+                            A5D2.SetBaseProperties(BaseForm);
+                        }
+                    }
+                }
+            }
+        }
         return Page();
     }
 

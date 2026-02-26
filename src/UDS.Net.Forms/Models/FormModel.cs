@@ -161,6 +161,25 @@ namespace UDS.Net.Forms.Models
                 }
             }
         }
+        public void SetBaseProperties(FormModel formBase)
+        {
+            if (formBase != null)
+            {
+                this.Id = formBase.Id;
+                this.PacketKind = formBase.PacketKind;
+                this.CreatedAt = formBase.CreatedAt;
+                this.INITIALS = formBase.INITIALS;
+                this.MODE = formBase.MODE;
+                this.ADMIN = formBase.ADMIN;
+                this.FRMDATE = formBase.FRMDATE;
+                this.RMREAS = formBase.RMREAS;
+                this.RMMODE = formBase.RMMODE;
+                this.NOT = formBase.NOT;
+                this.LANG = formBase.LANG;
+                this.Status = formBase.Status;
+            }
+        }
     }
+
 }
 
