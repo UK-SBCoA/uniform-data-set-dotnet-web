@@ -4,7 +4,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<ReleaseVersion>17.0.0-preview.1</ReleaseVersion>
+		<ReleaseVersion>11.0.2</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
@@ -21,8 +21,8 @@
 	<ItemGroup>
 		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.6" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.1" />
-		<PackageReference Include="UDS.Net.API.Entities" Version="11.0.2-preview.2" />
-		<PackageReference Include="UDS.Net.API.Extensions" Version="11.0.2-preview.2" />
-		<PackageReference Include="UDS.Net.Dto" Version="11.0.2-preview.2" />
+		<PackageReference Include="UDS.Net.API.Entities" Version="11.0.2" />
+		<PackageReference Include="UDS.Net.API.Extensions" Version="11.0.2" />
+		<PackageReference Include="UDS.Net.Dto" Version="11.0.2" />
 	</ItemGroup>
 </Project>
