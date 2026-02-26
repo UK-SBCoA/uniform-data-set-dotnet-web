@@ -25,6 +25,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
+        public Task<Milestone> GetByIdAsync(string name, int id)
+        {
+            throw new NotImplementedException();
+        }
         public Task<Milestone> GetById(string username, int id)
         {
             throw new NotImplementedException();
@@ -45,12 +49,27 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Milestone> IMilestoneService.GetMostRecentSubmission(string username)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Milestone> Update(string username, Milestone entity)
         {
             throw new NotImplementedException();
         }
 
-        Task<List<M1Dto>> IMilestoneService.FindByLegacyId(string username, string legacyId, string[] statuses)
+        public Task CreateSubmissionAsync(string username, int milestoneId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

@@ -35,6 +35,8 @@ namespace UDS.Net.Services.Extensions
             return participation;
         }
 
+        //public static List<M1Submission> M1Submissions { get; set; } = new List<M1Submission>();
+
         public static Visit ToDomain(this VisitDto dto, string username)
         {
 
@@ -164,6 +166,31 @@ namespace UDS.Net.Services.Extensions
 
             if (dto.Participation != null)
                 milestone.Participation = dto.Participation.ToDomain(dto.CreatedBy);
+
+            if (dto.M1Submissions != null)
+            {
+                var debug = dto.M1Submissions.Select(s => new { s.Id, ErrorCount = s.M1SubmissionErrors?.Count, HasErrors = s.M1SubmissionErrors != null }).ToList();
+
+                milestone.M1Submissions = dto.M1Submissions
+                    .Select(s => new M1Submission(
+                        id: s.Id,
+                        adrcId: null,
+                        submissionDate: s.SubmissionDate,
+                        m1Id: dto.Id,
+                        createdAt: s.CreatedAt,
+                        createdBy: s.CreatedBy,
+                        modifiedBy: s.ModifiedBy,
+                        deletedBy: s.DeletedBy,
+                        isDeleted: s.IsDeleted,
+                        errorCount: s.ErrorCount,
+                        forms: s.Forms?.Select(f => f.ToDomain(s.Id, f.CreatedBy)).ToList()
+                               ?? new List<Form>(),
+                        errors: s.M1SubmissionErrors?.Select(e => e.ToDomain(s.Id)).ToList()
+                               ?? new List<M1SubmissionError>()
+                    ))
+                    .ToList();
+            }
+
 
             return milestone;
         }
@@ -407,6 +434,31 @@ namespace UDS.Net.Services.Extensions
                 errors: errors
             );
         }
+
+        public static M1SubmissionError ToDomain(this M1SubmissionErrorDto dto, int submissionId)
+        {
+            var level = M1SubmissionErrorLevel.Information;
+            var status = M1SubmissionErrorStatus.Pending;
+
+            return new M1SubmissionError(
+                id: dto.Id,
+                m1SubmissionId: submissionId,
+                formKind: dto.FormKind,
+                message: dto.Message,
+                assignedTo: dto.AssignedTo,
+                level: level,
+                status: status,
+                statusChangedBy: dto.StatusChangedBy,
+                createdAt: dto.CreatedAt,
+                createdBy: dto.CreatedBy,
+                modifiedBy: dto.ModifiedBy,
+                deletedBy: dto.DeletedBy,
+                isDeleted: dto.IsDeleted,
+                location: dto.Location,
+                value: dto.Value
+            );
+        }
+
 
         public static PacketSubmissionError ToDomain(this PacketSubmissionErrorDto dto)
         {

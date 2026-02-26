@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Dto;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
@@ -17,10 +18,27 @@ namespace UDS.Net.Forms.Models.PageModels
 
         public string PageTitle { get; set; }
 
+        public List<MilestoneModel> M1Submissions { get; set; } = new List<MilestoneModel>();
         public MilestonePageModel(IMilestoneService milestoneService, IParticipationService participationService)
         {
             _milestoneService = milestoneService;
             _participationService = participationService;
+        }
+
+        private static readonly string[] EditableStatuses = new[]
+        {
+            "Pending",
+            "Finalized",
+            "PassedErrorChecks",
+            "FailedErrorChecks"
+        };
+
+        protected bool CanEdit(string? status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+                return false;
+
+            return EditableStatuses.Contains(status);
         }
 
         // TODO Move this to NotMapped properties in the view model and use custom annotations for required if
@@ -160,9 +178,11 @@ namespace UDS.Net.Forms.Models.PageModels
                 var milestoneFound = await _milestoneService.GetById(User.Identity.Name, id);
 
                 if (milestoneFound == null)
-                {
                     return NotFound("No milestone found.");
-                }
+
+                if (!CanEdit(milestoneFound.Status))
+                    return Forbid();
+
                 Milestone = milestoneFound.ToVM();
                 PageTitle = "Milestone for ";
 
@@ -178,6 +198,16 @@ namespace UDS.Net.Forms.Models.PageModels
             Milestone.Participation = participation.ToVM();
             PageTitle += "Participant " + Milestone.Participation.LegacyId;
 
+            var submissions = await _milestoneService.FindByLegacyId(
+                User.Identity.Name,
+                Milestone.Participation.LegacyId,
+                Array.Empty<string>()
+            );
+
+            M1Submissions = submissions
+                .Select(m => m.ToVM())
+                .ToList();
+
             return Page();
         }
 
@@ -189,12 +219,30 @@ namespace UDS.Net.Forms.Models.PageModels
                 return Page();
             }
 
+            MilestoneModel? existingMilestone = null;
+            if (Milestone.Id != 0)
+            {
+                existingMilestone = (await _milestoneService.GetById(User.Identity.Name, Milestone.Id))?.ToVM();
+                if (existingMilestone == null)
+                {
+                    return NotFound("No milestone found for editing.");
+                }
+
+                var allowedStatuses = new[] { "Pending", "Finalized", "PassedErrorChecks", "FailedErrorChecks" };
+                if (!allowedStatuses.Contains(existingMilestone.Status))
+                {
+                    ModelState.AddModelError(string.Empty, "Cannot edit milestone while it is submitted and awaiting NACC response.");
+                    return Page();
+                }
+            }
+
             Validate(Milestone);
 
             if (ModelState.IsValid)
             {
                 var milestone = Milestone.ToEntity();
                 // upsert based on the id
+                milestone.Status = "Finalized";
                 if (Milestone.Id == 0)
                     await _milestoneService.Add(User.Identity.Name, milestone);
                 else
@@ -214,4 +262,3 @@ namespace UDS.Net.Forms.Models.PageModels
         }
     }
 }
-
