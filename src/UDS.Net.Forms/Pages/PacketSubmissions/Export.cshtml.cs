@@ -668,6 +668,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
         {
+            if (previousValue == null && currentValue == null) return null;
+
             if (previousValue == currentValue)
             {
                 return code;
@@ -680,6 +682,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
         {
+            if (previousValue == null && currentValue == null) return null;
+
             if (previousValue == currentValue)
             {
                 return code;
