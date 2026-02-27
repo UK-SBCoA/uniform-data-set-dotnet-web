@@ -397,6 +397,21 @@ namespace UDS.Net.Forms.Extensions
 
             return vm;
         }
+        public static FormModel PreviousVisitToVM(this Form form)
+        {
+            var vm = new FormModel()
+            {
+                Id = form.Id
+            };
+            if (form.Fields is A5D2FormFields)
+            {
+                vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
+            SetFormBaseProperties(form, vm);
+
+            return vm;
+
+        }
 
         public static A1 ToVM(this A1FormFields fields, int formId)
         {
@@ -905,6 +920,180 @@ namespace UDS.Net.Forms.Extensions
                 BCENDAGE = fields.BCENDAGE
             };
         }
+        public static A5D2 PreviousVisitToVM(this A5D2FormFields fields, int formId)
+        {
+            /* Some but not all fields from A5D2 can be carried forward from a previous visit. 
+             * This method creates a new A5D2 view model with only the fields that should be 
+             * carried forward populated, and the rest left as default/null values.
+            */
+            return new A5D2()
+            {
+                Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
+                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
+                TOBAC100 = fields.TOBAC100,
+                SMOKYRS = fields.SMOKYRS,
+                PACKSPER = fields.PACKSPER,
+                QUITSMOK = fields.QUITSMOK,
+                SUBSTPAST = fields.SUBSTPAST,
+                HRTATTACK = fields.HRTATTACK,
+                HRTATTMULT = fields.HRTATTMULT,
+                HRTATTAGE = fields.HRTATTAGE,
+                CARDARREST = fields.CARDARREST,
+                CARDARRAGE = fields.CARDARRAGE,
+                CVAFIB = fields.CVAFIB,
+                CVANGIO = fields.CVANGIO,
+                CVBYPASS = fields.CVBYPASS,
+                BYPASSAGE = fields.BYPASSAGE,
+                CVPACDEF = fields.CVPACDEF,
+                PACDEFAGE = fields.PACDEFAGE,
+                CVCHF = fields.CVCHF,
+                CVHVALVE = fields.CVHVALVE,
+                VALVEAGE = fields.VALVEAGE,
+                CVOTHR = fields.CVOTHR,
+                CVOTHRX = fields.CVOTHRX,
+                CBSTROKE = fields.CBSTROKE,
+                STROKMUL = fields.STROKMUL,
+                STROKAGE = fields.STROKAGE,
+                STROKSTAT = fields.STROKSTAT,
+                ANGIOCP = fields.ANGIOCP,
+                CAROTIDAGE = fields.CAROTIDAGE,
+                CBTIA = fields.CBTIA,
+                TIAAGE = fields.TIAAGE,
+                PD = fields.PD,
+                PDAGE = fields.PDAGE,
+                PDOTHR = fields.PDOTHR,
+                PDOTHRAGE = fields.PDOTHRAGE,
+                SEIZURES = fields.SEIZURES,
+                SEIZAGE = fields.SEIZAGE,
+                HEADACHE = fields.HEADACHE,
+                MS = fields.MS,
+                HYDROCEPH = fields.HYDROCEPH,
+                HEADIMP = fields.HEADIMP,
+                IMPAMFOOT = fields.IMPAMFOOT,
+                IMPSOCCER = fields.IMPSOCCER,
+                IMPHOCKEY = fields.IMPHOCKEY,
+                IMPBOXING = fields.IMPBOXING,
+                IMPSPORT = fields.IMPSPORT,
+                IMPIPV = fields.IMPIPV,
+                IMPMILIT = fields.IMPMILIT,
+                IMPASSAULT = fields.IMPASSAULT,
+                IMPOTHER = fields.IMPOTHER,
+                IMPOTHERX = fields.IMPOTHERX,
+                IMPYEARS = fields.IMPYEARS,
+                HEADINJURY = fields.HEADINJURY,
+                HEADINJUNC = fields.HEADINJUNC,
+                HEADINJCON = fields.HEADINJCON,
+                HEADINJNUM = fields.HEADINJNUM,
+                FIRSTTBI = fields.FIRSTTBI,
+                LASTTBI = fields.LASTTBI,
+                DIABETES = fields.DIABETES,
+                DIABTYPE = fields.DIABTYPE,
+                DIABINS = fields.DIABINS,
+                DIABMEDS = fields.DIABMEDS,
+                DIABGLP1 = fields.DIABGLP1,
+                DIABRECACT = fields.DIABRECACT,
+                DIABDIET = fields.DIABDIET,
+                DIABUNK = fields.DIABUNK,
+                DIABAGE = fields.DIABAGE,
+                HYPERTEN = fields.HYPERTEN,
+                HYPERTAGE = fields.HYPERTAGE,
+                HYPERCHO = fields.HYPERCHO,
+                HYPERCHAGE = fields.HYPERCHAGE,
+                B12DEF = fields.B12DEF,
+                THYROID = fields.THYROID,
+                ARTHRIT = fields.ARTHRIT,
+                ARTHRRHEUM = fields.ARTHRRHEUM,
+                ARTHROSTEO = fields.ARTHROSTEO,
+                ARTHROTHR = fields.ARTHROTHR,
+                ARTHTYPX = fields.ARTHTYPX,
+                ARTHTYPUNK = fields.ARTHTYPUNK,
+                ARTHUPEX = fields.ARTHUPEX,
+                ARTHLOEX = fields.ARTHLOEX,
+                ARTHSPIN = fields.ARTHSPIN,
+                ARTHUNK = fields.ARTHUNK,
+                INCONTU = fields.INCONTU,
+                INCONTF = fields.INCONTF,
+                APNEA = fields.APNEA,
+                RBD = fields.RBD,
+                INSOMN = fields.INSOMN,
+                OTHSLEEP = fields.OTHSLEEP,
+                OTHSLEEX = fields.OTHSLEEX,
+                CANCERACTV = fields.CANCERACTV,
+                CANCERPRIM = fields.CANCERPRIM,
+                CANCERMETA = fields.CANCERMETA,
+                CANCMETBR = fields.CANCMETBR,
+                CANCMETOTH = fields.CANCMETOTH,
+                CANCERUNK = fields.CANCERUNK,
+                CANCBLOOD = fields.CANCBLOOD,
+                CANCBREAST = fields.CANCBREAST,
+                CANCCOLON = fields.CANCCOLON,
+                CANCLUNG = fields.CANCLUNG,
+                CANCPROST = fields.CANCPROST,
+                CANCOTHER = fields.CANCOTHER,
+                CANCOTHERX = fields.CANCOTHERX,
+                CANCRAD = fields.CANCRAD,
+                CANCRESECT = fields.CANCRESECT,
+                CANCIMMUNO = fields.CANCIMMUNO,
+                CANCBONE = fields.CANCBONE,
+                CANCCHEMO = fields.CANCCHEMO,
+                CANCHORM = fields.CANCHORM,
+                CANCTROTH = fields.CANCTROTH,
+                CANCTROTHX = fields.CANCTROTHX,
+                CANCERAGE = fields.CANCERAGE,
+                COVID19 = fields.COVID19,
+                COVIDHOSP = fields.COVIDHOSP,
+                PULMONARY = fields.PULMONARY,
+                KIDNEY = fields.KIDNEY,
+                KIDNEYAGE = fields.KIDNEYAGE,
+                LIVER = fields.LIVER,
+                LIVERAGE = fields.LIVERAGE,
+                PVD = fields.PVD,
+                PVDAGE = fields.PVDAGE,
+                HIVDIAG = fields.HIVDIAG,
+                HIVAGE = fields.HIVAGE,
+                OTHERCOND = fields.OTHERCOND,
+                OTHCONDX = fields.OTHCONDX,
+                MAJORDEP = fields.MAJORDEP,
+                OTHERDEP = fields.OTHERDEP,
+                DEPRTREAT = fields.DEPRTREAT,
+                BIPOLAR = fields.BIPOLAR,
+                SCHIZ = fields.SCHIZ,
+                ANXIETY = fields.ANXIETY,
+                GENERALANX = fields.GENERALANX,
+                PANICDIS = fields.PANICDIS,
+                OCD = fields.OCD,
+                OTHANXDIS = fields.OTHANXDIS,
+                OTHANXDISX = fields.OTHANXDISX,
+                PTSD = fields.PTSD,
+                NPSYDEV = fields.NPSYDEV,
+                PSYCDIS = fields.PSYCDIS,
+                PSYCDISX = fields.PSYCDISX,
+                MENARCHE = fields.MENARCHE,
+                NOMENSAGE = fields.NOMENSAGE,
+                NOMENSNAT = fields.NOMENSNAT,
+                NOMENSHYST = fields.NOMENSHYST,
+                NOMENSSURG = fields.NOMENSSURG,
+                NOMENSCHEM = fields.NOMENSCHEM,
+                NOMENSRAD = fields.NOMENSRAD,
+                NOMENSHORM = fields.NOMENSHORM,
+                NOMENSESTR = fields.NOMENSESTR,
+                NOMENSUNK = fields.NOMENSUNK,
+                NOMENSOTH = fields.NOMENSOTH,
+                NOMENSOTHX = fields.NOMENSOTHX,
+                HRT = fields.HRT,
+                HRTYEARS = fields.HRTYEARS,
+                HRTSTRTAGE = fields.HRTSTRTAGE,
+                HRTENDAGE = fields.HRTENDAGE,
+                BCPILLS = fields.BCPILLS,
+                BCPILLSYR = fields.BCPILLSYR,
+                BCSTARTAGE = fields.BCSTARTAGE,
+                BCENDAGE = fields.BCENDAGE
+            };
+        }
+
         public static B1 ToVM(this B1FormFields fields, int formId)
         {
             return new B1()
