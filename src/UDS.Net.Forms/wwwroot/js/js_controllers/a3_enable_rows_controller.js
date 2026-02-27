@@ -5,7 +5,7 @@ export default class extends Controller {
   static classes = ["invalid", "disabled"]
   static outlets = ["a3-enable-intra-row"]
   static values = {
-    maxRows: Number 
+    maxRows: Number
   }
 
     connect() {

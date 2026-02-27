@@ -22,14 +22,27 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
         private readonly IConfiguration _configuration;
+        private readonly IVisitService _visitService;
+
+        private enum A3Section
+        {
+            Parent = 1,
+            Sibling = 2,
+            Kid = 3
+        }
+        private int A3ParentChangeCount = 0;
+        private int A3SiblingChangeCount = 0;
+        private int A3KidsChangeCount = 0;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
             _packetService = packetService;
             _participationService = participationService;
             _configuration = configuration;
+            _visitService = visitService;
+
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -57,7 +70,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -116,7 +129,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketData(csv, packetSubmission, participant, packet);
+                                WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -303,7 +316,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+
+        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -378,24 +392,81 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FormFields normalA3)
-                    csv.WriteRecord(normalA3);
+                Form? previousA3Base = null;
 
-                List<A3FamilyMemberFormFields> siblings;
-                List<A3FamilyMemberFormFields> kids;
+                A3FormFields? previousA3Fields = null;
 
-                if (a3.Fields is A3FormFields normalKids)
+                A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
+
+                //Create lists for siblings and kids by casting a3.fields data (IFormFields to A3FormFields)
+                List<A3FamilyMemberFormFields> siblings = ((A3FormFields)a3.Fields).SiblingFormFields;
+                List<A3FamilyMemberFormFields> kids = ((A3FormFields)a3.Fields).KidsFormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    siblings = normalKids.SiblingFormFields;
-                    kids = normalKids.KidsFormFields;
-                }
-                else
-                {
-                    siblings = new List<A3FamilyMemberFormFields>();
-                    kids = new List<A3FamilyMemberFormFields>();
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+
+                    //Set previousA3Base
+                    previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
+
+                    //Set previousA3Fields
+                    previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
                 }
 
-                // siblings
+                //If a previous form exists, compare and set codes for each input
+                if (currentA3Fields != null && previousA3Fields != null)
+                {
+                    //Mother
+                    currentA3Fields.MOMYOB = CompareA3Values(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666, A3Section.Parent);
+                    currentA3Fields.MOMDAGE = CompareA3Values(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666, A3Section.Parent);
+                    currentA3Fields.MOMETPR = CompareA3Values(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66", A3Section.Parent);
+                    currentA3Fields.MOMETSEC = CompareA3Values(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66", A3Section.Parent);
+                    currentA3Fields.MOMMEVAL = CompareA3Values(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.MOMAGEO = CompareA3Values(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6, A3Section.Parent);
+
+                    //Father
+                    currentA3Fields.DADYOB = CompareA3Values(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666, A3Section.Parent);
+                    currentA3Fields.DADDAGE = CompareA3Values(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666, A3Section.Parent);
+                    currentA3Fields.DADETPR = CompareA3Values(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66", A3Section.Parent);
+                    currentA3Fields.DADETSEC = CompareA3Values(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66", A3Section.Parent);
+                    currentA3Fields.DADMEVAL = CompareA3Values(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.DADAGEO = CompareA3Values(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6, A3Section.Parent);
+
+                    //Siblings
+                    for (var siblingsIndex = 0; siblingsIndex < siblings.Count(); siblingsIndex++)
+                    {
+                        siblings[siblingsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666, A3Section.Sibling);
+                        siblings[siblingsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666, A3Section.Sibling);
+                        siblings[siblingsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, siblings[siblingsIndex].ETPR, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, siblings[siblingsIndex].ETSEC, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6, A3Section.Sibling);
+                        siblings[siblingsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666, A3Section.Sibling);
+                    };
+
+                    //Kids
+                    for (var kidsIndex = 0; kidsIndex < kids.Count(); kidsIndex++)
+                    {
+                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
+                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
+                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
+                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
+                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
+                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
+                    };
+
+                    //Set follow-up properties in currentA3Fields
+                    currentA3Fields?.NWINFSIB = A3SiblingChangeCount > 0 ? 1 : 0; //follow-up values will be NULL for forms with no previous visit
+                    currentA3Fields?.NWINFKID = A3KidsChangeCount > 0 ? 1 : 0;
+                    currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
+                }
+
+                //Write record of currentA3Fields after completing comparison checks
+                csv.WriteRecord(currentA3Fields);
+
+
+                //Write Sibling data
                 foreach (var sibling in siblings)
                 {
                     foreach (var prop in a3FamilyProps)
@@ -407,7 +478,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
                 }
 
-                // kids
+                //Write Kids data
                 foreach (var kid in kids)
                 {
                     foreach (var prop in a3FamilyProps)
@@ -419,6 +490,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
                 }
             }
+
             if (a4 != null)
             {
                 csv.WriteRecord(new A4Record(a4));
@@ -592,8 +664,42 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     csv.WriteRecord(normalD1b);
             }
 
-        } // writer flushed automatically here    
+        } // writer flushed automatically here
 
+        private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+
+        private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+
+        private void DetectA3Change(Enum section)
+        {
+            if (section is A3Section.Parent) A3ParentChangeCount++;
+            if (section is A3Section.Sibling) A3SiblingChangeCount++;
+            if (section is A3Section.Kid) A3KidsChangeCount++;
+        }
     }
 }
 

@@ -140,6 +140,9 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
+                this.NWINFPAR = a3Dto.NWINFPAR;
+                this.NWINFSIB = a3Dto.NWINFSIB;
+                this.NWINFKID = a3Dto.NWINFKID;
 
                 // TODO map new fields
 
