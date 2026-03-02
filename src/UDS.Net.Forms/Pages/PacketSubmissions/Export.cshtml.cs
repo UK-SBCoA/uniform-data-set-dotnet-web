@@ -570,7 +570,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         var previousValue = field.GetValue(previousA5D2Fields) as int?;
                         var currentValue = field.GetValue(currentA5D2Fields) as int?;
 
-                        var result = CompareA5D2Values(previousValue, currentValue,777);
+                        var result = CompareA5D2Values(previousValue, currentValue, 777);
 
                         field.SetValue(currentA5D2Fields, result);
                     }
