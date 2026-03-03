@@ -129,7 +129,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketDataAsync(csv, packetSubmission, participant, packet);
+                                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -563,12 +563,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //If a previous form exists, compare and set codes for each input
                 if (currentA5D2Fields != null && previousA5D2Fields != null)
                 {
-                    var fields = typeof(A5D2FormFields).GetProperties();
+                    var fields777 = typeof(A5D2FormFields)
+                        .GetProperties()
+                        .Where(p => p.CanWrite && p.PropertyType == typeof(int?)); //all 777 code properties are of type int
 
-                    foreach (var field in fields)
+                    foreach (var field in fields777)
                     {
-                        var previousValue = field.GetValue(previousA5D2Fields) as int?;
-                        var currentValue = field.GetValue(currentA5D2Fields) as int?;
+                        var previousValue = (int?)field.GetValue(previousA5D2Fields);
+                        var currentValue = (int?)field.GetValue(currentA5D2Fields);
 
                         var result = CompareA5D2Values(previousValue, currentValue, 777);
 
