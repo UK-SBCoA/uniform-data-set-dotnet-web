@@ -176,6 +176,42 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BCSTARTAGE { get; set; }
         public int? BCENDAGE { get; set; }
 
+        public static IEnumerable<string> EncodedFollowUpVariables()
+        {
+            return new List<string>() {
+                "SMOKYRS",
+                "QUITSMOK",
+                "HRTATTAGE",
+                "CARDARRAGE",
+                "BYPASSAGE",
+                "PACDEFAGE",
+                "VALVEAGE",
+                "STROKAGE",
+                "CAROTIDAGE",
+                "TIAAGE",
+                "PDAGE",
+                "PDOTHRAGE",
+                "SEIZAGE",
+                "IMPYEARS",
+                "FIRSTTBI",
+                "LASTTBI",
+                "DIABAGE",
+                "HYPERTAGE",
+                "HYPERCHAGE",
+                "CANCERAGE",
+                "KIDNEYAGE",
+                "LIVERAGE",
+                "PVDAGE",
+                "HIVAGE",
+                "NOMENSAGE",
+                "HRTYEARS",
+                "HRTSTRTAGE",
+                "HRTENDAGE",
+                "BCPILLSYR",
+                "BCSTARTAGE",
+                "BCENDAGE"
+          };
+        }
         public IEnumerable<FormMode> FormModes
         {
             get

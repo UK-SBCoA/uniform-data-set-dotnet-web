@@ -563,11 +563,14 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //If a previous form exists, compare and set codes for each input
                 if (currentA5D2Fields != null && previousA5D2Fields != null)
                 {
-                    var fields777 = typeof(A5D2FormFields)
-                        .GetProperties()
-                        .Where(p => p.CanWrite && p.PropertyType == typeof(int?)); //all 777 code properties are of type int
 
-                    foreach (var field in fields777)
+                    var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
+
+                    var fields = typeof(A5D2FormFields)
+                        .GetProperties()
+                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+
+                    foreach (var field in fields)
                     {
                         var previousValue = (int?)field.GetValue(previousA5D2Fields);
                         var currentValue = (int?)field.GetValue(currentA5D2Fields);
