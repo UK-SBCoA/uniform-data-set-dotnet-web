@@ -933,7 +933,7 @@ namespace UDS.Net.Forms.Extensions
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                TOBAC100 = fields.TOBAC100,
+                TOBAC100 = fields.TOBAC100.HasValue && fields.TOBAC100.Value == 1 ? fields.TOBAC100 : null,
                 SMOKYRS = fields.SMOKYRS,
                 PACKSPER = fields.PACKSPER,
                 QUITSMOK = fields.QUITSMOK,
