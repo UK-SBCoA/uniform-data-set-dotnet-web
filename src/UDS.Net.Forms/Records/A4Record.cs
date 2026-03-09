@@ -4,27 +4,25 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Records
 {
-    public record A4Record(Form form)
+    public record A4Record(Form form) : FormRecord(form)
     {
-        internal Form form { get; init; }
-
         [Name("frmdatea4")]
-        public string FrmDate { get; init; } = form.FRMDATE.ToString(RecordConstants.dateFormatString);
+        public string? FrmDate => base.FrmDateExport;
 
         [Name("initialsa4")]
-        public string Initials { get; init; } = form.INITIALS;
+        public string? Initials => base.InitialsExport;
 
         [Name("langa4")]
-        public int Lang { get; init; } = (int)form.LANG;
+        public int? Lang => base.LangExport;
 
         [Name("modea4")]
-        public int Mode { get; init; } = (int)form.MODE;
+        public int Mode => base.ModeExport;
 
         [Name("rmreasa4")]
-        public int? RmReas { get; init; } = form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
+        public int? RmReas => base.RmReasExport;
 
         [Name("rmmodea4")]
-        public int? RmMode { get; init; } = form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+        public int? RmMode => base.RmModeExport;
     }
 }
 

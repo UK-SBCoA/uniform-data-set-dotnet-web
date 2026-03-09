@@ -4,30 +4,28 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Records
 {
-    public record B5Record(Form form)
+    public record B5Record(Form form) : FormRecord(form)
     {
-        internal Form form { get; init; }
-
         [Name("frmdateb5")]
-        public string? FrmDate { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.FRMDATE.ToString(RecordConstants.dateFormatString);
+        public string? FrmDate => base.FrmDateExport;
 
         [Name("initialsb5")]
-        public string? Initials { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.INITIALS;
+        public string? Initials => base.InitialsExport;
 
         [Name("langb5")]
-        public int? Lang { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : (int)form.LANG;
+        public int? Lang => base.LangExport;
 
         [Name("modeb5")]
-        public int Mode { get; init; } = (int)form.MODE;
+        public int Mode => base.ModeExport;
 
         [Name("rmreasb5")]
-        public int? RmReas { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
+        public int? RmReas => base.RmReasExport;
 
         [Name("rmmodeb5")]
-        public int? RmMode { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+        public int? RmMode => base.RmModeExport;
 
         [Name("b5not")]
-        public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
+        public int? Not => base.NotExport;
     }
 }
 
