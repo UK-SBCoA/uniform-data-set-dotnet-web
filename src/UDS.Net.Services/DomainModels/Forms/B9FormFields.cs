@@ -81,6 +81,19 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? COURSE { get; set; }
         public int? FRSTCHG { get; set; }
 
+        public static IEnumerable<string> EncodedFollowUpVariables()
+        {
+            return new List<string>()
+            {
+                "COGAGE",
+                "BEHAGE",
+                "PSYCHAGE",
+                "PERCHAGE",
+                "BEREMAGO",
+                "MOTORAGE"
+            };
+        }
+
         public IEnumerable<FormMode> FormModes
         {
             get
