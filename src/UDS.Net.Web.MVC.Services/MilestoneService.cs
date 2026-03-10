@@ -86,7 +86,7 @@ namespace UDS.Net.Web.MVC.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Milestone> GetMostRecentSubmission(string username)
+        public async Task<Milestone> GetMostRecentSubmission(string username, int milestoneId)
         {
             var milestoneDtos = await _apiClient.MilestoneClient.Get(1000, 1);
 

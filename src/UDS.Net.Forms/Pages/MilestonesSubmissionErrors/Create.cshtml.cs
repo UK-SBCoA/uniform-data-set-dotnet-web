@@ -56,7 +56,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
             var username = User.Identity?.Name ?? "";
 
-            var milestone = await _milestoneService.GetMostRecentSubmission(username);
+            var milestone = await _milestoneService.GetMostRecentSubmission(username, int.Parse(Request.Query["milestoneId"]));
 
             if (milestone == null)
             {

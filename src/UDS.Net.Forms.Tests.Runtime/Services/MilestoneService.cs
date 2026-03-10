@@ -54,7 +54,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        Task<Milestone> IMilestoneService.GetMostRecentSubmission(string username)
+        Task<Milestone> IMilestoneService.GetMostRecentSubmission(string username, int milestoneId)
         {
             throw new NotImplementedException();
         }

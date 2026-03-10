@@ -13,7 +13,7 @@ namespace UDS.Net.Services
 
         Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses);
 
-        Task<Milestone> GetMostRecentSubmission(string username);
+        Task<Milestone> GetMostRecentSubmission(string username, int milestoneId);
         Task CreateSubmissionAsync(string username, int milestoneId);
     }
 }
