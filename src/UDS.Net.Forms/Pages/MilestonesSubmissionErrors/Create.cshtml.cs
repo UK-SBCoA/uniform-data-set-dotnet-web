@@ -7,6 +7,7 @@ using System.Globalization;
 using UDS.Net.API.Entities;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels;
 
 
 namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
@@ -21,6 +22,8 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
         public List<NACCM1ErrorModel> M1SubmissionErrors { get; set; } = new();
 
+        [BindProperty]
+        public int MilestoneId { get; set; }
         [BindProperty]
         public IFormFile? ErrorFileUpload { get; set; }
 
@@ -56,7 +59,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
             var username = User.Identity?.Name ?? "";
 
-            var milestone = await _milestoneService.GetMostRecentSubmission(username, int.Parse(Request.Query["milestoneId"]));
+            var milestone = await _milestoneService.GetMostRecentSubmission(username, MilestoneId);
 
             if (milestone == null)
             {

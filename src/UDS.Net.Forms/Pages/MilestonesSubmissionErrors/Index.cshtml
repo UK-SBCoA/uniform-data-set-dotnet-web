@@ -6,6 +6,7 @@
 <h1>Milestone Submission Errors</h1>
 <div>
     <form method="post" asp-page="Create" asp-page-handler="DisplayErrorSubmission" enctype="multipart/form-data">
+        <input type="hidden" asp-for="MilestoneId" />
         <div class="grid grid-cols-4">
             <div class="col-start-2 col-span-2 grid gap-4">
                 <div>
