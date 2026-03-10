@@ -224,6 +224,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var packet = await _context.Packets
                 .Include(p => p.A3)
                 .Include(p => p.A4a)
+                .Include(p => p.A5D2)
                 .Include(p => p.C2)
                 .Include(p => p.D1a)
                 .Where(p => p.Id == entity.Id)
@@ -357,6 +358,24 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 await _context.SaveChangesAsync();
             }
 
+            if (formId == "A5D2")
+            {
+                if (packet.A5D2 == null)
+                {
+                    packet.A5D2 = new API.Entities.A5D2
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+                var a5d2 = packet.A5D2;
+
+                a5d2.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+            }
             if (formId == "C2")
             {
                 if (packet.C2 == null)
