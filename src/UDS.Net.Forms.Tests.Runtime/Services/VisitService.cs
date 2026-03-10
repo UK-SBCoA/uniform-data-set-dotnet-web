@@ -427,6 +427,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = await _context.Packets
                 .Include(v => v.A3)
+                .Include(v => v.A5D2)
                 .Where(v => v.ParticipationId == participationId && v.VISITNUM == visitNumber)
                 .FirstOrDefaultAsync();
 
@@ -439,6 +440,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 var a3 = packet.A3.Convert(packet.Id, username);
                 forms.Add(a3);
+            }
+            if (packet.A5D2 != null)
+            {
+                var a5d2 = packet.A5D2.Convert(packet.Id, username);
+                forms.Add(a5d2);
             }
 
             //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily

@@ -17,7 +17,15 @@ namespace UDS.Net.Forms.Tests
 
             //await FillFormAsync(Page, model);
             await WriteFormData();
+
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+
+            //Go back in to A5D2 and check that modified data is loaded instead of previous visit data
+           await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+           await CheckAutoPopulatedValuesOnFollowUp();
         }
         private async Task WriteFormData()
         {
@@ -129,7 +137,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.CANCCOLON\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCLUNG\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCPROST\"][value=\"true\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.CANCOTHER\"]").FillAsync("Test");
+            await Page.Locator("input[name=\"A5D2.CANCOTHER\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCRAD\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCRESECT\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCIMMUNO\"][value=\"true\"]").CheckAsync();
@@ -142,14 +150,14 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.COVIDHOSP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.PULMONARY\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.KIDNEY\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.LIVER\"]").FillAsync("999");
-            await Page.Locator("input[name=\"A5D2.LIVERAGE\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.PVD\"]").FillAsync("999");
-            await Page.Locator("input[name=\"A5D2.PVDAGE\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.HIVDIAG\"]").FillAsync("999");
-            await Page.Locator("input[name=\"A5D2.HIVAGE\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.OTHERCOND\"]").FillAsync("999");
-            await Page.Locator("input[name=\"A5D2.OTHCONDX\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.LIVER\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.LIVERAGE\"]").FillAsync("999");
+            await Page.Locator("input[name=\"A5D2.PVD\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.PVDAGE\"]").FillAsync("999");
+            await Page.Locator("input[name=\"A5D2.HIVDIAG\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.HIVAGE\"]").FillAsync("999");;
+            await Page.Locator("input[name=\"A5D2.OTHERCOND\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.OTHCONDX\"]").FillAsync("999");;
             await Page.Locator("input[name=\"A5D2.MAJORDEP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.OTHERDEP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.DEPRTREAT\"][value=\"1\"]").CheckAsync();
@@ -166,6 +174,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.PSYCDIS\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.OTHANXDISX\"]").FillAsync("Test");
             await Page.Locator("input[name=\"A5D2.NOMENSAGE\"]").FillAsync("999");
+            await Page.Keyboard.PressAsync("Tab");
             await Page.Locator("input[name=\"A5D2.NOMENSNAT\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.NOMENSHYST\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.NOMENSSURG\"][value=\"true\"]").CheckAsync();
@@ -186,7 +195,14 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.BCENDAGE\"]").FillAsync("999");
 
             //DEVNOTE: Using tab key presses to unfocus input and trigger JS field enables
-            await Page.Keyboard.PressAsync("Tab");
+            // await Page.Keyboard.PressAsync("Tab");
+        }
+
+        private async Task CheckAutoPopulatedValuesOnFollowUp()
+        {
+        await Expect(Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]")).ToBeCheckedAsync();
+
+            
         }
 
 
