@@ -26,6 +26,19 @@ namespace UDS.Net.Forms.Tests
             //Go back in to A5D2 and check that modified data is loaded instead of previous visit data
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
             await CheckAutoPopulatedValuesOnFollowUp();
+
+            // Change value in second form
+            await Page.Locator("input[name=\"A5D2.SMOKYRS\"]").FillAsync("70");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Reload the form
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            // Verify updated value persisted
+            await Expect(Page.Locator("input[name=\"A5D2.SMOKYRS\"]")).ToHaveValueAsync("70");
+
+            // Verify it differs from the first form value
         }
         private async Task WriteFormData()
         {
@@ -201,9 +214,9 @@ namespace UDS.Net.Forms.Tests
         private async Task CheckAutoPopulatedValuesOnFollowUp()
         {
             await Expect(Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]")).ToBeCheckedAsync();
-            await Page.Locator("input[name=\"A5D2.SMOKYRS\"]").FillAsync("50");
+            await Expect(Page.Locator("input[name=\"A5D2.SMOKYRS\"]")).ToHaveValueAsync("50");
             await Expect(Page.Locator("input[name=\"A5D2.PACKSPER\"][value=\"1\"]")).ToBeCheckedAsync();
-            await Page.Locator("input[name=\"A5D2.QUITSMOK\"]").FillAsync("888");
+            await Expect(Page.Locator("input[name=\"A5D2.QUITSMOK\"]")).ToHaveValueAsync("888");
             await Expect(Page.Locator("input[name=\"A5D2.SUBSTPAST\"][value=\"1\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"A5D2.HRTATTACK\"][value=\"1\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"A5D2.HRTATTMULT\"][value=\"1\"]")).ToBeCheckedAsync();
