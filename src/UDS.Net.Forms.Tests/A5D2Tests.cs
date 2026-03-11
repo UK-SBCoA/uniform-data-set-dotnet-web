@@ -24,8 +24,8 @@ namespace UDS.Net.Forms.Tests
 
 
             //Go back in to A5D2 and check that modified data is loaded instead of previous visit data
-           await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
-           await CheckAutoPopulatedValuesOnFollowUp();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            await CheckAutoPopulatedValuesOnFollowUp();
         }
         private async Task WriteFormData()
         {
@@ -155,9 +155,9 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.PVD\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.PVDAGE\"]").FillAsync("999");
             await Page.Locator("input[name=\"A5D2.HIVDIAG\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.HIVAGE\"]").FillAsync("999");;
+            await Page.Locator("input[name=\"A5D2.HIVAGE\"]").FillAsync("999");
             await Page.Locator("input[name=\"A5D2.OTHERCOND\"][value=\"1\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.OTHCONDX\"]").FillAsync("999");;
+            await Page.Locator("input[name=\"A5D2.OTHCONDX\"]").FillAsync("999");
             await Page.Locator("input[name=\"A5D2.MAJORDEP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.OTHERDEP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.DEPRTREAT\"][value=\"1\"]").CheckAsync();
@@ -200,9 +200,162 @@ namespace UDS.Net.Forms.Tests
 
         private async Task CheckAutoPopulatedValuesOnFollowUp()
         {
-        await Expect(Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Page.Locator("input[name=\"A5D2.SMOKYRS\"]").FillAsync("50");
+            await Expect(Page.Locator("input[name=\"A5D2.PACKSPER\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Page.Locator("input[name=\"A5D2.QUITSMOK\"]").FillAsync("888");
+            await Expect(Page.Locator("input[name=\"A5D2.SUBSTPAST\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HRTATTACK\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HRTATTMULT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HRTATTAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CARDARREST\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CARDARRAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CVAFIB\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CVANGIO\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CVBYPASS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.BYPASSAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CVPACDEF\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PACDEFAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CVCHF\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CVHVALVE\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.VALVEAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CVOTHR\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CVOTHRX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.CBSTROKE\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.STROKMUL\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.STROKAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.STROKSTAT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ANGIOCP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CAROTIDAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CBTIA\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.TIAAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.PD\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PDAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.PDOTHR\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PDOTHRAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.SEIZURES\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.SEIZAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HEADACHE\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.MS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HYDROCEPH\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HEADIMP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPAMFOOT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPSOCCER\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPHOCKEY\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPBOXING\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPSPORT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPIPV\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPMILIT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPASSAULT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPOTHER\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.IMPOTHERX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.IMPYEARS\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HEADINJURY\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HEADINJUNC\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HEADINJCON\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HEADINJNUM\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.FIRSTTBI\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.LASTTBI\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.DIABETES\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABTYPE\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABINS\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABMEDS\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABGLP1\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABRECACT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABDIET\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABUNK\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DIABAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HYPERTEN\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HYPERTAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HYPERCHO\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HYPERCHAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.B12DEF\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.THYROID\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHRIT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHRRHEUM\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHROSTEO\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHROTHR\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHTYPX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHTYPUNK\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHUPEX\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHLOEX\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHSPIN\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ARTHUNK\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.INCONTU\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.APNEA\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.RBD\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.INSOMN\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHSLEEP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HYPERCHAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.CANCERACTV\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCERPRIM\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCERMETA\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCMETBR\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCMETOTH\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCERUNK\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCBLOOD\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCBREAST\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCCOLON\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCLUNG\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCPROST\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCOTHER\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCRAD\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCRESECT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCIMMUNO\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCBONE\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCCHEMO\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCHORM\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCTROTH\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.CANCTROTHX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.COVID19\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.COVIDHOSP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PULMONARY\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.KIDNEY\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.LIVER\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.LIVERAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.PVD\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PVDAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HIVDIAG\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HIVAGE\"]")).ToHaveValueAsync("999"); ;
+            await Expect(Page.Locator("input[name=\"A5D2.OTHERCOND\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHCONDX\"]")).ToHaveValueAsync("999"); ;
+            await Expect(Page.Locator("input[name=\"A5D2.MAJORDEP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHERDEP\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.DEPRTREAT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.BIPOLAR\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.SCHIZ\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.ANXIETY\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.GENERALANX\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PANICDIS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OCD\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHANXDIS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHANXDISX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.PTSD\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NPSYDEV\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.PSYCDIS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.OTHANXDISX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSAGE\"]")).ToHaveValueAsync("999");
+            await Page.Keyboard.PressAsync("Tab");
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSNAT\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSHYST\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSSURG\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSCHEM\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSRAD\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSHORM\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSESTR\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSUNK\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSOTH\"][value=\"true\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.NOMENSOTHX\"]")).ToHaveValueAsync("Test");
+            await Expect(Page.Locator("input[name=\"A5D2.HRT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.HRTYEARS\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HRTSTRTAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.HRTENDAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.BCPILLS\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A5D2.BCPILLSYR\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.BCSTARTAGE\"]")).ToHaveValueAsync("999");
+            await Expect(Page.Locator("input[name=\"A5D2.BCENDAGE\"]")).ToHaveValueAsync("999");
 
-            
+
         }
 
 
