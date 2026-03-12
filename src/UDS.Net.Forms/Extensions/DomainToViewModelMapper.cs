@@ -1,4 +1,5 @@
-﻿using UDS.Net.Forms.Models;
+﻿using System.Net.NetworkInformation;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -392,10 +393,30 @@ namespace UDS.Net.Forms.Extensions
                 }
             }
 
+            SetFormBaseProperties(form, vm);
+
+            return vm;
+        }
+
+        public static FormModel PreviousVisitToVM(this Form form)
+        {
+            var vm = new FormModel()
+            {
+                Id = form.Id
+            };
+            if (form.Fields is A5D2FormFields)
+            {
+                //vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
+            else if (form.Fields is B9FormFields)
+            {
+                vm = ((B9FormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
 
             SetFormBaseProperties(form, vm);
 
             return vm;
+
         }
 
         public static A1 ToVM(this A1FormFields fields, int formId)
@@ -1243,6 +1264,37 @@ namespace UDS.Net.Forms.Extensions
                 MOMOALS = fields.MOMOALS,
                 COURSE = fields.COURSE,
                 FRSTCHG = fields.FRSTCHG,
+            };
+        }
+
+        public static B9 PreviousVisitToVM(this B9FormFields fields, int formId)
+        {
+            return new B9()
+            {
+                Id = formId,
+
+                COGAGE = fields.COGAGE,
+                BEHAGE = fields.BEHAGE,
+                PSYCHAGE = fields.PSYCHAGE,
+                PERCHAGE = fields.PERCHAGE,
+                BEREMAGO = fields.BEREMAGO,
+                MOTORAGE = fields.MOTORAGE,
+
+                DECCLIN = (fields.COGAGE != null ||
+                           fields.BEHAGE != null ||
+                           fields.PSYCHAGE != null ||
+                           fields.PERCHAGE != null ||
+                           fields.MOTORAGE != null) ? 1 : (int?)null,
+
+                DECCLCOG = fields.COGAGE != null ? 1 : (int?)null,
+
+                DECCLBE = (fields.BEHAGE != null ||
+                           fields.PSYCHAGE != null ||
+                           fields.PERCHAGE != null) ? 1 : (int?)null,
+
+                DECCLMOT = fields.MOTORAGE != null ? 1 : (int?)null,
+
+                BEREM = fields.BEREMAGO != null ? 1 : (int?)null
             };
         }
 
