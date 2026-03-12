@@ -1605,10 +1605,7 @@ public class A5D2Model : FormPageModel
                         if (previousA5D2Form != null)
                         {
                             var previousFormModel = previousA5D2Form.PreviousVisitToVM();
-
-                            // On first creation, set all parent, sibling, and children properties 
                             A5D2 = (A5D2)previousFormModel;
-
                             // Reset base properties to match the current form
                             A5D2.SetBaseProperties(BaseForm);
                         }

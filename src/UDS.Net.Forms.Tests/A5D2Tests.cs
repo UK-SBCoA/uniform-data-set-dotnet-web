@@ -9,40 +9,38 @@ namespace UDS.Net.Forms.Tests
         [TestMethod]
         public async Task A5D2_Form_Submits()
         {
+            // Write form data for first visit
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("A5D2");
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
-
-
-            //await FillFormAsync(Page, model);
             await WriteFormData();
-
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
-
-            //Go back in to A5D2 and check that modified data is loaded instead of previous visit data
-            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            // Create new form and verify values are populated from previous form
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("A5D2");
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
             await CheckAutoPopulatedValuesOnFollowUp();
 
-            // Change value in second form
+            // Change a value and save again
             await Page.Locator("input[name=\"A5D2.SMOKYRS\"]").FillAsync("70");
-
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             // Reload the form
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
             // Verify updated value persisted
             await Expect(Page.Locator("input[name=\"A5D2.SMOKYRS\"]")).ToHaveValueAsync("70");
 
-            // Verify it differs from the first form value
         }
         private async Task WriteFormData()
         {
-            //Setup field values for next visit
+            // Writes data to all fields on form
             await Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.SMOKYRS\"]").FillAsync("50");
             await Page.Locator("input[name=\"A5D2.PACKSPER\"][value=\"1\"]").CheckAsync();
@@ -213,6 +211,18 @@ namespace UDS.Net.Forms.Tests
 
         private async Task CheckAutoPopulatedValuesOnFollowUp()
         {
+            // Checks that non auto populated values are blank on follow up form
+            await Expect(Page.Locator("input[name=\"A5D2.TOBAC30\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.ALCFREQYR\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.ALCDRINKS\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.ALCBINGE\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.SUBSTYEAR\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.CANNABIS\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.SEIZNUM\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.CPAP\"]:checked")).ToHaveCountAsync(0);
+            await Expect(Page.Locator("input[name=\"A5D2.APNEAORAL\"]:checked")).ToHaveCountAsync(0);
+
+            // Checks that values from previous form are populated on follow up form
             await Expect(Page.Locator("input[name=\"A5D2.TOBAC100\"][value=\"1\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"A5D2.SMOKYRS\"]")).ToHaveValueAsync("50");
             await Expect(Page.Locator("input[name=\"A5D2.PACKSPER\"][value=\"1\"]")).ToBeCheckedAsync();
@@ -367,46 +377,6 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"A5D2.BCPILLSYR\"]")).ToHaveValueAsync("999");
             await Expect(Page.Locator("input[name=\"A5D2.BCSTARTAGE\"]")).ToHaveValueAsync("999");
             await Expect(Page.Locator("input[name=\"A5D2.BCENDAGE\"]")).ToHaveValueAsync("999");
-
-
-        }
-
-
-        public static async Task FillFormAsync<T>(IPage page, T model)
-        {
-            foreach (var property in typeof(T).GetProperties())
-            {
-                var value = property.GetValue(model)?.ToString() ?? string.Empty;
-
-                var locator = page.Locator($"input[name=\"A5D2.{property.Name}\"]").First;
-                var inputType = await locator.GetAttributeAsync("type");
-                if (inputType == "radio")
-                {
-                    var radio = page.Locator($"input[name=\"A5D2.{property.Name}\"][value=\"{value}\"]");
-                    await radio.CheckAsync();
-                    continue;
-                }
-
-                if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(bool?))
-                {
-                    if (bool.TryParse(value, out bool boolValue))
-                    {
-                        if (boolValue)
-                        {
-                            await locator.CheckAsync();
-                        }
-                        else
-                        {
-                            await locator.UncheckAsync();
-                        }
-                    }
-                    continue;
-                }
-                else
-                {
-                    await locator.FillAsync(value);
-                }
-            }
         }
     }
 }
