@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -11,72 +12,42 @@ namespace UDS.Net.Forms.Extensions
     /// </summary>
     public static class FormComparisonExtensions
     {
-        /// <summary>
-        /// Represents a field comparison configuration
-        /// </summary>
-        public class FieldComparisonConfig
-        {
-            public string PropertyName { get; set; } = "";
-            public object EncodingValue { get; set; }
-            public FieldComparisonConfig(string propertyName, object encodingValue)
-            {
-                PropertyName = propertyName;
-                EncodingValue = encodingValue;
-            }
-        }
+        public record FieldComparisonConfig(string FieldName, int EncodingValue);
 
         /// <summary>
-        /// Compares two forms and encodes changed fields in the current form
+        /// Applies follow-up encoding to fields by comparing against previous visit values.
+        /// Unchanged fields are encoded with their specified encoding value.
         /// </summary>
-        public static void EncodeFollowUpFields<T>(
-            this T currentFields,
-            T? previousFields,
-            IEnumerable<FieldComparisonConfig> fieldConfigs) where T : class
+        public static void EncodeFollowUpFields(this B9FormFields current, B9FormFields previous, IEnumerable<FieldComparisonConfig> fieldConfigs)
         {
-            if (currentFields == null || previousFields == null)
+            if (current == null || previous == null)
                 return;
-
-            var type = typeof(T);
 
             foreach (var config in fieldConfigs)
             {
-                var property = type.GetProperty(config.PropertyName, 
-                    BindingFlags.Public | BindingFlags.IgnoreCase | BindingFlags.Instance);
-
-                if (property == null || !property.CanRead || !property.CanWrite)
+                var property = typeof(B9FormFields).GetProperty(config.FieldName);
+                if (property == null)
                     continue;
 
-                try
-                {
-                    var previousValue = property.GetValue(previousFields);
-                    var currentValue = property.GetValue(currentFields);
+                var previousValue = property.GetValue(previous);
+                var currentValue = property.GetValue(current);
 
-                    // If values are the same, encode with the specified value
-                    if (ValuesAreEqual(previousValue, currentValue))
-                    {
-                        property.SetValue(currentFields, config.EncodingValue);
-                    }
-                }
-                catch (Exception ex)
+                // If values are null or equal, encode the current value
+                if ((previousValue == null && currentValue == null) ||
+                    (previousValue != null && previousValue.Equals(currentValue)))
                 {
-                    // Log or handle exceptions as needed
-                    System.Diagnostics.Debug.WriteLine($"Error comparing field {config.PropertyName}: {ex.Message}");
+                    property.SetValue(current, config.EncodingValue);
                 }
             }
         }
 
         /// <summary>
-        /// Safely compares two values, handling null cases
+        /// Prepares follow-up encoding configuration with encoding value
         /// </summary>
-        private static bool ValuesAreEqual(object? previousValue, object? currentValue)
+        public static IEnumerable<FieldComparisonConfig> GetFollowUpEncodingConfig(this B9FormFields fields, int encodingValue)
         {
-            if (previousValue == null && currentValue == null)
-                return true;
-
-            if (previousValue == null || currentValue == null)
-                return false;
-
-            return previousValue.Equals(currentValue);
+            return B9FormFields.EncodedFollowUpVariables()
+                .Select(fieldName => new FieldComparisonConfig(fieldName, encodingValue));
         }
     }
 }

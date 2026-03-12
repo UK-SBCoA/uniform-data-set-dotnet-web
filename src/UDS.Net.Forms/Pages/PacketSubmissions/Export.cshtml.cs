@@ -647,15 +647,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 B9FormFields? previousB9Fields = null;
                 B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+                int countOfVisits = await _visitService.GetVisitCountByVersion(
+                    User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
-                        User.Identity!.Name!,
-                        packet.ParticipationId,
-                        packet.VISITNUM - 1,
-                        "B9");
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "B9");
 
                     previousB9Base = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "B9");
                     previousB9Fields = previousB9Base?.Fields as B9FormFields;
@@ -663,11 +660,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (currentB9Fields != null && previousB9Fields != null)
                 {
-                    var encodedFields = B9FormFields.EncodedFollowUpVariables();
-                    var fieldConfigs = encodedFields.Select(fieldName =>
-                        new FormComparisonExtensions.FieldComparisonConfig(fieldName, 777)).ToList();
-
-                    currentB9Fields.EncodeFollowUpFields(previousB9Fields, fieldConfigs);
+                    currentB9Fields.EncodeFollowUpFields(previousB9Fields, currentB9Fields.GetFollowUpEncodingConfig(777));
                 }
 
                 if (b9.Fields is B9FormFields normalB9)
