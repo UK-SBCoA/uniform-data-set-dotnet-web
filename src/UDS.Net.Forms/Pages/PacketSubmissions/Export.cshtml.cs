@@ -642,6 +642,42 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (b9 != null)
             {
                 csv.WriteRecord(new B9Record(b9));
+                                Form? previousB9Base = null;
+
+                B9FormFields? previousB9Fields = null;
+
+                B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "B9");
+
+                    previousB9Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "B9").FirstOrDefault() : null;
+
+                    previousB9Fields = previousB9Base != null ? previousB9Base.Fields as B9FormFields : null;
+                }
+
+                if (currentB9Fields != null && previousB9Fields != null)
+                {
+
+                    var encodedFollowUpFields = B9FormFields.EncodedFollowUpVariables();
+
+                    var fields = typeof(B9FormFields)
+                        .GetProperties()
+                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+
+                    foreach (var field in fields)
+                    {
+                        var previousValue = (int?)field.GetValue(previousB9Fields);
+                        var currentValue = (int?)field.GetValue(currentB9Fields);
+
+                        var result = CompareB9Values(previousValue, currentValue, 777);
+
+                        field.SetValue(currentB9Fields, result);
+                    }
+                }
                 if (b9.Fields is B9FormFields normalB9)
                     csv.WriteRecord(normalB9);
             }
@@ -694,6 +730,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return currentValue;
         }
 
+        private int? CompareB9Values(int? previousValue, int? currentValue, int code)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            return currentValue;
+        }
+
         private void DetectA3Change(Enum section)
         {
             if (section is A3Section.Parent) A3ParentChangeCount++;
@@ -702,4 +750,3 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         }
     }
 }
-

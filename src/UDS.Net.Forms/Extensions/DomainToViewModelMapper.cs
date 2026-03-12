@@ -614,6 +614,7 @@ namespace UDS.Net.Forms.Extensions
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
+                NEWINF = fields.NEWINF,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
