@@ -160,6 +160,7 @@ namespace UDS.Net.Forms.Models
                 }
             }
         }
+
         public void SetBaseProperties(FormModel formBase)
         {
             if (formBase != null)
@@ -179,6 +180,5 @@ namespace UDS.Net.Forms.Models
             }
         }
     }
-
 }
 

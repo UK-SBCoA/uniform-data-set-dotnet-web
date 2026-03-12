@@ -563,7 +563,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //If a previous form exists, compare and set codes for each input
                 if (currentA5D2Fields != null && previousA5D2Fields != null)
                 {
-
                     var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
 
                     var fields = typeof(A5D2FormFields)
@@ -574,16 +573,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousA5D2Fields);
                         var currentValue = (int?)field.GetValue(currentA5D2Fields);
-
                         var result = CompareA5D2Values(previousValue, currentValue, 777);
-
                         field.SetValue(currentA5D2Fields, result);
                     }
                 }
                 if (a5d2.Fields is A5D2FormFields normalA5D2)
                     csv.WriteRecord(normalA5D2);
-
-
             }
             if (b1 != null)
             {
