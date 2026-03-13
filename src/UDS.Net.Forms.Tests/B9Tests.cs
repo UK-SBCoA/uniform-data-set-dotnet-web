@@ -44,7 +44,6 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"B9.DECCLMOT\"][value=\"1\"]").ClickAsync();
             await Page.Locator("input[name=\"B9.MOGAIT\"][value=\"1\"]").ClickAsync();
             await Page.Locator("input[name=\"B9.MOTORAGE\"]").FillAsync("62");
-            await Page.Locator("input[name=\"B9.FRSTCHG\"][value=\"1\"]").ClickAsync();
 
             // Save in progress
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
@@ -66,7 +65,6 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"B9.DECCLBE\"][value=\"1\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"B9.DECCLMOT\"][value=\"1\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"B9.DECCLIN\"][value=\"1\"]")).ToBeCheckedAsync();
-            await Expect(Page.Locator("input[name=\"B9.FRSTCHG\"][value=\"0\"]")).ToBeCheckedAsync();
         }
 
         [TestMethod]

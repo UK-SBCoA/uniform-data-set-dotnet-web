@@ -1470,8 +1470,6 @@ namespace UDS.Net.Forms.Extensions
                 DECCLMOT = fields.MOTORAGE != null ? 1 : (int?)null,
 
                 BEREM = fields.BEREMAGO != null ? 1 : (int?)null,
-
-                FRSTCHG = fields.FRSTCHG != null ? 0 : (int?)null
             };
         }
 

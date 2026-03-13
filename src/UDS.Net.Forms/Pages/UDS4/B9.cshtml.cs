@@ -612,11 +612,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 B9 = (B9)BaseForm;
             }
 
-            if (B9?.PacketKind == PacketKind.F)
-            {
-                FRSTCHGListItems.Insert(0, new RadioListItem("Assessed at a previous UDS visit", "0"));
-            }
-
             if (B9.PacketKind == PacketKind.F && BaseForm.Id == 0)
             {
 
