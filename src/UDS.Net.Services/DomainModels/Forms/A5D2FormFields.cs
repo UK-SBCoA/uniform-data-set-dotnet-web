@@ -176,6 +176,42 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? BCSTARTAGE { get; set; }
         public int? BCENDAGE { get; set; }
 
+        public static IEnumerable<string> EncodedFollowUpVariables()
+        {
+            return new List<string>() {
+                "SMOKYRS",
+                "QUITSMOK",
+                "HRTATTAGE",
+                "CARDARRAGE",
+                "BYPASSAGE",
+                "PACDEFAGE",
+                "VALVEAGE",
+                "STROKAGE",
+                "CAROTIDAGE",
+                "TIAAGE",
+                "PDAGE",
+                "PDOTHRAGE",
+                "SEIZAGE",
+                "IMPYEARS",
+                "FIRSTTBI",
+                "LASTTBI",
+                "DIABAGE",
+                "HYPERTAGE",
+                "HYPERCHAGE",
+                "CANCERAGE",
+                "KIDNEYAGE",
+                "LIVERAGE",
+                "PVDAGE",
+                "HIVAGE",
+                "NOMENSAGE",
+                "HRTYEARS",
+                "HRTSTRTAGE",
+                "HRTENDAGE",
+                "BCPILLSYR",
+                "BCSTARTAGE",
+                "BCENDAGE"
+          };
+        }
         public IEnumerable<FormMode> FormModes
         {
             get
@@ -272,7 +308,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.HEADIMP = a5D2Dto.HEADIMP;
                 this.IMPAMFOOT = a5D2Dto.IMPAMFOOT;
                 this.IMPSOCCER = a5D2Dto.IMPSOCCER;
-                this.IMPHOCKEY = a5D2Dto.IMPHOCKEY;
+                this.IMPHOCKEY = a5D2Dto.IMPHOCKEY; // GITLEAKS incorrectly thinks this is a secret so #gitleaks:allow
                 this.IMPBOXING = a5D2Dto.IMPBOXING;
                 this.IMPSPORT = a5D2Dto.IMPSPORT;
                 this.IMPIPV = a5D2Dto.IMPIPV;
