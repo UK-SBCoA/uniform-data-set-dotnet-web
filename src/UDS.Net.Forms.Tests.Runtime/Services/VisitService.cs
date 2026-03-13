@@ -83,7 +83,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 var packet = await _context.Packets
                     .Include(v => v.A3)
                     .Include(v => v.A4a)
-                    .Include(v => v.B9)
+                    .Include(v => v.A5D2)
                     .Include(v => v.C2)
                     .Include(v => v.D1a)
                     .Where(v => v.Id == id)
@@ -104,10 +104,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         var a4a = packet.A4a.Convert(packet.Id, username);
                         forms.Add(a4a);
                     }
-                    if (packet.B9 != null)
+                    if (packet.A5D2 != null)
                     {
-                        var b9 = packet.B9.Convert(packet.Id, username);
-                        forms.Add(b9);
+                        var a5d2 = packet.A5D2.Convert(packet.Id, username);
+                        forms.Add(a5d2);
                     }
                     if (packet.C2 != null)
                     {
@@ -224,7 +224,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var packet = await _context.Packets
                 .Include(p => p.A3)
                 .Include(p => p.A4a)
-                .Include(p => p.B9)
+                .Include(p => p.A5D2)
                 .Include(p => p.C2)
                 .Include(p => p.D1a)
                 .Where(p => p.Id == entity.Id)
@@ -358,11 +358,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 await _context.SaveChangesAsync();
             }
 
-            if (formId == "B9")
+            if (formId == "A5D2")
             {
-                if (packet.B9 == null)
+                if (packet.A5D2 == null)
                 {
-                    packet.B9 = new API.Entities.B9
+                    packet.A5D2 = new API.Entities.A5D2
                     {
                         PacketId = packet.Id,
                         CreatedAt = packet.CreatedAt,
@@ -370,13 +370,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         ModifiedBy = packet.ModifiedBy
                     };
                 }
-                var b9 = packet.B9;
+                var a5d2 = packet.A5D2;
 
-                b9.UpdateFromDomain(formId, entity);
+                a5d2.UpdateFromDomain(formId, entity);
 
                 await _context.SaveChangesAsync();
             }
-
             if (formId == "C2")
             {
                 if (packet.C2 == null)
@@ -428,7 +427,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = await _context.Packets
                 .Include(v => v.A3)
-                .Include(v => v.B9)
+                .Include(v => v.A5D2)
                 .Where(v => v.ParticipationId == participationId && v.VISITNUM == visitNumber)
                 .FirstOrDefaultAsync();
 
@@ -442,10 +441,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 var a3 = packet.A3.Convert(packet.Id, username);
                 forms.Add(a3);
             }
-            if (packet.B9 != null)
+            if (packet.A5D2 != null)
             {
-                var b9 = packet.B9.Convert(packet.Id, username);
-                forms.Add(b9);
+                var a5d2 = packet.A5D2.Convert(packet.Id, username);
+                forms.Add(a5d2);
             }
 
             //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily

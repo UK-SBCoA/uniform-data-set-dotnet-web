@@ -129,7 +129,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketDataAsync(csv, packetSubmission, participant, packet);
+                                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -542,7 +542,41 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a5d2 != null)
             {
                 csv.WriteRecord(new A5D2Record(a5d2));
+                Form? previousA5D2Base = null;
 
+                A5D2FormFields? previousA5D2Fields = null;
+
+                A5D2FormFields? currentA5D2Fields = a5d2.Fields as A5D2FormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A5D2");
+
+                    //Set previousA5D2Base
+                    previousA5D2Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
+
+                    //Set previousA5D2Fields
+                    previousA5D2Fields = previousA5D2Base != null ? previousA5D2Base.Fields as A5D2FormFields : null;
+                }
+                //If a previous form exists, compare and set codes for each input
+                if (currentA5D2Fields != null && previousA5D2Fields != null)
+                {
+                    var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
+
+                    var fields = typeof(A5D2FormFields)
+                        .GetProperties()
+                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+
+                    foreach (var field in fields)
+                    {
+                        var previousValue = (int?)field.GetValue(previousA5D2Fields);
+                        var currentValue = (int?)field.GetValue(currentA5D2Fields);
+                        var result = CompareA5D2Values(previousValue, currentValue, 777);
+                        field.SetValue(currentA5D2Fields, result);
+                    }
+                }
                 if (a5d2.Fields is A5D2FormFields normalA5D2)
                     csv.WriteRecord(normalA5D2);
             }
@@ -642,27 +676,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (b9 != null)
             {
                 csv.WriteRecord(new B9Record(b9));
-
-                Form? previousB9Base = null;
-                B9FormFields? previousB9Fields = null;
-                B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
-
-                int countOfVisits = await _visitService.GetVisitCountByVersion(
-                    User.Identity!.Name!, packet.ParticipationId, "4.0.0");
-
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
-                {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "B9");
-
-                    previousB9Base = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "B9");
-                    previousB9Fields = previousB9Base?.Fields as B9FormFields;
-                }
-
-                if (currentB9Fields != null && previousB9Fields != null)
-                {
-                    currentB9Fields.EncodeFollowUpFields(previousB9Fields, currentB9Fields.GetFollowUpEncodingConfig(777));
-                }
-
                 if (b9.Fields is B9FormFields normalB9)
                     csv.WriteRecord(normalB9);
             }
@@ -714,8 +727,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             return currentValue;
         }
-
-        private int? CompareB9Values(int? previousValue, int? currentValue, int code)
+        private int? CompareA5D2Values(int? previousValue, int? currentValue, int code)
         {
             if (previousValue == null && currentValue == null) return null;
 
@@ -726,7 +738,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             return currentValue;
         }
-
         private void DetectA3Change(Enum section)
         {
             if (section is A3Section.Parent) A3ParentChangeCount++;
@@ -735,3 +746,4 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         }
     }
 }
+
