@@ -406,28 +406,13 @@ namespace UDS.Net.Forms.Extensions
             };
             if (form.Fields is A5D2FormFields)
             {
-                //vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
+                vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
             else if (form.Fields is B9FormFields)
             {
                 vm = ((B9FormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
 
-            SetFormBaseProperties(form, vm);
-
-            return vm;
-
-        }
-        public static FormModel PreviousVisitToVM(this Form form)
-        {
-            var vm = new FormModel()
-            {
-                Id = form.Id
-            };
-            if (form.Fields is A5D2FormFields)
-            {
-                vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
-            }
             SetFormBaseProperties(form, vm);
 
             return vm;
@@ -1484,7 +1469,9 @@ namespace UDS.Net.Forms.Extensions
 
                 DECCLMOT = fields.MOTORAGE != null ? 1 : (int?)null,
 
-                BEREM = fields.BEREMAGO != null ? 1 : (int?)null
+                BEREM = fields.BEREMAGO != null ? 1 : (int?)null,
+
+                FRSTCHG = fields.FRSTCHG != null ? 0 : (int?)null
             };
         }
 
