@@ -1459,7 +1459,8 @@ namespace UDS.Net.Forms.Extensions
                            fields.BEHAGE != null ||
                            fields.PSYCHAGE != null ||
                            fields.PERCHAGE != null ||
-                           fields.MOTORAGE != null) ? 1 : (int?)null,
+                           fields.MOTORAGE != null ||
+                           fields.BEREMAGO != null) ? 1 : (int?)null,
 
                 DECCLCOG = fields.COGAGE != null ? 1 : (int?)null,
 
