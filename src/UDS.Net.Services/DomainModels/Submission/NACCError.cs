@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace UDS.Net.Services.DomainModels
+namespace UDS.Net.Services.DomainModels.Submission
 {
     public class NACCError
     {
@@ -16,5 +16,6 @@ namespace UDS.Net.Services.DomainModels
         public string Ptid { get; set; }
         public string Visitnum { get; set; }
         public string Approved { get; set; }
+        public string ImportedBy { get; set; }
     }
 }

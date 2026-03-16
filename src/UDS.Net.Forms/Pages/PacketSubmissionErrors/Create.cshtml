@@ -23,27 +23,35 @@
                             <tr>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Type</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Code</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Location</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].File</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Value</p>
-                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Message</p>
+                                </td>
+                                @* hidden inputs from NACCError *@
+                                <td class="hidden">
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Timestamp" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
                                     <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Approved" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].ImportedBy" />
                                 </td>
                             </tr>
                         }
@@ -90,11 +98,5 @@
                 </div>
             }
         </div>
-
-        <input type="hidden" asp-for="PacketId" />
-        <input type="hidden" asp-for="PacketSubmissionId" />
-        <input type="hidden" asp-for="PacketStatus" value="3" />
-        <input type="hidden" asp-for="LegacyId" />
-        <input type="hidden" asp-for="VisitNum" />
     </form>
 </turbo-frame>

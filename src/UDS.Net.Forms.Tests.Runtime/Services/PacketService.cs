@@ -82,5 +82,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<NACCError>> UpdateMultiplePacketsSubmissionsErrors(string username, List<NACCError> errors)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
