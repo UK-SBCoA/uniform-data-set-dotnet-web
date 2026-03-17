@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4;
 
@@ -75,8 +77,8 @@ public class A5D2Model : FormPageModel
     public List<RadioListItem> ConditionsListItems { get; set; } = new List<RadioListItem>
     {
         new RadioListItem("Absent", "0"),
-        new RadioListItem("Recent/active", "1"),
-        new RadioListItem("Remote/inactive", "2"),
+        new RadioListItem("Recent/Active", "1"),
+        new RadioListItem("Remote/Inactive", "2"),
         new RadioListItem("Unknown", "9")
     };
 
@@ -132,7 +134,7 @@ public class A5D2Model : FormPageModel
     {
         new RadioListItem("Type 1", "1"),
         new RadioListItem("Type 2", "2"),
-        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes", "3"),
+        new RadioListItem("Other (diabetes insipidus, latent autoimmune diabetes/type 1.5, gestational diabetes, prediabetes)", "3"),
         new RadioListItem("Unknown", "9")
     };
 
@@ -144,9 +146,9 @@ public class A5D2Model : FormPageModel
         new RadioListItem("Unknown", "9")
     };
 
-    public List<RadioListItem> UntreadedTreatedItems { get; set; } = new List<RadioListItem>
+    public List<RadioListItem> UntreatedTreatedItems { get; set; } = new List<RadioListItem>
     {
-        new RadioListItem("Untreaded", "0"),
+        new RadioListItem("Untreated", "0"),
         new RadioListItem("Treated with medication and/or counseling", "1")
     };
 
@@ -1586,8 +1588,31 @@ public class A5D2Model : FormPageModel
         if (BaseForm != null)
         {
             A5D2 = (A5D2)BaseForm;
-        }
 
+            // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+            if (A5D2.PacketKind == PacketKind.F && BaseForm.Id == 0)
+            {
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
+
+                if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, Visit.ParticipationId, Visit.VISITNUM - 1, "A5D2");
+
+                    if (previousVisit != null)
+                    {
+                        var previousA5D2Form = previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
+
+                        if (previousA5D2Form != null)
+                        {
+                            var previousFormModel = previousA5D2Form.PreviousVisitToVM();
+                            A5D2 = (A5D2)previousFormModel;
+                            // Reset base properties to match the current form
+                            A5D2.SetBaseProperties(BaseForm);
+                        }
+                    }
+                }
+            }
+        }
         return Page();
     }
 

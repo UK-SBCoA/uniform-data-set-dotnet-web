@@ -7,6 +7,7 @@ namespace UDS.Net.Services.DomainModels.Forms
     public class A2FormFields : IFormFields
     {
         public int? INRELTO { get; set; }
+        public int? NEWINF { get; set; }
         public int? INKNOWN { get; set; }
         public int? INLIVWTH { get; set; }
         public int? INCNTMOD { get; set; }
@@ -66,6 +67,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 var a2Dto = ((A2Dto)dto);
                 this.INRELTO = a2Dto.INRELTO;
+                this.NEWINF = a2Dto.NEWINF == null ? (int?)null : a2Dto.NEWINF.Value ? 1 : 0;
                 this.INKNOWN = a2Dto.INKNOWN;
                 this.INLIVWTH = a2Dto.INLIVWTH;
                 this.INCNTMOD = a2Dto.INCNTMOD;

@@ -12,7 +12,6 @@ using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
@@ -23,14 +22,27 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         protected readonly IPacketService _packetService;
         protected readonly IParticipationService _participationService;
         private readonly IConfiguration _configuration;
+        private readonly IVisitService _visitService;
+
+        private enum A3Section
+        {
+            Parent = 1,
+            Sibling = 2,
+            Kid = 3
+        }
+        private int A3ParentChangeCount = 0;
+        private int A3SiblingChangeCount = 0;
+        private int A3KidsChangeCount = 0;
 
         public bool Processed { get; set; } = false;
 
-        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration)
+        public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
             _packetService = packetService;
             _participationService = participationService;
             _configuration = configuration;
+            _visitService = visitService;
+
         }
 
         public async Task<IActionResult> OnGetAsync(int packetId)
@@ -58,7 +70,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 WriteHeader(csv, packetSubmission);
 
-                WritePacketData(csv, packetSubmission, participant, packet);
+                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
             }
 
             memoryStream.Position = 0;
@@ -117,7 +129,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                                     headerWritten = true;
                                 }
 
-                                WritePacketData(csv, packetSubmission, participant, packet);
+                                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
                                 csv.NextRecord();
                             }
                         }
@@ -166,33 +178,17 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a1 != null)
             {
                 csv.WriteHeader<A1Record>();
-
-                if (a1.Fields is A1FollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A1FollowUpFormFields>();
-                }
-                else if (a1.Fields is A1FormFields)
-                {
-                    csv.WriteHeaderLowercase<A1FormFields>();
-                }
+                csv.WriteHeaderLowercase<A1FormFields>();
             }
             if (a1a != null)
             {
                 csv.WriteHeader<A1aRecord>();
-
-                if (a1a.Fields is A1aFormFields)
-                {
-                    csv.WriteHeaderLowercase<A1aFormFields>();
-                }
+                csv.WriteHeaderLowercase<A1aFormFields>();
             }
             if (a2 != null)
             {
                 csv.WriteHeader<A2Record>();
-
-                if (a2.Fields is A2FollowUpFormFields)
-                    csv.WriteHeaderLowercase<A2FollowUpFormFields>();
-                else
-                    csv.WriteHeaderLowercase<A2FormFields>();
+                csv.WriteHeaderLowercase<A2FormFields>();
             }
             if (a3 != null)
             {
@@ -201,18 +197,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 List<A3FamilyMemberFormFields> siblingFields;
                 List<A3FamilyMemberFormFields> kidFields;
 
-                if (a3.Fields is A3FollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A3FollowUpFormFields>();
-                    siblingFields = ((A3FollowUpFormFields)a3.Fields).SiblingFormFields;
-                    kidFields = ((A3FollowUpFormFields)a3.Fields).KidsFormFields;
-                }
-                else
-                {
-                    csv.WriteHeaderLowercase<A3FormFields>();
-                    siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields;
-                    kidFields = ((A3FormFields)a3.Fields).KidsFormFields;
-                }
+                csv.WriteHeaderLowercase<A3FormFields>();
+                siblingFields = ((A3FormFields)a3.Fields).SiblingFormFields;
+                kidFields = ((A3FormFields)a3.Fields).KidsFormFields;
 
                 // Siblings
                 foreach (var siblingField in siblingFields)
@@ -251,17 +238,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A4aTreatmentFormFields> treatments;
 
-                if (a4a.Fields is A4aFollowUpFormFields)
-                {
-                    csv.WriteHeaderLowercase<A4aFollowUpFormFields>();
-                    treatments = ((A4aFollowUpFormFields)a4a.Fields).TreatmentFormFields;
-                }
-                else
-                {
-                    csv.WriteHeaderLowercase<A4aFormFields>();
-                    treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields;
-                }
-
+                csv.WriteHeaderLowercase<A4aFormFields>();
+                treatments = ((A4aFormFields)a4a.Fields).TreatmentFormFields;
                 foreach (var treatment in treatments)
                 {
                     foreach (var prop in a4aProps)
@@ -276,11 +254,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a5d2 != null)
             {
                 csv.WriteHeader<A5D2Record>();
-
-                if (a5d2.Fields is A5D2FollowUpFormFields)
-                    csv.WriteHeaderLowercase<A5D2FollowUpFormFields>();
-                else
-                    csv.WriteHeaderLowercase<A5D2FormFields>();
+                csv.WriteHeaderLowercase<A5D2FormFields>();
             }
             if (b1 != null)
             {
@@ -342,7 +316,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         }
 
-        private void WritePacketData(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+
+        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -379,14 +354,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A1Record(a1));
 
-                if (a1.Fields is A1FollowUpFormFields followUpA1)
-                {
-                    csv.WriteRecord(followUpA1);
-                }
-                else if (a1.Fields is A1FormFields normalA1)
-                {
-                    csv.WriteRecord(normalA1);
-                }
+                if (a1.Fields is A1FormFields a1Fields)
+                    csv.WriteRecord(a1Fields);
+
             }
             if (a1a != null)
             {
@@ -394,17 +364,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> a1aFormFieldsProps;
-                    // If the form is not completed, everything exported should be null
-                    if (a1a.Fields is A1aFormFields)
-                        a1aFormFieldsProps = typeof(A1aFormFields).GetProperties();
-                    else
-                        a1aFormFieldsProps = Enumerable.Empty<PropertyInfo>();
+                    csv.WriteRecord(new A1aFormFields());
 
-                    a1aFormFieldsProps = a1aFormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in a1aFormFieldsProps)
-                        csv.WriteField(null);
                 }
                 else
                 {
@@ -419,26 +380,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (a2.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> a2FormFieldsProps;
-
-                    if (a2.Fields is A2FollowUpFormFields)
-                        a2FormFieldsProps = typeof(A2FollowUpFormFields).GetProperties();
-                    else if (a2.Fields is A2FormFields)
-                        a2FormFieldsProps = typeof(A2FormFields).GetProperties();
-                    else
-                        a2FormFieldsProps = Enumerable.Empty<PropertyInfo>();
-
-                    a2FormFieldsProps = a2FormFieldsProps
-                        .Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignored));
-
-                    foreach (var prop in a2FormFieldsProps)
-                        csv.WriteField(null);
+                    csv.WriteRecord(new A2FormFields());
                 }
                 else
                 {
-                    if (a2.Fields is A2FollowUpFormFields followUpA2)
-                        csv.WriteRecord(followUpA2);
-                    else if (a2.Fields is A2FormFields normalA2)
+                    if (a2.Fields is A2FormFields normalA2)
                         csv.WriteRecord(normalA2);
                 }
             }
@@ -446,31 +392,81 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                if (a3.Fields is A3FollowUpFormFields followUpA3)
-                    csv.WriteRecord(followUpA3);
-                else if (a3.Fields is A3FormFields normalA3)
-                    csv.WriteRecord(normalA3);
+                Form? previousA3Base = null;
 
-                List<A3FamilyMemberFormFields> siblings;
-                List<A3FamilyMemberFormFields> kids;
+                A3FormFields? previousA3Fields = null;
 
-                if (a3.Fields is A3FollowUpFormFields followUpKids)
+                A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
+
+                //Create lists for siblings and kids by casting a3.fields data (IFormFields to A3FormFields)
+                List<A3FamilyMemberFormFields> siblings = ((A3FormFields)a3.Fields).SiblingFormFields;
+                List<A3FamilyMemberFormFields> kids = ((A3FormFields)a3.Fields).KidsFormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    siblings = followUpKids.SiblingFormFields;
-                    kids = followUpKids.KidsFormFields;
-                }
-                else if (a3.Fields is A3FormFields normalKids)
-                {
-                    siblings = normalKids.SiblingFormFields;
-                    kids = normalKids.KidsFormFields;
-                }
-                else
-                {
-                    siblings = new List<A3FamilyMemberFormFields>();
-                    kids = new List<A3FamilyMemberFormFields>();
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+
+                    //Set previousA3Base
+                    previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
+
+                    //Set previousA3Fields
+                    previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
                 }
 
-                // siblings
+                //If a previous form exists, compare and set codes for each input
+                if (currentA3Fields != null && previousA3Fields != null)
+                {
+                    //Mother
+                    currentA3Fields.MOMYOB = CompareA3Values(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666, A3Section.Parent);
+                    currentA3Fields.MOMDAGE = CompareA3Values(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666, A3Section.Parent);
+                    currentA3Fields.MOMETPR = CompareA3Values(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66", A3Section.Parent);
+                    currentA3Fields.MOMETSEC = CompareA3Values(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66", A3Section.Parent);
+                    currentA3Fields.MOMMEVAL = CompareA3Values(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.MOMAGEO = CompareA3Values(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6, A3Section.Parent);
+
+                    //Father
+                    currentA3Fields.DADYOB = CompareA3Values(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666, A3Section.Parent);
+                    currentA3Fields.DADDAGE = CompareA3Values(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666, A3Section.Parent);
+                    currentA3Fields.DADETPR = CompareA3Values(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66", A3Section.Parent);
+                    currentA3Fields.DADETSEC = CompareA3Values(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66", A3Section.Parent);
+                    currentA3Fields.DADMEVAL = CompareA3Values(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6, A3Section.Parent);
+                    currentA3Fields.DADAGEO = CompareA3Values(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6, A3Section.Parent);
+
+                    //Siblings
+                    for (var siblingsIndex = 0; siblingsIndex < siblings.Count(); siblingsIndex++)
+                    {
+                        siblings[siblingsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666, A3Section.Sibling);
+                        siblings[siblingsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666, A3Section.Sibling);
+                        siblings[siblingsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, siblings[siblingsIndex].ETPR, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, siblings[siblingsIndex].ETSEC, "66", A3Section.Sibling);
+                        siblings[siblingsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6, A3Section.Sibling);
+                        siblings[siblingsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666, A3Section.Sibling);
+                    };
+
+                    //Kids
+                    for (var kidsIndex = 0; kidsIndex < kids.Count(); kidsIndex++)
+                    {
+                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
+                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
+                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
+                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
+                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
+                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
+                    };
+
+                    //Set follow-up properties in currentA3Fields
+                    currentA3Fields?.NWINFSIB = A3SiblingChangeCount > 0 ? 1 : 0; //follow-up values will be NULL for forms with no previous visit
+                    currentA3Fields?.NWINFKID = A3KidsChangeCount > 0 ? 1 : 0;
+                    currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
+                }
+
+                //Write record of currentA3Fields after completing comparison checks
+                csv.WriteRecord(currentA3Fields);
+
+
+                //Write Sibling data
                 foreach (var sibling in siblings)
                 {
                     foreach (var prop in a3FamilyProps)
@@ -482,7 +478,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
                 }
 
-                // kids
+                //Write Kids data
                 foreach (var kid in kids)
                 {
                     foreach (var prop in a3FamilyProps)
@@ -494,6 +490,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
                 }
             }
+
             if (a4 != null)
             {
                 csv.WriteRecord(new A4Record(a4));
@@ -523,12 +520,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 List<A4aTreatmentFormFields> treatments;
 
-                if (a4a.Fields is A4aFollowUpFormFields followUpA4a)
-                {
-                    csv.WriteRecord(followUpA4a);
-                    treatments = followUpA4a.TreatmentFormFields.ToList();
-                }
-                else if (a4a.Fields is A4aFormFields normalA4a)
+                if (a4a.Fields is A4aFormFields normalA4a)
                 {
                     csv.WriteRecord(normalA4a);
                     treatments = normalA4a.TreatmentFormFields.ToList();
@@ -550,10 +542,42 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a5d2 != null)
             {
                 csv.WriteRecord(new A5D2Record(a5d2));
+                Form? previousA5D2Base = null;
 
-                if (a5d2.Fields is A5D2FollowUpFormFields followUpA5D2)
-                    csv.WriteRecord(followUpA5D2);
-                else if (a5d2.Fields is A5D2FormFields normalA5D2)
+                A5D2FormFields? previousA5D2Fields = null;
+
+                A5D2FormFields? currentA5D2Fields = a5d2.Fields as A5D2FormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A5D2");
+
+                    //Set previousA5D2Base
+                    previousA5D2Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
+
+                    //Set previousA5D2Fields
+                    previousA5D2Fields = previousA5D2Base != null ? previousA5D2Base.Fields as A5D2FormFields : null;
+                }
+                //If a previous form exists, compare and set codes for each input
+                if (currentA5D2Fields != null && previousA5D2Fields != null)
+                {
+                    var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
+
+                    var fields = typeof(A5D2FormFields)
+                        .GetProperties()
+                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+
+                    foreach (var field in fields)
+                    {
+                        var previousValue = (int?)field.GetValue(previousA5D2Fields);
+                        var currentValue = (int?)field.GetValue(currentA5D2Fields);
+                        var result = CompareA5D2Values(previousValue, currentValue, 777);
+                        field.SetValue(currentA5D2Fields, result);
+                    }
+                }
+                if (a5d2.Fields is A5D2FormFields normalA5D2)
                     csv.WriteRecord(normalA5D2);
             }
             if (b1 != null)
@@ -563,17 +587,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 // write remaining form values
                 if (b1.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> b1FormFieldsProps;
-                    // If the form is not completed, everything exported should be null
-                    if (b1.Fields is B1FormFields)
-                        b1FormFieldsProps = typeof(B1FormFields).GetProperties();
-                    else
-                        b1FormFieldsProps = Enumerable.Empty<PropertyInfo>();
-
-                    b1FormFieldsProps = b1FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in b1FormFieldsProps)
-                        csv.WriteField(null);
+                    csv.WriteRecord(new B1FormFields());
                 }
                 else
                 {
@@ -589,17 +603,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 // write remaining form values
                 if (b3.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> b3FormFieldsProps;
-                    // If the form is not completed, everything exported should be null
-                    if (b3.Fields is B3FormFields)
-                        b3FormFieldsProps = typeof(B3FormFields).GetProperties();
-                    else
-                        b3FormFieldsProps = Enumerable.Empty<PropertyInfo>();
+                    csv.WriteRecord(new B3FormFields());
 
-                    b3FormFieldsProps = b3FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in b3FormFieldsProps)
-                        csv.WriteField(null);
                 }
                 else
                 {
@@ -620,17 +625,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (b5.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> b5FormFieldsProps;
-                    // If the form is not completed, everything exported should be null
-                    if (b5.Fields is B5FormFields)
-                        b5FormFieldsProps = typeof(B5FormFields).GetProperties();
-                    else
-                        b5FormFieldsProps = Enumerable.Empty<PropertyInfo>();
-
-                    b5FormFieldsProps = b5FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in b5FormFieldsProps)
-                        csv.WriteField(null);
+                    csv.WriteRecord(new B5FormFields());
                 }
                 else
                 {
@@ -646,16 +641,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 // write remaining form values
                 if (b6.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> b6FormFieldsProps;
-                    if (b6.Fields is B6FormFields)
-                        b6FormFieldsProps = typeof(B6FormFields).GetProperties();
-                    else
-                        b6FormFieldsProps = Enumerable.Empty<PropertyInfo>();
-
-                    b6FormFieldsProps = b6FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in b6FormFieldsProps)
-                        csv.WriteField(null);
+                    csv.WriteRecord(new B6FormFields());
                 }
                 else
                 {
@@ -672,16 +658,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 // write remaining form values
                 if (b7.MODE == Services.Enums.FormMode.NotCompleted)
                 {
-                    IEnumerable<PropertyInfo> b7FormFieldsProps;
-                    if (b7.Fields is B7FormFields)
-                        b7FormFieldsProps = typeof(B7FormFields).GetProperties();
-                    else
-                        b7FormFieldsProps = Enumerable.Empty<PropertyInfo>();
-
-                    b7FormFieldsProps = b7FormFieldsProps.Where(p => !Enum.TryParse(p.Name, true, out IgnoredFormFieldProps ignoredFormFieldProps));
-
-                    foreach (var prop in b7FormFieldsProps)
-                        csv.WriteField(null);
+                    csv.WriteRecord(new B7FormFields());
                 }
                 else
                 {
@@ -721,8 +698,52 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     csv.WriteRecord(normalD1b);
             }
 
-        } // writer flushed automatically here    
+        } // writer flushed automatically here
 
+        private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+
+        private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            DetectA3Change(section);
+
+            return currentValue;
+        }
+        private int? CompareA5D2Values(int? previousValue, int? currentValue, int code)
+        {
+            if (previousValue == null && currentValue == null) return null;
+
+            if (previousValue == currentValue)
+            {
+                return code;
+            }
+
+            return currentValue;
+        }
+        private void DetectA3Change(Enum section)
+        {
+            if (section is A3Section.Parent) A3ParentChangeCount++;
+            if (section is A3Section.Sibling) A3SiblingChangeCount++;
+            if (section is A3Section.Kid) A3KidsChangeCount++;
+        }
     }
 }
 

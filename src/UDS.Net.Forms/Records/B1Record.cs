@@ -4,24 +4,22 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Records
 {
-    public record B1Record(Form form)
+    public record B1Record(Form form) : FormRecord(form)
     {
-        internal Form form { get; init; }
-
         [Name("frmdateb1")]
-        public string? FrmDate { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.FRMDATE.ToString(RecordConstants.dateFormatString);
+        public string? FrmDate => base.FrmDateExport;
 
         [Name("initialsb1")]
-        public string? Initials { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.INITIALS;
+        public string? Initials => base.InitialsExport;
 
         [Name("langb1")]
-        public int? Lang { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : (int)form.LANG;
+        public int? Lang => base.LangExport;
 
         [Name("modeb1")]
-        public int Mode { get; init; } = (int)form.MODE;
+        public int Mode => base.ModeExport;
 
         [Name("b1not")]
-        public int? Not { get; set; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
+        public int? Not => base.NotExport;
     }
 }
 

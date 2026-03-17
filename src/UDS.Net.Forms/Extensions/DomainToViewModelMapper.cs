@@ -2,7 +2,6 @@
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Forms.FollowUp;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.LookupModels;
 
@@ -319,11 +318,7 @@ namespace UDS.Net.Forms.Extensions
 
             if (form.Fields != null)
             {
-                if (form.Fields is A1FollowUpFormFields)
-                {
-                    vm = ((A1FollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A1FormFields)
+                if (form.Fields is A1FormFields)
                 {
                     vm = ((A1FormFields)form.Fields).ToVM(form.Id);
                 }
@@ -331,17 +326,9 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A1aFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A2FollowUpFormFields)
-                {
-                    vm = ((A2FollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A2FormFields)
                 {
                     vm = ((A2FormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A3FollowUpFormFields)
-                {
-                    vm = ((A3FollowUpFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A3FormFields)
                 {
@@ -351,17 +338,9 @@ namespace UDS.Net.Forms.Extensions
                 {
                     vm = ((A4GFormFields)form.Fields).ToVM(form.Id);
                 }
-                else if (form.Fields is A4aFollowUpFormFields)
-                {
-                    vm = ((A4aFollowUpFormFields)form.Fields).ToVM(form.Id);
-                }
                 else if (form.Fields is A4aFormFields)
                 {
                     vm = ((A4aFormFields)form.Fields).ToVM(form.Id);
-                }
-                else if (form.Fields is A5D2FollowUpFormFields)
-                {
-                    vm = ((A5D2FollowUpFormFields)form.Fields).ToVM(form.Id);
                 }
                 else if (form.Fields is A5D2FormFields)
                 {
@@ -417,6 +396,21 @@ namespace UDS.Net.Forms.Extensions
             SetFormBaseProperties(form, vm);
 
             return vm;
+        }
+        public static FormModel PreviousVisitToVM(this Form form)
+        {
+            var vm = new FormModel()
+            {
+                Id = form.Id
+            };
+            if (form.Fields is A5D2FormFields)
+            {
+                vm = ((A5D2FormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
+            SetFormBaseProperties(form, vm);
+
+            return vm;
+
         }
 
         public static A1 ToVM(this A1FormFields fields, int formId)
@@ -539,46 +533,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static A1 ToVM(this A1FollowUpFormFields fields, int formId)
-        {
-            return new A1()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                GENMAN = fields.GENMAN.HasValue && fields.GENMAN.Value == true ? true : false,
-                GENWOMAN = fields.GENWOMAN.HasValue && fields.GENWOMAN.Value == true ? true : false,
-                GENTRMAN = fields.GENTRMAN.HasValue && fields.GENTRMAN.Value == true ? true : false,
-                GENTRWOMAN = fields.GENTRWOMAN.HasValue && fields.GENTRWOMAN.Value == true ? true : false,
-                GENNONBI = fields.GENNONBI.HasValue && fields.GENNONBI.Value == true ? true : false,
-                GENTWOSPIR = fields.GENTWOSPIR.HasValue && fields.GENTWOSPIR.Value == true ? true : false,
-                GENOTH = fields.GENOTH.HasValue && fields.GENOTH.Value == true ? true : false,
-                GENOTHX = fields.GENOTHX,
-                GENDKN = fields.GENDKN.HasValue && fields.GENDKN.Value == true ? true : false,
-                GENNOANS = fields.GENNOANS.HasValue && fields.GENNOANS.Value == true ? true : false,
-                SEXORNGAY = fields.SEXORNGAY.HasValue && fields.SEXORNGAY.Value == true ? true : false,
-                SEXORNHET = fields.SEXORNHET.HasValue && fields.SEXORNHET.Value == true ? true : false,
-                SEXORNBI = fields.SEXORNBI.HasValue && fields.SEXORNBI.Value == true ? true : false,
-                SEXORNTWOS = fields.SEXORNTWOS.HasValue && fields.SEXORNTWOS.Value == true ? true : false,
-                SEXORNOTH = fields.SEXORNOTH.HasValue && fields.SEXORNOTH.Value == true ? true : false,
-                SEXORNOTHX = fields.SEXORNOTHX,
-                SEXORNDNK = fields.SEXORNDNK.HasValue && fields.SEXORNDNK.Value == true ? true : false,
-                SEXORNNOAN = fields.SEXORNNOAN.HasValue && fields.SEXORNNOAN.Value == true ? true : false,
-                MARISTAT = fields.MARISTAT,
-                LIVSITUA = fields.LIVSITUA,
-                RESIDENC = fields.RESIDENC,
-                ZIP = fields.ZIP,
-                MEDVA = fields.MEDVA,
-                EXRTIME = fields.EXRTIME,
-                MEMWORS = fields.MEMWORS,
-                MEMTROUB = fields.MEMTROUB,
-                MEMTEN = fields.MEMTEN,
-                ADISTATE = fields.ADISTATE,
-                ADINAT = fields.ADINAT,
-            };
-        }
 
         public static A1a ToVM(this A1aFormFields fields, int formId)
         {
@@ -668,30 +622,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static A2 ToVM(this A2FollowUpFormFields fields, int formId)
-        {
-            return new A2()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                INRELTO = fields.INRELTO,
-                INKNOWN = fields.INKNOWN,
-                INLIVWTH = fields.INLIVWTH,
-                INCNTMOD = fields.INCNTMOD,
-                INCNTMDX = fields.INCNTMDX,
-                INCNTFRQ = fields.INCNTFRQ,
-                INCNTTIM = fields.INCNTTIM,
-                INRELY = fields.INRELY,
-                INMEMWORS = fields.INMEMWORS,
-                INMEMTROUB = fields.INMEMTROUB,
-                INMEMTEN = fields.INMEMTEN,
-                NEWINF = fields.NEWINF,
-            };
-        }
-
         public static A3 ToVM(this A3FormFields fields, int formId)
         {
             return new A3()
@@ -716,38 +646,10 @@ namespace UDS.Net.Forms.Extensions
                 SIBS = fields.SIBS,
                 KIDS = fields.KIDS,
                 Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
-                Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
-            };
-        }
-
-        public static A3 ToVM(this A3FollowUpFormFields fields, int formId)
-        {
-            return new A3()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                MOMYOB = fields.MOMYOB,
-                MOMDAGE = fields.MOMDAGE,
-                MOMETPR = fields.MOMETPR,
-                MOMETSEC = fields.MOMETSEC,
-                MOMMEVAL = fields.MOMMEVAL,
-                MOMAGEO = fields.MOMAGEO,
-                DADYOB = fields.DADYOB,
-                DADDAGE = fields.DADDAGE,
-                DADETPR = fields.DADETPR,
-                DADETSEC = fields.DADETSEC,
-                DADMEVAL = fields.DADMEVAL,
-                DADAGEO = fields.DADAGEO,
-                SIBS = fields.SIBS,
-                KIDS = fields.KIDS,
-                NWINFPAR = fields.NWINFPAR,
-                NWINFSIB = fields.NWINFSIB,
-                NWINFKID = fields.NWINFKID,
-                Siblings = fields.SiblingFormFields.Select(s => s.ToVM(formId)).ToList(),
-                Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList()
+                Children = fields.KidsFormFields.Select(k => k.ToVM(formId)).ToList(),
+                NWINFPAR = null,
+                NWINFSIB = null,
+                NWINFKID = null
             };
         }
 
@@ -818,29 +720,6 @@ namespace UDS.Net.Forms.Extensions
 
             };
         }
-        public static A4a ToVM(this A4aFollowUpFormFields fields, int formId)
-        {
-            return new A4a()
-            {
-                Id = formId,
-                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
-                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
-                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
-                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                ADVEVENT = fields.ADVEVENT,
-                ARIAE = fields.ARIAE,
-                ARIAH = fields.ARIAH,
-                ADVERSEOTH = fields.ADVERSEOTH,
-                ADVERSEOTX = fields.ADVERSEOTX,
-                TRTBIOMARK = fields.TRTBIOMARK,
-                NEWTREAT = fields.NEWTREAT,
-                NEWADEVENT = fields.NEWADEVENT,
-                Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
-
-            };
-        }
-
-
         public static A4aTreatment ToVM(this A4aTreatmentFormFields fields, int formId)
         {
             return new A4aTreatment()
@@ -1041,9 +920,12 @@ namespace UDS.Net.Forms.Extensions
                 BCENDAGE = fields.BCENDAGE
             };
         }
-
-        public static A5D2 ToVM(this A5D2FollowUpFormFields fields, int formId)
+        public static A5D2 PreviousVisitToVM(this A5D2FormFields fields, int formId)
         {
+            /* Some but not all fields from A5D2 can be carried forward from a previous visit. 
+             * This method creates a new A5D2 view model with only the fields that should be 
+             * carried forward populated, and the rest left as default/null values.
+            */
             return new A5D2()
             {
                 Id = formId,
@@ -1051,17 +933,11 @@ namespace UDS.Net.Forms.Extensions
                 AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
-                TOBAC100 = fields.TOBAC100,
+                TOBAC100 = fields.TOBAC100.HasValue && fields.TOBAC100.Value == 1 ? fields.TOBAC100 : null,
                 SMOKYRS = fields.SMOKYRS,
                 PACKSPER = fields.PACKSPER,
-                TOBAC30 = fields.TOBAC30,
                 QUITSMOK = fields.QUITSMOK,
-                ALCFREQYR = fields.ALCFREQYR,
-                ALCDRINKS = fields.ALCDRINKS,
-                ALCBINGE = fields.ALCBINGE,
-                SUBSTYEAR = fields.SUBSTYEAR,
                 SUBSTPAST = fields.SUBSTPAST,
-                CANNABIS = fields.CANNABIS,
                 HRTATTACK = fields.HRTATTACK,
                 HRTATTMULT = fields.HRTATTMULT,
                 HRTATTAGE = fields.HRTATTAGE,
@@ -1091,7 +967,6 @@ namespace UDS.Net.Forms.Extensions
                 PDOTHR = fields.PDOTHR,
                 PDOTHRAGE = fields.PDOTHRAGE,
                 SEIZURES = fields.SEIZURES,
-                SEIZNUM = fields.SEIZNUM,
                 SEIZAGE = fields.SEIZAGE,
                 HEADACHE = fields.HEADACHE,
                 MS = fields.MS,
@@ -1142,8 +1017,6 @@ namespace UDS.Net.Forms.Extensions
                 INCONTU = fields.INCONTU,
                 INCONTF = fields.INCONTF,
                 APNEA = fields.APNEA,
-                CPAP = fields.CPAP,
-                APNEAORAL = fields.APNEAORAL,
                 RBD = fields.RBD,
                 INSOMN = fields.INSOMN,
                 OTHSLEEP = fields.OTHSLEEP,
@@ -1180,6 +1053,44 @@ namespace UDS.Net.Forms.Extensions
                 PVD = fields.PVD,
                 PVDAGE = fields.PVDAGE,
                 HIVDIAG = fields.HIVDIAG,
+                HIVAGE = fields.HIVAGE,
+                OTHERCOND = fields.OTHERCOND,
+                OTHCONDX = fields.OTHCONDX,
+                MAJORDEP = fields.MAJORDEP,
+                OTHERDEP = fields.OTHERDEP,
+                DEPRTREAT = fields.DEPRTREAT,
+                BIPOLAR = fields.BIPOLAR,
+                SCHIZ = fields.SCHIZ,
+                ANXIETY = fields.ANXIETY,
+                GENERALANX = fields.GENERALANX,
+                PANICDIS = fields.PANICDIS,
+                OCD = fields.OCD,
+                OTHANXDIS = fields.OTHANXDIS,
+                OTHANXDISX = fields.OTHANXDISX,
+                PTSD = fields.PTSD,
+                NPSYDEV = fields.NPSYDEV,
+                PSYCDIS = fields.PSYCDIS,
+                PSYCDISX = fields.PSYCDISX,
+                MENARCHE = fields.MENARCHE,
+                NOMENSAGE = fields.NOMENSAGE,
+                NOMENSNAT = fields.NOMENSNAT,
+                NOMENSHYST = fields.NOMENSHYST,
+                NOMENSSURG = fields.NOMENSSURG,
+                NOMENSCHEM = fields.NOMENSCHEM,
+                NOMENSRAD = fields.NOMENSRAD,
+                NOMENSHORM = fields.NOMENSHORM,
+                NOMENSESTR = fields.NOMENSESTR,
+                NOMENSUNK = fields.NOMENSUNK,
+                NOMENSOTH = fields.NOMENSOTH,
+                NOMENSOTHX = fields.NOMENSOTHX,
+                HRT = fields.HRT,
+                HRTYEARS = fields.HRTYEARS,
+                HRTSTRTAGE = fields.HRTSTRTAGE,
+                HRTENDAGE = fields.HRTENDAGE,
+                BCPILLS = fields.BCPILLS,
+                BCPILLSYR = fields.BCPILLSYR,
+                BCSTARTAGE = fields.BCSTARTAGE,
+                BCENDAGE = fields.BCENDAGE
             };
         }
 

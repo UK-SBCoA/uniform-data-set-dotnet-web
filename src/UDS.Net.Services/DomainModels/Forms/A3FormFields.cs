@@ -8,6 +8,9 @@ namespace UDS.Net.Services.DomainModels.Forms
 {
     public class A3FormFields : IFormFields
     {
+        public int? NWINFPAR { get; set; }
+        public int? NWINFSIB { get; set; }
+        public int? NWINFKID { get; set; }
         public int? MOMYOB { get; set; }
         public int? MOMDAGE { get; set; }
         public string? MOMETPR { get; set; }
@@ -122,6 +125,9 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (dto is A3Dto)
             {
                 var a3Dto = ((A3Dto)dto);
+                this.NWINFPAR = a3Dto.NWINFPAR;
+                this.NWINFSIB = a3Dto.NWINFSIB;
+                this.NWINFKID = a3Dto.NWINFKID;
                 this.MOMYOB = a3Dto.MOMYOB;
                 this.MOMDAGE = a3Dto.MOMDAGE;
                 this.MOMETPR = a3Dto.MOMETPR;
@@ -134,6 +140,9 @@ namespace UDS.Net.Services.DomainModels.Forms
                 this.DADMEVAL = a3Dto.DADMEVAL;
                 this.DADDAGE = a3Dto.DADDAGE;
                 this.DADAGEO = a3Dto.DADAGEO;
+                this.NWINFPAR = a3Dto.NWINFPAR;
+                this.NWINFSIB = a3Dto.NWINFSIB;
+                this.NWINFKID = a3Dto.NWINFKID;
 
                 // TODO map new fields
 

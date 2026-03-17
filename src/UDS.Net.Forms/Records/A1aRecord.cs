@@ -1,38 +1,33 @@
-﻿using System;
-using CsvHelper.Configuration.Attributes;
+﻿using CsvHelper.Configuration.Attributes;
 using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Forms.Records
 {
-    public record A1aRecord(Form form)
+    public record A1aRecord(Form form) : FormRecord(form)
     {
-        internal Form form { get; init; }
-
         [Name("frmdatea1a")]
-        public string? FrmDate { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.FRMDATE.ToString(RecordConstants.dateFormatString);
+        public string? FrmDate => base.FrmDateExport;
 
         [Name("initialsa1a")]
-        public string? Initials { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.INITIALS;
+        public string? Initials => base.InitialsExport;
 
         [Name("langa1a")]
-        public int? Lang { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : (int)form.LANG;
+        public int? Lang => base.LangExport;
 
-        // If not completed, then MODE should be included in export
         [Name("modea1a")]
-        public int Mode { get; init; } = (int)form.MODE;
+        public int Mode => base.ModeExport;
 
         [Name("rmreasa1a")]
-        public int? RmReas { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMREAS.HasValue ? (int)form.RMREAS.Value : null;
+        public int? RmReas => base.RmReasExport;
 
         [Name("rmmodea1a")]
-        public int? RmMode { get; init; } = form.MODE == Services.Enums.FormMode.NotCompleted ? null : form.RMMODE.HasValue ? (int)form.RMMODE.Value : null;
+        public int? RmMode => base.RmModeExport;
 
         [Name("admina1a")]
-        public int? Admin { get; init; } = form.ADMIN.HasValue ? (int)form.ADMIN.Value : null; // TODO add support for different administration types
+        public int? Admin => base.AdminExport;
 
-        // If not completed, then NOT should be included in export
         [Name("a1anot")]
-        public int? Not { get; init; } = form.NOT.HasValue ? (int)form.NOT.Value : null;
+        public int? Not => base.NotExport;
     }
 }
 
