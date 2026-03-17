@@ -200,5 +200,39 @@ namespace UDS.Net.Forms.Tests
             //Look for successful path to forms index on finalized save
             await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" })).ToBeVisibleAsync();
         }
+
+
+        [TestMethod]
+        public async Task REYDREC_Invalid_When_REY1REC_0_15()
+        {
+            //Navigate to the C2 form
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" })
+                .GetByRole(AriaRole.Link).ClickAsync();
+
+            await SetupForRAVLC2();
+
+            await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("10");
+
+            // Case 1: 88
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("88");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+
+            await Expect(Page.Locator("span")
+                .Filter(new() { HasText = "cannot be blank or 88" }))
+                .ToBeVisibleAsync();
+
+            // Case 2: null
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("");
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save" }).ClickAsync();
+
+            await Expect(Page.Locator("span")
+                .Filter(new() { HasText = "cannot be blank" }))
+                .ToBeVisibleAsync();
+        }
     }
 }
