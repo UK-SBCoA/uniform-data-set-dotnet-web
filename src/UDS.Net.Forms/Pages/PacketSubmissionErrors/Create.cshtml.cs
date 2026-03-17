@@ -51,18 +51,76 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync()
         {
-            //DEVNOTE: Call new packet error submission route
-            var testNewRoute = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, PacketSubmissionErrors.ToDomain());
+            Packet currentPacket = await _packetService.GetById(User.Identity.Name, PacketId);
 
-            return null;
+            List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
 
-            //DEVNOTE: need to adjust the return 
-            //return new PartialViewResult
-            //{
-            //    ViewName = "_PacketErrors",
-            //    ViewData = new ViewDataDictionary<PacketModel>(ViewData, currentPacketModel),
-            //    ContentType = "text/vnd.turbo-stream.html"
-            //};
+            foreach (var error in PacketSubmissionErrors)
+            {
+                //Collect PacketSubmissionError data for creating new PacketSubmissionError object
+                PacketSubmissionErrorLevel errorLevel = GetErrorLevel(error.Type);
+
+                string formKind = error.Code.Split("-")[0].ToUpper();
+
+                var formData = currentPacket.Forms.Where(f => f.Kind.ToUpper() == formKind);
+
+                string formModifiedBy = formData.Select(a => a.ModifiedBy).FirstOrDefault();
+
+                string formAssignedTo = formData.Select(a => a.CreatedBy).FirstOrDefault();
+
+                //formAsignee will first attempt to be last modified and if null, set it to createdBy
+                string formAssignee = formModifiedBy;
+
+                if (string.IsNullOrEmpty(formModifiedBy))
+                {
+                    formAssignee = formAssignedTo;
+                }
+
+                PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
+                    id: 0,
+                    packetSubmissionId: PacketSubmissionId,
+                    formKind: formKind,
+                    message: error.Message,
+                    assignedTo: formAssignee,
+                    level: errorLevel,
+                    status: PacketSubmissionErrorStatus.Pending,
+                    statusChangedBy: null,
+                    createdAt: DateTime.Now,
+                    createdBy: User.Identity.Name,
+                    modifiedBy: null,
+                    deletedBy: null,
+                    isDeleted: false,
+                    location: error.Location?.ToUpper(),
+                    value: error.Value
+                );
+
+                packetSubmissionErrors.Add(newPacketSubmissionError);
+            }
+
+            //Update currentPacket status
+            if (currentPacket.TryUpdateStatus((PacketStatus)PacketStatus))
+            {
+                currentPacket.UpdateStatus((PacketStatus)PacketStatus);
+            }
+            else
+            {
+                return NotFound($"Unable to set packet Id ${currentPacket.Id} status to: {PacketStatus}");
+            }
+
+            //Update current packet with newPacketSubmissionError list
+            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, currentPacket, PacketSubmissionId, packetSubmissionErrors);
+
+            //Create packetModel for use in packetSubmission/_Index partial
+            PacketModel currentPacketModel = currentPacket.ToVM();
+            currentPacketModel.Participation = currentPacket.Participation.ToVM();
+
+
+            return new PartialViewResult
+            {
+                ViewName = "_PacketErrors",
+                ViewData = new ViewDataDictionary<PacketModel>(ViewData, currentPacketModel),
+                ContentType = "text/vnd.turbo-stream.html"
+            };
         }
 
 
@@ -122,9 +180,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                                 Message = record.Message,
                                 Ptid = record.Ptid,
                                 Visitnum = record.Visitnum,
-                                Approved = record.Approved,
-                                Timestamp = record.Timestamp,
-                                ImportedBy = User.Identity.Name
+                                Approved = record.Approved
                             };
 
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
@@ -155,5 +211,3 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         }
     }
 }
-
-
