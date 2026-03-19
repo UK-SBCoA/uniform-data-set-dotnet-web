@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using UDS.Net.API.Client;
@@ -139,11 +138,11 @@ namespace UDS.Net.Web.MVC.Services
             return await Update(username, packetToEdit);
         }
 
-        public async Task<List<NACCError>> UpdateMultiplePacketsSubmissionsErrors(string username, List<NACCError> errors)
+        public async Task<List<NACCError>> UpdateMultiplePacketsSubmissionsErrors(List<NACCError> errors)
         {
-            var test = await _apiClient.PacketClient.UpdateMultiplePacketsSubmissionsErrors(errors.ToDto());
+            var errorsImported = await _apiClient.PacketClient.UpdateMultiplePacketsSubmissionsErrors(errors.ToDto());
 
-            return null;
+            return errorsImported.ToDomain();
         }
     }
 }

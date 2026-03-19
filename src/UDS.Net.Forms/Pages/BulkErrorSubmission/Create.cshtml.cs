@@ -117,7 +117,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkSubmission()
         {
-            var testNewRoute = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, PacketSubmissionErrors.ToDomain());
+            //DEVNOTE: We could leverage the return here as temp data for post import information?
+            var errorsImported = await _packetService.UpdateMultiplePacketsSubmissionsErrors(PacketSubmissionErrors.ToDomain());
 
             return RedirectToPage("/Packets/Index");
         }
