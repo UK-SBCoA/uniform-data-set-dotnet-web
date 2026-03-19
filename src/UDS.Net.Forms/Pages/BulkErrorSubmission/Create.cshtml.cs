@@ -67,6 +67,16 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                 }
             }
 
+            //DEVNOTE: Set imported by outside of CSV helper code once to avoid multiple calls to user identity
+            var importedBy = User.Identity.Name;
+
+            if (importedBy == null)
+            {
+                ModelState.AddModelError("ErrorFileUpload", "A signed in user could not be located");
+
+                return Page();
+            }
+
             using (var stream = ErrorFileUpload.OpenReadStream())
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
@@ -94,7 +104,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 Ptid = record.Ptid,
                                 Visitnum = record.Visitnum,
                                 Approved = record.Approved,
-                                ImportedBy = User.Identity.Name
+                                ImportedBy = importedBy
                             };
 
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
