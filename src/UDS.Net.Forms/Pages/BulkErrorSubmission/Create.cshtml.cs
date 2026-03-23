@@ -115,6 +115,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkSubmission()
         {
+            List<Packet> packetsToUpdate = new List<Packet>();
+
             //Setting page size to 999 to retrieve all packets by status
             IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
@@ -177,11 +179,16 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         {
                             groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
+                            //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
+
+                            //add to list for later bulk save
+                            packetsToUpdate.Add(groupPacket);
                         }
                     }
                 }
             }
+
+            await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
             return RedirectToPage("/Packets/Index");
         }
