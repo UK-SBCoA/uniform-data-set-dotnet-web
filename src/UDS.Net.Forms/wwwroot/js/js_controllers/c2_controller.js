@@ -15,8 +15,6 @@ export default class extends Controller {
 
         //handle dropdown state on load
         this.HandleDropdowns()
-
-        this.ParseUnobtrusiveValidation();
     }
 
     ChangeView() {
@@ -37,12 +35,5 @@ export default class extends Controller {
             this.modalitySelectTarget.disabled = false;
             this.formRemoteReasonTarget.disabled = false;
         }
-    }
-
-    //Manually parse form views
-    //DEV NOTE: When form partial in C2 is changed, unobtrusive validation does not parse the new form automatically
-    ParseUnobtrusiveValidation() {
-        $("#UDSForm").removeData("validator").removeData("unobtrusiveValidation");
-        $.validator.unobtrusive.parse("#UDSForm");
     }
 }
