@@ -39,4 +39,4 @@ jobs:
       run: dotnet pack src/UDS.Net.Services -c Release -o .
 
     - name: Push packages to GitHub
-      run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols
+      run: dotnet nuget push UDS.Net.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate --no-symbols
