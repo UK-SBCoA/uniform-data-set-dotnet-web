@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -19,6 +11,7 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IParticipationService _participationService;
         protected readonly IPacketService _packetService;
         protected readonly IVisitService _visitService;
+        private readonly ILookupService _lookupService;
 
         [BindProperty]
         public PacketModel? Packet { get; set; }
@@ -34,8 +27,7 @@ namespace UDS.Net.Forms.Pages.Visits
                 return "";
             }
         }
-
-        public FinalizeModel(IVisitService visitService, IPacketService packetService, IParticipationService participationService)
+        public FinalizeModel(IVisitService visitService, IPacketService packetService, IParticipationService participationService, ILookupService lookupService)
         {
             // we need the full packet
             // and some previous visits
@@ -44,6 +36,7 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
             _packetService = packetService;
             _participationService = participationService;
+            _lookupService = lookupService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -116,7 +109,7 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
-            var list = packet.GetModelAlerts();
+            var list =  await packet.GetModelAlerts(_lookupService);
 
             return Partial("_Alerts", list);
         }

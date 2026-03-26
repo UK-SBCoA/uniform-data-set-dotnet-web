@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
@@ -12,6 +13,13 @@ namespace UDS.Net.Services.DomainModels
     /// </summary>
     public class Visit
     {
+        private readonly ILookupService _lookupService;
+
+        public Visit(ILookupService lookupService)
+        {
+            _lookupService = lookupService;
+        }
+
         private Dictionary<string, FormContract[]> _formsContract = new Dictionary<string, FormContract[]>();
 
         public int Id { get; set; }
@@ -395,13 +403,13 @@ namespace UDS.Net.Services.DomainModels
 
             return results;
         }
-
-        public IEnumerable<VisitValidationResult> GetModelAlerts()
+        public async Task<IEnumerable<VisitValidationResult>> GetModelAlerts(ILookupService lookupService)
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
             object a1 = GetFields<A1FormFields>("A1");
             object a2 = GetFields<A2FormFields>("A2");
+            object a4g = GetFields<A4GFormFields>("A4");
             object a5d2 = GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
             object b9 = GetFields<B9FormFields>("B9");
@@ -458,6 +466,34 @@ namespace UDS.Net.Services.DomainModels
                 }
             }
 
+            if (a4g != null)
+            {
+                A4GFormFields a4Ds = a4g as A4GFormFields;
+
+                if (a4Ds?.A4Ds != null && a4Ds.A4Ds.Any())
+                {
+                    var rxNormIds = a4Ds.A4Ds
+                        .Where(a => a != null && a.RxNormId != null)
+                        .Select(a => a.RxNormId)
+                        .ToList();
+
+                    var badRxCodeForTesting = "1234";
+                    rxNormIds.Add(badRxCodeForTesting);
+
+                    foreach (var id in rxNormIds)
+                    {
+                            var validRxCode = await lookupService.FindDrugCode(id);
+
+                            if (validRxCode.DrugCodes.Count == 0)
+                            {
+                                results.Add(new VisitValidationResult(
+                                    $"RxNormId '{id}' is not a valid drug code.",
+                                    new[] { "RxNormId" }
+                                ));
+                            }
+                    }
+                }
+            }
             return results;
         }
 
