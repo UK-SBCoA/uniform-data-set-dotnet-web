@@ -140,53 +140,63 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
                 var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
 
-                var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id).FirstOrDefault();
+                //account for different visits, loop through each visit
+                var visitGroups = errorGroup.Select(e => int.Parse(e.Visitnum)).ToList();
 
-                if (groupVisit != null)
+                foreach (var visitNumber in visitGroups)
                 {
-                    var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
+                    var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id && p.VISITNUM == visitNumber).FirstOrDefault();
 
-                    var groupSubmission = groupPacket?.Submissions.Where(s => s.ErrorCount == null).FirstOrDefault();
-
-                    List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
-
-                    if (groupPacket != null && groupSubmission != null)
+                    if (groupVisit != null)
                     {
-                        foreach (var error in errorGroup)
+                        var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
+
+                        var groupSubmission = groupPacket?.Submissions.Where(s => s.ErrorCount == null).FirstOrDefault();
+
+                        List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
+
+                        if (groupPacket != null && groupSubmission != null)
                         {
-                            PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
-                                id: 0,
-                                packetSubmissionId: groupSubmission.Id,
-                                formKind: error.Code.Split("-")[0].ToUpper(),
-                                message: error.Message,
-                                assignedTo: groupPacket.CreatedBy,
-                                level: GetErrorLevel(error.Type),
-                                status: PacketSubmissionErrorStatus.Pending,
-                                statusChangedBy: null,
-                                createdAt: DateTime.Now,
-                                createdBy: User.Identity.Name,
-                                modifiedBy: null,
-                                deletedBy: null,
-                                isDeleted: false,
-                                location: error.Location?.ToUpper(),
-                                value: error.Value
-                            );
+                            foreach (var error in errorGroup)
+                            {
+                                //DEVNOTE: visitnum in NACCError is currently a string. Should this be changed?
+                                if(int.Parse(error.Visitnum) == visitNumber)
+                                {
+                                    PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
+                                    id: 0,
+                                    packetSubmissionId: groupSubmission.Id,
+                                    formKind: error.Code.Split("-")[0].ToUpper(),
+                                    message: error.Message,
+                                    assignedTo: groupPacket.CreatedBy,
+                                    level: GetErrorLevel(error.Type),
+                                    status: PacketSubmissionErrorStatus.Pending,
+                                    statusChangedBy: null,
+                                    createdAt: DateTime.Now,
+                                    createdBy: User.Identity.Name,
+                                    modifiedBy: null,
+                                    deletedBy: null,
+                                    isDeleted: false,
+                                    location: error.Location?.ToUpper(),
+                                    value: error.Value
+                                );
 
-                            groupPacketSubmissionErrors.Add(newPacketSubmissionError);
-                        }
+                                    groupPacketSubmissionErrors.Add(newPacketSubmissionError);
+                                }
+                            }
 
-                        //Add submission errors to group packet / submissions and update count 
-                        groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
-                        groupSubmission.Errors = groupPacketSubmissionErrors;
+                            //Add submission errors to group packet / submissions and update count 
+                            groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
+                            groupSubmission.Errors = groupPacketSubmissionErrors;
 
-                        if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                        {
-                            groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+                            if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                            {
+                                groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                            //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
+                                //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
 
-                            //add to list for later bulk save
-                            packetsToUpdate.Add(groupPacket);
+                                //add to list for later bulk save
+                                packetsToUpdate.Add(groupPacket);
+                            }
                         }
                     }
                 }
