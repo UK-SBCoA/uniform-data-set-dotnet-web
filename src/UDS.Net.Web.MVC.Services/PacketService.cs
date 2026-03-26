@@ -138,9 +138,11 @@ namespace UDS.Net.Web.MVC.Services
             return await Update(username, packetToEdit);
         }
 
-        public Task<List<Packet>> UpdateMultiplePacketsSubmissionsErrors(string username, List<Packet> packets)
+        public async Task<List<Packet>> UpdateMultiplePacketsSubmissionsErrors(string username, List<Packet> packets)
         {
-            return null;
+            var result = await _apiClient.PacketClient.UpdateMultiplePacketsSubmissionsErrors(packets.ToDto());
+
+            return result.ToDomain(username);
         }
     }
 }

@@ -175,6 +175,10 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                             groupPacketSubmissionErrors.Add(newPacketSubmissionError);
                         }
 
+                        //Add submission errors to group packet / submissions and update count 
+                        groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
+                        groupSubmission.Errors = groupPacketSubmissionErrors;
+
                         if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                         {
                             groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
