@@ -630,20 +630,20 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(REY6REC), 0, 15, ErrorMessage = "Provide trial 6 intrusions.")]
         public int? REY6INT { get; set; }
 
-        [Display(Name = "Total delayed recall", Description = "(0-15, 95-98)")]
-        [RegularExpression("^(\\d|1[0-5]|9[5-8])$", ErrorMessage = "Allowed values are 0-15 or 95-98.")]
-        [RequiredIfRange(nameof(REY1REC), 0, 15, ErrorMessage = "Provide total delayed recall.")]
+        [Display(Name = "Total delayed recall", Description = "(0-15, 88, 95-98)")]
+        [RegularExpression(@"^(\d|1[0-5]|88|9[5-8])$", ErrorMessage = "Allowed values are 0-15, 88, or 95-98.")]
+        [RequiredIfRange(nameof(REY1REC), 95, 98, ErrorMessage = "REYDREC is required.")]
         public int? REYDREC { get; set; }
 
         [NotMapped]
-        [RequiredOnFinalized(ErrorMessage = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98")]
+        [RequiredOnFinalized(ErrorMessage = "REYDREC cannot be blank or 88 when REY1REC is 0-15.")]
         public bool? REYDRECValidation
         {
             get
             {
-                if (REY1REC.HasValue && (REY1REC.Value >= 95 && REY1REC.Value <= 98))
+                if (REY1REC.HasValue && REY1REC.Value >= 0 && REY1REC.Value <= 15)
                 {
-                    return REYDREC.HasValue && (REYDREC.Value >= 95 && REYDREC.Value <= 98) ? true : null;
+                    return (REYDREC.HasValue && REYDREC.Value != 88) ? true : null;
                 }
 
                 return true;
