@@ -160,7 +160,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                             foreach (var error in errorGroup)
                             {
                                 //DEVNOTE: visitnum in NACCError is currently a string. Should this be changed?
-                                if(int.Parse(error.Visitnum) == visitNumber)
+                                if (int.Parse(error.Visitnum) == visitNumber)
                                 {
                                     PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
                                     id: 0,
