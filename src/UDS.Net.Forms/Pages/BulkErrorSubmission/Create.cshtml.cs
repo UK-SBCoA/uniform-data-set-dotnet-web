@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -66,6 +67,16 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                 }
             }
 
+            //DEVNOTE: Set imported by outside of CSV helper code once to avoid multiple calls to user identity
+            var importedBy = User.Identity.Name;
+
+            if (importedBy == null)
+            {
+                ModelState.AddModelError("ErrorFileUpload", "A signed in user could not be located");
+
+                return Page();
+            }
+
             using (var stream = ErrorFileUpload.OpenReadStream())
             using (var reader = new StreamReader(stream))
             using (var csv = new CsvReader(reader, config))
@@ -92,7 +103,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 Message = record.Message.Length > 500 ? record.Message[..497] + "..." : record.Message,
                                 Ptid = record.Ptid,
                                 Visitnum = record.Visitnum,
-                                Approved = record.Approved
+                                Approved = record.Approved,
+                                ImportedBy = importedBy
                             };
 
                             PacketSubmissionErrors.Add(newPacketSubmissionError);
@@ -115,91 +127,10 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkSubmission()
         {
-            //Setting page size to 999 to retrieve all packets by status
-            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
-
-            var submittedParticipationList = new List<Participation>();
-
-            foreach (var packet in submittedPackets)
-            {
-                var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
-
-                if (participation != null)
-                {
-                    submittedParticipationList.Add(participation);
-                }
-            }
-
-            var packetSubmissionErrorsGrouped = PacketSubmissionErrors.GroupBy(p => p.Ptid);
-
-            foreach (var errorGroup in packetSubmissionErrorsGrouped)
-            {
-                var groupPtid = errorGroup.ElementAt(0).Ptid;
-
-                var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
-
-                var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id).FirstOrDefault();
-
-                if (groupVisit != null)
-                {
-                    var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
-
-                    var groupSubmission = groupPacket?.Submissions.Where(s => s.ErrorCount == null).FirstOrDefault();
-
-                    List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
-
-                    if (groupPacket != null && groupSubmission != null)
-                    {
-                        foreach (var error in errorGroup)
-                        {
-                            PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
-                                id: 0,
-                                packetSubmissionId: groupSubmission.Id,
-                                formKind: error.Code.Split("-")[0].ToUpper(),
-                                message: error.Message,
-                                assignedTo: groupPacket.CreatedBy,
-                                level: GetErrorLevel(error.Type),
-                                status: PacketSubmissionErrorStatus.Pending,
-                                statusChangedBy: null,
-                                createdAt: DateTime.Now,
-                                createdBy: User.Identity.Name,
-                                modifiedBy: null,
-                                deletedBy: null,
-                                isDeleted: false,
-                                location: error.Location?.ToUpper(),
-                                value: error.Value
-                            );
-
-                            groupPacketSubmissionErrors.Add(newPacketSubmissionError);
-                        }
-
-                        if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                        {
-                            groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
-
-                            await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
-                        }
-                    }
-                }
-            }
+            //DEVNOTE: We could leverage the return here as temp data for post import information?
+            var errorsImported = await _packetService.UpdateMultiplePacketsSubmissionsErrors(PacketSubmissionErrors.ToDomain());
 
             return RedirectToPage("/Packets/Index");
-        }
-
-        //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs
-        private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
-        {
-            if (errorType.Trim().ToLower() == "alert")
-            {
-                return PacketSubmissionErrorLevel.Information;
-            }
-            else if (errorType.Trim().ToLower() == "error")
-            {
-                return PacketSubmissionErrorLevel.Error;
-            }
-
-            //return information as default
-            return PacketSubmissionErrorLevel.Information;
         }
     }
 }
