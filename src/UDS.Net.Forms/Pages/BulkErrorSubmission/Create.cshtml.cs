@@ -64,7 +64,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
                 if (participation != null)
                 {
-                    if(!string.IsNullOrEmpty(participation.LegacyId) && submittedPacket.VISITNUM > 0)
+                    if (!string.IsNullOrEmpty(participation.LegacyId) && submittedPacket.VISITNUM > 0)
                     {
                         //Need to have legacyId and participationId to compare to the NACCErrors
                         legacyIdToVisitnum.Add(new LegacyIdToVisitnumModel
@@ -91,7 +91,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         //DEVNOTE: Record must match to a PTID and Visitnum of a submitted packet from legacyIdToVisitnum dictionary
                         var legacyIdToVisitnumItem = legacyIdToVisitnum?.Where(lv => lv.legacyId == record.Ptid && lv.VisitNumber == int.Parse(record.Visitnum)).FirstOrDefault();
 
-                        if(legacyIdToVisitnumItem != null && record.Approved.ToLower() == "false")
+                        if (legacyIdToVisitnumItem != null && record.Approved.ToLower() == "false")
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
@@ -218,6 +218,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
             string importStatus = "success";
             //array of packets update count and error update count
             var importDetails = new List<string>();
+            var errorDetails = new List<string>();
 
             var errorsToUpdate = 0;
             var errorsUpdated = 0;
@@ -226,12 +227,35 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
             for (var i = 0; i < packetsToUpdate.Count(); i++)
             {
-                errorsUpdated += updatedPackets[i].Submissions.Last().Errors.Count();
-                errorsToUpdate += updatedPackets[i].Submissions.Last().Errors.Count();
+                errorsToUpdate += packetsToUpdate[i].Submissions.Last().Errors.Count();
+
+                //DEVNOTE: Need to retrieve updated packet manually, in case less were updated than to be updated
+
+                //Get packet that was updated
+                var packetUpdated = updatedPackets.Where(up => up.Id == packetsToUpdate[i].Id).FirstOrDefault();
+                if (packetUpdated != null)
+                {
+                    //Get packet submission that was updated
+                    var submissionUpdated = packetUpdated.Submissions.Where(p => p.Id == packetsToUpdate[i].Submissions.Last().Id).FirstOrDefault();
+
+                    if (submissionUpdated != null)
+                    {
+                        //if it exists, add to errorsUpdated count
+                        errorsUpdated += submissionUpdated.Errors.Count();
+                    }
+                    else
+                    {
+                        errorDetails.Add($"[PacketId: {packetsToUpdate[i].Id}] Packet submission could not be updated. Errors not imported");
+                    }
+                }
+                else
+                {
+                    errorDetails.Add($"[PacketId: {packetsToUpdate[i].Id}] Packet could not be updated. Errors not imported");
+                }
             }
 
             importDetails.Add($"Errors Imported: {errorsUpdated} / {errorsToUpdate}");
-            
+
             //check for false import status
             if (updatedPackets.Count() != packetsToUpdate.Count()) importStatus = "fail";
             if (errorsUpdated != errorsToUpdate) importStatus = "fail";
@@ -239,9 +263,14 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
             if (!string.IsNullOrEmpty(importStatus))
             {
                 TempData["importStatus"] = importStatus;
+
+                if (importStatus == "fail")
+                {
+                    TempData["errorDetails"] = JsonSerializer.Serialize(errorDetails);
+                }
             }
 
-            if(importDetails.Count > 0)
+            if (importDetails.Count() > 0)
             {
                 TempData["importDetails"] = JsonSerializer.Serialize(importDetails);
             }
@@ -250,13 +279,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
             return RedirectToPage("/Packets/Index");
         }
-
-        //DEVNOTE: Example error results
-        //temp for import status: success / fail
-
-        //packets updated: 10/10
-        //submissions updated: 10/10
-        //Errors imported: 15/12
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
