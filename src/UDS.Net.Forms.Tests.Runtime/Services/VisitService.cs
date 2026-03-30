@@ -3,6 +3,7 @@ using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Forms.Tests.Runtime.Extensions;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -23,10 +24,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = new API.Entities.Packet
             {
-                ParticipationId = 1,
+                ParticipationId = entity.ParticipationId,
                 VISITNUM = entity.VISITNUM,
                 FORMVER = entity.FORMVER,
-                PACKET = "I",
+                PACKET = entity.PACKET.ToString(),
                 VISIT_DATE = entity.VISIT_DATE,
                 INITIALS = entity.INITIALS,
                 Status = API.Entities.PacketStatus.Pending,
@@ -57,7 +58,16 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 return null;
             }
-            return new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
+
+            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+            var packetKind = PacketKind.I;
+
+            if (packet.PACKET.ToString() == "F")
+            {
+                packetKind = PacketKind.F;
+            }
+
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
@@ -73,6 +83,8 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 var packet = await _context.Packets
                     .Include(v => v.A3)
                     .Include(v => v.A4a)
+                    .Include(v => v.A5D2)
+                    .Include(v => v.B9)
                     .Include(v => v.C2)
                     .Include(v => v.D1a)
                     .Where(v => v.Id == id)
@@ -93,6 +105,16 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         var a4a = packet.A4a.Convert(packet.Id, username);
                         forms.Add(a4a);
                     }
+                    if (packet.A5D2 != null)
+                    {
+                        var a5d2 = packet.A5D2.Convert(packet.Id, username);
+                        forms.Add(a5d2);
+                    }
+                    if (packet.B9 != null)
+                    {
+                        var B9 = packet.B9.Convert(packet.Id, username);
+                        forms.Add(B9);
+                    }
                     if (packet.C2 != null)
                     {
                         // get the dto then convert to domain with UDS.Net.Services.Extensions
@@ -105,7 +127,15 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         forms.Add(d1a);
                     }
 
-                    var visit = new Visit(packet.Id, packet.VISITNUM, 1, packet.FORMVER, Net.Services.Enums.PacketKind.I, packet.VISIT_DATE, packet.INITIALS, Net.Services.Enums.PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
+                    //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+                    var packetKind = PacketKind.I;
+
+                    if (packet.PACKET.ToString() == "F")
+                    {
+                        packetKind = PacketKind.F;
+                    }
+
+                    var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
 
                     return visit;
                 }
@@ -133,15 +163,20 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 .FirstOrDefaultAsync();
 
             if (mostRecent != null)
-                return mostRecent.VISITNUM;
+                return mostRecent.VISITNUM + 1;
             else
-                return 0;
+                return 1;
 
         }
 
-        public Task<int> GetVisitCountByVersion(string username, int participationId, string version)
+        public async Task<int> GetVisitCountByVersion(string username, int participationId, string version)
         {
-            throw new NotImplementedException();
+            //DEVNOTE: Manually entering FORMVER 4 here, the MVC pagemodel calls this method with version 4.0.0
+            var packetsOfVersion = await _context.Packets
+                    .Where(p => p.ParticipationId == participationId && p.FORMVER == "4")
+                    .ToListAsync();
+
+            return packetsOfVersion.Count;
         }
 
         public async Task<IEnumerable<Visit>> List(string username, int pageSize = 10, int pageIndex = 1)
@@ -195,6 +230,8 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var packet = await _context.Packets
                 .Include(p => p.A3)
                 .Include(p => p.A4a)
+                .Include(p => p.A5D2)
+                .Include(p => p.B9)
                 .Include(p => p.C2)
                 .Include(p => p.D1a)
                 .Where(p => p.Id == entity.Id)
@@ -328,6 +365,42 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 await _context.SaveChangesAsync();
             }
 
+            if (formId == "A5D2")
+            {
+                if (packet.A5D2 == null)
+                {
+                    packet.A5D2 = new API.Entities.A5D2
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+                var a5d2 = packet.A5D2;
+
+                a5d2.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+            }
+            if (formId == "B9")
+            {
+                if (packet.B9 == null)
+                {
+                    packet.B9 = new API.Entities.B9
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+                var B9 = packet.B9;
+
+                B9.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+            }
             if (formId == "C2")
             {
                 if (packet.C2 == null)
@@ -375,9 +448,44 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
+        public async Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
         {
-            return null;
+            var packet = await _context.Packets
+                .Include(v => v.A3)
+                .Include(v => v.A5D2)
+                .Include(v => v.B9)
+                .Where(v => v.ParticipationId == participationId && v.VISITNUM == visitNumber)
+                .FirstOrDefaultAsync();
+
+            if (packet == null) return null;
+
+            List<Form> forms = new List<Form>();
+
+            // TODO add more forms here as tests are added
+            if (packet.A3 != null)
+            {
+                var a3 = packet.A3.Convert(packet.Id, username);
+                forms.Add(a3);
+            }
+            if (packet.A5D2 != null)
+            {
+                var a5d2 = packet.A5D2.Convert(packet.Id, username);
+                forms.Add(a5d2);
+            }
+            if (packet.B9 != null)
+            {
+                var B9 = packet.B9.Convert(packet.Id, username);
+                forms.Add(B9);
+            }
+            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
+            var packetKind = PacketKind.I;
+
+            if (packet.PACKET.ToString() == "F")
+            {
+                packetKind = PacketKind.F;
+            }
+
+            return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
         }
     }
 }

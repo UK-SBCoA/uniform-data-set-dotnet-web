@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models
@@ -159,6 +158,25 @@ namespace UDS.Net.Forms.Models
                             new[] { nameof(RMMODE) });
                     }
                 }
+            }
+        }
+
+        public void SetBaseProperties(FormModel formBase)
+        {
+            if (formBase != null)
+            {
+                this.Id = formBase.Id;
+                this.PacketKind = formBase.PacketKind;
+                this.CreatedAt = formBase.CreatedAt;
+                this.INITIALS = formBase.INITIALS;
+                this.MODE = formBase.MODE;
+                this.ADMIN = formBase.ADMIN;
+                this.FRMDATE = formBase.FRMDATE;
+                this.RMREAS = formBase.RMREAS;
+                this.RMMODE = formBase.RMMODE;
+                this.NOT = formBase.NOT;
+                this.LANG = formBase.LANG;
+                this.Status = formBase.Status;
             }
         }
     }

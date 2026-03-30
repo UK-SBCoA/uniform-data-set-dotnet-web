@@ -16,10 +16,10 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: '10.0.x'
         source-url: https://nuget.pkg.github.com/UK-SBCoA/index.json
@@ -39,4 +39,4 @@ jobs:
       run: dotnet pack src/UDS.Net.Services -c Release -o .
 
     - name: Push packages to GitHub
-      run: dotnet nuget push UDS.Net.*.nupkg --skip-duplicate --no-symbols
+      run: dotnet nuget push UDS.Net.*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate --no-symbols
