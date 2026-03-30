@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
+using System.Collections.Generic;
+using System.Text.Json;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Forms.Models.Imports;
 
 namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 {
@@ -52,17 +55,24 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
             //Setting page size to 999 to retrieve all packets by status
             IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
-            //NACC PTID from error file will be the same as the legacy ID for a participation
-            var legacyIdsFromPackets = new List<string>();
+            var legacyIdToVisitnum = new List<LegacyIdToVisitnumModel>();
 
             foreach (var submittedPacket in submittedPackets)
             {
+                //DEVNOTE: NACC PTID from error file will be the same as the legacy ID for a participation.
                 var participation = await _participationService.GetById(User.Identity.Name, submittedPacket.ParticipationId);
-                var legacyId = participation?.LegacyId;
 
-                if (legacyId != null)
+                if (participation != null)
                 {
-                    legacyIdsFromPackets.Add(legacyId);
+                    if(!string.IsNullOrEmpty(participation.LegacyId) && submittedPacket.VISITNUM > 0)
+                    {
+                        //Need to have legacyId and participationId to compare to the NACCErrors
+                        legacyIdToVisitnum.Add(new LegacyIdToVisitnumModel
+                        {
+                            legacyId = participation.LegacyId,
+                            VisitNumber = submittedPacket.VISITNUM
+                        });
+                    }
                 }
             }
 
@@ -78,8 +88,10 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                     {
                         var record = csv.GetRecord<NACCErrorModel>();
 
-                        //NACC PTID from error file must have a matching legacy ID in participation tbl or the participation does not exist
-                        if (record.Approved.ToLower() == "false" && legacyIdsFromPackets.Contains(record.Ptid))
+                        //DEVNOTE: Record must match to a PTID and Visitnum of a submitted packet from legacyIdToVisitnum dictionary
+                        var legacyIdToVisitnumItem = legacyIdToVisitnum?.Where(lv => lv.legacyId == record.Ptid && lv.VisitNumber == int.Parse(record.Visitnum)).FirstOrDefault();
+
+                        if(legacyIdToVisitnumItem != null && record.Approved.ToLower() == "false")
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
@@ -184,7 +196,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 }
                             }
 
-                            //Add submission errors to group packet / submissions and update count 
+                            //Add submission errors to group packet, update count, and update status
                             groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
                             groupSubmission.Errors = groupPacketSubmissionErrors;
 
@@ -192,9 +204,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                             {
                                 groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                                //await _packetService.UpdatePacketSubmissionErrors(User.Identity.Name, groupPacket, groupSubmission.Id, groupPacketSubmissionErrors);
-
-                                //add to list for later bulk save
                                 packetsToUpdate.Add(groupPacket);
                             }
                         }
@@ -202,10 +211,52 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                 }
             }
 
-            await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+            var updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+
+            //DEVNOTE: Begin checking results to make update info 
+
+            string importStatus = "success";
+            //array of packets update count and error update count
+            var importDetails = new List<string>();
+
+            var errorsToUpdate = 0;
+            var errorsUpdated = 0;
+
+            importDetails.Add($"Packets Updated: {updatedPackets.Count()} / {packetsToUpdate.Count()}");
+
+            for (var i = 0; i < packetsToUpdate.Count(); i++)
+            {
+                errorsUpdated += updatedPackets[i].Submissions.Last().Errors.Count();
+                errorsToUpdate += updatedPackets[i].Submissions.Last().Errors.Count();
+            }
+
+            importDetails.Add($"Errors Imported: {errorsUpdated} / {errorsToUpdate}");
+            
+            //check for false import status
+            if (updatedPackets.Count() != packetsToUpdate.Count()) importStatus = "fail";
+            if (errorsUpdated != errorsToUpdate) importStatus = "fail";
+
+            if (!string.IsNullOrEmpty(importStatus))
+            {
+                TempData["importStatus"] = importStatus;
+            }
+
+            if(importDetails.Count > 0)
+            {
+                TempData["importDetails"] = JsonSerializer.Serialize(importDetails);
+            }
+
+            //End update info
 
             return RedirectToPage("/Packets/Index");
         }
+
+        //DEVNOTE: Example error results
+        //temp for import status: success / fail
+
+        //packets updated: 10/10
+        //submissions updated: 10/10
+        //Errors imported: 15/12
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs
         private static PacketSubmissionErrorLevel GetErrorLevel(string errorType)
