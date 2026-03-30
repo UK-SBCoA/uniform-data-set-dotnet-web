@@ -482,15 +482,15 @@ namespace UDS.Net.Services.DomainModels
 
                     foreach (var id in rxNormIds)
                     {
-                            var validRxCode = await lookupService.FindDrugCode(id);
+                        var validRxCode = await lookupService.FindDrugCode(id);
 
-                            if (validRxCode.DrugCodes.Count == 0)
-                            {
-                                results.Add(new VisitValidationResult(
-                                    $"RxNormId '{id}' is not a valid drug code.",
-                                    new[] { "RxNormId" }
-                                ));
-                            }
+                        if (validRxCode.DrugCodes.Count == 0)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"RxNormId '{id}' is not a valid drug code.",
+                                new[] { "RxNormId" }
+                            ));
+                        }
                     }
                 }
             }

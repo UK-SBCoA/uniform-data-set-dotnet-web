@@ -109,7 +109,7 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
-            var list =  await packet.GetModelAlerts(_lookupService);
+            var list = await packet.GetModelAlerts(_lookupService);
 
             return Partial("_Alerts", list);
         }
