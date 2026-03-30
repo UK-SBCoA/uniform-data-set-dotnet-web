@@ -153,7 +153,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                 var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
 
                 //account for different visits, loop through each visit
-                var visitGroups = errorGroup.Select(e => int.Parse(e.Visitnum)).ToList();
+                var visitGroups = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
 
                 foreach (var visitNumber in visitGroups)
                 {
