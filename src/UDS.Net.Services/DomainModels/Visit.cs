@@ -13,13 +13,6 @@ namespace UDS.Net.Services.DomainModels
     /// </summary>
     public class Visit
     {
-        private readonly ILookupService _lookupService;
-
-        public Visit(ILookupService lookupService)
-        {
-            _lookupService = lookupService;
-        }
-
         private Dictionary<string, FormContract[]> _formsContract = new Dictionary<string, FormContract[]>();
 
         public int Id { get; set; }
@@ -476,9 +469,6 @@ namespace UDS.Net.Services.DomainModels
                         .Where(a => a != null && a.RxNormId != null)
                         .Select(a => a.RxNormId)
                         .ToList();
-
-                    var badRxCodeForTesting = "1234";
-                    rxNormIds.Add(badRxCodeForTesting);
 
                     foreach (var id in rxNormIds)
                     {
