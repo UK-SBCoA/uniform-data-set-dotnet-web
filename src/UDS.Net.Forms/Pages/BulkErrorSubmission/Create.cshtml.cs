@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
-using System.Collections.Generic;
 using System.Text.Json;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -148,7 +147,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
             foreach (var errorGroup in packetSubmissionErrorsGrouped)
             {
-                var groupPtid = errorGroup.ElementAt(0).Ptid;
+                var groupPtid = errorGroup.Key;
 
                 var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
 
@@ -163,7 +162,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                     {
                         var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
 
-                        var groupSubmission = groupPacket?.Submissions.Where(s => s.ErrorCount == null).FirstOrDefault();
+                        var groupSubmission = groupPacket?.Submissions.Last();
 
                         List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
 
@@ -171,7 +170,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         {
                             foreach (var error in errorGroup)
                             {
-                                //DEVNOTE: visitnum in NACCError is currently a string. Should this be changed?
                                 if (int.Parse(error.Visitnum) == visitNumber)
                                 {
                                     PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
@@ -213,11 +211,12 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
             var updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
-            //DEVNOTE: Begin checking results to make update info 
+            //DEVNOTE: Create post import information using return from updatedPackets
 
             string importStatus = "success";
-            //array of packets update count and error update count
+            //DEVNOTE: Packets updated and errors imported
             var importDetails = new List<string>();
+            //DEVNOTE: Details on import errors
             var errorDetails = new List<string>();
 
             var errorsToUpdate = 0;
@@ -229,53 +228,48 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
             {
                 errorsToUpdate += packetsToUpdate[i].Submissions.Last().Errors.Count();
 
-                //DEVNOTE: Need to retrieve updated packet manually, in case less were updated than to be updated
-
-                //Get packet that was updated
                 var packetUpdated = updatedPackets.Where(up => up.Id == packetsToUpdate[i].Id).FirstOrDefault();
+
                 if (packetUpdated != null)
                 {
-                    //Get packet submission that was updated
+                    //DEVNOTE: Get packet submission that was updated
                     var submissionUpdated = packetUpdated.Submissions.Where(p => p.Id == packetsToUpdate[i].Submissions.Last().Id).FirstOrDefault();
 
                     if (submissionUpdated != null)
                     {
-                        //if it exists, add to errorsUpdated count
                         errorsUpdated += submissionUpdated.Errors.Count();
                     }
                     else
                     {
-                        errorDetails.Add($"[PacketId: {packetsToUpdate[i].Id}] Packet submission could not be updated. Errors not imported");
+                        //DEVNOTE: If packet was fond, but submission was not updated
+                        errorDetails.Add($"[ Participation Id: {packetsToUpdate[i].ParticipationId} | Visit Number: {packetsToUpdate[i].VISITNUM} ] Packet submission could not be updated. Errors not imported");
                     }
                 }
                 else
                 {
-                    errorDetails.Add($"[PacketId: {packetsToUpdate[i].Id}] Packet could not be updated. Errors not imported");
+                    //DEVNOTE: If packet was not updated
+                    errorDetails.Add($"[ Participation Id: {packetsToUpdate[i].ParticipationId} | Visit Number: {packetsToUpdate[i].VISITNUM} ] Packet could not be updated. Errors not imported");
                 }
             }
 
             importDetails.Add($"Errors Imported: {errorsUpdated} / {errorsToUpdate}");
 
-            //check for false import status
             if (updatedPackets.Count() != packetsToUpdate.Count()) importStatus = "fail";
+
             if (errorsUpdated != errorsToUpdate) importStatus = "fail";
 
-            if (!string.IsNullOrEmpty(importStatus))
-            {
-                TempData["importStatus"] = importStatus;
+            //DEVNOTE: set temp data for view
+            TempData["importStatus"] = importStatus;
 
-                if (importStatus == "fail")
-                {
-                    TempData["errorDetails"] = JsonSerializer.Serialize(errorDetails);
-                }
+            if (importStatus == "fail")
+            {
+                TempData["errorDetails"] = JsonSerializer.Serialize(errorDetails);
             }
 
             if (importDetails.Count() > 0)
             {
                 TempData["importDetails"] = JsonSerializer.Serialize(importDetails);
             }
-
-            //End update info
 
             return RedirectToPage("/Packets/Index");
         }
