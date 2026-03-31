@@ -9,9 +9,13 @@ namespace UDS.Net.Forms.Models
     {
         protected readonly IVisitService _visitService;
         protected readonly IParticipationService _participationService;
+        protected readonly IPacketService _packetService;
 
         [BindProperty]
         public VisitModel? Visit { get; set; }
+
+        [BindProperty]
+        public PacketSubmissionModel? PacketSubmission { get; set; }
 
         public string PageTitle
         {
@@ -25,10 +29,11 @@ namespace UDS.Net.Forms.Models
             }
         }
 
-        public VisitPageModel(IVisitService visitService, IParticipationService participationService) : base()
+        public VisitPageModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base()
         {
             _visitService = visitService;
             _participationService = participationService;
+            _packetService = packetService;
         }
 
         public virtual async Task<IActionResult> OnGet(int? id)
@@ -46,6 +51,14 @@ namespace UDS.Net.Forms.Models
             if (participation == null)
                 return NotFound();
 
+            var packet = await _packetService.GetById(User.Identity.Name, id.Value);
+
+            var packetSubmission = packet.Submissions.Where(p => p.PacketId == visit.Id).FirstOrDefault();
+
+            if (packetSubmission != null)
+            {
+                PacketSubmission = packetSubmission.ToVM();
+            }
             Visit = visit.ToVM();
             Visit.Participation = participation.ToVM();
 
