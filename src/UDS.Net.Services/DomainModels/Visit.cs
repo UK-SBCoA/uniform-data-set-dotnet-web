@@ -416,6 +416,11 @@ namespace UDS.Net.Services.DomainModels
                 var anxiety = GetInt<A5D2FormFields>(a5d2, f => f.ANXIETY);
                 var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX);
                 var anxiet = GetBool<D1aFormFields>(d1a, f => f.ANXIET);
+                var normCog = GetInt<D1aFormFields>(d1a, f => f.NORMCOG);
+                var decclin = GetInt<B9FormFields>(b9, f => f.DECCLIN);
+                var decclog = GetInt<B9FormFields>(b9, f => f.DECCLCOG);
+                var decClBe = GetInt<B9FormFields>(b9, f => f.DECCLBE);
+
 
                 if (inRelTo == 1 && inLivWth == 0)
                 {
@@ -455,6 +460,26 @@ namespace UDS.Net.Services.DomainModels
                                 "B5 if q6a. anx (anxiety) = 1 (yes), then form D1a, q14. anxiet (anxiety disorder (present)) should equal 1 (present).",
                                 new[] { "ANX", "ANXIET" }));
                         }
+                    }
+                }
+
+                if (normCog.HasValue && normCog == 0)
+                {
+                    if (!decclin.HasValue || decclin != 1)
+                    {
+                        results.Add(new VisitValidationResult(
+                            "D1a if q2. NORMCOG = 0 (no), then B9 q7. DECCLIN (clinician observed decline) should equal 1 (yes).",
+                            new[] { "NORMCOG", "DECCLIN" }));
+                    }
+
+                    bool hasCogDecline = decclog.HasValue && decclog == 1;
+                    bool hasBehaviorDecline = decClBe.HasValue && decClBe == 1;
+
+                    if (!hasCogDecline && !hasBehaviorDecline)
+                    {
+                        results.Add(new VisitValidationResult(
+                            "D1a if q2. NORMCOG = 0 (no), then either B9 q8. DECCLCOG (cognitive decline) or q11. DECCLBE (behavioral decline) should equal 1 (yes).",
+                            new[] { "NORMCOG", "DECCLCOG", "DECCLBE" }));
                     }
                 }
             }
