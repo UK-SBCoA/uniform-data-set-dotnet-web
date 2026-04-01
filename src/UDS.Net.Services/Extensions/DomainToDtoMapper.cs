@@ -169,7 +169,6 @@ namespace UDS.Net.Services.Extensions
                 packetDto.Forms = packet.Forms.ToDto();
                 packetDto.TotalUnresolvedErrorCount = packet.UnresolvedErrorCount;
                 packetDto.UnresolvedErrors = packet.UnresolvedErrors.ToDto();
-                //DEVNOTE: Forcing int here, can handle with conditional
                 packetDto.PacketSubmissionCount = packet.Submissions.Count();
                 packetDto.PacketSubmissions = packet.Submissions.ToDto();
 
