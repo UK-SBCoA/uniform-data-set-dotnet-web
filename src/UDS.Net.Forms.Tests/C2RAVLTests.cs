@@ -126,8 +126,7 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Expect error from 13a value
-            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98" })).ToBeVisibleAsync();
-
+            await Expect(Page.Locator("span[data-valmsg-for='C2.REYDREC']").Filter(new() { HasText = "REYDREC is required." })).ToBeVisibleAsync();
             //Change 13a value to valid value
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
 
@@ -186,8 +185,7 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
 
             //Expect error from 13a value
-            await Expect(Page.Locator("span").Filter(new() { HasText = "A value of 95 - 98 is required for 13a. Total delayed recall when Trial 1 of the Rey Auditory Verbal Learning (Immediate) is 95 - 98" })).ToBeVisibleAsync();
-
+            await Expect(Page.Locator("span[data-valmsg-for='C2.REYDREC']").Filter(new() { HasText = "REYDREC is required." })).ToBeVisibleAsync();
             //Change 13a value to valid value
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
 
@@ -201,6 +199,176 @@ namespace UDS.Net.Forms.Tests
 
             //Look for successful path to forms index on finalized save
             await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" })).ToBeVisibleAsync();
+        }
+
+        // When REY1REC is between 0 and 15, REYDREC cannot be blank or 88
+        [TestMethod]
+        public async Task REYDRECInvalidWhenREY1REC0And15()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+            await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+
+            // Section 1
+            await Page.Locator("input[type=\"radio\"][name=\"C2.MOCACOMP\"][value=\"0\"]").ClickAsync();
+            await Page.Locator("input[name=\"C2.MOCAREAS\"]").FillAsync("95");
+
+            // Section 2
+            await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYCLOC\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYLAN\"][value=\"2\"]").ClickAsync();
+
+            // Section 3–7
+            await Page.Locator("input[name=\"C2.CRAFTVRS\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.UDSBENTC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.DIGFORCT\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.DIGBACCT\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.ANIMALS\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.VEG\"]").FillAsync("95");
+
+            // Section 8
+            await Page.Locator("input[name=\"C2.TRAILA\"]").FillAsync("995");
+            await Page.Locator("input[name=\"C2.TRAILB\"]").FillAsync("995");
+
+            // Section 9–11
+            await Page.Locator("input[name=\"C2.UDSBENTD\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.CRAFTDVR\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.UDSVERFC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.UDSVERLC\"]").FillAsync("95");
+
+            await Page.Locator("input[type=\"radio\"][name=\"C2.VERBALTEST\"][value=\"1\"]").ClickAsync();
+
+            // Section 12
+            // REY1REC in 0–15
+            await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY1INT\"]").FillAsync("95");
+
+            await Page.Locator("input[name=\"C2.REY2REC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY3REC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY4REC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY5REC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REYBREC\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY6REC\"]").FillAsync("95");
+
+            // Test when REYDREC is 88
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("88");
+            await Page.Locator("input[name=\"C2.MINTTOTS\"]").FillAsync("95");
+            await Page.Locator("input[type=\"radio\"][name=\"C2.COGSTAT\"][value=\"2\"]").ClickAsync();
+            await Page.Locator("input[type=\"radio\"][name=\"C2.RESPVAL\"][value=\"1\"]").ClickAsync();
+
+            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            await Expect(
+                Page.Locator("span").Filter(new() { HasText = "REYDREC cannot be blank or 88 when REY1REC is 0-15." })
+            ).ToBeVisibleAsync();
+
+            // Test when REYDREC is 88 blank
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("");
+            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            await Expect(
+                Page.Locator("span").Filter(new() { HasText = "REYDREC cannot be blank or 88 when REY1REC is 0-15." })
+            ).ToBeVisibleAsync();
+        }
+
+        // When REYDREC is set to 88 or in the range of 95-98, the dependent fields are disabled
+        [TestMethod]
+        public async Task Section13DisabledWhenREYDREC88Or95To98()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem)
+                .Filter(new() { HasText = "C2 Required" })
+                .GetByRole(AriaRole.Link)
+                .ClickAsync();
+
+            await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+            await Page.Locator("input[type=\"radio\"][name=\"C2.VERBALTEST\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("10");
+
+            // Dependent fields
+            var dependentFields = new[] { "C2.REYDINT", "C2.REYDTI", "C2.REYTCOR", "C2.REYFPOS" };
+
+            // Set REYDREC as 88
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("88");
+
+            // Check that dependent fields are disabled
+            foreach (var field in dependentFields)
+                await Expect(Page.Locator($"input[name=\"{field}\"]")).ToBeDisabledAsync();
+
+            // Set REYDREC in 95-98 range
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("95");
+            foreach (var field in dependentFields)
+                await Expect(Page.Locator($"input[name=\"{field}\"]")).ToBeDisabledAsync();
+        }
+
+        // When REY1REC is between 0 and 15, REYDREC cannot be blank or 88
+        [TestMethod]
+        public async Task REY1REC95To98REYDRECNoRules()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem)
+                .Filter(new() { HasText = "C2 Required" })
+                .GetByRole(AriaRole.Link)
+                .ClickAsync();
+
+            await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+
+            // Setup to reach REY1REC
+            await Page.Locator("input[type=\"radio\"][name=\"C2.MOCACOMP\"][value=\"0\"]").ClickAsync();
+            await Page.Locator("input[name=\"C2.MOCAREAS\"]").FillAsync("95");
+
+            await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYCLOC\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[type=\"radio\"][name=\"C2.NPSYLAN\"][value=\"2\"]").ClickAsync();
+
+            await Page.Locator("input[name=\"C2.CRAFTVRS\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.UDSBENTC\"]").FillAsync("95");
+
+            await Page.Locator("input[type=\"radio\"][name=\"C2.VERBALTEST\"][value=\"1\"]").ClickAsync();
+
+            // Set REY1REC in 95-98 range
+            await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("96");
+
+            // Test multiple REYDREC values
+            foreach (var reydrecValue in new[] { "4", "88", "95" })
+            {
+                await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync(reydrecValue);
+
+                await Expect(Page.Locator("input[name=\"C2.REYDREC\"]")).ToBeEnabledAsync();
+                await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+                await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+                await Expect(Page.Locator("span[data-valmsg-for='C2.REYDREC']").Filter(new() { HasText = "REYDREC" })).Not.ToBeVisibleAsync();
+            }
+        }
+
+        // When REYDREC is set to a value in the range of 0–15, the dependent fields are enabled
+        [TestMethod]
+        public async Task Section13EnabledWhenREYDREC0To15()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem)
+                .Filter(new() { HasText = "C2 Required" })
+                .GetByRole(AriaRole.Link)
+                .ClickAsync();
+
+            await Page.Locator("#modalityselect").SelectOptionAsync("InPerson");
+
+            await Page.Locator("input[type=\"radio\"][name=\"C2.VERBALTEST\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("10");
+
+            // Dependent fields for section 13
+            var dependentFields = new[] { "C2.REYDINT", "C2.REYDTI", "C2.REYTCOR", "C2.REYFPOS" };
+
+            // Set REYDREC to a value in 0–15
+            await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("5");
+
+            foreach (var field in dependentFields)
+                await Expect(Page.Locator($"input[name=\"{field}\"]")).ToBeEnabledAsync();
         }
     }
 }
