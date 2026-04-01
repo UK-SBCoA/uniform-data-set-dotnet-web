@@ -7,10 +7,10 @@ namespace UDS.Net.Forms.Pages.Visits
 {
     public class DetailsModel : VisitPageModel
     {
-        private new readonly IPacketService _packetService;
+        private readonly IPacketService _packetService;
 
         public DetailsModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService)
-: base(visitService, participationService, packetService)
+: base(visitService, participationService)
         {
             _packetService = packetService;
         }
