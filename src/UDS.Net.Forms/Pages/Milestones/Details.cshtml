@@ -309,7 +309,6 @@
                 <th class="px-4 py-2">Created by</th>
                 <th class="px-4 py-2">Modified by</th>
                 <th class="px-4 py-2">Error count</th>
-                <th class="px-4 py-2">Download</th>
             </tr>
         </thead>
         <tbody>
@@ -322,9 +321,6 @@
                     <td class="px-4 py-2">@submission.CreatedBy</td>
                     <td class="px-4 py-2">@submission.ModifiedBy</td>
                     <td class="px-4 py-2">@submission.ErrorCount</td>
-                    <td class="px-4 py-2">
-                        <a asp-route-id="@submission.Id">Download</a>
-                    </td>
                 </tr>
             }
         </tbody>
