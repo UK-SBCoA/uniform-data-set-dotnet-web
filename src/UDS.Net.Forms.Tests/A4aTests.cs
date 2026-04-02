@@ -170,7 +170,105 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"A4a.TRTBIOMARK\"]:checked")).ToHaveValueAsync("1");
         }
 
+        [TestMethod]
+        public async Task FollowUpVisitAutofillsA4aTreatmentsFromPreviousVisit()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
 
+            // Enable treatments
+            await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
+
+            // Fill first treatment
+            await Page.Locator("input[name=\"A4a.Treatments[0].TARGETAB\"]").CheckAsync();
+            await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Trial A");
+            await Page.Locator("input[name=\"A4a.Treatments[0].NCTNUM\"]").FillAsync("NCT123");
+            await Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]").FillAsync("2020");
+
+            // Save
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Create follow-up visit
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            // Verify autofill
+            await Expect(Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TARGETAB\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]")).ToHaveValueAsync("Trial A");
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].NCTNUM\"]")).ToHaveValueAsync("NCT123");
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]")).ToHaveValueAsync("2020");
+        }
+
+        [TestMethod]
+        public async Task FollowUpVisitAutofillsA4aAdverseEvents()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            // Enable treatments first (required for ADVEVENT)
+            await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
+
+            // Set adverse events
+            await Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.ARIAE\"]").CheckAsync();
+            await Page.Locator("input[name=\"A4a.ADVERSEOTH\"]").CheckAsync();
+            await Page.Locator("input[name=\"A4a.ADVERSEOTX\"]").FillAsync("Other event");
+
+            // Save
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Follow-up visit
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            // Verify autofill
+            await Expect(Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"1\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.ARIAE\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.ADVERSEOTH\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.ADVERSEOTX\"]")).ToHaveValueAsync("Other event");
+        }
+
+        [TestMethod]
+        public async Task FollowUpVisitOverridesAutofillForA4a()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Original Trial");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Follow-up
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            // Verify autofill
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]")).ToHaveValueAsync("Original Trial");
+
+            // Change value
+            await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Updated Trial");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Reopen and confirm override
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]")).ToHaveValueAsync("Updated Trial");
+        }
 
     }
 }
