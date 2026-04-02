@@ -181,11 +181,13 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
 
             // Fill first treatment
-            await Page.Locator("input[name=\"A4a.Treatments[0].TARGETAB\"]").CheckAsync();
+            await Page.Locator("input[type=\"checkbox\"][name=\"A4a.Treatments[0].TARGETAB\"]").CheckAsync();
             await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Trial A");
             await Page.Locator("input[name=\"A4a.Treatments[0].NCTNUM\"]").FillAsync("NCT123");
             await Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]").FillAsync("01");
             await Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]").FillAsync("2020");
+            await Page.Locator("input[name=\"A4a.Treatments[0].CARETRIAL\"][value=\"3\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.Treatments[0].TRIALGRP\"][value=\"1\"]").ClickAsync();
 
             // Save
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
@@ -198,11 +200,13 @@ namespace UDS.Net.Forms.Tests
 
             // Verify autofill
             await Expect(Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]")).ToBeCheckedAsync();
-            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TARGETAB\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[type=\"checkbox\"][name=\"A4a.Treatments[0].TARGETAB\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]")).ToHaveValueAsync("Trial A");
             await Expect(Page.Locator("input[name=\"A4a.Treatments[0].NCTNUM\"]")).ToHaveValueAsync("NCT123");
-            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]")).ToHaveValueAsync("01");
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]")).ToHaveValueAsync("1");
             await Expect(Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]")).ToHaveValueAsync("2020");
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].CARETRIAL\"][value=\"3\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"A4a.Treatments[0].TRIALGRP\"][value=\"1\"]")).ToBeCheckedAsync();
         }
 
         [TestMethod]
@@ -217,8 +221,8 @@ namespace UDS.Net.Forms.Tests
 
             // Set adverse events
             await Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"1\"]").ClickAsync();
-            await Page.Locator("input[name=\"A4a.ARIAE\"]").CheckAsync();
-            await Page.Locator("input[name=\"A4a.ADVERSEOTH\"]").CheckAsync();
+            await Page.Locator("input[type=\"checkbox\"][name=\"A4a.ARIAE\"]").CheckAsync();
+            await Page.Locator("input[type=\"checkbox\"][name=\"A4a.ADVERSEOTH\"]").CheckAsync();
             await Page.Locator("input[name=\"A4a.ADVERSEOTX\"]").FillAsync("Other event");
 
             // Save
@@ -232,8 +236,8 @@ namespace UDS.Net.Forms.Tests
 
             // Verify autofill
             await Expect(Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"1\"]")).ToBeCheckedAsync();
-            await Expect(Page.Locator("input[name=\"A4a.ARIAE\"]")).ToBeCheckedAsync();
-            await Expect(Page.Locator("input[name=\"A4a.ADVERSEOTH\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[type=\"checkbox\"][name=\"A4a.ARIAE\"]")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[type=\"checkbox\"][name=\"A4a.ADVERSEOTH\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[name=\"A4a.ADVERSEOTX\"]")).ToHaveValueAsync("Other event");
         }
 
