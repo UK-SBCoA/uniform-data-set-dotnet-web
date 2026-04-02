@@ -20,6 +20,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
 
                 ((UDS.Net.API.Entities.A3)existing).Update(dto);
             }
+            else if (existing is UDS.Net.API.Entities.A4)
+            {
+                var dto = (A4Dto)formDto;
+
+                ((UDS.Net.API.Entities.A4)existing).Update(dto);
+            }
             else if (existing is UDS.Net.API.Entities.A4a)
             {
                 var dto = (A4aDto)formDto;
