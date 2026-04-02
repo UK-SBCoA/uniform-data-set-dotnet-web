@@ -92,26 +92,6 @@ public class TestDbContext : DbContext
             entity.OwnsOne(a => a.Treatment7);
             entity.OwnsOne(a => a.Treatment8);
         });
-
-        //Seed a completed packet with ID of -1
-        modelBuilder.Entity<Packet>().HasData(
-            new Packet
-            {
-                Id = -1,
-                ParticipationId = -1,
-                VISITNUM = 1,
-                FORMVER = "4",
-                PACKET = "I",
-                VISIT_DATE = DateTime.Now,
-                INITIALS = "TT",
-                Status = API.Entities.PacketStatus.Submitted,
-                CreatedAt = DateTime.Now,
-                CreatedBy = "test@test.com",
-                ModifiedBy = null,
-                DeletedBy = null,
-                IsDeleted = false,
-            }
-        );
     }
 }
 
