@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using UDS.Net.Dto;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -1659,6 +1660,29 @@ namespace UDS.Net.Services.Extensions
                 IsOverTheCounter = drugCode.IsOverTheCounter,
                 IsPopular = drugCode.IsPopular
             };
+        }
+
+        public static NACCErrorDto ToDto(this NACCError error)
+        {
+            return new NACCErrorDto
+            {
+                Timestamp = error.Timestamp,
+                Type = error.Type,
+                Code = error.Code,
+                Location = error.Location,
+                File = error.File,
+                Value = error.Value,
+                Message = error.Message,
+                Ptid = error.Ptid,
+                Visitnum = error.Visitnum,
+                Approved = error.Approved,
+                ImportedBy = error.ImportedBy
+            };
+        }
+
+        public static List<NACCErrorDto> ToDto(this List<NACCError> errors)
+        {
+            return errors.Select(e => e.ToDto()).ToList();
         }
     }
 }

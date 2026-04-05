@@ -1,4 +1,6 @@
-﻿using UDS.Net.Forms.Models;
+﻿using Newtonsoft.Json.Linq;
+using System.Net.NetworkInformation;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -1256,6 +1258,29 @@ namespace UDS.Net.Forms.Extensions
                 OTHCOGIF = vm.OTHCOGIF,
                 OTHCOGX = vm.OTHCOGX
             };
+        }
+
+        public static NACCError ToDomain(this NACCErrorModel vm)
+        {
+            return new NACCError
+            {
+                Timestamp = vm.Timestamp,
+                Type = vm.Type,
+                Code = vm.Code,
+                Location = vm.Location,
+                File = vm.File,
+                Value = vm.Value,
+                Message = vm.Message,
+                Ptid = vm.Ptid,
+                Visitnum = vm.Visitnum,
+                Approved = vm.Approved,
+                ImportedBy = vm.ImportedBy
+            };
+        }
+
+        public static List<NACCError> ToDomain(this List<NACCErrorModel> vm)
+        {
+            return vm.Select(p => p.ToDomain()).ToList();
         }
     }
 }

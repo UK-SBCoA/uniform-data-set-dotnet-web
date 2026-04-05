@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UDS.Net.API.Client;
 using UDS.Net.Services;
-using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels.Submission;
-using Microsoft.Extensions.Configuration;
-using System.Linq;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -136,6 +136,13 @@ namespace UDS.Net.Web.MVC.Services
             }
 
             return await Update(username, packetToEdit);
+        }
+
+        public async Task<List<NACCError>> UpdateMultiplePacketsSubmissionsErrors(List<NACCError> errors)
+        {
+            var errorsImported = await _apiClient.PacketClient.UpdateMultiplePacketsSubmissionsErrors(errors.ToDto());
+
+            return errorsImported.ToDomain();
         }
     }
 }

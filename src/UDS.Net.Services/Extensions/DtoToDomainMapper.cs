@@ -453,6 +453,29 @@ namespace UDS.Net.Services.Extensions
                 IsPopular = dto.IsPopular
             };
         }
+
+        public static NACCError ToDomain(this NACCErrorDto error)
+        {
+            return new NACCError
+            {
+                Timestamp = error.Timestamp,
+                Type = error.Type,
+                Code = error.Code,
+                Location = error.Location,
+                File = error.File,
+                Value = error.Value,
+                Message = error.Message,
+                Ptid = error.Ptid,
+                Visitnum = error.Visitnum,
+                Approved = error.Approved,
+                ImportedBy = error.ImportedBy
+            };
+        }
+
+        public static List<NACCError> ToDomain(this List<NACCErrorDto> errors)
+        {
+            return errors.Select(e => e.ToDomain()).ToList();
+        }
     }
 }
 

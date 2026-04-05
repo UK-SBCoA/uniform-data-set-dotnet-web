@@ -211,5 +211,3 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
         }
     }
 }
-
-

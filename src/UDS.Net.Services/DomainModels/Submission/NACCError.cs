@@ -1,9 +1,10 @@
-﻿
-using CsvHelper.Configuration.Attributes;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace UDS.Net.Forms.Models
+namespace UDS.Net.Services.DomainModels.Submission
 {
-    public class NACCErrorModel
+    public class NACCError
     {
         public string Timestamp { get; set; }
         public string Type { get; set; }
@@ -15,7 +16,6 @@ namespace UDS.Net.Forms.Models
         public string Ptid { get; set; }
         public string Visitnum { get; set; }
         public string Approved { get; set; }
-        [Ignore]
         public string ImportedBy { get; set; }
     }
 }

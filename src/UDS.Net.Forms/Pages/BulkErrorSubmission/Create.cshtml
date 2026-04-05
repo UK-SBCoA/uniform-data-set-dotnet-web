@@ -38,31 +38,37 @@
                                 <tr class="hover:bg-slate-50">
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Ptid</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Type</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Code</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Location</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Value</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
                                         <p>@Model.PacketSubmissionErrors[i].Message</p>
+                                    </td>
+                                    <td class="hidden">
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Timestamp" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
                                         <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Approved" />
+                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].ImportedBy" />
                                     </td>
                                 </tr>
                             }
