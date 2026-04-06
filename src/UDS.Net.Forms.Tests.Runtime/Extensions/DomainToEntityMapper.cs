@@ -24,6 +24,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
             {
                 var dto = (A4Dto)formDto;
 
+                //Need Package release so that the correct Update method is used.
                 ((UDS.Net.API.Entities.A4)existing).Update(dto);
             }
             else if (existing is UDS.Net.API.Entities.A4a)

@@ -352,7 +352,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
                 var a4 = packet.A4;
 
-                // Copy values from domain form to entity
                 a4.UpdateFromDomain(formId, entity);
 
                 await _context.SaveChangesAsync();
