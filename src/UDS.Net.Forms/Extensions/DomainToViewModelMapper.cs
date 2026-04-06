@@ -412,9 +412,9 @@ namespace UDS.Net.Forms.Extensions
             {
                 vm = ((B9FormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
-            else if (form.Fields is A4GFormFields)
+            else if (form.Fields is A4aFormFields)
             {
-                vm = ((A4GFormFields)form.Fields).PreviousVisitToVM(form.Id);
+                vm = ((A4aFormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
 
             SetFormBaseProperties(form, vm);
@@ -699,25 +699,6 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
-        public static A4 PreviousVisitToVM(this A4GFormFields fields, int formId)
-        {
-            return new A4()
-            {
-                Id = formId,
-
-                ANYMEDS = fields.ANYMEDS,
-
-                DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
-                {
-                    RxNormId = d.RxNormId,
-                    DrugName = d.DrugCode?.DrugName ?? "",
-                    BrandName = d.DrugCode?.BrandName ?? "",
-                    IsOverTheCounter = d.DrugCode?.IsOverTheCounter ?? false,
-                    IsPopular = d.DrugCode?.IsPopular ?? false,
-                }).ToList()
-            };
-        }
-
         // Drug code lookup model to view model
         public static DrugCodeModel ToVM(this DrugCode drugCode)
         {
@@ -750,6 +731,27 @@ namespace UDS.Net.Forms.Extensions
 
             };
         }
+
+        public static A4a PreviousVisitToVM(this A4aFormFields fields, int formId)
+        {
+            return new A4a()
+            {
+                Id = formId,
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
+                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
+                ADVEVENT = fields.ADVEVENT,
+                ARIAE = fields.ARIAE,
+                ARIAH = fields.ARIAH,
+                ADVERSEOTH = fields.ADVERSEOTH,
+                ADVERSEOTX = fields.ADVERSEOTX,
+                TRTBIOMARK = fields.TRTBIOMARK,
+                Treatments = fields.TreatmentFormFields.Select(s => s.ToVM(formId)).ToList(),
+
+            };
+        }
+
         public static A4aTreatment ToVM(this A4aTreatmentFormFields fields, int formId)
         {
             return new A4aTreatment()
