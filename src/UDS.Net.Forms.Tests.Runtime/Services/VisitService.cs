@@ -452,6 +452,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = await _context.Packets
                 .Include(v => v.A3)
+                .Include(v => v.A4a)
                 .Include(v => v.A5D2)
                 .Include(v => v.B9)
                 .Where(v => v.ParticipationId == participationId && v.VISITNUM == visitNumber)
@@ -466,6 +467,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 var a3 = packet.A3.Convert(packet.Id, username);
                 forms.Add(a3);
+            }
+            if (packet.A4a != null)
+            {
+                var a4a = packet.A4a.Convert(packet.Id, username);
+                forms.Add(a4a);
             }
             if (packet.A5D2 != null)
             {

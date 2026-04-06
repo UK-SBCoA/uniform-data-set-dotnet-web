@@ -1,10 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
