@@ -82,6 +82,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 // TODO Include related forms as tests are added
                 var packet = await _context.Packets
                     .Include(v => v.A3)
+                    .Include(v => v.A4)
                     .Include(v => v.A4a)
                     .Include(v => v.A5D2)
                     .Include(v => v.B9)
@@ -99,6 +100,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     {
                         var a3 = packet.A3.Convert(packet.Id, username);
                         forms.Add(a3);
+                    }
+                    if (packet.A4 != null)
+                    {
+                        var a4 = packet.A4.Convert(packet.Id, username);
+                        forms.Add(a4);
                     }
                     if (packet.A4a != null)
                     {
@@ -229,6 +235,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             // TODO Include related forms as tests are added
             var packet = await _context.Packets
                 .Include(p => p.A3)
+                .Include(p => p.A4)
                 .Include(p => p.A4a)
                 .Include(p => p.A5D2)
                 .Include(p => p.B9)
@@ -326,6 +333,26 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 var a3 = packet.A3;
 
                 a3.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+            }
+
+            if (formId == "A4")
+            {
+                if (packet.A4 == null)
+                {
+                    packet.A4 = new API.Entities.A4
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+
+                var a4 = packet.A4;
+
+                a4.UpdateFromDomain(formId, entity);
 
                 await _context.SaveChangesAsync();
             }
@@ -452,6 +479,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         {
             var packet = await _context.Packets
                 .Include(v => v.A3)
+                .Include(v => v.A4)
                 .Include(v => v.A4a)
                 .Include(v => v.A5D2)
                 .Include(v => v.B9)
@@ -467,6 +495,11 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             {
                 var a3 = packet.A3.Convert(packet.Id, username);
                 forms.Add(a3);
+            }
+            if (packet.A4 != null)
+            {
+                var a4 = packet.A4.Convert(packet.Id, username);
+                forms.Add(a4);
             }
             if (packet.A4a != null)
             {

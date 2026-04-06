@@ -34,12 +34,23 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1, bool? includePopular = null, bool? includeOverTheCounter = null)
         {
-            var paged = _drugCodes.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var query = _drugCodes.AsQueryable();
+
+            if (includePopular.HasValue)
+                query = query.Where(d => d.IsPopular == includePopular.Value);
+
+            if (includeOverTheCounter.HasValue)
+                query = query.Where(d => d.IsOverTheCounter == includeOverTheCounter.Value);
+
+            var result = query.ToList();
+
+            var paged = result.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
             return Task.FromResult(new DrugCodeLookup
             {
                 PageSize = pageSize,
                 PageIndex = pageIndex,
-                TotalResultsCount = _drugCodes.Count,
+                TotalResultsCount = result.Count,
                 DrugCodes = paged
             });
         }

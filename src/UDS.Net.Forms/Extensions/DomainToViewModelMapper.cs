@@ -412,6 +412,10 @@ namespace UDS.Net.Forms.Extensions
             {
                 vm = ((B9FormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
+            else if (form.Fields is A4GFormFields)
+            {
+                vm = ((A4GFormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
             else if (form.Fields is A4aFormFields)
             {
                 vm = ((A4aFormFields)form.Fields).PreviousVisitToVM(form.Id);
@@ -695,6 +699,25 @@ namespace UDS.Net.Forms.Extensions
                     BrandName = d.DrugCode != null ? d.DrugCode.BrandName : "",
                     IsOverTheCounter = d.DrugCode != null ? d.DrugCode.IsOverTheCounter : false,
                     IsPopular = d.DrugCode != null ? d.DrugCode.IsPopular : false,
+                }).ToList()
+            };
+        }
+
+        public static A4 PreviousVisitToVM(this A4GFormFields fields, int formId)
+        {
+            return new A4()
+            {
+                Id = formId,
+
+                ANYMEDS = fields.ANYMEDS,
+
+                DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
+                {
+                    RxNormId = d.RxNormId,
+                    DrugName = d.DrugCode?.DrugName ?? "",
+                    BrandName = d.DrugCode?.BrandName ?? "",
+                    IsOverTheCounter = d.DrugCode?.IsOverTheCounter ?? false,
+                    IsPopular = d.DrugCode?.IsPopular ?? false,
                 }).ToList()
             };
         }
