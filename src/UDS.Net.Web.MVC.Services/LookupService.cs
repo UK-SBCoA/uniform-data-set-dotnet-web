@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
@@ -184,9 +183,9 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
-        public Task<bool?> RxNormIsCurrent(string rxCUI)
+        public Task<bool?> RxNormIsActive(string rxCUI)
         {
-            return _rxNormClient.RxNormIsCurrentAsync(rxCUI);
+            return _rxNormClient.RxNormIsActiveAsync(rxCUI);
         }
 
         [Obsolete]

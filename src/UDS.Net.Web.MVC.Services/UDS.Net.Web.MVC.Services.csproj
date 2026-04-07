@@ -17,7 +17,7 @@
 		<PackageReference Include="System.Text.Json" Version="10.0.1" />
 		<PackageReference Include="UDS.Net.Dto" Version="11.0.1" />
 		<PackageReference Include="UDS.Net.API.Client" Version="11.0.1" />
-		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.7-preview.1" />
+		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.7-preview.2" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.1" />
 	</ItemGroup>
 	<ItemGroup>

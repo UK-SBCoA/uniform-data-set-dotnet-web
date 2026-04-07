@@ -497,7 +497,7 @@ namespace UDS.Net.Services.DomainModels
 
                     foreach (var id in rxNormIds)
                     {
-                        var validRxCode = await lookupService.RxNormIsCurrent(id);
+                        var validRxCode = await lookupService.RxNormIsActive(id);
 
                         if (validRxCode != true)
                         {

@@ -10,7 +10,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public LookupService()
         {
         }
-        public Task<bool?> RxNormIsCurrent(string rxCUI)
+        public Task<bool?> RxNormIsActive(string rxCUI)
         {
             throw new NotImplementedException();
         }
