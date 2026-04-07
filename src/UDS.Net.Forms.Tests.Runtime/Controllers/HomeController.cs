@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using UDS.Net.Forms.Tests.Runtime.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using UDS.Net.Forms.Tests.Runtime.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -65,21 +63,9 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> PacketSubmission(int id)
+    public async Task<IActionResult> Packets()
     {
-        //TODO: Null handling for ids that don't exist
-        var packet = await _packetService.GetById("username", id);
-
-        if(packet != null)
-        {
-            //TODO: Create a submission if the form is completed (all required packets finalized)
-            
-
-            return RedirectToPage("/Packets/Details", new { Id = id });
-        }
-
-        //TODO: If something went wrong, return home view
-        return null;
+        return RedirectToPage("/Packets/Index");
     }
 
     public IActionResult Privacy()

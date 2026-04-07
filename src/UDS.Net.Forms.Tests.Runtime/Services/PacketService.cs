@@ -6,6 +6,7 @@ using UDS.Net.Services;
 using UDS.Net.Services.Extensions;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
+using UDS.Net.Dto;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -23,9 +24,9 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<int> Count(string username, List<PacketStatus> statuses)
+        public async Task<int> Count(string username, List<PacketStatus> statuses)
         {
-            throw new NotImplementedException();
+            return await _context.Packets.CountAsync();
         }
 
         public Task<int> Count(string username)
@@ -53,9 +54,22 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Packet>> List(string username, List<PacketStatus> statuses, int pageSize = 10, int pageIndex = 1)
+        public async Task<List<Packet>> List(string username, List<PacketStatus> statuses, int pageSize = 10, int pageIndex = 1)
         {
-            throw new NotImplementedException();
+            List<PacketDto> packetDtos = new List<PacketDto>();
+
+            var packetEntities = await _context.Packets.ToListAsync();
+
+            if (packetEntities.Count > 0)
+            {
+                packetDtos = [.. packetEntities.Select(p => p.ToPacketDto())];
+
+                List<Packet> packetDomains = [.. packetDtos.Select(p => p.ToDomain(username))];
+
+                return packetDomains;
+            }
+
+            return new List<Packet>();
         }
 
         public Task<IEnumerable<Packet>> List(string username, int pageSize = 10, int pageIndex = 1)
