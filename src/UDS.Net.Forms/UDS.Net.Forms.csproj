@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 		<PackageId>UDS.Net.Forms</PackageId>
-		<Version>17.0.0-preview.9</Version>
+		<Version>17.0.0-preview.10</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>UDS Forms razor class library</Description>
 		<Owners>UK-SBCoA</Owners>
