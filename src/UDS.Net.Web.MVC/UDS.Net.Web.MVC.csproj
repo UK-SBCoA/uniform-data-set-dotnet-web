@@ -22,7 +22,7 @@
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="10.0.1" />
 		<PackageReference Include="UDS.Net.API.Client" Version="11.0.1" />
 		<PackageReference Include="UDS.Net.Dto" Version="11.0.1" />
-		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.6" />
+		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.7-preview.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Forms\UDS.Net.Forms.csproj">
