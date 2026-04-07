@@ -10,6 +10,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public LookupService()
         {
         }
+        public Task<bool?> RxNormIsCurrent(string rxCUI)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
         {
