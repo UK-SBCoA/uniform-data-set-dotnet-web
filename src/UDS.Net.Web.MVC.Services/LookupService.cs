@@ -184,6 +184,10 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
+        public Task<bool?> RxNormIsCurrent(string rxCUI)
+        {
+            return _rxNormClient.RxNormIsCurrentAsync(rxCUI);
+        }
 
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
