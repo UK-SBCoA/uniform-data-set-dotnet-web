@@ -1,12 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using UDS.Net.API.Extensions;
-using UDS.Net.Forms.Tests.Runtime.Data;
+﻿using UDS.Net.Forms.Tests.Runtime.Data;
 using UDS.Net.Services;
-using UDS.Net.Services.Extensions;
+using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
-using UDS.Net.Dto;
 
 namespace UDS.Net.Forms.Tests.Runtime.Services
 {
@@ -26,7 +22,8 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<int> Count(string username, List<PacketStatus> statuses)
         {
-            return await _context.Packets.CountAsync();
+            //DEVNOTE: Manually set 1 for packet count
+            return 1;
         }
 
         public Task<int> Count(string username)
@@ -36,40 +33,47 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Packet> GetById(string username, int id)
         {
-            var count = await _context.Packets.CountAsync();
-            var packet = await _context.Packets.FindAsync(id);
-
-            if (packet == null)
+            //DEVNOTE: Manually create packet with a submission to use for view
+            //var packet = await _context.Packets.FindAsync(id);
+            var packet = new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false, new List<Form>(), new List<PacketSubmission>
             {
-                return null;
-            }
+                new PacketSubmission(1, "17", DateTime.Now, 1, DateTime.Now, "test@test.com", null, null, false, null)
+            });
 
-            var dto = packet.ToPacketDto();
-
-            return dto.ToDomain(username);
+            return packet;
         }
 
         public Task<Packet> GetPacketWithForms(string username, int id)
         {
-            throw new NotImplementedException();
+            //DEVNOTE: Will need to create data to use with the export here
+            //throw new NotImplementedException();
+
+            var packet = new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false,
+                new List<Form>
+                {
+                    new Form(1, "A3", true, DateTime.Now, "test@test.com", PacketKind.I)
+                },
+                new List<PacketSubmission>
+                {
+                    new PacketSubmission(1, "17", DateTime.Now, 1, DateTime.Now, "test@test.com", null, null, false, null, new List<Form>
+                    {
+                        //DEVNOTE: Will need to include all forms for the export to write data
+                        new Form(1, "A3", true, DateTime.Now, "test@test.com", PacketKind.I)
+                    })
+                });
+
+            return Task.FromResult(packet);
         }
 
         public async Task<List<Packet>> List(string username, List<PacketStatus> statuses, int pageSize = 10, int pageIndex = 1)
         {
-            List<PacketDto> packetDtos = new List<PacketDto>();
-
-            var packetEntities = await _context.Packets.ToListAsync();
-
-            if (packetEntities.Count > 0)
+            //DEVNOTE: Manually create packet to use with packets index
+            List<Packet> packetDomains = new List<Packet>
             {
-                packetDtos = [.. packetEntities.Select(p => p.ToPacketDto())];
+                new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false, new List<Form>(), new List<PacketSubmission>())
+            };
 
-                List<Packet> packetDomains = [.. packetDtos.Select(p => p.ToDomain(username))];
-
-                return packetDomains;
-            }
-
-            return new List<Packet>();
+            return packetDomains;
         }
 
         public Task<IEnumerable<Packet>> List(string username, int pageSize = 10, int pageIndex = 1)
