@@ -29,9 +29,9 @@ namespace UDS.Net.Forms.Pages.UDS4
         };
         public List<RadioListItem> NEWADEVENTListItems { get; } = new List<RadioListItem>
         {
-            new RadioListItem("No", "0"),
+            new RadioListItem("No (end form here)", "0"),
             new RadioListItem("Yes", "1"),
-            new RadioListItem("Unknown", "9")
+            new RadioListItem("Unknown (end form here)", "9")
         };
 
         public List<RadioListItem> ADVEVENTListItems { get; } = new List<RadioListItem>
