@@ -22,6 +22,18 @@
     </div>
 </div>
 
+@if (Model.BaseForm.PacketKind == PacketKind.F)
+{
+    <div class="@rowCSS">
+        <label asp-for="A4a.NEWTREAT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A4a.NEWTREAT)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.NEWTREAT"></p>
+            <radio-button-group id="@Html.IdFor(m => m.A4a.NEWTREAT)" for="@Model.A4a.NEWTREAT" items="Model.NEWTREATListItems"></radio-button-group>
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.NEWTREAT"></span>
+            <submission-error location="NEWTREAT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+}
 <div class="overflow-x-auto">
     <span class="counter text-base font-semibold text-gray-900">
         Please provide information about the clinical treatment(s) and/or trial(s)
@@ -85,58 +97,71 @@
         <submission-error location="ADVEVENT" errors="Model.BaseForm.UnresolvedErrors" />
     </div>
 </div>
-
-<div class="subcounterreset ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-    <div>
-        <label class="text-base font-semibold text-gray-900">
-            <span class="subcounter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
-        </label><br />
-        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.AdverseEventsIndicated"></span>
-        <submission-error location="AdverseEventsIndicated" errors="Model.BaseForm.UnresolvedErrors" />
-    </div>
-    <div class="mt-4 sm:col-span-2 sm:mt-0">
-        <fieldset class="">
-            <div class="space-y-1 subsubcounterreset">
-                <div class="relative flex items-start">
-                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                    <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                    </div>
-                    <div class="ml-3 text-sm leading-6">
-                        <label asp-for="A4a.ARIAE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAE)</label>
-                    </div>
-                </div>
-
-                <div class="relative flex items-start">
-                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                    <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
-                    </div>
-                    <div class="ml-3 text-sm leading-6">
-                        <label asp-for="A4a.ARIAH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAH)</label>
-                    </div>
-                </div>
-
-                <div class="relative flex items-start">
-                    <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
-                    <div class="flex h-6 items-center">
-                        @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
-                    </div>
-                    <div class="ml-3 text-sm leading-6">
-                        <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
-                    </div>
-                </div>
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
-                <submission-error location="ADVERSEOTH" errors="Model.BaseForm.UnresolvedErrors" />
-
-                <div class="ml-6">
-                    <label asp-for="A4a.ADVERSEOTX">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTX)</label>
-                    <input asp-for="A4a.ADVERSEOTX" />
-                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
-                    <submission-error location="ADVERSEOTX" errors="Model.BaseForm.UnresolvedErrors" />
-                </div>
+<div class="subcounterreset">
+    @if (Model.BaseForm.PacketKind == PacketKind.F)
+    {
+        <div class="@rowCSS">
+            <label asp-for="A4a.NEWADEVENT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A4a.NEWADEVENT)</label>
+            <div class="mt-4 sm:col-span-2 sm:mt-0">
+                <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.NEWADEVENT"></p>
+                <radio-button-group id="@Html.IdFor(m => m.A4a.NEWADEVENT)" for="@Model.A4a.NEWADEVENT" items="Model.NEWADEVENTListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.NEWADEVENT"></span>
+                <submission-error location="NEWADEVENT" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
-        </fieldset>
+        </div>
+    }
+    <div class="ml-2 sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+        <div>
+            <label class="text-base font-semibold text-gray-900">
+                <span class="subcounter"></span>What major adverse events associated with treatments expected to modify ADRD biomarkers did they experience? (check all that apply)
+            </label><br />
+            <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.AdverseEventsIndicated"></span>
+            <submission-error location="AdverseEventsIndicated" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <fieldset class="">
+                <div class="space-y-1 subsubcounterreset">
+                    <div class="relative flex items-start">
+                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ARIAE", Model.A4a.ARIAE, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ARIAE" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAE)</label>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-start">
+                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ARIAH", Model.A4a.ARIAH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ARIAH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ARIAH)</label>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-start">
+                        <span class="subsubcounter mr-3 block text-sm font-medium leading-6 text-gray-900"></span>
+                        <div class="flex h-6 items-center">
+                            @Html.CheckBox("A4a.ADVERSEOTH", Model.A4a.ADVERSEOTH, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none", data_affects = "true", data_affects_toggle_targets = "[ \"A4a.ADVERSEOTX\" ]" })
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                            <label asp-for="A4a.ADVERSEOTH" class="font-medium text-gray-900">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTH)</label>
+                        </div>
+                    </div>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTH"></span>
+                    <submission-error location="ADVERSEOTH" errors="Model.BaseForm.UnresolvedErrors" />
+
+                    <div class="ml-6">
+                        <label asp-for="A4a.ADVERSEOTX">@Html.DisplayNameFor(m => m.A4a.ADVERSEOTX)</label>
+                        <input asp-for="A4a.ADVERSEOTX" />
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.ADVERSEOTX"></span>
+                        <submission-error location="ADVERSEOTX" errors="Model.BaseForm.UnresolvedErrors" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
     </div>
 </div>
 
