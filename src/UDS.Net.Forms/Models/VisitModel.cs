@@ -53,6 +53,7 @@ namespace UDS.Net.Forms.Models
 
         public bool IsDeleted { get; set; }
 
+        public int TotalUnresolvedAlertCount { get; set; } = 0;
         public virtual ParticipationModel? Participation { get; set; }
 
         public virtual IList<FormModel> Forms { get; set; } = new List<FormModel>();
