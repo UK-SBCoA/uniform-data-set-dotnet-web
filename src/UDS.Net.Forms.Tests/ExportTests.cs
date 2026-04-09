@@ -58,13 +58,13 @@ namespace UDS.Net.Forms.Tests
             Assert.AreEqual(DateTime.Now.ToString("MM-dd-yyyy"), row?[5]);
 
             //Check base form properties
-            foreach(var index in formDateIndexes)
+            foreach (var index in formDateIndexes)
             {
                 Assert.AreEqual(DateTime.Now.ToString("MM-dd-yyyy"), row?[index]);
                 Assert.AreEqual("TT", row?[index + 1]);
                 Assert.AreEqual("1", row?[index + 2]);
                 //D1a and D1b records do not contain mode properties
-                if(index != 1204 && index != 1313)
+                if (index != 1204 && index != 1313)
                 {
                     Assert.AreEqual("1", row?[index + 3]);
                 }
