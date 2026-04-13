@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
@@ -13,7 +12,6 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.PacketSubmissions
 {
@@ -462,6 +460,38 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
                 }
 
+                //Before writing A3Fields, set parent values to null if no changes in parent section detected
+                if (currentA3Fields?.NWINFPAR == 0)
+                {
+                    //Mother
+                    currentA3Fields.MOMYOB = null;
+                    currentA3Fields.MOMDAGE = null;
+                    currentA3Fields.MOMETPR = null;
+                    currentA3Fields.MOMETSEC = null;
+                    currentA3Fields.MOMMEVAL = null;
+                    currentA3Fields.MOMAGEO = null;
+
+                    //Father
+                    currentA3Fields.DADYOB = null;
+                    currentA3Fields.DADDAGE = null;
+                    currentA3Fields.DADETPR = null;
+                    currentA3Fields.DADETSEC = null;
+                    currentA3Fields.DADMEVAL = null;
+                    currentA3Fields.DADAGEO = null;
+                }
+
+                //Before writing, set sibling count to null if no changes detected in section
+                if(currentA3Fields?.NWINFSIB == 0)
+                {
+                    currentA3Fields.SIBS = null;
+                }
+
+                //Before writing, set kids count to null if no changes detected in section
+                if (currentA3Fields?.NWINFKID == 0)
+                {
+                    currentA3Fields.KIDS = null;
+                }
+
                 //Write record of currentA3Fields after completing comparison checks
                 csv.WriteRecord(currentA3Fields);
 
@@ -473,7 +503,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            csv.WriteField(prop.GetValue(sibling));
+                            csv.WriteField(currentA3Fields?.NWINFSIB == 0 ? null : prop.GetValue(sibling));
                         }
                     }
                 }
@@ -485,7 +515,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
-                            csv.WriteField(prop.GetValue(kid));
+                            csv.WriteField(currentA3Fields?.NWINFKID == 0 ? null : prop.GetValue(kid));
                         }
                     }
                 }
