@@ -1753,6 +1753,52 @@ namespace UDS.Net.Forms.Extensions
             };
         }
 
+        public static D1a PreviousVisitToVM(this D1aFormFields fields, int formId)
+        {
+            return new D1a()
+            {
+                Id = formId,
+
+                NORMCOG = fields.NORMCOG,
+                SCD = fields.SCD,
+                SCDDXCONF = fields.SCDDXCONF,
+                DEMENTED = fields.DEMENTED,
+                MCI = fields.MCI,
+                MBI = fields.MBI,
+                PREDOMSYN = fields.PREDOMSYN,
+                IMPNOMCI = fields.IMPNOMCI,
+
+                MAJDEPDX = fields.MAJDEPDX,
+                OTHDEPDX = fields.OTHDEPDX,
+                BIPOLDX = fields.BIPOLDX,
+                SCHIZOP = fields.SCHIZOP,
+                ANXIET = fields.ANXIET,
+                GENANX = fields.GENANX,
+                PANICDISDX = fields.PANICDISDX,
+                OCDDX = fields.OCDDX,
+                OTHANXD = fields.OTHANXD,
+                PTSDDX = fields.PTSDDX,
+                NDEVDIS = fields.NDEVDIS,
+                DELIR = fields.DELIR,
+                OTHPSY = fields.OTHPSY,
+
+                TBIDX = fields.TBIDX,
+                EPILEP = fields.EPILEP,
+                HYCEPH = fields.HYCEPH,
+                NEOP = fields.NEOP,
+                HIV = fields.HIV,
+                POSTC19 = fields.POSTC19,
+                APNEADX = fields.APNEADX,
+                OTHCOGILL = fields.OTHCOGILL,
+                ALCDEM = fields.ALCDEM,
+                IMPSUB = fields.IMPSUB,
+                MEDS = fields.MEDS,
+                COGOTH = fields.COGOTH,
+                COGOTH2 = fields.COGOTH2,
+                COGOTH3 = fields.COGOTH3
+            };
+        }
+
         public static D1b ToVM(this D1bFormFields fields, int formId)
         {
             return new D1b()
