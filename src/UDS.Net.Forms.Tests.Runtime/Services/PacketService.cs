@@ -34,13 +34,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Packet> GetById(string username, int id)
         {
-            //DEVNOTE: Manually create packet with a submission to use for view
-            //var packet = await _context.Packets.FindAsync(id);
-            //var packet = new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false, new List<Form>(), new List<PacketSubmission>
-            //{
-            //    new PacketSubmission(1, "17", DateTime.Now, 1, DateTime.Now, "test@test.com", null, null, false, null)
-            //});
-
             var packet = new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false, new List<Form>(), new List<PacketSubmission>
             {
                 new PacketSubmission(1, "19", DateTime.Now, 1, DateTime.Now, "test@test.com", null, null, false, null)
@@ -51,9 +44,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public Task<Packet> GetPacketWithForms(string username, int id)
         {
-            //DEVNOTE: Will need to create data to use with the export here
-            //throw new NotImplementedException();
-
             var packet = new Packet(1, 1, 1, "4", PacketKind.I, DateTime.Now, "TT", PacketStatus.Submitted, DateTime.Now, "test@test.com", null, null, false,
                 new List<Form>
                 {

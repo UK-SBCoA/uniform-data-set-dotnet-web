@@ -11,14 +11,12 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IVisitService _visitService;
     private readonly IParticipationService _participationService;
-    private readonly IPacketService _packetService;
 
-    public HomeController(ILogger<HomeController> logger, IVisitService visitService, IParticipationService participationService, IPacketService packetService)
+    public HomeController(ILogger<HomeController> logger, IVisitService visitService, IParticipationService participationService)
     {
         _logger = logger;
         _visitService = visitService;
         _participationService = participationService;
-        _packetService = packetService;
     }
 
     public IActionResult Index()

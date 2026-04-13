@@ -55,7 +55,7 @@ namespace UDS.Net.Forms.Tests
 
             var row = secondLine?.Split(',');
 
-            //Check base packet properties by export file index
+            //Check base packet property data by export file index
             Assert.AreEqual("1000", row?[0]);
             Assert.AreEqual("19", row?[1]);
             Assert.AreEqual("1", row?[2]);
@@ -66,6 +66,7 @@ namespace UDS.Net.Forms.Tests
             //Check base form properties
             foreach (var index in formDateIndexes)
             {
+                //Start with index and check the next columns in order for each index group
                 Assert.AreEqual(DateTime.Now.ToString("MM-dd-yyyy"), row?[index]);
                 Assert.AreEqual("TT", row?[index + 1]);
                 Assert.AreEqual("1", row?[index + 2]);
@@ -108,6 +109,7 @@ namespace UDS.Net.Forms.Tests
             var formKindIndex = 0;
             foreach (var index in formDateIndexes)
             {
+                //Start with index group and add to check next columns before next index group loop
                 Assert.AreEqual($"{headerColumns[0]}{formKinds[formKindIndex]}", row?[index]);
                 Assert.AreEqual($"{headerColumns[1]}{formKinds[formKindIndex]}", row?[index + 1]);
                 Assert.AreEqual($"{headerColumns[2]}{formKinds[formKindIndex]}", row?[index + 2]);
