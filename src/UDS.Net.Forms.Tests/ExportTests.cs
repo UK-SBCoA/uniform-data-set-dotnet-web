@@ -111,7 +111,7 @@ namespace UDS.Net.Forms.Tests
                 Assert.AreEqual($"{headerColumns[0]}{formKinds[formKindIndex]}", row?[index]);
                 Assert.AreEqual($"{headerColumns[1]}{formKinds[formKindIndex]}", row?[index + 1]);
                 Assert.AreEqual($"{headerColumns[2]}{formKinds[formKindIndex]}", row?[index + 2]);
-                
+
                 //D1a and D1b records do not contain mode properties
                 if (index != 1204 && index != 1313)
                 {
