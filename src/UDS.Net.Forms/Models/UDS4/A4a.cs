@@ -90,6 +90,26 @@ namespace UDS.Net.Forms.Models.UDS4
                             new[] { "Treatments" }
                         );
                     }
+
+                    if (PacketKind == PacketKind.F)
+                    {
+                        if (NEWTREAT == null)
+                        {
+                            yield return new ValidationResult("NEWTREAT response is required", new[] { nameof(NEWTREAT) });
+                        }
+
+                    }
+                }
+                if (ADVEVENT == 1)
+                {
+                    if (PacketKind == PacketKind.F)
+                    {
+                        if (NEWADEVENT == null)
+                        {
+                            yield return new ValidationResult("NEWWADEVENT response is required", new[] { nameof(NEWADEVENT) });
+                        }
+
+                    }
                 }
 
                 int index = 0;
