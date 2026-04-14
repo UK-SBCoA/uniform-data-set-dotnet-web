@@ -77,8 +77,6 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.Locator("input[name=\"D1a.PREDOMSYN\"][value=\"0\"]")).ToBeEnabledAsync();
             await Expect(Page.Locator("input[name=\"D1a.PREDOMSYN\"][value=\"1\"]")).ToBeEnabledAsync();
 
-
-
         }
 
         [TestMethod]

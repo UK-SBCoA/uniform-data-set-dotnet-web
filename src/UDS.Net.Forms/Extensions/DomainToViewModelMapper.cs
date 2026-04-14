@@ -416,6 +416,10 @@ namespace UDS.Net.Forms.Extensions
             {
                 vm = ((A4aFormFields)form.Fields).PreviousVisitToVM(form.Id);
             }
+            else if (form.Fields is D1aFormFields)
+            {
+                vm = ((D1aFormFields)form.Fields).PreviousVisitToVM(form.Id);
+            }
 
             SetFormBaseProperties(form, vm);
 
