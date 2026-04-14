@@ -708,7 +708,10 @@ namespace UDS.Net.Forms.Extensions
             return new A4()
             {
                 Id = formId,
-
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
+                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
                 ANYMEDS = fields.ANYMEDS,
 
                 DrugIds = fields.A4Ds.Select(d => new DrugCodeModel
