@@ -94,7 +94,7 @@
                                                                 @packet.TotalUnresolvedAlertCount alerts
                                                             </span>
                                                             <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
-                                                                @foreach (var error in packet.UnresolvedErrors.Where(e => e.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Information || Se.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Warning))
+                                                                @foreach (var error in packet.UnresolvedErrors.Where(e => e.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Information || e.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Warning))
                                                                 {
                                                                     <div class="break-words">
                                                                         <div class="font-semibold text-gray-900">@error.FormKind</div>
