@@ -501,8 +501,10 @@ namespace UDS.Net.Services.DomainModels
 
                         if (validRxCode != true)
                         {
+                            var rxNormStatus = await lookupService.GetRxNormStatus(id);
+
                             results.Add(new VisitValidationResult(
-                                $"A4 RxNormId '{id}' is not a valid drug code.",
+                                $"A4 RxNormId '{id}' is not a valid drug code. The RxNorm status is listed as \"{rxNormStatus}\"",
                                 new[] { "RxNormId" }
                             ));
                         }

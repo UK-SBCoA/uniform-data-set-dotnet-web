@@ -188,6 +188,12 @@ namespace UDS.Net.Web.MVC.Services
             return _rxNormClient.RxNormIsActiveAsync(rxCUI);
         }
 
+        public async Task<string?> GetRxNormStatus(string? rxCUI)
+        {
+            var rxStatus = await _rxNormClient.GetRxcuiStatusAsync(rxCUI);
+            return rxStatus;
+        }
+
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
         {

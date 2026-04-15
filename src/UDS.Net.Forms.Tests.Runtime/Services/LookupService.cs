@@ -1,5 +1,4 @@
-﻿using System;
-using UDS.Net.Dto;
+﻿using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.LookupModels;
 
@@ -15,6 +14,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
+        public Task<string?> GetRxNormStatus(string rxCUI)
+        {
+            throw new NotImplementedException();
+        }
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
         {
             throw new NotImplementedException();
