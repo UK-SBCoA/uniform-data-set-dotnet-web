@@ -56,9 +56,11 @@
                 <submission-error location="TRSPACCESS" errors="Model.BaseForm.UnresolvedErrors" />
             </div>
         </div>
+    </div>
+    <div>
         @if (Model.Visit.PACKET == PacketKind.F)
         {
-            <p>
+            <p class="mt-1 text-sm">
                 To get to the places they need to go, people might walk, bike, take a bus, train or taxi, drive a car, or get a ride. The next three
                 questions are trying to assess whether or not you have had recent issues with transportation.
             </p>
@@ -127,8 +129,7 @@
             {
                 <label asp-for="A1a.INCOMEYR">
                     <span class="counter"></span>
-                    <span class="underline"> In the last 12 months</span>?
-                   , did you ever eat less than you felt you should because there wasn't enough money to buy food?
+                    Which of these income groups represents your household income <span class="underline">for the past year</span>? Include income from all sources such as wages, salaries, social security or retirement benefits, help from relatives, rent from property, and so forth
                 </label>
             }
             else
@@ -199,8 +200,7 @@
         {
             <label asp-for="A1a.EATLESSYR">
                 <span class="counter"></span>
-                <span class="underline">In the last 12 months</span>?
-                , did you ever eat less than you felt you should because there wasn't enough money to buy food?
+                <span class="underline">In the last 12 months</span>, did you ever eat less than you felt you should because there wasn't enough money to buy food?
             </label>
         }
         else
@@ -232,8 +232,7 @@
         {
             <label asp-for="A1a.LESSMEDSYR">
                 <span class="counter"></span>
-                <span class="underline">In the last 12 months</span>
-                , have you ended up taking less medication than was prescribed for you because of the cost?
+                <span class="underline">In the last 12 months</span>, have you ended up taking less medication than was prescribed for you because of the cost?
             </label>
         }
         else
@@ -264,7 +263,19 @@
                     <table class="table-auto w-full">
                         <tr class="align-top">
                             <td colspan="11">
-                                <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                                @if (Model.Visit.PACKET == PacketKind.F)
+                                {
+                                    <label asp-for="A1a.COMPCOMM">
+                                        <span class="subcounter"></span>
+                                        <span class="font-bold">
+                                            This is a picture of a ladder with 10 steps. Each step represents a level of status as far as money, education, and jobs. The highest step is step 10. This represents people with the most money, the most education, and the best jobs. Step 1 is the lowest step. This step represents people with the least money, least education, and the worst jobs or no job. Steps in between (2 through 9) represent those people who fall somewhere between those who are best off and those who are worst of
+                                        </span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                                }
                                 <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
                                 <submission-error location="COMPCOMM" errors="Model.BaseForm.UnresolvedErrors" />
@@ -280,7 +291,7 @@
     </div>
     <div class="sm:py-6">
         <div class="@rowCSS">
-            <label asp-for="A1a.GUARDEDU"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.GUARDEDU)</label>
+            <label asp-for="A1a.GUARDEDU"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "What was your mother's (or primary person who raised you up until age 18) highest level of education completed at the time they were raising you?" : Html.DisplayNameFor(model => model.A1a.GUARDEDU))</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDEDU"></p>
@@ -305,7 +316,14 @@
 <div>
     <div class="mt-10 space-y-8 pb-12 sm:space-y-0 sm:border-t sm:divide-gray-900/10 sm:pb-0">
         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-            <p class="italic font-bold">Following are some statements that may or may not describe you as a person. For each statement, please rate how well you think the statement describes you.</p>
+            @if (Model.Visit.PACKET == PacketKind.F)
+            {
+                <p class="italic font-bold">Following are some statements to learn how you describe yourself in general. For each statement, select the number that most closely represents your opinion</p>
+            }
+            else
+            {
+                <p class="italic font-bold">Following are some statements that may or may not describe you as a person. For each statement, please rate how well you think the statement describes you.</p>
+            }
         </div>
     </div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:pb-0">
@@ -354,18 +372,8 @@
             </div>
         </div>
         <div class="@rowCSS">
-            @if (Model.Visit.PACKET == PacketKind.F)
-            {
-                <label asp-for="A1a.CLOSEFRND">
-                    <span class="counter"></span>
-                    I miss having a really close friend
-                </label>
-            }
-            else
-            {
-                <label asp-for="A1a.CLOSEFRND"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.CLOSEFRND)</label>
-
-            }
+            <label asp-for="A1a.CLOSEFRND"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "I miss having a really close friend" : Html.DisplayNameFor(model => model.A1a.CLOSEFRND))
+            </label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.CLOSEFRND"></p>
@@ -606,7 +614,7 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span>@(Model.Visit.PACKET == PacketKind.F ? "How frequently do you receive poorer service or treatment from doctors or in hospitals compared to other people?" : Html.DisplayNameFor(model => model.A1a.POORMEDTRT))</label>
+        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "How frequently do you receive poorer service or treatment from doctors or in hospitals compared to other people?" : Html.DisplayNameFor(model => model.A1a.POORMEDTRT))</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.POORMEDTRT"></p>
@@ -644,7 +652,7 @@
                     @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
-                    <label asp-for="A1a.EXPANCEST"></label>
+                    <label asp-for="A1a.EXPANCEST">@(Model.Visit.PACKET == PacketKind.F ? "My ancestry or national origins" : Html.DisplayNameFor(model => model.A1a.EXPANCEST))</label>
                 </div>
             </div>
             <div class="flex space-x-4">
@@ -795,7 +803,14 @@
                                         })
                 </div>
                 <div>
-                    <label asp-for="A1a.EXPNOTAPP"></label>
+                    @if (Model.Visit.PACKET == PacketKind.F)
+                    {
+                        <label asp-for="A1a.EXPNOTAPP">Not applicable - I do not have these experiences in my day-to-day life <b>(END FORM HERE)</b></label>
+                    }
+                    else
+                    {
+                        <label asp-for="A1a.EXPNOTAPP"></label>
+                    }
                 </div>
             </div>
             <div class="flex space-x-4">
