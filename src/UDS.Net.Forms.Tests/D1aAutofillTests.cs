@@ -126,8 +126,6 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[type=\"radio\"][name=\"D1a.DEMENTED\"][value=\"1\"]").ClickAsync();
 
-            await Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]").CheckAsync();
-
             await Page.Locator("input[type=\"radio\"][name=\"D1a.MBI\"][value=\"0\"]").ClickAsync();
 
             await Page.Locator("input[type=\"radio\"][name=\"D1a.PREDOMSYN\"][value=\"1\"]").ClickAsync();
@@ -166,8 +164,6 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[type=\"radio\"][name=\"D1a.DEMENTED\"][value=\"1\"]").ClickAsync();
 
-            await Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]").CheckAsync();
-
             await Page.Locator("input[type=\"radio\"][name=\"D1a.MBI\"][value=\"0\"]").ClickAsync();
 
             await Page.Locator("input[type=\"radio\"][name=\"D1a.PREDOMSYN\"][value=\"0\"]").ClickAsync();
@@ -187,6 +183,45 @@ namespace UDS.Net.Forms.Tests
             // Verify autofill of etiology diagnosis
             await Expect(Page.Locator("input[name=\"D1a.MAJDEPDX\"][type=\"checkbox\"]")).ToBeCheckedAsync();
             await Expect(Page.Locator("input[type=\"radio\"][name=\"D1a.MAJDEPDIF\"][value=\"1\"]")).ToBeCheckedAsync();
+        }
+
+        [TestMethod]
+        public async Task FollowUpVisitDoesNotFillAffectedDomainsFromPreviousVisit()
+        {
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Page.GetByText("Formal consensus panel").ClickAsync();
+
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.NORMCOG\"][value=\"0\"]").ClickAsync();
+
+            await Page.Locator("input[type=\"radio\"][name=\"D1a.DEMENTED\"][value=\"1\"]").ClickAsync();
+
+            await Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMLANG\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMATTN\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMEXEC\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMVISU\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMBEH\"][type=\"checkbox\"]").CheckAsync();
+            await Page.Locator("input[name=\"D1a.CDOMAPRAX\"][type=\"checkbox\"]").CheckAsync();
+
+            // Save in progress
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            // Create follow-up visit
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.Locator("input[name=\"D1a.CDOMMEM\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMLANG\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMATTN\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMEXEC\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMVISU\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMBEH\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name=\"D1a.CDOMAPRAX\"][type=\"checkbox\"]")).Not.ToBeCheckedAsync();
         }
 
         [TestMethod]
