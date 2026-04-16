@@ -402,7 +402,7 @@ namespace UDS.Net.Services.DomainModels
 
             object a1 = GetFields<A1FormFields>("A1");
             object a2 = GetFields<A2FormFields>("A2");
-            object a4g = GetFields<A4GFormFields>("A4");
+            object a4 = GetFields<A4GFormFields>("A4");
             object a5d2 = GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
             object b9 = GetFields<B9FormFields>("B9");
@@ -484,9 +484,9 @@ namespace UDS.Net.Services.DomainModels
                 }
             }
 
-            if (a4g != null)
+            if (a4 != null)
             {
-                A4GFormFields a4Ds = a4g as A4GFormFields;
+                A4GFormFields a4Ds = a4 as A4GFormFields;
 
                 if (a4Ds?.A4Ds != null && a4Ds.A4Ds.Any())
                 {
