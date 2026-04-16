@@ -9,14 +9,14 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public LookupService()
         {
         }
-        public Task<bool?> RxNormIsActive(string rxCUI)
+        public async Task<bool?> RxNormIsActive(string rxCUI)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
-        public Task<string?> GetRxNormStatus(string rxCUI)
+        public async Task<string?> GetRxNormStatus(string rxCUI)
         {
-            throw new NotImplementedException();
+            return "Active";
         }
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
         {
