@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Models.Exports;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
@@ -417,42 +418,64 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
                     //Mother
-                    currentA3Fields.MOMYOB = CompareA3Values(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666, A3Section.Parent);
-                    currentA3Fields.MOMDAGE = CompareA3Values(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666, A3Section.Parent);
-                    currentA3Fields.MOMETPR = CompareA3Values(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66", A3Section.Parent);
-                    currentA3Fields.MOMETSEC = CompareA3Values(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66", A3Section.Parent);
-                    currentA3Fields.MOMMEVAL = CompareA3Values(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6, A3Section.Parent);
-                    currentA3Fields.MOMAGEO = CompareA3Values(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6, A3Section.Parent);
+                    currentA3Fields.MOMYOB = GetExportValue(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666);
+                    currentA3Fields.MOMDAGE = GetExportValue(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666);
+                    currentA3Fields.MOMETPR = GetExportValue(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66");
+                    currentA3Fields.MOMETSEC = GetExportValue(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66");
+                    currentA3Fields.MOMMEVAL = GetExportValue(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6);
+                    currentA3Fields.MOMAGEO = GetExportValue(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6);
 
                     //Father
-                    currentA3Fields.DADYOB = CompareA3Values(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666, A3Section.Parent);
-                    currentA3Fields.DADDAGE = CompareA3Values(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666, A3Section.Parent);
-                    currentA3Fields.DADETPR = CompareA3Values(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66", A3Section.Parent);
-                    currentA3Fields.DADETSEC = CompareA3Values(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66", A3Section.Parent);
-                    currentA3Fields.DADMEVAL = CompareA3Values(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6, A3Section.Parent);
-                    currentA3Fields.DADAGEO = CompareA3Values(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6, A3Section.Parent);
+                    currentA3Fields.DADYOB = GetExportValue(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666);
+                    currentA3Fields.DADDAGE = GetExportValue(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666);
+                    currentA3Fields.DADETPR = GetExportValue(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66");
+                    currentA3Fields.DADETSEC = GetExportValue(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66");
+                    currentA3Fields.DADMEVAL = GetExportValue(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6);
+                    currentA3Fields.DADAGEO = GetExportValue(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6);
 
+                    //DEVNOTE: Setting the siblings changes before implementing into kids and parents
                     //Siblings
                     for (var siblingsIndex = 0; siblingsIndex < siblings.Count(); siblingsIndex++)
                     {
-                        siblings[siblingsIndex].YOB = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666, A3Section.Sibling);
-                        siblings[siblingsIndex].AGD = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666, A3Section.Sibling);
-                        siblings[siblingsIndex].ETPR = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, siblings[siblingsIndex].ETPR, "66", A3Section.Sibling);
-                        siblings[siblingsIndex].ETSEC = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, siblings[siblingsIndex].ETSEC, "66", A3Section.Sibling);
-                        siblings[siblingsIndex].MEVAL = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6, A3Section.Sibling);
-                        siblings[siblingsIndex].AGO = CompareA3Values(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666, A3Section.Sibling);
+                        //DEVNOTE: Full code for applying export value to a property
+                        //Can i do all this in a method? 
+                        ExportValue siblingsYOBExport = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666);
+                        siblings[siblingsIndex].YOB = siblingsYOBExport.Value;
+                        if (siblingsYOBExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+                        /*
+                         *  private void int? SetExportValues(previous, current, code, changeProp)
+                         *  
+                         *  Return a single value for setting siblings[siblingsIndex].prop and set change prop
+                        */
+
+                        siblings[siblingsIndex].AGD = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666).Value;
+
+                        //ETPR TEST CODE
+                        int? previousETPR = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int previousETPRInt) ? previousETPRInt: null;
+                        int? currentETPR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int currentETPRInt) ? currentETPRInt : null;
+                        int? ETPRExport = GetExportValue(previousETPR, currentETPR, 66).Value;
+                        siblings[siblingsIndex].ETPR = ETPRExport.ToString();
+
+                        //ETSEC TEST CODE
+                        int? previousETSEC = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int previousETSECInt) ? previousETSECInt : null;
+                        int? currentEPTR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int currentETSECInt) ? currentETSECInt : null;
+                        int? ETSECExport = GetExportValue(previousETSEC, currentEPTR, 66).Value;
+                        siblings[siblingsIndex].ETSEC = ETSECExport.ToString();
+
+                        siblings[siblingsIndex].MEVAL = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6).Value;
+                        siblings[siblingsIndex].AGO = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666).Value;
                     }
                     ;
 
                     //Kids
                     for (var kidsIndex = 0; kidsIndex < kids.Count(); kidsIndex++)
                     {
-                        kids[kidsIndex].YOB = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666, A3Section.Kid);
-                        kids[kidsIndex].AGD = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666, A3Section.Kid);
-                        kids[kidsIndex].ETPR = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66", A3Section.Kid);
-                        kids[kidsIndex].ETSEC = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66", A3Section.Kid);
-                        kids[kidsIndex].MEVAL = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6, A3Section.Kid);
-                        kids[kidsIndex].AGO = CompareA3Values(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666, A3Section.Kid);
+                        kids[kidsIndex].YOB = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666);
+                        kids[kidsIndex].AGD = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666);
+                        kids[kidsIndex].ETPR = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66");
+                        kids[kidsIndex].ETSEC = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66");
+                        kids[kidsIndex].MEVAL = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6);
+                        kids[kidsIndex].AGO = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666);
                     }
                     ;
 
@@ -462,37 +485,37 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
                 }
 
-                //Before writing A3Fields, set parent values to null if no changes in parent section detected
-                if (currentA3Fields?.NWINFPAR == 0)
-                {
-                    //Mother
-                    currentA3Fields.MOMYOB = null;
-                    currentA3Fields.MOMDAGE = null;
-                    currentA3Fields.MOMETPR = null;
-                    currentA3Fields.MOMETSEC = null;
-                    currentA3Fields.MOMMEVAL = null;
-                    currentA3Fields.MOMAGEO = null;
+                ////Before writing A3Fields, set parent values to null if no changes in parent section detected
+                //if (currentA3Fields?.NWINFPAR == 0)
+                //{
+                //    //Mother
+                //    currentA3Fields.MOMYOB = null;
+                //    currentA3Fields.MOMDAGE = null;
+                //    currentA3Fields.MOMETPR = null;
+                //    currentA3Fields.MOMETSEC = null;
+                //    currentA3Fields.MOMMEVAL = null;
+                //    currentA3Fields.MOMAGEO = null;
 
-                    //Father
-                    currentA3Fields.DADYOB = null;
-                    currentA3Fields.DADDAGE = null;
-                    currentA3Fields.DADETPR = null;
-                    currentA3Fields.DADETSEC = null;
-                    currentA3Fields.DADMEVAL = null;
-                    currentA3Fields.DADAGEO = null;
-                }
+                //    //Father
+                //    currentA3Fields.DADYOB = null;
+                //    currentA3Fields.DADDAGE = null;
+                //    currentA3Fields.DADETPR = null;
+                //    currentA3Fields.DADETSEC = null;
+                //    currentA3Fields.DADMEVAL = null;
+                //    currentA3Fields.DADAGEO = null;
+                //}
 
                 //Before writing, set sibling count to null if no changes detected in section
-                if (currentA3Fields?.NWINFSIB == 0)
-                {
-                    currentA3Fields.SIBS = null;
-                }
+                //if (currentA3Fields?.NWINFSIB == 0)
+                //{
+                //    currentA3Fields.SIBS = null;
+                //}
 
                 //Before writing, set kids count to null if no changes detected in section
-                if (currentA3Fields?.NWINFKID == 0)
-                {
-                    currentA3Fields.KIDS = null;
-                }
+                //if (currentA3Fields?.NWINFKID == 0)
+                //{
+                //    currentA3Fields.KIDS = null;
+                //}
 
                 //Write record of currentA3Fields after completing comparison checks
                 csv.WriteRecord(currentA3Fields);
@@ -605,7 +628,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousA5D2Fields);
                         var currentValue = (int?)field.GetValue(currentA5D2Fields);
-                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
+                        var result = GetExportValue(previousValue, currentValue, 777);
                         field.SetValue(currentA5D2Fields, result);
                     }
                 }
@@ -739,7 +762,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousB9Fields);
                         var currentValue = (int?)field.GetValue(currentB9Fields);
-                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
+                        var result = GetExportValue(previousValue, currentValue, 777);
                         field.SetValue(currentB9Fields, result);
                     }
                 }
@@ -767,49 +790,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         } // writer flushed automatically here
 
-        private string? CompareA3Values(string? previousValue, string? currentValue, string code, Enum section)
+        //DEVNOTE: Change the name? maybe GetExportObj? 
+        private ExportValue GetExportValue(int? previousValue, int? currentValue, int code)
         {
-            if (previousValue == null && currentValue == null) return null;
+            ExportValue newExportValue = new () { HasChanged = false };
+
+            if (previousValue == null && currentValue == null) newExportValue.Value = null;
 
             if (previousValue == currentValue)
             {
-                return code;
+                newExportValue.Value = code;
             }
 
-            DetectA3Change(section);
+            newExportValue.Value = currentValue;
+            //If current value is exported, then value has changed
+            newExportValue.HasChanged = true;
 
-            return currentValue;
-        }
-
-        private int? CompareA3Values(int? previousValue, int? currentValue, int code, Enum section)
-        {
-            if (previousValue == null && currentValue == null) return null;
-
-            if (previousValue == currentValue)
-            {
-                return code;
-            }
-
-            DetectA3Change(section);
-
-            return currentValue;
-        }
-        private int? CompareFollowUpValues(int? previousValue, int? currentValue, int code)
-        {
-            if (previousValue == null && currentValue == null) return null;
-
-            if (previousValue == currentValue)
-            {
-                return code;
-            }
-
-            return currentValue;
-        }
-        private void DetectA3Change(Enum section)
-        {
-            if (section is A3Section.Parent) A3ParentChangeCount++;
-            if (section is A3Section.Sibling) A3SiblingChangeCount++;
-            if (section is A3Section.Kid) A3KidsChangeCount++;
+            return newExportValue;
         }
     }
 }
