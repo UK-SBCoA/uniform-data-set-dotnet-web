@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -654,7 +656,41 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (BaseForm != null)
             {
-                D1a = (D1a)BaseForm; // class library should always handle new instances
+                D1a = (D1a)BaseForm;
+            }
+
+            if (D1a.PacketKind == PacketKind.F && BaseForm.Id == 0)
+            {
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(
+                    User.Identity!.Name!,
+                    Visit.ParticipationId,
+                    "4.0.0");
+
+                if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                        User.Identity!.Name!,
+                        Visit.ParticipationId,
+                        Visit.VISITNUM - 1,
+                        "D1a");
+
+                    if (previousVisit != null)
+                    {
+                        var previousD1aForm = previousVisit.Forms
+                            .Where(f => f.Kind == "D1a")
+                            .FirstOrDefault();
+
+                        if (previousD1aForm != null)
+                        {
+                            var previousFormModel = previousD1aForm.PreviousVisitToVM();
+
+                            D1a = (D1a)previousFormModel;
+
+                            D1a.SetBaseProperties(BaseForm);
+                        }
+                    }
+                }
             }
 
             return Page();
