@@ -1472,7 +1472,10 @@ namespace UDS.Net.Forms.Extensions
             return new B9()
             {
                 Id = formId,
-
+                AllowedFormModes = fields.FormModes.Select(f => (int)f).ToList(),
+                AllowedRemoteModalities = fields.RemoteModalities.Select(f => (int)f).ToList(),
+                AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
+                AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
                 COGAGE = fields.COGAGE,
                 BEHAGE = fields.BEHAGE,
                 PSYCHAGE = fields.PSYCHAGE,
