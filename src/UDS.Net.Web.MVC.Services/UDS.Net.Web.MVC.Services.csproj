@@ -23,4 +23,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\UDS.Net.Services\UDS.Net.Services.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Data\occupation-codes.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>

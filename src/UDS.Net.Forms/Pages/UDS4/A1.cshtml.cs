@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -13,6 +15,8 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         [BindProperty]
         public A1 A1 { get; set; } = default!;
+
+        public List<OccupationCode> OccupationTestResults { get; set; } = new();
 
         public List<RadioListItem> BIRTHSEXListItems { get; } = new List<RadioListItem>
         {
@@ -448,6 +452,26 @@ namespace UDS.Net.Forms.Pages.UDS4
             Visit.Forms.Add(A1); // visit needs updated form as well
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+        }
+
+        public async Task<IActionResult> OnGetOccupationStream(string searchTerm)
+        {
+            var autoCompleteList = await _lookupService.SearchOccupations(searchTerm, 100, 1);
+
+            var occupationLookup = new OccupationAutocompleteLookupModel
+            {
+                SearchResults = new Dictionary<string, string>(),
+                ResultsCount = autoCompleteList.Count()
+            };
+
+            // Build dictionary with display text as key and code as value
+            foreach (var occupation in autoCompleteList)
+            {
+                occupationLookup.SearchResults.Add($"{occupation.Code} - {occupation.Name}", occupation.Code);
+            }
+
+            Response.ContentType = "text/vnd.turbo-stream.html";
+            return Partial("~/Pages/UDS4/_OccupationAutocompleteStream.cshtml", occupationLookup);
         }
     }
 }
