@@ -32,12 +32,68 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
                     new UIDisableAttribute("A4a.ADVERSEOTX"),
-
+                    new UIDisableAttribute("A4a.NEWTREAT"),
+                    new UIDisableAttribute("A4a.NEWADEVENT")
                 },
                 InstructionalMessage = "END FORM HERE"
             } },
-            { "1", new UIBehavior { PropertyAttribute = new UIEnableAttribute("A4a.ADVEVENT") } },
-            { "9", new UIBehavior { PropertyAttribute = new UIDisableAttribute("A4a.ADVEVENT") } }
+            { "1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A4a.ADVEVENT"),
+                    new UIEnableAttribute("A4a.NEWTREAT"),
+                    new UIEnableAttribute("A4a.NEWADEVENT"),
+                },
+            } },
+            { "9", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ADVEVENT"),
+                    new UIDisableAttribute("A4a.NEWTREAT"),
+                    new UIDisableAttribute("A4a.NEWADEVENT"),
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+                },
+                InstructionalMessage = "END FORM HERE"
+            }
+            }
+        };
+        public Dictionary<string, UIBehavior> NEWTREATUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ADVEVENT"),
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+                    new UIDisableAttribute("A4a.NEWADEVENT")
+                },
+                InstructionalMessage = "END FORM HERE"
+            } },
+            { "1", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A4a.ADVEVENT"),
+                    new UIEnableAttribute("A4a.NEWADEVENT"),
+                },
+            } },
+            { "9", new UIBehavior{
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ADVEVENT"),
+                    new UIDisableAttribute("A4a.NEWADEVENT"),
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+                },
+                InstructionalMessage = "END FORM HERE"
+            }
+            }
         };
 
         public Dictionary<string, UIBehavior> ADVEVENTUIBehavior = new Dictionary<string, UIBehavior>
@@ -49,7 +105,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
                     new UIDisableAttribute("A4a.ADVERSEOTX"),
-
+                    new UIDisableAttribute("A4a.NEWADEVENT")
                 },
                 InstructionalMessage = "END FORM HERE"
             } },
@@ -58,8 +114,8 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     new UIEnableAttribute("A4a.ARIAE"),
                     new UIEnableAttribute("A4a.ARIAH"),
-                    new UIEnableAttribute("A4a.ADVERSEOTH")
-
+                    new UIEnableAttribute("A4a.ADVERSEOTH"),
+                    new UIEnableAttribute("A4a.NEWADEVENT")
                 },
                 InstructionalMessage = ""
             } },
@@ -70,6 +126,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                     new UIDisableAttribute("A4a.ARIAH"),
                     new UIDisableAttribute("A4a.ADVERSEOTH"),
                     new UIDisableAttribute("A4a.ADVERSEOTX"),
+                    new UIDisableAttribute("A4a.NEWADEVENT")
                 },
                 InstructionalMessage = ""
             } }
