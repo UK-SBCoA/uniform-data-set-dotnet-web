@@ -33,14 +33,6 @@ namespace UDS.Net.Forms.Models.PageModels
             "FailedErrorChecks"
         };
 
-        protected bool CanEdit(string? status)
-        {
-            if (string.IsNullOrWhiteSpace(status))
-                return false;
-
-            return EditableStatuses.Contains(status);
-        }
-
         // TODO Move this to NotMapped properties in the view model and use custom annotations for required if
         protected private void Validate(MilestoneModel milestone)
         {
@@ -179,9 +171,6 @@ namespace UDS.Net.Forms.Models.PageModels
 
                 if (milestoneFound == null)
                     return NotFound("No milestone found.");
-
-                if (!CanEdit(milestoneFound.Status))
-                    return Forbid();
 
                 Milestone = milestoneFound.ToVM();
                 PageTitle = "Milestone for ";

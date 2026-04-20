@@ -33,6 +33,7 @@ export default class extends Controller {
 
     //if an item is selected, unselect the select all item
     ItemSelected() {
-        this.toggleAllTarget.checked = false;
+        this.toggleAllTarget.checked =
+            this.checkBoxTargets.every(cb => cb.checked);
     }
 }

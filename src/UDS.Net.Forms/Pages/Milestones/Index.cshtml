@@ -79,12 +79,21 @@
                     {
                         <tr class="even:bg-gray-50">
                             <td class="text-center align-middle px-4 py-3">
-                                <input type="checkbox"
-                                       name="selectedIds"
-                                       value="@milestone.Id"
-                                       data-action="click->checkboxSelectAll#ItemSelected"
-                                       data-checkboxSelectAll-target="checkBox"
-                                       class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                @if (milestone.Status == "Finalized")
+                                {
+                                    <input type="checkbox"
+                                           name="selectedIds"
+                                           value="@milestone.Id"
+                                           data-action="click->checkboxSelectAll#ItemSelected"
+                                           data-checkboxSelectAll-target="checkBox"
+                                           class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                                }
+                                else
+                                {
+                                    <span class="text-gray-400 text-sm">
+                                        —
+                                    </span>
+                                }
                             </td>
                             <td>
                                 <div class="rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
