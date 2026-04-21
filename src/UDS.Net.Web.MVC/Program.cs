@@ -37,6 +37,7 @@ builder.Services.AddSingleton<IMilestoneService, MilestoneService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ILookupService, LookupService>();
 builder.Services.AddSingleton<IPacketService, PacketService>();
+builder.Services.AddScoped<IVisitValidator, VisitValidator>();
 
 builder.Services.AddSingleton<IRxNormClient, RxNormClient>();
 

@@ -291,6 +291,10 @@ namespace UDS.Net.Web.MVC.Services
             return Task.FromResult(codes.FirstOrDefault(c => c.Code == code));
         }
 
+        public Task<List<OccupationCode>> GetAllOccupations()
+        {
+            return Task.FromResult(GetCachedOccupations());
+        }
     }
 }
 

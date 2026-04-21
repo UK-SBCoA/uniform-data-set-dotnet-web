@@ -28,6 +28,8 @@ namespace UDS.Net.Services
         Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1);
 
         Task<OccupationCode> GetOccupationByCode(string code);
+
+        Task<List<OccupationCode>> GetAllOccupations();
     }
 }
 

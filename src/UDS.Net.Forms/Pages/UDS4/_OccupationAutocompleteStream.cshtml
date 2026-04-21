@@ -9,7 +9,15 @@
             int i = 0;
             @foreach (var result in Model.SearchResults)
             {
-                <li data-autocomplete-target="item" data-occupation-code="@result.Value" data-action="click->autocomplete#setSearchBox" class="cursor-default text-gray-900 hover:bg-indigo-600 hover:text-white rounded-md px-4 py-2 select-none" id="occupation-option-@i" role="option" tabindex="@i">@result.Key</li>
+                <li data-autocomplete-target="item"
+                    data-occupation-code="@result.Value"
+                    data-occupation-name="@result.Key"
+                    data-action="click->occupationDisplayNames#selectOccupation"
+                    class="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white transition-colors"
+                    role="option">
+                    <span class="font-medium">@result.Key</span>
+                    <span class="ml-2 text-gray-400 text-xs">(@result.Value)</span>
+                </li>
                 i++;
             }
             @if (Model.ResultsCount == 100)
