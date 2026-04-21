@@ -23,16 +23,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         private readonly IConfiguration _configuration;
         private readonly IVisitService _visitService;
 
-        private enum A3Section
-        {
-            Parent = 1,
-            Sibling = 2,
-            Kid = 3
-        }
-        private int A3ParentChangeCount = 0;
-        private int A3SiblingChangeCount = 0;
-        private int A3KidsChangeCount = 0;
-
         public bool Processed { get; set; } = false;
 
         public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
@@ -417,105 +407,183 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //If a previous form exists, compare and set codes for each input
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
+                    //Initialize change properties
+                    currentA3Fields.NWINFKID = 0;
+                    currentA3Fields.NWINFSIB = 0;
+                    currentA3Fields.NWINFKID = 0;
+
                     //Mother
-                    currentA3Fields.MOMYOB = GetExportValue(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666);
-                    currentA3Fields.MOMDAGE = GetExportValue(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666);
-                    currentA3Fields.MOMETPR = GetExportValue(previousA3Fields.MOMETPR, currentA3Fields.MOMETPR, "66");
-                    currentA3Fields.MOMETSEC = GetExportValue(previousA3Fields.MOMETSEC, currentA3Fields.MOMETSEC, "66");
-                    currentA3Fields.MOMMEVAL = GetExportValue(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6);
-                    currentA3Fields.MOMAGEO = GetExportValue(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6);
+                    //YOB
+                    ExportValue momYOBExport = GetExportObject(previousA3Fields.MOMYOB, currentA3Fields.MOMYOB, 6666);
+                    currentA3Fields.MOMYOB = momYOBExport.Value;
+                    if (momYOBExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //AGE
+                    ExportValue momDAGEExport = GetExportObject(previousA3Fields.MOMDAGE, currentA3Fields.MOMDAGE, 666);
+                    currentA3Fields.MOMDAGE = momDAGEExport.Value;
+                    if (momDAGEExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //ETPR
+                    //Handle ETPR string type
+                    int? previousMomETPR = int.TryParse(previousA3Fields.MOMETPR, out int previousMomETPRInt) ? previousMomETPRInt : null;
+                    int? currentMomETPR = int.TryParse(currentA3Fields.MOMETPR, out int currentETPRInt) ? currentETPRInt : null;
+
+                    ExportValue momETPRExport = GetExportObject(previousMomETPR, currentMomETPR, 66);
+                    currentA3Fields.MOMETPR = momETPRExport.Value.ToString();
+                    if (momETPRExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //ETSEC
+                    //Handle ETSEC string type
+                    int? previousMomETSEC = int.TryParse(previousA3Fields.MOMETSEC, out int previousMomETSECInt) ? previousMomETSECInt : null;
+                    int? currentMomETSEC = int.TryParse(currentA3Fields.MOMETSEC, out int currentMomETSECInt) ? currentMomETSECInt : null;
+
+                    ExportValue momETSECExport = GetExportObject(previousMomETSEC, currentMomETSEC, 66);
+                    currentA3Fields.MOMETSEC = momETSECExport.Value.ToString();
+                    if (momETSECExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //MOMMEVAL
+                    ExportValue MOMMEVALExport = GetExportObject(previousA3Fields.MOMMEVAL, currentA3Fields.MOMMEVAL, 6);
+                    currentA3Fields.MOMMEVAL = MOMMEVALExport.Value;
+                    if (MOMMEVALExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //MOMAGEO
+                    ExportValue MOMAGEOExport = GetExportObject(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6);
+                    currentA3Fields.MOMAGEO = MOMAGEOExport.Value;
+                    if (MOMAGEOExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
                     //Father
-                    currentA3Fields.DADYOB = GetExportValue(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666);
-                    currentA3Fields.DADDAGE = GetExportValue(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666);
-                    currentA3Fields.DADETPR = GetExportValue(previousA3Fields.DADETPR, currentA3Fields.DADETPR, "66");
-                    currentA3Fields.DADETSEC = GetExportValue(previousA3Fields.DADETSEC, currentA3Fields.DADETSEC, "66");
-                    currentA3Fields.DADMEVAL = GetExportValue(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6);
-                    currentA3Fields.DADAGEO = GetExportValue(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6);
+                    //YOB
+                    ExportValue dadYOBExport = GetExportObject(previousA3Fields.DADYOB, currentA3Fields.DADYOB, 6666);
+                    currentA3Fields.DADYOB = dadYOBExport.Value;
+                    if (dadYOBExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
-                    //DEVNOTE: Setting the siblings changes before implementing into kids and parents
+                    //AGE
+                    ExportValue dadDAGEExport = GetExportObject(previousA3Fields.DADDAGE, currentA3Fields.DADDAGE, 666);
+                    currentA3Fields.DADDAGE = dadDAGEExport.Value;
+                    if (dadDAGEExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //ETPR
+                    //Handle ETPR string type
+                    int? previousDadETPR = int.TryParse(previousA3Fields.DADETPR, out int previousDadETPRInt) ? previousDadETPRInt : null;
+                    int? currentDadETPR = int.TryParse(currentA3Fields.DADETPR, out int currentDadETPRInt) ? currentETPRInt : null;
+
+                    ExportValue dadETPRExport = GetExportObject(previousDadETPR, currentDadETPR, 66);
+                    currentA3Fields.DADETPR = momETPRExport.Value.ToString();
+                    if (momETPRExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //ETSEC
+                    //Handle ETSEC string type
+                    int? previousDadETSEC = int.TryParse(previousA3Fields.DADETSEC, out int previousDadETSECInt) ? previousDadETSECInt : null;
+                    int? currentDadETSEC = int.TryParse(currentA3Fields.MOMETSEC, out int currentDadETSECInt) ? currentDadETSECInt : null;
+
+                    ExportValue dadETSECExport = GetExportObject(previousDadETSEC, currentDadETSEC, 66);
+                    currentA3Fields.MOMETSEC = dadETSECExport.Value.ToString();
+                    if (dadETSECExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //DADMEVAL
+                    ExportValue DADMEVALExport = GetExportObject(previousA3Fields.DADMEVAL, currentA3Fields.DADMEVAL, 6);
+                    currentA3Fields.DADMEVAL = DADMEVALExport.Value;
+                    if (DADMEVALExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
+                    //DADAGEO
+                    ExportValue DADAGEOExport = GetExportObject(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6);
+                    currentA3Fields.DADAGEO = DADAGEOExport.Value;
+                    if (DADAGEOExport.HasChanged) currentA3Fields.NWINFPAR = 1;
+
                     //Siblings
                     for (var siblingsIndex = 0; siblingsIndex < siblings.Count(); siblingsIndex++)
                     {
-                        //DEVNOTE: Full code for applying export value to a property
-                        //Can i do all this in a method? 
-                        ExportValue siblingsYOBExport = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666);
+                        //YOB
+                        ExportValue siblingsYOBExport = GetExportObject(previousA3Fields.SiblingFormFields[siblingsIndex].YOB, siblings[siblingsIndex].YOB, 6666);
                         siblings[siblingsIndex].YOB = siblingsYOBExport.Value;
-                        if (siblingsYOBExport.HasChanged) currentA3Fields.NWINFPAR = 1;
-                        /*
-                         *  private void int? SetExportValues(previous, current, code, changeProp)
-                         *  
-                         *  Return a single value for setting siblings[siblingsIndex].prop and set change prop
-                        */
+                        if (siblingsYOBExport.HasChanged) currentA3Fields.NWINFSIB = 1;
 
-                        siblings[siblingsIndex].AGD = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666).Value;
+                        //AGD
+                        ExportValue siblingsAGDExport = GetExportObject(previousA3Fields.SiblingFormFields[siblingsIndex].AGD, siblings[siblingsIndex].AGD, 666);
+                        siblings[siblingsIndex].AGD = siblingsAGDExport.Value;
+                        if (siblingsAGDExport.HasChanged) currentA3Fields.NWINFSIB = 1;
 
-                        //ETPR TEST CODE
-                        int? previousETPR = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int previousETPRInt) ? previousETPRInt: null;
-                        int? currentETPR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int currentETPRInt) ? currentETPRInt : null;
-                        int? ETPRExport = GetExportValue(previousETPR, currentETPR, 66).Value;
-                        siblings[siblingsIndex].ETPR = ETPRExport.ToString();
+                        //Handle ETPR string type
+                        int? previousSibETPR = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int previousSibETPRInt) ? previousSibETPRInt: null;
+                        int? currentSibETPR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int currentSibETPRInt) ? currentSibETPRInt : null;
+                        //ETPR
+                        ExportValue siblingsETPRExport = GetExportObject(previousSibETPR, currentSibETPR, 66);
+                        siblings[siblingsIndex].ETPR = siblingsETPRExport.Value.ToString();
+                        if (siblingsETPRExport.HasChanged) currentA3Fields.NWINFSIB = 1;
 
-                        //ETSEC TEST CODE
-                        int? previousETSEC = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int previousETSECInt) ? previousETSECInt : null;
-                        int? currentEPTR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int currentETSECInt) ? currentETSECInt : null;
-                        int? ETSECExport = GetExportValue(previousETSEC, currentEPTR, 66).Value;
-                        siblings[siblingsIndex].ETSEC = ETSECExport.ToString();
+                        //Handle ETSEC string type
+                        int? previousSibETSEC = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int previousSibETSECInt) ? previousSibETSECInt : null;
+                        int? currentSibETSEC = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETSEC, out int currentSibETSECInt) ? currentSibETSECInt : null;
+                        //ETSEC
+                        ExportValue siblingsETSECExport = GetExportObject(previousSibETSEC, currentSibETSEC, 66);
+                        siblings[siblingsIndex].ETSEC = siblingsETSECExport.Value.ToString();
+                        if (siblingsETSECExport.HasChanged) currentA3Fields.NWINFSIB = 1;
 
-                        siblings[siblingsIndex].MEVAL = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6).Value;
-                        siblings[siblingsIndex].AGO = GetExportValue(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666).Value;
-                    }
-                    ;
+                        //MEVAL
+                        ExportValue siblingsMEVALExport = GetExportObject(previousA3Fields.SiblingFormFields[siblingsIndex].MEVAL, siblings[siblingsIndex].MEVAL, 6);
+                        siblings[siblingsIndex].MEVAL = siblingsMEVALExport.Value;
+                        if (siblingsMEVALExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+
+
+                        //AGO
+                        ExportValue siblingsAGOExport = GetExportObject(previousA3Fields.SiblingFormFields[siblingsIndex].AGO, siblings[siblingsIndex].AGO, 666);
+                        siblings[siblingsIndex].AGO = siblingsAGOExport.Value;
+                        if (siblingsAGOExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+                    };
+
+                    //Adjust sibs prop after checking for changes
+                    if (currentA3Fields.NWINFSIB == 0)
+                    {
+                        currentA3Fields.SIBS = null;
+                    };
 
                     //Kids
                     for (var kidsIndex = 0; kidsIndex < kids.Count(); kidsIndex++)
                     {
-                        kids[kidsIndex].YOB = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666);
-                        kids[kidsIndex].AGD = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666);
-                        kids[kidsIndex].ETPR = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].ETPR, kids[kidsIndex].ETPR, "66");
-                        kids[kidsIndex].ETSEC = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].ETSEC, kids[kidsIndex].ETSEC, "66");
-                        kids[kidsIndex].MEVAL = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, kids[kidsIndex].MEVAL, 6);
-                        kids[kidsIndex].AGO = GetExportValue(previousA3Fields.KidsFormFields[kidsIndex].AGO, kids[kidsIndex].AGO, 666);
-                    }
-                    ;
+                        //YOB
+                        ExportValue kidsYOBExport = GetExportObject(previousA3Fields.SiblingFormFields[kidsIndex].YOB, kids[kidsIndex].YOB, 6666);
+                        kids[kidsIndex].YOB = kidsYOBExport.Value;
+                        if (kidsYOBExport.HasChanged) currentA3Fields.NWINFKID = 1;
 
-                    //Set follow-up properties in currentA3Fields
-                    currentA3Fields?.NWINFSIB = A3SiblingChangeCount > 0 ? 1 : 0; //follow-up values will be NULL for forms with no previous visit
-                    currentA3Fields?.NWINFKID = A3KidsChangeCount > 0 ? 1 : 0;
-                    currentA3Fields?.NWINFPAR = A3ParentChangeCount > 0 ? 1 : 0;
+                        //AGD
+                        ExportValue kidsAGDExport = GetExportObject(previousA3Fields.SiblingFormFields[kidsIndex].AGD, kids[kidsIndex].AGD, 666);
+                        kids[kidsIndex].AGD = kidsYOBExport.Value;
+                        if (kidsYOBExport.HasChanged) currentA3Fields.NWINFKID = 1;
+
+                        //Handle ETPR string type
+                        int? previousKidETPR = int.TryParse(previousA3Fields.SiblingFormFields[kidsIndex].ETPR, out int previousKidETPRInt) ? previousKidETPRInt : null;
+                        int? currentKidETPR = int.TryParse(currentA3Fields.SiblingFormFields[kidsIndex].ETPR, out int currentKidETPRInt) ? currentKidETPRInt : null;
+                        //ETPR
+                        ExportValue kidsETPRExport = GetExportObject(previousKidETPR, currentKidETPR, 66);
+                        kids[kidsIndex].ETPR = kidsETPRExport.Value.ToString();
+                        if (kidsETPRExport.HasChanged) currentA3Fields.NWINFKID = 1;
+
+                        //Handle ETSEC string type
+                        int? previousETSEC = int.TryParse(previousA3Fields.SiblingFormFields[kidsIndex].ETSEC, out int previousETSECInt) ? previousETSECInt : null;
+                        int? currentETSEC = int.TryParse(currentA3Fields.SiblingFormFields[kidsIndex].ETSEC, out int currentETSECInt) ? currentETSECInt : null;
+                        //ETSEC
+                        ExportValue kidsETSECExport = GetExportObject(previousETSEC, currentETSEC, 66);
+                        kids[kidsIndex].ETSEC = kidsETSECExport.Value.ToString();
+                        if (kidsETSECExport.HasChanged) currentA3Fields.NWINFKID = 1;
+
+                        //MEVAL
+                        ExportValue siblingsMEVALExport = GetExportObject(previousA3Fields.SiblingFormFields[kidsIndex].MEVAL, siblings[kidsIndex].MEVAL, 6);
+                        siblings[kidsIndex].MEVAL = siblingsMEVALExport.Value;
+                        if (siblingsMEVALExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+
+
+                        //AGO
+                        ExportValue siblingsAGOExport = GetExportObject(previousA3Fields.SiblingFormFields[kidsIndex].AGO, siblings[kidsIndex].AGO, 666);
+                        siblings[kidsIndex].AGO = siblingsAGOExport.Value;
+                        if (siblingsAGOExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+                    };
+
+                    //Adjust kids prop after checking for changes
+                    if (currentA3Fields.NWINFKID == 0)
+                    {
+                        currentA3Fields.KIDS = null;
+                    };
                 }
-
-                ////Before writing A3Fields, set parent values to null if no changes in parent section detected
-                //if (currentA3Fields?.NWINFPAR == 0)
-                //{
-                //    //Mother
-                //    currentA3Fields.MOMYOB = null;
-                //    currentA3Fields.MOMDAGE = null;
-                //    currentA3Fields.MOMETPR = null;
-                //    currentA3Fields.MOMETSEC = null;
-                //    currentA3Fields.MOMMEVAL = null;
-                //    currentA3Fields.MOMAGEO = null;
-
-                //    //Father
-                //    currentA3Fields.DADYOB = null;
-                //    currentA3Fields.DADDAGE = null;
-                //    currentA3Fields.DADETPR = null;
-                //    currentA3Fields.DADETSEC = null;
-                //    currentA3Fields.DADMEVAL = null;
-                //    currentA3Fields.DADAGEO = null;
-                //}
-
-                //Before writing, set sibling count to null if no changes detected in section
-                //if (currentA3Fields?.NWINFSIB == 0)
-                //{
-                //    currentA3Fields.SIBS = null;
-                //}
-
-                //Before writing, set kids count to null if no changes detected in section
-                //if (currentA3Fields?.NWINFKID == 0)
-                //{
-                //    currentA3Fields.KIDS = null;
-                //}
 
                 //Write record of currentA3Fields after completing comparison checks
                 csv.WriteRecord(currentA3Fields);
@@ -628,7 +696,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousA5D2Fields);
                         var currentValue = (int?)field.GetValue(currentA5D2Fields);
-                        var result = GetExportValue(previousValue, currentValue, 777);
+                        var result = GetExportObject(previousValue, currentValue, 777);
                         field.SetValue(currentA5D2Fields, result);
                     }
                 }
@@ -762,7 +830,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousB9Fields);
                         var currentValue = (int?)field.GetValue(currentB9Fields);
-                        var result = GetExportValue(previousValue, currentValue, 777);
+                        var result = GetExportObject(previousValue, currentValue, 777);
                         field.SetValue(currentB9Fields, result);
                     }
                 }
@@ -791,7 +859,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         } // writer flushed automatically here
 
         //DEVNOTE: Change the name? maybe GetExportObj? 
-        private ExportValue GetExportValue(int? previousValue, int? currentValue, int code)
+        private ExportValue GetExportObject(int? previousValue, int? currentValue, int code)
         {
             ExportValue newExportValue = new () { HasChanged = false };
 
