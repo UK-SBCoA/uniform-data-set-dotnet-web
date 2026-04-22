@@ -144,7 +144,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         }
 
         // Obsolete / Test-only methods
-        public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity) => throw new NotImplementedException();
         public Task<int> Count(string username) => Task.FromResult(_drugCodes.Count);
         public Task<DrugCodeLookup> Update(string username, DrugCodeLookup entity) => throw new NotImplementedException();
         public Task<DrugCodeLookup> Patch(string username, DrugCodeLookup entity) => throw new NotImplementedException();
