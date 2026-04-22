@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using System.Text;
-using System.Transactions;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.Exports;
@@ -430,7 +429,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     int? currentMomETPR = int.TryParse(currentA3Fields.MOMETPR, out int currentETPRInt) ? currentETPRInt : null;
 
                     ExportObject momETPRExport = GetExportObject(previousMomETPR, currentMomETPR, 66);
-                    //DEVNOTE: GetExportObject takes int? type arguments, which would return 00 as 0. Use the HasChanged prop to determine value
+                    //Some properties are string? types and require ToString() to set the propery value
                     currentA3Fields.MOMETPR = momETPRExport.Value.ToString();
                     if (momETPRExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
@@ -583,29 +582,21 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     };
                 }
 
-                //Write record of currentA3Fields after completing comparison checks
-                //csv.WriteRecord(currentA3Fields);
-
-                //DEVNOTE: Loop through currentA3Fields props manually to set null when change property == 0
-                //copies what writeRecord is doing
+                //Loop through currentA3Fields props manually as csv.WriteRecord() does to set null when change property == 0
                 if (currentA3Fields != null)
                 {
                     foreach (var prop in currentA3Fields.GetType().GetProperties().Where(p => p.PropertyType == typeof(int?) || p.PropertyType == typeof(string)))
                     {
                         if (prop.Name == "SIBS")
                         {
-                            //Get export value for SIBS If NWINFSIB == 0, then SIBS will be null
                             csv.WriteField(currentA3Fields?.NWINFSIB == 0 ? null : prop.GetValue(currentA3Fields));
                         }
                         else if (prop.Name == "KIDS")
                         {
-                            //get export value for KIDS. If NWINFKID == 0, then KIDS will be null
                             csv.WriteField(currentA3Fields?.NWINFKID == 0 ? null : prop.GetValue(currentA3Fields));
                         }
                         else
                         {
-                            //DEVNOTE: currentA3Fields parent props are previously set. If NWINFPAR == 0, then parent props will be null
-                            //will have to use reflection here to get value for currentA3Fields prop
                             csv.WriteField(currentA3Fields?.NWINFPAR == 0 ? null : prop.GetValue(currentA3Fields));
                         }
                     }
@@ -618,6 +609,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
+                            //If NWINFSIB is 0, then the fields are nulled out
                             csv.WriteField(currentA3Fields?.NWINFSIB == 0 ? null : prop.GetValue(sibling));
                         }
                     }
@@ -630,6 +622,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         if (prop.Name != "FamilyMemberIndex")
                         {
+                            //If NWINFKID is 0, then the fields are nulled out
                             csv.WriteField(currentA3Fields?.NWINFKID == 0 ? null : prop.GetValue(kid));
                         }
                     }
@@ -880,7 +873,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         } // writer flushed automatically here
 
-        //DEVNOTE: Change the name? maybe GetExportObj? 
         private ExportObject GetExportObject(int? previousValue, int? currentValue, int code)
         {
             ExportObject newExportValue = new() { HasChanged = false };
@@ -898,7 +890,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             }
 
             newExportValue.Value = currentValue;
-            //If current value is exported, then value has changed
             newExportValue.HasChanged = true;
 
             return newExportValue;
