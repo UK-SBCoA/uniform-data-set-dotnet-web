@@ -48,6 +48,9 @@ $(document).ready(function () {
   $('input[type=radio][name*="A4a.TRTBIOMARK"]').change(function () {
     toggleTreatmentTable($(this).val());
   });
+  $('input[type=radio][name*="A4a.NEWTREAT"]').change(function () {
+    toggleTreatmentTable($(this).val());
+  });
 
   $('input[name*="TARGETOTH"]').change(function () {
     toggleTargetotxInput(this);
@@ -83,7 +86,17 @@ $(document).ready(function () {
       return;
     }
 
-    const inputs = a4ainputs.querySelectorAll("input");
+    const inputs = Array.from(a4ainputs.querySelectorAll("input"));
+
+    const excludedNames = ["A4a.ARIAE", "A4a.ARIAH", "A4a.ADVERSEOTH", "A4a.ADVERSEOTX"];
+
+    const newTreatInputs = inputs.filter(input =>
+      !excludedNames.includes(input.name)
+    );
+    const newAdEventInputs = inputs.filter(input =>
+      excludedNames.includes(input.name)
+    );
+
     const newTreat = a4ainputs.querySelectorAll('input[type=radio][name="A4a.NEWTREAT"]');
     const newAdEvent = a4ainputs.querySelectorAll('input[name="A4a.NEWADEVENT"]');
 
@@ -91,13 +104,13 @@ $(document).ready(function () {
       return;
     }
 
-    let hasChanged = false;
+    let newTreatHasChanged = false;
+    let newAdEventHasChanged = false;
 
     function setInitialState() {
       newTreat.forEach(radio => {
         if (radio.value === "1") {
           radio.checked = false;
-          radio.disabled = true;
         } else if (radio.value === "0" || radio.value === "9") {
           radio.disabled = false;
         }
@@ -106,14 +119,13 @@ $(document).ready(function () {
       newAdEvent.forEach(radio => {
         if (radio.value === "1") {
           radio.checked = false;
-          radio.disabled = true;
         } else if (radio.value === "0" || radio.value === "9") {
           radio.disabled = false;
         }
       });
     }
 
-    function setChangedState() {
+    function setNewTreatChangedState() {
       newTreat.forEach(radio => {
         if (radio.value === "1") {
           radio.checked = true;
@@ -122,7 +134,8 @@ $(document).ready(function () {
           radio.disabled = true;
         }
       });
-
+    }
+    function setNewAdEventChangedState() {
       newAdEvent.forEach(radio => {
         if (radio.value === "1") {
           radio.checked = true;
@@ -135,15 +148,27 @@ $(document).ready(function () {
 
     setInitialState();
 
-    inputs.forEach(input => {
+    newTreatInputs.forEach(input => {
       input.addEventListener('input', (event) => {
 
         if (event.target.name === "A4a.NEWTREAT") return;
         if (event.target.name === "A4a.NEWADEVENT") return;
 
-        if (!hasChanged) {
-          hasChanged = true;
-          setChangedState();
+        if (!newTreatHasChanged) {
+          newTreatHasChanged = true;
+          setNewTreatChangedState();
+        }
+      });
+    });
+    newAdEventInputs.forEach(input => {
+      input.addEventListener('input', (event) => {
+
+        if (event.target.name === "A4a.NEWTREAT") return;
+        if (event.target.name === "A4a.NEWADEVENT") return;
+
+        if (!newAdEventHasChanged) {
+          newAdEventHasChanged = true;
+          setNewAdEventChangedState();
         }
       });
     });

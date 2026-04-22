@@ -132,6 +132,40 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
+        public Dictionary<string, UIBehavior> NEWADVEVENTUIBehavior = new Dictionary<string, UIBehavior>
+        {
+            { "0", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+                },
+                InstructionalMessage = "END FORM HERE"
+            } },
+            { "1", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIEnableAttribute("A4a.ARIAE"),
+                    new UIEnableAttribute("A4a.ARIAH"),
+                    new UIEnableAttribute("A4a.ADVERSEOTH"),
+                },
+                InstructionalMessage = ""
+            } },
+            { "9", new UIBehavior {
+                PropertyAttributes = new List<UIPropertyAttributes>
+                {
+                    new UIDisableAttribute("A4a.ARIAE"),
+                    new UIDisableAttribute("A4a.ARIAH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTH"),
+                    new UIDisableAttribute("A4a.ADVERSEOTX"),
+                },
+                InstructionalMessage = ""
+            } }
+        };
+
+
         public A4aModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A4a")
         {
         }

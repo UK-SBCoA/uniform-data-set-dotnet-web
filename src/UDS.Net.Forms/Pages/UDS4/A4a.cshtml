@@ -104,7 +104,7 @@
                 <label asp-for="A4a.NEWADEVENT"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A4a.NEWADEVENT)</label>
                 <div class="mt-4 sm:col-span-2 sm:mt-0">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A4a.NEWADEVENT"></p>
-                    <radio-button-group id="@Html.IdFor(m => m.A4a.NEWADEVENT)" for="@Model.A4a.NEWADEVENT" items="Model.BiomarkerListItems"></radio-button-group>
+                    <radio-button-group id="@Html.IdFor(m => m.A4a.NEWADEVENT)" for="@Model.A4a.NEWADEVENT" items="Model.BiomarkerListItems" ui-behaviors="Model.NEWADVEVENTUIBehavior"></radio-button-group>
                     <span class="mt-2 text-sm text-red-600" asp-validation-for="A4a.NEWADEVENT"></span>
                     <submission-error location="NEWADEVENT" errors="Model.BaseForm.UnresolvedErrors" />
                 </div>
