@@ -229,7 +229,7 @@ namespace UDS.Net.Web.MVC.Services
             throw new NotImplementedException();
         }
 
-        private List<OccupationCode> LoadOccupations()
+        private async Task<List<OccupationCode>> LoadOccupations()
         {
             var path = Path.Combine(
                 Path.GetDirectoryName(typeof(LookupService).Assembly.Location)!,
@@ -250,13 +250,13 @@ namespace UDS.Net.Web.MVC.Services
             ) ?? new List<OccupationCode>();
         }
 
-        private List<OccupationCode> GetCachedOccupations()
+        private async Task<List<OccupationCode>> GetCachedOccupations()
         {
             const string cacheKey = "OccupationCodes";
 
             if (!_cache.TryGetValue(cacheKey, out List<OccupationCode> codes))
             {
-                codes = LoadOccupations();
+                codes = await LoadOccupations();
 
                 _cache.Set(cacheKey, codes, new MemoryCacheEntryOptions
                 {
@@ -267,9 +267,9 @@ namespace UDS.Net.Web.MVC.Services
             return codes;
         }
 
-        public Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1)
+        public async Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1)
         {
-            var codes = GetCachedOccupations();
+            var codes = await GetCachedOccupations();
 
             var results = codes
                 .Where(c =>
@@ -281,19 +281,19 @@ namespace UDS.Net.Web.MVC.Services
                 .Take(pageSize)
                 .ToList();
 
-            return Task.FromResult(results);
+            return results;
         }
 
-        public Task<OccupationCode> GetOccupationByCode(string code)
+        public async Task<OccupationCode> GetOccupationByCode(string code)
         {
-            var codes = GetCachedOccupations();
+            var codes = await GetCachedOccupations();
 
-            return Task.FromResult(codes.FirstOrDefault(c => c.Code == code));
+            return codes.FirstOrDefault(c => c.Code == code);
         }
 
-        public Task<List<OccupationCode>> GetAllOccupations()
+        public async Task<List<OccupationCode>> GetAllOccupations()
         {
-            return Task.FromResult(GetCachedOccupations());
+            return await GetCachedOccupations();
         }
     }
 }

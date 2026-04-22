@@ -456,7 +456,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public async Task<IActionResult> OnGetOccupationStream(string searchTerm)
         {
-            var autoCompleteList = await _lookupService.SearchOccupations(searchTerm, 100, 1);
+            var autoCompleteList = await _lookupService.SearchOccupations(searchTerm, 10, 1);
 
             var occupationLookup = new OccupationAutocompleteLookupModel
             {
@@ -464,7 +464,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                 ResultsCount = autoCompleteList.Count()
             };
 
-            // Build dictionary with display text as key and code as value
             foreach (var occupation in autoCompleteList)
             {
                 occupationLookup.SearchResults.Add($"{occupation.Code} - {occupation.Name}", occupation.Code);

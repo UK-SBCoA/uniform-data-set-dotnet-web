@@ -51,19 +51,16 @@ export default class extends Controller {
         const occupationName = event.currentTarget.dataset.occupationName;
 
         if (occupationCode) {
-            // Set the PRIOCC field (hidden input) to the code
             const prioccField = document.querySelector('input[name="A1.PRIOCC"]');
             if (prioccField) {
                 prioccField.value = occupationCode;
             }
 
-            // Clear the search box
             const searchBox = document.getElementById("occupationSearchBox");
             if (searchBox) {
                 searchBox.value = "";
             }
 
-            // Hide the autocomplete list
             const list = document.querySelector('[data-autocomplete-target="list"]');
             if (list) {
                 list.classList.add("hidden");
