@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UDS.Net.Forms.Models.Exports
 {
-    public class ExportValue
+    public class ExportObject
     {
         public int? Value { get; set; }
 
