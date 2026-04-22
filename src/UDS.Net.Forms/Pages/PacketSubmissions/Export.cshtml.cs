@@ -516,7 +516,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         if (siblingsAGDExport.HasChanged) currentA3Fields.NWINFSIB = 1;
 
                         //Handle ETPR string type
-                        int? previousSibETPR = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int previousSibETPRInt) ? previousSibETPRInt: null;
+                        int? previousSibETPR = int.TryParse(previousA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int previousSibETPRInt) ? previousSibETPRInt : null;
                         int? currentSibETPR = int.TryParse(currentA3Fields.SiblingFormFields[siblingsIndex].ETPR, out int currentSibETPRInt) ? currentSibETPRInt : null;
                         //ETPR
                         ExportObject siblingsETPRExport = GetExportObject(previousSibETPR, currentSibETPR, 66);
@@ -588,7 +588,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 //DEVNOTE: Loop through currentA3Fields props manually to set null when change property == 0
                 //copies what writeRecord is doing
-                if(currentA3Fields != null)
+                if (currentA3Fields != null)
                 {
                     foreach (var prop in currentA3Fields.GetType().GetProperties().Where(p => p.PropertyType == typeof(int?) || p.PropertyType == typeof(string)))
                     {
@@ -883,7 +883,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         //DEVNOTE: Change the name? maybe GetExportObj? 
         private ExportObject GetExportObject(int? previousValue, int? currentValue, int code)
         {
-            ExportObject newExportValue = new () { HasChanged = false };
+            ExportObject newExportValue = new() { HasChanged = false };
 
             if (previousValue == null && currentValue == null)
             {
