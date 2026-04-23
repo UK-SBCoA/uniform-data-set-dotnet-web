@@ -448,7 +448,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (MOMMEVALExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
                     //MOMAGEO
-                    ExportObject MOMAGEOExport = GetExportObject(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 6);
+                    ExportObject MOMAGEOExport = GetExportObject(previousA3Fields.MOMAGEO, currentA3Fields.MOMAGEO, 666);
                     currentA3Fields.MOMAGEO = MOMAGEOExport.Value;
                     if (MOMAGEOExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
@@ -487,7 +487,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (DADMEVALExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
                     //DADAGEO
-                    ExportObject DADAGEOExport = GetExportObject(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 6);
+                    ExportObject DADAGEOExport = GetExportObject(previousA3Fields.DADAGEO, currentA3Fields.DADAGEO, 666);
                     currentA3Fields.DADAGEO = DADAGEOExport.Value;
                     if (DADAGEOExport.HasChanged) currentA3Fields.NWINFPAR = 1;
 
@@ -551,8 +551,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                         //AGD
                         ExportObject kidsAGDExport = GetExportObject(previousA3Fields.KidsFormFields[kidsIndex].AGD, currentA3Fields.KidsFormFields[kidsIndex].AGD, 666);
-                        kids[kidsIndex].AGD = kidsYOBExport.Value;
-                        if (kidsYOBExport.HasChanged) currentA3Fields.NWINFKID = 1;
+                        kids[kidsIndex].AGD = kidsAGDExport.Value;
+                        if (kidsAGDExport.HasChanged) currentA3Fields.NWINFKID = 1;
 
                         //Handle ETPR string type
                         int? previousKidETPR = int.TryParse(previousA3Fields.KidsFormFields[kidsIndex].ETPR, out int previousKidETPRInt) ? previousKidETPRInt : null;
@@ -573,12 +573,12 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         //MEVAL
                         ExportObject kidsMEVALExport = GetExportObject(previousA3Fields.KidsFormFields[kidsIndex].MEVAL, currentA3Fields.KidsFormFields[kidsIndex].MEVAL, 6);
                         kids[kidsIndex].MEVAL = kidsMEVALExport.Value;
-                        if (kidsMEVALExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+                        if (kidsMEVALExport.HasChanged) currentA3Fields.NWINFKID = 1;
 
                         //AGO
                         ExportObject kidsAGOExport = GetExportObject(previousA3Fields.KidsFormFields[kidsIndex].AGO, currentA3Fields.KidsFormFields[kidsIndex].AGO, 666);
                         kids[kidsIndex].AGO = kidsAGOExport.Value;
-                        if (kidsAGOExport.HasChanged) currentA3Fields.NWINFSIB = 1;
+                        if (kidsAGOExport.HasChanged) currentA3Fields.NWINFKID = 1;
                     };
                 }
 
