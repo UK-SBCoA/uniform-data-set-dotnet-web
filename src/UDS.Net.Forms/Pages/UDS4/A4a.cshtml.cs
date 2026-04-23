@@ -4,6 +4,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -165,6 +166,44 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
+        public async Task CompareValuesFromPreviousVisit(int participationId)
+        {
+            int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity?.Name!, participationId, "4.0.0");
+
+            if (Visit.VISITNUM < countOfVisits || countOfVisits == 1)
+                return;
+
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, participationId, Visit.VISITNUM - 1, "A4a");
+
+            if (previousVisit == null)
+                return;
+
+            var currentA4a = BaseForm.ToEntity();
+
+            var previousA4a = previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
+
+            var previousA4aFields = previousA4a?.Fields as A4aFormFields;
+            var currentA4aFields = currentA4a.Fields as A4aFormFields;
+
+            if (previousA4aFields == null || currentA4aFields == null)
+                return;
+            bool allValuesMatch = true;
+            foreach (var fields in previousA4aFields.GetType().GetProperties())
+            {
+                var prevValue = fields.GetValue(previousA4aFields);
+                var currentValue = fields.GetValue(currentA4aFields);
+                if (!object.Equals(prevValue, currentValue))
+                {
+                    allValuesMatch = false;
+                    break;
+                }
+            }
+            if (allValuesMatch)
+            {
+                ModelState.AddModelError("A4a.NEWTREAT", "If NEWTREAT has a value of 1, treatment responses must differ from previous visit");
+            }
+            return;
+        }
 
         public A4aModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A4a")
         {
@@ -223,6 +262,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A4a); // visit needs updated form as well
 
+            if (A4a.NEWTREAT != null && A4a.NEWTREAT == 1)
+            {
+                await CompareValuesFromPreviousVisit(Visit.ParticipationId);
+            }
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
