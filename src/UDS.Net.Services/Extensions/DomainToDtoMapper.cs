@@ -646,6 +646,7 @@ namespace UDS.Net.Services.Extensions
         {
             return new A2Dto()
             {
+                NEWINF = fields.NEWINF.HasValue ? Convert.ToBoolean(fields.NEWINF) : (bool?)null,
                 INRELTO = fields.INRELTO,
                 INKNOWN = fields.INKNOWN,
                 INLIVWTH = fields.INLIVWTH,
@@ -680,7 +681,8 @@ namespace UDS.Net.Services.Extensions
                 KIDS = fields.KIDS,
                 NWINFPAR = null,
                 NWINFSIB = null,
-                NWINFKID = null
+                NWINFKID = null,
+
             };
 
             foreach (var sib in fields.SiblingFormFields)

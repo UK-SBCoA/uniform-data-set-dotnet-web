@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -91,6 +93,40 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (BaseForm != null)
             {
                 A4a = (A4a)BaseForm;
+            }
+
+            if (A4a.PacketKind == PacketKind.F && BaseForm.Id == 0)
+            {
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(
+                    User.Identity!.Name!,
+                    Visit.ParticipationId,
+                    "4.0.0");
+
+                if (Visit.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                        User.Identity!.Name!,
+                        Visit.ParticipationId,
+                        Visit.VISITNUM - 1,
+                        "A4a");
+
+                    if (previousVisit != null)
+                    {
+                        var previousA4aForm = previousVisit.Forms
+                            .Where(f => f.Kind == "A4a")
+                            .FirstOrDefault();
+
+                        if (previousA4aForm != null)
+                        {
+                            var previousFormModel = previousA4aForm.PreviousVisitToVM();
+
+                            A4a = (A4a)previousFormModel;
+
+                            A4a.SetBaseProperties(BaseForm);
+                        }
+                    }
+                }
             }
 
             return Page();
