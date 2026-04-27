@@ -6,13 +6,33 @@
 }
 
 <div>
-    <p class="mt-1 text-sm text-gray-500">
-        <b>INSTRUCTIONS:</b> The following questions are designed to assess your current and past life experiences. These questions will help us understand how certain experiences affect your health.
-        You do not have to answer any question that makes you feel uncomfortable.
-    </p>
+    @if (Model.Visit.PACKET == PacketKind.F)
+    {
+        <p class="mt-1 text-sm text-gray-500">
+            <b>INSTRUCTIONS:</b> The following questions are designed to gather information on your current and past life experience that we think
+            may be important for brain health. There are no right or wrong answers, and you do not have to answer any question that makes you
+            feel uncomfortable. If the question does not apply to your experience, feel free to check <b>Prefer not to answer</b>. You should fill out this
+            form on your own, without help from your co-participant or study partner.
+        </p>
+    }
+    else
+    {
+        <p class="mt-1 text-sm text-gray-500">
+            <b>INSTRUCTIONS:</b> The following questions are designed to assess your current and past life experiences. These questions will help us understand how certain experiences affect your health.
+            You do not have to answer any question that makes you feel uncomfortable.
+        </p>
+    }
 </div>
 <div>
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 1 - Transportation</h3>
+        @if (Model.Visit.PACKET == PacketKind.F)
+    {
+    <p>
+        In this section we are trying to understand the extent to which lack of reliable and consistent transportation is a barrier to
+        accomplishing important activities, such as going to the doctor for appointments, going grocery shopping, or picking up
+        medications (these are only examples).
+    </p>
+    }
 </div>
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     <div class="@rowCSS">
@@ -37,8 +57,29 @@
             </div>
         </div>
     </div>
+    <div>
+        @if (Model.Visit.PACKET == PacketKind.F)
+        {
+            <p class="mt-1 text-sm">
+                To get to the places they need to go, people might walk, bike, take a bus, train or taxi, drive a car, or get a ride. The next three
+                questions are trying to assess whether or not you have had recent issues with transportation.
+            </p>
+        }
+    </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.TRANSPROB"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.TRANSPROB)</label>
+        <label asp-for="A1a.TRANSPROB">
+            <span class="counter"></span>
+            @if (Model.Visit.PACKET == PacketKind.F)
+            {
+                <text>
+                    In the past 30 days, how often were you <strong>not</strong> able to leave the house when you wanted to because of a problem with transportation?
+                </text>
+            }
+            else
+            {
+                @Html.DisplayNameFor(model => model.A1a.TRANSPROB)
+            }
+        </label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.TRANSPROB"></p>
@@ -73,11 +114,28 @@
 </div>
 <div>
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 2 - Financial security</h3>
+    @if (Model.Visit.PACKET == PacketKind.F)
+    {
+    <p>
+        These next set of questions are designed to assess your current and past financial situation. If you do not feel comfortable with
+            any question in this section, you can respond <b>Prefer not to answer</b>.
+    </p>
+    }
 </div>
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     <div class="@rowCSS">
-        <div>
-            <label asp-for="A1a.INCOMEYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.INCOMEYR)</label>
+        <div>    
+            @if (Model.Visit.PACKET == PacketKind.F)
+            {
+                <label asp-for="A1a.INCOMEYR">
+                    <span class="counter"></span>
+                    Which of these income groups represents your household income <span class="underline">for the past year</span>? Include income from all sources such as wages, salaries, social security or retirement benefits, help from relatives, rent from property, and so forth
+                </label>
+            }
+            else
+            {
+                <label asp-for="A1a.INCOMEYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.INCOMEYR)</label>
+            }
             <br />
             <em class="text-base font-semibold text-gray-900">
                 This information will be kept confidential and will not be shared in a way that identifies you with any
@@ -138,7 +196,17 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.EATLESSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.EATLESSYR)</label>
+        @if (Model.Visit.PACKET == PacketKind.F)
+        {
+            <label asp-for="A1a.EATLESSYR">
+                <span class="counter"></span>
+                <span class="underline">In the last 12 months</span>, did you ever eat less than you felt you should because there wasn't enough money to buy food?
+            </label>
+        }
+        else
+        {
+            <label asp-for="A1a.EATLESSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.EATLESSYR)</label>
+        }
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EATLESSYR"></p>
@@ -160,7 +228,17 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.LESSMEDSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.LESSMEDSYR)</label>
+        @if (Model.Visit.PACKET == PacketKind.F)
+        {
+            <label asp-for="A1a.LESSMEDSYR">
+                <span class="counter"></span>
+                <span class="underline">In the last 12 months</span>, have you ended up taking less medication than was prescribed for you because of the cost?
+            </label>
+        }
+        else
+        {
+            <label asp-for="A1a.LESSMEDSYR"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.LESSMEDSYR)</label>
+        }
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.LESSMEDSYR"></p>
@@ -185,7 +263,19 @@
                     <table class="table-auto w-full">
                         <tr class="align-top">
                             <td colspan="11">
-                                <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                                @if (Model.Visit.PACKET == PacketKind.F)
+                                {
+                                    <label asp-for="A1a.COMPCOMM">
+                                        <span class="subcounter"></span>
+                                        <span class="font-bold">
+                                            This is a picture of a ladder with 10 steps. Each step represents a level of status as far as money, education, and jobs. The highest step is step 10. This represents people with the most money, the most education, and the best jobs. Step 1 is the lowest step. This step represents people with the least money, least education, and the worst jobs or no job. Steps in between (2 through 9) represent those people who fall somewhere between those who are best off and those who are worst of
+                                        </span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label asp-for="A1a.COMPCOMM"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.A1a.COMPCOMM)</label>
+                                }
                                 <p class="text-sm text-gray-500" asp-description-for="A1a.COMPCOMM"></p>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A1a.COMPCOMM"></span>
                                 <submission-error location="COMPCOMM" errors="Model.BaseForm.UnresolvedErrors" />
@@ -201,7 +291,7 @@
     </div>
     <div class="sm:py-6">
         <div class="@rowCSS">
-            <label asp-for="A1a.GUARDEDU"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.GUARDEDU)</label>
+            <label asp-for="A1a.GUARDEDU"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "What was your mother's (or primary person who raised you up until age 18) highest level of education completed at the time they were raising you?" : Html.DisplayNameFor(model => model.A1a.GUARDEDU))</label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.GUARDEDU"></p>
@@ -215,11 +305,25 @@
 </div>
 <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 3 - Social connections, activities, and environment</h3>
+    @if (Model.Visit.PACKET == PacketKind.F)
+    {
+        <p>
+            These next set of questions are designed to learn what you think about your social connections, the types of activities you spend
+            your time on, and how you view your home and neighborhood.
+        </p>
+    }
 </div>
 <div>
     <div class="mt-10 space-y-8 pb-12 sm:space-y-0 sm:border-t sm:divide-gray-900/10 sm:pb-0">
         <div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
-            <p class="italic font-bold">Following are some statements that may or may not describe you as a person. For each statement, please rate how well you think the statement describes you.</p>
+            @if (Model.Visit.PACKET == PacketKind.F)
+            {
+                <p class="italic font-bold">Following are some statements to learn how you describe yourself in general. For each statement, select the number that most closely represents your opinion</p>
+            }
+            else
+            {
+                <p class="italic font-bold">Following are some statements that may or may not describe you as a person. For each statement, please rate how well you think the statement describes you.</p>
+            }
         </div>
     </div>
     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:pb-0">
@@ -268,7 +372,8 @@
             </div>
         </div>
         <div class="@rowCSS">
-            <label asp-for="A1a.CLOSEFRND"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.CLOSEFRND)</label>
+            <label asp-for="A1a.CLOSEFRND"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "I miss having a really close friend" : Html.DisplayNameFor(model => model.A1a.CLOSEFRND))
+            </label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.CLOSEFRND"></p>
@@ -342,8 +447,7 @@
     </div>
     <div class="subcounterreset pl-10">
         <div class="@rowCSS">
-            <label asp-for="A1a.SAFEHOME"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.SAFEHOME)</label>
-            <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <label asp-for="A1a.SAFEHOME"> <span class="subcounter"></span> @(Model.Visit.PACKET == PacketKind.F ? "Home" : Html.DisplayNameFor(model => model.A1a.SAFEHOME)) </label>            <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.SAFEHOME"></p>
                     <radio-button-group id="A1_SAFEHOME" for="A1a.SAFEHOME" items="Model.SafeToUnsafeItems"></radio-button-group>
@@ -353,7 +457,7 @@
             </div>
         </div>
         <div class="@rowCSS">
-            <label asp-for="A1a.SAFECOMM"><span class="subcounter"></span> @Html.DisplayNameFor(model => model.A1a.SAFECOMM)</label>
+            <label asp-for="A1a.SAFECOMM"> <span class="subcounter"></span> @(Model.Visit.PACKET == PacketKind.F ? "Community (or neighborhood)" : Html.DisplayNameFor(model => model.A1a.SAFECOMM)) </label>
             <div class="mt-4 sm:col-span-2 sm:mt-0">
                 <div class="max-w-lg">
                     <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.SAFECOMM"></p>
@@ -367,10 +471,19 @@
 </div>
 <div>
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 4 - Experiences with the healthcare system</h3>
-    <p class="italic">
-        The next 5 questions ask about your experiences with the healthcare system. Please answer the questions in reference to your regular medical doctors
-        (not your research study doctors).
-    </p>
+    @if (Model.Visit.PACKET == PacketKind.F)
+    {
+        <p class="italic">
+            These next five questions are about your experiences with the healthcare system over the past year. In answering the questions, please think about your regular medical doctors (not the doctors you see for this research study).
+        </p>
+    }
+    else
+    {
+        <p class="italic">
+            The next 5 questions ask about your experiences with the healthcare system. Please answer the questions in reference to your regular medical doctors
+            (not your research study doctors).
+        </p>
+    }
 </div>
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     <div class="@rowCSS">
@@ -431,9 +544,18 @@
 </div>
 <div>
     <h3 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:tracking-tight">Section 5 - Experiences of Discrimination</h3>
-    <p class="italic">
-        Research has shown that experiences of unfair treatment can negatively affect health. We are interested in whether you have experienced any unfair treatment in your daily life.
-    </p>
+    @if (Model.Visit.PACKET == PacketKind.F)
+    {
+        <p class="italic">
+            Research has shown that experiences of unfair treatment in daily life, for any reason, can negatively affect health. Please answer the following questions about whether you have experienced unfair treatment in the following ways.
+        </p>
+    }
+    else
+    {
+        <p class="italic">
+            Research has shown that experiences of unfair treatment can negatively affect health. We are interested in whether you have experienced any unfair treatment in your daily life.
+        </p>
+    }
 </div>
 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
     <div class="@rowCSS">
@@ -492,7 +614,7 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.POORMEDTRT)</label>
+        <label asp-for="A1a.POORMEDTRT"><span class="counter"></span> @(Model.Visit.PACKET == PacketKind.F ? "How frequently do you receive poorer service or treatment from doctors or in hospitals compared to other people?" : Html.DisplayNameFor(model => model.A1a.POORMEDTRT))</label>
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.POORMEDTRT"></p>
@@ -504,7 +626,14 @@
     </div>
     <div class="@rowCSS" data-controller="checkboxDisable">
         <div>
-            <label><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+            @if (Model.Visit.PACKET == PacketKind.F)
+            {
+                <label><span class="counter"></span> When reflecting on the day-to-day experiences in questions 31 to 36, what do you think are the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+            }
+            else
+            {
+                <label><span class="counter"></span> When reflecting on the day-to-day experiences in questions 33 to 38, what do you think is the main reason for these experiences?<br /><small class="italic">(Check all that apply)</small></label>
+            }
             <div>
                 <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1a.POORMEDTRTInvalidNoResponse"></span>
                 <submission-error location="POORMEDTRTInvalidNoResponse" errors="Model.BaseForm.UnresolvedErrors" />
@@ -523,7 +652,7 @@
                     @Html.CheckBox("A1a.EXPANCEST", Model.A1a.EXPANCEST, new { @class = "h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-600" })
                 </div>
                 <div>
-                    <label asp-for="A1a.EXPANCEST"></label>
+                    <label asp-for="A1a.EXPANCEST">@(Model.Visit.PACKET == PacketKind.F ? "My ancestry or national origins" : Html.DisplayNameFor(model => model.A1a.EXPANCEST))</label>
                 </div>
             </div>
             <div class="flex space-x-4">
@@ -674,7 +803,14 @@
                                         })
                 </div>
                 <div>
-                    <label asp-for="A1a.EXPNOTAPP"></label>
+                    @if (Model.Visit.PACKET == PacketKind.F)
+                    {
+                        <label asp-for="A1a.EXPNOTAPP">Not applicable - I do not have these experiences in my day-to-day life <b>(END FORM HERE)</b></label>
+                    }
+                    else
+                    {
+                        <label asp-for="A1a.EXPNOTAPP"></label>
+                    }
                 </div>
             </div>
             <div class="flex space-x-4">
@@ -691,7 +827,9 @@
         </div>
     </div>
     <div class="@rowCSS">
-        <label asp-for="A1a.EXPSTRS"><span class="counter"></span> @Html.DisplayNameFor(model => model.A1a.EXPSTRS)</label>
+        <label asp-for="A1a.EXPSTRS"> <span class="counter"> </span> @(Model.Visit.PACKET == PacketKind.F ?
+            "When you have had day-to-day experiences like those in questions 31 to 36, would you say they have been verystressful, moderately stressful, or not stressful" : Html.DisplayNameFor(model => model.A1a.EXPSTRS))</label>
+
         <div class="mt-4 sm:col-span-2 sm:mt-0">
             <div class="max-w-lg">
                 <p class="text-sm text-gray-500" asp-description-for="@Model.A1a.EXPSTRS"></p>
