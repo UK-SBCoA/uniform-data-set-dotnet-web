@@ -130,8 +130,6 @@ $(document).ready(function () {
         if (radio.value === "1") {
           radio.checked = true;
           radio.disabled = false;
-        } else if (radio.value === "0" || radio.value === "9") {
-          radio.disabled = true;
         }
       });
     }
@@ -140,8 +138,6 @@ $(document).ready(function () {
         if (radio.value === "1") {
           radio.checked = true;
           radio.disabled = false;
-        } else if (radio.value === "0" || radio.value === "9") {
-          radio.disabled = true;
         }
       });
     }

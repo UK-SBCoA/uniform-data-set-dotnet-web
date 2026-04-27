@@ -188,23 +188,65 @@ namespace UDS.Net.Forms.Pages.UDS4
             if (previousA4aFields == null || currentA4aFields == null)
                 return;
             bool allValuesMatch = true;
-            foreach (var fields in previousA4aFields.GetType().GetProperties())
+
+            foreach (var prop in previousA4aFields.GetType().GetProperties())
             {
-                var prevValue = fields.GetValue(previousA4aFields);
-                var currentValue = fields.GetValue(currentA4aFields);
-                if (!object.Equals(prevValue, currentValue))
+                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
                 {
-                    allValuesMatch = false;
-                    break;
+                    continue;
+                }
+                var prevValue = prop.GetValue(previousA4aFields);
+                var currentValue = prop.GetValue(currentA4aFields);
+
+                if (prop.Name == nameof(A4aFormFields.TreatmentFormFields))
+                {
+                    var prevList = prevValue as List<A4aTreatmentFormFields>;
+                    var currentList = currentValue as List<A4aTreatmentFormFields>;
+
+                    if (!TreatmentListsMatch(prevList!, currentList!))
+                    {
+                        allValuesMatch = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (!object.Equals(prevValue, currentValue))
+                    {
+                        allValuesMatch = false;
+                        break;
+                    }
                 }
             }
+
             if (allValuesMatch)
             {
-                ModelState.AddModelError("A4a.NEWTREAT", "If NEWTREAT has a value of 1, treatment responses must differ from previous visit");
+                ModelState.AddModelError("A4a", "All values cannot match the previous visit when either NEWTREAT or NEWADEVENT are selected.");
             }
             return;
         }
+        private bool TreatmentListsMatch(List<A4aTreatmentFormFields> prev, List<A4aTreatmentFormFields> current)
+        {
+            if (prev == null && current == null) return true;
+            if (prev == null || current == null) return false;
+            if (prev.Count != current.Count) return false;
 
+            for (int i = 0; i < prev.Count; i++)
+            {
+                var prevItem = prev[i];
+                var currentItem = current[i];
+
+                foreach (var prop in typeof(A4aTreatmentFormFields).GetProperties())
+                {
+                    var prevValue = prop.GetValue(prevItem);
+                    var currentValue = prop.GetValue(currentItem);
+
+                    if (!object.Equals(prevValue, currentValue))
+                        return false;
+                }
+            }
+            return true;
+        }
         public A4aModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A4a")
         {
         }
