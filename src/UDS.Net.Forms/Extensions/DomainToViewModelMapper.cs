@@ -752,6 +752,8 @@ namespace UDS.Net.Forms.Extensions
                 AllowedNotIncludedReasonCodes = fields.NotIncludedReasonCodes.Select(f => (int)f).ToList(),
                 AllowedAdministrationCodes = fields.AdministrationFormats.Select(f => (int)f).ToList(),
                 ADVEVENT = fields.ADVEVENT,
+                NEWADEVENT = fields.NEWADEVENT,
+                NEWTREAT = fields.NEWTREAT,
                 ARIAE = fields.ARIAE,
                 ARIAH = fields.ARIAH,
                 ADVERSEOTH = fields.ADVERSEOTH,
