@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
@@ -13,6 +13,7 @@ using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels.Forms;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -78,19 +79,52 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             await base.OnGetAsync(id);
 
-            if (BaseForm != null)
+            if (BaseForm is A4 baseA4)
             {
-                A4 = (A4)BaseForm; // class library should always handle new instances
+                A4 = baseA4;
+
+                if (A4.PacketKind == PacketKind.F && BaseForm.Id == 0)
+                {
+                    int countOfVisits = await _visitService.GetVisitCountByVersion(
+                        User.Identity!.Name!,
+                        Visit.ParticipationId,
+                        "4.0.0");
+
+                    if (countOfVisits > 1)
+                    {
+                        var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                            User.Identity!.Name!,
+                            Visit.ParticipationId,
+                            Visit.VISITNUM - 1,
+                            "A4");
+
+                        if (previousVisit != null)
+                        {
+                            var previousA4Form = previousVisit.Forms
+                                .FirstOrDefault(f => f.Kind == "A4");
+
+                            if (previousA4Form != null)
+                            {
+                                var previousFormModel = (A4)previousA4Form.PreviousVisitToVM();
+
+                                A4.ANYMEDS = previousFormModel.ANYMEDS;
+                                A4.DrugIds = previousFormModel.DrugIds;
+
+                                A4.SetBaseProperties(BaseForm);
+                            }
+                        }
+                    }
+                }
             }
 
             RxNormLookup = new RxNormLookupModel
             {
-                VisitId = id.HasValue ? id.Value : 0
+                VisitId = id ?? 0
             };
 
             SelectedDrugs = A4.DrugIds.Select(d => d.RxNormId).ToList();
 
-            await PopulateDrugCodeLists(); // gather the drug reference lists
+            await PopulateDrugCodeLists();
 
             return Page();
         }
