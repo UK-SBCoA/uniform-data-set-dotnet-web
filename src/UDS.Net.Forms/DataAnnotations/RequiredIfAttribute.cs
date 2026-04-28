@@ -28,7 +28,7 @@ namespace UDS.Net.Forms.DataAnnotations
                 var form = (FormModel)validationContext.ObjectInstance;
 
                 // only validate if the form is attempting to be completed
-                if (form != null && form.Status == FormStatus.Finalized && form.MODE != FormMode.NotCompleted)
+                if (form.Status == FormStatus.Finalized)
                 {
                     // get the watched property and compare
                     var type = validationContext.ObjectType;
