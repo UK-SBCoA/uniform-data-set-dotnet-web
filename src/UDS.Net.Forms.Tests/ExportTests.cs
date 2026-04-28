@@ -5,14 +5,9 @@ namespace UDS.Net.Forms.Tests
     [TestClass]
     public class ExportTests : TestBase
     {
-        //frmdate positions in export file
+        //frmdate positions in export file.
+        //Used in BasePropDataIsCorrectlyWrittenToColumns() and HeadersForBasePropsAreCorrectlyLabeled() to test positions of data.
         static int[] formDateIndexes = [6, 121, 182, 201, 434, 481, 607, 780, 800, 861, 877, 910, 934, 951, 995, 1074, 1204, 1313];
-
-        //Forms 
-        static string[] formKinds = ["a1", "a1a", "a2", "a3", "a4", "a4a", "a5d2", "b1", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "c2c2t", "d1a", "d1b"];
-
-        //base form header properties
-        static string[] headerColumns = ["frmdate", "initials", "lang", "mode"];
 
         [TestMethod]
         public async Task ExportFileHas1413Colums()
@@ -50,7 +45,9 @@ namespace UDS.Net.Forms.Tests
             using var stream = await download.CreateReadStreamAsync();
             using var reader = new StreamReader(stream);
 
+            //Call reader to skip the first row and move to the data row
             await reader.ReadLineAsync();
+
             var secondLine = await reader.ReadLineAsync();
 
             var row = secondLine?.Split(',');
@@ -81,12 +78,19 @@ namespace UDS.Net.Forms.Tests
         [TestMethod]
         public async Task HeadersForBasePropsAreCorrectlyLabeled()
         {
+            //Forms 
+            string[] formKinds = ["a1", "a1a", "a2", "a3", "a4", "a4a", "a5d2", "b1", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "c2c2t", "d1a", "d1b"];
+
+            //base form header properties
+            string[] headerColumns = ["frmdate", "initials", "lang", "mode"];
+
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Link, new() { Name = "Packets Index" }).ClickAsync();
             await Page.GetByRole(AriaRole.Link, new() { Name = "View" }).ClickAsync();
 
             var download = await Page.RunAndWaitForDownloadAsync(async () =>
             {
+                //As of now, the default test partipant is particpant 1000
                 await Page.GetByRole(AriaRole.Link, new() { Name = "UDS_1000_" }).ClickAsync();
             });
 
