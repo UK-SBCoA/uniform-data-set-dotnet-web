@@ -190,7 +190,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<string?> GetRxNormStatus(string? rxCUI)
         {
-            var rxStatus = await _rxNormClient.GetRxcuiStatusAsync(rxCUI);
+            var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
             return rxStatus;
         }
 
