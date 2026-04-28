@@ -25,6 +25,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             _drugCodes.Add(new DrugCode { RxNormId = "56789", DrugName = "Guanfacine", BrandName = "Intuniv", IsOverTheCounter = false, IsPopular = false });
             _drugCodes.Add(new DrugCode { RxNormId = "67890", DrugName = "Voriconazole", BrandName = "Vfend", IsOverTheCounter = false, IsPopular = false });
 
+
             // Country codes
             _countries.Add(new LookupCountryCodeDto { Id = 1, Code = "US", Country = "United States", IsActive = true });
             _countries.Add(new LookupCountryCodeDto { Id = 2, Code = "CA", Country = "Canada", IsActive = true });
@@ -32,6 +33,19 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             _countries.Add(new LookupCountryCodeDto { Id = 4, Code = "GB", Country = "United Kingdom", IsActive = true });
         }
 
+        public async Task<bool?> RxNormIsActive(string rxCUI)
+        {
+            return true;
+        }
+
+        public async Task<string?> GetRxNormStatus(string rxCUI)
+        {
+            return "Active";
+        }
+        public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
+        {
+            throw new NotImplementedException();
+        }
         public Task<DrugCodeLookup> LookupDrugCodes(int pageSize = 10, int pageIndex = 1, bool? includePopular = null, bool? includeOverTheCounter = null)
         {
             var query = _drugCodes.AsQueryable();
@@ -130,7 +144,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         }
 
         // Obsolete / Test-only methods
-        public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity) => throw new NotImplementedException();
         public Task<int> Count(string username) => Task.FromResult(_drugCodes.Count);
         public Task<DrugCodeLookup> Update(string username, DrugCodeLookup entity) => throw new NotImplementedException();
         public Task<DrugCodeLookup> Patch(string username, DrugCodeLookup entity) => throw new NotImplementedException();

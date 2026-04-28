@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
@@ -395,13 +396,13 @@ namespace UDS.Net.Services.DomainModels
 
             return results;
         }
-
-        public IEnumerable<VisitValidationResult> GetModelAlerts()
+        public async Task<IEnumerable<VisitValidationResult>> GetModelAlerts(ILookupService lookupService)
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
             object a1 = GetFields<A1FormFields>("A1");
             object a2 = GetFields<A2FormFields>("A2");
+            object a4 = GetFields<A4GFormFields>("A4");
             object a5d2 = GetFields<A5D2FormFields>("A5D2");
             object b5 = GetFields<B5FormFields>("B5");
             object b9 = GetFields<B9FormFields>("B9");
@@ -483,6 +484,33 @@ namespace UDS.Net.Services.DomainModels
                 }
             }
 
+            if (a4 != null)
+            {
+                A4GFormFields a4Ds = a4 as A4GFormFields;
+
+                if (a4Ds?.A4Ds != null && a4Ds.A4Ds.Any())
+                {
+                    var rxNormIds = a4Ds.A4Ds
+                        .Where(a => a != null && a.RxNormId != null)
+                        .Select(a => a.RxNormId)
+                        .ToList();
+
+                    foreach (var id in rxNormIds)
+                    {
+                        var validRxCode = await lookupService.RxNormIsActive(id);
+
+                        if (validRxCode != true)
+                        {
+                            var rxNormStatus = await lookupService.GetRxNormStatus(id);
+
+                            results.Add(new VisitValidationResult(
+                                $"A4 RxNormId '{id}' is not a valid drug code. The RxNorm status is listed as \"{rxNormStatus}\"",
+                                new[] { "RxNormId" }
+                            ));
+                        }
+                    }
+                }
+            }
             return results;
         }
 

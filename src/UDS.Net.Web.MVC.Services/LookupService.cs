@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
@@ -184,6 +183,16 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
+        public Task<bool?> RxNormIsActive(string rxCUI)
+        {
+            return _rxNormClient.RxNormIsActiveAsync(rxCUI);
+        }
+
+        public async Task<string?> GetRxNormStatus(string? rxCUI)
+        {
+            var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
+            return rxStatus;
+        }
 
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)

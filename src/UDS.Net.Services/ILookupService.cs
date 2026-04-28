@@ -24,6 +24,10 @@ namespace UDS.Net.Services
         Task<List<RxNorm>> LookupRxNormApproximateMatches(string searchTerm, int pageSize = 20);
 
         Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode);
-    }
+
+        Task<bool?> RxNormIsActive(string rxCUI);
+
+        Task<string?> GetRxNormStatus(string rxCUI);
+    };
 }
 
