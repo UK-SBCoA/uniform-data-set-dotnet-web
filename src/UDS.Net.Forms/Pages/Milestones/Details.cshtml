@@ -3,7 +3,7 @@
 @using UDS.Net.Services.DomainModels.Submission
 @using UDS.Net.Services.Enums 
 @model UDS.Net.Forms.Pages.Milestones.DetailsModel
-
+@using Microsoft.AspNetCore.Http.Extensions
 @{
     ViewData["Title"] = Model.PageTitle;
 }
@@ -17,6 +17,15 @@
         </li>
     </ol>
 </nav>
+
+
+@* @if (TempData["submissionInfo"] != null)
+{
+    <div>
+        TEST
+    </div>
+} *@
+
 
 <div class="space-y-16 p-16 xl:space-y-20">
     <input type="hidden" asp-for="Milestone.Id" />
@@ -293,9 +302,10 @@
 
 <div class="px-6">
     <div class="mb-4">
-        <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" asp-page="/MilestonesSubmissionErrors/Index">
-            Import Error File
-        </a>
+<a asp-page="/MilestonesSubmissionErrors/Index"
+   asp-route-returnUrl="@(Request.Path + Request.QueryString)">
+   Import Error File
+</a>
     </div>
     <h2 class="text-xl font-bold mb-4">Milestone Submissions</h2>
 
@@ -354,7 +364,6 @@
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Value</th>
-                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
                         </tr>
@@ -371,7 +380,6 @@
                                     <td class="px-4 py-2">@error.Location</td>
                                     <td class="px-4 py-2">@error.Value</td>
                                     <td class="px-4 py-2">@error.Level</td>
-                                    <td class="px-4 py-2">@error.Status</td>
                                     <td class="px-4 py-2">@error.CreatedAt</td>
                                 </tr>
                             }

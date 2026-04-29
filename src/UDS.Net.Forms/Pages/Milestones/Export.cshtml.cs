@@ -56,7 +56,9 @@ namespace UDS.Net.Forms.Pages.Milestones
             csv.WriteField("deathyr");
             csv.WriteField("autopsy");
             csv.WriteField("discmo");
-            csv.WriteField("discdy");
+
+            csv.WriteField("discday");
+
             csv.WriteField("discyr");
             csv.WriteField("dropreas");
             csv.NextRecord();
@@ -192,11 +194,13 @@ namespace UDS.Net.Forms.Pages.Milestones
                 string adcid = _configuration["ADRC:Id"];
                 string initials = username.Substring(0, Math.Min(username.Length, 3)).ToUpper();
 
+                await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
+
+
                 var record = new MilestoneRecord(milestone, initials, adcid);
 
                 WriteCsvRecord(csv, record);
 
-                await _milestoneService.CreateSubmissionAsync(username, milestone.Id);
             }
 
             await csv.FlushAsync();

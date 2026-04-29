@@ -71,7 +71,6 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                 .OrderByDescending(s => s.SubmissionDate)
                 .FirstOrDefault();
 
-
             if (submission == null)
             {
                 ModelState.AddModelError("", "No submission found.");
@@ -131,7 +130,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         isDeleted: false,
                         location: record.Location ?? "",
                         value: record.Value ?? "");
-                    submission.Errors.Add(error);
+                        submission.Errors.Add(error);
                 }
 
                 milestone.Status = "FailedErrorChecks";
@@ -146,7 +145,13 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
             }
 
-            return RedirectToPage("/Milestones/Index");
+            TempData["submissionInfo"] = "test";
+
+
+
+
+
+            return RedirectToPage("../Milestones/Details/", new { id = milestone.Id });
         }
 
     }

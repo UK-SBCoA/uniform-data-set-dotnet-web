@@ -8,6 +8,9 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 {
     public class IndexModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
+        public string? ReturnUrl { get; set; }
+
         [BindProperty]
         public IFormFile? ErrorFileUpload { get; set; }
         [BindProperty]
