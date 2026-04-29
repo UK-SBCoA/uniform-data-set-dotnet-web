@@ -24,7 +24,158 @@ namespace UDS.Net.Forms.Tests
     public class FormFooterNotCompletedTests : TestBase
     {
         [TestMethod]
-        public async Task A1aNotCompletedRequiresReasonCode()
+        public async Task A1NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task A3NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A3 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task A4NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task A4aNotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task A5D2NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task B4NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "B4 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task B8NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "B8 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task B9NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "B9 Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task D1aNotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1a Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+        [TestMethod]
+        public async Task D1bNotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "D1b Required" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true }).Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
+        }
+
+
+        [TestMethod]
+        public async Task A1aNotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -46,7 +197,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task A2NotCompletedRequiresReasonCode()
+        public async Task A2NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -68,7 +219,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task B1NotCompletedRequiresReasonCode()
+        public async Task B1NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -90,7 +241,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task B3NotCompletedRequiresReasonCode()
+        public async Task B3NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -112,7 +263,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task B5NotCompletedRequiresReasonCode()
+        public async Task B5NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -134,7 +285,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task B6NotCompletedRequiresReasonCode()
+        public async Task B6NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
@@ -156,7 +307,7 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
-        public async Task B7NotCompletedRequiresReasonCode()
+        public async Task B7NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
