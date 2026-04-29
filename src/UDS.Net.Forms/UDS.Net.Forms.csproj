@@ -12,7 +12,7 @@
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Razor class library for rendering UDS forms</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>16.2.12</ReleaseVersion>
+		<ReleaseVersion>16.2.8</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
