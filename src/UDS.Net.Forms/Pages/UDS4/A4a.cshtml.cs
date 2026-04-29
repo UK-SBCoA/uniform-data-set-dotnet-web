@@ -166,25 +166,8 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public async Task CompareValuesFromPreviousVisit(int participationId)
+        public async Task CompareValuesFromPreviousVisit(int participationId, A4aFormFields previousA4aFields, A4aFormFields currentA4aFields)
         {
-            int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity?.Name!, participationId, "4.0.0");
-
-            if (Visit.VISITNUM < countOfVisits || countOfVisits == 1)
-                return;
-
-            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, participationId, Visit.VISITNUM - 1, "A4a");
-
-            if (previousVisit == null)
-                return;
-
-            var currentA4a = BaseForm.ToEntity();
-
-            var previousA4a = previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
-
-            var previousA4aFields = previousA4a?.Fields as A4aFormFields;
-            var currentA4aFields = currentA4a.Fields as A4aFormFields;
-
             if (previousA4aFields == null || currentA4aFields == null)
                 return;
             bool allValuesMatch = true;
@@ -304,9 +287,56 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(A4a); // visit needs updated form as well
 
-            if (A4a.NEWTREAT != null && A4a.NEWTREAT == 1)
+            if (Visit.PACKET == PacketKind.F)
             {
-                await CompareValuesFromPreviousVisit(Visit.ParticipationId);
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity?.Name!, Visit.ParticipationId, "4.0.0");
+
+                var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, Visit.ParticipationId, Visit.VISITNUM - 1, "A4a");
+
+                var currentA4a = BaseForm.ToEntity();
+
+                var previousA4a = previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
+
+                var previousA4aFields = previousA4a?.Fields as A4aFormFields;
+                var currentA4aFields = currentA4a.Fields as A4aFormFields;
+
+                if (A4a.NEWTREAT != null)
+                {
+                    if ((A4a.NEWTREAT == 1))
+                    {
+                        //Displays model error if all values are the same
+                        await CompareValuesFromPreviousVisit(Visit.ParticipationId, previousA4aFields!, currentA4aFields!);
+                    }
+
+                    if (A4a.NEWTREAT == 0 || A4a.NEWTREAT == 9)
+                    {
+                        //Need to set the currentA4a treatment fields to the previousA4a treatment fields
+                        var previousA4aVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                            User.Identity!.Name!,
+                            Visit.ParticipationId,
+                            Visit.VISITNUM - 1,
+                            "A4a");
+
+                        if (previousA4aVisit != null)
+                        {
+                            var previousA4aForm = previousA4aVisit.Forms
+                                .Where(f => f.Kind == "A4a")
+                                .FirstOrDefault();
+
+                            if (previousA4aForm != null)
+                            {
+                                //This needs fixed, I only need to set the treatment fields
+                                var previousFormModel = previousA4aForm.PreviousVisitToVM();
+
+                                A4a = (A4a)previousFormModel;
+
+                                A4a.SetBaseProperties(BaseForm);
+                            }
+                        }
+
+                    }
+
+                }
             }
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
