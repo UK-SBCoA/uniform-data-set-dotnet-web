@@ -144,13 +144,6 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                 return Page();
 
             }
-
-            TempData["submissionInfo"] = "test";
-
-
-
-
-
             return RedirectToPage("../Milestones/Details/", new { id = milestone.Id });
         }
 

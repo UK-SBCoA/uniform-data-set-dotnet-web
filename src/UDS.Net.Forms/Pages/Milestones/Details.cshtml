@@ -17,16 +17,6 @@
         </li>
     </ol>
 </nav>
-
-
-@* @if (TempData["submissionInfo"] != null)
-{
-    <div>
-        TEST
-    </div>
-} *@
-
-
 <div class="space-y-16 p-16 xl:space-y-20">
     <input type="hidden" asp-for="Milestone.Id" />
     <input type="hidden" asp-for="Milestone.ParticipationId" />
@@ -302,10 +292,10 @@
 
 <div class="px-6">
     <div class="mb-4">
-<a asp-page="/MilestonesSubmissionErrors/Index"
-   asp-route-returnUrl="@(Request.Path + Request.QueryString)">
-   Import Error File
-</a>
+        <a asp-page="/MilestonesSubmissionErrors/Index"
+           asp-route-returnUrl="@(Request.Path + Request.QueryString)">
+           Import Error File
+        </a>
     </div>
     <h2 class="text-xl font-bold mb-4">Milestone Submissions</h2>
 

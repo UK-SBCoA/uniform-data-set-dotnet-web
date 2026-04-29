@@ -131,22 +131,17 @@
                                 {
                                     <span class="text-gray-700">Submitted</span>
                                     <br />
-                                    <span class="text-indigo-600 cursor-pointer hover:text-green-800"
-                                          onclick="updateStatus(@milestone.Id, 'PassedErrorChecks')">
+                                    <span class="text-indigo-600 cursor-pointer hover:text-green-800" onclick="updateStatus(@milestone.Id, 'PassedErrorChecks')">
                                         PassedErrorChecks
                                     </span>
-
                                     <span class="mx-2 text-gray-400">|</span>
-
-                                    <span class="text-indigo-600 cursor-pointer hover:text-red-800"
-                                          onclick="updateStatus(@milestone.Id, 'FailedErrorChecks')">
+                                    <span class="text-indigo-600 cursor-pointer hover:text-red-800" onclick="updateStatus(@milestone.Id, 'FailedErrorChecks')">
                                         FailedErrorChecks
                                     </span>
                                 }
                                 else
                                 {
                                     var statusClass = "text-gray-700";
-
                                     if (milestone.Status == "FailedErrorChecks")
                                     {
                                         statusClass = "text-red-600 font-semibold";
@@ -155,7 +150,6 @@
                                     {
                                         statusClass = "text-green-600 font-semibold";
                                     }
-
                                     <span class="@statusClass">
                                         @milestone.Status
                                     </span>
@@ -171,10 +165,7 @@
                                     <a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-500">Edit</a>
                                 }
                             </td>
-
-
                             <td>
-
                                 @if (milestone.Status == "Submitted")
                                 {
                                     <a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a>
@@ -184,12 +175,8 @@
                                     <span class="text-gray-400 cursor-not-allowed" title="View available only for submitted milestones">
                                         View
                                     </span>
-                                }
-                                
-                                
+                                }         
                             </td>
-
-
                             <td>
                                 @if (milestone.Status == "Finalized")
                                 {
