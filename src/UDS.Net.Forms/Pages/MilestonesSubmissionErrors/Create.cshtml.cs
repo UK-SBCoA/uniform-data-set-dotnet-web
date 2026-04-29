@@ -48,10 +48,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                 : M1SubmissionErrorLevel.Information;
         }
 
-
-
-        List<M1SubmissionError> errorsToSave = new();
-
+        //List<M1SubmissionError> errorsToSave = new();
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostDisplayErrorSubmission()
