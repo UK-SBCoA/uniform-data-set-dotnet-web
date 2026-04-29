@@ -127,7 +127,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         isDeleted: false,
                         location: record.Location ?? "",
                         value: record.Value ?? "");
-                        submission.Errors.Add(error);
+                    submission.Errors.Add(error);
                 }
 
                 milestone.Status = "FailedErrorChecks";
