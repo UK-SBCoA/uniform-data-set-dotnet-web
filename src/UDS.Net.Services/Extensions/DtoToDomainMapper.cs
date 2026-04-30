@@ -437,8 +437,22 @@ namespace UDS.Net.Services.Extensions
 
         public static M1SubmissionError ToDomain(this M1SubmissionErrorDto dto, int submissionId)
         {
-            var level = M1SubmissionErrorLevel.Information;
-            var status = M1SubmissionErrorStatus.Pending;
+            M1SubmissionErrorLevel level;
+            var levelStr = dto.Level?.Trim().ToLower();
+            if (levelStr == "error")
+                level = M1SubmissionErrorLevel.Error;
+            else if (levelStr == "alert" || levelStr == "warning")
+                level = M1SubmissionErrorLevel.Warning;
+            else if (levelStr == "critical")
+                level = M1SubmissionErrorLevel.Critical;
+            else
+                level = M1SubmissionErrorLevel.Information;
+
+            var status = dto.Status?.Trim().ToLower() switch
+            {
+                "pending" => M1SubmissionErrorStatus.Pending,
+                _ => M1SubmissionErrorStatus.Pending
+            };
 
             return new M1SubmissionError(
                 id: dto.Id,

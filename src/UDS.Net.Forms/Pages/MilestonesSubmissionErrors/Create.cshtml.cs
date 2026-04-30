@@ -4,11 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Globalization;
-using UDS.Net.API.Entities;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels;
-
 
 namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 {
@@ -38,17 +35,21 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
         }
 
 
-        private static M1SubmissionErrorLevel GetErrorLevel(string? errorType)
+
+        private static Services.Enums.M1SubmissionErrorLevel GetErrorLevel(string? type)
         {
-            if (string.IsNullOrWhiteSpace(errorType))
-                return M1SubmissionErrorLevel.Information;
+                if (string.IsNullOrWhiteSpace(type))
+                return Services.Enums.M1SubmissionErrorLevel.Information;
 
-            return errorType.Trim().ToLower() == "error"
-                ? M1SubmissionErrorLevel.Error
-                : M1SubmissionErrorLevel.Information;
-        }
+                var normalized = type.Trim().ToLower();
 
-        //List<M1SubmissionError> errorsToSave = new();
+                return normalized switch
+                {
+                    "error" => Services.Enums.M1SubmissionErrorLevel.Error,
+                    "alert" => Services.Enums.M1SubmissionErrorLevel.Warning,
+                    _ => Services.Enums.M1SubmissionErrorLevel.Information
+                };
+            }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostDisplayErrorSubmission()
@@ -119,8 +120,7 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                         formKind: record.Value ?? "",
                         message: record.Message ?? "",
                         assignedTo: "",
-                        level: Services.Enums.M1SubmissionErrorLevel.Error,
-                        status: Services.Enums.M1SubmissionErrorStatus.Pending,
+                        level: GetErrorLevel(record.Type), status: Services.Enums.M1SubmissionErrorStatus.Pending,
                         statusChangedBy: "",
                         createdAt: record.Timestamp ?? DateTime.UtcNow,
                         createdBy: username,
