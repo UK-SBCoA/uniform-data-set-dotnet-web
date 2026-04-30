@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
@@ -408,53 +409,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
                     A3FormFields encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
+                    if(encodedFormFields != null)
+                    {
+                        A3FormFields exportFormFields = encodedFormFields.GetExportFormFields();
+
+                        csv.WriteRecord(exportFormFields);
+                    }
                 }
-
-                //Loop through currentA3Fields props manually as csv.WriteRecord() does to set null when change property == 0
-                //if (currentA3Fields != null)
-                //{
-                //    foreach (var prop in currentA3Fields.GetType().GetProperties().Where(p => p.PropertyType == typeof(int?) || p.PropertyType == typeof(string)))
-                //    {
-                //        if (prop.Name == "SIBS")
-                //        {
-                //            csv.WriteField(currentA3Fields?.NWINFSIB == 0 ? null : prop.GetValue(currentA3Fields));
-                //        }
-                //        else if (prop.Name == "KIDS")
-                //        {
-                //            csv.WriteField(currentA3Fields?.NWINFKID == 0 ? null : prop.GetValue(currentA3Fields));
-                //        }
-                //        else
-                //        {
-                //            csv.WriteField(currentA3Fields?.NWINFPAR == 0 ? null : prop.GetValue(currentA3Fields));
-                //        }
-                //    }
-                //}
-
-                //Write Sibling data
-                //foreach (var sibling in siblings)
-                //{
-                //    foreach (var prop in a3FamilyProps)
-                //    {
-                //        if (prop.Name != "FamilyMemberIndex")
-                //        {
-                //            //If NWINFSIB is 0, then the fields are nulled out
-                //            csv.WriteField(currentA3Fields?.NWINFSIB == 0 ? null : prop.GetValue(sibling));
-                //        }
-                //    }
-                //}
-
-                ////Write Kids data
-                //foreach (var kid in kids)
-                //{
-                //    foreach (var prop in a3FamilyProps)
-                //    {
-                //        if (prop.Name != "FamilyMemberIndex")
-                //        {
-                //            //If NWINFKID is 0, then the fields are nulled out
-                //            csv.WriteField(currentA3Fields?.NWINFKID == 0 ? null : prop.GetValue(kid));
-                //        }
-                //    }
-                //}
             }
 
             if (a4 != null)

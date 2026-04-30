@@ -130,6 +130,73 @@ namespace UDS.Net.Services.DomainModels.Forms
             return null;
         }
 
+        //Take the enocded form fields and set values to null when change property is 0
+        public A3FormFields GetExportFormFields()
+        {
+            A3FormFields encodedFormFields = this;
+
+            if(encodedFormFields != null)
+            {
+                if(NWINFPAR == 0)
+                {
+                    encodedFormFields.MOMYOB = null;
+                    encodedFormFields.MOMDAGE = null;
+                    encodedFormFields.MOMETPR = null;
+                    encodedFormFields.MOMETSEC = null;
+                    encodedFormFields.MOMMEVAL = null;
+                    encodedFormFields.MOMAGEO = null;
+                    encodedFormFields.DADYOB = null;
+                    encodedFormFields.DADDAGE = null;
+                    encodedFormFields.DADETPR = null;
+                    encodedFormFields.DADETSEC = null;
+                    encodedFormFields.DADMEVAL = null;
+                    encodedFormFields.DADAGEO = null;
+                    encodedFormFields.SIBS = null;
+                    encodedFormFields.KIDS = null;
+                }
+
+                if(NWINFSIB == 0)
+                {
+                    encodedFormFields.SIBS = encodedFormFields.NWINFSIB == 0 ? null : SIBS;
+
+                    if (encodedFormFields.SiblingFormFields != null)
+                    {
+                        for (var i = 0; i < SiblingFormFields.Count; i++)
+                        {
+                            encodedFormFields.SiblingFormFields[i].YOB = null;
+                            encodedFormFields.SiblingFormFields[i].AGD = null;
+                            encodedFormFields.SiblingFormFields[i].ETPR = null;
+                            encodedFormFields.SiblingFormFields[i].ETSEC = null;
+                            encodedFormFields.SiblingFormFields[i].MEVAL = null;
+                            encodedFormFields.SiblingFormFields[i].AGO = null;
+                        }
+                    }
+                }
+
+                if(NWINFKID == 0)
+                {
+                    encodedFormFields.KIDS = encodedFormFields.NWINFKID == 0 ? null : KIDS;
+
+                    if (encodedFormFields.KidsFormFields != null)
+                    {
+                        for (var i = 0; i < KidsFormFields.Count; i++)
+                        {
+                            encodedFormFields.KidsFormFields[i].YOB = null;
+                            encodedFormFields.KidsFormFields[i].AGD = null;
+                            encodedFormFields.KidsFormFields[i].ETPR = null;
+                            encodedFormFields.KidsFormFields[i].ETSEC = null;
+                            encodedFormFields.KidsFormFields[i].MEVAL = null;
+                            encodedFormFields.KidsFormFields[i].AGO = null;
+                        }
+                    }
+                }
+
+                return encodedFormFields;
+            }
+
+            return null;
+        }
+
         // Evalutate for export value (currentValue, code, or null) and use the setter method to set change property value
         private int? GetExportValue(int? previousValue, int? currentValue, int code, Action<int?> changePropSetter)
         {
