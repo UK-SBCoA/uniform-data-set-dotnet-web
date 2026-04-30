@@ -38,18 +38,18 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
 
         private static Services.Enums.M1SubmissionErrorLevel GetErrorLevel(string? type)
         {
-                if (string.IsNullOrWhiteSpace(type))
+            if (string.IsNullOrWhiteSpace(type))
                 return Services.Enums.M1SubmissionErrorLevel.Information;
 
-                var normalized = type.Trim().ToLower();
+            var normalized = type.Trim().ToLower();
 
-                return normalized switch
-                {
-                    "error" => Services.Enums.M1SubmissionErrorLevel.Error,
-                    "alert" => Services.Enums.M1SubmissionErrorLevel.Warning,
-                    _ => Services.Enums.M1SubmissionErrorLevel.Information
-                };
-            }
+            return normalized switch
+            {
+                "error" => Services.Enums.M1SubmissionErrorLevel.Error,
+                "alert" => Services.Enums.M1SubmissionErrorLevel.Warning,
+                _ => Services.Enums.M1SubmissionErrorLevel.Information
+            };
+        }
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostDisplayErrorSubmission()
