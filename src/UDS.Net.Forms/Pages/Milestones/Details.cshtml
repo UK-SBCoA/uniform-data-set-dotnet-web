@@ -292,10 +292,18 @@
 
 <div class="px-6">
     <div class="mb-4">
-        <a asp-page="/MilestonesSubmissionErrors/Index"
-           asp-route-returnUrl="@(Request.Path + Request.QueryString)">
-           Import Error File
-        </a>
+        @if (Model.Milestone.Status == "Submitted")
+        {
+            <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" asp-page="/MilestonesSubmissionErrors/Index" asp-route-returnUrl="@(Request.Path + Request.QueryString)">
+                Import Error File
+            </a>
+        }
+        else
+        {
+            <span class="rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-gray-500 cursor-not-allowed">
+                Import Error File
+            </span>
+        }
     </div>
     <h2 class="text-xl font-bold mb-4">Milestone Submissions</h2>
 
@@ -354,7 +362,7 @@
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Location</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Value</th>
-                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
+                            <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                             <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
                         </tr>
                     </thead>

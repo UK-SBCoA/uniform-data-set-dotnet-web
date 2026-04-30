@@ -166,16 +166,7 @@
                                 }
                             </td>
                             <td>
-                                @if (milestone.Status == "Submitted")
-                                {
-                                    <a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a>
-                                }
-                                else
-                                {
-                                    <span class="text-gray-400 cursor-not-allowed" title="View available only for submitted milestones">
-                                        View
-                                    </span>
-                                }         
+                                <a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a>
                             </td>
                             <td>
                                 @if (milestone.Status == "Finalized")

@@ -74,6 +74,8 @@ namespace UDS.Net.Forms.Pages.MilestonesSubmissionErrors
                 return Page();
             }
 
+            submission.ModifiedBy = username;
+
             if (ErrorFileUpload == null || ErrorFileUpload.Length == 0)
             {
                 ModelState.AddModelError("ErrorFileUpload", "File not found.");
