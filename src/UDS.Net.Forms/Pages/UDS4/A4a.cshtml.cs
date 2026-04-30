@@ -174,7 +174,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             foreach (var prop in previousA4aFields.GetType().GetProperties())
             {
-                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
+                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.ARIAE) || prop.Name == nameof(A4aFormFields.ARIAH) || prop.Name == nameof(A4aFormFields.ADVERSEOTH) || prop.Name == nameof(A4aFormFields.ADVERSEOTX) || prop.Name == nameof(A4aFormFields.ADVEVENT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
                 {
                     continue;
                 }
@@ -285,8 +285,6 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A4a; // reassign bounded and derived form to base form for base method
 
-            Visit.Forms.Add(A4a); // visit needs updated form as well
-
             if (Visit.PACKET == PacketKind.F)
             {
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity?.Name!, Visit.ParticipationId, "4.0.0");
@@ -304,40 +302,45 @@ namespace UDS.Net.Forms.Pages.UDS4
                 {
                     if ((A4a.NEWTREAT == 1))
                     {
-                        //Displays model error if all values are the same
+                        //Displays model error if all a4a treatment values are the same
                         await CompareValuesFromPreviousVisit(Visit.ParticipationId, previousA4aFields!, currentA4aFields!);
                     }
 
                     if (A4a.NEWTREAT == 0 || A4a.NEWTREAT == 9)
                     {
                         //Need to set the currentA4a treatment fields to the previousA4a treatment fields
-                        var previousA4aVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
-                            User.Identity!.Name!,
-                            Visit.ParticipationId,
-                            Visit.VISITNUM - 1,
-                            "A4a");
-
-                        if (previousA4aVisit != null)
+                        if (previousA4aFields != null)
                         {
-                            var previousA4aForm = previousA4aVisit.Forms
-                                .Where(f => f.Kind == "A4a")
-                                .FirstOrDefault();
-
-                            if (previousA4aForm != null)
-                            {
-                                //This needs fixed, I only need to set the treatment fields
-                                var previousFormModel = previousA4aForm.PreviousVisitToVM();
-
-                                A4a = (A4a)previousFormModel;
-
-                                A4a.SetBaseProperties(BaseForm);
-                            }
+                            List<A4aTreatmentFormFields> previousTreatmentFields = previousA4aFields.TreatmentFormFields;
+                            A4a.Treatments = previousTreatmentFields
+                                            .Select(tf => new A4aTreatment
+                                            {
+                                                TreatmentIndex = tf.TreatmentIndex,
+                                                TARGETAB = tf.TARGETAB,
+                                                TARGETTAU = tf.TARGETTAU,
+                                                TARGETINF = tf.TARGETINF,
+                                                TARGETSYN = tf.TARGETSYN,
+                                                TARGETOTH = tf.TARGETOTH,
+                                                TARGETOTX = tf.TARGETOTX,
+                                                TRTTRIAL = tf.TRTTRIAL,
+                                                NCTNUM = tf.NCTNUM,
+                                                STARTMO = tf.STARTMO,
+                                                STARTYEAR = tf.STARTYEAR,
+                                                ENDMO = tf.ENDMO,
+                                                ENDYEAR = tf.ENDYEAR,
+                                                CARETRIAL = tf.CARETRIAL,
+                                                TRIALGRP = tf.TRIALGRP
+                                            })
+                                            .ToList();
                         }
+                        Visit.Forms.Add(A4a);
+                        return await base.OnPostAsync(id, goNext); // checks for validation, etc.
 
                     }
-
                 }
             }
+            Visit.Forms.Add(A4a); // visit needs updated form as well
+
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
     }
