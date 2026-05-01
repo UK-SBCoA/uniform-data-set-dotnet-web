@@ -18,12 +18,12 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 A3FamilyMemberFormFields encodedFamilyMemberFormFields = new A3FamilyMemberFormFields();
 
-                encodedFamilyMemberFormFields.YOB = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.YOB, this.YOB, 6666, changePropSetter);
-                encodedFamilyMemberFormFields.AGD = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.AGD, this.AGD, 666, changePropSetter);
-                encodedFamilyMemberFormFields.ETPR = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.ETPR, this.ETPR, "66", changePropSetter);
-                encodedFamilyMemberFormFields.ETSEC = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.ETSEC, this.ETSEC, "66", changePropSetter);
-                encodedFamilyMemberFormFields.MEVAL = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.MEVAL, this.MEVAL, 6, changePropSetter);
-                encodedFamilyMemberFormFields.AGO = ExportValueHelper.GetExportValue(previousFamilyMemberFormFields.AGO, this.AGO, 666, changePropSetter);
+                encodedFamilyMemberFormFields.YOB = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.YOB, this.YOB, 6666, changePropSetter);
+                encodedFamilyMemberFormFields.AGD = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGD, this.AGD, 666, changePropSetter);
+                encodedFamilyMemberFormFields.ETPR = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETPR, this.ETPR, "66", changePropSetter);
+                encodedFamilyMemberFormFields.ETSEC = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETSEC, this.ETSEC, "66", changePropSetter);
+                encodedFamilyMemberFormFields.MEVAL = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.MEVAL, this.MEVAL, 6, changePropSetter);
+                encodedFamilyMemberFormFields.AGO = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGO, this.AGO, 666, changePropSetter);
 
                 return encodedFamilyMemberFormFields;
             }

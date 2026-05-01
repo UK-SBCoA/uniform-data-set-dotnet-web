@@ -687,6 +687,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         } // writer flushed automatically here
 
+        //TODO: Currently used by the B9 and A5D2, we'll want it to function similar to the A3
         private int? CompareFollowUpValues(int? previousValue, int? currentValue, int code)
         {
             if (previousValue == null && currentValue == null) return null;
