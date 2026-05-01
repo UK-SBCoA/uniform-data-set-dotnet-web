@@ -14,7 +14,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public A3FamilyMemberFormFields GetEncodedFormFields(A3FamilyMemberFormFields previousFamilyMemberFormFields, Action<int?> changePropSetter)
         {
-            if(previousFamilyMemberFormFields != null)
+            if (previousFamilyMemberFormFields != null)
             {
                 A3FamilyMemberFormFields encodedFamilyMemberFormFields = new A3FamilyMemberFormFields();
 

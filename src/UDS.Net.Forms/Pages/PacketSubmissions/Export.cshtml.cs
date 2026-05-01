@@ -411,7 +411,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     //Export form fields applies NULL to properties when changes in section are not detected
                     A3FormFields? exportFormFields = encodedFormFields?.GetExportFormFields();
 
-                    if(exportFormFields != null)
+                    if (exportFormFields != null)
                     {
                         //Write A3FormField data
                         csv.WriteRecord(exportFormFields);
