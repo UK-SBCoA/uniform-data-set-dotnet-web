@@ -407,12 +407,38 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 //If a previous form exists, compare and set codes for each input
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
-                    A3FormFields encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
-                    if(encodedFormFields != null)
-                    {
-                        A3FormFields exportFormFields = encodedFormFields.GetExportFormFields();
+                    A3FormFields? encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
+                    //Export form fields applies NULL to properties when changes in section are not detected
+                    A3FormFields? exportFormFields = encodedFormFields?.GetExportFormFields();
 
+                    if(exportFormFields != null)
+                    {
+                        //Write A3FormField data
                         csv.WriteRecord(exportFormFields);
+
+                        //Write sibling data
+                        foreach (var sibling in exportFormFields.SiblingFormFields)
+                        {
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(sibling));
+                                }
+                            }
+                        }
+
+                        //Write Kids data
+                        foreach (var kid in exportFormFields.KidsFormFields)
+                        {
+                            foreach (var prop in a3FamilyProps)
+                            {
+                                if (prop.Name != "FamilyMemberIndex")
+                                {
+                                    csv.WriteField(prop.GetValue(kid));
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -499,8 +525,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousA5D2Fields);
                         var currentValue = (int?)field.GetValue(currentA5D2Fields);
-                        var result = GetExportObject(previousValue, currentValue, 777);
-                        field.SetValue(currentA5D2Fields, result.Value);
+                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
+                        field.SetValue(currentA5D2Fields, result);
                     }
                 }
                 if (a5d2.Fields is A5D2FormFields normalA5D2)
@@ -633,8 +659,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     {
                         var previousValue = (int?)field.GetValue(previousB9Fields);
                         var currentValue = (int?)field.GetValue(currentB9Fields);
-                        var result = GetExportObject(previousValue, currentValue, 777);
-                        field.SetValue(currentB9Fields, result.Value);
+                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
+                        field.SetValue(currentB9Fields, result);
                     }
                 }
                 if (b9.Fields is B9FormFields normalB9)
@@ -661,26 +687,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
         } // writer flushed automatically here
 
-        private ExportObject GetExportObject(int? previousValue, int? currentValue, int code)
+        private int? CompareFollowUpValues(int? previousValue, int? currentValue, int code)
         {
-            ExportObject newExportValue = new() { HasChanged = false };
-
-            if (previousValue == null && currentValue == null)
-            {
-                newExportValue.Value = null;
-                return newExportValue;
-            }
+            if (previousValue == null && currentValue == null) return null;
 
             if (previousValue == currentValue)
             {
-                newExportValue.Value = code;
-                return newExportValue;
+                return code;
             }
 
-            newExportValue.Value = currentValue;
-            newExportValue.HasChanged = true;
-
-            return newExportValue;
+            return currentValue;
         }
     }
 }
