@@ -143,6 +143,41 @@ namespace UDS.Net.Services.Extensions
             return dto;
         }
 
+        //DEVNOTE: The singular packetDto ToDto on returns id, status, and packetSubmissions
+        //This one will just be regular conversion
+        public static List<PacketDto> ToDto(this List<Packet> packets)
+        {
+            var packetDtos = new List<PacketDto>();
+
+            foreach (var packet in packets)
+            {
+                var packetDto = new PacketDto();
+
+                packetDto.Id = packet.Id;
+                packetDto.CreatedAt = packet.CreatedAt;
+                packetDto.CreatedBy = packet.CreatedBy;
+                packetDto.ModifiedBy = packet.ModifiedBy;
+                packetDto.DeletedBy = packet.DeletedBy;
+                packetDto.IsDeleted = packet.IsDeleted;
+                packetDto.ParticipationId = packet.ParticipationId;
+                packetDto.VISITNUM = packet.VISITNUM;
+                packetDto.PACKET = packet.PACKET.ToString();
+                packetDto.FORMVER = packet.FORMVER;
+                packetDto.VISIT_DATE = packet.VISIT_DATE;
+                packetDto.INITIALS = packet.INITIALS;
+                packetDto.Status = packet.Status.ToString();
+                packetDto.Forms = packet.Forms.ToDto();
+                packetDto.TotalUnresolvedErrorCount = packet.UnresolvedErrorCount;
+                packetDto.UnresolvedErrors = packet.UnresolvedErrors.ToDto();
+                packetDto.PacketSubmissionCount = packet.Submissions.Count();
+                packetDto.PacketSubmissions = packet.Submissions.ToDto();
+
+                packetDtos.Add(packetDto);
+            }
+
+            return packetDtos;
+        }
+
         public static PacketSubmissionDto ToDto(this PacketSubmission packetSubmission)
         {
             var dto = new PacketSubmissionDto
@@ -162,6 +197,11 @@ namespace UDS.Net.Services.Extensions
                 dto.PacketSubmissionErrors = packetSubmission.Errors.Select(e => e.ToDto(packetSubmission.Id)).ToList();
 
             return dto;
+        }
+
+        public static List<PacketSubmissionDto> ToDto(this List<PacketSubmission> packetSubmissions)
+        {
+            return packetSubmissions.Select(p => p.ToDto()).ToList();
         }
 
         public static PacketSubmissionErrorDto ToDto(this PacketSubmissionError error, int packetSubmissionId)
@@ -187,6 +227,12 @@ namespace UDS.Net.Services.Extensions
 
             return dto;
         }
+
+        public static List<PacketSubmissionErrorDto> ToDto(this IEnumerable<PacketSubmissionError> packetSubmissionErrors)
+        {
+            return packetSubmissionErrors.Select(p => p.ToDto(p.PacketSubmissionId)).ToList();
+        }
+
 
         public static List<FormDto> ToDto(this IList<Form> forms)
         {

@@ -372,6 +372,11 @@ namespace UDS.Net.Services.Extensions
 
         }
 
+        public static List<Packet> ToDomain(this List<PacketDto> dtos, string username)
+        {
+            return dtos.Select(d => d.ToDomain(username)).ToList();
+        }
+
         public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username, PacketKind? packetKind = PacketKind.I)
         {
             if (dto == null)
