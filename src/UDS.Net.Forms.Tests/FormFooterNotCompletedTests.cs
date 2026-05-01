@@ -173,6 +173,20 @@ namespace UDS.Net.Forms.Tests
             await Expect(Page.GetByLabel("Mode", new() { Exact = true })).ToHaveValueAsync("1");
         }
 
+        [TestMethod]
+        public async Task C2NotCompletedIsDisabled()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "C2" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            await Expect(Page.Locator("#modalityselect").Locator("option[value='0']")).ToBeDisabledAsync();
+
+            await Expect(Page.Locator("#modalityselect")).Not.ToHaveValueAsync("0");
+
+            await Expect(Page.Locator("#modalityselect")).ToHaveValueAsync("1");
+        }
 
         [TestMethod]
         public async Task A1aNotCompletedTest()
