@@ -10,6 +10,7 @@ namespace UDS.Net.Forms.Models.UDS4
     public class A2 : FormModel
     {
         [Display(Name = "Is this a new co-participant (i.e., one who was not a co-participant at any past UDS visit)?")]
+        [RequiredOnFinalized(PacketKind.F, ErrorMessage = "Response to whether this is a new co-participant is required")]
         public int? NEWINF { get; set; }
         [Display(Name = "What is the co-participant’s relationship to the participant?")]
         [RequiredOnFinalized(ErrorMessage = "Response to co-participant's relationship to participant required")]
@@ -49,22 +50,6 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Status == FormStatus.Finalized)
-            {
-                var visitValue = validationContext.Items.FirstOrDefault(v => v.Key.ToString() == "Visit").Value;
-                if (visitValue is VisitModel)
-                {
-                    VisitModel visit = (VisitModel)visitValue;
-
-                    if (visit.PACKET == PacketKind.F && NEWINF == null)
-                    {
-                        yield return new ValidationResult(
-                            "Response to whether this is a new co-participant is required",
-                            new[] { nameof(NEWINF) }
-                        );
-                    }
-                }
-            }
             foreach (var result in base.Validate(validationContext))
             {
                 yield return result;
