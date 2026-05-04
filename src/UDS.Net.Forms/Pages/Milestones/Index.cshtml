@@ -68,7 +68,7 @@
                         <th>Milestone date</th>
                         <th>Type</th>
                         <th>Details</th>
-                        <th>Progress</th>
+                        <th>Status</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -79,12 +79,21 @@
                     {
                         <tr class="even:bg-gray-50">
                             <td class="text-center align-middle px-4 py-3">
-                                <input type="checkbox"
-                                       name="selectedIds"
-                                       value="@milestone.Id"
-                                       data-action="click->checkboxSelectAll#ItemSelected"
-                                       data-checkboxSelectAll-target="checkBox"
-                                       class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+                                @if (milestone.Status == "Finalized")
+                                {
+                                    <input type="checkbox"
+                                           name="selectedIds"
+                                           value="@milestone.Id"
+                                           data-action="click->checkboxSelectAll#ItemSelected"
+                                           data-checkboxSelectAll-target="checkBox"
+                                           class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
+                                }
+                                else
+                                {
+                                    <span class="text-gray-400 text-sm">
+                                        —
+                                    </span>
+                                }
                             </td>
                             <td>
                                 <div class="rounded-lg bg-white px-4 py-5 shadow-sm sm:p-6">
@@ -117,11 +126,59 @@
                             <td>
                                 <partial name="_MilestoneDetails" model="@milestone" />
                             </td>
-                            <td>@milestone.Status</td>
-                            <td><a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id">Edit</a></td>
-                            <td><a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a></td>
                             <td>
-                                <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                                @if (milestone.Status == "Submitted")
+                                {
+                                    <span class="text-gray-700">Submitted</span>
+                                    <br />
+                                    <span class="text-indigo-600 cursor-pointer hover:text-green-800" onclick="updateStatus(@milestone.Id, 'PassedErrorChecks')">
+                                        PassedErrorChecks
+                                    </span>
+                                    <span class="mx-2 text-gray-400">|</span>
+                                    <span class="text-indigo-600 cursor-pointer hover:text-red-800" onclick="updateStatus(@milestone.Id, 'FailedErrorChecks')">
+                                        FailedErrorChecks
+                                    </span>
+                                }
+                                else
+                                {
+                                    var statusClass = "text-gray-700";
+                                    if (milestone.Status == "FailedErrorChecks")
+                                    {
+                                        statusClass = "text-red-600 font-semibold";
+                                    }
+                                    else if (milestone.Status == "PassedErrorChecks")
+                                    {
+                                        statusClass = "text-green-600 font-semibold";
+                                    }
+                                    <span class="@statusClass">
+                                        @milestone.Status
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                @if (milestone.Status == "Submitted")
+                                {
+                                    <span class="text-gray-400 cursor-not-allowed" title="Cannot edit while submitted">Edit</span>
+                                }
+                                else
+                                {
+                                    <a asp-page="/Milestones/Edit" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-500">Edit</a>
+                                }
+                            </td>
+                            <td>
+                                <a asp-page="/Milestones/Details" asp-route-id="@milestone.Id">View</a>
+                            </td>
+                            <td>
+                                @if (milestone.Status == "Finalized")
+                                {
+                                    <a asp-page="/Milestones/Export" asp-route-id="@milestone.Id" class="text-indigo-600 hover:text-indigo-900">Export</a>
+                                }
+                                else
+                                {
+                                    <span class="text-gray-400 cursor-not-allowed" title="Export available only for finalized milestones">
+                                        Export
+                                    </span>
+                                }
                             </td>
                         </tr>
                     }
@@ -135,7 +192,22 @@
             </div>
         </form>
 
+        <form method="post" asp-page-handler="UpdateStatus" id="statusUpdateForm">
+            <input type="hidden" name="id" id="statusUpdateId" />
+            <input type="hidden" name="status" id="statusUpdateValue" />
+        </form>
+
     }
 
     <partial name="_PreviousNextButtons" model="Model.Milestones"></partial>
 </div>
+
+@section Scripts {
+    <script>
+        window.updateStatus = function (id, status) {
+            document.getElementById('statusUpdateId').value = id;
+            document.getElementById('statusUpdateValue').value = status;
+            document.getElementById('statusUpdateForm').submit();
+        }
+    </script>
+}

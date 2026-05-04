@@ -97,6 +97,24 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
+        public static List<M1Submission> ToEntity(this IList<M1SubmissionModel> vm)
+        {
+            List<M1Submission> submissions = new List<M1Submission>();
+
+            if (vm != null)
+            {
+                submissions = vm.Select(p => p.ToEntity()).ToList();
+            }
+
+            return submissions;
+        }
+
+        public static M1Submission ToEntity(this M1SubmissionModel vm)
+        {
+            return new M1Submission(vm.Id, "", vm.SubmissionDate, vm.M1Id, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
+        }
+
+
         public static List<Form> ToEntity(this IList<FormModel> vm, PacketKind visitPacket)
         {
             return vm.Select(v =>
