@@ -141,6 +141,7 @@ namespace UDS.Net.Forms.Extensions
                 PacketSubmissions = packet.Submissions.ToVM(),
                 IsValid = packet.IsValid,
                 TotalUnresolvedErrorCount = packet.TotalUnresolvedErrorCount,
+                TotalUnresolvedAlertCount = packet.TotalUnresolvedAlertCount,
                 UnresolvedErrors = packet.UnresolvedErrors.Select(e => e.ToVM()).ToList()
             };
         }
