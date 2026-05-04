@@ -495,6 +495,15 @@ namespace UDS.Net.Services.DomainModels
                 .FirstOrDefault();
         }
 
+        public T GetFormFields<T>(string kind)
+        {
+            return Forms
+                .Where(f => f.Kind == kind)
+                .Select(f => f.Fields)
+                .OfType<T>()
+                .FirstOrDefault();
+        }
+
         private int? GetInt<T>(object obj, Func<T, int?> getter)
         {
             return obj is T t ? getter(t) : null;

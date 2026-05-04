@@ -1,16 +1,18 @@
 ﻿#define CODE_NOT_IMPLEMENTED
+using Microsoft.Extensions.Caching.Memory;
+using rxNorm.Net.Api.Wrapper;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.Extensions;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 using UDS.Net.Services.LookupModels;
-using rxNorm.Net.Api.Wrapper;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
 {
@@ -227,6 +229,72 @@ namespace UDS.Net.Web.MVC.Services
             throw new NotImplementedException();
         }
 
+        private async Task<List<OccupationCode>> LoadOccupations()
+        {
+            var path = Path.Combine(
+                Path.GetDirectoryName(typeof(LookupService).Assembly.Location)!,
+                "Data",
+                "occupation-codes.json");
+
+            if (!File.Exists(path))
+                return new List<OccupationCode>();
+
+            var json = File.ReadAllText(path);
+
+            return JsonSerializer.Deserialize<List<OccupationCode>>(
+                json,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }
+            ) ?? new List<OccupationCode>();
+        }
+
+        private async Task<List<OccupationCode>> GetCachedOccupations()
+        {
+            const string cacheKey = "OccupationCodes";
+
+            if (!_cache.TryGetValue(cacheKey, out List<OccupationCode> codes))
+            {
+                codes = await LoadOccupations();
+
+                _cache.Set(cacheKey, codes, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+                });
+            }
+
+            return codes;
+        }
+
+        public async Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1)
+        {
+            var codes = await GetCachedOccupations();
+
+            var results = codes
+                .Where(c =>
+                    string.IsNullOrWhiteSpace(searchTerm) ||
+                    c.Code.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                    c.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(c => c.Code)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return results;
+        }
+
+        public async Task<OccupationCode> GetOccupationByCode(string code)
+        {
+            var codes = await GetCachedOccupations();
+
+            return codes.FirstOrDefault(c => c.Code == code);
+        }
+
+        public async Task<List<OccupationCode>> GetAllOccupations()
+        {
+            return await GetCachedOccupations();
+        }
     }
 }
 

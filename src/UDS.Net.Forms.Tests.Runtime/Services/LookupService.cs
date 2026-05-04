@@ -137,5 +137,8 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public Task Remove(string username, DrugCodeLookup entity) => throw new NotImplementedException();
         public Task<IEnumerable<DrugCodeLookup>> List(string username, int pageSize = 10, int pageIndex = 1) => throw new NotImplementedException();
         public Task<DrugCodeLookup> GetById(string username, int id) => throw new NotImplementedException();
+        public Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1) => throw new NotImplementedException();
+        public Task<OccupationCode> GetOccupationByCode(string code) => throw new NotImplementedException();
+        public Task<List<OccupationCode>> GetAllOccupations() => throw new NotImplementedException();
     }
 }

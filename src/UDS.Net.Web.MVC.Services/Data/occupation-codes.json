@@ -1,0 +1,1025 @@
+[
+  {
+    "code": "101",
+    "name": "Actuaries"
+  },
+  {
+    "code": "102",
+    "name": "Architects"
+  },
+  {
+    "code": "103",
+    "name": "Bank officers"
+  },
+  {
+    "code": "104",
+    "name": "Certified public accountants"
+  },
+  {
+    "code": "105",
+    "name": "Chief executives (CEO, CFO, COO)"
+  },
+  {
+    "code": "106",
+    "name": "Clergy (professionally trained)"
+  },
+  {
+    "code": "107",
+    "name": "Commissioned officers in the military"
+  },
+  {
+    "code": "108",
+    "name": "Dentists"
+  },
+  {
+    "code": "109",
+    "name": "Economists"
+  },
+  {
+    "code": "110",
+    "name": "Engineers (Masters level and above)"
+  },
+  {
+    "code": "111",
+    "name": "Financial managers"
+  },
+  {
+    "code": "112",
+    "name": "Federal government officials"
+  },
+  {
+    "code": "113",
+    "name": "Large business owners"
+  },
+  {
+    "code": "114",
+    "name": "Lawyers / judges"
+  },
+  {
+    "code": "115",
+    "name": "Mathematicians"
+  },
+  {
+    "code": "116",
+    "name": "Major contractors"
+  },
+  {
+    "code": "117",
+    "name": "Orthodontists"
+  },
+  {
+    "code": "118",
+    "name": "Physicians"
+  },
+  {
+    "code": "119",
+    "name": "Professor / University teachers"
+  },
+  {
+    "code": "120",
+    "name": "Psychologists"
+  },
+  {
+    "code": "121",
+    "name": "Research scientists"
+  },
+  {
+    "code": "122",
+    "name": "Urban and regional planners"
+  },
+  {
+    "code": "123",
+    "name": "Veterinarians"
+  },
+  {
+    "code": "124",
+    "name": "VP of large business"
+  },
+
+  {
+    "code": "201",
+    "name": "Accountants"
+  },
+  {
+    "code": "202",
+    "name": "Advertising executives"
+  },
+  {
+    "code": "203",
+    "name": "Authors"
+  },
+  {
+    "code": "204",
+    "name": "Branch managers"
+  },
+  {
+    "code": "205",
+    "name": "Building contractors"
+  },
+  {
+    "code": "206",
+    "name": "Business managers"
+  },
+  {
+    "code": "207",
+    "name": "Chiropractors"
+  },
+  {
+    "code": "208",
+    "name": "Computer programmer"
+  },
+  {
+    "code": "209",
+    "name": "Computer specialists"
+  },
+  {
+    "code": "210",
+    "name": "Database developer"
+  },
+  {
+    "code": "211",
+    "name": "Editors"
+  },
+  {
+    "code": "212",
+    "name": "Engineers (no advanced degree)"
+  },
+  {
+    "code": "213",
+    "name": "Executive managers"
+  },
+  {
+    "code": "214",
+    "name": "Industrial farm owners"
+  },
+  {
+    "code": "215",
+    "name": "Furniture business owners"
+  },
+  {
+    "code": "216",
+    "name": "Jewelers"
+  },
+  {
+    "code": "217",
+    "name": "Labor relations consultants"
+  },
+  {
+    "code": "218",
+    "name": "Librarians"
+  },
+  {
+    "code": "219",
+    "name": "Manufacturing owners"
+  },
+  {
+    "code": "220",
+    "name": "Medium business owners"
+  },
+  {
+    "code": "221",
+    "name": "Musicians / composers"
+  },
+  {
+    "code": "222",
+    "name": "Nurses"
+  },
+  {
+    "code": "223",
+    "name": "Office managers"
+  },
+  {
+    "code": "224",
+    "name": "Opticians"
+  },
+  {
+    "code": "225",
+    "name": "Personnel managers"
+  },
+  {
+    "code": "226",
+    "name": "Pharmacists"
+  },
+  {
+    "code": "227",
+    "name": "Pilots"
+  },
+  {
+    "code": "228",
+    "name": "Police chief / sheriff"
+  },
+  {
+    "code": "229",
+    "name": "Postmaster"
+  },
+  {
+    "code": "230",
+    "name": "Production managers (TV / radio)"
+  },
+  {
+    "code": "231",
+    "name": "Public administration officials"
+  },
+  {
+    "code": "232",
+    "name": "Public health officers"
+  },
+  {
+    "code": "233",
+    "name": "Purchasing managers"
+  },
+  {
+    "code": "234",
+    "name": "Real estate brokers"
+  },
+  {
+    "code": "235",
+    "name": "Research assistants"
+  },
+  {
+    "code": "236",
+    "name": "Sales engineers"
+  },
+  {
+    "code": "237",
+    "name": "Sales managers"
+  },
+  {
+    "code": "238",
+    "name": "Social workers"
+  },
+  {
+    "code": "239",
+    "name": "State / Local government officials"
+  },
+  {
+    "code": "240",
+    "name": "Teachers (Elementary & high school)"
+  },
+
+  {
+    "code": "301",
+    "name": "Actors"
+  },
+  {
+    "code": "302",
+    "name": "Administrative assistants"
+  },
+  {
+    "code": "303",
+    "name": "Advertising agents"
+  },
+  {
+    "code": "304",
+    "name": "Artists"
+  },
+  {
+    "code": "305",
+    "name": "Bakers"
+  },
+  {
+    "code": "306",
+    "name": "Beauty shop owners"
+  },
+  {
+    "code": "307",
+    "name": "Chefs"
+  },
+  {
+    "code": "308",
+    "name": "Chief clerks"
+  },
+  {
+    "code": "309",
+    "name": "Clergy (not professionally trained)"
+  },
+  {
+    "code": "310",
+    "name": "Court reporters"
+  },
+  {
+    "code": "311",
+    "name": "Credit managers"
+  },
+  {
+    "code": "312",
+    "name": "Dental hygienists"
+  },
+  {
+    "code": "313",
+    "name": "Department store managers"
+  },
+  {
+    "code": "314",
+    "name": "Deputy sheriffs"
+  },
+  {
+    "code": "315",
+    "name": "Dietitians / Nutritionists"
+  },
+  {
+    "code": "316",
+    "name": "Dispatchers"
+  },
+  {
+    "code": "317",
+    "name": "Florists"
+  },
+  {
+    "code": "318",
+    "name": "Funeral directors"
+  },
+  {
+    "code": "319",
+    "name": "Insurance agents"
+  },
+  {
+    "code": "320",
+    "name": "Laboratory assistants"
+  },
+  {
+    "code": "321",
+    "name": "Landscape planners"
+  },
+  {
+    "code": "322",
+    "name": "Noncommissioned officers (senior)"
+  },
+  {
+    "code": "323",
+    "name": "Morticians"
+  },
+  {
+    "code": "324",
+    "name": "Newspaper / TV reporters"
+  },
+  {
+    "code": "325",
+    "name": "Photographers"
+  },
+  {
+    "code": "326",
+    "name": "Piano teachers"
+  },
+  {
+    "code": "327",
+    "name": "Radio / TV announcers"
+  },
+  {
+    "code": "328",
+    "name": "Real estate agents"
+  },
+  {
+    "code": "329",
+    "name": "Restaurant owners"
+  },
+  {
+    "code": "330",
+    "name": "Sales representatives"
+  },
+  {
+    "code": "331",
+    "name": "Service managers"
+  },
+  {
+    "code": "332",
+    "name": "Small business owners"
+  },
+  {
+    "code": "333",
+    "name": "Store managers"
+  },
+  {
+    "code": "334",
+    "name": "Surveyors"
+  },
+  {
+    "code": "335",
+    "name": "Title searchers"
+  },
+  {
+    "code": "336",
+    "name": "Tool designers"
+  },
+  {
+    "code": "337",
+    "name": "Traffic managers"
+  },
+  {
+    "code": "338",
+    "name": "Travel agents"
+  },
+  {
+    "code": "339",
+    "name": "Yard masters (railroad)"
+  },
+
+  {
+    "code": "401",
+    "name": "Bank tellers"
+  },
+  {
+    "code": "402",
+    "name": "Bill collectors"
+  },
+  {
+    "code": "403",
+    "name": "Bookkeepers"
+  },
+  {
+    "code": "404",
+    "name": "Claims examiners"
+  },
+  {
+    "code": "405",
+    "name": "Drafters"
+  },
+  {
+    "code": "406",
+    "name": "Driving teachers"
+  },
+  {
+    "code": "407",
+    "name": "Factory supervisors"
+  },
+  {
+    "code": "408",
+    "name": "Small farm owners / farmers"
+  },
+  {
+    "code": "409",
+    "name": "Flower shop workers"
+  },
+  {
+    "code": "410",
+    "name": "Human resources workers"
+  },
+  {
+    "code": "411",
+    "name": "Laboratory technicians"
+  },
+  {
+    "code": "412",
+    "name": "Newsstand operators"
+  },
+  {
+    "code": "413",
+    "name": "Post office clerks"
+  },
+  {
+    "code": "414",
+    "name": "Railroad conductors"
+  },
+  {
+    "code": "415",
+    "name": "Railroad train engineers"
+  },
+  {
+    "code": "416",
+    "name": "Receptionists"
+  },
+  {
+    "code": "417",
+    "name": "Route managers"
+  },
+  {
+    "code": "418",
+    "name": "Sales clerks"
+  },
+  {
+    "code": "419",
+    "name": "Secretaries / stenographers"
+  },
+  {
+    "code": "420",
+    "name": "Shipping clerks"
+  },
+  {
+    "code": "421",
+    "name": "Tailors"
+  },
+  {
+    "code": "422",
+    "name": "Tax clerks"
+  },
+  {
+    "code": "423",
+    "name": "Telephone company workers"
+  },
+  {
+    "code": "424",
+    "name": "Telephone operators"
+  },
+  {
+    "code": "425",
+    "name": "Timekeepers"
+  },
+  {
+    "code": "426",
+    "name": "Toll collectors"
+  },
+  {
+    "code": "427",
+    "name": "Tower operators"
+  },
+  {
+    "code": "428",
+    "name": "Truck dispatchers"
+  },
+  {
+    "code": "429",
+    "name": "Typists"
+  },
+  {
+    "code": "430",
+    "name": "Utility workers"
+  },
+  {
+    "code": "431",
+    "name": "Warehouse clerks"
+  },
+  {
+    "code": "432",
+    "name": "Window store trimmers"
+  },
+  {
+    "code": "501",
+    "name": "Auto body repairers"
+  },
+  {
+    "code": "502",
+    "name": "Barbers"
+  },
+  {
+    "code": "503",
+    "name": "Boiler repairers"
+  },
+  {
+    "code": "504",
+    "name": "Bookbinders"
+  },
+  {
+    "code": "505",
+    "name": "Brewers"
+  },
+  {
+    "code": "506",
+    "name": "Cabinet makers"
+  },
+  {
+    "code": "507",
+    "name": "Carpenters"
+  },
+  {
+    "code": "508",
+    "name": "Cement layers / finishers"
+  },
+  {
+    "code": "509",
+    "name": "Checkers / examiners / inspectors"
+  },
+  {
+    "code": "510",
+    "name": "Cheese makers"
+  },
+  {
+    "code": "511",
+    "name": "Construction forepeople"
+  },
+  {
+    "code": "512",
+    "name": "Die makers"
+  },
+  {
+    "code": "513",
+    "name": "Electricians"
+  },
+  {
+    "code": "514",
+    "name": "Engravers"
+  },
+  {
+    "code": "515",
+    "name": "Exterminators"
+  },
+  {
+    "code": "516",
+    "name": "Firefighters"
+  },
+  {
+    "code": "517",
+    "name": "Gardeners / landscapers"
+  },
+  {
+    "code": "518",
+    "name": "Glassblowers"
+  },
+  {
+    "code": "519",
+    "name": "Glaziers"
+  },
+  {
+    "code": "520",
+    "name": "Gun smiths"
+  },
+  {
+    "code": "521",
+    "name": "Hair stylists"
+  },
+  {
+    "code": "522",
+    "name": "Heavy equipment operators"
+  },
+  {
+    "code": "523",
+    "name": "Home repairs"
+  },
+  {
+    "code": "524",
+    "name": "Iron workers"
+  },
+  {
+    "code": "525",
+    "name": "Kitchen workers / cooks"
+  },
+  {
+    "code": "526",
+    "name": "Locksmiths"
+  },
+  {
+    "code": "527",
+    "name": "Machinists"
+  },
+  {
+    "code": "528",
+    "name": "Mail carriers"
+  },
+  {
+    "code": "529",
+    "name": "Maintenance forepeople"
+  },
+  {
+    "code": "530",
+    "name": "Masons"
+  },
+  {
+    "code": "531",
+    "name": "Mechanics"
+  },
+  {
+    "code": "532",
+    "name": "Millwrights"
+  },
+  {
+    "code": "533",
+    "name": "Noncommissioned officers (junior)"
+  },
+  {
+    "code": "534",
+    "name": "Painters"
+  },
+  {
+    "code": "535",
+    "name": "Paperhangers"
+  },
+  {
+    "code": "536",
+    "name": "Patrolmen"
+  },
+  {
+    "code": "537",
+    "name": "Piano builders"
+  },
+  {
+    "code": "538",
+    "name": "Piano tuners"
+  },
+  {
+    "code": "539",
+    "name": "Plumbers"
+  },
+  {
+    "code": "540",
+    "name": "Police officers"
+  },
+  {
+    "code": "541",
+    "name": "Postal workers"
+  },
+  {
+    "code": "542",
+    "name": "Printers"
+  },
+  {
+    "code": "543",
+    "name": "Radio / TV maintenance"
+  },
+  {
+    "code": "544",
+    "name": "Railroad brake operators"
+  },
+  {
+    "code": "545",
+    "name": "Repair people"
+  },
+  {
+    "code": "546",
+    "name": "Seamstresses / seamsters"
+  },
+  {
+    "code": "547",
+    "name": "Sheet metal workers"
+  },
+  {
+    "code": "548",
+    "name": "Ship smiths"
+  },
+  {
+    "code": "549",
+    "name": "Shoe repairers"
+  },
+  {
+    "code": "550",
+    "name": "Steelworkers"
+  },
+  {
+    "code": "551",
+    "name": "Tile layers"
+  },
+  {
+    "code": "552",
+    "name": "Tool makers"
+  },
+  {
+    "code": "553",
+    "name": "Upholsterers"
+  },
+  {
+    "code": "554",
+    "name": "Utility line workers"
+  },
+  {
+    "code": "555",
+    "name": "Weavers"
+  },
+  {
+    "code": "556",
+    "name": "Welders"
+  },
+  {
+    "code": "601",
+    "name": "Apprentices (electrician / printers / etc.)"
+  },
+  {
+    "code": "602",
+    "name": "Assembly line workers"
+  },
+  {
+    "code": "603",
+    "name": "Bartenders"
+  },
+  {
+    "code": "604",
+    "name": "Building superintendents"
+  },
+  {
+    "code": "605",
+    "name": "Bus drivers"
+  },
+  {
+    "code": "606",
+    "name": "Cab / taxi drivers"
+  },
+  {
+    "code": "607",
+    "name": "Cashiers"
+  },
+  {
+    "code": "608",
+    "name": "Child care workers (not private household)"
+  },
+  {
+    "code": "609",
+    "name": "Cooks (short order)"
+  },
+  {
+    "code": "610",
+    "name": "Corrections workers"
+  },
+  {
+    "code": "611",
+    "name": "Delivery people"
+  },
+  {
+    "code": "612",
+    "name": "Dry cleaning pressers"
+  },
+  {
+    "code": "613",
+    "name": "Elevator operators"
+  },
+  {
+    "code": "614",
+    "name": "Enlisted military personnel (other than NCOs)"
+  },
+  {
+    "code": "615",
+    "name": "Factory machine operators"
+  },
+  {
+    "code": "616",
+    "name": "Factory workers"
+  },
+  {
+    "code": "617",
+    "name": "Foundry workers"
+  },
+  {
+    "code": "618",
+    "name": "Garage and gas station assistants"
+  },
+  {
+    "code": "619",
+    "name": "Greenhouse workers"
+  },
+  {
+    "code": "620",
+    "name": "Guards / security watch people"
+  },
+  {
+    "code": "621",
+    "name": "Machine operators"
+  },
+  {
+    "code": "622",
+    "name": "Meat cutters / packers"
+  },
+  {
+    "code": "623",
+    "name": "Meter readers"
+  },
+  {
+    "code": "624",
+    "name": "Nursing aides / attendants"
+  },
+  {
+    "code": "625",
+    "name": "Oil delivery people"
+  },
+  {
+    "code": "626",
+    "name": "Practical nurses"
+  },
+  {
+    "code": "627",
+    "name": "Pump operators"
+  },
+  {
+    "code": "628",
+    "name": "Receivers / checkers"
+  },
+  {
+    "code": "629",
+    "name": "Servers (waiters / waitresses)"
+  },
+  {
+    "code": "630",
+    "name": "Signal operators (railroad)"
+  },
+  {
+    "code": "631",
+    "name": "Truck drivers"
+  },
+  {
+    "code": "632",
+    "name": "Wood workers"
+  },
+  {
+    "code": "633",
+    "name": "Wrappers (stores / factories)"
+  },
+  {
+    "code": "701",
+    "name": "Amusement park workers"
+  },
+  {
+    "code": "702",
+    "name": "Cafeteria workers"
+  },
+  {
+    "code": "703",
+    "name": "Car cleaners"
+  },
+  {
+    "code": "704",
+    "name": "Child care workers (private household)"
+  },
+  {
+    "code": "705",
+    "name": "Construction laborers"
+  },
+  {
+    "code": "706",
+    "name": "Dairy workers"
+  },
+  {
+    "code": "707",
+    "name": "Deck hands"
+  },
+  {
+    "code": "708",
+    "name": "Farm laborers"
+  },
+  {
+    "code": "709",
+    "name": "Fishers"
+  },
+  {
+    "code": "710",
+    "name": "Freight handlers"
+  },
+  {
+    "code": "711",
+    "name": "Garbage collectors"
+  },
+  {
+    "code": "712",
+    "name": "Grave diggers"
+  },
+  {
+    "code": "713",
+    "name": "Homemakers"
+  },
+  {
+    "code": "714",
+    "name": "House cleaners"
+  },
+  {
+    "code": "715",
+    "name": "Janitors"
+  },
+  {
+    "code": "716",
+    "name": "Junk / recycle sorters"
+  },
+  {
+    "code": "717",
+    "name": "Laundry workers"
+  },
+  {
+    "code": "718",
+    "name": "Messengers"
+  },
+  {
+    "code": "719",
+    "name": "Peddlers"
+  },
+  {
+    "code": "720",
+    "name": "Porters"
+  },
+  {
+    "code": "721",
+    "name": "Roofing laborers"
+  },
+  {
+    "code": "722",
+    "name": "Shoe shiners"
+  },
+  {
+    "code": "723",
+    "name": "Stagehands"
+  },
+  {
+    "code": "724",
+    "name": "Stock handlers"
+  },
+  {
+    "code": "725",
+    "name": "Street cleaners"
+  },
+  {
+    "code": "726",
+    "name": "Unemployed"
+  },
+  {
+    "code": "727",
+    "name": "Unskilled factory workers"
+  },
+  {
+    "code": "728",
+    "name": "Unspecified laborers"
+  },
+  {
+    "code": "729",
+    "name": "Window cleaners"
+  },
+  {
+    "code": "730",
+    "name": "Woodchoppers"
+  },
+  {
+    "code": "731",
+    "name": "Worked while incarcerated"
+  }
+]

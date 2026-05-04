@@ -1,0 +1,31 @@
+@model OccupationAutocompleteLookupModel
+
+<turbo-stream action="update" target="occupation-options">
+    <template>
+        @if (Model != null && Model.SearchResults != null && Model.SearchResults.Count() > 0)
+        {
+            int i = 0;
+            @foreach (var result in Model.SearchResults)
+            {
+                <li data-autocomplete-target="item"
+                    data-occupation-code="@result.Value"
+                    data-occupation-name="@result.Key"
+                    data-action="click->occupationDisplayNames#selectOccupation"
+                    class="cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white transition-colors"
+                    role="option">
+                    <span class="font-medium">@result.Key</span>
+                    <span class="ml-2 text-gray-400 text-xs">(@result.Value)</span>
+                </li>
+                i++;
+            }
+            @if (Model.ResultsCount == 100)
+            {
+                <li class="text-gray-400 rounded-md px-4 py-2 select-none">More than @Model.ResultsCount results, continue typing</li>
+            }
+        }
+        else
+        {
+            <li class="text-gray-600 rounded-md px-4 py-2 select-none italic">No occupations found</li>
+        }
+    </template>
+</turbo-stream>
