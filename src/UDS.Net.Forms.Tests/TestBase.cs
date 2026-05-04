@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.Playwright;
-using Microsoft.Playwright.MSTest;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Playwright.MSTest;
 
 [TestClass]
 public class TestBase : PageTest
