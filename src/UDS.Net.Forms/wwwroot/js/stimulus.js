@@ -10,7 +10,7 @@ import rxNormDisplayNames from "./js_controllers/rxNormDisplayNames_controller.j
 import autocomplete from "./js_controllers/autocomplete_controller.js"
 import b4 from "./js_controllers/b4_controller.js"
 import b6 from "./js_controllers/b6_controller.js"
-import dropdownReset from "./js_controllers/dropdownReset_controller.js"
+import formFooter from "./js_controllers/formFooter_controller.js"
 import FormlessSubmit from "./js_controllers/formlessSubmit_controller.js"
 import a4 from "./js_controllers/a4_controller.js"
 import modal from "./js_controllers/modal_controller.js"
@@ -33,7 +33,7 @@ application.register("rxNormDisplayNames", rxNormDisplayNames)
 application.register("autocomplete", autocomplete)
 application.register("b4", b4)
 application.register("b6", b6)
-application.register("dropdownReset", dropdownReset)
+application.register("formFooter", formFooter)
 application.register("formlessSubmit", FormlessSubmit)
 application.register("a4", a4)
 application.register("modal", modal)
