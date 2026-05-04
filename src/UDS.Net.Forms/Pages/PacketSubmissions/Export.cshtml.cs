@@ -517,6 +517,22 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a4a != null)
             {
                 csv.WriteRecord(new A4aRecord(a4a));
+                Form? previousA4aBase = null;
+
+                A4aFormFields? previousA4aFields = null;
+
+                A4aFormFields? currentA4aFields = a4a.Fields as A4aFormFields;
+
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                {
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A4a");
+
+                    previousA4aBase = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault() : null;
+
+                    previousA4aFields = previousA4aBase != null ? previousA4aBase.Fields as A4aFormFields : null;
+                }
 
                 List<A4aTreatmentFormFields> treatments;
 
@@ -530,6 +546,20 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     treatments = new List<A4aTreatmentFormFields>();
                 }
 
+                if (currentA4aFields != null && previousA4aFields != null)
+                {
+                    // If NEWTREAT is 0 or 9, no treatment data should be exported.We will still need a list of 8 to maintain the csv formatting
+                    if (currentA4aFields.NEWTREAT == 0 || currentA4aFields.NEWTREAT == 9)
+                    {
+                        var emptyTreatments = new List<A4aTreatmentFormFields>();
+
+                        for (int i = 0; i < 8; i++)
+                        {
+                            emptyTreatments.Add(new A4aTreatmentFormFields());
+                        }
+                        treatments = emptyTreatments;
+                    }
+                }
                 foreach (var treatment in treatments)
                 {
                     foreach (var prop in a4aProps)

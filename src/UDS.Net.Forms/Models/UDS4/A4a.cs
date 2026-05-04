@@ -14,7 +14,6 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Since the last UDS visit, is new information available concerning any of the participant's prescribed treatments or clinical trial(s) of a treatment expected to modify ADRD biomarkers?")]
         public int? NEWTREAT { get; set; }
 
-        [RequiredIfRegex(nameof(TRTBIOMARK), "^(1)$", ErrorMessage = "Please specify adverse events associated with treatments expected to modify ADRD biomarkers.")]
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
 
@@ -59,6 +58,10 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     return true;
                 }
+                if (PacketKind == PacketKind.F) //FVP variable NEWADEVENT adds seperate validation logic for follow up visits
+                {
+                    return true;
+                }
                 return null;
             }
         }
@@ -71,24 +74,53 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (TRTBIOMARK == 1)
                 {
-                    bool isAnyTargetSet = false;
-                    foreach (var t in Treatments)
+
+                    if (PacketKind == PacketKind.I || PacketKind == PacketKind.I4)
                     {
-                        if (t.TARGETAB == true || t.TARGETTAU == true ||
-                            t.TARGETINF == true || t.TARGETSYN == true ||
-                            t.TARGETOTH == true)
+                        bool isAnyTargetSet = false;
+                        foreach (var t in Treatments)
                         {
-                            isAnyTargetSet = true;
-                            break;
+                            if (t.TARGETAB == true || t.TARGETTAU == true ||
+                                t.TARGETINF == true || t.TARGETSYN == true ||
+                                t.TARGETOTH == true)
+                            {
+                                isAnyTargetSet = true;
+                                break;
+                            }
+                        }
+
+                        if (!isAnyTargetSet)
+                        {
+                            yield return new ValidationResult(
+                                "At least one primary drug target must be specified.",
+                                new[] { "Treatments" }
+                            );
+                        }
+
+                        if (ADVEVENT == null)
+                        {
+                            yield return new ValidationResult("Please specify adverse events associated with treatments expected to modify ADRD biomarkers.", new[] { nameof(ADVEVENT) });
                         }
                     }
 
-                    if (!isAnyTargetSet)
+                    if (PacketKind == PacketKind.F)
                     {
-                        yield return new ValidationResult(
-                            "At least one primary drug target must be specified.",
-                            new[] { "Treatments" }
-                        );
+                        if (NEWTREAT == null)
+                        {
+                            yield return new ValidationResult("NEWTREAT response is required", new[] { nameof(NEWTREAT) });
+                        }
+
+                    }
+                }
+                if (ADVEVENT == 1)
+                {
+                    if (PacketKind == PacketKind.F)
+                    {
+                        if (NEWADEVENT == null)
+                        {
+                            yield return new ValidationResult("NEWWADEVENT response is required", new[] { nameof(NEWADEVENT) });
+                        }
+
                     }
                 }
 
