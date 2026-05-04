@@ -35,9 +35,19 @@
         </div>
     }
     <div class="overflow-x-auto">
-        <span class="counter text-base font-semibold text-gray-900">
-            Please provide information about the clinical treatment(s) and/or trial(s)
-        </span>
+
+        @if (Model.BaseForm.PacketKind == PacketKind.F)
+        {
+            <span class="counter text-base font-semibold text-gray-900">
+                Please provide information about the clinical treatment(s) and/or trial(s). INCLUDE ALL HISTORICAL CLINICAL TREATMENT(S) AND / OR TRIAL(S) even if there is no new information on those treatments / trials.If there is a new treatment and / or trial to report, please add it after all of the historical information
+            </span>
+        }
+        else
+        {
+            <span class="counter text-base font-semibold text-gray-900">
+                Please provide information about the clinical treatment(s) and/or trial(s)
+            </span>
+        }
         <p class="font-style: italic  text-gray-500">
             (If participant is exposed to more than two treatments and/or trials, use extended table below)
         </p>

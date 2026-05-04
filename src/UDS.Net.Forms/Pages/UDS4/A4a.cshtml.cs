@@ -174,7 +174,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             foreach (var prop in previousA4aFields.GetType().GetProperties())
             {
-                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.ARIAE) || prop.Name == nameof(A4aFormFields.ARIAH) || prop.Name == nameof(A4aFormFields.ADVERSEOTH) || prop.Name == nameof(A4aFormFields.ADVERSEOTX) || prop.Name == nameof(A4aFormFields.ADVEVENT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
+                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.ADVEVENT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
                 {
                     continue;
                 }
