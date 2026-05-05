@@ -538,6 +538,16 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (a4a.Fields is A4aFormFields normalA4a)
                 {
+                    if (currentA4aFields != null && previousA4aFields != null)
+                    {
+                        if (currentA4aFields.NEWADEVENT == 0 || currentA4aFields.NEWADEVENT == 9) //Indicates ARIA-E has not changed from previous visits. Export blank values
+                        {
+                            currentA4aFields.ARIAE = null;
+                            currentA4aFields.ARIAH = null;
+                            currentA4aFields.ADVERSEOTH = null;
+                            currentA4aFields.ADVERSEOTX = null;
+                        }
+                    }
                     csv.WriteRecord(normalA4a);
                     treatments = normalA4a.TreatmentFormFields.ToList();
                 }

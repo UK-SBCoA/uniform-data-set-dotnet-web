@@ -58,7 +58,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     return true;
                 }
-                if (PacketKind == PacketKind.F) //FVP variable NEWADEVENT adds seperate validation logic for follow up visits
+                if (NEWADEVENT == 0 || NEWADEVENT == 9) //FVP variable NEWADEVENT adds seperate validation logic for follow up visits
                 {
                     return true;
                 }

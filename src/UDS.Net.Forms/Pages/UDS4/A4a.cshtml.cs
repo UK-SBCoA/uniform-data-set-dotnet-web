@@ -166,70 +166,6 @@ namespace UDS.Net.Forms.Pages.UDS4
             } }
         };
 
-        public async Task CompareValuesFromPreviousVisit(int participationId, A4aFormFields previousA4aFields, A4aFormFields currentA4aFields)
-        {
-            if (previousA4aFields == null || currentA4aFields == null)
-                return;
-            bool allValuesMatch = true;
-
-            foreach (var prop in previousA4aFields.GetType().GetProperties())
-            {
-                if (prop.Name == nameof(A4aFormFields.NEWTREAT) || prop.Name == nameof(A4aFormFields.ADVEVENT) || prop.Name == nameof(A4aFormFields.NEWADEVENT) || prop.Name == nameof(A4aFormFields.FormModes) || prop.Name == nameof(A4aFormFields.NotIncludedReasonCodes) || prop.Name == nameof(A4aFormFields.RemoteModalities) || prop.Name == nameof(A4aFormFields.AdministrationFormats))
-                {
-                    continue;
-                }
-                var prevValue = prop.GetValue(previousA4aFields);
-                var currentValue = prop.GetValue(currentA4aFields);
-
-                if (prop.Name == nameof(A4aFormFields.TreatmentFormFields))
-                {
-                    var prevList = prevValue as List<A4aTreatmentFormFields>;
-                    var currentList = currentValue as List<A4aTreatmentFormFields>;
-
-                    if (!TreatmentListsMatch(prevList!, currentList!))
-                    {
-                        allValuesMatch = false;
-                        break;
-                    }
-                }
-                else
-                {
-                    if (!object.Equals(prevValue, currentValue))
-                    {
-                        allValuesMatch = false;
-                        break;
-                    }
-                }
-            }
-
-            if (allValuesMatch)
-            {
-                ModelState.AddModelError("A4a", "All values cannot match the previous visit when either NEWTREAT or NEWADEVENT are selected.");
-            }
-            return;
-        }
-        private bool TreatmentListsMatch(List<A4aTreatmentFormFields> prev, List<A4aTreatmentFormFields> current)
-        {
-            if (prev == null && current == null) return true;
-            if (prev == null || current == null) return false;
-            if (prev.Count != current.Count) return false;
-
-            for (int i = 0; i < prev.Count; i++)
-            {
-                var prevItem = prev[i];
-                var currentItem = current[i];
-
-                foreach (var prop in typeof(A4aTreatmentFormFields).GetProperties())
-                {
-                    var prevValue = prop.GetValue(prevItem);
-                    var currentValue = prop.GetValue(currentItem);
-
-                    if (!object.Equals(prevValue, currentValue))
-                        return false;
-                }
-            }
-            return true;
-        }
         public A4aModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A4a")
         {
         }
@@ -298,12 +234,40 @@ namespace UDS.Net.Forms.Pages.UDS4
                 var previousA4aFields = previousA4a?.Fields as A4aFormFields;
                 var currentA4aFields = currentA4a.Fields as A4aFormFields;
 
+
                 if (A4a.NEWTREAT != null)
                 {
-                    if ((A4a.NEWTREAT == 1))
+                    bool treatmentValuesMatch = true;
+                    foreach (var prop in previousA4aFields.GetType().GetProperties())
                     {
-                        //Displays model error if all a4a treatment values are the same
-                        await CompareValuesFromPreviousVisit(Visit.ParticipationId, previousA4aFields!, currentA4aFields!);
+
+                        var prevValue = prop.GetValue(previousA4aFields);
+                        var currentValue = prop.GetValue(currentA4aFields);
+
+                        if (prop.Name == nameof(A4aFormFields.TreatmentFormFields))
+                        {
+                            var prevList = prevValue as List<A4aTreatmentFormFields>;
+                            var currentList = currentValue as List<A4aTreatmentFormFields>;
+
+                            treatmentValuesMatch = TreatmentListsMatch(prevList!, currentList!);
+                        }
+                    }
+
+                    var adrdValuesMatch = ADRDMatchPreviousVisit(previousA4aFields!, currentA4aFields!);
+
+                    if (A4a.NEWTREAT == 1 && A4a.NEWADEVENT == 1)
+                    {
+                        if (treatmentValuesMatch && adrdValuesMatch)
+                        {
+                            ModelState.AddModelError("A4a", "If both NEWTREAT and NEWADEVENT are marked as 1 all treatment values cannot match previous visit");
+                        }
+                    }
+                    if (A4a.NEWTREAT == 1 && A4a.NEWADEVENT != 1)
+                    {
+                        if (treatmentValuesMatch)
+                        {
+                            ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new informatoin is avaiable");
+                        }
                     }
 
                     if (A4a.NEWTREAT == 0 || A4a.NEWTREAT == 9)
@@ -333,15 +297,66 @@ namespace UDS.Net.Forms.Pages.UDS4
                                             })
                                             .ToList();
                         }
-                        Visit.Forms.Add(A4a);
-                        return await base.OnPostAsync(id, goNext); // checks for validation, etc.
-
                     }
+                    if (A4a.NEWADEVENT == 0 || A4a.NEWADEVENT == 9)
+                    {
+                        A4a.ARIAE = previousA4aFields.ARIAE;
+                        A4a.ARIAH = previousA4aFields.ARIAH;
+                        A4a.ADVERSEOTH = previousA4aFields.ADVERSEOTH;
+                        A4a.ADVERSEOTX = previousA4aFields.ADVERSEOTX;
+                    }
+                    Visit.Forms.Add(A4a);
+
+                    return await base.OnPostAsync(id, goNext); // checks for validation, etc.
                 }
             }
             Visit.Forms.Add(A4a); // visit needs updated form as well
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+        }
+
+
+        public bool ADRDMatchPreviousVisit(A4aFormFields previousA4aFields, A4aFormFields currentA4aFields)
+        {
+            if (previousA4aFields == null || currentA4aFields == null)
+                return false;
+
+            foreach (var prop in previousA4aFields.GetType().GetProperties())
+            {
+                if (prop.Name == nameof(A4aFormFields.ARIAE) || prop.Name == nameof(A4aFormFields.ARIAH) || prop.Name == nameof(A4aFormFields.ADVERSEOTH) || prop.Name == nameof(A4aFormFields.ADVERSEOTX))
+                {
+                    var prevValue = prop.GetValue(previousA4aFields);
+                    var currentValue = prop.GetValue(currentA4aFields);
+
+                    if (!object.Equals(prevValue, currentValue))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private bool TreatmentListsMatch(List<A4aTreatmentFormFields> prev, List<A4aTreatmentFormFields> current)
+        {
+            if (prev == null && current == null) return true;
+            if (prev == null || current == null) return false;
+            if (prev.Count != current.Count) return false;
+
+            for (int i = 0; i < prev.Count; i++)
+            {
+                var prevItem = prev[i];
+                var currentItem = current[i];
+
+                foreach (var prop in typeof(A4aTreatmentFormFields).GetProperties())
+                {
+                    var prevValue = prop.GetValue(prevItem);
+                    var currentValue = prop.GetValue(currentItem);
+
+                    if (!object.Equals(prevValue, currentValue))
+                        return false;
+                }
+            }
+            return true;
         }
     }
 }
