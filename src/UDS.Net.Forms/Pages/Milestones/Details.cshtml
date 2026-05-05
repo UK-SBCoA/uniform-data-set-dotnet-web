@@ -294,7 +294,7 @@
     <div class="mb-4">
         @if (Model.Milestone.Status == "Submitted")
         {
-            <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" asp-page="/MilestonesSubmissionErrors/Index" asp-route-returnUrl="@(Request.Path + Request.QueryString)">
+            <a class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500" asp-page="/MilestonesSubmissionErrors/Index" asp-route-milestoneId="@Model.Milestone.Id" asp-route-returnUrl="@(Request.Path + Request.QueryString)">
                 Import Error File
             </a>
         }
