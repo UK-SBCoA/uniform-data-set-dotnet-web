@@ -458,10 +458,12 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             var results = await _lookupService.SearchOccupations(searchTerm, 20, 1);
 
-            return new JsonResult(results.Select(o => new {
-                code = o.Code,
-                name = o.Name
-            }));
+            return new JsonResult(
+                        results.Select(o => new
+                        {
+                            code = o.Code,
+                            name = o.Name
+                        }));
         }
 
         public async Task<IActionResult> OnGetOccupationLookup(string code)
