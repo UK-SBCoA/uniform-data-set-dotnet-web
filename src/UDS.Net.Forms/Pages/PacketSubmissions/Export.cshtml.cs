@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.Exports;
 using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Forms.Records;
 using UDS.Net.Services;
@@ -387,12 +386,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
 
-                //Create lists for siblings and kids by casting a3.fields data (IFormFields to A3FormFields)
-                List<A3FamilyMemberFormFields> siblings = ((A3FormFields)a3.Fields).SiblingFormFields;
-                List<A3FamilyMemberFormFields> kids = ((A3FormFields)a3.Fields).KidsFormFields;
-
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
+                //If a previous visit exists, get data from previous visit
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
@@ -404,39 +400,40 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
                 }
 
-                //If a previous form exists, compare and set codes for each input
+                //Modify currentA3Fields with export values
                 if (currentA3Fields != null && previousA3Fields != null)
                 {
                     A3FormFields? encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
                     //Export form fields applies NULL to properties when changes in section are not detected
-                    A3FormFields? exportFormFields = encodedFormFields?.GetExportFormFields();
+                    currentA3Fields = encodedFormFields?.GetExportFormFields();
+                }
 
-                    if (exportFormFields != null)
+                //Write records and fields from currentA3Fields
+                if (currentA3Fields != null)
+                {
+                    //Write A3FormField data
+                    csv.WriteRecord(currentA3Fields);
+
+                    //Write sibling data
+                    foreach (var sibling in currentA3Fields.SiblingFormFields)
                     {
-                        //Write A3FormField data
-                        csv.WriteRecord(exportFormFields);
-
-                        //Write sibling data
-                        foreach (var sibling in exportFormFields.SiblingFormFields)
+                        foreach (var prop in a3FamilyProps)
                         {
-                            foreach (var prop in a3FamilyProps)
+                            if (prop.Name != "FamilyMemberIndex")
                             {
-                                if (prop.Name != "FamilyMemberIndex")
-                                {
-                                    csv.WriteField(prop.GetValue(sibling));
-                                }
+                                csv.WriteField(prop.GetValue(sibling));
                             }
                         }
+                    }
 
-                        //Write Kids data
-                        foreach (var kid in exportFormFields.KidsFormFields)
+                    //Write Kids data
+                    foreach (var kid in currentA3Fields.KidsFormFields)
+                    {
+                        foreach (var prop in a3FamilyProps)
                         {
-                            foreach (var prop in a3FamilyProps)
+                            if (prop.Name != "FamilyMemberIndex")
                             {
-                                if (prop.Name != "FamilyMemberIndex")
-                                {
-                                    csv.WriteField(prop.GetValue(kid));
-                                }
+                                csv.WriteField(prop.GetValue(kid));
                             }
                         }
                     }
