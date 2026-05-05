@@ -456,21 +456,29 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public async Task<IActionResult> OnGetOccupationStream(string searchTerm)
         {
-            var autoCompleteList = await _lookupService.SearchOccupations(searchTerm, 10, 1);
+            var results = await _lookupService.SearchOccupations(searchTerm, 20, 1);
 
-            var occupationLookup = new OccupationAutocompleteLookupModel
+            return new JsonResult(results.Select(o => new {
+                code = o.Code,
+                name = o.Name
+            }));
+        }
+
+        public async Task<IActionResult> OnGetOccupationLookup(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+                return new JsonResult(null);
+
+            var result = await _lookupService.GetOccupationByCode(code);
+
+            if (result == null)
+                return new JsonResult(null);
+
+            return new JsonResult(new
             {
-                SearchResults = new Dictionary<string, string>(),
-                ResultsCount = autoCompleteList.Count()
-            };
-
-            foreach (var occupation in autoCompleteList)
-            {
-                occupationLookup.SearchResults.Add($"{occupation.Code} - {occupation.Name}", occupation.Code);
-            }
-
-            Response.ContentType = "text/vnd.turbo-stream.html";
-            return Partial("~/Pages/UDS4/_OccupationAutocompleteStream.cshtml", occupationLookup);
+                code = result.Code,
+                name = result.Name
+            });
         }
     }
 }
