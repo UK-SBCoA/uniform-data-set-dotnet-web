@@ -75,7 +75,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "4";
         }
 
-        public A3FormFields GetEncodedFormFields(A3FormFields previousA3Fields)
+        private A3FormFields GetEncodedFormFields(A3FormFields previousA3Fields)
         {
             if (previousA3Fields != null)
             {
@@ -118,39 +118,39 @@ namespace UDS.Net.Services.DomainModels.Forms
         }
 
         //Take the enocded form fields and set values to null when change property is 0
-        public A3FormFields GetExportFormFields()
+        public A3FormFields GetExportFormFields(A3FormFields previousA3Fields)
         {
-            A3FormFields exportFormFields = this;
+            A3FormFields formFields = this.GetEncodedFormFields(previousA3Fields);
 
-            if (exportFormFields.NWINFPAR == 0)
+            if (formFields.NWINFPAR == 0)
             {
-                exportFormFields.MOMYOB = null;
-                exportFormFields.MOMDAGE = null;
-                exportFormFields.MOMETPR = null;
-                exportFormFields.MOMETSEC = null;
-                exportFormFields.MOMMEVAL = null;
-                exportFormFields.MOMAGEO = null;
-                exportFormFields.DADYOB = null;
-                exportFormFields.DADDAGE = null;
-                exportFormFields.DADETPR = null;
-                exportFormFields.DADETSEC = null;
-                exportFormFields.DADMEVAL = null;
-                exportFormFields.DADAGEO = null;
+                formFields.MOMYOB = null;
+                formFields.MOMDAGE = null;
+                formFields.MOMETPR = null;
+                formFields.MOMETSEC = null;
+                formFields.MOMMEVAL = null;
+                formFields.MOMAGEO = null;
+                formFields.DADYOB = null;
+                formFields.DADDAGE = null;
+                formFields.DADETPR = null;
+                formFields.DADETSEC = null;
+                formFields.DADMEVAL = null;
+                formFields.DADAGEO = null;
             }
 
-            if (exportFormFields.NWINFSIB == 0)
+            if (formFields.NWINFSIB == 0)
             {
-                exportFormFields.SIBS = null;
-                exportFormFields.SiblingFormFields = exportFormFields.SiblingFormFields.Select(siblingFields => siblingFields.GetExportFormFields(exportFormFields.NWINFSIB)).ToList();
+                formFields.SIBS = null;
+                formFields.SiblingFormFields = formFields.SiblingFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFSIB)).ToList();
             }
 
-            if (exportFormFields.NWINFKID == 0)
+            if (formFields.NWINFKID == 0)
             {
-                exportFormFields.KIDS = null;
-                exportFormFields.KidsFormFields = exportFormFields.KidsFormFields.Select(siblingFields => siblingFields.GetExportFormFields(exportFormFields.NWINFKID)).ToList();
+                formFields.KIDS = null;
+                formFields.KidsFormFields = formFields.KidsFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFKID)).ToList();
             }
 
-            return exportFormFields;
+            return formFields;
         }
 
         private A3FamilyMemberFormFields GetFamilyMemberFormFields(int index, string propertyPrefix, A3Dto dto)

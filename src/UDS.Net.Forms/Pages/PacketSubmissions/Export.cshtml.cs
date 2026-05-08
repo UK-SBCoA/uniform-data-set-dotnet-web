@@ -390,20 +390,15 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 {
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
 
-                    //Set previousA3Base
-                    Form previousA3Base = previousVisit.Forms.FirstOrDefault(f => f.Kind == "A3");
-
                     //Set previousA3Fields
-                    A3FormFields previousA3Fields = (A3FormFields)previousA3Base.Fields;
+                    A3FormFields previousA3Fields = (A3FormFields)previousVisit.Forms.FirstOrDefault(f => f.Kind == "A3").Fields;
 
-                    //Modify currentA3Fields with export values
-                    A3FormFields? encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
-                    //Export form fields applies NULL to properties when changes in section are not detected
-                    exportA3Fields = encodedFormFields?.GetExportFormFields();
+                    //Export form fields applies NULL to properties when changes in section are not detected, and encodes when changes are detected
+                    exportA3Fields = currentA3Fields.GetExportFormFields(previousA3Fields);
                 }
                 else
                 {
-                    exportA3Fields = currentA3Fields;
+                    exportA3Fields = currentA3Fields; // if it is an initial visit, then the exact properties are exported (no encoding)
                 }
 
                 //Write records and fields from exportA3Fields
