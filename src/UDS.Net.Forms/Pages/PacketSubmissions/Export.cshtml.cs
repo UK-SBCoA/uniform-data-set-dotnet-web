@@ -380,40 +380,40 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                A3FormFields? previousA3Fields = null;
-
-                A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
+                A3FormFields currentA3Fields = (A3FormFields)a3.Fields;
 
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
+                A3FormFields? exportA3Fields = null;
                 //If a previous visit exists, get data from previous visit
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
 
                     //Set previousA3Base
-                    Form? previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
+                    Form previousA3Base = previousVisit.Forms.FirstOrDefault(f => f.Kind == "A3");
 
                     //Set previousA3Fields
-                    previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
-                }
+                    A3FormFields previousA3Fields = (A3FormFields)previousA3Base.Fields;
 
-                //Modify currentA3Fields with export values
-                if (currentA3Fields != null && previousA3Fields != null)
-                {
+                    //Modify currentA3Fields with export values
                     A3FormFields? encodedFormFields = currentA3Fields.GetEncodedFormFields(previousA3Fields);
                     //Export form fields applies NULL to properties when changes in section are not detected
-                    currentA3Fields = encodedFormFields?.GetExportFormFields();
+                    exportA3Fields = encodedFormFields?.GetExportFormFields();
+                }
+                else
+                {
+                    exportA3Fields = currentA3Fields;
                 }
 
-                //Write records and fields from currentA3Fields
-                if (currentA3Fields != null)
+                //Write records and fields from exportA3Fields
+                if (exportA3Fields != null)
                 {
                     //Write A3FormField data
-                    csv.WriteRecord(currentA3Fields);
+                    csv.WriteRecord(exportA3Fields);
 
                     //Write sibling data
-                    foreach (var sibling in currentA3Fields.SiblingFormFields)
+                    foreach (var sibling in exportA3Fields.SiblingFormFields)
                     {
                         foreach (var prop in a3FamilyProps)
                         {
@@ -425,7 +425,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     }
 
                     //Write Kids data
-                    foreach (var kid in currentA3Fields.KidsFormFields)
+                    foreach (var kid in exportA3Fields.KidsFormFields)
                     {
                         foreach (var prop in a3FamilyProps)
                         {
