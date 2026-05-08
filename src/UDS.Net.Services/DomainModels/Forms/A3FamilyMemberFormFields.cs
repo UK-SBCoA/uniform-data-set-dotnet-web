@@ -12,18 +12,18 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? MEVAL { get; set; }
         public int? AGO { get; set; }
 
-        public A3FamilyMemberFormFields GetEncodedFormFields(A3FamilyMemberFormFields previousFamilyMemberFormFields, Action<int?> changePropSetter)
+        public A3FamilyMemberFormFields GetEncodedFormFields(A3FamilyMemberFormFields previousFamilyMemberFormFields, Action<int?> hasNewInformation)
         {
             if (previousFamilyMemberFormFields != null)
             {
                 A3FamilyMemberFormFields encodedFamilyMemberFormFields = new A3FamilyMemberFormFields();
 
-                encodedFamilyMemberFormFields.YOB = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.YOB, this.YOB, 6666, changePropSetter);
-                encodedFamilyMemberFormFields.AGD = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGD, this.AGD, 666, changePropSetter);
-                encodedFamilyMemberFormFields.ETPR = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETPR, this.ETPR, "66", changePropSetter);
-                encodedFamilyMemberFormFields.ETSEC = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETSEC, this.ETSEC, "66", changePropSetter);
-                encodedFamilyMemberFormFields.MEVAL = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.MEVAL, this.MEVAL, 6, changePropSetter);
-                encodedFamilyMemberFormFields.AGO = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGO, this.AGO, 666, changePropSetter);
+                encodedFamilyMemberFormFields.YOB = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.YOB, this.YOB, 6666, hasNewInformation);
+                encodedFamilyMemberFormFields.AGD = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGD, this.AGD, 666, hasNewInformation);
+                encodedFamilyMemberFormFields.ETPR = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETPR, this.ETPR, "66", hasNewInformation);
+                encodedFamilyMemberFormFields.ETSEC = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETSEC, this.ETSEC, "66", hasNewInformation);
+                encodedFamilyMemberFormFields.MEVAL = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.MEVAL, this.MEVAL, 6, hasNewInformation);
+                encodedFamilyMemberFormFields.AGO = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGO, this.AGO, 666, hasNewInformation);
 
                 return encodedFamilyMemberFormFields;
             }
@@ -31,21 +31,22 @@ namespace UDS.Net.Services.DomainModels.Forms
             return null;
         }
 
-        public A3FamilyMemberFormFields GetExportFormFields(int? changePropValue)
+        public A3FamilyMemberFormFields GetExportFormFields(int hasNewInformation)
         {
-            A3FamilyMemberFormFields exportFamilyMemberFormFields = this;
+            A3FamilyMemberFormFields formFields = this;
 
-            if (changePropValue == 0)
+            // if there is no new information then it is exported as null for follow-up visits
+            if (hasNewInformation == 0)
             {
-                exportFamilyMemberFormFields.YOB = null;
-                exportFamilyMemberFormFields.AGD = null;
-                exportFamilyMemberFormFields.ETPR = null;
-                exportFamilyMemberFormFields.ETSEC = null;
-                exportFamilyMemberFormFields.MEVAL = null;
-                exportFamilyMemberFormFields.AGO = null;
+                formFields.YOB = null;
+                formFields.AGD = null;
+                formFields.ETPR = null;
+                formFields.ETSEC = null;
+                formFields.MEVAL = null;
+                formFields.AGO = null;
             }
 
-            return exportFamilyMemberFormFields;
+            return formFields;
         }
     }
 }

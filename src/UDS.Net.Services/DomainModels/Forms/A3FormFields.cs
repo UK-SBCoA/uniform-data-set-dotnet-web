@@ -87,28 +87,29 @@ namespace UDS.Net.Services.DomainModels.Forms
                 encodedFormFields.NWINFSIB = 0;
                 encodedFormFields.NWINFKID = 0;
 
-                //DEVNOTE: It is using the current value without "this", maybe I don't need it for parents
-                encodedFormFields.MOMYOB = ExportHelper.GetEncodedValue(previousA3Fields.MOMYOB, this.MOMYOB, 6666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.MOMDAGE = ExportHelper.GetEncodedValue(previousA3Fields.MOMDAGE, this.MOMDAGE, 666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.MOMETPR = ExportHelper.GetEncodedValue(previousA3Fields.MOMETPR, this.MOMETPR, "66", changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.MOMETSEC = ExportHelper.GetEncodedValue(previousA3Fields.MOMETSEC, this.MOMETSEC, "66", changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.MOMMEVAL = ExportHelper.GetEncodedValue(previousA3Fields.MOMMEVAL, this.MOMMEVAL, 6, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.MOMAGEO = ExportHelper.GetEncodedValue(previousA3Fields.MOMAGEO, this.MOMAGEO, 666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADYOB = ExportHelper.GetEncodedValue(previousA3Fields.DADYOB, this.DADYOB, 6666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADDAGE = ExportHelper.GetEncodedValue(previousA3Fields.DADDAGE, this.DADDAGE, 666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADETPR = ExportHelper.GetEncodedValue(previousA3Fields.DADETPR, this.DADETPR, "66", changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADETSEC = ExportHelper.GetEncodedValue(previousA3Fields.DADETSEC, this.DADETSEC, "66", changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADMEVAL = ExportHelper.GetEncodedValue(previousA3Fields.DADMEVAL, this.DADMEVAL, 6, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.DADAGEO = ExportHelper.GetEncodedValue(previousA3Fields.DADAGEO, this.DADAGEO, 666, changeProp => encodedFormFields.NWINFPAR = changeProp);
-                encodedFormFields.SIBS = ExportHelper.GetEncodedValue(previousA3Fields.SIBS, this.SIBS, 66, changeProp => encodedFormFields.NWINFSIB = changeProp);
-                encodedFormFields.KIDS = ExportHelper.GetEncodedValue(previousA3Fields.KIDS, this.KIDS, 66, changeProp => encodedFormFields.NWINFKID = changeProp);
+                encodedFormFields.MOMYOB = ExportHelper.GetEncodedValue(previousA3Fields.MOMYOB, this.MOMYOB, 6666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.MOMDAGE = ExportHelper.GetEncodedValue(previousA3Fields.MOMDAGE, this.MOMDAGE, 666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.MOMETPR = ExportHelper.GetEncodedValue(previousA3Fields.MOMETPR, this.MOMETPR, "66", hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.MOMETSEC = ExportHelper.GetEncodedValue(previousA3Fields.MOMETSEC, this.MOMETSEC, "66", hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.MOMMEVAL = ExportHelper.GetEncodedValue(previousA3Fields.MOMMEVAL, this.MOMMEVAL, 6, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.MOMAGEO = ExportHelper.GetEncodedValue(previousA3Fields.MOMAGEO, this.MOMAGEO, 666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADYOB = ExportHelper.GetEncodedValue(previousA3Fields.DADYOB, this.DADYOB, 6666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADDAGE = ExportHelper.GetEncodedValue(previousA3Fields.DADDAGE, this.DADDAGE, 666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADETPR = ExportHelper.GetEncodedValue(previousA3Fields.DADETPR, this.DADETPR, "66", hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADETSEC = ExportHelper.GetEncodedValue(previousA3Fields.DADETSEC, this.DADETSEC, "66", hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADMEVAL = ExportHelper.GetEncodedValue(previousA3Fields.DADMEVAL, this.DADMEVAL, 6, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.DADAGEO = ExportHelper.GetEncodedValue(previousA3Fields.DADAGEO, this.DADAGEO, 666, hasNewInformation => encodedFormFields.NWINFPAR = hasNewInformation);
+                encodedFormFields.SIBS = ExportHelper.GetEncodedValue(previousA3Fields.SIBS, this.SIBS, 66, hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation);
+                encodedFormFields.KIDS = ExportHelper.GetEncodedValue(previousA3Fields.KIDS, this.KIDS, 66, hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation);
 
                 //Encode siblings and kids
-                if (encodedFormFields.SiblingFormFields != null & encodedFormFields.KidsFormFields != null)
+                if (encodedFormFields.SiblingFormFields != null)
                 {
-                    encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], changeProp => encodedFormFields.NWINFSIB = changeProp)).ToList();
-
-                    encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], changeProp => encodedFormFields.NWINFKID = changeProp)).ToList();
+                    encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation)).ToList();
+                }
+                if (encodedFormFields.KidsFormFields != null)
+                {
+                    encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation)).ToList();
                 }
 
                 return encodedFormFields;
@@ -141,13 +142,13 @@ namespace UDS.Net.Services.DomainModels.Forms
             if (formFields.NWINFSIB == 0)
             {
                 formFields.SIBS = null;
-                formFields.SiblingFormFields = formFields.SiblingFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFSIB)).ToList();
+                formFields.SiblingFormFields = formFields.SiblingFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFSIB.Value)).ToList();
             }
 
             if (formFields.NWINFKID == 0)
             {
                 formFields.KIDS = null;
-                formFields.KidsFormFields = formFields.KidsFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFKID)).ToList();
+                formFields.KidsFormFields = formFields.KidsFormFields.Select(siblingFields => siblingFields.GetExportFormFields(formFields.NWINFKID.Value)).ToList();
             }
 
             return formFields;
