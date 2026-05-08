@@ -4,7 +4,7 @@ namespace UDS.Net.Services.Utilities
 {
     public static class ExportHelper
     {
-        public static int? GetEncodedValue(int? previousValue, int? currentValue, int code, Action<int?> changePropSetter)
+        public static int? GetEncodedValue(int? previousValue, int? currentValue, int code, Action<int?> newInformationPropSetter)
         {
             if (previousValue == null && currentValue == null)
             {
@@ -16,11 +16,11 @@ namespace UDS.Net.Services.Utilities
                 return code;
             }
 
-            changePropSetter(1);
+            newInformationPropSetter(1);
             return currentValue;
         }
 
-        public static string GetEncodedValue(string previousValue, string currentValue, string code, Action<int?> changePropSetter)
+        public static string GetEncodedValue(string previousValue, string currentValue, string code, Action<int?> newInformationPropSetter)
         {
             if (previousValue == null && currentValue == null)
             {
@@ -32,7 +32,7 @@ namespace UDS.Net.Services.Utilities
                 return code;
             }
 
-            changePropSetter(1);
+            newInformationPropSetter(1);
             return currentValue;
         }
     }

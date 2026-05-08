@@ -118,7 +118,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return null;
         }
 
-        //Take the enocded form fields and set values to null when change property is 0
+        //Take the encoded form fields and set values to null when change property is 0
         public A3FormFields GetExportFormFields(A3FormFields previousA3Fields)
         {
             A3FormFields formFields = this.GetEncodedFormFields(previousA3Fields);
