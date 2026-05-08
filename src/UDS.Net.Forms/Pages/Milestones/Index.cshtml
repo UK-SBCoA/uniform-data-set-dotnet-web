@@ -135,9 +135,10 @@
                                         PassedErrorChecks
                                     </span>
                                     <span class="mx-2 text-gray-400">|</span>
-                                    <span class="text-indigo-600 cursor-pointer hover:text-red-800" onclick="updateStatus(@milestone.Id, 'FailedErrorChecks')">
+                                    <a class="text-indigo-600 cursor-pointer hover:text-red-800" asp-page="/MilestonesSubmissionErrors/Index" asp-route-milestoneId="@milestone.Id" asp-route-returnUrl="@($"/Milestones/Details?id={milestone.Id}")">
                                         FailedErrorChecks
-                                    </span>
+                                        
+                                    </a>
                                 }
                                 else
                                 {

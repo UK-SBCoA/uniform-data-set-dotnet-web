@@ -306,7 +306,9 @@
         }
     </div>
     <h2 class="text-xl font-bold mb-4">Milestone Submissions</h2>
-
+    @{
+        var eastern = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+    }
     <div class="overflow-x-auto rounded-2xl bg-white shadow-lg">
 
         <table class="w-full text-left border border-gray-200">
@@ -325,8 +327,13 @@
                 {
                     <tr class="border-t border-gray-100" id="m1_submission_@submission.Id">
                         <td class="px-4 py-2">@submission.Id</td>
-                        <td class="px-4 py-2">@submission.SubmissionDate</td>
-                        <td class="px-4 py-2">@submission.CreatedAt</td>
+                        <td class="px-4 py-2">
+                            @TimeZoneInfo.ConvertTimeFromUtc(submission.SubmissionDate, eastern)
+                        </td>
+
+                        <td class="px-4 py-2">
+                            @TimeZoneInfo.ConvertTimeFromUtc(submission.CreatedAt, eastern)
+                        </td>
                         <td class="px-4 py-2">@submission.CreatedBy</td>
                         <td class="px-4 py-2">@submission.ModifiedBy</td>
                         <td class="px-4 py-2">@(submission.Errors?.Count ?? 0)</td>
