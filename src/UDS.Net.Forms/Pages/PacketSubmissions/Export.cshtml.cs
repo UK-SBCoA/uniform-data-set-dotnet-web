@@ -380,8 +380,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A3Record(a3));
 
-                Form? previousA3Base = null;
-
                 A3FormFields? previousA3Fields = null;
 
                 A3FormFields? currentA3Fields = a3.Fields as A3FormFields;
@@ -394,7 +392,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
 
                     //Set previousA3Base
-                    previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
+                    Form? previousA3Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A3").FirstOrDefault() : null;
 
                     //Set previousA3Fields
                     previousA3Fields = previousA3Base != null ? previousA3Base.Fields as A3FormFields : null;
