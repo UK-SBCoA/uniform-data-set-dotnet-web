@@ -1144,6 +1144,8 @@
             </div>
         </div>
 
+        <!-- Replace the PRIOCC section (around line 1355-1405) with this: -->
+
         <div class="@rowCSS">
             <label asp-for="@Model.A1.PRIOCC">
                 <span class="counter"></span>
@@ -1161,26 +1163,21 @@
                      data-occupation-autocomplete-lookup-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationLookup"
                      class="relative mt-2 max-w-md">
 
-                    <!-- SINGLE INPUT -->
+                    <!-- SEARCH INPUT -->
                     <input type="search"
                            id="occupationSearchBox"
                            data-occupation-autocomplete-target="searchBox"
-                           data-action="
-                           focus->occupation-autocomplete#showList
-                    input->occupation-autocomplete#onInput
-                    blur->occupation-autocomplete#onBlur
-                    keydown->occupation-autocomplete#onKeydown"
-                    placeholder="Start typing occupation name or code..."
-                    autocomplete="off"
-                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                           data-action="focus->occupation-autocomplete#showList input->occupation-autocomplete#onInput blur->occupation-autocomplete#onBlur keydown->occupation-autocomplete#onKeydown"
+                           placeholder="Start typing occupation name or code..."
+                           autocomplete="off"
+                           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" />
 
-                    <!-- HIDDEN VALUE -->
+                    <!-- HIDDEN FIELD FOR FORM BINDING -->
                     <input type="hidden"
                            asp-for="@Model.A1.PRIOCC"
-                           id="prioccHidden"
                            data-occupation-autocomplete-target="hidden" />
 
-                    <!-- DROPDOWN -->
+                    <!-- DROPDOWN LIST -->
                     <div data-occupation-autocomplete-target="list"
                          class="hidden absolute z-20 mt-1 w-full rounded-md bg-white shadow-lg ring-1 ring-black/5">
 
@@ -1192,7 +1189,10 @@
 
                         <div class="flex justify-center py-2">
                             <span data-occupation-autocomplete-target="loading" class="hidden">
-                                <svg class="h-5 w-5 animate-spin text-indigo-500" viewBox="0 0 24 24"></svg>
+                                <svg class="h-5 w-5 animate-spin text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
                             </span>
                         </div>
                     </div>

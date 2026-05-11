@@ -1,98 +1,140 @@
-﻿
-// wwwroot/js/js_controllers/autocomplete_controller.js
-import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-  static targets = ["searchBox", "list", "item", "noResults"]
+    static targets = [
+        "searchBox",
+        "list",
+        "options",
+        "loading"
+    ]
 
-  showList(event) {
-    this.listTarget.classList.remove("hidden")
-  }
+    connect() {
+        this.activeIndex = -1
+        this.items = []
+        this.debounceTimer = null
 
-  hideList(event) {
-    this.listTarget.classList.add("hidden")
-  }
-
-  handleOutsideClick(event) {
-    if (!this.searchBoxTarget.contains(event.target)) {
-      this.hideList();
-    }
-  }
-
-  filterList(event) {
-    clearTimeout(this.dispatchTimeout)
-
-    if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      // debounce input
-      this.dispatchTimeout = setTimeout(() => {
-        this.showList();
-        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-      }, 300)
-    }
-    else {
-      this.reset();
-      this.dispatch("resetSearch");
+        this.hideList()
     }
 
-    this.activeIndex = -1;
-  }
+    onInput() {
+        const value = this.searchBoxTarget.value.trim()
 
-  showNoResults(event) {
-    this.noResultsTarget.remove("hidden")
-  }
+        clearTimeout(this.debounceTimer)
 
-  hideNoResults(event) {
-    this.noResultsTarget.add("hidden")
-  }
+        if (!value) {
+            this.reset()
 
-  setSearchBox(event) {
-    event.preventDefault();
-    if (event.type == "click") {
-      this.searchBoxTarget.value = event.target.innerHTML;
-    }
-    else if (event.type == "keydown" && event.key == "Enter") {
-      const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
-      this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
-    }
-    this.hideList();
-  }
+            this.dispatch("reset")
 
-  connect() {
-    this.hideList()
+            return
+        }
 
-    this.activeIndex = -1;
-    this.dispatchTimeout = null;
-  }
+        this.debounceTimer = setTimeout(() => {
+            this.showList()
 
-  reset() {
-    this.hideList();
-    this.searchBoxTarget.value = "";
-    this.activeIndex = -1;
-    this.dispatchTimeout = null;
-  }
-
-  highlightItem(event) {
-    event.preventDefault();
-    const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
-    if (visibleItems.length === 0) return;
-
-    switch (event.key) {
-      case "ArrowDown":
-        this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
-        break;
-      case "ArrowUp":
-        this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
-        break;
+            this.dispatch("search", {
+                detail: {
+                    value
+                }
+            })
+        }, 300)
     }
 
-    visibleItems.forEach((item, index) => {
-      if (index === this.activeIndex) {
-        item.classList.add("bg-indigo-600", "text-white");
-        item.scrollIntoView({ block: "nearest" });
-      } else {
-        item.classList.remove("bg-indigo-600", "text-white");
-      }
-    });
-  }
+    rebuildItems() {
+        this.items = Array.from(
+            this.optionsTarget.querySelectorAll("li")
+        )
 
+        this.activeIndex = -1
+    }
+
+    showList() {
+        if (this.hasListTarget) {
+            this.listTarget.classList.remove("hidden")
+        }
+    }
+
+    hideList() {
+        if (this.hasListTarget) {
+            this.listTarget.classList.add("hidden")
+        }
+    }
+
+    reset() {
+        this.items = []
+        this.activeIndex = -1
+
+        this.hideList()
+
+        if (this.hasOptionsTarget) {
+            this.optionsTarget.scrollTop = 0
+        }
+    }
+
+    onBlur(event) {
+        if (!this.element.contains(event.relatedTarget)) {
+            this.hideList()
+        }
+    }
+
+    onKeydown(event) {
+        switch (event.key) {
+            case "ArrowDown":
+                event.preventDefault()
+                this.move(1)
+                break
+
+            case "ArrowUp":
+                event.preventDefault()
+                this.move(-1)
+                break
+
+            case "Enter":
+                event.preventDefault()
+                this.selectActive()
+                break
+
+            case "Escape":
+                this.hideList()
+                break
+        }
+    }
+
+    move(direction) {
+        if (this.items.length === 0) {
+            return
+        }
+
+        this.activeIndex =
+            (this.activeIndex + direction + this.items.length) %
+            this.items.length
+
+        this.items.forEach((item, index) => {
+            item.classList.toggle(
+                "bg-indigo-600",
+                index === this.activeIndex
+            )
+
+            item.classList.toggle(
+                "text-white",
+                index === this.activeIndex
+            )
+
+            if (index === this.activeIndex) {
+                item.scrollIntoView({
+                    block: "nearest"
+                })
+            }
+        })
+    }
+
+    selectActive() {
+        const item = this.items[this.activeIndex]
+
+        if (!item) {
+            return
+        }
+
+        item.click()
+    }
 }
