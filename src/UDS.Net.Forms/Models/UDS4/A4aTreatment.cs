@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.DataAnnotations;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.TagHelpers;
+using UDS.Net.Services.DomainModels.Forms;
 
 namespace UDS.Net.Forms.Models.UDS4
 {
@@ -86,6 +88,20 @@ namespace UDS.Net.Forms.Models.UDS4
                 },
             }},
         };
+        public bool NewTreatmentInformation(A4aTreatment previousTreatment, A4aTreatment currentTreatment)
+        {
+            var previousFields = previousTreatment.ToEntity();
+            var currentFields = currentTreatment.ToEntity();
+
+            foreach (var property in typeof(A4aTreatmentFormFields).GetProperties())
+            {
+                if (!Equals(property.GetValue(previousFields), property.GetValue(currentFields)))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }

@@ -4,7 +4,6 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -227,33 +226,36 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                 var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, Visit.ParticipationId, Visit.VISITNUM - 1, "A4a");
 
-                var currentA4a = BaseForm.ToEntity();
+                var currentA4a = A4a;
 
-                var previousA4a = previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
+                var previousA4a = previousVisit.Forms
+                    .Where(f => f.Kind == "A4a")
+                    .Select(f => ((A4a)f.ToVM()))
+                    .FirstOrDefault();
 
-                var previousA4aFields = previousA4a?.Fields as A4aFormFields;
-                var currentA4aFields = currentA4a.Fields as A4aFormFields;
+                List<A4aTreatment> currentTreatments = A4a.Treatments;
+                List<A4aTreatment> previousTreatments = previousVisit.Forms
+                    .Where(f => f.Kind == "A4a")
+                    .SelectMany(f => ((A4a)f.PreviousVisitToVM()).Treatments)
+                    .ToList();
 
 
                 if (A4a.NEWTREAT != null)
                 {
                     bool treatmentValuesMatch = true;
-                    foreach (var prop in previousA4aFields.GetType().GetProperties())
+
+                    foreach (var treatment in currentTreatments)
                     {
+                        var matchingPreviousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
 
-                        var prevValue = prop.GetValue(previousA4aFields);
-                        var currentValue = prop.GetValue(currentA4aFields);
-
-                        if (prop.Name == nameof(A4aFormFields.TreatmentFormFields))
+                        if (!treatment.NewTreatmentInformation(matchingPreviousTreatment, treatment))
                         {
-                            var prevList = prevValue as List<A4aTreatmentFormFields>;
-                            var currentList = currentValue as List<A4aTreatmentFormFields>;
-
-                            treatmentValuesMatch = TreatmentListsMatch(prevList!, currentList!);
+                            treatmentValuesMatch = false;
+                            break;
                         }
                     }
 
-                    var adrdValuesMatch = ADRDMatchPreviousVisit(previousA4aFields!, currentA4aFields!);
+                    var adrdValuesMatch = ADRDMatchPreviousVisit(previousA4a!, currentA4a!);
 
                     if (A4a.NEWTREAT == 1 && A4a.NEWADEVENT == 1)
                     {
@@ -266,17 +268,16 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         if (treatmentValuesMatch)
                         {
-                            ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new informatoin is avaiable");
+                            ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new information is avaiable");
                         }
                     }
 
                     if (A4a.NEWTREAT == 0 || A4a.NEWTREAT == 9)
                     {
                         //Need to set the currentA4a treatment fields to the previousA4a treatment fields
-                        if (previousA4aFields != null)
+                        if (previousTreatments != null)
                         {
-                            List<A4aTreatmentFormFields> previousTreatmentFields = previousA4aFields.TreatmentFormFields;
-                            A4a.Treatments = previousTreatmentFields
+                            A4a.Treatments = previousTreatments
                                             .Select(tf => new A4aTreatment
                                             {
                                                 TreatmentIndex = tf.TreatmentIndex,
@@ -300,10 +301,10 @@ namespace UDS.Net.Forms.Pages.UDS4
                     }
                     if (A4a.NEWADEVENT == 0 || A4a.NEWADEVENT == 9)
                     {
-                        A4a.ARIAE = previousA4aFields.ARIAE;
-                        A4a.ARIAH = previousA4aFields.ARIAH;
-                        A4a.ADVERSEOTH = previousA4aFields.ADVERSEOTH;
-                        A4a.ADVERSEOTX = previousA4aFields.ADVERSEOTX;
+                        A4a.ARIAE = previousA4a.ARIAE;
+                        A4a.ARIAH = previousA4a.ARIAH;
+                        A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
+                        A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
                     }
                     Visit.Forms.Add(A4a);
 
@@ -314,16 +315,14 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
-
-
-        public bool ADRDMatchPreviousVisit(A4aFormFields previousA4aFields, A4aFormFields currentA4aFields)
+        public bool ADRDMatchPreviousVisit(A4a previousA4aFields, A4a currentA4aFields)
         {
             if (previousA4aFields == null || currentA4aFields == null)
                 return false;
 
             foreach (var prop in previousA4aFields.GetType().GetProperties())
             {
-                if (prop.Name == nameof(A4aFormFields.ARIAE) || prop.Name == nameof(A4aFormFields.ARIAH) || prop.Name == nameof(A4aFormFields.ADVERSEOTH) || prop.Name == nameof(A4aFormFields.ADVERSEOTX))
+                if (prop.Name == nameof(A4a.ARIAE) || prop.Name == nameof(A4a.ARIAH) || prop.Name == nameof(A4a.ADVERSEOTH) || prop.Name == nameof(A4a.ADVERSEOTX))
                 {
                     var prevValue = prop.GetValue(previousA4aFields);
                     var currentValue = prop.GetValue(currentA4aFields);
@@ -332,28 +331,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         return false;
                     }
-                }
-            }
-            return true;
-        }
-        private bool TreatmentListsMatch(List<A4aTreatmentFormFields> prev, List<A4aTreatmentFormFields> current)
-        {
-            if (prev == null && current == null) return true;
-            if (prev == null || current == null) return false;
-            if (prev.Count != current.Count) return false;
-
-            for (int i = 0; i < prev.Count; i++)
-            {
-                var prevItem = prev[i];
-                var currentItem = current[i];
-
-                foreach (var prop in typeof(A4aTreatmentFormFields).GetProperties())
-                {
-                    var prevValue = prop.GetValue(prevItem);
-                    var currentValue = prop.GetValue(currentItem);
-
-                    if (!object.Equals(prevValue, currentValue))
-                        return false;
                 }
             }
             return true;
