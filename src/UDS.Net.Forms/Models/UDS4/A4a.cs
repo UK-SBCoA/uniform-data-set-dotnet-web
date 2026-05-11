@@ -107,7 +107,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (NEWTREAT == null)
                         {
-                            yield return new ValidationResult("NEWTREAT response is required", new[] { nameof(NEWTREAT) });
+                            yield return new ValidationResult("Is new information available concerning the participant's treatments or trials?", new[] { nameof(NEWTREAT) });
                         }
 
                     }
@@ -118,7 +118,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     {
                         if (NEWADEVENT == null)
                         {
-                            yield return new ValidationResult("NEWWADEVENT response is required", new[] { nameof(NEWADEVENT) });
+                            yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
                         }
 
                     }
