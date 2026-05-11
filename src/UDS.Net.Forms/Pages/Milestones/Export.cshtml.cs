@@ -204,7 +204,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             await writer.FlushAsync();
             memoryStream.Position = 0;
 
-            string filename = $"Milestones_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
+            string filename = $"Milestones_{DateTime.Now:yyyyMMdd_HHmmss}-mlst.csv";
             return File(memoryStream, "text/csv", filename);
         }
 
