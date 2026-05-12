@@ -1,85 +1,207 @@
 import AutocompleteController from "./autocomplete_controller.js"
 
 export default class extends AutocompleteController {
-    static targets = ["searchBox", "hidden", "list", "options", "loading"]
+
+    static targets = [
+        "searchBox",
+        "hidden",
+        "list",
+        "options",
+        "loading",
+        "item"
+    ]
+
     static values = {
         url: String,
         lookupUrl: String
     }
 
-    initialize() {
+    connect() {
+
+        super.connect()
+
         this.restoreValue()
     }
 
     async restoreValue() {
+
         const code = this.hiddenTarget.value
-        if (!code) return
+
+        if (!code) {
+            return
+        }
 
         try {
-            const url = new URL(this.lookupUrlValue, window.location.origin)
+
+            const url = new URL(
+                this.lookupUrlValue,
+                window.location.origin
+            )
+
             url.searchParams.set("code", code)
 
             const res = await fetch(url)
-            if (!res.ok) throw new Error()
+
+            if (!res.ok) {
+                throw new Error()
+            }
 
             const data = await res.json()
 
-            if (data) {
-                this.searchBoxTarget.value = `${data.code} - ${data.name}`
-            } else {
-                this.searchBoxTarget.value = code
-            }
+            this.searchBoxTarget.value = data
+                ? `${data.code} - ${data.name}`
+                : code
+
         } catch {
+
             this.searchBoxTarget.value = code
         }
     }
 
-    getNoResultsMessage() {
-        return "No occupations found"
+    onEmptyInput() {
+
+        this.hiddenTarget.value = ""
     }
 
-    onSelect(item) {
+    async performFetch(search) {
+
+        const url = new URL(
+            this.urlValue,
+            window.location.origin
+        )
+
+        url.searchParams.set("searchTerm", search)
+
+        return fetch(url, {
+            headers: {
+                "Accept": "application/json"
+            }
+        })
+    }
+
+    async handleResponse(response) {
+
+        const data = await response.json()
+
+        this.renderOptions(data)
+    }
+
+    renderOptions(data) {
+
+        this.optionsTarget.innerHTML = ""
+
+        if (!data?.length) {
+
+            this.optionsTarget.innerHTML = `
+                <li class="px-4 py-2 text-gray-500 italic">
+                    No occupations found
+                </li>
+            `
+
+            return
+        }
+
+        data.forEach((item) => {
+
+            const li = document.createElement("li")
+
+            li.className =
+                "cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
+
+            li.textContent =
+                `${item.code} - ${item.name}`
+
+            li.dataset.code = item.code
+            li.dataset.name = item.name
+
+            li.setAttribute(
+                "data-occupation-autocomplete-target",
+                "item"
+            )
+
+            li.addEventListener("mousedown", (e) => {
+
+                e.preventDefault()
+
+                this.select(item)
+            })
+
+            this.optionsTarget.appendChild(li)
+        })
+    }
+
+    select(item) {
+
         this.hiddenTarget.value = item.code
-        this.searchBoxTarget.value = `${item.code} - ${item.name}`
+
+        this.searchBoxTarget.value =
+            `${item.code} - ${item.name}`
+
+        this.hideList()
     }
 
-    handleEnter() {
+    handleEnter(event) {
+
         const value = this.searchBoxTarget.value.trim()
 
-        // If an item is highlighted, select it
-        if (this.activeIndex >= 0 && this.items[this.activeIndex]) {
+        if (
+            this.activeIndex >= 0 &&
+            this.items[this.activeIndex]
+        ) {
+
+            event.preventDefault()
+
             const el = this.items[this.activeIndex]
+
             this.select({
                 code: el.dataset.code,
                 name: el.dataset.name
             })
+
             return
         }
 
-        // Allow 3-digit codes to be entered directly
         if (/^\d{3}$/.test(value)) {
+
+            event.preventDefault()
+
             this.hiddenTarget.value = value
+
             this.hideList()
+
             return
         }
 
-        // Invalid entry
+        event.preventDefault()
+
         this.hiddenTarget.value = ""
+
         this.hideList()
     }
 
     onBlur() {
-        const value = this.searchBoxTarget.value.trim()
 
-        // Allow 3-digit codes to be stored on blur
-        if (/^\d{3}$/.test(value)) {
-            this.hiddenTarget.value = value
-            return
-        }
+        setTimeout(() => {
 
-        // If the format doesn't match "code - name", clear the hidden value
-        if (!value.includes(" - ")) {
-            this.hiddenTarget.value = ""
-        }
+            const value =
+                this.searchBoxTarget.value.trim()
+
+            if (/^\d{3}$/.test(value)) {
+
+                this.hiddenTarget.value = value
+
+                this.hideList()
+
+                return
+            }
+
+            if (!value.includes(" - ")) {
+
+                this.hiddenTarget.value = ""
+            }
+
+            this.hideList()
+
+        }, 150)
     }
 }

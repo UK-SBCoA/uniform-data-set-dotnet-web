@@ -1,79 +1,59 @@
 ﻿import AutocompleteController from "./autocomplete_controller.js"
 
 export default class extends AutocompleteController {
-    static targets = ["searchBox", "list", "options", "loading"]
+
+    static targets = [
+        "searchBox",
+        "list",
+        "options",
+        "loading",
+        "item"
+    ]
+
     static values = {
         url: String
     }
 
     connect() {
-        // Call parent connect to initialize state
+
         super.connect()
-        // Don't fetch on page load - wait for user interaction
+
+        document.addEventListener(
+            "turbo:before-stream-render",
+            () => {
+                this.activeIndex = -1
+            }
+        )
     }
 
-    async fetchData({ detail: { content } }) {
-        const search = content
-        if (search.length === 0) return
+    async performFetch(search) {
 
-        this.showList()
-        this.loadingTarget.classList.remove("hidden")
-
-        try {
-            const response = await fetch(this.urlValue + "&searchTerm=" + search, {
+        return fetch(
+            `${this.urlValue}&searchTerm=${encodeURIComponent(search)}`,
+            {
                 method: "GET",
                 headers: {
                     "Accept": "text/vnd.turbo-stream.html"
                 }
-            })
-
-            const html = await response.text()
-            Turbo.renderStreamMessage(html)
-
-            // Reset scroll position
-            const options = document.getElementById("options")
-            if (options) {
-                options.scrollTop = 0
             }
-        } catch (error) {
-            console.error("GET error:", error)
-        } finally {
-            this.loadingTarget.classList.add("hidden")
-        }
+        )
     }
 
-    onInput() {
-        const value = this.searchBoxTarget.value.trim()
-        clearTimeout(this.debounceTimer)
+    async handleResponse(response) {
 
-        if (!value) {
-            this.reset()
-            return
-        }
+        const html = await response.text()
 
-        this.debounceTimer = setTimeout(() => {
-            this.fetchData({ detail: { content: value } })
-        }, 300)
+        Turbo.renderStreamMessage(html)
     }
 
-    getNoResultsMessage() {
-        return "No medications found"
-    }
+    select(event) {
 
-    onSelect(item) {
-        // Fill the search field with the selected medication name
-        // This handles autocomplete list selections
+        const item = JSON.parse(
+            event.currentTarget.dataset.item
+        )
+
         this.searchBoxTarget.value = item
-        this.hideList()
-    }
 
-    handleEnter() {
-        // RxNorm handles Enter key through Turbo Streams
-        // Override to prevent default behavior
-    }
-
-    onBlur() {
-        // Close the dropdown when focus leaves
         this.hideList()
     }
 }

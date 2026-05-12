@@ -1144,8 +1144,6 @@
             </div>
         </div>
 
-        <!-- Replace the PRIOCC section (around line 1355-1405) with this: -->
-
         <div class="@rowCSS">
             <label asp-for="@Model.A1.PRIOCC">
                 <span class="counter"></span>
@@ -1163,7 +1161,6 @@
                      data-occupation-autocomplete-lookup-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationLookup"
                      class="relative mt-2 max-w-md">
 
-                    <!-- SEARCH INPUT -->
                     <input type="search"
                            id="occupationSearchBox"
                            data-occupation-autocomplete-target="searchBox"
@@ -1172,12 +1169,10 @@
                            autocomplete="off"
                            class="w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" />
 
-                    <!-- HIDDEN FIELD FOR FORM BINDING -->
                     <input type="hidden"
                            asp-for="@Model.A1.PRIOCC"
                            data-occupation-autocomplete-target="hidden" />
 
-                    <!-- DROPDOWN LIST -->
                     <div data-occupation-autocomplete-target="list"
                          class="hidden absolute z-20 mt-1 w-full rounded-md bg-white shadow-lg ring-1 ring-black/5">
 
