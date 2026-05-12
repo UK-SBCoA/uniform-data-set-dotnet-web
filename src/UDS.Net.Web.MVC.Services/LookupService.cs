@@ -187,8 +187,7 @@ namespace UDS.Net.Web.MVC.Services
         {
             if (!String.IsNullOrWhiteSpace(rxCUI))
             {
-                var isActive = await _rxNormClient.RxNormIsActiveAsync(rxCUI);
-                return (bool)isActive;
+                return await _rxNormClient.RxNormIsActiveAsync(rxCUI);
             }
             throw new ArgumentException("rxCUI cannot be null or whitespace.");
         }
