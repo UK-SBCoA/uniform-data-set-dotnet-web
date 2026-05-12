@@ -126,5 +126,19 @@ namespace UDS.Net.Services.DomainModels.Forms
                 }
             }
         }
+
+        public A4aFormFields GetExportedBiomarkerFields(A4aFormFields previousFields, A4aFormFields currentFields)
+        {
+            if (currentFields.NEWADEVENT == 0 || currentFields.NEWADEVENT == 9) //Biomarkers have not changed from previous visits. Export blank values
+            {
+                currentFields.ARIAE = null;
+                currentFields.ARIAH = null;
+                currentFields.ADVERSEOTH = null;
+                currentFields.ADVERSEOTX = null;
+
+                return currentFields;
+            }
+            return currentFields;
+        }
     }
 }

@@ -476,40 +476,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     previousA4aFields = previousA4aBase != null ? previousA4aBase.Fields as A4aFormFields : null;
                 }
 
-                List<A4aTreatmentFormFields> treatments;
-
                 if (a4a.Fields is A4aFormFields normalA4a)
                 {
                     if (currentA4aFields != null && previousA4aFields != null)
                     {
-                        if (currentA4aFields.NEWADEVENT == 0 || currentA4aFields.NEWADEVENT == 9) //Indicates ARIA-E has not changed from previous visits. Export blank values
-                        {
-                            currentA4aFields.ARIAE = null;
-                            currentA4aFields.ARIAH = null;
-                            currentA4aFields.ADVERSEOTH = null;
-                            currentA4aFields.ADVERSEOTX = null;
-                        }
+                        //Handle exported biomarker fields
+                        currentA4aFields.GetExportedBiomarkerFields(previousA4aFields, currentA4aFields);
                     }
                     csv.WriteRecord(normalA4a);
-                    treatments = normalA4a.TreatmentFormFields.ToList();
                 }
-                else
-                {
-                    treatments = new List<A4aTreatmentFormFields>();
-                }
+
+                List<A4aTreatmentFormFields> treatments = currentA4aFields!.TreatmentFormFields;
 
                 if (currentA4aFields != null && previousA4aFields != null)
                 {
-                    // If NEWTREAT is 0 or 9, no treatment data should be exported.We will still need a list of 8 to maintain the csv formatting
-                    if (currentA4aFields.NEWTREAT == 0 || currentA4aFields.NEWTREAT == 9)
+                   for(var i = 0; i < 8; i++)
                     {
-                        var emptyTreatments = new List<A4aTreatmentFormFields>();
-
-                        for (int i = 0; i < 8; i++)
-                        {
-                            emptyTreatments.Add(new A4aTreatmentFormFields());
-                        }
-                        treatments = emptyTreatments;
+                        treatments[i].GetExportedTreatmentFields(treatments[i], currentA4aFields.NEWTREAT); //NEWTREAT value determines if treatments values are exported or nullified
                     }
                 }
                 foreach (var treatment in treatments)
