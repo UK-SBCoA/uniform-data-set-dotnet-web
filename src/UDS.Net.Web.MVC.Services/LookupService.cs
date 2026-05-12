@@ -183,9 +183,9 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
-        public Task<bool?> RxNormIsActive(string rxCUI)
+        public async Task<bool?> RxNormIsActive(string rxCUI)
         {
-            return _rxNormClient.RxNormIsActiveAsync(rxCUI);
+            return await _rxNormClient.RxNormIsActiveAsync(rxCUI);
         }
 
         public async Task<string?> GetRxNormStatus(string? rxCUI)
