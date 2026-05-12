@@ -1,80 +1,105 @@
 ﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-    static targets = [
-        "searchBox",
-        "list",
-        "options",
-        "loading"
-    ]
+    static targets = ["searchBox", "list", "options", "loading"]
+    static values = {
+        url: String
+    }
 
     connect() {
         this.activeIndex = -1
         this.items = []
         this.debounceTimer = null
+        this.initialize()
+    }
 
-        this.hideList()
+    // Override in subclasses for custom initialization
+    initialize() {
     }
 
     onInput() {
         const value = this.searchBoxTarget.value.trim()
-
         clearTimeout(this.debounceTimer)
 
         if (!value) {
             this.reset()
-
-            this.dispatch("reset")
-
             return
         }
 
         this.debounceTimer = setTimeout(() => {
-            this.showList()
-
-            this.dispatch("search", {
-                detail: {
-                    value
-                }
-            })
+            this.fetchResults(value)
         }, 300)
     }
 
-    rebuildItems() {
-        this.items = Array.from(
-            this.optionsTarget.querySelectorAll("li")
-        )
+    async fetchResults(search) {
+        this.showList()
+        this.loadingTarget.classList.remove("hidden")
 
-        this.activeIndex = -1
-    }
+        try {
+            const url = new URL(this.urlValue, window.location.origin)
+            url.searchParams.set("searchTerm", search)
 
-    showList() {
-        if (this.hasListTarget) {
-            this.listTarget.classList.remove("hidden")
+            const res = await fetch(url, {
+                headers: { "Accept": "application/json" }
+            })
+
+            const data = await res.json()
+            this.renderOptions(data)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            this.loadingTarget.classList.add("hidden")
         }
     }
 
-    hideList() {
-        if (this.hasListTarget) {
-            this.listTarget.classList.add("hidden")
-        }
-    }
-
-    reset() {
+    renderOptions(data) {
+        this.optionsTarget.innerHTML = ""
         this.items = []
-        this.activeIndex = -1
 
-        this.hideList()
-
-        if (this.hasOptionsTarget) {
-            this.optionsTarget.scrollTop = 0
+        if (!data || data.length === 0) {
+            this.optionsTarget.innerHTML = `<li class="px-4 py-2 text-gray-500 italic">${this.getNoResultsMessage()}</li>`
+            return
         }
+
+        data.forEach((item) => {
+            const li = document.createElement("li")
+            li.className = "cursor-pointer px-4 py-2 hover:bg-indigo-600 hover:text-white"
+            li.textContent = this.formatItemText(item)
+
+            this.setItemData(li, item)
+            li.addEventListener("click", () => this.select(item))
+
+            this.optionsTarget.appendChild(li)
+            this.items.push(li)
+        })
+
+        this.activeIndex = -1
     }
 
-    onBlur(event) {
-        if (!this.element.contains(event.relatedTarget)) {
-            this.hideList()
-        }
+    // Override in subclasses to customize item text formatting
+    formatItemText(item) {
+        return `${item.code} - ${item.name}`
+    }
+
+    // Override in subclasses to customize item data storage
+    setItemData(element, item) {
+        element.dataset.code = item.code
+        element.dataset.name = item.name
+    }
+
+    // Override in subclasses to customize no results message
+    getNoResultsMessage() {
+        return "No results found"
+    }
+
+    select(item) {
+        this.onSelect(item)
+        this.hideList()
+    }
+
+    // Override in subclasses for custom select behavior
+    onSelect(item) {
+        this.searchBoxTarget.value = this.formatItemText(item)
     }
 
     onKeydown(event) {
@@ -91,7 +116,7 @@ export default class extends Controller {
 
             case "Enter":
                 event.preventDefault()
-                this.selectActive()
+                this.handleEnter()
                 break
 
             case "Escape":
@@ -100,41 +125,47 @@ export default class extends Controller {
         }
     }
 
-    move(direction) {
-        if (this.items.length === 0) {
-            return
+    // Override in subclasses for custom Enter key behavior
+    handleEnter() {
+        if (this.activeIndex >= 0 && this.items[this.activeIndex]) {
+            const el = this.items[this.activeIndex]
+            this.select({ code: el.dataset.code, name: el.dataset.name })
         }
+    }
 
-        this.activeIndex =
-            (this.activeIndex + direction + this.items.length) %
-            this.items.length
+    move(direction) {
+        if (this.items.length === 0) return
 
-        this.items.forEach((item, index) => {
-            item.classList.toggle(
-                "bg-indigo-600",
-                index === this.activeIndex
-            )
+        this.activeIndex = (this.activeIndex + direction + this.items.length) % this.items.length
 
-            item.classList.toggle(
-                "text-white",
-                index === this.activeIndex
-            )
-
-            if (index === this.activeIndex) {
-                item.scrollIntoView({
-                    block: "nearest"
-                })
+        this.items.forEach((el, i) => {
+            if (i === this.activeIndex) {
+                el.classList.add("bg-indigo-600", "text-white")
+                el.scrollIntoView({ block: "nearest" })
+            } else {
+                el.classList.remove("bg-indigo-600", "text-white")
             }
         })
     }
 
-    selectActive() {
-        const item = this.items[this.activeIndex]
+    onBlur() {
+        // Override in subclasses for custom blur behavior
+    }
 
-        if (!item) {
-            return
-        }
+    showList() {
+        this.listTarget.classList.remove("hidden")
+    }
 
-        item.click()
+    hideList() {
+        setTimeout(() => {
+            this.listTarget.classList.add("hidden")
+        }, 150)
+    }
+
+    reset() {
+        this.optionsTarget.innerHTML = ""
+        this.items = []
+        this.activeIndex = -1
+        this.hideList()
     }
 }
