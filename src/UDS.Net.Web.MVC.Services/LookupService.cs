@@ -195,7 +195,7 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<string> GetRxNormStatus(string rxCUI)
         {
-            if(!String.IsNullOrWhiteSpace(rxCUI))
+            if (!String.IsNullOrWhiteSpace(rxCUI))
             {
                 var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
                 return rxStatus;
