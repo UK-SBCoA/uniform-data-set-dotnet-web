@@ -183,15 +183,24 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
-        public async Task<bool?> RxNormIsActive(string rxCUI)
+        public async Task<bool> RxNormIsActive(string rxCUI)
         {
-            return await _rxNormClient.RxNormIsActiveAsync(rxCUI);
+            if (!String.IsNullOrWhiteSpace(rxCUI))
+            {
+                var isActive = await _rxNormClient.RxNormIsActiveAsync(rxCUI);
+                return (bool)isActive;
+            }
+            throw new ArgumentException("rxCUI cannot be null or whitespace.");
         }
 
-        public async Task<string?> GetRxNormStatus(string? rxCUI)
+        public async Task<string> GetRxNormStatus(string rxCUI)
         {
-            var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
-            return rxStatus;
+            if(!String.IsNullOrWhiteSpace(rxCUI))
+            {
+                var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
+                return rxStatus;
+            }
+            throw new ArgumentException("rxCUI cannot be null or whitespace.");
         }
 
         [Obsolete]

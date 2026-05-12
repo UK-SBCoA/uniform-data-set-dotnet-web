@@ -25,9 +25,9 @@ namespace UDS.Net.Services
 
         Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode);
 
-        Task<bool?> RxNormIsActive(string rxCUI);
+        Task<bool> RxNormIsActive(string rxCUI);
 
-        Task<string?> GetRxNormStatus(string rxCUI);
+        Task<string> GetRxNormStatus(string rxCUI);
     };
 }
 

@@ -33,12 +33,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             _countries.Add(new LookupCountryCodeDto { Id = 4, Code = "GB", Country = "United Kingdom", IsActive = true });
         }
 
-        public async Task<bool?> RxNormIsActive(string rxCUI)
+        public async Task<bool> RxNormIsActive(string rxCUI)
         {
             return true;
         }
 
-        public async Task<string?> GetRxNormStatus(string rxCUI)
+        public async Task<string> GetRxNormStatus(string rxCUI)
         {
             return "Active";
         }
