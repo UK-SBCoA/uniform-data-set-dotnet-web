@@ -296,17 +296,17 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
-        public bool AdverseEventsMatchPreviousVisit(A4a previousA4aFields, A4a currentA4aFields)
+        public bool AdverseEventsMatchPreviousVisit(A4a previousA4a, A4a currentA4a)
         {
-            if (previousA4aFields == null || currentA4aFields == null)
+            if (previousA4a == null || currentA4a == null)
                 return false;
 
-            foreach (var prop in previousA4aFields.GetType().GetProperties())
+            foreach (var prop in previousA4a.GetType().GetProperties())
             {
                 if (prop.Name == nameof(A4a.ARIAE) || prop.Name == nameof(A4a.ARIAH) || prop.Name == nameof(A4a.ADVERSEOTH) || prop.Name == nameof(A4a.ADVERSEOTX))
                 {
-                    var prevValue = prop.GetValue(previousA4aFields);
-                    var currentValue = prop.GetValue(currentA4aFields);
+                    var prevValue = prop.GetValue(previousA4a);
+                    var currentValue = prop.GetValue(currentA4a);
 
                     if (!object.Equals(prevValue, currentValue))
                     {

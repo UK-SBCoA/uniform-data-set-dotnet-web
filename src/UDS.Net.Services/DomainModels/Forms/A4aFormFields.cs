@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
@@ -166,6 +165,5 @@ namespace UDS.Net.Services.DomainModels.Forms
                 }
             }
         }
-
     }
 }
