@@ -101,7 +101,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             bool newTreatmentInformation = currentA4aFields.NEWTREAT == 1;
             bool newAdverseEventInformation = currentA4aFields.NEWADEVENT == 1;
 
-            if(!newTreatmentInformation)
+            if (!newTreatmentInformation)
             {
                 currentA4aFields.ClearTreatmentFormFields();
                 currentA4aFields.ADVEVENT = null;
