@@ -459,23 +459,39 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a4a != null)
             {
                 csv.WriteRecord(new A4aRecord(a4a));
-                Form? previousA4aBase = null;
-
-                A4aFormFields? previousA4aFields = null;
-
-                A4aFormFields? currentA4aFields = a4a.Fields as A4aFormFields;
+        
+                A4aFormFields exportA4aFormFields = null;
+                A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
+                    A4aFormFields? previousA4aFields = null;
+
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A4a");
 
-                    previousA4aBase = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A4a").FirstOrDefault() : null;
+                    previousA4aFields = (A4aFormFields)(previousVisit.Forms.FirstOrDefault(f => f.Kind == "A4a").Fields);
 
-                    previousA4aFields = previousA4aBase != null ? previousA4aBase.Fields as A4aFormFields : null;
+                    exportA4aFormFields = currentA4aFields.GetExportFormFields(previousA4aFields);
+                }
+                else
+                {
+                    exportA4aFormFields = currentA4aFields;
                 }
 
+                // write the export object
+                csv.WriteRecord(exportA4aFormFields);
+                foreach (var treatment in exportA4aFormFields.TreatmentFormFields)
+                {
+                    foreach (var prop in a4aProps)
+                    {
+                        if (prop.Name != "TreatmentIndex")
+                            csv.WriteField(prop.GetValue(treatment));
+                    }
+                }
+
+                /*
                 if (a4a.Fields is A4aFormFields normalA4a)
                 {
                     if (currentA4aFields != null && previousA4aFields != null)
@@ -495,14 +511,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                         treatments[i].GetExportedTreatmentFields(treatments[i], currentA4aFields.NEWTREAT); //NEWTREAT value determines if treatments values are exported or nullified
                     }
                 }
-                foreach (var treatment in treatments)
-                {
-                    foreach (var prop in a4aProps)
-                    {
-                        if (prop.Name != "TreatmentIndex")
-                            csv.WriteField(prop.GetValue(treatment));
-                    }
-                }
+                */
             }
             if (a5d2 != null)
             {

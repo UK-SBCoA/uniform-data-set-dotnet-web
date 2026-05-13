@@ -96,6 +96,29 @@ namespace UDS.Net.Services.DomainModels.Forms
             return treatment;
         }
 
+        public A4aFormFields GetExportFormFields(A4aFormFields previousFormFields)
+        {
+            // TODO get the representation of the A4a the way it should be with either nulls or actual values dependeing on NEWTREAT or NEWADVENT
+            return new A4aFormFields();
+        }
+
+        /*
+
+        public A4aFormFields GetExportedAdverseEventFields(A4aFormFields previousFields, A4aFormFields currentFields)
+        {
+            if (currentFields.NEWADEVENT == 0 || currentFields.NEWADEVENT == 9) //Biomarkers have not changed from previous visits. Export blank values
+            {
+                currentFields.ARIAE = null;
+                currentFields.ARIAH = null;
+                currentFields.ADVERSEOTH = null;
+                currentFields.ADVERSEOTX = null;
+
+                return currentFields;
+            }
+            return currentFields;
+        }
+        */
+
         public A4aFormFields()
         {
             for (int i = 1; i <= 8; i++)
@@ -127,18 +150,5 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
-        public A4aFormFields GetExportedAdverseEventFields(A4aFormFields previousFields, A4aFormFields currentFields)
-        {
-            if (currentFields.NEWADEVENT == 0 || currentFields.NEWADEVENT == 9) //Biomarkers have not changed from previous visits. Export blank values
-            {
-                currentFields.ARIAE = null;
-                currentFields.ARIAH = null;
-                currentFields.ADVERSEOTH = null;
-                currentFields.ADVERSEOTX = null;
-
-                return currentFields;
-            }
-            return currentFields;
-        }
     }
 }
