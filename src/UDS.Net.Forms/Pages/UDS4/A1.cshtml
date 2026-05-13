@@ -1145,50 +1145,86 @@
         </div>
 
         <div class="@rowCSS">
+
             <label asp-for="@Model.A1.PRIOCC">
                 <span class="counter"></span>
+
                 @Html.DisplayNameFor(m => m.A1.PRIOCC)
+
                 <span class="text-gray-400 text-sm">
                     <i>(Search or enter 3-digit code)</i>
                 </span>
             </label>
 
             <div class="mt-4 sm:col-span-2 sm:mt-0">
-                <p class="text-sm text-gray-500" asp-description-for="A1.PRIOCC"></p>
 
-                <div data-controller="occupation-autocomplete"
-                     data-occupation-autocomplete-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationStream"
-                     data-occupation-autocomplete-lookup-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationLookup"
+                <p class="text-sm text-gray-500"
+                   asp-description-for="A1.PRIOCC">
+                </p>
+
+                <div data-controller="autocomplete occupation"
+                     data-occupation-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationStream"
+                     data-occupation-lookup-url-value="UDS4/A1/@Model.Visit.Id?handler=OccupationLookup"
                      class="relative mt-2 max-w-md">
 
                     <input type="search"
-                           id="occupationSearchBox"
-                           data-occupation-autocomplete-target="searchBox"
-                           data-action="focus->occupation-autocomplete#showList input->occupation-autocomplete#onInput blur->occupation-autocomplete#onBlur keydown->occupation-autocomplete#onKeydown"
-                           placeholder="Start typing occupation name or code..."
                            autocomplete="off"
-                           class="w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" />
+                           placeholder="Start typing occupation name or code..."
+                           data-autocomplete-target="search"
+                           data-action="
+                           focus->autocomplete#show
+                    blur->autocomplete#blur
+                    input->occupation#search
+                    keydown->occupation#keydown
+                    keydown->autocomplete#keydown
+                    "
+
+                    class="w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2" />
 
                     <input type="hidden"
                            asp-for="@Model.A1.PRIOCC"
-                           data-occupation-autocomplete-target="hidden" />
+                           data-occupation-target="hidden" />
 
-                    <div data-occupation-autocomplete-target="list"
+                    <div data-autocomplete-target="list"
                          class="hidden absolute z-20 mt-1 w-full rounded-md bg-white shadow-lg ring-1 ring-black/5">
 
-                        <ul data-occupation-autocomplete-target="options"
+                        <ul data-autocomplete-target="options"
                             class="max-h-60 overflow-y-auto py-1 text-sm text-gray-800"
                             role="listbox">
-                            <li class="px-4 py-2 text-gray-500">Search for an occupation</li>
+
+                            <li class="px-4 py-2 text-gray-500">
+                                Search for an occupation
+                            </li>
+
                         </ul>
 
                         <div class="flex justify-center py-2">
-                            <span data-occupation-autocomplete-target="loading" class="hidden">
-                                <svg class="h-5 w-5 animate-spin text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+
+                            <span data-autocomplete-target="loading"
+                                  class="hidden">
+
+                                <svg class="h-5 w-5 animate-spin text-indigo-500"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     fill="none"
+                                     viewBox="0 0 24 24">
+
+                                    <circle class="opacity-25"
+                                            cx="12"
+                                            cy="12"
+                                            r="10"
+                                            stroke="currentColor"
+                                            stroke-width="4">
+                                    </circle>
+
+                                    <path class="opacity-75"
+                                          fill="currentColor"
+                                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+
                                 </svg>
+
                             </span>
+
                         </div>
                     </div>
                 </div>
@@ -1197,8 +1233,13 @@
                     <i>(If unknown, leave blank)</i>
                 </p>
 
-                <span class="mt-2 text-sm text-red-600" asp-validation-for="@Model.A1.PRIOCC"></span>
-                <submission-error location="PRIOCC" errors="Model.BaseForm.UnresolvedErrors" />
+                <span class="mt-2 text-sm text-red-600"
+                      asp-validation-for="@Model.A1.PRIOCC">
+                </span>
+
+                <submission-error location="PRIOCC"
+                                  errors="Model.BaseForm.UnresolvedErrors" />
+
             </div>
         </div>
 

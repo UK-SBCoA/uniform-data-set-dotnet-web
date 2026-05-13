@@ -3,7 +3,7 @@
 export default class extends Controller {
 
     static targets = [
-        "searchBox",
+        "search",
         "list",
         "options",
         "loading",
@@ -11,80 +11,50 @@ export default class extends Controller {
     ]
 
     connect() {
-
         this.activeIndex = -1
-        this.debounceTimer = null
     }
 
     get items() {
-
-        return this.optionsTarget.querySelectorAll(
-            `[data-${this.identifier}-target="item"]`
-        )
+        return this.itemTargets
     }
 
-    onInput() {
+    // -------------------------
+    // UI STATE
+    // -------------------------
 
-        const value = this.searchBoxTarget.value.trim()
-
-        clearTimeout(this.debounceTimer)
-
-        if (!value) {
-
-            this.onEmptyInput()
-
-            this.reset()
-
-            return
-        }
-
-        this.debounceTimer = setTimeout(() => {
-            this.fetchResults(value)
-        }, 300)
+    show() {
+        this.listTarget.classList.remove("hidden")
     }
 
-    onEmptyInput() {
+    hide() {
+        this.listTarget.classList.add("hidden")
     }
 
-    async fetchResults(search) {
-
-        if (!search) {
-            return
-        }
-
-        this.showList()
-
-        this.showLoading()
-
-        try {
-
-            const response = await this.performFetch(search)
-
-            await this.handleResponse(response)
-
-            this.activeIndex = -1
-
-            this.scrollToTop()
-
-        } catch (error) {
-
-            console.error(error)
-
-        } finally {
-
-            this.hideLoading()
-        }
+    blur() {
+        setTimeout(() => this.hide(), 150)
     }
 
-    async performFetch(search) {
-        throw new Error("performFetch must be implemented")
+    showLoading() {
+        this.loadingTarget.classList.remove("hidden")
     }
 
-    async handleResponse(response) {
-        throw new Error("handleResponse must be implemented")
+    hideLoading() {
+        this.loadingTarget.classList.add("hidden")
     }
 
-    onKeydown(event) {
+    resetActive() {
+        this.activeIndex = -1
+    }
+
+    scrollTop() {
+        this.optionsTarget.scrollTop = 0
+    }
+
+    // -------------------------
+    // KEYBOARD
+    // -------------------------
+
+    keydown(event) {
 
         switch (event.key) {
 
@@ -99,40 +69,34 @@ export default class extends Controller {
                 break
 
             case "Enter":
-                this.handleEnter(event)
+                this.enter(event)
                 break
 
             case "Escape":
-                this.hideList()
+                this.hide()
                 break
         }
     }
 
-    handleEnter(event) {
+    enter(event) {
 
-        if (this.activeIndex < 0) {
-            return
-        }
+        if (this.activeIndex < 0) return
 
         event.preventDefault()
 
         const item = this.items[this.activeIndex]
+        if (!item) return
 
-        if (item) {
-
-            item.dispatchEvent(
-                new MouseEvent("mousedown", {
-                    bubbles: true
-                })
-            )
-        }
+        item.dispatchEvent(
+            new MouseEvent("mousedown", {
+                bubbles: true
+            })
+        )
     }
 
     move(direction) {
 
-        if (this.items.length === 0) {
-            return
-        }
+        if (this.items.length === 0) return
 
         this.activeIndex =
             (this.activeIndex + direction + this.items.length)
@@ -146,46 +110,8 @@ export default class extends Controller {
             el.classList.toggle("text-white", active)
 
             if (active) {
-
-                el.scrollIntoView({
-                    block: "nearest"
-                })
+                el.scrollIntoView({ block: "nearest" })
             }
         })
-    }
-
-    showLoading() {
-        this.loadingTarget.classList.remove("hidden")
-    }
-
-    hideLoading() {
-        this.loadingTarget.classList.add("hidden")
-    }
-
-    showList() {
-        this.listTarget.classList.remove("hidden")
-    }
-
-    hideList() {
-        this.listTarget.classList.add("hidden")
-    }
-
-    scrollToTop() {
-
-        this.optionsTarget.scrollTop = 0
-    }
-
-    onBlur() {
-
-        setTimeout(() => {
-            this.hideList()
-        }, 150)
-    }
-
-    reset() {
-
-        this.activeIndex = -1
-
-        this.hideList()
     }
 }

@@ -9,8 +9,8 @@
         {
             for (int i = 0; i < Model.AutocompleteResults.Count(); i++)
             {
-                <li data-rxNormDisplayNames-target="item"
-                    data-action="mousedown->rxNormDisplayNames#select"
+                <li data-autocomplete-target="item"
+                    data-action="mousedown->rxnorm#select"
                     data-item='@Json.Serialize(Model.AutocompleteResults[i])'
                     class="cursor-default text-gray-900 hover:bg-indigo-600 hover:text-white rounded-md px-4 py-2 select-none"
                     id="option-@i"
