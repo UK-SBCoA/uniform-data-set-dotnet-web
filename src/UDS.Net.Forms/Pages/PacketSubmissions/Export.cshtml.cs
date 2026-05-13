@@ -490,7 +490,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (currentA4aFields != null && previousA4aFields != null)
                 {
-                   for(var i = 0; i < 8; i++)
+                    for (var i = 0; i < 8; i++)
                     {
                         treatments[i].GetExportedTreatmentFields(treatments[i], currentA4aFields.NEWTREAT); //NEWTREAT value determines if treatments values are exported or nullified
                     }
