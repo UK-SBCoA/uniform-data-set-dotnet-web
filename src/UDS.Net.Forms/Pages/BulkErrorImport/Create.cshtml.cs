@@ -10,9 +10,8 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
-using UDS.Net.Forms.Models.Imports;
 
-namespace UDS.Net.Forms.Pages.BulkErrorSubmission
+namespace UDS.Net.Forms.Pages.BulkErrorImport
 {
     public class CreateModel : PageModel
     {
@@ -54,7 +53,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
             //Setting page size to 999 to retrieve all packets by status
             IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
-            var legacyIdToVisitnum = new List<LegacyIdToVisitnumModel>();
+            //Initialize tuple for storing legacyId and visitnum matches from a submittedPackets
+            var legacyIdToVisitnum = new List<(string legacyId, int visitNum)>();
 
             foreach (var submittedPacket in submittedPackets)
             {
@@ -66,11 +66,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                     if (!string.IsNullOrEmpty(participation.LegacyId) && submittedPacket.VISITNUM > 0)
                     {
                         //Need to have legacyId and participationId to compare to the NACCErrors
-                        legacyIdToVisitnum.Add(new LegacyIdToVisitnumModel
-                        {
-                            legacyId = participation.LegacyId,
-                            VisitNumber = submittedPacket.VISITNUM
-                        });
+                        legacyIdToVisitnum.Add((participation.LegacyId, submittedPacket.VISITNUM));
                     }
                 }
             }
@@ -88,7 +84,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         var record = csv.GetRecord<NACCErrorModel>();
 
                         //DEVNOTE: Record must match to a PTID and Visitnum of a submitted packet from legacyIdToVisitnum dictionary
-                        var legacyIdToVisitnumItem = legacyIdToVisitnum?.Where(lv => lv.legacyId == record.Ptid && lv.VisitNumber == int.Parse(record.Visitnum)).FirstOrDefault();
+                        var legacyIdToVisitnumItem = legacyIdToVisitnum?.Where(lv => lv.legacyId == record.Ptid && lv.visitNum == int.Parse(record.Visitnum)).FirstOrDefault();
 
                         if (legacyIdToVisitnumItem != null && record.Approved.ToLower() == "false")
                         {
@@ -128,18 +124,19 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
         {
             List<Packet> packetsToUpdate = new List<Packet>();
 
-            //Setting page size to 999 to retrieve all packets by status
-            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
+            //Setting page size to 999 to retrieve all packets of status due to pagination
+            IEnumerable<Packet> submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
-            var submittedParticipationList = new List<Participation>();
+            var submittedPacketsParticipations = new List<Participation>();
 
             foreach (var packet in submittedPackets)
             {
                 var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
+                //DEVNOTE: Is this necessary?
                 if (participation != null)
                 {
-                    submittedParticipationList.Add(participation);
+                    submittedPacketsParticipations.Add(participation);
                 }
             }
 
@@ -147,26 +144,23 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
 
             foreach (var errorGroup in packetSubmissionErrorsGrouped)
             {
-                var groupPtid = errorGroup.Key;
-
-                var groupParticipation = submittedParticipationList.Where(p => p.LegacyId == groupPtid).FirstOrDefault();
+                var groupParticipation = submittedPacketsParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
 
                 //account for different visits, loop through each visit
                 var visitGroups = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
 
-                foreach (var visitNumber in visitGroups)
+                foreach (var visitNumber in visitGroups) 
                 {
                     var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id && p.VISITNUM == visitNumber).FirstOrDefault();
 
                     if (groupVisit != null)
                     {
-                        var groupPacket = await _packetService.GetById(User.Identity.Name, groupVisit.Id);
-
-                        var groupSubmission = groupPacket?.Submissions.Last();
+                        //The last submission will be the most recent
+                        var groupSubmission = groupVisit.Submissions.Last();
 
                         List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
 
-                        if (groupPacket != null && groupSubmission != null)
+                        if (groupSubmission != null)
                         {
                             foreach (var error in errorGroup)
                             {
@@ -177,7 +171,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                     packetSubmissionId: groupSubmission.Id,
                                     formKind: error.Code.Split("-")[0].ToUpper(),
                                     message: error.Message,
-                                    assignedTo: groupPacket.CreatedBy,
+                                    assignedTo: groupVisit.CreatedBy,
                                     level: GetErrorLevel(error.Type),
                                     status: PacketSubmissionErrorStatus.Pending,
                                     statusChangedBy: null,
@@ -198,11 +192,11 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                             groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
                             groupSubmission.Errors = groupPacketSubmissionErrors;
 
-                            if (groupPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                            if (groupVisit.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                             {
-                                groupPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+                                groupVisit.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                                packetsToUpdate.Add(groupPacket);
+                                packetsToUpdate.Add(groupVisit);
                             }
                         }
                     }
