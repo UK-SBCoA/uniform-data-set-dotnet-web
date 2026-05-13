@@ -98,26 +98,26 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public A4aFormFields GetExportFormFields(A4aFormFields previousFormFields)
         {
-            // TODO get the representation of the A4a the way it should be with either nulls or actual values dependeing on NEWTREAT or NEWADVENT
+            bool newAdverseEventInformation = previousFormFields.NEWADEVENT == 1;
+            bool newTreatmentInformation = previousFormFields.NEWTREAT == 1;
+
+            if (!newAdverseEventInformation)
+            {
+                previousFormFields.ARIAE = null;
+                previousFormFields.ARIAH = null;
+                previousFormFields.ADVERSEOTH = null;
+                previousFormFields.ADVERSEOTX = null;
+            }
+            if(!newTreatmentInformation)
+            {
+                for(var i = 0; i < 8; i++)
+                {
+                    previousFormFields.TreatmentFormFields[i] = null;
+                }
+                previousFormFields.ADVEVENT = null;
+            }
             return new A4aFormFields();
         }
-
-        /*
-
-        public A4aFormFields GetExportedAdverseEventFields(A4aFormFields previousFields, A4aFormFields currentFields)
-        {
-            if (currentFields.NEWADEVENT == 0 || currentFields.NEWADEVENT == 9) //Biomarkers have not changed from previous visits. Export blank values
-            {
-                currentFields.ARIAE = null;
-                currentFields.ARIAH = null;
-                currentFields.ADVERSEOTH = null;
-                currentFields.ADVERSEOTX = null;
-
-                return currentFields;
-            }
-            return currentFields;
-        }
-        */
 
         public A4aFormFields()
         {

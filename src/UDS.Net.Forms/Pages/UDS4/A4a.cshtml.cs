@@ -234,6 +234,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                 List<A4aTreatment> currentTreatments = A4a.Treatments;
                 List<A4aTreatment> previousTreatments = previousA4a?.Treatments ?? new List<A4aTreatment>();
 
+                if(A4a.TRTBIOMARK != 1)
+                {
+                    if(previousA4a!.TRTBIOMARK == 1)
+                    {
+                        ModelState.AddModelError("A4a.TRTBIOMARK", "If previous visit indicated a treatment or clincial trial that was expected to modify biomarkers, then must response be marked as \"Yes\".");
+                    }
+                }
+
                 if (A4a.NEWTREAT != null)
                 {
                     bool newTreatmentInformation = A4a.NEWTREAT == 1;
@@ -270,7 +278,6 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                     if (!newTreatmentInformation)
                     {
-                        //Need to set the currentA4a treatment fields to the previousA4a treatment fields
                         A4a.Treatments = previousTreatments;
                     }
                     if (!newAdverseEventInformartion)

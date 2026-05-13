@@ -460,7 +460,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A4aRecord(a4a));
         
-                A4aFormFields exportA4aFormFields = null;
+                A4aFormFields exportA4aFormFields = null!;
                 A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
@@ -471,7 +471,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A4a");
 
-                    previousA4aFields = (A4aFormFields)(previousVisit.Forms.FirstOrDefault(f => f.Kind == "A4a").Fields);
+                    previousA4aFields = (A4aFormFields)(previousVisit.Forms.FirstOrDefault(f => f.Kind == "A4a")!.Fields);
 
                     exportA4aFormFields = currentA4aFields.GetExportFormFields(previousA4aFields);
                 }
@@ -490,28 +490,6 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                             csv.WriteField(prop.GetValue(treatment));
                     }
                 }
-
-                /*
-                if (a4a.Fields is A4aFormFields normalA4a)
-                {
-                    if (currentA4aFields != null && previousA4aFields != null)
-                    {
-                        //Handle exported biomarker fields
-                        currentA4aFields.GetExportedAdverseEventFields(previousA4aFields, currentA4aFields);
-                    }
-                    csv.WriteRecord(normalA4a);
-                }
-
-                List<A4aTreatmentFormFields> treatments = currentA4aFields!.TreatmentFormFields;
-
-                if (currentA4aFields != null && previousA4aFields != null)
-                {
-                    for (var i = 0; i < 8; i++)
-                    {
-                        treatments[i].GetExportedTreatmentFields(treatments[i], currentA4aFields.NEWTREAT); //NEWTREAT value determines if treatments values are exported or nullified
-                    }
-                }
-                */
             }
             if (a5d2 != null)
             {

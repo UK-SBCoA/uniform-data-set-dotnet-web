@@ -116,11 +116,13 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     if (PacketKind == PacketKind.F)
                     {
-                        if (NEWADEVENT == null)
+                        if (NEWTREAT == 1)
                         {
-                            yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
+                            if (NEWADEVENT == null)
+                            {
+                                yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
+                            }
                         }
-
                     }
                 }
 
