@@ -242,9 +242,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                     bool treatmentValuesMatch = true;
                     foreach (var treatment in currentTreatments)
                     {
-                        var matchingPreviousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
+                        var previousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
 
-                        if (!treatment.TreatmentMatchesPreviousVisit(matchingPreviousTreatment, treatment))
+                        if (!treatment.TreatmentMatchesPreviousVisit(previousTreatment, treatment))
                         {
                             treatmentValuesMatch = false;
                             break;
