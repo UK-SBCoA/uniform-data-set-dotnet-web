@@ -459,7 +459,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             if (a4a != null)
             {
                 csv.WriteRecord(new A4aRecord(a4a));
-        
+
                 A4aFormFields exportA4aFormFields = null!;
                 A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
@@ -467,13 +467,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    A4aFormFields? previousA4aFields = null;
-
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A4a");
-
-                    previousA4aFields = (A4aFormFields)(previousVisit.Forms.FirstOrDefault(f => f.Kind == "A4a")!.Fields);
-
-                    exportA4aFormFields = currentA4aFields.GetExportFormFields(previousA4aFields);
+                    exportA4aFormFields = currentA4aFields.GetExportFormFields(currentA4aFields);
                 }
                 else
                 {

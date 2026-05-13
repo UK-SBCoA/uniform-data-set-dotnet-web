@@ -96,29 +96,46 @@ namespace UDS.Net.Services.DomainModels.Forms
             return treatment;
         }
 
-        public A4aFormFields GetExportFormFields(A4aFormFields previousFormFields)
+        public A4aFormFields GetExportFormFields(A4aFormFields currentA4aFields)
         {
-            bool newAdverseEventInformation = previousFormFields.NEWADEVENT == 1;
-            bool newTreatmentInformation = previousFormFields.NEWTREAT == 1;
+            bool newTreatmentInformation = currentA4aFields.NEWTREAT == 1;
+            bool newAdverseEventInformation = currentA4aFields.NEWADEVENT == 1;
 
-            if (!newAdverseEventInformation)
-            {
-                previousFormFields.ARIAE = null;
-                previousFormFields.ARIAH = null;
-                previousFormFields.ADVERSEOTH = null;
-                previousFormFields.ADVERSEOTX = null;
-            }
             if(!newTreatmentInformation)
             {
-                for(var i = 0; i < 8; i++)
-                {
-                    previousFormFields.TreatmentFormFields[i] = null;
-                }
-                previousFormFields.ADVEVENT = null;
+                currentA4aFields.ClearTreatmentFormFields();
+                currentA4aFields.ADVEVENT = null;
             }
-            return new A4aFormFields();
+            if (!newAdverseEventInformation)
+            {
+                currentA4aFields.ARIAE = null;
+                currentA4aFields.ARIAH = null;
+                currentA4aFields.ADVERSEOTH = null;
+                currentA4aFields.ADVERSEOTX = null;
+            }
+            return currentA4aFields;
         }
 
+        public void ClearTreatmentFormFields()
+        {
+            for (var i = 0; i < TreatmentFormFields.Count; i++)
+            {
+                TreatmentFormFields[i].TARGETAB = null;
+                TreatmentFormFields[i].TARGETTAU = null;
+                TreatmentFormFields[i].TARGETINF = null;
+                TreatmentFormFields[i].TARGETSYN = null;
+                TreatmentFormFields[i].TARGETOTH = null;
+                TreatmentFormFields[i].TARGETOTX = null;
+                TreatmentFormFields[i].TRTTRIAL = null;
+                TreatmentFormFields[i].NCTNUM = null;
+                TreatmentFormFields[i].STARTMO = null;
+                TreatmentFormFields[i].STARTYEAR = null;
+                TreatmentFormFields[i].ENDMO = null;
+                TreatmentFormFields[i].ENDYEAR = null;
+                TreatmentFormFields[i].CARETRIAL = null;
+                TreatmentFormFields[i].TRIALGRP = null;
+            }
+        }
         public A4aFormFields()
         {
             for (int i = 1; i <= 8; i++)
