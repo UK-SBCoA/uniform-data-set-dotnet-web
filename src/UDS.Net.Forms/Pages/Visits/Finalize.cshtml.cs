@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Pages.Visits
@@ -78,8 +79,28 @@ namespace UDS.Net.Forms.Pages.Visits
             Packet = packet.ToVM();
             Packet.Participation = participation.ToVM();
 
+            D1aFormFields? previousD1a = null;
+
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                User.Identity!.Name!,
+                packet.ParticipationId,
+                packet.VISITNUM - 1,
+                "D1a"
+            );
+
+            if (previousVisit != null)
+            {
+                var previousD1aForm = previousVisit.Forms
+                    .FirstOrDefault(f => f.Kind == "D1a");
+
+                if (previousD1aForm != null)
+                {
+                    previousD1a = previousD1aForm.Fields as D1aFormFields;
+                }
+            }
+
             var p = Packet.ToEntity();
-            p.TryValidate();
+            p.TryValidate(previousD1a);
 
             if (!p.IsFinalizable)
             {
@@ -98,17 +119,38 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public async Task<IActionResult> OnGetValidate(int id)
         {
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
+            var packet = await _packetService.GetPacketWithForms(User.Identity!.Name, id);
 
-            packet.TryValidate();
+            if (packet == null)
+                return NotFound();
 
-            // TODO add a service method to get the previous packet
+            D1aFormFields? previousD1a = null;
 
-            if (!packet.IsValid)
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                User.Identity!.Name!,
+                packet.ParticipationId,
+                packet.VISITNUM - 1,
+                "D1a"
+            );
+
+            if (previousVisit != null)
             {
-                var list = packet.GetModelErrors();
-                return Partial("_Validate", list);
+                var previousD1aForm = previousVisit.Forms
+                    .FirstOrDefault(f => f.Kind == "D1a");
+
+                if (previousD1aForm != null)
+                {
+                    previousD1a = previousD1aForm.Fields as D1aFormFields;
+                }
             }
+
+            var errors = packet.GetModelErrors(previousD1a);
+
+            if (errors.Any())
+            {
+                return Partial("_Validate", errors);
+            }
+
             return Partial("_Validate", null);
         }
 
