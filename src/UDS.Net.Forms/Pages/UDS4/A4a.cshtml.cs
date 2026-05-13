@@ -228,7 +228,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                 var previousA4a = previousVisit.Forms
                     .Where(f => f.Kind == "A4a")
-                    .Select(f => ((A4a)f.ToVM()))
+                    .Select(f => (A4a)f.ToVM())
                     .FirstOrDefault();
 
                 List<A4aTreatment> currentTreatments = A4a.Treatments;
@@ -245,14 +245,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                 if (A4a.NEWTREAT != null)
                 {
                     bool newTreatmentInformation = A4a.NEWTREAT == 1;
-                    bool newAdverseEventInformartion = A4a.NEWADEVENT == 1;
+                    bool newAdverseEventInformation = A4a.NEWADEVENT == 1;
 
                     bool treatmentValuesMatch = true;
                     foreach (var treatment in currentTreatments)
                     {
                         var previousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
 
-                        if (!treatment.TreatmentMatchesPreviousVisit(previousTreatment, treatment))
+                        if (!treatment.TreatmentMatchesPreviousVisit(previousTreatment!, treatment))
                         {
                             treatmentValuesMatch = false;
                             break;
@@ -261,14 +261,14 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                     var adverseEventValuesMatch = AdverseEventsMatchPreviousVisit(previousA4a!, currentA4a!);
 
-                    if (newTreatmentInformation && newAdverseEventInformartion)
+                    if (newTreatmentInformation && newAdverseEventInformation)
                     {
                         if (treatmentValuesMatch && adverseEventValuesMatch)
                         {
                             ModelState.AddModelError("A4a", "If both NEWTREAT and NEWADEVENT are marked as 1 all treatment values cannot match previous visit");
                         }
                     }
-                    if (newTreatmentInformation && !newAdverseEventInformartion)
+                    if (newTreatmentInformation && !newAdverseEventInformation)
                     {
                         if (treatmentValuesMatch)
                         {
@@ -280,9 +280,9 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         A4a.Treatments = previousTreatments;
                     }
-                    if (!newAdverseEventInformartion)
+                    if (!newAdverseEventInformation)
                     {
-                        A4a.ARIAE = previousA4a.ARIAE;
+                        A4a.ARIAE = previousA4a!.ARIAE;
                         A4a.ARIAH = previousA4a.ARIAH;
                         A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
                         A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
