@@ -7,7 +7,7 @@
       novalidate="novalidate">
 
     <div data-controller="autocomplete rxnorm"
-         data-rxnorm-url-value="../A4/@Model.VisitId?handler=RxNormStream">
+         data-rxnorm-url-value="@Url.Page("/UDS4/A4", pageHandler: "RxNormStream", new { id = Model.VisitId })">
 
         <label class="max-w-xl text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl lg:col-span-7">
             Search RxNorm
@@ -17,11 +17,6 @@
 
             <div class="flex gap-x-4">
 
-                <label asp-for="SearchTerm" class="sr-only">
-                    @Html.DisplayNameFor(m => m.SearchTerm)
-                </label>
-
-                <!-- SEARCH INPUT -->
                 <input asp-for="SearchTerm"
                        type="search"
                        autocomplete="off"
@@ -29,31 +24,31 @@
                        data-rxnorm-target="search"
                        data-autocomplete-target="search"
                        data-action="input->rxnorm#onInput focus->autocomplete#show blur->autocomplete#blur keydown->autocomplete#keydown keydown->rxnorm#onKeydown"
-
-                class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400" />
+                       class="block w-full max-w-lg rounded-md border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm placeholder:text-gray-400" />
 
                 <input type="hidden" asp-for="VisitId" />
 
-                <input name="RxNormSearch"
-                       type="submit"
+                <input type="submit"
                        value="Search"
                        class="flex-none rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500" />
             </div>
 
-            <!-- AUTOCOMPLETE PANEL -->
             <div data-autocomplete-target="list"
                  class="hidden absolute z-10 mx-auto w-96 transform rounded-xl bg-white p-2 ring-1 shadow-2xl ring-black/5 transition-all">
 
-                <ul id="options"
-                    role="listbox"
-                    data-autocomplete-target="options"
-                    class="max-h-72 overflow-y-auto py-2 text-sm text-gray-800">
+                <div id="autocomplete-options">
 
-                    <li class="px-4 py-2 text-gray-500 italic">
-                        Search for medications by drug or brand name
-                    </li>
+                    <ul data-autocomplete-target="options"
+                        role="listbox"
+                        class="max-h-72 overflow-y-auto py-2 text-sm text-gray-800">
 
-                </ul>
+                        <li class="px-4 py-2 text-gray-500 italic">
+                            Search for medications by drug or brand name
+                        </li>
+
+                    </ul>
+
+                </div>
 
                 <span data-autocomplete-target="loading"
                       class="hidden">

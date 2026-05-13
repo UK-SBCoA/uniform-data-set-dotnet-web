@@ -22,10 +22,6 @@ export default class extends Controller {
         this.restoreValue()
     }
 
-    // -------------------------
-    // LOOKUP HELPERS
-    // -------------------------
-
     async lookupCode(code) {
 
         const url = new URL(
@@ -44,10 +40,6 @@ export default class extends Controller {
         return await response.json()
     }
 
-    // -------------------------
-    // INITIAL RESTORE
-    // -------------------------
-
     async restoreValue() {
 
         const code = this.hiddenTarget.value
@@ -64,10 +56,6 @@ export default class extends Controller {
             this.autocomplete.searchTarget.value = code
         }
     }
-
-    // -------------------------
-    // SEARCH
-    // -------------------------
 
     search() {
 
@@ -122,10 +110,6 @@ export default class extends Controller {
         }
     }
 
-    // -------------------------
-    // RENDER
-    // -------------------------
-
     render(data) {
 
         this.autocomplete.optionsTarget.innerHTML = ""
@@ -167,10 +151,6 @@ export default class extends Controller {
         })
     }
 
-    // -------------------------
-    // SELECT
-    // -------------------------
-
     select(item) {
 
         this.hiddenTarget.value = item.code
@@ -180,10 +160,6 @@ export default class extends Controller {
 
         this.autocomplete.hide()
     }
-
-    // -------------------------
-    // ENTER OVERRIDE (SUPERUSER MODE)
-    // -------------------------
 
     keydown(event) {
 

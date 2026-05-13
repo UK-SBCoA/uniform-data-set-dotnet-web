@@ -15,11 +15,9 @@ export default class extends Controller {
             )
 
         this.debounceTimer = null
-    }
 
-    // -------------------------
-    // INPUT HANDLING
-    // -------------------------
+        console.log("RxNorm controller connected with URL:", this.urlValue)
+    }
 
     onInput() {
         const value = this.searchTarget.value.trim()
@@ -36,10 +34,6 @@ export default class extends Controller {
         }, 300)
     }
 
-    // -------------------------
-    // FETCH (FIXED)
-    // -------------------------
-
     async fetch(search) {
         if (!this.urlValue) {
             console.error("Missing urlValue on controller")
@@ -50,8 +44,9 @@ export default class extends Controller {
         this.autocomplete?.showLoading?.()
 
         try {
-            // safer + simpler than URL constructor
-            const url = `${this.urlValue}?searchTerm=${encodeURIComponent(search)}`
+            const url = `${this.urlValue}&searchTerm=${encodeURIComponent(search)}`
+
+            console.log("Fetching RxNorm results from:", url)
 
             const response = await fetch(url, {
                 headers: {
@@ -65,8 +60,10 @@ export default class extends Controller {
 
             const html = await response.text()
 
+            console.log("Received HTML response:", html.substring(0, 200))
+
             if (window.Turbo?.renderStreamMessage) {
-                Turbo.renderStreamMessage(html)
+                window.Turbo.renderStreamMessage(html)
             } else {
                 console.error("Turbo is not available")
             }
@@ -82,21 +79,13 @@ export default class extends Controller {
         }
     }
 
-    // -------------------------
-    // SELECTION
-    // -------------------------
-
     select(event) {
         const item = JSON.parse(event.currentTarget.dataset.item)
 
-        this.searchTarget.value = `${item.code} - ${item.name}`
+        this.searchTarget.value = item.name
 
         this.autocomplete?.hide?.()
     }
-
-    // -------------------------
-    // KEYDOWN
-    // -------------------------
 
     onKeydown(event) {
         if (event.key !== "Enter") return

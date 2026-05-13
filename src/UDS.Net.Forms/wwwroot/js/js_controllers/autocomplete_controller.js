@@ -18,10 +18,6 @@ export default class extends Controller {
         return this.itemTargets
     }
 
-    // -------------------------
-    // UI STATE
-    // -------------------------
-
     show() {
         this.listTarget.classList.remove("hidden")
     }
@@ -49,10 +45,6 @@ export default class extends Controller {
     scrollTop() {
         this.optionsTarget.scrollTop = 0
     }
-
-    // -------------------------
-    // KEYBOARD
-    // -------------------------
 
     keydown(event) {
 

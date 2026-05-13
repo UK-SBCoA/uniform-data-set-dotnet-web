@@ -1,40 +1,43 @@
 ﻿@model RxNormLookupModel
-@{
-}
 
-<turbo-stream action="update" target="options">
+<turbo-stream action="update" target="autocomplete-options">
     <template>
 
-        @if (Model?.AutocompleteResults?.Any() == true)
-        {
-            for (int i = 0; i < Model.AutocompleteResults.Count(); i++)
+        <ul data-autocomplete-target="options"
+            role="listbox"
+            class="max-h-72 overflow-y-auto py-2 text-sm text-gray-800">
+
+            @if (Model?.AutocompleteResults?.Any() == true)
             {
-                <li data-autocomplete-target="item"
-                    data-action="mousedown->rxnorm#select"
-                    data-item='@Json.Serialize(Model.AutocompleteResults[i])'
-                    class="cursor-default text-gray-900 hover:bg-indigo-600 hover:text-white rounded-md px-4 py-2 select-none"
-                    id="option-@i"
-                    role="option"
-                    tabindex="-1">
+                for (int i = 0; i < Model.AutocompleteResults.Count(); i++)
+                {
+                    <li data-autocomplete-target="item"
+                        data-action="mousedown->rxnorm#select"
+                        data-item='@Json.Serialize(new { name = Model.AutocompleteResults[i] })'
+                        class="cursor-default text-gray-900 hover:bg-indigo-600 hover:text-white rounded-md px-4 py-2 select-none"
+                        id="option-@i"
+                        role="option"
+                        tabindex="-1">
 
-                    @Model.AutocompleteResults[i]
+                        @Model.AutocompleteResults[i]
+                    </li>
+                }
 
+                if (Model.ResultsCount == 100)
+                {
+                    <li class="text-gray-400 rounded-md px-4 py-2 select-none">
+                        More than @Model.ResultsCount results, continue typing
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="px-4 py-2 text-gray-500 italic">
+                    No results
                 </li>
             }
 
-            if (Model.ResultsCount == 100)
-            {
-                <li class="text-gray-400 rounded-md px-4 py-2 select-none">
-                    More than @Model.ResultsCount results, continue typing
-                </li>
-            }
-        }
-        else
-        {
-            <li class="px-4 py-2 text-gray-500 italic">
-                No results
-            </li>
-        }
+        </ul>
 
     </template>
 </turbo-stream>
