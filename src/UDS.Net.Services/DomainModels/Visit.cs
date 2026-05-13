@@ -362,15 +362,15 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            object a1 = GetFields<A1FormFields>("A1");
-            object a2 = GetFields<A2FormFields>("A2");
-            object a5d2 = GetFields<A5D2FormFields>("A5D2");
-            object b5 = GetFields<B5FormFields>("B5");
+            A1FormFields a1 = GetFields<A1FormFields>("A1");
+            A2FormFields a2 = GetFields<A2FormFields>("A2");
+            A5D2FormFields a5d2 = GetFields<A5D2FormFields>("A5D2");
+            B5FormFields b5 = GetFields<B5FormFields>("B5");
 
             if (a1 != null && a2 != null)
             {
-                var livSitua = GetInt<A1FormFields>(a1, f => f.LIVSITUA);
-                var inLivWth = GetInt<A2FormFields>(a2, f => f.INLIVWTH);
+                var livSitua = a1.LIVSITUA;
+                var inLivWth = a2.INLIVWTH;
 
                 if (inLivWth == 1 && livSitua == 1)
                 {
@@ -380,11 +380,10 @@ namespace UDS.Net.Services.DomainModels
                 }
             }
 
-            if ((PACKET == PacketKind.I || PACKET == PacketKind.I4)
-                && a1 != null && a5d2 != null && b5 != null)
+            if ((PACKET == PacketKind.I || PACKET == PacketKind.I4) && a1 != null && a5d2 != null && b5 != null)
             {
-                var birthSex = GetInt<A1FormFields>(a1, f => f.BIRTHSEX);
-                var menarche = GetInt<A5D2FormFields>(a5d2, f => f.MENARCHE);
+                var birthSex = a1.BIRTHSEX;
+                var menarche = a5d2.MENARCHE;
 
                 if (birthSex == 1 && menarche != null)
                 {
@@ -400,27 +399,26 @@ namespace UDS.Net.Services.DomainModels
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
-            object a1 = GetFields<A1FormFields>("A1");
-            object a2 = GetFields<A2FormFields>("A2");
-            object a4 = GetFields<A4GFormFields>("A4");
-            object a5d2 = GetFields<A5D2FormFields>("A5D2");
-            object b5 = GetFields<B5FormFields>("B5");
-            object b9 = GetFields<B9FormFields>("B9");
-            object d1a = GetFields<D1aFormFields>("D1a");
+            A1FormFields a1 = GetFields<A1FormFields>("A1");
+            A2FormFields a2 = GetFields<A2FormFields>("A2");
+            A4GFormFields a4 = GetFields<A4GFormFields>("A4");
+            A5D2FormFields a5d2 = GetFields<A5D2FormFields>("A5D2");
+            B5FormFields b5 = GetFields<B5FormFields>("B5");
+            B9FormFields b9 = GetFields<B9FormFields>("B9");
+            D1aFormFields d1a = GetFields<D1aFormFields>("D1a");
 
             if (a1 != null && a2 != null && a5d2 != null && b5 != null && b9 != null && d1a != null)
             {
-                var inRelTo = GetInt<A2FormFields>(a2, f => f.INRELTO);
-                var inLivWth = GetInt<A2FormFields>(a2, f => f.INLIVWTH);
-                var anx = GetInt<B5FormFields>(b5, f => f.ANX);
-                var anxiety = GetInt<A5D2FormFields>(a5d2, f => f.ANXIETY);
-                var beAnx = GetInt<B9FormFields>(b9, f => f.BEANX);
-                var anxiet = GetBool<D1aFormFields>(d1a, f => f.ANXIET);
-                var normCog = GetInt<D1aFormFields>(d1a, f => f.NORMCOG);
-                var decclin = GetInt<B9FormFields>(b9, f => f.DECCLIN);
-                var decclog = GetInt<B9FormFields>(b9, f => f.DECCLCOG);
-                var decClBe = GetInt<B9FormFields>(b9, f => f.DECCLBE);
-
+                var inRelTo = a2.INRELTO;
+                var inLivWth = a2.INLIVWTH;
+                var anx = b5.ANX;
+                var anxiety = a5d2.ANXIETY;
+                var beAnx = b9.BEANX;
+                var anxiet = d1a.ANXIET;
+                var normCog = d1a.NORMCOG;
+                var decclin = b9.DECCLIN;
+                var decclog = b9.DECCLCOG;
+                var decClBe = b9.DECCLBE;
 
                 if (inRelTo == 1 && inLivWth == 0)
                 {
@@ -486,11 +484,9 @@ namespace UDS.Net.Services.DomainModels
 
             if (a4 != null)
             {
-                A4GFormFields a4Ds = a4 as A4GFormFields;
-
-                if (a4Ds?.A4Ds != null && a4Ds.A4Ds.Any())
+                if (a4.A4Ds != null && a4.A4Ds.Any())
                 {
-                    var rxNormIds = a4Ds.A4Ds
+                    var rxNormIds = a4.A4Ds
                         .Where(a => a != null && a.RxNormId != null)
                         .Select(a => a.RxNormId)
                         .ToList();
@@ -521,16 +517,6 @@ namespace UDS.Net.Services.DomainModels
                 .Select(f => f.Fields)
                 .OfType<T>()
                 .FirstOrDefault();
-        }
-
-        private int? GetInt<T>(object obj, Func<T, int?> getter)
-        {
-            return obj is T t ? getter(t) : null;
-        }
-
-        private bool? GetBool<T>(object obj, Func<T, bool?> getter)
-        {
-            return obj is T t ? getter(t) : null;
         }
     }
 }
