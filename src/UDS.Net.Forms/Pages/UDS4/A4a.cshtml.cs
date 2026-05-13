@@ -222,8 +222,6 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             if (Visit.PACKET == PacketKind.F)
             {
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity?.Name!, Visit.ParticipationId, "4.0.0");
-
                 var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, Visit.ParticipationId, Visit.VISITNUM - 1, "A4a");
 
                 var currentA4a = A4a;
@@ -234,37 +232,35 @@ namespace UDS.Net.Forms.Pages.UDS4
                     .FirstOrDefault();
 
                 List<A4aTreatment> currentTreatments = A4a.Treatments;
-                List<A4aTreatment> previousTreatments = previousVisit.Forms
-                    .Where(f => f.Kind == "A4a")
-                    .SelectMany(f => ((A4a)f.PreviousVisitToVM()).Treatments)
-                    .ToList();
-
+                List<A4aTreatment> previousTreatments = previousA4a?.Treatments ?? new List<A4aTreatment>();
 
                 if (A4a.NEWTREAT != null)
                 {
-                    bool treatmentValuesMatch = true;
+                    bool newTreatmentInformation = A4a.NEWTREAT == 1;
+                    bool newAdverseEventInformartion = A4a.NEWADEVENT == 1;
 
+                    bool treatmentValuesMatch = true;
                     foreach (var treatment in currentTreatments)
                     {
                         var matchingPreviousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
 
-                        if (!treatment.NewTreatmentInformation(matchingPreviousTreatment, treatment))
+                        if (!treatment.TreatmentMatchesPreviousVisit(matchingPreviousTreatment, treatment))
                         {
                             treatmentValuesMatch = false;
                             break;
                         }
                     }
 
-                    var adrdValuesMatch = ADRDMatchPreviousVisit(previousA4a!, currentA4a!);
+                    var adverseEventValuesMatch = AdverseEventsMatchPreviousVisit(previousA4a!, currentA4a!);
 
-                    if (A4a.NEWTREAT == 1 && A4a.NEWADEVENT == 1)
+                    if (newTreatmentInformation && newAdverseEventInformartion)
                     {
-                        if (treatmentValuesMatch && adrdValuesMatch)
+                        if (treatmentValuesMatch && adverseEventValuesMatch)
                         {
                             ModelState.AddModelError("A4a", "If both NEWTREAT and NEWADEVENT are marked as 1 all treatment values cannot match previous visit");
                         }
                     }
-                    if (A4a.NEWTREAT == 1 && A4a.NEWADEVENT != 1)
+                    if (newTreatmentInformation && !newAdverseEventInformartion)
                     {
                         if (treatmentValuesMatch)
                         {
@@ -272,34 +268,12 @@ namespace UDS.Net.Forms.Pages.UDS4
                         }
                     }
 
-                    if (A4a.NEWTREAT == 0 || A4a.NEWTREAT == 9)
+                    if (!newTreatmentInformation)
                     {
                         //Need to set the currentA4a treatment fields to the previousA4a treatment fields
-                        if (previousTreatments != null)
-                        {
-                            A4a.Treatments = previousTreatments
-                                            .Select(tf => new A4aTreatment
-                                            {
-                                                TreatmentIndex = tf.TreatmentIndex,
-                                                TARGETAB = tf.TARGETAB,
-                                                TARGETTAU = tf.TARGETTAU,
-                                                TARGETINF = tf.TARGETINF,
-                                                TARGETSYN = tf.TARGETSYN,
-                                                TARGETOTH = tf.TARGETOTH,
-                                                TARGETOTX = tf.TARGETOTX,
-                                                TRTTRIAL = tf.TRTTRIAL,
-                                                NCTNUM = tf.NCTNUM,
-                                                STARTMO = tf.STARTMO,
-                                                STARTYEAR = tf.STARTYEAR,
-                                                ENDMO = tf.ENDMO,
-                                                ENDYEAR = tf.ENDYEAR,
-                                                CARETRIAL = tf.CARETRIAL,
-                                                TRIALGRP = tf.TRIALGRP
-                                            })
-                                            .ToList();
-                        }
+                        A4a.Treatments = previousTreatments;
                     }
-                    if (A4a.NEWADEVENT == 0 || A4a.NEWADEVENT == 9)
+                    if (!newAdverseEventInformartion)
                     {
                         A4a.ARIAE = previousA4a.ARIAE;
                         A4a.ARIAH = previousA4a.ARIAH;
@@ -315,7 +289,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
         }
-        public bool ADRDMatchPreviousVisit(A4a previousA4aFields, A4a currentA4aFields)
+        public bool AdverseEventsMatchPreviousVisit(A4a previousA4aFields, A4a currentA4aFields)
         {
             if (previousA4aFields == null || currentA4aFields == null)
                 return false;

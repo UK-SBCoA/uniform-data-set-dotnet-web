@@ -481,7 +481,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     if (currentA4aFields != null && previousA4aFields != null)
                     {
                         //Handle exported biomarker fields
-                        currentA4aFields.GetExportedBiomarkerFields(previousA4aFields, currentA4aFields);
+                        currentA4aFields.GetExportedAdverseEventFields(previousA4aFields, currentA4aFields);
                     }
                     csv.WriteRecord(normalA4a);
                 }

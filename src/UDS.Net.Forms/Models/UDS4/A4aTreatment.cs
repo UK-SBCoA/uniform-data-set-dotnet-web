@@ -88,7 +88,7 @@ namespace UDS.Net.Forms.Models.UDS4
                 },
             }},
         };
-        public bool NewTreatmentInformation(A4aTreatment previousTreatment, A4aTreatment currentTreatment)
+        public bool TreatmentMatchesPreviousVisit(A4aTreatment previousTreatment, A4aTreatment currentTreatment)
         {
             var previousFields = previousTreatment.ToEntity();
             var currentFields = currentTreatment.ToEntity();
