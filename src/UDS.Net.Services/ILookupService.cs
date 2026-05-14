@@ -25,11 +25,9 @@ namespace UDS.Net.Services
 
         Task<DrugCode> AddDrugCodeToLookup(DrugCode newDrugCode);
 
-        Task<List<OccupationCode>> SearchOccupations(string searchTerm, int pageSize = 20, int pageIndex = 1);
+        Task<bool> RxNormIsActive(string rxCUI);
 
-        Task<OccupationCode> GetOccupationByCode(string code);
-
-        Task<List<OccupationCode>> GetAllOccupations();
-    }
+        Task<string> GetRxNormStatus(string rxCUI);
+    };
 }
 
