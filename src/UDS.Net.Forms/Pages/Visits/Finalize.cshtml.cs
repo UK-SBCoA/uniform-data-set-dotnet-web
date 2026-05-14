@@ -1,17 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Forms;
-using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -20,6 +11,7 @@ namespace UDS.Net.Forms.Pages.Visits
         protected readonly IParticipationService _participationService;
         protected readonly IPacketService _packetService;
         protected readonly IVisitService _visitService;
+        private readonly ILookupService _lookupService;
 
         [BindProperty]
         public PacketModel? Packet { get; set; }
@@ -35,8 +27,7 @@ namespace UDS.Net.Forms.Pages.Visits
                 return "";
             }
         }
-
-        public FinalizeModel(IVisitService visitService, IPacketService packetService, IParticipationService participationService)
+        public FinalizeModel(IVisitService visitService, IPacketService packetService, IParticipationService participationService, ILookupService lookupService)
         {
             // we need the full packet
             // and some previous visits
@@ -45,6 +36,7 @@ namespace UDS.Net.Forms.Pages.Visits
             _visitService = visitService;
             _packetService = packetService;
             _participationService = participationService;
+            _lookupService = lookupService;
         }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -79,28 +71,8 @@ namespace UDS.Net.Forms.Pages.Visits
             Packet = packet.ToVM();
             Packet.Participation = participation.ToVM();
 
-            D1aFormFields? previousD1a = null;
-
-            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
-                User.Identity!.Name!,
-                packet.ParticipationId,
-                packet.VISITNUM - 1,
-                "D1a"
-            );
-
-            if (previousVisit != null)
-            {
-                var previousD1aForm = previousVisit.Forms
-                    .FirstOrDefault(f => f.Kind == "D1a");
-
-                if (previousD1aForm != null)
-                {
-                    previousD1a = previousD1aForm.Fields as D1aFormFields;
-                }
-            }
-
             var p = Packet.ToEntity();
-            p.TryValidate(previousD1a);
+            p.TryValidate();
 
             if (!p.IsFinalizable)
             {
@@ -119,38 +91,17 @@ namespace UDS.Net.Forms.Pages.Visits
 
         public async Task<IActionResult> OnGetValidate(int id)
         {
-            var packet = await _packetService.GetPacketWithForms(User.Identity!.Name, id);
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
-            if (packet == null)
-                return NotFound();
+            packet.TryValidate();
 
-            D1aFormFields? previousD1a = null;
+            // TODO add a service method to get the previous packet
 
-            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
-                User.Identity!.Name!,
-                packet.ParticipationId,
-                packet.VISITNUM - 1,
-                "D1a"
-            );
-
-            if (previousVisit != null)
+            if (!packet.IsValid)
             {
-                var previousD1aForm = previousVisit.Forms
-                    .FirstOrDefault(f => f.Kind == "D1a");
-
-                if (previousD1aForm != null)
-                {
-                    previousD1a = previousD1aForm.Fields as D1aFormFields;
-                }
+                var list = packet.GetModelErrors();
+                return Partial("_Validate", list);
             }
-
-            var errors = packet.GetModelErrors(previousD1a);
-
-            if (errors.Any())
-            {
-                return Partial("_Validate", errors);
-            }
-
             return Partial("_Validate", null);
         }
 
@@ -158,7 +109,7 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
-            var list = packet.GetModelAlerts();
+            var list = await packet.GetModelAlerts(_lookupService);
 
             return Partial("_Alerts", list);
         }
