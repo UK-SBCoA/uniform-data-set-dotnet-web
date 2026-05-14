@@ -425,6 +425,7 @@ namespace UDS.Net.Services.DomainModels
 
             return results;
         }
+
         public async Task<IEnumerable<VisitValidationResult>> GetModelAlerts(ILookupService lookupService)
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
