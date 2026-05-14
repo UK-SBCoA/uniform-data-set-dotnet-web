@@ -10,14 +10,14 @@
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Implemented service contract</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>16.2.16</ReleaseVersion>
+		<ReleaseVersion>16.2.17</ReleaseVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
 		<PackageReference Include="System.Text.Json" Version="10.0.1" />
 		<PackageReference Include="UDS.Net.Dto" Version="11.0.3" />
 		<PackageReference Include="UDS.Net.API.Client" Version="11.0.3" />
-		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.6" />
+		<PackageReference Include="rxNorm.Net.Api.Wrapper" Version="1.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.1" />
 	</ItemGroup>
 	<ItemGroup>
