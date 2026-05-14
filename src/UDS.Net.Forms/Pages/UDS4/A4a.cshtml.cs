@@ -4,6 +4,7 @@ using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4
@@ -12,8 +13,6 @@ namespace UDS.Net.Forms.Pages.UDS4
     {
         [BindProperty]
         public A4a A4a { get; set; } = default!;
-
-        public A4aTreatment A4ATreatment { get; set; }
 
         public List<RadioListItem> BiomarkerListItems { get; } = new List<RadioListItem>
         {
@@ -220,81 +219,90 @@ namespace UDS.Net.Forms.Pages.UDS4
         {
             BaseForm = A4a; // reassign bounded and derived form to base form for base method
 
-            if (Visit.PACKET == PacketKind.F)
+            Visit.Forms.Add(A4a);
+
+            if (A4a != null && A4a.Status == FormStatus.Finalized)
             {
-                var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, Visit.ParticipationId, Visit.VISITNUM - 1, "A4a");
-
-                var currentA4a = A4a;
-
-                var previousA4a = previousVisit.Forms
-                    .Where(f => f.Kind == "A4a")
-                    .Select(f => (A4a)f.ToVM())
-                    .FirstOrDefault();
-
-                List<A4aTreatment> currentTreatments = A4a.Treatments;
-                List<A4aTreatment> previousTreatments = previousA4a?.Treatments ?? new List<A4aTreatment>();
-
-                if (A4a.TRTBIOMARK != 1)
+                if (Visit.PACKET == PacketKind.I || Visit.PACKET == PacketKind.I4)
                 {
-                    if (previousA4a!.TRTBIOMARK == 1)
+                    // initial visit only validation
+                    if (A4a.TRTBIOMARK.HasValue && A4a.TRTBIOMARK.Value == 1)
+                    {
+                        if (!A4a.HasAtLeastOneTreatment)
+                        {
+                            ModelState.AddModelError("A4a.TRTBIOMARK", "At least one treatment must be provided.");
+                        }
+                    }
+                }
+                else
+                {
+                    // follow-up only validation
+                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity?.Name, Visit.ParticipationId, Visit.VISITNUM - 1, "A4a");
+
+                    var previousA4a = previousVisit.Forms
+                        .Where(f => f.Kind == "A4a")
+                        .Select(f => (A4a)f.ToVM())
+                        .FirstOrDefault();
+                    
+                    List<A4aTreatment> currentTreatments = A4a.Treatments;
+                    List<A4aTreatment> previousTreatments = previousA4a?.Treatments ?? new List<A4aTreatment>();
+
+                    if (A4a.TRTBIOMARK != 1 && previousA4a!.TRTBIOMARK == 1)
                     {
                         ModelState.AddModelError("A4a.TRTBIOMARK", "If previous visit indicated a treatment or clincial trial that was expected to modify biomarkers, then must response be marked as \"Yes\".");
                     }
-                }
 
-                if (A4a.NEWTREAT != null)
-                {
-                    bool newTreatmentInformation = A4a.NEWTREAT == 1;
-                    bool newAdverseEventInformation = A4a.NEWADEVENT == 1;
-
-                    bool treatmentValuesMatch = true;
-                    foreach (var treatment in currentTreatments)
+                    if (A4a.NEWTREAT != null)
                     {
-                        var previousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
+                        bool newTreatmentInformation = A4a.NEWTREAT == 1;
+                        bool newAdverseEventInformation = A4a.NEWADEVENT == 1;
 
-                        if (!treatment.TreatmentMatchesPreviousVisit(previousTreatment!, treatment))
+                        bool treatmentValuesMatch = true;
+                        foreach (var treatment in currentTreatments)
                         {
-                            treatmentValuesMatch = false;
-                            break;
+                            var previousTreatment = previousTreatments.FirstOrDefault(pt => pt.TreatmentIndex == treatment.TreatmentIndex);
+
+                            if (!treatment.TreatmentMatchesPreviousVisit(previousTreatment!, treatment))
+                            {
+                                treatmentValuesMatch = false;
+                                break;
+                            }
+                        }
+
+                        var adverseEventValuesMatch = AdverseEventsMatchPreviousVisit(previousA4a!, A4a);
+
+                        if (newTreatmentInformation && newAdverseEventInformation)
+                        {
+                            if (treatmentValuesMatch && adverseEventValuesMatch)
+                            {
+                                ModelState.AddModelError("A4a", "If both NEWTREAT and NEWADEVENT are marked as 1 all treatment values cannot match previous visit");
+                            }
+                        }
+                        if (newTreatmentInformation && !newAdverseEventInformation)
+                        {
+                            if (treatmentValuesMatch)
+                            {
+                                ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new information is avaiable");
+                            }
+                        }
+
+                        if (!newTreatmentInformation)
+                        {
+                            A4a.Treatments = previousTreatments;
+                        }
+                        if (!newAdverseEventInformation)
+                        {
+                            A4a.ARIAE = previousA4a!.ARIAE;
+                            A4a.ARIAH = previousA4a.ARIAH;
+                            A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
+                            A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
                         }
                     }
 
-                    var adverseEventValuesMatch = AdverseEventsMatchPreviousVisit(previousA4a!, currentA4a!);
-
-                    if (newTreatmentInformation && newAdverseEventInformation)
-                    {
-                        if (treatmentValuesMatch && adverseEventValuesMatch)
-                        {
-                            ModelState.AddModelError("A4a", "If both NEWTREAT and NEWADEVENT are marked as 1 all treatment values cannot match previous visit");
-                        }
-                    }
-                    if (newTreatmentInformation && !newAdverseEventInformation)
-                    {
-                        if (treatmentValuesMatch)
-                        {
-                            ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new information is avaiable");
-                        }
-                    }
-
-                    if (!newTreatmentInformation)
-                    {
-                        A4a.Treatments = previousTreatments;
-                    }
-                    if (!newAdverseEventInformation)
-                    {
-                        A4a.ARIAE = previousA4a!.ARIAE;
-                        A4a.ARIAH = previousA4a.ARIAH;
-                        A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
-                        A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
-                    }
-                    Visit.Forms.Add(A4a);
-
-                    return await base.OnPostAsync(id, goNext); // checks for validation, etc.
                 }
             }
-            Visit.Forms.Add(A4a); // visit needs updated form as well
-
-            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+            
+            return await base.OnPostAsync(id, goNext);
         }
         public bool AdverseEventsMatchPreviousVisit(A4a previousA4a, A4a currentA4a)
         {

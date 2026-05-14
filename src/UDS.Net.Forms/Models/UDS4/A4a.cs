@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Services.Enums;
 
@@ -14,6 +15,8 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Since the last UDS visit, is new information available concerning any of the participant's prescribed treatments or clinical trial(s) of a treatment expected to modify ADRD biomarkers?")]
         public int? NEWTREAT { get; set; }
 
+        // ADEVENT is required for I/I4 visits when TRTBIOMARK = 1
+        // ADEVENT is required for F visits when 
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
         public int? ADVEVENT { get; set; }
 
@@ -68,188 +71,65 @@ namespace UDS.Net.Forms.Models.UDS4
 
         public List<A4aTreatment> Treatments { get; set; } = new List<A4aTreatment>();
 
-        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        [NotMapped]
+        public bool HasAtLeastOneTreatment
         {
-            if (Status == FormStatus.Finalized)
+            get
             {
-                if (TRTBIOMARK == 1)
-                {
-
-                    if (PacketKind == PacketKind.I || PacketKind == PacketKind.I4)
-                    {
-                        bool isAnyTargetSet = false;
-                        foreach (var t in Treatments)
-                        {
-                            if (t.TARGETAB == true || t.TARGETTAU == true ||
-                                t.TARGETINF == true || t.TARGETSYN == true ||
-                                t.TARGETOTH == true)
-                            {
-                                isAnyTargetSet = true;
-                                break;
-                            }
-                        }
-
-                        if (!isAnyTargetSet)
-                        {
-                            yield return new ValidationResult(
-                                "At least one primary drug target must be specified.",
-                                new[] { "Treatments" }
-                            );
-                        }
-
-                        if (ADVEVENT == null)
-                        {
-                            yield return new ValidationResult("Please specify adverse events associated with treatments expected to modify ADRD biomarkers.", new[] { nameof(ADVEVENT) });
-                        }
-                    }
-
-                    if (PacketKind == PacketKind.F)
-                    {
-                        if (NEWTREAT == null)
-                        {
-                            yield return new ValidationResult("Is new information available concerning the participant's treatments or trials?", new[] { nameof(NEWTREAT) });
-                        }
-
-                    }
-                }
-                if (ADVEVENT == 1)
-                {
-                    if (PacketKind == PacketKind.F)
-                    {
-                        if (NEWTREAT == 1)
-                        {
-                            if (NEWADEVENT == null)
-                            {
-                                yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
-                            }
-                        }
-                    }
-                }
-
-                int index = 0;
+                int treatmentCount = 0;
                 foreach (var treatment in Treatments)
                 {
-                    var treatmentIdentifier = $"Treatments[{index}]";
-
-                    bool hasAnyTreatmentDate = treatment.TRTTRIAL != null || treatment.STARTMO.HasValue ||
-                                               treatment.STARTYEAR.HasValue || treatment.ENDMO.HasValue ||
-                                               treatment.ENDYEAR.HasValue || treatment.CARETRIAL.HasValue ||
-                                               treatment.TRIALGRP.HasValue;
-
-                    if (hasAnyTreatmentDate)
+                    if (treatment.HasPrimaryDrugTarget || treatment.HasAnyTreatmentData)
                     {
-                        bool hasAnyTarget = (treatment.TARGETAB.HasValue && treatment.TARGETAB.Value) ||
-                                           (treatment.TARGETTAU.HasValue && treatment.TARGETTAU.Value) ||
-                                           (treatment.TARGETINF.HasValue && treatment.TARGETINF.Value) ||
-                                           (treatment.TARGETSYN.HasValue && treatment.TARGETSYN.Value) ||
-                                           (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value);
+                        treatmentCount++;
+                    }
+                }
+                if (treatmentCount > 0)
+                    return true;
+                return false;
+            }
+        }
 
-                        if (!hasAnyTarget)
-                        {
-                            yield return new ValidationResult("Please specify the primary drug target for the provided date.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TARGETAB)}" });
-                        }
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (TRTBIOMARK == 1)
+            {
+                if (PacketKind == PacketKind.I || PacketKind == PacketKind.I4)
+                {
+                    bool isAnyTargetSet = Treatments.Any(t => t.HasPrimaryDrugTarget);
+
+                    if (!isAnyTargetSet)
+                    {
+                        yield return new ValidationResult("At least one primary drug target must be specified.", new[] { "Treatments" });
                     }
 
-                    if (treatment.TARGETOTH.HasValue && treatment.TARGETOTH.Value)
+                    if (ADVEVENT == null)
                     {
-                        if (treatment.TARGETOTX == null)
-                        {
-                            yield return new ValidationResult("Please specify other target.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TARGETOTX)}" });
-                        }
+                        yield return new ValidationResult("Please specify adverse events associated with treatments expected to modify ADRD biomarkers.", new[] { nameof(ADVEVENT) });
                     }
-
-                    if ((treatment.TARGETAB.HasValue && treatment.TARGETAB == true) ||
-                       (treatment.TARGETTAU.HasValue && treatment.TARGETTAU == true) ||
-                       (treatment.TARGETINF.HasValue && treatment.TARGETINF == true) ||
-                       (treatment.TARGETSYN.HasValue && treatment.TARGETSYN == true) ||
-                       (treatment.TARGETOTH.HasValue && treatment.TARGETOTH == true))
-                    {
-                        if (treatment.TRTTRIAL == null)
-                        {
-                            yield return new ValidationResult("Please specify.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRTTRIAL)}" });
-                        }
-                    }
-
-                    if (treatment.TRTTRIAL != null)
-                    {
-                        if (!treatment.STARTMO.HasValue)
-                        {
-                            yield return new ValidationResult("Start month is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTMO)}" });
-                        }
-
-                        if (!treatment.STARTYEAR.HasValue)
-                        {
-                            yield return new ValidationResult("Start year is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
-                        }
-                    }
-
-
-                    if (treatment.STARTMO.HasValue || treatment.STARTYEAR.HasValue)
-                    {
-                        if (!treatment.ENDMO.HasValue)
-                        {
-                            yield return new ValidationResult("End month is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDMO)}" });
-                        }
-
-                        if (!treatment.ENDYEAR.HasValue)
-                        {
-                            yield return new ValidationResult("End year is required.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
-                        }
-                    }
-
-                    if (treatment.ENDMO.HasValue || treatment.ENDYEAR.HasValue)
-                    {
-                        if (!treatment.CARETRIAL.HasValue)
-                        {
-                            yield return new ValidationResult("How was the treatment provided.", new[] { $"{treatmentIdentifier}.{nameof(treatment.CARETRIAL)}" });
-                        }
-                    }
-
-                    if ((treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 2) || (treatment.CARETRIAL.HasValue && treatment.CARETRIAL == 3))
-                    {
-                        if (!treatment.TRIALGRP.HasValue)
-                        {
-                            yield return new ValidationResult("In which group was the participant.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRIALGRP)}" });
-                        }
-                    }
-
-                    if (treatment.CARETRIAL == 1 || !treatment.CARETRIAL.HasValue)
-                    {
-                        if (treatment.TRIALGRP.HasValue)
-                        {
-                            yield return new ValidationResult(
-                                "If CARETRIAL is 1 or blank then TRIALGRP must be blank.", new[] { $"{treatmentIdentifier}.{nameof(treatment.TRIALGRP)}" });
-                        }
-                    }
-
-                    if (treatment.STARTYEAR.HasValue && treatment.STARTYEAR != 9999 && (treatment.STARTYEAR < 1990 || treatment.STARTYEAR > DateTime.Now.Year))
-                    {
-                        yield return new ValidationResult($"Start year must be between 1990 and {DateTime.Now.Year} or 9999.", new[] { $"{treatmentIdentifier}.{nameof(treatment.STARTYEAR)}" });
-                    }
-
-
-                    if (treatment.ENDYEAR.HasValue && (treatment.ENDYEAR < 1990 || treatment.ENDYEAR > DateTime.Now.Year) && (treatment.ENDYEAR.Value != 9999) && (treatment.ENDYEAR.Value != 8888))
-                    {
-                        yield return new ValidationResult($"End year must be between 1990 and {DateTime.Now.Year} or 8888 or 9999", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
-                    }
-
-                    if (treatment.STARTYEAR.HasValue && treatment.STARTMO.HasValue &&
-                        treatment.ENDYEAR.HasValue && treatment.ENDMO.HasValue &&
-                        treatment.STARTMO != 99 && treatment.ENDMO != 88 && treatment.ENDMO != 99 &&
-                        treatment.STARTYEAR != 9999 && treatment.ENDYEAR != 8888 && treatment.ENDYEAR != 9999)
-                    {
-                        var startDate = new DateTime(treatment.STARTYEAR.Value, treatment.STARTMO.Value, 1);
-                        var endDate = new DateTime(treatment.ENDYEAR.Value, treatment.ENDMO.Value, 1);
-
-                        if (endDate < startDate)
-                        {
-                            yield return new ValidationResult("End date must be later than or equal to start date.", new[] { $"{treatmentIdentifier}.{nameof(treatment.ENDYEAR)}" });
-                        }
-                    }
-
-                    index++;
                 }
 
+                if (PacketKind == PacketKind.F)
+                {
+                    if (NEWTREAT == null)
+                    {
+                        yield return new ValidationResult("Is new information available concerning the participant's treatments or trials?", new[] { nameof(NEWTREAT) });
+                    }
+
+                }
+            }
+            if (ADVEVENT == 1)
+            {
+                if (PacketKind == PacketKind.F)
+                {
+                    if (NEWTREAT == 1)
+                    {
+                        if (NEWADEVENT == null)
+                        {
+                            yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
+                        }
+                    }
+                }
             }
 
             foreach (var result in base.Validate(validationContext))
@@ -257,7 +137,6 @@ namespace UDS.Net.Forms.Models.UDS4
                 yield return result;
             }
         }
-
     }
 }
 
