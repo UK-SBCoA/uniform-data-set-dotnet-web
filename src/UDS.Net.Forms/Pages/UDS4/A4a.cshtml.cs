@@ -292,6 +292,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                         }
                         if (!newAdverseEventInformation)
                         {
+                            A4a.ADVEVENT = previousA4a.ADVEVENT;
                             A4a.ARIAE = previousA4a!.ARIAE;
                             A4a.ARIAH = previousA4a.ARIAH;
                             A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
