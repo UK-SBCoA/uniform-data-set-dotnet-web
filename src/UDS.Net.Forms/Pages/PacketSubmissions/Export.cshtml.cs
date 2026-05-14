@@ -467,7 +467,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    exportA4aFormFields = currentA4aFields.GetExportFormFields(currentA4aFields);
+                    exportA4aFormFields = currentA4aFields.GetExportFormFields();
                 }
                 else
                 {

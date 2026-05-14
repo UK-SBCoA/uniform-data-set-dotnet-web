@@ -95,24 +95,24 @@ namespace UDS.Net.Services.DomainModels.Forms
             return treatment;
         }
 
-        public A4aFormFields GetExportFormFields(A4aFormFields currentA4aFields)
+        public A4aFormFields GetExportFormFields()
         {
-            bool newTreatmentInformation = currentA4aFields.NEWTREAT == 1;
-            bool newAdverseEventInformation = currentA4aFields.NEWADEVENT == 1;
+            bool newTreatmentInformation = NEWTREAT == 1;
+            bool newAdverseEventInformation = NEWADEVENT == 1;
 
             if (!newTreatmentInformation)
             {
-                currentA4aFields.ClearTreatmentFormFields();
-                currentA4aFields.ADVEVENT = null;
+                ClearTreatmentFormFields();
+                ADVEVENT = null;
             }
             if (!newAdverseEventInformation)
             {
-                currentA4aFields.ARIAE = null;
-                currentA4aFields.ARIAH = null;
-                currentA4aFields.ADVERSEOTH = null;
-                currentA4aFields.ADVERSEOTX = null;
+                ARIAE = null;
+                ARIAH = null;
+                ADVERSEOTH = null;
+                ADVERSEOTX = null;
             }
-            return currentA4aFields;
+            return this;
         }
 
         public void ClearTreatmentFormFields()
