@@ -37,7 +37,7 @@ namespace UDS.Net.Forms.Models.UDS4
                     if (TARGETAB!.Value == true || TARGETTAU!.Value == true || TARGETINF!.Value == true || TARGETSYN!.Value == true || TARGETOTH!.Value == true)
                         return true;
                 }
-                
+
                 return false;
             }
         }
@@ -83,7 +83,7 @@ namespace UDS.Net.Forms.Models.UDS4
                         return true;
                     if (STARTYEAR >= 1990 && STARTYEAR <= DateTime.Now.Year)
                         return true;
-                } 
+                }
                 return false;
             }
         }
@@ -205,7 +205,7 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (TARGETOTH.HasValue && TARGETOTH.Value == true && String.IsNullOrWhiteSpace(TARGETOTX))
                 {
-                    yield return new ValidationResult("Provide other target(s)", new[] { nameof(TARGETOTX) } );
+                    yield return new ValidationResult("Provide other target(s)", new[] { nameof(TARGETOTX) });
                 }
                 if (String.IsNullOrWhiteSpace(TRTTRIAL))
                 {
@@ -215,11 +215,11 @@ namespace UDS.Net.Forms.Models.UDS4
                 {
                     if (!StartYearValid)
                     {
-                        yield return new ValidationResult("Start year must be valid year or 9999.", new[] { nameof(STARTYEAR) }); 
+                        yield return new ValidationResult("Start year must be valid year or 9999.", new[] { nameof(STARTYEAR) });
                     }
                     if (!EndYearValid)
                     {
-                        yield return new ValidationResult("End year must be valid year, 8888, or 9999.", new[] { nameof(ENDYEAR) }); 
+                        yield return new ValidationResult("End year must be valid year, 8888, or 9999.", new[] { nameof(ENDYEAR) });
                     }
                     if (STARTMO != 99 && STARTYEAR != 9999 && ENDMO != 99 && ENDYEAR != 9999 && ENDMO != 88 && ENDYEAR != 8888 && !PreciseDateRangeValid)
                     {
@@ -228,18 +228,18 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
                 else
                 {
-                    yield return new ValidationResult("Start and end dates must be provided.", new[] { nameof(STARTMO) }); 
+                    yield return new ValidationResult("Start and end dates must be provided.", new[] { nameof(STARTMO) });
                 }
                 if (CARETRIAL.HasValue)
                 {
                     if ((CARETRIAL == 2 || CARETRIAL == 3) && !TRIALGRP.HasValue)
                     {
-                        yield return new ValidationResult("If a clinical trial then group must be provided.", new[] { nameof(TRIALGRP) }); 
+                        yield return new ValidationResult("If a clinical trial then group must be provided.", new[] { nameof(TRIALGRP) });
                     }
                 }
                 else
                 {
-                    yield return new ValidationResult("How was the treatment provided?", new[] { nameof(CARETRIAL) }); 
+                    yield return new ValidationResult("How was the treatment provided?", new[] { nameof(CARETRIAL) });
                 }
             }
         }

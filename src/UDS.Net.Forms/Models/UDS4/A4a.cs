@@ -118,16 +118,19 @@ namespace UDS.Net.Forms.Models.UDS4
 
                 }
             }
-            if (ADVEVENT == 1)
+            if (PacketKind == PacketKind.F)
             {
-                if (PacketKind == PacketKind.F)
+                if (NEWTREAT == 1)
                 {
-                    if (NEWTREAT == 1)
+                    if (ADVEVENT == null)
                     {
-                        if (NEWADEVENT == null)
-                        {
-                            yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
-                        }
+                        yield return new ValidationResult("Has the participant ever experienced major adverse events associated with treatments expected to modify ADRD biomarkers?", new[] { nameof(ADVEVENT) });
+
+                    }
+
+                    if (ADVEVENT == 1 && NEWADEVENT == null)
+                    {
+                        yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });
                     }
                 }
             }

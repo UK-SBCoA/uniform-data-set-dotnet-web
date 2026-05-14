@@ -243,7 +243,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                         .Where(f => f.Kind == "A4a")
                         .Select(f => (A4a)f.ToVM())
                         .FirstOrDefault();
-                    
+
                     List<A4aTreatment> currentTreatments = A4a.Treatments;
                     List<A4aTreatment> previousTreatments = previousA4a?.Treatments ?? new List<A4aTreatment>();
 
@@ -301,7 +301,7 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                 }
             }
-            
+
             return await base.OnPostAsync(id, goNext);
         }
         public bool AdverseEventsMatchPreviousVisit(A4a previousA4a, A4a currentA4a)
