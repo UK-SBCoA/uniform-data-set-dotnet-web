@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UDS.Net.Services.LookupModels;
 using rxNorm.Net.Api.Wrapper;
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace UDS.Net.Web.MVC.Services
@@ -184,6 +183,24 @@ namespace UDS.Net.Web.MVC.Services
             return new List<RxNorm>();
         }
 
+        public async Task<bool> RxNormIsActive(string rxCUI)
+        {
+            if (!String.IsNullOrWhiteSpace(rxCUI))
+            {
+                return await _rxNormClient.RxNormIsActiveAsync(rxCUI);
+            }
+            throw new ArgumentException("rxCUI cannot be null or whitespace.");
+        }
+
+        public async Task<string> GetRxNormStatus(string rxCUI)
+        {
+            if (!String.IsNullOrWhiteSpace(rxCUI))
+            {
+                var rxStatus = await _rxNormClient.GetRxCUIStatusAsync(rxCUI);
+                return rxStatus;
+            }
+            throw new ArgumentException("rxCUI cannot be null or whitespace.");
+        }
 
         [Obsolete]
         public Task<DrugCodeLookup> Add(string username, DrugCodeLookup entity)
