@@ -57,8 +57,8 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[name='A4.ANYMEDS'][value='1']").CheckAsync();
 
-            await Page.Locator("input[data-rxNormDisplayNames-target='searchBox']").FillAsync("Acetazolamide");
-            await Page.Locator("input[name='RxNormSearch'][type='submit']").ClickAsync();
+            await Page.Locator("input[data-rxnorm-target='search']").FillAsync("Acetazolamide");
+            await Page.Locator("input[type='submit'][value='Search']").ClickAsync();
             await Page.Locator("button[data-action='a4#selectDrug'][value='34567']")
                 .WaitForAsync(new() { State = WaitForSelectorState.Visible });
             await Page.Locator("button[data-action='a4#selectDrug'][value='34567']").ClickAsync();
@@ -87,8 +87,8 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[name='A4.ANYMEDS'][value='1']").CheckAsync();
 
-            await Page.Locator("input[data-rxNormDisplayNames-target='searchBox']").FillAsync("Guanfacine");
-            await Page.Locator("input[name='RxNormSearch'][type='submit']").ClickAsync();
+            await Page.Locator("input[data-rxnorm-target='search']").FillAsync("Guanfacine");
+            await Page.Locator("input[type='submit'][value='Search']").ClickAsync();
             await Page.Locator("button[data-action='a4#selectDrug'][value='56789']")
                 .WaitForAsync(new() { State = WaitForSelectorState.Visible });
             await Page.Locator("button[data-action='a4#selectDrug'][value='56789']").ClickAsync();
