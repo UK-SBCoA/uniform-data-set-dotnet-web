@@ -3,9 +3,12 @@ using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel;
 using System.Globalization;
+using System.Net.Sockets;
 using System.Text.Json;
 using UDS.Net.Forms.Models;
+using UDS.Net.Forms.Pages.Participations;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
@@ -20,7 +23,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         protected readonly IPacketService _packetService;
         public IFormFile? ErrorFileUpload { get; set; }
         [BindProperty]
-        public List<NACCErrorModel> PacketSubmissionErrors { get; set; } = new List<NACCErrorModel>();
+        public List<NACCErrorModel> PacketImportErrors { get; set; } = new List<NACCErrorModel>();
         public CreateModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService)
         {
             _visitService = visitService;
@@ -102,7 +105,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                                 Approved = record.Approved
                             };
 
-                            PacketSubmissionErrors.Add(newPacketSubmissionError);
+                            PacketImportErrors.Add(newPacketSubmissionError);
                         }
 
                         rowIndex++;
@@ -122,88 +125,39 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkSubmission()
         {
-            List<Packet> packetsToUpdate = new List<Packet>();
+            var packetsToUpdate = new List<Packet>();
 
             //Setting page size to 999 to retrieve all packets of status due to pagination
-            IEnumerable<Packet> submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
+            List<Packet> submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
-            var submittedPacketsParticipations = new List<Participation>();
+            List<Participation> submittedPacketParticipations = await RetrieveParticipations(submittedPackets);
 
-            foreach (var packet in submittedPackets)
+            foreach (var errorGroup in PacketImportErrors.GroupBy(p => p.Ptid))
             {
-                var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
+                //Each error in the error group must have a participation, if not then expect an error
+                Participation groupParticipation = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
 
-                //DEVNOTE: Is this necessary?
-                if (participation != null)
+                //will need to allow updating of previous visits as well, so get all visitNumbers for PTID number
+                List<int> groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
+
+                foreach (var visitNumber in groupVisitNumbers)
                 {
-                    submittedPacketsParticipations.Add(participation);
-                }
-            }
+                    Packet packet = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id && p.VISITNUM == visitNumber).First();
 
-            var packetSubmissionErrorsGrouped = PacketSubmissionErrors.GroupBy(p => p.Ptid);
-
-            foreach (var errorGroup in packetSubmissionErrorsGrouped)
-            {
-                var groupParticipation = submittedPacketsParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
-
-                //account for different visits, loop through each visit
-                var visitGroups = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
-
-                foreach (var visitNumber in visitGroups) 
-                {
-                    var groupVisit = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id && p.VISITNUM == visitNumber).FirstOrDefault();
-
-                    if (groupVisit != null)
+                    if (packet.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                     {
-                        //The last submission will be the most recent
-                        var groupSubmission = groupVisit.Submissions.Last();
+                        packet.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                        List<PacketSubmissionError> groupPacketSubmissionErrors = new List<PacketSubmissionError>();
+                        packet.Submissions.Last().Errors = CreatePacketSubmissionErrors(errorGroup, packet);
 
-                        if (groupSubmission != null)
-                        {
-                            foreach (var error in errorGroup)
-                            {
-                                if (int.Parse(error.Visitnum) == visitNumber)
-                                {
-                                    PacketSubmissionError newPacketSubmissionError = new PacketSubmissionError(
-                                    id: 0,
-                                    packetSubmissionId: groupSubmission.Id,
-                                    formKind: error.Code.Split("-")[0].ToUpper(),
-                                    message: error.Message,
-                                    assignedTo: groupVisit.CreatedBy,
-                                    level: GetErrorLevel(error.Type),
-                                    status: PacketSubmissionErrorStatus.Pending,
-                                    statusChangedBy: null,
-                                    createdAt: DateTime.Now,
-                                    createdBy: User.Identity.Name,
-                                    modifiedBy: null,
-                                    deletedBy: null,
-                                    isDeleted: false,
-                                    location: error.Location?.ToUpper(),
-                                    value: error.Value
-                                );
-
-                                    groupPacketSubmissionErrors.Add(newPacketSubmissionError);
-                                }
-                            }
-
-                            //Add submission errors to group packet, update count, and update status
-                            groupSubmission.ErrorCount = groupPacketSubmissionErrors.Count;
-                            groupSubmission.Errors = groupPacketSubmissionErrors;
-
-                            if (groupVisit.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-                            {
-                                groupVisit.UpdateStatus(PacketStatus.FailedErrorChecks);
-
-                                packetsToUpdate.Add(groupVisit);
-                            }
-                        }
+                        packet.Submissions.Last().ErrorCount = packet.Submissions.Last().Errors.Count;
+                        
+                        packetsToUpdate.Add(packet);
                     }
                 }
             }
 
-            var updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+            List<Packet> updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
             //DEVNOTE: Create post import information using return from updatedPackets
 
@@ -266,6 +220,50 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             }
 
             return RedirectToPage("/Packets/Index");
+        }
+
+        private async Task<List<Participation>> RetrieveParticipations(IEnumerable<Packet> packets)
+        {
+            List<Participation> participations = new List<Participation>();
+
+            foreach (var packet in packets)
+            {
+                participations.Add(await _participationService.GetById(User.Identity.Name, packet.ParticipationId));
+            }
+
+            return participations;
+        }
+
+        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<string, NACCErrorModel> errorGroup, Packet packet)
+        {
+            List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
+
+            foreach (var error in errorGroup)
+            {
+                if (int.Parse(error.Visitnum) == packet.VISITNUM)
+                {
+                    packetSubmissionErrors.Add(new PacketSubmissionError
+                    (
+                        id: 0,
+                        packetSubmissionId: packet.Submissions.Last().Id,
+                        formKind: error.Code.Split("-")[0].ToUpper(),
+                        message: error.Message,
+                        assignedTo: packet.CreatedBy,
+                        level: GetErrorLevel(error.Type),
+                        status: PacketSubmissionErrorStatus.Pending,
+                        statusChangedBy: null,
+                        createdAt: DateTime.Now,
+                        createdBy: User.Identity.Name,
+                        modifiedBy: null,
+                        deletedBy: null,
+                        isDeleted: false,
+                        location: error.Location?.ToUpper(),
+                        value: error.Value
+                    ));
+                }
+            }
+
+            return packetSubmissionErrors;
         }
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs

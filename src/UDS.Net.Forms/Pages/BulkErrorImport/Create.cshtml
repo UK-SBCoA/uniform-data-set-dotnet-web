@@ -25,44 +25,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (var i = 0; i < Model.PacketSubmissionErrors.Count; i++)
+                            @for (var i = 0; i < Model.PacketImportErrors.Count; i++)
                             {
-                                @if(int.Parse(Model.PacketSubmissionErrors[i].Ptid) != previousPTID)
+                                @if(int.Parse(Model.PacketImportErrors[i].Ptid) != previousPTID)
                                 {
-                                    previousPTID = int.Parse(Model.PacketSubmissionErrors[i].Ptid);
+                                    previousPTID = int.Parse(Model.PacketImportErrors[i].Ptid);
 
                                     <tr>
-                                        <td colspan="7" class="p-4 border-b border-slate-300 bg-slate-50">Packet PTID: @Model.PacketSubmissionErrors[i].Ptid</td>
+                                        <td colspan="7" class="p-4 border-b border-slate-300 bg-slate-50">Packet PTID: @Model.PacketImportErrors[i].Ptid</td>
                                     </tr>
                                 }
                                 <tr class="hover:bg-slate-50">
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Ptid</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Ptid" />
+                                        <p>@Model.PacketImportErrors[i].Ptid</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Ptid" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Visitnum</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Visitnum" />
+                                        <p>@Model.PacketImportErrors[i].Visitnum</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Visitnum" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Type</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                                        <p>@Model.PacketImportErrors[i].Type</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Type" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Code</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Code" />
+                                        <p>@Model.PacketImportErrors[i].Code</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Code" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Location</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Location" />
+                                        <p>@Model.PacketImportErrors[i].Location</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Location" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Value</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Value" />
+                                        <p>@Model.PacketImportErrors[i].Value</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Value" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketSubmissionErrors[i].Message</p>
-                                        <input type="hidden" asp-for="PacketSubmissionErrors[i].Message" />
+                                        <p>@Model.PacketImportErrors[i].Message</p>
+                                        <input type="hidden" asp-for="PacketImportErrors[i].Message" />
                                     </td>
                                 </tr>
                             }
