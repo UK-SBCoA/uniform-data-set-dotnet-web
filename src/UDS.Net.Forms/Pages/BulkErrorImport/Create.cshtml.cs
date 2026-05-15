@@ -125,15 +125,15 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
             foreach (var errorGroup in NACCSubmissionErrors.GroupBy(p => p.Ptid))
             {
-                //All errors from the NACC error file must have a participation. If not, then expect an error
-                var participationForGroup = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
+                //All errors from the NACC error file must have a participation. If not, then expect an error.
+                var participationForGroup = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).First();
 
                 //Allow updating of previous visits, so get all unique visit numbers for a PTID grouping in the NACC error file
                 var groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
 
                 foreach (var visitNumber in groupVisitNumbers)
                 {
-                    var matchingPacket = submittedPackets.Where(p => p.ParticipationId == participationForGroup?.Id && p.VISITNUM == visitNumber).First();
+                    var matchingPacket = submittedPackets.Where(p => p.ParticipationId == participationForGroup.Id && p.VISITNUM == visitNumber).First();
 
                     if (matchingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                     {
