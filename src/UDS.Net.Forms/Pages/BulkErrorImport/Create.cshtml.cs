@@ -23,7 +23,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         protected readonly IPacketService _packetService;
         public IFormFile? ErrorFileUpload { get; set; }
         [BindProperty]
-        public List<NACCErrorModel> PacketImportErrors { get; set; } = new List<NACCErrorModel>();
+        public List<NACCErrorModel> NACCSubmissionErrors { get; set; } = new List<NACCErrorModel>();
         public CreateModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService)
         {
             _visitService = visitService;
@@ -51,26 +51,20 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
             };
 
-            int rowIndex = 0;
+            //page size to 999 to retrieve maximum packets by status
+            var submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
 
-            //Setting page size to 999 to retrieve all packets by status
-            IEnumerable<Visit> submittedPackets = await _visitService.ListByStatus(User.Identity.Name, 999, 1, [PacketStatus.Submitted.ToString()]);
+            //Initialize tuple for storing legacyId and visitnum paring of each submitted packet
+            var legacyIdVisitnumPairs = new List<(string legacyId, int visitNum)>();
 
-            //Initialize tuple for storing legacyId and visitnum matches from a submittedPackets
-            var legacyIdToVisitnum = new List<(string legacyId, int visitNum)>();
-
-            foreach (var submittedPacket in submittedPackets)
+            foreach (var packet in submittedPackets)
             {
                 //DEVNOTE: NACC PTID from error file will be the same as the legacy ID for a participation.
-                var participation = await _participationService.GetById(User.Identity.Name, submittedPacket.ParticipationId);
+                var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
-                if (participation != null)
+                if (!string.IsNullOrEmpty(participation.LegacyId) && packet.VISITNUM > 0)
                 {
-                    if (!string.IsNullOrEmpty(participation.LegacyId) && submittedPacket.VISITNUM > 0)
-                    {
-                        //Need to have legacyId and participationId to compare to the NACCErrors
-                        legacyIdToVisitnum.Add((participation.LegacyId, submittedPacket.VISITNUM));
-                    }
+                    legacyIdVisitnumPairs.Add((participation.LegacyId, packet.VISITNUM));
                 }
             }
 
@@ -86,10 +80,9 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                     {
                         var record = csv.GetRecord<NACCErrorModel>();
 
-                        //DEVNOTE: Record must match to a PTID and Visitnum of a submitted packet from legacyIdToVisitnum dictionary
-                        var legacyIdToVisitnumItem = legacyIdToVisitnum?.Where(lv => lv.legacyId == record.Ptid && lv.visitNum == int.Parse(record.Visitnum)).FirstOrDefault();
+                        var matchedLegacyIdVisitnumPair = legacyIdVisitnumPairs?.Where(pair => pair.legacyId == record.Ptid && pair.visitNum == int.Parse(record.Visitnum)).FirstOrDefault();
 
-                        if (legacyIdToVisitnumItem != null && record.Approved.ToLower() == "false")
+                        if (!string.IsNullOrEmpty(matchedLegacyIdVisitnumPair?.legacyId) && record.Approved.ToLower() == "false")
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
@@ -105,10 +98,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                                 Approved = record.Approved
                             };
 
-                            PacketImportErrors.Add(newPacketSubmissionError);
+                            NACCSubmissionErrors.Add(newPacketSubmissionError);
                         }
-
-                        rowIndex++;
                     }
                 }
                 catch (Exception e)
@@ -128,38 +119,42 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             var packetsToUpdate = new List<Packet>();
 
             //Setting page size to 999 to retrieve all packets of status due to pagination
-            List<Packet> submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
+            var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
-            List<Participation> submittedPacketParticipations = await RetrieveParticipations(submittedPackets);
+            var submittedPacketParticipations = await GetParticipationsFromPackets(submittedPackets);
 
-            foreach (var errorGroup in PacketImportErrors.GroupBy(p => p.Ptid))
+            foreach (var errorGroup in NACCSubmissionErrors.GroupBy(p => p.Ptid))
             {
-                //Each error in the error group must have a participation, if not then expect an error
-                Participation groupParticipation = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
+                //All errors from the NACC error file must have a participation. If not, then expect an error
+                var participationForGroup = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).FirstOrDefault();
 
-                //will need to allow updating of previous visits as well, so get all visitNumbers for PTID number
-                List<int> groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
+                //Allow updating of previous visits, so get all unique visit numbers for a PTID grouping in the NACC error file
+                var groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
 
                 foreach (var visitNumber in groupVisitNumbers)
                 {
-                    Packet packet = submittedPackets.Where(p => p.ParticipationId == groupParticipation?.Id && p.VISITNUM == visitNumber).First();
+                    var matchingPacket = submittedPackets.Where(p => p.ParticipationId == participationForGroup?.Id && p.VISITNUM == visitNumber).First();
 
-                    if (packet.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                    if (matchingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                     {
-                        packet.UpdateStatus(PacketStatus.FailedErrorChecks);
+                        matchingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
 
-                        packet.Submissions.Last().Errors = CreatePacketSubmissionErrors(errorGroup, packet);
+                        var submission = matchingPacket.Submissions.Last();
 
-                        packet.Submissions.Last().ErrorCount = packet.Submissions.Last().Errors.Count;
+                        submission.Errors = CreatePacketSubmissionErrors(errorGroup, matchingPacket);
+                        submission.ErrorCount = submission.Errors.Count;
                         
-                        packetsToUpdate.Add(packet);
+                        packetsToUpdate.Add(matchingPacket);
                     }
                 }
             }
 
             List<Packet> updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
-            //DEVNOTE: Create post import information using return from updatedPackets
+            
+
+
+            //DEVNOTE: Move handling of setting post import information in a private void method
 
             string importStatus = "success";
             //DEVNOTE: Packets updated and errors imported
@@ -222,7 +217,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             return RedirectToPage("/Packets/Index");
         }
 
-        private async Task<List<Participation>> RetrieveParticipations(IEnumerable<Packet> packets)
+        private async Task<List<Participation>> GetParticipationsFromPackets(IEnumerable<Packet> packets)
         {
             List<Participation> participations = new List<Participation>();
 

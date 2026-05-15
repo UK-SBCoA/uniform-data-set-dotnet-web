@@ -25,44 +25,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (var i = 0; i < Model.PacketImportErrors.Count; i++)
+                            @for (var i = 0; i < Model.NACCSubmissionErrors.Count; i++)
                             {
-                                @if(int.Parse(Model.PacketImportErrors[i].Ptid) != previousPTID)
+                                @if(int.Parse(Model.NACCSubmissionErrors[i].Ptid) != previousPTID)
                                 {
-                                    previousPTID = int.Parse(Model.PacketImportErrors[i].Ptid);
+                                    previousPTID = int.Parse(Model.NACCSubmissionErrors[i].Ptid);
 
                                     <tr>
-                                        <td colspan="7" class="p-4 border-b border-slate-300 bg-slate-50">Packet PTID: @Model.PacketImportErrors[i].Ptid</td>
+                                        <td colspan="7" class="p-4 border-b border-slate-300 bg-slate-50">Packet PTID: @Model.NACCSubmissionErrors[i].Ptid</td>
                                     </tr>
                                 }
                                 <tr class="hover:bg-slate-50">
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Ptid</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Ptid" />
+                                        <p>@Model.NACCSubmissionErrors[i].Ptid</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Ptid" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Visitnum</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Visitnum" />
+                                        <p>@Model.NACCSubmissionErrors[i].Visitnum</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Visitnum" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Type</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Type" />
+                                        <p>@Model.NACCSubmissionErrors[i].Type</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Type" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Code</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Code" />
+                                        <p>@Model.NACCSubmissionErrors[i].Code</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Code" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Location</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Location" />
+                                        <p>@Model.NACCSubmissionErrors[i].Location</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Location" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Value</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Value" />
+                                        <p>@Model.NACCSubmissionErrors[i].Value</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Value" />
                                     </td>
                                     <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.PacketImportErrors[i].Message</p>
-                                        <input type="hidden" asp-for="PacketImportErrors[i].Message" />
+                                        <p>@Model.NACCSubmissionErrors[i].Message</p>
+                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Message" />
                                     </td>
                                 </tr>
                             }
