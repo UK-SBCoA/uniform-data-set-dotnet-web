@@ -3,12 +3,9 @@ using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel;
 using System.Globalization;
-using System.Net.Sockets;
 using System.Text.Json;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Pages.Participations;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Submission;
@@ -37,7 +34,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostDisplayBulkSubmission()
+        public async Task<IActionResult> OnPostDisplayBulkImport()
         {
             if (ErrorFileUpload == null)
             {
@@ -59,7 +56,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
             foreach (var packet in submittedPackets)
             {
-                //DEVNOTE: NACC PTID from error file will be the same as the legacy ID for a participation.
+                //DEVNOTE: NACC PTID from error file will be the same as the legacy ID for a matching participation.
                 var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
                 if (!string.IsNullOrEmpty(participation.LegacyId) && packet.VISITNUM > 0)
@@ -84,7 +81,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
                         if (!string.IsNullOrEmpty(matchedLegacyIdVisitnumPair?.legacyId) && record.Approved.ToLower() == "false")
                         {
-                            NACCErrorModel newPacketSubmissionError = new NACCErrorModel
+                            NACCErrorModel newNACCError = new NACCErrorModel
                             {
                                 Type = record.Type,
                                 Code = record.Code,
@@ -98,7 +95,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                                 Approved = record.Approved
                             };
 
-                            NACCSubmissionErrors.Add(newPacketSubmissionError);
+                            NACCSubmissionErrors.Add(newNACCError);
                         }
                     }
                 }
@@ -114,7 +111,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         }
 
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OnPostConfirmBulkSubmission()
+        public async Task<IActionResult> OnPostConfirmBulkImport()
         {
             var packetsToUpdate = new List<Packet>();
 
@@ -128,7 +125,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 //All errors from the NACC error file must have a participation. If not, then expect an error.
                 var participationForGroup = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).First();
 
-                //Allow updating of previous visits, so get all unique visit numbers for a PTID grouping in the NACC error file
+                //Allow updating of previous visit numbers, so get all unique visit numbers for a PTID grouping of the NACC errors
                 var groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
 
                 foreach (var visitNumber in groupVisitNumbers)
@@ -165,7 +162,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
                 var packetSubmissionToUpdate = packetToUpdate.Submissions.Last();
 
-                //Packets to be updated will always have an error count
+                //Packets to be updated should always have an error count
                 errorsToUpdate += packetSubmissionToUpdate.ErrorCount.Value;
 
                 if (updatedPacketReturned != null && updatedPacketSubmissionReturned != null)
