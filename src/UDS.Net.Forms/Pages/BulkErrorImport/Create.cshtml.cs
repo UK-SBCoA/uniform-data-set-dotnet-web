@@ -149,59 +149,55 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 }
             }
 
-            List<Packet> updatedPackets = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+            List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
-            
-
-
-            //DEVNOTE: Move handling of setting post import information in a private void method
-
-            string importStatus = "success";
-            //DEVNOTE: Packets updated and errors imported
+            var importStatus = "success";
             var importDetails = new List<string>();
-            //DEVNOTE: Details on import errors
             var errorDetails = new List<string>();
 
-            var errorsToUpdate = 0;
-            var errorsUpdated = 0;
+            int errorsToUpdate = 0;
+            int updatedErrorsReturned = 0;
 
-            importDetails.Add($"Packets Updated: {updatedPackets.Count()} / {packetsToUpdate.Count()}");
-
-            for (var i = 0; i < packetsToUpdate.Count(); i++)
+            foreach (var packetToUpdate in packetsToUpdate)
             {
-                errorsToUpdate += packetsToUpdate[i].Submissions.Last().Errors.Count();
+                var updatedPacketReturned = updatedPacketsReturned.FirstOrDefault(packet => packet.Id == packetToUpdate.Id);
+                var updatedPacketSubmissionReturned = updatedPacketReturned?.Submissions.Last();
 
-                var packetUpdated = updatedPackets.Where(up => up.Id == packetsToUpdate[i].Id).FirstOrDefault();
+                var packetSubmissionToUpdate = packetToUpdate.Submissions.Last();
 
-                if (packetUpdated != null)
+                //Packets to be updated will always have an error count
+                errorsToUpdate += packetSubmissionToUpdate.ErrorCount.Value;
+
+                if (updatedPacketReturned != null && updatedPacketSubmissionReturned != null)
                 {
-                    //DEVNOTE: Get packet submission that was updated
-                    var submissionUpdated = packetUpdated.Submissions.Where(p => p.Id == packetsToUpdate[i].Submissions.Last().Id).FirstOrDefault();
-
-                    if (submissionUpdated != null)
-                    {
-                        errorsUpdated += submissionUpdated.Errors.Count();
-                    }
-                    else
-                    {
-                        //DEVNOTE: If packet was fond, but submission was not updated
-                        errorDetails.Add($"[ Participation Id: {packetsToUpdate[i].ParticipationId} | Visit Number: {packetsToUpdate[i].VISITNUM} ] Packet submission could not be updated. Errors not imported");
-                    }
-                }
+                    updatedErrorsReturned += updatedPacketSubmissionReturned.Errors.Count;
+                } 
                 else
                 {
-                    //DEVNOTE: If packet was not updated
-                    errorDetails.Add($"[ Participation Id: {packetsToUpdate[i].ParticipationId} | Visit Number: {packetsToUpdate[i].VISITNUM} ] Packet could not be updated. Errors not imported");
+                    errorDetails.Add($"[ Participation Id: {packetToUpdate.ParticipationId} | Visit Number: {packetToUpdate.VISITNUM} ] Packet could not be updated. Errors not imported");
                 }
             }
 
-            importDetails.Add($"Errors Imported: {errorsUpdated} / {errorsToUpdate}");
+            importDetails.Add($"Packets Updated: {updatedPacketsReturned.Count} / {packetsToUpdate.Count}");
+            importDetails.Add($"Errors Imported: {updatedErrorsReturned} / {errorsToUpdate}");
 
-            if (updatedPackets.Count() != packetsToUpdate.Count()) importStatus = "fail";
+            if (updatedPacketsReturned.Count != packetsToUpdate.Count)
+            {
+                importStatus = "fail";
+            }
 
-            if (errorsUpdated != errorsToUpdate) importStatus = "fail";
+            if (updatedErrorsReturned != errorsToUpdate)
+            {
+                importStatus = "fail";
+            }
 
-            //DEVNOTE: set temp data for view
+            CreateTempDataForView(importStatus, importDetails, errorDetails);
+
+            return RedirectToPage("/Packets/Index");
+        }
+
+        private void CreateTempDataForView(string importStatus, List<string> importDetails, List<string> errorDetails)
+        {
             TempData["importStatus"] = importStatus;
 
             if (importStatus == "fail")
@@ -209,12 +205,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 TempData["errorDetails"] = JsonSerializer.Serialize(errorDetails);
             }
 
-            if (importDetails.Count() > 0)
-            {
-                TempData["importDetails"] = JsonSerializer.Serialize(importDetails);
-            }
-
-            return RedirectToPage("/Packets/Index");
+            TempData["importDetails"] = JsonSerializer.Serialize(importDetails);
         }
 
         private async Task<List<Participation>> GetParticipationsFromPackets(IEnumerable<Packet> packets)
