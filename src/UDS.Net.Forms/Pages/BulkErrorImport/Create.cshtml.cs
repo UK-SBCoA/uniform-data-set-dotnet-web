@@ -140,7 +140,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
                         submission.Errors = CreatePacketSubmissionErrors(errorGroup, matchingPacket);
                         submission.ErrorCount = submission.Errors.Count;
-                        
+
                         packetsToUpdate.Add(matchingPacket);
                     }
                 }
@@ -168,7 +168,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 if (updatedPacketReturned != null && updatedPacketSubmissionReturned != null)
                 {
                     updatedErrorsReturned += updatedPacketSubmissionReturned.Errors.Count;
-                } 
+                }
                 else
                 {
                     errorDetails.Add($"[ Participation Id: {packetToUpdate.ParticipationId} | Visit Number: {packetToUpdate.VISITNUM} ] Packet could not be updated. Errors not imported");
