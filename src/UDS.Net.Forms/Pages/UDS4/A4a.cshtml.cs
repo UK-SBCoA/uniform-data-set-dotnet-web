@@ -304,7 +304,7 @@ namespace UDS.Net.Forms.Pages.UDS4
                             A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
                             A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
                         }
-                        if(previousA4a.ADVEVENT == 1)
+                        if (previousA4a.ADVEVENT == 1)
                         {
                             A4a.ADVEVENT = previousA4a.ADVEVENT;
                         }
