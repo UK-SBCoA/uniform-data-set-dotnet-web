@@ -18,6 +18,7 @@ namespace UDS.Net.Forms.Models.UDS4
         // ADEVENT is required for I/I4 visits when TRTBIOMARK = 1
         // ADEVENT is required for F visits when 
         [Display(Name = "Has the participant ever experienced amyloid related imaging abnormalities–edema (ARIA-E), amyloid related imaging abnormalities–hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
+        [RequiredIf(nameof(NEWTREAT), "1", ErrorMessage = "Please indicate major adverse event(s) associated with treatments expected to modify ADRD biomarkers.")]
         public int? ADVEVENT { get; set; }
 
         [Display(Name = "Since the last UDS visit, is new information available concerning the participant's experience of amyloid related imaging abnormalities-edema (ARIA-E), amyloid related imaging abnormalities-hemorrhage (ARIA-H), or other major adverse events associated with treatments expected to modify ADRD biomarkers?")]
@@ -122,12 +123,6 @@ namespace UDS.Net.Forms.Models.UDS4
             {
                 if (NEWTREAT == 1)
                 {
-                    if (ADVEVENT == null)
-                    {
-                        yield return new ValidationResult("Has the participant ever experienced major adverse events associated with treatments expected to modify ADRD biomarkers?", new[] { nameof(ADVEVENT) });
-
-                    }
-
                     if (ADVEVENT == 1 && NEWADEVENT == null)
                     {
                         yield return new ValidationResult("Is new information available concerning the participant's imaging or adverse events that could modify biomarkers?", new[] { nameof(NEWADEVENT) });

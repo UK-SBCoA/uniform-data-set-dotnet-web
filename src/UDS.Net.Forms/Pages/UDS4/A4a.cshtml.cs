@@ -285,6 +285,13 @@ namespace UDS.Net.Forms.Pages.UDS4
                                 ModelState.AddModelError("A4a.NEWTREAT", "Treatment values cannot match previous visit if new information is avaiable");
                             }
                         }
+                        if (newTreatmentInformation && previousA4a.ADVEVENT != null && previousA4a.ADVEVENT == 1)
+                        {
+                            if (A4a.ADVEVENT != 1)
+                            {
+                                ModelState.AddModelError("A4a.ADVEVENT", "If previous visit indicated participant experienced adverse events then a value of 0 or 9 cannot be selected");
+                            }
+                        }
 
                         if (!newTreatmentInformation)
                         {
@@ -292,11 +299,14 @@ namespace UDS.Net.Forms.Pages.UDS4
                         }
                         if (!newAdverseEventInformation)
                         {
-                            A4a.ADVEVENT = previousA4a.ADVEVENT;
                             A4a.ARIAE = previousA4a!.ARIAE;
                             A4a.ARIAH = previousA4a.ARIAH;
                             A4a.ADVERSEOTH = previousA4a.ADVERSEOTH;
                             A4a.ADVERSEOTX = previousA4a.ADVERSEOTX;
+                        }
+                        if(previousA4a.ADVEVENT == 1)
+                        {
+                            A4a.ADVEVENT = previousA4a.ADVEVENT;
                         }
                     }
 
