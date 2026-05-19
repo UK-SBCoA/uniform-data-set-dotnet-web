@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
@@ -96,6 +95,46 @@ namespace UDS.Net.Services.DomainModels.Forms
             return treatment;
         }
 
+        public A4aFormFields GetExportFormFields()
+        {
+            bool newTreatmentInformation = NEWTREAT == 1;
+            bool newAdverseEventInformation = NEWADEVENT == 1;
+
+            if (!newTreatmentInformation)
+            {
+                ClearTreatmentFormFields();
+                ADVEVENT = null;
+            }
+            if (!newAdverseEventInformation)
+            {
+                ARIAE = null;
+                ARIAH = null;
+                ADVERSEOTH = null;
+                ADVERSEOTX = null;
+            }
+            return this;
+        }
+
+        public void ClearTreatmentFormFields()
+        {
+            for (var i = 0; i < TreatmentFormFields.Count; i++)
+            {
+                TreatmentFormFields[i].TARGETAB = null;
+                TreatmentFormFields[i].TARGETTAU = null;
+                TreatmentFormFields[i].TARGETINF = null;
+                TreatmentFormFields[i].TARGETSYN = null;
+                TreatmentFormFields[i].TARGETOTH = null;
+                TreatmentFormFields[i].TARGETOTX = null;
+                TreatmentFormFields[i].TRTTRIAL = null;
+                TreatmentFormFields[i].NCTNUM = null;
+                TreatmentFormFields[i].STARTMO = null;
+                TreatmentFormFields[i].STARTYEAR = null;
+                TreatmentFormFields[i].ENDMO = null;
+                TreatmentFormFields[i].ENDYEAR = null;
+                TreatmentFormFields[i].CARETRIAL = null;
+                TreatmentFormFields[i].TRIALGRP = null;
+            }
+        }
         public A4aFormFields()
         {
             for (int i = 1; i <= 8; i++)

@@ -460,19 +460,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A4aRecord(a4a));
 
-                List<A4aTreatmentFormFields> treatments;
+                A4aFormFields exportA4aFormFields = null!;
+                A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
-                if (a4a.Fields is A4aFormFields normalA4a)
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
                 {
-                    csv.WriteRecord(normalA4a);
-                    treatments = normalA4a.TreatmentFormFields.ToList();
+                    exportA4aFormFields = currentA4aFields.GetExportFormFields();
                 }
                 else
                 {
-                    treatments = new List<A4aTreatmentFormFields>();
+                    exportA4aFormFields = currentA4aFields;
                 }
 
-                foreach (var treatment in treatments)
+                // write the export object
+                csv.WriteRecord(exportA4aFormFields);
+                foreach (var treatment in exportA4aFormFields.TreatmentFormFields)
                 {
                     foreach (var prop in a4aProps)
                     {
