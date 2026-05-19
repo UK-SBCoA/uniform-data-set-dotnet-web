@@ -404,6 +404,8 @@ namespace UDS.Net.Forms.Extensions
             return new A4aFormFields
             {
                 ADVEVENT = vm.ADVEVENT,
+                NEWADEVENT = vm.NEWADEVENT,
+                NEWTREAT = vm.NEWTREAT,
                 ARIAE = vm.ARIAE,
                 ARIAH = vm.ARIAH,
                 ADVERSEOTH = vm.ADVERSEOTH,
