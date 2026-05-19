@@ -936,6 +936,8 @@ namespace UDS.Net.Services.Extensions
             var dto = new A4aDto()
             {
                 ADVEVENT = fields.ADVEVENT,
+                NEWADEVENT = fields.NEWADEVENT,
+                NEWTREAT = fields.NEWTREAT,
                 ARIAE = fields.ARIAE,
                 ARIAH = fields.ARIAH,
                 ADVERSEOTH = fields.ADVERSEOTH,
