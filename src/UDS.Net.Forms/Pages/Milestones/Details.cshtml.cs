@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Services;
 
 namespace UDS.Net.Forms.Pages.Milestones
 {
-    public class DetailsModel : EditModel
+    public class DetailsModel : MilestonePageModel
     {
         public DetailsModel(IMilestoneService milestoneService, IParticipationService participationService) : base(milestoneService, participationService)
         {

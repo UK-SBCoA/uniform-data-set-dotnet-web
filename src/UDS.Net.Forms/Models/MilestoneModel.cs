@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using UDS.Net.Dto;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.DomainModels;
@@ -14,13 +15,15 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
+        public List<M1SubmissionModel> M1Submissions { get; set; } = new();
+
         [Required]
         public int ParticipationId { get; set; }
 
         public virtual ParticipationModel? Participation { get; set; }
 
         [Display(Name = "Status")]
-        public string Status { get; set; } = "Complete";
+        public string Status { get; set; } = PacketStatus.Pending.ToString();
 
         [Display(Name = "Month")]
         public int? CHANGEMO { get; set; }
