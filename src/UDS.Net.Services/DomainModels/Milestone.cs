@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Services.DomainModels
 {
@@ -41,6 +43,8 @@ namespace UDS.Net.Services.DomainModels
         public string DeletedBy { get; set; }
         public bool IsDeleted { get; set; }
         public int? MILESTONETYPE { get; set; }
+
+        public List<M1Submission> M1Submissions { get; set; } = new List<M1Submission>();
         // TODO use Milestone constructor for mapping instead of extension method
     }
 }
