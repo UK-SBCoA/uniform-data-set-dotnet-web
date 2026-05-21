@@ -394,7 +394,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     var previousA3Fields = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
 
                     //If I4 with no previous visits, then export current A3 fields
-                    if(packet.PACKET == Services.Enums.PacketKind.I4 && previousVisit == null)
+                    if (packet.PACKET == Services.Enums.PacketKind.I4 && previousVisit == null)
                     {
                         exportA3Fields = currentA3Fields;
                     }
