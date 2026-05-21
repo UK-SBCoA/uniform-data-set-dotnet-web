@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using UDS.Net.Forms.Tests.Runtime.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using UDS.Net.Forms.Tests.Runtime.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -59,6 +58,12 @@ public class HomeController : Controller
 
             return RedirectToPage("/Visits/Details", new { Id = visit.Id });
         }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Packets()
+    {
+        return RedirectToPage("/Packets/Index");
     }
 
     public IActionResult Privacy()
