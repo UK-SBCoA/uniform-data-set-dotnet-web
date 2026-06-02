@@ -1,82 +1,74 @@
 ﻿@page
 @model UDS.Net.Forms.Pages.BulkErrorImport.CreateModel
-@{
-    var previousPTID = 0;
-}
 
 <turbo-frame id="BulkErrorImport">
     <form method="post" asp-page-handler="ConfirmBulkImport">
         <div class="flex justify-center py-3">
             <div asp-validation-summary="All" class="mt-2 text-sm text-red-600"></div>
         </div>
-        <div class="flex justify-center">
-            <div>
-                <div class="text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
-                    <table class="w-full">
-                        <thead>
-                            <tr>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">PTID</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Visit</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Type</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Code</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Location</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Value</th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">Message</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (var i = 0; i < Model.NACCSubmissionErrors.Count; i++)
-                            {
-                                @if(int.Parse(Model.NACCSubmissionErrors[i].Ptid) != previousPTID)
-                                {
-                                    previousPTID = int.Parse(Model.NACCSubmissionErrors[i].Ptid);
-
-                                    <tr>
-                                        <td colspan="7" class="p-4 border-b border-slate-300 bg-slate-50">Packet PTID: @Model.NACCSubmissionErrors[i].Ptid</td>
-                                    </tr>
-                                }
-                                <tr class="hover:bg-slate-50">
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Ptid</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Ptid" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Visitnum</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Visitnum" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Type</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Type" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Code</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Code" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Location</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Location" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Value</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Value" />
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200">
-                                        <p>@Model.NACCSubmissionErrors[i].Message</p>
-                                        <input type="hidden" asp-for="NACCSubmissionErrors[i].Message" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+        <div class="grid grid-cols-4">
+            <div class="col-start-2 col-span-2">
+                <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
+                <div class="pb-3">
+                    Packets in Submitted Status
                 </div>
-                <div class="grid grid-cols-2 justify-items-center p-3">
+                @for(var i = 0; i < Model.PacketsToUpdate.Count; i++)
+                {
+                    @* hidden fields for post data *@
+                    <input asp-for="@Model.PacketsToUpdate[i].ImportPacket.Id" />
+                    <input asp-for="@Model.PacketsToUpdate[i].ImportPacket.ParticipationId" />
+
+                    var activeSubmission = Model.PacketsToUpdate[i].ImportPacket?.Submissions.Last();
+
+                    <div class="py-3">
+                        <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
+                            <div>
+                                <input asp-for="@Model.PacketsToUpdate[i].ConfirmImport" type="checkbox" />
+                            </div>
+                            <div>
+                                PTID: @Model.PacketsToUpdate[i].ImportPacket.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+                        </div>
+                            
+                        @for(var j = 0; j < activeSubmission.Errors.Count; j++)
+                        {
+                            <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                <div>
+                                    @Model.PacketsToUpdate[i].ImportPacket.Submissions.Last().Errors[j].Message
+                                </div>
+                                <div>
+                                    <select asp-for="@Model.PacketsToUpdate[i].ImportPacket.Submissions.Last().Errors[j].Status">
+                                        <option value="1">Pending</option>
+                                        <option value="3">Ignored</option>
+                                    </select> 
+                                </div>
+                            </div>
+                        }
+                           
+                    </div>
+                }
+                <div class="pt-4 flex gap-x-3">
+                    <div>
+                        <input type="checkbox" />
+                    </div>
+                    <div>
+                        Update packets to PassedErrorChecks with all alerts set to ignored/resolved
+                    </div>
+                </div>
+                <div class="pt-4">
                     <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Apply submission errors
+                        Import
                     </button>
                     <a href="/Packets/Index" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
                         Cancel
                     </a>
                 </div>
+            </div>
             </div>
         </div>
     </form>
