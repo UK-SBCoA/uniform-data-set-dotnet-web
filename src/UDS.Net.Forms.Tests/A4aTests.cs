@@ -179,15 +179,21 @@ namespace UDS.Net.Forms.Tests
 
             // Enable treatments
             await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.NEWTREAT\"][value=\"1\"]").ClickAsync();
 
             // Fill first treatment
             await Page.Locator("input[type=\"checkbox\"][name=\"A4a.Treatments[0].TARGETAB\"]").CheckAsync();
             await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Trial A");
             await Page.Locator("input[name=\"A4a.Treatments[0].NCTNUM\"]").FillAsync("NCT123");
-            await Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]").FillAsync("1");
             await Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]").FillAsync("2020");
+            await Page.Locator("input[name=\"A4a.Treatments[0].ENDMO\"]").FillAsync("99");
+            await Page.Locator("input[name=\"A4a.Treatments[0].ENDYEAR\"]").FillAsync("9999");
             await Page.Locator("input[name=\"A4a.Treatments[0].CARETRIAL\"][value=\"3\"]").ClickAsync();
             await Page.Locator("input[name=\"A4a.Treatments[0].TRIALGRP\"][value=\"1\"]").ClickAsync();
+
+            await Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"1\"]").ClickAsync();
+
 
             // Save
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
@@ -249,7 +255,18 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A4a" }).GetByRole(AriaRole.Link).ClickAsync();
 
             await Page.Locator("input[name=\"A4a.TRTBIOMARK\"][value=\"1\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.NEWTREAT\"][value=\"1\"]").ClickAsync();
+
+            await Page.Locator("input[type=\"checkbox\"][name=\"A4a.Treatments[0].TARGETAB\"]").CheckAsync();
             await Page.Locator("input[name=\"A4a.Treatments[0].TRTTRIAL\"]").FillAsync("Original Trial");
+            await Page.Locator("input[name=\"A4a.Treatments[0].STARTMO\"]").FillAsync("99");
+            await Page.Locator("input[name=\"A4a.Treatments[0].STARTYEAR\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A4a.Treatments[0].ENDMO\"]").FillAsync("99");
+            await Page.Locator("input[name=\"A4a.Treatments[0].ENDYEAR\"]").FillAsync("9999");
+            await Page.Locator("input[name=\"A4a.Treatments[0].CARETRIAL\"][value=\"3\"]").ClickAsync();
+            await Page.Locator("input[name=\"A4a.Treatments[0].TRIALGRP\"][value=\"1\"]").ClickAsync();
+
+            await Page.Locator("input[name=\"A4a.ADVEVENT\"][value=\"0\"]").ClickAsync();
 
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
