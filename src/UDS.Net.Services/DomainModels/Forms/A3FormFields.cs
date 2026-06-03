@@ -105,11 +105,33 @@ namespace UDS.Net.Services.DomainModels.Forms
                 //Encode siblings and kids
                 if (encodedFormFields.SiblingFormFields != null)
                 {
-                    encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation)).ToList();
+                    //encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation)).ToList();
+
+                    encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) =>
+                    {
+                        if(index <= previousA3Fields.SIBS)
+                        {
+                            return siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation);
+                        }
+
+                        return null;
+
+                    }).ToList();
                 }
                 if (encodedFormFields.KidsFormFields != null)
                 {
-                    encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation)).ToList();
+                    //encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation)).ToList();
+
+                    encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) =>
+                    {
+                        if (index <= previousA3Fields.KIDS)
+                        {
+                            return siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation);
+                        }
+
+                        return null;
+
+                    }).ToList();
                 }
 
                 return encodedFormFields;
