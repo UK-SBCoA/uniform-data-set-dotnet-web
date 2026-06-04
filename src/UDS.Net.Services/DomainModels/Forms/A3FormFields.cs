@@ -109,7 +109,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
                     encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) =>
                     {
-                        if(index <= previousA3Fields.SIBS)
+                        if (index <= previousA3Fields.SIBS)
                         {
                             return siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation);
                         }
