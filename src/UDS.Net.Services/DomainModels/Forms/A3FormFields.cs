@@ -105,8 +105,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 //Encode siblings and kids
                 if (encodedFormFields.SiblingFormFields != null)
                 {
-                    //encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation)).ToList();
-
                     encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) =>
                     {
                         if (index <= previousA3Fields.SIBS)
@@ -120,8 +118,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 }
                 if (encodedFormFields.KidsFormFields != null)
                 {
-                    //encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) => siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation)).ToList();
-
                     encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) =>
                     {
                         if (index <= previousA3Fields.KIDS)
