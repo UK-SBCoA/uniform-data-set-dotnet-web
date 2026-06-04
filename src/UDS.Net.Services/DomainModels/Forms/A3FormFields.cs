@@ -114,7 +114,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                             return siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation);
                         }
 
-                        return null;
+                        return encodedFormFields.SiblingFormFields[index];
 
                     }).ToList();
                 }
@@ -129,7 +129,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                             return siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation);
                         }
 
-                        return null;
+                        return encodedFormFields.KidsFormFields[index];
 
                     }).ToList();
                 }
