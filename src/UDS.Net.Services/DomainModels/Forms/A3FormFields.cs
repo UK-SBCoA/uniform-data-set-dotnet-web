@@ -107,7 +107,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 {
                     encodedFormFields.SiblingFormFields = encodedFormFields.SiblingFormFields.Select((siblingFields, index) =>
                     {
-                        if (index < previousA3Fields.SIBS)
+                        if (index < (encodedFormFields.SIBS != 66 ? encodedFormFields.SIBS : previousA3Fields.SIBS))
                         {
                             return siblingFields.GetEncodedFormFields(previousA3Fields.SiblingFormFields[index], hasNewInformation => encodedFormFields.NWINFSIB = hasNewInformation);
                         }
@@ -120,7 +120,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 {
                     encodedFormFields.KidsFormFields = encodedFormFields.KidsFormFields.Select((siblingFields, index) =>
                     {
-                        if (index < previousA3Fields.KIDS)
+                        if (index < (encodedFormFields.KIDS != 66 ? encodedFormFields.KIDS : previousA3Fields.KIDS))
                         {
                             return siblingFields.GetEncodedFormFields(previousA3Fields.KidsFormFields[index], hasNewInformation => encodedFormFields.NWINFKID = hasNewInformation);
                         }
