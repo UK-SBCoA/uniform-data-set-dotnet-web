@@ -5,9 +5,10 @@ using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Models
 {
-    public class BulkErrorDisplayItemModel
+    public class BulkErrorImportItem
     {
-        public Packet ImportPacket { get; set; }
+        public Packet? PacketToImport { get; set; }
         public bool ConfirmImport { get; set; }
+        public PacketSubmission GetActiveSubmission => PacketToImport.Submissions.Last();
     }
 }

@@ -1,6 +1,10 @@
 ﻿@page
 @model UDS.Net.Forms.Pages.BulkErrorImport.CreateModel
 
+@{
+    var SubmissionErrorIndex = 0;
+}
+
 <turbo-frame id="BulkErrorImport">
     <form method="post" asp-page-handler="ConfirmBulkImport">
         <div class="flex justify-center py-3">
@@ -12,21 +16,19 @@
                 <div class="pb-3">
                     Packets in Submitted Status
                 </div>
-                @for(var i = 0; i < Model.PacketsToUpdate.Count; i++)
-                {
-                    @* hidden fields for post data *@
-                    <input asp-for="@Model.PacketsToUpdate[i].ImportPacket.Id" />
-                    <input asp-for="@Model.PacketsToUpdate[i].ImportPacket.ParticipationId" />
+                    @foreach (var packet in Model.PacketsToDisplay)
 
-                    var activeSubmission = Model.PacketsToUpdate[i].ImportPacket?.Submissions.Last();
+                    {
+
+                        var activeSubmission = packet.GetActiveSubmission;
 
                     <div class="py-3">
                         <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
                             <div>
-                                <input asp-for="@Model.PacketsToUpdate[i].ConfirmImport" type="checkbox" />
+                                <input type="checkbox" />
                             </div>
                             <div>
-                                PTID: @Model.PacketsToUpdate[i].ImportPacket.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                                PTID: @packet.PacketToImport.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -34,22 +36,50 @@
                                 </svg>
                             </div>
                         </div>
-                            
-                        @for(var j = 0; j < activeSubmission.Errors.Count; j++)
+
+                        @foreach(var error in activeSubmission.Errors)
                         {
+
+                            /*
+                                id: 0,
+                                packetSubmissionId: packet.Submissions.Last().Id,
+                                formKind: error.Code.Split("-")[0].ToUpper(),
+                                message: error.Message,
+                                assignedTo: packet.CreatedBy,
+                                level: GetErrorLevel(error.Type),
+                                status: PacketSubmissionErrorStatus.Pending,
+                                statusChangedBy: null,
+                                createdAt: DateTime.Now,
+                                createdBy: User.Identity.Name,
+                                modifiedBy: null,
+                                deletedBy: null,
+                                isDeleted: false,
+                                location: error.Location?.ToUpper(),
+                                value: error.Value
+                            */
+
                             <div class="grid grid-cols-2 bg-white py-5 pl-3">
                                 <div>
-                                    @Model.PacketsToUpdate[i].ImportPacket.Submissions.Last().Errors[j].Message
+                                    @error.Message
                                 </div>
-                                <div>
-                                    <select asp-for="@Model.PacketsToUpdate[i].ImportPacket.Submissions.Last().Errors[j].Status">
-                                        <option value="1">Pending</option>
-                                        <option value="3">Ignored</option>
-                                    </select> 
-                                </div>
+                                @* <div>
+                                    <select name="NACCSubmissionErrors[NACCErrorIndex].PacketSubmissionErrorStatus">
+                                        <option value="0">Pending</option>
+                                        <option value="1">Resolved</option>
+                                        <option value="2">Ignored</option>
+                                    </select>
+                                </div> *@
+
+                                @* hidden  inputs for the NACC errors *@
+                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Id" value="@error.Id" />
+                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.PacketSubmissionId" value="@error.PacketSubmissionId" />
+                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.FormKind" value="@error.FormKind" />
+                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Message" value="@error.Message" />
+
+                                @* increment the NACCErrorIndex *@
+                                @{SubmissionErrorIndex++;}
                             </div>
-                        }
-                           
+                        } 
                     </div>
                 }
                 <div class="pt-4 flex gap-x-3">

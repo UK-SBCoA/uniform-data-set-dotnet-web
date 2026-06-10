@@ -18,13 +18,9 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         protected readonly IParticipationService _participationService;
         protected readonly IPacketService _packetService;
         public IFormFile? ErrorFileUpload { get; set; }
-        //[BindProperty]
-        //public List<NACCErrorModel> NACCSubmissionErrors { get; set; } = new List<NACCErrorModel>();
-        //DEVNOTE: Temporary name for now
-        //public List<Packet> SubmittedPacketsToUpdate { get; set; } = new List<Packet>();
-        //DEVNOTE: temporary name
         [BindProperty]
-        public List<BulkErrorDisplayItemModel> PacketsToUpdate { get; set; }
+        public List<BulkErrorSubmissionItem> SubmissionErrors { get; set; } = new List<BulkErrorSubmissionItem>();
+        public List<BulkErrorImportItem> PacketsToDisplay { get; set; } = new List<BulkErrorImportItem>();
         public CreateModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService)
         {
             _visitService = visitService;
@@ -146,14 +142,14 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
                     foreach (var packet in submittedPackets)
                     {
-                        //DEVNOTE: temp test way to set new object. ConfirmImport should be handled better
-                        var newBulkItemDisplayModel = new BulkErrorDisplayItemModel()
+                        //PacketsToUpdate.Add(singlePacket);
+                        var newBulkErrorImportItem = new BulkErrorImportItem
                         {
-                            ImportPacket = packet,
-                            ConfirmImport = packet.Submissions.Last().ErrorCount > 0 ? true : false
+                            PacketToImport = packet,
+                            ConfirmImport = false
                         };
 
-                        PacketsToUpdate.Add(newBulkItemDisplayModel);
+                        PacketsToDisplay.Add(newBulkErrorImportItem);
                     }
                 }
                 catch (Exception e)
@@ -170,9 +166,9 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostConfirmBulkImport()
         {
-            //DEVNOTE: Comment out for now while I rework the display. This may receive the updated packets from the display instead of using the NACC error list
+            //DEVNOTE: recieve submission errors from display view, use that to save new sumbmissions on packets INSTEAD using NACC errors to gather data as before
 
-            //var packetsToUpdate = new List<Packet>();
+            var packetsToUpdate = new List<Packet>();
 
             ////Setting page size to 999 to retrieve all packets of status due to pagination
             //var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
