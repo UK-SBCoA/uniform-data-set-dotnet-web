@@ -43,6 +43,7 @@ export default class extends Controller {
     async restoreValue() {
 
         const code = this.hiddenTarget.value
+
         if (!code) return
 
         try {
@@ -53,8 +54,20 @@ export default class extends Controller {
                 data ? `${data.code} - ${data.name}` : code
 
         } catch {
+
             this.autocomplete.searchTarget.value = code
         }
+    }
+
+    clearValidation() {
+
+        this.autocomplete.searchTarget.setCustomValidity("")
+    }
+
+    showValidation(message) {
+
+        this.autocomplete.searchTarget.setCustomValidity(message)
+        this.autocomplete.searchTarget.reportValidity()
     }
 
     search() {
@@ -62,12 +75,15 @@ export default class extends Controller {
         const value =
             this.autocomplete.searchTarget.value.trim()
 
+        this.clearValidation()
+
         clearTimeout(this.debounceTimer)
 
         if (!value) {
 
             this.hiddenTarget.value = ""
             this.autocomplete.hide()
+
             return
         }
 
@@ -104,8 +120,11 @@ export default class extends Controller {
             this.autocomplete.scrollTop()
 
         } catch (err) {
+
             console.error(err)
+
         } finally {
+
             this.autocomplete.hideLoading()
         }
     }
@@ -121,6 +140,7 @@ export default class extends Controller {
                     No occupations found
                 </li>
             `
+
             return
         }
 
@@ -143,7 +163,9 @@ export default class extends Controller {
             )
 
             li.addEventListener("mousedown", (e) => {
+
                 e.preventDefault()
+
                 this.select(item)
             })
 
@@ -158,6 +180,8 @@ export default class extends Controller {
         this.autocomplete.searchTarget.value =
             `${item.code} - ${item.name}`
 
+        this.clearValidation()
+
         this.autocomplete.hide()
     }
 
@@ -168,25 +192,25 @@ export default class extends Controller {
         const value =
             this.autocomplete.searchTarget.value.trim()
 
-        // Let autocomplete handle highlighted item
         if (this.autocomplete.activeIndex >= 0) return
-
-        // Allow direct 3-digit entry
-        if (/^\d{3}$/.test(value)) {
-
-            event.preventDefault()
-            event.stopPropagation()
-            event.stopImmediatePropagation()
-
-            this.resolveManualCode(value)
-            return
-        }
 
         event.preventDefault()
         event.stopPropagation()
         event.stopImmediatePropagation()
 
+        if (/^\d{3}$/.test(value)) {
+
+            this.resolveManualCode(value)
+
+            return
+        }
+
         this.hiddenTarget.value = ""
+
+        this.showValidation(
+            "Please select an occupation from the list or enter a valid 3-digit occupation code."
+        )
+
         this.autocomplete.hide()
     }
 
@@ -197,7 +221,13 @@ export default class extends Controller {
             const data = await this.lookupCode(code)
 
             if (!data) {
+
                 this.hiddenTarget.value = ""
+
+                this.showValidation(
+                    "Please enter a valid occupation code."
+                )
+
                 return
             }
 
@@ -206,10 +236,47 @@ export default class extends Controller {
             this.autocomplete.searchTarget.value =
                 `${data.code} - ${data.name}`
 
+            this.clearValidation()
+
         } catch {
+
             this.hiddenTarget.value = ""
+
+            this.showValidation(
+                "Unable to validate occupation code."
+            )
         }
 
         this.autocomplete.hide()
+    }
+
+    async validateOnBlur() {
+
+        const value =
+            this.autocomplete.searchTarget.value.trim()
+
+        if (!value) {
+            this.hiddenTarget.value = ""
+            this.clearValidation()
+            return
+        }
+
+        if (this.hiddenTarget.value) {
+            this.clearValidation()
+            return
+        }
+
+        if (/^\d{3}$/.test(value)) {
+
+            await this.resolveManualCode(value)
+
+            return
+        }
+
+        this.hiddenTarget.value = ""
+
+        this.showValidation(
+            "Please select an occupation from the list or enter a valid 3-digit occupation code."
+        )
     }
 }
