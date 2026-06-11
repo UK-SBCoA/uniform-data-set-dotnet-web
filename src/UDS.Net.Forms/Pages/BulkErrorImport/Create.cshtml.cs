@@ -171,9 +171,50 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             var packetsToUpdate = new List<Packet>();
 
             ////Setting page size to 999 to retrieve all packets of status due to pagination
-            //var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
+            var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
-            //var submittedPacketParticipations = await GetParticipationsFromPackets(submittedPackets);
+            var submittedPacketParticipations = await GetParticipationsFromPackets(submittedPackets);
+
+
+            //DEVNOTE: New method
+
+
+            //loop through the packet submission errors sent from the display view
+            foreach(var submissionErrorGroup in SubmissionErrors.GroupBy(s => s.SubmissionError.PacketSubmissionId))
+            {
+                //Find the corrisponding packet that the submission belongs to the submission error group (search the submitted packets list)
+                var matchedPacket = submittedPackets.Where(p => p.Submissions.Any(s => s.Id == submissionErrorGroup.Key)).FirstOrDefault();
+
+                //Get the active submission from the packet (most recent submission with a NULL error count)
+                var matchedActiveSubmission = matchedPacket?.Submissions.Last();
+                
+                //Add submission errors from group to the found packet and update packet
+                if(matchedActiveSubmission != null & matchedPacket != null)
+                {
+                    var newSubmissionList = new List<PacketSubmissionErrorModel>();
+
+                    foreach(var submission in submissionErrorGroup)
+                    {
+                        if(submission.ConfirmErrorImport)
+                        {
+                            newSubmissionList.Add(submission.SubmissionError);
+                        }
+                    }
+
+                    packetsToUpdate.Add(matchedPacket);
+                }
+
+                //Update packet error count
+
+                //Update packet status
+            }
+
+            //run the API update method on the updated packets list
+            
+            
+
+
+            //DEVNOTE: Old method
 
             //foreach (var errorGroup in NACCSubmissionErrors.GroupBy(p => p.Ptid))
             //{

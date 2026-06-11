@@ -62,13 +62,13 @@
                                 <div>
                                     @error.Message
                                 </div>
-                                @* <div>
-                                    <select name="NACCSubmissionErrors[NACCErrorIndex].PacketSubmissionErrorStatus">
+                                <div>
+                                        <select name="SubmissionErrors[@SubmissionErrorIndex].PacketSubmissionErrorStatus">
                                         <option value="0">Pending</option>
                                         <option value="1">Resolved</option>
                                         <option value="2">Ignored</option>
                                     </select>
-                                </div> *@
+                                </div>
 
                                 @* hidden  inputs for the NACC errors *@
                                 <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Id" value="@error.Id" />
