@@ -3,6 +3,7 @@ using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Dynamic;
 using System.Globalization;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
@@ -189,29 +190,30 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 var matchedActiveSubmission = matchedPacket?.Submissions.Last();
                 
                 //Add submission errors from group to the found packet and update packet
-                if(matchedActiveSubmission != null & matchedPacket != null)
+                if(matchedActiveSubmission != null && matchedPacket != null)
                 {
-                    var newSubmissionList = new List<PacketSubmissionErrorModel>();
-
-                    foreach(var submission in submissionErrorGroup)
+                    //Update packet status
+                    if (matchedPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
                     {
-                        if(submission.ConfirmErrorImport)
-                        {
-                            newSubmissionList.Add(submission.SubmissionError);
-                        }
+                        //Update packet status
+                        matchedPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+
+                        //Update errors
+                        matchedActiveSubmission.Errors = CreatePacketSubmissionErrors(submissionErrorGroup, matchedActiveSubmission);
+
+                        //Update packet error count
+                        matchedActiveSubmission.ErrorCount = matchedActiveSubmission.Errors.Count;
+
+                        packetsToUpdate.Add(matchedPacket);
                     }
-
-                    packetsToUpdate.Add(matchedPacket);
                 }
-
-                //Update packet error count
-
-                //Update packet status
             }
 
             //run the API update method on the updated packets list
-            
-            
+            List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+
+            var test = "test";
+
 
 
             //DEVNOTE: Old method
@@ -259,36 +261,37 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             return participations;
         }
 
-        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<string, NACCErrorModel> errorGroup, Packet packet)
+        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkErrorSubmissionItem> submissionErrorGroup, PacketSubmission matchedActiveSubmission)
         {
-            List<PacketSubmissionError> packetSubmissionErrors = new List<PacketSubmissionError>();
+            var newPacketSubmissionErrors = new List<PacketSubmissionError>();
 
-            foreach (var error in errorGroup)
+            foreach (var submission in submissionErrorGroup)
             {
-                if (int.Parse(error.Visitnum) == packet.VISITNUM)
+                if (submission.ConfirmErrorImport)
                 {
-                    packetSubmissionErrors.Add(new PacketSubmissionError
+                    //DEVNOTE: currently creating a new object. Using submission error model because submission error domain object doesn't have a null constructor to initialize
+                    newPacketSubmissionErrors.Add(new PacketSubmissionError
                     (
                         id: 0,
-                        packetSubmissionId: packet.Submissions.Last().Id,
-                        formKind: error.Code.Split("-")[0].ToUpper(),
-                        message: error.Message,
-                        assignedTo: packet.CreatedBy,
-                        level: GetErrorLevel(error.Type),
-                        status: PacketSubmissionErrorStatus.Pending,
-                        statusChangedBy: null,
-                        createdAt: DateTime.Now,
-                        createdBy: User.Identity.Name,
-                        modifiedBy: null,
-                        deletedBy: null,
-                        isDeleted: false,
-                        location: error.Location?.ToUpper(),
-                        value: error.Value
+                        packetSubmissionId: matchedActiveSubmission.Id,
+                        formKind: submission.SubmissionError.FormKind,
+                        message: submission.SubmissionError.Message,
+                        assignedTo: submission.SubmissionError.AssignedTo,
+                        level: submission.SubmissionError.Level,
+                        status: submission.SubmissionError.Status,
+                        statusChangedBy: submission.SubmissionError.StatusChangedBy,
+                        createdAt: submission.SubmissionError.CreatedAt,
+                        createdBy: submission.SubmissionError.CreatedBy,
+                        modifiedBy: submission.SubmissionError.ModifiedBy,
+                        deletedBy: submission.SubmissionError.DeletedBy,
+                        isDeleted: submission.SubmissionError.IsDeleted,
+                        location: submission.SubmissionError.Location,
+                        value: submission.SubmissionError.Value
                     ));
                 }
             }
 
-            return packetSubmissionErrors;
+            return newPacketSubmissionErrors;
         }
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs
