@@ -58,27 +58,57 @@
                                 value: error.Value
                             */
 
-                            <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                <div>
-                                    @error.Message
-                                </div>
-                                <div>
-                                        <select name="SubmissionErrors[@SubmissionErrorIndex].PacketSubmissionErrorStatus">
-                                        <option value="0">Pending</option>
-                                        <option value="1">Resolved</option>
-                                        <option value="2">Ignored</option>
-                                    </select>
+                            <div class="border border-gray-400">
+                                <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                    <div>
+                                        @error.FormKind - @error.Location
+                                    </div>
                                 </div>
 
-                                @* hidden  inputs for the NACC errors *@
-                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Id" value="@error.Id" />
-                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.PacketSubmissionId" value="@error.PacketSubmissionId" />
-                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.FormKind" value="@error.FormKind" />
-                                <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Message" value="@error.Message" />
-
-                                @* increment the NACCErrorIndex *@
-                                @{SubmissionErrorIndex++;}
+                                <div class="grid grid-cols-3 bg-white py-5 pl-3">
+                                    <div>
+                                        Error Level: @error.Level
+                                    </div>
+                                    <div>
+                                        Error Value: @error.Value
+                                    </div>
+                                    <div>
+                                        Assigned To: @error.AssignedTo
+                                    </div>
+                                </div>
+                            
+                                <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                    <div>
+                                        @error.Message
+                                    </div>
+                                    <div>
+                                        <select readonly name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Status" value="@error.Status">
+                                            <option value="0">Pending</option>
+                                            <option value="1">Resolved</option>
+                                            <option value="2">Ignored</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
+                             @* hidden  inputs for the NACC errors *@
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Id" value="@error.Id" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.PacketSubmissionId" value="@error.PacketSubmissionId" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.FormKind" value="@error.FormKind" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Message" value="@error.Message" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.AssignedTo" value="@error.AssignedTo" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Level" value="@error.Level" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.StatusChangedBy" value="@error.StatusChangedBy" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Location" value="@error.Location" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Value" value="@error.Value" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.CreatedAt" value="@error.CreatedAt" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.CreatedBy" value="@error.CreatedBy" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.ModifiedBy" value="@error.ModifiedBy" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.DeletedBy" value="@error.DeletedBy" />
+                            <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.IsDeleted" value="@error.IsDeleted" />
+
+                            @* increment the NACCErrorIndex *@
+                            SubmissionErrorIndex++;
                         } 
                     </div>
                 }

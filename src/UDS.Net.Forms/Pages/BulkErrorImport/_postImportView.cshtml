@@ -1,0 +1,80 @@
+﻿@model List<UDS.Net.Services.DomainModels.Submission.Packet>
+
+<turbo-frame id="BulkErrorImport">
+    <div>
+        <div class="flex justify-center py-3">
+            <div class="mt-2 text-sm text-red-600"></div>
+        </div>
+        <div class="grid grid-cols-4">
+            <div class="col-start-2 col-span-2">
+                <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
+                    <div class="pb-3">
+                        Packets Updated
+                    </div>
+                    @foreach (var packet in Model)
+                    {
+                        //DEVNOTE: manually getting last submission here instead of using the BulkImportItem class method
+                        var activeSubmission = packet.Submissions.Last();
+
+                        <div class="py-3">
+                            <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
+                                <div>
+                                    PTID: @packet.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                                </div>
+                                <div>
+                                    Packet status updated to @packet.Status
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            @foreach (var error in activeSubmission.Errors)
+                            {
+                                <div class="border border-gray-400">
+                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                        <div>
+                                            @error.FormKind - @error.Location
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-3 bg-white py-5 pl-3">
+                                        <div>
+                                            Error Level: @error.Level
+                                        </div>
+                                        <div>
+                                            Error Value: @error.Value
+                                        </div>
+                                        <div>
+                                            Assigned To: @error.AssignedTo
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                        <div>
+                                            @error.Message
+                                        </div>
+                                        <div>
+                                            <select readonly value="@error.Status">
+                                                <option value="0">Pending</option>
+                                                <option value="1">Resolved</option>
+                                                <option value="2">Ignored</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div class="pt-4">
+                        <a asp-page="/Packets/Index" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Back to packet submissions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</turbo-frame>

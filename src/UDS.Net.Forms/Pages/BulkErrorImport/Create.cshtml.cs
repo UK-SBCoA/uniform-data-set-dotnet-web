@@ -210,43 +210,11 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             }
 
             //run the API update method on the updated packets list
-            List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
-
-            var test = "test";
+            //List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
 
-
-            //DEVNOTE: Old method
-
-            //foreach (var errorGroup in NACCSubmissionErrors.GroupBy(p => p.Ptid))
-            //{
-            //    //All errors from the NACC error file must have a participation. If not, then expect an error.
-            //    var participationForGroup = submittedPacketParticipations.Where(p => p.LegacyId == errorGroup.Key).First();
-
-            //    //Allow updating of previous visit numbers, so get all unique visit numbers for a PTID grouping of the NACC errors
-            //    var groupVisitNumbers = errorGroup.Select(e => int.Parse(e.Visitnum)).Distinct().ToList();
-
-            //    foreach (var visitNumber in groupVisitNumbers)
-            //    {
-            //        var matchingPacket = submittedPackets.Where(p => p.ParticipationId == participationForGroup.Id && p.VISITNUM == visitNumber).First();
-
-            //        if (matchingPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
-            //        {
-            //            matchingPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
-
-            //            var submission = matchingPacket.Submissions.Last();
-
-            //            submission.Errors = CreatePacketSubmissionErrors(errorGroup, matchingPacket);
-            //            submission.ErrorCount = submission.Errors.Count;
-
-            //            packetsToUpdate.Add(matchingPacket);
-            //        }
-            //    }
-            //}
-
-            //List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, SubmittedPacketsToUpdate);
-
-            return RedirectToPage("/Packets/Index");
+            //return RedirectToPage("/Packets/Index");
+            return Partial("_postImportView", packetsToUpdate);
         }
 
         private async Task<List<Participation>> GetParticipationsFromPackets(IEnumerable<Packet> packets)
