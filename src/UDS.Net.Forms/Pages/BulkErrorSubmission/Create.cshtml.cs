@@ -83,8 +83,10 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
+                                FileName = ErrorFileUpload.FileName,
                                 Type = record.Type,
                                 Code = record.Code,
+                                Timestamp = record.Timestamp,
                                 Location = record.Location,
                                 File = record.File,
                                 Value = record.Value,
@@ -156,6 +158,9 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 id: 0,
                                 packetSubmissionId: groupSubmission.Id,
                                 formKind: error.Code.Split("-")[0].ToUpper(),
+                                fileName: error.File,
+                                errorCode: error.Code,
+                                errorTimeStamp: DateTime.Parse(error.Timestamp),
                                 message: error.Message,
                                 assignedTo: groupPacket.CreatedBy,
                                 level: GetErrorLevel(error.Type),

@@ -6,7 +6,6 @@ namespace UDS.Net.Forms.Models
     public class NACCErrorModel
     {
         public string Timestamp { get; set; }
-        public string Date { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
         public string Location { get; set; }

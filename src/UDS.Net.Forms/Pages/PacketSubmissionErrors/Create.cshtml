@@ -24,6 +24,7 @@
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Type</p>
                                     <input type="hidden" asp-for="PacketSubmissionErrors[i].Type" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].Timestamp" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Code</p>

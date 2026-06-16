@@ -14,7 +14,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public int M1Id { get; set; }
 
-        public IList<Form> Forms { get; set; } = new List<Form>();
+        //public IList<Form> Forms { get; set; } = new List<Form>();
 
         public int? ErrorCount { get; set; } // If null, no response was received from submission
 
@@ -65,11 +65,11 @@ namespace UDS.Net.Services.DomainModels.Submission
             string deletedBy,
             bool isDeleted,
             int? errorCount,
-            IList<Form> forms,
+            //IList<Form> forms,
             IList<M1SubmissionError> errors)
             : this(id, adrcId, submissionDate, m1Id, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
-            Forms = forms ?? new List<Form>();
+            //Forms = forms ?? new List<Form>();
             Errors = errors?.ToList() ?? new List<M1SubmissionError>();
         }
     }

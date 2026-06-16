@@ -80,6 +80,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     id: 0,
                     packetSubmissionId: PacketSubmissionId,
                     formKind: formKind,
+                    fileName: error.File,
+                    errorCode: error.Code,
+                    errorTimeStamp: DateTime.Parse(error.Timestamp),
                     message: error.Message,
                     assignedTo: formAssignee,
                     level: errorLevel,
@@ -173,6 +176,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
                                 Type = record.Type,
+                                Timestamp = record.Timestamp,
                                 Code = record.Code,
                                 Location = record.Location,
                                 File = record.File,
