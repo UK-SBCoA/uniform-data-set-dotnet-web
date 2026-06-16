@@ -473,7 +473,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1 && packet.PACKET != Services.Enums.PacketKind.I4)
                 {
                     exportA4aFormFields = currentA4aFields.GetExportFormFields();
                 }
