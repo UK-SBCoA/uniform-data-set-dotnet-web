@@ -36,7 +36,9 @@
                                 <div class="border border-gray-400">
                                     <div class="grid grid-cols-2 bg-white py-5 pl-3">
                                         <div>
-                                            @error.FormKind - @error.Location
+                                            <a asp-page="/Visits/Details" target="_blank" asp-route-id="@packet.Id" class="text-indigo-700 hover:text-indigo-700">
+                                                @error.FormKind - @error.Location
+                                            </a>
                                         </div>
                                     </div>
 
@@ -54,14 +56,10 @@
 
                                     <div class="grid grid-cols-2 bg-white py-5 pl-3">
                                         <div>
-                                            @error.Message
+                                            Message: @error.Message
                                         </div>
                                         <div>
-                                            <select readonly value="@error.Status">
-                                                <option value="0">Pending</option>
-                                                <option value="1">Resolved</option>
-                                                <option value="2">Ignored</option>
-                                            </select>
+                                            Status: @error.Status
                                         </div>
                                     </div>
                                 </div>

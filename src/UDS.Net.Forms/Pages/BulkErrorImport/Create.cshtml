@@ -25,7 +25,8 @@
                     <div class="py-3">
                         <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
                             <div>
-                                <input type="checkbox" />
+                                @* DEVNOTE: Address the disabeled syntax highlighting *@
+                                <input type="checkbox" @(activeSubmission.ErrorCount > 0 ? "Checked" : "disabled")/>
                             </div>
                             <div>
                                 PTID: @packet.PacketToImport.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
@@ -58,35 +59,39 @@
                                 value: error.Value
                             */
 
-                            <div class="border border-gray-400">
-                                <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                    <div>
-                                        @error.FormKind - @error.Location
+                            <div>
+                                <div class="py-3">
+                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                        <div>
+                                            <a asp-page="/Visits/Details" target="_blank" asp-route-id="@packet.PacketToImport.Id" class="text-indigo-700 hover:text-indigo-700">
+                                                @error.FormKind - @error.Location
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="grid grid-cols-3 bg-white py-5 pl-3">
-                                    <div>
-                                        Error Level: @error.Level
+                                    <div class="grid grid-cols-3 bg-white py-5 pl-3">
+                                        <div>
+                                            Error Level: @error.Level
+                                        </div>
+                                        <div>
+                                            Error Value: @error.Value
+                                        </div>
+                                        <div>
+                                            Assigned To: @error.AssignedTo
+                                        </div>
                                     </div>
-                                    <div>
-                                        Error Value: @error.Value
-                                    </div>
-                                    <div>
-                                        Assigned To: @error.AssignedTo
-                                    </div>
-                                </div>
-                            
-                                <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                    <div>
-                                        @error.Message
-                                    </div>
-                                    <div>
-                                        <select readonly name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Status" value="@error.Status">
-                                            <option value="0">Pending</option>
-                                            <option value="1">Resolved</option>
-                                            <option value="2">Ignored</option>
-                                        </select>
+
+                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                        <div>
+                                            Message: @error.Message
+                                        </div>
+                                        <div>
+                                            <select readonly name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Status" value="@error.Status">
+                                                <option value="0">Pending</option>
+                                                <option value="1">Resolved</option>
+                                                <option value="2">Ignored</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +111,9 @@
                             <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.ModifiedBy" value="@error.ModifiedBy" />
                             <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.DeletedBy" value="@error.DeletedBy" />
                             <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.IsDeleted" value="@error.IsDeleted" />
+
+                            @* hidden  input for confirm submission*@
+                            <input id="error-@SubmissionErrorIndex" type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].ConfirmImport" />
 
                             @* increment the NACCErrorIndex *@
                             SubmissionErrorIndex++;
