@@ -37,6 +37,7 @@
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].File</p>
                                     <input type="hidden" asp-for="PacketSubmissionErrors[i].File" />
+                                    <input type="hidden" asp-for="PacketSubmissionErrors[i].FileName" />
                                 </td>
                                 <td>
                                     <p>@Model.PacketSubmissionErrors[i].Value</p>

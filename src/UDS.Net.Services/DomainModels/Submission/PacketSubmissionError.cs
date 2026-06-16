@@ -91,7 +91,7 @@ namespace UDS.Net.Services.DomainModels.Submission
             FormKind = formKind;
             FileName = fileName;
             ErrorCode = errorCode;
-            errorTimeStamp = ErrorTimeStamp;
+            ErrorTimeStamp = errorTimeStamp;
             Message = message;
             AssignedTo = assignedTo;
             Level = level;

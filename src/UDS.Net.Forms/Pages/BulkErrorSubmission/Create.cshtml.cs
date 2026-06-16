@@ -42,6 +42,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                 return Page();
             }
 
+            string uploadedFileName = ErrorFileUpload.FileName;
+
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
@@ -83,12 +85,12 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                         {
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
-                                FileName = ErrorFileUpload.FileName,
                                 Type = record.Type,
                                 Code = record.Code,
                                 Timestamp = record.Timestamp,
                                 Location = record.Location,
                                 File = record.File,
+                                FileName = uploadedFileName,
                                 Value = record.Value,
                                 //DEVNOTE: Trim message to avoid 500+ character truncade error
                                 Message = record.Message.Length > 500 ? record.Message[..497] + "..." : record.Message,
@@ -158,7 +160,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorSubmission
                                 id: 0,
                                 packetSubmissionId: groupSubmission.Id,
                                 formKind: error.Code.Split("-")[0].ToUpper(),
-                                fileName: error.File,
+                                fileName: error.FileName,
                                 errorCode: error.Code,
                                 errorTimeStamp: DateTime.Parse(error.Timestamp),
                                 message: error.Message,
