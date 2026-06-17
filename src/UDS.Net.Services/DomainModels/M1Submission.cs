@@ -14,7 +14,7 @@ namespace UDS.Net.Services.DomainModels.Submission
 
         public int M1Id { get; set; }
 
-        //public IList<Form> Forms { get; set; } = new List<Form>();
+        public IList<Form> Forms { get; set; } = new List<Form>();
 
         public int? ErrorCount { get; set; } // If null, no response was received from submission
 

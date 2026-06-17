@@ -188,6 +188,7 @@
                             <thead class="bg-red-50">
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Code</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Previous Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Current Value</th>
@@ -212,6 +213,7 @@
                                                 @error.FormKind - @error.Location
                                             </a>
                                         </td>
+                                        <td class="px-4 py-2 text-gray-700">@error.ErrorCode</td>
                                         <td class="px-4 py-2 text-gray-700">@error.Message</td>
                                         <td class="px-4 py-2">
                                             @if (error.Value != null)
