@@ -77,8 +77,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NotIncludedReasonCode.ConcernsAboutReliability
             };
 
-            if (IsFollowUp)
-                codes.Add(NotIncludedReasonCode.Optional);
+                if (IsFollowUp)
+                    codes.Add(NotIncludedReasonCode.Optional);
 
                 return codes;
             }
