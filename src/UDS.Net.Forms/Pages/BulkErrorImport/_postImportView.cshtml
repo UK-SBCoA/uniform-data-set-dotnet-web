@@ -11,61 +11,71 @@
                     <div class="pb-3">
                         Packets Updated
                     </div>
-                    @foreach (var packet in Model)
+                    @if(Model.Count > 0)
                     {
-                        //DEVNOTE: manually getting last submission here instead of using the BulkImportItem class method
-                        var activeSubmission = packet.Submissions.Last();
+                        @foreach (var packet in Model)
+                        {
+                            //DEVNOTE: manually getting last submission here instead of using the BulkImportItem class method
+                            var activeSubmission = packet.Submissions.Last();
 
-                        <div class="py-3">
-                            <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
-                                <div>
-                                    PTID: @packet.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                            <div class="py-3">
+                                <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
+                                    <div>
+                                        PTID: @packet.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                                    </div>
+                                    <div>
+                                        Packet status updated to @packet.Status
+                                    </div>
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </div>
                                 </div>
-                                <div>
-                                    Packet status updated to @packet.Status
-                                </div>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </div>
+
+                                @foreach (var error in activeSubmission.Errors)
+                                {
+                                    <div class="border border-gray-400">
+                                        <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                            <div>
+                                                <a asp-page="/Visits/Details" target="_blank" asp-route-id="@packet.Id" class="text-indigo-700 hover:text-indigo-700">
+                                                    @error.FormKind - @error.Location
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-3 bg-white py-5 pl-3">
+                                            <div>
+                                                Error Level: @error.Level
+                                            </div>
+                                            <div>
+                                                Error Value: @error.Value
+                                            </div>
+                                            <div>
+                                                Assigned To: @error.AssignedTo
+                                            </div>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 bg-white py-5 pl-3">
+                                            <div>
+                                                Message: @error.Message
+                                            </div>
+                                            <div>
+                                                Status: @error.Status
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
-
-                            @foreach (var error in activeSubmission.Errors)
-                            {
-                                <div class="border border-gray-400">
-                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                        <div>
-                                            <a asp-page="/Visits/Details" target="_blank" asp-route-id="@packet.Id" class="text-indigo-700 hover:text-indigo-700">
-                                                @error.FormKind - @error.Location
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="grid grid-cols-3 bg-white py-5 pl-3">
-                                        <div>
-                                            Error Level: @error.Level
-                                        </div>
-                                        <div>
-                                            Error Value: @error.Value
-                                        </div>
-                                        <div>
-                                            Assigned To: @error.AssignedTo
-                                        </div>
-                                    </div>
-
-                                    <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                        <div>
-                                            Message: @error.Message
-                                        </div>
-                                        <div>
-                                            Status: @error.Status
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                        }
+                    }
+                    else
+                    {
+                        <div>
+                            No packets were updated
                         </div>
                     }
+
                     <div class="pt-4">
                         <a asp-page="/Packets/Index" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Back to packet submissions

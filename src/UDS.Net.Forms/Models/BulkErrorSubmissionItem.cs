@@ -11,6 +11,6 @@ namespace UDS.Net.Forms.Models
     {
         public PacketSubmissionErrorModel SubmissionError { get; set; }
         public PacketSubmissionErrorStatus PacketSubmissionErrorStatus { get; set; }
-        public bool ConfirmErrorImport { get; set; } = true;
+        public bool ConfirmImport { get; set; }
     }
 }
