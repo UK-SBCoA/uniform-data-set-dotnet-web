@@ -175,8 +175,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             ////Setting page size to 999 to retrieve all packets of status due to pagination
             var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
-            var submittedPacketParticipations = await GetParticipationsFromPackets(submittedPackets);
-
 
             //DEVNOTE: New method
 
@@ -184,6 +182,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             //loop through the packet submission errors sent from the display view
             foreach(var submissionErrorGroup in SubmissionErrors.GroupBy(s => s.SubmissionError.PacketSubmissionId))
             {
+                //DEVNOTE: All errors of a packet will share a value, if any of them are a value, then all of them are that value
                 if (submissionErrorGroup.Any(error => error.ConfirmImport == true)){
                     //Find the corrisponding packet that the submission belongs to the submission error group (search the submitted packets list)
                     var matchedPacket = submittedPackets.Where(p => p.Submissions.Any(s => s.Id == submissionErrorGroup.Key)).FirstOrDefault();
@@ -194,11 +193,16 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                     //Add submission errors from group to the found packet and update packet
                     if (matchedActiveSubmission != null && matchedPacket != null)
                     {
+                        //DEVNOTE: if ANY packets are pending, then set to failed error checks. If all errors are ignored or resolved then set packet to passed error checks
+
+                        //if an error with pending exists in group, then failed error checks. If pending is not found in group, then passed error checks
+                        var updatedStatus = submissionErrorGroup.Any(error => error.SubmissionError.Status == PacketSubmissionErrorStatus.Pending) ? PacketStatus.FailedErrorChecks : PacketStatus.PassedErrorChecks;
+
                         //Update packet status
-                        if (matchedPacket.TryUpdateStatus(PacketStatus.FailedErrorChecks))
+                        if (matchedPacket.TryUpdateStatus(updatedStatus))
                         {
                             //Update packet status
-                            matchedPacket.UpdateStatus(PacketStatus.FailedErrorChecks);
+                            matchedPacket.UpdateStatus(updatedStatus);
 
                             //Update errors
                             matchedActiveSubmission.Errors = CreatePacketSubmissionErrors(submissionErrorGroup, matchedActiveSubmission);
@@ -215,21 +219,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             //run the API update method on the updated packets list
             //List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
-
-            //return RedirectToPage("/Packets/Index");
             return Partial("_postImportView", packetsToUpdate);
-        }
-
-        private async Task<List<Participation>> GetParticipationsFromPackets(IEnumerable<Packet> packets)
-        {
-            List<Participation> participations = new List<Participation>();
-
-            foreach (var packet in packets)
-            {
-                participations.Add(await _participationService.GetById(User.Identity.Name, packet.ParticipationId));
-            }
-
-            return participations;
         }
 
         private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkErrorSubmissionItem> submissionErrorGroup, PacketSubmission matchedActiveSubmission)

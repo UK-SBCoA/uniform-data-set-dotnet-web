@@ -66,7 +66,8 @@
                                         <div>
                                             Message: @error.Message
                                         </div>
-                                        <div>
+                                        <div class="@(error.Level.ToString().ToLower() == "error" ? "hidden" : "")">
+                                            <label>Error status:</label>
                                             <select readonly name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.Status" value="@error.Status">
                                                 <option value="0">Pending</option>
                                                 <option value="1">Resolved</option>
@@ -94,9 +95,10 @@
                             <input type="hidden" name="SubmissionErrors[@SubmissionErrorIndex].SubmissionError.IsDeleted" value="@error.IsDeleted" />
 
                             @* hidden  input for confirm submission*@
+                            @* DEVNOTE: all confirm imports within a packet will share a value. If a packet is submitted, then all errors are confirmed for submission *@
                             <label>Confirm checkbox</label>
                             <input hidden type="checkbox" name="SubmissionErrors[@SubmissionErrorIndex].ConfirmImport" value="false"/>
-                            <input class="submissionGroup-@(SubmissionGroupIndex)" type="checkbox" name="SubmissionErrors[@SubmissionErrorIndex].ConfirmImport" value="true"/>
+                            <input hidden class="submissionGroup-@(SubmissionGroupIndex)" type="checkbox" name="SubmissionErrors[@SubmissionErrorIndex].ConfirmImport" value="true"/>
 
                             @* increment the NACCErrorIndex *@
                             SubmissionErrorIndex++;

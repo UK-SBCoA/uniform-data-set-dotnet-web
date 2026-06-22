@@ -10,7 +10,6 @@ namespace UDS.Net.Forms.Models
     public class BulkErrorSubmissionItem
     {
         public PacketSubmissionErrorModel SubmissionError { get; set; }
-        public PacketSubmissionErrorStatus PacketSubmissionErrorStatus { get; set; }
         public bool ConfirmImport { get; set; }
     }
 }
