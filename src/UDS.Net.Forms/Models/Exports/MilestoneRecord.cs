@@ -47,7 +47,7 @@ namespace UDS.Net.Forms.Models.Exports
         public int? DEATHYR { get; set; }
         public int? AUTOPSY { get; set; }
         public int? DISCMO { get; set; }
-        public int? DISCDAY { get; set; }
+        public int? DISCDY { get; set; }
         public int? DISCYR { get; set; }
         public int? DROPREAS { get; set; }
 
@@ -90,7 +90,7 @@ namespace UDS.Net.Forms.Models.Exports
             DEATHYR = m.DEATHYR;
             AUTOPSY = m.AUTOPSY;
             DISCMO = m.DISCMO;
-            DISCDAY = m.DISCDAY;
+            DISCDY = m.DISCDY;
             DISCYR = m.DISCYR;
             DROPREAS = m.DROPREAS;
         }
