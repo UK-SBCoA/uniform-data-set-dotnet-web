@@ -183,8 +183,6 @@ namespace UDS.Net.Services.Extensions
                         deletedBy: s.DeletedBy,
                         isDeleted: s.IsDeleted,
                         errorCount: s.ErrorCount,
-                        forms: s.Forms?.Select(f => f.ToDomain(s.Id, f.CreatedBy)).ToList()
-                               ?? new List<Form>(),
                         errors: s.M1SubmissionErrors?.Select(e => e.ToDomain(s.Id)).ToList()
                                ?? new List<M1SubmissionError>()
                     ))
