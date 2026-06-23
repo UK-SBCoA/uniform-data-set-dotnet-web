@@ -5,7 +5,9 @@ export default class extends Controller {
         "modeSelect",
         "modalitySelect",
         "UDSFormSubmit",
-        "formRemoteReason"
+        "formRemoteReason",
+        "recall",
+        "intrusion"
     ]
 
     //look for UDSForm connection, stimulus not reloaded on turbo partial switch
@@ -36,4 +38,49 @@ export default class extends Controller {
             this.formRemoteReasonTarget.disabled = false;
         }
     }
+
+  //#region Rey Auditory Verbal Learning Section
+
+  handleRecallInputs(event) {
+    const currentRecall = event.target;
+    const value =currentRecall.value;
+
+    const currentIndex = this.recallTargets.indexOf(currentRecall);
+
+    const currentIntrusion = this.intrusionTargets[currentIndex];
+    const nextRecall = this.recallTargets[currentIndex + 1];
+
+    // 95-98 disables all remaining rows
+    if (value >= 95 && value <= 98) {
+
+      if (currentIntrusion) {
+        currentIntrusion.disabled = true;
+        currentIntrusion.value = "";
+      }
+
+      for (let i = currentIndex + 1; i < this.recallTargets.length; i++) {
+
+        this.recallTargets[i].disabled = true;
+        this.recallTargets[i].value = "";
+
+        this.intrusionTargets[i].disabled = true;
+        this.intrusionTargets[i].value = "";
+      }
+
+      return;
+    }
+
+    // 0-15 enables INT in current row and REC in next row
+    if (value >= 0 && value <= 15) {
+
+      if (currentIntrusion) {
+        currentIntrusion.disabled = false;
+      }
+
+      if (nextRecall) {
+        nextRecall.disabled = false;
+      }
+    }
+  }
+ // #endregion
 }
