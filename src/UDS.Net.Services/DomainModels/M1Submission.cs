@@ -65,11 +65,9 @@ namespace UDS.Net.Services.DomainModels.Submission
             string deletedBy,
             bool isDeleted,
             int? errorCount,
-            IList<Form> forms,
             IList<M1SubmissionError> errors)
             : this(id, adrcId, submissionDate, m1Id, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, errorCount)
         {
-            Forms = forms ?? new List<Form>();
             Errors = errors?.ToList() ?? new List<M1SubmissionError>();
         }
     }
