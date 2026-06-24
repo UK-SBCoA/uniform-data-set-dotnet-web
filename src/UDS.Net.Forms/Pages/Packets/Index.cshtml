@@ -33,7 +33,7 @@
                                     <th scope="col">Initials</th>
                                     <th scope="col">Visit date</th>
                                     <th>Status</th>
-                                    <th></th>
+                                    <th>Submission Errors/Alerts</th>
                                     <th scope="col"><span class="sr-only">View details</span></th>
                                 </tr>
                             </thead>
@@ -60,28 +60,50 @@
                                             <a asp-page="/Participations/Details" asp-route-id="@packet.ParticipationId" class="text-indigo-600 hover:underline">
                                                 @(packet.Participation != null ? packet.Participation.LegacyId : packet.ParticipationId)
                                             </a>
-                                        </td>
+                                        </td>                   
                                         <td>@packet.VISITNUM</td>
                                         <td>@packet.PACKET</td>
                                         <td>@packet.INITIALS</td>
                                         <td>@packet.VISIT_DATE.ToShortDateString()</td>
                                         <td>@packet.Status</td>
                                         <td>
-                                            @if (packet.TotalUnresolvedErrorCount.HasValue && packet.TotalUnresolvedErrorCount != 0)
+                                            @if ((packet.TotalUnresolvedErrorCount.HasValue && packet.TotalUnresolvedErrorCount != 0) || packet.TotalUnresolvedAlertCount > 0)
                                             {
-                                                <div class="text-red-800 text-sm group relative flex items-center">
-                                                    <span class="font-medium cursor-help underline decoration-dotted">
-                                                        @packet.TotalUnresolvedErrorCount errors
-                                                    </span>
-                                                    <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
-                                                        @foreach (var error in packet.UnresolvedErrors)
-                                                        {
-                                                            <div class="break-words">
-                                                                <div class="font-semibold text-gray-900">@error.FormKind</div>
-                                                                <div class="text-gray-700">@error.Message</div>
+                                                <div class="flex flex-col gap-1">
+                                                    @if (packet.TotalUnresolvedErrorCount.HasValue && packet.TotalUnresolvedErrorCount != 0)
+                                                    {
+                                                        <div class="text-red-800 text-sm group relative flex items-center">
+                                                            <span class="font-medium cursor-help underline decoration-dotted">
+                                                                @packet.TotalUnresolvedErrorCount errors
+                                                            </span>
+                                                            <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
+                                                                @foreach (var error in packet.UnresolvedErrors.Where(e => e.Level == PacketSubmissionErrorLevel.Error || e.Level == PacketSubmissionErrorLevel.Critical))
+                                                                {
+                                                                    <div class="break-words">
+                                                                        <div class="font-semibold text-gray-900">@error.FormKind</div>
+                                                                        <div class="text-gray-700">@error.Message</div>
+                                                                    </div>
+                                                                }
                                                             </div>
-                                                        }
-                                                    </div>
+                                                        </div>
+                                                    }
+                                                    @if (packet.TotalUnresolvedAlertCount > 0)
+                                                    {
+                                                        <div class="text-yellow-800 text-sm group relative flex items-center">
+                                                            <span class="font-medium cursor-help underline decoration-dotted">
+                                                                @packet.TotalUnresolvedAlertCount alerts
+                                                            </span>
+                                                            <div class="absolute z-10 hidden group-hover:block w-96 right-0 mt-1 top-full rounded bg-white px-4 py-3 text-left text-xs text-gray-800 shadow-lg border border-gray-200 space-y-2 overflow-y-auto max-h-64">
+                                                                @foreach (var error in packet.UnresolvedErrors.Where(e => e.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Information || e.Level == UDS.Net.Services.Enums.PacketSubmissionErrorLevel.Warning))
+                                                                {
+                                                                    <div class="break-words">
+                                                                        <div class="font-semibold text-gray-900">@error.FormKind</div>
+                                                                        <div class="text-gray-700">@error.Message</div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    }
                                                 </div>
                                             }
                                         </td>
