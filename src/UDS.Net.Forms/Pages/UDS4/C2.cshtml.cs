@@ -77,9 +77,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             UIBehavior = new UIBehavior
             {
                 PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("C2.REY2INT")
-                    }
+                {
+                    new UIEnableAttribute("C2.REY2INT")
+                }
             }
         };
 
