@@ -244,11 +244,11 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"C2.REY1INT\"]").FillAsync("95");
 
             await Page.Locator("input[name=\"C2.REY2REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY3REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY4REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY5REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REYBREC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY6REC\"]").FillAsync("95");
+            await Expect(Page.Locator("input[name=\"C2.REY3REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY4REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY5REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REYBREC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY6REC\"]")).ToBeDisabledAsync();
 
             // Test when REYDREC is 88
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("88");
