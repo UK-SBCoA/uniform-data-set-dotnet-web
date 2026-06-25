@@ -581,6 +581,68 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Required if BCPILLS = Yes")]
         public int? BCENDAGE { get; set; }
 
+
+        [RequiredIf(nameof(HRT), "1",
+            ErrorMessage = "Age at last use of female hormone replacement pills must be greater than or equal to age at first use.")]
+        [NotMapped]
+        public bool? HRTAgeValid
+        {
+            get
+            {
+                if (!HRTSTRTAGE.HasValue || !HRTENDAGE.HasValue)
+                    return true;
+
+                if (HRTSTRTAGE == 999 || HRTENDAGE == 888 || HRTENDAGE == 999)
+                    return true;
+
+                return HRTENDAGE >= HRTSTRTAGE ? true : null;
+            }
+        }
+
+        [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Age at last use of birth control pills must be greater than or equal to age at first use.")]
+        [NotMapped]
+        public bool? BCPillsAgeValid
+        {             
+            get
+            {
+                if (!BCSTARTAGE.HasValue || !BCENDAGE.HasValue)
+                    return true;
+                if (BCSTARTAGE == 999 || BCENDAGE == 888 || BCENDAGE == 999)
+                    return true;
+                return BCENDAGE >= BCSTARTAGE ? true : null;
+            }
+        }
+
+        [RequiredIf(nameof(HEADINJURY), "1", ErrorMessage = "Age at the last head injury must be greater than or equal to the age at the first head injury.")]
+        [NotMapped]
+        public bool? TBIAgeValid
+        {
+            get
+            {
+                if (!FIRSTTBI.HasValue || !LASTTBI.HasValue)
+                    return true;
+                if (FIRSTTBI == 999 || LASTTBI == 999)
+                    return true;
+                return LASTTBI >= FIRSTTBI ? true : null;
+            }
+        }
+
+        [Required(ErrorMessage = "Age at the last menstrual period must be greater than or equal to the age at the first menstrual period.")]
+        [NotMapped]
+        public bool? MENARCHEAgeValid
+        {
+            get
+            {
+                if (!MENARCHE.HasValue || !NOMENSAGE.HasValue)
+                    return true;
+
+                if (MENARCHE == 999 || MENARCHE == 888 || NOMENSAGE == 888 || NOMENSAGE == 999)
+                    return true;
+
+                return NOMENSAGE >= MENARCHE ? true : null;
+            }
+        }
+
         [RequiredIf(nameof(HEADIMP), "1", ErrorMessage = "Please indicate at least one sources of exposure.")]
         [NotMapped]
         public bool? HEADIMPCheckboxes
