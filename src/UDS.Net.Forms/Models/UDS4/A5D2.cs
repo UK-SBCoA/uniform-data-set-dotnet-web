@@ -602,7 +602,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIf(nameof(BCPILLS), "1", ErrorMessage = "Age at last use of birth control pills must be greater than or equal to age at first use.")]
         [NotMapped]
         public bool? BCPillsAgeValid
-        {             
+        {
             get
             {
                 if (!BCSTARTAGE.HasValue || !BCENDAGE.HasValue)
