@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Dynamic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -21,7 +22,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
         public IFormFile? ErrorFileUpload { get; set; }
         [BindProperty]
         //DEVNOTE: for the confirm logic, rename the type for better naming
-        public List<BulkErrorSubmissionItem> SubmissionErrors { get; set; } = new List<BulkErrorSubmissionItem>();
+        public List<BulkErrorSubmissionItem> BulkErrorSubmissionItems { get; set; } = new List<BulkErrorSubmissionItem>();
         //DEVNOTE: for the display logic rename the type for better naming
         public List<BulkErrorImportItem> PacketsToDisplay { get; set; } = new List<BulkErrorImportItem>();
         public CreateModel(IVisitService visitService, IParticipationService participationService, IPacketService packetService)
@@ -176,16 +177,18 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             var submittedPackets = await _packetService.List(User.Identity.Name, [PacketStatus.Submitted], 999);
 
 
-            //DEVNOTE: New method
+            //DEVNOTE: read only packets with confirm import
+            var confirmedBulkErrorSubmissionItems = BulkErrorSubmissionItems.Where(i => i.ConfirmImport).ToList();
 
 
             //loop through the packet submission errors sent from the display view
-            foreach(var submissionErrorGroup in SubmissionErrors.GroupBy(s => s.SubmissionError.PacketSubmissionId))
+            foreach(var bulkSubmissionItemGroup in confirmedBulkErrorSubmissionItems.GroupBy(s => s.SubmissionErrors[0].PacketSubmissionId))
             {
-                //DEVNOTE: All errors of a packet will share a value, if any of them are a value, then all of them are that value
-                if (submissionErrorGroup.Any(error => error.ConfirmImport == true)){
+                //DEVNOTE: if the bulksubmissionitem confirmImport == true
+                if (bulkSubmissionItemGroup.Select(item => item.ConfirmImport).FirstOrDefault() == true)
+                {
                     //Find the corrisponding packet that the submission belongs to the submission error group (search the submitted packets list)
-                    var matchedPacket = submittedPackets.Where(p => p.Submissions.Any(s => s.Id == submissionErrorGroup.Key)).FirstOrDefault();
+                    var matchedPacket = submittedPackets.Where(p => p.Submissions.Any(s => s.Id == bulkSubmissionItemGroup.Key)).FirstOrDefault();
 
                     //Get the active submission from the packet (most recent submission with a NULL error count)
                     var matchedActiveSubmission = matchedPacket?.Submissions.Last();
@@ -193,10 +196,8 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                     //Add submission errors from group to the found packet and update packet
                     if (matchedActiveSubmission != null && matchedPacket != null)
                     {
-                        //DEVNOTE: if ANY packets are pending, then set to failed error checks. If all errors are ignored or resolved then set packet to passed error checks
-
-                        //if an error with pending exists in group, then failed error checks. If pending is not found in group, then passed error checks
-                        var updatedStatus = submissionErrorGroup.Any(error => error.SubmissionError.Status == PacketSubmissionErrorStatus.Pending) ? PacketStatus.FailedErrorChecks : PacketStatus.PassedErrorChecks;
+                        //DEVNOTE: Check for if status is null (should never be with default) 
+                        var updatedStatus = bulkSubmissionItemGroup.Select(group => group.PacketStatus).FirstOrDefault();
 
                         //Update packet status
                         if (matchedPacket.TryUpdateStatus(updatedStatus))
@@ -205,7 +206,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                             matchedPacket.UpdateStatus(updatedStatus);
 
                             //Update errors
-                            matchedActiveSubmission.Errors = CreatePacketSubmissionErrors(submissionErrorGroup, matchedActiveSubmission);
+                            matchedActiveSubmission.Errors = CreatePacketSubmissionErrors(bulkSubmissionItemGroup, matchedActiveSubmission);
 
                             //Update packet error count
                             matchedActiveSubmission.ErrorCount = matchedActiveSubmission.Errors.Count;
@@ -222,34 +223,34 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             return Partial("_postImportView", packetsToUpdate);
         }
 
-        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkErrorSubmissionItem> submissionErrorGroup, PacketSubmission matchedActiveSubmission)
+        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkErrorSubmissionItem> bulkSubmissionItemGroup, PacketSubmission matchedActiveSubmission)
         {
             var newPacketSubmissionErrors = new List<PacketSubmissionError>();
 
-            foreach (var submission in submissionErrorGroup)
+            foreach (var item in bulkSubmissionItemGroup)
             {
-                if (submission.ConfirmImport)
-                {
-                    //DEVNOTE: currently creating a new object. Using submission error model because submission error domain object doesn't have a null constructor to initialize
-                    newPacketSubmissionErrors.Add(new PacketSubmissionError
-                    (
-                        id: 0,
-                        packetSubmissionId: matchedActiveSubmission.Id,
-                        formKind: submission.SubmissionError.FormKind,
-                        message: submission.SubmissionError.Message,
-                        assignedTo: submission.SubmissionError.AssignedTo,
-                        level: submission.SubmissionError.Level,
-                        status: submission.SubmissionError.Status,
-                        statusChangedBy: submission.SubmissionError.StatusChangedBy,
-                        createdAt: submission.SubmissionError.CreatedAt,
-                        createdBy: submission.SubmissionError.CreatedBy,
-                        modifiedBy: submission.SubmissionError.ModifiedBy,
-                        deletedBy: submission.SubmissionError.DeletedBy,
-                        isDeleted: submission.SubmissionError.IsDeleted,
-                        location: submission.SubmissionError.Location,
-                        value: submission.SubmissionError.Value
-                    ));
-                }
+                //if (item.ConfirmImport)
+                //{
+                //    //DEVNOTE: currently creating a new object. Using submission error model because submission error domain object doesn't have a null constructor to initialize
+                //    newPacketSubmissionErrors.Add(new PacketSubmissionError
+                //    (
+                //        id: 0,
+                //        packetSubmissionId: matchedActiveSubmission.Id,
+                //        formKind: item..FormKind,
+                //        message: submission.SubmissionError.Message,
+                //        assignedTo: submission.SubmissionError.AssignedTo,
+                //        level: submission.SubmissionError.Level,
+                //        status: submission.SubmissionError.Status,
+                //        statusChangedBy: submission.SubmissionError.StatusChangedBy,
+                //        createdAt: submission.SubmissionError.CreatedAt,
+                //        createdBy: submission.SubmissionError.CreatedBy,
+                //        modifiedBy: submission.SubmissionError.ModifiedBy,
+                //        deletedBy: submission.SubmissionError.DeletedBy,
+                //        isDeleted: submission.SubmissionError.IsDeleted,
+                //        location: submission.SubmissionError.Location,
+                //        value: submission.SubmissionError.Value
+                //    ));
+                //}
             }
 
             return newPacketSubmissionErrors;
