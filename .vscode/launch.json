@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/src/UDS.Net.Web.MVC/bin/Debug/net6.0/UDS.Net.Web.MVC.dll",
+            "program": "${workspaceFolder}/src/UDS.Net.Web.MVC/bin/Debug/net10.0/UDS.Net.Web.MVC.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/UDS.Net.Web.MVC",
             "stopAtEntry": false,
