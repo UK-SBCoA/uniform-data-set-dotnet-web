@@ -1,39 +1,97 @@
-﻿
-// wwwroot/js/js_controllers/rxNormDisplayNames_controller.js
-import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-  static targets = ["list"]
-  static values = {
-    fetchedLetters: String,
-    url: String
-  }
+    static targets = ["search"]
 
-  initialize() {
-  }
-
-  connect() {
-    this.fetchData({ detail: { content: "a" } }); // initialize with "a" drugs
-  }
-
-  async fetchData({ detail: { content } }) {
-    var search = content;
-    if (content.length > 0) {
-      fetch(this.urlValue + "&searchTerm=" + search, {
-        method: "GET",
-        headers: {
-          "Accept": "text/vnd.turbo-stream.html"
-        }
-      })
-        .then(response => response.text())
-        .then(html => {
-          Turbo.renderStreamMessage(html);
-          // stimulus does not yet support scroll position, so we need to use vanilla js
-          const options = document.getElementById("options");
-          options.scrollTop = 0;
-        })
-        .catch(error => console.error("GET error:", error));
+    static values = {
+        url: String
     }
-  }
 
+    connect() {
+        this.autocomplete =
+            this.application.getControllerForElementAndIdentifier(
+                this.element,
+                "autocomplete"
+            )
+
+        this.debounceTimer = null
+
+        console.log("RxNorm controller connected with URL:", this.urlValue)
+    }
+
+    onInput() {
+        const value = this.searchTarget.value.trim()
+
+        clearTimeout(this.debounceTimer)
+
+        if (!value) {
+            this.autocomplete?.hide()
+            return
+        }
+
+        this.debounceTimer = setTimeout(() => {
+            this.fetch(value)
+        }, 300)
+    }
+
+    async fetch(search) {
+        if (!this.urlValue) {
+            console.error("Missing urlValue on controller")
+            return
+        }
+
+        this.autocomplete?.show?.()
+        this.autocomplete?.showLoading?.()
+
+        try {
+            const url = `${this.urlValue}&searchTerm=${encodeURIComponent(search)}`
+
+            console.log("Fetching RxNorm results from:", url)
+
+            const response = await fetch(url, {
+                headers: {
+                    "Accept": "text/vnd.turbo-stream.html"
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+
+            const html = await response.text()
+
+            console.log("Received HTML response:", html.substring(0, 200))
+
+            if (window.Turbo?.renderStreamMessage) {
+                window.Turbo.renderStreamMessage(html)
+            } else {
+                console.error("Turbo is not available")
+            }
+
+            this.autocomplete?.resetActive?.()
+            this.autocomplete?.scrollTop?.()
+
+        } catch (err) {
+            console.error("Fetch failed:", err)
+
+        } finally {
+            this.autocomplete?.hideLoading?.()
+        }
+    }
+
+    select(event) {
+        const item = JSON.parse(event.currentTarget.dataset.item)
+
+        this.searchTarget.value = item.name
+
+        this.autocomplete?.hide?.()
+    }
+
+    onKeydown(event) {
+        if (event.key !== "Enter") return
+
+        if (!this.autocomplete?.items?.length) {
+            this.autocomplete?.hide?.()
+        }
+    }
 }
