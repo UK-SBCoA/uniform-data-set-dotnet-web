@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4;
@@ -12,6 +14,9 @@ public class A5D2Model : FormPageModel
 {
     [BindProperty]
     public A5D2 A5D2 { get; set; } = default!;
+
+    [BindProperty]
+    public int? BirthYear { get; set; }
 
     public A5D2Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A5D2")
     {
@@ -1585,6 +1590,20 @@ public class A5D2Model : FormPageModel
     {
         await base.OnGetAsync(id);
 
+        var getByIdWithForm = await _visitService.GetByIdWithForm(User.Identity.Name, (int)id, "A1");
+        var a1 = getByIdWithForm.Forms.Where(a => a.Kind == "A1").FirstOrDefault();
+        if(a1 != null)
+        {
+            A1FormFields a1Fields = (A1FormFields)a1.Fields;
+
+            if(a1Fields != null)
+            {
+                if (a1Fields.BIRTHYR != null)
+                {
+                    BirthYear = a1Fields.BIRTHYR;
+                }
+            }    
+        }
         if (BaseForm != null)
         {
             A5D2 = (A5D2)BaseForm;
@@ -1623,6 +1642,16 @@ public class A5D2Model : FormPageModel
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
+        if(BirthYear != null)
+        {
+            //TODO add helper method to validate related age inputs
+        }
+
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+    }
+
+    public static ValidationResult ValidateAgeInput()
+    {
+        return ValidationResult.Success;
     }
 }
