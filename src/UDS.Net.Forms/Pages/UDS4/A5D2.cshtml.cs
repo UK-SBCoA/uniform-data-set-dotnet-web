@@ -1632,7 +1632,7 @@ public class A5D2Model : FormPageModel
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
-        ValidateAgeInput(A5D2,BirthYear);
+        ValidateAgeInput(A5D2, BirthYear);
 
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
