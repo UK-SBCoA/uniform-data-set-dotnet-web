@@ -15,6 +15,8 @@ namespace UDS.Net.Services.DomainModels
     {
         private Dictionary<string, FormContract[]> _formsContract = new Dictionary<string, FormContract[]>();
 
+        public int? AgeAtVisit { get; set; }
+
         public int Id { get; set; }
 
         public int ParticipationId { get; set; }
@@ -308,9 +310,10 @@ namespace UDS.Net.Services.DomainModels
             BuildFormsContract(FORMVER, PACKET, VISIT_DATE, existingForms);
         }
 
-        public Visit(int id, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
+        public Visit(int id, int? age, int number, int participationId, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
         {
             Id = id;
+            AgeAtVisit = age;
             VISITNUM = number;
             ParticipationId = participationId;
             FORMVER = version;
@@ -334,8 +337,8 @@ namespace UDS.Net.Services.DomainModels
                 UnresolvedErrors = unresolvedErrors;
         }
 
-        public Visit(int id, int number, int participationId, Participation participation, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
-            : this(id, number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms, unresolvedErrorCount, unresolvedErrors)
+        public Visit(int id, int? age, int number, int participationId, Participation participation, string version, PacketKind packet, DateTime visitDate, string initials, PacketStatus status, DateTime createdAt, string createdBy, string modifiedBy, string deletedBy, bool isDeleted, IList<Form> existingForms, int? unresolvedErrorCount, IList<PacketSubmissionError> unresolvedErrors)
+            : this(id,age,number, participationId, version, packet, visitDate, initials, status, createdAt, createdBy, modifiedBy, deletedBy, isDeleted, existingForms, unresolvedErrorCount, unresolvedErrors)
         {
             if (participation != null)
             {

@@ -212,6 +212,44 @@ namespace UDS.Net.Services.DomainModels.Forms
                 "BCENDAGE"
           };
         }
+
+        public static IEnumerable<string> AgeRelatedQuestions()
+        {
+            //TODO Need to verify that these are the only age-related questions in the A5D2 form. If there are more, they should be added to this list.
+            return new List<string>()
+            {
+                "HRTATTAGE",
+                "CARDARRAGE",
+                "BYPASSAGE",
+                "PACDEFAGE",
+                "VALVEAGE",
+                "STROKAGE",
+                "CAROTIDAGE",
+                "TIAAGE",
+                "PDAGE",
+                "PDOTHRAGE",
+                "SEIZAGE",
+                "IMPYEARS",
+                "FIRSTTBI",
+                "LASTTBI",
+                "DIABAGE",
+                "HYPERTAGE",
+                "HYPERCHAGE",
+                "CANCERAGE",
+                "KIDNEYAGE",
+                "LIVERAGE",
+                "PVDAGE",
+                "HIVAGE",
+                "NOMENSAGE",
+                "HRTYEARS",
+                "HRTSTRTAGE",
+                "HRTENDAGE",
+                "BCPILLSYR",
+                "BCSTARTAGE",
+                "BCENDAGE"
+            };
+        }
+
         public IEnumerable<FormMode> FormModes
         {
             get

@@ -75,7 +75,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Visit> GetByIdWithForm(string username, int id, string formId)
+        public async Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false)
         {
             if (!String.IsNullOrWhiteSpace(formId))
             {

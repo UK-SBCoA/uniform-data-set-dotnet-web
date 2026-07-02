@@ -6,6 +6,7 @@ using UDS.Net.API.Client;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
+using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Web.MVC.Services
@@ -56,12 +57,27 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Visit not found");
         }
 
-        public async Task<Visit> GetByIdWithForm(string username, int id, string formId)
+        public async Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false)
         {
             var visitDto = await _apiClient.VisitClient.GetWithForm(id, formId);
 
             if (visitDto != null)
             {
+                if (includeAge.HasValue && includeAge == true)
+                {
+                    //TODO Add GetWithForms which takes visit ID and multiple form kinds 
+
+                    var visitWithA1Fields = await _apiClient.VisitClient.GetWithForm(id, "A1");
+
+                    var a1Fields = (A1Dto)visitWithA1Fields.Forms
+                        .Where(f => f.Kind == "A1")
+                        .FirstOrDefault();
+                    if (a1Fields != null && a1Fields.BIRTHYR != null)
+                    {
+                        var age = a1Fields.BIRTHYR;
+                        return visitDto.ToDomain(username, age);
+                    }
+                }
                 return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
             }
 

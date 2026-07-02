@@ -7,7 +7,7 @@ namespace UDS.Net.Services
 {
     public interface IVisitService : IService<Visit>
     {
-        Task<Visit> GetByIdWithForm(string username, int id, string formId);
+        Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false);
 
         Task<Visit> UpdateForm(string username, Visit entity, string formId);
 

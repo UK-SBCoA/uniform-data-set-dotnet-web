@@ -16,8 +16,8 @@ public class A5D2Model : FormPageModel
     public A5D2 A5D2 { get; set; } = default!;
 
     [BindProperty]
+    //Provided in A1 form. This value will be used to validate A5D2 questions that relate to the age of the participant
     public int? BirthYear { get; set; }
-
     public A5D2Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A5D2")
     {
     }
@@ -1590,20 +1590,10 @@ public class A5D2Model : FormPageModel
     {
         await base.OnGetAsync(id);
 
-        var getByIdWithForm = await _visitService.GetByIdWithForm(User.Identity.Name, (int)id, "A1");
-        var a1 = getByIdWithForm.Forms.Where(a => a.Kind == "A1").FirstOrDefault();
-        if(a1 != null)
-        {
-            A1FormFields a1Fields = (A1FormFields)a1.Fields;
+        var visitWithA1Fields = await _visitService.GetByIdWithForm(User.Identity.Name, (int)id, "A1", true);
 
-            if(a1Fields != null)
-            {
-                if (a1Fields.BIRTHYR != null)
-                {
-                    BirthYear = a1Fields.BIRTHYR;
-                }
-            }    
-        }
+        BirthYear = visitWithA1Fields!.AgeAtVisit;
+
         if (BaseForm != null)
         {
             A5D2 = (A5D2)BaseForm;
@@ -1642,16 +1632,17 @@ public class A5D2Model : FormPageModel
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
-        if(BirthYear != null)
-        {
-            //TODO add helper method to validate related age inputs
-        }
+        ValidateAgeInput(A5D2,BirthYear);
 
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
 
-    public static ValidationResult ValidateAgeInput()
+    public static ValidationResult ValidateAgeInput(A5D2 a5d2, int? birthYear)
     {
+        var ageQuestions = A5D2FormFields.AgeRelatedQuestions();
+
+        //TODO validate AgeRelatedQuestions against birthYear
+
         return ValidationResult.Success;
     }
 }
