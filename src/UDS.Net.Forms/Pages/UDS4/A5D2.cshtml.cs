@@ -1590,9 +1590,19 @@ public class A5D2Model : FormPageModel
     {
         await base.OnGetAsync(id);
 
+        var visitWithA1andA5d2 = await _visitService.GetByIdWithForms(User.Identity.Name, (int)id, ["A1", "A5D2"]);
+
+        //Assigns year of birth which was provided in the A1 form
+        BirthYear = visitWithA1andA5d2.Forms
+             .Where(f => f.Kind == "A1")
+             .Select(f => ((A1FormFields)f.Fields).BIRTHYR)
+             .FirstOrDefault();
+
+        //Using updated visit service which now offers "includeAge" parameter
         var visitWithA1Fields = await _visitService.GetByIdWithForm(User.Identity.Name, (int)id, "A1", true);
 
-        BirthYear = visitWithA1Fields!.AgeAtVisit;
+        // Alternative implementation:
+        // BirthYear = visitWithA1Fields!.AgeAtVisit;
 
         if (BaseForm != null)
         {
