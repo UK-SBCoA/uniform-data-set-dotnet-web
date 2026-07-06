@@ -10,9 +10,8 @@
         <div class="flex justify-center py-3">
             <div asp-validation-summary="All" class="mt-2 text-sm text-red-600"></div>
         </div>
-        <div class="grid grid-cols-4">
-            <div class="col-start-2 col-span-2">
-                <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
+        <div class="px-16">
+            <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
                 <div class="pb-3">
                     Packets in Submitted Status
                 </div>
@@ -23,7 +22,7 @@
                     <div class="py-3">
                         <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
                             <div>
-                                <input name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-bulkImport-target="submissionGroupConfirm" type="checkbox" @(activeSubmission.ErrorCount > 0 ? "Checked" : "disabled") value="true"/>
+                                <input name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-bulkImport-target="submissionGroupConfirm" type="checkbox" @(activeSubmission.ErrorCount > 0 ? "Checked" : "disabled") value="true" />
                                 <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" value="false" />
                             </div>
                             <div>
@@ -36,90 +35,97 @@
                             </div>
                         </div>
 
-                        @{var bulkErrorSubmissionErrorIndex = 0;}
+                        @{
+                            var bulkErrorSubmissionErrorIndex = 0;
+                        }
 
-                        @if(activeSubmission.ErrorCount > 0){
-                            @foreach(var error in activeSubmission.Errors)
-                            {
-                                <div>
-                                    <div class="py-3">
-                                        <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                            <div>
-                                                <a asp-page="/Visits/Details" target="_blank" asp-route-id="@packet.PacketToImport.Id" class="text-indigo-700 hover:text-indigo-700">
-                                                    @error.FormKind - @error.Location
-                                                </a>
-                                            </div>
-                                        </div>
+                        <div>
+                        </div>
+                        @if (activeSubmission.ErrorCount > 0)
+                        {
+                            <div class="mt-3 py-5 px-5 bg-white">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="text-left">
+                                            <th>Location</th>
+                                            <th>Message</th>
+                                            <th>Value</th>
+                                            <th>Level</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var error in activeSubmission.Errors)
+                                        {
+                                            <tr>
+                                                <td class="py-5">@error.FormKind - @error.Location</td>
+                                                <td class="py-5">@error.Message</td>
+                                                <td class="py-5">@error.Value</td>
+                                                <td class="py-5">
+                                                    <div class="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium @(error.Level.ToString().ToLower() == "error" ? "bg-red-100 text-red-800" : "bg-yellow-100 text-yellow-800")">
+                                                        @error.Level
+                                                    </div>
+                                                </td>
+                                                <td class="py-5">
+                                                    <div>
+                                                        @if(error.Level.ToString().ToLower() == "error"){
+                                                            @error.Status
+                                                        }
+                                                        else
+                                                        {
+                                                            <select class="block rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Status">
+                                                                <option value="0">Resolved</option>
+                                                                <option value="1">Pending</option>
+                                                                <option value="2">Ignored</option>
+                                                            </select>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-                                        <div class="grid grid-cols-3 bg-white py-5 pl-3">
-                                            <div>
-                                                Error Level: @error.Level
-                                            </div>
-                                            <div>
-                                                Error Value: @error.Value
-                                            </div>
-                                            <div>
-                                                Assigned To: @error.AssignedTo
-                                            </div>
-                                        </div>
+                                            @* hidden  inputs for the NACC errors *@
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].PacketSubmissionId" value="@error.PacketSubmissionId" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FormKind" value="@error.FormKind" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Message" value="@error.Message" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].AssignedTo" value="@error.AssignedTo" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Level" value="@error.Level" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].StatusChangedBy" value="@error.StatusChangedBy" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Location" value="@error.Location" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Value" value="@error.Value" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedAt" value="@error.CreatedAt" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedBy" value="@error.CreatedBy" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ModifiedBy" value="@error.ModifiedBy" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
 
-                                        <div class="grid grid-cols-2 bg-white py-5 pl-3">
-                                            <div>
-                                                Message: @error.Message
-                                            </div>
-                                            <div class="@(error.Level.ToString().ToLower() == "error" ? "hidden" : "")">
-                                                <label>Error status:</label>
-                                                <select readonly name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Status value="@error.Status">
-                                                    <option value="0">Pending</option>
-                                                    <option value="1">Resolved</option>
-                                                    <option value="2">Ignored</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @* hidden  inputs for the NACC errors *@
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].PacketSubmissionId" value="@error.PacketSubmissionId" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FormKind" value="@error.FormKind" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Message" value="@error.Message" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].AssignedTo" value="@error.AssignedTo" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Level" value="@error.Level" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].StatusChangedBy" value="@error.StatusChangedBy" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Location" value="@error.Location" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Value" value="@error.Value" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedAt" value="@error.CreatedAt" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedBy" value="@error.CreatedBy" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ModifiedBy" value="@error.ModifiedBy" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
-                                <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
-
-                                @* increment the NACCErrorIndex *@
-                                bulkErrorSubmissionErrorIndex++;
-                            }
+                                            @* increment the NACCErrorIndex *@
+                                            bulkErrorSubmissionErrorIndex++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         }
                     </div>
 
                     bulkErrorSubmissionItemIndex++;
                 }
-                <div class="pt-4 flex gap-x-3">
-                    <div>
-                        <input type="checkbox" />
-                    </div>
-                    <div>
-                        Update packets to PassedErrorChecks with all alerts set to ignored/resolved
-                    </div>
+            </div>
+            <div class="pt-4 flex gap-x-3">
+                <div>
+                    <input type="checkbox" />
                 </div>
-                <div class="pt-4">
-                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Import
-                    </button>
-                    <a href="/Packets/Index" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
-                        Cancel
-                    </a>
+                <div>
+                    Update packets to PassedErrorChecks with all alerts set to ignored/resolved
                 </div>
             </div>
+            <div class="pt-4">
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Import
+                </button>
+                <a href="/Packets/Index" class="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">
+                    Cancel
+                </a>
             </div>
         </div>
     </form>
