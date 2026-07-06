@@ -11,6 +11,11 @@
             <div asp-validation-summary="All" class="mt-2 text-sm text-red-600"></div>
         </div>
         <div class="px-16">
+            <div class="text-right px-5">
+                <a data-action="click->bulkImport#CollapseAll">
+                    Collapse All
+                </a>
+            </div>
             <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
                 <div class="pb-3">
                     Packets in Submitted Status
@@ -20,18 +25,23 @@
                     var activeSubmission = packet.GetActiveSubmission;
 
                     <div class="py-3">
-                        <div class="border border-gray-600 grid grid-cols-3 p-4 bg-white">
-                            <div>
+                        <div class="border border-gray-600 flex p-4 bg-white">
+                            <div class="w-14">
                                 <input name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-bulkImport-target="submissionGroupConfirm" type="checkbox" @(activeSubmission.ErrorCount > 0 ? "Checked" : "disabled") value="true" />
                                 <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" value="false" />
                             </div>
-                            <div>
-                                PTID: @packet.PacketToImport.ParticipationId @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                            <div class="w-64">
+                                PTID: @packet.PacketToImport.ParticipationId
                             </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                </svg>
+                            <div class="w-64">
+                                @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
+                            </div>
+                            <div class="flex-1 flex justify-end">
+                                <a data-action="click->bulkImport#ToggleErrorDisplay" data-bulkImport-submission-index-param="@bulkErrorSubmissionItemIndex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
 
@@ -39,11 +49,9 @@
                             var bulkErrorSubmissionErrorIndex = 0;
                         }
 
-                        <div>
-                        </div>
                         @if (activeSubmission.ErrorCount > 0)
                         {
-                            <div class="mt-3 py-5 px-5 bg-white">
+                            <div class="mt-3 py-5 px-5 bg-white" data-bulkImport-target="window" data-submission-index="@bulkErrorSubmissionItemIndex" hidden>
                                 <table class="w-full">
                                     <thead>
                                         <tr class="text-left">
@@ -74,14 +82,19 @@
                                                         else
                                                         {
                                                             <select class="block rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Status">
-                                                                <option value="0">Resolved</option>
-                                                                <option value="1">Pending</option>
+                                                                <option value="0">Pending</option>
+                                                                <option value="1">Resolved</option>
                                                                 <option value="2">Ignored</option>
                                                             </select>
                                                         }
                                                     </div>
                                                 </td>
                                             </tr>
+
+                                            @* hidden input for packet status *@
+                                            //DEVNOTE: Set up the javascript to set this value when the checkbox is clicked
+                                            //Check each error in a group and if none of them are "Pending", then set the input to PassedErrorChecks
+                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks"/>
 
                                             @* hidden  inputs for the NACC errors *@
                                             <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
@@ -116,7 +129,7 @@
                     <input type="checkbox" />
                 </div>
                 <div>
-                    Update packets to PassedErrorChecks with all alerts set to ignored/resolved
+                    Update packets with ignored/resolved alerts to Passed Error Checks
                 </div>
             </div>
             <div class="pt-4">

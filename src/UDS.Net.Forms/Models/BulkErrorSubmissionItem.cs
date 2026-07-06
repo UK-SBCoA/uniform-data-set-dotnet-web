@@ -11,6 +11,6 @@ namespace UDS.Net.Forms.Models
     {
         public List<PacketSubmissionErrorModel>? SubmissionErrors { get; set; }
         public bool ConfirmImport { get; set; }
-        public PacketStatus PacketStatus { get; set; } = PacketStatus.FailedErrorChecks;
+        public PacketStatus PacketStatus { get; set; }
     }
 }

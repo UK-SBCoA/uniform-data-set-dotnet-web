@@ -1,23 +1,19 @@
 ﻿import { Controller } from 'https://unpkg.com/@hotwired/stimulus/dist/stimulus.js';
 
 export default class extends Controller {
-    static targets = ["submissionGroupConfirm"]
+    static targets = ["window"]
 
-    connect() {
-        this.submissionGroupConfirmTargets.forEach((group) => {
-            if (group.checked) {
-                document.querySelectorAll(`.submissionGroup-${group.dataset.submissionGroup}`).forEach((error) => {
-                    error.checked = true
-                })
+    ToggleErrorDisplay(event) {
+        this.windowTargets.forEach((group) => {
+            if (String(event.params.submissionIndex) == group.dataset.submissionIndex) {
+                group.toggleAttribute("hidden")
             }
         })
     }
 
-    ToggleConfirmImport(event) {
-        document.querySelectorAll(`.submissionGroup-${event.params.submissionGroup}`).forEach((error) => {
-            error.checked = event.target.checked 
-            if (event.target.checked) error.checked = true
-            else error.checked = false
-        });
+    ToggleAll() {
+        this.windowTargets.forEach((group) => {
+            group.hidden = true
+        })
     }
 }
