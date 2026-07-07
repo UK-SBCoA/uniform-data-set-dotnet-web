@@ -1,98 +1,109 @@
-﻿
-// wwwroot/js/js_controllers/autocomplete_controller.js
-import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+﻿import { Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
 
 export default class extends Controller {
-  static targets = ["searchBox", "list", "item", "noResults"]
 
-  showList(event) {
-    this.listTarget.classList.remove("hidden")
-  }
+    static targets = [
+        "search",
+        "list",
+        "options",
+        "loading",
+        "item"
+    ]
 
-  hideList(event) {
-    this.listTarget.classList.add("hidden")
-  }
-
-  handleOutsideClick(event) {
-    if (!this.searchBoxTarget.contains(event.target)) {
-      this.hideList();
-    }
-  }
-
-  filterList(event) {
-    clearTimeout(this.dispatchTimeout)
-
-    if (this.searchBoxTarget.value != undefined && this.searchBoxTarget.value !== "") {
-      // debounce input
-      this.dispatchTimeout = setTimeout(() => {
-        this.showList();
-        this.dispatch("newSearch", { detail: { content: this.searchBoxTarget.value } })
-      }, 300)
-    }
-    else {
-      this.reset();
-      this.dispatch("resetSearch");
+    connect() {
+        this.activeIndex = -1
     }
 
-    this.activeIndex = -1;
-  }
-
-  showNoResults(event) {
-    this.noResultsTarget.remove("hidden")
-  }
-
-  hideNoResults(event) {
-    this.noResultsTarget.add("hidden")
-  }
-
-  setSearchBox(event) {
-    event.preventDefault();
-    if (event.type == "click") {
-      this.searchBoxTarget.value = event.target.innerHTML;
-    }
-    else if (event.type == "keydown" && event.key == "Enter") {
-      const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
-      this.searchBoxTarget.value = visibleItems[this.activeIndex].innerHTML;
-    }
-    this.hideList();
-  }
-
-  connect() {
-    this.hideList()
-
-    this.activeIndex = -1;
-    this.dispatchTimeout = null;
-  }
-
-  reset() {
-    this.hideList();
-    this.searchBoxTarget.value = "";
-    this.activeIndex = -1;
-    this.dispatchTimeout = null;
-  }
-
-  highlightItem(event) {
-    event.preventDefault();
-    const visibleItems = this.itemTargets.filter(item => !item.classList.contains("hidden"));
-    if (visibleItems.length === 0) return;
-
-    switch (event.key) {
-      case "ArrowDown":
-        this.activeIndex = (this.activeIndex + 1) % visibleItems.length;
-        break;
-      case "ArrowUp":
-        this.activeIndex = (this.activeIndex - 1 + visibleItems.length) % visibleItems.length;
-        break;
+    get items() {
+        return this.itemTargets
     }
 
-    visibleItems.forEach((item, index) => {
-      if (index === this.activeIndex) {
-        item.classList.add("bg-indigo-600", "text-white");
-        item.scrollIntoView({ block: "nearest" });
-      } else {
-        item.classList.remove("bg-indigo-600", "text-white");
-      }
-    });
-  }
+    show() {
+        this.listTarget.classList.remove("hidden")
+    }
 
+    hide() {
+        this.listTarget.classList.add("hidden")
+    }
+
+    blur() {
+        setTimeout(() => this.hide(), 150)
+    }
+
+    showLoading() {
+        this.loadingTarget.classList.remove("hidden")
+    }
+
+    hideLoading() {
+        this.loadingTarget.classList.add("hidden")
+    }
+
+    resetActive() {
+        this.activeIndex = -1
+    }
+
+    scrollTop() {
+        this.optionsTarget.scrollTop = 0
+    }
+
+    keydown(event) {
+
+        switch (event.key) {
+
+            case "ArrowDown":
+                event.preventDefault()
+                this.move(1)
+                break
+
+            case "ArrowUp":
+                event.preventDefault()
+                this.move(-1)
+                break
+
+            case "Enter":
+                this.enter(event)
+                break
+
+            case "Escape":
+                this.hide()
+                break
+        }
+    }
+
+    enter(event) {
+
+        if (this.activeIndex < 0) return
+
+        event.preventDefault()
+
+        const item = this.items[this.activeIndex]
+        if (!item) return
+
+        item.dispatchEvent(
+            new MouseEvent("mousedown", {
+                bubbles: true
+            })
+        )
+    }
+
+    move(direction) {
+
+        if (this.items.length === 0) return
+
+        this.activeIndex =
+            (this.activeIndex + direction + this.items.length)
+            % this.items.length
+
+        this.items.forEach((el, index) => {
+
+            const active = index === this.activeIndex
+
+            el.classList.toggle("bg-indigo-600", active)
+            el.classList.toggle("text-white", active)
+
+            if (active) {
+                el.scrollIntoView({ block: "nearest" })
+            }
+        })
+    }
 }
