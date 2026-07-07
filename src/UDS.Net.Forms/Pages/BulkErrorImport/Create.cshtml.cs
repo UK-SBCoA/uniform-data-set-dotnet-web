@@ -193,7 +193,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 //Add submission errors from group to the found packet and update packet
                 if (matchedActiveSubmission != null && matchedPacket != null)
                 {
-                    //DEVNOTE: Check for if status is null (should never be with default) 
+                    //DEVNOTE: Check for if status is null 
                     var updatedStatus = bulkSubmissionItemGroup.Select(group => group.PacketStatus).FirstOrDefault();
 
                     //Update packet status

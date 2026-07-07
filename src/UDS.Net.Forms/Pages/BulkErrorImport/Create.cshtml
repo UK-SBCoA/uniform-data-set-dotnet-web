@@ -30,7 +30,7 @@
                                 <input name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-bulkImport-target="submissionGroupConfirm" type="checkbox" @(activeSubmission.ErrorCount > 0 ? "Checked" : "disabled") value="true" />
                                 <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].ConfirmImport" value="false" />
                             </div>
-                            <div class="w-64">
+                            <div class="w-64" data-bulkImport-target="ptidGroup" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex">
                                 PTID: @packet.PacketToImport.ParticipationId
                             </div>
                             <div class="w-64">
@@ -81,7 +81,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <select class="block rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Status">
+                                                            <select data-bulkImport-target="errorStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" data-action="change->bulkImport#ResetStatuses" class="block rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Status">
                                                                 <option value="0">Pending</option>
                                                                 <option value="1">Resolved</option>
                                                                 <option value="2">Ignored</option>
@@ -94,7 +94,7 @@
                                             @* hidden input for packet status *@
                                             //DEVNOTE: Set up the javascript to set this value when the checkbox is clicked
                                             //Check each error in a group and if none of them are "Pending", then set the input to PassedErrorChecks
-                                            <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks"/>
+                                            <input data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
 
                                             @* hidden  inputs for the NACC errors *@
                                             <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
@@ -126,7 +126,7 @@
             </div>
             <div class="pt-4 flex gap-x-3">
                 <div>
-                    <input type="checkbox" />
+                    <input data-action="click->bulkImport#SetPacketStatusByAlertStatus" data-bulkImport-target="ignoreResolvedCheckbox" type="checkbox" />
                 </div>
                 <div>
                     Update packets with ignored/resolved alerts to Passed Error Checks
