@@ -215,14 +215,13 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
             }
 
             //run the API update method on the updated packets list
-            //List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
+            List<Packet> updatedPacketsReturned = await _packetService.UpdateMultiplePacketsSubmissionsErrors(User.Identity.Name, packetsToUpdate);
 
             return Partial("_postImportView", new PostImportViewModel
             {
-                UpdatedPackets = packetsToUpdate,
-                RemainingSubmittedPackets = submittedPackets.ExceptBy(packetsToUpdate.Select(u => u.Id), s => s.Id).ToList()
+                UpdatedPackets = updatedPacketsReturned,
+                RemainingSubmittedPackets = submittedPackets.ExceptBy(updatedPacketsReturned.Select(u => u.Id), s => s.Id).ToList()
             });
-
         }
 
         private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkErrorSubmissionItem> bulkSubmissionItemGroup, PacketSubmission matchedActiveSubmission)

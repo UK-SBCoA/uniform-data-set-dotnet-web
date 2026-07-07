@@ -4,6 +4,7 @@ export default class extends Controller {
     static targets = ["window", "packetStatus", "ignoreResolvedCheckbox", "ptidGroup", "errorStatus"]
 
     ToggleErrorDisplay(event) {
+        console.log("initiating toggle error display")
         this.windowTargets.forEach((group) => {
             if (String(event.params.submissionIndex) == group.dataset.submissionIndex) {
                 group.toggleAttribute("hidden")
@@ -11,6 +12,7 @@ export default class extends Controller {
         })
     }
 
+    //DEVNOTE: currently only closes all
     ToggleAll() {
         this.windowTargets.forEach((group) => {
             group.hidden = true
