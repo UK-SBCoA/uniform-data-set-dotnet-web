@@ -11,9 +11,9 @@ export default class extends Controller {
         })
     }
 
-    CollapseAll() {
+    ToggleWindows({ params: { openWindows }}) {
         this.windowTargets.forEach((group) => {
-            group.hidden = true
+            group.hidden = !openWindows
         })
     }
 

@@ -11,9 +11,26 @@
             <div asp-validation-summary="All" class="mt-2 text-sm text-red-600"></div>
         </div>
         <div class="px-16">
-            <div class="text-right px-5">
-                <a data-action="click->bulkImport#CollapseAll">
-                    Collapse All
+            <div class="p-3 flex justify-end gap-5">
+                <a class="p-3 flex rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" data-action="click->bulkImport#ToggleWindows" data-bulkImport-open-windows-param="true">
+                    <div>
+                        Open All 
+                    </div>
+                    <div>
+                        <span>
+                            <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" /></svg>
+                        </span>
+                    </div>
+                </a>
+                <a class="p-3 flex rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" data-action="click->bulkImport#ToggleWindows" data-bulkImport-open-windows-param="false">
+                    <div>
+                        Collapse All
+                    </div>
+                    <div>
+                        <span>
+                            <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7" /></svg>
+                        </span>
+                    </div>
                 </a>
             </div>
             <div class="grid grid-cols-1 p-3 rounded-md min-h-16 bg-gray-200 px-3 py-2 text-sm font-semibold text-black shadow-sm">
@@ -104,7 +121,7 @@
                                             @* hidden input for packet status *@
                                             //DEVNOTE: Set up the javascript to set this value when the checkbox is clicked
                                             //Check each error in a group and if none of them are "Pending", then set the input to PassedErrorChecks
-                                            <input data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
+                                            <input hidden data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
 
                                             @* hidden  inputs for the NACC errors *@
                                             <input type="hidden" name="BulkErrorSubmissionItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
