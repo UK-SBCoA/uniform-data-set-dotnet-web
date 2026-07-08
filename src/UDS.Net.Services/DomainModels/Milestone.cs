@@ -34,7 +34,7 @@ namespace UDS.Net.Services.DomainModels
         public int? DEATHYR { get; set; }
         public int? AUTOPSY { get; set; }
         public int? DISCMO { get; set; }
-        public int? DISCDAY { get; set; }
+        public int? DISCDY { get; set; }
         public int? DISCYR { get; set; }
         public int? DROPREAS { get; set; }
         public DateTime CreatedAt { get; set; }

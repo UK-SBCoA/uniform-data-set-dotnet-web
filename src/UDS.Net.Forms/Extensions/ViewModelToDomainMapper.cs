@@ -57,7 +57,7 @@ namespace UDS.Net.Forms.Extensions
                 DEATHYR = vm.DEATHYR,
                 AUTOPSY = vm.AUTOPSY,
                 DISCMO = vm.DISCMO,
-                DISCDAY = vm.DISCDAY,
+                DISCDY = vm.DISCDY,
                 DISCYR = vm.DISCYR,
                 DROPREAS = vm.DROPREAS,
                 CreatedAt = vm.CreatedAt,
