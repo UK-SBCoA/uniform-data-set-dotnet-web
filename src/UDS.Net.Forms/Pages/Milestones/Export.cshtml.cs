@@ -56,7 +56,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             csv.WriteField("deathyr");
             csv.WriteField("autopsy");
             csv.WriteField("discmo");
-            csv.WriteField("discday");
+            csv.WriteField("discdy");
             csv.WriteField("discyr");
             csv.WriteField("dropreas");
             csv.NextRecord();
@@ -112,7 +112,7 @@ namespace UDS.Net.Forms.Pages.Milestones
             csv.WriteField(record.DEATHYR);
             csv.WriteField(record.AUTOPSY);
             csv.WriteField(record.DISCMO);
-            csv.WriteField(record.DISCDAY);
+            csv.WriteField(record.DISCDY);
             csv.WriteField(record.DISCYR);
             csv.WriteField(record.DROPREAS);
             csv.NextRecord();

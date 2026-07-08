@@ -88,7 +88,7 @@ namespace UDS.Net.Forms.Models
 
         public int? DISCMO { get; set; }
 
-        public int? DISCDAY { get; set; }
+        public int? DISCDY { get; set; }
 
         public int? DISCYR { get; set; }
 
@@ -124,7 +124,7 @@ namespace UDS.Net.Forms.Models
                     if (DECEASED.HasValue && DECEASED.Value == true)
                         return $"{DEATHMO}/{DEATHDY}/{DEATHYR}";
                     else if (DISCONT.HasValue && DISCONT.Value == true)
-                        return $"{DISCMO}/{DISCDAY}/{DISCYR}";
+                        return $"{DISCMO}/{DISCDY}/{DISCYR}";
                 }
                 return "--/--/----";
             }
@@ -257,7 +257,7 @@ namespace UDS.Net.Forms.Models
                         new UIEnableAttribute("Milestone.DEATHDY"),
                         new UIEnableAttribute("Milestone.DEATHYR"),
                         new UIEnableAttribute("Milestone.AUTOPSY"),
-                        new UIDisableAttribute("Milestone.DISCDAY"),
+                        new UIDisableAttribute("Milestone.DISCDY"),
                         new UIDisableAttribute("Milestone.DISCYR"),
                         new UIDisableAttribute("Milestone.DROPREAS")
                     }
@@ -271,7 +271,7 @@ namespace UDS.Net.Forms.Models
                         new UIDisableAttribute("Milestone.DEATHDY"),
                         new UIDisableAttribute("Milestone.DEATHYR"),
                         new UIDisableAttribute("Milestone.AUTOPSY"),
-                        new UIEnableAttribute("Milestone.DISCDAY"),
+                        new UIEnableAttribute("Milestone.DISCDY"),
                         new UIEnableAttribute("Milestone.DISCYR"),
                         new UIEnableAttribute("Milestone.DROPREAS")
                     }
