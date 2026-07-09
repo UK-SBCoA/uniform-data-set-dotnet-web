@@ -5,7 +5,7 @@ using UDS.Net.Services.DomainModels.Submission;
 
 namespace UDS.Net.Forms.Models
 {
-    public class BulkErrorImportItem
+    public class BulkImportDisplayItem
     {
         public Packet? PacketToImport { get; set; }
         public PacketSubmission GetActiveSubmission => PacketToImport.Submissions.Last();

@@ -18,7 +18,7 @@ export default class extends Controller {
     }
 
     SetPacketStatusByAlertStatus() {
-        //check if checkbox is selected
+        //check if ignored/resolved checkbox is selected
         if (this.ignoreResolvedCheckboxTarget.checked) {
             //Search all submission groups
             this.ptidGroupTargets.forEach((group) => {

@@ -65,12 +65,12 @@
                                 @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
                             </div>
                             @if(activeSubmission.ErrorCount > 0) {
-                                <div class="flex-1 flex justify-end">
-                                    <a data-action="click->bulkImport#ToggleErrorDisplay" data-bulkImport-submission-index-param="@bulkErrorSubmissionItemIndex">
+                                <div data-action="click->bulkImport#ToggleErrorDisplay" data-bulkImport-submission-index-param="@bulkErrorSubmissionItemIndex" class="flex-1 flex justify-end">
+                                    <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                         </svg>
-                                    </a>
+                                    </span>
                                 </div>
                             }
                         </div>

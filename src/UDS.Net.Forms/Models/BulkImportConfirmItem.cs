@@ -7,7 +7,7 @@ using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Models
 {
-    public class BulkErrorSubmissionItem
+    public class BulkImportConfirmItem
     {
         public List<PacketSubmissionErrorModel>? SubmissionErrors { get; set; }
         public bool ConfirmImport { get; set; }
