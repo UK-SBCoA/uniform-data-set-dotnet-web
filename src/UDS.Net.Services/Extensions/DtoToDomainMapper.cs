@@ -153,7 +153,7 @@ namespace UDS.Net.Services.Extensions
                 DEATHYR = dto.DEATHYR,
                 AUTOPSY = dto.AUTOPSY,
                 DISCMO = dto.DISCMO,
-                DISCDAY = dto.DISCDAY,
+                DISCDY = dto.DISCDAY,
                 DISCYR = dto.DISCYR,
                 DROPREAS = dto.DROPREAS,
                 CreatedAt = dto.CreatedAt,

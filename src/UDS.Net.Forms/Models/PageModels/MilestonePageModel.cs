@@ -96,7 +96,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 if (milestone.DISCONT == true)
                 {
                     ValidateMonth(milestone.DISCMO, "DISCMO");
-                    ValidateDay(milestone.DISCDAY, "DISCDAY");
+                    ValidateDay(milestone.DISCDY, "DISCDY");
                     ValidateYear(milestone.DISCYR, "DISCYR");
 
                     if (milestone.DROPREAS == null)
