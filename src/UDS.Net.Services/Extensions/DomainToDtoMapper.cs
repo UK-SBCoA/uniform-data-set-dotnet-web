@@ -140,11 +140,9 @@ namespace UDS.Net.Services.Extensions
             if (packet.Submissions != null)
                 dto.PacketSubmissions = packet.Submissions.Select(s => s.ToDto()).ToList();
 
-            return dto;
+            return dto; 
         }
 
-        //DEVNOTE: The singular packetDto ToDto on returns id, status, and packetSubmissions
-        //This one will just be regular conversion
         public static List<PacketDto> ToDto(this List<Packet> packets)
         {
             var packetDtos = new List<PacketDto>();

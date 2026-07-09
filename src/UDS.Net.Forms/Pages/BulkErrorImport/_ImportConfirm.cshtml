@@ -111,13 +111,14 @@
                 <div class="pb-3">
                     Packets still in Submitted status
                 </div>
-                @foreach (var packet in Model.RemainingSubmittedPackets)
+                @foreach (var packet in Model.UnmodifiedPackets)
                 {
                     <div class="py-3">
                         <div class="border border-gray-600 flex p-4 bg-white">
                             <div class="w-14"></div>
                             <div class="w-64">
-                                 <a target="_blank"
+                                <a class="text-indigo-600 hover:underline"
+                                    target="_blank"
                                     asp-page="/Visits/Details"
                                     asp-route-id="@packet.Id">
                                      PTID: @packet.ParticipationId
