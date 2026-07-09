@@ -97,7 +97,7 @@ namespace UDS.Net.Services.Extensions
                 DEATHYR = milestone.DEATHYR,
                 AUTOPSY = milestone.AUTOPSY,
                 DISCMO = milestone.DISCMO,
-                DISCDAY = milestone.DISCDAY,
+                DISCDAY = milestone.DISCDY,
                 DISCYR = milestone.DISCYR,
                 DROPREAS = milestone.DROPREAS,
                 CreatedAt = milestone.CreatedAt,
