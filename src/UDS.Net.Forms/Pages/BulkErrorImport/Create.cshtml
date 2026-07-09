@@ -123,11 +123,9 @@
                                             </tr>
 
                                             @* hidden input for packet status *@
-                                            //DEVNOTE: Set up the javascript to set this value when the checkbox is clicked
-                                            //Check each error in a group and if none of them are "Pending", then set the input to PassedErrorChecks
                                             <input hidden data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
 
-                                            @* hidden  inputs for the NACC errors *@
+                                            @* hidden  inputs for the submission errors *@
                                             <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
                                             <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].PacketSubmissionId" value="@error.PacketSubmissionId" />
                                             <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FormKind" value="@error.FormKind" />
@@ -143,7 +141,7 @@
                                             <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
                                             <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
 
-                                            @* increment the NACCErrorIndex *@
+                                            @* increment the submission error index *@
                                             bulkErrorSubmissionErrorIndex++;
                                         }
                                     </tbody>
