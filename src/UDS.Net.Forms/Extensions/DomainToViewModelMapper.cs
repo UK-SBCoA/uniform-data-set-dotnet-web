@@ -287,7 +287,7 @@ namespace UDS.Net.Forms.Extensions
                 DEATHYR = milestone.DEATHYR,
                 AUTOPSY = milestone.AUTOPSY,
                 DISCMO = milestone.DISCMO,
-                DISCDAY = milestone.DISCDAY,
+                DISCDY = milestone.DISCDY,
                 DISCYR = milestone.DISCYR,
                 DROPREAS = milestone.DROPREAS,
                 CreatedAt = milestone.CreatedAt,

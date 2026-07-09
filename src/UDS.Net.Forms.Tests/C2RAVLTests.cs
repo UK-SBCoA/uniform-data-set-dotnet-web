@@ -242,13 +242,29 @@ namespace UDS.Net.Forms.Tests
             // REY1REC in 0–15
             await Page.Locator("input[name=\"C2.REY1REC\"]").FillAsync("1");
             await Page.Locator("input[name=\"C2.REY1INT\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY2REC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY2INT\"]").FillAsync("95");
+            await Page.Locator("input[name=\"C2.REY3REC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY3INT\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY4REC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY4INT\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY5REC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REY5INT\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REYBREC\"]").FillAsync("1");
+            await Page.Locator("input[name=\"C2.REYBINT\"]").FillAsync("1");
 
+            //Changing REYD2REC to 95 should disable REY inputs that come after it in the form
             await Page.Locator("input[name=\"C2.REY2REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY3REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY4REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY5REC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REYBREC\"]").FillAsync("95");
-            await Page.Locator("input[name=\"C2.REY6REC\"]").FillAsync("95");
+            await Expect(Page.Locator("input[name=\"C2.REY3REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY3INT\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY4REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY4INT\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY5REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY5INT\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REYBREC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REYBINT\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY6REC\"]")).ToBeDisabledAsync();
+            await Expect(Page.Locator("input[name=\"C2.REY6INT\"]")).ToBeDisabledAsync();
 
             // Test when REYDREC is 88
             await Page.Locator("input[name=\"C2.REYDREC\"]").FillAsync("88");
