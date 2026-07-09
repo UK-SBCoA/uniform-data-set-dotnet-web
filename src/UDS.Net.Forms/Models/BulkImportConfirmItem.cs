@@ -9,7 +9,6 @@ namespace UDS.Net.Forms.Models
 {
     public class BulkImportConfirmItem
     {
-        //DEVNOTE: PacketSubmissionError does not have a parameterless constructor
         public List<PacketSubmissionErrorModel> SubmissionErrors { get; set; } = new List<PacketSubmissionErrorModel>();
         public bool ConfirmImport { get; set; }
         public PacketStatus PacketStatus { get; set; }

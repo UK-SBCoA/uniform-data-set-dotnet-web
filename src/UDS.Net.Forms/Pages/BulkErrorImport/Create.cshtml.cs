@@ -172,8 +172,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
 
             foreach (var item in bulkSubmissionItemGroup.SelectMany(e => e.SubmissionErrors))
             {
-                //DEVNOTE: currently creating a new object to create PacketSubmissionError list. PacketSubmissionErrorModel domain object doesn't have a null constructor to initialize
-                //(SEE BulkImportConfirmItem.cshtml.cs) 
                 newPacketSubmissionErrors.Add(new PacketSubmissionError
                 (
                     id: 0,
