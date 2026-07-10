@@ -42,13 +42,18 @@
                             <div class="w-64">
                                 <a class="text-indigo-600 hover:underline"
                                    target="_blank"
-                                   asp-page="/Visits/Details"
-                                   asp-route-id="@packet.Id">
+                                   asp-page="/Participations/Details"
+                                   asp-route-id="@packet.ParticipationId">
                                     PTID: @packet.ParticipationId
-                               </a>
+                                </a>
                             </div>
                              <div class="w-64">
-                                Visit: @packet.VISITNUM
+                                <a class="text-indigo-600 hover:underline"
+                                   target="_blank"
+                                   asp-page="/Visits/Details"
+                                   asp-route-id="@packet.Id">
+                                    Visit: @packet.VISITNUM
+                                </a>
                             </div>
                              <div class="w-64">
                                 Packet: @packet.PACKET
@@ -118,14 +123,19 @@
                             <div class="w-14"></div>
                             <div class="w-64">
                                 <a class="text-indigo-600 hover:underline"
-                                    target="_blank"
-                                    asp-page="/Visits/Details"
-                                    asp-route-id="@packet.Id">
-                                     PTID: @packet.ParticipationId
+                                   target="_blank"
+                                   asp-page="/Participations/Details"
+                                   asp-route-id="@packet.ParticipationId">
+                                    PTID: @packet.ParticipationId
                                 </a>
                             </div>
                             <div class="w-64">
-                                Visit: @packet.VISITNUM
+                                <a class="text-indigo-600 hover:underline"
+                                   target="_blank"
+                                   asp-page="/Visits/Details"
+                                   asp-route-id="@packet.Id">
+                                    Visit: @packet.VISITNUM
+                                </a>
                             </div>
                              <div class="w-64">
                                 Packet: @packet.PACKET

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Dynamic;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -148,7 +149,14 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                     {
                         matchedPacket.UpdateStatus(updatedStatus);
 
-                        matchedActiveSubmission.Errors = CreatePacketSubmissionErrors(submissionErrorGroup, matchedActiveSubmission);
+                        matchedActiveSubmission.Errors = submissionErrorGroup
+                            .SelectMany(e => e.SubmissionErrors.ToEntity()
+                                .Select(error =>
+                                {
+                                    error.PacketSubmissionId = matchedActiveSubmission.Id;
+                                    return error;
+                                })
+                            ).ToList();
 
                         matchedActiveSubmission.ErrorCount = matchedActiveSubmission.Errors.Count;
 
@@ -164,35 +172,6 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                 UpdatedPackets = updatedPacketsReturned,
                 UnmodifiedPackets = submittedPackets.ExceptBy(updatedPacketsReturned.Select(u => u.Id), s => s.Id).ToList()
             });
-        }
-
-        private List<PacketSubmissionError> CreatePacketSubmissionErrors(IGrouping<int, BulkImportConfirmItem> bulkSubmissionItemGroup, PacketSubmission matchedActiveSubmission)
-        {
-            var newPacketSubmissionErrors = new List<PacketSubmissionError>();
-
-            foreach (var item in bulkSubmissionItemGroup.SelectMany(e => e.SubmissionErrors))
-            {
-                newPacketSubmissionErrors.Add(new PacketSubmissionError
-                (
-                    id: 0,
-                    packetSubmissionId: matchedActiveSubmission.Id,
-                    formKind: item.FormKind,
-                    message: item.Message,
-                    assignedTo: item.AssignedTo,
-                    level: item.Level,
-                    status: item.Status,
-                    statusChangedBy: item.StatusChangedBy,
-                    createdAt: item.CreatedAt,
-                    createdBy: item.CreatedBy,
-                    modifiedBy: item.ModifiedBy,
-                    deletedBy: item.DeletedBy,
-                    isDeleted: item.IsDeleted,
-                    location: item.Location,
-                    value: item.Value
-                ));
-            }
-
-            return newPacketSubmissionErrors;
         }
 
         //DEVNOTE: Copied from the packetSubmissionError/Create.cshtml.cs

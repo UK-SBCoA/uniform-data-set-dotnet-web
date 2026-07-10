@@ -97,6 +97,33 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
+        public static PacketSubmissionError ToEntity(this PacketSubmissionErrorModel vm)
+        {
+            return new PacketSubmissionError
+            (
+                id: vm.Id,
+                packetSubmissionId: vm.Id,
+                formKind: vm.FormKind,
+                message: vm.Message,
+                assignedTo: vm.AssignedTo,
+                level: vm.Level,
+                status: vm.Status,
+                statusChangedBy: vm.StatusChangedBy,
+                createdAt: vm.CreatedAt,
+                createdBy: vm.CreatedBy,
+                modifiedBy: vm.ModifiedBy,
+                deletedBy: vm.DeletedBy,
+                isDeleted: vm.IsDeleted,
+                location: vm.Location,
+                value: vm.Value
+            );
+        }
+
+        public static List<PacketSubmissionError> ToEntity(this List<PacketSubmissionErrorModel> vm)
+        {
+            return vm.Select(p => p.ToEntity()).ToList();
+        }
+
         public static List<Form> ToEntity(this IList<FormModel> vm, PacketKind visitPacket)
         {
             return vm.Select(v =>

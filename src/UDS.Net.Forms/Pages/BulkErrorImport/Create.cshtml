@@ -50,13 +50,18 @@
                             <div class="w-64" data-bulkImport-target="ptidGroup" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex">
                                 <a class="text-indigo-600 hover:underline"
                                    target="_blank"
-                                   asp-page="/Visits/Details"
-                                   asp-route-id="@packet.PacketToImport.Id">
+                                   asp-page="/Participations/Details"
+                                   asp-route-id="@packet.PacketToImport.ParticipationId">
                                     PTID: @packet.PacketToImport.ParticipationId
                                </a>
                             </div>
                             <div class="w-64">
-                                Visit: @packet.PacketToImport.VISITNUM
+                                <a class="text-indigo-600 hover:underline"
+                                   target="_blank"
+                                   asp-page="/Visits/Details"
+                                   asp-route-id="@packet.PacketToImport.Id">
+                                    Visit: @packet.PacketToImport.VISITNUM
+                                </a>
                             </div>
                             <div class="w-64">
                                 Packet: @packet.PacketToImport.PACKET
