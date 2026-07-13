@@ -80,6 +80,9 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                     id: 0,
                     packetSubmissionId: PacketSubmissionId,
                     formKind: formKind,
+                    fileName: error.FileName,
+                    errorCode: error.Code,
+                    errorTimeStamp: DateTime.Parse(error.Timestamp),
                     message: error.Message,
                     assignedTo: formAssignee,
                     level: errorLevel,
@@ -149,6 +152,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                 return NotFound("Error upload file not found");
             }
 
+            string uploadedFileName = ErrorFileUpload.FileName;
+
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 PrepareHeaderForMatch = args => args.Header.ToLower(),
@@ -173,9 +178,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissionErrors
                             NACCErrorModel newPacketSubmissionError = new NACCErrorModel
                             {
                                 Type = record.Type,
+                                Timestamp = record.Timestamp,
                                 Code = record.Code,
                                 Location = record.Location,
                                 File = record.File,
+                                FileName = uploadedFileName,
                                 Value = record.Value,
                                 Message = record.Message,
                                 Ptid = record.Ptid,
