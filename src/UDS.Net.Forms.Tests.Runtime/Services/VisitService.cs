@@ -69,6 +69,10 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
             return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
+        public async Task<Visit> GetByIdWithForms(string username, int id, string[] formKinds)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
         {
