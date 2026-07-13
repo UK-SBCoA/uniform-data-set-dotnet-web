@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
 using UDS.Net.Services.Enums;
+using UDS.Net.Services.LookupModels;
 
 namespace UDS.Net.Forms.Pages.UDS4
 {
@@ -13,6 +15,8 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         [BindProperty]
         public A1 A1 { get; set; } = default!;
+
+        public List<OccupationCode> OccupationTestResults { get; set; } = new();
 
         public List<RadioListItem> BIRTHSEXListItems { get; } = new List<RadioListItem>
         {
@@ -448,6 +452,35 @@ namespace UDS.Net.Forms.Pages.UDS4
             Visit.Forms.Add(A1); // visit needs updated form as well
 
             return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+        }
+
+        public async Task<IActionResult> OnGetOccupationStream(string searchTerm)
+        {
+            var results = await _lookupService.SearchOccupations(searchTerm, 20, 1);
+
+            return new JsonResult(
+                        results.Select(o => new
+                        {
+                            code = o.Code,
+                            name = o.Name
+                        }));
+        }
+
+        public async Task<IActionResult> OnGetOccupationLookup(string code)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+                return new JsonResult(null);
+
+            var result = await _lookupService.GetOccupationByCode(code);
+
+            if (result == null)
+                return new JsonResult(null);
+
+            return new JsonResult(new
+            {
+                code = result.Code,
+                name = result.Name
+            });
         }
     }
 }

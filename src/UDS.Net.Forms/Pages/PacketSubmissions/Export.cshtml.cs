@@ -391,10 +391,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
 
                     //Set previousA3Fields
-                    A3FormFields previousA3Fields = (A3FormFields)previousVisit.Forms.FirstOrDefault(f => f.Kind == "A3").Fields;
+                    var previousA3Fields = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
 
-                    //Export form fields applies NULL to properties when changes in section are not detected, and encodes when changes are detected
-                    exportA3Fields = currentA3Fields.GetExportFormFields(previousA3Fields);
+                    //If I4 with no previous visits, then export current A3 fields
+                    if (packet.PACKET == Services.Enums.PacketKind.I4 && previousVisit == null)
+                    {
+                        exportA3Fields = currentA3Fields;
+                    }
+                    else
+                    {
+                        //Export form fields applies NULL to properties when changes in section are not detected, and encodes when changes are detected
+                        exportA3Fields = currentA3Fields.GetExportFormFields(previousA3Fields);
+                    }
                 }
                 else
                 {
@@ -460,19 +468,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             {
                 csv.WriteRecord(new A4aRecord(a4a));
 
-                List<A4aTreatmentFormFields> treatments;
+                A4aFormFields exportA4aFormFields = null!;
+                A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
-                if (a4a.Fields is A4aFormFields normalA4a)
+                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+
+                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1 && packet.PACKET != Services.Enums.PacketKind.I4)
                 {
-                    csv.WriteRecord(normalA4a);
-                    treatments = normalA4a.TreatmentFormFields.ToList();
+                    exportA4aFormFields = currentA4aFields.GetExportFormFields();
                 }
                 else
                 {
-                    treatments = new List<A4aTreatmentFormFields>();
+                    exportA4aFormFields = currentA4aFields;
                 }
 
-                foreach (var treatment in treatments)
+                // write the export object
+                csv.WriteRecord(exportA4aFormFields);
+                foreach (var treatment in exportA4aFormFields.TreatmentFormFields)
                 {
                     foreach (var prop in a4aProps)
                     {

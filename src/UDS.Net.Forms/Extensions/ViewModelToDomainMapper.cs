@@ -57,7 +57,7 @@ namespace UDS.Net.Forms.Extensions
                 DEATHYR = vm.DEATHYR,
                 AUTOPSY = vm.AUTOPSY,
                 DISCMO = vm.DISCMO,
-                DISCDAY = vm.DISCDAY,
+                DISCDY = vm.DISCDY,
                 DISCYR = vm.DISCYR,
                 DROPREAS = vm.DROPREAS,
                 CreatedAt = vm.CreatedAt,
@@ -68,6 +68,23 @@ namespace UDS.Net.Forms.Extensions
                 MILESTONETYPE = vm.MILESTONETYPE
             };
 
+        }
+
+        public static List<M1Submission> ToEntity(this IList<M1SubmissionModel> vm)
+        {
+            List<M1Submission> submissions = new List<M1Submission>();
+
+            if (vm != null)
+            {
+                submissions = vm.Select(p => p.ToEntity()).ToList();
+            }
+
+            return submissions;
+        }
+
+        public static M1Submission ToEntity(this M1SubmissionModel vm)
+        {
+            return new M1Submission(vm.Id, "", vm.SubmissionDate, vm.M1Id, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
         public static Visit ToEntity(this VisitModel vm)
@@ -431,6 +448,8 @@ namespace UDS.Net.Forms.Extensions
             return new A4aFormFields
             {
                 ADVEVENT = vm.ADVEVENT,
+                NEWADEVENT = vm.NEWADEVENT,
+                NEWTREAT = vm.NEWTREAT,
                 ARIAE = vm.ARIAE,
                 ARIAH = vm.ARIAH,
                 ADVERSEOTH = vm.ADVERSEOTH,

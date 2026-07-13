@@ -18,6 +18,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 A3FamilyMemberFormFields encodedFamilyMemberFormFields = new A3FamilyMemberFormFields();
 
+                encodedFamilyMemberFormFields.FamilyMemberIndex = previousFamilyMemberFormFields.FamilyMemberIndex;
                 encodedFamilyMemberFormFields.YOB = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.YOB, this.YOB, 6666, hasNewInformation);
                 encodedFamilyMemberFormFields.AGD = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.AGD, this.AGD, 666, hasNewInformation);
                 encodedFamilyMemberFormFields.ETPR = ExportHelper.GetEncodedValue(previousFamilyMemberFormFields.ETPR, this.ETPR, "66", hasNewInformation);

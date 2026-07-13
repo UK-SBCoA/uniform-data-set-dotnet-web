@@ -97,7 +97,7 @@ namespace UDS.Net.Services.Extensions
                 DEATHYR = milestone.DEATHYR,
                 AUTOPSY = milestone.AUTOPSY,
                 DISCMO = milestone.DISCMO,
-                DISCDAY = milestone.DISCDAY,
+                DISCDAY = milestone.DISCDY,
                 DISCYR = milestone.DISCYR,
                 DROPREAS = milestone.DROPREAS,
                 CreatedAt = milestone.CreatedAt,
@@ -105,9 +105,47 @@ namespace UDS.Net.Services.Extensions
                 ModifiedBy = milestone.ModifiedBy,
                 DeletedBy = milestone.DeletedBy,
                 IsDeleted = milestone.IsDeleted,
-                MILESTONETYPE = milestone.MILESTONETYPE
+                MILESTONETYPE = milestone.MILESTONETYPE,
+                M1Submissions = milestone.M1Submissions != null ? milestone.M1Submissions.Select(s => s.ToDto()).ToList() : null
             };
         }
+
+        public static M1SubmissionDto ToDto(this M1Submission submission)
+        {
+            return new M1SubmissionDto
+            {
+                Id = submission.Id,
+                SubmissionDate = submission.SubmissionDate,
+                CreatedBy = submission.CreatedBy,
+                CreatedAt = submission.CreatedAt,
+                ModifiedBy = submission.ModifiedBy,
+                DeletedBy = submission.DeletedBy,
+                IsDeleted = submission.IsDeleted,
+                ErrorCount = submission.ErrorCount,
+                M1SubmissionErrors = submission.Errors?
+                    .Select(e => e.ToDto())
+                    .ToList() ?? new List<M1SubmissionErrorDto>()
+            };
+        }
+
+        public static M1SubmissionErrorDto ToDto(this M1SubmissionError error) => new M1SubmissionErrorDto
+        {
+            Id = error.Id,
+            M1SubmissionId = error.M1SubmissionId,
+            FormKind = error.FormKind,
+            Message = error.Message,
+            AssignedTo = error.AssignedTo,
+            Level = ((int)error.Level).ToString(),
+            Status = ((int)error.Status).ToString(),
+            Location = error.Location,
+            Value = error.Value,
+            CreatedAt = error.CreatedAt,
+            CreatedBy = error.CreatedBy,
+            ModifiedBy = error.ModifiedBy,
+            DeletedBy = error.DeletedBy,
+            IsDeleted = error.IsDeleted
+        };
+
 
         public static VisitDto ToDto(this Visit visit)
         {
@@ -980,6 +1018,8 @@ namespace UDS.Net.Services.Extensions
             var dto = new A4aDto()
             {
                 ADVEVENT = fields.ADVEVENT,
+                NEWADEVENT = fields.NEWADEVENT,
+                NEWTREAT = fields.NEWTREAT,
                 ARIAE = fields.ARIAE,
                 ARIAH = fields.ARIAH,
                 ADVERSEOTH = fields.ADVERSEOTH,

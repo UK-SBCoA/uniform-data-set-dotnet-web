@@ -22,7 +22,7 @@ namespace UDS.Net.Services.Utilities
 
         public static string GetEncodedValue(string previousValue, string currentValue, string code, Action<int?> newInformationPropSetter)
         {
-            if (previousValue == null && currentValue == null)
+            if (string.IsNullOrWhiteSpace(previousValue) && string.IsNullOrWhiteSpace(currentValue))
             {
                 return null;
             }

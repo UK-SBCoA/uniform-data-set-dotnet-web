@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using UDS.Net.Dto;
 using UDS.Net.Forms.DataAnnotations;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services.DomainModels;
@@ -14,13 +15,15 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
+        public List<M1SubmissionModel> M1Submissions { get; set; } = new();
+
         [Required]
         public int ParticipationId { get; set; }
 
         public virtual ParticipationModel? Participation { get; set; }
 
         [Display(Name = "Status")]
-        public string Status { get; set; } = "Complete";
+        public string Status { get; set; } = PacketStatus.Pending.ToString();
 
         [Display(Name = "Month")]
         public int? CHANGEMO { get; set; }
@@ -85,7 +88,7 @@ namespace UDS.Net.Forms.Models
 
         public int? DISCMO { get; set; }
 
-        public int? DISCDAY { get; set; }
+        public int? DISCDY { get; set; }
 
         public int? DISCYR { get; set; }
 
@@ -121,7 +124,7 @@ namespace UDS.Net.Forms.Models
                     if (DECEASED.HasValue && DECEASED.Value == true)
                         return $"{DEATHMO}/{DEATHDY}/{DEATHYR}";
                     else if (DISCONT.HasValue && DISCONT.Value == true)
-                        return $"{DISCMO}/{DISCDAY}/{DISCYR}";
+                        return $"{DISCMO}/{DISCDY}/{DISCYR}";
                 }
                 return "--/--/----";
             }
@@ -254,7 +257,7 @@ namespace UDS.Net.Forms.Models
                         new UIEnableAttribute("Milestone.DEATHDY"),
                         new UIEnableAttribute("Milestone.DEATHYR"),
                         new UIEnableAttribute("Milestone.AUTOPSY"),
-                        new UIDisableAttribute("Milestone.DISCDAY"),
+                        new UIDisableAttribute("Milestone.DISCDY"),
                         new UIDisableAttribute("Milestone.DISCYR"),
                         new UIDisableAttribute("Milestone.DROPREAS")
                     }
@@ -268,7 +271,7 @@ namespace UDS.Net.Forms.Models
                         new UIDisableAttribute("Milestone.DEATHDY"),
                         new UIDisableAttribute("Milestone.DEATHYR"),
                         new UIDisableAttribute("Milestone.AUTOPSY"),
-                        new UIEnableAttribute("Milestone.DISCDAY"),
+                        new UIEnableAttribute("Milestone.DISCDY"),
                         new UIEnableAttribute("Milestone.DISCYR"),
                         new UIEnableAttribute("Milestone.DROPREAS")
                     }

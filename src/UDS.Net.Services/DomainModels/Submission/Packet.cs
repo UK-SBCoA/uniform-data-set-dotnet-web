@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Services.DomainModels.Submission
@@ -17,21 +18,13 @@ namespace UDS.Net.Services.DomainModels.Submission
             {
                 if (_totalUnresolvedErrorsCount.HasValue)
                     return _totalUnresolvedErrorsCount;
-                else if (this._submissions != null)
-                {
-                    int unresolvedCount = 0;
-                    foreach (var submission in this._submissions)
-                    {
-                        if (submission.Errors != null)
-                        {
-                            foreach (var error in submission.Errors)
-                                if (error.Status == PacketSubmissionErrorStatus.Pending)
-                                    unresolvedCount++;
-                        }
-                    }
-                    return unresolvedCount;
-                }
-                return 0;
+
+                var unresolved = UnresolvedErrors;
+
+                return unresolved.Count(e =>
+                    e.Level == PacketSubmissionErrorLevel.Error ||
+                    e.Level == PacketSubmissionErrorLevel.Critical
+                );
             }
             set
             {
@@ -55,12 +48,26 @@ namespace UDS.Net.Services.DomainModels.Submission
 
                     foreach (var error in submission.Errors)
                     {
-                        if (error.Status == PacketSubmissionErrorStatus.Pending)
+                        if (!error.IsDeleted && error.Status == PacketSubmissionErrorStatus.Pending)
+                        {
                             unresolvedErrors.Add(error);
+                        }
                     }
                 }
 
                 return unresolvedErrors;
+            }
+        }
+
+
+        public int TotalUnresolvedAlertCount
+        {
+            get
+            {
+                return UnresolvedErrors.Count(e =>
+                    e.Level == PacketSubmissionErrorLevel.Information ||
+                    e.Level == PacketSubmissionErrorLevel.Warning
+                );
             }
         }
 
