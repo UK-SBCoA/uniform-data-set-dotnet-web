@@ -62,7 +62,7 @@
                                 @(activeSubmission.ErrorCount > 0 ? $"Error Count: {@activeSubmission.ErrorCount}" : "")
                             </div>
                             <div class="w-64">
-                                Packet updated to - @packet.Status
+                                <a class="text-indigo-600 hover:underline" asp-page="/Packets/Details" asp-route-id="@packet.Id" target="_blank">Packet updated to - @packet.Status</a>
                             </div>
                             <div class="flex-1 flex justify-end" data-action="click->bulkImport#ToggleErrorDisplay" data-bulkImport-submission-index-param="@bulkErrorSubmissionItemIndex">
                                 <span>
@@ -141,7 +141,7 @@
                                 Packet: @packet.PACKET
                             </div>
                             <div class="w-64">
-                                Packet status - @packet.Status
+                                <a class="text-indigo-600 hover:underline" asp-page="/Packets/Details" asp-route-id="@packet.Id" target="_blank">Packet status - @packet.Status</a>
                             </div>
                         </div>
                     </div>

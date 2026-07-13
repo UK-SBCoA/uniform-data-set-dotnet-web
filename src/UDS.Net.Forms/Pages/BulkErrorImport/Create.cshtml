@@ -126,28 +126,31 @@
                                                     </div>
                                                 </td>
                                             </tr>
+                                            <tr class="hidden">
+                                                <td>
+                                                    @* hidden input for packet status *@
+                                                    <input data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
 
-                                            @* hidden input for packet status *@
-                                            <input hidden data-bulkImport-target="packetStatus" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].PacketStatus" value="FailedErrorChecks" />
+                                                    @* hidden  inputs for the submission errors *@
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].PacketSubmissionId" value="@error.PacketSubmissionId" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FormKind" value="@error.FormKind" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Message" value="@error.Message" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].AssignedTo" value="@error.AssignedTo" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Level" value="@error.Level" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].StatusChangedBy" value="@error.StatusChangedBy" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Location" value="@error.Location" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Value" value="@error.Value" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedAt" value="@error.CreatedAt" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedBy" value="@error.CreatedBy" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ModifiedBy" value="@error.ModifiedBy" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
 
-                                            @* hidden  inputs for the submission errors *@
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Id" value="@error.Id" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].PacketSubmissionId" value="@error.PacketSubmissionId" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FormKind" value="@error.FormKind" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Message" value="@error.Message" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].AssignedTo" value="@error.AssignedTo" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Level" value="@error.Level" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].StatusChangedBy" value="@error.StatusChangedBy" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Location" value="@error.Location" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].Value" value="@error.Value" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedAt" value="@error.CreatedAt" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].CreatedBy" value="@error.CreatedBy" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ModifiedBy" value="@error.ModifiedBy" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
-                                            <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
-
-                                            @* increment the submission error index *@
-                                            bulkErrorSubmissionErrorIndex++;
+                                                    @* increment the submission error index *@
+                                                    bulkErrorSubmissionErrorIndex++;
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
