@@ -13,6 +13,6 @@
 		<ReleaseVersion>17.0.13</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="UDS.Net.Dto" Version="11.2.0-preview.1" />
+		<PackageReference Include="UDS.Net.Dto" Version="11.2.0-preview.2" />
 	</ItemGroup>
 </Project>
