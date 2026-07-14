@@ -1647,12 +1647,72 @@ public class A5D2Model : FormPageModel
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
 
-    public static ValidationResult ValidateAgeInput(A5D2 a5d2, int? birthYear)
+    public void ValidateAgeInput(A5D2 a5D2, int? birthYear)
     {
-        var ageQuestions = A5D2FormFields.AgeRelatedQuestions();
+        if (!birthYear.HasValue)
+            return;
 
-        //TODO validate AgeRelatedQuestions against birthYear
+        int currentAge = DateTime.Today.Year - birthYear.Value;
 
-        return ValidationResult.Success;
+        foreach (var field in AgeFields)
+        {
+            var value = field.Value(a5D2);
+
+            //TODO Need to handle SMOKYRS case which uses 99 to indicate "Unknown"
+            if (value.HasValue && value != 999 && value > currentAge)
+            {
+                ModelState.AddModelError($"A5D2.{field.Key}", $"Value cannot be greater than the participant's age ({currentAge}).");
+            }
+        }
+        //foreach (var propertyName in A5D2FormFields.AgeRelatedQuestions())
+        //{
+        //    var property = typeof(A5D2).GetProperty(propertyName);
+        //    if (property == null)
+        //        continue;
+
+        //    var value = (int?)property.GetValue(model);
+
+        //    if (value.HasValue && value != 999 && value > currentAge)
+        //    {
+        //        ModelState.AddModelError($"A5D2.{propertyName}",$"Age cannot be greater than the participant's current age ({currentAge}).");
+        //    }
+        //}
     }
+
+    public static readonly Dictionary<string, Func<A5D2, int?>> AgeFields =
+        new()
+        {
+            {nameof(A5D2.SMOKYRS), x => x.SMOKYRS },
+            {nameof(A5D2.QUITSMOK), x => x.QUITSMOK },
+            {nameof(A5D2.HRTATTAGE), x => x.HRTATTAGE },
+            {nameof(A5D2.CARDARRAGE), x => x.CARDARRAGE },
+            {nameof(A5D2.BYPASSAGE), x => x.BYPASSAGE },
+            {nameof(A5D2.PACDEFAGE), x => x.PACDEFAGE },
+            {nameof(A5D2.VALVEAGE), x => x.VALVEAGE },
+            {nameof(A5D2.STROKAGE), x => x.STROKAGE },
+            {nameof(A5D2.CAROTIDAGE), x => x.CAROTIDAGE },
+            {nameof(A5D2.TIAAGE), x => x.TIAAGE },
+            {nameof(A5D2.PDAGE), x => x.PDAGE },
+            {nameof(A5D2.PDOTHRAGE), x => x.PDOTHRAGE },
+            {nameof(A5D2.SEIZAGE), x => x.SEIZAGE },
+            {nameof(A5D2.IMPYEARS), x => x.IMPYEARS },
+            {nameof(A5D2.FIRSTTBI), x => x.FIRSTTBI },
+            {nameof(A5D2.LASTTBI), x => x.LASTTBI },
+            {nameof(A5D2.DIABAGE), x => x.DIABAGE },
+            {nameof(A5D2.HYPERTAGE), x => x.HYPERTAGE },
+            {nameof(A5D2.HYPERCHAGE), x => x.HYPERCHAGE },
+            {nameof(A5D2.CANCERAGE), x => x.CANCERAGE },
+            {nameof(A5D2.KIDNEYAGE), x => x.KIDNEYAGE },
+            {nameof(A5D2.LIVERAGE), x => x.LIVERAGE },
+            {nameof(A5D2.PVDAGE), x => x.PVDAGE },
+            {nameof(A5D2.HIVAGE), x => x.HIVAGE },
+            {nameof(A5D2.MENARCHE), x => x.MENARCHE },
+            {nameof(A5D2.NOMENSAGE), x => x.NOMENSAGE },
+            {nameof(A5D2.HRTYEARS), x => x.HRTYEARS },
+            {nameof(A5D2.HRTSTRTAGE), x => x.HRTSTRTAGE },
+            {nameof(A5D2.HRTENDAGE), x => x.HRTENDAGE },
+            {nameof(A5D2.BCPILLSYR), x => x.BCPILLSYR },
+            {nameof(A5D2.BCSTARTAGE), x => x.BCSTARTAGE },
+            {nameof(A5D2.BCENDAGE), x => x.BCENDAGE },
+        };
 }

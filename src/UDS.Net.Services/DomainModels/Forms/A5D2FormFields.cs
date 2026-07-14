@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -215,9 +214,10 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public static IEnumerable<string> AgeRelatedQuestions()
         {
-            //TODO Need to verify that these are the only age-related questions in the A5D2 form. If there are more, they should be added to this list.
             return new List<string>()
             {
+                "SMOKYRS",
+                "QUITSMOK",
                 "HRTATTAGE",
                 "CARDARRAGE",
                 "BYPASSAGE",
@@ -240,6 +240,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 "LIVERAGE",
                 "PVDAGE",
                 "HIVAGE",
+                "MENARCHE",
                 "NOMENSAGE",
                 "HRTYEARS",
                 "HRTSTRTAGE",
