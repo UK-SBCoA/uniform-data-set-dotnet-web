@@ -88,14 +88,17 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                                 assignedTo: matchedPacket.CreatedBy,
                                 level: GetErrorLevel(record.Type),
                                 status: PacketSubmissionErrorStatus.Pending,
-                                statusChangedBy: User.Identity.Name,
+                                statusChangedBy: null,
                                 createdAt: DateTime.Now,
                                 createdBy: User.Identity.Name,
-                                modifiedBy: User.Identity.Name,
+                                modifiedBy: null,
                                 deletedBy: null,
                                 isDeleted: false,
                                 location: record.Location?.ToUpper(),
-                                value: record.Value
+                                value: record.Value,
+                                errorCode: record.Code,
+                                errorTimeStamp: DateTime.Parse(record.Timestamp),
+                                fileName: ErrorFileUpload.FileName
                             ));
 
                             

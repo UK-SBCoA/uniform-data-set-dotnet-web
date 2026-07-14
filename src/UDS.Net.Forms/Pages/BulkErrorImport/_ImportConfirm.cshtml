@@ -79,17 +79,20 @@
                                 <table class="w-full">
                                     <thead>
                                         <tr class="text-left">
+                                            <th>Code</th>
                                             <th>Location</th>
                                             <th>Message</th>
                                             <th>Value</th>
                                             <th>Level</th>
                                             <th>Status</th>
+                                            <th>Time Stamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var error in activeSubmission.Errors)
                                         {
                                             <tr>
+                                                <td>@error.ErrorCode</td>
                                                 <td class="py-5">@error.FormKind - @error.Location</td>
                                                 <td class="py-5">@error.Message</td>
                                                 <td class="py-5">@error.Value</td>
@@ -101,6 +104,7 @@
                                                 <td class="py-5">
                                                     @error.Status
                                                 </td>
+                                                <td>@error.ErrorTimeStamp</td>
                                             </tr>
                                         }
                                     </tbody>

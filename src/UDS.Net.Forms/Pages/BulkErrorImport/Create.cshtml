@@ -90,17 +90,20 @@
                                 <table class="w-full">
                                     <thead>
                                         <tr class="text-left">
+                                            <th>Code</th>
                                             <th>Location</th>
                                             <th>Message</th>
                                             <th>Value</th>
                                             <th>Level</th>
                                             <th>Status</th>
+                                            <th>Time Stamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var error in activeSubmission.Errors)
                                         {
                                             <tr>
+                                                <td>@error.ErrorCode</td>
                                                 <td class="py-5">@error.FormKind - @error.Location</td>
                                                 <td class="py-5">@error.Message</td>
                                                 <td class="py-5">@error.Value</td>
@@ -125,6 +128,7 @@
                                                         }
                                                     </div>
                                                 </td>
+                                                <td>@error.ErrorTimeStamp</td>
                                             </tr>
                                             <tr class="hidden">
                                                 <td>
@@ -146,6 +150,9 @@
                                                     <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ModifiedBy" value="@error.ModifiedBy" />
                                                     <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].DeletedBy" value="@error.DeletedBy" />
                                                     <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].IsDeleted" value="@error.IsDeleted" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ErrorCode" value="@error.ErrorCode" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].ErrorTimeStamp" value="@error.ErrorTimeStamp" />
+                                                    <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FileName" value="@error.FileName" />
 
                                                     @* increment the submission error index *@
                                                     bulkErrorSubmissionErrorIndex++;

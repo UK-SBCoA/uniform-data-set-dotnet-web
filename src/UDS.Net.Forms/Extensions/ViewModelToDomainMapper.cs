@@ -132,7 +132,10 @@ namespace UDS.Net.Forms.Extensions
                 deletedBy: vm.DeletedBy,
                 isDeleted: vm.IsDeleted,
                 location: vm.Location,
-                value: vm.Value
+                value: vm.Value,
+                errorCode: vm.ErrorCode,
+                errorTimeStamp: vm.ErrorTimeStamp,
+                fileName: vm.FileName
             );
         }
 
