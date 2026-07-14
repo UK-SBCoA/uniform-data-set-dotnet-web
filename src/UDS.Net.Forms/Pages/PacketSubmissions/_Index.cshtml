@@ -188,12 +188,14 @@
                             <thead class="bg-red-50">
                                 <tr>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Form</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">Code</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Message</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Previous Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Current Value</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Level</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Status</th>
                                     <th class="px-4 py-2 text-left font-semibold text-gray-900">Date Recorded</th>
+                                    <th class="px-4 py-2 text-left font-semibold text-gray-900">File Name</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
@@ -212,6 +214,7 @@
                                                 @error.FormKind - @error.Location
                                             </a>
                                         </td>
+                                        <td class="px-4 py-2 text-gray-700">@error.ErrorCode</td>
                                         <td class="px-4 py-2 text-gray-700">@error.Message</td>
                                         <td class="px-4 py-2">
                                             @if (error.Value != null)
@@ -272,6 +275,7 @@
                                                 @error.CreatedAt
                                             </span>
                                         </td>
+                                        <td class="px-4 py-2 text-gray-700">@error.FileName</td>
                                     </tr>
                                 }
                             </tbody>
