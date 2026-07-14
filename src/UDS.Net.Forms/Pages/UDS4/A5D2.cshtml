@@ -956,6 +956,7 @@
                                                 <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.LASTTBI"></p>
                                                 <input asp-for="@Model.A5D2.LASTTBI" />
                                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.LASTTBI"></span>
+                                                <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.TBIAgeValid"></span>
                                                 <submission-error location="LASTTBI" errors="Model.BaseForm.UnresolvedErrors" />
                                             </div>
                                         </div>
@@ -2170,6 +2171,7 @@
                            asp-description-for="@Model.A5D2.NOMENSAGE"></p>
                         <input asp-for="@Model.A5D2.NOMENSAGE" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.NOMENSAGE"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.MENARCHEAgeValid"></span>
                         <submission-error location="NOMENSAGE" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
@@ -2350,6 +2352,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.HRTENDAGE"></p>
                         <input asp-for="@Model.A5D2.HRTENDAGE" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTENDAGE"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.HRTAgeValid"></span>
                         <submission-error location="HRTENDAGE" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>
@@ -2399,6 +2402,7 @@
                         <p class="text-sm text-gray-500" asp-description-for="@Model.A5D2.BCENDAGE"></p>
                         <input asp-for="@Model.A5D2.BCENDAGE" />
                         <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.BCENDAGE"></span>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="A5D2.BCPillsAgeValid"></span>
                         <submission-error location="BCENDAGE" errors="Model.BaseForm.UnresolvedErrors" />
                     </div>
                 </div>

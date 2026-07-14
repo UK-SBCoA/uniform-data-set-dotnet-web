@@ -6,7 +6,6 @@ namespace UDS.Net.Forms.Models
     public class NACCErrorModel
     {
         public string Timestamp { get; set; }
-        public string Date { get; set; }
         public string Type { get; set; }
         public string Code { get; set; }
         public string Location { get; set; }
@@ -16,5 +15,8 @@ namespace UDS.Net.Forms.Models
         public string Ptid { get; set; }
         public string Visitnum { get; set; }
         public string Approved { get; set; }
+
+        [Ignore]
+        public string? FileName { get; set; } = null;
     }
 }

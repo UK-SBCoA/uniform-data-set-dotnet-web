@@ -10,6 +10,9 @@ namespace UDS.Net.Services.DomainModels.Submission
         public int PacketSubmissionId { get; set; }
 
         public string FormKind { get; set; }
+        public string FileName { get; set; }
+        public string ErrorCode { get; set; }
+        public DateTime ErrorTimeStamp { get; set; }
 
         public string Message { get; set; }
 
@@ -67,6 +70,9 @@ namespace UDS.Net.Services.DomainModels.Submission
             int id,
             int packetSubmissionId,
             string formKind,
+            string fileName,
+            string errorCode,
+            DateTime errorTimeStamp,
             string message,
             string assignedTo,
             PacketSubmissionErrorLevel level,
@@ -83,6 +89,9 @@ namespace UDS.Net.Services.DomainModels.Submission
             Id = id;
             PacketSubmissionId = packetSubmissionId;
             FormKind = formKind;
+            FileName = fileName;
+            ErrorCode = errorCode;
+            ErrorTimeStamp = errorTimeStamp;
             Message = message;
             AssignedTo = assignedTo;
             Level = level;
