@@ -1230,35 +1230,50 @@
                     </div>
 
                     <div class="@rowCSS">
-                        <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
+                        <div>
+                            <label asp-for="C2.UDSVERTN"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTN)</label>
+                            <p class="text-nowrap text-xs">(If questions 12a OR 12d are 95-98, then 12g MUST BE BLANK )</p>
+                        </div>
                         <div class="flex flex-row space-x-4">
                             <div class="min-w-[80px] max-w-[115px]">
                                 <input asp-for="@Model.C2.UDSVERTN" />
                             </div>
                             <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                         </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
-                        <submission-error location="UDSVERTN" errors="Model.BaseForm.UnresolvedErrors" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValidation"></span>
-                        <submission-error location="UDSVERTNValidation" errors="Model.BaseForm.UnresolvedErrors" />
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
+                            <submission-error location="UDSVERTN" errors="Model.BaseForm.UnresolvedErrors" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValidation"></span>
+                            <submission-error location="UDSVERTNValidation" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
                     </div>
 
                     <div class="@rowCSS">
-                        <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
+                        <div>
+                            <label asp-for="C2.UDSVERTE"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTE)</label>
+                            <p class="text-nowrap text-xs">(If questions 12a OR 12d are 95-98, then 12h MUST BE BLANK )</p>
+                        </div>
                         <div class="flex flex-row space-x-4">
                             <div class="min-w-[80px] max-w-[115px]">
                                 <input asp-for="@Model.C2.UDSVERTE" />
                             </div>
                             <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                         </div>
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
-                        <submission-error location="UDSVERTE" errors="Model.BaseForm.UnresolvedErrors" />
-                        <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValidation"></span>
-                        <submission-error location="UDSVERTEValidation" errors="Model.BaseForm.UnresolvedErrors" />
+                        <div>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
+                            <submission-error location="UDSVERTE" errors="Model.BaseForm.UnresolvedErrors" />
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValidation"></span>
+                            <submission-error location="UDSVERTEValidation" errors="Model.BaseForm.UnresolvedErrors" />
+                        </div>
                     </div>
 
                     <div class="@rowCSS">
-                        <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
+                        <div>
+                            <label asp-for="C2.UDSVERTI"><span class="subcounter"></span> @Html.DisplayNameFor(m => m.C2.UDSVERTI)</label>
+                            <p class="text-nowrap text-xs">(If questions 12a OR 12d are 95-98, then 12i MUST BE BLANK )</p>
+                        </div>
                         <div class="flex flex-row space-x-4">
                             <div class="min-w-[80px] max-w-[115px]">
                                 <input asp-for="@Model.C2.UDSVERTI" />
@@ -1268,6 +1283,7 @@
                         <div>
                             <div>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
+                                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
                                 <submission-error location="UDSVERTI" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
                             <div>
