@@ -211,46 +211,6 @@ namespace UDS.Net.Services.DomainModels.Forms
                 "BCENDAGE"
           };
         }
-
-        public static IEnumerable<string> AgeRelatedQuestions()
-        {
-            return new List<string>()
-            {
-                "SMOKYRS",
-                "QUITSMOK",
-                "HRTATTAGE",
-                "CARDARRAGE",
-                "BYPASSAGE",
-                "PACDEFAGE",
-                "VALVEAGE",
-                "STROKAGE",
-                "CAROTIDAGE",
-                "TIAAGE",
-                "PDAGE",
-                "PDOTHRAGE",
-                "SEIZAGE",
-                "IMPYEARS",
-                "FIRSTTBI",
-                "LASTTBI",
-                "DIABAGE",
-                "HYPERTAGE",
-                "HYPERCHAGE",
-                "CANCERAGE",
-                "KIDNEYAGE",
-                "LIVERAGE",
-                "PVDAGE",
-                "HIVAGE",
-                "MENARCHE",
-                "NOMENSAGE",
-                "HRTYEARS",
-                "HRTSTRTAGE",
-                "HRTENDAGE",
-                "BCPILLSYR",
-                "BCSTARTAGE",
-                "BCENDAGE"
-            };
-        }
-
         public IEnumerable<FormMode> FormModes
         {
             get

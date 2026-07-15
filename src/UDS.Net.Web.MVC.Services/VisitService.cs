@@ -65,8 +65,6 @@ namespace UDS.Net.Web.MVC.Services
             {
                 if (includeAge.HasValue && includeAge == true)
                 {
-                    //TODO Add GetWithForms which takes visit ID and multiple form kinds 
-
                     var visitWithA1Fields = await _apiClient.VisitClient.GetWithForm(id, "A1");
 
                     var a1Fields = (A1Dto)visitWithA1Fields.Forms
@@ -74,8 +72,8 @@ namespace UDS.Net.Web.MVC.Services
                         .FirstOrDefault();
                     if (a1Fields != null && a1Fields.BIRTHYR != null)
                     {
-                        var age = a1Fields.BIRTHYR;
-                        return visitDto.ToDomain(username, age);
+                        var ageAtVisit =  visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
+                        return visitDto.ToDomain(username, ageAtVisit);
                     }
                 }
                 return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
