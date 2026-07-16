@@ -72,7 +72,7 @@ namespace UDS.Net.Web.MVC.Services
                         .FirstOrDefault();
                     if (a1Fields != null && a1Fields.BIRTHYR != null)
                     {
-                        var ageAtVisit =  visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
+                        var ageAtVisit = visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
                         return visitDto.ToDomain(username, ageAtVisit);
                     }
                 }

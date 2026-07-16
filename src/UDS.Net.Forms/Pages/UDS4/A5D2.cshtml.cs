@@ -1587,7 +1587,7 @@ public class A5D2Model : FormPageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        await base.OnGetAsync(id,true);
+        await base.OnGetAsync(id, true);
 
         if (BaseForm != null)
         {
