@@ -1130,7 +1130,7 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
-        [RequiredIfRange(nameof(UDSVERFC), 95, 98, ErrorMessage = "If UDSVERFC (correct f-words is between 95 and 98 or UDSVERLC (I-words correct) is between 95 and 98, then UDSVERTN, UDSVERTE, and UDSVERTI must be blank")]
+        [RequiredIfRange(nameof(UDSVERFC), 95, 98, ErrorMessage = "If UDSVERFC (correct f-words) is between 95 and 98 or UDSVERLC (I-words correct) is between 95 and 98, then UDSVERTN, UDSVERTE, and UDSVERTI must be blank")]
         public bool? UDSVERFCReasonCodeValidation
         {
             get
