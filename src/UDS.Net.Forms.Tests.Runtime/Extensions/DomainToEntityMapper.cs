@@ -14,7 +14,13 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
 
             var formDto = form.ToDto(formKind);
 
-            if (existing is UDS.Net.API.Entities.A3)
+            if (existing is UDS.Net.API.Entities.A1)
+            {
+                var dto = (A1Dto)formDto;
+
+                ((UDS.Net.API.Entities.A1)existing).Update(dto);
+            }
+            else if (existing is UDS.Net.API.Entities.A3)
             {
                 var dto = (A3Dto)formDto;
 
