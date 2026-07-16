@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models.PageModels;
 using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Forms.TagHelpers;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.UDS4;
@@ -1627,8 +1625,10 @@ public class A5D2Model : FormPageModel
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
-        ValidateAgeInput();
-
+        if (BaseForm.Status == FormStatus.Finalized)
+        {
+            ValidateAgeInput();
+        }
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
     }
 
