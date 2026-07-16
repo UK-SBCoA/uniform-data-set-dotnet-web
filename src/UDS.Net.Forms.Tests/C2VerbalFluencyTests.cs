@@ -9,7 +9,7 @@ namespace UDS.Net.Forms.Tests
 {
     [TestClass]
     public class C2VerbalFluencyTests : TestBase
-    { 
+    {
         //Sets up the form leaving the verbal fluency test blank for manual inputs in tests
         private async Task SetUpForm()
         {
