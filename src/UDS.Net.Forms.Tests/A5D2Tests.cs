@@ -50,7 +50,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A1.BIRTHYR\"]").FillAsync("1950");
             await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
-            await Page.GetByRole(AriaRole.Button, new(){Name = "Save", Exact = true}).ClickAsync();
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
             //Fill out A5D2
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
             await WriteInitialVisitFormData();
