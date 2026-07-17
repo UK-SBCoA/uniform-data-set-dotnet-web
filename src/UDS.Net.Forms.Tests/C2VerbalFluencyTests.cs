@@ -175,7 +175,7 @@ namespace UDS.Net.Forms.Tests
 
         //If UDSVERNF and UDSVERLN are both within valid ranges (0-15) then UDSVERTI should equal the sum of UDSVERNF and UDSVERLN.
         [TestMethod]
-        public async Task UDSVERTIRequiresSumOfUDSVERFNAndUDSVERLNWhenBothAreValues()
+        public async Task UDSVERTIRequiresSumOfUDSVERNFAndUDSVERLNWhenBothAreValues()
         {
             await SetUpC2Form();
 
