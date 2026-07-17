@@ -220,5 +220,31 @@ namespace UDS.Net.Forms.Tests
             //Look for validation message to appear on properties
             await Expect(Page.Locator("span").Filter(new() { HasText = "If UDSVERFN (f-words repeated) is between 0 and 15 and UDSVERLR (l-words repeated) is between 0 and 15, then UDSVERTE must be the total of UDSVERFN and UDSVERLR" })).ToBeVisibleAsync();
         }
+
+        //When UDSVERFC and UDSVERLC are values, All questions can be given a value and save the form
+        [TestMethod]
+        public async Task UDSVERFCAndUDSVERLCWithValuesRequiresSectionCompletion()
+        {
+            await SetUpC2Form();
+
+            //Provide values for verbal fluency section
+            await Page.Locator("input[name=\"C2.UDSVERFC\"]").FillAsync("40");
+            await Page.Locator("input[name=\"C2.UDSVERFN\"]").FillAsync("15");
+            await Page.Locator("input[name=\"C2.UDSVERNF\"]").FillAsync("15");
+            await Page.Locator("input[name=\"C2.UDSVERLC\"]").FillAsync("40");
+            await Page.Locator("input[name=\"C2.UDSVERLR\"]").FillAsync("15");
+            await Page.Locator("input[name=\"C2.UDSVERLN\"]").FillAsync("15");
+            await Page.Locator("input[name=\"C2.UDSVERTN\"]").FillAsync("");
+            await Page.Locator("input[name=\"C2.UDSVERTE\"]").FillAsync("");
+            await Page.Locator("input[name=\"C2.UDSVERTI\"]").FillAsync("30");
+
+            await Page.GetByLabel("Save status").SelectOptionAsync("Finalized");
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+
+            //Look for validation message to appear on properties
+            var valueRequiredErrorMessageLocator = Page.Locator("span").Filter(new() { HasText = "Value Required" });
+
+            await Expect(valueRequiredErrorMessageLocator).ToHaveCountAsync(2);
+        }
     }
 }

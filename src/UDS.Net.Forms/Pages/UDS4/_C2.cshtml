@@ -988,10 +988,10 @@
                             <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTN"></p>
                         </div>
                         <div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTN"></span>
                             <submission-error location="UDSVERTN" errors="Model.BaseForm.UnresolvedErrors" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValidation"></span>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTNValueValidation"></span>
                             <submission-error location="UDSVERTNValidation" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
@@ -1008,10 +1008,10 @@
                             <p class="text-sm text-gray-500 text-nowrap" asp-description-for="@Model.C2.UDSVERTE"></p>
                         </div>
                         <div>
-                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTE"></span>
                             <submission-error location="UDSVERTE" errors="Model.BaseForm.UnresolvedErrors" />
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValidation"></span>
                             <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
+                            <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTEValueValidation"></span>
                             <submission-error location="UDSVERTEValidation" errors="Model.BaseForm.UnresolvedErrors" />
                         </div>
                     </div>
@@ -1029,7 +1029,6 @@
                         </div>
                         <div>
                             <div>
-                                <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERTI"></span>
                                 <span class="mt-2 text-sm text-red-600" asp-validation-for="C2.UDSVERFCReasonCodeValidation"></span>
                                 <submission-error location="UDSVERTI" errors="Model.BaseForm.UnresolvedErrors" />
                             </div>
