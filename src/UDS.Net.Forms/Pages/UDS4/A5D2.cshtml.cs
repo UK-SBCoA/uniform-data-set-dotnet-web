@@ -1682,10 +1682,6 @@ public class A5D2Model : FormPageModel
             ModelState.AddModelError("A5D2.PVDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
         if (A5D2.HIVAGE.HasValue && A5D2.HIVAGE != 999 && A5D2.HIVAGE.Value > Visit.AgeAtVisit)
             ModelState.AddModelError("A5D2.HIVAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
-        if (A5D2.MENARCHE.HasValue && A5D2.MENARCHE != 999 && A5D2.MENARCHE.Value > Visit.AgeAtVisit)
-            ModelState.AddModelError("A5D2.MENARCHE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
-        if (A5D2.NOMENSAGE.HasValue && A5D2.NOMENSAGE != 999 && A5D2.NOMENSAGE.Value > Visit.AgeAtVisit)
-            ModelState.AddModelError("A5D2.NOMENSAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
         if (A5D2.HRTYEARS.HasValue && A5D2.HRTYEARS != 999 && A5D2.HRTYEARS.Value > Visit.AgeAtVisit)
             ModelState.AddModelError("A5D2.HRTYEARS", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
         if (A5D2.HRTSTRTAGE.HasValue && A5D2.HRTSTRTAGE != 999 && A5D2.HRTSTRTAGE.Value > Visit.AgeAtVisit)

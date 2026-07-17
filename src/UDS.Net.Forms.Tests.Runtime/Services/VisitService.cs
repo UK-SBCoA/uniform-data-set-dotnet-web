@@ -81,6 +81,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public async Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false)
         {
+            int? ageAtVisit = null;
             if (!String.IsNullOrWhiteSpace(formId))
             {
                 // TODO Include related forms as tests are added
@@ -106,7 +107,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                         var a1 = packet.A1.Convert(packet.Id, username);
                         forms.Add(a1);
                     }
-                        
+
                     if (packet.A3 != null)
                     {
                         var a3 = packet.A3.Convert(packet.Id, username);
@@ -151,9 +152,18 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     {
                         packetKind = PacketKind.F;
                     }
-
+                    if (includeAge.HasValue && includeAge == true)
+                    {
+                        var a1 = _context.A1s
+                            .Where(v => v.Id == id)
+                            .FirstOrDefault();
+                        if (a1 != null)
+                        {
+                            ageAtVisit = packet.CreatedAt.Year - a1.BIRTHYR;
+                        }
+                    }
                     var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
-
+                    visit.AgeAtVisit = ageAtVisit;
                     return visit;
                 }
             }
@@ -259,7 +269,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var form = entity.Forms.Where(f => f.Kind == formId).FirstOrDefault();
 
             // TODO Add more as tests are added
-            if(formId == "A1")
+            if (formId == "A1")
             {
                 if (packet.A1 == null)
                 {
@@ -525,12 +535,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             List<Form> forms = new List<Form>();
 
             // TODO add more forms here as tests are added
-            if(packet.A1 != null)
+            if (packet.A1 != null)
             {
                 var a1 = packet.A1.Convert(packet.Id, username);
                 forms.Add(a1);
             }
-                
+
             if (packet.A3 != null)
             {
                 var a3 = packet.A3.Convert(packet.Id, username);

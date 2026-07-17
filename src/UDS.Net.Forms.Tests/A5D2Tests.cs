@@ -62,9 +62,13 @@ namespace UDS.Net.Forms.Tests
             }
             await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "2" });
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+            //Check that validation displays correctly
+            foreach (var field in AgeRelatedQuestions)
+            {
+                var validationMessage = Page.Locator($"span[data-valmsg-for='A5D2.{field}']");
 
-            //TODO Check that validation displays correctly
-
+                await Expect(validationMessage).ToContainTextAsync("Value cannot be greater than the participant's age");
+            }
         }
         private async Task WriteFormData()
         {
@@ -329,12 +333,14 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.ARTHSPIN\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.ARTHUNK\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.INCONTU\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.INCONTF\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.APNEA\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CPAP\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.APNEAORAL\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.RBD\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.INSOMN\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.OTHSLEEP\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.OTHSLEEX\"]").FillAsync("Test");
             await Page.Locator("input[name=\"A5D2.HYPERCHAGE\"]").FillAsync("999");
             await Page.Locator("input[name=\"A5D2.CANCERACTV\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCERPRIM\"][value=\"true\"]").CheckAsync();
@@ -347,7 +353,6 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.CANCCOLON\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCLUNG\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCPROST\"][value=\"true\"]").CheckAsync();
-            await Page.Locator("input[name=\"A5D2.CANCOTHER\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCRAD\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCRESECT\"][value=\"true\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.CANCIMMUNO\"][value=\"true\"]").CheckAsync();
@@ -382,6 +387,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.PTSD\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.NPSYDEV\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.PSYCDIS\"][value=\"1\"]").CheckAsync();
+            await Page.Locator("input[name=\"A5D2.PSYCDISX\"]").FillAsync("Test");
             await Page.Locator("input[name=\"A5D2.OTHANXDISX\"]").FillAsync("Test");
             await Page.Locator("input[name=\"A5D2.MENARCHE\"]").FillAsync("999");
             await Page.Keyboard.PressAsync("Tab");
@@ -608,10 +614,7 @@ namespace UDS.Net.Forms.Tests
                 "HIVAGE",
                 "HRTYEARS",
                 "HRTSTRTAGE",
-                "HRTENDAGE",
-                "BCPILLSYR",
-                "BCSTARTAGE",
-                "BCENDAGE"
+                "HRTENDAGE"
               };
     }
 }
