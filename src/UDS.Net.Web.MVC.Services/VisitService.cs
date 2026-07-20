@@ -64,9 +64,12 @@ namespace UDS.Net.Web.MVC.Services
             {
                 if (includeAge.HasValue && includeAge == true)
                 {
-                    var visitWithA1Fields = await _apiClient.VisitClient.GetWithForm(id, "A1");
+                    //Only initial visits contain the BIRTHYR property
+                    var firstVisit = await _apiClient.VisitClient.GetByVisitNumber(visitDto.ParticipationId, 1, "A1");
 
-                    var a1Fields = (A1Dto)visitWithA1Fields.Forms
+                    var firstVisitWithA1Fields = await _apiClient.VisitClient.GetWithForm(firstVisit.Id, "A1");
+
+                    var a1Fields = (A1Dto)firstVisitWithA1Fields.Forms
                         .Where(f => f.Kind == "A1")
                         .FirstOrDefault();
                     if (a1Fields != null && a1Fields.BIRTHYR != null)

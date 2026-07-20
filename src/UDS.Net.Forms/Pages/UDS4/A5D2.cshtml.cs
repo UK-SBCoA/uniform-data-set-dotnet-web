@@ -1591,7 +1591,7 @@ public class A5D2Model : FormPageModel
         {
             A5D2 = (A5D2)BaseForm;
 
-            // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+            // If packet type is follow-up and no ID is found (loading a new form), then load previous A5D2 form data
             if (A5D2.PacketKind == PacketKind.F && BaseForm.Id == 0)
             {
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
