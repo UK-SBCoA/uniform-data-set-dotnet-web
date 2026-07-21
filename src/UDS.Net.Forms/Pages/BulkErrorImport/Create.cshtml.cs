@@ -156,6 +156,12 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                             .SelectMany(e => e.SubmissionErrors.ToEntity()
                                 .Select(error =>
                                 {
+                                    if(error.Status != PacketSubmissionErrorStatus.Pending)
+                                    {
+                                        //Method will set status and status updated by for error
+                                        error.SetStatus(error.Status, User.Identity.Name);
+                                    }
+
                                     error.PacketSubmissionId = matchedActiveSubmission.Id;
                                     return error;
                                 })

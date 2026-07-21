@@ -155,7 +155,7 @@
                                                     <input name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].SubmissionErrors[@bulkErrorSubmissionErrorIndex].FileName" value="@error.FileName" />
 
                                                     @* increment the submission error index *@
-                                                    bulkErrorSubmissionErrorIndex++;
+                                                    @{bulkErrorSubmissionErrorIndex++;}
                                                 </td>
                                             </tr>
                                         }
