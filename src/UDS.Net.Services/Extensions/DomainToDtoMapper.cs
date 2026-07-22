@@ -178,7 +178,7 @@ namespace UDS.Net.Services.Extensions
             if (packet.Submissions != null)
                 dto.PacketSubmissions = packet.Submissions.Select(s => s.ToDto()).ToList();
 
-            return dto; 
+            return dto;
         }
 
         public static List<PacketDto> ToDto(this List<Packet> packets)

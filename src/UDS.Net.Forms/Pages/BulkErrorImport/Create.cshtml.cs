@@ -101,7 +101,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                                 fileName: ErrorFileUpload.FileName
                             ));
 
-                            
+
                             matchedPacketActiveSubmission.ErrorCount = matchedPacketActiveSubmission.ErrorCount == null ? 1 : matchedPacketActiveSubmission.ErrorCount += 1;
                         }
                     }
@@ -156,7 +156,7 @@ namespace UDS.Net.Forms.Pages.BulkErrorImport
                             .SelectMany(e => e.SubmissionErrors.ToEntity()
                                 .Select(error =>
                                 {
-                                    if(error.Status != PacketSubmissionErrorStatus.Pending)
+                                    if (error.Status != PacketSubmissionErrorStatus.Pending)
                                     {
                                         //Method will set status and status updated by for error
                                         error.SetStatus(error.Status, User.Identity.Name);
