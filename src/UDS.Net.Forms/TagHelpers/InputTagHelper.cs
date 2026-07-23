@@ -25,21 +25,36 @@ namespace UDS.Net.Forms.TagHelpers
                     output.Attributes.Add("class", css);
             }
 
-            if (UIRangeBehavior.UIBehavior != null && UIRangeBehavior.UIBehavior.PropertyAttributes.Count() > 0)
+            if (UIRangeBehavior.Behaviors.Any())
             {
                 output.Attributes.Add("data-affects", "true");
-                output.Attributes.Add("data-affects-range-low", UIRangeBehavior.Low.ToString());
-                output.Attributes.Add("data-affects-range-high", UIRangeBehavior.High.ToString());
 
-                // each value or range value
-                string json = "";
-                // TODO output targets
-                foreach (var att in UIRangeBehavior.UIBehavior.PropertyAttributes)
+                var behaviorJson = new List<string>();
+
+                foreach (var behavior in UIRangeBehavior.Behaviors)
                 {
-                    json += att.ToJSON() + ", ";
+                    string targets = "";
+
+                    foreach (var att in behavior.PropertyAttributes)
+                    {
+                        targets += att.ToJSON() + ", ";
+                    }
+
+                    targets = targets.Trim().TrimEnd(',');
+
+                    behaviorJson.Add($$"""
+                        {
+                            "low": {{behavior.Low}},
+                            "high": {{behavior.High}},
+                            "targets": [ {{targets}} ],
+                            "instruction": "{{behavior.InstructionalMessage}}"
+                        }
+                        """);
                 }
-                json = json.Trim().TrimEnd(',');
-                output.Attributes.Add("data-affects-range-targets", "[ " + json + " ]"); // js expects an array
+
+                output.Attributes.Add(
+                    "data-affects-range-behaviors",
+                    "[" + string.Join(",", behaviorJson) + "]");
             }
 
             base.Process(context, output);

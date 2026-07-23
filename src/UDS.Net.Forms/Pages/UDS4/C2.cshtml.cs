@@ -14,125 +14,138 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public UIRangeToggle OTRAILABehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 100,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.OTRLARR"),
-                    new UIEnableAttribute("C2.OTRLALI")
+            //Low = 0,
+            //High = 100,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.OTRLARR"),
+            //        new UIEnableAttribute("C2.OTRLALI")
 
-                },
-                InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because optional, enter 888, and SKIP TO QUESTION 7b."
-            }
+            //    },
+            //    InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because optional, enter 888, and SKIP TO QUESTION 7b."
+            //}
         };
 
         public UIRangeToggle OTRAILBBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 300,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.OTRLBRR"),
-                    new UIEnableAttribute("C2.OTRLBLI")
-                },
-                InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because\noptional, enter 888, and SKIP TO QUESTION 8a."
-            }
+            //Low = 0,
+            //High = 300,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.OTRLBRR"),
+            //        new UIEnableAttribute("C2.OTRLBLI")
+            //    },
+            //    InstructionalMessage = "If test was not completed, enter reason code, 995-998. If test was skipped because\noptional, enter 888, and SKIP TO QUESTION 8a."
+            //}
         };
 
         public UIRangeToggle CERAD1RECBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 10,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.CERAD1READ"),
-                    new UIEnableAttribute("C2.CERAD1INT"),
-                    new UIEnableAttribute("C2.CERAD2REC"),
-                    new UIEnableAttribute("C2.CERAD2READ"),
-                    new UIEnableAttribute("C2.CERAD2INT"),
-                    new UIEnableAttribute("C2.CERAD3REC"),
-                    new UIEnableAttribute("C2.CERAD3READ"),
-                    new UIEnableAttribute("C2.CERAD3INT"),
-                    new UIEnableAttribute("C2.CERADDTI"),
-                    new UIEnableAttribute("C2.CERADJ6REC"),
-                    new UIEnableAttribute("C2.CERADJ6INT"),
-                    new UIEnableAttribute("C2.CERADJ7YES"),
-                    new UIEnableAttribute("C2.CERADJ7NO")
+            //Low = 0,
+            //High = 10,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.CERAD1READ"),
+            //        new UIEnableAttribute("C2.CERAD1INT"),
+            //        new UIEnableAttribute("C2.CERAD2REC"),
+            //        new UIEnableAttribute("C2.CERAD2READ"),
+            //        new UIEnableAttribute("C2.CERAD2INT"),
+            //        new UIEnableAttribute("C2.CERAD3REC"),
+            //        new UIEnableAttribute("C2.CERAD3READ"),
+            //        new UIEnableAttribute("C2.CERAD3INT"),
+            //        new UIEnableAttribute("C2.CERADDTI"),
+            //        new UIEnableAttribute("C2.CERADJ6REC"),
+            //        new UIEnableAttribute("C2.CERADJ6INT"),
+            //        new UIEnableAttribute("C2.CERADJ7YES"),
+            //        new UIEnableAttribute("C2.CERADJ7NO")
 
-                },
-                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
-            }
+            //    },
+            //    InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            //}
         };
 
         public UIRangeToggle CERADJ6RECBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 10,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.CERADJ6INT"),
-                    new UIEnableAttribute("C2.CERADJ6INT"),
+            //Low = 0,
+            //High = 10,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.CERADJ6INT"),
+            //        new UIEnableAttribute("C2.CERADJ6INT"),
 
-                },
-                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 15d."
-            }
+            //    },
+            //    InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 15d."
+            //}
         };
 
         public UIRangeToggle CERADJ7YESBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 10,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.CERADJ7NO"),
-                },
-                InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
-            }
+            //Low = 0,
+            //High = 10,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.CERADJ7NO"),
+            //    },
+            //    InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+            //}
         };
 
-        public UIRangeToggle REYDRECBehavior = new UIRangeToggle
+        public UIRangeToggle REYDRECBehavior = new()
+        {
+            Behaviors =
+    {
+        new()
         {
             Low = 0,
             High = 15,
-            UIBehavior = new UIBehavior
+            PropertyAttributes =
             {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.REYDINT"),
-                    new UIEnableAttribute("C2.REYDTI"),
-                    new UIEnableAttribute("C2.REYMETHOD"),
-                    new UIEnableAttribute("C2.REYTCOR"),
-                    new UIEnableAttribute("C2.REYFPOS")
-                },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 16a."
-            }
+                new UIEnableAttribute("C2.REYDINT"),
+                new UIEnableAttribute("C2.REYDTI"),
+                new UIEnableAttribute("C2.REYMETHOD")
+            },
+            InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+        },
+        new()
+        {
+            Low = 95,
+            High = 98,
+            PropertyAttributes =
+            {
+                new UIDisableAttribute("C2.REYDINT"),
+                new UIDisableAttribute("C2.REYDTI"),
+                new UIDisableAttribute("C2.REYMETHOD")
+            },
+            InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+        }
+    }
         };
 
         public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 15,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.REYDINT"),
-                    new UIEnableAttribute("C2.REYDTI"),
-                    new UIEnableAttribute("C2.REYTCOR"),
-                    new UIEnableAttribute("C2.REYFPOS")
-                },
-                InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
-            }
+            //Low = 0,
+            //High = 15,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.REYDINT"),
+            //        new UIEnableAttribute("C2.REYDTI"),
+            //        new UIEnableAttribute("C2.REYTCOR"),
+            //        new UIEnableAttribute("C2.REYFPOS")
+            //    },
+            //    InstructionalMessage = "If test not completed, enter reason code, 95-98, and SKIP TO QUESTION 14a."
+            //}
         };
 
         public List<RadioListItem> RESPVALListItems { get; set; } = new List<RadioListItem>
@@ -318,35 +331,35 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public UIRangeToggle UDSVERFCBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 40,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.UDSVERFN"),
-                    new UIEnableAttribute("C2.UDSVERNF")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 12d."
-            }
+            //Low = 0,
+            //High = 40,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.UDSVERFN"),
+            //        new UIEnableAttribute("C2.UDSVERNF")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 12d."
+            //}
         };
 
         public UIRangeToggle UDSVERLCBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 40,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.UDSVERLR"),
-                    new UIEnableAttribute("C2.UDSVERLN"),
-                    new UIEnableAttribute("C2.UDSVERTN"),
-                    new UIEnableAttribute("C2.UDSVERTE"),
-                    new UIEnableAttribute("C2.UDSVERTI")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 13a."
-            }
+            //Low = 0,
+            //High = 40,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.UDSVERLR"),
+            //        new UIEnableAttribute("C2.UDSVERLN"),
+            //        new UIEnableAttribute("C2.UDSVERTN"),
+            //        new UIEnableAttribute("C2.UDSVERTE"),
+            //        new UIEnableAttribute("C2.UDSVERTI")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 13a."
+            //}
         };
 
         public List<RadioListItem> VERBALTESTListItems { get; set; } = new List<RadioListItem>
@@ -456,122 +469,122 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         public UIRangeToggle MINTTOTSBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 32,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.MINTTOTW"),
-                    new UIEnableAttribute("C2.MINTSCNG"),
-                    new UIEnableAttribute("C2.MINTSCNC"),
-                    new UIEnableAttribute("C2.MINTPCNG"),
-                    new UIEnableAttribute("C2.MINTPCNC")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 12a."
-            }
+            //Low = 0,
+            //High = 32,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.MINTTOTW"),
+            //        new UIEnableAttribute("C2.MINTSCNG"),
+            //        new UIEnableAttribute("C2.MINTSCNC"),
+            //        new UIEnableAttribute("C2.MINTPCNG"),
+            //        new UIEnableAttribute("C2.MINTPCNC")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 12a."
+            //}
         };
 
         public UIRangeToggle UDSBENTDBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 17,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.UDSBENRS")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 11a."
-            }
+            //Low = 0,
+            //High = 17,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.UDSBENRS")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 11a."
+            //}
         };
 
         public UIRangeToggle CRAFTDVRBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 44,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.CRAFTDRE"),
-                    new UIEnableAttribute("C2.CRAFTDTI"),
-                    new UIEnableAttribute("C2.CRAFTCUE")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 10a."
-            }
+            //Low = 0,
+            //High = 44,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.CRAFTDRE"),
+            //        new UIEnableAttribute("C2.CRAFTDTI"),
+            //        new UIEnableAttribute("C2.CRAFTCUE")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 10a."
+            //}
         };
 
         public UIRangeToggle TRAILABehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 150,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.TRAILARR"),
-                    new UIEnableAttribute("C2.TRAILALI")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 995-998, and skip to question 8b."
-            }
+            //Low = 0,
+            //High = 150,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.TRAILARR"),
+            //        new UIEnableAttribute("C2.TRAILALI")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 995-998, and skip to question 8b."
+            //}
         };
 
         public UIRangeToggle TRAILBBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 300,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.TRAILBRR"),
-                    new UIEnableAttribute("C2.TRAILBLI")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 9a."
-            }
+            //Low = 0,
+            //High = 300,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.TRAILBRR"),
+            //        new UIEnableAttribute("C2.TRAILBLI")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 9a."
+            //}
         };
 
         public UIRangeToggle DIGBACCTBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 14,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.DIGBACLS")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 7a."
-            }
+            //Low = 0,
+            //High = 14,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.DIGBACLS")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 7a."
+            //}
         };
 
         public UIRangeToggle DIGFORCTBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 14,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.DIGFORSL")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 6a."
-            }
+            //Low = 0,
+            //High = 14,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.DIGFORSL")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 6a."
+            //}
         };
 
         public UIRangeToggle CRAFTVRSBehavior = new UIRangeToggle
         {
-            Low = 0,
-            High = 44,
-            UIBehavior = new UIBehavior
-            {
-                PropertyAttributes = new List<UIPropertyAttributes>
-                {
-                    new UIEnableAttribute("C2.CRAFTURS")
-                },
-                InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 4a."
-            }
+            //Low = 0,
+            //High = 44,
+            //UIBehavior = new UIBehavior
+            //{
+            //    PropertyAttributes = new List<UIPropertyAttributes>
+            //    {
+            //        new UIEnableAttribute("C2.CRAFTURS")
+            //    },
+            //    InstructionalMessage = "if test not completed, enter reason code, 95-98, and skip to question 4a."
+            //}
         };
 
         public C2Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "C2")

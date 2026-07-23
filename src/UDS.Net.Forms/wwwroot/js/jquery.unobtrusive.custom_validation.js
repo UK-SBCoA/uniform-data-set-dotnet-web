@@ -71,30 +71,31 @@ function toggleAffects(targets, isSelected, depth = 0) {
     });
 }
 
-function compareRange(low, high, targets, value) {
+function compareRangeBehaviors(behaviors, value) {
+
     if (value === "") {
-        $.each(targets, function (index, behavior) {
-            $.each(behavior, function (target, affects) {
-                setAffect(target, "disabled", true);
+        $.each(behaviors, function (_, behavior) {
+            $.each(behavior.targets, function (_, target) {
+                $.each(target, function (field) {
+                    setAffect(field, "disabled", true);
+                });
             });
         });
+        return;
     }
-    else {
-        if (value >= low && value <= high) {
-            $.each(targets, function (index, behavior) {
-                $.each(behavior, function (target, affects) {
-                    setAffect(target, "disabled", false);
-                });
+
+    value = parseInt(value);
+
+    $.each(behaviors, function (_, behavior) {
+
+        const inRange = value >= behavior.low && value <= behavior.high;
+
+        $.each(behavior.targets, function (_, target) {
+            $.each(target, function (field) {
+                setAffect(field, "disabled", !inRange);
             });
-        }
-        else {
-            $.each(targets, function (index, behavior) {
-                $.each(behavior, function (target, affects) {
-                    setAffect(target, "disabled", true);
-                });
-            });
-        }
-    };
+        });
+    });
 }
 
 function debounce(func, wait) {
@@ -165,13 +166,10 @@ function setInputStates() {
                 let toggleTargets = $(this).data("affects-toggle-targets");
                 toggleAffects(toggleTargets, isSelected);
             }
-            else if ($(this).data("affects-range-targets")) {
-                // text or number inputs
-                let low = $(this).data("affects-range-low");
-                let high = $(this).data("affects-range-high");
-                let targets = $(this).data("affects-range-targets");
+            else if ($(this).data("affects-range-behaviors")) {
+                let behaviors = $(this).data("affects-range-behaviors");
 
-                compareRange(low, high, targets, $(this).val());
+                compareRangeBehaviors(behaviors, $(this).val());
             }
 
             // watch for changes
@@ -188,13 +186,12 @@ function setInputStates() {
             });
 
             // if it's a range input, add a debounced input handler
-            if ($(this).data("affects-range-targets")) {
-                let low = $(this).data("affects-range-low");
-                let high = $(this).data("affects-range-high");
-                let targets = $(this).data("affects-range-targets");
+            if ($(this).data("affects-range-behaviors")) {
+
+                let behaviors = $(this).data("affects-range-behaviors");
 
                 $(this).on("input", debounce(function () {
-                    compareRange(low, high, targets, $(this).val());
+                    compareRangeBehaviors(behaviors, $(this).val());
                 }, 300));
             }
         });
