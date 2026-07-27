@@ -12,6 +12,7 @@ namespace UDS.Net.Forms.Pages.UDS4
         [BindProperty]
         public C2 C2 { get; set; } = default!;
 
+
         public UIRangeToggle OTRAILABehavior = new UIRangeToggle
         {
             //Low = 0,
@@ -100,35 +101,39 @@ namespace UDS.Net.Forms.Pages.UDS4
             //}
         };
 
-        public UIRangeToggle REYDRECBehavior = new()
+
+
+
+
+        public UIRangeToggle REYDRECBehavior { get; } = new()
         {
             Behaviors =
-    {
-        new()
-        {
-            Low = 0,
-            High = 15,
-            PropertyAttributes =
             {
-                new UIEnableAttribute("C2.REYDINT"),
-                new UIEnableAttribute("C2.REYDTI"),
-                new UIEnableAttribute("C2.REYMETHOD")
-            },
-            InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
-        },
-        new()
-        {
-            Low = 95,
-            High = 98,
-            PropertyAttributes =
-            {
-                new UIDisableAttribute("C2.REYDINT"),
-                new UIDisableAttribute("C2.REYDTI"),
-                new UIDisableAttribute("C2.REYMETHOD")
-            },
-            InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
-        }
-    }
+                new()
+                {
+                    Low = 0,
+                    High = 15,
+                    PropertyAttributes =
+                    {
+                        new UIEnableAttribute("C2.REYDINT"),
+                        new UIEnableAttribute("C2.REYDTI"),
+                        new UIEnableAttribute("C2.REYMETHOD")
+                    },
+                    InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+                },
+                new()
+                {
+                    Low = 95,
+                    High = 98,
+                    PropertyAttributes =
+                    {
+                        new UIDisableAttribute("C2.REYDINT"),
+                        new UIDisableAttribute("C2.REYDTI"),
+                        new UIDisableAttribute("C2.REYMETHOD")
+                    },
+                    InstructionalMessage = "If test was not completed, enter reason code, 95-98. SKIP TO QUESTION 16a."
+                }
+            }
         };
 
         public UIRangeToggle C2TREYDRECBehavior = new UIRangeToggle
