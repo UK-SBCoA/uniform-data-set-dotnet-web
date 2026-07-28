@@ -11,6 +11,9 @@ namespace UDS.Net.Forms.Models
         public int PacketSubmissionId { get; set; }
 
         public string FormKind { get; set; } = "";
+        public string? FileName { get; set; }
+        public string? ErrorCode { get; set; }
+        public DateTime ErrorTimeStamp { get; set; }
 
         public string Message { get; set; } = "";
 
