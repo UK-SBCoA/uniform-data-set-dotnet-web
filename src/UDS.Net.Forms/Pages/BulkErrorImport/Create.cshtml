@@ -44,7 +44,7 @@
                     <div class="py-3">
                         <div class="border border-gray-600 flex p-4 bg-white">
                             <div class="w-14">
-                                <input @(activeSubmission.ErrorCount > 0 ? "checked" : "hidden") name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" data-bulkImport-target="submissionGroupConfirm" type="checkbox" value="true" />
+                                <input @(activeSubmission.ErrorCount > 0 ? "checked" : "") name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].ConfirmImport" class="h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 @(activeSubmission.ErrorCount > 0 ? "" : "hidden") data-bulkImport-target="submissionGroupConfirm" type="checkbox" value="true" />
                                 <input type="hidden" name="BulkImportConfirmItems[@bulkErrorSubmissionItemIndex].ConfirmImport" value="false" />
                             </div>
                             <div class="w-64" data-bulkImport-target="ptidGroup" data-bulk-error-submission-item-index="@bulkErrorSubmissionItemIndex">
