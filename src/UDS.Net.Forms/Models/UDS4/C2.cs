@@ -521,17 +521,14 @@ namespace UDS.Net.Forms.Models.UDS4
 
         [Display(Name = "TOTAL number of correct F-words and L-words", Description = "(0-80)")]
         [Range(0, 80, ErrorMessage = "Allowed values are 0-80.")]
-        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Provide count of correct F-words and L-words.")]
         public int? UDSVERTN { get; set; }
 
         [Display(Name = "TOTAL number of F-word and L-word repetition errors", Description = "(0-30)")]
         [Range(0, 30, ErrorMessage = "Allowed values are 0-30.")]
-        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Provide count of F-word and L-word repetition errors.")]
         public int? UDSVERTE { get; set; }
 
         [Display(Name = "TOTAL number of non-F/L words and rule violation errors", Description = "(0-30)")]
         [Range(0, 30, ErrorMessage = "Allowed values are 0-30.")]
-        [RequiredIfRange(nameof(UDSVERLC), 0, 40, ErrorMessage = "Provide count of non-F/L words and rule violation errors.")]
         public int? UDSVERTI { get; set; }
 
         //If UDSVERNF and UDSVERLN are both valid values, then UDSVERTI must = UDSVERNF + UDSVERLN
@@ -1013,6 +1010,42 @@ namespace UDS.Net.Forms.Models.UDS4
         }
 
         [NotMapped]
+        [RequiredIfRange(nameof(UDSVERFC), 0, 40, ErrorMessage = "Value required")]
+        public bool? UDSVERTNValueValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
+                {
+                    if (!UDSVERTN.HasValue)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERFC), 0, 40, ErrorMessage = "Value required")]
+        public bool? UDSVERTEValueValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC.Value <= 40) && (UDSVERLC.HasValue && UDSVERLC.Value <= 40))
+                {
+                    if (!UDSVERTE.HasValue)
+                    {
+                        return null;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+        [NotMapped]
         [RequiredOnFinalized(ErrorMessage = "If Q14a. CERAD1REC is between 0 and 10, then Q15d. CERADJ7YES cannot be blank")]
         public bool? CeradJ7YesRequired
         {
@@ -1129,6 +1162,42 @@ namespace UDS.Net.Forms.Models.UDS4
                 }
 
                 return true;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERFC), 95, 98, ErrorMessage = "If UDSVERFC (correct f-words) is between 95 and 98 or UDSVERLC (I-words correct) is between 95 and 98, then UDSVERTN, UDSVERTE, and UDSVERTI must be blank")]
+        public bool? UDSVERFCReasonCodeValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC >= 95) || (UDSVERLC.HasValue && UDSVERLC.Value >= 95))
+                {
+                    if (UDSVERTN == null && UDSVERTE == null && UDSVERTI == null)
+                    {
+                        return true;
+                    }
+                }
+
+                return null;
+            }
+        }
+
+        [NotMapped]
+        [RequiredIfRange(nameof(UDSVERFC), 95, 98, ErrorMessage = "If UDSVERFC (correct f-words) is between 95 and 98 or UDSVERLC (I-words correct) is between 95 and 98, then UDSVERTN, UDSVERTE, and UDSVERTI must be blank")]
+        public bool? UDSVERFCValueValidation
+        {
+            get
+            {
+                if ((UDSVERFC.HasValue && UDSVERFC >= 95) || (UDSVERLC.HasValue && UDSVERLC.Value >= 95))
+                {
+                    if (UDSVERTN == null && UDSVERTE == null && UDSVERTI == null)
+                    {
+                        return true;
+                    }
+                }
+
+                return null;
             }
         }
 
