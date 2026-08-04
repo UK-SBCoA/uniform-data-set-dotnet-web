@@ -74,13 +74,6 @@ function toggleAffects(targets, isSelected, depth = 0) {
 function compareRangeBehaviors(behaviors, value) {
 
     if (value === "") {
-        $.each(behaviors, function (_, behavior) {
-            $.each(behavior.targets, function (_, target) {
-                $.each(target, function (field) {
-                    setAffect(field, "disabled", true);
-                });
-            });
-        });
         return;
     }
 
@@ -90,9 +83,22 @@ function compareRangeBehaviors(behaviors, value) {
 
         const inRange = value >= behavior.low && value <= behavior.high;
 
+        if (!inRange) {
+            return;
+        }
+
         $.each(behavior.targets, function (_, target) {
-            $.each(target, function (field) {
-                setAffect(field, "disabled", !inRange);
+
+            $.each(target, function (field, attributes) {
+
+                $.each(attributes, function (attribute, value) {
+
+                    setAffect(
+                        field,
+                        attribute,
+                        value === "true"
+                    );
+                });
             });
         });
     });
