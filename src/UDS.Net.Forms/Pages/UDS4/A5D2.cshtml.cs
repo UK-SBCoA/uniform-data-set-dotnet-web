@@ -1469,18 +1469,43 @@ public class A5D2Model : FormPageModel
 
     /****************** Question 7b ******************/
     /****************** NOMENSAGE chekcboxes controlled in A5D2.js ******************/
-    public UIRangeToggle MENARCHEBehavior = new UIRangeToggle
+    public UIRangeToggle MENARCHEBehavior { get; } = new()
     {
-        //Low = 5,
-        //High = 999,
-        //UIBehavior = new UIBehavior
-        //{
-        //    PropertyAttributes = new List<UIPropertyAttributes>
-        //        {
-        //            new UIEnableAttribute("A5D2.HRT"),
-        //            new UIEnableAttribute("A5D2.BCPILLS"),
-        //        },
-        //}
+        Behaviors =
+        {
+            new()
+            {
+                Low = 5,
+                High = 120,
+                PropertyAttributes =
+                {
+                    new UIEnableAttribute("A5D2.HRT"),
+                    new UIEnableAttribute("A5D2.BCPILLS")
+                }
+            },
+
+            new()
+            {
+                Low = 888,
+                High = 888,
+                PropertyAttributes =
+                {
+                    new UIDisableAttribute("A5D2.HRT"),
+                    new UIDisableAttribute("A5D2.BCPILLS")
+                }
+            },
+
+            new()
+            {
+                Low = 999,
+                High = 999,
+                PropertyAttributes =
+                {
+                    new UIDisableAttribute("A5D2.HRT"),
+                    new UIDisableAttribute("A5D2.BCPILLS")
+                }
+            }
+        }
     };
 
     /****************** Question 7d ******************/
