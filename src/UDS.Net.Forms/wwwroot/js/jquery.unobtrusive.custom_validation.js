@@ -104,6 +104,20 @@ function compareRangeBehaviors(behaviors, value) {
     });
 }
 
+function compareRangeBehaviors(behaviors, value) {
+    behaviors.forEach(function (behavior) {
+        let inRange = value !== "" &&
+            value >= behavior.low &&
+            value <= behavior.high;
+
+        $.each(behavior.targets, function (index, target) {
+            $.each(target, function (name, affects) {
+                setAffect(name, "disabled", !inRange);
+            });
+        });
+    });
+}
+
 function debounce(func, wait) {
     let timeout;
     return function () {
@@ -152,6 +166,7 @@ function setInputStates() {
     });
 
 
+
     if (affects.length) {
         // for each input with data-affects check to see if it is selected or is a checkbox that should toggle
         affects.each(function () {
@@ -177,6 +192,11 @@ function setInputStates() {
 
                 compareRangeBehaviors(behaviors, $(this).val());
             }
+            else if ($(this).data("affects-range-behaviors")) {
+                let behaviors = $(this).data("affects-range-behaviors");
+
+                compareRangeBehaviors(behaviors, $(this).val());
+            }
 
             // watch for changes
             $(this).on("change", function () {
@@ -194,6 +214,13 @@ function setInputStates() {
             // if it's a range input, add a debounced input handler
             if ($(this).data("affects-range-behaviors")) {
 
+                let behaviors = $(this).data("affects-range-behaviors");
+
+                $(this).on("input", debounce(function () {
+                    compareRangeBehaviors(behaviors, $(this).val());
+                }, 300));
+            }
+            else if ($(this).data("affects-range-behaviors")) {
                 let behaviors = $(this).data("affects-range-behaviors");
 
                 $(this).on("input", debounce(function () {
