@@ -1,11 +1,9 @@
 ﻿using System;
 namespace UDS.Net.Forms.TagHelpers
 {
-    public class UIRangeToggle
+    public class UIRangeToggle : UIRangeToggleBase
     {
-        public int Low { get; set; }
-        public int High { get; set; }
-        public UIBehavior UIBehavior { get; set; }
+        public List<UIRangeBehavior> Behaviors { get; } = new();
 
         public UIRangeToggle()
         {
