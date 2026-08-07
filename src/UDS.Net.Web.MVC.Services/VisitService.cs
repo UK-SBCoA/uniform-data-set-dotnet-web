@@ -69,7 +69,7 @@ namespace UDS.Net.Web.MVC.Services
                     {
                         //Only initial visits contain the BIRTHYR property
                         var initialVisit = participant.Visits
-                        .Where(v => v.PACKET == "I" || v.PACKET == "I4")
+                        .Where(v => v.PACKET == "I" || v.PACKET == "I4" && v.FORMVER == "4")
                         .FirstOrDefault();
 
                         var initialVisitA1Fields = await _apiClient.VisitClient.GetWithForm(initialVisit.Id, "A1");
