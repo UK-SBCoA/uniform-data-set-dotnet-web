@@ -44,12 +44,12 @@ namespace UDS.Net.Forms.Models.PageModels
             _packetService = packetService;
         }
 
-        protected async Task<IActionResult> OnGetAsync(int? id)
+        protected async Task<IActionResult> OnGetAsync(int? id, bool? includeAge = null)
         {
             if (id == null || _formKind == null)
                 return NotFound();
 
-            var visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id.Value, _formKind);
+            var visit = await _visitService.GetByIdWithForm(User.Identity.IsAuthenticated ? User.Identity.Name : "username", id.Value, _formKind, includeAge);
 
             if (visit == null)
                 return NotFound();

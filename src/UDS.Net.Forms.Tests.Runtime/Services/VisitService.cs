@@ -69,18 +69,24 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
             return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, new List<Form>());
         }
+        public async Task<Visit> GetByIdWithForms(string username, int id, string[] formKinds)
+        {
+            throw new NotImplementedException();
+        }
 
         public Task<Visit> GetByIdWithSubmissions(string username, int id, int pageSize = 10, int pageIndex = 1)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Visit> GetByIdWithForm(string username, int id, string formId)
+        public async Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false)
         {
+            int? ageAtVisit = null;
             if (!String.IsNullOrWhiteSpace(formId))
             {
                 // TODO Include related forms as tests are added
                 var packet = await _context.Packets
+                    .Include(v => v.A1)
                     .Include(v => v.A3)
                     .Include(v => v.A4)
                     .Include(v => v.A4a)
@@ -96,6 +102,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     List<Form> forms = new List<Form>();
 
                     // TODO add more forms here as tests are added
+                    if (packet.A1 != null)
+                    {
+                        var a1 = packet.A1.Convert(packet.Id, username);
+                        forms.Add(a1);
+                    }
+
                     if (packet.A3 != null)
                     {
                         var a3 = packet.A3.Convert(packet.Id, username);
@@ -140,9 +152,18 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                     {
                         packetKind = PacketKind.F;
                     }
-
+                    if (includeAge.HasValue && includeAge == true)
+                    {
+                        var a1 = _context.A1s
+                            .Where(v => v.Id == id)
+                            .FirstOrDefault();
+                        if (a1 != null)
+                        {
+                            ageAtVisit = packet.CreatedAt.Year - a1.BIRTHYR;
+                        }
+                    }
                     var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
-
+                    visit.AgeAtVisit = ageAtVisit;
                     return visit;
                 }
             }
@@ -234,6 +255,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
             // TODO Include related forms as tests are added
             var packet = await _context.Packets
+                .Include(p => p.A1)
                 .Include(p => p.A3)
                 .Include(p => p.A4)
                 .Include(p => p.A4a)
@@ -247,6 +269,26 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             var form = entity.Forms.Where(f => f.Kind == formId).FirstOrDefault();
 
             // TODO Add more as tests are added
+            if (formId == "A1")
+            {
+                if (packet.A1 == null)
+                {
+                    packet.A1 = new API.Entities.A1
+                    {
+                        PacketId = packet.Id,
+                        CreatedAt = packet.CreatedAt,
+                        CreatedBy = packet.CreatedBy,
+                        ModifiedBy = packet.ModifiedBy
+                    };
+                }
+                var a1 = packet.A1;
+
+                a1.UpdateFromDomain(formId, entity);
+
+                await _context.SaveChangesAsync();
+
+            }
+
             if (formId == "A3")
             {
                 if (packet.A3 == null)
@@ -478,6 +520,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
         public async Task<Visit>? GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
         {
             var packet = await _context.Packets
+                .Include(v => v.A1)
                 .Include(v => v.A3)
                 .Include(v => v.A4)
                 .Include(v => v.A4a)
@@ -492,6 +535,12 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
             List<Form> forms = new List<Form>();
 
             // TODO add more forms here as tests are added
+            if (packet.A1 != null)
+            {
+                var a1 = packet.A1.Convert(packet.Id, username);
+                forms.Add(a1);
+            }
+
             if (packet.A3 != null)
             {
                 var a3 = packet.A3.Convert(packet.Id, username);

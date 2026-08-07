@@ -81,6 +81,7 @@ namespace UDS.Net.Forms.Extensions
             var vm = new VisitModel()
             {
                 Id = visit.Id,
+                AgeAtVisit = visit.AgeAtVisit,
                 ParticipationId = visit.ParticipationId,
                 VISITNUM = visit.VISITNUM,
                 PACKET = visit.PACKET,
