@@ -64,18 +64,24 @@ namespace UDS.Net.Web.MVC.Services
             {
                 if (includeAge.HasValue && includeAge == true)
                 {
-                    //Only initial visits contain the BIRTHYR property
-                    var firstVisit = await _apiClient.VisitClient.GetByVisitNumber(visitDto.ParticipationId, 1, "A1");
-
-                    var firstVisitWithA1Fields = await _apiClient.VisitClient.GetWithForm(firstVisit.Id, "A1");
-
-                    var a1Fields = (A1Dto)firstVisitWithA1Fields.Forms
-                        .Where(f => f.Kind == "A1")
-                        .FirstOrDefault();
-                    if (a1Fields != null && a1Fields.BIRTHYR != null)
+                    var participant = await _apiClient.ParticipationClient.Get(visitDto.ParticipationId);
+                    if (participant != null)
                     {
-                        var ageAtVisit = visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
-                        return visitDto.ToDomain(username, ageAtVisit);
+                        //Only initial visits contain the BIRTHYR property
+                        var initialVisit = participant.Visits
+                        .Where(v => v.PACKET == "I" || v.PACKET == "I4")
+                        .FirstOrDefault();
+
+                        var initialVisitA1Fields = await _apiClient.VisitClient.GetWithForm(initialVisit.Id, "A1");
+
+                        var a1Fields = (A1Dto)initialVisitA1Fields.Forms
+                            .Where(f => f.Kind == "A1")
+                            .FirstOrDefault();
+                        if (a1Fields != null && a1Fields.BIRTHYR != null)
+                        {
+                            var ageAtVisit = visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
+                            return visitDto.ToDomain(username, ageAtVisit);
+                        }
                     }
                 }
                 return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
