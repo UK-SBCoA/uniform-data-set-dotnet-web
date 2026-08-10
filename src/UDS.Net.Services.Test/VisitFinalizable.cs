@@ -9,6 +9,7 @@ namespace UDS.Net.Services.Test
         {
             return new Visit(
                 id: 1,
+                age: null,
                 number: 1,
                 participationId: 1,
                 version: "4",

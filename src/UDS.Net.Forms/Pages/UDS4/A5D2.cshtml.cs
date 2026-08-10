@@ -13,6 +13,8 @@ public class A5D2Model : FormPageModel
     [BindProperty]
     public A5D2 A5D2 { get; set; } = default!;
 
+    [BindProperty]
+    public int? AgeAtVisit { get; set; }
     public A5D2Model(IVisitService visitService, IParticipationService participationService, IPacketService packetService) : base(visitService, participationService, packetService, "A5D2")
     {
     }
@@ -1583,13 +1585,13 @@ public class A5D2Model : FormPageModel
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        await base.OnGetAsync(id);
+        await base.OnGetAsync(id, true);
 
         if (BaseForm != null)
         {
             A5D2 = (A5D2)BaseForm;
 
-            // If packet type is follow-up and no ID is found (loading a new form), then load previous A3 form data
+            // If packet type is follow-up and no ID is found (loading a new form), then load previous A5D2 form data
             if (A5D2.PacketKind == PacketKind.F && BaseForm.Id == 0)
             {
                 int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, Visit.ParticipationId, "4.0.0");
@@ -1623,6 +1625,74 @@ public class A5D2Model : FormPageModel
 
         Visit.Forms.Add(A5D2); // visit needs updated form as well
 
+        if (BaseForm.Status == FormStatus.Finalized)
+        {
+            ValidateAgeInput();
+        }
         return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+    }
+
+    public void ValidateAgeInput()
+    {
+        if (A5D2.SMOKYRS.HasValue && A5D2.SMOKYRS != 99 && A5D2.SMOKYRS.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.SMOKYRS", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.QUITSMOK.HasValue && A5D2.QUITSMOK != 999 && A5D2.QUITSMOK.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.QUITSMOK", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HRTATTAGE.HasValue && A5D2.HRTATTAGE != 999 && A5D2.HRTATTAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HRTATTAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.CARDARRAGE.HasValue && A5D2.CARDARRAGE != 999 && A5D2.CARDARRAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.CARDARRAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.BYPASSAGE.HasValue && A5D2.BYPASSAGE != 999 && A5D2.BYPASSAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.BYPASSAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.PACDEFAGE.HasValue && A5D2.PACDEFAGE != 999 && A5D2.PACDEFAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.PACDEFAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.VALVEAGE.HasValue && A5D2.VALVEAGE != 999 && A5D2.VALVEAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.VALVEAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.STROKAGE.HasValue && A5D2.STROKAGE != 999 && A5D2.STROKAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.STROKAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.CAROTIDAGE.HasValue && A5D2.CAROTIDAGE != 999 && A5D2.CAROTIDAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.CAROTIDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.TIAAGE.HasValue && A5D2.TIAAGE != 999 && A5D2.TIAAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.TIAAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.PDAGE.HasValue && A5D2.PDAGE != 999 && A5D2.PDAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.PDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.PDOTHRAGE.HasValue && A5D2.PDOTHRAGE != 999 && A5D2.PDOTHRAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.PDOTHRAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.SEIZAGE.HasValue && A5D2.SEIZAGE != 999 && A5D2.SEIZAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.SEIZAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.IMPYEARS.HasValue && A5D2.IMPYEARS != 999 && A5D2.IMPYEARS.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.IMPYEARS", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.FIRSTTBI.HasValue && A5D2.FIRSTTBI != 999 && A5D2.FIRSTTBI.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.FIRSTTBI", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.LASTTBI.HasValue && A5D2.LASTTBI != 999 && A5D2.LASTTBI.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.LASTTBI", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.DIABAGE.HasValue && A5D2.DIABAGE != 999 && A5D2.DIABAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.DIABAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HYPERTAGE.HasValue && A5D2.HYPERTAGE != 999 && A5D2.HYPERTAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HYPERTAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HYPERCHAGE.HasValue && A5D2.HYPERCHAGE != 999 && A5D2.HYPERCHAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HYPERCHAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.CANCERAGE.HasValue && A5D2.CANCERAGE != 999 && A5D2.CANCERAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.CANCERAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.KIDNEYAGE.HasValue && A5D2.KIDNEYAGE != 999 && A5D2.KIDNEYAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.KIDNEYAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.LIVERAGE.HasValue && A5D2.LIVERAGE != 999 && A5D2.LIVERAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.LIVERAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.PVDAGE.HasValue && A5D2.PVDAGE != 999 && A5D2.PVDAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.PVDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HIVAGE.HasValue && A5D2.HIVAGE != 999 && A5D2.HIVAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HIVAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HRTYEARS.HasValue && A5D2.HRTYEARS != 999 && A5D2.HRTYEARS.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HRTYEARS", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HRTSTRTAGE.HasValue && A5D2.HRTSTRTAGE != 999 && A5D2.HRTSTRTAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HRTSTRTAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.HRTENDAGE.HasValue && A5D2.HRTENDAGE != 999 && A5D2.HRTENDAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.HRTENDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.BCPILLSYR.HasValue && A5D2.BCPILLSYR != 999 && A5D2.BCPILLSYR.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.BCPILLSYR", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.BCSTARTAGE.HasValue && A5D2.BCSTARTAGE != 999 && A5D2.BCSTARTAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.BCSTARTAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
+        if (A5D2.BCENDAGE.HasValue && A5D2.BCENDAGE != 999 && A5D2.BCENDAGE.Value > Visit.AgeAtVisit)
+            ModelState.AddModelError("A5D2.BCENDAGE", $"Value cannot be greater than the participant's age ({Visit.AgeAtVisit}).");
     }
 }
