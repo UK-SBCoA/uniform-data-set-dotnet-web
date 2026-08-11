@@ -37,8 +37,9 @@ namespace UDS.Net.Services.Extensions
 
         //public static List<M1Submission> M1Submissions { get; set; } = new List<M1Submission>();
 
-        public static Visit ToDomain(this VisitDto dto, string username)
+        public static Visit ToDomain(this VisitDto dto, string username, int? ageAtVisit = null)
         {
+            //TODO Verify that this maps multiple forms which will support new GetForms service method
 
             PacketKind packetKind = PacketKind.I;
 
@@ -75,10 +76,10 @@ namespace UDS.Net.Services.Extensions
                     packetStatus = status;
             }
 
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
+            return new Visit(dto.Id, ageAtVisit, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
         }
 
-        public static Visit ToDomain(this VisitDto dto, string username, ParticipationDto participationDto)
+        public static Visit ToDomain(this VisitDto dto, string username, ParticipationDto participationDto, int? ageAtVisit = null)
         {
             IList<Form> existingForms = new List<Form>();
 
@@ -117,7 +118,7 @@ namespace UDS.Net.Services.Extensions
 
             Participation participation = participationDto.ToDomain(username);
 
-            return new Visit(dto.Id, dto.VISITNUM, dto.ParticipationId, participation, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
+            return new Visit(dto.Id, ageAtVisit, dto.VISITNUM, dto.ParticipationId, participation, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, dto.TotalUnresolvedErrorCount, errors);
 
         }
 
@@ -395,6 +396,11 @@ namespace UDS.Net.Services.Extensions
 
             return new Packet(dto.Id, dto.VISITNUM, dto.ParticipationId, dto.FORMVER, packetKind, dto.VISIT_DATE, dto.INITIALS, packetStatus, dto.CreatedAt, dto.CreatedBy, dto.ModifiedBy, dto.DeletedBy, dto.IsDeleted, existingForms, packetSubmissions);
 
+        }
+
+        public static List<Packet> ToDomain(this List<PacketDto> dtos, string username)
+        {
+            return dtos.Select(d => d.ToDomain(username)).ToList();
         }
 
         public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username, PacketKind? packetKind = PacketKind.I)

@@ -8,6 +8,8 @@ namespace UDS.Net.Forms.Models
     {
         public int Id { get; set; }
 
+        public int? AgeAtVisit { get; set; }
+
         [Required]
         [Display(Name = "Participation")]
         public int ParticipationId { get; set; }

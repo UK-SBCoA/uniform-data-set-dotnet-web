@@ -70,6 +70,23 @@ namespace UDS.Net.Forms.Extensions
 
         }
 
+        public static List<M1Submission> ToEntity(this IList<M1SubmissionModel> vm)
+        {
+            List<M1Submission> submissions = new List<M1Submission>();
+
+            if (vm != null)
+            {
+                submissions = vm.Select(p => p.ToEntity()).ToList();
+            }
+
+            return submissions;
+        }
+
+        public static M1Submission ToEntity(this M1SubmissionModel vm)
+        {
+            return new M1Submission(vm.Id, "", vm.SubmissionDate, vm.M1Id, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
+        }
+
         public static Visit ToEntity(this VisitModel vm)
         {
             return new Visit(vm.Id, vm.VISITNUM, vm.ParticipationId, vm.FORMVER, vm.PACKET, vm.VISIT_DATE, vm.INITIALS, vm.Status, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, vm.DeletedBy, vm.IsDeleted, vm.Forms.ToEntity(vm.PACKET));
@@ -97,23 +114,35 @@ namespace UDS.Net.Forms.Extensions
             return new PacketSubmission(vm.Id, "", vm.SubmissionDate, vm.PacketId, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
         }
 
-        public static List<M1Submission> ToEntity(this IList<M1SubmissionModel> vm)
+        public static PacketSubmissionError ToEntity(this PacketSubmissionErrorModel vm)
         {
-            List<M1Submission> submissions = new List<M1Submission>();
-
-            if (vm != null)
-            {
-                submissions = vm.Select(p => p.ToEntity()).ToList();
-            }
-
-            return submissions;
+            return new PacketSubmissionError
+            (
+                id: vm.Id,
+                packetSubmissionId: vm.Id,
+                formKind: vm.FormKind,
+                message: vm.Message,
+                assignedTo: vm.AssignedTo,
+                level: vm.Level,
+                status: vm.Status,
+                statusChangedBy: vm.StatusChangedBy,
+                createdAt: vm.CreatedAt,
+                createdBy: vm.CreatedBy,
+                modifiedBy: vm.ModifiedBy,
+                deletedBy: vm.DeletedBy,
+                isDeleted: vm.IsDeleted,
+                location: vm.Location,
+                value: vm.Value,
+                errorCode: vm.ErrorCode,
+                errorTimeStamp: vm.ErrorTimeStamp,
+                fileName: vm.FileName
+            );
         }
 
-        public static M1Submission ToEntity(this M1SubmissionModel vm)
+        public static List<PacketSubmissionError> ToEntity(this List<PacketSubmissionErrorModel> vm)
         {
-            return new M1Submission(vm.Id, "", vm.SubmissionDate, vm.M1Id, vm.CreatedAt, vm.CreatedBy, vm.ModifiedBy, "", false, null);
+            return vm.Select(p => p.ToEntity()).ToList();
         }
-
 
         public static List<Form> ToEntity(this IList<FormModel> vm, PacketKind visitPacket)
         {

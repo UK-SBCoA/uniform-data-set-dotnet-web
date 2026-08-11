@@ -56,16 +56,48 @@ namespace UDS.Net.Web.MVC.Services
             throw new Exception("Visit not found");
         }
 
-        public async Task<Visit> GetByIdWithForm(string username, int id, string formId)
+        public async Task<Visit> GetByIdWithForm(string username, int id, string formId, bool? includeAge = false)
         {
             var visitDto = await _apiClient.VisitClient.GetWithForm(id, formId);
 
             if (visitDto != null)
             {
+                if (includeAge.HasValue && includeAge == true)
+                {
+                    var participant = await _apiClient.ParticipationClient.Get(visitDto.ParticipationId);
+                    if (participant != null)
+                    {
+                        //Only initial visits contain the BIRTHYR property
+                        var initialVisit = participant.Visits
+                        .Where(v => v.PACKET == "I" || v.PACKET == "I4" && v.FORMVER == "4")
+                        .FirstOrDefault();
+
+                        var initialVisitA1Fields = await _apiClient.VisitClient.GetWithForm(initialVisit.Id, "A1");
+
+                        var a1Fields = (A1Dto)initialVisitA1Fields.Forms
+                            .Where(f => f.Kind == "A1")
+                            .FirstOrDefault();
+                        if (a1Fields != null && a1Fields.BIRTHYR != null)
+                        {
+                            var ageAtVisit = visitDto.CreatedAt.Year - a1Fields.BIRTHYR;
+                            return visitDto.ToDomain(username, ageAtVisit);
+                        }
+                    }
+                }
                 return visitDto.ToDomain(username); // converting to domain object implements business rules for shown forms
             }
 
             throw new Exception("Visit with form not found");
+        }
+
+        public async Task<Visit> GetByIdWithForms(string username, int id, string[] formKinds)
+        {
+            var visitDto = await _apiClient.VisitClient.GetWithForms(id, formKinds);
+            if (visitDto != null)
+            {
+                return visitDto.ToDomain(username);
+            }
+            throw new Exception("Visit with forms not found");
         }
 
         public async Task<Visit> GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
