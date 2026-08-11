@@ -6,6 +6,14 @@ namespace UDS.Net.Forms.Tests.Runtime.Extensions
 {
     public static class EntityToDomainMapper
     {
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A1 entity, int visitId, string username)
+        {
+            var dto = entity.ToFullDto();
+
+            var a1 = dto.ToDomain(visitId, username);
+
+            return a1;
+        }
         public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A3 entity, int visitId, string username)
         {
             var dto = entity.ToFullDto();
