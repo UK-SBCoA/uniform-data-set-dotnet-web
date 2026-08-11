@@ -23,6 +23,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         private readonly IVisitService _visitService;
 
         public bool Processed { get; set; } = false;
+        private static readonly DateTime D1cEffectiveDate = new(2026, 7, 14);
+        private const string D1cNotDefaultValue = "88";
+        private const string ModeD1cDefaultValue = "0";
+
 
         public ExportModel(IPacketService packetService, IParticipationService participationService, IConfiguration configuration, IVisitService visitService)
         {
@@ -47,18 +51,23 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 return NotFound();
 
             var participant = await _participationService.GetById(User.Identity?.Name, packet.ParticipationId);
+
             if (participant == null)
                 return NotFound();
 
             var packetSubmission = packet.Submissions.FirstOrDefault();
+
             if (packetSubmission == null)
                 return NotFound();
 
+            // D1c fields are required for visits on or after July 14, 2026.
+            bool includeD1cColumns = packet.VISIT_DATE >= D1cEffectiveDate;
+
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                WriteHeader(csv, packetSubmission);
+                WriteHeader(csv, packetSubmission, includeD1cColumns);
 
-                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
+                await WritePacketDataAsync(csv, packetSubmission, participant, packet, includeD1cColumns);
             }
 
             memoryStream.Position = 0;
@@ -66,62 +75,78 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             string filename = packetSubmission.ToVM().GetFileName(participant.LegacyId, packet.VISIT_DATE);
 
             Response.Headers["Content-Disposition"] = $"attachment; {filename}";
+
             return File(memoryStream, "text/csv", filename);
         }
 
         public async Task<IActionResult> OnPostExportMultiplePackets(List<int> packetId)
         {
-
             if (packetId == null || packetId.Count == 0)
                 return NotFound();
+
+            var packetsToExport = new List<(Packet Packet, Participation Participant, PacketSubmission Submission)>();
+
+            foreach (var id in packetId)
+            {
+                var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
+
+                if (packet == null)
+                    continue;
+
+                var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
+
+                if (participant == null)
+                    continue;
+
+                var newPacketSubmission = new PacketSubmissionModel
+                {
+                    PacketId = packet.Id,
+                    SubmissionDate = DateTime.Now,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = User.Identity.IsAuthenticated
+                        ? User.Identity.Name
+                        : "Username"
+                };
+
+                packet.AddSubmission(newPacketSubmission.ToEntity());
+                await _packetService.Update(User.Identity.Name, packet);
+
+                if (packet.Submissions == null || packet.Submissions.Count == 0)
+                    continue;
+
+                var packetSubmission = packet.Submissions
+                    .OrderByDescending(s => s.SubmissionDate)
+                    .FirstOrDefault();
+
+                if (packetSubmission == null)
+                    continue;
+
+                packetSubmission.Forms = packet.Forms;
+
+                packetsToExport.Add((packet, participant, packetSubmission));
+            }
+
+            if (packetsToExport.Count == 0)
+                return NotFound();
+
+            bool includeD1cColumns = packetsToExport.Any(x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                bool headerWritten = false;
+                // Write the header once, based on ALL packets.
+                var firstPacket = packetsToExport[0];
 
-                foreach (var id in packetId)
+                WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
+
+                // Write each packet.
+                foreach (var item in packetsToExport)
                 {
-                    var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
+                    await WritePacketDataAsync(csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
 
-                    if (packet != null)
-                    {
-                        var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
-
-                        var newPacketSubmission = new PacketSubmissionModel
-                        {
-                            PacketId = packet.Id,
-                            SubmissionDate = DateTime.Now,
-                            CreatedAt = DateTime.UtcNow,
-                            CreatedBy = User.Identity.IsAuthenticated ? User.Identity.Name : "Username"
-                        };
-
-                        packet.AddSubmission(newPacketSubmission.ToEntity());
-                        await _packetService.Update(User.Identity.Name, packet);
-
-                        if (packet.Submissions != null && packet.Submissions.Count > 0)
-                        {
-                            var packetSubmission = packet.Submissions
-                                .OrderByDescending(s => s.SubmissionDate)
-                                .FirstOrDefault();
-
-                            if (packetSubmission != null)
-                            {
-                                packetSubmission.Forms = packet.Forms;
-
-                                if (!headerWritten)
-                                {
-                                    WriteHeader(csv, packetSubmission);
-                                    headerWritten = true;
-                                }
-
-                                await WritePacketDataAsync(csv, packetSubmission, participant, packet);
-                                csv.NextRecord();
-                            }
-                        }
-                    }
+                    csv.NextRecord();
                 }
             }
             memoryStream.Position = 0;
@@ -129,14 +154,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             string packetIdsExported = string.Join("-", packetId);
             string filename = $"UDS_Packets_{packetIdsExported}_{DateTime.UtcNow:yyyyMMdd}-uds.csv";
 
-            // Sets a flag cookie so the Stimulus controller knows when the download is complete and can refresh the page.
             Response.Cookies.Append("udsPacketExportComplete", "true");
             Response.Headers["Content-Disposition"] = $"attachment; filename=\"{filename}\"";
 
             return File(memoryStream, "text/csv", filename);
         }
 
-        private void WriteHeader(CsvWriter csv, PacketSubmission packetSubmission)
+        private void WriteHeader(CsvWriter csv, PacketSubmission packetSubmission, bool includeD1cColumns)
         {
             // ptid, adcid, visitnum, packet, formver, dssub, visit_date m/d/yyyy, initials, frmdatea1, initialsa1, langa1, modea1, rmreasa1
             csv.WriteHeader<CsvRecord>();
@@ -299,13 +323,18 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 csv.WriteHeader<D1bRecord>();
                 csv.WriteHeaderLowercase<D1bFormFields>();
             }
+            if (includeD1cColumns)
+            {
+                csv.WriteField("d1cnot");
+                csv.WriteField("moded1c");
+            }
 
             csv.NextRecord(); // end of header row
 
         }
 
 
-        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet)
+        private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet, bool includeD1cColumns)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
@@ -685,6 +714,19 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                 csv.WriteRecord(new D1bRecord(d1b));
                 if (d1b.Fields is D1bFormFields normalD1b)
                     csv.WriteRecord(normalD1b);
+            }
+            if (includeD1cColumns)
+            {
+                if (packet.VISIT_DATE >= D1cEffectiveDate)
+                {
+                    csv.WriteField(D1cNotDefaultValue);
+                    csv.WriteField(ModeD1cDefaultValue);
+                }
+                else
+                {
+                    csv.WriteField(string.Empty);
+                    csv.WriteField(string.Empty);
+                }
             }
 
         } // writer flushed automatically here
