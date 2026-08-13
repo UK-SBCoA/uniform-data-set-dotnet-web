@@ -79,69 +79,86 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return File(memoryStream, "text/csv", filename);
         }
 
-        public async Task<IActionResult> OnPostExportMultiplePackets(List<int> packetId)
+        public async Task<IActionResult> OnPostExportMultiplePackets(List<int> packetIds)
         {
-            if (packetId == null || packetId.Count == 0)
+            if (packetIds == null || packetIds.Count == 0)
                 return NotFound();
 
+            var packets = new List<Packet>();
+
+            foreach (var id in packetIds)            {
+
+                var packet = await _packetService.GetPacketWithForms(User.Identity!.Name!, id);
+
+                if (packet != null)
+                {
+                    packets.Add(packet);
+                }
+            }
+
+            // Every requested packet must exist.
+            if (packets.Count != packetIds.Count)
+                return NotFound();
+
+            var participants = new Dictionary<int, Participation>();
+
+            foreach (var packet in packets)
+            {
+                var participant = await _participationService.GetById(
+                    User.Identity!.Name!,
+                    packet.ParticipationId);
+
+                if (participant != null)
+                {
+                    participants[packet.Id] = participant;
+                }
+            }
+
+            // Every packet must have a participant.
+            if (participants.Count != packets.Count)
+                return NotFound();
+
+            // Validation is complete. No data has been changed yet.
             var packetsToExport = new List<(Packet Packet, Participation Participant, PacketSubmission Submission)>();
 
-            foreach (var id in packetId)
+            foreach (var packet in packets)
             {
-                var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
-
-                if (packet == null)
-                    continue;
-
-                var participant = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
-
-                if (participant == null)
-                    continue;
+                var participant = participants[packet.Id];
 
                 var newPacketSubmission = new PacketSubmissionModel
                 {
                     PacketId = packet.Id,
                     SubmissionDate = DateTime.Now,
                     CreatedAt = DateTime.UtcNow,
-                    CreatedBy = User.Identity.IsAuthenticated
-                        ? User.Identity.Name
+                    CreatedBy = User.Identity!.IsAuthenticated
+                        ? User.Identity!.Name
                         : "Username"
                 };
 
-                packet.AddSubmission(newPacketSubmission.ToEntity());
-                await _packetService.Update(User.Identity.Name, packet);
-
-                if (packet.Submissions == null || packet.Submissions.Count == 0)
-                    continue;
-
-                var packetSubmission = packet.Submissions
-                    .OrderByDescending(s => s.SubmissionDate)
-                    .FirstOrDefault();
-
-                if (packetSubmission == null)
-                    continue;
-
+                var packetSubmission = newPacketSubmission.ToEntity();
                 packetSubmission.Forms = packet.Forms;
 
                 packetsToExport.Add((packet, participant, packetSubmission));
             }
 
-            if (packetsToExport.Count == 0)
-                return NotFound();
+            foreach (var item in packetsToExport)
+            {
+                item.Packet.AddSubmission(item.Submission);
+                await _packetService.Update(User.Identity!.Name!, item.Packet);
+            }
 
-            bool includeD1cColumns = packetsToExport.Any(x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
+            bool includeD1cColumns = packetsToExport.Any(
+                x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                // Write the header once, based on ALL packets.
                 var firstPacket = packetsToExport[0];
 
                 WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
 
-                // Write each packet.
                 foreach (var item in packetsToExport)
                 {
                     await WritePacketDataAsync(csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
@@ -149,9 +166,10 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     csv.NextRecord();
                 }
             }
+
             memoryStream.Position = 0;
 
-            string packetIdsExported = string.Join("-", packetId);
+            string packetIdsExported = string.Join("-", packetIds);
             string filename = $"UDS_Packets_{packetIdsExported}_{DateTime.UtcNow:yyyyMMdd}-uds.csv";
 
             Response.Cookies.Append("udsPacketExportComplete", "true");
