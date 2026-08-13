@@ -86,8 +86,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             var packets = new List<Packet>();
 
-            foreach (var id in packetIds)            {
-
+            foreach (var id in packetIds)
+            {
                 var packet = await _packetService.GetPacketWithForms(User.Identity!.Name!, id);
 
                 if (packet != null)
@@ -104,9 +104,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             foreach (var packet in packets)
             {
-                var participant = await _participationService.GetById(
-                    User.Identity!.Name!,
-                    packet.ParticipationId);
+                var participant = await _participationService.GetById(User.Identity!.Name!, packet.ParticipationId);
 
                 if (participant != null)
                 {
