@@ -123,7 +123,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKMUL { get; set; }
         [Display(Name = "Age at most recent stroke")]
-        [RegularExpression("^(1\\d|[2-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 10-110 or 999")]
+        [RegularExpression("^(\\d|[1-9]\\d|10\\d|110|999)$", ErrorMessage = "Valid range is 0-110 or 999")]
         [RequiredIfRange(nameof(CBSTROKE), 1, 2, ErrorMessage = "Please specify.")]
         public int? STROKAGE { get; set; }
         [Display(Name = "What is the status of stroke symptoms?")]
