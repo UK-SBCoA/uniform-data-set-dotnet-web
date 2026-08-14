@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
+using UDS.Net.Services.DomainModels.Forms;
 
 namespace UDS.Net.Forms.Pages.Visits
 {
@@ -15,6 +16,8 @@ namespace UDS.Net.Forms.Pages.Visits
 
         [BindProperty]
         public PacketModel? Packet { get; set; }
+
+        public bool CanFinalize { get; set; }
 
         public string PageTitle
         {
@@ -44,23 +47,42 @@ namespace UDS.Net.Forms.Pages.Visits
             if (id == null || id == 0)
                 return NotFound();
 
-            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id.Value);
+            var packet = await _packetService.GetPacketWithForms(User.Identity!.Name!, id.Value);
 
             if (packet == null)
                 return NotFound();
 
-
-            var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
+            var participation = await _participationService.GetById(
+                User.Identity!.Name!,
+                packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
 
-            Packet = packet.ToVM();
+            D1aFormFields? previousD1a = null;
 
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                User.Identity!.Name!,
+                packet.ParticipationId,
+                packet.VISITNUM - 1,
+                "D1a");
+
+            if (previousVisit != null)
+            {
+                previousD1a = previousVisit.Forms
+                    .FirstOrDefault(f => f.Kind == "D1a")
+                    ?.Fields as D1aFormFields;
+            }
+
+            Packet = packet.ToVM();
             Packet.Participation = participation.ToVM();
+
+            CanFinalize = packet.IsFinalizable &&
+                          packet.TryValidate(previousD1a);
 
             return Page();
         }
+
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
@@ -71,8 +93,28 @@ namespace UDS.Net.Forms.Pages.Visits
             Packet = packet.ToVM();
             Packet.Participation = participation.ToVM();
 
+            D1aFormFields? previousD1a = null;
+
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                User.Identity!.Name!,
+                packet.ParticipationId,
+                packet.VISITNUM - 1,
+                "D1a"
+            );
+
+            if (previousVisit != null)
+            {
+                var previousD1aForm = previousVisit.Forms
+                    .FirstOrDefault(f => f.Kind == "D1a");
+
+                if (previousD1aForm != null)
+                {
+                    previousD1a = previousD1aForm.Fields as D1aFormFields;
+                }
+            }
+
             var p = Packet.ToEntity();
-            p.TryValidate();
+            p.TryValidate(previousD1a);
 
             if (!p.IsFinalizable)
             {
@@ -93,15 +135,33 @@ namespace UDS.Net.Forms.Pages.Visits
         {
             var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id);
 
-            packet.TryValidate();
+            D1aFormFields? previousD1a = null;
 
-            // TODO add a service method to get the previous packet
+            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                User.Identity!.Name!,
+                packet.ParticipationId,
+                packet.VISITNUM - 1,
+                "D1a"
+            );
 
-            if (!packet.IsValid)
+            if (previousVisit != null)
             {
-                var list = packet.GetModelErrors();
-                return Partial("_Validate", list);
+                var previousD1aForm = previousVisit.Forms
+                    .FirstOrDefault(f => f.Kind == "D1a");
+
+                if (previousD1aForm != null)
+                {
+                    previousD1a = previousD1aForm.Fields as D1aFormFields;
+                }
             }
+
+            var errors = packet.GetModelErrors(previousD1a).ToList();
+
+            if (errors.Any())
+            {
+                return Partial("_Validate", errors);
+            }
+
             return Partial("_Validate", null);
         }
 
