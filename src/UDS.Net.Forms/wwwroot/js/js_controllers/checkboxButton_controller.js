@@ -57,23 +57,22 @@ export default class extends Controller {
     this.updateButtonState()
   }
 
-  prepareSubmission(event) {
-    const form = event.target.closest('form')
-    const selected = this.getSelectedPackets()
+    prepareSubmission(event) {
+        const form = event.target.closest('form')
+        const selected = this.getSelectedPackets()
 
-    form.querySelectorAll('input[name="packetId"][data-generated="true"]').forEach(el => el.remove())
+        form.querySelectorAll('input[name="packetIds"][data-generated="true"]').forEach(el => el.remove())
 
-    selected.forEach(id => {
-      const existing = form.querySelector(`input[name="packetId"][value="${id}"]`)
-      if (existing && existing.type !== 'hidden') return
+        selected.forEach(id => {
+            const existing = form.querySelector(`input[name="packetId"][value="${id}"]`)
+            if (existing && existing.type !== 'hidden') return
 
-      const input = document.createElement('input')
-      input.type = 'hidden'
-      input.name = 'packetId'
-      input.value = id
-      input.dataset.generated = 'true'
-      form.appendChild(input)
-    })
-  }
-
+            const input = document.createElement('input')
+            input.type = 'hidden'
+            input.name = 'packetIds'
+            input.value = id
+            input.dataset.generated = 'true'
+            form.appendChild(input)
+        })
+    }
 }
