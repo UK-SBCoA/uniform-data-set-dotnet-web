@@ -28,7 +28,8 @@ namespace UDS.Net.Forms.Pages.Packets
                 PacketStatus.Finalized,
                 PacketStatus.Submitted,
                 PacketStatus.FailedErrorChecks,
-                PacketStatus.PassedErrorChecks
+                PacketStatus.PassedErrorChecks,
+                PacketStatus.Pending
             };
 
             var allStatusNames = allowedStatuses.Select(s => s.ToString()).ToList();
