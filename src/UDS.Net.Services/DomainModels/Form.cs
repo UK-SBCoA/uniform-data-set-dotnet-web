@@ -93,7 +93,7 @@ namespace UDS.Net.Services.DomainModels
             {
                 Fields = new A1aFormFields
                 {
-                    IsFollowUp = (packetKind == PacketKind.F) ? true : false
+                    IsFollowUp = packetKind == PacketKind.F
                 };
             }
             else if (Kind == "A2")
