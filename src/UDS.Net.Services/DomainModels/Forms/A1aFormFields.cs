@@ -72,7 +72,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
+                var codes = new List<NotIncludedReasonCode>
+            {
+                NotIncludedReasonCode.ConcernsAboutReliability
+            };
+
+                if (IsFollowUp == true)
+                    codes.Add(NotIncludedReasonCode.Optional);
+
+                return codes;
             }
         }
 
@@ -91,6 +99,8 @@ namespace UDS.Net.Services.DomainModels.Forms
                 return new List<AdministrationFormat>() { AdministrationFormat.Self, AdministrationFormat.Staff };
             }
         }
+
+        public bool IsFollowUp { get; set; } = true;
 
         public string GetDescription()
         {

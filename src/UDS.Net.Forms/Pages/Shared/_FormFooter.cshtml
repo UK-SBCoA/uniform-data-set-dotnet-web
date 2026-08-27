@@ -125,7 +125,11 @@
                     <div>
                         <label for="@Html.IdFor(m => m.NOT)" class="block text-sm font-semibold leading-6 text-gray-800">If not completed, specify reason</label>
 
-                        @if (Model.IsRequiredForPacketKind)
+                        @{
+                            var allowOptionalA1a = Model.Kind == "A1a" && Model.PacketKind == PacketKind.F;
+                        }
+
+                        @if (Model.IsRequiredForPacketKind && !allowOptionalA1a)
                         {
                             <select data-formFooter-target="notCompletedFields" asp-for="NOT" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-400 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 never-enable">
                                 <option disabled selected class="disabled:opacity-75">Form is required, MUST complete</option>
