@@ -71,30 +71,37 @@ function toggleAffects(targets, isSelected, depth = 0) {
     });
 }
 
-function compareRange(low, high, targets, value) {
+function compareRangeBehaviors(behaviors, value) {
+
     if (value === "") {
-        $.each(targets, function (index, behavior) {
-            $.each(behavior, function (target, affects) {
-                setAffect(target, "disabled", true);
+        return;
+    }
+
+    value = parseInt(value);
+
+    $.each(behaviors, function (_, behavior) {
+
+        const inRange = value >= behavior.low && value <= behavior.high;
+
+        if (!inRange) {
+            return;
+        }
+
+        $.each(behavior.targets, function (_, target) {
+
+            $.each(target, function (field, attributes) {
+
+                $.each(attributes, function (attribute, value) {
+
+                    setAffect(
+                        field,
+                        attribute,
+                        value === "true"
+                    );
+                });
             });
         });
-    }
-    else {
-        if (value >= low && value <= high) {
-            $.each(targets, function (index, behavior) {
-                $.each(behavior, function (target, affects) {
-                    setAffect(target, "disabled", false);
-                });
-            });
-        }
-        else {
-            $.each(targets, function (index, behavior) {
-                $.each(behavior, function (target, affects) {
-                    setAffect(target, "disabled", true);
-                });
-            });
-        }
-    };
+    });
 }
 
 function debounce(func, wait) {
@@ -165,13 +172,10 @@ function setInputStates() {
                 let toggleTargets = $(this).data("affects-toggle-targets");
                 toggleAffects(toggleTargets, isSelected);
             }
-            else if ($(this).data("affects-range-targets")) {
-                // text or number inputs
-                let low = $(this).data("affects-range-low");
-                let high = $(this).data("affects-range-high");
-                let targets = $(this).data("affects-range-targets");
+            else if ($(this).data("affects-range-behaviors")) {
+                let behaviors = $(this).data("affects-range-behaviors");
 
-                compareRange(low, high, targets, $(this).val());
+                compareRangeBehaviors(behaviors, $(this).val());
             }
 
             // watch for changes
@@ -188,13 +192,12 @@ function setInputStates() {
             });
 
             // if it's a range input, add a debounced input handler
-            if ($(this).data("affects-range-targets")) {
-                let low = $(this).data("affects-range-low");
-                let high = $(this).data("affects-range-high");
-                let targets = $(this).data("affects-range-targets");
+            if ($(this).data("affects-range-behaviors")) {
+
+                let behaviors = $(this).data("affects-range-behaviors");
 
                 $(this).on("input", debounce(function () {
-                    compareRange(low, high, targets, $(this).val());
+                    compareRangeBehaviors(behaviors, $(this).val());
                 }, 300));
             }
         });
@@ -633,22 +636,22 @@ $.validator.unobtrusive.adapters.add(
 
 $.validator.addMethod("allowcode777", function (value, element, params) {
 
-  let packetKind = $("[name='" + params.packetkind + "']").val();
+    let packetKind = $("[name='" + params.packetkind + "']").val();
 
-  if (value === "777" && packetKind !== "F") {
-    return false;
-  }
+    if (value === "777" && packetKind !== "F") {
+        return false;
+    }
 
-  return true;
+    return true;
 });
 
 $.validator.unobtrusive.adapters.add("allowcode777", ["packetkind"],
-  function (options) {
-    options.rules.allowcode777 = {
-      packetkind: options.params.packetkind
-    };
-    options.messages.allowcode777 = options.message;
-  }
+    function (options) {
+        options.rules.allowcode777 = {
+            packetkind: options.params.packetkind
+        };
+        options.messages.allowcode777 = options.message;
+    }
 );
 function RemoveValidationMessages(elementName, validationMessage) {
     $(`input[name='${elementName}']`).removeClass("input-validation-error");
