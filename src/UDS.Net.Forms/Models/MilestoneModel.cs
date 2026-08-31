@@ -81,6 +81,7 @@ namespace UDS.Net.Forms.Models
 
         public int? DEATHDY { get; set; }
 
+        [Display(Name = "Date of death, year")]
         public int? DEATHYR { get; set; }
 
         [Display(Name = "ADC autopsy")]
