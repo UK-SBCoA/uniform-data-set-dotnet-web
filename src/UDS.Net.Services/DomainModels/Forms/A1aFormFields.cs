@@ -72,7 +72,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
+                var codes = new List<NotIncludedReasonCode>
+            {
+                NotIncludedReasonCode.ConcernsAboutReliability
+            };
+
+                if (PacketKind == PacketKind.F)
+                    codes.Add(NotIncludedReasonCode.Optional);
+
+                return codes;
             }
         }
 
@@ -90,6 +98,13 @@ namespace UDS.Net.Services.DomainModels.Forms
             {
                 return new List<AdministrationFormat>() { AdministrationFormat.Self, AdministrationFormat.Staff };
             }
+        }
+
+        public PacketKind PacketKind { get; }
+
+        public A1aFormFields(PacketKind packetKind)
+        {
+            PacketKind = packetKind;
         }
 
         public string GetDescription()

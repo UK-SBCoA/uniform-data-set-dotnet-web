@@ -18,7 +18,9 @@ namespace UDS.Net.Services.Enums
         [Description("Verbal refusal")]
         VerbalRefusal = 98,
         [Description("Concerns about reliability")]
-        ConcernsAboutReliability = 93
+        ConcernsAboutReliability = 93,
+        [Description("Optional")]
+        Optional = 88 // only allowed for Aa1 FVP
     }
 }
 
