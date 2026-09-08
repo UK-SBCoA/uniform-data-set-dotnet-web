@@ -77,7 +77,7 @@ namespace UDS.Net.Services.DomainModels.Forms
                 NotIncludedReasonCode.ConcernsAboutReliability
             };
 
-                if (IsFollowUp == true)
+                if (PacketKind == PacketKind.F)
                     codes.Add(NotIncludedReasonCode.Optional);
 
                 return codes;
@@ -100,7 +100,12 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
-        public bool IsFollowUp { get; set; } = true;
+        public PacketKind PacketKind { get; }
+
+        public A1aFormFields(PacketKind packetKind)
+        {
+            PacketKind = packetKind;
+        }
 
         public string GetDescription()
         {

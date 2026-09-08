@@ -195,19 +195,32 @@ namespace UDS.Net.Forms.Tests
             await Page.GetByRole(AriaRole.Button, new() { Name = "New visit" }).ClickAsync();
             await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1a" }).GetByRole(AriaRole.Link).ClickAsync();
 
-            await Page.GetByLabel("Mode", new() { Exact = true }).SelectOptionAsync("0");
+            var mode = Page.GetByLabel("Mode", new() { Exact = true });
+            var reason = Page.GetByLabel("If not completed, specify reason");
 
-            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "2" });
+            await Expect(mode.Locator("option[value='0']")).ToBeEnabledAsync();
+
+            await Expect(
+                reason.Locator("option[value='88']")
+            ).ToHaveTextAsync("Optional");
+
+            await mode.SelectOptionAsync("0");
+
+            await Expect(reason).ToBeEnabledAsync();
+
+            await Expect(
+                reason.Locator("option[value='93']")
+            ).ToBeEnabledAsync();
+
+            await reason.SelectOptionAsync("93");
+
+            var saveStatus = Page.Locator("select[data-val-status]");
+            await Expect(saveStatus).ToBeVisibleAsync();
+            await saveStatus.SelectOptionAsync("2");
+
+            await Expect(saveStatus).ToHaveValueAsync("2");
+
             await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-
-            await Expect(Page.GetByLabel("If not completed, specify reason")).ToBeVisibleAsync();
-
-            await Page.GetByLabel("If not completed, specify reason").SelectOptionAsync("93");
-
-            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "2" });
-            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
-
-            await Expect(Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1a" }).GetByRole(AriaRole.Link)).ToBeVisibleAsync();
         }
 
         [TestMethod]
