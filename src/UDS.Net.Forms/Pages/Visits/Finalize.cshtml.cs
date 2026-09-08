@@ -17,8 +17,6 @@ namespace UDS.Net.Forms.Pages.Visits
         [BindProperty]
         public PacketModel? Packet { get; set; }
 
-        public bool CanFinalize { get; set; }
-
         public string PageTitle
         {
             get
@@ -47,42 +45,23 @@ namespace UDS.Net.Forms.Pages.Visits
             if (id == null || id == 0)
                 return NotFound();
 
-            var packet = await _packetService.GetPacketWithForms(User.Identity!.Name!, id.Value);
+            var packet = await _packetService.GetPacketWithForms(User.Identity.Name, id.Value);
 
             if (packet == null)
                 return NotFound();
 
-            var participation = await _participationService.GetById(
-                User.Identity!.Name!,
-                packet.ParticipationId);
+
+            var participation = await _participationService.GetById(User.Identity.Name, packet.ParticipationId);
 
             if (participation == null)
                 return NotFound();
 
-            D1aFormFields? previousD1a = null;
-
-            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
-                User.Identity!.Name!,
-                packet.ParticipationId,
-                packet.VISITNUM - 1,
-                "D1a");
-
-            if (previousVisit != null)
-            {
-                previousD1a = previousVisit.Forms
-                    .FirstOrDefault(f => f.Kind == "D1a")
-                    ?.Fields as D1aFormFields;
-            }
-
             Packet = packet.ToVM();
-            Packet.Participation = participation.ToVM();
 
-            CanFinalize = packet.IsFinalizable &&
-                          packet.TryValidate(previousD1a);
+            Packet.Participation = participation.ToVM();
 
             return Page();
         }
-
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync(int id)
