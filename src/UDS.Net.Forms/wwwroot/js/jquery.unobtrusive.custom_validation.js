@@ -74,10 +74,17 @@ function toggleAffects(targets, isSelected, depth = 0) {
 function compareRangeBehaviors(behaviors, value) {
 
     value = parseInt(value);
+    let matched = false;
 
     $.each(behaviors, function (_, behavior) {
 
         const inRange = !isNaN(value) && value >= behavior.low && value <= behavior.high;
+
+        if (!inRange) {
+            return;
+        }
+
+        matched = true;
 
         $.each(behavior.targets, function (_, target) {
 
@@ -88,12 +95,32 @@ function compareRangeBehaviors(behaviors, value) {
                     setAffect(
                         field,
                         attribute,
-                        inRange ? value === "true" : value !== "true"
+                        value === "true"
                     );
                 });
             });
         });
     });
+
+    if (!matched) {
+        $.each(behaviors, function (_, behavior) {
+
+            $.each(behavior.targets, function (_, target) {
+
+                $.each(target, function (field, attributes) {
+
+                    $.each(attributes, function (attribute, value) {
+
+                        setAffect(
+                            field,
+                            attribute,
+                            false
+                        );
+                    });
+                });
+            });
+        });
+    }
 }
 
 function debounce(func, wait) {
