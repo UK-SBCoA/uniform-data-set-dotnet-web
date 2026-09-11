@@ -351,17 +351,19 @@ namespace UDS.Net.Services.DomainModels
         // https://stackoverflow.com/questions/30895888/setting-common-base-class-properties-when-creating-objects
         // TODO Use notifications pattern to return errors and not throwing exceptions
 
-        public bool TryValidate()
+        public bool TryValidate(D1aFormFields previousD1a = null)
         {
             // TODO validate the visit against any rules that might have changed due to form fields changing
-            var errors = GetModelErrors();
+            var errors = GetModelErrors(previousD1a);
             if (errors != null && errors.Count() > 0)
                 return false;
             else
                 return true;
         }
 
-        public IEnumerable<VisitValidationResult> GetModelErrors()
+        public IEnumerable<VisitValidationResult> GetModelErrors() => GetModelErrors(null);
+
+        public IEnumerable<VisitValidationResult> GetModelErrors(D1aFormFields previousD1a)
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
 
@@ -396,8 +398,37 @@ namespace UDS.Net.Services.DomainModels
                 }
             }
 
+            if (previousD1a != null)
+            {
+                var current = GetFields<D1aFormFields>("D1a");
+
+                if (current != null)
+                {
+                    void Check(string fieldName, bool? previous, bool? currentValue)
+                    {
+                        if (previous == true && currentValue != true)
+                        {
+                            results.Add(new VisitValidationResult(
+                                $"D1a: {fieldName} was present in previous visit and must remain present in current visit.",
+                                new[] { fieldName }
+                            ));
+                        }
+                    }
+
+                    Check("BIPOLDX", previousD1a.BIPOLDX, current.BIPOLDX);
+                    Check("SCHIZOP", previousD1a.SCHIZOP, current.SCHIZOP);
+                    Check("ANXIET", previousD1a.ANXIET, current.ANXIET);
+                    Check("PTSDDX", previousD1a.PTSDDX, current.PTSDDX);
+                    Check("OTHPSY", previousD1a.OTHPSY, current.OTHPSY);
+                    Check("EPILEP", previousD1a.EPILEP, current.EPILEP);
+                    Check("HYCEPH", previousD1a.HYCEPH, current.HYCEPH);
+                    Check("HIV", previousD1a.HIV, current.HIV);
+                }
+            }
+
             return results;
         }
+
         public async Task<IEnumerable<VisitValidationResult>> GetModelAlerts(ILookupService lookupService)
         {
             List<VisitValidationResult> results = new List<VisitValidationResult>();
