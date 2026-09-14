@@ -703,7 +703,48 @@ namespace UDS.Net.Forms.Pages.UDS4
 
             Visit.Forms.Add(D1a); // visit needs updated form as well
 
-            return await base.OnPostAsync(id, goNext); // checks for validation, etc.
+            // Validate selected values against the previous visit
+            if (Visit.VISITNUM > 1)
+            {
+                var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(
+                    User.Identity!.Name!,
+                    Visit.ParticipationId,
+                    Visit.VISITNUM - 1,
+                    "D1a");
+
+                if (previousVisit != null)
+                {
+                    var previousD1aForm = previousVisit.Forms
+                        .FirstOrDefault(f => f.Kind == "D1a");
+
+                    if (previousD1aForm != null)
+                    {
+                        var previousD1a = (D1a)previousD1aForm.PreviousVisitToVM();
+
+                        ValidatePreviousValue(D1a.BIPOLDX, previousD1a.BIPOLDX, "BIPOLDX", "D1a.BIPOLDIF");
+                        ValidatePreviousValue(D1a.SCHIZOP, previousD1a.SCHIZOP, "SCHIZOP", "D1a.SCHIZOIF");
+                        ValidatePreviousValue(D1a.ANXIET, previousD1a.ANXIET, "ANXIET", "D1a.ANXIETIF");
+                        ValidatePreviousValue(D1a.PTSDDX, previousD1a.PTSDDX, "PTSDDX", "D1a.PTSDDXIF");
+                        ValidatePreviousValue(D1a.OTHPSY, previousD1a.OTHPSY, "OTHPSY", "D1a.OTHPSYIF");
+                        ValidatePreviousValue(D1a.EPILEP, previousD1a.EPILEP, "EPILEP", "D1a.EPILEPIF");
+                        ValidatePreviousValue(D1a.HYCEPH, previousD1a.HYCEPH, "HYCEPH", "D1a.HYCEPHIF");
+                        ValidatePreviousValue(D1a.HIV, previousD1a.HIV, "HIV", "D1a.HIVIF");
+                    }
+                }
+            }
+
+            return await base.OnPostAsync(id, goNext);
         }
+
+        private void ValidatePreviousValue<T>(T currentValue, T previousValue, string fieldName, string validationPropertyName)
+        {
+            if (!EqualityComparer<T>.Default.Equals(currentValue, previousValue))
+            {
+                ModelState.AddModelError(
+                    validationPropertyName,
+                    $"{fieldName} was present in the previous visit and must remain present.");
+            }
+        }
+
     }
 }
