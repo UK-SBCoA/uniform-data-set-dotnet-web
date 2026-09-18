@@ -81,6 +81,7 @@ namespace UDS.Net.Forms.Models
 
         public int? DEATHDY { get; set; }
 
+        [Display(Name = "Date of death, year")]
         public int? DEATHYR { get; set; }
 
         [Display(Name = "ADC autopsy")]
@@ -207,14 +208,32 @@ namespace UDS.Net.Forms.Models
             }
         };
 
-        public Dictionary<string, UIBehavior> FTLDREASBehavior = new Dictionary<string, UIBehavior>
+        public Dictionary<string, UIBehavior> MILESTONETYPEBehavior = new Dictionary<string, UIBehavior>
         {
             {
-                "4", new UIBehavior
+                "0", new UIBehavior
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIEnableAttribute("Milestone.FTLDREAX")
+                        new UIEnableAttribute("DECEASED"),
+                        new UIEnableAttribute("DISCONT"),
+                        new UIDisableAttribute("CHANGEMO"),
+                        new UIDisableAttribute("CHANGEDY"),
+                        new UIDisableAttribute("CHANGEYR"),
+                        new UIDisableAttribute("PROTOCOL"),
+                        new UIDisableAttribute("ACONSENT"),
+                        new UIDisableAttribute("RECOGIM"),
+                        new UIDisableAttribute("REPHYILL"),
+                        new UIDisableAttribute("REREFUSE"),
+                        new UIDisableAttribute("RENAVAIL"),
+                        new UIDisableAttribute("RENURSE"),
+                        new UIDisableAttribute("REJOIN"),
+                        new UIDisableAttribute("FTLDDISC"),
+                        new UIDisableAttribute("FTLDREAS"),
+                        new UIDisableAttribute("FTLDREAX"),
+                        new UIDisableAttribute("NURSEMO"),
+                        new UIDisableAttribute("NURSEDY"),
+                        new UIDisableAttribute("NURSEYR"),
                     }
                 }
             },
@@ -223,7 +242,51 @@ namespace UDS.Net.Forms.Models
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
+                        new UIDisableAttribute("DECEASED"),
+                        new UIDisableAttribute("DISCONT"),
+                        new UIDisableAttribute("DISCMO"),
+                        new UIDisableAttribute("DISCDY"),
+                        new UIDisableAttribute("DISCYR"),
+                        new UIDisableAttribute("AUTOPSY"),
+                        new UIDisableAttribute("DROPREAS"),
+                        new UIDisableAttribute("DEATHMO"),
+                        new UIDisableAttribute("DEATHDY"),
+                        new UIDisableAttribute("DEATHYR"),
+                        new UIEnableAttribute("CHANGEMO"),
+                        new UIEnableAttribute("CHANGEDY"),
+                        new UIEnableAttribute("CHANGEYR"),
+                        new UIEnableAttribute("PROTOCOL"),
+                        new UIEnableAttribute("ACONSENT"),
+                        new UIEnableAttribute("RECOGIM"),
+                        new UIEnableAttribute("REPHYILL"),
+                        new UIEnableAttribute("REREFUSE"),
+                        new UIEnableAttribute("RENAVAIL"),
+                        new UIEnableAttribute("RENURSE"),
+                        new UIEnableAttribute("REJOIN"),
+                        new UIEnableAttribute("FTLDDISC"),
+                        new UIEnableAttribute("FTLDREAS"),
+                    }
+                }
+            }
+        };
+
+        public Dictionary<string, UIBehavior> FTLDREASBehavior = new()
+        {
+            {
+                "4", new UIBehavior
+                {
+                    PropertyAttributes = new List<UIPropertyAttributes>
+                    {
+                        new UIEnableAttribute("FTLDREAX")
+                    }
+                }
+            },
+            {
+                "1", new UIBehavior
+                {
+                    PropertyAttributes = new List<UIPropertyAttributes>
+                    {
+                        new UIDisableAttribute("FTLDREAX")
                     }
                 }
             },
@@ -232,7 +295,7 @@ namespace UDS.Net.Forms.Models
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
+                        new UIDisableAttribute("FTLDREAX")
                     }
                 }
             },
@@ -241,10 +304,10 @@ namespace UDS.Net.Forms.Models
                 {
                     PropertyAttributes = new List<UIPropertyAttributes>
                     {
-                        new UIDisableAttribute("Milestone.FTLDREAX")
+                        new UIDisableAttribute("FTLDREAX")
                     }
                 }
-            },
+            }
         };
 
         public Dictionary<string, UIBehavior> DECEASEDBehavior = new Dictionary<string, UIBehavior>

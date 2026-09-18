@@ -85,7 +85,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     ValidateMonth(milestone.DEATHMO, "DEATHMO");
                     ValidateDay(milestone.DEATHDY, "DEATHDY");
-                    ValidateYear(milestone.DEATHYR, "DEATHYR");
+                    ValidateDeathYear(milestone.DEATHYR, "DEATHYR");
 
                     if (milestone.AUTOPSY == null)
                     {
@@ -143,6 +143,22 @@ namespace UDS.Net.Forms.Models.PageModels
             if (yearValue < 2015 || yearValue > 2999)
             {
                 ModelState.AddModelError(property, "Provide a valid year between 2015 - 2999");
+            }
+        }
+
+        private void ValidateDeathYear(int? yearValue, string property)
+        {
+            if (yearValue == null)
+            {
+                ModelState.AddModelError(property, "Must have a value for year");
+                return;
+            }
+
+            int currentYear = DateTime.Today.Year;
+
+            if (yearValue < 2005 || yearValue > currentYear)
+            {
+                ModelState.AddModelError(property, $"Provide a valid year between 2005 and current year");
             }
         }
 
