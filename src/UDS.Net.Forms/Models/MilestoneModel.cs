@@ -233,7 +233,7 @@ namespace UDS.Net.Forms.Models
                         new UIDisableAttribute("FTLDREAX"),
                         new UIDisableAttribute("NURSEMO"),
                         new UIDisableAttribute("NURSEDY"),
-                        new UIDisableAttribute("NURSEYR"),                
+                        new UIDisableAttribute("NURSEYR"),             
                     }
                 }
             },
