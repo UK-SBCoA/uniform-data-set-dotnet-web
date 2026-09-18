@@ -154,9 +154,11 @@ namespace UDS.Net.Forms.Models.PageModels
                 return;
             }
 
-            if (yearValue < 2005)
+            int currentYear = DateTime.Today.Year;
+
+            if (yearValue < 2005 || yearValue > currentYear)
             {
-                ModelState.AddModelError(property, "Provide a valid year of 2005 or later");
+                ModelState.AddModelError(property, $"Provide a valid year between 2005 and current year");
             }
         }
 
