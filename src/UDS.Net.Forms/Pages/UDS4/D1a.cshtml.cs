@@ -736,9 +736,9 @@ namespace UDS.Net.Forms.Pages.UDS4
             return await base.OnPostAsync(id, goNext);
         }
 
-        private void ValidatePreviousValue<T>(T currentValue, T previousValue, string fieldName, string validationPropertyName)
+        private void ValidatePreviousValue(bool? currentValue, bool? previousValue, string fieldName, string validationPropertyName)
         {
-            if (!EqualityComparer<T>.Default.Equals(currentValue, previousValue))
+            if (previousValue == true && currentValue == false)
             {
                 ModelState.AddModelError(
                     validationPropertyName,
