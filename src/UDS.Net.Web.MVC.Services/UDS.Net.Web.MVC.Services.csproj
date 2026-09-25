@@ -14,6 +14,7 @@
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
 	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="33.1.0" />
 		<PackageReference Include="System.Text.Json" Version="10.0.1" />
 		<PackageReference Include="UDS.Net.Dto" Version="11.2.0" />
 		<PackageReference Include="UDS.Net.API.Client" Version="11.2.0" />
