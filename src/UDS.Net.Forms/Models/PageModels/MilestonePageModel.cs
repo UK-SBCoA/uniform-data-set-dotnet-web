@@ -47,7 +47,7 @@ namespace UDS.Net.Forms.Models.PageModels
                     ModelState.AddModelError("PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
-                if (milestone.PROTOCOL == 2 || milestone.PROTOCOL == 1)
+                if (milestone.PROTOCOL == 3)
                 {
                     if (milestone.ACONSENT == null)
                     {
@@ -67,7 +67,7 @@ namespace UDS.Net.Forms.Models.PageModels
                     ValidateYear(milestone.NURSEYR, "NURSEYR");
                 }
 
-                if (milestone.FTLDREAS == 4 && String.IsNullOrEmpty(milestone.FTLDREAX))
+                if (milestone.FTLDREAS == 4 && string.IsNullOrWhiteSpace(milestone.FTLDREAX))
                 {
                     ModelState.AddModelError("FTLDREAX", "Must have a value when indicating reason of other");
                 }

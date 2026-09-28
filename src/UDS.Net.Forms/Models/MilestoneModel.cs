@@ -178,35 +178,35 @@ namespace UDS.Net.Forms.Models
 
 
         public Dictionary<string, UIBehavior> ProtocolBehavior = new Dictionary<string, UIBehavior>
-        {
             {
-                "3", new UIBehavior
                 {
-                    PropertyAttributes = new List<UIPropertyAttributes>
+                    "3", new UIBehavior
                     {
-                        new UIDisableAttribute("Milestone.ACONSENT")
+                        PropertyAttributes = new List<UIPropertyAttributes>
+                        {
+                            new UIEnableAttribute("ACONSENT")
+                        }
+                    }
+                },
+                {
+                    "1", new UIBehavior
+                    {
+                        PropertyAttributes = new List<UIPropertyAttributes>
+                        {
+                            new UIDisableAttribute("ACONSENT")
+                        }
+                    }
+                },
+                {
+                    "2", new UIBehavior
+                    {
+                        PropertyAttributes = new List<UIPropertyAttributes>
+                        {
+                            new UIDisableAttribute("ACONSENT")
+                        }
                     }
                 }
-            },
-            {
-                "1", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            },
-            {
-                "2", new UIBehavior
-                {
-                    PropertyAttributes = new List<UIPropertyAttributes>
-                    {
-                        new UIEnableAttribute("Milestone.ACONSENT")
-                    }
-                }
-            }
-        };
+            };
 
         public Dictionary<string, UIBehavior> MILESTONETYPEBehavior = new Dictionary<string, UIBehavior>
         {
@@ -256,7 +256,6 @@ namespace UDS.Net.Forms.Models
                         new UIEnableAttribute("CHANGEDY"),
                         new UIEnableAttribute("CHANGEYR"),
                         new UIEnableAttribute("PROTOCOL"),
-                        new UIEnableAttribute("ACONSENT"),
                         new UIEnableAttribute("RECOGIM"),
                         new UIEnableAttribute("REPHYILL"),
                         new UIEnableAttribute("REREFUSE"),
