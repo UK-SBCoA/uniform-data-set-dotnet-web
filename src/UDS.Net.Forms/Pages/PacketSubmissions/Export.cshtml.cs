@@ -8,7 +8,6 @@ using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Overrides.CsvHelper;
-using UDS.Net.Forms.Records;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -32,6 +31,8 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
 
             //Begin file dowload in browser without changing views
             //return File(memoryStream, "text/csv", filename);
+
+            return null;
         }
     }
 }

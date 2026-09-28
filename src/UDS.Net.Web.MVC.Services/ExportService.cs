@@ -66,21 +66,23 @@ namespace UDS.Net.Web.MVC.Services
             {
                 WriteHeader(csv, packetSubmission, includeD1cColumns);
 
-                await WritePacketDataAsync(csv, packetSubmission, participant, packet, includeD1cColumns);
+                //await WritePacketDataAsync(csv, packetSubmission, participant, packet, includeD1cColumns);
             }
 
             memoryStream.Position = 0;
 
-            string filename = packetSubmission.ToVM().GetFileName(participant.LegacyId, packet.VISIT_DATE);
+            //string filename = packetSubmission.ToVM().GetFileName(participant.LegacyId, packet.VISIT_DATE);
 
-            Response.Headers["Content-Disposition"] = $"attachment; {filename}";
+            //Response.Headers["Content-Disposition"] = $"attachment; {filename}";
 
-            return File(memoryStream, "text/csv", filename);
+            //return File(memoryStream, "text/csv", filename);
+
+            return null;
         }
 
         private void WriteHeader(CsvWriter csv, PacketSubmission packetSubmission, bool includeD1cColumns)
         {
-            // ptid, adcid, visitnum, packet, formver, dssub, visit_date m/d/yyyy, initials, frmdatea1, initialsa1, langa1, modea1, rmreasa1
+            //ptid, adcid, visitnum, packet, formver, dssub, visit_date m/ d / yyyy, initials, frmdatea1, initialsa1, langa1, modea1, rmreasa1
             csv.WriteHeader<CsvRecord>();
 
             var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
@@ -252,412 +254,412 @@ namespace UDS.Net.Web.MVC.Services
 
         private async Task WritePacketDataAsync(CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet, bool includeD1cColumns)
         {
-            // Register custom converters globally.
-            // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
-            csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
-            csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
+            //    // Register custom converters globally.
+            //    // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
+            //    csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
+            //    csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
 
-            var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
-            var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
-            var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
-            var a3 = packetSubmission.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
-            var a4 = packetSubmission.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
-            var a4a = packetSubmission.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
-            var a5d2 = packetSubmission.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
-            var b1 = packetSubmission.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
-            var b3 = packetSubmission.Forms.Where(f => f.Kind == "B3").FirstOrDefault();
-            var b4 = packetSubmission.Forms.Where(f => f.Kind == "B4").FirstOrDefault();
-            var b5 = packetSubmission.Forms.Where(f => f.Kind == "B5").FirstOrDefault();
-            var b6 = packetSubmission.Forms.Where(f => f.Kind == "B6").FirstOrDefault();
-            var b7 = packetSubmission.Forms.Where(f => f.Kind == "B7").FirstOrDefault();
-            var b8 = packetSubmission.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
-            var b9 = packetSubmission.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
-            var c2 = packetSubmission.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
-            var d1a = packetSubmission.Forms.Where(f => f.Kind == "D1a").FirstOrDefault();
-            var d1b = packetSubmission.Forms.Where(f => f.Kind == "D1b").FirstOrDefault();
-            var a4aProps = typeof(A4aTreatmentFormFields).GetProperties();
-            var a3FamilyProps = typeof(A3FamilyMemberFormFields).GetProperties();
+            //    var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
+            //    var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
+            //    var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
+            //    var a3 = packetSubmission.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+            //    var a4 = packetSubmission.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
+            //    var a4a = packetSubmission.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
+            //    var a5d2 = packetSubmission.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
+            //    var b1 = packetSubmission.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+            //    var b3 = packetSubmission.Forms.Where(f => f.Kind == "B3").FirstOrDefault();
+            //    var b4 = packetSubmission.Forms.Where(f => f.Kind == "B4").FirstOrDefault();
+            //    var b5 = packetSubmission.Forms.Where(f => f.Kind == "B5").FirstOrDefault();
+            //    var b6 = packetSubmission.Forms.Where(f => f.Kind == "B6").FirstOrDefault();
+            //    var b7 = packetSubmission.Forms.Where(f => f.Kind == "B7").FirstOrDefault();
+            //    var b8 = packetSubmission.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
+            //    var b9 = packetSubmission.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
+            //    var c2 = packetSubmission.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
+            //    var d1a = packetSubmission.Forms.Where(f => f.Kind == "D1a").FirstOrDefault();
+            //    var d1b = packetSubmission.Forms.Where(f => f.Kind == "D1b").FirstOrDefault();
+            //    var a4aProps = typeof(A4aTreatmentFormFields).GetProperties();
+            //    var a3FamilyProps = typeof(A3FamilyMemberFormFields).GetProperties();
 
-            var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, participant, packet);
+            //    var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, participant, packet);
 
 
-            csv.WriteRecord(record);
+            //    csv.WriteRecord(record);
 
-            if (a1 != null)
-            {
-                csv.WriteRecord(new A1Record(a1));
+            //    if (a1 != null)
+            //    {
+            //        csv.WriteRecord(new A1Record(a1));
 
-                if (a1.Fields is A1FormFields a1Fields)
-                    csv.WriteRecord(a1Fields);
+            //        if (a1.Fields is A1FormFields a1Fields)
+            //            csv.WriteRecord(a1Fields);
 
-            }
-            if (a1a != null)
-            {
-                csv.WriteRecord(new A1aRecord(a1a));
+            //    }
+            //    if (a1a != null)
+            //    {
+            //        csv.WriteRecord(new A1aRecord(a1a));
 
-                if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new A1aFormFields());
+            //        if (a1a.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new A1aFormFields());
 
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (a1a.Fields is A1aFormFields normalA1a)
-                        csv.WriteRecord(normalA1a);
-                }
-            }
-            if (a2 != null)
-            {
-                csv.WriteRecord(new A2Record(a2));
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (a1a.Fields is A1aFormFields normalA1a)
+            //                csv.WriteRecord(normalA1a);
+            //        }
+            //    }
+            //    if (a2 != null)
+            //    {
+            //        csv.WriteRecord(new A2Record(a2));
 
-                if (a2.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new A2FormFields());
-                }
-                else
-                {
-                    if (a2.Fields is A2FormFields normalA2)
-                        csv.WriteRecord(normalA2);
-                }
-            }
-            if (a3 != null)
-            {
-                csv.WriteRecord(new A3Record(a3));
+            //        if (a2.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new A2FormFields());
+            //        }
+            //        else
+            //        {
+            //            if (a2.Fields is A2FormFields normalA2)
+            //                csv.WriteRecord(normalA2);
+            //        }
+            //    }
+            //    if (a3 != null)
+            //    {
+            //        csv.WriteRecord(new A3Record(a3));
 
-                A3FormFields currentA3Fields = (A3FormFields)a3.Fields;
+            //        A3FormFields currentA3Fields = (A3FormFields)a3.Fields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+            //        int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
-                A3FormFields? exportA3Fields = null;
-                //If a previous visit exists, get data from previous visit
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
-                {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
+            //        A3FormFields? exportA3Fields = null;
+            //        //If a previous visit exists, get data from previous visit
+            //        if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+            //        {
+            //            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A3");
 
-                    //Set previousA3Fields
-                    var previousA3Fields = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
+            //            //Set previousA3Fields
+            //            var previousA3Fields = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
 
-                    //If I4 with no previous visits, then export current A3 fields
-                    if (packet.PACKET == Services.Enums.PacketKind.I4 && previousVisit == null)
-                    {
-                        exportA3Fields = currentA3Fields;
-                    }
-                    else
-                    {
-                        //Export form fields applies NULL to properties when changes in section are not detected, and encodes when changes are detected
-                        exportA3Fields = currentA3Fields.GetExportFormFields(previousA3Fields);
-                    }
-                }
-                else
-                {
-                    exportA3Fields = currentA3Fields; // if it is an initial visit, then the exact properties are exported (no encoding)
-                }
+            //            //If I4 with no previous visits, then export current A3 fields
+            //            if (packet.PACKET == Services.Enums.PacketKind.I4 && previousVisit == null)
+            //            {
+            //                exportA3Fields = currentA3Fields;
+            //            }
+            //            else
+            //            {
+            //                //Export form fields applies NULL to properties when changes in section are not detected, and encodes when changes are detected
+            //                exportA3Fields = currentA3Fields.GetExportFormFields(previousA3Fields);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            exportA3Fields = currentA3Fields; // if it is an initial visit, then the exact properties are exported (no encoding)
+            //        }
 
-                //Write records and fields from exportA3Fields
-                if (exportA3Fields != null)
-                {
-                    //Write A3FormField data
-                    csv.WriteRecord(exportA3Fields);
+            //        //Write records and fields from exportA3Fields
+            //        if (exportA3Fields != null)
+            //        {
+            //            //Write A3FormField data
+            //            csv.WriteRecord(exportA3Fields);
 
-                    //Write sibling data
-                    foreach (var sibling in exportA3Fields.SiblingFormFields)
-                    {
-                        foreach (var prop in a3FamilyProps)
-                        {
-                            if (prop.Name != "FamilyMemberIndex")
-                            {
-                                csv.WriteField(prop.GetValue(sibling));
-                            }
-                        }
-                    }
+            //            //Write sibling data
+            //            foreach (var sibling in exportA3Fields.SiblingFormFields)
+            //            {
+            //                foreach (var prop in a3FamilyProps)
+            //                {
+            //                    if (prop.Name != "FamilyMemberIndex")
+            //                    {
+            //                        csv.WriteField(prop.GetValue(sibling));
+            //                    }
+            //                }
+            //            }
 
-                    //Write Kids data
-                    foreach (var kid in exportA3Fields.KidsFormFields)
-                    {
-                        foreach (var prop in a3FamilyProps)
-                        {
-                            if (prop.Name != "FamilyMemberIndex")
-                            {
-                                csv.WriteField(prop.GetValue(kid));
-                            }
-                        }
-                    }
-                }
-            }
+            //            //Write Kids data
+            //            foreach (var kid in exportA3Fields.KidsFormFields)
+            //            {
+            //                foreach (var prop in a3FamilyProps)
+            //                {
+            //                    if (prop.Name != "FamilyMemberIndex")
+            //                    {
+            //                        csv.WriteField(prop.GetValue(kid));
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
 
-            if (a4 != null)
-            {
-                csv.WriteRecord(new A4Record(a4));
-                List<A4DFormFields> details;
-                if (a4.Fields is A4GFormFields normalA4)
-                {
-                    csv.WriteRecord(normalA4);
-                    details = normalA4.A4Ds.ToList();
-                }
-                else
-                {
-                    details = new List<A4DFormFields>();
-                }
+            //    if (a4 != null)
+            //    {
+            //        csv.WriteRecord(new A4Record(a4));
+            //        List<A4DFormFields> details;
+            //        if (a4.Fields is A4GFormFields normalA4)
+            //        {
+            //            csv.WriteRecord(normalA4);
+            //            details = normalA4.A4Ds.ToList();
+            //        }
+            //        else
+            //        {
+            //            details = new List<A4DFormFields>();
+            //        }
 
-                // we do NOT already have a list of 40, size of this list is dynamic
-                for (int i = 1; i <= 40; i++)
-                {
-                    if (details.Count >= i)
-                        csv.WriteField(details[i - 1].RxNormId);
-                    else
-                        csv.WriteField(string.Empty);
-                }
-            }
-            if (a4a != null)
-            {
-                csv.WriteRecord(new A4aRecord(a4a));
+            //        // we do NOT already have a list of 40, size of this list is dynamic
+            //        for (int i = 1; i <= 40; i++)
+            //        {
+            //            if (details.Count >= i)
+            //                csv.WriteField(details[i - 1].RxNormId);
+            //            else
+            //                csv.WriteField(string.Empty);
+            //        }
+            //    }
+            //    if (a4a != null)
+            //    {
+            //        csv.WriteRecord(new A4aRecord(a4a));
 
-                A4aFormFields exportA4aFormFields = null!;
-                A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
+            //        A4aFormFields exportA4aFormFields = null!;
+            //        A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+            //        int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1 && packet.PACKET != Services.Enums.PacketKind.I4)
-                {
-                    exportA4aFormFields = currentA4aFields.GetExportFormFields();
-                }
-                else
-                {
-                    exportA4aFormFields = currentA4aFields;
-                }
+            //        if (packet.VISITNUM >= countOfVisits && countOfVisits > 1 && packet.PACKET != Services.Enums.PacketKind.I4)
+            //        {
+            //            exportA4aFormFields = currentA4aFields.GetExportFormFields();
+            //        }
+            //        else
+            //        {
+            //            exportA4aFormFields = currentA4aFields;
+            //        }
 
-                // write the export object
-                csv.WriteRecord(exportA4aFormFields);
-                foreach (var treatment in exportA4aFormFields.TreatmentFormFields)
-                {
-                    foreach (var prop in a4aProps)
-                    {
-                        if (prop.Name != "TreatmentIndex")
-                            csv.WriteField(prop.GetValue(treatment));
-                    }
-                }
-            }
-            if (a5d2 != null)
-            {
-                csv.WriteRecord(new A5D2Record(a5d2));
-                Form? previousA5D2Base = null;
+            //        // write the export object
+            //        csv.WriteRecord(exportA4aFormFields);
+            //        foreach (var treatment in exportA4aFormFields.TreatmentFormFields)
+            //        {
+            //            foreach (var prop in a4aProps)
+            //            {
+            //                if (prop.Name != "TreatmentIndex")
+            //                    csv.WriteField(prop.GetValue(treatment));
+            //            }
+            //        }
+            //    }
+            //    if (a5d2 != null)
+            //    {
+            //        csv.WriteRecord(new A5D2Record(a5d2));
+            //        Form? previousA5D2Base = null;
 
-                A5D2FormFields? previousA5D2Fields = null;
+            //        A5D2FormFields? previousA5D2Fields = null;
 
-                A5D2FormFields? currentA5D2Fields = a5d2.Fields as A5D2FormFields;
+            //        A5D2FormFields? currentA5D2Fields = a5d2.Fields as A5D2FormFields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+            //        int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
-                {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A5D2");
+            //        if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+            //        {
+            //            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "A5D2");
 
-                    //Set previousA5D2Base
-                    previousA5D2Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
+            //            //Set previousA5D2Base
+            //            previousA5D2Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
 
-                    //Set previousA5D2Fields
-                    previousA5D2Fields = previousA5D2Base != null ? previousA5D2Base.Fields as A5D2FormFields : null;
-                }
-                //If a previous form exists, compare and set codes for each input
-                if (currentA5D2Fields != null && previousA5D2Fields != null)
-                {
-                    var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
+            //            //Set previousA5D2Fields
+            //            previousA5D2Fields = previousA5D2Base != null ? previousA5D2Base.Fields as A5D2FormFields : null;
+            //        }
+            //        //If a previous form exists, compare and set codes for each input
+            //        if (currentA5D2Fields != null && previousA5D2Fields != null)
+            //        {
+            //            var encodedFollowUpFields = A5D2FormFields.EncodedFollowUpVariables();
 
-                    var fields = typeof(A5D2FormFields)
-                        .GetProperties()
-                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+            //            var fields = typeof(A5D2FormFields)
+            //                .GetProperties()
+            //                .Where(p => encodedFollowUpFields.Contains(p.Name));
 
-                    foreach (var field in fields)
-                    {
-                        var previousValue = (int?)field.GetValue(previousA5D2Fields);
-                        var currentValue = (int?)field.GetValue(currentA5D2Fields);
-                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
-                        field.SetValue(currentA5D2Fields, result);
-                    }
-                }
-                if (a5d2.Fields is A5D2FormFields normalA5D2)
-                    csv.WriteRecord(normalA5D2);
-            }
-            if (b1 != null)
-            {
-                csv.WriteRecord(new B1Record(b1));
+            //            foreach (var field in fields)
+            //            {
+            //                var previousValue = (int?)field.GetValue(previousA5D2Fields);
+            //                var currentValue = (int?)field.GetValue(currentA5D2Fields);
+            //                var result = CompareFollowUpValues(previousValue, currentValue, 777);
+            //                field.SetValue(currentA5D2Fields, result);
+            //            }
+            //        }
+            //        if (a5d2.Fields is A5D2FormFields normalA5D2)
+            //            csv.WriteRecord(normalA5D2);
+            //    }
+            //    if (b1 != null)
+            //    {
+            //        csv.WriteRecord(new B1Record(b1));
 
-                // write remaining form values
-                if (b1.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new B1FormFields());
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (b1.Fields is B1FormFields normalB1)
-                        csv.WriteRecord(normalB1);
-                }
-            }
-            if (b3 != null)
-            {
-                csv.WriteRecord(new B3Record(b3));
+            //        // write remaining form values
+            //        if (b1.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new B1FormFields());
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (b1.Fields is B1FormFields normalB1)
+            //                csv.WriteRecord(normalB1);
+            //        }
+            //    }
+            //    if (b3 != null)
+            //    {
+            //        csv.WriteRecord(new B3Record(b3));
 
-                // write remaining form values
-                if (b3.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new B3FormFields());
+            //        // write remaining form values
+            //        if (b3.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new B3FormFields());
 
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (b3.Fields is B3FormFields normalB3)
-                        csv.WriteRecord(normalB3);
-                }
-            }
-            if (b4 != null)
-            {
-                csv.WriteRecord(new B4Record(b4));
-                if (b4.Fields is B4FormFields normalB4)
-                    csv.WriteRecord(normalB4);
-            }
-            if (b5 != null)
-            {
-                csv.WriteRecord(new B5Record(b5));
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (b3.Fields is B3FormFields normalB3)
+            //                csv.WriteRecord(normalB3);
+            //        }
+            //    }
+            //    if (b4 != null)
+            //    {
+            //        csv.WriteRecord(new B4Record(b4));
+            //        if (b4.Fields is B4FormFields normalB4)
+            //            csv.WriteRecord(normalB4);
+            //    }
+            //    if (b5 != null)
+            //    {
+            //        csv.WriteRecord(new B5Record(b5));
 
-                if (b5.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new B5FormFields());
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (b5.Fields is B5FormFields normalB5)
-                        csv.WriteRecord(normalB5);
-                }
-            }
-            if (b6 != null)
-            {
-                csv.WriteRecord(new B6Record(b6));
+            //        if (b5.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new B5FormFields());
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (b5.Fields is B5FormFields normalB5)
+            //                csv.WriteRecord(normalB5);
+            //        }
+            //    }
+            //    if (b6 != null)
+            //    {
+            //        csv.WriteRecord(new B6Record(b6));
 
-                // write remaining form values
-                if (b6.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new B6FormFields());
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (b6.Fields is B6FormFields normalB6)
-                        csv.WriteRecord(normalB6);
-                }
-            }
-            if (b7 != null)
-            {
-                // write header values
-                csv.WriteRecord(new B7Record(b7));
+            //        // write remaining form values
+            //        if (b6.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new B6FormFields());
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (b6.Fields is B6FormFields normalB6)
+            //                csv.WriteRecord(normalB6);
+            //        }
+            //    }
+            //    if (b7 != null)
+            //    {
+            //        // write header values
+            //        csv.WriteRecord(new B7Record(b7));
 
-                // write remaining form values
-                if (b7.MODE == Services.Enums.FormMode.NotCompleted)
-                {
-                    csv.WriteRecord(new B7FormFields());
-                }
-                else
-                {
-                    // if the form is included, export all the values
-                    if (b7.Fields is B7FormFields normalB7)
-                        csv.WriteRecord(normalB7);
-                }
-            }
-            if (b8 != null)
-            {
-                csv.WriteRecord(new B8Record(b8));
-                if (b8.Fields is B8FormFields normalB8)
-                    csv.WriteRecord(normalB8);
-            }
-            if (b9 != null)
-            {
-                csv.WriteRecord(new B9Record(b9));
-                Form? previousB9Base = null;
+            //        // write remaining form values
+            //        if (b7.MODE == Services.Enums.FormMode.NotCompleted)
+            //        {
+            //            csv.WriteRecord(new B7FormFields());
+            //        }
+            //        else
+            //        {
+            //            // if the form is included, export all the values
+            //            if (b7.Fields is B7FormFields normalB7)
+            //                csv.WriteRecord(normalB7);
+            //        }
+            //    }
+            //    if (b8 != null)
+            //    {
+            //        csv.WriteRecord(new B8Record(b8));
+            //        if (b8.Fields is B8FormFields normalB8)
+            //            csv.WriteRecord(normalB8);
+            //    }
+            //    if (b9 != null)
+            //    {
+            //        csv.WriteRecord(new B9Record(b9));
+            //        Form? previousB9Base = null;
 
-                B9FormFields? previousB9Fields = null;
+            //        B9FormFields? previousB9Fields = null;
 
-                B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
+            //        B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
+            //        int countOfVisits = await _visitService.GetVisitCountByVersion(User.Identity!.Name!, packet.ParticipationId, "4.0.0");
 
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
-                {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "B9");
+            //        if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+            //        {
+            //            var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(User.Identity!.Name!, packet.ParticipationId, packet.VISITNUM - 1, "B9");
 
-                    //Set previousB9Base
-                    previousB9Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "B9").FirstOrDefault() : null;
+            //            //Set previousB9Base
+            //            previousB9Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "B9").FirstOrDefault() : null;
 
-                    //Set previousB9Fields
-                    previousB9Fields = previousB9Base != null ? previousB9Base.Fields as B9FormFields : null;
-                }
-                //If a previous form exists, compare and set codes for each input
-                if (currentB9Fields != null && previousB9Fields != null)
-                {
-                    var encodedFollowUpFields = B9FormFields.EncodedFollowUpVariables();
+            //            //Set previousB9Fields
+            //            previousB9Fields = previousB9Base != null ? previousB9Base.Fields as B9FormFields : null;
+            //        }
+            //        //If a previous form exists, compare and set codes for each input
+            //        if (currentB9Fields != null && previousB9Fields != null)
+            //        {
+            //            var encodedFollowUpFields = B9FormFields.EncodedFollowUpVariables();
 
-                    var fields = typeof(B9FormFields)
-                        .GetProperties()
-                        .Where(p => encodedFollowUpFields.Contains(p.Name));
+            //            var fields = typeof(B9FormFields)
+            //                .GetProperties()
+            //                .Where(p => encodedFollowUpFields.Contains(p.Name));
 
-                    foreach (var field in fields)
-                    {
-                        var previousValue = (int?)field.GetValue(previousB9Fields);
-                        var currentValue = (int?)field.GetValue(currentB9Fields);
-                        var result = CompareFollowUpValues(previousValue, currentValue, 777);
-                        field.SetValue(currentB9Fields, result);
-                    }
-                }
-                if (b9.Fields is B9FormFields normalB9)
-                    csv.WriteRecord(normalB9);
-            }
-            if (c2 != null)
-            {
-                csv.WriteRecord(new C2Record(c2));
-                if (c2.Fields is C2FormFields normalC2)
-                    csv.WriteRecord(normalC2);
-            }
-            if (d1a != null)
-            {
-                csv.WriteRecord(new D1aRecord(d1a));
-                if (d1a.Fields is D1aFormFields normalD1a)
-                    csv.WriteRecord(normalD1a);
-            }
-            if (d1b != null)
-            {
-                csv.WriteRecord(new D1bRecord(d1b));
-                if (d1b.Fields is D1bFormFields normalD1b)
-                    csv.WriteRecord(normalD1b);
-            }
-            if (includeD1cColumns)
-            {
-                if (packet.VISIT_DATE >= D1cEffectiveDate)
-                {
-                    csv.WriteField(D1cNotDefaultValue);
-                    csv.WriteField(ModeD1cDefaultValue);
-                }
-                else
-                {
-                    csv.WriteField(string.Empty);
-                    csv.WriteField(string.Empty);
-                }
-            }
+            //            foreach (var field in fields)
+            //            {
+            //                var previousValue = (int?)field.GetValue(previousB9Fields);
+            //                var currentValue = (int?)field.GetValue(currentB9Fields);
+            //                var result = CompareFollowUpValues(previousValue, currentValue, 777);
+            //                field.SetValue(currentB9Fields, result);
+            //            }
+            //        }
+            //        if (b9.Fields is B9FormFields normalB9)
+            //            csv.WriteRecord(normalB9);
+            //    }
+            //    if (c2 != null)
+            //    {
+            //        csv.WriteRecord(new C2Record(c2));
+            //        if (c2.Fields is C2FormFields normalC2)
+            //            csv.WriteRecord(normalC2);
+            //    }
+            //    if (d1a != null)
+            //    {
+            //        csv.WriteRecord(new D1aRecord(d1a));
+            //        if (d1a.Fields is D1aFormFields normalD1a)
+            //            csv.WriteRecord(normalD1a);
+            //    }
+            //    if (d1b != null)
+            //    {
+            //        csv.WriteRecord(new D1bRecord(d1b));
+            //        if (d1b.Fields is D1bFormFields normalD1b)
+            //            csv.WriteRecord(normalD1b);
+            //    }
+            //    if (includeD1cColumns)
+            //    {
+            //        if (packet.VISIT_DATE >= D1cEffectiveDate)
+            //        {
+            //            csv.WriteField(D1cNotDefaultValue);
+            //            csv.WriteField(ModeD1cDefaultValue);
+            //        }
+            //        else
+            //        {
+            //            csv.WriteField(string.Empty);
+            //            csv.WriteField(string.Empty);
+            //        }
+            //    }
 
-        } // writer flushed automatically here
+            //} // writer flushed automatically here
 
-        //TODO: Currently used by the B9 and A5D2, we'll want it to function similar to the A3
-        private int? CompareFollowUpValues(int? previousValue, int? currentValue, int code)
-        {
-            if (previousValue == null && currentValue == null) return null;
+            ////TODO: Currently used by the B9 and A5D2, we'll want it to function similar to the A3
+            //private int? CompareFollowUpValues(int? previousValue, int? currentValue, int code)
+            //{
+            //    if (previousValue == null && currentValue == null) return null;
 
-            if (previousValue == currentValue)
-            {
-                return code;
-            }
+            //    if (previousValue == currentValue)
+            //    {
+            //        return code;
+            //    }
 
-            return currentValue;
+            //    return currentValue;
         }
     }
 }
