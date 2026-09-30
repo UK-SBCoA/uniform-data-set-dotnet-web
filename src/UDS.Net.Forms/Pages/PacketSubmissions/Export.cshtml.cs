@@ -7,7 +7,6 @@ using System.Security.Principal;
 using System.Text;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
-using UDS.Net.Forms.Overrides.CsvHelper;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
@@ -27,12 +26,11 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
         public async Task<IActionResult> OnGetAsync(int packetId)
         {
             //DEVNOTE: Call Export service and return csv file using packet Id
+            //DEVNOTE: Error check for return data
             var csv = await _exportService.ConvertPacketToCSV(packetId, User.Identity.Name);
 
-            //Begin file dowload in browser without changing views
-            //return File(memoryStream, "text/csv", filename);
-
-            return null;
+            //DEVNOTE: temporary file name
+            return File(csv, "text/csv", "testfile.csv");
         }
     }
 }
