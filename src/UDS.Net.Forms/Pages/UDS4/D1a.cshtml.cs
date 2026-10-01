@@ -721,11 +721,6 @@ namespace UDS.Net.Forms.Pages.UDS4
                     {
                         var previousD1a = (D1a)previousD1aForm.PreviousVisitToVM();
 
-                        ValidatePreviousValue(D1a.BIPOLDX, previousD1a.BIPOLDX, "BIPOLDX", "D1a.BIPOLDIF");
-                        ValidatePreviousValue(D1a.SCHIZOP, previousD1a.SCHIZOP, "SCHIZOP", "D1a.SCHIZOIF");
-                        ValidatePreviousValue(D1a.ANXIET, previousD1a.ANXIET, "ANXIET", "D1a.ANXIETIF");
-                        ValidatePreviousValue(D1a.PTSDDX, previousD1a.PTSDDX, "PTSDDX", "D1a.PTSDDXIF");
-                        ValidatePreviousValue(D1a.OTHPSY, previousD1a.OTHPSY, "OTHPSY", "D1a.OTHPSYIF");
                         ValidatePreviousValue(D1a.EPILEP, previousD1a.EPILEP, "EPILEP", "D1a.EPILEPIF");
                         ValidatePreviousValue(D1a.HYCEPH, previousD1a.HYCEPH, "HYCEPH", "D1a.HYCEPHIF");
                         ValidatePreviousValue(D1a.HIV, previousD1a.HIV, "HIV", "D1a.HIVIF");
@@ -738,7 +733,10 @@ namespace UDS.Net.Forms.Pages.UDS4
 
         private void ValidatePreviousValue(bool? currentValue, bool? previousValue, string fieldName, string validationPropertyName)
         {
-            if (previousValue == true && currentValue == false)
+            // If the value was explicitly true at the previous visit,
+            // it must still be explicitly true at the current visit.
+            // False or null in the current visit should both produce an error.
+            if (previousValue.HasValue && previousValue.Value && currentValue != true)
             {
                 ModelState.AddModelError(
                     validationPropertyName,
