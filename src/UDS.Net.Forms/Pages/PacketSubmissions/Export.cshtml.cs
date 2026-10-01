@@ -32,6 +32,13 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             //DEVNOTE: temporary file name
             return File(csv, "text/csv", "testfile.csv");
         }
+
+        public async Task<IActionResult> ExportMultiplePackets(int[] packetIds)
+        {
+            var csv = await _exportService.BulkConvertPacketsToCSV(packetIds, User.Identity.Name);
+
+            return File(csv, "text/csv", "bulktestfile.csv");
+        }
     }
 }
 

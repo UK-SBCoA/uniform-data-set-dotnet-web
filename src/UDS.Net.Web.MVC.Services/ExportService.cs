@@ -14,6 +14,7 @@ using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 using UDS.Net.Services.Overrides.CsvHelper;
 using UDS.Net.Services.Records;
@@ -78,11 +79,98 @@ namespace UDS.Net.Web.MVC.Services
             //DEVNOTE: Noticed the older code was not using ToFileTimeUTC() but instead ToFileTime(), should it be switched to the UTC time as it is now?
             string filename = $"UDS_{participant.LegacyId}_{packet.VISIT_DATE.Year}_EXPORTED_{packetSubmission.SubmissionDate.ToFileTimeUtc()}-uds.csv";
 
-            //Response.Headers["Content-Disposition"] = $"attachment; {filename}";
+            return memoryStream.ToArray();
+        }
 
-            //return File(memoryStream, "text/csv", filename);
+        public async Task<byte[]> BulkConvertPacketsToCSV(int[] packetIds, string username)
+        {
+            if (string.IsNullOrWhiteSpace(username)) throw new NullReferenceException();
 
-            //var test = memoryStream;
+            if (packetIds == null || packetIds.Count() == 0)
+                throw new NullReferenceException();
+
+            var packets = new List<Packet>();
+
+            foreach (var id in packetIds)
+            {
+                var packet = await _packetService.GetPacketWithForms(username, id);
+
+                if (packet != null)
+                {
+                    packets.Add(packet);
+                }
+            }
+
+            // Every requested packet must exist.
+            if (packets.Count != packetIds.Count())
+                throw new NullReferenceException();
+
+            var participants = new Dictionary<int, Participation>();
+
+            foreach (var packet in packets)
+            {
+                var participant = await _participationService.GetById(username, packet.ParticipationId);
+
+                if (participant != null)
+                {
+                    participants[packet.Id] = participant;
+                }
+            }
+
+            // Every packet must have a participant.
+            if (participants.Count != packets.Count)
+                throw new NullReferenceException();
+
+            // Validation is complete. No data has been changed yet.
+            var packetsToExport = new List<(Packet Packet, Participation Participant, PacketSubmission Submission)>();
+
+            foreach (var packet in packets)
+            {
+                var participant = participants[packet.Id];
+
+                var newPacketSubmission = new PacketSubmissionDto()
+                {
+                    PacketId = packet.Id,
+                    SubmissionDate = DateTime.Now,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = username
+                };
+
+                //DEVNOTE: Casting to formDto for the PacketSubmissionDto parent object
+                newPacketSubmission.Forms = (List<FormDto>)packet.Forms;
+
+                packetsToExport.Add((packet, participant, newPacketSubmission.ToDomain("19", packet.PACKET)));
+            }
+
+            foreach (var item in packetsToExport)
+            {
+                //item.Packet.PacketSubmissions.Add(item.Submission);
+                item.Packet.AddSubmission(item.Submission);
+                
+                await _packetService.Update(username, item.Packet);
+            }
+
+            bool includeD1cColumns = packetsToExport.Any(
+                x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
+
+            var memoryStream = new MemoryStream();
+            var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
+
+            using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
+            {
+                var firstPacket = packetsToExport[0];
+
+                WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
+
+                foreach (var item in packetsToExport)
+                {
+                    //DEVNOTE: Unsure if username needs to be part of the WritePacketDataAsync method
+                    //Is a private method only used for exports
+                    await WritePacketDataAsync(username, csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
+
+                    csv.NextRecord();
+                }
+            }
 
             return memoryStream.ToArray();
         }
