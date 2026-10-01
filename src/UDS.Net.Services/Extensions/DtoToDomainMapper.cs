@@ -220,7 +220,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A1aDto)
             {
-                formFields = new A1aFormFields(dto);
+                formFields = new A1aFormFields(dto, packetKind ?? PacketKind.I);
             }
             else if (dto is A2Dto)
             {
@@ -291,7 +291,7 @@ namespace UDS.Net.Services.Extensions
                 if (dto.Kind == "A1")
                     title = new A1FormFields().GetDescription();
                 else if (dto.Kind == "A1a")
-                    title = new A1aFormFields().GetDescription();
+                    title = new A1aFormFields(packetKind ?? PacketKind.I).GetDescription();
                 else if (dto.Kind == "A2")
                     title = new A2FormFields().GetDescription();
                 else if (dto.Kind == "A3")

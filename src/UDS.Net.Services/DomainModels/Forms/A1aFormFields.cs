@@ -117,9 +117,10 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "4";
         }
 
-        public A1aFormFields() { }
-        public A1aFormFields(FormDto dto)
+        public A1aFormFields(FormDto dto, PacketKind packetKind)
         {
+            PacketKind = packetKind;
+
             if (dto is A1aDto)
             {
                 var a1aDto = ((A1aDto)dto);

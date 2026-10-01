@@ -224,6 +224,23 @@ namespace UDS.Net.Forms.Tests
         }
 
         [TestMethod]
+        public async Task A1aOptionalIsDisabledForInitialVisitTest()
+        {
+            await Page.GotoAsync(BaseUrl);
+
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Initial Visit" }).ClickAsync();
+
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A1a" }).GetByRole(AriaRole.Link).ClickAsync();
+
+            var mode = Page.GetByLabel("Mode", new() { Exact = true });
+            var reason = Page.GetByLabel("If not completed, specify reason");
+
+            await mode.SelectOptionAsync("0");
+
+            await Expect(reason.Locator("option[value='88']")).ToBeDisabledAsync();
+        }
+
+        [TestMethod]
         public async Task A2NotCompletedTest()
         {
             await Page.GotoAsync(BaseUrl);
