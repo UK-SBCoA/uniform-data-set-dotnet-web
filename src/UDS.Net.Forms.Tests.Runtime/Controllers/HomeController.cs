@@ -63,7 +63,7 @@ public class HomeController : Controller
                     visitPacketKind = Net.Services.Enums.PacketKind.F;
             }
 
-            var v = new Visit( 0, visitNumber, participation.Id, "4", visitPacketKind, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
+            var v = new Visit(0, visitNumber, participation.Id, "4", visitPacketKind, DateTime.Now, User.Identity.Name.Substring(0, 3), Net.Services.Enums.PacketStatus.Pending, DateTime.Now, User.Identity.Name, "", "", false, null);
 
             var visit = await _visitService.Add("username", v);
 
