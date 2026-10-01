@@ -734,9 +734,9 @@ namespace UDS.Net.Forms.Pages.UDS4
         private void ValidatePreviousValue(bool? currentValue, bool? previousValue, string fieldName, string validationPropertyName)
         {
             // If the value was explicitly true at the previous visit,
-            // it must still be explicitly true at the current visit.
-            // False or null in the current visit should both produce an error.
-            if (previousValue.HasValue && previousValue.Value && currentValue != true)
+            // it must still be explicitly true at the current visit if the field is enabled.
+            // False in the current visit should produce an error.
+            if (previousValue.HasValue && currentValue.HasValue && previousValue.Value && currentValue != true)
             {
                 ModelState.AddModelError(
                     validationPropertyName,
