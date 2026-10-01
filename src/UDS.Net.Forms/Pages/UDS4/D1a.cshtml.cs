@@ -723,9 +723,9 @@ namespace UDS.Net.Forms.Pages.UDS4
 
                         if (previousD1a.NORMCOG == 0 && D1a.NORMCOG == 0)
                         {
-                            ValidatePreviousValue(D1a.EPILEP, previousD1a.EPILEP, "EPILEP", "D1a.EPILEPIF");
-                            ValidatePreviousValue(D1a.HYCEPH, previousD1a.HYCEPH, "HYCEPH", "D1a.HYCEPHIF");
-                            ValidatePreviousValue(D1a.HIV, previousD1a.HIV, "HIV", "D1a.HIVIF");
+                            ValidatePreviousValue(D1a.EPILEP ?? false, previousD1a.EPILEP ?? false, "EPILEP", "D1a.EPILEPIF");
+                            ValidatePreviousValue(D1a.HYCEPH ?? false, previousD1a.HYCEPH ?? false, "HYCEPH", "D1a.HYCEPHIF");
+                            ValidatePreviousValue(D1a.HIV ?? false, previousD1a.HIV ?? false, "HIV", "D1a.HIVIF");
                         }
                     }
                 }
@@ -734,12 +734,12 @@ namespace UDS.Net.Forms.Pages.UDS4
             return await base.OnPostAsync(id, goNext);
         }
 
-        private void ValidatePreviousValue(bool? currentValue, bool? previousValue, string fieldName, string validationPropertyName)
+        private void ValidatePreviousValue(bool currentValue, bool previousValue, string fieldName, string validationPropertyName)
         {
             // If the value was explicitly true at the previous visit,
             // it must still be explicitly true at the current visit if the field is enabled.
             // False in the current visit should produce an error.
-            if (previousValue.HasValue && currentValue.HasValue && previousValue.Value && currentValue != true)
+            if (previousValue && !currentValue)
             {
                 ModelState.AddModelError(
                     validationPropertyName,
