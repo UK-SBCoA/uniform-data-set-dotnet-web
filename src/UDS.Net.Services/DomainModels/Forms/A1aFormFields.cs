@@ -72,7 +72,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
+                var codes = new List<NotIncludedReasonCode>
+            {
+                NotIncludedReasonCode.ConcernsAboutReliability
+            };
+
+                if (PacketKind == PacketKind.F)
+                    codes.Add(NotIncludedReasonCode.Optional);
+
+                return codes;
             }
         }
 
@@ -92,6 +100,13 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
+        public PacketKind PacketKind { get; }
+
+        public A1aFormFields(PacketKind packetKind)
+        {
+            PacketKind = packetKind;
+        }
+
         public string GetDescription()
         {
             return "Social Determinants of Health";
@@ -102,9 +117,10 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "4";
         }
 
-        public A1aFormFields() { }
-        public A1aFormFields(FormDto dto)
+        public A1aFormFields(FormDto dto, PacketKind packetKind)
         {
+            PacketKind = packetKind;
+
             if (dto is A1aDto)
             {
                 var a1aDto = ((A1aDto)dto);

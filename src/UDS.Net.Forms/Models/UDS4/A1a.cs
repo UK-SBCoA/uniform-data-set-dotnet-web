@@ -78,7 +78,7 @@ namespace UDS.Net.Forms.Models.UDS4
         public int? COMPCOMM { get; set; }
 
 
-        [Display(Name = "Thinking of the person who raised you, what was their highest level of education completed?")]
+        [Display(Name = "What was your mother's (or primary person who raised you up until age 18) highest level of education completed at the time they were raising you?")]
         [RegularExpression("^([1-6]|8|9)$", ErrorMessage = "Valid range is 1-6 or 8 - 9")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? GUARDEDU { get; set; }
@@ -103,7 +103,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? ABANDONED { get; set; }
 
-        [Display(Name = "I miss having a really good friend")]
+        [Display(Name = "I miss having a really close friend")]
         [RegularExpression("^([1-5]|8)$", ErrorMessage = "Valid range is 1-5 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? CLOSEFRND { get; set; }
@@ -128,12 +128,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PARTICIPATE { get; set; }
 
-        [Display(Name = "How safe do you feel in your home?")]
+        [Display(Name = "Home?")]
         [RegularExpression("^([1-4]|8)$", ErrorMessage = "Valid range is 1-4 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SAFEHOME { get; set; }
 
-        [Display(Name = "How safe do you feel in your community (or neighborhood)?")]
+        [Display(Name = "Community (or neighborhood)")]
         [RegularExpression("^([1-4]|8)$", ErrorMessage = "Valid range is 1-4 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SAFECOMM { get; set; }
@@ -188,12 +188,12 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? THREATENED { get; set; }
 
-        [Display(Name = "How frequently did you receive poorer service or treatment from doctors or in hospitals compared to other people?")]
+        [Display(Name = "How frequently do you receive poorer service or treatment from doctors or in hospitals compared to other people?")]
         [RegularExpression("^([1-5]|8)$", ErrorMessage = "Valid range is 1-5 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? POORMEDTRT { get; set; }
 
-        [Display(Name = "Your Ancestry or National Origins")]
+        [Display(Name = "Your ancestry or national origins")]
         public bool EXPANCEST { get; set; }
 
         [Display(Name = "Your gender")]
@@ -238,7 +238,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Prefer not to answer")]
         public bool EXPNOANS { get; set; }
 
-        [Display(Name = "When you have had day-to-day experiences like those in questions 33 to 38, would you say they have been very stressful, moderately stressful, or not stressful?")]
+        [Display(Name = "When you have had day-to-day experiences like those in questions 31 to 36, would you say they have been very stressful, moderately stressful, or not stressful?")]
         [RegularExpression("^([1-3]|[8-9])$", ErrorMessage = "Valid range is 1-3 or 8-9")]
         public int? EXPSTRS { get; set; }
 
