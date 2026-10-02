@@ -184,7 +184,7 @@ namespace UDS.Net.Forms.Models
                     {
                         PropertyAttributes = new List<UIPropertyAttributes>
                         {
-                            new UIEnableAttribute("ACONSENT")
+                            new UIDisableAttribute("ACONSENT")
                         }
                     }
                 },
@@ -193,7 +193,7 @@ namespace UDS.Net.Forms.Models
                     {
                         PropertyAttributes = new List<UIPropertyAttributes>
                         {
-                            new UIDisableAttribute("ACONSENT")
+                            new UIEnableAttribute("ACONSENT")
                         }
                     }
                 },
@@ -202,7 +202,7 @@ namespace UDS.Net.Forms.Models
                     {
                         PropertyAttributes = new List<UIPropertyAttributes>
                         {
-                            new UIDisableAttribute("ACONSENT")
+                            new UIEnableAttribute("ACONSENT")
                         }
                     }
                 }

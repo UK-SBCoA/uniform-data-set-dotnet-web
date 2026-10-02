@@ -40,14 +40,14 @@ namespace UDS.Net.Forms.Models.PageModels
             {
                 ValidateMonth(milestone.CHANGEMO, "CHANGEMO");
                 ValidateDay(milestone.CHANGEDY, "CHANGEDY");
-                ValidateYear(milestone.CHANGEYR, "CHANGEYR");
+                ValidateYear(milestone.CHANGEYR, "CHANGEYR", 2015);
 
                 if (milestone.PROTOCOL == null)
                 {
                     ModelState.AddModelError("PROTOCOL", "Must have a value when indicating continued contact");
                 }
 
-                if (milestone.PROTOCOL == 3)
+                if (milestone.PROTOCOL == 1 || milestone.PROTOCOL == 2)
                 {
                     if (milestone.ACONSENT == null)
                     {
@@ -64,7 +64,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     ValidateMonth(milestone.NURSEMO, "NURSEMO");
                     ValidateDay(milestone.NURSEDY, "NURSEDY");
-                    ValidateYear(milestone.NURSEYR, "NURSEYR");
+                    ValidateYear(milestone.NURSEYR, "NURSEYR", 2015);
                 }
 
                 if (milestone.FTLDREAS == 4 && string.IsNullOrWhiteSpace(milestone.FTLDREAX))
@@ -85,7 +85,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     ValidateMonth(milestone.DEATHMO, "DEATHMO");
                     ValidateDay(milestone.DEATHDY, "DEATHDY");
-                    ValidateDeathYear(milestone.DEATHYR, "DEATHYR");
+                    ValidateYear(milestone.DEATHYR, "DEATHYR", 2005);
 
                     if (milestone.AUTOPSY == null)
                     {
@@ -97,7 +97,7 @@ namespace UDS.Net.Forms.Models.PageModels
                 {
                     ValidateMonth(milestone.DISCMO, "DISCMO");
                     ValidateDay(milestone.DISCDY, "DISCDY");
-                    ValidateYear(milestone.DISCYR, "DISCYR");
+                    ValidateYear(milestone.DISCYR, "DISCYR", 2015);
 
                     if (milestone.DROPREAS == null)
                     {
@@ -133,20 +133,9 @@ namespace UDS.Net.Forms.Models.PageModels
             }
         }
 
-        private void ValidateYear(int? yearValue, string property)
-        {
-            if (yearValue == null)
-            {
-                ModelState.AddModelError(property, "Must have a value for year");
-            }
 
-            if (yearValue < 2015 || yearValue > 2999)
-            {
-                ModelState.AddModelError(property, "Provide a valid year between 2015 - 2999");
-            }
-        }
 
-        private void ValidateDeathYear(int? yearValue, string property)
+        private void ValidateYear(int? yearValue, string property, int minimumYear)
         {
             if (yearValue == null)
             {
@@ -156,9 +145,9 @@ namespace UDS.Net.Forms.Models.PageModels
 
             int currentYear = DateTime.Today.Year;
 
-            if (yearValue < 2005 || yearValue > currentYear)
+            if (yearValue < minimumYear || yearValue > currentYear)
             {
-                ModelState.AddModelError(property, $"Provide a valid year between 2005 and current year");
+                ModelState.AddModelError(property, $"Provide a valid year between {minimumYear} and current year");
             }
         }
 
