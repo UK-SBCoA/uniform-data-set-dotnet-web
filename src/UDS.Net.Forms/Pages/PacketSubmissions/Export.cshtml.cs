@@ -33,7 +33,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return File(csv, "text/csv", "testfile.csv");
         }
 
-        public async Task<IActionResult> ExportMultiplePackets(int[] packetIds)
+        public async Task<IActionResult> OnPostExportMultiplePackets(int[] packetIds)
         {
             var csv = await _exportService.BulkConvertPacketsToCSV(packetIds, User.Identity.Name);
 

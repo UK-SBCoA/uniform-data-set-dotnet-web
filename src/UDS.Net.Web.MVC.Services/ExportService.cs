@@ -137,7 +137,7 @@ namespace UDS.Net.Web.MVC.Services
                 };
 
                 //DEVNOTE: Casting to formDto for the PacketSubmissionDto parent object
-                newPacketSubmission.Forms = (List<FormDto>)packet.Forms;
+                newPacketSubmission.Forms = packet.Forms.ToDto();
 
                 packetsToExport.Add((packet, participant, newPacketSubmission.ToDomain("19", packet.PACKET)));
             }
