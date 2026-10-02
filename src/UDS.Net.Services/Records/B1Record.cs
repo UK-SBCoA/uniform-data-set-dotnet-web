@@ -2,9 +2,9 @@
 using CsvHelper.Configuration.Attributes;
 using UDS.Net.Services.DomainModels;
 
-namespace UDS.Net.Forms.Records
+namespace UDS.Net.Services.Records
 {
-    public record B1Record(Form form) : FormRecord(form)
+    public record B1Record(Form FormRecord) : FormRecord(FormRecord)
     {
         [Name("frmdateb1")]
         public string? FrmDate => base.FrmDateExport;

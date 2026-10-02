@@ -1,4 +1,4 @@
-﻿namespace UDS.Net.Forms.Records
+﻿namespace UDS.Net.Services.Records
 {
     public static class RecordConstants
     {
