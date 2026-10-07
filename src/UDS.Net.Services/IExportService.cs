@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UDS.Net.Services
 {
-    public interface IExportService
+    public interface IExportService : IService<Byte>
     {
         public Task<Byte[]> ConvertPacketToCSV(int packetId, string username);
         public Task<Byte[]> BulkConvertPacketsToCSV(int[] packetId, string username);

@@ -41,7 +41,7 @@ namespace UDS.Net.Web.MVC.Services
             _visitService = visitService;
         }
 
-        public async Task<byte[]> ConvertPacketToCSV(int packetId, string username)
+        public async Task<Byte[]> ConvertPacketToCSV(int packetId, string username)
         {
             if (packetId == 0)
                 throw new ArgumentNullException(nameof(packetId));
@@ -82,7 +82,7 @@ namespace UDS.Net.Web.MVC.Services
             return memoryStream.ToArray();
         }
 
-        public async Task<byte[]> BulkConvertPacketsToCSV(int[] packetIds, string username)
+        public async Task<Byte[]> BulkConvertPacketsToCSV(int[] packetIds, string username)
         {
             if (string.IsNullOrWhiteSpace(username)) throw new NullReferenceException();
 
@@ -755,6 +755,41 @@ namespace UDS.Net.Web.MVC.Services
             }
 
             return currentValue;
+        }
+
+        public Task<byte> GetById(string username, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte> Add(string username, byte entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Remove(string username, byte entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte> Update(string username, byte entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<byte> Patch(string username, byte entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> Count(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<byte>> List(string username, int pageSize = 10, int pageIndex = 1)
+        {
+            throw new NotImplementedException();
         }
     }
 }
