@@ -2,17 +2,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>11</LangVersion>
 		<OutputType>Library</OutputType>
 		<PackageId>UDS.Net.Services</PackageId>
-		<Version>18.1.2</Version>
+		<Version>18.2.0-preview.3</Version>
 		<Authors>Sanders-Brown Center on Aging</Authors>
 		<Description>Service contracts for implmenting your own back-end with MVC web app</Description>
 		<Owners>UK-SBCoA</Owners>
 		<PackageDescription>Service contracts required by MVC web app</PackageDescription>
 		<RepositoryUrl>https://github.com/UK-SBCoA/uniform-data-set-dotnet-web</RepositoryUrl>
-		<ReleaseVersion>18.1.2</ReleaseVersion>
+		<ReleaseVersion>18.2.0-preview.3</ReleaseVersion>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="33.1.0" />
+		<PackageReference Include="IsExternalInit" Version="1.0.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="UDS.Net.Dto" Version="11.2.0" />
 	</ItemGroup>
 </Project>

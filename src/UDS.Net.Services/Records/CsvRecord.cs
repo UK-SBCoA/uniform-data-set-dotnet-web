@@ -1,9 +1,8 @@
 ﻿using System;
 using CsvHelper.Configuration.Attributes;
-using UDS.Net.Forms.Models.UDS4;
 using UDS.Net.Services.DomainModels;
 
-namespace UDS.Net.Forms.Records
+namespace UDS.Net.Services.Records
 {
     public record CsvRecord(string adcid, Participation participation, Visit visit)
     {
