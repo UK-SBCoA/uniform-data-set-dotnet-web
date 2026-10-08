@@ -23,7 +23,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             _exportService = exportService;
         }
 
-        public async Task<IActionResult> OnGetAsync(int packetId)
+        public virtual async Task<IActionResult> OnGetAsync(int packetId)
         {
             //DEVNOTE: Call Export service and return csv file using packet Id
             //DEVNOTE: Error check for return data
@@ -33,7 +33,7 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
             return File(csv, "text/csv", "testfile.csv");
         }
 
-        public async Task<IActionResult> OnPostExportMultiplePackets(int[] packetIds)
+        public virtual async Task<IActionResult> OnPostExportMultiplePackets(int[] packetIds)
         {
             var csv = await _exportService.BulkConvertPacketsToCSV(packetIds, User.Identity.Name);
 
