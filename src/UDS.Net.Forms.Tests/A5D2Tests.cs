@@ -389,7 +389,7 @@ namespace UDS.Net.Forms.Tests
             await Page.Locator("input[name=\"A5D2.PSYCDIS\"][value=\"1\"]").CheckAsync();
             await Page.Locator("input[name=\"A5D2.PSYCDISX\"]").FillAsync("Test");
             await Page.Locator("input[name=\"A5D2.OTHANXDISX\"]").FillAsync("Test");
-            await Page.Locator("input[name=\"A5D2.MENARCHE\"]").FillAsync("999");
+            await Page.Locator("input[name=\"A5D2.MENARCHE\"]").FillAsync("12");
             await Page.Keyboard.PressAsync("Tab");
             await Page.Locator("input[name=\"A5D2.NOMENSAGE\"]").FillAsync("999");
             await Page.Keyboard.PressAsync("Tab");

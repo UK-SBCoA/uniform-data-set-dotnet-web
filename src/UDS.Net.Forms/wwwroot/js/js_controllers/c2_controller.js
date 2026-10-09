@@ -10,26 +10,34 @@ export default class extends Controller {
     "intrusion"
   ]
 
+  connect() {
+    setTimeout(() => {
+        this.initializeRecallStates();
+    }, 50);
+  }
+
   //look for UDSForm connection, stimulus not reloaded on turbo partial switch
   UDSFormSubmitTargetConnected() {
     //call global javascript method from unobtrusive_custom to reapply disable states
-    setInputStates()
-
+    setInputStates();
     //handle dropdown state on load
-    this.HandleDropdowns()
+    this.HandleDropdowns();
+    this.initializeRecallStates();
   }
 
   ChangeView() {
-    if ((this.modeSelectTarget.value == 1 || this.modeSelectTarget.value == 2) && this.modalitySelectTarget.value != "") {
-      this.UDSFormSubmitTarget.click()
+    if (
+        (this.modeSelectTarget.value == 1 || this.modeSelectTarget.value == 2) && this.modalitySelectTarget.value != "")
+    {
+        this.UDSFormSubmitTarget.click();
     }
   }
 
   HandleDropdowns() {
     if (this.modeSelectTarget.value == 1) {
       //Disable and default modality dropdown and C2FormFooter remote reason
-      this.modalitySelectTarget.value = ""
-      this.formRemoteReasonTarget.value = ""
+      this.modalitySelectTarget.value = "";
+      this.formRemoteReasonTarget.value = "";
       this.modalitySelectTarget.disabled = true;
       this.formRemoteReasonTarget.disabled = true;
     } else {
@@ -39,11 +47,22 @@ export default class extends Controller {
     }
   }
 
+  initializeRecallStates() {
+      for (const recall of this.recallTargets) {
+          const value = Number(recall.value);
+
+          if (value >= 95 && value <= 98) {
+              this.handleRecallInputs({ target: recall });
+              break;
+          }
+      }
+  }
+
   //#region Rey Auditory Verbal Learning Section
 
   handleRecallInputs(event) {
     const currentRecall = event.target;
-    const value = currentRecall.value;
+    const value = Number(currentRecall.value);
 
     const currentIndex = this.recallTargets.indexOf(currentRecall);
 
@@ -77,9 +96,21 @@ export default class extends Controller {
         currentIntrusion.disabled = false;
       }
 
-      if (nextRecall) {
-        nextRecall.disabled = false;
-      }
+        if (nextRecall) {
+            nextRecall.disabled = false;
+        }
+
+        return;
+    }
+
+    if (currentIntrusion) {
+        currentIntrusion.disabled = true;
+        currentIntrusion.value = "";
+    }
+
+    if (nextRecall) {
+        nextRecall.disabled = true;
+        nextRecall.value = "";
     }
   }
   // #endregion
