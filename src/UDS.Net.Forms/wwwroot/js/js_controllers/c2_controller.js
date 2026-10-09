@@ -96,9 +96,21 @@ export default class extends Controller {
         currentIntrusion.disabled = false;
       }
 
-      if (nextRecall) {
-        nextRecall.disabled = false;
-      }
+        if (nextRecall) {
+            nextRecall.disabled = false;
+        }
+
+        return;
+    }
+
+    if (currentIntrusion) {
+        currentIntrusion.disabled = true;
+        currentIntrusion.value = "";
+    }
+
+    if (nextRecall) {
+        nextRecall.disabled = true;
+        nextRecall.value = "";
     }
   }
   // #endregion

@@ -1478,7 +1478,7 @@ public class A5D2Model : FormPageModel
             new()
             {
                 Low = 5,
-                High = 120,
+                High = 25,
                 PropertyAttributes =
                 {
                     new UIEnableAttribute("A5D2.HRT"),

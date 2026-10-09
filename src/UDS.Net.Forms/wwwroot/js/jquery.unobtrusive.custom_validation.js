@@ -109,14 +109,8 @@ function compareRangeBehaviors(behaviors, value) {
 
                 $.each(target, function (field, attributes) {
 
-                    $.each(attributes, function (attribute, value) {
-
-                        setAffect(
-                            field,
-                            attribute,
-                            false
-                        );
-                    });
+                    setAffect(field, "disabled", true
+                    );
                 });
             });
         });
