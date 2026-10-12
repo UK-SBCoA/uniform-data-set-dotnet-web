@@ -107,11 +107,11 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[name='MILESTONETYPE'][value='1']").CheckAsync();
 
-            // Autopsy consent is only enabled when protocol 3 is selected.
+            // Autopsy consent is only enabled when protocol 2 is selected.
             await Expect(Page.Locator("input[name='ACONSENT'][value='0']")).ToBeDisabledAsync();
             await Expect(Page.Locator("input[name='ACONSENT'][value='1']")).ToBeDisabledAsync();
 
-            await Page.Locator("input[name='PROTOCOL'][value='3']").CheckAsync();
+            await Page.Locator("input[name='PROTOCOL'][value='2']").CheckAsync();
 
             await Expect(Page.Locator("input[name='ACONSENT'][value='0']")).ToBeEnabledAsync();
             await Expect(Page.Locator("input[name='ACONSENT'][value='1']")).ToBeEnabledAsync();
@@ -246,9 +246,9 @@ namespace UDS.Net.Forms.Tests
 
             await Page.Locator("input[name='MILESTONETYPE'][value='1']").CheckAsync();
 
-            await Page.Locator("input[name='PROTOCOL'][value='3']").CheckAsync();
+            await Page.Locator("input[name='PROTOCOL'][value='2']").CheckAsync();
 
-            await Expect(Page.Locator("input[name='PROTOCOL'][value='3']")).ToBeCheckedAsync();
+            await Expect(Page.Locator("input[name='PROTOCOL'][value='2']")).ToBeCheckedAsync();
 
             await Page.GetByRole(AriaRole.Button, new() { Name = "Add", Exact = true }).ClickAsync();
 
@@ -286,7 +286,7 @@ namespace UDS.Net.Forms.Tests
 
             await Page.GetByRole(AriaRole.Button, new() { Name = "Add", Exact = true }).ClickAsync();
 
-            await Expect(Page.Locator("[data-valmsg-for='CHANGEYR']")).ToContainTextAsync("Provide a valid year between 2015 - 2999");
+            await Expect(Page.Locator("[data-valmsg-for='CHANGEYR']")).ToContainTextAsync("Provide a valid year between 2015 and current year");
         }
 
         [TestMethod]
@@ -306,7 +306,7 @@ namespace UDS.Net.Forms.Tests
 
             await Page.GetByRole(AriaRole.Button, new() { Name = "Add", Exact = true }).ClickAsync();
 
-            await Expect(Page.Locator("[data-valmsg-for='NURSEYR']")).ToContainTextAsync("Provide a valid year between 2015 - 2999");
+            await Expect(Page.Locator("[data-valmsg-for='NURSEYR']")).ToContainTextAsync("Provide a valid year between 2015 and current year");
         }
 
         [TestMethod]
@@ -346,7 +346,7 @@ namespace UDS.Net.Forms.Tests
 
             await Page.GetByRole(AriaRole.Button, new() { Name = "Add", Exact = true }).ClickAsync();
 
-            await Expect(Page.Locator("[data-valmsg-for='DISCYR']")).ToContainTextAsync("Provide a valid year between 2015 - 2999");
+            await Expect(Page.Locator("[data-valmsg-for='DISCYR']")).ToContainTextAsync("Provide a valid year between 2015 and current year");
         }
     }
 }
