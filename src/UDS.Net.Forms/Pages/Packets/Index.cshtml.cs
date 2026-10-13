@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using UDS.Net.Forms.Extensions;
 using UDS.Net.Forms.Models;
 using UDS.Net.Services;
-using UDS.Net.Services.DomainModels.Submission;
 using UDS.Net.Services.Enums;
 
 namespace UDS.Net.Forms.Pages.Packets
@@ -14,7 +13,7 @@ namespace UDS.Net.Forms.Pages.Packets
 
         public PacketsPaginatedModel Packets { get; set; } = new PacketsPaginatedModel();
 
-        public FilterModel Filter;
+        public FilterModel? Filter;
 
         public IndexModel(IPacketService packetService)
         {
@@ -25,6 +24,7 @@ namespace UDS.Net.Forms.Pages.Packets
         {
             var allowedStatuses = new List<PacketStatus>
             {
+                PacketStatus.Pending,
                 PacketStatus.Finalized,
                 PacketStatus.Submitted,
                 PacketStatus.FailedErrorChecks,
@@ -40,11 +40,11 @@ namespace UDS.Net.Forms.Pages.Packets
                 ? Filter.SelectedItems
                     .Select(s => Enum.TryParse<PacketStatus>(s, out var parsed) ? (PacketStatus?)parsed : null)
                     .Where(s => s.HasValue && allowedStatuses.Contains(s.Value))
-                    .Select(s => s.Value)
+                    .Select(s => s!.Value)
                     .ToList()
                 : allowedStatuses;
 
-            var packets = await _packetService.List(User.Identity.Name, selectedStatuses, pageSize, pageIndex);
+            var packets = await _packetService.List(User.Identity!.Name, selectedStatuses, pageSize, pageIndex);
             int total = await _packetService.Count(User.Identity.Name, selectedStatuses);
 
             Packets = packets.ToVM(pageSize, pageIndex, total, search);
