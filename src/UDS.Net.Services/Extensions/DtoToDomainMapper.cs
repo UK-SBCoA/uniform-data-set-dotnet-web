@@ -81,10 +81,18 @@ namespace UDS.Net.Services.Extensions
 
         public static Visit ToDomain(this VisitDto dto, string username, ParticipationDto participationDto, int? ageAtVisit = null)
         {
+            PacketKind packetKind = PacketKind.I;
+
+            if (!string.IsNullOrWhiteSpace(dto.PACKET))
+            {
+                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
+                    packetKind = kind;
+            }
+
             IList<Form> existingForms = new List<Form>();
 
             if (dto.Forms != null)
-                existingForms = dto.Forms.ToDomain(dto.Id, username);
+                existingForms = dto.Forms.ToDomain(dto.Id, username, packetKind);
 
             IList<PacketSubmissionError> errors = new List<PacketSubmissionError>();
 
@@ -101,13 +109,6 @@ namespace UDS.Net.Services.Extensions
                 }
             }
 
-            PacketKind packetKind = PacketKind.I;
-
-            if (!string.IsNullOrWhiteSpace(dto.PACKET))
-            {
-                if (Enum.TryParse(dto.PACKET, true, out PacketKind kind))
-                    packetKind = kind;
-            }
 
             PacketStatus packetStatus = PacketStatus.Pending;
             if (!string.IsNullOrWhiteSpace(dto.Status))
@@ -199,7 +200,7 @@ namespace UDS.Net.Services.Extensions
             return m1Dtos.Select(m => m.ToDomain()).ToList();
         }
 
-        public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username, PacketKind? packetKind = PacketKind.I)
+        public static IList<Form> ToDomain(this List<FormDto> dto, int visitId, string username, PacketKind packetKind)
         {
             if (dto != null)
                 return dto.Select(f => f.ToDomain(visitId, f.CreatedBy, packetKind)).ToList();
@@ -207,7 +208,7 @@ namespace UDS.Net.Services.Extensions
             return new List<Form>();
         }
 
-        public static Form ToDomain(this FormDto dto, int visitId, string username, PacketKind? packetKind = PacketKind.I)
+        public static Form ToDomain(this FormDto dto, int visitId, string username, PacketKind packetKind)
         {
             IFormFields formFields = null;
             string title = "";
@@ -220,7 +221,7 @@ namespace UDS.Net.Services.Extensions
             }
             else if (dto is A1aDto)
             {
-                formFields = new A1aFormFields(dto, packetKind ?? PacketKind.I);
+                formFields = new A1aFormFields(dto, packetKind);
             }
             else if (dto is A2Dto)
             {
@@ -291,7 +292,7 @@ namespace UDS.Net.Services.Extensions
                 if (dto.Kind == "A1")
                     title = new A1FormFields().GetDescription();
                 else if (dto.Kind == "A1a")
-                    title = new A1aFormFields(packetKind ?? PacketKind.I).GetDescription();
+                    title = new A1aFormFields(packetKind).GetDescription();
                 else if (dto.Kind == "A2")
                     title = new A2FormFields().GetDescription();
                 else if (dto.Kind == "A3")
@@ -403,7 +404,7 @@ namespace UDS.Net.Services.Extensions
             return dtos.Select(d => d.ToDomain(username)).ToList();
         }
 
-        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username, PacketKind? packetKind = PacketKind.I)
+        public static IList<PacketSubmission> ToDomain(this List<PacketSubmissionDto> dto, string adrcId, int visitId, string username, PacketKind packetKind)
         {
             if (dto == null)
                 return new List<PacketSubmission>();
@@ -413,7 +414,7 @@ namespace UDS.Net.Services.Extensions
             }
         }
 
-        public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId, PacketKind? packetKind = PacketKind.I)
+        public static PacketSubmission ToDomain(this PacketSubmissionDto dto, string adrcId, PacketKind packetKind)
         {
             IList<Form> forms = dto.Forms?
                 .Select(form => form.ToDomain(dto.PacketId, form.CreatedBy, packetKind))

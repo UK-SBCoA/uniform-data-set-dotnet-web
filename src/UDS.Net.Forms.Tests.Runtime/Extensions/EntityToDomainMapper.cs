@@ -1,75 +1,76 @@
 ﻿using System;
 using UDS.Net.API.Extensions;
+using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 
 namespace UDS.Net.Forms.Tests.Runtime.Extensions
 {
     public static class EntityToDomainMapper
     {
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A1 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A1 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var a1 = dto.ToDomain(visitId, username);
+            var a1 = dto.ToDomain(visitId, username, packetKind);
 
             return a1;
         }
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A3 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A3 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var a3 = dto.ToDomain(visitId, username);
+            var a3 = dto.ToDomain(visitId, username, packetKind);
 
             return a3;
         }
 
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A4 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A4 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var a4 = dto.ToDomain(visitId, username);
+            var a4 = dto.ToDomain(visitId, username, packetKind);
 
             return a4;
         }
 
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A4a entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A4a entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var a4a = dto.ToDomain(visitId, username);
+            var a4a = dto.ToDomain(visitId, username, packetKind);
 
             return a4a;
         }
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A5D2 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.A5D2 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var a5d2 = dto.ToDomain(visitId, username);
+            var a5d2 = dto.ToDomain(visitId, username, packetKind);
 
             return a5d2;
         }
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.B9 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.B9 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var B9 = dto.ToDomain(visitId, username);
+            var B9 = dto.ToDomain(visitId, username, packetKind);
 
             return B9;
         }
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.C2 entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.C2 entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var c2 = dto.ToDomain(visitId, username);
+            var c2 = dto.ToDomain(visitId, username, packetKind);
 
             return c2;
         }
 
-        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.D1a entity, int visitId, string username)
+        public static UDS.Net.Services.DomainModels.Form Convert(this UDS.Net.API.Entities.D1a entity, int visitId, string username, PacketKind packetKind)
         {
             var dto = entity.ToFullDto();
 
-            var d1a = dto.ToDomain(visitId, username);
+            var d1a = dto.ToDomain(visitId, username, packetKind);
 
             return d1a;
         }
