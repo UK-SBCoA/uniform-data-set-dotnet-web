@@ -41,43 +41,50 @@ namespace UDS.Net.Web.MVC.Services
             _visitService = visitService;
         }
 
-        public async Task<Byte[]> ConvertPacketToCSV(int packetId, string username)
+        //DEVNOTE: remove calls to services, provide infomration needed to build file
+        //DEVNOTE: Keeping username for authentication check
+        public async Task<Byte[]> ConvertPacketToCSV(PacketExportItemModel packetExportItem, string username)
         {
-            if (packetId == 0)
-                throw new ArgumentNullException(nameof(packetId));
+            if(string.IsNullOrEmpty(username)) { throw new NullReferenceException(nameof(username)); }
+
+            if (packetExportItem.Packet.Id == 0)
+                throw new ArgumentNullException(nameof(packetExportItem.Packet.Id));
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
-            var packet = await _packetService.GetPacketWithForms(username, packetId);
+            //DEVNOTE: Supply packet with forms to the method from export.cs, returns a Packet type
+            //var packet = await _packetService.GetPacketWithForms(username, packetId);
 
-            if (packet == null)
-                throw new NullReferenceException(nameof(packet));
+            if (packetExportItem.Packet == null)
+                throw new NullReferenceException(nameof(packetExportItem.Packet));
 
-            var participant = await _participationService.GetById(username, packet.ParticipationId);
+            //DEVNOTE: Returns participation, supplying this with packetToConvert
+            //var participant = await _participationService.GetById(username, packetToConvert.ParticipationId);
 
-            if (participant == null)
-                throw new NullReferenceException(nameof(participant));
+            if (packetExportItem.Packet.Participation == null)
+                throw new NullReferenceException(nameof(packetExportItem.Packet.Participation));
 
-            var packetSubmission = packet.Submissions.FirstOrDefault();
+            var packetSubmission = packetExportItem.Packet.Submissions.FirstOrDefault();
 
             if (packetSubmission == null)
                 throw new NullReferenceException(nameof(packetSubmission));
 
             // D1c fields are required for visits on or after July 14, 2026.
-            bool includeD1cColumns = packet.VISIT_DATE >= D1cEffectiveDate;
+            //bool includeD1cColumns = packetToConvert.VISIT_DATE >= D1cEffectiveDate;
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                WriteHeader(csv, packetSubmission, includeD1cColumns);
+                WriteHeader(csv, packetSubmission, packetExportItem.IncludeD1cColumns);
 
-                await WritePacketDataAsync(username, csv, packetSubmission, participant, packet, includeD1cColumns);
+                await WritePacketDataAsync(username, csv, packetExportItem);
             }
 
             memoryStream.Position = 0;
 
+            //DEVNOTE: Name of the file can be set in the pagemodel 
             //DEVNOTE: Noticed the older code was not using ToFileTimeUTC() but instead ToFileTime(), should it be switched to the UTC time as it is now?
-            string filename = $"UDS_{participant.LegacyId}_{packet.VISIT_DATE.Year}_EXPORTED_{packetSubmission.SubmissionDate.ToFileTimeUtc()}-uds.csv";
+            //string filename = $"UDS_{participant.LegacyId}_{packet.VISIT_DATE.Year}_EXPORTED_{packetSubmission.SubmissionDate.ToFileTimeUtc()}-uds.csv";
 
             return memoryStream.ToArray();
         }
@@ -150,8 +157,8 @@ namespace UDS.Net.Web.MVC.Services
                 await _packetService.Update(username, item.Packet);
             }
 
-            bool includeD1cColumns = packetsToExport.Any(
-                x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
+            //bool includeD1cColumns = packetsToExport.Any(
+            //    x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
@@ -160,13 +167,13 @@ namespace UDS.Net.Web.MVC.Services
             {
                 var firstPacket = packetsToExport[0];
 
-                WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
+                //WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
 
                 foreach (var item in packetsToExport)
                 {
                     //DEVNOTE: Unsure if username needs to be part of the WritePacketDataAsync method
                     //Is a private method only used for exports
-                    await WritePacketDataAsync(username, csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
+                    //await WritePacketDataAsync(username, csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
 
                     csv.NextRecord();
                 }
@@ -347,35 +354,35 @@ namespace UDS.Net.Web.MVC.Services
             csv.NextRecord(); // end of header row
         }
 
-        private async Task WritePacketDataAsync(string username, CsvWriter csv, PacketSubmission packetSubmission, Participation participant, Packet packet, bool includeD1cColumns)
+        private async Task WritePacketDataAsync(string username, CsvWriter csv, PacketExportItemModel packetExportItem)
         {
             // Register custom converters globally.
             // https://joshclose.github.io/CsvHelper/examples/type-conversion/custom-type-converter/
             csv.Context.TypeConverterCache.AddConverter<bool>(new BooleanConverterOverride());
             csv.Context.TypeConverterCache.AddConverter<string>(new StringConverterOverride());
 
-            var a1 = packetSubmission.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
-            var a1a = packetSubmission.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
-            var a2 = packetSubmission.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
-            var a3 = packetSubmission.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
-            var a4 = packetSubmission.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
-            var a4a = packetSubmission.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
-            var a5d2 = packetSubmission.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
-            var b1 = packetSubmission.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
-            var b3 = packetSubmission.Forms.Where(f => f.Kind == "B3").FirstOrDefault();
-            var b4 = packetSubmission.Forms.Where(f => f.Kind == "B4").FirstOrDefault();
-            var b5 = packetSubmission.Forms.Where(f => f.Kind == "B5").FirstOrDefault();
-            var b6 = packetSubmission.Forms.Where(f => f.Kind == "B6").FirstOrDefault();
-            var b7 = packetSubmission.Forms.Where(f => f.Kind == "B7").FirstOrDefault();
-            var b8 = packetSubmission.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
-            var b9 = packetSubmission.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
-            var c2 = packetSubmission.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
-            var d1a = packetSubmission.Forms.Where(f => f.Kind == "D1a").FirstOrDefault();
-            var d1b = packetSubmission.Forms.Where(f => f.Kind == "D1b").FirstOrDefault();
+            var a1 = packetExportItem.Packet.Forms.Where(f => f.Kind == "A1").FirstOrDefault();
+            var a1a = packetExportItem.Packet.Forms.Where(f => f.Kind == "A1a").FirstOrDefault();
+            var a2 = packetExportItem.Packet.Forms.Where(f => f.Kind == "A2").FirstOrDefault();
+            var a3 = packetExportItem.Packet.Forms.Where(f => f.Kind == "A3").FirstOrDefault();
+            var a4 = packetExportItem.Packet.Forms.Where(f => f.Kind == "A4").FirstOrDefault();
+            var a4a = packetExportItem.Packet.Forms.Where(f => f.Kind == "A4a").FirstOrDefault();
+            var a5d2 = packetExportItem.Packet.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault();
+            var b1 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B1").FirstOrDefault();
+            var b3 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B3").FirstOrDefault();
+            var b4 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B4").FirstOrDefault();
+            var b5 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B5").FirstOrDefault();
+            var b6 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B6").FirstOrDefault();
+            var b7 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B7").FirstOrDefault();
+            var b8 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B8").FirstOrDefault();
+            var b9 = packetExportItem.Packet.Forms.Where(f => f.Kind == "B9").FirstOrDefault();
+            var c2 = packetExportItem.Packet.Forms.Where(f => f.Kind == "C2").FirstOrDefault();
+            var d1a = packetExportItem.Packet.Forms.Where(f => f.Kind == "D1a").FirstOrDefault();
+            var d1b = packetExportItem.Packet.Forms.Where(f => f.Kind == "D1b").FirstOrDefault();
             var a4aProps = typeof(A4aTreatmentFormFields).GetProperties();
             var a3FamilyProps = typeof(A3FamilyMemberFormFields).GetProperties();
 
-            var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, participant, packet);
+            var record = new CsvRecord(_configuration.GetSection("ADRC:Id").Value, packetExportItem.Packet.Participation, packetExportItem.Packet);
 
 
             csv.WriteRecord(record);
@@ -424,19 +431,15 @@ namespace UDS.Net.Web.MVC.Services
 
                 A3FormFields currentA3Fields = (A3FormFields)a3.Fields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(username, packet.ParticipationId, "4.0.0");
-
                 A3FormFields? exportA3Fields = null;
                 //If a previous visit exists, get data from previous visit
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                if (packetExportItem.Packet.VISITNUM >= packetExportItem.CountOfVisits && packetExportItem.CountOfVisits > 1)
                 {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(username, packet.ParticipationId, packet.VISITNUM - 1, "A3");
-
                     //Set previousA3Fields
-                    var previousA3Fields = previousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
+                    var previousA3Fields = packetExportItem.PreviousVisit?.Forms.FirstOrDefault(f => f.Kind == "A3")?.Fields as A3FormFields;
 
                     //If I4 with no previous visits, then export current A3 fields
-                    if (packet.PACKET == Net.Services.Enums.PacketKind.I4 && previousVisit == null)
+                    if (packetExportItem.Packet.PACKET == Net.Services.Enums.PacketKind.I4 && packetExportItem.PreviousVisit == null)
                     {
                         exportA3Fields = currentA3Fields;
                     }
@@ -513,9 +516,7 @@ namespace UDS.Net.Web.MVC.Services
                 A4aFormFields exportA4aFormFields = null!;
                 A4aFormFields currentA4aFields = (A4aFormFields)a4a.Fields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(username, packet.ParticipationId, "4.0.0");
-
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1 && packet.PACKET != Net.Services.Enums.PacketKind.I4)
+                if (packetExportItem.Packet.VISITNUM >= packetExportItem.CountOfVisits && packetExportItem.CountOfVisits > 1 && packetExportItem.Packet.PACKET != Net.Services.Enums.PacketKind.I4)
                 {
                     exportA4aFormFields = currentA4aFields.GetExportFormFields();
                 }
@@ -544,14 +545,10 @@ namespace UDS.Net.Web.MVC.Services
 
                 A5D2FormFields? currentA5D2Fields = a5d2.Fields as A5D2FormFields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(username, packet.ParticipationId, "4.0.0");
-
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                if (packetExportItem.Packet.VISITNUM >= packetExportItem.CountOfVisits && packetExportItem.CountOfVisits > 1)
                 {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(username, packet.ParticipationId, packet.VISITNUM - 1, "A5D2");
-
                     //Set previousA5D2Base
-                    previousA5D2Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
+                    previousA5D2Base = packetExportItem.PreviousVisit != null ? packetExportItem.PreviousVisit.Forms.Where(f => f.Kind == "A5D2").FirstOrDefault() : null;
 
                     //Set previousA5D2Fields
                     previousA5D2Fields = previousA5D2Base != null ? previousA5D2Base.Fields as A5D2FormFields : null;
@@ -678,14 +675,10 @@ namespace UDS.Net.Web.MVC.Services
 
                 B9FormFields? currentB9Fields = b9.Fields as B9FormFields;
 
-                int countOfVisits = await _visitService.GetVisitCountByVersion(username, packet.ParticipationId, "4.0.0");
-
-                if (packet.VISITNUM >= countOfVisits && countOfVisits > 1)
+                if (packetExportItem.Packet.VISITNUM >= packetExportItem.CountOfVisits && packetExportItem.CountOfVisits > 1)
                 {
-                    var previousVisit = await _visitService.GetWithFormByParticipantAndVisitNumber(username, packet.ParticipationId, packet.VISITNUM - 1, "B9");
-
                     //Set previousB9Base
-                    previousB9Base = previousVisit != null ? previousVisit.Forms.Where(f => f.Kind == "B9").FirstOrDefault() : null;
+                    previousB9Base = packetExportItem.PreviousVisit != null ? packetExportItem.PreviousVisit.Forms.Where(f => f.Kind == "B9").FirstOrDefault() : null;
 
                     //Set previousB9Fields
                     previousB9Fields = previousB9Base != null ? previousB9Base.Fields as B9FormFields : null;
@@ -728,9 +721,9 @@ namespace UDS.Net.Web.MVC.Services
                 if (d1b.Fields is D1bFormFields normalD1b)
                     csv.WriteRecord(normalD1b);
             }
-            if (includeD1cColumns)
+            if (packetExportItem.IncludeD1cColumns)
             {
-                if (packet.VISIT_DATE >= D1cEffectiveDate)
+                if (packetExportItem.Packet.VISIT_DATE >= D1cEffectiveDate)
                 {
                     csv.WriteField(D1cNotDefaultValue);
                     csv.WriteField(ModeD1cDefaultValue);
