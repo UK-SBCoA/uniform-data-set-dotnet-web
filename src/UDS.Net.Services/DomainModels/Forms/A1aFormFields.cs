@@ -59,6 +59,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool EXPNOTAPP { get; set; }
         public bool EXPNOANS { get; set; }
         public int? EXPSTRS { get; set; }
+        private PacketKind PacketKind { get; }
 
         public IEnumerable<FormMode> FormModes
         {
@@ -73,9 +74,9 @@ namespace UDS.Net.Services.DomainModels.Forms
             get
             {
                 var codes = new List<NotIncludedReasonCode>
-            {
-                NotIncludedReasonCode.ConcernsAboutReliability
-            };
+                {
+                    NotIncludedReasonCode.ConcernsAboutReliability
+                };
 
                 if (PacketKind == PacketKind.F)
                     codes.Add(NotIncludedReasonCode.Optional);
@@ -100,8 +101,6 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
-        public PacketKind PacketKind { get; }
-
         public A1aFormFields(PacketKind packetKind)
         {
             PacketKind = packetKind;
@@ -117,10 +116,8 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "4";
         }
 
-        public A1aFormFields(FormDto dto, PacketKind packetKind)
+        public A1aFormFields(FormDto dto, PacketKind packetKind) : this(packetKind)
         {
-            PacketKind = packetKind;
-
             if (dto is A1aDto)
             {
                 var a1aDto = ((A1aDto)dto);
