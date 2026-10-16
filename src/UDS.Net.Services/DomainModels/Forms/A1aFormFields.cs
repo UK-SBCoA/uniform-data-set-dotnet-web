@@ -59,6 +59,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public bool EXPNOTAPP { get; set; }
         public bool EXPNOANS { get; set; }
         public int? EXPSTRS { get; set; }
+        private PacketKind PacketKind { get; }
 
         public IEnumerable<FormMode> FormModes
         {
@@ -72,7 +73,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         {
             get
             {
-                return new List<NotIncludedReasonCode>() { NotIncludedReasonCode.ConcernsAboutReliability };
+                var codes = new List<NotIncludedReasonCode>
+                {
+                    NotIncludedReasonCode.ConcernsAboutReliability
+                };
+
+                if (PacketKind == PacketKind.F)
+                    codes.Add(NotIncludedReasonCode.Optional);
+
+                return codes;
             }
         }
 
@@ -92,6 +101,11 @@ namespace UDS.Net.Services.DomainModels.Forms
             }
         }
 
+        public A1aFormFields(PacketKind packetKind)
+        {
+            PacketKind = packetKind;
+        }
+
         public string GetDescription()
         {
             return "Social Determinants of Health";
@@ -102,8 +116,7 @@ namespace UDS.Net.Services.DomainModels.Forms
             return "4";
         }
 
-        public A1aFormFields() { }
-        public A1aFormFields(FormDto dto)
+        public A1aFormFields(FormDto dto, PacketKind packetKind) : this(packetKind)
         {
             if (dto is A1aDto)
             {

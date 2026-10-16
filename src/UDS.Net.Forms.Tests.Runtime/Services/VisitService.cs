@@ -99,59 +99,59 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
                 if (packet != null)
                 {
-                    List<Form> forms = new List<Form>();
-
-                    // TODO add more forms here as tests are added
-                    if (packet.A1 != null)
-                    {
-                        var a1 = packet.A1.Convert(packet.Id, username);
-                        forms.Add(a1);
-                    }
-
-                    if (packet.A3 != null)
-                    {
-                        var a3 = packet.A3.Convert(packet.Id, username);
-                        forms.Add(a3);
-                    }
-                    if (packet.A4 != null)
-                    {
-                        var a4 = packet.A4.Convert(packet.Id, username);
-                        forms.Add(a4);
-                    }
-                    if (packet.A4a != null)
-                    {
-                        var a4a = packet.A4a.Convert(packet.Id, username);
-                        forms.Add(a4a);
-                    }
-                    if (packet.A5D2 != null)
-                    {
-                        var a5d2 = packet.A5D2.Convert(packet.Id, username);
-                        forms.Add(a5d2);
-                    }
-                    if (packet.B9 != null)
-                    {
-                        var B9 = packet.B9.Convert(packet.Id, username);
-                        forms.Add(B9);
-                    }
-                    if (packet.C2 != null)
-                    {
-                        // get the dto then convert to domain with UDS.Net.Services.Extensions
-                        var c2 = packet.C2.Convert(packet.Id, username);
-                        forms.Add(c2);
-                    }
-                    if (packet.D1a != null)
-                    {
-                        var d1a = packet.D1a.Convert(packet.Id, username);
-                        forms.Add(d1a);
-                    }
-
-                    //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
                     var packetKind = PacketKind.I;
 
                     if (packet.PACKET.ToString() == "F")
                     {
                         packetKind = PacketKind.F;
                     }
+                    List<Form> forms = new List<Form>();
+
+                    // TODO add more forms here as tests are added
+                    if (packet.A1 != null)
+                    {
+                        var a1 = packet.A1.Convert(packet.Id, username, packetKind);
+                        forms.Add(a1);
+                    }
+
+                    if (packet.A3 != null)
+                    {
+                        var a3 = packet.A3.Convert(packet.Id, username, packetKind);
+                        forms.Add(a3);
+                    }
+                    if (packet.A4 != null)
+                    {
+                        var a4 = packet.A4.Convert(packet.Id, username, packetKind);
+                        forms.Add(a4);
+                    }
+                    if (packet.A4a != null)
+                    {
+                        var a4a = packet.A4a.Convert(packet.Id, username, packetKind);
+                        forms.Add(a4a);
+                    }
+                    if (packet.A5D2 != null)
+                    {
+                        var a5d2 = packet.A5D2.Convert(packet.Id, username, packetKind);
+                        forms.Add(a5d2);
+                    }
+                    if (packet.B9 != null)
+                    {
+                        var B9 = packet.B9.Convert(packet.Id, username, packetKind);
+                        forms.Add(B9);
+                    }
+                    if (packet.C2 != null)
+                    {
+                        // get the dto then convert to domain with UDS.Net.Services.Extensions
+                        var c2 = packet.C2.Convert(packet.Id, username, packetKind);
+                        forms.Add(c2);
+                    }
+                    if (packet.D1a != null)
+                    {
+                        var d1a = packet.D1a.Convert(packet.Id, username, packetKind);
+                        forms.Add(d1a);
+                    }
+
+
                     if (includeAge.HasValue && includeAge == true)
                     {
                         var a1 = _context.A1s
@@ -162,6 +162,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                             ageAtVisit = packet.CreatedAt.Year - a1.BIRTHYR;
                         }
                     }
+                    //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
                     var visit = new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
                     visit.AgeAtVisit = ageAtVisit;
                     return visit;
@@ -532,46 +533,6 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
             if (packet == null) return null;
 
-            List<Form> forms = new List<Form>();
-
-            // TODO add more forms here as tests are added
-            if (packet.A1 != null)
-            {
-                var a1 = packet.A1.Convert(packet.Id, username);
-                forms.Add(a1);
-            }
-
-            if (packet.A3 != null)
-            {
-                var a3 = packet.A3.Convert(packet.Id, username);
-                forms.Add(a3);
-            }
-            if (packet.A4 != null)
-            {
-                var a4 = packet.A4.Convert(packet.Id, username);
-                forms.Add(a4);
-            }
-            if (packet.A4a != null)
-            {
-                var a4a = packet.A4a.Convert(packet.Id, username);
-                forms.Add(a4a);
-            }
-            if (packet.A5D2 != null)
-            {
-                var a5d2 = packet.A5D2.Convert(packet.Id, username);
-                forms.Add(a5d2);
-            }
-            if (packet.B9 != null)
-            {
-                var B9 = packet.B9.Convert(packet.Id, username);
-                forms.Add(B9);
-            }
-            if (packet.D1a != null)
-            {
-                var D1a = packet.D1a.Convert(packet.Id, username);
-                forms.Add(D1a);
-            }
-            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
             var packetKind = PacketKind.I;
 
             if (packet.PACKET.ToString() == "F")
@@ -579,6 +540,46 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
                 packetKind = PacketKind.F;
             }
 
+            List<Form> forms = new List<Form>();
+
+            // TODO add more forms here as tests are added
+            if (packet.A1 != null)
+            {
+                var a1 = packet.A1.Convert(packet.Id, username, packetKind);
+                forms.Add(a1);
+            }
+
+            if (packet.A3 != null)
+            {
+                var a3 = packet.A3.Convert(packet.Id, username, packetKind);
+                forms.Add(a3);
+            }
+            if (packet.A4 != null)
+            {
+                var a4 = packet.A4.Convert(packet.Id, username, packetKind);
+                forms.Add(a4);
+            }
+            if (packet.A4a != null)
+            {
+                var a4a = packet.A4a.Convert(packet.Id, username, packetKind);
+                forms.Add(a4a);
+            }
+            if (packet.A5D2 != null)
+            {
+                var a5d2 = packet.A5D2.Convert(packet.Id, username, packetKind);
+                forms.Add(a5d2);
+            }
+            if (packet.B9 != null)
+            {
+                var B9 = packet.B9.Convert(packet.Id, username, packetKind);
+                forms.Add(B9);
+            }
+            if (packet.D1a != null)
+            {
+                var D1a = packet.D1a.Convert(packet.Id, username, packetKind);
+                forms.Add(D1a);
+            }
+            //DEVNOTE: visit constructor used needs an enum.packetKind, creating a variable to use for constuctor temporarily
             return new Visit(packet.Id, packet.VISITNUM, packet.ParticipationId, packet.FORMVER, packetKind, packet.VISIT_DATE, packet.INITIALS, PacketStatus.Pending, packet.CreatedAt, packet.CreatedBy, packet.ModifiedBy, packet.DeletedBy, packet.IsDeleted, forms);
         }
     }

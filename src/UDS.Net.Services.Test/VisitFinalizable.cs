@@ -38,7 +38,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -76,7 +77,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -113,7 +115,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -150,7 +153,7 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -189,7 +192,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -228,7 +232,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
@@ -267,7 +272,8 @@ namespace UDS.Net.Services.Test
                 new List<Form>
                 {
                     new Form(1, 1, "A1", "A1", true, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1FormFields()),
-                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields()),
+                    new Form(1, 1, "A1a", "A1a", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A1aFormFields(PacketKind.I)
+),
                     new Form(1, 1, "A2", "A2", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A2FormFields()),
                     new Form(1, 1, "A3", "A3", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A3FormFields()),
                     new Form(1, 1, "A4", "A4", false, FormStatus.Finalized, DateTime.Now, "XX", FormLanguage.English, FormMode.InPerson, null, null, null, null, DateTime.Now, "tester", "", "", false, new A4GFormFields()),
