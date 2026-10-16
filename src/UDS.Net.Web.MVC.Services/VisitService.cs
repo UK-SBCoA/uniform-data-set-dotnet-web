@@ -102,7 +102,17 @@ namespace UDS.Net.Web.MVC.Services
 
         public async Task<Visit> GetWithFormByParticipantAndVisitNumber(string username, int participationId, int visitNumber, string formKind)
         {
-            var visitDto = await _apiClient.VisitClient.GetByVisitNumber(participationId, visitNumber, formKind);
+            //DEVNOTE: The program crahses when visitDto == null. Temporary try catch to handle for testing
+            VisitDto visitDto = null;
+
+            try
+            {
+                visitDto = await _apiClient.VisitClient.GetByVisitNumber(participationId, visitNumber, formKind);
+            }
+            catch
+            {
+                visitDto = null;
+            }
 
             if (visitDto != null)
             {

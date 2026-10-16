@@ -19,16 +19,15 @@
 
 <turbo-stream action="replace" target="exportModalButtons">
     <template>
-        <div id="exportModalButtons" class="mt-6 flex justify-end space-x-3">
+        <div data-modal-target="exportConfirmButtons" id="exportModalButtons" class="mt-6 flex justify-end space-x-3">
             <button data-action="modal#hide" type="button"
                     class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-800">
                 Cancel
             </button>
             <button type="submit"
-                    data-pageRefreshOnSubmit-target="button"
-                    data-action="checkboxButton#clearSelected"
+                    data-action="checkboxButton#clearSelected modal#swapModalButtons"
                     class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white">
-                Confirm Export
+                Confirm Export test
             </button>
         </div>
     </template>

@@ -1,33 +1,32 @@
 ﻿using System;
-using System.Globalization;
 using CsvHelper.Configuration.Attributes;
 using UDS.Net.Services.DomainModels;
-using UDS.Net.Services.DomainModels.Forms;
 
-namespace UDS.Net.Forms.Records
+namespace UDS.Net.Services.Records
 {
-    public record A1Record(Form form) : FormRecord(form)
+    public record A2Record(Form FormRecord) : FormRecord(FormRecord)
     {
-        [Name("frmdatea1")]
+        [Name("frmdatea2")]
         public string? FrmDate => base.FrmDateExport;
 
-        [Name("initialsa1")]
+        [Name("initialsa2")]
         public string? Initials => base.InitialsExport;
 
-        [Name("langa1")]
+        [Name("langa2")]
         public int? Lang => base.LangExport;
 
-        [Name("modea1")]
+        [Name("modea2")]
         public int Mode => base.ModeExport;
 
-        [Name("rmreasa1")]
+        [Name("rmreasa2")]
         public int? RmReas => base.RmReasExport;
 
-        [Name("rmmodea1")]
+        [Name("rmmodea2")]
         public int? RmMode => base.RmModeExport;
 
-        [Name("admina1")]
-        public int? Admin => base.AdminExport;
+        [Name("a2not")]
+        public int? Not => base.NotExport;
     }
 }
+
 
