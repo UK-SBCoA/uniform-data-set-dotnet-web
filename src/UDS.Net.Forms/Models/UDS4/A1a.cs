@@ -128,7 +128,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? PARTICIPATE { get; set; }
 
-        [Display(Name = "Home?")]
+        [Display(Name = "Home")]
         [RegularExpression("^([1-4]|8)$", ErrorMessage = "Valid range is 1-4 or 8")]
         [RequiredOnFinalized(ErrorMessage = "Response required")]
         public int? SAFEHOME { get; set; }
