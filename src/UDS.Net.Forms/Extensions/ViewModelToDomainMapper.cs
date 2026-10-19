@@ -313,7 +313,7 @@ namespace UDS.Net.Forms.Extensions
 
         public static IFormFields GetFormFields(this A1a vm, PacketKind packetKind)
         {
-            return new A1aFormFields
+            return new A1aFormFields(packetKind)
             {
                 OWNSCAR = vm.OWNSCAR,
                 TRSPACCESS = vm.TRSPACCESS,
