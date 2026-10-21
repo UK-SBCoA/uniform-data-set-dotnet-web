@@ -13,6 +13,12 @@
     <button type="submit">New visit</button>
 </form>
 
+<form asp-action="Index" method="POST"> 
+    <input type="hidden" value="1000" name="LegacyId" /> 
+    <input type="hidden" value="I" name="PacketKind" /> 
+    <button type="submit">Initial Visit</button>
+</form>
+
 <form action="/Milestones/Create" method="GET">
     <input type="hidden" value="1" name="participationId" />
     <button type="submit">Milestones</button>
