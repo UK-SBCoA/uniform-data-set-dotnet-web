@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UDS.Net.API.Entities;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -89,100 +90,48 @@ namespace UDS.Net.Web.MVC.Services
             return memoryStream.ToArray();
         }
 
-        public async Task<Byte[]> BulkConvertPacketsToCSV(int[] packetIds, string username)
+        public async Task<Byte[]> BulkConvertPacketsToCSV(List<PacketExportItemModel> exportItems, string username)
         {
-            if (string.IsNullOrWhiteSpace(username)) throw new NullReferenceException();
+            if (string.IsNullOrEmpty(username)) { throw new NullReferenceException(nameof(username)); }
 
-            if (packetIds == null || packetIds.Count() == 0)
-                throw new NullReferenceException();
-
-            var packets = new List<Packet>();
-
-            foreach (var id in packetIds)
-            {
-                var packet = await _packetService.GetPacketWithForms(username, id);
-
-                if (packet != null)
-                {
-                    packets.Add(packet);
-                }
-            }
-
-            // Every requested packet must exist.
-            if (packets.Count != packetIds.Count())
-                throw new NullReferenceException();
-
-            var participants = new Dictionary<int, Participation>();
-
-            foreach (var packet in packets)
-            {
-                var participant = await _participationService.GetById(username, packet.ParticipationId);
-
-                if (participant != null)
-                {
-                    participants[packet.Id] = participant;
-                }
-            }
-
-            // Every packet must have a participant.
-            if (participants.Count != packets.Count)
-                throw new NullReferenceException();
-
-            // Validation is complete. No data has been changed yet.
-            var packetsToExport = new List<(Packet Packet, Participation Participant, PacketSubmission Submission)>();
-
-            foreach (var packet in packets)
-            {
-                var participant = participants[packet.Id];
-
-                var newPacketSubmission = new PacketSubmissionDto()
-                {
-                    PacketId = packet.Id,
-                    SubmissionDate = DateTime.Now,
-                    CreatedAt = DateTime.UtcNow,
-                    CreatedBy = username
-                };
-
-                //DEVNOTE: Casting to formDto for the PacketSubmissionDto parent object
-                newPacketSubmission.Forms = packet.Forms.ToDto();
-
-                packetsToExport.Add((packet, participant, newPacketSubmission.ToDomain("19", packet.PACKET)));
-            }
-
-            foreach (var item in packetsToExport)
-            {
-                //item.Packet.PacketSubmissions.Add(item.Submission);
-                item.Packet.AddSubmission(item.Submission);
-                
-                await _packetService.Update(username, item.Packet);
-            }
-
-            //bool includeD1cColumns = packetsToExport.Any(
-            //    x => x.Packet.VISIT_DATE >= D1cEffectiveDate);
+            if (exportItems.Count < 1) throw new ArgumentNullException();
 
             var memoryStream = new MemoryStream();
             var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(false, true));
 
+            //Modified exportItems, these items will have packet information set for the export
+            List<PacketExportItemModel> modifiedExportItems = new List<PacketExportItemModel>();
+
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                var firstPacket = packetsToExport[0];
+                //take the submission and d1c columns props from the most recent packet in exportItems
+                //DEVNOTE: make sure that the correct submission is grabbed
+                WriteHeader(csv, exportItems.OrderByDescending(e => e.Packet.CreatedAt).FirstOrDefault().Packet.Submissions.FirstOrDefault(), exportItems.OrderByDescending(e => e.Packet.CreatedAt).FirstOrDefault().IncludeD1cColumns);
 
-                //WriteHeader(csv, firstPacket.Submission, includeD1cColumns);
-
-                foreach (var item in packetsToExport)
+                foreach (var exportItem in exportItems)
                 {
-                    //DEVNOTE: Unsure if username needs to be part of the WritePacketDataAsync method
-                    //Is a private method only used for exports
-                    //await WritePacketDataAsync(username, csv, item.Submission, item.Participant, item.Packet, includeD1cColumns);
+                    if (exportItem.Packet == null)
+                        throw new NullReferenceException(nameof(exportItem.Packet));
 
-                    csv.NextRecord();
+                    if (exportItem.Packet.Participation == null)
+                        throw new NullReferenceException(nameof(exportItem.Packet.Participation));
+
+                    modifiedExportItems.Add(exportItem);
+                }
+
+                foreach(var modifiedItem in modifiedExportItems)
+                {
+                    await WritePacketDataAsync(username, csv, modifiedItem);
+                    csv.NextRecord(); // end of header row
                 }
             }
+
+            memoryStream.Position = 0;
 
             return memoryStream.ToArray();
         }
 
-        private void WriteHeader(CsvWriter csv, PacketSubmission packetSubmission, bool includeD1cColumns)
+        private void WriteHeader(CsvWriter csv, Net.Services.DomainModels.Submission.PacketSubmission packetSubmission, bool includeD1cColumns)
         {
             //ptid, adcid, visitnum, packet, formver, dssub, visit_date m/ d / yyyy, initials, frmdatea1, initialsa1, langa1, modea1, rmreasa1
             csv.WriteHeader<CsvRecord>();
@@ -539,7 +488,7 @@ namespace UDS.Net.Web.MVC.Services
             if (a5d2 != null)
             {
                 csv.WriteRecord(new A5D2Record(a5d2));
-                Form? previousA5D2Base = null;
+                Net.Services.DomainModels.Form? previousA5D2Base = null;
 
                 A5D2FormFields? previousA5D2Fields = null;
 
@@ -669,7 +618,7 @@ namespace UDS.Net.Web.MVC.Services
             if (b9 != null)
             {
                 csv.WriteRecord(new B9Record(b9));
-                Form? previousB9Base = null;
+                Net.Services.DomainModels.Form? previousB9Base = null;
 
                 B9FormFields? previousB9Fields = null;
 
