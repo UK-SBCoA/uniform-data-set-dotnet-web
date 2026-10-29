@@ -4,7 +4,7 @@ using UDS.Net.Services.DomainModels;
 
 namespace UDS.Net.Services.Records
 {
-    public record B7Record(Form FormRecord) : FormRecord(FormRecord)
+    public record B7Record(Form form) : FormRecord(form)
     {
         [Name("frmdateb7")]
         public string? FrmDate => base.FrmDateExport;

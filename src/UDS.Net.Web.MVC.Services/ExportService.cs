@@ -3,19 +3,16 @@ using CsvHelper.TypeConversion;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UDS.Net.API.Entities;
 using UDS.Net.Dto;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
 using UDS.Net.Services.DomainModels.Forms;
 using UDS.Net.Services.DomainModels.Submission;
-using UDS.Net.Services.Enums;
 using UDS.Net.Services.Extensions;
 using UDS.Net.Services.Overrides.CsvHelper;
 using UDS.Net.Services.Records;
@@ -104,8 +101,8 @@ namespace UDS.Net.Web.MVC.Services
 
             using (var csv = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, true))
             {
-                //take the submission and d1c columns props from the most recent packet in exportItems
-                //DEVNOTE: make sure that the correct submission is grabbed
+                //DEVNOTE: You have to create the submission for bulk due to them reaching submitted status through this process 
+                //This also means that 
                 WriteHeader(csv, exportItems.OrderByDescending(e => e.Packet.CreatedAt).FirstOrDefault().Packet.Submissions.FirstOrDefault(), exportItems.OrderByDescending(e => e.Packet.CreatedAt).FirstOrDefault().IncludeD1cColumns);
 
                 foreach (var exportItem in exportItems)

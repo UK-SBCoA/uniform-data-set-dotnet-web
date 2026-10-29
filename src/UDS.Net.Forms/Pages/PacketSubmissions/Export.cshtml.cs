@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UDS.Net.Forms.Extensions;
+using UDS.Net.Forms.Models;
 using UDS.Net.Forms.Pages.PacketSubmissionErrors;
 using UDS.Net.Services;
 using UDS.Net.Services.DomainModels;
@@ -67,6 +69,22 @@ namespace UDS.Net.Forms.Pages.PacketSubmissions
                     PreviousVisit = null,
                     CountOfVisits = 0
                 };
+
+                //DEVNOTE: Create new submission during bulk export
+                PacketSubmissionModel newPacketSubmission = new PacketSubmissionModel
+                {
+                    PacketId = packetId,
+                    SubmissionDate = DateTime.Now,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = username
+                };
+
+                //DEVNOTE: comment out for testing
+                //newPacketExportItem.Packet.AddSubmission(newPacketSubmission.ToEntity());
+                //await _packetService.Update(User.Identity!.Name!, newPacketExportItem.Packet);
+
+                //DEVNOTE: This method says to entity but returns a domain object
+                newPacketExportItem.Packet.Submissions.Add(newPacketSubmission.ToEntity());
 
                 newPacketExportItem.Packet.Participation = await _participationService.GetById(username, newPacketExportItem.Packet.ParticipationId);
                 newPacketExportItem.CountOfVisits = await _visitService.GetVisitCountByVersion(username, newPacketExportItem.Packet.ParticipationId, "4.0.0");
