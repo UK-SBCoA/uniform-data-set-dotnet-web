@@ -51,7 +51,7 @@ namespace UDS.Net.Forms.Tests.Runtime.Services
 
         public Task<IEnumerable<Milestone>> FindByLegacyId(string username, string legacyId, string[] statuses)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<IEnumerable<Milestone>>([]);
         }
 
         Task<Milestone> IMilestoneService.GetMostRecentSubmission(string username, int milestoneId)

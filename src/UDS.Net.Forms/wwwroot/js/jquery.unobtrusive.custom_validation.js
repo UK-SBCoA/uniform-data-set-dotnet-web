@@ -21,6 +21,32 @@ function setAffect(target, attribute, value) {
         if (attribute === "disabled") {
             if (value === "true" || value === true) {
                 element.attr("disabled", "disabled");
+
+                element.removeClass("input-validation-error");
+
+                $(`[data-valmsg-for="${target}"]`)
+                    .empty()
+                    .removeClass("field-validation-error")
+                    .addClass("field-validation-valid");
+
+                if (element.is(":radio") || element.is(":checkbox")) {
+                    element.addClass(
+                        "disabled:bg-slate-50 " +
+                        "disabled:text-slate-500 " +
+                        "disabled:border-slate-200 " +
+                        "disabled:shadow-none"
+                    );
+                }
+                else {
+                    element.addClass(
+                        "block w-full max-w-lg rounded-md border-gray-400 shadow-sm " +
+                        "focus:border-indigo-500 focus:ring-indigo-500 " +
+                        "sm:max-w-xs sm:text-sm placeholder:text-gray-400 " +
+                        "disabled:bg-slate-50 disabled:text-slate-500 " +
+                        "disabled:border-slate-200 disabled:shadow-none"
+                    );
+                }
+
                 // Clear values
                 if (element.is(":radio") || element.is(":checkbox")) {
                     element.prop("checked", false);
