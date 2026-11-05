@@ -159,7 +159,7 @@
 
                 </div>
             </div>
-            <div class="mt-8">
+            @* <div class="mt-8">
                 <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
                 @if (!String.IsNullOrWhiteSpace(Model.NextFormKind))
                 {
@@ -170,7 +170,34 @@
                         </svg>
                     </button>
                 }
-            </div>
+            </div> *@
+
+
+            @if (Model.Status == FormStatus.InProgress)
+            {
+                <button type="submit"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                    Back to Packets
+                </button>
+
+                <select id="nextAction" onchange="if(this.value !== '') {document.getElementById('GoNext').value = this.value; document.getElementById('nextActionSubmit').click();}" class="inline-flex cursor-pointer rounded-md border-0 bg-indigo-600 px-3 py-2 pr-10 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                    <option value="" selected disabled>View Next</option>
+                    <option value="@Model.NextFormKind">Save and View Next</option>
+                    <option value="RETURN">Save and return to Packets</option>
+                </select>
+
+                <input type="hidden" id="GoNext" name="GoNext" value="" />
+
+                <button type="submit" id="nextActionSubmit" class="hidden"></button>
+            }
+            else
+            {
+                <button type="submit"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Save
+                </button>
+            }
         </div>
     </div>
+
 }
