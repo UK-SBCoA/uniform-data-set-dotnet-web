@@ -70,6 +70,38 @@ namespace UDS.Net.Forms.Tests
                 await Expect(validationMessage).ToContainTextAsync("Value cannot be greater than the participant's age");
             }
         }
+
+        [TestMethod]
+        public async Task A5D2_Successfully_Submits_With_Valid_Age_At_Visit()
+        {
+            //Add birth year to visit via the A1 form
+            await Page.GotoAsync(BaseUrl);
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Go" }).ClickAsync();
+            await Expect(Page.GetByRole(AriaRole.List)).ToContainTextAsync("A1");
+            await Page.GetByRole(AriaRole.Link, new() { Name = "A1 Participant Demographics", Exact = true }).ClickAsync();
+            await Page.Locator("input[name=\"A1.BIRTHMO\"]").FillAsync("01");
+            await Page.Locator("input[name=\"A1.BIRTHYR\"]").FillAsync("1950");
+            await Expect(Page.GetByLabel("Save status")).ToContainTextAsync("Not started In progress Finalized");
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "1" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+            //Fill out A5D2
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
+            await WriteInitialVisitFormData();
+            //Update age fields to a age that is not higher than what was provided in the A1.
+            foreach (var field in AgeRelatedQuestions)
+            {
+                // Testing that special value of 888 (N/A) is accepted for these fields
+                var value = (field == "QUITSMOK" || field == "HRTENDAGE")
+                    ? "888"
+                    : "50";
+
+                await Page.Locator($"input[name=\"A5D2.{field}\"]").FillAsync(value);
+                await Page.Keyboard.PressAsync("Tab");
+            }
+            await Page.GetByLabel("Save status").SelectOptionAsync(new[] { "2" });
+            await Page.GetByRole(AriaRole.Button, new() { Name = "Save", Exact = true }).ClickAsync();
+            await Page.GetByRole(AriaRole.Listitem).Filter(new() { HasText = "A5D2" }).GetByRole(AriaRole.Link).ClickAsync();
+        }
         private async Task WriteFormData()
         {
             // Writes data to all fields on form
