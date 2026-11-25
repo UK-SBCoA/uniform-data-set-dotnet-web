@@ -397,6 +397,10 @@ namespace UDS.Net.Services.Extensions
             {
                 dto = ((D1bFormFields)form.Fields).ToDto();
             }
+            else if (form.Fields is D1cFormFields)
+            {
+                dto = ((D1cFormFields)form.Fields).ToDto();
+            }
 
             SetBaseProperties(dto, form);
 
@@ -498,6 +502,11 @@ namespace UDS.Net.Services.Extensions
             else if (formKind == "D1b")
             {
                 if (form.Fields is D1bFormFields initial)
+                    dto = initial.ToDto();
+            }
+            else if (formKind == "D1c")
+            {
+                if (form.Fields is D1cFormFields initial)
                     dto = initial.ToDto();
             }
 
@@ -1733,6 +1742,86 @@ namespace UDS.Net.Services.Extensions
                 OTHCOG = fields.OTHCOG,
                 OTHCOGIF = fields.OTHCOGIF,
                 OTHCOGX = fields.OTHCOGX
+            };
+        }
+
+        public static D1cDto ToDto(this D1cFormFields fields)
+        {
+            return new D1cDto
+            {
+                DXPLSMABIO = fields.DXPLSMABIO,
+                DXPTAU217 = fields.DXPTAU217,
+                PTAU217RS = fields.PTAU217RS,
+                PT217ANLYS = fields.PT217ANLYS,
+                PT217INT = fields.PT217INT,
+                DXPCPT217 = fields.DXPCPT217,
+                PCPT217RS = fields.PCPT217RS,
+                PCPT217INT = fields.PCPT217INT,
+                DXOTHPLSMA = fields.DXOTHPLSMA,
+                DXOTHPLSMX = fields.DXOTHPLSMX,
+                OTHPLSMARS = fields.OTHPLSMARS,
+                OPLSMANLYS = fields.OPLSMANLYS,
+                OPLSMAINT = fields.OPLSMAINT,
+                DXCSFBIO = fields.DXCSFBIO,
+                DXPT181AB = fields.DXPT181AB,
+                PT181ABRS = fields.PT181ABRS,
+                PT181ABAYS = fields.PT181ABAYS,
+                PT181ABINT = fields.PT181ABINT,
+                DXTTABETA = fields.DXTTABETA,
+                TTABETARS = fields.TTABETARS,
+                TTABETAINT = fields.TTABETAINT,
+                DXAB42AB40 = fields.DXAB42AB40,
+                AB42AB40RS = fields.AB42AB40RS,
+                AB42AB40AY = fields.AB42AB40AY,
+                AB42AB40IT = fields.AB42AB40IT,
+                DXOTHCSF = fields.DXOTHCSF,
+                DXOTHCSFX = fields.DXOTHCSFX,
+                OTHCSFRS = fields.OTHCSFRS,
+                OCSFANLYS = fields.OCSFANLYS,
+                OCSFINT = fields.OCSFINT,
+                DXAPET = fields.DXAPET,
+                APETRS = fields.APETRS,
+                APETVIS = fields.APETVIS,
+                APETQUANT = fields.APETQUANT,
+                APETANLYS = fields.APETANLYS,
+                APETINT = fields.APETINT,
+                DXTAUPET = fields.DXTAUPET,
+                TPETMTLRS = fields.TPETMTLRS,
+                TPETMTLVIS = fields.TPETMTLVIS,
+                TPETMTLQNT = fields.TPETMTLQNT,
+                TPETMTLAYS = fields.TPETMTLAYS,
+                TPETNEORS = fields.TPETNEORS,
+                TPETNEOVIS = fields.TPETNEOVIS,
+                TPETNEOQNT = fields.TPETNEOQNT,
+                TPETNEOAYS = fields.TPETNEOAYS,
+                DXTAUPTINT = fields.DXTAUPTINT,
+                INFORISCH = fields.INFORISCH,
+                IMGRSINF = fields.IMGRSINF,
+                IMGRSINFLC = fields.IMGRSINFLC,
+                IMGRSINFCT = fields.IMGRSINFCT,
+                IMGRSMICR = fields.IMGRSMICR,
+                IMGRSWMH = fields.IMGRSWMH,
+                IMGRSSPSID = fields.IMGRSSPSID,
+                IMGRSOTH = fields.IMGRSOTH,
+                IMGRSOTHX = fields.IMGRSOTHX,
+                IMGRSINT = fields.IMGRSINT,
+                DXASYN = fields.DXASYN,
+                ASYNRS = fields.ASYNRS,
+                ASYNASSAY = fields.ASYNASSAY,
+                ASYNASSAYX = fields.ASYNASSAYX,
+                ASYNANLYSX = fields.ASYNANLYSX,
+                ASYNINT = fields.ASYNINT,
+                AACRITMET = fields.AACRITMET,
+                CR1APET = fields.CR1APET,
+                CR1PTAU217 = fields.CR1PTAU217,
+                CR1PCPT217 = fields.CR1PCPT217,
+                CR1PT181AB = fields.CR1PT181AB,
+                CR1TTABETA = fields.CR1TTABETA,
+                C1AB42AB40 = fields.C1AB42AB40,
+                CR1OTH = fields.CR1OTH,
+                CR1OTHX = fields.CR1OTHX,
+                BIOSTAGE = fields.BIOSTAGE,
+                CLINSTAGE = fields.CLINSTAGE
             };
         }
 

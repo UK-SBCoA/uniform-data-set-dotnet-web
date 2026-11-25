@@ -1,0 +1,622 @@
+@page "{id:int?}"
+@model UDS.Net.Forms.Pages.UDS4.D1cModel
+@{
+    Layout = "_LayoutForm";
+    string rowCSS = "sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6";
+}
+
+<div>
+    <p class="mt-1 text-sm text-gray-500">
+        INSTRUCTIONS: This form is to be completed by the clinician for all participants to record biological and clinical staging of Alzheimer's disease. For additional clarification and examples, see <guidebook kind="@Model.Visit.PACKET"></guidebook>, <strong>Form D1c</strong>. Check only <span class="underline">one</span> box per question unless otherwise indicated.
+    </p>
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.DXPLSMABIO"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXPLSMABIO)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXPLSMABIO"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.DXPLSMABIO)" for="@Model.D1c.DXPLSMABIO" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DXPLSMABIOUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXPLSMABIO"></span>
+        <submission-error location="DXPLSMABIO" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Plasma biomarkers
+        </p>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXPTAU217"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXPTAU217)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXPTAU217"></p>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-900">p-tau 217 Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PTAU217RS)" for="@Model.D1c.PTAU217RS" items="Model.FindingsListItems" ui-behaviors="Model.DXPTau217UIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PTAU217RS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Where analyzed?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PT217ANLYS)" for="@Model.D1c.PT217ANLYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PT217ANLYS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PT217INT)" for="@Model.D1c.PT217INT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PT217INT"></span>
+                </div>
+            </div>
+            <submission-error location="PTAU217RS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="PT217ANLYS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="PT217INT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXPCPT217"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXPCPT217)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXPCPT217"></p>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-900">%p-tau 217 Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PCPT217RS)" for="@Model.D1c.PCPT217RS" items="Model.FindingsListItems" ui-behaviors="Model.DXPCpt217UIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PCPT217RS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PCPT217INT)" for="@Model.D1c.PCPT217INT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PCPT217INT"></span>
+                </div>
+            </div>
+            <submission-error location="PCPT217RS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="PCPT217INT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXOTHPLSMA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXOTHPLSMA)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXOTHPLSMA"></p>
+            <div class="space-y-4">
+                <div>
+                    <label asp-for="D1c.DXOTHPLSMX" class="text-sm font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1c.DXOTHPLSMX)</label>
+                    <input asp-for="D1c.DXOTHPLSMX" class="mt-2" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXOTHPLSMX"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OTHPLSMARS)" for="@Model.D1c.OTHPLSMARS" items="Model.FindingsListItems" ui-behaviors="Model.DXOthPlsmaUIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OTHPLSMARS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Where analyzed?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OPLSMANLYS)" for="@Model.D1c.OPLSMANLYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OPLSMANLYS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OPLSMAINT)" for="@Model.D1c.OPLSMAINT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OPLSMAINT"></span>
+                </div>
+            </div>
+            <submission-error location="DXOTHPLSMX" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OTHPLSMARS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OPLSMANLYS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OPLSMAINT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.DXCSFBIO"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXCSFBIO)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXCSFBIO"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.DXCSFBIO)" for="@Model.D1c.DXCSFBIO" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DXCSFBIOUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXCSFBIO"></span>
+        <submission-error location="DXCSFBIO" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            CSF biomarkers
+        </p>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXPT181AB"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXPT181AB)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXPT181AB"></p>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-900">p-tau 181/ A?42 Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PT181ABRS)" for="@Model.D1c.PT181ABRS" items="Model.FindingsListItems" ui-behaviors="Model.DXPt181ABUIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PT181ABRS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Where analyzed?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PT181ABAYS)" for="@Model.D1c.PT181ABAYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PT181ABAYS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.PT181ABINT)" for="@Model.D1c.PT181ABINT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.PT181ABINT"></span>
+                </div>
+            </div>
+            <submission-error location="PT181ABRS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="PT181ABAYS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="PT181ABINT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXTTABETA"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXTTABETA)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXTTABETA"></p>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-900">t-tau / A?42 Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.TTABETARS)" for="@Model.D1c.TTABETARS" items="Model.FindingsListItems" ui-behaviors="Model.DXTtabetaUIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TTABETARS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.TTABETAINT)" for="@Model.D1c.TTABETAINT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TTABETAINT"></span>
+                </div>
+            </div>
+            <submission-error location="TTABETARS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TTABETAINT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXAB42AB40"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXAB42AB40)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXAB42AB40"></p>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-sm font-medium text-gray-900">A?42/40 Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.AB42AB40RS)" for="@Model.D1c.AB42AB40RS" items="Model.FindingsListItems" ui-behaviors="Model.DXAb42Ab40UIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.AB42AB40RS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Where analyzed?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.AB42AB40AY)" for="@Model.D1c.AB42AB40AY" items="Model.AnalysisLocationListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.AB42AB40AY"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.AB42AB40IT)" for="@Model.D1c.AB42AB40IT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.AB42AB40IT"></span>
+                </div>
+            </div>
+            <submission-error location="AB42AB40RS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="AB42AB40AY" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="AB42AB40IT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+
+    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+        <label asp-for="D1c.DXOTHCSF"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXOTHCSF)</label>
+        <div class="mt-4 sm:col-span-2 sm:mt-0">
+            <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXOTHCSF"></p>
+            <div class="space-y-4">
+                <div>
+                    <label asp-for="D1c.DXOTHCSFX" class="text-sm font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1c.DXOTHCSFX)</label>
+                    <input asp-for="D1c.DXOTHCSFX" class="mt-2" />
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXOTHCSFX"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Result</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OTHCSFRS)" for="@Model.D1c.OTHCSFRS" items="Model.FindingsListItems" ui-behaviors="Model.DXOthCsfUIBehavior"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OTHCSFRS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Where analyzed?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OCSFANLYS)" for="@Model.D1c.OCSFANLYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OCSFANLYS"></span>
+                </div>
+                <div>
+                    <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+                    <radio-button-group id="@Html.IdFor(m => m.D1c.OCSFINT)" for="@Model.D1c.OCSFINT" items="Model.DateWithinListItems"></radio-button-group>
+                    <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.OCSFINT"></span>
+                </div>
+            </div>
+            <submission-error location="DXOTHCSFX" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OTHCSFRS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OCSFANLYS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="OCSFINT" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.DXAPET"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXAPET)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXAPET"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.DXAPET)" for="@Model.D1c.DXAPET" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DXApetUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXAPET"></span>
+        <submission-error location="DXAPET" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Amyloid PET
+        </p>
+    </div>
+
+    <div class="ml-2 space-y-4">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Amyloid PET Result</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.APETRS)" for="@Model.D1c.APETRS" items="Model.PETFindingsListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.APETRS"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">How obtained?</label>
+            <div class="mt-2 sm:col-span-2 space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.APETVIS)" name="@Html.NameFor(m => m.D1c.APETVIS)" value="1" @(Model.D1c.APETVIS == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.APETVIS)" class="ml-2 text-sm text-gray-900">Visual Read</label>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.APETQUANT)" name="@Html.NameFor(m => m.D1c.APETQUANT)" value="1" @(Model.D1c.APETQUANT == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.APETQUANT)" class="ml-2 text-sm text-gray-900">Quantitative</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Where obtained?</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.APETANLYS)" for="@Model.D1c.APETANLYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.APETANLYS"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.APETINT)" for="@Model.D1c.APETINT" items="Model.DateWithinListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.APETINT"></span>
+            </div>
+        </div>
+    </div>
+    <submission-error location="APETRS" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="APETVIS" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="APETQUANT" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="APETANLYS" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="APETINT" errors="Model.BaseForm.UnresolvedErrors" />
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.DXTAUPET"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXTAUPET)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXTAUPET"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.DXTAUPET)" for="@Model.D1c.DXTAUPET" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DXTaupetUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXTAUPET"></span>
+        <submission-error location="DXTAUPET" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Tau PET
+        </p>
+    </div>
+
+    <div class="ml-2 space-y-6">
+        <div class="border-t pt-4">
+            <h4 class="text-sm font-semibold text-gray-900 mb-4">Tau PET MTL (Medial Temporal Lobe)</h4>
+            <div class="space-y-4">
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">MTL Result</label>
+                    <div class="mt-2 sm:col-span-2">
+                        <radio-button-group id="@Html.IdFor(m => m.D1c.TPETMTLRS)" for="@Model.D1c.TPETMTLRS" items="Model.PETFindingsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TPETMTLRS"></span>
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">How obtained?</label>
+                    <div class="mt-2 sm:col-span-2 space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="@Html.IdFor(m => m.D1c.TPETMTLVIS)" name="@Html.NameFor(m => m.D1c.TPETMTLVIS)" value="1" @(Model.D1c.TPETMTLVIS == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                            <label for="@Html.IdFor(m => m.D1c.TPETMTLVIS)" class="ml-2 text-sm text-gray-900">Visual Read</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="@Html.IdFor(m => m.D1c.TPETMTLQNT)" name="@Html.NameFor(m => m.D1c.TPETMTLQNT)" value="1" @(Model.D1c.TPETMTLQNT == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                            <label for="@Html.IdFor(m => m.D1c.TPETMTLQNT)" class="ml-2 text-sm text-gray-900">Quantitative</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">Where obtained?</label>
+                    <div class="mt-2 sm:col-span-2">
+                        <radio-button-group id="@Html.IdFor(m => m.D1c.TPETMTLAYS)" for="@Model.D1c.TPETMTLAYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TPETMTLAYS"></span>
+                    </div>
+                </div>
+            </div>
+            <submission-error location="TPETMTLRS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETMTLVIS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETMTLQNT" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETMTLAYS" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+
+        <div class="border-t pt-4">
+            <h4 class="text-sm font-semibold text-gray-900 mb-4">Tau PET Neocortical</h4>
+            <div class="space-y-4">
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">Neocortical Result</label>
+                    <div class="mt-2 sm:col-span-2">
+                        <radio-button-group id="@Html.IdFor(m => m.D1c.TPETNEORS)" for="@Model.D1c.TPETNEORS" items="Model.PETFindingsListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TPETNEORS"></span>
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">How obtained?</label>
+                    <div class="mt-2 sm:col-span-2 space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="@Html.IdFor(m => m.D1c.TPETNEOVIS)" name="@Html.NameFor(m => m.D1c.TPETNEOVIS)" value="1" @(Model.D1c.TPETNEOVIS == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                            <label for="@Html.IdFor(m => m.D1c.TPETNEOVIS)" class="ml-2 text-sm text-gray-900">Visual Read</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="@Html.IdFor(m => m.D1c.TPETNEOQNT)" name="@Html.NameFor(m => m.D1c.TPETNEOQNT)" value="1" @(Model.D1c.TPETNEOQNT == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                            <label for="@Html.IdFor(m => m.D1c.TPETNEOQNT)" class="ml-2 text-sm text-gray-900">Quantitative</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+                    <label class="text-sm font-medium text-gray-900">Where obtained?</label>
+                    <div class="mt-2 sm:col-span-2">
+                        <radio-button-group id="@Html.IdFor(m => m.D1c.TPETNEOAYS)" for="@Model.D1c.TPETNEOAYS" items="Model.AnalysisLocationListItems"></radio-button-group>
+                        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.TPETNEOAYS"></span>
+                    </div>
+                </div>
+            </div>
+            <submission-error location="TPETNEORS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETNEOVIS" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETNEOQNT" errors="Model.BaseForm.UnresolvedErrors" />
+            <submission-error location="TPETNEOAYS" errors="Model.BaseForm.UnresolvedErrors" />
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Tau PET within +/- 12 months?</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.DXTAUPTINT)" for="@Model.D1c.DXTAUPTINT" items="Model.DateWithinListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXTAUPTINT"></span>
+            </div>
+        </div>
+    </div>
+    <submission-error location="DXTAUPTINT" errors="Model.BaseForm.UnresolvedErrors" />
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.INFORISCH"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.INFORISCH)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.INFORISCH"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.INFORISCH)" for="@Model.D1c.INFORISCH" items="Model.SimpleNoYesListItems" ui-behaviors="Model.InforischUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.INFORISCH"></span>
+        <submission-error location="INFORISCH" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Structural Imaging Findings
+        </p>
+    </div>
+
+    <div class="ml-2 space-y-4">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Infarction on MRI</label>
+            <div class="mt-2 sm:col-span-2 space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSINF)" name="@Html.NameFor(m => m.D1c.IMGRSINF)" value="1" @(Model.D1c.IMGRSINF == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.IMGRSINF)" class="ml-2 text-sm text-gray-900">Yes - Infarction present</label>
+                </div>
+                <div class="ml-6 space-y-2">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSINFLC)" name="@Html.NameFor(m => m.D1c.IMGRSINFLC)" value="1" @(Model.D1c.IMGRSINFLC == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                        <label for="@Html.IdFor(m => m.D1c.IMGRSINFLC)" class="ml-2 text-sm text-gray-900">Lacunar</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSINFCT)" name="@Html.NameFor(m => m.D1c.IMGRSINFCT)" value="1" @(Model.D1c.IMGRSINFCT == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                        <label for="@Html.IdFor(m => m.D1c.IMGRSINFCT)" class="ml-2 text-sm text-gray-900">Cortical</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Microbleeds</label>
+            <div class="mt-2 sm:col-span-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSMICR)" name="@Html.NameFor(m => m.D1c.IMGRSMICR)" value="1" @(Model.D1c.IMGRSMICR == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.IMGRSMICR)" class="ml-2 text-sm text-gray-900">Yes</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">White Matter Hyperintensity (WMH)</label>
+            <div class="mt-2 sm:col-span-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSWMH)" name="@Html.NameFor(m => m.D1c.IMGRSWMH)" value="1" @(Model.D1c.IMGRSWMH == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.IMGRSWMH)" class="ml-2 text-sm text-gray-900">Yes</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Superficial Siderosis</label>
+            <div class="mt-2 sm:col-span-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSSPSID)" name="@Html.NameFor(m => m.D1c.IMGRSSPSID)" value="1" @(Model.D1c.IMGRSSPSID == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+                    <label for="@Html.IdFor(m => m.D1c.IMGRSSPSID)" class="ml-2 text-sm text-gray-900">Yes</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Other Imaging Finding</label>
+            <div class="mt-2 sm:col-span-2 space-y-2">
+                <div class="flex items-center">
+                    <input type="checkbox" id="@Html.IdFor(m => m.D1c.IMGRSOTH)" name="@Html.NameFor(m => m.D1c.IMGRSOTH)" value="1" @(Model.D1c.IMGRSOTH == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" data-affects="true" data-affects-toggle-targets="[ &quot;D1c.IMGRSOTHX&quot; ]" />
+                    <label for="@Html.IdFor(m => m.D1c.IMGRSOTH)" class="ml-2 text-sm text-gray-900">Yes - Specify:</label>
+                </div>
+                <input asp-for="D1c.IMGRSOTHX" placeholder="Specify other imaging finding" class="ml-6" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.IMGRSOTHX"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Imaging within +/- 12 months?</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.IMGRSINT)" for="@Model.D1c.IMGRSINT" items="Model.DateWithinListItems" ui-behaviors="Model.InforischUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.IMGRSINT"></span>
+            </div>
+        </div>
+    </div>
+    <submission-error location="IMGRSINF" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSINFLC" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSINFCT" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSMICR" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSWMH" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSSPSID" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSOTH" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="IMGRSINT" errors="Model.BaseForm.UnresolvedErrors" />
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.DXASYN"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.DXASYN)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.DXASYN"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.DXASYN)" for="@Model.D1c.DXASYN" items="Model.SimpleNoYesListItems" ui-behaviors="Model.DXAsynUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.DXASYN"></span>
+        <submission-error location="DXASYN" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Alpha-Synuclein Seed Amplification Assay (?Syn-SAA)
+        </p>
+    </div>
+
+    <div class="ml-2 space-y-4">
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">?Syn-SAA Result</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.ASYNRS)" for="@Model.D1c.ASYNRS" items="Model.FindingsListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.ASYNRS"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">?Syn-SAA Assay Type</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.ASYNASSAY)" for="@Model.D1c.ASYNASSAY" items="Model.ASynAssayListItems" ui-behaviors="Model.AsynassayUIBehavior"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.ASYNASSAY"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label asp-for="D1c.ASYNASSAYX" class="text-sm font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1c.ASYNASSAYX)</label>
+            <div class="mt-2 sm:col-span-2">
+                <input asp-for="D1c.ASYNASSAYX" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.ASYNASSAYX"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label asp-for="D1c.ASYNANLYSX" class="text-sm font-medium text-gray-900">@Html.DisplayNameFor(m => m.D1c.ASYNANLYSX)</label>
+            <div class="mt-2 sm:col-span-2">
+                <input asp-for="D1c.ASYNANLYSX" placeholder="Where ?Syn-SAA values were obtained" />
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.ASYNANLYSX"></span>
+            </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4">
+            <label class="text-sm font-medium text-gray-900">Within +/- 12 months?</label>
+            <div class="mt-2 sm:col-span-2">
+                <radio-button-group id="@Html.IdFor(m => m.D1c.ASYNINT)" for="@Model.D1c.ASYNINT" items="Model.DateWithinListItems"></radio-button-group>
+                <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.ASYNINT"></span>
+            </div>
+        </div>
+    </div>
+    <submission-error location="ASYNRS" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="ASYNASSAY" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="ASYNANLYSX" errors="Model.BaseForm.UnresolvedErrors" />
+    <submission-error location="ASYNINT" errors="Model.BaseForm.UnresolvedErrors" />
+</div>
+
+<div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6 subcounterreset">
+    <label asp-for="D1c.AACRITMET"><span class="counter"></span> @Html.DisplayNameFor(m => m.D1c.AACRITMET)</label>
+    <div class="mt-4 sm:col-span-2 sm:mt-0">
+        <p class="text-sm text-gray-500" asp-description-for="@Model.D1c.AACRITMET"></p>
+        <radio-button-group id="@Html.IdFor(m => m.D1c.AACRITMET)" for="@Model.D1c.AACRITMET" items="Model.SimpleNoYesListItems" ui-behaviors="Model.AacritmetUIBehavior"></radio-button-group>
+        <span class="mt-2 text-sm text-red-600" asp-validation-for="D1c.AACRITMET"></span>
+        <submission-error location="AACRITMET" errors="Model.BaseForm.UnresolvedErrors" />
+    </div>
+</div>
+
+<div class="sm:grid sm:grid-cols-1 sm:items-start sm:gap-4 sm:py-6">
+    <div class="-ml-2 -mt-2 flex flex-wrap items-baseline bg-indigo-100">
+        <p class="ml-2 mt-1 truncate font-semibold leading-6 text-indigo-900">
+            Core 1 Biomarkers Used
+        </p>
+    </div>
+
+    <div class="ml-2 space-y-2">
+        <p class="text-sm text-gray-900">Select which Core 1 biomarker(s) were used to determine Alzheimer's criteria:</p>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1APET)" name="@Html.NameFor(m => m.D1c.CR1APET)" value="1" @(Model.D1c.CR1APET == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.CR1APET)" class="ml-2 text-sm text-gray-900">Amyloid PET</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1PTAU217)" name="@Html.NameFor(m => m.D1c.CR1PTAU217)" value="1" @(Model.D1c.CR1PTAU217 == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.CR1PTAU217)" class="ml-2 text-sm text-gray-900">p-tau 217</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1PCPT217)" name="@Html.NameFor(m => m.D1c.CR1PCPT217)" value="1" @(Model.D1c.CR1PCPT217 == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.CR1PCPT217)" class="ml-2 text-sm text-gray-900">%p-tau 217</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1PT181AB)" name="@Html.NameFor(m => m.D1c.CR1PT181AB)" value="1" @(Model.D1c.CR1PT181AB == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.CR1PT181AB)" class="ml-2 text-sm text-gray-900">p-tau 181/A?42</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1TTABETA)" name="@Html.NameFor(m => m.D1c.CR1TTABETA)" value="1" @(Model.D1c.CR1TTABETA == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.CR1TTABETA)" class="ml-2 text-sm text-gray-900">t-tau/A?42</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.C1AB42AB40)" name="@Html.NameFor(m => m.D1c.C1AB42AB40)" value="1" @(Model.D1c.C1AB42AB40 == 1 ? "checked" : "") class="h-4 w-4 rounded border-gray-400" />
+            <label for="@Html.IdFor(m => m.D1c.C1AB42AB40)" class="ml-2 text-sm text-gray-900">A?42/40</label>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" id="@Html.IdFor(m => m.D1c.CR1OTH)"

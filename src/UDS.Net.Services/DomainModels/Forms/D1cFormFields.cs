@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UDS.Net.Dto;
 using UDS.Net.Services.Enums;
 
@@ -17,7 +16,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? PCPT217RS { get; set; }
         public int? PCPT217INT { get; set; }
         public int? DXOTHPLSMA { get; set; }
-        public string DXOTHPLSMX { get; set; }
+        public string? DXOTHPLSMX { get; set; }
         public int? OTHPLSMARS { get; set; }
         public int? OPLSMANLYS { get; set; }
         public int? OPLSMAINT { get; set; }
@@ -36,7 +35,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? AB42AB40AY { get; set; }
         public int? AB42AB40IT { get; set; }
         public int? DXOTHCSF { get; set; }
-        public string DXOTHCSFX { get; set; }
+        public string? DXOTHCSFX { get; set; }
         public int? OTHCSFRS { get; set; }
         public int? OCSFANLYS { get; set; }
         public int? OCSFINT { get; set; }
@@ -70,15 +69,15 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? IMGRSWMH { get; set; }
         public int? IMGRSSPSID { get; set; }
         public int? IMGRSOTH { get; set; }
-        public string IMGRSOTHX { get; set; }
+        public string? IMGRSOTHX { get; set; }
         public int? IMGRSINT { get; set; }
 
         // 6. Alpha Synuclein Seed Amplification Assay
         public int? DXASYN { get; set; }
         public int? ASYNRS { get; set; }
         public int? ASYNASSAY { get; set; }
-        public string ASYNASSAYX { get; set; }
-        public string ASYNANLYSX { get; set; }
+        public string? ASYNASSAYX { get; set; }
+        public string? ASYNANLYSX { get; set; }
         public int? ASYNINT { get; set; }
 
         // 7. AA Biological Biomarker Criteria
@@ -92,7 +91,7 @@ namespace UDS.Net.Services.DomainModels.Forms
         public int? CR1TTABETA { get; set; }
         public int? C1AB42AB40 { get; set; }
         public int? CR1OTH { get; set; }
-        public string CR1OTHX { get; set; }
+        public string? CR1OTHX { get; set; }
 
         // 9. Biological Stage
         public int? BIOSTAGE { get; set; }
@@ -135,7 +134,7 @@ namespace UDS.Net.Services.DomainModels.Forms
 
         public string GetDescription()
         {
-            return "Plasma and CSF Biomarkers and Etiologic Diagnosis";
+            return "Biological and Clinical Staging";
         }
 
         public string GetVersion()

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -9,7 +8,7 @@ namespace UDS.Net.Forms.Models.UDS4
 {
     public class D1c : FormModel
     {
-        [RequiredOnFinalized(ErrorMessage = "Please specify if any plasma biomarker results were used to support the current etiological diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Were plasma biomarkers used in the etiologic diagnosis?")]
         public int? DXPLSMABIO { get; set; }
 
@@ -59,7 +58,7 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Was the plasma sample used in the diagnosis from a date within +/- 12 months of the current UDS visit?")]
         public int? OPLSMAINT { get; set; }
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if CSF biomarkers were used in the etiologic diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Were CSF biomarkers used in the etiologic diagnosis?")]
         public int? DXCSFBIO { get; set; }
 
@@ -84,26 +83,26 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "t-tau / Aβ42 used in the diagnosis")]
         public int? DXTTABETA { get; set; }
 
-        [RequiredIf(nameof(TTABETARS), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(DXTTABETA), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "t-tau / Aβ42 result")]
         public int? TTABETARS { get; set; }
 
-        [RequiredIf(nameof(TTABETARS), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(DXTTABETA), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Was the CSF t-tau / Aβ42 sample used in the diagnosis from a date within +/- 12 months of the current UDS visit?")]
         public int? TTABETAINT { get; set; }
 
         [Display(Name = "Aβ42/40 used in diagnosis")]
         public int? DXAB42AB40 { get; set; }
 
-        [RequiredIf(nameof(AB42AB40RS), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(DXAB42AB40), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Aβ42/40 result")]
         public int? AB42AB40RS { get; set; }
 
-        [RequiredIf(nameof(AB42AB40RS), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(DXAB42AB40), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Where were the Aβ42/40 values used in the diagnosis analyzed?")]
         public int? AB42AB40AY { get; set; }
 
-        [RequiredIf(nameof(AB42AB40RS), "1", ErrorMessage = "Please specify.")]
+        [RequiredIf(nameof(DXAB42AB40), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Was the Aβ42 / 40 sample used in the diagnosis from a date within +/- 12 months of the current UDS visit?")]
         public int? AB42AB40IT { get; set; }
 
@@ -129,7 +128,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         // 3. Amyloid PET
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if Amyloid PET was used in the etiologic diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Was Amyloid PET used in the etiologic diagnosis?")]
         public int? DXAPET { get; set; }
 
@@ -137,11 +136,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Amyloid PET result")]
         public int? APETRS { get; set; }
 
-        [RequiredIf(nameof(DXAPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were amyloid PET results obtained - Visual Read")]
         public int? APETVIS { get; set; }
 
-        [RequiredIf(nameof(DXAPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were amyloid PET results obtained - Quantitative")]
         public int? APETQUANT { get; set; }
 
@@ -155,7 +152,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         // 4. Tau PET
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if Tau PET was used in the etiologic diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Was tau PET used in the etiologic diagnosis?")]
         public int? DXTAUPET { get; set; }
 
@@ -163,11 +160,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Tau PET MTL result")]
         public int? TPETMTLRS { get; set; }
 
-        [RequiredIf(nameof(DXTAUPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were tau PET MTL results obtained - Visual Read")]
         public int? TPETMTLVIS { get; set; }
 
-        [RequiredIf(nameof(DXTAUPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were tau PET MTL results obtained - Quantitative")]
         public int? TPETMTLQNT { get; set; }
 
@@ -179,11 +174,9 @@ namespace UDS.Net.Forms.Models.UDS4
         [Display(Name = "Tau PET Neocortical result")]
         public int? TPETNEORS { get; set; }
 
-        [RequiredIf(nameof(DXTAUPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were tau PET neocortical results obtained - Visual Read")]
         public int? TPETNEOVIS { get; set; }
 
-        [RequiredIf(nameof(DXTAUPET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "How were tau PET neocortical results obtained - Quantitative")]
         public int? TPETNEOQNT { get; set; }
 
@@ -198,35 +191,28 @@ namespace UDS.Net.Forms.Models.UDS4
 
         // 5. MRI / Ischemia / CAA
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if infarction on MRI or WMH consistent with ischemia or blood products consistent with CAA was used in the etiologic diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Was infarction on MRI or WMH consistent with ischemia or blood products consistent with CAA used in the etiologic diagnosis?")]
         public int? INFORISCH { get; set; }
 
-        [RequiredIf(nameof(INFORISCH), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Infarction on MRI")]
         public int? IMGRSINF { get; set; }
 
-        [RequiredIf(nameof(IMGRSINF), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Infarction on MRI - Lacunar")]
         public int? IMGRSINFLC { get; set; }
 
-        [RequiredIf(nameof(IMGRSINF), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Infarction on MRI - Cortical")]
         public int? IMGRSINFCT { get; set; }
 
-        [RequiredIf(nameof(INFORISCH), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Microbleeds")]
         public int? IMGRSMICR { get; set; }
 
-        [RequiredIf(nameof(INFORISCH), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - WMH")]
         public int? IMGRSWMH { get; set; }
 
-        [RequiredIf(nameof(INFORISCH), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Superficial siderosis")]
         public int? IMGRSSPSID { get; set; }
 
-        [RequiredIf(nameof(INFORISCH), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Imaging result - Other (specify)")]
         public int? IMGRSOTH { get; set; }
 
@@ -241,7 +227,7 @@ namespace UDS.Net.Forms.Models.UDS4
 
         // 6. αSyn-SAA
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if αSyn-SAA was used in the etiologic diagnosis.")]
+        [RequiredOnFinalized]
         [Display(Name = "Was αSyn-SAA used in the etiologic diagnosis?")]
         public int? DXASYN { get; set; }
 
@@ -270,37 +256,30 @@ namespace UDS.Net.Forms.Models.UDS4
 
         // 7. AA Biological Biomarker Criteria
 
-        [RequiredOnFinalized(ErrorMessage = "Please specify if the participant met the AA biological biomarker criteria for Alzheimer's based on a positive Core 1 biomarker.")]
-        [Display(Name = "Did the participant meet the AA biological biomarker criteria for Alzheimer’s based on a positive Core 1 biomarker?")]
+        [RequiredOnFinalized]
+        [Display(Name = "Did the participant meet the AA biological biomarker criteria for Alzheimer's based on a positive Core 1 biomarker?")]
         public int? AACRITMET { get; set; }
 
         // 8. Core 1 Biomarker Selection
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - Amyloid PET")]
         public int? CR1APET { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - p-tau217")]
         public int? CR1PTAU217 { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - %p-tau217")]
         public int? CR1PCPT217 { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - p-tau181/Aβ42")]
         public int? CR1PT181AB { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - t-tau/Aβ42")]
         public int? CR1TTABETA { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - Aβ42/40")]
         public int? C1AB42AB40 { get; set; }
 
-        [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Which Core 1 biomarker was used to make this determination - Other")]
         public int? CR1OTH { get; set; }
 
@@ -309,17 +288,21 @@ namespace UDS.Net.Forms.Models.UDS4
         [MaxLength(60)]
         public string? CR1OTHX { get; set; }
 
-        // 9. Biological Stage
-
         [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Select the biological stage of the participant")]
         public int? BIOSTAGE { get; set; }
-
-        // 10. Clinical AD Stage
 
         [RequiredIf(nameof(AACRITMET), "1", ErrorMessage = "Please specify.")]
         [Display(Name = "Clinical AD stage")]
         public int? CLINSTAGE { get; set; }
 
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext))
+            {
+                yield return result;
+            }
+            yield break;
+        }
     }
 }
